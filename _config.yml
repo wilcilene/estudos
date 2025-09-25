@@ -1,5 +1,3 @@
-title: Um site de estudos
-description: Materiais e conteúdos das disciplinas de Engenharia da Computação
-show_downloads: true
-google_analytics:
+title: "Um site de estudos"
+description: "Materiais e conteúdos das disciplinas de Engenharia da Computação"
 theme: jekyll-theme-hacker
