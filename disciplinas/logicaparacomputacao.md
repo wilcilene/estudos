@@ -165,8 +165,22 @@ Definindo:
 
 A proposição composta é: ((P → (Q ∧ R)) ∧ (¬P → S))
 
-
 Essa fórmula expressa as duas condições: caso Gustavo seja aprovado, terá admiração e diploma; caso não seja, precisará aumentar o esforço.
+
+
+```markdown
+```mermaid
+graph TD
+  A["E (∧)"] --> B["Se Gustavo aprovar no TCC então (→)"]
+  A --> C["Se não aprovar no TCC então (→)"]
+
+  B --> D["Gustavo aprova no TCC"]
+  B --> E["Todos irão admirá-lo E (∧) Receberá o diploma"]
+  E --> F["Todos irão admirá-lo"]
+  E --> G["Gustavo receberá o diploma"]
+
+  C --> H["Gustavo não aprova no TCC (¬P)"]
+  C --> I["Precisará aumentar o esforço"]
 
 ---
 
