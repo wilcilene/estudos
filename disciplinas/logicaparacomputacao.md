@@ -32,6 +32,9 @@ A − B = {1}
 <img width="1020" height="249" alt="image" src="https://github.com/user-attachments/assets/f0a2fbba-99ce-4c90-86e4-537d1d48f35d" />
 
 
-
+(adaptado de respondeai)
 Exemplo:
 
+
+
+https://www.respondeai.com.br/conteudo/calculo/pre-calculo/operacoes-com-conjuntos/1578
