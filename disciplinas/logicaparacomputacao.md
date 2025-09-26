@@ -59,43 +59,50 @@ A − B = {1}
 
 ### Tabelas-verdade
 
-#### Negação
-| p | ¬p |
-|---|----|
-| 1 | 0  |
-| 0 | 1  |
+## Tabelas-verdade
 
-#### Conjunção
-| p | q | p ∧ q |
-|---|---|-------|
-| 1 | 1 | 1     |
-| 1 | 0 | 0     |
-| 0 | 1 | 0     |
-| 0 | 0 | 0     |
+<h3>Negação</h3>
+<table>
+  <tr><th>p</th><th>¬p</th></tr>
+  <tr><td>1</td><td>0</td></tr>
+  <tr><td>0</td><td>1</td></tr>
+</table>
 
-#### Disjunção
-| p | q | p ∨ q |
-|---|---|-------|
-| 1 | 1 | 1     |
-| 1 | 0 | 1     |
-| 0 | 1 | 1     |
-| 0 | 0 | 0     |
+<h3>Conjunção</h3>
+<table>
+  <tr><th>p</th><th>q</th><th>p ∧ q</th></tr>
+  <tr><td>1</td><td>1</td><td>1</td></tr>
+  <tr><td>1</td><td>0</td><td>0</td></tr>
+  <tr><td>0</td><td>1</td><td>0</td></tr>
+  <tr><td>0</td><td>0</td><td>0</td></tr>
+</table>
 
-#### Condicional
-| p | q | p → q |
-|---|---|-------|
-| 1 | 1 | 1     |
-| 1 | 0 | 0     |
-| 0 | 1 | 1     |
-| 0 | 0 | 1     |
+<h3>Disjunção</h3>
+<table>
+  <tr><th>p</th><th>q</th><th>p ∨ q</th></tr>
+  <tr><td>1</td><td>1</td><td>1</td></tr>
+  <tr><td>1</td><td>0</td><td>1</td></tr>
+  <tr><td>0</td><td>1</td><td>1</td></tr>
+  <tr><td>0</td><td>0</td><td>0</td></tr>
+</table>
 
-#### Bicondicional
-| p | q | p ↔ q |
-|---|---|-------|
-| 1 | 1 | 1     |
-| 1 | 0 | 0     |
-| 0 | 1 | 0     |
-| 0 | 0 | 1     |
+<h3>Condicional</h3>
+<table>
+  <tr><th>p</th><th>q</th><th>p → q</th></tr>
+  <tr><td>1</td><td>1</td><td>1</td></tr>
+  <tr><td>1</td><td>0</td><td>0</td></tr>
+  <tr><td>0</td><td>1</td><td>1</td></tr>
+  <tr><td>0</td><td>0</td><td>1</td></tr>
+</table>
+
+<h3>Bicondicional</h3>
+<table>
+  <tr><th>p</th><th>q</th><th>p ↔ q</th></tr>
+  <tr><td>1</td><td>1</td><td>1</td></tr>
+  <tr><td>1</td><td>0</td><td>0</td></tr>
+  <tr><td>0</td><td>1</td><td>0</td></tr>
+  <tr><td>0</td><td>0</td><td>1</td></tr>
+</table>
 
 ---
 
