@@ -32,8 +32,184 @@ A − B = {1}
 <img width="1020" height="249" alt="image" src="https://github.com/user-attachments/assets/f0a2fbba-99ce-4c90-86e4-537d1d48f35d" />
 
 
-(adaptado de respondeai)
+(Imagem adaptada de respondeai)
 Exemplo:
+
+
+---
+
+## Proposições
+
+- **Definição**: uma proposição é uma sentença declarativa que pode ser classificada como **verdadeira (1)** ou **falsa (0)**.  
+- Exemplos:
+  - "2 é par" → 1 (verdadeira)
+  - "5 < 3" → 0 (falsa)
+  - "Leia este texto" → não é proposição (não possui valor lógico)
+
+---
+
+## Conectivos Lógicos
+
+- **Negação (¬p)**: inverte o valor de `p`.
+- **Conjunção (p ∧ q)**: é 1 apenas se `p` e `q` forem ambos 1.
+- **Disjunção (p ∨ q)**: é 1 se pelo menos um for 1.
+- **Condicional (p → q)**: é 0 apenas quando `p = 1` e `q = 0`.
+- **Bicondicional (p ↔ q)**: é 1 se `p` e `q` tiverem o mesmo valor.
+
+### Tabelas-verdade
+
+#### Negação
+| p | ¬p |
+|---|----|
+| 1 | 0  |
+| 0 | 1  |
+
+#### Conjunção
+| p | q | p ∧ q |
+|---|---|-------|
+| 1 | 1 | 1     |
+| 1 | 0 | 0     |
+| 0 | 1 | 0     |
+| 0 | 0 | 0     |
+
+#### Disjunção
+| p | q | p ∨ q |
+|---|---|-------|
+| 1 | 1 | 1     |
+| 1 | 0 | 1     |
+| 0 | 1 | 1     |
+| 0 | 0 | 0     |
+
+#### Condicional
+| p | q | p → q |
+|---|---|-------|
+| 1 | 1 | 1     |
+| 1 | 0 | 0     |
+| 0 | 1 | 1     |
+| 0 | 0 | 1     |
+
+#### Bicondicional
+| p | q | p ↔ q |
+|---|---|-------|
+| 1 | 1 | 1     |
+| 1 | 0 | 0     |
+| 0 | 1 | 0     |
+| 0 | 0 | 1     |
+
+---
+
+## Argumentos Lógicos
+
+Um argumento lógico é um conjunto de proposições em que algumas são **premissas** e uma é a **conclusão**.
+
+### Exemplo 1 (Silogismo Hipotético)
+
+1. Se as demandas aumentam, então as empresas crescem.  
+2. Se as empresas crescem, então contratam novos trabalhadores.  
+**Conclusão:** Se as demandas aumentam, então as empresas contratam novos trabalhadores.
+
+Passo a passo:
+- Premissa 1: `P → Q`  
+- Premissa 2: `Q → R`  
+- Conclusão: `P → R`  
+- Essa é uma regra de inferência válida chamada **silogismo hipotético**.
+
+### Exemplo 2
+
+1. Este programa tem bug ou foram inseridos valores errados.  
+2. Os valores inseridos não estão errados.  
+**Conclusão:** Este programa tem bug.  
+
+Passo a passo:
+- Premissa 1: `P ∨ Q`  
+- Premissa 2: ¬Q  
+- Conclusão: `P`  
+- Esse raciocínio aplica a **lei do silogismo disjuntivo**.
+
+---
+
+## Fórmulas Bem Formadas (FBFs)
+
+Uma **Fórmula Bem Formada (FBF)** é uma expressão lógica construída corretamente, seguindo regras sintáticas.
+
+Exemplo válido:
+(p ∨ ¬q) → r
+
+Exemplo inválido:
+p ∨ ∧ q
+
+
+---
+
+## Exercícios
+
+### 1. Classifique como proposição ou não:
+a) `3 + 2 = 8`  
+b) `O Brasil fica na América do Sul`  
+c) `Abra a porta`  
+d) `Hoje está calor`
+
+---
+
+### 2. Diga se as expressões são FBFs:
+a) `p ∧ q`  
+b) `(¬p ∨ q) → r`  
+c) `p ∨ ∧ q`  
+d) `((p → q) ↔ (q → r))`
+
+---
+
+### 3. Construa FBFs a partir das frases:
+a) "Se chover, então levo guarda-chuva."  
+b) "Vou à praia se e somente se fizer sol."  
+c) "Pedro é alto e Maria é baixa."  
+d) "Se João estuda, então ele passa; se não, ele não passa."
+
+---
+
+### 4. Traduza para linguagem natural:
+Dado:  
+- p: “O computador está ligado.”  
+- q: “A internet funciona.”  
+- r: “Posso acessar o Google.”  
+
+Transforme em português:  
+a) `p ∧ q`  
+b) `¬p ∨ q`  
+c) `(p ∧ q) → r`  
+d) `(q ↔ r)`
+
+---
+
+## Gabarito dos Exercícios
+
+### Exercício 1
+a) Proposição, 0 (falsa).  
+b) Proposição, 1 (verdadeira).  
+c) Não é proposição.  
+d) Proposição (valor depende do contexto, mas é proposição).  
+
+### Exercício 2
+a) FBF (válida).  
+b) FBF (válida).  
+c) Não é FBF.  
+d) FBF (válida).  
+
+### Exercício 3
+a) `p → q`  
+b) `p ↔ q`  
+c) `p ∧ q`  
+d) `(p → q) ∧ (¬p → ¬q)`  
+
+### Exercício 4
+a) "O computador está ligado e a internet funciona."  
+b) "O computador está desligado ou a internet funciona."  
+c) "Se o computador está ligado e a internet funciona, então posso acessar o Google."  
+d) "A internet funciona se e somente se posso acessar o Google."  
+
+---
+
+📚 **Leitura complementar:** Huth & Ryan, *Logic in Computer Science*, Capítulo 1.  
 
 
 
