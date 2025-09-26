@@ -167,10 +167,9 @@ A proposição composta é: ((P → (Q ∧ R)) ∧ (¬P → S))
 
 Essa fórmula expressa as duas condições: caso Gustavo seja aprovado, terá admiração e diploma; caso não seja, precisará aumentar o esforço.
 
-Análise de Composição – Exemplo Gustavo no TCC
+((P → (Q ∧ R)) ∧ (¬P → S))
 
-                          ((P → (Q ∧ R)) ∧ (¬P → S))
-                          "Se o Gustavo aprovar no TCC todos irão admirá-lo e ele receberá o diploma. Mas se ele não passar, então precisará aumentar o esforço."
+
                                         ∧
                        ┌────────────────┴────────────────┐
                        →                                 →
