@@ -146,10 +146,313 @@ Exemplo válido:
 Exemplo inválido:
 p ∨ ∧ q
 
+---
+
+## Análise de Composição
+
+Para analisar proposições compostas, utilizamos **árvores de análise sintática (parse trees)**.  
+O objetivo é decompor uma proposição em suas partes atômicas.
+
+### Exemplo
+> "Se o Gustavo aprovar no TCC todos irão admirá-lo e ele receberá o diploma.  
+> Mas se ele não passar, então precisará aumentar o esforço."
+
+Definindo:
+- P: Gustavo aprova no TCC  
+- Q: Todos irão admirá-lo  
+- R: Gustavo receberá o diploma  
+- S: Gustavo precisará aumentar o esforço  
+
+A proposição composta é: ((P → (Q ∧ R)) ∧ (¬P → S))
+
+
+Essa fórmula expressa as duas condições: caso Gustavo seja aprovado, terá admiração e diploma; caso não seja, precisará aumentar o esforço.
 
 ---
 
-## Exercícios
+## Regras de Precedência
+
+Os conectivos lógicos seguem uma ordem de prioridade:
+
+1. ¬ (negação)  
+2. ∧ (conjunção)  
+3. ∨ (disjunção)  
+4. → (condicional)  
+5. ↔ (bicondicional)  
+
+Exemplo: P ∨ Q ∧ R → ¬P ∧ R ↔ S
+Deve ser lido conforme a ordem de precedência acima.
+
+---
+
+## Tautologias, Contradições e Contingências
+
+- **Tautologia**: fórmula que é verdadeira em todos os casos.  
+- **Contradição**: fórmula que é falsa em todos os casos.  
+- **Contingência**: fórmula que em alguns casos é verdadeira e em outros é falsa.  
+
+### Exemplo de tautologia
+¬(P ∧ Q) ∨ Q
+
+### Exemplo de contradição
+(P ∨ Q) ∧ ¬P ∧ ¬Q
+
+
+---
+
+## Equivalências Lógicas
+
+Duas proposições são equivalentes se tiverem os mesmos valores em todas as linhas da tabela-verdade.
+
+### Exemplos
+- `(P ∧ Q) ↔ (Q ∧ P)` → **equivalência comutativa**
+- `P → Q ≡ ¬P ∨ Q` → **eliminação do condicional**
+- `P ↔ Q ≡ (P → Q) ∧ (Q → P)` → **definição do bicondicional**
+
+---
+
+## Leis Essenciais da Lógica
+
+---
+
+### Law of Absorption (Lei da Absorção)
+
+Esta lei mostra que, quando temos uma proposição combinada com ela mesma em disjunção ou conjunção, os elementos adicionais se tornam redundantes.  
+Ou seja, a proposição isolada já carrega o mesmo valor lógico que a expressão expandida.
+
+**Expressões:**
+P ∨ (P ∧ Q) ≡ P
+P ∧ (P ∨ Q) ≡ P
+
+**Tabela-verdade:**
+
+<table style="display:inline-block; margin-right:20px;">
+  <caption>P ∨ (P ∧ Q)</caption>
+  <tr><th>P</th><th>Q</th><th>P ∨ (P ∧ Q)</th></tr>
+  <tr><td>1</td><td>1</td><td>1</td></tr>
+  <tr><td>1</td><td>0</td><td>1</td></tr>
+  <tr><td>0</td><td>1</td><td>0</td></tr>
+  <tr><td>0</td><td>0</td><td>0</td></tr>
+</table>
+
+<table style="display:inline-block;">
+  <caption>P</caption>
+  <tr><th>P</th></tr>
+  <tr><td>1</td></tr>
+  <tr><td>1</td></tr>
+  <tr><td>0</td></tr>
+  <tr><td>0</td></tr>
+</table>
+
+---
+
+### Law of Identity (Lei da Identidade)
+
+Afirma que qualquer proposição combinada com o valor lógico universal (0 ou 1) mantém seu valor original.  
+Ou seja, unir com falso (0) não altera na disjunção, e unir com verdadeiro (1) não altera na conjunção.
+
+**Expressões:**
+P ∨ 0 ≡ P
+P ∧ 1 ≡ P
+
+
+**Tabela-verdade:**
+
+<table style="display:inline-block; margin-right:20px;">
+  <caption>P ∨ 0</caption>
+  <tr><th>P</th><th>P ∨ 0</th></tr>
+  <tr><td>1</td><td>1</td></tr>
+  <tr><td>0</td><td>0</td></tr>
+</table>
+
+<table style="display:inline-block;">
+  <caption>P</caption>
+  <tr><th>P</th></tr>
+  <tr><td>1</td></tr>
+  <tr><td>0</td></tr>
+</table>
+
+---
+
+### Law of Excluded Middle (Lei do Terceiro Excluído)
+
+Estabelece que uma proposição ou sua negação sempre resultam em verdadeiro.  
+Não há meio termo: ou a proposição é verdadeira, ou sua negação é.
+
+**Expressão:**
+P ∨ ¬P ≡ 1
+
+
+**Tabela-verdade:**
+
+<table style="display:inline-block; margin-right:20px;">
+  <caption>P ∨ ¬P</caption>
+  <tr><th>P</th><th>¬P</th><th>P ∨ ¬P</th></tr>
+  <tr><td>1</td><td>0</td><td>1</td></tr>
+  <tr><td>0</td><td>1</td><td>1</td></tr>
+</table>
+
+<table style="display:inline-block;">
+  <caption>1 (Constante)</caption>
+  <tr><th>Valor</th></tr>
+  <tr><td>1</td></tr>
+  <tr><td>1</td></tr>
+</table>
+
+---
+
+### Law of Contradiction (Lei da Contradição)
+
+Afirma que uma proposição e sua negação nunca podem ser verdadeiras ao mesmo tempo.  
+Assim, a conjunção de `P` com `¬P` é sempre falsa.
+
+**Expressão:**
+P ∧ ¬P ≡ 0
+
+**Tabela-verdade:**
+
+<table style="display:inline-block; margin-right:20px;">
+  <caption>P ∧ ¬P</caption>
+  <tr><th>P</th><th>¬P</th><th>P ∧ ¬P</th></tr>
+  <tr><td>1</td><td>0</td><td>0</td></tr>
+  <tr><td>0</td><td>1</td><td>0</td></tr>
+</table>
+
+<table style="display:inline-block;">
+  <caption>0 (Constante)</caption>
+  <tr><th>Valor</th></tr>
+  <tr><td>0</td></tr>
+  <tr><td>0</td></tr>
+</table>
+
+---
+
+### Commutative Laws (Leis Comutativas)
+
+A ordem das proposições não altera o resultado.
+
+**Expressões:**
+P ∨ Q ≡ Q ∨ P
+P ∧ Q ≡ Q ∧ P
+
+php-template
+Copiar código
+
+**Tabela-verdade:**
+
+<table style="display:inline-block; margin-right:20px;">
+  <caption>P ∨ Q</caption>
+  <tr><th>P</th><th>Q</th><th>P ∨ Q</th></tr>
+  <tr><td>1</td><td>1</td><td>1</td></tr>
+  <tr><td>1</td><td>0</td><td>1</td></tr>
+  <tr><td>0</td><td>1</td><td>1</td></tr>
+  <tr><td>0</td><td>0</td><td>0</td></tr>
+</table>
+
+<table style="display:inline-block;">
+  <caption>Q ∨ P</caption>
+  <tr><th>P</th><th>Q</th><th>Q ∨ P</th></tr>
+  <tr><td>1</td><td>1</td><td>1</td></tr>
+  <tr><td>1</td><td>0</td><td>1</td></tr>
+  <tr><td>0</td><td>1</td><td>1</td></tr>
+  <tr><td>0</td><td>0</td><td>0</td></tr>
+</table>
+
+---
+
+### Associative Laws (Leis Associativas)
+
+A forma como as proposições são agrupadas não altera o resultado.
+
+**Expressões:**
+(P ∨ Q) ∨ R ≡ P ∨ (Q ∨ R)
+(P ∧ Q) ∧ R ≡ P ∧ (Q ∧ R)
+
+yaml
+Copiar código
+
+---
+
+### Distributive Laws (Leis Distributivas)
+
+Uma proposição pode ser distribuída sobre outra em conjunção ou disjunção.
+
+**Expressões:**
+P ∨ (Q ∧ R) ≡ (P ∨ Q) ∧ (P ∨ R)
+P ∧ (Q ∨ R) ≡ (P ∧ Q) ∨ (P ∧ R)
+
+yaml
+Copiar código
+
+---
+
+### Double Negation Law (Lei da Dupla Negação)
+
+Negar duas vezes equivale à proposição original.
+
+**Expressão:**
+¬(¬P) ≡ P
+
+php-template
+Copiar código
+
+**Tabela-verdade:**
+
+<table style="display:inline-block; margin-right:20px;">
+  <caption>¬(¬P)</caption>
+  <tr><th>P</th><th>¬P</th><th>¬(¬P)</th></tr>
+  <tr><td>1</td><td>0</td><td>1</td></tr>
+  <tr><td>0</td><td>1</td><td>0</td></tr>
+</table>
+
+<table style="display:inline-block;">
+  <caption>P</caption>
+  <tr><th>P</th></tr>
+  <tr><td>1</td></tr>
+  <tr><td>0</td></tr>
+</table>
+
+---
+
+### De Morgan’s Laws (Leis de De Morgan)
+
+Transformam uma negação de conjunção em disjunção e vice-versa.
+
+**Expressões:**
+¬(P ∧ Q) ≡ (¬P ∨ ¬Q)
+¬(P ∨ Q) ≡ (¬P ∧ ¬Q)
+
+javascript
+Copiar código
+
+**Tabela-verdade (primeira lei):**
+
+<table style="display:inline-block; margin-right:20px;">
+  <caption>¬(P ∧ Q)</caption>
+  <tr><th>P</th><th>Q</th><th>P ∧ Q</th><th>¬(P ∧ Q)</th></tr>
+  <tr><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+  <tr><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+  <tr><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+  <tr><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+</table>
+
+<table style="display:inline-block;">
+  <caption>(¬P ∨ ¬Q)</caption>
+  <tr><th>P</th><th>Q</th><th>¬P</th><th>¬Q</th><th>¬P ∨ ¬Q</th></tr>
+  <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+  <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+  <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+  <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+</table>
+ 
+
+
+
+
+
+
+---
+## Para Pensar
 
 ### 1. Classifique como proposição ou não:
 a) `3 + 2 = 8`  
