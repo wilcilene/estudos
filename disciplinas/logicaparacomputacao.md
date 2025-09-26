@@ -167,19 +167,20 @@ A proposição composta é: ((P → (Q ∧ R)) ∧ (¬P → S))
 
 Essa fórmula expressa as duas condições: caso Gustavo seja aprovado, terá admiração e diploma; caso não seja, precisará aumentar o esforço.
 
-```mermaid
-graph TD
-  A["∧"] --> B["→"]
-  A --> C["→"]
+Análise de Composição – Exemplo Gustavo no TCC
 
-  B --> D["Gustavo aprova no TCC (P)"]
-  B --> E["∧"]
-  E --> F["Todos irão admirá-lo (Q)"]
-  E --> G["Receberá o diploma (R)"]
+                          ((P → (Q ∧ R)) ∧ (¬P → S))
+                          "Se o Gustavo aprovar no TCC todos irão admirá-lo e ele receberá o diploma. Mas se ele não passar, então precisará aumentar o esforço."
+                                        ∧
+                       ┌────────────────┴────────────────┐
+                       →                                 →
+           ┌───────────┴───────────┐           ┌─────────┴─────────┐
+ "Gustavo aprova no TCC"           ∧           ¬                   "Precisará
+         (P)             ┌─────────┴─────────┐ |          aumentar o esforço"
+                         |                   | |
+        "Todos irão admirá-lo"   "Receberá o diploma"   "Gustavo aprova no TCC"
+              (Q)                        (R)                    (P)
 
-  C --> H["¬"]
-  H --> I["Gustavo aprova no TCC (P)"]
-  C --> J["Precisará aumentar o esforço (S)"]
 
 ---
 
