@@ -579,28 +579,30 @@ Tautologia: `(Q ^ P) ↔ (P ^ Q)`
 - `P ↔ Q ≡ (P → Q) ∧ (Q → P)` → **definição do bicondicional**
 
 
-Ele não está informado ou não é honesto.
+Ele não está informado ou não é honesto. `¬P v ¬Q`
 
-Não é verdade que ele seja informado e honesto.
+Não é verdade que ele seja informado e honesto. `¬(P ^ Q)`
 
 
 <table>
   <tr>
-    <th>p</th><th>q</th><th>p ∧ q</th><th>p ∨ q</th><th>(p ∧ q) → (p ∨ q)</th>
+    <th>p</th><th>q</th><th>p ∧ q</th><th>¬p V ¬q </th><th>¬(p ∧ q) ↔  (¬p V ¬q)</th>
   </tr>
-  <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
-  <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+  <tr><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
   <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
-  <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+  <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+  <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
 </table>
 
-- Quando `p ∧ q` é **1**, também `p ∨ q` é **1**, logo o condicional é verdadeiro.  
-- Nos demais casos, o antecedente é falso, e o condicional é considerado **verdadeiro por definição**.
+- Quando `¬(p ∧ q)` é **1**, também `¬p V ¬q` é **1**.
 
 ---
 Se os produtos não forem pagos, não serão entregues.
+
 Se os produtos foram entregues, então foram pagos.
 
+P: Produtos entregues
+Q: Produtos pagos
 
 <table style="display:inline-block; margin-right:24px; vertical-align:top;">
   <caption><strong>p → q</strong></caption>
@@ -613,11 +615,11 @@ Se os produtos foram entregues, então foram pagos.
 
 <table style="display:inline-block; vertical-align:top;">
   <caption><strong>¬p ∨ q</strong></caption>
-  <tr><th>p</th><th>q</th><th>¬p</th><th>¬p ∨ q</th></tr>
-  <tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
-  <tr><td>1</td><td>0</td><td>0</td><td>0</td></tr>
-  <tr><td>0</td><td>1</td><td>1</td><td>1</td></tr>
-  <tr><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+  <tr><th>p</th><th>q</th><th>¬p</th><th>¬q</th>th><th>¬q ∨ ¬p</th></tr>
+  <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+  <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+  <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+  <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
 </table>
 
 As colunas finais de ambas as tabelas coincidem (1,0,1,1), portanto `(p → q)` é equivalente a `(¬p ∨ q)`.
