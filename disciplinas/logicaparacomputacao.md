@@ -187,6 +187,17 @@ Conclusão: `P`
 - Conclusão: `P`  
 - Esse raciocínio aplica a **lei do silogismo disjuntivo**.
 
+### Mas atenção, apenas se as premissas forem verdadeiras
+
+1. Se o gato ver o peixe, então o gato pegará o peixe.
+2. Se o gato pegar o peixe, então o gato comerá o peixe.  
+**Conclusão:** Se o gato ver o peixe, então o gato comerá o peixe.
+
+
+A conclusão considera que as premissas são verdadeiras.
+
+Alguns gatos não pegam peixes, alguns gatos não comem peixes.
+Para assumir que se o gato ver o peixe, então o gato comerá o peixe, as premissas 1 e 2 devem ser verdadeiras.
 ---
 
 ## Fórmulas Bem Formadas (FBFs)
