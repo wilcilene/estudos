@@ -162,7 +162,8 @@ Representando:
 2. Os valores inseridos não estão errados.
 **Conclusão:** Este programa tem bug.
 
-Analisando:
+
+*Analisando:*:
 
 P: Este programa tem bug.
 
@@ -170,10 +171,12 @@ Q: Foram inseridos valores errados.
 
 
 `P ∨ Q`
-`¬Q`
-**Conclusão:** P
 
-Representando:
+`¬Q`
+
+Conclusão: `P`
+
+*Representando:*
 - Premissa 1: `P ∨ Q`  
 - Premissa 2: `¬Q`  
 - Conclusão: `P`  
