@@ -258,18 +258,18 @@ d) `((p → q) ↔ (q → r))`
 
 
 ### 1. Determine se são verdadeiras (V), falsas (F) ou não são proposições (N)
- a) 2 + 3 = 5
- b) O sol é uma estrela
- c) Leia este livro
- d) x + 1 = 2
- e) A água ferve a 100 °C ao nível do mar
+a) 2 + 3 = 5
+b) O sol é uma estrela
+c) Leia este livro
+d) x + 1 = 2
+e) A água ferve a 100 °C ao nível do mar
 
 ### 2. Classifique cada expressão como FBF ou não-FBF. Justifique:
- a) ¬p ∨ q
- b) (p ∧) ∨ q
- c) (p ∧ q) → (r ∨ ¬s)
- d) (p ↔ q ↔ r)
- e) ((p ∨ q) ∧ (¬r))
+a) ¬p ∨ q
+b) (p ∧) ∨ q
+c) (p ∧ q) → (r ∨ ¬s)
+d) (p ↔ q ↔ r)
+e) ((p ∨ q) ∧ (¬r))
  
 ### 3. Construa FBFs a partir das frases:
 a) "Se chover, então levo guarda-chuva."  
