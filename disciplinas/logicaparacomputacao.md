@@ -6,18 +6,18 @@ Este material reúne os principais conceitos de lógica aplicada à computação
 
 ## Tópicos da Parte I (Esta página)
 
-Introdução e Fundamentos: 
-   Apresentação da disciplina, objetivos e aplicações da lógica na computação. 
-   Revisão matemática básica: conjuntos, proposições e conectivos.
-Lógica Proposicional, Linguagem e Semântica: 
-   Sintaxe e fórmulas bem formadas (FBFs).
-   Tabelas-verdade, tautologias, contradições, contingências e Equivalências lógicas.
-   Simplificação de fórmulas.
-Sistemas Dedutivos: 
-   Regras de inferência. Argumentos válidos x inválidos.
-Dedução natural: 
-   Construção de provas.
-   Aplicação de dedução em problemas computacionais.
+-Introdução e Fundamentos: 
+   -Apresentação da disciplina, objetivos e aplicações da lógica na computação. 
+   --Revisão matemática básica: conjuntos, proposições e conectivos.
+-Lógica Proposicional, Linguagem e Semântica: 
+   --Sintaxe e fórmulas bem formadas (FBFs).
+   --Tabelas-verdade, tautologias, contradições, contingências e Equivalências lógicas.
+   -Simplificação de fórmulas.
+-Sistemas Dedutivos: 
+   -Regras de inferência. Argumentos válidos x inválidos.
+-Dedução natural: 
+   -Construção de provas.
+   -Aplicação de dedução em problemas computacionais.
 
 ---
 
