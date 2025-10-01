@@ -159,7 +159,7 @@ Representando:
 ### Exemplo 2
 
 1. Este programa tem bug ou foram inseridos valores errados.
-2. Os valores inseridos não estão errados.
+2. Os valores inseridos não estão errados.  
 **Conclusão:** Este programa tem bug.
 
 
