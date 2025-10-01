@@ -163,8 +163,11 @@ Representando:
 **Conclusão:** Este programa tem bug.
 
 Analisando:
+
 P: Este programa tem bug.
+
 Q: Foram inseridos valores errados.
+
 
 `P ∨ Q`
 `¬Q`
