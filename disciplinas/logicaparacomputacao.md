@@ -323,12 +323,10 @@ A negação inverte o valor de uma proposição.
 A conjunção é verdadeira apenas quando **ambas as proposições** são verdadeiras.  
 Em qualquer outro caso, é falsa.
 
-**Exemplo prático:**  
-- p: "Ana pegou caneta"  
-- q: "Ana pegou lápis"  
-- p ∧ q: "Ana pegou caneta **e** lápis"
+**Exemplo prático:**
 
-Situação:
+** Peguem caneta e Lápis**
+
 - Ana pegou caneta e lápis → verdadeiro  
 - João pegou só caneta → falso  
 - Maria pegou só lápis → falso  
@@ -351,12 +349,10 @@ Situação:
 A disjunção é verdadeira quando **ao menos uma das proposições** é verdadeira.  
 Só é falsa quando ambas são falsas.
 
-**Exemplo prático:**  
-- p: "Maria pegou caneta"  
-- q: "Maria pegou lápis"  
-- p ∨ q: "Maria pegou caneta **ou** lápis"
+**Exemplo prático:**
 
-Situação:
+** Peguem caneta ou Lápis**
+  
 - Ana pegou caneta e lápis → verdadeiro  
 - João pegou só caneta → verdadeiro  
 - Maria pegou só lápis → verdadeiro  
@@ -426,7 +422,20 @@ Situação:
   <tr><td>0</td><td>1</td><td>0</td></tr>
   <tr><td>0</td><td>0</td><td>1</td></tr>
 </table>
+
 --
+
+> ### Para lembrar: Conectivos Lógicos Fundamentais
+> 1. Qualquer expressão da forma (¬A) é chamada de **negação**.  
+> 2. Qualquer expressão da forma (A ∧ B) é chamada de **conjunção**.  
+> 3. Qualquer expressão da forma (A ∨ B) é chamada de **disjunção**.  
+> 4. Qualquer expressão da forma (A → B) é chamada de **condicional**.  
+> 5. Qualquer expressão da forma (A ↔ B) é chamada de **equivalência**.  
+>
+> Todas as expressões consideradas neste capítulo devem ser atômicas,  
+> ou negações, conjunções, disjunções, condicionais ou equivalências.
+
+---
 
 ## Análise de Composição
 
