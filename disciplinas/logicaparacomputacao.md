@@ -59,7 +59,9 @@ A ∩ B = {2, 3}
 A − B = {1}
 
 ---
-#'Se chover, então levo guarda-chuva' → condição lógica.
+
+# 'Se chover, então levo guarda-chuva' → condição lógica.
+
 ---
 
 ## Proposições
@@ -74,11 +76,11 @@ A − B = {1}
 
 ## Conectivos Lógicos
 
-- **Negação ('¬p')**: inverte o valor de `p`.
-- **Conjunção (p ∧ q)**: é 1 apenas se `p` e `q` forem ambos 1.
-- **Disjunção (p ∨ q)**: é 1 se pelo menos um for 1.
-- **Condicional (p → q)**: é 0 apenas quando `p = 1` e `q = 0`.
-- **Bicondicional (p ↔ q)**: é 1 se `p` e `q` tiverem o mesmo valor.
+- **Negação (`¬p`)**: inverte o valor de `p`.
+- **Conjunção (`p ∧ q`)**: é `1` apenas se `p` e `q` forem ambos `1`.
+- **Disjunção (`p ∨ q`)**: é `1` se pelo menos um for `1`.
+- **Condicional (`p → q`)**: é `0` apenas quando `p = 1` e `q = 0`.
+- **Bicondicional (`p ↔ q`)**: é `1` se `p` e `q` tiverem o mesmo valor.
 
 ### Tabelas-verdade
 
@@ -139,7 +141,16 @@ Um argumento lógico é um conjunto de proposições em que algumas são **premi
 2. Se as empresas crescem, então contratam novos trabalhadores.  
 **Conclusão:** Se as demandas aumentam, então as empresas contratam novos trabalhadores.
 
-Passo a passo:
+Analisando:
+P: As demandas aumentam.
+Q: as empresas crescem.  
+R: As empresas contratam novos trabalhadores.  
+
+Se P então Q.
+Se Q então R.
+**Conclusão:** Se P então R.
+
+Representando:
 - Premissa 1: `P → Q`  
 - Premissa 2: `Q → R`  
 - Conclusão: `P → R`  
@@ -147,13 +158,21 @@ Passo a passo:
 
 ### Exemplo 2
 
-1. Este programa tem bug ou foram inseridos valores errados.  
-2. Os valores inseridos não estão errados.  
-**Conclusão:** Este programa tem bug.  
+1. Este programa tem bug ou foram inseridos valores errados.
+2. Os valores inseridos não estão errados.
+**Conclusão:** Este programa tem bug.
 
-Passo a passo:
+Analisando:
+P: Este programa tem bug.
+Q: Foram inseridos valores errados.
+
+`P ∨ Q`
+`¬Q`
+**Conclusão:** P
+
+Representando:
 - Premissa 1: `P ∨ Q`  
-- Premissa 2: ¬Q  
+- Premissa 2: `¬Q`  
 - Conclusão: `P`  
 - Esse raciocínio aplica a **lei do silogismo disjuntivo**.
 
