@@ -257,12 +257,13 @@ d) `((p → q) ↔ (q → r))`
 ## Exercícios
 
 ### 1. Determine se são verdadeiras (V), falsas (F) ou não são proposições (N):
-a) "Se chover, então levo guarda-chuva."  
-b) "Vou à praia se e somente se fizer sol."  
-c) "Pedro é alto e Maria é baixa."  
-d) "Se João estuda, então ele passa; se não, ele não passa."
+a) "2 + 3 = 5"  
+b) "O sol é uma estrela."
+c) "Leia este livro."  
+d) "x + 1 = 2."
+e) "A água ferve a 100 °C ao nível do mar."
 
-### 1. Determine se são verdadeiras (V), falsas (F) ou não são proposições (N):
+### 1. ALTERADO   Determine se são verdadeiras (V), falsas (F) ou não são proposições (N):
 a) 2 + 3 = 5
 b) O sol é uma estrela
 c) Leia este livro
