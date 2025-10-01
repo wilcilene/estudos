@@ -426,11 +426,11 @@ Situação:
 --
 
 > ### Para lembrar: Conectivos Lógicos Fundamentais
-> 1. Qualquer expressão da forma (¬A) é chamada de **negação**.  
-> 2. Qualquer expressão da forma (A ∧ B) é chamada de **conjunção**.  
-> 3. Qualquer expressão da forma (A ∨ B) é chamada de **disjunção**.  
-> 4. Qualquer expressão da forma (A → B) é chamada de **condicional**.  
-> 5. Qualquer expressão da forma (A ↔ B) é chamada de **equivalência**.  
+> 1. Qualquer expressão da forma (¬P) é chamada de **negação**.  
+> 2. Qualquer expressão da forma (P ∧ Q) é chamada de **conjunção**.  
+> 3. Qualquer expressão da forma (P ∨ Q) é chamada de **disjunção**.  
+> 4. Qualquer expressão da forma (P → Q) é chamada de **condicional**.  
+> 5. Qualquer expressão da forma (P ↔ Q) é chamada de **equivalência**.  
 >
 > Todas as expressões consideradas neste capítulo devem ser atômicas,  
 > ou negações, conjunções, disjunções, condicionais ou equivalências.
@@ -439,8 +439,13 @@ Situação:
 
 ## Análise de Composição
 
-Para analisar proposições compostas, utilizamos **árvores de análise sintática (parse trees)**.  
+Para analisar proposições compostas, utilizamos **árvores de análise sintática (parse trees)**.
+
 O objetivo é decompor uma proposição em suas partes atômicas.
+
+Uma árvore de análise sintática de proposição é construída top-down. Você começa com a expressão completa e quebra ela até chegar em expressões atômicas.
+
+Uma ‘parse tree’ deve ser facilmente representada em uma expressão com parênteses.
 
 ### Exemplo
 > "Se o Gustavo aprovar no TCC todos irão admirá-lo e ele receberá o diploma.  
@@ -468,6 +473,25 @@ Essa fórmula expressa as duas condições: caso Gustavo seja aprovado, terá ad
                          |                   | |
         "Todos irão admirá-lo"   "Receberá o diploma"   "Gustavo aprova no TCC"
               (Q)                        (R)                    (P)
+
+
+---
+## Para pensar
+
+Represente a ‘parse tree’ para 
+
+"Se eu prestar atenção então entenderei o conteúdo, e se eu fizer os exercícios fixarei o que aprendi".
+
+
+((P → Q) ∧ (R → S))
+
+
+                          ∧
+              ┌───────────┴───────────┐
+              →                       →
+        ┌─────┴─────┐           ┌─────┴─────┐
+ "Presto atenção"   "Entenderei"   "Faço exercícios"   "Fixarei o que aprendi"
+       (P)              (Q)              (R)                    (S)
 
 
 ---
