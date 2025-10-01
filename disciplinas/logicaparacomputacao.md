@@ -74,7 +74,7 @@ A − B = {1}
 
 ## Conectivos Lógicos
 
-- **Negação (¬p)**: inverte o valor de `p`.
+- **Negação ('¬p')**: inverte o valor de `p`.
 - **Conjunção (p ∧ q)**: é 1 apenas se `p` e `q` forem ambos 1.
 - **Disjunção (p ∨ q)**: é 1 se pelo menos um for 1.
 - **Condicional (p → q)**: é 0 apenas quando `p = 1` e `q = 0`.
