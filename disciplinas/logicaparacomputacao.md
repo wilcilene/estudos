@@ -74,6 +74,16 @@ A − B = {1}
 
 ---
 
+## Para Pensar
+
+### 1. Classifique como proposição ou não:
+a) `3 + 2 = 8`  
+b) `O Brasil fica na América do Sul`  
+c) `Abra a porta`  
+d) `Hoje está calor`
+
+---
+
 ## Conectivos Lógicos
 
 - **Negação (`¬p`)**: inverte o valor de `p`.
@@ -200,16 +210,6 @@ Alguns gatos não pegam peixes, alguns gatos não comem peixes.
 Para assumir que se o gato ver o peixe, então o gato comerá o peixe, as premissas 1 e 2 devem ser verdadeiras.
 
 ---
-
-## Para Pensar
-
-### 1. Classifique como proposição ou não:
-a) `3 + 2 = 8`  
-b) `O Brasil fica na América do Sul`  
-c) `Abra a porta`  
-d) `Hoje está calor`
-
----
 # Lógica Proposicional: Linguagem e Semântica
 
 A **lógica proposicional** é um dos alicerces do raciocínio formal em computação.  
@@ -226,11 +226,11 @@ Então vamos estudar sintaxe e semântica:
 
   Resumindo uma FBF é uma expressão lógica construída corretamente, seguindo as regras sintáticas.
 
- Exemplo válido:
-`(p ∨ ¬q) → r`
+  Exemplo válido:
+    `(p ∨ ¬q) → r`
 
-Exemplo inválido:
-`p ∨ ∧ q`
+  Exemplo inválido:
+    `p ∨ ∧ q`
 
 
 - **Semântica (Significado):**  
@@ -245,6 +245,51 @@ Esse entendimento é importante para a programação pois fornece a base para en
 Isso nos permite formalizar problemas, analisar a validade de argumentos e simplificar expressões. Habilidades essenciais para a engenharia de software e áreas relacionadas.
 
 ---
+## Para Pensar
+
+### 2. Diga se as expressões são FBFs:
+a) `p ∧ q`  
+b) `(¬p ∨ q) → r`  
+c) `p ∨ ∧ q`  
+d) `((p → q) ↔ (q → r))`
+
+---
+## Exercícios
+
+
+### 1. Determine se são verdadeiras (V), falsas (F) ou não são proposições (N)
+ a) 2 + 3 = 5
+ b) O sol é uma estrela
+ c) Leia este livro
+ d) x + 1 = 2
+ e) A água ferve a 100 °C ao nível do mar
+
+### 2. Classifique cada expressão como FBF ou não-FBF. Justifique:
+ a) ¬p ∨ q
+ b) (p ∧) ∨ q
+ c) (p ∧ q) → (r ∨ ¬s)
+ d) (p ↔ q ↔ r)
+ e) ((p ∨ q) ∧ (¬r))
+ 
+### 3. Construa FBFs a partir das frases:
+a) "Se chover, então levo guarda-chuva."  
+b) "Vou à praia se e somente se fizer sol."  
+c) "Pedro é alto e Maria é baixa."  
+d) "Se João estuda, então ele passa; se não, ele não passa."
+
+### 4. Suponha que:
+Dado:  
+- p: “O computador está ligado.”  
+- q: “A internet funciona.”  
+- r: “Posso acessar o Google.”  
+
+Escreva em linguagem natural (português) as seguintes fórmulas:  
+a) `p ∧ q`  
+b) `¬p ∨ q`  
+c) `(p ∧ q) → r`  
+d) `(q ↔ r)`
+
+---
 
 ## Análise de Composição
 
@@ -256,10 +301,10 @@ O objetivo é decompor uma proposição em suas partes atômicas.
 > Mas se ele não passar, então precisará aumentar o esforço."
 
 Definindo:
-- P: Gustavo aprova no TCC  
-- Q: Todos irão admirá-lo  
-- R: Gustavo receberá o diploma  
-- S: Gustavo precisará aumentar o esforço  
+- P: Gustavo aprova no TCC
+- Q: Todos irão admirá-lo
+- R: Gustavo receberá o diploma
+- S: Gustavo precisará aumentar o esforço
 
 A proposição composta é: ((P → (Q ∧ R)) ∧ (¬P → S))
 
@@ -562,35 +607,9 @@ Copiar código
 
 
 
----
 
-### 2. Diga se as expressões são FBFs:
-a) `p ∧ q`  
-b) `(¬p ∨ q) → r`  
-c) `p ∨ ∧ q`  
-d) `((p → q) ↔ (q → r))`
 
----
 
-### 3. Construa FBFs a partir das frases:
-a) "Se chover, então levo guarda-chuva."  
-b) "Vou à praia se e somente se fizer sol."  
-c) "Pedro é alto e Maria é baixa."  
-d) "Se João estuda, então ele passa; se não, ele não passa."
-
----
-
-### 4. Traduza para linguagem natural:
-Dado:  
-- p: “O computador está ligado.”  
-- q: “A internet funciona.”  
-- r: “Posso acessar o Google.”  
-
-Transforme em português:  
-a) `p ∧ q`  
-b) `¬p ∨ q`  
-c) `(p ∧ q) → r`  
-d) `(q ↔ r)`
 
 ---
 
