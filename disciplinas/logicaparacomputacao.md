@@ -4,17 +4,38 @@ Este material reúne os principais conceitos de lógica aplicada à computação
 
 ---
 
+## Tópicos da Parte I (Esta página)
+
+Introdução e Fundamentos: 
+   Apresentação da disciplina, objetivos e aplicações da lógica na computação. 
+   Revisão matemática básica: conjuntos, proposições e conectivos.
+Lógica Proposicional, Linguagem e Semântica: 
+   Sintaxe e fórmulas bem formadas (FBFs).
+   Tabelas-verdade, tautologias, contradições, contingências e Equivalências lógicas.
+   Simplificação de fórmulas.
+Sistemas Dedutivos: 
+   Regras de inferência. Argumentos válidos x inválidos.
+Dedução natural: 
+   Construção de provas.
+   Aplicação de dedução em problemas computacionais.
+
+---
+
 ## Introdução e Fundamentos
 
 A lógica é a base do raciocínio estruturado e preciso, fundamental para algoritmos, inteligência artificial e verificação de software.  
 Ela também sustenta linguagens de programação, já que estruturas condicionais, operadores e expressões lógicas são diretamente inspiradas nos princípios da lógica.
 
+O foco é estabelecer a base para o raciocínio lógico usado em programação.
+
 **Objetivos da disciplina:**
+Ao final dessa disciplina (Parte I e Parte II) é esperado que o estudante possa
 - Compreender os fundamentos da lógica proposicional e de predicados.
 - Formalizar, analisar e validar argumentos.
-- Aplicar técnicas dedutivas e computacionais.
-- Relacionar lógica com estruturas computacionais.
+- Aplicar técnicas dedutivas e computacionais na resolução de problemas.
+- Aprimorar a capacidade de relacionar a lógica com estruturas computacionais.
 - Utilizar algoritmos de resolução e unificação.
+- Explorar aplicações práticas em diversas áreas.
 
 ---
 
@@ -24,7 +45,7 @@ Ela também sustenta linguagens de programação, já que estruturas condicionai
 - Principais operações:
   - **União (∪)**: elementos que estão em A ou B.  
   - **Interseção (∩)**: elementos que estão em A e B.  
-  - **Diferença (−)**: elementos que estão em A mas não em B.
+  - **Diferença (−)**: elementos que estão em A mas não em B (ou que estão em B e não em A - depende da ordem).
 
 <img width="1020" height="249" alt="image" src="https://github.com/user-attachments/assets/f0a2fbba-99ce-4c90-86e4-537d1d48f35d" />
 
@@ -38,14 +59,16 @@ A ∩ B = {2, 3}
 A − B = {1}
 
 ---
+#'Se chover, então levo guarda-chuva' → condição lógica.
+---
 
 ## Proposições
 
-- **Definição**: uma proposição é uma sentença declarativa que pode ser classificada como **verdadeira (1)** ou **falsa (0)**.  
+- **Definição**: uma proposição é uma sentença declarativa que pode ser **verdadeira (1)** ou **falsa (0)**.  
 - Exemplos:
-  - "2 é par" → 1 (verdadeira)
-  - "5 < 3" → 0 (falsa)
-  - "Leia este texto" → não é proposição (não possui valor lógico)
+  - "2 é par" → 1 (verdadeira).
+  - "5 < 3" → 0 (falsa).
+  - "Leia este texto" → não é proposição (não possui valor lógico).
 
 ---
 
