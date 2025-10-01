@@ -135,22 +135,27 @@ A − B = {1}
 
 Um argumento lógico é um conjunto de proposições em que algumas são **premissas** e uma é a **conclusão**.
 
-### Exemplo 1 (Silogismo Hipotético)
+### Exemplo 1
 
 1. Se as demandas aumentam, então as empresas crescem.  
 2. Se as empresas crescem, então contratam novos trabalhadores.  
 **Conclusão:** Se as demandas aumentam, então as empresas contratam novos trabalhadores.
 
-Analisando:
+*Analisando:*:
+
 P: As demandas aumentam.
-Q: as empresas crescem.  
-R: As empresas contratam novos trabalhadores.  
+
+Q: as empresas crescem.
+
+R: As empresas contratam novos trabalhadores.
 
 Se P então Q.
-Se Q então R.
-**Conclusão:** Se P então R.
 
-Representando:
+Se Q então R.
+
+Conclusão: Se P então R.
+
+*Representando:*
 - Premissa 1: `P → Q`  
 - Premissa 2: `Q → R`  
 - Conclusão: `P → R`  
@@ -189,10 +194,10 @@ Conclusão: `P`
 Uma **Fórmula Bem Formada (FBF)** é uma expressão lógica construída corretamente, seguindo regras sintáticas.
 
 Exemplo válido:
-(p ∨ ¬q) → r
+`(p ∨ ¬q) → r`
 
 Exemplo inválido:
-p ∨ ∧ q
+`p ∨ ∧ q`
 
 ---
 
