@@ -457,23 +457,11 @@ Definindo:
 - R: Gustavo receberá o diploma
 - S: Gustavo precisará aumentar o esforço
 
-A proposição composta é: ((P → (Q ∧ R)) ∧ (¬P → S))
+A proposição composta é: `((P → (Q ∧ R)) ∧ (¬P → S))`
 
 Essa fórmula expressa as duas condições: caso Gustavo seja aprovado, terá admiração e diploma; caso não seja, precisará aumentar o esforço.
 
-((P → (Q ∧ R)) ∧ (¬P → S))
-
-
-                                        ∧
-                       ┌────────────────┴────────────────┐
-                       →                                 →
-           ┌───────────┴───────────┐           ┌─────────┴─────────┐
- "Gustavo aprova no TCC"           ∧           ¬                   "Precisará
-         (P)             ┌─────────┴─────────┐ |          aumentar o esforço"
-                         |                   | |
-        "Todos irão admirá-lo"   "Receberá o diploma"   "Gustavo aprova no TCC"
-              (Q)                        (R)                    (P)
-
+<img width="1155" height="992" alt="image" src="https://github.com/user-attachments/assets/22cfaaa9-a490-4544-89f3-26e9e7916b3d" />
 
 ---
 ## Para pensar
@@ -482,17 +470,10 @@ Represente a ‘parse tree’ para
 
 "Se eu prestar atenção então entenderei o conteúdo, e se eu fizer os exercícios fixarei o que aprendi".
 
+`((P → Q) ∧ (R → S))`
 
-((P → Q) ∧ (R → S))
 
-
-                          ∧
-              ┌───────────┴───────────┐
-              →                       →
-        ┌─────┴─────┐           ┌─────┴─────┐
- "Presto atenção"   "Entenderei"   "Faço exercícios"   "Fixarei o que aprendi"
-       (P)              (Q)              (R)                    (S)
-
+<img width="1299" height="502" alt="image" src="https://github.com/user-attachments/assets/4b61cfdd-c0c9-4777-83fa-a70f84785e66" />
 
 ---
 
@@ -500,14 +481,36 @@ Represente a ‘parse tree’ para
 
 Os conectivos lógicos seguem uma ordem de prioridade:
 
-1. ¬ (negação)  
-2. ∧ (conjunção)  
-3. ∨ (disjunção)  
-4. → (condicional)  
-5. ↔ (bicondicional)  
+1. `¬` (negação)  
+2. `∧` (conjunção)  
+3. `∨` (disjunção)  
+4. `→` (condicional)  
+5. `↔` (bicondicional)  
 
-Exemplo: P ∨ Q ∧ R → ¬P ∧ R ↔ S
+Exemplo1: `P ∨ Q ∧ R → ¬P ∧ R ↔ S`
+
 Deve ser lido conforme a ordem de precedência acima.
+
+ `(((P ∨ (Q ∧ R)) → ((¬P) ∧ R)) ↔ S)`
+ 
+--
+
+ Exemplo2: `P v Q v R v S`
+ 
+ Deve ser lido conforme a ordem de precedência acima.
+ 
+`(((P v Q) v R) v S)`
+
+--
+Para o exemplo anterior temos:
+"Se o Gustavo aprovar no TCC todos irão admirá-lo e ele receberá o diploma. 
+Mas se ele não passar, então precisará aumentar o esforço."
+
+`((P→(Q^R))^((¬P)→(S))`
+
+Que deve ser lido conforme a ordem de precedência acima.
+
+`(P→Q^R)^(¬P→S)`
 
 ---
 
@@ -518,11 +521,40 @@ Deve ser lido conforme a ordem de precedência acima.
 - **Contingência**: fórmula que em alguns casos é verdadeira e em outros é falsa.  
 
 ### Exemplo de tautologia
-¬(P ∧ Q) ∨ Q
+`¬(P ∧ Q) ∨ Q`
 
+<table>
+  <tr>
+    <th>P</th><th>Q</th><th>P ∧ Q</th><th>¬(P ∧ Q)</th><th>¬(P ∧ Q) ∨ Q</th>
+  </tr>
+  <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+  <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+  <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+  <tr><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+</table>
+
+Resultado final: a coluna **`¬(P ∧ Q) ∨ Q`** é sempre **1**, logo a expressão é uma **tautologia**.
+
+---
 ### Exemplo de contradição
-(P ∨ Q) ∧ ¬P ∧ ¬Q
+`(P ∨ Q) ∧ ¬P ∧ ¬Q`
 
+<table>
+  <tr>
+    <th>P</th><th>Q</th><th>P ∨ Q</th><th>¬P</th><th>¬Q</th><th>(P ∨ Q) ∧ ¬P ∧ ¬Q</th>
+  </tr>
+  <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+  <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+  <tr><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+  <tr><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+</table>
+
+Resultado final: a coluna **`(P ∨ Q) ∧ ¬P ∧ ¬Q`** é sempre **0**, logo a expressão é uma **contradição**.
+
+---
+## Para Pensar
+
+Crie uma expressão que contenha 5 proposições e seja uma tautologia e outra que seja uma contradição (Apresente a resolução e a árvore).
 
 ---
 
@@ -530,11 +562,69 @@ Deve ser lido conforme a ordem de precedência acima.
 
 Duas proposições são equivalentes se tiverem os mesmos valores em todas as linhas da tabela-verdade.
 
+Exemplo:
+O programa foi bem escrito e bem documentado. 
+`(Q ^ P)`
+
+O programa foi bem documentado e bem escrito.
+`(P ^ Q)`
+
+Tautologia: `(Q ^ P) ↔ (P ^ Q)`
+**Prova de que são equivalentes**
+
+
 ### Exemplos
 - `(P ∧ Q) ↔ (Q ∧ P)` → **equivalência comutativa**
 - `P → Q ≡ ¬P ∨ Q` → **eliminação do condicional**
 - `P ↔ Q ≡ (P → Q) ∧ (Q → P)` → **definição do bicondicional**
 
+
+Ele não está informado ou não é honesto.
+
+Não é verdade que ele seja informado e honesto.
+
+
+<table>
+  <tr>
+    <th>p</th><th>q</th><th>p ∧ q</th><th>p ∨ q</th><th>(p ∧ q) → (p ∨ q)</th>
+  </tr>
+  <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+  <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+  <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+  <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+</table>
+
+- Quando `p ∧ q` é **1**, também `p ∨ q` é **1**, logo o condicional é verdadeiro.  
+- Nos demais casos, o antecedente é falso, e o condicional é considerado **verdadeiro por definição**.
+
+---
+Se os produtos não forem pagos, não serão entregues.
+Se os produtos foram entregues, então foram pagos.
+
+
+<table style="display:inline-block; margin-right:24px; vertical-align:top;">
+  <caption><strong>p → q</strong></caption>
+  <tr><th>p</th><th>q</th><th>p → q</th></tr>
+  <tr><td>1</td><td>1</td><td>1</td></tr>
+  <tr><td>1</td><td>0</td><td>0</td></tr>
+  <tr><td>0</td><td>1</td><td>1</td></tr>
+  <tr><td>0</td><td>0</td><td>1</td></tr>
+</table>
+
+<table style="display:inline-block; vertical-align:top;">
+  <caption><strong>¬p ∨ q</strong></caption>
+  <tr><th>p</th><th>q</th><th>¬p</th><th>¬p ∨ q</th></tr>
+  <tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+  <tr><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+  <tr><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+  <tr><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+</table>
+
+As colunas finais de ambas as tabelas coincidem (1,0,1,1), portanto `(p → q)` é equivalente a `(¬p ∨ q)`.
+
+---
+
+ 
 ---
 
 ## Leis Essenciais da Lógica
