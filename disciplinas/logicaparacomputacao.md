@@ -198,17 +198,51 @@ A conclusão considera que as premissas são verdadeiras.
 
 Alguns gatos não pegam peixes, alguns gatos não comem peixes.
 Para assumir que se o gato ver o peixe, então o gato comerá o peixe, as premissas 1 e 2 devem ser verdadeiras.
+
 ---
 
-## Fórmulas Bem Formadas (FBFs)
+## Para Pensar
 
-Uma **Fórmula Bem Formada (FBF)** é uma expressão lógica construída corretamente, seguindo regras sintáticas.
+### 1. Classifique como proposição ou não:
+a) `3 + 2 = 8`  
+b) `O Brasil fica na América do Sul`  
+c) `Abra a porta`  
+d) `Hoje está calor`
 
-Exemplo válido:
+---
+# Lógica Proposicional: Linguagem e Semântica
+
+A **lógica proposicional** é um dos alicerces do raciocínio formal em computação.  
+Já entendemos as **proposições** (sentenças que podem ser verdadeiras ou falsas) e os **conectivos lógicos** que permitem construir proposições compostas, como **negação**, **conjunção**, **disjunção**, **condicional** e **bicondicional**.
+
+Então vamos estudar sintaxe e semântica:
+
+- **Sintaxe (Linguagem Formal):**  
+  Define as regras de escrita (assim como em português, inglês ou qualquer linguagem).  
+
+  Uma sequência de símbolos só é considerada uma **Fórmula Bem Formada (FBF)** se respeitar essas regras.
+
+  FBF = Termo técnico para uma sequência finita de símbolos de um alfabeto formal que segue as regras de construção de uma linguagem formal, como a lógica proposicional ou a lógica de predicados. São expressões construídas corretamente com proposições e conectivos.
+
+  Resumindo uma FBF é uma expressão lógica construída corretamente, seguindo as regras sintáticas.
+
+ Exemplo válido:
 `(p ∨ ¬q) → r`
 
 Exemplo inválido:
 `p ∨ ∧ q`
+
+
+- **Semântica (Significado):**  
+
+  Trata da interpretação das proposições, isto é, do valor lógico que cada expressão assume (verdadeiro = 1, falso = 0).  
+
+  A semântica é representada pelas **tabelas-verdade**, que permitem avaliar todas as combinações possíveis dos valores de uma fórmula.
+
+
+Esse entendimento é importante para a programação pois fornece a base para entender **condições, estruturas de decisão, algoritmos e validação de programas**.  
+
+Isso nos permite formalizar problemas, analisar a validade de argumentos e simplificar expressões. Habilidades essenciais para a engenharia de software e áreas relacionadas.
 
 ---
 
@@ -529,15 +563,6 @@ Copiar código
 
 
 ---
-## Para Pensar
-
-### 1. Classifique como proposição ou não:
-a) `3 + 2 = 8`  
-b) `O Brasil fica na América do Sul`  
-c) `Abra a porta`  
-d) `Hoje está calor`
-
----
 
 ### 2. Diga se as expressões são FBFs:
 a) `p ∧ q`  
@@ -569,7 +594,7 @@ d) `(q ↔ r)`
 
 ---
 
-## Gabarito dos Exercícios
+## Gabarito das atividades
 
 ### Exercício 1
 a) Proposição, 0 (falsa).  
