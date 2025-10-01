@@ -256,28 +256,27 @@ d) `((p → q) ↔ (q → r))`
 ---
 ## Exercícios
 
-### 1. Determine se são verdadeiras (V), falsas (F) ou não são proposições (N):
+** 1. Determine se são verdadeiras (V), falsas (F) ou não são proposições (N):**
 a) "2 + 3 = 5"  
 b) "O sol é uma estrela."
 c) "Leia este livro."  
 d) "x + 1 = 2."
 e) "A água ferve a 100 °C ao nível do mar."
 
-### 2. Classifique cada expressão como FBF ou não-FBF. Justifique:
+** 2. Classifique cada expressão como FBF ou não-FBF. Justifique:**
 a) `¬p ∨ q`
 b) `(p ∧) ∨ q`
 c) `(p ∧ q) → (r ∨ ¬s)`
 d) `(p ↔ q ↔ r)`
 e) `((p ∨ q) ∧ (¬r))`
  
-### 3. Construa FBFs a partir das frases:
+** 3. Construa FBFs a partir das frases:**
 a) "Se chover, então levo guarda-chuva."  
 b) "Vou à praia se e somente se fizer sol."  
 c) "Pedro é alto e Maria é baixa."  
 d) "Se João estuda, então ele passa; se não, ele não passa."
 
-### 4. Suponha que:
-Dado:  
+** 4. Suponha que:** 
 - p: “O computador está ligado.”  
 - q: “A internet funciona.”  
 - r: “Posso acessar o Google.”  
@@ -288,7 +287,146 @@ b) `¬p ∨ q`
 c) `(p ∧ q) → r`  
 d) `(q ↔ r)`
 
+** 5. Em sala,pegue uma folha de papel e crie em linguagem natural, uma proposição simples e duas FBFs.**
+
 ---
+## Para revisar
+## Conectivos Lógicos
+
+Os conectivos lógicos permitem combinar proposições e construir expressões mais complexas.  
+A seguir, veremos os principais conectivos, seus significados, exemplos práticos e as tabelas-verdade correspondentes.
+
+---
+
+### Negação (¬)
+
+A negação inverte o valor de uma proposição.  
+- Se a proposição é verdadeira (1), sua negação é falsa (0).  
+- Se é falsa (0), sua negação é verdadeira (1).
+
+**Exemplo:**  
+- p: "Hoje está chovendo"  
+- ¬p: "Hoje **não** está chovendo"
+
+**Tabela-verdade:**
+
+<table>
+  <tr><th>p</th><th>¬p</th></tr>
+  <tr><td>1</td><td>0</td></tr>
+  <tr><td>0</td><td>1</td></tr>
+</table>
+
+---
+
+### Conjunção (∧)
+
+A conjunção é verdadeira apenas quando **ambas as proposições** são verdadeiras.  
+Em qualquer outro caso, é falsa.
+
+**Exemplo prático:**  
+- p: "Ana pegou caneta"  
+- q: "Ana pegou lápis"  
+- p ∧ q: "Ana pegou caneta **e** lápis"
+
+Situação:
+- Ana pegou caneta e lápis → verdadeiro  
+- João pegou só caneta → falso  
+- Maria pegou só lápis → falso  
+- José não pegou nenhum → falso  
+
+**Tabela-verdade:**
+
+<table>
+  <tr><th>p</th><th>q</th><th>p ∧ q</th></tr>
+  <tr><td>1</td><td>1</td><td>1</td></tr>
+  <tr><td>1</td><td>0</td><td>0</td></tr>
+  <tr><td>0</td><td>1</td><td>0</td></tr>
+  <tr><td>0</td><td>0</td><td>0</td></tr>
+</table>
+
+---
+
+### Disjunção (∨)
+
+A disjunção é verdadeira quando **ao menos uma das proposições** é verdadeira.  
+Só é falsa quando ambas são falsas.
+
+**Exemplo prático:**  
+- p: "Maria pegou caneta"  
+- q: "Maria pegou lápis"  
+- p ∨ q: "Maria pegou caneta **ou** lápis"
+
+Situação:
+- Ana pegou caneta e lápis → verdadeiro  
+- João pegou só caneta → verdadeiro  
+- Maria pegou só lápis → verdadeiro  
+- José não pegou nenhum → falso  
+
+**Tabela-verdade:**
+
+<table>
+  <tr><th>p</th><th>q</th><th>p ∨ q</th></tr>
+  <tr><td>1</td><td>1</td><td>1</td></tr>
+  <tr><td>1</td><td>0</td><td>1</td></tr>
+  <tr><td>0</td><td>1</td><td>1</td></tr>
+  <tr><td>0</td><td>0</td><td>0</td></tr>
+</table>
+
+---
+
+### Condicional (→)
+
+O condicional é lido como "se... então...".  
+É **falso apenas** quando a primeira proposição é verdadeira e a segunda é falsa.  
+Nos demais casos, é verdadeiro.
+
+**Exemplo prático:**  
+- p: "Se pegarem caneta"  
+- q: "Então peguem lápis"  
+
+Situação:
+- Ana pegou caneta e lápis → verdadeiro  
+- João pegou só caneta → falso (p=1, q=0)  
+- Maria pegou só lápis → verdadeiro (p=0, q=1)  
+- José não pegou nenhum → verdadeiro (p=0, q=0)  
+
+**Tabela-verdade:**
+
+<table>
+  <tr><th>p</th><th>q</th><th>p → q</th></tr>
+  <tr><td>1</td><td>1</td><td>1</td></tr>
+  <tr><td>1</td><td>0</td><td>0</td></tr>
+  <tr><td>0</td><td>1</td><td>1</td></tr>
+  <tr><td>0</td><td>0</td><td>1</td></tr>
+</table>
+
+---
+
+### Bicondicional (↔)
+
+O bicondicional é lido como "se e somente se".  
+É verdadeiro quando as duas proposições têm o **mesmo valor lógico** (ambas verdadeiras ou ambas falsas).  
+
+**Exemplo prático:**  
+- p: "Se e somente se pegarem caneta"  
+- q: "Então peguem lápis"  
+
+Situação:
+- Ana pegou caneta e lápis → verdadeiro  
+- João pegou só caneta → falso  
+- Maria pegou só lápis → falso  
+- José não pegou nenhum → verdadeiro  
+
+**Tabela-verdade:**
+
+<table>
+  <tr><th>p</th><th>q</th><th>p ↔ q</th></tr>
+  <tr><td>1</td><td>1</td><td>1</td></tr>
+  <tr><td>1</td><td>0</td><td>0</td></tr>
+  <tr><td>0</td><td>1</td><td>0</td></tr>
+  <tr><td>0</td><td>0</td><td>1</td></tr>
+</table>
+--
 
 ## Análise de Composição
 
