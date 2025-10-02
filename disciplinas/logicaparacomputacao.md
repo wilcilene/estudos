@@ -13,9 +13,8 @@ Este material reúne os principais conceitos de lógica aplicada à computação
   - Sintaxe e fórmulas bem formadas (FBFs).
   - Tabelas-verdade, tautologias, contradições, contingências e Equivalências lógicas.
   - Simplificação de fórmulas.
-- Sistemas Dedutivos: 
+- Sistemas Dedutivos e Dedução natural: 
   - Regras de inferência. Argumentos válidos x inválidos.
-- Dedução natural: 
   - Construção de provas.
   - Aplicação de dedução em problemas computacionais.
 
@@ -55,7 +54,9 @@ Ao final dessa disciplina (Parte I e Parte II) é esperado que o estudante possa
 Exemplo:
 A = {1, 2, 3}, B = {2, 3, 4}
 A ∪ B = {1, 2, 3, 4}
+
 A ∩ B = {2, 3}
+
 A − B = {1}
 
 ---
@@ -143,7 +144,7 @@ d) `Hoje está calor`
 
 ## Argumentos Lógicos
 
-Um argumento lógico é um conjunto de proposições em que algumas são **premissas** e uma é a **conclusão**.
+Conjunto de proposições em que algumas são **premissas** e uma é a **conclusão**.
 
 ### Exemplo 1
 
@@ -287,7 +288,7 @@ b) `¬p ∨ q`
 c) `(p ∧ q) → r`  
 d) `(q ↔ r)`
 
-** 5. Em sala,pegue uma folha de papel e crie em linguagem natural, uma proposição simples e duas FBFs.**
+** 5. Em sala, pegue uma folha de papel e crie em linguagem natural, uma proposição simples e duas FBFs.**
 
 ---
 ## Para revisar
@@ -432,7 +433,7 @@ Situação:
 > 4. Qualquer expressão da forma (P → Q) é chamada de **condicional**.  
 > 5. Qualquer expressão da forma (P ↔ Q) é chamada de **equivalência**.  
 >
-> Todas as expressões consideradas neste capítulo devem ser atômicas,  
+> Todas as expressões consideradas são atômicas,  
 > ou negações, conjunções, disjunções, condicionais ou equivalências.
 
 ---
@@ -443,9 +444,9 @@ Para analisar proposições compostas, utilizamos **árvores de análise sintát
 
 O objetivo é decompor uma proposição em suas partes atômicas.
 
-Uma árvore de análise sintática de proposição é construída top-down. Você começa com a expressão completa e quebra ela até chegar em expressões atômicas.
+Uma árvore de análise sintática é construída top-down. Você começa com a expressão completa e quebra ela até chegar em expressões atômicas.
 
-Uma ‘parse tree’ deve ser facilmente representada em uma expressão com parênteses.
+Uma *parse tree* pode ser representada em uma expressão com parênteses.
 
 ### Exemplo
 > "Se o Gustavo aprovar no TCC todos irão admirá-lo e ele receberá o diploma.  
@@ -461,19 +462,19 @@ A proposição composta é: `((P → (Q ∧ R)) ∧ (¬P → S))`
 
 Essa fórmula expressa as duas condições: caso Gustavo seja aprovado, terá admiração e diploma; caso não seja, precisará aumentar o esforço.
 
-<img width="1155" height="992" alt="image" src="https://github.com/user-attachments/assets/22cfaaa9-a490-4544-89f3-26e9e7916b3d" />
+<img width="770" height="661" alt="image" src="https://github.com/user-attachments/assets/22cfaaa9-a490-4544-89f3-26e9e7916b3d" />
 
 ---
 ## Para pensar
 
-Represente a ‘parse tree’ para 
+Represente a *parse tree* para:
 
 "Se eu prestar atenção então entenderei o conteúdo, e se eu fizer os exercícios fixarei o que aprendi".
 
 `((P → Q) ∧ (R → S))`
 
 
-<img width="1299" height="502" alt="image" src="https://github.com/user-attachments/assets/4b61cfdd-c0c9-4777-83fa-a70f84785e66" />
+<img width="649" height="251" alt="image" src="https://github.com/user-attachments/assets/4b61cfdd-c0c9-4777-83fa-a70f84785e66" />
 
 ---
 
@@ -583,7 +584,6 @@ Ele não está informado ou não é honesto. `¬P v ¬Q`
 
 Não é verdade que ele seja informado e honesto. `¬(P ^ Q)`
 
-
 <table>
   <tr>
     <th>p</th><th>q</th><th>p ∧ q</th><th>¬p V ¬q </th><th>¬(p ∧ q) ↔  (¬p V ¬q)</th>
@@ -624,9 +624,6 @@ Q: Produtos pagos
 
 As colunas finais de ambas as tabelas coincidem (1,0,1,1), portanto `(p → q)` é equivalente a `(¬p ∨ q)`.
 
----
-
- 
 ---
 
 ## Leis Essenciais da Lógica
@@ -753,9 +750,6 @@ A ordem das proposições não altera o resultado.
 P ∨ Q ≡ Q ∨ P
 P ∧ Q ≡ Q ∧ P
 
-php-template
-Copiar código
-
 **Tabela-verdade:**
 
 <table style="display:inline-block; margin-right:20px;">
@@ -786,9 +780,6 @@ A forma como as proposições são agrupadas não altera o resultado.
 (P ∨ Q) ∨ R ≡ P ∨ (Q ∨ R)
 (P ∧ Q) ∧ R ≡ P ∧ (Q ∧ R)
 
-yaml
-Copiar código
-
 ---
 
 ### Distributive Laws (Leis Distributivas)
@@ -799,9 +790,6 @@ Uma proposição pode ser distribuída sobre outra em conjunção ou disjunção
 P ∨ (Q ∧ R) ≡ (P ∨ Q) ∧ (P ∨ R)
 P ∧ (Q ∨ R) ≡ (P ∧ Q) ∨ (P ∧ R)
 
-yaml
-Copiar código
-
 ---
 
 ### Double Negation Law (Lei da Dupla Negação)
@@ -810,9 +798,6 @@ Negar duas vezes equivale à proposição original.
 
 **Expressão:**
 ¬(¬P) ≡ P
-
-php-template
-Copiar código
 
 **Tabela-verdade:**
 
@@ -840,8 +825,6 @@ Transformam uma negação de conjunção em disjunção e vice-versa.
 ¬(P ∧ Q) ≡ (¬P ∨ ¬Q)
 ¬(P ∨ Q) ≡ (¬P ∧ ¬Q)
 
-javascript
-Copiar código
 
 **Tabela-verdade (primeira lei):**
 
@@ -863,14 +846,134 @@ Copiar código
   <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
 </table>
  
+---
 
+# Sistemas Dedutivos e Dedução Natural
 
+A lógica proposicional não se limita a avaliar proposições com tabelas-verdade.  
+Ela também permite **deduzir conclusões a partir de premissas**, seguindo regras formais chamadas **regras de inferência**.  
+Essas regras constituem os **sistemas dedutivos**, fundamentais para a matemática, a filosofia e a computação.
 
+---
 
+## Regras de Inferência
 
+As **regras de inferência** estabelecem formas válidas de obter uma conclusão a partir de uma ou mais premissas verdadeiras.  
+Elas garantem que, se as premissas forem verdadeiras, a conclusão também será verdadeira.
 
+### Exemplos de regras
 
+1. **Modus Ponens (MP)**  
+   - Se `p → q` e `p` são verdadeiros, então `q` também é verdadeiro.  
+   - Exemplo:  
+     - Premissas:  
+       1. "Se chover, levarei guarda-chuva."  
+       2. "Está chovendo."  
+     - Conclusão: "Levarei guarda-chuva."
 
+2. **Modus Tollens (MT)**  
+   - Se `p → q` e `¬q` são verdadeiros, então `¬p` também é verdadeiro.  
+   - Exemplo:  
+     - Premissas:  
+       1. "Se chover, a rua ficará molhada."  
+       2. "A rua não está molhada."  
+     - Conclusão: "Não choveu."
+
+3. **Silogismo Hipotético (SH)**
+   - Se `p → q` e `q → r`, então `p → r`.  
+   - Exemplo:  
+     - Premissas:  
+       1. "Se estudar, tiro boa nota."  
+       2. "Se tiro boa nota, fico feliz."  
+     - Conclusão: "Se estudar, fico feliz."
+
+4. **Silogismo Disjuntivo (SD)**  
+   - Se `p ∨ q` e `¬p`, então `q`.  
+   - Exemplo:  
+     - Premissas:  
+       1. "Ou estudo ou vou ao cinema."  
+       2. "Não vou estudar."  
+     - Conclusão: "Vou ao cinema."
+
+---
+
+## Argumentos Válidos x Inválidos
+
+- Um **argumento válido** é aquele em que a conclusão decorre logicamente das premissas.  
+- Um **argumento inválido** é aquele em que a conclusão **não** segue das premissas, mesmo que todas as premissas sejam verdadeiras.
+
+**Exemplo válido:**  
+1. "Se eu programar em Python, entenderei lógica."  
+2. "Eu programei em Python."  
+3. Logo, "Entendi lógica." (Modus Ponens)
+
+**Exemplo inválido:**  
+1. "Se eu programar em Python, entenderei lógica."  
+2. "Entendi lógica."  
+3. Logo, "Programei em Python." (→ Erro: conclusão não é garantida)
+
+---
+
+## Dedução Natural
+
+A **dedução natural** é um método para construir provas lógicas **passo a passo**, usando regras de inferência.  
+Cada linha de uma prova é justificada por uma regra previamente aceita.
+
+### Exemplo de prova (Dedução Natural)
+
+Provar que de `p ∧ q` podemos concluir que `q ∧ p`:
+
+1. Premissa: `p ∧ q`  
+2. Da premissa, obtemos `p` (eliminação da conjunção)  
+3. Da premissa, obtemos `q` (eliminação da conjunção)  
+4. Com `q` e `p`, concluímos `q ∧ p` (introdução da conjunção)  
+
+Assim, provamos a comutatividade da conjunção.
+
+---
+
+## Aplicações em Computação
+
+Sistemas dedutivos e dedução natural são aplicados em diversas áreas da computação, como:
+
+- **Verificação de programas**: garantir que um software satisfaz requisitos formais.  
+- **Compiladores**: verificação de tipos e consistência de programas.  
+- **Inteligência Artificial**: mecanismos de raciocínio automático em sistemas especialistas.  
+- **Segurança da informação**: provas formais de protocolos criptográficos.  
+
+---
+
+## Exercícios
+
+1. Use **Modus Tollens** para deduzir a conclusão:  
+   - Premissas:  
+     1. "Se o sistema está vulnerável, então haverá falhas de segurança."  
+     2. "Não há falhas de segurança."  
+   - Conclusão: ?
+
+2. Determine se o argumento é válido ou inválido:  
+   - "Se a senha for forte, o sistema é seguro."  
+   - "O sistema é seguro."  
+   - "Logo, a senha é forte."
+
+3. Construa uma prova em dedução natural:  
+   - Premissa: `p → (q → r)`  
+   - Premissa: `p ∧ q`  
+   - Conclusão: `r`
+
+---
+
+## Gabarito
+
+1. Conclusão: "O sistema não está vulnerável." (Modus Tollens)  
+2. Argumento inválido (afirmação do consequente).  
+3.  
+   1. `p → (q → r)` (premissa)  
+   2. `p ∧ q` (premissa)  
+   3. `p` (eliminação da conjunção em 2)  
+   4. `q` (eliminação da conjunção em 2)  
+   5. `q → r` (Modus Ponens em 1 e 3)  
+   6. `r` (Modus Ponens em 5 e 4)  
 
 
 ---
