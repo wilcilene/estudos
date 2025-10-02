@@ -292,6 +292,7 @@ d) `(q ↔ r)`
 
 ---
 ## Para revisar
+
 ## Conectivos Lógicos
 
 Os conectivos lógicos permitem combinar proposições e construir expressões mais complexas.  
@@ -870,6 +871,19 @@ Elas garantem que, se as premissas forem verdadeiras, a conclusão também será
        1. "Se chover, levarei guarda-chuva."  
        2. "Está chovendo."  
      - Conclusão: "Levarei guarda-chuva."
+    
+<table>
+  <tr>
+    <th>p</th><th>q</th><th>p → q</th><th>Premissas válidas?</th><th>Conclusão q</th>
+  </tr>
+  <tr><td>1</td><td>1</td><td>1</td><td>p e (p → q) são 1</td><td>1</td></tr>
+  <tr><td>1</td><td>0</td><td>0</td><td>(p → q) é 0</td><td>-</td></tr>
+  <tr><td>0</td><td>1</td><td>1</td><td>p é 0</td><td>-</td></tr>
+  <tr><td>0</td><td>0</td><td>1</td><td>p é 0</td><td>-</td></tr>
+</table>
+
+**Validade:** apenas na linha 1 as premissas são verdadeiras, e nesse caso `q` também é verdadeiro → regra confirmada.
+
 
 2. **Modus Tollens (MT)**  
    - Se `p → q` e `¬q` são verdadeiros, então `¬p` também é verdadeiro.  
@@ -878,6 +892,19 @@ Elas garantem que, se as premissas forem verdadeiras, a conclusão também será
        1. "Se chover, a rua ficará molhada."  
        2. "A rua não está molhada."  
      - Conclusão: "Não choveu."
+    
+<table>
+  <tr>
+    <th>p</th><th>q</th><th>p → q</th><th>¬q</th><th>Premissas válidas?</th><th>Conclusão ¬p</th>
+  </tr>
+  <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>-</td><td>-</td></tr>
+  <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>(p → q) é 0</td><td>-</td></tr>
+  <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>-</td><td>-</td></tr>
+  <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>Premissas verdadeiras</td><td>¬p = 1</td></tr>
+</table>
+
+**Validade:** na linha 4, onde as premissas são verdadeiras, a conclusão `¬p` também é verdadeira → regra confirmada.
+
 
 3. **Silogismo Hipotético (SH)**
    - Se `p → q` e `q → r`, então `p → r`.  
@@ -887,6 +914,24 @@ Elas garantem que, se as premissas forem verdadeiras, a conclusão também será
        2. "Se tiro boa nota, fico feliz."  
      - Conclusão: "Se estudar, fico feliz."
 
+<table>
+  <tr>
+    <th>p</th><th>q</th><th>r</th>
+    <th>p → q</th><th>q → r</th><th>p → r</th>
+  </tr>
+  <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+  <tr><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+  <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+  <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+  <tr><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+  <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+  <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+  <tr><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+</table>
+
+**Validade:** sempre que `p → q` e `q → r` são verdadeiros, `p → r` também é verdadeiro.
+
+
 4. **Silogismo Disjuntivo (SD)**  
    - Se `p ∨ q` e `¬p`, então `q`.  
    - Exemplo:  
@@ -894,6 +939,9 @@ Elas garantem que, se as premissas forem verdadeiras, a conclusão também será
        1. "Ou estudo ou vou ao cinema."  
        2. "Não vou estudar."  
      - Conclusão: "Vou ao cinema."
+    
+<table> <tr> <th>p</th><th>q</th><th>p ∨ q</th><th>¬p</th><th>Premissas (p ∨ q ∧ ¬p)?</th><th>Conclusão (q)</th> </tr> <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>Não</td><td>1</td></tr> <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>Não</td><td>0</td></tr> <tr><td>0</td><td>1</td><td>1</td><td>1</td><td><strong>Sim</strong></td><td><strong>1</strong></td></tr> <tr><td>0</td><td>0</td><td>0</td><td>1</td><td>Não</td><td>0</td></tr> </table>
+
 
 ---
 
@@ -919,17 +967,39 @@ Elas garantem que, se as premissas forem verdadeiras, a conclusão também será
 A **dedução natural** é um método para construir provas lógicas **passo a passo**, usando regras de inferência.  
 Cada linha de uma prova é justificada por uma regra previamente aceita.
 
-### Exemplo de prova (Dedução Natural)
+### Problema:
+> Se eu estudar, então passo na prova.  
+> Se eu passo na prova, então fico feliz.  
+> Eu estudei.  
+> Logo, fico feliz.
 
-Provar que de `p ∧ q` podemos concluir que `q ∧ p`:
+### Formalização:
+- p: "Eu estudei"  
+- q: "Eu passo na prova"  
+- r: "Eu fico feliz"  
+- Premissas: `p → q`, `q → r`, `p`  
+- Conclusão: `r`
 
-1. Premissa: `p ∧ q`  
-2. Da premissa, obtemos `p` (eliminação da conjunção)  
-3. Da premissa, obtemos `q` (eliminação da conjunção)  
-4. Com `q` e `p`, concluímos `q ∧ p` (introdução da conjunção)  
+### Prova (dedução natural):
 
-Assim, provamos a comutatividade da conjunção.
+1. `p → q` (premissa)  
+2. `q → r` (premissa)  
+3. `p` (premissa)  
+4. `q` (Modus Ponens em 1 e 3)  
+5. `r` (Modus Ponens em 2 e 4)  
 
+**Conclusão:** a partir das premissas, concluímos `r` — o argumento é **válido**.
+
+---
+
+# Para Pensar
+
+1. Prove, usando dedução natural:  
+   - "Se eu praticar exercícios, terei mais saúde."  
+   - "Se eu tiver mais saúde, serei mais produtivo."  
+   - "Eu pratico exercícios."  
+   - **Conclusão:** "Serei mais produtivo."
+     
 ---
 
 ## Aplicações em Computação
