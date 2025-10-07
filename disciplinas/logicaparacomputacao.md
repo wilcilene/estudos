@@ -1033,7 +1033,7 @@ Sistemas dedutivos e dedução natural são aplicados em diversas áreas da comp
 
 ---
 
-## Gabarito
+## Gabarito (precisa organizar)
 
 1. Conclusão: "O sistema não está vulnerável." (Modus Tollens)  
 2. Argumento inválido (afirmação do consequente).  
@@ -1044,11 +1044,6 @@ Sistemas dedutivos e dedução natural são aplicados em diversas áreas da comp
    4. `q` (eliminação da conjunção em 2)  
    5. `q → r` (Modus Ponens em 1 e 3)  
    6. `r` (Modus Ponens em 5 e 4)  
-
-
----
-
-## Gabarito das atividades
 
 ### Exercício 1
 a) Proposição, 0 (falsa).  
