@@ -224,6 +224,7 @@ Então vamos estudar sintaxe e semântica:
   Uma sequência de símbolos só é considerada uma **Fórmula Bem Formada (FBF)** se respeitar essas regras.
 
   FBF = Termo técnico para uma sequência finita de símbolos de um alfabeto formal que segue as regras de construção de uma linguagem formal, como a lógica proposicional ou a lógica de predicados. São expressões construídas corretamente com proposições e conectivos.
+Obs: os símbolos atômicos (as proposições em si) são FBFs. Se 'P' representa a proposição "Estudo", então 'P' é uma FBF. Podemos a partir dela construir outras como 'não Estudo', 'Estudo e vou bem nas provas' supondo Q como 'vou bem nas provas'.
 
   Resumindo uma FBF é uma expressão lógica construída corretamente, seguindo as regras sintáticas.
 
