@@ -5,7 +5,7 @@ Aqui você encontra materiais e conteúdos das disciplinas que leciono.
 
 ## Disciplinas
 - [Engenharia de Software](disciplinas/engenhariadesoftware.md)
-- [Lógica para Computação](disciplinas/logicaparacomputacao/index)
+- [Lógica para Computação](disciplinas/logicaparacomputacao/index.md)
 
 ## Contato
 - Email: wilcilenekowal@gmail.com
