@@ -1,7 +1,7 @@
 # Bem-vindo a página da disciplina de Lógica para Computação!
 
 Essa página foi criada no momento em que eu comecei a lecionar disciplinas no curso de Engenharia da Computação no Instituto Federal Catarinense (IFC).  
-Aqui você encontra materiais e conteúdos das disciplinas que leciono.
+Aqui você encontra materiais e conteúdos da disciplina de Lógica para Computação.
 
 ## Disciplinas
 - [Parte I](introducao)
