@@ -9,6 +9,7 @@ Aqui você encontra materiais e conteúdos da disciplina de Lógica para Computa
   - Lógica Proposicional, Linguagem e Semântica: Sintaxe e fórmulas bem formadas (FBFs). Tabela-verdade, tautologias, contradições, contingências e Equivalências lógicas. Simplificação de fórmulas.
   - Sistemas Dedutivos e Dedução natural: Regras de inferência. Argumentos válidos x inválidos. Construção de provas. Aplicação de dedução em problemas computacionais.
 - [Aspectos computacionais](aspectoscomputacionais.md)
+- [O Princípio da Resolução](cnf.md)
 
 ## Contato
 - Email: wilcilenekowal@gmail.com
