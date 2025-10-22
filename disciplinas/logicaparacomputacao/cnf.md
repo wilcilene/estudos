@@ -4,7 +4,8 @@
 
   - https://www.youtube.com/watch?v=P83EaNMPAkE - Para que serve
   - https://youtu.be/7r0ahPsbcVA?si=H3EmyfJxMmJFH9e1 - Como aplicar
-  -  
+  - https://www.youtube.com/watch?v=7r0ahPsbcVA&list=PLqjqpppsxxcURhzS6tFluQ65T6plLPq8U&index=7&pp=iAQB
+    
 - O Princípio da Resolução: Aplicações em problemas computacionais.
   - Grupo A (Alterar titulo e por link para página)
   - Grupo B (Alterar titulo e por link para página)
