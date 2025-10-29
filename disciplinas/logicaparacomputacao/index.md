@@ -10,6 +10,7 @@ Aqui você encontra materiais e conteúdos da disciplina de Lógica para Computa
   - Sistemas Dedutivos e Dedução natural: Regras de inferência. Argumentos válidos x inválidos. Construção de provas. Aplicação de dedução em problemas computacionais.
 - [Aspectos computacionais](aspectoscomputacionais.md)
 - [O Princípio da Resolução](cnf.md)
+- [Lógica de Predicado](logicadepredicado.md)
 
 ## Contato
 - Email: wilcilenekowal@gmail.com
