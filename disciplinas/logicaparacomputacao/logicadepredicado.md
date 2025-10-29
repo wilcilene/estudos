@@ -163,6 +163,13 @@ Esse tipo de formalização é base para **mecanismos de inferência**, usados e
    * c) Se um gato mia, então ele é vivo.
 
 ---
+
+## 9. Resumo
+
+A Lógica de Predicados amplia os horizontes da lógica proposicional, permitindo representar e raciocinar sobre propriedades e relações entre objetos. É uma ferramenta essencial para áreas como **Inteligência Artificial**, **Verificação Formal**, **Linguagens de Programação** e **Banco de Dados**.
+
+> compreender a sintaxe, semântica e interpretação da Lógica de Predicados é o primeiro passo para aplicar raciocínio lógico de forma automatizada em sistemas computacionais.
+
 <!--
 ## 9. Materiais e Recursos Extras
 
@@ -172,28 +179,12 @@ Esse tipo de formalização é base para **mecanismos de inferência**, usados e
 * **Huth & Ryan**, *Logic in Computer Science: Modelling and Reasoning about Systems*.
 * **Ian Chiswell & Wilfrid Hodges**, *Mathematical Logic*.
 
-### 🎥 Vídeos e cursos online
+### Online
 
 * [Lógica de Predicados – UNIVESP](https://www.youtube.com/watch?v=b7P5qtuWHDI)
 * [Introdução à Lógica – USP Coursera](https://www.coursera.org/learn/logica)
-
-### Recursos na Web
-
 * [Brilliant.org – Logic Courses](https://brilliant.org/courses/logic/)
 * [Wikibooks – Lógica Matemática](https://pt.wikibooks.org/wiki/L%C3%B3gica_Matem%C3%A1tica)
 * [Logic.ly – Simulador de circuitos lógicos](https://logic.ly/demo/)
 -->
 ---
-
-## 10. Conclusão
-
-A Lógica de Predicados amplia os horizontes da lógica proposicional, permitindo representar e raciocinar sobre propriedades e relações entre objetos. É uma ferramenta essencial para áreas como **Inteligência Artificial**, **Verificação Formal**, **Linguagens de Programação** e **Banco de Dados**.
-
-> 🧠 **Resumo:** compreender a sintaxe, semântica e interpretação da Lógica de Predicados é o primeiro passo para aplicar raciocínio lógico de forma automatizada em sistemas computacionais.
-
----
-
-### 📄 Sobre este material
-
-Material elaborado para fins didáticos na disciplina **Lógica para Computação**.
-Pode ser utilizado e adaptado livremente com atribuição ao autor original.
