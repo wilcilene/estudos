@@ -1,0 +1,25 @@
+package br.com.conexao;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class TesteSelect {
+    public static void main(String[] args) {
+        try {
+            Connection con = Conexao.conectar();
+            String sql = "SELECT * FROM usuario";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                System.out.println("ID: " + rs.getInt("id") + ", Nome: " + rs.getString("nome") + ", Email: " + rs.getString("email")
+                );
+            }
+
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
