@@ -28,9 +28,9 @@
  - New -> Class
  - Escolha um nome (Sugestão: Conexao)
 > Nessa classe vamos importar as bibliotecas java.sql Connection, DriverManager e SQLException
-   Connection possibilita o envio de comandos SQL (select, insert, update, delete) bem como abrir transações com o banco e fechar a conexão após o uso.
-   DriverManager permite gerenciar os drivers JDBC instalados e criar conexões com o banco.
-   SQLException facilita o tratamento de exceções
+> - Connection possibilita o envio de comandos SQL (select, insert, update, delete) bem como abrir transações com o banco e fechar a conexão após o uso.
+> - DriverManager permite gerenciar os drivers JDBC instalados e criar conexões com o banco.
+> - SQLException facilita o tratamento de exceções
 <!--
    
 
