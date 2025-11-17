@@ -3,7 +3,7 @@
 Essa página foi criada no momento em que eu comecei a lecionar disciplinas no curso de Engenharia da Computação no Instituto Federal Catarinense (IFC).  
 Aqui você encontra materiais e conteúdos da disciplina de Lógica para Computação.
 
-## Disciplinas
+## Conteúdo
 - [Parte I](introducao)
   - Introdução e Fundamentos: Apresentação da disciplina, objetivos e aplicações da lógica na computação. Revisão matemática básica: conjuntos, proposições e conectivos.
   - Lógica Proposicional, Linguagem e Semântica: Sintaxe e fórmulas bem formadas (FBFs). Tabela-verdade, tautologias, contradições, contingências e Equivalências lógicas. Simplificação de fórmulas.
