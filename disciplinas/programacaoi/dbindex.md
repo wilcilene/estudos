@@ -1,4 +1,4 @@
-<img width="316" height="257" alt="image" src="https://github.com/user-attachments/assets/c7454ccb-9e8a-487c-9fca-4a0dba59c22b" /># Pré requisitos:
+# Pré requisitos:
 
 (as ferramentas podem ser susbstituídas, mas como o tutorial é para uso no IFC, optou-se por indicar as ferramentas que são, por padrão, utilizadas nos laboratórios)
 
