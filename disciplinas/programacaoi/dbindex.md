@@ -1,4 +1,4 @@
-#Pré requisitos:
+# Pré requisitos:
 
 (as ferramentas podem ser susbstituídas, mas como o tutorial é para uso no IFC, optou-se por indicar as ferramentas que são, por padrão, utilizadas nos laboratórios)
 
@@ -9,21 +9,21 @@
   - https://dev.mysql.com/downloads/connector/j/ (em windows escolha "plataform independent e baixe o *.ZIP Archive)
 - Descompacte o arquivo (preste atenção no diretório em que está descompactando)
 
-#Crie um projeto Java (no Eclipse)
+# Crie um projeto Java (no Eclipse)
 
 - Abra o Eclipse
 - Escolha File -> New -> Java Project
 - Escolha um nome (Sugestão: ConexaoMySQL, se escolher outro, adeque o código)
 - Clique em Finish
 
-#Adicione o Driver JDBC ao seu projeto
+# Adicione o Driver JDBC ao seu projeto
 
 - Clique com o botão direito no projeto
 - em Build Path -> Configure Build Path escolha a guia Libraries e Add External JARs
 - Selecione o arquivo mysql-connector-j-8.x.x.jar (no diretório onde descompactou o *.ZIP anteriormente)
 - Clique em Apply and Close
 
- #Crie uma classe de conexão
+ # Crie uma classe de conexão
  
  - Clique com o botão direito em src
  - Escolha New -> Package
