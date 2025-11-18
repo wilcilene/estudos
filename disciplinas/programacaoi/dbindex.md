@@ -1,4 +1,4 @@
-# Pré requisitos:
+<img width="316" height="257" alt="image" src="https://github.com/user-attachments/assets/c7454ccb-9e8a-487c-9fca-4a0dba59c22b" /># Pré requisitos:
 
 (as ferramentas podem ser susbstituídas, mas como o tutorial é para uso no IFC, optou-se por indicar as ferramentas que são, por padrão, utilizadas nos laboratórios)
 
@@ -44,12 +44,56 @@
 >  - Defina um método estático (chamado sem criar objeto da classe) que retorna um objeto Connection
 >  - Crie a conexão:
 >    - Connection conexao = DriverManager.getConnection(URL, USER, PASSWORD);
->    - busca o driver do MySQL; tenta conectar ao banco com os dados fornecidos; retorna o objeto Connection
+>    - Busca o driver do MySQL; tenta conectar ao banco com os dados fornecidos; retorna para o objeto Connection
 > - Trate exceção para saber se tudo ocorreu conforme esperado
 > - Retorne a 'conexao' para que a chamada possa utilizá-la
 > - Obs: no método main chame o método
 >   - conectar();
 <!--
-   
 
-   Obs: Você pode acessar os códigos em:
+ # Crie o Banco de dados MySQL
+ 
+ - Crie o banco com 
+   - CREATE DATABASE meubanco;
+ - Indique o banco a ser utilizado com 
+   - USE meubanco;
+- Em seguida crie as tabelas com os campos desejados, para o exemplo desse tutorial, crie:
+'CREATE TABLE usuario (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100),
+    email VARCHAR(100)
+);'
+
+ # Insira dados no banco criado
+ 
+ - Se criou o banco conforme descrito no tópico anterior, execute o comando de INSERT a seguir:
+ INSERT INTO usuario(nome, email)
+ VALUES ('Wilcilene', 'wilcilenekowal@gmail.com');
+
+ 
+  # Crie uma nova classe Java para usar o banco
+ 
+ - New -> Class
+ - Escolha um nome (Sugestão: TesteSelect)
+> Nessa classe importe as bibliotecas java.sql Connection, ResultSet e Statement
+> - Connection já utilizada anteriormente
+> - ResultSet usada para armazenar os resultados da consulta
+> - Statement permite executar os comandos SQL
+> - Em seguida declare a classe e o método main
+>   - Chame o método 'conectar()' da classe 'Conexao' e armazene essa conexão em uma variável 'con'.
+>      - Connection con = Conexao.conectar();
+>   - Crie uma string com o comando SQL que será executado
+>     - String sql = "SELECT * FROM usuario";
+>   - Defina um objeto 'Statement' a partir da conexão estabelecida 'con' (se usou outro nome na variável, ajuste), que envia os comandos ao banco.
+>     - Statement stmt = con.createStatement();
+>   - Execute o comando SQL da string sql criada anteriormente e armazene o resultado em uma variável do tipo ResultSet (nesse caso a rs)
+>     - ResultSet rs = stmt.executeQuery(sql);
+>   - Em um laço percorra a variável e imprima os dados consultados para verificar
+>     - System.out.println("ID: " + rs.getInt("id") +  ", Nome: " + rs.getString("nome") + ", Email: " + rs.getString("email")); 
+>   - Importante: Feche a conexão com o banco para liberação dos recursos
+>     - con.close();
+> - Trate exceção para saber se tudo ocorreu conforme esperado
+<!--
+
+Códigos disponíveis em https://github.com/wilcilene/estudos/tree/main/disciplinas/programacaoi/ConexaoMySQL
+
