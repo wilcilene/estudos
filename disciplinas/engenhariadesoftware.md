@@ -13,5 +13,12 @@
     - E aí você inicia a construção ou chama um engenheiro?
 - Agora que todos reconhecem a importância da análise. Reflita sobre como a análise impacta na qualidade do desenvolvimento e manutenção de softwares?
 
-<p align="center"><img width="972" height="531" alt="image" src="https://github.com/user-attachments/assets/a5df99b4-85b3-461c-8034-029c0c0d39d0" /></p>
+| <img src="https://github.com/user-attachments/assets/a5df99b4-85b3-461c-8034-029c0c0d39d0" width="300"> |  
+Assuntos abordados: Atividades de engenharia de software. Ciclo de vida do software.  
+Especificação de Requisitos. Análise e Projeto de Software.  
+Implementação, Depuração e Testes. Qualidade de Software.  
+Métodos de desenvolvimento de software. |
+|---|---|
+
+
 
