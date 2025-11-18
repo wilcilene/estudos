@@ -49,7 +49,7 @@
 > - Retorne a 'conexao' para que a chamada possa utilizá-la
 > - Obs: no método main chame o método
 >   - conectar();
-<!--
+
 
  # Crie o Banco de dados MySQL
  
