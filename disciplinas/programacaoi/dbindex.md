@@ -93,7 +93,17 @@
 >   - Importante: Feche a conexão com o banco para liberação dos recursos
 >     - con.close();
 > - Trate exceção para saber se tudo ocorreu conforme esperado
-<!--
 
+# Execute o programa e observe o resultado
+ 
+ - Run As -> Java Application
+   - Se tratou exceção deve aparecer a mensagem definida para sucesso ou falha
+   - A lista de usuários cadastrados com INSERT INTO direto no banco, deve aparecer devido ao System.out.println executado após consultar os dados do banco
+
+# Experimente
+
+- Edite o programa para que, a partir da aplicação Java, seja possível cadastrar novos usuários, consultar a lista de usuários cadastrados (já existente), editar e remover registros/usuários.
+ 
+     
 Códigos disponíveis em https://github.com/wilcilene/estudos/tree/main/disciplinas/programacaoi/ConexaoMySQL
 
