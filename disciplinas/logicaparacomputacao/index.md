@@ -11,7 +11,7 @@ Aqui você encontra materiais e conteúdos da disciplina de Lógica para Computa
 - [Aspectos computacionais](aspectoscomputacionais.md)
 - [O Princípio da Resolução](cnf.md)
 - [Lógica de Predicado](logicadepredicado.md)
-
+- [Trabalho Final](trabalhofinal.md)
 ## Contato
 - Email: wilcilenekowal@gmail.com
 - [GitHub](https://github.com/wilcilene)
