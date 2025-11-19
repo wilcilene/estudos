@@ -56,7 +56,7 @@ Saída: Uma sequência ordenada dos n números recebidos.
 
 Para solucionar esse problema, é necessário desenvolver uma sequência de procedimentos que recebam o conjunto E, comparem de algum modo, reorganizem os valores de forma ordenada e devolvam o conjunto S. Algoritmos de ordenação serão estudados com mais ênfase nos próximos posts, pois é um problema comum na vida real dos programadores e permite encontrar ou programar uma ampla gama de diferentes soluções. A seguir é apresentado um algoritmo simples de ordenação, implementado em Python, o BubbleSort! 
 Para outros algoritmos de ordenação acesse: https://github.com/wilcilene/ordenacao
-```md
+```python
 def bubbleSort(eA):
     if len(eA) <= 1:
         sA = eA
@@ -69,7 +69,7 @@ def bubbleSort(eA):
                     eA[i] = temp
         sA = eA
     return sA
-```python
+```
 
 Referências:
 Cormen, Thomas, Leiserson, Charles,Rivest, Ronald. Algoritmos. GEN LTC.
