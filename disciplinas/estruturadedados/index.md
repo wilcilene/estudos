@@ -20,11 +20,13 @@ Desde a arquitetura proposta por Von Neumann, é necessário que os computadores
 <img width="1001" height="457" alt="image" src="https://github.com/user-attachments/assets/bcada3b8-c554-4257-9f18-fe80be14030b" />
 <sub>Figura 01 – Uma visão Funcional do computador (STALLINGS, 2010)</sub>
 
+
 ## Níveis de um computador
 Do ponto de vista de usuário tudo parece gráfico, mas para o computador tudo é pulso elétrico (bits de valor, de endereço ou de instrução a serem armazenados, lidos ou processados,). Tanenbaum (2013) apresenta a Figura 02 para explicar um computador de seis níveis. Nessa Figura é possível visualizar os níveis indicados, embaixo de cada nível o método de suporte para o mesmo e o nome do programa que o suporta entre parênteses. <sub>Os parágrafos após a Figura 02, tratam brevemente cada um dos níveis, se você os compreende pode pular a leitura.</sub>
 
 <img width="972" height="611" alt="image" src="https://github.com/user-attachments/assets/0beb671a-195b-4ca4-81e1-e74b40ee84d8" />
 <sub>Figura 02 – Um computador com seis níveis (TANENBAUM, 2013)</sub>
+
 
 Em uma visão Up-Down (de cima para abaixo), observa-se no topo o nível 5, nível de <u>linguagem orientada a problema</u>. Nesse nível encontram-se as linguagens de alto nível utilizadas pela maioria dos programadores de aplicações. Programas escritos nessas linguagens em geral são traduzidos para os níveis 3 ou 4 por tradutores conhecidos como compiladores, embora às vezes sejam interpretados, em vez de traduzidos.
 
