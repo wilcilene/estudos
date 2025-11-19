@@ -71,7 +71,11 @@ def bubbleSort(eA):
     return sA
 ```
 
-Referências:
+
+# Referências:
+
 Cormen, Thomas, Leiserson, Charles,Rivest, Ronald. Algoritmos. GEN LTC.
+
 Stallings, William. Arquitetura e organização de computadores.
+
 Tanenbaum, Andrew S. Organização Estruturada de Computadores.
