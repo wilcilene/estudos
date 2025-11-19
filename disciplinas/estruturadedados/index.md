@@ -1,4 +1,5 @@
 # Introdução à estrutura de dados
+
 Para melhor entender o conteúdo de “Estrutura de dados” é importante conhecer o funcionamento de um computador. Stallings (2017) afirma que “um computador é um sistema complexo” pois, pode conter milhões de componentes eletrônicos. Com o objetivo de revisar alguns conceitos importantes e melhor entender os computadores, esse post apresenta a definição de arquitetura e de organização, as funções e os níveis de um computador.
 
 Inicialmente vamos rever alguns conceitos importantes, seguindo a definição proposta por Stallings (2017) .
@@ -9,7 +10,7 @@ Arquitetura de computador: atributos de um sistema visíveis ao programador – 
 Organização de computador: unidades operacionais e suas interconexões que realizam as especificações arquiteturais. São detalhes de hardware transparentes ao programador, como sinais de controle, interfaces entre o computador e periféricos e a tecnologia de memória utilizada.
 – Frequência de clock. Posições de memória.
 
-# Funções de um computador
+## Funções de um computador
 Desde a arquitetura proposta por Von Neumann, é necessário que os computadores apresentem quatro as funções básicas: Processamento, Armazenamento, Movimentação e Controle. A Figura 01 apresenta a visão de Stallings (2010) sobre essas funções. Se você já está familiarizado com elas, pule a leitura para a Figura 01.
 - Processamento de dados: Os dados podem assumir diversas formas, em diferentes intervalos e necessitarem de diferentes operações de processamento. Não importam as condições, o computador deve ser capaz de processá-los.
 - Armazenamento de dados: Há dois tipos de armazenamento de dados. O armazenamento temporário, que mantém um dado armazenado (em registradores, memória RAM, etc…) apenas o tempo necessário para ser utilizado e depois o descarta. E o armazenamento permanente, que representa o armazenamento de dados em arquivos que são salvos pelo computador (em SSD, pendrive, etc…) e permitem recuperação, edição e exclusão dos mesmos a longo prazo.
@@ -19,7 +20,7 @@ Desde a arquitetura proposta por Von Neumann, é necessário que os computadores
 <img width="1001" height="457" alt="image" src="https://github.com/user-attachments/assets/bcada3b8-c554-4257-9f18-fe80be14030b" />
 <sub>Figura 01 – Uma visão Funcional do computador (STALLINGS, 2010)</sub>
 
-# Níveis de um computador
+## Níveis de um computador
 Do ponto de vista de usuário tudo parece gráfico, mas para o computador tudo é pulso elétrico (bits de valor, de endereço ou de instrução a serem armazenados, lidos ou processados,). Tanenbaum (2013) apresenta a Figura 02 para explicar um computador de seis níveis. Nessa Figura é possível visualizar os níveis indicados, embaixo de cada nível o método de suporte para o mesmo e o nome do programa que o suporta entre parênteses. <sub>Os parágrafos após a Figura 02, tratam brevemente cada um dos níveis, se você os compreende pode pular a leitura.</sub>
 
 <img width="972" height="611" alt="image" src="https://github.com/user-attachments/assets/0beb671a-195b-4ca4-81e1-e74b40ee84d8" />
@@ -40,7 +41,7 @@ No nível 0, nível <u>lógico digital</u>, os objetos são chamados de portas (
 Abaixo do nível zero poderia ser considerado mais um nível, que poderia ser denominado <u>nível de dispositivo</u>. Esse nível representaria transistores individuais. Normalmente descrito por autores da área de eletrônica.
 
 
-# Algoritmos
+## Algoritmos
 
 Algoritmos determinam a execução de procedimentos computacionais que de forma geral, transformam entradas em saídas. Ahh, eles precisam ser bem definidos, se não, nada funciona! Cormen e Leiserson (2017) afirmam “que devemos considerar algoritmos como uma tecnologia, lado a lado com hardware rápido, interfaces gráficas do usuário, sistemas orientados a objetos e redes”.
 
@@ -72,7 +73,7 @@ def bubbleSort(eA):
 ```
 
 
-# Referências:
+## Referências:
 
 Cormen, Thomas, Leiserson, Charles,Rivest, Ronald. Algoritmos. GEN LTC.
 
