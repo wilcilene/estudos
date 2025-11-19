@@ -73,19 +73,18 @@ O projeto deve ter um link para ser adicionado nesta página e será apresentado
 
 # Avaliação
 
-1. **URL** contendo todas as etapas com descrição.  
+1. **URL** contendo todas as etapas com descrição. Envie por email o bloco de cabeçalho para eu colar aqui embaixo (Título, Estudante, Semestra link).  
 2. **Código** (Python, Prolog ou outro) indique o repositório no final da página da URL entregue (ou adicione o próprio código formatado no final).  
 3. **Apresentação** .
 
 ---
 
-# Modelo de entrega gerada pelo chatGPT 
-Preciso terminar de conferir ainda, mas já sei que vocês podem fazer melhor!
+# Entregas
  
 ## Sistema Lógico de Controle de Acesso  
-### Estudante: chatGPT 
+### Estudante: modelo gerado pelo chatGPT 
 ### Semestre: 2025.2
-link: 
+### Link: [Sistema Lógico de Controle de Acesso](entregachatgpt.md)
 
 ---
 
