@@ -5,7 +5,7 @@ Aqui você encontra materiais e conteúdos das disciplinas que leciono.
 
 ## Disciplinas
 - [Engenharia de Software](disciplinas/engenhariadesoftware.md)
-- [Estrutura de dados](disciplinas/estrutura de dados/index.md)
+- [Estrutura de dados](disciplinas/estruturadedados/index.md)
 - [Lógica para Computação](disciplinas/logicaparacomputacao/index.md)
 - [Programação I](disciplinas/programacaoi/index.md)
 
