@@ -46,13 +46,16 @@ Algoritmos determinam a execução de procedimentos computacionais que de forma 
 
 Um exemplo muito comum, encontrado na literatura é o problema de ordenação. Tem se a necessidade de ordenar uma lista de códigos em ordem crescente. Formalmente pode-se definir esse problema como:
 
-Entrada: Uma sequência de n números quaisquer (que provavelmente estarão desordenados). E = [n1, n2, n3…nn]
-E = [ 3, 1, 2, 4, 5]
+Entrada: Uma sequência de 'n' números quaisquer (que provavelmente estarão desordenados). 
+'E = [n1, n2, n3…nn]' ->
+'E = [ 3, 1, 2, 4, 5]'
 
-Saída: Uma sequência ordenada dos n números recebidos. S = [n1′, n2′, n3’…nn’] tal que n1′ ≤ n2′ ≤ n3’… ≤ nn’
-S = [1, 2, 3, 4, 5]
+Saída: Uma sequência ordenada dos n números recebidos. 
+'S = [n1′, n2′, n3’…nn’]' tal que 'n1′ ≤ n2′ ≤ n3’… ≤ nn'
+'S = [1, 2, 3, 4, 5]'
 
-Para solucionar esse problema, é necessário desenvolver uma sequência de procedimentos que recebam o conjunto E, comparem de algum modo, reorganizem os valores de forma ordenada e devolvam o conjunto S. Algoritmos de ordenação serão estudados com mais ênfase nos próximos posts, pois é um problema comum na vida real dos programadores e permite encontrar ou programar uma ampla gama de diferentes soluções. A seguir são apresentados dois algoritmos simples de ordenação, implementados em Python.
+Para solucionar esse problema, é necessário desenvolver uma sequência de procedimentos que recebam o conjunto E, comparem de algum modo, reorganizem os valores de forma ordenada e devolvam o conjunto S. Algoritmos de ordenação serão estudados com mais ênfase nos próximos posts, pois é um problema comum na vida real dos programadores e permite encontrar ou programar uma ampla gama de diferentes soluções. A seguir é apresentado um algoritmo simples de ordenação, implementado em Python, o BubbleSort! 
+Para outros algoritmos de ordenação acesse: https://github.com/wilcilene/ordenacao
 ```md
 ```python
 def bubbleSort(eA):
@@ -67,8 +70,6 @@ def bubbleSort(eA):
                     eA[i] = temp
         sA = eA
     return sA
-
-> …Adicionar o outro exemplo e finalizar.
 
 Referências:
 Cormen, Thomas, Leiserson, Charles,Rivest, Ronald. Algoritmos. GEN LTC.
