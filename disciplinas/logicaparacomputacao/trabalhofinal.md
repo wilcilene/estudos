@@ -19,7 +19,7 @@ Exemplos de temas possíveis:
 - Trânsito e semáforos.
 - Validação de fluxos de trabalho com autômatos.
 - Torre de Hanói.
-- Quebra-cabeças lógicos etc.
+- Sejam mais criativos, estou olhando minha lista aqui e está chata demais rs
 
 O projeto deve ter um link para ser adicionado nesta página e será apresentado em sala.
 
