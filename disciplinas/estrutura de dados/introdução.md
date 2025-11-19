@@ -53,7 +53,7 @@ Saída: Uma sequência ordenada dos n números recebidos. S = [n1′, n2′, n3�
 S = [1, 2, 3, 4, 5]
 
 Para solucionar esse problema, é necessário desenvolver uma sequência de procedimentos que recebam o conjunto E, comparem de algum modo, reorganizem os valores de forma ordenada e devolvam o conjunto S. Algoritmos de ordenação serão estudados com mais ênfase nos próximos posts, pois é um problema comum na vida real dos programadores e permite encontrar ou programar uma ampla gama de diferentes soluções. A seguir são apresentados dois algoritmos simples de ordenação, implementados em Python.
-´´´python
+'''python
 def bubbleSort(eA):
     if len(eA) <= 1:
         sA = eA
@@ -66,7 +66,8 @@ def bubbleSort(eA):
                     eA[i] = temp
         sA = eA
     return sA
-´´´
+'''
+
 > …Adicionar o outro exemplo e finalizar.
 
 Referências:
