@@ -7,7 +7,7 @@ O planejamento financeiro é um conjunto de processos que facilitam o objetivo d
 Os dados que são necessários para a elaboração do planejamento financeiro são dados facilmente identificáveis, como quanto de dinheiro irá necessitar (inversão), como conseguirá (financiamento), como prevê vender e a que valores (entradas), quais serão os custos variáveis do produto ou serviço e quais serão os custos fixos, incluindo salários. Muitos desses elementos já estão indicados no próprio plano da empresa, então o planejamento financeiro é simplesmente transforma-los em dados numéricos e vinculados.
 
 Um bom planejamento financeiro deve ter as seguintes características:
-<img width="1536" height="250" alt="image" src="https://github.com/user-attachments/assets/cb7327eb-3882-4d36-b256-fe8070e44bfc" />
+<img width="1536" height="200" alt="image" src="https://github.com/user-attachments/assets/cb7327eb-3882-4d36-b256-fe8070e44bfc" />
 
 
 Deve ser a imagem fiel da empresa e, portanto, a contabilidade deve ser real e atualizada, caso contrário, não terá utilidade.
