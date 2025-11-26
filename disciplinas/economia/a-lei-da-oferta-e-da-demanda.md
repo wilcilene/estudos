@@ -34,7 +34,7 @@ Essa teoria foi criada por Jeremy Bentham, e aperfeiçoada por outros pensadores
 | 5                                            | 100              | 1                   |
 
 
-Assim, a utilidade marginal causa uma tendência negativa de consumo, uma vez que o consumidor não obterá a mesma utilidade para itens adicionais de um produto, o mesmo não estará disposto a pagar o mesmo valor pago pelo primeiro item. Para melhor compreender sobre o assunto, leia também o artigo Teoria do Consumidor, de autoria de Donário e Santos (2015), disponível em https://repositorio.ual.pt/bitstream/11144/3191/3/TEORIA%20DO%20CONSUMIDOR.pdf
+Assim, a utilidade marginal causa uma tendência negativa de consumo, uma vez que o consumidor não obterá a mesma utilidade para itens adicionais de um produto, o mesmo não estará disposto a pagar o mesmo valor pago pelo primeiro item. Para melhor compreender sobre o assunto, leia também o artigo Teoria do Consumidor, de autoria de Donário e Santos (2015), disponível em [Teoria do Consumidor](https://repositorio.ual.pt/bitstream/11144/3191/3/TEORIA%20DO%20CONSUMIDOR.pdf)
 
 ## As curvas econômicas
 Dentro da lei da oferta e demanda existem duas curvas, a curva da oferta e a curva da demanda, as quais tendem a regular e equilibrar o mercado. Para isso, considera-se a não intervenção do Estado, ou seja, o governo não intervém nos fatores econômicos. Assim, o preço de mercado será definido pela procura e produção dos produtos, bem como a demanda estará ligada à situação econômica do indivíduo ou sociedade, enquanto a oferta dependerá da procura pelos bens e serviços.
@@ -70,6 +70,7 @@ A curva da demanda é demonstrada em gráficos, conforme exemplo abaixo. Univers
 <sub>(MANKIW, 2020)</sub>
 
 ## Referências
+
 IZIDORO, Cleyton (org.). Economia e mercado. São Paulo: Pearson Education do Brasil, 2014.
 
 MANKIW, N. Gregory. Introdução à economia. São Paulo: Cengage, 2020.
