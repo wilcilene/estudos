@@ -38,15 +38,15 @@ Acesse a pasta com os arquivos *.java
 
 Compile os arquivos:
 
-''' 
+``` 
 javac *.java
-'''
+``` 
 
 Execute:
 
-'''
+``` 
 java Principal
-'''
+``` 
 
 ### Opção 2: Com Eclipse, IntelliJ ou NetBeans
 
