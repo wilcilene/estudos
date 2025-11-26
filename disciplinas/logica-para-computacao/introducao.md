@@ -1073,7 +1073,3 @@ d) "A internet funciona se e somente se posso acessar o Google."
 ---
 
 📚 **Leitura complementar:** Huth & Ryan, *Logic in Computer Science*, Capítulo 1.  
-
-
-
-https://www.respondeai.com.br/conteudo/calculo/pre-calculo/operacoes-com-conjuntos/1578
