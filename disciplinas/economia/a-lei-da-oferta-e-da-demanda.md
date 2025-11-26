@@ -8,9 +8,13 @@ Para Izidoro (2014) e outros economistas, essa teoria é centrada no comportamen
  O autor ainda define que, de forma geral, os indivíduos possuem características sobressalentes em comum, que são:
 
 > Com exceção de uma reserva monetária (poupança), transformam todos os seus rendimentos em bens e serviços;
+> 
 > Dividem sua renda em diversos bens, não concentrando-a em um só;
+> 
 > Via de regra, a maioria dos produtos não são adquiridas em quantidade suficiente;
+> 
 > Limitados à sua renda e ao preço aplicado aos bens, procuram sua total satisfação.
+> 
 Mas, o em que isso influencia o mercado? Qual a conexão com a demanda e oferta?
 
 Pois bem, a lei da oferta e da demanda se aplica para análises econômicas por meio de diversas características, destacadas algumas por Silva (2018) como a compreensão do porquê as variações econômicas no mercado global afetam o preço do mercado local e sua produção, além de auxiliar na previsão destas situações; avaliações de impactos causados por preções, salários-mínimos e incentivos à produção e; avaliação dos impactos aos produtores e consumidores causados pelos impostos de importação. Para melhor compreensão da lei da oferta e demanda, avalia-se a teoria da utilidade.
