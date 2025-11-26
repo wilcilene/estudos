@@ -52,7 +52,7 @@ e também diferenças.
   
 ### Orientação a Objetos
 
-Exemplo de classes com orientação a objetos: [Ver](/orientacao-a-objetos)
+Exemplo de classes com orientação a objetos: [Ver](disciplinas/engenharia-de-software/orientacao-a-objetos)
 
 A programação orientada a objetos inclui:
 
