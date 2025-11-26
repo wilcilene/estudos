@@ -1,6 +1,6 @@
 # Trabalho Final da Disciplina — Lógica para Computação
 
-Este trabalho reúne todos os conteúdos estudados ao longo do semestre.
+Este trabalho reune todos os conteúdos estudados ao longo do semestre.
 
 O objetivo é modelar e resolver logicamente um problema real ou computacional.
 
