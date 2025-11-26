@@ -67,7 +67,7 @@ A programação orientada a objetos inclui:
   - Métodos: ações executadas pelo objeto
 
 - Abstração
-<img width="1360" height="537" alt="image" src="https://github.com/user-attachments/assets/1c63d7db-ad98-49bb-ada0-a3fd2e65517d" />
+<img width="1013" height="537" alt="image" src="https://github.com/user-attachments/assets/1c63d7db-ad98-49bb-ada0-a3fd2e65517d" />
 
 Foca somente nos elementos essenciais.
 
@@ -75,29 +75,30 @@ Uma classe abstrata é uma especificação conceitual para outras classes.
 Ela fornece um modelo para geração de outras classes, sem ser instanciada (super classe).
 
 - Herança
+<img width="1013" height="289" alt="image" src="https://github.com/user-attachments/assets/b7be8d2e-db9f-491f-ada7-dcb41858413c" />
 
-Permite que uma classe herde características de outra
+Permite que uma classe herde características de outra.
 
-Facilita reutilização e especialização
-Veja um exemplo simples em: 
+Facilita reutilização e especialização. Lembre que copiar e reutilizar código são ações distintas.
+A classe “filha” herda as características da classe “mãe” (superclasse) e pode ter características próprias (Pantoni).
 
-Polimorfismo
+- Polimorfismo
 
 Um mesmo método pode se comportar de diferentes formas conforme a classe que o implementa
 
-Dependência
+- Dependência
 
 Representa uso temporário de recursos de outra classe
 
 Deve ser utilizada com bom senso para evitar alto acoplamento
 
-Encapsulamento
+- Encapsulamento
 
 Protege os dados internos do objeto
 
 Controla o acesso a atributos e métodos
 
-Visibilidade
+- Visibilidade
 
 Define quem pode acessar cada elemento da classe:
 
