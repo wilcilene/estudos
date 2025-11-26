@@ -4,6 +4,7 @@ Essa página foi criada no momento em que eu comecei a lecionar disciplinas no c
 Aqui você encontra materiais e conteúdos das disciplinas que leciono.
 
 ## Disciplinas
+- [Economia] (disciplinas/economia/index/)
 - [Engenharia de Software](disciplinas/engenharia-de-software/index.md)
 - [Estrutura de dados](disciplinas/estrutura-de-dados/index.md)
 - [Lógica para Computação](disciplinas/logica-para-computacao/index.md)
