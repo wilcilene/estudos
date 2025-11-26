@@ -84,7 +84,7 @@ O projeto deve ter um link para ser adicionado nesta página e será apresentado
 ## Sistema Lógico de Controle de Acesso  
 ### Estudante: modelo gerado pelo chatGPT 
 ### Semestre: 2025.2
-### Link: [Sistema Lógico de Controle de Acesso](entregachatgpt.md)
+### Link: [Sistema Lógico de Controle de Acesso](entrega-chatgpt.md)
 
 ---
 
