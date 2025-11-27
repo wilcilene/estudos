@@ -30,8 +30,12 @@ Na base de toda a estrutura está o **Foco na Qualidade**, que sustenta e direci
 
 A modelagem conceitual de software é uma etapa essencial dentro do processo de desenvolvimento e compõe uma subárea da Engenharia de Software (Doll, 2016).
 Para compreender e construir sistemas de qualidade, é necessário entender como esta área se organiza.
-<img width="1683" height="1019" alt="image" src="https://github.com/user-attachments/assets/5ec375f9-8349-497e-ba08-33352f1d8f36" />
-<sub> Imagem encontrada em diversos lugares da internet, difícil definir quem criou</sub>
+
+<p align="center">
+  <img width="841" height="509" 
+       alt="image"
+       src="[https://github.com/user-attachments/assets/2636a501-fe38-4dcb-96f2-d8692e2e341b](https://github.com/user-attachments/assets/5ec375f9-8349-497e-ba08-33352f1d8f36)">
+</p>
 
 Vamos revisar alguns conceitos para ajudar a entender a modelagem de software: 
 Obs: Você também encontra esse conteúdo nos livros do Deitel & Deitel
