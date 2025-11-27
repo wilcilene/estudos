@@ -75,7 +75,7 @@ A programação orientada a objetos inclui:
 
 - Abstração
   
-<img width="1013" height="537" alt="image" src="https://github.com/user-attachments/assets/1c63d7db-ad98-49bb-ada0-a3fd2e65517d" />
+<img width="506" height="268" alt="image" src="https://github.com/user-attachments/assets/1c63d7db-ad98-49bb-ada0-a3fd2e65517d" />
 
 Foca somente nos elementos essenciais.
 
@@ -84,7 +84,7 @@ Ela fornece um modelo para geração de outras classes, sem ser instanciada (sup
 
 - Herança
   
-<img width="1013" height="289" alt="image" src="https://github.com/user-attachments/assets/b7be8d2e-db9f-491f-ada7-dcb41858413c" />
+<img width="506" height="144" alt="image" src="https://github.com/user-attachments/assets/b7be8d2e-db9f-491f-ada7-dcb41858413c" />
 
 Permite que uma classe herde características de outra.
 
@@ -93,14 +93,14 @@ A classe “filha” herda as características da classe “mãe” (superclasse
 
 - Polimorfismo
   
-<img width="752" height="342" alt="image" src="https://github.com/user-attachments/assets/b1dc8f3a-46f8-444d-8251-e81e8d149489" />
+<img width="376" height="171" alt="image" src="https://github.com/user-attachments/assets/b1dc8f3a-46f8-444d-8251-e81e8d149489" />
 
 Polimorfismo é o princípio pelo qual duas ou mais classes derivadas de uma mesma superclasse podem invocar métodos que têm a mesma identificação (assinatura) mas comportamentos distintos, especializados para cada classe derivada, usando para tanto uma referência a um objeto do tipo da superclasse.
 Um mesmo método pode se comportar de diferentes formas conforme a classe que o implementa.
 
 - Dependência
   
-<img width="991" height="387" alt="image" src="https://github.com/user-attachments/assets/1299388b-2978-4c47-90ea-7a96e068bff2" />
+<img width="495" height="193" alt="image" src="https://github.com/user-attachments/assets/1299388b-2978-4c47-90ea-7a96e068bff2" />
 
 Representa uso temporário de recursos de outra classe.
 É importantíssimo utilizar com bom senso as dependências, procurando sempre isolar as classes quando possível, focando sempre no desacoplamento (Ventura).
@@ -124,7 +124,7 @@ protected (#): classes do mesmo pacote e subclasses
 private (-): apenas dentro da própria classe
 
 package-private (~): classes do mesmo pacote
-<img width="1427" height="339" alt="image" src="https://github.com/user-attachments/assets/b87cca98-304f-4d11-b25e-890a7a19a1d8" />
+<img width="713" height="169" alt="image" src="https://github.com/user-attachments/assets/b87cca98-304f-4d11-b25e-890a7a19a1d8" />
 
 
 Modelagem de Software
