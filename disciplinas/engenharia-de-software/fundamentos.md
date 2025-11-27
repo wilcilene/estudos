@@ -34,7 +34,7 @@ Para compreender e construir sistemas de qualidade, é necessário entender como
 <p align="center">
   <img width="841" height="509" 
        alt="image"
-       src="[https://github.com/user-attachments/assets/2636a501-fe38-4dcb-96f2-d8692e2e341b](https://github.com/user-attachments/assets/5ec375f9-8349-497e-ba08-33352f1d8f36)">
+       src="[https://github.com/user-attachments/assets/5ec375f9-8349-497e-ba08-33352f1d8f36">
 </p>
 
 Vamos revisar alguns conceitos para ajudar a entender a modelagem de software: 
