@@ -124,7 +124,7 @@ protected (#): classes do mesmo pacote e subclasses
 private (-): apenas dentro da própria classe
 
 package-private (~): classes do mesmo pacote
-<img width="713" height="169" alt="image" src="https://github.com/user-attachments/assets/b87cca98-304f-4d11-b25e-890a7a19a1d8" />
+<img width="1427" height="395" alt="image" src="https://github.com/user-attachments/assets/b87cca98-304f-4d11-b25e-890a7a19a1d8" />
 
 
 Modelagem de Software
