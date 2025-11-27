@@ -10,8 +10,11 @@
 - E se a construção iniciasse sem levantamento de requisitos, sem análise, sem projeto e sem documentação?
 - E se fosse uma ponte mais simples, poderia ser construída sem planejamento algum?
   - Se você está pensando que a análise não é realmente importante. Eu te desafio a construir uma ponte qualquer sem análise alguma e ser o primeiro a passar por ela (dentro de um caminhão carregado… seguido de uma fila de outros caminhões, todos carregados)!
-    - E aí você inicia a construção ou chama um engenheiro?
-- Agora que todos reconhecem a importância da análise. Reflita sobre como a análise impacta na qualidade do desenvolvimento e manutenção de softwares?
+    - E aí você inicia a construção ou a análise da situação para seguir com o projeto?
+- Por que com a construção do software seria diferente? Vamos analisar, documentar...
+- Reflita sobre: como a análise impacta na qualidade do desenvolvimento e manutenção de softwares?
+
+Compartilhe sua conclusão e interaja com os colegas em: https://github.com/wilcilene/estudos/discussions/1
 
 <table>
   <tr>
