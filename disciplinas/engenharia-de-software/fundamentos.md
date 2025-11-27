@@ -22,7 +22,7 @@ Na base de toda a estrutura está o **Foco na Qualidade**, que sustenta e direci
 
 <p align="center">
   <img width="415" height="174" 
-       alt="Ferramentas > Métodos > Processo > Foco na Qualidade"
+       alt="image"
        src="https://github.com/user-attachments/assets/2636a501-fe38-4dcb-96f2-d8692e2e341b">
 </p>
 
