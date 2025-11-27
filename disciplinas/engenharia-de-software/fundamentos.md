@@ -67,6 +67,7 @@ A programação orientada a objetos inclui:
   - Métodos: ações executadas pelo objeto
 
 - Abstração
+  
 <img width="1013" height="537" alt="image" src="https://github.com/user-attachments/assets/1c63d7db-ad98-49bb-ada0-a3fd2e65517d" />
 
 Foca somente nos elementos essenciais.
@@ -75,6 +76,7 @@ Uma classe abstrata é uma especificação conceitual para outras classes.
 Ela fornece um modelo para geração de outras classes, sem ser instanciada (super classe).
 
 - Herança
+  
 <img width="1013" height="289" alt="image" src="https://github.com/user-attachments/assets/b7be8d2e-db9f-491f-ada7-dcb41858413c" />
 
 Permite que uma classe herde características de outra.
@@ -83,20 +85,26 @@ Facilita reutilização e especialização. Lembre que copiar e reutilizar códi
 A classe “filha” herda as características da classe “mãe” (superclasse) e pode ter características próprias (Pantoni).
 
 - Polimorfismo
+  
+<img width="752" height="342" alt="image" src="https://github.com/user-attachments/assets/b1dc8f3a-46f8-444d-8251-e81e8d149489" />
 
-Um mesmo método pode se comportar de diferentes formas conforme a classe que o implementa
+Polimorfismo é o princípio pelo qual duas ou mais classes derivadas de uma mesma superclasse podem invocar métodos que têm a mesma identificação (assinatura) mas comportamentos distintos, especializados para cada classe derivada, usando para tanto uma referência a um objeto do tipo da superclasse.
+Um mesmo método pode se comportar de diferentes formas conforme a classe que o implementa.
 
 - Dependência
+  
+<img width="991" height="387" alt="image" src="https://github.com/user-attachments/assets/1299388b-2978-4c47-90ea-7a96e068bff2" />
 
-Representa uso temporário de recursos de outra classe
-
-Deve ser utilizada com bom senso para evitar alto acoplamento
+Representa uso temporário de recursos de outra classe.
+É importantíssimo utilizar com bom senso as dependências, procurando sempre isolar as classes quando possível, focando sempre no desacoplamento (Ventura).
 
 - Encapsulamento
 
-Protege os dados internos do objeto
+“(…) em programação orientada a objetos significa separar o programa em partes, o mais isolado possível”
 
-Controla o acesso a atributos e métodos
+Protege os dados internos do objeto.
+
+Controla o acesso a atributos e métodos.
 
 - Visibilidade
 
@@ -109,6 +117,8 @@ protected (#): classes do mesmo pacote e subclasses
 private (-): apenas dentro da própria classe
 
 package-private (~): classes do mesmo pacote
+<img width="1427" height="339" alt="image" src="https://github.com/user-attachments/assets/b87cca98-304f-4d11-b25e-890a7a19a1d8" />
+
 
 Modelagem de Software
 
