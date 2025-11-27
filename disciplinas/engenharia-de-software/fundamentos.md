@@ -20,7 +20,7 @@ necessárias para construção de um software com alta qualidade. Define itens c
 
 Na base de toda a estrutura está o **Foco na Qualidade**, que sustenta e direciona todas as demais camadas, assegurando que o software seja confiável, eficiente e adequado às necessidades do usuário.
 
-<img width="831" height="348" alt="image" src="https://github.com/user-attachments/assets/2636a501-fe38-4dcb-96f2-d8692e2e341b" />
+<img width="415" height="174" alt="image" src="https://github.com/user-attachments/assets/2636a501-fe38-4dcb-96f2-d8692e2e341b" />
 
 
 ## Modelagem e documentação de software
