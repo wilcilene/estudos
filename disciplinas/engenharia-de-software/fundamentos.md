@@ -141,30 +141,38 @@ A modelagem do sistema permite:
 
 – Compreender como os objetos interagem entre si para atender os requisitos do sistema
 
-- Eliminar ambiguidades
+– Eliminar ambiguidades
 
-- Facilitar a comunicação entre todos os envolvidos (usuários, equipe de desenvolvimento, equipe de qualidade, stakeholders, ...)
+– Facilitar a comunicação entre todos os envolvidos (usuários, equipe de desenvolvimento, equipe de qualidade, stakeholders, ...)
 
 > Modelar significa estruturar o pensamento antes da construção do software.
 
 Deitel e Deitel destacam que “A Modelagem OO fornece uma maneira natural e intuitiva de visualizar os processos do projeto de software”, pois permite modelar objetos por suas características, comportamentos e relações como no mundo real.
 
-Modelagem Orientada a Objetos (MOO)
+### Modelagem Orientada a Objetos (MOO)
 
-Representa objetos conforme o mundo real
+Representa objetos conforme o mundo real.
 
-Modela comportamentos e comunicações
+> “As classes estão para os objetos assim como as plantas arquitetônicas estão para as casas”. 
+Podemos instanciar várias casas a partir de uma planta (classe) mas não podemos cochilar na sala da planta, apenas na sala real (objeto).
 
-Facilita reutilização e evolução do sistema
+Modela comportamentos e comunicações. As classes se relacionam com outras classes. 
+A classe ContaCorrente por exemplo, se relaciona/associa com Cliente, Caixa, etc. 
 
-Suporta crescimento organizacional
+A Orientação a objetos permite combinar classes, o que facilita reutilização e evolução do sistema.
+Deitel & Deitel desde o primeiro livro indicam que 
+> “Os três fatores que mais afetam o futuro do desenvolvimento de software são:
+> -Reutilização,
+> - reutilização e
+> - reutilização”. 
 
-Evita ambiguidades através de modelos gráficos
+Isso aumenta a economia de tempo e esforço que refletem em maior qualidade. 
+O que facilita a manutenção do software conforme crescimento organizacional.
 
-Para pequenos sistemas, pseudocódigo pode ser suficiente. Entretanto, conforme o projeto cresce, torna-se necessária uma linguagem visual padronizada.
+PseudoCódigo e rabisco são suficientes para equipes de softwares pequenos.
+Mas, a empresa pode crescer e o software vai crescer! Pense nisso...
 
-Esse padrão é a UML — assunto que será tratado na próxima seção.
-
-Próximo Tópico
-
-A partir daqui iniciam-se os conteúdos de UML (Unified Modeling Language), que serão incluídos posteriormente.
+Embora existam muitas formas de realizar análise e modelagem de softwares OO, uma única linguagem gráfica é capaz de comunicar os resultados desses processos: [UML - Unified Modeling Language](https://www.omg.org/uml/).
+Estudaremos mais sobre a UML e aprenderemos como compreender e representar os diagramas nos próximos tópicos. 
+Você perceberá que é uma linguagem bem intuitiva, e que facilmente você consegue pegar um diagrama pronto e entender o que ele representa mesmo sem estudar UML. 
+Mas para isso, alguém precisará criá-los, então nosso objetivo é aprender também, como criar esses diagramas para que outros envolvidos no processo possam entende-lo com **facilidade** e **agilidade**.
