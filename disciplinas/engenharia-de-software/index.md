@@ -14,7 +14,7 @@
 - Por que com a construção do software seria diferente? Vamos analisar, documentar...
 - Reflita sobre: como a análise impacta na qualidade do desenvolvimento e manutenção de softwares?
 
-Compartilhe sua conclusão e interaja com os colegas em: https://github.com/wilcilene/estudos/discussions/1
+Compartilhe sua conclusão e interaja com os colegas no [fórum](https://github.com/wilcilene/estudos/discussions/1) sobre o assunto.
 
 <table>
   <tr>
