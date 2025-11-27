@@ -26,7 +26,7 @@ Na base de toda a estrutura está o **Foco na Qualidade**, que sustenta e direci
        src="https://github.com/user-attachments/assets/2636a501-fe38-4dcb-96f2-d8692e2e341b">
 </p>
 
-## Modelagem e documentação de software
+## Modelagem e documentação de software (revisão de conceitos OO)
 
 A modelagem conceitual de software é uma etapa essencial dentro do processo de desenvolvimento e compõe uma subárea da Engenharia de Software (Doll, 2016).
 Para compreender e construir sistemas de qualidade, é necessário entender como esta área se organiza.
@@ -127,23 +127,27 @@ package-private (~): classes do mesmo pacote
 <img width="1427" height="395" alt="image" src="https://github.com/user-attachments/assets/b87cca98-304f-4d11-b25e-890a7a19a1d8" />
 
 
-Modelagem de Software
+## Modelagem e documentação de software
 
-A modelagem permite:
+A modelagem do sistema permite:
 
-Analisar requisitos
+– Analisar os requisitos do software
 
-Identificar objetos
+– Determinar os objetos envolvidos
 
-Definir atributos e comportamentos
+– Determinar as características (atributos) desses objetos
 
-Compreender interações entre objetos
+– Determinar os comportamentos (métodos) desses objetos
 
-Eliminar ambiguidades
+– Compreender como os objetos interagem entre si para atender os requisitos do sistema
 
-Facilitar a comunicação entre membros da equipe e stakeholders
+- Eliminar ambiguidades
 
-Modelar significa estruturar o pensamento antes da construção do software.
+- Facilitar a comunicação entre todos os envolvidos (usuários, equipe de desenvolvimento, equipe de qualidade, stakeholders, ...)
+
+> Modelar significa estruturar o pensamento antes da construção do software.
+
+Deitel e Deitel destacam que “A Modelagem OO fornece uma maneira natural e intuitiva de visualizar os processos do projeto de software”, pois permite modelar objetos por suas características, comportamentos e relações como no mundo real.
 
 Modelagem Orientada a Objetos (MOO)
 
