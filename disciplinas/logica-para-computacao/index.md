@@ -10,6 +10,7 @@ Aqui você encontra materiais e conteúdos da disciplina de Lógica para Computa
 - [Aspectos Computacionais](aspectos-computacionais.md)
 - [O Princípio da Resolução](cnf.md)
 - [Lógica de Predicado](logica-de-predicados.md)
+- [Estudo de caso](estudo-de-caso.md)
 - [Trabalho Final](trabalho-final.md)
 ## Contato
 - Email: wilcilenekowal@gmail.com
