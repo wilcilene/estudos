@@ -24,6 +24,7 @@ Compartilhe sua conclusão e interaja com os colegas no [fórum](https://github.
     <td>
       Assuntos abordados: [Atividades e fundamentos de engenharia de software.](fundamentos.md) <br>
       Ciclo de vida do software. métodos prescritivos, métodos ágeis, [manifesto ágil](manifesto-agil.md)<br>
+      
       Especificação de Requisitos. Análise e Projeto de Software.<br>
       Implementação, Depuração e Testes. Qualidade de Software.<br>
       Métodos de desenvolvimento de software.
