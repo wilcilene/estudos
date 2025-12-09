@@ -22,8 +22,8 @@ Compartilhe sua conclusão e interaja com os colegas no [fórum](https://github.
       <img src="https://github.com/user-attachments/assets/a5df99b4-85b3-461c-8034-029c0c0d39d0" width="300">
     </td>
     <td>
-      Assuntos abordados: [Atividades e fundamentos de engenharia de software.](/fundamentos.md) <br>
-      Ciclo de vida do software. métodos prescritivos, métodos ágeis, [manifesto ágil](/manifesto-agil.md)<br>
+      Assuntos abordados: [Atividades e fundamentos de engenharia de software.](fundamentos.md) <br>
+      Ciclo de vida do software. métodos prescritivos, métodos ágeis, [manifesto ágil](manifesto-agil.md)<br>
       Especificação de Requisitos. Análise e Projeto de Software.<br>
       Implementação, Depuração e Testes. Qualidade de Software.<br>
       Métodos de desenvolvimento de software.
