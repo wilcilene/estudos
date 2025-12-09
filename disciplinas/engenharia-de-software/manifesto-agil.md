@@ -1,5 +1,7 @@
 # Por Que o Manifesto Ágil Ainda é Essencial?
-<img width="650" height="371" alt="image" src="https://github.com/user-attachments/assets/fdba8bed-ae32-4d5b-9227-ac81d9c20ded" />
+<p align="center"> 
+  <img width="650" height="371" alt="image" src="https://github.com/user-attachments/assets/fdba8bed-ae32-4d5b-9227-ac81d9c20ded" />
+</p>
 
 Na década de 1990, a indústria do desenvolvimento de software enfrentava problemas graves. 
 Os métodos tradicionais valorizavam processos e ferramentas mais que pessoas, documentação abrangente mais que software funcionando, contratos mais que colaboração e planos rígidos mais que adaptação.
