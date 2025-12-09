@@ -16,11 +16,15 @@
 
 Compartilhe sua conclusão e interaja com os colegas no [fórum](https://github.com/wilcilene/estudos/discussions/1) sobre o assunto.
 
-  <img src="https://github.com/user-attachments/assets/a5df99b4-85b3-461c-8034-029c0c0d39d0" width="300">
-      Assuntos abordados: [Atividades e fundamentos de engenharia de software.](fundamentos.md)
-      Ciclo de vida do software. métodos prescritivos, métodos ágeis, [manifesto ágil](manifesto-agil.md)
-      
-      Especificação de Requisitos. Análise e Projeto de Software.
-      Implementação, Depuração e Testes. Qualidade de Software.
-      Métodos de desenvolvimento de software.
+<img width="972" height="531" alt="image" src="https://github.com/user-attachments/assets/c432d038-901f-4f00-a38e-7799b9e1fde1" />
+
+Assuntos abordados: 
+-[Atividades e fundamentos de engenharia de software.](fundamentos.md)
+-Ciclo de vida do software e Métodos de desenvolvimento de software.
+  - métodos prescritivos,
+  - métodos ágeis,
+  - [manifesto ágil](manifesto-agil.md)
+-Especificação de Requisitos, Análise e Projeto de Software.
+-Implementação, Depuração e Testes. Qualidade de Software.
+
 
