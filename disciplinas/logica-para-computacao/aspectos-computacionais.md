@@ -41,11 +41,16 @@ Investigar a relação entre lógica proposicional e algoritmos computacionais, 
 - Aula para pesquisar e preparar o material.  
 - Usem livros, slides, internet ou ferramentas simples.  
 - Todos devem participar — dividam funções (pesquisa, escrita, desenho, apresentação).  
-- Ao final, **cada grupo apresentará**.  
-- O material produzido fará parte do repositório da disciplina.
-
----
+- Ao final, **cada grupo apresentará**.
 
 ## Extras
 - Escolham exemplos simples e claros — o objetivo é **entender o raciocínio lógico**, não programar de verdade.
 - Pensem como a **lógica controla** decisões no algoritmo ou como **o autômato decide** aceitar ou não uma entrada.
+
+---
+
+O material produzido pode ser acessado nos links a seguir.
+  - https://brennofv.github.io/Verificador-de-Consistencia/
+  - https://gustavoleandroalmeidadeandrade.github.io/prova-de-teoremas/
+
+---
