@@ -1,4 +1,4 @@
-# Lógica para Programação – Parte I
+# Lógica para Computação – Parte I
 
 Este material reúne os principais conceitos de lógica aplicada à computação, estruturados em formato de texto corrido para estudo. O objetivo é servir como apoio didático, trazendo definições, exemplos resolvidos, tabelas-verdade, além de exercícios com gabarito ao final.
 
