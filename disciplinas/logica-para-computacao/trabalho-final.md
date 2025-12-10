@@ -87,16 +87,22 @@ O projeto deve ter um link para ser adicionado nesta página e será apresentado
 ### Link: [Torre de Hanói](https://romulo-hzb.github.io/L-gica/)
 
 
-## Sistema Lógico de Controle de Acesso  
-### Estudante: modelo gerado pelo chatGPT 
+## Sistema de Gerenciamento de Poções  
+### Estudante: Eduardo Michel Karschimarski 
 ### Semestre: 2025.2
-### Link: [Sistema Lógico de Controle de Acesso](entrega-chatgpt.md)
+### Link: [Sistema de Gerenciamento de Poções](https://wolkvicz.github.io/Estudo-de-caso-para-a-m-teria-de-l-gica-para-computa-o/)
 
 
 ## Sistema de Reservas  
 ### Estudante: Gustavo Leandro Almeida de Andrade
 ### Semestre: 2025.2
 ### Link: [Sistema de Reservas](https://gustavoleandroalmeidadeandrade.github.io/sistemadereservas/)
+
+
+## Sistema Lógico de Controle de Acesso  
+### Estudante: modelo gerado pelo chatGPT 
+### Semestre: 2025.2
+### Link: [Sistema Lógico de Controle de Acesso](entrega-chatgpt.md)
 
 
 ## Sistema de controle de acesso 
