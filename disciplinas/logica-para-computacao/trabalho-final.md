@@ -86,5 +86,10 @@ O projeto deve ter um link para ser adicionado nesta página e será apresentado
 ### Semestre: 2025.2
 ### Link: [Sistema Lógico de Controle de Acesso](entrega-chatgpt.md)
 
+## Sistema de Reservas  
+### Estudante: Gustavo Leandro Almeida de Andrade
+### Semestre: 2025.2
+### Link: [Sistema de Reservas](https://gustavoleandroalmeidadeandrade.github.io/sistemadereservas/)
+
 ---
 
