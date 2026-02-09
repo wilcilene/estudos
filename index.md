@@ -11,7 +11,8 @@ Há também alguns materiais no youtube, relacionados principalmente a resoluç�
 - [Engenharia de Software](disciplinas/engenharia-de-software/index.md)
 - [Estrutura de dados](disciplinas/estrutura-de-dados/index.md)
 - [Lógica para Computação](disciplinas/logica-para-computacao/index.md)
-- [Programação I](disciplinas/programacaoi/index.md)
+- [Programação I - técnico integrado](disciplinas/programacaoi/index.md)
+- [Programação I - Bacharelado ECO](disciplinas/programacaoi-eco/index.md)
 
 Em ordem cronológica lecionei nos cursos:
 - Bacharelado em Ciência da Computação [Informações](https://www.udesc.br/cct/computacao)
@@ -19,7 +20,7 @@ Em ordem cronológica lecionei nos cursos:
 - Engenharia de software [Informações](https://www.uepg.br/engenharia-de-software/)
 - Bacharelado em sistemas de informação [Informações](https://www.udesc.br/ceplan/sistemasdeinformacao)
 - Bacharelado Interdisciplinar em Ciências e Tecnologia [Informações](https://www.udesc.br/cead/bict)
-- Engenharia da computação [Informações](https://saobentodosul.ifc.edu.br/eco/)
+- Bacharelado em Engenharia de computação [Informações](https://saobentodosul.ifc.edu.br/eco/)
 - Técnico em Informática Integrado ao Ensino Médio [Informações](https://saobentodosul.ifc.edu.br/tin/)
   
 ## Contato
