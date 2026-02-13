@@ -10,7 +10,7 @@ Há também alguns materiais no youtube, relacionados principalmente a resoluç�
 - [Empreendedorismo](disciplinas/empreendedorismo/index.md/)
 - [Engenharia de Software](disciplinas/engenharia-de-software/index.md)
 - [Estrutura de Dados](disciplinas/estrutura-de-dados/index.md)
-- [IHC](disciplinas/ihc/index.md)
+- [IHC](disciplinas/ihc/index.html)
 - [Lógica para Computação](disciplinas/logica-para-computacao/index.md)
 - [Matemática Discreta](disciplinas/matematica-discreta/index.md)
 - [Programação I - Bacharelado ECO](disciplinas/programacaoi-eco/index.md)
