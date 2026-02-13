@@ -19,13 +19,13 @@ Há também alguns materiais no youtube, relacionados principalmente a resoluç�
 
 
 Em ordem cronológica lecionei nos cursos:
-- Bacharelado em Ciência da Computação [Informações](https://www.udesc.br/cct/computacao)
-- Engenharia de computação [Informações](https://www2.uepg.br/proenzem/engenharia-de-computacao/)
-- Engenharia de software [Informações](https://www.uepg.br/engenharia-de-software/)
-- Bacharelado em sistemas de informação [Informações](https://www.udesc.br/ceplan/sistemasdeinformacao)
-- Bacharelado Interdisciplinar em Ciências e Tecnologia [Informações](https://www.udesc.br/cead/bict)
-- Bacharelado em Engenharia de computação [Informações](https://saobentodosul.ifc.edu.br/eco/)
-- Técnico em Informática Integrado ao Ensino Médio [Informações](https://saobentodosul.ifc.edu.br/tin/)
+- Bacharelado em Ciência da computação - UDESC [Informações](https://www.udesc.br/cct/computacao)
+- Bacharelado em Engenharia de computação - UEPG [Informações](https://www2.uepg.br/proenzem/engenharia-de-computacao/)
+- Bacharelado em Engenharia de software - UEPG [Informações](https://www.uepg.br/engenharia-de-software/)
+- Bacharelado em Sistemas de informação - UDESC [Informações](https://www.udesc.br/ceplan/sistemasdeinformacao)
+- Bacharelado Interdisciplinar em ciências e tecnologia - UDESC [Informações](https://www.udesc.br/cead/bict)
+- Bacharelado em Engenharia de computação - IFC [Informações](https://saobentodosul.ifc.edu.br/eco/)
+- Técnico em Informática integrado ao ensino médio - IFC [Informações](https://saobentodosul.ifc.edu.br/tin/)
   
 ## Contato
 - Email: wilcilenekowal@gmail.com
