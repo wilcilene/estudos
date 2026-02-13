@@ -9,10 +9,14 @@ Há também alguns materiais no youtube, relacionados principalmente a resoluç�
 - [Economia](disciplinas/economia/index.md/)
 - [Empreendedorismo](disciplinas/empreendedorismo/index.md/)
 - [Engenharia de Software](disciplinas/engenharia-de-software/index.md)
-- [Estrutura de dados](disciplinas/estrutura-de-dados/index.md)
+- [Estrutura de Dados](disciplinas/estrutura-de-dados/index.md)
+- [IHC](disciplinas/ihc/index.md)
 - [Lógica para Computação](disciplinas/logica-para-computacao/index.md)
-- [Programação I - técnico integrado](disciplinas/programacaoi/index.md)
+- [Matemática Discreta](disciplinas/matematica-discreta/index.md)
 - [Programação I - Bacharelado ECO](disciplinas/programacaoi-eco/index.md)
+- [Programação I - Técnico integrado](disciplinas/programacaoi/index.md)
+- [Programação II - Bacharelado ECO](disciplinas/programacaoii-eco/index.md)
+
 
 Em ordem cronológica lecionei nos cursos:
 - Bacharelado em Ciência da Computação [Informações](https://www.udesc.br/cct/computacao)
