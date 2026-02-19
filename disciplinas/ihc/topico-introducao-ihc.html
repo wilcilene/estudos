@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Introdução à IHC · CPA1469</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Mesma fonte usada na página principal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-elevated: #0f172a;
+      --accent: #38bdf8;
+      --accent-soft: #1d283a;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.3);
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.7);
+      --transition-fast: 180ms ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 45%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 3rem;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.08);
+      color: var(--accent);
+      font-size: 0.8rem;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      width: fit-content;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.9);
+    }
+
+    header h1 {
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      letter-spacing: 0.03em;
+      font-weight: 700;
+    }
+
+    header p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 640px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 1.25rem;
+      transition: color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .back-link span {
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    .back-link:hover {
+      color: var(--accent);
+      transform: translateX(-2px);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 2.3fr) minmax(0, 1.2fr);
+      gap: 1.75rem;
+    }
+
+    @media (max-width: 820px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .content-card {
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.96)) padding-box,
+                  linear-gradient(135deg, rgba(56, 189, 248, 0.55), rgba(147, 51, 234, 0.5)) border-box;
+      border: 1px solid transparent;
+      padding: 1.4rem 1.6rem 1.7rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .content-card h2 {
+      font-size: 1.05rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .content-card p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0.75rem;
+    }
+
+    .content-card ul {
+      margin: 0.4rem 0 0.8rem 1.1rem;
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .content-card li + li {
+      margin-top: 0.25rem;
+    }
+
+    .highlight {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .side-card {
+      border-radius: var(--radius-lg);
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid var(--border-subtle);
+      padding: 1.2rem 1.4rem 1.4rem;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.85);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .side-section-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+      color: var(--text);
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .resources-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.3rem;
+    }
+
+    .resources-list li + li {
+      margin-top: 0.35rem;
+    }
+
+    .resources-list a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .resources-list a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.75rem 1.25rem 2.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="index.html">
+      <span>←</span> voltar para o índice da disciplina
+    </a>
+
+    <header>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Introdução à Interação Humano‑Computador
+      </div>
+      <h1>O que é Interação Humano‑Computador?</h1>
+      <p>
+        Nesta primeira unidade você terá uma visão geral da área de IHC, entenderá por que o estudo
+        da interação entre pessoas e computadores é fundamental e como isso se conecta com o projeto
+        que será desenvolvido ao longo do semestre.
+      </p>
+    </header>
+
+    <main>
+      <article class="content-card">
+        <h2>Visão geral do conteúdo</h2>
+        <p>
+          Interação Humano‑Computador (IHC) é a área que estuda como projetar, implementar e avaliar
+          sistemas interativos com foco nas pessoas que os utilizam. Em vez de olhar apenas para a
+          tecnologia, IHC considera <span class="highlight">usuários, tarefas e contexto</span>.
+        </p>
+        <p>
+          Nesta introdução vamos discutir:
+        </p>
+        <ul>
+          <li>como a área de IHC surgiu e se relaciona com outras áreas de computação;</li>
+          <li>exemplos de interfaces boas e ruins no dia a dia;</li>
+          <li>o que significa falar em usabilidade, experiência do usuário e acessibilidade;</li>
+          <li>como o projeto prático da disciplina será construído aos poucos a partir de cada tópico.</li>
+        </ul>
+
+        <h2>Ao final deste tópico, você deve ser capaz de…</h2>
+        <ul>
+          <li>explicar, em suas próprias palavras, o que é Interação Humano‑Computador;</li>
+          <li>identificar situações em que a interface interfere positivamente ou negativamente na experiência;</li>
+          <li>reconhecer a importância de considerar pessoas reais durante o desenvolvimento de sistemas;</li>
+          <li>descrever, em linhas gerais, como será a jornada da disciplina e do projeto avaliativo.</li>
+        </ul>
+
+        <h2>Atividade sugerida</h2>
+        <p>
+          Escolha dois sistemas que você utiliza com frequência: um que considera prazeroso/fácil
+          de usar e outro que considere confuso ou frustrante. Para cada um, responda:
+        </p>
+        <ul>
+          <li>qual é o contexto de uso (onde, quando, em qual dispositivo você usa);</li>
+          <li>o que você precisa fazer nesse sistema (tarefas principais);</li>
+          <li>quais aspectos da interface ajudam ou atrapalham sua experiência.</li>
+        </ul>
+        <p>
+          Traga suas observações para a próxima aula ou envie pelo canal definido pela professora.
+          Essas percepções serão usadas como ponto de partida para discutirmos conceitos de interface,
+          interação e experiência do usuário.
+        </p>
+      </article>
+
+      <aside class="side-card">
+        <div>
+          <div class="side-section-title">Palavras‑chave</div>
+          <div class="tag-list">
+            <span class="tag">IHC</span>
+            <span class="tag">usuário</span>
+            <span class="tag">interface</span>
+            <span class="tag">experiência</span>
+            <span class="tag">usabilidade</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="side-section-title">Conexão com o projeto</div>
+          <p>
+            A partir desta unidade você começará a observar interfaces do cotidiano com olhar crítico.
+            As ideias e problemas identificados aqui podem inspirar o tema do seu projeto.
+          </p>
+        </div>
+
+        <div>
+          <div class="side-section-title">Materiais sugeridos</div>
+          <ul class="resources-list">
+            <li>Capítulo introdutório de <em>Barbosa &amp; Silva, Interação Humano‑Computador</em>.</li>
+            <li>Capítulo 1 de <em>Preece et al., Design de Interação</em>.</li>
+            <li><a href="https://lesandrop.github.io/site/teaching/IHC/" target="_blank" rel="noopener noreferrer">
+              Notas de aula de IHC (Prof. Lesandro Ponciano)</a></li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <footer>
+    <p>
+      Lembre-se: esta página é um ponto de partida. Volte depois para revisar os conceitos, assistir
+      aos vídeos indicados pela professora e atualizar suas anotações.
+    </p>
+  </footer>
+</body>
+</html>
