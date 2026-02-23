@@ -74,7 +74,6 @@
 
     .intro p {
       margin-bottom: 1rem;
-      color: var(--text);
     }
 
     .topics-grid {
@@ -88,6 +87,9 @@
       padding: 1.5rem;
       border-radius: 14px;
       border: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      display: block;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
@@ -99,7 +101,6 @@
     .topic-card h3 {
       font-size: 1.1rem;
       margin-bottom: 0.5rem;
-      color: var(--text);
     }
 
     .topic-card p {
@@ -121,9 +122,8 @@
   <header>
     <h1>Programação II</h1>
     <p>
-      Disciplina focada no aprofundamento da Programação Orientada a Objetos,
-      boas práticas de desenvolvimento, arquitetura de software e construção
-      de aplicações robustas, manuteníveis e escaláveis.
+      Aprofundamento em Programação Orientada a Objetos, padrões de projeto,
+      arquitetura de software e desenvolvimento de aplicações completas.
     </p>
   </header>
 
@@ -132,88 +132,86 @@
     <section class="intro">
       <h2>Sobre a disciplina</h2>
       <p>
-        Em <strong>Programação II</strong>, o estudante consolida os conceitos
+        A disciplina de <strong>Programação II</strong> consolida os conceitos
         fundamentais de Orientação a Objetos e avança para práticas modernas
-        de desenvolvimento de software, incluindo padrões de projeto,
-        princípios SOLID, desenvolvimento de APIs, integração com banco de
-        dados e aplicações web.
+        de desenvolvimento de software, com foco em qualidade, organização
+        e manutenção de código.
       </p>
       <p>
-        A disciplina combina teoria e prática, incentivando o pensamento
-        crítico, a organização do código, o trabalho com ferramentas
-        profissionais e a construção de projetos reais.
+        Ao longo do curso, serão explorados padrões de projeto, princípios
+        SOLID, APIs, banco de dados, desenvolvimento web e testes.
       </p>
     </section>
 
     <section>
-      <h2>Conteúdos e Tópicos de Estudo</h2>
+      <h2>Conteúdos da disciplina</h2>
 
       <div class="topics-grid">
 
-        <div class="topic-card">
+        <a href="revisao-oo/" class="topic-card">
           <h3>Revisão de conceitos de Orientação a Objetos</h3>
-          <p>Classes, herança, polimorfismo, abstração, interfaces, exceções e manipulação de arquivos.</p>
-        </div>
+          <p>Classes, herança, polimorfismo, abstração, interfaces, exceções e arquivos.</p>
+        </a>
 
-        <div class="topic-card">
-          <h3>Ambientes e ferramentas de desenvolvimento</h3>
-          <p>IDEs (Eclipse, IntelliJ, VS Code), configuração, debugging, refatoração e versionamento com Git.</p>
-        </div>
+        <a href="ferramentas/" class="topic-card">
+          <h3>Ferramentas e ambientes de desenvolvimento</h3>
+          <p>IDEs, debugging, refatoração automatizada e versionamento com Git.</p>
+        </a>
 
-        <div class="topic-card">
+        <a href="dependencias/" class="topic-card">
           <h3>Gerenciamento de dependências</h3>
-          <p>Organização de bibliotecas, dependências externas e boas práticas de manutenção.</p>
-        </div>
+          <p>Organização e integração de bibliotecas externas.</p>
+        </a>
 
-        <div class="topic-card">
-          <h3>Padrões de Projeto Criacionais</h3>
-          <p>Singleton, Factory e Builder aplicados a problemas reais.</p>
-        </div>
+        <a href="padroes-criacionais/" class="topic-card">
+          <h3>Padrões de projeto criacionais</h3>
+          <p>Singleton, Factory e Builder.</p>
+        </a>
 
-        <div class="topic-card">
-          <h3>Padrões Estruturais</h3>
-          <p>Adapter, Decorator e Facade para organização e extensibilidade do código.</p>
-        </div>
+        <a href="padroes-estruturais/" class="topic-card">
+          <h3>Padrões de projeto estruturais</h3>
+          <p>Adapter, Decorator e Facade.</p>
+        </a>
 
-        <div class="topic-card">
-          <h3>Padrões Comportamentais</h3>
+        <a href="padroes-comportamentais/" class="topic-card">
+          <h3>Padrões de projeto comportamentais</h3>
           <p>Observer, Strategy e Template Method.</p>
-        </div>
+        </a>
 
-        <div class="topic-card">
+        <a href="solid/" class="topic-card">
           <h3>Princípios SOLID e projetos OO</h3>
-          <p>Aplicação prática de princípios de design orientado a objetos.</p>
-        </div>
+          <p>Boas práticas de design orientado a objetos.</p>
+        </a>
 
-        <div class="topic-card">
+        <a href="apis-java/" class="topic-card">
           <h3>APIs Java e desenvolvimento de APIs</h3>
-          <p>Streams, Optional, Date/Time e construção de APIs REST.</p>
-        </div>
+          <p>Streams, Optional, Date/Time e APIs REST.</p>
+        </a>
 
-        <div class="topic-card">
+        <a href="interfaces-graficas/" class="topic-card">
           <h3>Interface gráfica</h3>
-          <p>Introdução ao desenvolvimento de interfaces para aplicações desktop ou web.</p>
-        </div>
+          <p>Introdução ao desenvolvimento de interfaces.</p>
+        </a>
 
-        <div class="topic-card">
+        <a href="modelagem/" class="topic-card">
           <h3>Modelagem e documentação</h3>
-          <p>Diagramas de classes, casos de uso, prototipação e documentação do projeto.</p>
-        </div>
+          <p>Diagramas, prototipação e documentação do projeto.</p>
+        </a>
 
-        <div class="topic-card">
+        <a href="banco-dados/" class="topic-card">
           <h3>Banco de dados</h3>
-          <p>Revisão de conceitos, conectividade e integração com aplicações.</p>
-        </div>
+          <p>Conceitos, conectividade e integração com aplicações.</p>
+        </a>
 
-        <div class="topic-card">
+        <a href="desenvolvimento-web/" class="topic-card">
           <h3>Desenvolvimento web</h3>
-          <p>HTML, CSS, frameworks web, arquitetura, autenticação, segurança e deploy.</p>
-        </div>
+          <p>HTML, CSS, frameworks web, segurança e arquitetura.</p>
+        </a>
 
-        <div class="topic-card">
+        <a href="testes/" class="topic-card">
           <h3>Testes e qualidade de software</h3>
-          <p>Testes, refatoração contínua, integração e boas práticas.</p>
-        </div>
+          <p>Testes, refatoração, integração e deploy.</p>
+        </a>
 
       </div>
     </section>
@@ -221,7 +219,7 @@
   </main>
 
   <footer>
-    <p>Programação II • Material didático e acompanhamento da disciplina</p>
+    <p>Programação II • Página inicial da disciplina</p>
   </footer>
 
 </body>
