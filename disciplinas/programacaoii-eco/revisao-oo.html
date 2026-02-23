@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Revisão de Conceitos de Orientação a Objetos</title>
+  <title>Revisão de Orientação a Objetos</title>
 
   <style>
     body {
@@ -36,7 +36,7 @@
       margin-bottom: 2rem;
     }
 
-    h1, h2 {
+    h1, h2, h3 {
       color: #5b5fc7;
       margin-top: 0;
     }
@@ -48,6 +48,26 @@
     .highlight {
       background: #eef2ff;
       border-left: 6px solid #5b5fc7;
+    }
+
+    .media {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    iframe {
+      width: 100%;
+      min-height: 250px;
+      border-radius: 12px;
+      border: none;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
     }
 
     footer {
@@ -63,27 +83,30 @@
 
 <header>
   <h1>Revisão de Conceitos de Orientação a Objetos</h1>
-  <p>Classes, herança, polimorfismo, abstração, interfaces, exceções e arquivos</p>
+  <p>
+    Classes, herança, polimorfismo, abstração, interfaces,
+    exceções e arquivos
+  </p>
 </header>
 
 <main>
 
 <section>
-  <h2>Objetivo do tópico</h2>
+  <h2>Objetivo da revisão</h2>
   <p>
-    Revisar e consolidar os conceitos fundamentais da
+    Esta página tem como objetivo revisar os principais conceitos da
     <strong>Programação Orientada a Objetos (POO)</strong>,
-    que servirão de base para o desenvolvimento de aplicações
-    ao longo da disciplina.
+    fundamentais para o desenvolvimento de sistemas estruturados,
+    reutilizáveis e de fácil manutenção.
   </p>
 </section>
 
 <section>
-  <h2>Classes, objetos e atributos</h2>
+  <h2>Classe, objeto e atributos</h2>
   <p>
-    Uma <strong>classe</strong> define a estrutura e o comportamento
-    de seus objetos. Os <strong>atributos</strong> representam os dados
-    do objeto.
+    Uma <strong>classe</strong> é um modelo que define atributos
+    (dados) e métodos (comportamentos). Um <strong>objeto</strong>
+    é uma instância concreta dessa classe.
   </p>
 
   <pre><code class="language-java">
@@ -99,10 +122,10 @@ public class Estudante {
 </section>
 
 <section>
-  <h2>Construtor</h2>
+  <h2>Construtor e encapsulamento</h2>
   <p>
-    O construtor é responsável por inicializar o objeto
-    no momento da sua criação.
+    O construtor inicializa o objeto. O encapsulamento protege os dados,
+    controlando o acesso por meio de métodos.
   </p>
 
   <pre><code class="language-java">
@@ -115,16 +138,6 @@ public Estudante(int ra, String nome,
     this.nota2 = nota2;
     this.nota3 = nota3;
 }
-  </code></pre>
-</section>
-
-<section>
-  <h2>Métodos</h2>
-
-  <pre><code class="language-java">
-public double calcularMedia() {
-    return (nota1 + nota2 + nota3) / 3;
-}
 
 public String getNome() {
     return nome;
@@ -133,7 +146,86 @@ public String getNome() {
 </section>
 
 <section>
-  <h2>Diagrama de Classes (UML)</h2>
+  <h2>Abstração</h2>
+  <p>
+    Abstração consiste em representar apenas as características
+    essenciais de um objeto, ignorando detalhes irrelevantes.
+  </p>
+
+  <pre><code class="language-java">
+public abstract class Pessoa {
+
+    protected String nome;
+
+    public abstract void apresentar();
+}
+  </code></pre>
+</section>
+
+<section>
+  <h2>Herança</h2>
+  <p>
+    A herança permite que uma classe herde atributos e métodos de outra,
+    promovendo reutilização de código.
+  </p>
+
+  <pre><code class="language-java">
+public class Aluno extends Pessoa {
+
+    @Override
+    public void apresentar() {
+        System.out.println("Sou um aluno");
+    }
+}
+  </code></pre>
+</section>
+
+<section>
+  <h2>Polimorfismo</h2>
+  <p>
+    O polimorfismo permite que objetos diferentes respondam de forma
+    distinta ao mesmo método.
+  </p>
+
+  <pre><code class="language-java">
+Pessoa p = new Aluno();
+p.apresentar();
+  </code></pre>
+</section>
+
+<section>
+  <h2>Interfaces</h2>
+  <p>
+    Interfaces definem contratos que devem ser implementados pelas classes.
+  </p>
+
+  <pre><code class="language-java">
+public interface Autenticavel {
+    boolean autenticar(String senha);
+}
+  </code></pre>
+</section>
+
+<section>
+  <h2>Exceções e arquivos</h2>
+  <p>
+    Exceções tratam situações inesperadas, como erros de leitura de arquivos.
+  </p>
+
+  <pre><code class="language-java">
+try {
+    Scanner sc = new Scanner(new File("dados.txt"));
+} catch (Exception e) {
+    System.out.println("Erro ao acessar o arquivo.");
+}
+  </code></pre>
+</section>
+
+<section>
+  <h2>Diagrama de Classes</h2>
+  <p>
+    O diagrama de classes representa visualmente a estrutura do sistema.
+  </p>
 
   <pre><code>
 +---------------------------+
@@ -145,123 +237,44 @@ public String getNome() {
 | - nota2: double           |
 | - nota3: double           |
 +---------------------------+
-| + Estudante(...)          |
 | + calcularMedia():double  |
 | + getNome():String        |
 +---------------------------+
   </code></pre>
+
+  <img
+    src="https://upload.wikimedia.org/wikipedia/commons/9/93/UML_class_diagram_example.png"
+    alt="Exemplo de diagrama de classes UML">
 </section>
 
 <section>
-  <h2>Classe principal e método main</h2>
+  <h2>Vídeos para revisão</h2>
 
-  <pre><code class="language-java">
-public class Principal {
+  <div class="media">
+    <iframe src="https://www.youtube.com/embed/1ONhXmQuWP8"
+      title="POO em Java"></iframe>
 
-    public static void main(String[] args) {
-
-        Estudante e1 =
-            new Estudante(1, "Ana", 8.5, 9.0, 7.0);
-
-        Estudante e2 =
-            new Estudante(2, "Julio", 5.0, 6.5, 8.0);
-
-        System.out.printf(
-            "O estudante %s possui média %.2f%n",
-            e1.getNome(),
-            e1.calcularMedia()
-        );
-    }
-}
-  </code></pre>
-</section>
-
-<section>
-  <h2>Entrada de dados com Scanner</h2>
-
-  <pre><code class="language-java">
-import java.util.Scanner;
-
-Scanner sc = new Scanner(System.in);
-
-System.out.print("Digite a nota: ");
-double nota = sc.nextDouble();
-  </code></pre>
-</section>
-
-<section>
-  <h2>Chamada de métodos</h2>
-
-  <pre><code class="language-java">
-double media = e1.calcularMedia();
-String nome = e1.getNome();
-  </code></pre>
-</section>
-
-<section>
-  <h2>Exceções e arquivos</h2>
-
-  <pre><code class="language-java">
-import java.io.File;
-import java.util.Scanner;
-
-try {
-    Scanner sc = new Scanner(new File("dados.txt"));
-} catch (Exception e) {
-    System.out.println("Erro ao ler o arquivo.");
-}
-  </code></pre>
-</section>
-
-<section class="highlight">
-  <h2>Para lembrar!</h2>
-  <ul>
-    <li>Todo objeto é criado com <code>new</code></li>
-    <li>Métodos não static exigem objeto instanciado</li>
-    <li>Atributos normalmente são <code>private</code></li>
-    <li>Métodos <code>get</code> e <code>set</code> controlam o acesso</li>
-    <li>Construtores inicializam corretamente o objeto</li>
-  </ul>
-</section>
-
-<section class="highlight">
-  <h2>Atividade prática – Classe Estudante</h2>
-  <ol>
-    <li>Crie a classe <code>Estudante</code> com atributos privados</li>
-    <li>Implemente um construtor</li>
-    <li>Crie um método para cálculo da média</li>
-    <li>Crie uma classe principal com <code>main</code></li>
-    <li>Instancie três objetos</li>
-    <li>Altere notas usando <code>Scanner</code></li>
-  </ol>
+    <iframe src="https://www.youtube.com/embed/ZnP6h0gRz4A"
+      title="Herança e Polimorfismo"></iframe>
+  </div>
 </section>
 
 <section class="highlight">
   <h2>Checklist do aluno</h2>
   <ul>
-    <li>⬜ Sei explicar o que é classe e objeto</li>
+    <li>⬜ Entendo classe e objeto</li>
     <li>⬜ Sei criar construtores</li>
     <li>⬜ Sei encapsular atributos</li>
-    <li>⬜ Sei instanciar objetos</li>
-    <li>⬜ Sei criar e chamar métodos</li>
-    <li>⬜ Sei usar Scanner</li>
-    <li>⬜ Sei tratar exceções simples</li>
-  </ul>
-</section>
-
-<section>
-  <h2>Referências</h2>
-  <ul>
-    <li>Deitel & Deitel — <em>Java: Como Programar</em></li>
-    <li>Oracle — Documentação oficial Java</li>
-    <li>Material de aula — <strong>Wilcilene Maria Kowal</strong></li>
+    <li>⬜ Entendo herança e polimorfismo</li>
+    <li>⬜ Sei criar interfaces</li>
+    <li>⬜ Sei tratar exceções</li>
   </ul>
 </section>
 
 </main>
 
 <footer>
-  <p>Professora <strong>Wilcilene Maria Kowal</strong></p>
+  <p>Disciplina de Programação II — Professora <strong>Wilcilene Maria Kowal</strong></p>
 </footer>
 
 </body>
