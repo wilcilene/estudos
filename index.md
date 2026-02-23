@@ -15,7 +15,7 @@ Há também alguns materiais no youtube, relacionados principalmente a resoluç�
 - [Matemática Discreta](disciplinas/matematica-discreta/index.md)
 - [Programação I - Bacharelado ECO](disciplinas/programacaoi-eco/index.md)
 - [Programação I - Técnico integrado](disciplinas/programacaoi/index.md)
-- [Programação II - Bacharelado ECO](disciplinas/programacaoii-eco/index.md)
+- [Programação II - Bacharelado ECO](disciplinas/programacaoii-eco/index.html)
 
 
 Em ordem cronológica lecionei nos cursos:
