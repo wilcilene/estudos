@@ -13,13 +13,14 @@
       --muted: #6b7280;
       --card: #ffffff;
       --border: #e5e7eb;
-      --highlight: #eef2ff;
+      --code-bg: #f9fafb;
+      --code-border: #d1d5db;
     }
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   Roboto, Ubuntu, Cantarell, "Open Sans", sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+                   "Segoe UI", Roboto, Ubuntu, sans-serif;
       background: var(--secondary);
       color: var(--text);
       line-height: 1.7;
@@ -46,46 +47,31 @@
       margin-bottom: 2rem;
     }
 
-    section.highlight {
-      background: var(--highlight);
-      border-left: 6px solid var(--primary);
-    }
-
-    h1, h2, h3 {
+    h1, h2 {
       color: var(--primary);
-    }
-
-    h2 {
       margin-top: 0;
     }
 
-    pre, code {
-      background: #111827;
-      color: #e5e7eb;
-      padding: 1rem;
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
       border-radius: 10px;
+      padding: 1rem;
       overflow-x: auto;
+      margin: 1rem 0;
     }
 
-    pre {
-      margin: 1rem 0;
+    code {
+      font-family: "Fira Code", Consolas, "Courier New", monospace;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #111827;
+      display: block;
+      white-space: pre;
     }
 
     ul, ol {
       padding-left: 1.5rem;
-    }
-
-    .media {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-
-    iframe, img {
-      width: 100%;
-      border-radius: 12px;
-      border: 1px solid var(--border);
     }
 
     footer {
@@ -107,35 +93,53 @@
 <main>
 
 <section>
-  <h2>Objetivo do tópico</h2>
-  <p>
-    Este tópico tem como objetivo revisar e consolidar os conceitos fundamentais
-    da <strong>Programação Orientada a Objetos (POO)</strong>, servindo como base
-    para o desenvolvimento de sistemas orientados a objetos ao longo da disciplina.
-  </p>
-</section>
-
-<section>
   <h2>Classes, objetos e atributos</h2>
-  <p>
-    Todo programa Java possui ao menos uma classe definida pelo programador.
-    Uma classe descreve a estrutura e o comportamento de seus objetos.
-  </p>
+
+  <p>Uma classe define a estrutura de seus objetos.</p>
 
   <pre><code>
 public class Estudante {
+
+    // atributos (dados)
     private int ra;
     private String nome;
-    private double nota1, nota2, nota3;
+    private double nota1;
+    private double nota2;
+    private double nota3;
+}
+  </code></pre>
+</section>
 
-    public Estudante(int ra, String nome,
-                     double n1, double n2, double n3) {
-        this.ra = ra;
-        this.nome = nome;
-        this.nota1 = n1;
-        this.nota2 = n2;
-        this.nota3 = n3;
-    }
+<section>
+  <h2>Construtor</h2>
+
+  <p>O construtor inicializa o objeto no momento da criação.</p>
+
+  <pre><code>
+public Estudante(int ra, String nome,
+                 double nota1, double nota2, double nota3) {
+
+    this.ra = ra;
+    this.nome = nome;
+    this.nota1 = nota1;
+    this.nota2 = nota2;
+    this.nota3 = nota3;
+}
+  </code></pre>
+</section>
+
+<section>
+  <h2>Métodos</h2>
+
+  <p>Métodos realizam ações e podem retornar valores.</p>
+
+  <pre><code>
+public double calcularMedia() {
+    return (nota1 + nota2 + nota3) / 3;
+}
+
+public String getNome() {
+    return nome;
 }
   </code></pre>
 </section>
@@ -158,54 +162,23 @@ public class Estudante {
 | + getNome():String        |
 +---------------------------+
   </code></pre>
-
-  <p>
-    O símbolo <strong>-</strong> indica atributos privados
-    e <strong>+</strong> indica métodos públicos.
-  </p>
-</section>
-
-<section>
-  <h2>Métodos, construtores e encapsulamento</h2>
-  <p>
-    Métodos realizam tarefas. O construtor é responsável por inicializar
-    corretamente o objeto no momento da criação.
-  </p>
-
-  <pre><code>
-public double calcularMedia() {
-    return (nota1 + nota2 + nota3) / 3;
-}
-
-public String getNome() {
-    return nome;
-}
-  </code></pre>
-
-  <p>
-    O encapsulamento protege os dados do objeto,
-    permitindo acesso controlado via métodos públicos.
-  </p>
 </section>
 
 <section>
   <h2>Classe principal e método main</h2>
-  <p>
-    O método <code>main</code> é o ponto de entrada do programa Java.
-  </p>
 
   <pre><code>
 public class Principal {
 
     public static void main(String[] args) {
 
-        Estudante e1 = new Estudante(1, "Ana", 8.5, 9.0, 7.0);
-        Estudante e2 = new Estudante(2, "Julio", 5.0, 6.5, 8.0);
-        Estudante e3 = new Estudante(3, "Wilcilene", 10.0, 10.0, 9.8);
+        Estudante e1 =
+            new Estudante(1, "Ana", 8.5, 9.0, 7.0);
 
         System.out.printf(
             "O estudante %s possui média %.2f%n",
-            e1.getNome(), e1.calcularMedia()
+            e1.getNome(),
+            e1.calcularMedia()
         );
     }
 }
@@ -213,91 +186,47 @@ public class Principal {
 </section>
 
 <section>
-  <h2>Entrada de dados, atribuição e parâmetros</h2>
+  <h2>Entrada de dados com Scanner</h2>
 
   <pre><code>
 import java.util.Scanner;
 
 Scanner sc = new Scanner(System.in);
 
-System.out.print("Digite a nova nota: ");
-double novaNota = sc.nextDouble();
-
-e2.setNota1(novaNota);
+System.out.print("Digite a nota: ");
+double nota = sc.nextDouble();
   </code></pre>
-
-  <p>
-    O operador <code>=</code> atribui valores.
-    O operador <code>==</code> realiza comparação.
-  </p>
 </section>
 
 <section>
   <h2>Chamada de métodos</h2>
 
   <pre><code>
-// método da mesma classe
-calcularMedia();
+// chamada de método do objeto
+double media = e1.calcularMedia();
 
-// método de outra classe
-e1.calcularMedia();
+// acesso via método getter
+String nome = e1.getNome();
   </code></pre>
 </section>
 
 <section>
-  <h2>Herança, abstração e polimorfismo</h2>
-  <p>
-    A herança permite reutilização de código,
-    a abstração define comportamentos essenciais
-    e o polimorfismo permite múltiplas implementações.
-  </p>
-
-  <div class="media">
-    <iframe src="https://www.youtube.com/embed/SS-9y0H3Si8"
-            title="POO em Java"
-            allowfullscreen></iframe>
-  </div>
-</section>
-
-<section>
-  <h2>Interfaces, exceções e arquivos</h2>
+  <h2>Exceções e arquivos</h2>
 
   <pre><code>
 try {
     Scanner sc = new Scanner(new File("dados.txt"));
 } catch (Exception e) {
-    System.out.println("Erro ao ler arquivo.");
+    System.out.println("Erro ao ler o arquivo.");
 }
   </code></pre>
 </section>
 
-<section class="highlight">
-  <h2>Para lembrar!</h2>
-  <ul>
-    <li>Todo objeto é criado com <code>new</code></li>
-    <li>Métodos não static exigem objeto instanciado</li>
-    <li>Atributos devem ser <code>private</code></li>
-    <li>Variáveis locais existem apenas dentro do método</li>
-    <li>Construtores inicializam corretamente o objeto</li>
-  </ul>
-</section>
-
-<section class="highlight">
-  <h2>Atividade prática – Classe Estudante</h2>
-  <ol>
-    <li>Crie a classe <code>Estudante</code> com atributos privados</li>
-    <li>Implemente um construtor</li>
-    <li>Crie método para cálculo da média</li>
-    <li>Instancie três objetos na classe principal</li>
-    <li>Altere notas usando <code>Scanner</code></li>
-  </ol>
-</section>
-
-<section class="highlight">
+<section>
   <h2>Checklist do aluno</h2>
   <ul>
-    <li>⬜ Sei explicar classe e objeto</li>
-    <li>⬜ Sei criar construtores</li>
+    <li>⬜ Sei criar classes</li>
+    <li>⬜ Sei usar construtores</li>
     <li>⬜ Sei encapsular atributos</li>
     <li>⬜ Sei instanciar objetos</li>
     <li>⬜ Sei chamar métodos</li>
@@ -308,18 +237,16 @@ try {
 <section>
   <h2>Referências</h2>
   <ul>
-    <li>Deitel & Deitel – Java: Como Programar</li>
-    <li>Oracle – Documentação Java</li>
-    <li>Material de aula – Wilcilene Maria Kowal</li>
+    <li>Deitel & Deitel — Java: Como Programar</li>
+    <li>Oracle — Documentação Java</li>
+    <li>Material de aula — Wilcilene Maria Kowal</li>
   </ul>
 </section>
 
 </main>
 
 <footer>
-  <p>
-    Conteúdo elaborado por <strong>Wilcilene Maria Kowal</strong>
-  </p>
+  <p>Professora <strong>Wilcilene Maria Kowal</strong></p>
 </footer>
 
 </body>
