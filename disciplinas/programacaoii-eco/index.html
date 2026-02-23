@@ -1,144 +1,228 @@
-<header align="center">
-  <h1 style="margin-bottom:0.2rem;">Programação II – ECO</h1>
-  <p style="margin-top:0.2rem; font-size:0.95rem; color:#555;">
-    Projeto Orientado a Objetos · Padrões de Projeto · APIs · GUI · Banco de Dados · Web
-  </p>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programação II</title>
 
-  <nav>
-    <a href="#visao-geral" style="margin:0 0.5rem;">Visão geral</a> ·
-    <a href="#objetivos-de-aprendizagem" style="margin:0 0.5rem;">Objetivos</a> ·
-    <a href="#conteudos-do-semestre" style="margin:0 0.5rem;">Conteúdos</a> ·
-    <a href="#projeto-da-disciplina" style="margin:0 0.5rem;">Projeto</a> ·
-    <a href="#ferramentas-e-tecnologias" style="margin:0 0.5rem;">Ferramentas</a>
-  </nav>
+  <style>
+    :root {
+      --primary: #5b5fc7;
+      --secondary: #f4f6fb;
+      --text: #1f2933;
+      --muted: #6b7280;
+      --card: #ffffff;
+      --border: #e5e7eb;
+    }
 
-  <hr style="margin-top:1rem;">
-</header>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<section id="visao-geral">
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+                   "Helvetica Neue", sans-serif;
+      background: var(--secondary);
+      color: var(--text);
+      line-height: 1.6;
+    }
 
-> “Código é projeto tornado executável.”
+    header {
+      background: linear-gradient(135deg, var(--primary), #7c7ff0);
+      color: #fff;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
 
-### 🎯 Visão geral da disciplina
+    header h1 {
+      font-size: 2.4rem;
+      margin-bottom: 0.5rem;
+    }
 
-Programação II aprofunda os conceitos de Orientação a Objetos trabalhados em Programação I, focando em projeto de software, uso de APIs, interface gráfica, acesso a banco de dados e desenvolvimento web.  
-Ao final do semestre, você deverá ser capaz de planejar e implementar uma aplicação completa em camadas, aplicando boas práticas de projeto, padrões de projeto (Design Patterns) e técnicas básicas de testes e deploy.
+    header p {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      opacity: 0.95;
+    }
 
-#### Pré-requisito
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
 
-- Programação I (conceitos básicos de programação, introdução à Orientação a Objetos e interface gráfica).
+    section {
+      margin-bottom: 3rem;
+    }
 
-#### Como vamos trabalhar
+    section h2 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
 
-- Aulas expositivas dialogadas com demonstrações em IDE.  
-- Atividades práticas em laboratório, com exercícios guiados e desenvolvimento incremental de um projeto.  
-- Uso de repositórios no GitHub para organização do código e acompanhamento da evolução do projeto.
+    .intro {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
 
-</section>
+    .intro p {
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
 
----
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
 
-<section id="objetivos-de-aprendizagem">
+    .topic-card {
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
 
-### 🧭 Objetivos de aprendizagem
+    .topic-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    }
 
-Ao concluir a disciplina, você deverá ser capaz de:
+    .topic-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
 
-- Revisar e aplicar conceitos fundamentais de Orientação a Objetos em projetos maiores.  
-- Utilizar uma IDE moderna para desenvolver, depurar e refatorar aplicações.  
-- Empregar padrões de projeto clássicos (GoF) para melhorar a organização e a manutenção do código.  
-- Integrar APIs e bibliotecas externas às suas aplicações.  
-- Criar interfaces gráficas mais ricas e conectá‑las a um backend.  
-- Conectar aplicações a bancos de dados relacionais, realizando operações CRUD com segurança.  
-- Desenvolver uma aplicação web simples, seguindo boas práticas de arquitetura, segurança e deploy.
+    .topic-card p {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
 
-</section>
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
 
----
+<body>
 
-<section id="conteudos-do-semestre">
+  <header>
+    <h1>Programação II</h1>
+    <p>
+      Disciplina focada no aprofundamento da Programação Orientada a Objetos,
+      boas práticas de desenvolvimento, arquitetura de software e construção
+      de aplicações robustas, manuteníveis e escaláveis.
+    </p>
+  </header>
 
-### 📚 Conteúdos do semestre
+  <main>
 
-<details open>
-  <summary><strong>1. Fundamentos e revisão</strong></summary>
+    <section class="intro">
+      <h2>Sobre a disciplina</h2>
+      <p>
+        Em <strong>Programação II</strong>, o estudante consolida os conceitos
+        fundamentais de Orientação a Objetos e avança para práticas modernas
+        de desenvolvimento de software, incluindo padrões de projeto,
+        princípios SOLID, desenvolvimento de APIs, integração com banco de
+        dados e aplicações web.
+      </p>
+      <p>
+        A disciplina combina teoria e prática, incentivando o pensamento
+        crítico, a organização do código, o trabalho com ferramentas
+        profissionais e a construção de projetos reais.
+      </p>
+    </section>
 
-  - Revisão de conceitos de Orientação a Objetos
-</details>
+    <section>
+      <h2>Conteúdos e Tópicos de Estudo</h2>
 
-<details>
-  <summary><strong>2. Ferramentas de desenvolvimento</strong></summary>
+      <div class="topics-grid">
 
-  - Introdução a IDEs (Eclipse, IntelliJ, VS Code); configuração e debugging  
-  - Refatoração automatizada; versionamento com Git integrado  
-  - Gerenciamento de dependências
-</details>
+        <div class="topic-card">
+          <h3>Revisão de conceitos de Orientação a Objetos</h3>
+          <p>Classes, herança, polimorfismo, abstração, interfaces, exceções e manipulação de arquivos.</p>
+        </div>
 
-<details>
-  <summary><strong>3. Padrões de projeto (Design Patterns)</strong></summary>
+        <div class="topic-card">
+          <h3>Ambientes e ferramentas de desenvolvimento</h3>
+          <p>IDEs (Eclipse, IntelliJ, VS Code), configuração, debugging, refatoração e versionamento com Git.</p>
+        </div>
 
-  - Introdução aos GoF (criacionais: Singleton, Factory, Builder)  
-  - Estruturais (Adapter, Decorator, Facade)  
-  - Comportamentais (Observer, Strategy, Template)  
-  - Aplicação prática em projetos OO; princípios SOLID
-</details>
+        <div class="topic-card">
+          <h3>Gerenciamento de dependências</h3>
+          <p>Organização de bibliotecas, dependências externas e boas práticas de manutenção.</p>
+        </div>
 
-<details>
-  <summary><strong>4. APIs e bibliotecas</strong></summary>
+        <div class="topic-card">
+          <h3>Padrões de Projeto Criacionais</h3>
+          <p>Singleton, Factory e Builder aplicados a problemas reais.</p>
+        </div>
 
-  - Preparação estudo de caso  
-  - Apresentação estudo de caso  
-  - APIs Java standard (Streams, Optional, Date/Time)  
-  - Desenvolvimento de APIs  
-  - Integração com bibliotecas externas
-</details>
+        <div class="topic-card">
+          <h3>Padrões Estruturais</h3>
+          <p>Adapter, Decorator e Facade para organização e extensibilidade do código.</p>
+        </div>
 
-<details>
-  <summary><strong>5. Interface gráfica e modelagem</strong></summary>
+        <div class="topic-card">
+          <h3>Padrões Comportamentais</h3>
+          <p>Observer, Strategy e Template Method.</p>
+        </div>
 
-  - Interface gráfica introdução  
-  - Prototipação, diagrama de classes, diagrama de casos de uso  
-  - Definição, análise e documentação do projeto
-</details>
+        <div class="topic-card">
+          <h3>Princípios SOLID e projetos OO</h3>
+          <p>Aplicação prática de princípios de design orientado a objetos.</p>
+        </div>
 
-<details>
-  <summary><strong>6. Backend, dados e integração</strong></summary>
+        <div class="topic-card">
+          <h3>APIs Java e desenvolvimento de APIs</h3>
+          <p>Streams, Optional, Date/Time e construção de APIs REST.</p>
+        </div>
 
-  - Programação backend projeto  
-  - Programação interface projeto  
-  - Revisão Banco de dados  
-  - Conectividade com Banco de Dados  
-  - Programação e conexão do banco de dados do projeto  
-  - Revisão e ajustes do projeto
-</details>
+        <div class="topic-card">
+          <h3>Interface gráfica</h3>
+          <p>Introdução ao desenvolvimento de interfaces para aplicações desktop ou web.</p>
+        </div>
 
-<details>
-  <summary><strong>7. Desenvolvimento web e deploy</strong></summary>
+        <div class="topic-card">
+          <h3>Modelagem e documentação</h3>
+          <p>Diagramas de classes, casos de uso, prototipação e documentação do projeto.</p>
+        </div>
 
-  - Desenvolvimento web  
-  - Arquitetura e boas práticas  
-  - Frameworks web, HTML, CSS, APIs REST  
-  - Autenticação e segurança  
-  - Testes e Deploy
-</details>
+        <div class="topic-card">
+          <h3>Banco de dados</h3>
+          <p>Revisão de conceitos, conectividade e integração com aplicações.</p>
+        </div>
 
-</section>
+        <div class="topic-card">
+          <h3>Desenvolvimento web</h3>
+          <p>HTML, CSS, frameworks web, arquitetura, autenticação, segurança e deploy.</p>
+        </div>
 
----
+        <div class="topic-card">
+          <h3>Testes e qualidade de software</h3>
+          <p>Testes, refatoração contínua, integração e boas práticas.</p>
+        </div>
 
-<section id="projeto-da-disciplina">
+      </div>
+    </section>
 
-### 🛠️ Projeto da disciplina
+  </main>
 
-Durante o semestre, a turma desenvolverá um projeto aplicado que integrará interface gráfica, regras de negócio, acesso a banco de dados e, na etapa final, recursos web.  
-O projeto será evoluído em etapas, alinhado aos tópicos apresentados em aula, permitindo que você veja a relação direta entre teoria e prática.
+  <footer>
+    <p>Programação II • Material didático e acompanhamento da disciplina</p>
+  </footer>
 
-Sugestão de organização do repositório:
-
-```text
-/ projeto
-  /docs
-  /src
-    /backend
-    /frontend
-  /db
+</body>
+</html>
