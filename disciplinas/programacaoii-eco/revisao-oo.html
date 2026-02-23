@@ -1,80 +1,96 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Revisão de Orientação a Objetos</title>
+  <meta charset="UTF-8">
+  <title>Revisão de Orientação a Objetos – Programação II</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Estilo base semelhante ao site original -->
   <style>
     body {
+      font-family: Arial, Helvetica, sans-serif;
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   Roboto, Ubuntu, Cantarell, "Open Sans", sans-serif;
-      background: #f4f6fb;
-      color: #1f2933;
-      line-height: 1.7;
+      background-color: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
     }
 
     header {
-      background: linear-gradient(135deg, #5b5fc7, #7c7ff0);
-      color: #fff;
-      padding: 3rem 1.5rem;
+      background: linear-gradient(135deg, #2c3e50, #4ca1af);
+      color: white;
+      padding: 40px 20px;
       text-align: center;
+    }
+
+    header h1 {
+      margin-bottom: 10px;
     }
 
     main {
       max-width: 1100px;
       margin: auto;
-      padding: 2.5rem 1.5rem;
+      padding: 30px 20px;
+      background-color: white;
     }
 
     section {
-      background: #ffffff;
-      border: 1px solid #e5e7eb;
-      border-radius: 14px;
-      padding: 2rem;
-      margin-bottom: 2rem;
+      margin-bottom: 50px;
     }
 
-    h1, h2, h3 {
-      color: #5b5fc7;
-      margin-top: 0;
+    h2 {
+      color: #2c3e50;
+      border-left: 6px solid #4ca1af;
+      padding-left: 10px;
     }
 
-    ul, ol {
-      padding-left: 1.5rem;
+    h3 {
+      color: #4ca1af;
+      margin-top: 25px;
     }
 
-    .highlight {
-      background: #eef2ff;
-      border-left: 6px solid #5b5fc7;
+    pre {
+      background-color: #1e1e1e;
+      color: #dcdcdc;
+      padding: 15px;
+      overflow-x: auto;
+      border-radius: 5px;
     }
 
-    .media {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
+    code {
+      font-family: Consolas, monospace;
     }
 
-    iframe {
-      width: 100%;
-      min-height: 250px;
-      border-radius: 12px;
-      border: none;
+    .box {
+      background: #eef6f8;
+      border-left: 5px solid #4ca1af;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    .video {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .video iframe {
+      max-width: 100%;
+      width: 560px;
+      height: 315px;
+      border-radius: 8px;
     }
 
     img {
       max-width: 100%;
-      border-radius: 12px;
-      border: 1px solid #e5e7eb;
+      margin: 15px 0;
+      border-radius: 8px;
     }
 
     footer {
+      background-color: #2c3e50;
+      color: white;
       text-align: center;
-      color: #6b7280;
-      font-size: 0.9rem;
-      padding: 2rem 1rem;
+      padding: 20px;
+      margin-top: 40px;
     }
   </style>
 </head>
@@ -83,198 +99,208 @@
 
 <header>
   <h1>Revisão de Conceitos de Orientação a Objetos</h1>
-  <p>
-    Classes, herança, polimorfismo, abstração, interfaces,
-    exceções e arquivos
-  </p>
+  <p>Programação II – Engenharia de Computação</p>
 </header>
 
 <main>
 
-<section>
-  <h2>Objetivo da revisão</h2>
-  <p>
-    Esta página tem como objetivo revisar os principais conceitos da
-    <strong>Programação Orientada a Objetos (POO)</strong>,
-    fundamentais para o desenvolvimento de sistemas estruturados,
-    reutilizáveis e de fácil manutenção.
-  </p>
-</section>
+  <section>
+    <h2>1. Introdução à Orientação a Objetos</h2>
 
-<section>
-  <h2>Classe, objeto e atributos</h2>
-  <p>
-    Uma <strong>classe</strong> é um modelo que define atributos
-    (dados) e métodos (comportamentos). Um <strong>objeto</strong>
-    é uma instância concreta dessa classe.
-  </p>
+    <p>
+      A Orientação a Objetos (OO) é um paradigma de programação que organiza o software
+      a partir de <strong>objetos</strong>, que representam entidades do mundo real.
+      Cada objeto possui <strong>atributos</strong> (dados) e <strong>métodos</strong> (comportamentos).
+    </p>
 
-  <pre><code class="language-java">
-public class Estudante {
+    <div class="box">
+      Todo programa Java possui ao menos uma classe definida pelo programador.
+      A palavra-chave <code>class</code> introduz a definição da classe.
+    </div>
 
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Object-oriented_modeling.svg"
+         alt="Modelo de orientação a objetos">
+  </section>
+
+  <section>
+    <h2>2. Classes, Objetos e Atributos</h2>
+
+    <p>
+      Uma <strong>classe</strong> funciona como um molde para criar objetos.
+      Os <strong>objetos</strong> são instâncias dessa classe.
+    </p>
+
+    <h3>Exemplo de Classe em Java</h3>
+
+    <pre><code>public class Estudante {
     private int ra;
     private String nome;
-    private double nota1;
-    private double nota2;
-    private double nota3;
-}
-  </code></pre>
-</section>
+    private double nota1, nota2, nota3;
 
-<section>
-  <h2>Construtor e encapsulamento</h2>
-  <p>
-    O construtor inicializa o objeto. O encapsulamento protege os dados,
-    controlando o acesso por meio de métodos.
-  </p>
+    public Estudante(int ra, String nome, double n1, double n2, double n3) {
+        this.ra = ra;
+        this.nome = nome;
+        this.nota1 = n1;
+        this.nota2 = n2;
+        this.nota3 = n3;
+    }
+}</code></pre>
 
-  <pre><code class="language-java">
-public Estudante(int ra, String nome,
-                 double nota1, double nota2, double nota3) {
+    <div class="box">
+      Os atributos normalmente são declarados como <code>private</code>,
+      garantindo o encapsulamento dos dados.
+    </div>
+  </section>
 
+  <section>
+    <h2>3. Métodos, Construtores e Main</h2>
+
+    <p>
+      Métodos realizam tarefas. O método <code>main</code> é o ponto de partida
+      de qualquer aplicação Java.
+    </p>
+
+    <pre><code>public static void main(String[] args) {
+    System.out.println("Programa iniciado!");
+}</code></pre>
+
+    <h3>Construtores</h3>
+    <p>
+      O construtor possui o mesmo nome da classe e é responsável por inicializar o objeto.
+    </p>
+
+    <pre><code>public Estudante(int ra, String nome) {
     this.ra = ra;
     this.nome = nome;
+}</code></pre>
+
+    <div class="video">
+      <iframe src="https://www.youtube.com/embed/6T_HgnjoYwM"
+              title="Classes e Objetos em Java"
+              allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <section>
+    <h2>4. Encapsulamento, Getters e Setters</h2>
+
+    <p>
+      O encapsulamento protege os dados do objeto, permitindo acesso controlado
+      por meio de métodos <code>get</code> e <code>set</code>.
+    </p>
+
+    <pre><code>public double getNota1() {
+    return nota1;
+}
+
+public void setNota1(double nota1) {
     this.nota1 = nota1;
-    this.nota2 = nota2;
-    this.nota3 = nota3;
-}
+}</code></pre>
+  </section>
 
-public String getNome() {
-    return nome;
-}
-  </code></pre>
-</section>
+  <section>
+    <h2>5. Herança</h2>
 
-<section>
-  <h2>Abstração</h2>
-  <p>
-    Abstração consiste em representar apenas as características
-    essenciais de um objeto, ignorando detalhes irrelevantes.
-  </p>
+    <p>
+      A herança permite que uma classe reutilize atributos e métodos de outra classe,
+      utilizando a palavra-chave <code>extends</code>.
+    </p>
 
-  <pre><code class="language-java">
-public abstract class Pessoa {
+    <pre><code>public class AlunoGraduacao extends Estudante {
+    private String curso;
+}</code></pre>
 
-    protected String nome;
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Inheritance_OOP.svg"
+         alt="Herança em orientação a objetos">
+  </section>
 
-    public abstract void apresentar();
-}
-  </code></pre>
-</section>
+  <section>
+    <h2>6. Polimorfismo</h2>
 
-<section>
-  <h2>Herança</h2>
-  <p>
-    A herança permite que uma classe herde atributos e métodos de outra,
-    promovendo reutilização de código.
-  </p>
+    <p>
+      O polimorfismo permite que métodos com o mesmo nome tenham comportamentos diferentes,
+      dependendo do objeto que os executa.
+    </p>
 
-  <pre><code class="language-java">
-public class Aluno extends Pessoa {
+    <pre><code>@Override
+public double calcularMedia() {
+    return (nota1 + nota2 + nota3) / 3;
+}</code></pre>
+  </section>
 
-    @Override
-    public void apresentar() {
-        System.out.println("Sou um aluno");
+  <section>
+    <h2>7. Abstração e Interfaces</h2>
+
+    <p>
+      A abstração foca apenas no que o objeto faz, ocultando detalhes internos.
+      Interfaces definem contratos que as classes devem implementar.
+    </p>
+
+    <pre><code>public interface Avaliavel {
+    double calcularMedia();
+}</code></pre>
+
+    <pre><code>public class Estudante implements Avaliavel {
+    public double calcularMedia() {
+        return (nota1 + nota2 + nota3) / 3;
     }
+}</code></pre>
+
+    <div class="video">
+      <iframe src="https://www.youtube.com/embed/WQ6H-0U8V5A"
+              title="Interfaces em Java"
+              allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <section>
+    <h2>8. Exceções</h2>
+
+    <p>
+      Exceções tratam situações inesperadas durante a execução do programa.
+    </p>
+
+    <pre><code>try {
+    int x = 10 / 0;
+} catch (ArithmeticException e) {
+    System.out.println("Erro: divisão por zero.");
+}</code></pre>
+  </section>
+
+  <section>
+    <h2>9. Arquivos</h2>
+
+    <p>
+      A leitura e escrita em arquivos permite persistência de dados.
+    </p>
+
+    <pre><code>import java.io.File;
+import java.util.Scanner;
+
+File arquivo = new File("dados.txt");
+Scanner sc = new Scanner(arquivo);
+
+while (sc.hasNextLine()) {
+    System.out.println(sc.nextLine());
 }
-  </code></pre>
-</section>
+sc.close();</code></pre>
+  </section>
 
-<section>
-  <h2>Polimorfismo</h2>
-  <p>
-    O polimorfismo permite que objetos diferentes respondam de forma
-    distinta ao mesmo método.
-  </p>
+  <section>
+    <h2>10. Atividade Prática</h2>
 
-  <pre><code class="language-java">
-Pessoa p = new Aluno();
-p.apresentar();
-  </code></pre>
-</section>
-
-<section>
-  <h2>Interfaces</h2>
-  <p>
-    Interfaces definem contratos que devem ser implementados pelas classes.
-  </p>
-
-  <pre><code class="language-java">
-public interface Autenticavel {
-    boolean autenticar(String senha);
-}
-  </code></pre>
-</section>
-
-<section>
-  <h2>Exceções e arquivos</h2>
-  <p>
-    Exceções tratam situações inesperadas, como erros de leitura de arquivos.
-  </p>
-
-  <pre><code class="language-java">
-try {
-    Scanner sc = new Scanner(new File("dados.txt"));
-} catch (Exception e) {
-    System.out.println("Erro ao acessar o arquivo.");
-}
-  </code></pre>
-</section>
-
-<section>
-  <h2>Diagrama de Classes</h2>
-  <p>
-    O diagrama de classes representa visualmente a estrutura do sistema.
-  </p>
-
-  <pre><code>
-+---------------------------+
-|         Estudante         |
-+---------------------------+
-| - ra: int                 |
-| - nome: String            |
-| - nota1: double           |
-| - nota2: double           |
-| - nota3: double           |
-+---------------------------+
-| + calcularMedia():double  |
-| + getNome():String        |
-+---------------------------+
-  </code></pre>
-
-  <img
-    src="https://upload.wikimedia.org/wikipedia/commons/9/93/UML_class_diagram_example.png"
-    alt="Exemplo de diagrama de classes UML">
-</section>
-
-<section>
-  <h2>Vídeos para revisão</h2>
-
-  <div class="media">
-    <iframe src="https://www.youtube.com/embed/1ONhXmQuWP8"
-      title="POO em Java"></iframe>
-
-    <iframe src="https://www.youtube.com/embed/ZnP6h0gRz4A"
-      title="Herança e Polimorfismo"></iframe>
-  </div>
-</section>
-
-<section class="highlight">
-  <h2>Checklist do aluno</h2>
-  <ul>
-    <li>⬜ Entendo classe e objeto</li>
-    <li>⬜ Sei criar construtores</li>
-    <li>⬜ Sei encapsular atributos</li>
-    <li>⬜ Entendo herança e polimorfismo</li>
-    <li>⬜ Sei criar interfaces</li>
-    <li>⬜ Sei tratar exceções</li>
-  </ul>
-</section>
+    <div class="box">
+      Crie a classe <strong>Estudante</strong>, instancie três objetos,
+      calcule e exiba a média. Altere as notas de um estudante e verifique
+      as médias novamente.
+    </div>
+  </section>
 
 </main>
 
 <footer>
-  <p>Disciplina de Programação II — Professora <strong>Wilcilene Maria Kowal</strong></p>
+  <p>Programação II – Engenharia de Computação</p>
+  <p>Conteúdo baseado em material didático da disciplina</p>
 </footer>
 
 </body>
