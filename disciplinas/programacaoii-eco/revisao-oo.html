@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Revisão de Orientação a Objetos</title>
+  <title>Revisão de Conceitos de Orientação a Objetos</title>
 
   <style>
     :root {
@@ -13,15 +13,16 @@
       --muted: #6b7280;
       --card: #ffffff;
       --border: #e5e7eb;
+      --highlight: #eef2ff;
     }
 
     body {
+      margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
                    Roboto, Ubuntu, Cantarell, "Open Sans", sans-serif;
       background: var(--secondary);
       color: var(--text);
       line-height: 1.7;
-      margin: 0;
     }
 
     header {
@@ -45,6 +46,11 @@
       margin-bottom: 2rem;
     }
 
+    section.highlight {
+      background: var(--highlight);
+      border-left: 6px solid var(--primary);
+    }
+
     h1, h2, h3 {
       color: var(--primary);
     }
@@ -53,32 +59,33 @@
       margin-top: 0;
     }
 
-    code, pre {
+    pre, code {
       background: #111827;
       color: #e5e7eb;
       padding: 1rem;
       border-radius: 10px;
-      display: block;
       overflow-x: auto;
+    }
+
+    pre {
       margin: 1rem 0;
+    }
+
+    ul, ol {
+      padding-left: 1.5rem;
     }
 
     .media {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
     }
 
     iframe, img {
       width: 100%;
       border-radius: 12px;
       border: 1px solid var(--border);
-    }
-
-    .atividade {
-      background: #eef2ff;
-      border-left: 6px solid var(--primary);
     }
 
     footer {
@@ -103,21 +110,16 @@
   <h2>Objetivo do tópico</h2>
   <p>
     Este tópico tem como objetivo revisar e consolidar os conceitos fundamentais
-    da <strong>Programação Orientada a Objetos (POO)</strong>, que servirão como base
-    para todo o restante da disciplina.
-  </p>
-  <p>
-    Os conteúdos apresentados aqui seguem a estrutura conceitual utilizada
-    em disciplinas introdutórias de Java e modelagem de software :contentReference[oaicite:1]{index=1}.
+    da <strong>Programação Orientada a Objetos (POO)</strong>, servindo como base
+    para o desenvolvimento de sistemas orientados a objetos ao longo da disciplina.
   </p>
 </section>
 
 <section>
   <h2>Classes, objetos e atributos</h2>
   <p>
-    Todo programa Java possui ao menos uma <strong>classe</strong>. Uma classe
-    define os atributos (dados) e métodos (comportamentos) que seus objetos
-    irão possuir :contentReference[oaicite:2]{index=2}.
+    Todo programa Java possui ao menos uma classe definida pelo programador.
+    Uma classe descreve a estrutura e o comportamento de seus objetos.
   </p>
 
   <pre><code>
@@ -126,7 +128,8 @@ public class Estudante {
     private String nome;
     private double nota1, nota2, nota3;
 
-    public Estudante(int ra, String nome, double n1, double n2, double n3) {
+    public Estudante(int ra, String nome,
+                     double n1, double n2, double n3) {
         this.ra = ra;
         this.nome = nome;
         this.nota1 = n1;
@@ -135,40 +138,118 @@ public class Estudante {
     }
 }
   </code></pre>
+</section>
 
-  <div class="media">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/ClassDiagram_Person.png"
-         alt="Diagrama de classe exemplo">
-  </div>
+<section>
+  <h2>Diagrama de Classes (UML)</h2>
+
+  <pre><code>
++---------------------------+
+|         Estudante         |
++---------------------------+
+| - ra: int                 |
+| - nome: String            |
+| - nota1: double           |
+| - nota2: double           |
+| - nota3: double           |
++---------------------------+
+| + Estudante(...)          |
+| + calcularMedia():double  |
+| + getNome():String        |
++---------------------------+
+  </code></pre>
+
+  <p>
+    O símbolo <strong>-</strong> indica atributos privados
+    e <strong>+</strong> indica métodos públicos.
+  </p>
 </section>
 
 <section>
   <h2>Métodos, construtores e encapsulamento</h2>
   <p>
-    Métodos realizam tarefas e podem ou não retornar valores.
-    O construtor é um método especial utilizado para inicializar objetos
-    corretamente no momento da instanciação :contentReference[oaicite:3]{index=3}.
+    Métodos realizam tarefas. O construtor é responsável por inicializar
+    corretamente o objeto no momento da criação.
   </p>
 
   <pre><code>
 public double calcularMedia() {
     return (nota1 + nota2 + nota3) / 3;
 }
+
+public String getNome() {
+    return nome;
+}
   </code></pre>
 
   <p>
-    O <strong>encapsulamento</strong> é garantido pelo uso do modificador
-    <code>private</code> nos atributos e métodos públicos <code>get</code> e
-    <code>set</code>.
+    O encapsulamento protege os dados do objeto,
+    permitindo acesso controlado via métodos públicos.
   </p>
+</section>
+
+<section>
+  <h2>Classe principal e método main</h2>
+  <p>
+    O método <code>main</code> é o ponto de entrada do programa Java.
+  </p>
+
+  <pre><code>
+public class Principal {
+
+    public static void main(String[] args) {
+
+        Estudante e1 = new Estudante(1, "Ana", 8.5, 9.0, 7.0);
+        Estudante e2 = new Estudante(2, "Julio", 5.0, 6.5, 8.0);
+        Estudante e3 = new Estudante(3, "Wilcilene", 10.0, 10.0, 9.8);
+
+        System.out.printf(
+            "O estudante %s possui média %.2f%n",
+            e1.getNome(), e1.calcularMedia()
+        );
+    }
+}
+  </code></pre>
+</section>
+
+<section>
+  <h2>Entrada de dados, atribuição e parâmetros</h2>
+
+  <pre><code>
+import java.util.Scanner;
+
+Scanner sc = new Scanner(System.in);
+
+System.out.print("Digite a nova nota: ");
+double novaNota = sc.nextDouble();
+
+e2.setNota1(novaNota);
+  </code></pre>
+
+  <p>
+    O operador <code>=</code> atribui valores.
+    O operador <code>==</code> realiza comparação.
+  </p>
+</section>
+
+<section>
+  <h2>Chamada de métodos</h2>
+
+  <pre><code>
+// método da mesma classe
+calcularMedia();
+
+// método de outra classe
+e1.calcularMedia();
+  </code></pre>
 </section>
 
 <section>
   <h2>Herança, abstração e polimorfismo</h2>
   <p>
-    A herança permite reutilizar código, a abstração define comportamentos
-    essenciais e o polimorfismo possibilita múltiplas implementações
-    para um mesmo método.
+    A herança permite reutilização de código,
+    a abstração define comportamentos essenciais
+    e o polimorfismo permite múltiplas implementações.
   </p>
 
   <div class="media">
@@ -180,10 +261,6 @@ public double calcularMedia() {
 
 <section>
   <h2>Interfaces, exceções e arquivos</h2>
-  <p>
-    Interfaces definem contratos. Exceções tratam situações inesperadas.
-    Arquivos permitem persistência de dados.
-  </p>
 
   <pre><code>
 try {
@@ -194,27 +271,46 @@ try {
   </code></pre>
 </section>
 
-<section class="atividade">
-  <h2>Atividade prática</h2>
-  <p><strong>Implemente:</strong></p>
+<section class="highlight">
+  <h2>Para lembrar!</h2>
   <ul>
-    <li>Uma classe <code>Estudante</code> com atributos privados</li>
-    <li>Construtor para inicialização</li>
-    <li>Método para cálculo da média</li>
-    <li>Classe principal com <code>main</code> instanciando objetos</li>
+    <li>Todo objeto é criado com <code>new</code></li>
+    <li>Métodos não static exigem objeto instanciado</li>
+    <li>Atributos devem ser <code>private</code></li>
+    <li>Variáveis locais existem apenas dentro do método</li>
+    <li>Construtores inicializam corretamente o objeto</li>
   </ul>
-  <p>
-    Utilize entrada de dados, modifique valores e exiba os resultados conforme
-    proposto na atividade da apresentação :contentReference[oaicite:4]{index=4}.
-  </p>
+</section>
+
+<section class="highlight">
+  <h2>Atividade prática – Classe Estudante</h2>
+  <ol>
+    <li>Crie a classe <code>Estudante</code> com atributos privados</li>
+    <li>Implemente um construtor</li>
+    <li>Crie método para cálculo da média</li>
+    <li>Instancie três objetos na classe principal</li>
+    <li>Altere notas usando <code>Scanner</code></li>
+  </ol>
+</section>
+
+<section class="highlight">
+  <h2>Checklist do aluno</h2>
+  <ul>
+    <li>⬜ Sei explicar classe e objeto</li>
+    <li>⬜ Sei criar construtores</li>
+    <li>⬜ Sei encapsular atributos</li>
+    <li>⬜ Sei instanciar objetos</li>
+    <li>⬜ Sei chamar métodos</li>
+    <li>⬜ Sei usar Scanner</li>
+  </ul>
 </section>
 
 <section>
   <h2>Referências</h2>
   <ul>
-    <li>Deitel & Deitel. <em>Java: Como Programar</em>.</li>
-    <li>Documentação oficial Java – Oracle.</li>
-    <li>Material de aula – Wilcilene Maria Kowal.</li>
+    <li>Deitel & Deitel – Java: Como Programar</li>
+    <li>Oracle – Documentação Java</li>
+    <li>Material de aula – Wilcilene Maria Kowal</li>
   </ul>
 </section>
 
@@ -222,8 +318,7 @@ try {
 
 <footer>
   <p>
-    Disciplina de Programação •
-    Professora <strong>Wilcilene Maria Kowal</strong>
+    Conteúdo elaborado por <strong>Wilcilene Maria Kowal</strong>
   </p>
 </footer>
 
