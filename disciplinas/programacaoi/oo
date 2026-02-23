@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Introdução à Orientação a Objetos – Programação I</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      background-color: #f4f6f8;
+      color: #333;
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1f3c88, #4e73df);
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px 20px;
+      background-color: #fff;
+    }
+
+    section {
+      margin-bottom: 50px;
+    }
+
+    h2 {
+      color: #1f3c88;
+      border-left: 6px solid #4e73df;
+      padding-left: 10px;
+    }
+
+    h3 {
+      color: #4e73df;
+      margin-top: 25px;
+    }
+
+    pre {
+      background-color: #1e1e1e;
+      color: #dcdcdc;
+      padding: 15px;
+      overflow-x: auto;
+      border-radius: 5px;
+    }
+
+    code {
+      font-family: Consolas, monospace;
+    }
+
+    .explicacao {
+      background: #eef2ff;
+      border-left: 5px solid #4e73df;
+      padding: 15px;
+      margin: 15px 0;
+    }
+
+    .destaque {
+      background: #fff7e6;
+      border-left: 5px solid #f0ad4e;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    .video {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .video iframe {
+      width: 560px;
+      max-width: 100%;
+      height: 315px;
+      border-radius: 8px;
+    }
+
+    footer {
+      background-color: #1f3c88;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Introdução à Orientação a Objetos</h1>
+  <p>Programação I – Engenharia de Computação</p>
+</header>
+
+<main>
+
+  <section>
+    <h2>1. Antes de tudo: o que é programar?</h2>
+
+    <p>
+      Programar é escrever instruções para que o computador execute tarefas.
+      Em Programação I, normalmente começamos com comandos simples, variáveis,
+      decisões (<code>if</code>) e repetições (<code>for</code>, <code>while</code>).
+    </p>
+
+    <p>
+      À medida que os programas crescem, precisamos de uma forma melhor
+      de <strong>organizar o código</strong>.  
+      É nesse ponto que surge a <strong>Orientação a Objetos (OO)</strong>.
+    </p>
+
+    <div class="destaque">
+      👉 Pense na OO como uma forma de organizar o programa usando conceitos
+      semelhantes aos do mundo real.
+    </div>
+  </section>
+
+  <section>
+    <h2>2. O que é uma Classe?</h2>
+
+    <p>
+      Uma <strong>classe</strong> é como um <strong>modelo</strong> ou um <strong>molde</strong>.
+      Ela define como algo será, mas ainda não é esse algo.
+    </p>
+
+    <p>
+      Exemplo: antes de existir um estudante específico, existe a ideia de
+      <em>Estudante</em>.
+    </p>
+
+    <h3>Primeira classe em Java</h3>
+
+    <pre><code>public class Estudante {
+}</code></pre>
+
+    <div class="explicacao">
+      <ul>
+        <li><code>public</code>: indica que a classe pode ser usada por outros arquivos</li>
+        <li><code>class</code>: palavra-chave que cria uma classe</li>
+        <li><code>Estudante</code>: nome da classe (sempre começa com letra maiúscula)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>3. Atributos: as características do objeto</h2>
+
+    <p>
+      Os <strong>atributos</strong> representam as características de algo.
+      No caso de um estudante, podemos ter:
+    </p>
+
+    <ul>
+      <li>RA</li>
+      <li>Nome</li>
+      <li>Notas</li>
+    </ul>
+
+    <pre><code>public class Estudante {
+    int ra;
+    String nome;
+    double nota1;
+    double nota2;
+    double nota3;
+}</code></pre>
+
+    <div class="explicacao">
+      Cada linha declara uma <strong>variável</strong> que pertence à classe.
+      Essas variáveis serão copiadas para cada estudante criado.
+    </div>
+  </section>
+
+  <section>
+    <h2>4. Objetos: criando estudantes de verdade</h2>
+
+    <p>
+      Um <strong>objeto</strong> é um elemento criado a partir de uma classe.
+      Se a classe é o molde, o objeto é o item pronto.
+    </p>
+
+    <pre><code>public class Principal {
+    public static void main(String[] args) {
+
+        Estudante e1 = new Estudante();
+        e1.ra = 1;
+        e1.nome = "Ana";
+        e1.nota1 = 8.5;
+        e1.nota2 = 9.0;
+        e1.nota3 = 7.0;
+    }
+}</code></pre>
+
+    <div class="explicacao">
+      <ul>
+        <li><code>new Estudante()</code> cria um novo objeto</li>
+        <li><code>e1</code> é a variável que guarda o objeto</li>
+        <li><code>e1.nota1</code> acessa um atributo do objeto</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>5. Métodos: comportamentos do objeto</h2>
+
+    <p>
+      Métodos representam ações que o objeto pode realizar.
+      Vamos criar um método para calcular a média.
+    </p>
+
+    <pre><code>public class Estudante {
+
+    double nota1, nota2, nota3;
+
+    double calcularMedia() {
+        return (nota1 + nota2 + nota3) / 3;
+    }
+}</code></pre>
+
+    <div class="explicacao">
+      <ul>
+        <li><code>double</code>: tipo de valor que o método retorna</li>
+        <li><code>calcularMedia</code>: nome do método</li>
+        <li><code>return</code>: devolve o resultado do cálculo</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>6. Usando métodos no programa principal</h2>
+
+    <pre><code>public class Principal {
+    public static void main(String[] args) {
+
+        Estudante e1 = new Estudante();
+        e1.nota1 = 8.5;
+        e1.nota2 = 9.0;
+        e1.nota3 = 7.0;
+
+        double media = e1.calcularMedia();
+        System.out.println("Média: " + media);
+    }
+}</code></pre>
+
+    <div class="explicacao">
+      O método é chamado usando:
+      <br><strong>nomeDoObjeto.nomeDoMetodo()</strong>
+    </div>
+  </section>
+
+  <section>
+    <h2>7. Construtores: inicializando o objeto corretamente</h2>
+
+    <p>
+      O construtor é um método especial chamado automaticamente
+      quando o objeto é criado.
+    </p>
+
+    <pre><code>public class Estudante {
+
+    int ra;
+    String nome;
+    double nota1, nota2, nota3;
+
+    public Estudante(int ra, String nome, double n1, double n2, double n3) {
+        this.ra = ra;
+        this.nome = nome;
+        nota1 = n1;
+        nota2 = n2;
+        nota3 = n3;
+    }
+}</code></pre>
+
+    <div class="explicacao">
+      <code>this</code> diferencia o atributo da classe do parâmetro recebido.
+    </div>
+  </section>
+
+  <section>
+    <h2>8. Encapsulamento (primeiro contato)</h2>
+
+    <p>
+      Para proteger os dados, os atributos normalmente são <code>private</code>
+      e acessados por métodos.
+    </p>
+
+    <pre><code>private double nota1;
+
+public void setNota1(double nota) {
+    nota1 = nota;
+}
+
+public double getNota1() {
+    return nota1;
+}</code></pre>
+
+    <div class="destaque">
+      🔒 Isso evita acessos indevidos e melhora a organização do código.
+    </div>
+  </section>
+
+  <section>
+    <h2>9. Atividade Prática</h2>
+
+    <div class="destaque">
+      <ol>
+        <li>Crie a classe <strong>Estudante</strong></li>
+        <li>Crie atributos para RA, nome e três notas</li>
+        <li>Implemente um método para calcular a média</li>
+        <li>No <code>main</code>, crie três estudantes</li>
+        <li>Exiba a média de cada um</li>
+      </ol>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Programação I – Engenharia de Computação</p>
+  <p>Introdução gradual à Orientação a Objetos</p>
+</footer>
+
+</body>
+</html>
