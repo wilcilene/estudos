@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Programação II – Revisão de Orientação a Objetos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Estilos básicos inspirados no layout atual do site da disciplina [page:1] -->
+    <style>
+      :root {
+        --bg: #f5f5f5;
+        --bg-card: #ffffff;
+        --primary: #006699;
+        --primary-dark: #004766;
+        --accent: #ff9800;
+        --text: #222222;
+        --muted: #666666;
+        --border: #dddddd;
+        --code-bg: #272822;
+        --code-text: #f8f8f2;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      header {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: #ffffff;
+        padding: 1.5rem 1rem;
+      }
+
+      header .container {
+        max-width: 960px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 1.8rem;
+      }
+
+      header p {
+        margin: 0;
+        max-width: 640px;
+        font-size: 0.95rem;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      nav a {
+        color: #ffffff;
+        text-decoration: none;
+        padding: 0.25rem 0.6rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+      }
+
+      nav a:hover {
+        background-color: rgba(255, 255, 255, 0.16);
+      }
+
+      main {
+        max-width: 960px;
+        margin: 1.5rem auto 2.5rem;
+        padding: 0 1rem;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.5rem;
+      }
+
+      @media (min-width: 900px) {
+        main {
+          grid-template-columns: minmax(0, 2fr) minmax(260px, 0.9fr);
+          align-items: flex-start;
+        }
+      }
+
+      .card {
+        background-color: var(--bg-card);
+        border-radius: 0.5rem;
+        padding: 1.25rem 1.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border);
+      }
+
+      .card h2,
+      .card h3,
+      .card h4 {
+        margin-top: 0;
+      }
+
+      .card h2 {
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.4rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .tag {
+        display: inline-block;
+        padding: 0.1rem 0.5rem;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        background-color: #e3f2fd;
+        color: var(--primary-dark);
+        margin-right: 0.4rem;
+      }
+
+      .tag--nivel {
+        background-color: #fff3e0;
+        color: #e65100;
+      }
+
+      .tag--aulas {
+        background-color: #e8f5e9;
+        color: #1b5e20;
+      }
+
+      h3 {
+        margin-top: 1.1rem;
+      }
+
+      h4 {
+        margin-top: 0.8rem;
+      }
+
+      p {
+        margin: 0.3rem 0 0.7rem;
+      }
+
+      ul {
+        margin: 0.2rem 0 0.7rem 1.2rem;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 0.25rem;
+      }
+
+      code {
+        font-family: "Fira Code", "SF Mono", "Consolas", "Roboto Mono", monospace;
+        background-color: #ececec;
+        padding: 0.1rem 0.25rem;
+        border-radius: 3px;
+        font-size: 0.9em;
+      }
+
+      pre {
+        background-color: var(--code-bg);
+        color: var(--code-text);
+        padding: 0.9rem 1rem;
+        border-radius: 0.4rem;
+        overflow-x: auto;
+        font-size: 0.88rem;
+        margin: 0.4rem 0 0.9rem;
+      }
+
+      pre code {
+        background: none;
+        padding: 0;
+        color: inherit;
+      }
+
+      .note {
+        border-left: 4px solid var(--primary);
+        padding-left: 0.75rem;
+        margin: 0.4rem 0 0.8rem;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .callout {
+        border-radius: 0.4rem;
+        padding: 0.75rem 0.9rem;
+        background-color: #fff8e1;
+        border: 1px solid #ffe082;
+        font-size: 0.9rem;
+        margin: 0.5rem 0 1rem;
+      }
+
+      .callout strong {
+        color: #e65100;
+      }
+
+      details {
+        margin: 0.4rem 0 0.7rem;
+        border-radius: 0.4rem;
+        border: 1px solid var(--border);
+        background-color: #fafafa;
+      }
+
+      details summary {
+        padding: 0.5rem 0.7rem;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      details[open] summary {
+        border-bottom: 1px solid var(--border);
+      }
+
+      details > div {
+        padding: 0.6rem 0.8rem 0.7rem;
+      }
+
+      aside {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .mini-list {
+        list-style: none;
+        margin: 0.3rem 0 0.2rem;
+        padding: 0;
+        font-size: 0.9rem;
+      }
+
+      .mini-list li {
+        margin-bottom: 0.25rem;
+      }
+
+      footer {
+        border-top: 1px solid var(--border);
+        margin-top: 1rem;
+        padding-top: 0.6rem;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      footer p {
+        margin: 0.1rem 0;
+      }
+
+      .pill-list {
+        list-style: none;
+        padding: 0;
+        margin: 0.2rem 0 0.8rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+
+      .pill-list li {
+        background-color: #e0f7fa;
+        color: #006064;
+        border-radius: 999px;
+        padding: 0.2rem 0.7rem;
+        font-size: 0.8rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="container">
+        <div>
+          <span class="tag">Programação II – ECO</span>
+          <span class="tag tag--aulas">Aulas 1 a 9</span>
+          <span class="tag tag--nivel">Revisão</span>
+        </div>
+        <h1>Revisão de Orientação a Objetos com JavaScript</h1>
+        <p>
+          Nesta unidade revisamos os principais conceitos de programação orientada a objetos, agora
+          focados em JavaScript e no contexto de desenvolvimento web.
+        </p>
+        <nav>
+          <a href="#ambiente">Configuração do ambiente</a>
+          <a href="#objetivos">Objetivos da unidade</a>
+          <a href="#conceitos-basicos">Conceitos básicos</a>
+          <a href="#pilares">Pilares da POO</a>
+          <a href="#atividades">Atividades em sala</a>
+          <a href="#exercicios">Exercícios de estudo</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Introdução</h2>
+        <p>
+          A Programação Orientada a Objetos (POO) organiza o código em torno de
+          <strong>objetos</strong>, que representam entidades com dados e comportamentos.
+          Nesta página, vamos revisar os conceitos fundamentais de POO usando JavaScript moderno,
+          preparando a base para o desenvolvimento web que veremos ao longo da disciplina.
+        </p>
+
+        <div class="callout">
+          <strong>Para quem faltou:</strong> siga a ordem desta página,
+          reproduza todos os exemplos em seu ambiente e resolva os exercícios propostos.
+          Isso deve cobrir o conteúdo das aulas 1 a 9.
+        </div>
+
+        <!-- ========================= AMBIENTE ========================= -->
+
+        <h2 id="ambiente">Configuração do ambiente para os exemplos</h2>
+
+        <p>
+          Você pode executar os exemplos desta unidade diretamente no navegador
+          (recomendado para começar) ou com Node.js caso já tenha instalado.
+        </p>
+
+        <h3>Opção 1 – Navegador (recomendado)</h3>
+        <ol>
+          <li>Crie uma pasta em seu computador, por exemplo <code>prog2-revisao-oo</code>.</li>
+          <li>
+            Dentro da pasta, crie um arquivo chamado <code>index.html</code> com o conteúdo abaixo.
+          </li>
+        </ol>
+
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;title&gt;Revisão OO - Programação II&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Revisão de Orientação a Objetos em JavaScript&lt;/h1&gt;
+    &lt;p&gt;Abra o console do navegador para ver a saída dos exemplos.&lt;/p&gt;
+
+    &lt;script src="revisao-oo.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+        <ol start="3">
+          <li>
+            Crie um arquivo chamado <code>revisao-oo.js</code> na mesma pasta.
+            É nele que você vai colar os exemplos de código desta página.
+          </li>
+          <li>
+            Abra o arquivo <code>index.html</code> no navegador (clique duas vezes ou use
+            “Abrir com &gt; Navegador”).
+          </li>
+          <li>
+            Pressione <strong>F12</strong> e selecione a aba <strong>Console</strong> para ver
+            a saída dos códigos.
+          </li>
+        </ol>
+
+        <h3>Opção 2 – Node.js (para quem já instalou)</h3>
+        <ol>
+          <li>Instale o Node.js a partir do site oficial, se ainda não tiver.</li>
+          <li>
+            Na mesma pasta, mantenha o arquivo <code>revisao-oo.js</code> com os exemplos.
+          </li>
+          <li>
+            Abra um terminal na pasta e execute:
+            <pre><code>node revisao-oo.js</code></pre>
+          </li>
+        </ol>
+
+        <div class="note">
+          Em sala, vamos priorizar o uso do navegador, pois é o mesmo ambiente em que as
+          aplicações web dos próximos módulos irão rodar.
+        </div>
+
+        <!-- ========================= OBJETIVOS ========================= -->
+
+        <h2 id="objetivos">Objetivos da unidade (Aulas 1 a 9)</h2>
+        <ul>
+          <li>
+            Explicar o que é programação orientada a objetos e como ela é usada em sistemas web.
+          </li>
+          <li>
+            Definir e utilizar classes e objetos em JavaScript, seguindo boas práticas de código.
+          </li>
+          <li>
+            Aplicar os pilares de POO: abstração, encapsulamento, herança e polimorfismo.
+          </li>
+          <li>
+            Implementar pequenos modelos de domínio (como Aluno, ContaBancaria, Produto) que
+            servirão de base para o projeto web da disciplina.
+          </li>
+        </ul>
+
+        <!-- ========================= CONCEITOS BÁSICOS ========================= -->
+
+        <h2 id="conceitos-basicos">1. Conceitos básicos de POO em JavaScript</h2>
+
+        <h3>1.1 Classe e objeto</h3>
+        <p>
+          Em POO, a <strong>classe</strong> é um molde que descreve quais dados e comportamentos
+          um tipo de objeto terá, enquanto o <strong>objeto</strong> é uma instância concreta dessa
+          classe.
+        </p>
+
+        <pre><code>// Exemplo 1 – Classe Produto
+
+class Produto {
+  constructor(nome, preco) {
+    if (!nome || typeof nome !== 'string') {
+      throw new Error('Nome do produto deve ser uma string não vazia.');
+    }
+
+    if (typeof preco !== 'number' || preco &lt;= 0) {
+      throw new Error('Preço deve ser um número positivo.');
+    }
+
+    this.nome = nome;
+    this.preco = preco;
+  }
+
+  aplicarDesconto(percentual) {
+    if (typeof percentual !== 'number' || percentual &lt;= 0 || percentual &gt;= 100) {
+      throw new Error('Percentual deve ser um número entre 0 e 100.');
+    }
+
+    const fatorDesconto = 1 - percentual / 100;
+    this.preco *= fatorDesconto;
+  }
+
+  descrever() {
+    const precoFormatado = this.preco.toFixed(2);
+    return `${this.nome} - R$ ${precoFormatado}`;
+  }
+}
+
+// Uso da classe Produto
+const mouse = new Produto('Mouse sem fio', 80);
+const teclado = new Produto('Teclado mecânico', 350);
+
+mouse.aplicarDesconto(10);
+
+console.log('Produtos cadastrados:');
+console.log(mouse.descrever());
+console.log(teclado.descrever());
+</code></pre>
+
+        <h3>1.2 Atributos, métodos e responsabilidade</h3>
+        <p>
+          Uma boa prática é manter cada classe com uma responsabilidade clara.
+          No exemplo abaixo, a classe <code>Aluno</code> é responsável por representar o estado
+          acadêmico de um estudante em um curso.
+        </p>
+
+        <pre><code>// Exemplo 2 – Classe Aluno
+
+class Aluno {
+  constructor(nome, matricula, curso) {
+    if (!nome || !matricula || !curso) {
+      throw new Error('Aluno precisa de nome, matrícula e curso.');
+    }
+
+    this.nome = nome;
+    this.matricula = matricula;
+    this.curso = curso;
+    this.status = 'Em andamento';
+  }
+
+  aprovar() {
+    this.status = 'Aprovado';
+  }
+
+  reprovar() {
+    this.status = 'Reprovado';
+  }
+
+  obterResumo() {
+    return `${this.nome} (${this.matricula}) - ${this.curso} - ${this.status}`;
+  }
+}
+
+const ana = new Aluno('Ana', '2026001', 'Sistemas de Informação');
+console.log(ana.obterResumo());
+ana.aprovar();
+console.log(ana.obterResumo());
+</code></pre>
+
+        <!-- ========================= PILARES ========================= -->
+
+        <h2 id="pilares">2. Pilares da Programação Orientada a Objetos</h2>
+
+        <h3>2.1 Abstração</h3>
+        <p>
+          Abstrair significa representar apenas o que é relevante de um objeto para o contexto do
+          sistema, ignorando detalhes desnecessários.
+        </p>
+
+        <pre><code>// Exemplo 3 – Classe Professor
+
+class Professor {
+  constructor(nome, cpf, area) {
+    if (!nome || !cpf || !area) {
+      throw new Error('Professor precisa de nome, CPF e área.');
+    }
+
+    this.nome = nome;
+    this.cpf = cpf;
+    this.area = area;
+  }
+
+  resumo() {
+    return `${this.nome} (${this.area})`;
+  }
+}
+
+const profJoao = new Professor('João Silva', '123.456.789-00', 'Programação Web');
+console.log(profJoao.resumo());
+</code></pre>
+
+        <h3>2.2 Encapsulamento</h3>
+        <p>
+          Encapsulamento significa proteger os dados de acesso direto indevido,
+          expondo apenas o que realmente precisa ser público. Em JavaScript moderno podemos usar
+          campos privados com <code>#</code>.
+        </p>
+
+        <pre><code>// Exemplo 4 – ContaBancaria com atributo privado
+
+class ContaBancaria {
+  #saldo;
+
+  constructor(titular) {
+    if (!titular) {
+      throw new Error('Conta precisa de um titular.');
+    }
+
+    this.titular = titular;
+    this.#saldo = 0;
+  }
+
+  depositar(valor) {
+    if (typeof valor !== 'number' || valor &lt;= 0) {
+      throw new Error('Depósito deve ser um número positivo.');
+    }
+
+    this.#saldo += valor;
+  }
+
+  sacar(valor) {
+    if (typeof valor !== 'number' || valor &lt;= 0) {
+      throw new Error('Saque deve ser um número positivo.');
+    }
+
+    if (valor &gt; this.#saldo) {
+      throw new Error('Saldo insuficiente para saque.');
+    }
+
+    this.#saldo -= valor;
+  }
+
+  obterSaldo() {
+    return this.#saldo;
+  }
+}
+
+const contaCarlos = new ContaBancaria('Carlos');
+contaCarlos.depositar(500);
+contaCarlos.sacar(150);
+
+console.log(`Saldo da conta de ${contaCarlos.titular}: R$ ${contaCarlos.obterSaldo()}`);
+// contaCarlos.#saldo = 9999; // Erro: campo privado
+</code></pre>
+
+        <h3>2.3 Herança</h3>
+        <p>
+          Herança permite reaproveitar código criando classes mais específicas a partir de uma
+          mais geral. Usamos <code>extends</code> e <code>super()</code> em JavaScript.
+        </p>
+
+        <pre><code>// Exemplo 5 – Usuário e Admin
+
+class Usuario {
+  constructor(nome, email) {
+    if (!nome || !email) {
+      throw new Error('Usuário precisa de nome e email.');
+    }
+
+    this.nome = nome;
+    this.email = email;
+  }
+
+  apresentar() {
+    console.log(`Olá, eu sou ${this.nome}.`);
+  }
+}
+
+class Admin extends Usuario {
+  constructor(nome, email) {
+    super(nome, email);
+    this.perfil = 'ADMIN';
+  }
+
+  bloquearUsuario(usuario) {
+    if (!(usuario instanceof Usuario)) {
+      throw new Error('É possível bloquear apenas um objeto do tipo Usuario.');
+    }
+
+    console.log(`Usuário ${usuario.nome} foi bloqueado por ${this.nome}.`);
+  }
+}
+
+const usuarioJoao = new Usuario('João', 'joao@exemplo.com');
+const adminMaria = new Admin('Maria', 'maria@exemplo.com');
+
+usuarioJoao.apresentar();
+adminMaria.apresentar();
+adminMaria.bloquearUsuario(usuarioJoao);
+</code></pre>
+
+        <h3>2.4 Polimorfismo</h3>
+        <p>
+          Polimorfismo é a capacidade de um mesmo método ter comportamentos diferentes,
+          dependendo da classe concreta do objeto.
+        </p>
+
+        <pre><code>// Exemplo 6 – Formas geométricas
+
+class Forma {
+  calcularArea() {
+    throw new Error('Método calcularArea() deve ser implementado pela subclasse.');
+  }
+}
+
+class Retangulo extends Forma {
+  constructor(largura, altura) {
+    super();
+
+    if (largura &lt;= 0 || altura &lt;= 0) {
+      throw new Error('Largura e altura devem ser positivas.');
+    }
+
+    this.largura = largura;
+    this.altura = altura;
+  }
+
+  calcularArea() {
+    return this.largura * this.altura;
+  }
+}
+
+class Circulo extends Forma {
+  constructor(raio) {
+    super();
+
+    if (raio &lt;= 0) {
+      throw new Error('Raio deve ser positivo.');
+    }
+
+    this.raio = raio;
+  }
+
+  calcularArea() {
+    return Math.PI * this.raio ** 2;
+  }
+}
+
+function imprimirArea(forma) {
+  if (!(forma instanceof Forma)) {
+    throw new Error('O parâmetro deve ser uma instância de Forma.');
+  }
+
+  console.log('Área:', forma.calcularArea().toFixed(2));
+}
+
+imprimirArea(new Retangulo(3, 4));
+imprimirArea(new Circulo(2));
+</code></pre>
+
+        <!-- ========================= ATIVIDADES ========================= -->
+
+        <h2 id="atividades">3. Atividades em sala</h2>
+
+        <details open>
+          <summary>Atividade 1 – Modelando uma turma</summary>
+          <div>
+            <p>
+              Em duplas, modele as classes abaixo em JavaScript, seguindo as boas práticas vistas
+              nos exemplos (validação de dados, nomes claros, responsabilidade única).
+            </p>
+            <ul>
+              <li><code>Curso</code>: possui nome e carga horária.</li>
+              <li>
+                <code>Turma</code>: está ligada a um curso e contém uma lista de alunos
+                (<code>Aluno</code>).
+              </li>
+            </ul>
+            <p>Regras sugeridas:</p>
+            <ul>
+              <li>Não permitir alunos duplicados na turma (mesma matrícula).</li>
+              <li>Garantir que toda turma esteja ligada a um curso válido.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>Atividade 2 – Encapsulando um carrinho de compras</summary>
+          <div>
+            <p>Implemente uma classe <code>CarrinhoDeCompras</code> com:</p>
+            <ul>
+              <li>Lista interna de itens (cada item com <code>descricao</code>, <code>preco</code>, <code>quantidade</code>).</li>
+              <li>Métodos: <code>adicionarItem</code>, <code>removerItem</code>, <code>calcularTotal</code>, <code>listarItens</code>.</li>
+            </ul>
+            <p>Regras:</p>
+            <ul>
+              <li>Não aceitar quantidade zero ou negativa.</li>
+              <li>Esconder a lista interna (encapsulamento) e expor apenas métodos de acesso.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>Atividade 3 – Herança e polimorfismo com veículos</summary>
+          <div>
+            <p>Implemente:</p>
+            <ul>
+              <li><code>Veiculo</code> com <code>marca</code>, <code>modelo</code>, <code>ano</code> e método <code>descricao()</code>.</li>
+              <li><code>Carro</code> e <code>Moto</code>, que herdam de <code>Veiculo</code> e sobrescrevem <code>descricao()</code>.</li>
+            </ul>
+            <p>
+              Crie uma função <code>imprimirDescricao(veiculo)</code> que recebe qualquer
+              <code>Veiculo</code> (ou subclasse) e chama <code>descricao()</code>,
+              demonstrando polimorfismo.
+            </p>
+          </div>
+        </details>
+
+        <!-- ========================= EXERCÍCIOS ========================= -->
+
+        <h2 id="exercicios">4. Exercícios para estudo individual</h2>
+
+        <h3>Exercício 1 – Biblioteca</h3>
+        <p>
+          Crie as classes <code>Livro</code>, <code>UsuarioBiblioteca</code> e,
+          se achar necessário, uma classe para controlar empréstimos.
+          Use encapsulamento para proteger a lista de livros emprestados.
+        </p>
+
+        <h3>Exercício 2 – Sistema de pagamentos</h3>
+        <p>
+          Crie uma hierarquia de <code>Pagamento</code> com subclasses para
+          <code>PagamentoCartao</code>, <code>PagamentoPix</code> e
+          <code>PagamentoBoleto</code>, cada uma sobrescrevendo um método
+          <code>processar()</code>.
+        </p>
+
+        <h3>Exercício 3 – Refatoração para OO</h3>
+        <p>
+          Pegue um script simples em JavaScript (pode ser um exercício da Programação I)
+          e reescreva usando classes, procurando melhorar nomes, responsabilidades e
+          reuso de código.
+        </p>
+
+        <h3>Roteiro de estudo para quem faltou</h3>
+        <ul>
+          <li>Configure o ambiente (seção “Configuração do ambiente para os exemplos”).</li>
+          <li>
+            Reproduza todos os exemplos de código em seu arquivo <code>revisao-oo.js</code>,
+            alterando valores e observando o resultado.
+          </li>
+          <li>Resolva pelo menos dois dos exercícios propostos.</li>
+          <li>Anote dúvidas pontuais para discutirmos na próxima aula.</li>
+        </ul>
+      </section>
+
+      <!-- ========================= SIDEBAR ========================= -->
+
+      <aside>
+        <section class="card">
+          <h3>Aulas 1 a 9 – Checklist</h3>
+          <ul class="mini-list">
+            <li>☑ Ambiente configurado (HTML + JS ou Node)</li>
+            <li>☑ Conceito de classe e objeto</li>
+            <li>☑ Atributos e métodos</li>
+            <li>☑ Abstração</li>
+            <li>☑ Encapsulamento</li>
+            <li>☑ Herança</li>
+            <li>☑ Polimorfismo</li>
+          </ul>
+        </section>
+
+        <section class="card">
+          <h3>Boas práticas usadas</h3>
+          <ul class="pill-list">
+            <li>Nomes significativos</li>
+            <li>Validação de entrada</li>
+            <li>Responsabilidade única</li>
+            <li>Encapsulamento</li>
+            <li>Mensagens de erro claras</li>
+          </ul>
+          <p class="note">
+            Tente aplicar essas mesmas práticas em todos os exercícios e no projeto da disciplina.
+          </p>
+        </section>
+
+        <section class="card">
+          <h3>Material complementar</h3>
+          <ul class="mini-list">
+            <li>
+              MDN – Classes e herança em JavaScript.
+            </li>
+            <li>
+              Artigos introdutórios sobre POO e seus pilares.
+            </li>
+          </ul>
+
+          <footer>
+            <p><strong>Dica:</strong> salve links úteis no repositório da disciplina para consulta rápida.</p>
+          </footer>
+        </section>
+      </aside>
+    </main>
+  </body>
+</html>
