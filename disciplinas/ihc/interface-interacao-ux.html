@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Interfaces, interação e UX · CPA1469</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Fonte -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050816;
+      --accent: #38bdf8;
+      --accent2: #a855f7;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.3);
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.7);
+      --transition-fast: 180ms ease-out;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 45%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 3.2rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 1.35rem;
+      transition: color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .back-link span { font-size: 1.1rem; line-height: 1; }
+
+    .back-link:hover {
+      color: var(--accent);
+      transform: translateX(-2px);
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      margin-bottom: 1.9rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.08);
+      color: var(--accent);
+      font-size: 0.8rem;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      width: fit-content;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.9);
+    }
+
+    header h1 {
+      font-size: clamp(1.7rem, 3vw, 2.1rem);
+      letter-spacing: 0.03em;
+      font-weight: 700;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 700px;
+      line-height: 1.7;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.2fr);
+      gap: 1.8rem;
+    }
+
+    @media (max-width: 860px) {
+      main { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    .content-card {
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(135deg, rgba(15, 23, 42, 0.97), rgba(15, 23, 42, 0.97)) padding-box,
+        linear-gradient(135deg, rgba(56, 189, 248, 0.55), rgba(147, 51, 234, 0.5)) border-box;
+      border: 1px solid transparent;
+      padding: 1.6rem 1.7rem 1.9rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .content-card section + section { margin-top: 1.7rem; }
+
+    .section-title {
+      font-size: 1rem;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .content-card p {
+      font-size: 0.93rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 0.75rem;
+    }
+
+    .content-card ul, .content-card ol {
+      margin: 0.2rem 0 0.9rem 1.1rem;
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .content-card li + li { margin-top: 0.25rem; }
+
+    .highlight { color: var(--text); font-weight: 600; }
+
+    .example-box, .activity-box {
+      margin-top: 0.4rem;
+      padding: 0.75rem 0.9rem;
+      border-radius: 10px;
+      font-size: 0.88rem;
+    }
+
+    .example-box {
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      color: var(--muted);
+    }
+
+    .activity-box {
+      background: rgba(8, 47, 73, 0.88);
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      color: var(--text);
+    }
+
+    .example-label, .activity-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.25rem;
+    }
+
+    .example-label { color: var(--accent2); }
+    .activity-title { color: var(--accent); }
+
+    .media-wrapper {
+      margin: 0.4rem 0 0.8rem;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: #020617;
+    }
+
+    .media-wrapper iframe,
+    .media-wrapper img {
+      display: block;
+      width: 100%;
+    }
+
+    .media-caption {
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding: 0.45rem 0.7rem 0.6rem;
+    }
+
+    .side-card {
+      border-radius: var(--radius-lg);
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid var(--border-subtle);
+      padding: 1.25rem 1.45rem 1.55rem;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.85);
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .side-section-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: var(--text);
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .resources-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.3rem;
+      font-size: 0.87rem;
+    }
+
+    .resources-list li + li { margin-top: 0.35rem; }
+
+    .resources-list a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .resources-list a:hover { text-decoration: underline; }
+
+    footer {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 1.9rem 1.25rem 2.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="index.html">
+      <span>←</span> voltar para o índice da disciplina
+    </a>
+
+    <header>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Unidade 1 · Interfaces, interação e experiência do usuário
+      </div>
+      <h1>Interfaces, interação e UX</h1>
+      <p>
+        Esta página é o material completo da nossa aula de 3 tempos sobre os conceitos de interface,
+        interação e experiência do usuário (UX). Ela serve tanto para acompanhar a explicação em sala
+        quanto para estudo posterior, inclusive para quem não pôde participar presencialmente.
+      </p>
+    </header>
+
+    <main>
+      <article class="content-card">
+        <!-- BLOCO 1: 1º tempo -->
+        <section>
+          <h2 class="section-title">1. O que é uma interface?</h2>
+          <p>
+            Em Interação Humano‑Computador, chamamos de <span class="highlight">interface</span> tudo aquilo que
+            faz a ponte entre a pessoa usuária e o sistema computacional. É a “camada de conversa”
+            entre humano e máquina: telas, botões, caixas de texto, ícones, gestos, voz, mensagens,
+            sons, vibrações, entre outros. [web:50][web:52]
+          </p>
+          <p>
+            Imagine um caixa eletrônico: a interface envolve a tela com opções, o teclado numérico,
+            o visor que mostra o valor digitado, as mensagens de confirmação e até o local onde você
+            insere o cartão. Esses elementos foram projetados para que a pessoa consiga realizar
+            tarefas como sacar dinheiro ou consultar saldo sem precisar conhecer os detalhes internos
+            do sistema bancário.
+          </p>
+
+          <div class="media-wrapper">
+            <img src="https://images.pexels.com/photos/1181243/pexels-photo-1181243.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                 alt="Pessoa interagindo com um painel de interface digital">
+            <div class="media-caption">
+              Exemplo de interface: tela tátil com elementos visuais, textos, botões e feedback imediato ao toque.
+            </div>
+          </div>
+
+          <div class="example-box">
+            <div class="example-label">Exemplo guiado em sala</div>
+            Em duplas, escolham rapidamente um aplicativo no celular. Em 3 minutos, listem pelo menos
+            5 elementos de interface que aparecem na tela inicial (botões, ícones, textos, menus,
+            campos de busca etc.). Depois, compartilhem um exemplo com a turma.
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">2. Interação: o diálogo entre pessoa e sistema</h2>
+          <p>
+            <span class="highlight">Interação</span> é o processo de ação e reação entre usuário e sistema. A pessoa
+            executa uma ação (clicar, tocar, falar, digitar) e o sistema responde (abre uma tela, envia
+            uma mensagem, exibe um erro, toca um som). Esse ciclo se repete até que a tarefa seja concluída.
+            [web:49][web:50]
+          </p>
+          <p>
+            Um bom projeto de interação busca tornar esse diálogo claro, previsível e consistente.
+            Cada ação deve ter um resultado compreensível, acompanhado de feedback visível, para que
+            a pessoa saiba o que está acontecendo e possa manter a sensação de controle.
+          </p>
+
+          <div class="media-wrapper">
+            <iframe width="560" height="315"
+              src="https://www.youtube.com/embed/NdmOR3TqN9Y"
+              title="Conceitos básicos de IHC: interação, interface e affordance"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+            <div class="media-caption">
+              Vídeo sugerido: conceitos básicos de interação, interface e affordance em IHC. [web:51]
+            </div>
+          </div>
+
+          <div class="activity-box">
+            <div class="activity-title">atividade 1 · mapa de interação (em sala ou em casa)</div>
+            <p>
+              Escolha uma tarefa simples em um aplicativo (por exemplo, “enviar uma mensagem no WhatsApp”
+              ou “pesquisar um vídeo no YouTube”). Desenhe em um papel, caderno ou ferramenta digital:
+            </p>
+            <ol>
+              <li>Qual é o objetivo da tarefa?</li>
+              <li>Quais ações o usuário executa, passo a passo?</li>
+              <li>Que feedback o sistema dá em cada passo (texto, cor, som, animação)?</li>
+            </ol>
+            <p>
+              Tire uma foto ou exporte o desenho: esse material poderá ser usado futuramente no projeto
+              da disciplina.
+            </p>
+          </div>
+        </section>
+
+        <!-- BLOCO 2: 2º tempo -->
+        <section>
+          <h2 class="section-title">3. O que é Experiência do Usuário (UX)?</h2>
+          <p>
+            A expressão <span class="highlight">UX (User Experience)</span> se refere à experiência geral que uma pessoa
+            tem ao interagir com um produto, sistema ou serviço, incluindo sentimentos, percepções,
+            eficiência, facilidade de uso e impacto dessa experiência no dia a dia. [web:54][web:57]
+          </p>
+          <p>
+            UX vai além da interface: envolve expectativas, emoções, contexto, marca, suporte, tempo de
+            resposta, acessibilidade e muito mais. Ainda assim, a interface é um dos principais meios
+            pelos quais a experiência acontece — por isso IHC e UX estão tão conectados.
+          </p>
+          <p>
+            Podemos pensar que uma boa experiência do usuário acontece quando:
+          </p>
+          <ul>
+            <li>a pessoa consegue realizar suas tarefas com sucesso e sem esforço excessivo;</li>
+            <li>o sistema é previsível, confiável e responde de forma consistente;</li>
+            <li>a interface transmite confiança e gera satisfação (ou ao menos não frustração);</li>
+            <li>o produto respeita limitações, diferenças e necessidades dos usuários.</li>
+          </ul>
+
+          <div class="media-wrapper">
+            <iframe width="560" height="315"
+              src="https://www.youtube.com/embed/lGDN3yrRYdM"
+              title="Experiência do Usuário (UX) - Por onde começo?"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+            <div class="media-caption">
+              Vídeo sugerido: introdução à Experiência do Usuário e caminhos para iniciar na área. [web:55]
+            </div>
+          </div>
+
+          <div class="example-box">
+            <div class="example-label">Reflexão guiada</div>
+            Pense em um sistema que você considera “bonito”, mas difícil de usar, e em outro que é
+            visualmente simples, porém extremamente prático. Qual dos dois oferece melhor experiência
+            para você? Por quê? Essa comparação ajuda a perceber que visual não é tudo em UX.
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">4. Interface, usabilidade e UX: como se relacionam?</h2>
+          <p>
+            Alguns termos aparecem com frequência e podem gerar confusão:
+          </p>
+          <ul>
+            <li><span class="highlight">Interface</span>: camada visível/tátil/auditiva com a qual o usuário interage.</li>
+            <li><span class="highlight">Usabilidade</span>: quão fácil, eficiente, segura e agradável é usar essa interface
+                para atingir objetivos. [web:50]</li>
+            <li><span class="highlight">Experiência do Usuário (UX)</span>: visão mais ampla, incluindo emoções, contexto,
+                expectativas, percepção de valor e satisfação geral. [web:54][web:57]</li>
+          </ul>
+          <p>
+            Em resumo, uma boa UX depende de boa usabilidade, mas também de outros fatores como
+            estética, performance, conteúdo relevante e alinhamento com as expectativas do público.
+          </p>
+          <div class="media-wrapper">
+            <img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                 alt="Equipe avaliando protótipos de interface em uma mesa">
+            <div class="media-caption">
+              Equipes de UX analisam interfaces considerando usabilidade, experiência e objetivos de negócio.
+            </div>
+          </div>
+        </section>
+
+        <!-- BLOCO 3: 3º tempo -->
+        <section>
+          <h2 class="section-title">5. Exercício crítico: analisando UX de um caso real</h2>
+          <p>
+            Agora que diferenciamos interface, interação, usabilidade e UX, vamos aplicar esses conceitos
+            a um caso concreto. Este exercício pode ser feito em sala (em grupos) ou individualmente,
+            como atividade para casa.
+          </p>
+
+          <div class="activity-box">
+            <div class="activity-title">atividade 2 · análise de UX</div>
+            <p><strong>Passo 1 — escolha do sistema</strong></p>
+            <p>
+              Escolha um sistema digital que você usa com frequência (site, aplicativo, sistema acadêmico,
+              plataforma de streaming etc.).
+            </p>
+            <p><strong>Passo 2 — descrição da interface</strong></p>
+            <ul>
+              <li>Faça uma captura de tela da página inicial ou da tela que você mais utiliza;</li>
+              <li>Identifique, na imagem, pelo menos 5 elementos de interface (botões, menus, ícones, textos);</li>
+              <li>Explique qual é a função de cada elemento e por que ele está ali.</li>
+            </ul>
+
+            <p><strong>Passo 3 — avaliação de interação e usabilidade</strong></p>
+            <ul>
+              <li>Descreva uma tarefa importante que você realiza nesse sistema (ex.: “pagar uma conta”);</li>
+              <li>Liste os passos necessários para concluir a tarefa (ações do usuário e respostas do sistema);</li>
+              <li>Indique onde a interação funciona bem e onde gera dúvidas, erros ou frustração.</li>
+            </ul>
+
+            <p><strong>Passo 4 — julgamento de UX</strong></p>
+            <ul>
+              <li>Como você se sente ao usar esse sistema? (seguro, perdido, confiante, irritado…)</li>
+              <li>Se pudesse mudar três coisas na interface, o que alteraria para melhorar a experiência?</li>
+            </ul>
+
+            <p>
+              Entregue suas respostas no formato solicitado pela professora (documento, slides, formulário
+              etc.). Essa atividade compõe a nota de exercícios da unidade.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">6. Conexão com o projeto da disciplina</h2>
+          <p>
+            As observações que você faz nesta aula serão úteis quando formos escolher o problema e o
+            sistema que será desenvolvido ao longo do semestre. Quanto mais exemplos de boas e más
+            experiências você reunir, mais repertório terá para propor soluções relevantes.
+          </p>
+          <p>
+            Guarde as capturas de tela, descrições de tarefas e comentários de UX produzidos aqui:
+            eles podem se transformar em parte da justificativa e da análise inicial do seu projeto.
+          </p>
+        </section>
+      </article>
+
+      <aside class="side-card">
+        <div>
+          <div class="side-section-title">Palavras‑chave</div>
+          <div class="tag-list">
+            <span class="tag">interface</span>
+            <span class="tag">interação</span>
+            <span class="tag">UX</span>
+            <span class="tag">usabilidade</span>
+            <span class="tag">feedback</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="side-section-title">Leituras de apoio</div>
+          <ul class="resources-list">
+            <li>Thiago Vilela, <em>Conceitos básicos de IHC</em> (slides). [web:50]</li>
+            <li>Rogers, Sharp &amp; Preece, <em>Design de Interação</em>, capítulos iniciais. [web:52]</li>
+            <li>Artigo IBM: <a href="https://www.ibm.com/br-pt/think/topics/user-experience" target="_blank" rel="noopener noreferrer">O que é experiência do usuário (UX)?</a> [web:54]</li>
+            <li>Post sobre UX: <a href="https://fia.com.br/blog/ux-user-experience/" target="_blank" rel="noopener noreferrer">UX: princípios básicos e visão geral</a>. [web:57]</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="side-section-title">Sugestão de estudo contínuo</div>
+          <p>
+            Nos próximos dias, tente anotar sempre que uma interface chamar sua atenção — positiva ou
+            negativamente. Ao registrar rapidamente o que aconteceu e como você se sentiu, você treina
+            o olhar crítico de UX, essencial para as próximas unidades da disciplina.
+          </p>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <footer>
+    <p>
+      Use esta página como referência sempre que precisar lembrar os conceitos de interface, interação,
+      usabilidade e experiência do usuário. Atualize com suas próprias anotações durante o semestre.
+    </p>
+  </footer>
+</body>
+</html>
