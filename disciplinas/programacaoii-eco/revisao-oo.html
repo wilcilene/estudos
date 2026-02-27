@@ -349,10 +349,10 @@
           </li>
         </ol>
 
-      <h3>Entendendo o arquivo HTML base</h3>
+<h3>Entendendo o arquivo HTML base</h3>
 
     <div style="
-      border-left: 4px solid #1976d2;
+      border-left: 4px solid #1976d2; 
       background-color: #f3f6fb;
       padding: 0.8rem 1rem;
       margin: 0.4rem 0 1.2rem;
@@ -428,8 +428,6 @@
       </dl>
     </div>
 
-
-
         <h3>Opção 2 – Node.js (para quem já instalou)</h3>
         <ol>
           <li>Instale o Node.js a partir do site oficial, se ainda não tiver.</li>
@@ -449,7 +447,7 @@
 
         <!-- ========================= OBJETIVOS ========================= -->
 
-        <h2 id="objetivos">Objetivos da unidade (Aulas 1 a 9)</h2>
+        <h2 id="objetivos">Objetivos da unidade</h2>
         <ul>
           <li>
             Explicar o que é programação orientada a objetos e como ela é usada em sistemas web.
@@ -461,8 +459,8 @@
             Aplicar os pilares de POO: abstração, encapsulamento, herança e polimorfismo.
           </li>
           <li>
-            Implementar pequenos modelos de domínio (como Aluno, ContaBancaria, Produto) que
-            servirão de base para o projeto web da disciplina.
+            Implementar pequenos modelos de domínio (como Estudante, ContaBancaria, Produto) que
+            poderão servir de base para o projeto da disciplina.
           </li>
         </ul>
 
@@ -519,6 +517,73 @@ console.log(mouse.descrever());
 console.log(teclado.descrever());
 </code></pre>
 
+    <h3>Entendendo o Exemplo 1 – Classe <code>Produto</code></h3>
+
+    <div style="
+      border-left: 4px solid #1976d2;
+      background-color: #f3f6fb;
+      padding: 0.8rem 1rem;
+      margin: 0.4rem 0 1.2rem;
+      font-size: 0.93rem;
+    ">
+      <p style="margin-top:0;">
+        Este exemplo mostra como modelar um produto usando uma classe em JavaScript,
+        incluindo validação de dados e um método para aplicar desconto.
+      </p>
+
+      <dl style="margin:0.4rem 0;">
+        <dt><code>class Produto { ... }</code></dt>
+        <dd>
+          Define uma nova classe chamada <code>Produto</code>, que servirá como “molde”
+          para criar objetos que representam produtos à venda.
+        </dd>
+
+        <dt><code>constructor(nome, preco) { ... }</code></dt>
+        <dd>
+          O construtor é chamado quando criamos um novo produto. Ele recebe o
+          <code>nome</code> e o <code>preco</code> como parâmetros, valida esses dados
+          (não aceita nome vazio nem preço menor ou igual a zero) e, se estiver tudo certo,
+          guarda esses valores dentro do objeto.
+        </dd>
+
+        <dt><code>aplicarDesconto(percentual) { ... }</code></dt>
+        <dd>
+          Este método recebe um percentual de desconto e também faz validação
+          (entre 0 e 100). Em seguida, calcula um fator de desconto e atualiza o atributo
+          <code>preco</code> multiplicando pelo fator. Assim, o próprio objeto “sabe”
+          como aplicar descontos sobre si mesmo.
+        </dd>
+
+        <dt><code>descrever() { ... }</code></dt>
+        <dd>
+          Gera uma string amigável com o nome do produto e o preço formatado com duas casas
+          decimais. Essa é uma forma de centralizar a formatação em um único lugar,
+          facilitando o reuso em diferentes partes do sistema.
+        </dd>
+
+        <dt><code>const mouse = new Produto(...)</code> / <code>const teclado = new Produto(...)</code></dt>
+        <dd>
+          Aqui criamos dois objetos concretos (instâncias) da classe
+          <code>Produto</code>: um mouse e um teclado, cada um com seu próprio preço.
+        </dd>
+
+        <dt><code>mouse.aplicarDesconto(10);</code></dt>
+        <dd>
+          Chamamos o método da instância <code>mouse</code> para aplicar um desconto de
+          10%. Apenas o preço do mouse é atualizado; o teclado continua com o valor original.
+        </dd>
+
+        <dt><code>console.log(...)</code></dt>
+        <dd style="margin-bottom:0;">
+          As chamadas ao <code>console.log</code> servem para exibir no console o texto
+          “Produtos cadastrados” e, em seguida, a descrição de cada produto retornada pelo
+          método <code>descrever()</code>. É assim que verificamos, na prática, se o código
+          está se comportando como esperado.
+        </dd>
+      </dl>
+    </div>
+
+        
         <h3>1.2 Atributos, métodos e responsabilidade</h3>
         <p>
           Uma boa prática é manter cada classe com uma responsabilidade clara.
