@@ -4,8 +4,6 @@
     <meta charset="UTF-8" />
     <title>Programação II – Revisão de Orientação a Objetos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- Estilos básicos inspirados no layout atual do site da disciplina [page:1] -->
     <style>
       :root {
         --bg: #f5f5f5;
@@ -300,15 +298,9 @@
         <p>
           A Programação Orientada a Objetos (POO) organiza o código em torno de
           <strong>objetos</strong>, que representam entidades com dados e comportamentos.
-          Nesta página, vamos revisar os conceitos fundamentais de POO usando JavaScript moderno,
+          Nesta página, vamos revisar os conceitos fundamentais de POO usando JavaScript,
           preparando a base para o desenvolvimento web que veremos ao longo da disciplina.
         </p>
-
-        <div class="callout">
-          <strong>Para quem faltou:</strong> siga a ordem desta página,
-          reproduza todos os exemplos em seu ambiente e resolva os exercícios propostos.
-          Isso deve cobrir o conteúdo das aulas 1 a 9.
-        </div>
 
         <!-- ========================= AMBIENTE ========================= -->
 
@@ -316,10 +308,10 @@
 
         <p>
           Você pode executar os exemplos desta unidade diretamente no navegador
-          (recomendado para começar) ou com Node.js caso já tenha instalado.
+          (recomendado para começar) ou com Node.js.
         </p>
 
-        <h3>Opção 1 – Navegador (recomendado)</h3>
+        <h3>Opção 1 – Navegador</h3>
         <ol>
           <li>Crie uma pasta em seu computador, por exemplo <code>prog2-revisao-oo</code>.</li>
           <li>
@@ -356,6 +348,88 @@
             a saída dos códigos.
           </li>
         </ol>
+
+            <h2>Entendendo o arquivo HTML base</h2>
+
+    <p>
+      Abaixo está uma explicação, linha a linha, do que cada parte do arquivo HTML
+      de exemplo faz. Isso ajuda a entender como o navegador interpreta o documento. [web:57]
+    </p>
+
+    <pre><code>&lt;!DOCTYPE html&gt;</code></pre>
+    <p>
+      Indica ao navegador que este documento usa a versão HTML5 da linguagem de marcação.
+      Ajuda o navegador a renderizar a página de forma padronizada. [web:57]
+    </p>
+
+    <pre><code>&lt;html lang="pt-BR"&gt;</code></pre>
+    <p>
+      Abre a tag raiz do documento HTML e define o idioma principal da página como
+      português do Brasil (<code>lang="pt-BR"</code>), o que é importante para acessibilidade
+      e mecanismos de busca. [web:57]
+    </p>
+
+    <pre><code>  &lt;head&gt;</code></pre>
+    <p>
+      Inicia a seção <code>&lt;head&gt;</code>, onde colocamos metadados (informações sobre a
+      página), título, links para estilos, scripts que não aparecem diretamente na tela etc.
+      [web:57]
+    </p>
+
+    <pre><code>    &lt;meta charset="UTF-8" /&gt;</code></pre>
+    <p>
+      Define o conjunto de caracteres usado na página como UTF‑8, garantindo que acentos e
+      caracteres especiais em português sejam exibidos corretamente. [web:57]
+    </p>
+
+    <pre><code>    &lt;title&gt;Revisão OO - Programação II&lt;/title&gt;</code></pre>
+    <p>
+      Define o título da aba/janela do navegador. Esse texto aparece na barra de título do
+      browser e também é usado pelos sistemas de favoritos e pelos buscadores. [web:57]
+    </p>
+
+    <pre><code>  &lt;/head&gt;</code></pre>
+    <p>
+      Fecha a seção <code>&lt;head&gt;</code>. A partir daqui, começamos a definir o conteúdo
+      que será exibido para o usuário. [web:57]
+    </p>
+
+    <pre><code>  &lt;body&gt;</code></pre>
+    <p>
+      Abre a tag <code>&lt;body&gt;</code>, que contém todo o conteúdo visível da página:
+      textos, imagens, formulários, scripts etc. É o “corpo” do documento. [web:57]
+    </p>
+
+    <pre><code>    &lt;h1&gt;Revisão de Orientação a Objetos em JavaScript&lt;/h1&gt;</code></pre>
+    <p>
+      Cria um título de nível 1 (<code>&lt;h1&gt;</code>), geralmente o título principal da
+      página. É importante para a hierarquia visual e para a acessibilidade. [web:57]
+    </p>
+
+    <pre><code>    &lt;p&gt;Abra o console do navegador para ver a saída dos exemplos.&lt;/p&gt;</code></pre>
+    <p>
+      Cria um parágrafo (<code>&lt;p&gt;</code>) com uma instrução para o usuário. Essa
+      mensagem orienta a abrir o console para acompanhar a saída dos códigos JavaScript. [web:57]
+    </p>
+
+    <pre><code>    &lt;script src="revisao-oo.js"&gt;&lt;/script&gt;</code></pre>
+    <p>
+      Inclui um arquivo JavaScript externo chamado <code>revisao-oo.js</code>. Quando a página
+      é carregada, o navegador executa o código presente nesse arquivo, permitindo que os
+      exemplos de programação rodem e mostrem resultados no console. [web:51][web:57]
+    </p>
+
+    <pre><code>  &lt;/body&gt;</code></pre>
+    <p>
+      Fecha a seção <code>&lt;body&gt;</code>. Nada além desse ponto será exibido como parte do
+      conteúdo principal da página. [web:57]
+    </p>
+
+    <pre><code>&lt;/html&gt;</code></pre>
+    <p>
+      Fecha a tag raiz <code>&lt;html&gt;</code>, indicando o fim do documento HTML. [web:57]
+    </p>
+
 
         <h3>Opção 2 – Node.js (para quem já instalou)</h3>
         <ol>
