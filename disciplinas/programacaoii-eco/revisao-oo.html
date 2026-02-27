@@ -273,7 +273,7 @@
       <div class="container">
         <div>
           <span class="tag">Programação II – ECO</span>
-          <span class="tag tag--aulas">Aulas 1 a 9</span>
+          <span class="tag tag--aulas">Aulas </span>
           <span class="tag tag--nivel">Revisão</span>
         </div>
         <h1>Revisão de Orientação a Objetos com JavaScript</h1>
@@ -287,7 +287,6 @@
           <a href="#conceitos-basicos">Conceitos básicos</a>
           <a href="#pilares">Pilares da POO</a>
           <a href="#atividades">Atividades em sala</a>
-          <a href="#exercicios">Exercícios de estudo</a>
         </nav>
       </div>
     </header>
@@ -587,16 +586,16 @@ console.log(teclado.descrever());
         <h3>1.2 Atributos, métodos e responsabilidade</h3>
         <p>
           Uma boa prática é manter cada classe com uma responsabilidade clara.
-          No exemplo abaixo, a classe <code>Aluno</code> é responsável por representar o estado
+          No exemplo abaixo, a classe <code>Estudante</code> é responsável por representar o estado
           acadêmico de um estudante em um curso.
         </p>
 
-        <pre><code>// Exemplo 2 – Classe Aluno
+        <pre><code>// Exemplo 2 – Classe Estudante
 
-class Aluno {
+class Estudante {
   constructor(nome, matricula, curso) {
     if (!nome || !matricula || !curso) {
-      throw new Error('Aluno precisa de nome, matrícula e curso.');
+      throw new Error('Estudante precisa de nome, matrícula e curso.');
     }
 
     this.nome = nome;
@@ -618,10 +617,10 @@ class Aluno {
   }
 }
 
-const ana = new Aluno('Ana', '2026001', 'Sistemas de Informação');
-console.log(ana.obterResumo());
-ana.aprovar();
-console.log(ana.obterResumo());
+const maria = new Estudante('Maria', '2026001', 'Engenharia de computação');
+console.log(maria.obterResumo());
+maria.aprovar();
+console.log(maria.obterResumo());
 </code></pre>
 
         <!-- ========================= PILARES ========================= -->
@@ -652,14 +651,14 @@ class Professor {
   }
 }
 
-const profJoao = new Professor('João Silva', '123.456.789-00', 'Programação Web');
-console.log(profJoao.resumo());
+const profWilcilene = new Professor('Wilcilene Maria Kowal', '123.456.789-00', 'Programação II, que não é Web');
+console.log(profWilcilene.resumo());
 </code></pre>
 
         <h3>2.2 Encapsulamento</h3>
         <p>
           Encapsulamento significa proteger os dados de acesso direto indevido,
-          expondo apenas o que realmente precisa ser público. Em JavaScript moderno podemos usar
+          expondo apenas o que realmente precisa ser público. Em JavaScript podemos usar
           campos privados com <code>#</code>.
         </p>
 
@@ -702,12 +701,12 @@ class ContaBancaria {
   }
 }
 
-const contaCarlos = new ContaBancaria('Carlos');
-contaCarlos.depositar(500);
-contaCarlos.sacar(150);
+const contaGilsilene = new ContaBancaria('Gilsilene');
+contaGilsilene.depositar(500);
+contaGilsilene.sacar(150);
 
-console.log(`Saldo da conta de ${contaCarlos.titular}: R$ ${contaCarlos.obterSaldo()}`);
-// contaCarlos.#saldo = 9999; // Erro: campo privado
+console.log(`Saldo da conta de ${contaGilsilene.titular}: R$ ${contaGilsilene.obterSaldo()}`);
+// contaGilsilene.#saldo = 9999; // Erro: campo privado
 </code></pre>
 
         <h3>2.3 Herança</h3>
@@ -817,25 +816,25 @@ imprimirArea(new Circulo(2));
 
         <!-- ========================= ATIVIDADES ========================= -->
 
-        <h2 id="atividades">3. Atividades em sala</h2>
+        <h2 id="atividades">3. Para memorizar! </h2>
 
         <details open>
           <summary>Atividade 1 – Modelando uma turma</summary>
           <div>
             <p>
-              Em duplas, modele as classes abaixo em JavaScript, seguindo as boas práticas vistas
+              Modele as classes abaixo em JavaScript, seguindo as práticas estudadas
               nos exemplos (validação de dados, nomes claros, responsabilidade única).
             </p>
             <ul>
               <li><code>Curso</code>: possui nome e carga horária.</li>
               <li>
-                <code>Turma</code>: está ligada a um curso e contém uma lista de alunos
-                (<code>Aluno</code>).
+                <code>Turma</code>: está ligada a um curso e contém uma lista de estudantes
+                (<code>Estudante</code>).
               </li>
             </ul>
             <p>Regras sugeridas:</p>
             <ul>
-              <li>Não permitir alunos duplicados na turma (mesma matrícula).</li>
+              <li>Não permitir estudantes duplicados na turma (mesma matrícula).</li>
               <li>Garantir que toda turma esteja ligada a um curso válido.</li>
             </ul>
           </div>
@@ -873,11 +872,7 @@ imprimirArea(new Circulo(2));
           </div>
         </details>
 
-        <!-- ========================= EXERCÍCIOS ========================= -->
-
-        <h2 id="exercicios">4. Exercícios para estudo individual</h2>
-
-        <h3>Exercício 1 – Biblioteca</h3>
+        <h3>Atividade 4 – Biblioteca</h3>
         <p>
           Crie as classes <code>Livro</code>, <code>UsuarioBiblioteca</code> e,
           se achar necessário, uma classe para controlar empréstimos.
@@ -892,7 +887,7 @@ imprimirArea(new Circulo(2));
           <code>processar()</code>.
         </p>
 
-        <h3>Exercício 3 – Refatoração para OO</h3>
+        <h3>Atividade 4 – Refatoração para OO</h3>
         <p>
           Pegue um script simples em JavaScript (pode ser um exercício da Programação I)
           e reescreva usando classes, procurando melhorar nomes, responsabilidades e
@@ -906,7 +901,7 @@ imprimirArea(new Circulo(2));
             Reproduza todos os exemplos de código em seu arquivo <code>revisao-oo.js</code>,
             alterando valores e observando o resultado.
           </li>
-          <li>Resolva pelo menos dois dos exercícios propostos.</li>
+          <li>Resolva os exercícios propostos.</li>
           <li>Anote dúvidas pontuais para discutirmos na próxima aula.</li>
         </ul>
       </section>
