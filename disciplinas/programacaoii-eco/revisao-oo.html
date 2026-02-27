@@ -872,27 +872,60 @@ imprimirArea(new Circulo(2));
           </div>
         </details>
 
-        <h3>Atividade 4 – Biblioteca</h3>
-        <p>
-          Crie as classes <code>Livro</code>, <code>UsuarioBiblioteca</code> e,
-          se achar necessário, uma classe para controlar empréstimos.
-          Use encapsulamento para proteger a lista de livros emprestados.
-        </p>
+        <details>
+          <summary>Atividade 4 – Biblioteca</summary>
+          <div>
+            <p>
+              Crie as classes <code>Livro</code>, <code>UsuarioBiblioteca</code> e,
+              se achar necessário, uma classe para controlar empréstimos.
+            </p>
+            <p>Regras sugeridas:</p>
+            <ul>
+              <li>Use encapsulamento para proteger a lista interna de livros emprestados.</li>
+              <li>Impeça que o mesmo livro seja emprestado duas vezes para o mesmo usuário.</li>
+              <li>Inclua um método para listar todos os empréstimos ativos.</li>
+            </ul>
+          </div>
+        </details>
 
-        <h3>Exercício 2 – Sistema de pagamentos</h3>
-        <p>
-          Crie uma hierarquia de <code>Pagamento</code> com subclasses para
-          <code>PagamentoCartao</code>, <code>PagamentoPix</code> e
-          <code>PagamentoBoleto</code>, cada uma sobrescrevendo um método
-          <code>processar()</code>.
-        </p>
+        <details>
+          <summary>Atividade 5 – Sistema de pagamentos</summary>
+          <div>
+            <p>
+              Crie uma hierarquia de <code>Pagamento</code> com subclasses para
+              <code>PagamentoCartao</code>, <code>PagamentoPix</code> e
+              <code>PagamentoBoleto</code>.
+            </p>
+            <p>Orientações:</p>
+            <ul>
+              <li>
+                Defina na classe base um método <code>processar()</code> que é sobrescrito em
+                cada subclasse com a lógica específica de mensagem ou validação.
+              </li>
+              <li>
+                Implemente uma função <code>pagar(pagamento)</code> que recebe qualquer objeto
+                da hierarquia e chama <code>processar()</code>, explorando o polimorfismo.
+              </li>
+            </ul>
+          </div>
+        </details>
 
-        <h3>Atividade 4 – Refatoração para OO</h3>
-        <p>
-          Pegue um script simples em JavaScript (pode ser um exercício da Programação I)
-          e reescreva usando classes, procurando melhorar nomes, responsabilidades e
-          reuso de código.
-        </p>
+        <details>
+          <summary>Atividade 6 – Refatoração para OO</summary>
+          <div>
+            <p>
+              Escolha um script simples em JavaScript (pode ser um exercício da Programação I)
+              e reescreva usando classes.
+            </p>
+            <p>Objetivos da refatoração:</p>
+            <ul>
+              <li>Melhorar nomes de variáveis, funções e estruturas.</li>
+              <li>Separar responsabilidades em classes e métodos coerentes.</li>
+              <li>Identificar onde POO traz reuso e organização melhores que o código original.</li>
+            </ul>
+          </div>
+        </details>
+
 
         <h3>Roteiro de estudo para quem faltou</h3>
         <ul>
