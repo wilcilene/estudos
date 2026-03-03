@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Tipos de usuários · CPA1469</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Fonte -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050816;
+      --accent: #38bdf8;
+      --accent2: #a855f7;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.3);
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.7);
+      --transition-fast: 180ms ease-out;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 45%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 3.2rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 1.35rem;
+      transition: color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .back-link span { font-size: 1.1rem; line-height: 1; }
+
+    .back-link:hover {
+      color: var(--accent);
+      transform: translateX(-2px);
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      margin-bottom: 1.9rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.08);
+      color: var(--accent);
+      font-size: 0.8rem;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      width: fit-content;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.9);
+    }
+
+    header h1 {
+      font-size: clamp(1.7rem, 3vw, 2.1rem);
+      letter-spacing: 0.03em;
+      font-weight: 700;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 700px;
+      line-height: 1.7;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.2fr);
+      gap: 1.8rem;
+    }
+
+    @media (max-width: 860px) {
+      main { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    .content-card {
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(135deg, rgba(15, 23, 42, 0.97), rgba(15, 23, 42, 0.97)) padding-box,
+        linear-gradient(135deg, rgba(56, 189, 248, 0.55), rgba(147, 51, 234, 0.5)) border-box;
+      border: 1px solid transparent;
+      padding: 1.6rem 1.7rem 1.9rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .content-card section + section { margin-top: 1.7rem; }
+
+    .section-title {
+      font-size: 1rem;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .content-card p {
+      font-size: 0.93rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 0.75rem;
+    }
+
+    .content-card ul, .content-card ol {
+      margin: 0.2rem 0 0.9rem 1.1rem;
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .content-card li + li { margin-top: 0.25rem; }
+
+    .highlight { color: var(--text); font-weight: 600; }
+
+    .example-box, .activity-box {
+      margin-top: 0.4rem;
+      padding: 0.75rem 0.9rem;
+      border-radius: 10px;
+      font-size: 0.88rem;
+    }
+
+    .example-box {
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      color: var(--muted);
+    }
+
+    .activity-box {
+      background: rgba(8, 47, 73, 0.88);
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      color: var(--text);
+    }
+
+    .example-label, .activity-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.25rem;
+    }
+
+    .example-label { color: var(--accent2); }
+    .activity-title { color: var(--accent); }
+
+    .media-wrapper {
+      margin: 0.4rem 0 0.8rem;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: #020617;
+    }
+
+    .media-wrapper iframe,
+    .media-wrapper img {
+      display: block;
+      width: 100%;
+    }
+
+    .media-caption {
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding: 0.45rem 0.7rem 0.6rem;
+    }
+
+    .side-card {
+      border-radius: var(--radius-lg);
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid var(--border-subtle);
+      padding: 1.25rem 1.45rem 1.55rem;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.85);
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .side-section-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: var(--text);
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .resources-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.3rem;
+      font-size: 0.87rem;
+    }
+
+    .resources-list li + li { margin-top: 0.35rem; }
+
+    .resources-list a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .resources-list a:hover { text-decoration: underline; }
+
+    footer {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 1.9rem 1.25rem 2.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="index.html">
+      <span>←</span> voltar para o índice da disciplina
+    </a>
+
+    <header>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Unidade 1 · Tipos de usuários, perfis e personas
+      </div>
+      <h1>Tipos de usuários</h1>
+      <p>
+        Nesta aula vamos aprofundar quem são as pessoas para as quais projetamos: como agrupar usuários
+        em perfis, como entender seus objetivos e como usar <strong>personas</strong> para representar grupos
+        de usuários no projeto de interface. O material serve para acompanhar a aula e para estudo
+        posterior, inclusive para quem não pôde participar presencialmente.
+      </p>
+    </header>
+
+    <main>
+      <article class="content-card">
+        <!-- BLOCO 1: 1º tempo -->
+        <section>
+          <h2 class="section-title">1. Por que precisamos falar de “tipos de usuários”?</h2>
+          <p>
+            Em IHC não projetamos para “o usuário genérico”, e sim para grupos de pessoas com
+            características, conhecimentos, necessidades e contextos de uso específicos. Entender
+            <span class="highlight">quem</span> são esses grupos é o primeiro passo para tomar decisões de interface
+            mais conscientes. [web:69][web:72]
+          </p>
+          <p>
+            Se não conhecemos os usuários, tendemos a projetar para nós mesmos (ou para um usuário
+            imaginário). Isso costuma gerar interfaces difíceis para pessoas com menos experiência,
+            com limitações de tempo, recursos, acesso à tecnologia ou necessidades especiais.
+          </p>
+
+          <div class="media-wrapper">
+            <img src="https://images.pexels.com/photos/3182822/pexels-photo-3182822.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                 alt="Grupo diverso de pessoas olhando para notebook e discutindo um projeto">
+            <div class="media-caption">
+              Diferentes usuários têm objetivos, experiências e contextos distintos; a interface precisa considerar essa diversidade.
+            </div>
+          </div>
+
+          <div class="example-box">
+            <div class="example-label">Exemplo inicial</div>
+            Pense em um sistema de notas escolares. Os principais usuários podem incluir:
+            estudantes (que consultam notas), professores (que lançam notas) e equipe administrativa
+            (que gera relatórios). Cada grupo tem objetivos e frequência de uso diferentes; projetar
+            “uma única tela para todo mundo” provavelmente não atenderá bem a ninguém.
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">2. Tipos de usuários segundo a relação com o sistema</h2>
+          <p>
+            Uma forma comum de classificar usuários é segundo a <span class="highlight">frequência e forma de uso</span>
+            de um sistema. [web:69]
+          </p>
+          <ul>
+            <li><strong>Usuário primário</strong>: interage diretamente e com frequência com o sistema (ex.: atendente
+                de caixa, estudante em sistema acadêmico).</li>
+            <li><strong>Usuário secundário</strong>: usa o sistema de forma ocasional ou por meio de intermediários
+                (ex.: supervisor que consulta relatórios gerados por outra pessoa).</li>
+            <li><strong>Usuário terciário</strong>: é afetado pelo sistema ou influencia sua compra, mas não o utiliza
+                diretamente (ex.: gestores, clientes finais de um sistema usado por funcionários).</li>
+          </ul>
+          <p>
+            Além disso, podemos distinguir usuários <strong>novatos</strong>, <strong>ocasionalmente experientes</strong> e
+            <strong>experts</strong>, com expectativas muito diferentes em termos de ajuda, atalhos e nível de
+            detalhe na interface.
+          </p>
+
+          <div class="activity-box">
+            <div class="activity-title">atividade 1 · mapeando tipos de usuários</div>
+            <p>
+              Escolha um sistema real (por exemplo, o SIGAA, um app de banco ou um sistema de e‑commerce)
+              e identifique:
+            </p>
+            <ol>
+              <li>Quem seriam os usuários primários, secundários e terciários?</li>
+              <li>Entre os primários, quais são novatos, intermediários e experts?</li>
+              <li>Que tipos de decisões de interface você tomaria pensando em cada um desses grupos?</li>
+            </ol>
+            <p>
+              Registre suas respostas em um documento ou caderno; usaremos esse material mais à frente,
+              na construção de personas e cenários.
+            </p>
+          </div>
+        </section>
+
+        <!-- BLOCO 2: 2º tempo -->
+        <section>
+          <h2 class="section-title">3. Perfis de usuário: agrupando características</h2>
+          <p>
+            Um <span class="highlight">perfil de usuário</span> é o conjunto de características relevantes de um grupo
+            de pessoas que utilizará o sistema: faixa etária, formação, experiência com tecnologia,
+            idioma, contexto de trabalho, principais tarefas, limitações e preferências. [web:69][web:66]
+          </p>
+          <p>
+            Perfis ajudam a responder perguntas como:
+          </p>
+          <ul>
+            <li>Os usuários estão familiarizados com termos técnicos?</li>
+            <li>Podem investir tempo aprendendo a usar o sistema ou precisam “sair usando”?</li>
+            <li>Usam o sistema em ambientes calmos ou em situações de pressão e interrupções constantes?</li>
+            <li>Preferem ler instruções detalhadas ou aprender “fazendo” com exemplos e feedback?</li>
+          </ul>
+
+          <div class="media-wrapper">
+            <iframe width="560" height="315"
+              src="https://www.youtube.com/embed/G6BGPsGccKY"
+              title="Representando usuários e situações: perfis, personas e cenários"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+            <div class="media-caption">
+              Vídeo sugerido: aula sobre perfis de usuários, personas e cenários (DCC/UFMG). [web:64]
+            </div>
+          </div>
+
+          <div class="example-box">
+            <div class="example-label">Exemplo de perfil</div>
+            Em um sistema de agendamento on‑line para um posto de saúde, um perfil poderia ser:
+            “Adultos entre 25 e 60 anos, com ensino médio, que usam o celular diariamente, mas têm
+            conexão instável à internet e pouco tempo disponível. Precisam marcar consultas em poucos
+            passos, muitas vezes em fila ou no transporte público.”
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">4. Personas: representando grupos de usuários</h2>
+          <p>
+            <span class="highlight">Personas</span> são personagens fictícios, mas baseados em dados reais, que
+            representam grupos de usuários com objetivos e comportamentos semelhantes. Elas ajudam a
+            manter o foco nas pessoas durante o processo de design. [web:63][web:67][web:72]
+          </p>
+          <p>
+            Uma persona costuma incluir:
+          </p>
+          <ul>
+            <li>nome, idade, foto ilustrativa e breve biografia;</li>
+            <li>objetivos principais ao usar o sistema;</li>
+            <li>habilidades e experiência com tecnologia;</li>
+            <li>dor(es), frustrações e necessidades específicas;</li>
+            <li>contexto de uso (onde, quando, em que dispositivo, com quais limitações).</li>
+          </ul>
+
+          <div class="media-wrapper">
+            <img src="https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                 alt="Quadro com cartões representando personas">
+            <div class="media-caption">
+              Personas sintetizam informações de usuários reais para orientar decisões de projeto.
+            </div>
+          </div>
+
+          <div class="example-box">
+            <div class="example-label">Mini‑persona ilustrativa</div>
+            <p><strong>Nome:</strong> Ana, 19 anos, estudante de Engenharia de Software.</p>
+            <p><strong>Objetivo:</strong> acompanhar notas, horários e materiais das disciplinas pelo sistema acadêmico.</p>
+            <p><strong>Características:</strong> usa o celular como principal dispositivo, internet móvel limitada,
+              acessa o sistema em intervalos curtos entre aulas e estágio.</p>
+            <p><strong>Dores:</strong> menus confusos, excesso de cliques para ver as notas, páginas que não funcionam bem em telas pequenas.</p>
+          </div>
+        </section>
+
+        <!-- BLOCO 3: 3º tempo -->
+        <section>
+          <h2 class="section-title">5. Exercício prático: criando personas para o projeto</h2>
+          <p>
+            Agora vamos aplicar os conceitos de tipos de usuários, perfis e personas ao projeto da
+            disciplina. Este exercício pode ser realizado em grupos (em sala) ou individualmente
+            (em casa).
+          </p>
+
+          <div class="activity-box">
+            <div class="activity-title">atividade avaliativa · personas do projeto</div>
+            <p><strong>Passo 1 — escolha do sistema/problema</strong></p>
+            <p>
+              Partindo das discussões anteriores sobre sistemas que você gostaria de melhorar ou criar,
+              defina (sozinho ou com seu grupo) qual será o <strong>contexto geral</strong> do projeto
+              (ex.: “app para organizar estudos”, “sistema para eventos acadêmicos”, “portal para
+              agendamento de consultas”).
+            </p>
+
+            <p><strong>Passo 2 — definição de perfis</strong></p>
+            <ul>
+              <li>Liste de 2 a 3 perfis de usuários relevantes para esse sistema (ex.: estudante,
+                  professor, coordenador; cliente, atendente, gestor etc.).</li>
+              <li>Para cada perfil, responda: faixa etária, familiaridade com tecnologia, principais
+                  tarefas, ambiente em que usa o sistema.</li>
+            </ul>
+
+            <p><strong>Passo 3 — criação de personas</strong></p>
+            <ul>
+              <li>Escolha pelo menos <strong>duas personas</strong> para representar os perfis mais importantes.</li>
+              <li>Para cada persona, defina: nome, idade, breve história, objetivos, dores e contexto de uso.</li>
+              <li>Inclua uma foto ilustrativa (pode ser de banco de imagens gratuito ou ícone genérico).</li>
+            </ul>
+
+            <p><strong>Passo 4 — reflexão crítica</strong></p>
+            <ul>
+              <li>Explique por que essas personas são relevantes para o projeto.</li>
+              <li>Comente como elas podem influenciar decisões futuras de interface (ex.: tamanho da fonte,
+                  linguagem, nível de detalhamento, ajuda, navegação).</li>
+            </ul>
+
+            <p>
+              Entregue o material no formato combinado em sala (documento, apresentação, mural digital).
+              Esta atividade compõe a nota de exercícios e será reutilizada nas próximas aulas,
+              especialmente em cenários, tarefas e prototipagem.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">6. Conclusões e próximo passo</h2>
+          <p>
+            Definir tipos de usuários, perfis e personas não é um luxo, mas uma necessidade para
+            qualquer projeto de interface que queira ser realmente centrado nas pessoas. A partir
+            deste entendimento, passaremos a descrever <strong>cenários de uso e tarefas</strong>, conectando
+            cada persona às situações em que ela interage com o sistema.
+          </p>
+          <p>
+            Guarde as personas construídas hoje; elas serão o “elenco” que acompanhará seu projeto
+            durante todo o semestre.
+          </p>
+        </section>
+      </article>
+
+      <aside class="side-card">
+        <div>
+          <div class="side-section-title">Palavras‑chave</div>
+          <div class="tag-list">
+            <span class="tag">tipos de usuários</span>
+            <span class="tag">perfil</span>
+            <span class="tag">persona</span>
+            <span class="tag">contexto de uso</span>
+            <span class="tag">IHC</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="side-section-title">Leituras de apoio</div>
+          <ul class="resources-list">
+            <li>Slides “Personas e Cenários” (PUC‑Rio). [web:63][web:67]</li>
+            <li>Slides “Perfil do usuário, Personas, Cenários” (SlideShare). [web:72]</li>
+            <li>Texto sobre personas em design thinking. [web:73]</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="side-section-title">Dica de estudo</div>
+          <p>
+            Observe, durante a semana, como sistemas diferentes parecem “pensados” para públicos
+            diferentes. Repare em linguagem, quantidade de opções, ícones, ajuda e fluxo de telas.
+            Pergunte-se: que tipo de usuário esse sistema tem em mente?
+          </p>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <footer>
+    <p>
+      Use esta página como caderno digital sobre tipos de usuários. Atualize com suas anotações,
+      exemplos e personas à medida que o projeto evoluir.
+    </p>
+  </footer>
+</body>
+</html>
