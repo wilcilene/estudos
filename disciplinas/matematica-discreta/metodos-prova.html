@@ -227,7 +227,29 @@
             </div>
             <div class="exercicio">
                 <h3>3. Algoritmo:</h3> Prove que este algoritmo encontra máximo: <code>max = a[0]; for i=1 to n: if a[i]>max max=a[i]</code>.<button onclick="toggleRes('res3')">Ver Resolução</button>
-                <div id="res3" class="resolucao">Por contraposição: Se max != máximo real, existe a[j] > max não visitado (impossível por loop completo).</div>
+                <div id="res3" class="resolucao">Por contraposição: Se max != máximo real, existe a[j] > max não visitado (impossível por loop completo).
+                    <div class="exemplo">
+                        <h3>Passos da prova: o algoritmo realmente encontra o máximo</h3>
+                        <p><strong>Algoritmo:</strong> <code>max = a[0]; for i = 1 to n: if a[i] &gt; max then max = a[i]</code></p>
+                        <p><strong>Ideia-chave:</strong> usar um <em>invariante de loop</em>: depois de cada iteração, <code>max</code> guarda o maior valor visto até agora no vetor.</p>
+                        <ol>
+                            <li><strong>Antes do laço (início):</strong> definimos <code>max = a[0]</code>.  
+                                Então, o maior elemento entre os já “vistos” (só <code>a[0]</code>) é exatamente <code>a[0]</code>.  
+                                Invariante: <em>“max é o maior valor em a[0..i]</em>” começa valendo para <code>i = 0</code></li>
+                            <li><strong>Durante o laço:</strong> em cada passo, comparamos o próximo elemento <code>a[i]</code> com <code>max</code>:
+                                <ul>
+                                    <li>se <code>a[i] &gt; max</code>, atualizamos <code>max = a[i]</code> (agora <code>max</code> é o maior entre todos os já vistos);</li>
+                                    <li>se <code>a[i] &le; max</code>, não mudamos <code>max</code> (ele continua sendo o maior visto).</li>
+                                </ul>
+                                Assim, após a iteração de índice <code>i</code>, continua valendo: <em>“max é o maior valor entre a[0], a[1], ..., a[i]</em>”.</li>
+                            <li><strong>Ao final do laço:</strong> quando o laço termina, todos os elementos de <code>a[0]</code> até <code>a[n]</code> já foram visitados.  
+                                Pelo invariante, <code>max</code> é o maior valor entre todos esses elementos, isto é, o máximo do vetor</li>
+                        </ol>
+                        <p><strong>Conclusão:</strong> o algoritmo retorna um elemento que é maior ou igual a todos os outros do vetor, logo ele encontra corretamente o máximo.</p>
+                    </div>
+
+                
+                </div>
             </div>
             <div class="exercicio">
                 <h3>4. !!!:</h3> Prove por contraposição: Se \( 2n+1 \) primo >2, então ímpar.
@@ -235,7 +257,7 @@
         </div>
 
         <footer style="text-align: center; margin-top: 40px; color: #7f8c8d;">
-            <p>GitHub Pages: <a href="https://wilcilene.github.io/estudos/">wilcilene.github.io/estudos/</a> | Licença CC-BY-SA | Conteúdo autoexplicativo para estudo independente.</p>
+            <p>GitHub Pages: <a href="https://wilcilene.github.io/estudos/">wilcilene.github.io/estudos/</a> | Licença CC-BY-SA | Estude!!!</p>
         </footer>
     </div>
 
