@@ -185,14 +185,52 @@
             </div>
             <div class="exercicio">
                 <h3>2. Contraposição:</h3> Prove: Produto de dois ímpares é ímpar.<button onclick="toggleRes('res2')">Ver Resolução</button>
-                <div id="res2" class="resolucao">Contrapositiva: Se produto par, pelo menos um par. Prova: Suponha ambos ímpares → produto ímpar.</div>
+                <div id="res2" class="resolucao">Contrapositiva: Se produto par, pelo menos um par. Prova: Suponha ambos ímpares → produto ímpar.
+                    <div class="exemplo">
+                        <h3>Passos da prova: produto de dois ímpares é ímpar (prova direta)</h3>
+                        <p><strong>Objetivo:</strong> mostrar que, se \(m\) e \(n\) são inteiros ímpares, então \(m \cdot n\) é ímpar.</p>
+                        <ol>
+                            <li><strong>Definição de ímpar:</strong> um inteiro \(x\) é ímpar se existe \(k \in \mathbb{Z}\) tal que \(x = 2k + 1\).</li>
+                            <li><strong>Escreva os números como ímpares:</strong> seja
+                                \[
+                                    m = 2a + 1 \quad \text{e} \quad n = 2b + 1,
+                                \]
+                                com \(a, b \in \mathbb{Z}\).</li>
+                            <li><strong>Calcule o produto:</strong>
+                                \[
+                                    m \cdot n = (2a + 1)(2b + 1).
+                                \]
+                                Fazendo a distributiva:
+                                \[
+                                    (2a + 1)(2b + 1) = 4ab + 2a + 2b + 1.
+                                \]
+                            </li>
+                            <li><strong>Coloque em evidência o 2:</strong>
+                                \[
+                                    4ab + 2a + 2b + 1 = 2(2ab + a + b) + 1.
+                                \]
+                            </li>
+                            <li><strong>Interprete o resultado:</strong> como \(2ab + a + b\) é inteiro, chamando
+                                \[
+                                    k = 2ab + a + b,
+                                \]
+                                temos
+                                \[
+                                    m \cdot n = 2k + 1,
+                                \]
+                                que é exatamente a forma de um número ímpar.</li>
+                        </ol>
+                        <p><strong>Conclusão:</strong> o produto de dois inteiros ímpares pode ser escrito como \(2k + 1\), logo é ímpar.</p>
+                    </div>
+
+                </div>
             </div>
             <div class="exercicio">
                 <h3>3. Algoritmo:</h3> Prove que este algoritmo encontra máximo: <code>max = a[0]; for i=1 to n: if a[i]>max max=a[i]</code>.<button onclick="toggleRes('res3')">Ver Resolução</button>
                 <div id="res3" class="resolucao">Por contraposição: Se max != máximo real, existe a[j] > max não visitado (impossível por loop completo).</div>
             </div>
             <div class="exercicio">
-                <h3>4. !!!:</h3> Prove por contraposição: Se \( 2n+1 \) primo >2, então ímpar. (Faça você mesmo!)
+                <h3>4. !!!:</h3> Prove por contraposição: Se \( 2n+1 \) primo >2, então ímpar.
             </div>
         </div>
 
