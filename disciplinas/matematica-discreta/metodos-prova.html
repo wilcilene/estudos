@@ -148,24 +148,39 @@
                 <strong>Objetivos:</strong> Dominar contraposição e ligar a análise de algoritmos.
             </div>
             <h3>Prova por Contraposição</h3>
-            <p>Para provar \( P \implies Q \), prove \( \neg Q \implies \neg P \) (equivalente) [web:20]. Útil quando \( \neg Q \) é mais fácil.</p>
+            <p>Para provar \( P \implies Q \), prove \( \neg Q \implies \neg P \) (equivalente). Útil quando \( \neg Q \) é mais fácil.</p>
             <div class="exemplo">
                 <strong>Teorema:</strong> Se \( n^2 \) é par, então \( n \) é par.<br>
                 <strong>Contrapositiva:</strong> Se \( n \) ímpar, então \( n^2 \) ímpar.<br>
                 <strong>Prova:</strong> \( n = 2k+1 \implies n^2 = 4k^2 + 4k + 1 = 2(2k^2 + 2k) + 1 \), ímpar.
             </div>
             <div class="algoritmo">
-                <strong>Aplicação em CS:</strong> Prova de terminação de algoritmo: "Se não termina, então loop infinito" (contrapositiva de "loop termina sempre").
+                <strong>Aplicação:</strong> Prova de terminação de algoritmo: "Se não termina, então loop infinito" (contrapositiva de "loop termina sempre").
             </div>
-            <p><strong>Atividade:</strong> Prove transitividade da divisibilidade usando contraposição.</p>
         </div>
 
         <div id="exercicios">
-            <h2>Exercícios para Prática e Autoavaliação</h2>
-            <p>Resolva e clique para ver respostas. Indicado para revisão ou faltas.</p>
+            <h2>Para pensar!</h2>
+            <p>Resolva antes de espiar as respostas</p>
             <div class="exercicio">
                 <h3>1. Direta:</h3> Prove: Soma de dois racionais é racional.<button onclick="toggleRes('res1')">Ver Resolução</button>
-                <div id="res1" class="resolucao">Seja \( r = a/b \), \( s = c/d \). Então \( r + s = (ad + bc)/(bd) \), racional.</div>
+                <div id="res1" class="resolucao">Seja \( r = a/b \), \( s = c/d \). Então \( r + s = (ad + bc)/(bd) \), racional.</div                                                                                                                             <div class="exemplo">
+                <h3>Passos da prova: soma de dois racionais é racional</h3>
+                <p><strong>Objetivo:</strong> mostrar que, se \(r\) e \(s\) são racionais, então \(r + s\) também é racional.</p>
+                <ol>
+                    <li><strong>Definição de racional:</strong> um número é racional se pode ser escrito como \(\frac{p}{q}\), com \(p, q \in \mathbb{Z}\) e \(q \neq 0\).</li>
+                    <li><strong>Escreva \(r\) e \(s\) usando a definição:</strong> seja \(r = \frac{a}{b}\) e \(s = \frac{c}{d}\), com \(a,b,c,d \in \mathbb{Z}\) e \(b,d \neq 0\).</li>
+                    <li><strong>Some as frações:</strong>
+                        \[
+                            r + s = \frac{a}{b} + \frac{c}{d}
+                            = \frac{ad + bc}{bd}.
+                        \]
+                    </li>
+                    <li><strong>Verifique o numerador:</strong> \(ad + bc\) é inteiro, pois é soma de produtos de inteiros.</li>
+                    <li><strong>Verifique o denominador:</strong> \(bd \neq 0\), pois \(b \neq 0\) e \(d \neq 0\).</li>
+                </ol>
+                <p><strong>Conclusão:</strong> \(r + s = \dfrac{ad + bc}{bd}\) é uma fração com numerador e denominador inteiros e denominador não nulo, portanto é um número racional.</p>
+            </div>
             </div>
             <div class="exercicio">
                 <h3>2. Contraposição:</h3> Prove: Produto de dois ímpares é ímpar.<button onclick="toggleRes('res2')">Ver Resolução</button>
@@ -176,7 +191,7 @@
                 <div id="res3" class="resolucao">Por contraposição: Se max != máximo real, existe a[j] > max não visitado (impossível por loop completo).</div>
             </div>
             <div class="exercicio">
-                <h3>4. Aberto:</h3> Prove por contraposição: Se \( 2n+1 \) primo >2, então ímpar. (Faça você mesmo!)
+                <h3>4. !!!:</h3> Prove por contraposição: Se \( 2n+1 \) primo >2, então ímpar. (Faça você mesmo!)
             </div>
         </div>
 
