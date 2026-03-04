@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos de Prova: Básicos, Direta e Contraposição - Matemática Discreta IFC SBS</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; padding: 20px; background-color: #f4f4f4; color: #333; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+        h1, h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        h3 { color: #34495e; }
+        .aula { background: #ecf0f1; padding: 20px; margin: 20px 0; border-left: 5px solid #3498db; border-radius: 5px; }
+        .exemplo { background: #d5f4e6; padding: 15px; border-left: 4px solid #27ae60; margin: 10px 0; }
+        .exercicio { background: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin: 10px 0; }
+        .resolucao { background: #e8f5e8; padding: 15px; border-left: 4px solid #28a745; margin: 10px 0; display: none; }
+        button { background: #3498db; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; margin: 5px; }
+        button:hover { background: #2980b9; }
+        .objetivos { background: #e3f2fd; padding: 15px; border-radius: 5px; }
+        nav { text-align: center; margin-bottom: 30px; }
+        nav a { margin: 0 10px; color: #3498db; text-decoration: none; font-weight: bold; }
+        .algoritmo { background: #f8f9fa; padding: 15px; border: 1px solid #dee2e6; border-radius: 5px; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Matemática Discreta - Bacharelado em Ciência da Computação<br>IFC São Bento do Sul<br>Métodos de Prova: Definições Básicas, Provas Diretas e por Contraposição (com Algoritmos)</h1>
+        <p><strong>Disciplina:</strong> Matemática Discreta | <strong>Professora:</strong> Wilcilene Maria Kowal </p>
+
+        <div id="aula1" class="aula">
+            <h2>Aula 1: Definições Básicas de Provas</h2>
+            <div class="objetivos">
+                <strong>Objetivos:</strong> Entender o que é uma prova matemática e sua importância em Ciência da Computação (correção de algoritmos).
+            </div>
+            <h3>O que é uma Prova?</h3>
+            <p>Uma prova é um argumento lógico rigoroso que estabelece a veracidade de uma afirmação para <em>todos</em> os casos relevantes. Provas garantem que algoritmos funcionam corretamente.</p>
+            <div class="exemplo">
+                <strong>Afirmação:</strong> Para todo inteiro \( n \geq 1 \), a soma dos primeiros \( n \) números ímpares é \( n^2 \).<br>
+                <strong>Prova necessária:</strong> Mostrar que vale para qualquer \( n \).
+
+                <h3>Prova por Indução: soma dos primeiros números ímpares</h3>
+                <p><strong>Afirmação:</strong> Para todo inteiro \( n \geq 1 \), vale</p>
+                <p>\[
+                    1 + 3 + 5 + \dots + (2n - 1) = n^2.
+                \]</p>
+            
+                <h4>1. Passo base</h4>
+                <p>Para \( n = 1 \):</p>
+                <ul>
+                    <li>Lado esquerdo: soma dos primeiros 1 número ímpar é \( 1 \).</li>
+                    <li>Lado direito: \( 1^2 = 1 \).</li>
+                </ul>
+                <p>Logo, a igualdade vale para \( n = 1 \).</p>
+            
+                <h4>2. Hipótese de indução</h4>
+                <p>Suponha que a afirmação seja verdadeira para algum inteiro \( k \geq 1 \). Isto é, assumimos que</p>
+                <p>\[
+                    1 + 3 + 5 + \dots + (2k - 1) = k^2.
+                \]</p>
+                <p>Esta suposição é a <em>hipótese de indução</em>.</p>
+            
+                <h4>3. Passo indutivo</h4>
+                <p>Queremos mostrar que, sob essa hipótese, a afirmação vale para \( k + 1 \), ou seja, que</p>
+                <p>\[
+                    1 + 3 + 5 + \dots + (2k - 1) + (2(k+1) - 1) = (k+1)^2.
+                \]</p>
+                <p>Note que o próximo número ímpar após \( 2k - 1 \) é \( 2(k+1) - 1 = 2k + 1 \).</p>
+                <p>Começamos da soma até \( k+1 \) e usamos a hipótese de indução:</p>
+                <p>\[
+                    \begin{aligned}
+                    1 + 3 + 5 + \dots + (2k - 1) + (2k + 1)
+                    &= \underbrace{(1 + 3 + \dots + (2k - 1))}_{\text{hipótese de indução}} + (2k + 1) \\
+                    &= k^2 + (2k + 1).
+                    \end{aligned}
+                \]</p>
+                <p>Agora somamos:</p>
+                <p>\[
+                    k^2 + 2k + 1 = (k + 1)^2.
+                \]</p>
+                <p>Portanto,</p>
+                <p>\[
+                    1 + 3 + 5 + \dots + (2k - 1) + (2k + 1) = (k + 1)^2.
+                \]</p>
+                <p>Isso mostra que, se a igualdade vale para \( n = k \), então ela também vale para \( n = k+1 \).</p>
+            
+                <h4>4. Conclusão</h4>
+                <p>
+                    Já vimos que a afirmação vale para \( n = 1 \) (passo base) e mostramos que,
+                    se vale para \( n = k \), então vale para \( n = k + 1 \) (passo indutivo).
+                    Assim, pelo Princípio da Indução Matemática, concluímos que
+                </p>
+                <p>\[
+                    1 + 3 + 5 + \dots + (2n - 1) = n^2
+                \]</p>
+                <p>para todo inteiro \( n \geq 1 \).</p>
+            </div>
+
+        </div>
+            <p><strong>Atividade em sala:</strong> Discuta por que contraexemplos refutam universalizações.</p>
+        </div>
+
+        <div id="aula2" class="aula">
+            <h2>Aula 2: Prova Direta</h2>
+            <div class="objetivos">
+                <strong>Objetivos:</strong> Aprender a estrutura da prova direta e aplicar em problemas simples.
+            </div>
+            <h3>Estrutura da Prova Direta</h3>
+            <p>Assuma a hipótese \( P \) verdadeira e derive logicamente a conclusão \( Q \), usando axiomas e teoremas conhecidos.</p>
+            <div class="exemplo">
+                <strong>Teorema:</strong> Se a soma de dois inteiros é par, então a diferença é par.<br>
+                <strong>Prova Direta:</strong> Seja \( m + n = 2k \) (par). Então \( m = 2a \), \( n = 2b \) ou ambos ímpares. Em ambos, \( m - n = 2(a - b) \) ou \( 2(a - b - 1) + 2 \), par.
+            </div>
+            <div class="algoritmo">
+                <strong>Exemplo em Algoritmo:</strong><br>
+                Função <code>ehPar(soma):</code> return soma % 2 == 0<br>
+                Prova: Se <code>soma</code> par, loop de adição preserva paridade.
+            </div>
+            <p><strong>Atividade:</strong> Prove que soma de racionais é racional.</p>
+        </div>
+
+        <div id="aula3" class="aula">
+            <h2>Aula 3: Prova por Contraposição e Aplicações em Algoritmos (45 min)</h2>
+            <div class="objetivos">
+                <strong>Objetivos:</strong> Dominar contraposição e ligar a análise de algoritmos.
+            </div>
+            <h3>Prova por Contraposição</h3>
+            <p>Para provar \( P \implies Q \), prove \( \neg Q \implies \neg P \) (equivalente) [web:20]. Útil quando \( \neg Q \) é mais fácil.</p>
+            <div class="exemplo">
+                <strong>Teorema:</strong> Se \( n^2 \) é par, então \( n \) é par.<br>
+                <strong>Contrapositiva:</strong> Se \( n \) ímpar, então \( n^2 \) ímpar.<br>
+                <strong>Prova:</strong> \( n = 2k+1 \implies n^2 = 4k^2 + 4k + 1 = 2(2k^2 + 2k) + 1 \), ímpar.
+            </div>
+            <div class="algoritmo">
+                <strong>Aplicação em CS:</strong> Prova de terminação de algoritmo: "Se não termina, então loop infinito" (contrapositiva de "loop termina sempre").
+            </div>
+            <p><strong>Atividade:</strong> Prove transitividade da divisibilidade usando contraposição.</p>
+        </div>
+
+        <div id="exercicios">
+            <h2>Exercícios para Prática e Autoavaliação</h2>
+            <p>Resolva e clique para ver respostas. Indicado para revisão ou faltas.</p>
+            <div class="exercicio">
+                <h3>1. Direta:</h3> Prove: Soma de dois racionais é racional.<button onclick="toggleRes('res1')">Ver Resolução</button>
+                <div id="res1" class="resolucao">Seja \( r = a/b \), \( s = c/d \). Então \( r + s = (ad + bc)/(bd) \), racional.</div>
+            </div>
+            <div class="exercicio">
+                <h3>2. Contraposição:</h3> Prove: Produto de dois ímpares é ímpar.<button onclick="toggleRes('res2')">Ver Resolução</button>
+                <div id="res2" class="resolucao">Contrapositiva: Se produto par, pelo menos um par. Prova: Suponha ambos ímpares → produto ímpar.</div>
+            </div>
+            <div class="exercicio">
+                <h3>3. Algoritmo:</h3> Prove que este algoritmo encontra máximo: <code>max = a[0]; for i=1 to n: if a[i]>max max=a[i]</code>.<button onclick="toggleRes('res3')">Ver Resolução</button>
+                <div id="res3" class="resolucao">Por contraposição: Se max != máximo real, existe a[j] > max não visitado (impossível por loop completo).</div>
+            </div>
+            <div class="exercicio">
+                <h3>4. Aberto:</h3> Prove por contraposição: Se \( 2n+1 \) primo >2, então ímpar. (Faça você mesmo!)
+            </div>
+        </div>
+
+        <footer style="text-align: center; margin-top: 40px; color: #7f8c8d;">
+            <p>GitHub Pages: <a href="https://wilcilene.github.io/estudos/">wilcilene.github.io/estudos/</a> | Licença CC-BY-SA | Conteúdo autoexplicativo para estudo independente.</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleRes(id) {
+            const elem = document.getElementById(id);
+            elem.style.display = elem.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>
