@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Tipos de interfaces · CPA1469</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Fonte -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050816;
+      --accent: #38bdf8;
+      --accent2: #a855f7;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.3);
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.7);
+      --transition-fast: 180ms ease-out;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 45%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 3.2rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 1.35rem;
+      transition: color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .back-link span { font-size: 1.1rem; line-height: 1; }
+
+    .back-link:hover {
+      color: var(--accent);
+      transform: translateX(-2px);
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      margin-bottom: 1.9rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.08);
+      color: var(--accent);
+      font-size: 0.8rem;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      width: fit-content;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.9);
+    }
+
+    header h1 {
+      font-size: clamp(1.7rem, 3vw, 2.1rem);
+      letter-spacing: 0.03em;
+      font-weight: 700;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 720px;
+      line-height: 1.7;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.3fr);
+      gap: 1.8rem;
+    }
+
+    @media (max-width: 880px) {
+      main { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    .content-card {
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(135deg, rgba(15, 23, 42, 0.97), rgba(15, 23, 42, 0.97)) padding-box,
+        linear-gradient(135deg, rgba(56, 189, 248, 0.55), rgba(147, 51, 234, 0.5)) border-box;
+      border: 1px solid transparent;
+      padding: 1.6rem 1.7rem 1.9rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .content-card section + section { margin-top: 1.7rem; }
+
+    .section-title {
+      font-size: 1rem;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .content-card p {
+      font-size: 0.93rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 0.75rem;
+    }
+
+    .content-card ul {
+      margin: 0.2rem 0 0.9rem 1.1rem;
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .content-card li + li { margin-top: 0.25rem; }
+
+    .highlight { color: var(--text); font-weight: 600; }
+
+    .media-wrapper {
+      margin: 0.4rem 0 0.8rem;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: #020617;
+    }
+
+    .media-wrapper img,
+    .media-wrapper iframe {
+      width: 100%;
+      display: block;
+    }
+
+    .media-caption {
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding: 0.45rem 0.7rem 0.6rem;
+    }
+
+    .example-box, .activity-box {
+      margin-top: 0.4rem;
+      padding: 0.75rem 0.9rem;
+      border-radius: 10px;
+      font-size: 0.88rem;
+    }
+
+    .example-box {
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      color: var(--muted);
+    }
+
+    .activity-box {
+      background: rgba(8, 47, 73, 0.88);
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      color: var(--text);
+    }
+
+    .example-label, .activity-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.25rem;
+    }
+
+    .example-label { color: var(--accent2); }
+    .activity-title { color: var(--accent); }
+
+    .side-card {
+      border-radius: var(--radius-lg);
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid var(--border-subtle);
+      padding: 1.25rem 1.45rem 1.55rem;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.85);
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .side-section-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: var(--text);
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .resources-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.3rem;
+      font-size: 0.87rem;
+    }
+
+    .resources-list li + li { margin-top: 0.35rem; }
+
+    .resources-list a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .resources-list a:hover { text-decoration: underline; }
+
+    footer {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 1.9rem 1.25rem 2.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="index.html">
+      <span>←</span> voltar para o índice da disciplina
+    </a>
+
+    <header>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Unidade 1 · Tipos de interfaces
+      </div>
+      <h1>Tipos de interfaces</h1>
+      <p>
+        Nesta aula vamos explorar diferentes formas de interação entre pessoas e sistemas:
+        interfaces de linha de comando (CLI), gráficas (GUI), web, mobile, voz e realidade
+        virtual. O objetivo é reconhecer características, vantagens e limitações de cada uma
+        e relacioná‑las aos contextos de uso.
+      </p>
+    </header>
+
+    <main>
+      <article class="content-card">
+        <!-- Introdução -->
+        <section>
+          <h2 class="section-title">1. Por que existe mais de um tipo de interface?</h2>
+          <p>
+            Não existe “um único jeito certo” de conversar com um computador. Diferentes tarefas,
+            dispositivos e públicos pedem formas de interação diferentes. Alguns contextos exigem
+            precisão e controle por texto; outros pedem rapidez e toques na tela; outros ainda
+            exigem mãos livres e uso de voz ou gestos.
+          </p>
+          <p>
+            Ao conhecer os tipos de interface, você amplia o repertório de possibilidades para
+            o projeto e a avaliação de sistemas.
+          </p>
+        </section>
+
+        <!-- CLI -->
+        <section>
+          <h2 class="section-title">2. Interface de linha de comando (CLI)</h2>
+          <p>
+            Em uma <span class="highlight">CLI (Command Line Interface)</span> a interação acontece por meio de
+            comandos digitados em texto. O usuário precisa conhecer a sintaxe correta
+            (nome do comando, parâmetros, opções).
+          </p>
+          <p>
+            Exemplos: terminal do Linux, PowerShell, console do Git, interpretadores de
+            linguagens de programação.
+          </p>
+
+          <div class="media-wrapper">
+            <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                 alt="Janela de terminal com comandos sendo digitados">
+            <div class="media-caption">
+              CLI: tela predominante em texto, onde comandos são digitados e o sistema responde também em texto.
+            </div>
+          </div>
+
+          <ul>
+            <li><strong>Vantagens:</strong> muito poderosa para usuários experientes; permite automação;
+                consome poucos recursos; pode ser usada remotamente com facilidade.</li>
+            <li><strong>Desvantagens:</strong> curva de aprendizado alta; pouco amigável para iniciantes;
+                exige memorização de comandos e parâmetros.</li>
+          </ul>
+
+          <div class="example-box">
+            <div class="example-label">Perguntas para discussão</div>
+            <p>
+              Por que muitas ferramentas de desenvolvimento ainda preferem CLI para tarefas como
+              compilar código, rodar testes ou fazer deploy? Em quais situações uma GUI seria
+              mais adequada?
+            </p>
+          </div>
+        </section>
+
+        <!-- GUI / desktop -->
+        <section>
+          <h2 class="section-title">3. Interface gráfica (GUI)</h2>
+          <p>
+            A <span class="highlight">GUI (Graphical User Interface)</span> é baseada em elementos visuais: janelas,
+            ícones, menus, botões, barras de rolagem, ponteiros etc. É o modelo WIMP
+            (Windows, Icons, Menus, Pointer) que dominou PCs e notebooks.
+          </p>
+          <p>
+            Exemplos: ambientes de desktop (Windows, KDE, GNOME), editores de texto, IDEs,
+            aplicativos gráficos em geral.
+          </p>
+
+          <div class="media-wrapper">
+            <img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                 alt="Tela de computador com janelas e ícones abertos">
+            <div class="media-caption">
+              GUI: janelas, ícones, menus e ponteiro do mouse permitem acessar funções por manipulação direta.
+            </div>
+          </div>
+
+          <ul>
+            <li><strong>Vantagens:</strong> mais intuitiva para iniciantes; aproveita percepção visual;
+                reduz necessidade de memorizar comandos; permite executar várias tarefas em paralelo.</li>
+            <li><strong>Desvantagens:</strong> pode exigir mais recursos de hardware; algumas operações
+                complexas podem ficar “escondidas” em menus; nem sempre é ideal para automação.</li>
+          </ul>
+        </section>
+
+        <!-- Web -->
+        <section>
+          <h2 class="section-title">4. Interfaces web</h2>
+          <p>
+            Interfaces <span class="highlight">web</span> são GUIs que rodam em navegadores, acessadas por meio
+            de URLs e construídas com HTML, CSS, JavaScript e tecnologias associadas.
+            Hoje praticamente todos os serviços on‑line usam esse tipo de interface.
+          </p>
+          <p>
+            Exemplos: sistemas acadêmicos, lojas virtuais, plataformas de streaming, redes
+            sociais acessadas pelo navegador.
+          </p>
+
+          <div class="media-wrapper">
+            <img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                 alt="Pessoa usando notebook com website aberto">
+            <div class="media-caption">
+              Interfaces web devem se adaptar a diferentes tamanhos de tela, navegadores e condições de rede.
+            </div>
+          </div>
+
+          <ul>
+            <li><strong>Vantagens:</strong> acesso multiplataforma; atualização centralizada no servidor;
+                distribuição facilitada; integração com múltiplos serviços.</li>
+            <li><strong>Desafios:</strong> lidar com latência e conexão instável; garantir responsividade
+                em vários dispositivos; atender requisitos de acessibilidade e segurança.</li>
+          </ul>
+        </section>
+
+        <!-- Mobile -->
+        <section>
+          <h2 class="section-title">5. Interfaces mobile</h2>
+          <p>
+            Interfaces <span class="highlight">mobile</span> são guiadas por toque (touch) e projetadas para
+            telas pequenas, uso em movimento e interação com sensores do dispositivo (câmera,
+            GPS, acelerômetro, vibração).
+          </p>
+          <p>
+            Exemplos: apps de mensagem, redes sociais, aplicativos bancários, jogos em smartphones
+            e tablets.
+          </p>
+
+          <div class="media-wrapper">
+            <img src="https://images.pexels.com/photos/5077047/pexels-photo-5077047.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                 alt="Pessoa segurando smartphone e interagindo com um aplicativo">
+            <div class="media-caption">
+              Em mobile, gestos como tocar, arrastar e pinçar substituem o clique do mouse e exigem elementos maiores e bem espaçados.
+            </div>
+          </div>
+
+          <ul>
+            <li><strong>Vantagens:</strong> portabilidade; acesso em qualquer lugar; recursos como câmera
+                e localização enriquecem a interação.</li>
+            <li><strong>Desafios:</strong> limitação de espaço; atenção dispersa; diferentes tamanhos de
+                tela e sistemas operacionais; necessidade de design responsivo e simplificado.</li>
+          </ul>
+        </section>
+
+        <!-- Voz -->
+        <section>
+          <h2 class="section-title">6. Interfaces de voz (VUI)</h2>
+          <p>
+            <span class="highlight">VUI (Voice User Interface)</span> permite que o usuário interaja por comandos
+            de voz, com o sistema reconhecendo fala e respondendo em áudio ou por ações.
+          </p>
+          <p>
+            Exemplos: assistentes virtuais como Alexa, Google Assistente e Siri; comandos
+            de voz em carros; sistemas de atendimento telefônico.
+          </p>
+
+          <div class="media-wrapper">
+            <img src="https://images.pexels.com/photos/14366167/pexels-photo-14366167.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                 alt="Caixa de som inteligente sobre uma mesa, representando assistente de voz">
+            <div class="media-caption">
+              Interfaces de voz são úteis quando o usuário está com as mãos ocupadas ou tem dificuldade com interfaces visuais.
+            </div>
+          </div>
+
+          <ul>
+            <li><strong>Vantagens:</strong> uso com mãos livres; potencial de acessibilidade para pessoas
+                com limitações motoras ou visuais; interação natural em certas tarefas.</li>
+            <li><strong>Desafios:</strong> reconhecimento de sotaques e ruídos; privacidade; dificuldade
+                de apresentar muitas opções apenas por voz.</li>
+          </ul>
+        </section>
+
+        <!-- Realidade virtual -->
+        <section>
+          <h2 class="section-title">7. Interfaces de realidade virtual</h2>
+          <p>
+            Em <span class="highlight">realidade virtual (VR)</span> o usuário é imerso em um ambiente tridimensional
+            gerado por computador, interagindo por meio de capacetes com visores, controles,
+            luvas, sensores de movimento etc.
+          </p>
+          <p>
+            Exemplos: jogos de VR, simuladores de treinamento, ambientes virtuais colaborativos.
+          </p>
+
+          <div class="media-wrapper">
+            <img src="https://images.pexels.com/photos/8147791/pexels-photo-8147791.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                 alt="Pessoa usando óculos de realidade virtual e controles nas mãos">
+            <div class="media-caption">
+              Interfaces em VR buscam criar a sensação de presença em um ambiente virtual, usando visão estéreo, som e movimentos do corpo.
+            </div>
+          </div>
+
+          <ul>
+            <li><strong>Vantagens:</strong> alta imersão; boas para simulações, treinamento e experiências
+                educativas; podem combinar múltiplos sentidos.</li>
+            <li><strong>Desafios:</strong> custo de hardware; possíveis enjoos/cansaço; necessidade de
+                espaço físico; questões de segurança e ergonomia.</li>
+          </ul>
+        </section>
+
+        <!-- Atividade -->
+        <section>
+          <h2 class="section-title">8. Atividade: comparando tipos de interface</h2>
+          <div class="activity-box">
+            <div class="activity-title">atividade avaliativa · pode ser feita em sala ou em casa</div>
+            <p><strong>Passo 1 — escolha de exemplos</strong></p>
+            <p>
+              Para cada tipo de interface estudado (CLI, GUI desktop, web, mobile, voz, VR),
+              escolha um exemplo real que você já tenha usado ou que possa observar em vídeos.
+            </p>
+
+            <p><strong>Passo 2 — descrição</strong></p>
+            <ul>
+              <li>Explique em poucas linhas como é a interação nesse exemplo (o que o usuário faz,
+                  o que o sistema responde).</li>
+              <li>Liste uma vantagem e uma limitação que você percebe para cada tipo de interface
+                  no contexto escolhido.</li>
+            </ul>
+
+            <p><strong>Passo 3 — síntese crítica</strong></p>
+            <ul>
+              <li>Em qual desses tipos você se sente mais confortável? Por quê?</li>
+              <li>Para o projeto da disciplina, qual tipo de interface faz mais sentido como ponto
+                  de partida? Justifique.</li>
+            </ul>
+
+            <p>
+              Entregue o material no formato combinado em sala (documento, apresentação, formulário).
+              Essa atividade conta como exercício da unidade e será usada na definição futura do
+              tipo de interface principal do projeto.
+            </p>
+          </div>
+        </section>
+      </article>
+
+      <aside class="side-card">
+        <div>
+          <div class="side-section-title">Palavras‑chave</div>
+          <div class="tag-list">
+            <span class="tag">CLI</span>
+            <span class="tag">GUI</span>
+            <span class="tag">web</span>
+            <span class="tag">mobile</span>
+            <span class="tag">voz</span>
+            <span class="tag">realidade virtual</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="side-section-title">Leituras e vídeos</div>
+          <ul class="resources-list">
+            <li>Slides “Tipos de Interface” (Slideshare).</li>
+            <li>Capítulos sobre interfaces em livros de IHC (Barbosa &amp; Silva; Preece et al.).</li>
+            <li>Artigos introdutórios sobre GUI, CLI e VUI.</li>
+            <li><a href="https://www.youtube.com/watch?v=6-t9pZjyqfI" target="_blank" rel="noopener noreferrer">
+              Vídeo: CLI, GUI, TUI, NUI, VUI, BCI – conceitos básicos</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="side-section-title">Para observar no dia a dia</div>
+          <p>
+            Durante a semana, tente identificar em quais momentos você usa cada tipo de interface:
+            quando digita comandos, quando clica em ícones, quando fala com um assistente, quando
+            usa jogos ou filtros em VR/AR. Anote situações que chamarem sua atenção.
+          </p>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <footer>
+    <p>
+      Estude!!!
+    </p>
+  </footer>
+</body>
+</html>
