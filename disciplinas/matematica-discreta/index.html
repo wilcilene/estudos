@@ -1,17 +1,19 @@
+<!-- ÍNDICE DE TÓPICOS – MATEMÁTICA DISCRETA -->
 <nav class="menu-topicos">
     <h2>Conteúdos da Disciplina</h2>
     <p class="menu-descricao">
-        Explore os tópicos de Matemática Discreta. Clique em um assunto para acessar a página correspondente.
+        Clique em um tópico para acessar o material correspondente.
     </p>
+
     <div class="menu-grid">
         <a class="menu-item" href="apresentacao.html">
             <span class="menu-titulo">Apresentação da disciplina</span>
             <span class="menu-subtitulo">Visão geral e organização do curso</span>
         </a>
 
-        <a class="menu-item" href="metodos-prova.html">
+        <a class="menu-item" href="metodos-de-prova.html">
             <span class="menu-titulo">Métodos de Prova</span>
-            <span class="menu-subtitulo">Definições básicas, provas diretas, contraposição e algoritmos</span>
+            <span class="menu-subtitulo">Definições básicas, provas diretas e por contraposição; algoritmos</span>
         </a>
 
         <a class="menu-item" href="provas-contradicao-contrapositiva.html">
@@ -25,13 +27,13 @@
         </a>
 
         <a class="menu-item" href="recursao-inducao-estruturas-recursivas.html">
-            <span class="menu-titulo">Recursão e Indução em Estruturas Recursivas</span>
-            <span class="menu-subtitulo">Funções recursivas e correção</span>
+            <span class="menu-titulo">Recursão e Estruturas Recursivas</span>
+            <span class="menu-subtitulo">Funções recursivas</span>
         </a>
 
         <a class="menu-item" href="conjuntos-operacoes-propriedades.html">
             <span class="menu-titulo">Conjuntos: Operações e Propriedades</span>
-            <span class="menu-subtitulo">União, interseção, potência e Leis de De Morgan</span>
+            <span class="menu-subtitulo">União, interseção, potência; Leis de De Morgan</span>
         </a>
 
         <a class="menu-item" href="analise-combinatoria-basica.html">
@@ -46,27 +48,27 @@
 
         <a class="menu-item" href="combinacoes-binomio-newton.html">
             <span class="menu-titulo">Combinações e Binômio de Newton</span>
-            <span class="menu-subtitulo">Coeficientes binomiais e aplicações em software</span>
+            <span class="menu-subtitulo">Coeficientes binomiais; aplicações em software</span>
         </a>
 
         <a class="menu-item" href="tecnicas-avancadas-contagem.html">
             <span class="menu-titulo">Técnicas Avançadas de Contagem</span>
-            <span class="menu-subtitulo">Casa dos pombos e inclusão-exclusão</span>
+            <span class="menu-subtitulo">Princípio da casa dos pombos; inclusão-exclusão</span>
         </a>
 
         <a class="menu-item" href="relacoes-tipos-propriedades.html">
             <span class="menu-titulo">Relações: Tipos e Propriedades</span>
-            <span class="menu-subtitulo">Reflexividade, simetria e outras propriedades</span>
+            <span class="menu-subtitulo">Reflexividade, simetria, etc.</span>
         </a>
 
         <a class="menu-item" href="funcoes-injetoras-sobrejetoras-bijetoas.html">
             <span class="menu-titulo">Funções: Injetoras, Sobrejetoras e Bijetoras</span>
-            <span class="menu-subtitulo">Composição e funções inversas</span>
+            <span class="menu-subtitulo">Composição e inversas</span>
         </a>
 
         <a class="menu-item" href="algoritmos-em-grafos.html">
             <span class="menu-titulo">Algoritmos em Grafos</span>
-            <span class="menu-subtitulo">Busca em profundidade/largura e Dijkstra</span>
+            <span class="menu-subtitulo">Busca em profundidade/largura; Dijkstra</span>
         </a>
     </div>
 </nav>
@@ -74,7 +76,7 @@
 <style>
     .menu-topicos {
         margin: 30px 0;
-        padding: 25px 25px 30px;
+        padding: 20px 24px 26px;
         background: #ecf0f1;
         border-radius: 10px;
         border-left: 5px solid #3498db;
@@ -84,20 +86,19 @@
         margin-top: 0;
         color: #2c3e50;
         border-bottom: 2px solid #3498db;
-        padding-bottom: 8px;
-        font-size: 1.4rem;
+        padding-bottom: 6px;
+        font-size: 1.3rem;
     }
 
     .menu-descricao {
         color: #555;
-        margin-top: 10px;
-        margin-bottom: 20px;
+        margin: 10px 0 18px;
     }
 
     .menu-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 12px 16px;
+        gap: 10px 14px;
     }
 
     .menu-item {
@@ -105,35 +106,34 @@
         text-decoration: none;
         background: #ffffff;
         border-radius: 8px;
-        padding: 12px 14px;
+        padding: 10px 12px;
         border: 1px solid #d0d7de;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-        transition: transform 0.1s ease, box-shadow 0.1s ease, border-color 0.1s ease, background 0.1s ease;
         color: #2c3e50;
+        transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
     }
 
     .menu-item:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-        border-color: #3498db;
         background: #f7fbff;
+        border-color: #3498db;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+        transform: translateY(-1px);
     }
 
     .menu-titulo {
         display: block;
         font-weight: 600;
-        margin-bottom: 4px;
+        margin-bottom: 3px;
     }
 
     .menu-subtitulo {
         display: block;
-        font-size: 0.85rem;
+        font-size: 0.84rem;
         color: #6c757d;
     }
 
     @media (max-width: 600px) {
         .menu-topicos {
-            padding: 20px 18px 24px;
+            padding: 18px 16px 22px;
         }
     }
 </style>
