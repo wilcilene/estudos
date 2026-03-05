@@ -4,6 +4,7 @@ Essa página foi criada para disponibilizar alguns materiais de algumas discipli
 Há também materiais de apoio, das disciplinas mais antigas no Moodle, no Sigaa, no classroom e no Discord. 
 Para cada disciplina há um plano e os links são disponibilizados aos estudantes no sistema de comunicação.
 Há também alguns materiais no youtube, relacionados principalmente a resolução de exercícios no período da pandemia.
+Cada disciplina tem seu próprio layout e organização. 
 
 ## Disciplinas
 - [Economia](disciplinas/economia/index.md/)
