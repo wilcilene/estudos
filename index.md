@@ -12,7 +12,7 @@ Há também alguns materiais no youtube, relacionados principalmente a resoluç�
 - [Estrutura de Dados](disciplinas/estrutura-de-dados/index.md)
 - [IHC](disciplinas/ihc/index.html)
 - [Lógica para Computação](disciplinas/logica-para-computacao/index.md)
-- [Matemática Discreta](disciplinas/matematica-discreta/index.md)
+- [Matemática Discreta](disciplinas/matematica-discreta/index.html)
 - [Programação I - Bacharelado ECO](disciplinas/programacaoi-eco/index.md)
 - [Programação I - Técnico integrado](disciplinas/programacaoi/index.md)
 - [Programação II - Bacharelado ECO](disciplinas/programacaoii-eco/index.html)
