@@ -93,7 +93,6 @@
             font-style: italic;
             color: #666;
             border: 2px dashed #bbb;
-            overflow: hidden; 
         }
 
 
@@ -161,8 +160,12 @@ public class OlaMundo {
 
     <section id="oo-basico">
         <h2>3. O Salto para a Orientação a Objetos</h2>
-        <p>Na lógica estrutural, focamos em funções. Na **Orientação a Objetos**, pensamos em objetos do mundo real.</p>
-        
+        <p>Na lógica estrutural, focamos em funções. Na <strong>Orientação a Objetos</strong>, pensamos em objetos do mundo real.</p>
+    
+        <h3>Abstração</h3>
+        <p>A <strong>abstração</strong> é escolher quais detalhes do mundo real importam para o nosso programa e quais podemos ignorar.</p>
+        <p>No caso de um carro, poderíamos registrar milhares de informações, mas para o nosso sistema talvez baste guardar cor, marca, modelo, ano, preço e se está ligado ou não. Na orientação a objetos, fazemos isso criando uma classe (como <code>Carro</code>) que representa o conceito de forma simplificada, com apenas os atributos e métodos necessários para o problema que queremos resolver.</p>
+            
         <div class="illustration">
             <img src="objeto-carro.png"
                  alt="Exemplo de objeto carro em Java"
@@ -245,37 +248,174 @@ public class ProgramaCarro {
             <li><strong>Getters e Setters:</strong> Métodos públicos usados para ler (get) ou alterar (set) esses atributos de forma controlada. Obs: object-calisthenics tem outra visão.</li>
         </ul>
     </section>
+    
+    <section id="heranca">
+        <h2>5. Reutilizando código com Herança</h2>
+        <p>A <strong>herança</strong> permite criar uma nova classe reaproveitando características de outra. Criamos uma classe mais geral (por exemplo, <code>Carro</code>) e depois classes mais específicas (como <code>CarroEletrico</code>) que herdam atributos e métodos, adicionando seus próprios detalhes.</p>
+        <p>Isso evita código duplicado e ajuda a organizar melhor os conceitos do domínio do problema.</p>
+    
+        <h3>Exemplo de Herança em Java</h3>
+<pre><code class="language-java">
+// Classe base (superclasse)
+public class Carro {
+    String marca;
+    String modelo;
+    int ano;
 
+    void ligar() {
+        System.out.println("Carro ligado.");
+    }
+
+    void desligar() {
+        System.out.println("Carro desligado.");
+    }
+}
+
+// Classe derivada (subclasse) que herda de Carro
+public class CarroEletrico extends Carro {
+    int capacidadeBateria; // em kWh
+
+    void recarregar() {
+        System.out.println("Recarregando bateria...");
+    }
+}
+
+// Classe principal para testar a herança
+public class ProgramaHeranca {
+
+    public static void main(String[] args) {
+
+        CarroEletrico meuCarroEletrico = new CarroEletrico();
+
+        // Atributos herdados de Carro
+        meuCarroEletrico.marca = "Tesla";
+        meuCarroEletrico.modelo = "Model 3";
+        meuCarroEletrico.ano = 2024;
+
+        // Atributo específico de CarroEletrico
+        meuCarroEletrico.capacidadeBateria = 75;
+
+        // Usando métodos herdados
+        meuCarroEletrico.ligar();
+
+        System.out.println("Marca: " + meuCarroEletrico.marca);
+        System.out.println("Modelo: " + meuCarroEletrico.modelo);
+        System.out.println("Ano: " + meuCarroEletrico.ano);
+        System.out.println("Capacidade da bateria: "
+                           + meuCarroEletrico.capacidadeBateria + " kWh");
+
+        // Usando método específico da subclasse
+        meuCarroEletrico.recarregar();
+
+        meuCarroEletrico.desligar();
+    }
+}
+</code></pre>
+    </section>
+
+    <section id="polimorfismo">
+        <h2>6. Polimorfismo: muitos jeitos de acelerar</h2>
+        <p><strong>Polimorfismo</strong> significa “muitas formas”. Em Java, podemos usar uma referência do tipo da superclasse (<code>Carro</code>) apontando para objetos de subclasses diferentes (<code>CarroEsportivo</code>, <code>CarroFamilia</code>), chamando o mesmo método e obtendo comportamentos específicos.</p>
+        <p>Isso é útil quando queremos tratar vários tipos de objetos de forma uniforme e, ao mesmo tempo, permitir que cada um tenha seu próprio jeito de fazer a mesma ação.</p>
+    
+        <h3>Exemplo de Polimorfismo em Java</h3>
+<pre><code class="language-java">
+// Superclasse
+public class Carro {
+    String modelo;
+
+    void acelerar() {
+        System.out.println("Carro acelerando de forma genérica...");
+    }
+}
+
+// Subclasse 1
+public class CarroEsportivo extends Carro {
+
+    @Override
+    void acelerar() {
+        System.out.println("Carro esportivo acelerando MUITO rápido! Vruuum!");
+    }
+}
+
+// Subclasse 2
+public class CarroFamilia extends Carro {
+
+    @Override
+    void acelerar() {
+        System.out.println("Carro de família acelerando de forma suave e segura.");
+    }
+}
+
+// Classe principal demonstrando polimorfismo
+public class ProgramaPolimorfismo {
+
+    public static void main(String[] args) {
+
+        Carro carro1 = new CarroEsportivo();
+        carro1.modelo = "Super GT";
+
+        Carro carro2 = new CarroFamilia();
+        carro2.modelo = "Minivan Confort";
+
+        System.out.println("Modelo: " + carro1.modelo);
+        carro1.acelerar(); // chama versão de CarroEsportivo
+
+        System.out.println("Modelo: " + carro2.modelo);
+        carro2.acelerar(); // chama versão de CarroFamilia
+
+        // Podemos colocar vários carros diferentes em um mesmo array de Carro
+        Carro[] garagem = new Carro[2];
+        garagem[0] = carro1;
+        garagem[1] = carro2;
+
+        System.out.println("\nTestando todos os carros da garagem:");
+        for (Carro c : garagem) {
+            System.out.println("-> " + c.modelo);
+            c.acelerar(); // comportamento varia conforme o tipo real do objeto
+        }
+    }
+}
+</code></pre>
+    </section>
+    
     <section id="erros-comuns">
-        <h2>5. Atenção!!</h2>
+        <h2>Atenção!!</h2>
         <div class="card" style="border-left: 5px solid var(--accent-color);">
             <p><strong>Não use "==" para comparar Strings:</strong> Em Java, <code>==</code> compara endereços de memória. Para comparar o texto, use <code>.equals()</code>.</p>
             <p><strong>Nomenclatura:</strong> Classes começam com <strong>Maiúscula</strong> (PascalCase). Variáveis e métodos começam com <strong>minúscula</strong> (camelCase).</p>
         </div>
     </section>
+    <section id="exercicios">
+        <h2>7. Para memorizar!</h2>
+    
+        <h3>1. Carro Gamer Edition</h3>
+        <p>Crie uma classe <code>CarroJogador</code> que tenha, além dos atributos normais, um atributo <code>nivelNitro</code> (de 0 a 100).</p>
+        <p>Implemente um método <code>usarNitro()</code> que imprima uma mensagem (por exemplo, <code>"NITRO ATIVADO!"</code>), diminui o nível de nitro e avisa quando o nitro acabar.</p>
+
+        <h3>2. Carro Fantasma</h3>
+        <p>Modifique a sua classe <code>Carro</code> para ter um atributo booleano <code>fantasma</code>. Quando <code>fantasma</code> for <code>true</code>, o método <code>ligar()</code> deve imprimir <code>"Carro fantasma apareceu do nada!"</code> em vez de <code>"Carro ligado."</code>.</p>
+        <p>No <code>main</code>, crie carros normais e carros fantasmas para comparar os comportamentos.</p>
+    
+        <h3>3. Garagem do Futuro</h3>
+        <p>Crie uma classe <code>Garagem</code> que guarda <code>Carros</code>. Implemente métodos <code>adicionarCarro(Carro c)</code>, <code>listarCarros()</code> e <code>ligarTodos()</code>.</p>
+        <p>No <code>main</code>, crie alguns carros diferentes, adicione na garagem e teste os métodos.</p>
+    
+        <h3>4. Seu Veículo dos Sonhos</h3>
+        <p>Crie uma hierarquia de classes para representar um veículo dos seus sonhos (pode ser carro, nave espacial, vassoura voadora...). Use:</p>
+        <ul>
+            <li><strong>Abstração</strong> para escolher bem atributos e métodos.</li>
+            <li><strong>Herança</strong> para criar subclasses específicas.</li>
+            <li><strong>Polimorfismo</strong> para ter um método em comum sobrescrito em cada subclasse.</li>
+        </ul>
+        <p>No <code>main</code>, crie uma coleção de veículos dos sonhos e faça um loop chamando esse método em todos, para ver o “show” no console.</p>
+    </section>
 
 </div>
 
 <footer>
-    <p>Subi os meus slides da aula no notebookLM e depois só revisei e fiz alguns ajustes.</p>
+    <p>Subi os meus slides da aula no notebookLM e depois só revisei e fiz alguns (muitos na verdade) ajustes.</p>
 </footer>
-
-<script>
-    // Animação simples de entrada ao carregar a página
-    document.addEventListener('DOMContentLoaded', () => {
-        const sections = document.querySelectorAll('section');
-        sections.forEach((section, index) => {
-            section.style.opacity = '0';
-            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            section.style.transform = 'translateY(20px)';
-            
-            setTimeout(() => {
-                section.style.opacity = '1';
-                section.style.transform = 'translateY(0)';
-            }, index * 200);
-        });
-    });
-</script>
 
 </body>
 </html>
