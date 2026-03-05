@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introdução ao Java e Orientação a Objetos</title>
+    <style>
+        :root {
+            --primary-color: #0073b7;
+            --secondary-color: #2c3e50;
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --code-bg: #2d2d2d;
+            --accent-color: #e67e22;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            border-bottom: 5px solid var(--primary-color);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            color: #ccc;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+
+        .concept-card {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            border-radius: 5px;
+            background: #fafafa;
+        }
+
+        .illustration {
+            width: 100%;
+            height: 200px;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            font-style: italic;
+            color: #666;
+            border: 2px dashed #bbb;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #777;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Desvendando o Mundo Java</h1>
+    <p>Da Lógica de Programação à Orientação a Objetos</p>
+</header>
+
+<div class="container">
+    
+    <section id="introducao">
+        <h2>1. O que é Java?</h2>
+        <p>A linguagem Java é baseada no princípio <strong>"Write Once, Run Anywhere" (WORA)</strong> [1]. Isso significa que um código escrito uma vez pode rodar em qualquer sistema graças à <strong>JVM (Java Virtual Machine)</strong>, que atua como uma camada entre o seu código e o hardware [1, 2].</p>
+        <p>Para começar, você precisa do <strong>JDK (Java Development Kit)</strong>, que contém as ferramentas para criar programas, enquanto o <strong>JRE (Java Runtime Environment)</strong> é usado apenas para executá-los [3, 4].</p>
+    </section>
+
+    <section id="logica-para-java">
+        <h2>2. Transição: Da Lógica para o Código</h2>
+        <p>Você já conhece algoritmos como sequências de passos ordenados [5]. No Java, as instruções são finalizadas com <strong>ponto e vírgula (;)</strong> [6, 7].</p>
+        <div class="concept-card">
+            <div class="card">
+                <h3>Saída de Dados</h3>
+                <p>Para exibir mensagens no terminal, utilizamos o comando:</p>
+                <code>System.out.println("Olá Mundo!");</code> [8-10].
+            </div>
+            <div class="card">
+                <h3>Entrada de Dados</h3>
+                <p>Para ler o que o usuário digita, usamos a classe <strong>Scanner</strong> do pacote <code>java.util</code> [8, 11, 12].</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="oo-basico">
+        <h2>3. O Salto para a Orientação a Objetos</h2>
+        <p>Na lógica estrutural, focamos em funções. Na **Orientação a Objetos**, pensamos em entidades do mundo real [13].</p>
+        
+        <div class="illustration">
+            [Ilustração Sugerida: Um molde de carro (Classe) gerando vários carros diferentes (Objetos)] [14, 15]
+        </div>
+
+        <div class="concept-card">
+            <div class="card">
+                <h3>Classe</h3>
+                <p>É o <strong>molde</strong> ou planta. Define quais <strong>Atributos</strong> (características) e <strong>Métodos</strong> (ações) um objeto terá [13, 15, 16].</p>
+            </div>
+            <div class="card">
+                <h3>Objeto</h3>
+                <p>É uma <strong>instância</strong> da classe. Usamos a palavra-chave <code>new</code> para criar um objeto na memória [15, 17, 18].</p>
+            </div>
+        </div>
+
+        <h3>Exemplo de Código:</h3>
+        <pre>
+public class Carro {
+    // Atributos (campos)
+    String cor;
+    String modelo;
+
+    // Método (ação)
+    void ligar() {
+        System.out.println("O carro está ligado.");
+    }
+}
+        </pre> [14, 15, 17]
+    </section>
+
+    <section id="encapsulamento">
+        <h2>4. Protegendo Dados: Encapsulamento</h2>
+        <p>O <strong>Encapsulamento</strong> serve para esconder detalhes internos de uma classe e proteger os dados [19, 20].</p>
+        <ul>
+            <li><strong>Private:</strong> Atributos são geralmente privados para evitar acesso direto indesejado [17, 21].</li>
+            <li><strong>Getters e Setters:</strong> Métodos públicos usados para ler (get) ou alterar (set) esses atributos de forma controlada [16, 17, 22].</li>
+        </ul>
+    </section>
+
+    <section id="erros-comuns">
+        <h2>5. Checklist para Iniciantes</h2>
+        <p>Evite cair nestas armadilhas clássicas identificadas por profissionais [23, 24]:</p>
+        <div class="card" style="border-left: 5px solid var(--accent-color);">
+            <p><strong>Não use "==" para comparar Strings:</strong> Em Java, <code>==</code> compara endereços de memória. Para comparar o texto, use <code>.equals()</code> [24, 25].</p>
+            <p><strong>Nomenclatura:</strong> Classes começam com <strong>Maiúscula</strong> (PascalCase). Variáveis e métodos começam com <strong>minúscula</strong> (camelCase) [26, 27].</p>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p>Material de aula da professora Wilcilene atualizado pelo notebookLM.</p>
+</footer>
+
+<script>
+    // Animação simples de entrada ao carregar a página
+    document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('section');
+        sections.forEach((section, index) => {
+            section.style.opacity = '0';
+            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            section.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                section.style.opacity = '1';
+                section.style.transform = 'translateY(0)';
+            }, index * 200);
+        });
+    });
+</script>
+
+</body>
+</html>
