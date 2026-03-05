@@ -1,139 +1,205 @@
-<!-- ÍNDICE DE TÓPICOS – MATEMÁTICA DISCRETA -->
-<nav class="menu-topicos">
-    <h2>Conteúdos da Disciplina</h2>
-    <p class="menu-descricao">
-        Clique em um tópico para acessar o material correspondente.
-    </p>
-
-    <div class="menu-grid">
-        <a class="menu-item" href="apresentacao.html">
-            <span class="menu-titulo">Apresentação da disciplina</span>
-            <span class="menu-subtitulo">Visão geral e organização do curso</span>
-        </a>
-
-        <a class="menu-item" href="metodos-de-prova.html">
-            <span class="menu-titulo">Métodos de Prova</span>
-            <span class="menu-subtitulo">Definições básicas, provas diretas e por contraposição; algoritmos</span>
-        </a>
-
-        <a class="menu-item" href="provas-contradicao-contrapositiva.html">
-            <span class="menu-titulo">Provas por Contradição e Contrapositiva</span>
-            <span class="menu-subtitulo">Técnicas com aplicações em correção de programas</span>
-        </a>
-
-        <a class="menu-item" href="principio-inducao-matematica.html">
-            <span class="menu-titulo">Princípio da Indução Matemática</span>
-            <span class="menu-subtitulo">Base, variantes fortes e aplicações em sequências</span>
-        </a>
-
-        <a class="menu-item" href="recursao-inducao-estruturas-recursivas.html">
-            <span class="menu-titulo">Recursão e Estruturas Recursivas</span>
-            <span class="menu-subtitulo">Funções recursivas</span>
-        </a>
-
-        <a class="menu-item" href="conjuntos-operacoes-propriedades.html">
-            <span class="menu-titulo">Conjuntos: Operações e Propriedades</span>
-            <span class="menu-subtitulo">União, interseção, potência; Leis de De Morgan</span>
-        </a>
-
-        <a class="menu-item" href="analise-combinatoria-basica.html">
-            <span class="menu-titulo">Análise Combinatória Básica</span>
-            <span class="menu-subtitulo">Princípios aditivos e multiplicativos</span>
-        </a>
-
-        <a class="menu-item" href="permutacoes-arranjos.html">
-            <span class="menu-titulo">Permutações e Arranjos</span>
-            <span class="menu-subtitulo">Fórmulas e problemas computacionais</span>
-        </a>
-
-        <a class="menu-item" href="combinacoes-binomio-newton.html">
-            <span class="menu-titulo">Combinações e Binômio de Newton</span>
-            <span class="menu-subtitulo">Coeficientes binomiais; aplicações em software</span>
-        </a>
-
-        <a class="menu-item" href="tecnicas-avancadas-contagem.html">
-            <span class="menu-titulo">Técnicas Avançadas de Contagem</span>
-            <span class="menu-subtitulo">Princípio da casa dos pombos; inclusão-exclusão</span>
-        </a>
-
-        <a class="menu-item" href="relacoes-tipos-propriedades.html">
-            <span class="menu-titulo">Relações: Tipos e Propriedades</span>
-            <span class="menu-subtitulo">Reflexividade, simetria, etc.</span>
-        </a>
-
-        <a class="menu-item" href="funcoes-injetoras-sobrejetoras-bijetoas.html">
-            <span class="menu-titulo">Funções: Injetoras, Sobrejetoras e Bijetoras</span>
-            <span class="menu-subtitulo">Composição e inversas</span>
-        </a>
-
-        <a class="menu-item" href="algoritmos-em-grafos.html">
-            <span class="menu-titulo">Algoritmos em Grafos</span>
-            <span class="menu-subtitulo">Busca em profundidade/largura; Dijkstra</span>
-        </a>
-    </div>
-</nav>
-
-<style>
-    .menu-topicos {
-        margin: 30px 0;
-        padding: 20px 24px 26px;
-        background: #ecf0f1;
-        border-radius: 10px;
-        border-left: 5px solid #3498db;
-    }
-
-    .menu-topicos h2 {
-        margin-top: 0;
-        color: #2c3e50;
-        border-bottom: 2px solid #3498db;
-        padding-bottom: 6px;
-        font-size: 1.3rem;
-    }
-
-    .menu-descricao {
-        color: #555;
-        margin: 10px 0 18px;
-    }
-
-    .menu-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 10px 14px;
-    }
-
-    .menu-item {
-        display: block;
-        text-decoration: none;
-        background: #ffffff;
-        border-radius: 8px;
-        padding: 10px 12px;
-        border: 1px solid #d0d7de;
-        color: #2c3e50;
-        transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
-    }
-
-    .menu-item:hover {
-        background: #f7fbff;
-        border-color: #3498db;
-        box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-        transform: translateY(-1px);
-    }
-
-    .menu-titulo {
-        display: block;
-        font-weight: 600;
-        margin-bottom: 3px;
-    }
-
-    .menu-subtitulo {
-        display: block;
-        font-size: 0.84rem;
-        color: #6c757d;
-    }
-
-    @media (max-width: 600px) {
-        .menu-topicos {
-            padding: 18px 16px 22px;
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Matemática Discreta - Índice de Tópicos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Estilo básico combinando com o layout das aulas -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
         }
-    }
-</style>
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .subtitle {
+            color: #555;
+            margin-top: 8px;
+            margin-bottom: 25px;
+        }
+
+        .menu-topicos {
+            margin: 10px 0 0;
+            padding: 20px 24px 26px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+
+        .menu-topicos h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 6px;
+            font-size: 1.3rem;
+        }
+
+        .menu-descricao {
+            color: #555;
+            margin: 10px 0 18px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 10px 14px;
+        }
+
+        .menu-item {
+            display: block;
+            text-decoration: none;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 10px 12px;
+            border: 1px solid #d0d7de;
+            color: #2c3e50;
+            transition: background 0.15s ease, border-color 0.15s ease,
+                        box-shadow 0.15s ease, transform 0.1s ease;
+        }
+
+        .menu-item:hover {
+            background: #f7fbff;
+            border-color: #3498db;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            transform: translateY(-1px);
+        }
+
+        .menu-titulo {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .menu-subtitulo {
+            display: block;
+            font-size: 0.84rem;
+            color: #6c757d;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+            .container {
+                padding: 20px 16px;
+            }
+            .menu-topicos {
+                padding: 18px 16px 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Matemática Discreta<br><span style="font-size:0.8em;">Bacharelado em Ciência da Computação – IFC São Bento do Sul</span></h1>
+        <p class="subtitle">
+            Esta página reúne os tópicos principais da disciplina. Clique em um assunto para acessar o material correspondente.
+        </p>
+
+        <!-- ÍNDICE DE TÓPICOS -->
+        <nav class="menu-topicos">
+            <h2>Conteúdos da Disciplina</h2>
+            <p class="menu-descricao">
+                Selecione um tópico para estudar, revisar a aula ou recuperar conteúdos perdidos.
+            </p>
+
+            <div class="menu-grid">
+                <a class="menu-item" href="apresentacao.html">
+                    <span class="menu-titulo">Apresentação da disciplina</span>
+                    <span class="menu-subtitulo">Visão geral, objetivos e organização do curso</span>
+                </a>
+
+                <a class="menu-item" href="metodos-prova.html">
+                    <span class="menu-titulo">Métodos de Prova</span>
+                    <span class="menu-subtitulo">Definições básicas, provas diretas e por contraposição; algoritmos</span>
+                </a>
+
+                <a class="menu-item" href="provas-contradicao-contrapositiva.html">
+                    <span class="menu-titulo">Provas por Contradição e Contrapositiva</span>
+                    <span class="menu-subtitulo">Técnicas de demonstração com aplicações em correção de programas</span>
+                </a>
+
+                <a class="menu-item" href="principio-inducao-matematica.html">
+                    <span class="menu-titulo">Princípio da Indução Matemática</span>
+                    <span class="menu-subtitulo">Passo base, passo indutivo, variantes fortes e aplicações em sequências</span>
+                </a>
+
+                <a class="menu-item" href="recursao-inducao-estruturas-recursivas.html">
+                    <span class="menu-titulo">Recursão e Estruturas Recursivas</span>
+                    <span class="menu-subtitulo">Definição de funções recursivas e provas de corretude</span>
+                </a>
+
+                <a class="menu-item" href="conjuntos-operacoes-propriedades.html">
+                    <span class="menu-titulo">Conjuntos: Operações e Propriedades</span>
+                    <span class="menu-subtitulo">União, interseção, complemento, potência e Leis de De Morgan</span>
+                </a>
+
+                <a class="menu-item" href="analise-combinatoria-basica.html">
+                    <span class="menu-titulo">Análise Combinatória Básica</span>
+                    <span class="menu-subtitulo">Princípios aditivos e multiplicativos</span>
+                </a>
+
+                <a class="menu-item" href="permutacoes-arranjos.html">
+                    <span class="menu-titulo">Permutações e Arranjos</span>
+                    <span class="menu-subtitulo">Fórmulas, exemplos e problemas computacionais</span>
+                </a>
+
+                <a class="menu-item" href="combinacoes-binomio-newton.html">
+                    <span class="menu-titulo">Combinações e Binômio de Newton</span>
+                    <span class="menu-subtitulo">Coeficientes binomiais e aplicações em software</span>
+                </a>
+
+                <a class="menu-item" href="tecnicas-avancadas-contagem.html">
+                    <span class="menu-titulo">Técnicas Avançadas de Contagem</span>
+                    <span class="menu-subtitulo">Princípio da casa dos pombos e inclusão–exclusão</span>
+                </a>
+
+                <a class="menu-item" href="relacoes-tipos-propriedades.html">
+                    <span class="menu-titulo">Relações: Tipos e Propriedades</span>
+                    <span class="menu-subtitulo">Reflexividade, simetria, transitividade e relações de equivalência</span>
+                </a>
+
+                <a class="menu-item" href="funcoes-injetoras-sobrejetoras-bijetoas.html">
+                    <span class="menu-titulo">Funções: Injetoras, Sobrejetoras e Bijetoras</span>
+                    <span class="menu-subtitulo">Composição, inversas e aplicações</span>
+                </a>
+
+                <a class="menu-item" href="algoritmos-em-grafos.html">
+                    <span class="menu-titulo">Algoritmos em Grafos</span>
+                    <span class="menu-subtitulo">Busca em profundidade/largura e algoritmo de Dijkstra</span>
+                </a>
+            </div>
+        </nav>
+
+        <footer>
+            <p>IFC São Bento do Sul · Matemática Discreta · Página de estudos</p>
+        </footer>
+    </div>
+</body>
+</html>
