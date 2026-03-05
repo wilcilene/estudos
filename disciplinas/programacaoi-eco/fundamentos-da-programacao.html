@@ -126,69 +126,113 @@
             <div class="card">
                 <h3>Saída de Dados</h3>
                 <p>Para exibir mensagens no terminal, utilizamos o comando:</p>
-                <code>public class OlaMundo {<br>
-                         public static void main(String[] args) {<br>
-                            System.out.println("Olá Mundo!");<br>
-                         }<br>
-                      }<br>
-                 </code>
+<pre></pre><code>public class OlaMundo {
+         public static void main(String[] args) {
+            System.out.println("Olá Mundo!");
+         }
+      }<
+ </code></pre>
             </div>
             <div class="card">
                 <h3>Entrada de Dados</h3>
                 <p>Para ler o que o usuário digita, podemos usar a classe <strong>Scanner</strong> do pacote <code>java.util</code>. Para isso, importe o pacote.</p>
-                <pre><code>import java.util.Scanner;
-                    
-                            public class OlaEstudante {
-                            
-                                public static void main(String[] args) {
-                                    // cria o Scanner para ler do teclado
-                                    Scanner entrada = new Scanner(System.in);
-                            
-                                    System.out.print("Digite seu nome: ");
-                                    String nomeEstudante = entrada.nextLine();
-                            
-                                    System.out.println("Olá " + nomeEstudante + "!");
-                            
-                                    entrada.close();
-                                }
-                            }
-                </code></pre>
+<pre><code>import java.util.Scanner;
+    
+            public class OlaEstudante {
+            
+                public static void main(String[] args) {
+                    // cria o Scanner para ler do teclado
+                    Scanner entrada = new Scanner(System.in);
+            
+                    System.out.print("Digite seu nome: ");
+                    String nomeEstudante = entrada.nextLine();
+            
+                    System.out.println("Olá " + nomeEstudante + "!");
+            
+                    entrada.close();
+                }
+            }
+</code></pre>
             </div>
         </div>
     </section>
 
     <section id="oo-basico">
         <h2>3. O Salto para a Orientação a Objetos</h2>
-        <p>Na lógica estrutural, focamos em funções. Na **Orientação a Objetos**, pensamos em entidades do mundo real [13].</p>
+        <p>Na lógica estrutural, focamos em funções. Na **Orientação a Objetos**, pensamos em objetos do mundo real.</p>
         
         <div class="illustration">
-            [Ilustração Sugerida: Um molde de carro (Classe) gerando vários carros diferentes (Objetos)] [14, 15]
+            <p>
+              <img src="objeto-carro.png" alt="Exemplo de objeto carro em Java">
+            </p>
         </div>
 
         <div class="concept-card">
             <div class="card">
                 <h3>Classe</h3>
-                <p>É o <strong>molde</strong> ou planta. Define quais <strong>Atributos</strong> (características) e <strong>Métodos</strong> (ações) um objeto terá [13, 15, 16].</p>
+                <p>É o <strong>molde</strong> ou planta. Define quais <strong>atributos</strong> (características) e <strong>métodos</strong> (ações) um objeto terá.</p>
             </div>
             <div class="card">
                 <h3>Objeto</h3>
-                <p>É uma <strong>instância</strong> da classe. Usamos a palavra-chave <code>new</code> para criar um objeto na memória [15, 17, 18].</p>
+                <p>É uma <strong>instância</strong> da classe. Usamos a palavra-chave <code>new</code> para criar um objeto na memória.</p>
             </div>
         </div>
 
         <h3>Exemplo de Código:</h3>
-        <pre>
+<pre><code class="language-java">
+// Classe Carro: definição do "molde" (classe)
 public class Carro {
-    // Atributos (campos)
-    String cor;
-    String modelo;
 
-    // Método (ação)
+    // Atributos (estado)
+    String cor;
+    String marca;
+    String modelo;
+    int ano;
+    double preco;
+    boolean ligado;
+
+    // Métodos (comportamento)
     void ligar() {
-        System.out.println("O carro está ligado.");
+        ligado = true;
+        System.out.println("Carro ligado.");
+    }
+
+    void desligar() {
+        ligado = false;
+        System.out.println("Carro desligado.");
     }
 }
-        </pre> [14, 15, 17]
+
+// Classe principal com método main: cria e consulta um objeto Carro
+public class ProgramaCarro {
+
+    public static void main(String[] args) {
+
+        // Instanciando (criando) um objeto Carro
+        Carro meuCarro = new Carro();
+        meuCarro.cor = "Azul";
+        meuCarro.marca = "Ford";
+        meuCarro.modelo = "Modelo T";
+        meuCarro.ano = 1925;
+        meuCarro.preco = 35000.0;
+
+        // Consultando (lendo) os atributos do objeto
+        System.out.println("=== Dados do carro ===");
+        System.out.println("Marca: " + meuCarro.marca);
+        System.out.println("Modelo: " + meuCarro.modelo);
+        System.out.println("Ano: " + meuCarro.ano);
+        System.out.println("Cor: " + meuCarro.cor);
+        System.out.println("Preço: R$ " + meuCarro.preco);
+
+        // Usando os métodos (comportamento)
+        meuCarro.ligar();
+        System.out.println("Está ligado? " + meuCarro.ligado);
+        meuCarro.desligar();
+        System.out.println("Está ligado? " + meuCarro.ligado);
+    }
+}
+</code></pre>
+
     </section>
 
     <section id="encapsulamento">
