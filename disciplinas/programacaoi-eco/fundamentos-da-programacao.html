@@ -115,18 +115,23 @@
     
     <section id="introducao">
         <h2>1. O que é Java?</h2>
-        <p>A linguagem Java é baseada no princípio <strong>"Write Once, Run Anywhere" (WORA)</strong> [1]. Isso significa que um código escrito uma vez pode rodar em qualquer sistema graças à <strong>JVM (Java Virtual Machine)</strong>, que atua como uma camada entre o seu código e o hardware [1, 2].</p>
-        <p>Para começar, você precisa do <strong>JDK (Java Development Kit)</strong>, que contém as ferramentas para criar programas, enquanto o <strong>JRE (Java Runtime Environment)</strong> é usado apenas para executá-los [3, 4].</p>
+        <p>A linguagem Java é baseada no princípio <strong>"Write Once, Run Anywhere" (WORA)</strong>. Isso significa que em teoria um código escrito uma vez poderia rodar em qualquer sistema devido à <strong>JVM (Java Virtual Machine)</strong>, que atua como uma camada entre o seu código e o hardware.</p>
+        <p>Para começar, você precisa do <strong>JDK (Java Development Kit)</strong>, que contém as ferramentas para criar programas, enquanto o <strong>JRE (Java Runtime Environment)</strong> é usado apenas para executá-los.</p>
     </section>
 
     <section id="logica-para-java">
         <h2>2. Transição: Da Lógica para o Código</h2>
-        <p>Você já conhece algoritmos como sequências de passos ordenados [5]. No Java, as instruções são finalizadas com <strong>ponto e vírgula (;)</strong> [6, 7].</p>
+        <p>Você já conhece algoritmos como sequências de passos ordenados. No Java, as instruções são finalizadas com <strong>ponto e vírgula (;)</strong>.</p>
         <div class="concept-card">
             <div class="card">
                 <h3>Saída de Dados</h3>
                 <p>Para exibir mensagens no terminal, utilizamos o comando:</p>
-                <code>System.out.println("Olá Mundo!");</code> [8-10].
+                <code>public class OlaMundo {<br>
+                         public static void main(String[] args) {<br>
+                            System.out.println("Olá Mundo!");<br>
+                         }<br>
+                      }<br>
+                 </code>
             </div>
             <div class="card">
                 <h3>Entrada de Dados</h3>
