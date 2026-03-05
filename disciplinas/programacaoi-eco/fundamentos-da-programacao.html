@@ -121,7 +121,7 @@
 
     <section id="logica-para-java">
         <h2>2. Transição: Da Lógica para o Código</h2>
-        <p>Você já conhece algoritmos como sequências de passos ordenados. No Java, as instruções são finalizadas com <strong>ponto e vírgula (;)</strong>.</p>
+        <p>Você já conhece algoritmos como sequências de passos ordenados. No Java, as instruções são finalizadas com <strong>ponto e vírgula (;)</strong> e o programa é sempre iniciado pelo método <strong>main()</strong>.</p>
         <div class="concept-card">
             <div class="card">
                 <h3>Saída de Dados</h3>
@@ -135,7 +135,24 @@
             </div>
             <div class="card">
                 <h3>Entrada de Dados</h3>
-                <p>Para ler o que o usuário digita, usamos a classe <strong>Scanner</strong> do pacote <code>java.util</code> [8, 11, 12].</p>
+                <p>Para ler o que o usuário digita, podemos usar a classe <strong>Scanner</strong> do pacote <code>java.util</code>. Para isso, importe o pacote.</p>
+                <pre><code>import java.util.Scanner;
+                    
+                            public class OlaEstudante {
+                            
+                                public static void main(String[] args) {
+                                    // cria o Scanner para ler do teclado
+                                    Scanner entrada = new Scanner(System.in);
+                            
+                                    System.out.print("Digite seu nome: ");
+                                    String nomeEstudante = entrada.nextLine();
+                            
+                                    System.out.println("Olá " + nomeEstudante + "!");
+                            
+                                    entrada.close();
+                                }
+                            }
+                </code></pre>
             </div>
         </div>
     </section>
