@@ -13,25 +13,6 @@
             --code-bg: #2d2d2d;
             --accent-color: #e67e22;
         }
-        <script>
-          // Quando a página terminar de carregar
-          document.addEventListener('DOMContentLoaded', function () {
-            // Seleciona todos os botões de resposta
-            const botoes = document.querySelectorAll('.btn-resposta');
-        
-            botoes.forEach(function (botao) {
-              const alvoId = botao.getAttribute('data-target');
-              const alvo = document.getElementById(alvoId);
-        
-              if (!alvo) return;
-        
-              botao.addEventListener('click', function () {
-                const visivel = alvo.style.display === 'block';
-                alvo.style.display = visivel ? 'none' : 'block';
-              });
-            });
-          });
-        </script>
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -610,6 +591,23 @@ public class ProgramaPolimorfismo {
 <footer>
     <p>Subi os meus slides da aula no notebookLM e depois só revisei e fiz alguns (muitos na verdade) ajustes.</p>
 </footer>
-
+    
+<script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const botoes = document.querySelectorAll('.btn-resposta');
+    
+        botoes.forEach(function (botao) {
+          const alvoId = botao.getAttribute('data-target');
+          const alvo = document.getElementById(alvoId);
+    
+          if (!alvo) return;
+    
+          botao.addEventListener('click', function () {
+            const visivel = alvo.style.display === 'block';
+            alvo.style.display = visivel ? 'none' : 'block';
+          });
+        });
+      });
+    </script>
 </body>
 </html>
