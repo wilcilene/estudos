@@ -420,7 +420,149 @@ public class ProgramaPolimorfismo {
         </div>
     </section>
     <section id="exercicios">
-        <h2>7. Para memorizar!</h2>
+        <h2>7. Para entender melhor!</h2>
+        <p>Nestes exercícios, o foco é entender a instancia e manipulação de <strong> objetos</strong>.</p>
+    
+        <!-- Exercício 1 -->
+        <h3>Exercício 1 – Objeto Estudante</h3>
+        <p>
+            Crie uma classe <code>Estudante</code> com os atributos <code>nome</code> (String) e <code>matricula</code> (String).<br>
+            Depois crie uma classe com <code>main</code> que:
+        </p>
+        <ul>
+            <li>crie um objeto <code>Estudante</code>;</li>
+            <li>atribua valores para <code>nome</code> e <code>matricula</code>;</li>
+            <li>imprima os dados do estudante no console.</li>
+        </ul>
+    
+        <button class="btn-resposta" data-target="resp-estudante"
+                style="margin-bottom:0.5rem; padding:0.4rem 0.8rem; background-color: var(--primary-color); color:#fff; border:none; border-radius:4px; cursor:pointer;">
+            Mostrar/ocultar resposta em Java
+        </button>
+    
+        <div id="resp-estudante" style="display:none; margin-bottom:1.5rem;">
+            <pre><code class="language-java">
+            public class Estudante {
+                String nome;
+                String matricula;
+            }
+            
+            public class ProgramaEstudante {
+                public static void main(String[] args) {
+                    Estudante estudante1 = new Estudante();
+            
+                    estudante1.nome = "Ana Silva";
+                    estudante1.matricula = "2026001";
+            
+                    System.out.println("Nome do estudante: " + estudante1.nome);
+                    System.out.println("Matrícula: " + estudante1.matricula);
+                }
+            }
+                    </code></pre>
+                </div>
+            
+                <!-- Exercício 2 -->
+                <h3>Exercício 2 – Objeto Livro</h3>
+                <p>
+                    Crie uma classe <code>Livro</code> com os atributos <code>titulo</code> (String), <code>autor</code> (String) e <code>paginas</code> (int).<br>
+                    Depois crie uma classe com <code>main</code> que:
+                </p>
+                <ul>
+                    <li>crie um objeto <code>Livro</code> com valores iniciais;</li>
+                    <li>imprima um resumo do livro, juntando os atributos em uma frase;</li>
+                    <li>modifique o número de páginas e imprima novamente o resumo.</li>
+                </ul>
+            
+                <button class="btn-resposta" data-target="resp-livro"
+                        style="margin-bottom:0.5rem; padding:0.4rem 0.8rem; background-color: var(--primary-color); color:#fff; border:none; border-radius:4px; cursor:pointer;">
+                    Mostrar/ocultar resposta em Java
+                </button>
+            
+                <div id="resp-livro" style="display:none; margin-bottom:1.5rem;">
+                    <pre><code class="language-java">
+            public class Livro {
+                String titulo;
+                String autor;
+                int paginas;
+            }
+            
+            public class ProgramaLivro {
+                public static void main(String[] args) {
+                    Livro livro1 = new Livro();
+            
+                    livro1.titulo = "Introdução ao Java";
+                    livro1.autor = "Maria Souza";
+                    livro1.paginas = 250;
+            
+                    System.out.println("Livro: " + livro1.titulo
+                            + " - " + livro1.autor
+                            + " (" + livro1.paginas + " páginas)");
+            
+                    // Editando o número de páginas
+                    livro1.paginas = 300;
+            
+                    System.out.println("Nova edição: " + livro1.titulo
+                            + " - " + livro1.autor
+                            + " (" + livro1.paginas + " páginas)");
+                }
+            }
+                    </code></pre>
+                </div>
+            
+                <!-- Exercício 3 -->
+                <h3>Exercício 3 – Objeto Playlist</h3>
+                <p>
+                    Crie uma classe <code>Musica</code> com os atributos <code>titulo</code> (String), <code>artista</code> (String) e <code>duracaoEmSegundos</code> (int).<br>
+                    Depois crie uma classe com <code>main</code> que:
+                </p>
+                <ul>
+                    <li>crie duas músicas diferentes;</li>
+                    <li>imprima o título e o artista de cada uma;</li>
+                    <li>edite o título da segunda música e mostre o novo valor.</li>
+                </ul>
+            
+                <button class="btn-resposta" data-target="resp-musica"
+                        style="margin-bottom:0.5rem; padding:0.4rem 0.8rem; background-color: var(--primary-color); color:#fff; border:none; border-radius:4px; cursor:pointer;">
+                    Mostrar/ocultar resposta em Java
+                </button>
+            
+                <div id="resp-musica" style="display:none; margin-bottom:1.5rem;">
+                    <pre><code class="language-java">
+            public class Musica {
+                String titulo;
+                String artista;
+                int duracaoEmSegundos;
+            }
+            
+            public class ProgramaPlaylist {
+                public static void main(String[] args) {
+                    Musica musica1 = new Musica();
+                    musica1.titulo = "Code Jam";
+                    musica1.artista = "Dev Band";
+                    musica1.duracaoEmSegundos = 210;
+            
+                    Musica musica2 = new Musica();
+                    musica2.titulo = "Debugging Night";
+                    musica2.artista = "Stack Traces";
+                    musica2.duracaoEmSegundos = 185;
+            
+                    System.out.println("Música 1: " + musica1.titulo
+                            + " - " + musica1.artista);
+            
+                    System.out.println("Música 2: " + musica2.titulo
+                            + " - " + musica2.artista);
+            
+                    // Editando o título da segunda música
+                    musica2.titulo = "Debugging Morning";
+            
+                    System.out.println("Música 2 (atualizada): "
+                            + musica2.titulo + " - " + musica2.artista);
+                }
+            }
+                    </code></pre>
+                </div>
+
+        <h2>7. Extras!</h2>
     
         <h3>1. Carro Gamer Edition</h3>
         <p>Crie uma classe <code>CarroJogador</code> que tenha, além dos atributos normais, um atributo <code>nivelNitro</code> (de 0 a 100).</p>
