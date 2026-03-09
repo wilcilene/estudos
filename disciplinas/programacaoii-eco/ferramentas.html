@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Programação II – IDEs e Debugging</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: #f5f5f5;
+        --bg-card: #ffffff;
+        --primary: #006699;
+        --primary-dark: #004766;
+        --text: #222222;
+        --muted: #666666;
+        --border: #dddddd;
+        --code-bg: #272822;
+        --code-text: #f8f8f2;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      header {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: #fff;
+        padding: 1.5rem 1rem;
+      }
+
+      header .container {
+        max-width: 960px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      header h1 { margin: 0; font-size: 1.8rem; }
+      header p  { margin: 0; font-size: 0.95rem; max-width: 640px; }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        padding: 0.25rem 0.6rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255,255,255,0.4);
+      }
+
+      nav a:hover { background: rgba(255,255,255,0.16); }
+
+      main {
+        max-width: 960px;
+        margin: 1.5rem auto 2.5rem;
+        padding: 0 1rem;
+        display: grid;
+        grid-template-columns: minmax(0,1fr);
+        gap: 1.5rem;
+      }
+
+      @media (min-width: 900px) {
+        main {
+          grid-template-columns: minmax(0,2fr) minmax(260px,0.9fr);
+          align-items: flex-start;
+        }
+      }
+
+      .card {
+        background: var(--bg-card);
+        border-radius: 0.5rem;
+        padding: 1.25rem 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        border: 1px solid var(--border);
+      }
+
+      .card h2 {
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.4rem;
+        margin: 0 0 0.8rem;
+      }
+
+      .card h3 { margin-top: 1.2rem; }
+      .card h4 { margin-top: 0.8rem; color: var(--primary-dark); }
+
+      p { margin: 0.3rem 0 0.7rem; }
+      ul, ol { margin: 0.2rem 0 0.7rem 1.2rem; padding: 0; }
+      li { margin-bottom: 0.3rem; }
+
+      code {
+        font-family: "Fira Code", "SF Mono", Consolas, monospace;
+        background: #ececec;
+        padding: 0.1rem 0.25rem;
+        border-radius: 3px;
+        font-size: 0.9em;
+      }
+
+      pre {
+        background: var(--code-bg);
+        color: var(--code-text);
+        padding: 0.9rem 1rem;
+        border-radius: 0.4rem;
+        overflow-x: auto;
+        font-size: 0.88rem;
+        margin: 0.4rem 0 0.9rem;
+      }
+
+      pre code { background: none; padding: 0; color: inherit; }
+
+      .note {
+        border-left: 4px solid var(--primary);
+        padding-left: 0.75rem;
+        margin: 0.4rem 0 0.8rem;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .callout {
+        border-radius: 0.4rem;
+        padding: 0.75rem 0.9rem;
+        background: #fff8e1;
+        border: 1px solid #ffe082;
+        font-size: 0.9rem;
+        margin: 0.5rem 0 1rem;
+      }
+
+      .callout strong { color: #e65100; }
+
+      .tip {
+        border-radius: 0.4rem;
+        padding: 0.75rem 0.9rem;
+        background: #e8f5e9;
+        border: 1px solid #a5d6a7;
+        font-size: 0.9rem;
+        margin: 0.5rem 0 1rem;
+      }
+
+      .tip strong { color: #1b5e20; }
+
+      details {
+        margin: 0.4rem 0 0.7rem;
+        border-radius: 0.4rem;
+        border: 1px solid var(--border);
+        background: #fafafa;
+      }
+
+      details summary {
+        padding: 0.5rem 0.7rem;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      details[open] summary { border-bottom: 1px solid var(--border); }
+      details > div { padding: 0.6rem 0.8rem 0.8rem; }
+
+      .explain {
+        border-left: 4px solid #1976d2;
+        background: #f3f6fb;
+        padding: 0.8rem 1rem;
+        margin: 0.4rem 0 1.2rem;
+        font-size: 0.93rem;
+      }
+
+      .explain dl { margin: 0.4rem 0; }
+      .explain dt { font-family: "Fira Code", monospace; font-weight: 700; margin-top: 0.5rem; }
+      .explain dd { margin: 0.1rem 0 0.4rem 1rem; color: #444; }
+
+      aside {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .mini-list { list-style: none; margin: 0.3rem 0; padding: 0; font-size: 0.9rem; }
+      .mini-list li { margin-bottom: 0.3rem; }
+
+      .pill-list {
+        list-style: none; padding: 0; margin: 0.2rem 0 0.8rem;
+        display: flex; flex-wrap: wrap; gap: 0.4rem;
+      }
+
+      .pill-list li {
+        background: #e0f7fa; color: #006064;
+        border-radius: 999px;
+        padding: 0.2rem 0.7rem;
+        font-size: 0.8rem;
+      }
+
+      .tag {
+        display: inline-block;
+        padding: 0.1rem 0.5rem;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        background: #e3f2fd;
+        color: var(--primary-dark);
+        margin-right: 0.4rem;
+      }
+
+      .tag--aulas { background: #e8f5e9; color: #1b5e20; }
+      .tag--nivel { background: #fff3e0; color: #e65100; }
+
+      /* Tabela de ferramentas */
+      .tool-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.88rem;
+        margin: 0.6rem 0 1.2rem;
+      }
+
+      .tool-table th {
+        background: var(--primary);
+        color: #fff;
+        padding: 0.5rem 0.7rem;
+        text-align: left;
+        font-weight: 600;
+      }
+
+      .tool-table td {
+        padding: 0.45rem 0.7rem;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
+
+      .tool-table tr:nth-child(even) td { background: #f8f8f8; }
+      .tool-table tr:hover td { background: #eef5ff; }
+
+      .badge {
+        display: inline-block;
+        font-size: 0.68rem;
+        border-radius: 999px;
+        padding: 0.1rem 0.45rem;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .badge--free     { background: #e8f5e9; color: #2e7d32; }
+      .badge--freemium { background: #fff3e0; color: #e65100; }
+      .badge--paid     { background: #fce4ec; color: #b71c1c; }
+      .badge--online   { background: #e3f2fd; color: #0d47a1; }
+
+      /* Rubrica */
+      .rubric-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.88rem;
+        margin: 0.6rem 0 1.2rem;
+      }
+
+      .rubric-table th {
+        background: var(--primary-dark);
+        color: #fff;
+        padding: 0.5rem 0.7rem;
+        text-align: left;
+      }
+
+      .rubric-table td {
+        padding: 0.45rem 0.7rem;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
+
+      .rubric-table tr:nth-child(even) td { background: #f8f8f8; }
+
+      .score {
+        font-weight: 700;
+        color: var(--primary-dark);
+      }
+
+      footer-note {
+        display: block;
+        font-size: 0.85rem;
+        color: var(--muted);
+        border-top: 1px solid var(--border);
+        margin-top: 0.8rem;
+        padding-top: 0.5rem;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <header>
+      <div class="container">
+        <div>
+          <span class="tag">Programação II – ECO</span>
+          <span class="tag tag--nivel">Ferramentas</span>
+        </div>
+        <h1>IDEs, Editores e Ambiente de Desenvolvimento</h1>
+        <p>
+          Configuração do ambiente para desenvolvimento web com JavaScript.
+          Comparativo de ferramentas e atividade de pesquisa em trios.
+        </p>
+        <nav>
+          <a href="#o-que-e-ide">O que é uma IDE?</a>
+          <a href="#ferramentas">Ferramentas</a>
+          <a href="#criterios">Como avaliar</a>
+          <a href="#debugging">Debugging</a>
+          <a href="#atividade">Atividade</a>
+          <a href="#entrega">Entrega</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+
+      <section class="card">
+
+        <!-- INTRO -->
+        <h2>Introdução</h2>
+        <p>
+          Antes de escrever a primeira linha do projeto semestral, precisamos de um
+          ambiente de desenvolvimento configurado e funcionando. A escolha das
+          ferramentas certas afeta diretamente a produtividade, a qualidade do código
+          e a facilidade de identificar erros ao longo do semestre.
+        </p>
+        <p>
+          Vamos conhecer as principais categorias de ferramentas, entender
+          o que cada uma oferece e — através de uma pesquisa e avaliação — decidir
+          qual combinação cada grupo adotará durante a disciplina.
+        </p>
+
+        <div class="callout">
+          <strong>Se você faltou na aula</strong> lembre de ler todas as seções desta pagina, pesquisar
+          as ferramentas listadas, instalar e configurar o ambiente escolhido pelo seu trio
+          e entregar o resultado conforme descrito na seção "Entrega". Nao ha necessidade
+          de revisão em aula se voce estudar.
+        </div>
+
+        <!-- SEÇÃO 1 -->
+        <h2 id="o-que-e-ide">1. O que é uma IDE e por que ela importa?</h2>
+
+        <p>
+          Uma <strong>IDE</strong> (Integrated Development Environment) reúne em um único
+          programa os recursos necessários para escrever, executar e depurar código.
+          Um simples editor de texto também serve para escrever JavaScript, mas uma IDE
+          ou editor avançado oferece:
+        </p>
+
+        <ul>
+          ><strong>Realce de sintaxe</strong> — cores que facilitam a leitura do código.</li>
+          ><strong>Autocompletar inteligente</strong> — sugestões de funções, métodos e variáveis enquanto você digita.</li>
+          ><strong>Detecção de erros em tempo real</strong> — sublinha problemas antes mesmo de executar.</li>
+          ><strong>Debugger integrado</strong> — permite pausar o programa, inspecionar variáveis e acompanhar o fluxo de execução linha a linha.</li>
+          ><strong>Terminal integrado</strong> — executa comandos Node.js, Git e npm sem sair da ferramenta.</li>
+          ><strong>Integração com Git</strong> — faz commits, ajuda gerenciar alterações e resolver conflitos visualmente.</li>
+          ><strong>Extensões e plugins</strong> — adicionam suporte a frameworks, formatadores e muito mais.</li>
+        </ul>
+
+        <div class="tip">
+          <strong>Contexto da disciplina:</strong> ao longo do semestre vamos escrever
+          JavaScript puro, HTML, CSS, criar APIs, conectar ao banco de dados e fazer deploy
+          de aplicações web. O ambiente precisa dar suporte a tudo isso de forma integrada.
+        </div>
+
+        <!-- SEÇÃO 2 -->
+        <h2 id="ferramentas">2. Ferramentas disponíveis</h2>
+
+        <p>
+          As ferramentas estao organizadas por categoria. Cada trio devera escolher
+          <strong>pelo menos uma ferramenta de cada categoria obrigatória</strong> e
+          justificar a escolha no relatório.
+        </p>
+
+        <!-- 2.1 IDEs e Editores -->
+        <h3>2.1 IDEs e editores de código</h3>
+        <p>
+          Ferramenta central do desenvolvimento. É onde se escreve, organiza
+          e depura o código. Para desenvolvimento web com JavaScript, as principais
+          opções são:
+        </p>
+
+        <table class="tool-table">
+          <thead>
+            <tr>
+              <th>Ferramenta</th>
+              <th>Tipo</th>
+              <th>Licenca</th>
+              <th>Destaques para a disciplina</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>VS Code</strong></td>
+              <td>Editor avancado</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Extensões para JS, HTML, CSS, Node, Git, banco de dados e debug integrado. Recomendado.</td>
+            </tr>
+            <tr>
+              <td><strong>WebStorm</strong></td>
+              <td>IDE</td>
+              <td><span class="badge badge--freemium">Freemium</span></td>
+              <td>IDE dedicada a JavaScript com suporte nativo a Node, frameworks e banco de dados. Gratuita para estudantes.</td>
+            </tr>
+            <tr>
+              <td><strong>IntelliJ IDEA</strong></td>
+              <td>IDE</td>
+              <td><span class="badge badge--freemium">Freemium</span></td>
+              <td>Versão Community gratuita. Suporte a JavaScript via plugins. Excelente para quem migra de Java.</td>
+            </tr>
+            <tr>
+              <td><strong>Eclipse</strong></td>
+              <td>IDE</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Tradicional em Java. Suporte a web via pluggins (Eclipse Wild Web Developer). Interface mais pesada.</td>
+            </tr>
+            <tr>
+              <td><strong>Sublime Text</strong></td>
+              <td>Editor avancado</td>
+              <td><span class="badge badge--freemium">Freemium</span></td>
+              <td>Leve e rápido. Menor ecosistema de extensões comparado ao VS Code.</td>
+            </tr>
+            <tr>
+              <td><strong>Vim / Neovim</strong></td>
+              <td>Editor de terminal</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Alta produtividade apos curva de aprendizado. Configurável para desenvolvimento web completo.</td>
+            </tr>
+            <tr>
+              <td><strong>Replit</strong></td>
+              <td>IDE online</td>
+              <td><span class="badge badge--online">Online</span></td>
+              <td>Sem instalação. útil para prototipagem rápida e trabalho colaborativo em tempo real.</td>
+            </tr>
+            <tr>
+              <td><strong>StackBlitz</strong></td>
+              <td>IDE online</td>
+              <td><span class="badge badge--online">Online</span></td>
+              <td>Ambiente Node.js completo no navegador. Ótimo para testar projetos web sem configurar nada.</td>
+            </tr>
+            <tr>
+              <td><strong>CodeSandbox</strong></td>
+              <td>IDE online</td>
+              <td><span class="badge badge--online">Online</span></td>
+              <td>Focado em frontend. Bom para compartilhar exemplos e prototipagem rápida de interfaces.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 2.2 Controle de versão -->
+        <h3>2.2 Controle de versão e colaboração</h3>
+        <p>
+          Essenciais para trabalhar em equipe e manter o histórico de evolução do projeto.
+          Usaremos Git e GitHub no decorrer do semestre.
+        </p>
+
+        <table class="tool-table">
+          <thead>
+            <tr>
+              <th>Ferramenta</th>
+              <th>Tipo</th>
+              <th>Licenca</th>
+              <th>Destaques para a disciplina</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Git</strong></td>
+              <td>Controle de versão</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Ferramenta principal. Obrigatória. Usada via terminal ou integrada na IDE.</td>
+            </tr>
+            <tr>
+              <td><strong>GitHub</strong></td>
+              <td>Plataforma de repositórios</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Repositório oficial da disciplina. Entregas e colaboração entre duplas.</td>
+            </tr>
+            <tr>
+              <td><strong>GitHub Desktop</strong></td>
+              <td>Cliente Git gráfico</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Interface gráfica para Git. Útil para quem ainda está se familiarizando com linha de comando.</td>
+            </tr>
+            <tr>
+              <td><strong>GitLens (extensão VS Code)</strong></td>
+              <td>Plugin</td>
+              <td><span class="badge badge--freemium">Freemium</span></td>
+              <td>Visualização de histórico e autoria de código diretamente no editor.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 2.3 Gerenciamento de pacotes -->
+        <h3>2.3 Gerenciamento de pacotes e dependências</h3>
+        <p>
+          Permitem instalar e gerenciar bibliotecas externas no projeto JavaScript/Node.js.
+        </p>
+
+        <table class="tool-table">
+          <thead>
+            <tr>
+              <th>Ferramenta</th>
+              <th>Tipo</th>
+              <th>Licenca</th>
+              <th>Destaques para a disciplina</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>npm</strong></td>
+              <td>Gerenciador de pacotes</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Vem junto com o Node.js. Principal gerenciador para instalar frameworks e bibliotecas.</td>
+            </tr>
+            <tr>
+              <td><strong>yarn</strong></td>
+              <td>Gerenciador de pacotes</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Alternativa ao npm, com cache mais eficiente e instalação paralela de dependências.</td>
+            </tr>
+            <tr>
+              <td><strong>pnpm</strong></td>
+              <td>Gerenciador de pacotes</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Mais rápido e econômico em disco que npm e yarn. Crescente adoção no mercado.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 2.4 Banco de dados -->
+        <h3>2.4 Banco de dados e clientes de banco</h3>
+        <p>
+          Vamos conectar o projeto web a um banco de dados relacional. Além do SGBD,
+          é útil ter um cliente gráfico para visualizar e consultar os dados durante o desenvolvimento.
+        </p>
+
+        <table class="tool-table">
+          <thead>
+            <tr>
+              <th>Ferramenta</th>
+              <th>Tipo</th>
+              <th>Licenca</th>
+              <th>Destaques para a disciplina</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>PostgreSQL</strong></td>
+              <td>SGBD relacional</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Robusto, amplamente usado em produção. Excelente suporte a JSON e tipos avançados.</td>
+            </tr>
+            <tr>
+              <td><strong>MySQL</strong></td>
+              <td>SGBD relacional</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Muito popular em aplicações web. Boa documentação e integração com Node.js.</td>
+            </tr>
+            <tr>
+              <td><strong>SQLite</strong></td>
+              <td>SGBD leve</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Banco de dados em arquivo. Ideal para projetos pequenos e prototipagem rápida sem servidor.</td>
+            </tr>
+            <tr>
+              <td><strong>DBeaver</strong></td>
+              <td>Cliente de banco gráfico</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Suporta PostgreSQL, MySQL e SQLite. Interface clara para visualizar tabelas e executar queries.</td>
+            </tr>
+            <tr>
+              <td><strong>TablePlus</strong></td>
+              <td>Cliente de banco gráfico</td>
+              <td><span class="badge badge--freemium">Freemium</span></td>
+              <td>Interface moderna e rápida. Versão gratuita com algumas limitações de abas.</td>
+            </tr>
+            <tr>
+              <td><strong>Database Client (extensão VS Code)</strong></td>
+              <td>Plugin</td>
+              <td><span class="badge badge--freemium">Freemium</span></td>
+              <td>Permite conectar e consultar bancos de dados diretamente dentro do VS Code.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 2.5 Teste e depuração de APIs -->
+        <h3>2.5 Teste e depuração de APIs</h3>
+        <p>
+          Indispensáveis para testar os endpoints da API REST que vamos construir no projeto.
+        </p>
+
+        <table class="tool-table">
+          <thead>
+            <tr>
+              <th>Ferramenta</th>
+              <th>Tipo</th>
+              <th>Licença</th>
+              <th>Destaques para a disciplina</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Postman</strong></td>
+              <td>Cliente HTTP / teste de API</td>
+              <td><span class="badge badge--freemium">Freemium</span></td>
+              <td>Interface gráfica para enviar requisições HTTP e inspecionar respostas. Muito usado no mercado.</td>
+            </tr>
+            <tr>
+              <td><strong>Insomnia</strong></td>
+              <td>Cliente HTTP / teste de API</td>
+              <td><span class="badge badge--freemium">Freemium</span></td>
+              <td>Alternativa ao Postman, mais leve. Suporte a REST e GraphQL.</td>
+            </tr>
+            <tr>
+              <td><strong>Thunder Client (extensão VS Code)</strong></td>
+              <td>Plugin</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Cliente HTTP integrado ao VS Code. Evita a necessidade de abrir uma ferramenta separada.</td>
+            </tr>
+            <tr>
+              <td><strong>curl</strong></td>
+              <td>Linha de comando</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Ferramenta de terminal para fazer requisições HTTP. Útil para scripts e automação.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 2.6 Qualidade de código -->
+        <h3>2.6 Qualidade e padronização de código</h3>
+        <p>
+          Garantem que o código do projeto siga um padrão consistente entre todos os
+          integrantes da equipe.
+        </p>
+
+        <table class="tool-table">
+          <thead>
+            <tr>
+              <th>Ferramenta</th>
+              <th>Tipo</th>
+              <th>Licenca</th>
+              <th>Destaques para a disciplina</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>ESLint</strong></td>
+              <td>Linter JavaScript</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Aponta erros de estilo e problemas de código antes de executar. Integrável ao VS Code.</td>
+            </tr>
+            <tr>
+              <td><strong>Prettier</strong></td>
+              <td>Formatador de código</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Formata automáticamente JS, HTML e CSS com um padrão consistente ao salvar o arquivo.</td>
+            </tr>
+            <tr>
+              <td><strong>EditorConfig</strong></td>
+              <td>Padronização de editor</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Define configurações de indentação e charset compartilhadas entre todos no projeto.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 2.7 Deploy e ambiente -->
+        <h3>2.7 Deploy e ambiente de execução</h3>
+
+        <table class="tool-table">
+          <thead>
+            <tr>
+              <th>Ferramenta</th>
+              <th>Tipo</th>
+              <th>Licenca</th>
+              <th>Destaques para a disciplina</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Node.js</strong></td>
+              <td>Runtime JavaScript</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Ambiente de execução do JavaScript fora do navegador. Obrigatório para o backend.</td>
+            </tr>
+            <tr>
+              <td><strong>GitHub Pages</strong></td>
+              <td>Hospedagem estática</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Já usado na disciplina. Facilita para gerenciar o projeto.</td>
+            </tr>
+            <tr>
+              <td><strong>Render</strong></td>
+              <td>Hospedagem de aplicações</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Hospeda aplicações Node.js gratuitamente. Boa opcão para deploy do backend do projeto.</td>
+            </tr>
+            <tr>
+              <td><strong>Railway</strong></td>
+              <td>Hospedagem de aplicações</td>
+              <td><span class="badge badge--freemium">Freemium</span></td>
+              <td>Suporta Node.js e banco de dados PostgreSQL na mesma plataforma. Facil de configurar.</td>
+            </tr>
+            <tr>
+              <td><strong>Vercel</strong></td>
+              <td>Hospedagem de aplicações</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Excelente para frontend e APIs simples em Node.js (serverless). Deploy automático via GitHub.</td>
+            </tr>
+            <tr>
+              <td><strong>Docker</strong></td>
+              <td>Conteinerizacão</td>
+              <td><span class="badge badge--free">Gratuito</span></td>
+              <td>Empacota a aplicacão e suas dependências em um container. Garante que o ambiente seja idêntico em qualquer máquina.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- SEÇÃO 3 -->
+        <h2 id="criterios">3. Como avaliar uma ferramenta</h2>
+        <p>
+          Comparem ferramentas de forma estruturada.
+        </p>
+
+        <table class="tool-table">
+          <thead>
+            <tr>
+              <th>Criterio</th>
+              <th>O que observar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Facilidade de instalacão</strong></td>
+              <td>Quantos passos são necessários? Funciona sem configuracão adicional?</td>
+            </tr>
+            <tr>
+              <td><strong>Suporte a JavaScript e Node.js</strong></td>
+              <td>A ferramenta entende a sintaxe, sugere código. e aponta erros em JS nativamente?</td>
+            </tr>
+            <tr>
+              <td><strong>Suporte a HTML e CSS</strong></td>
+              <td>Oferece autocompletar e validacão de HTML e CSS para o frontend?</td>
+            </tr>
+            <tr>
+              <td><strong>Debugger integrado</strong></td>
+              <td>E possivel pausar a execucão, inspecionar variáveis e acompanhar o fluxo sem sair da ferramenta?</td>
+            </tr>
+            <tr>
+              <td><strong>Integracão com Git e GitHub</strong></td>
+              <td>Permite fazer commits, push e pull diretamente pela interface?</td>
+            </tr>
+            <tr>
+              <td><strong>Terminal integrado</strong></td>
+              <td>Tem terminal embutido para rodar Node.js e npm sem abrir uma janela separada?</td>
+            </tr>
+            <tr>
+              <td><strong>Extensões e plugins</strong></td>
+              <td>Existe um ecosistema de extensões para banco de dados, APIs, linting e formatacão?</td>
+            </tr>
+            <tr>
+              <td><strong>Performance</strong></td>
+              <td>A ferramenta abre rápidamente e responde bem em máquinas com hardware limitado?</td>
+            </tr>
+            <tr>
+              <td><strong>Custo</strong></td>
+              <td>E gratuita para estudantes? Tem limitações na versão gratuita que impactam o projeto?</td>
+            </tr>
+            <tr>
+              <td><strong>Documentacão e comunidade</strong></td>
+              <td>Há documentacão oficial clara e uma comunidade ativa para ajudar com dúvidas?</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- SEÇÃO 4 -->
+        <h2 id="debugging">4. O que é debugging e por que ele e importante</h2>
+        <p>
+          <strong>Debugging</strong> e o processo de encontrar e corrigir erros no código..
+          Em vez de usar de>console.log</code> para imprimir variáveis em todo lugar,
+          uma IDE com debugger permite:
+        </p>
+
+        <ul>
+          ><strong>Definir breakpoints</strong> — pontos onde a execucão pausa automáticamente.</li>
+          ><strong>Inspecionar variáveis</strong> — ver o valor exato de cada variável no momento da pausa.</li>
+          ><strong>Executar passo a passo</strong> — avançar linha a linha para entender o fluxo do programa.</li>
+          ><strong>Avaliar expressões</strong> — testar expressões JavaScript diretamente no estado atual do programa.</li>
+          ><strong>Inspecionar a pilha de chamadas</strong> — ver quais funções foram chamadas ate chegar na linha atual.</li>
+        </ul>
+
+        <div class="tip">
+          <strong>Dica pratica:</strong> ao longo do semestre, sempre que um método
+          retornar um valor inesperado, coloque um breakpoint na linha suspeita em vez de
+          adicionar vários de>console.log</code>. Voce vai resolver o problema muito mais rápido.
+        </div>
+
+        <h3>Debugging no VS Code com Node.js</h3>
+        <p>
+          O VS Code possui debugger nativo para Node.js. Para usar, crie um arquivo
+          de>.vscode/launch.json</code> na raiz do projeto com o seguinte conteudo:
+        </p>
+
+        <pre>de>{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Executar projeto",
+      "program": "${workspaceFolder}/src/index.js",
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
+}</code></pre>
+
+        <div class="explain">
+          <dl>
+            <dt>"type": "node"</dt>
+            <dd>Indica ao VS Code que este e um projeto Node.js.</dd>
+            <dt>"request": "launch"</dt>
+            <dd>O VS Code vai iniciar o programa diretamente (em vez de se conectar a um processo ja em execucão).</dd>
+            <dt>"program"</dt>
+            <dd>Caminho para o arquivo de entrada da aplicacão. Ajuste conforme a estrutura do seu projeto.</dd>
+            <dt>"skipFiles"</dt>
+            <dd>Ignora os arquivos internos do Node.js durante o passo a passo, para nao entrar no código. do proprio runtime.</dd>
+          </dl>
+        </div>
+
+        <p>
+          Com o arquivo configurado, clique na margem esquerda de qualquer linha para
+          adicionar um breakpoint (um circulo vermelho aparecera). Em seguida pressione
+          de>F5</code> para iniciar o debugging. A execucão pausara na linha marcada
+          e o painel lateral mostrara todas as variáveis disponiveis naquele momento.
+        </p>
+
+        <h3>Debugging no navegador (frontend)</h3>
+        <p>
+          Para o código. JavaScript que roda no navegador, o debugger ja esta embutido nas
+          ferramentas de desenvolvedor. Pressione de>F12</code>, va para a aba
+          <strong>Sources</strong>, encontre o arquivo de>.js</code> e clique na
+          linha desejada para adicionar um breakpoint. Funciona da mesma forma: a execucão
+          pausa, as variáveis ficam visiveis e voce avanca passo a passo.
+        </p>
+
+        <!-- SEÇÃO 5 -->
+        <h2 id="atividade">5. Atividade</h2>
+
+        <div class="callout">
+          <strong>Objetivo:</strong> pesquisar, testar e comparar ferramentas de
+          desenvolvimento, escolher a combinacão que usaremos no semestre e
+          documentar a decisão em um relatório.
+        </div>
+
+        <h3>Etapa 1 — Divisão e pesquisa</h3>
+        <p>
+          Cada integrante fica responsável por pesquisar um subconjunto das
+          categorias abaixo. Ao final, reúnam as informações e discutam em conjunto.
+        </p>
+
+        <details open>
+          <summary>Categorias obrigatórias para pesquisa</summary>
+          <div>
+            <ul>
+              ><strong>IDE ou editor de código.</strong> — compare pelo menos 2 opções da secão 2.1.</li>
+              ><strong>Cliente de banco de dados</strong> — compare pelo menos 2 opções da secão 2.4.</li>
+              ><strong>Ferramenta de teste de API</strong> — compare pelo menos 2 opções da secão 2.5.</li>
+            </ul>
+            <p>
+              Para cada par de ferramentas comparadas, use os criterios da secão 3 como
+              base para a avaliacão. Atribua uma nota de 1 a 5 para cada criterio.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Categorias complementares (escolha pelo menos 1)</summary>
+          <div>
+            <ul>
+              >Ferramenta de qualidade de código. (secão 2.6): ESLint, Prettier ou EditorConfig.</li>
+              >Plataforma de deploy (secão 2.7): Render, Railway ou Vercel.</li>
+            </ul>
+          </div>
+        </details>
+
+        <h3>Etapa 2 — Instalação e configuração</h3>
+        <p>
+          Apos definir quais ferramentas adotarão, cada integrante instala e
+          configura o seu ambiente. Ao final desta etapa, todos devem conseguir:
+        </p>
+        <ol>
+          >Abrir um arquivo de>.js</code> no editor escolhido com realce de sintaxe ativo.</li>
+          >Executar de>node arquivo.js</code> pelo terminal integrado.</li>
+          >Colocar um breakpoint e iniciar o debugger.</li>
+          >Fazer um commit e push para o repositório da disciplina pelo Git integrado ou GitHub Desktop.</li>
+          >Conectar ao banco de dados pelo cliente grafico escolhido.</li>
+          >Enviar uma requisicão GET de teste pelo cliente de API escolhido.</li>
+        </ol>
+
+        <h3>Etapa 3 — Relatório</h3>
+        <p>
+          Preencher o template de relatório disponivel e entregar no repositório da disciplina antes do final da aula. O relatório deve conter:
+        </p>
+        <ul>
+          >Ferramentas comparadas e descricão breve de cada uma.</li>
+          >Tabela comparativa com notas por criterio.</li>
+          >Conclusão indicando qual ferramenta foi escolhida em cada categoria e por que.</li>
+          >Print ou descricão do ambiente configurado.</li>
+        </ul>
+      </section><!-- fecha .card principal -->
+
+      <!-- SIDEBAR -->
+      <aside>
+
+        <div class="card">
+          <h3>Checklist da aula</h3>
+          <ul class="mini-list">
+            >[ ] Editor instalado e configurado</li>
+            >[ ] Node.js instalado (de>node -v</code>)</li>
+            >[ ] npm funcionando (de>npm -v</code>)</li>
+            >[ ] Git configurado (de>git config --list</code>)</li>
+            >[ ] Breakpoint testado no debugger</li>
+            >[ ] Banco escolhido (se falta tempo podem deixar o banco para depois)</li>
+            >[ ] Cliente de API definido</li>
+            >[ ] Relatório commitado no repositório</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Ferramentas recomendadas</h3>
+          <p style="font-size:0.88rem; color:var(--muted);">
+            Nao há obrigatoriedade de usar estas, mas são um bom ponto de partida
+            para quem nao sabe por onde começar.
+          </p>
+          <ul class="pill-list">
+            >VS Code</li>
+            >Node.js</li>
+            >npm</li>
+            >Git</li>
+            >GitHub Desktop</li>
+            >DBeaver</li>
+            >Thunder Client</li>
+            >ESLint</li>
+            >Prettier</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Links uteis</h3>
+          <ul class="mini-list">
+            ><a href="https://code.visualstudio.com/" target="_blank">Download VS Code</a></li>
+            ><a href="https://nodejs.org/" target="_blank">Download Node.js</a></li>
+            ><a href="https://git-scm.com/" target="_blank">Download Git</a></li>
+            ><a href="https://dbeaver.io/" target="_blank">Download DBeaver</a></li>
+            ><a href="https://www.postman.com/" target="_blank">Postman</a></li>
+            ><a href="https://insomnia.rest/" target="_blank">Insomnia</a></li>
+            ><a href="https://github.com/wilcilene
+                           ><a href="https://github.com/wilcilene/prog2-eco-2026-projetos" target="_blank">Repositorio da disciplina</a></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Categorias obrigatórias</h3>
+          <ul class="mini-list">
+            >IDE ou editor de código.</li>
+            >Cliente de banco de dados</li>
+            >Ferramenta de teste de API</li>
+          </ul>
+          <h3 style="margin-top:0.8rem;">Categorias complementares</h3>
+          <ul class="mini-list">
+            >Qualidade de código.</li>
+            >Plataforma de deploy</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Prazo de entrega</h3>
+          <p style="font-size:0.88rem;">
+            Relatorio commitado no repositório da disciplina
+            <strong>ate o final desta aula</strong>.
+          </p>
+          <p style="font-size:0.88rem; color:var(--muted);">
+            Ambiente configurado verificado
+          </p>
+        </div>
+
+      </aside>
+
+    </main>
+
+    <footer style="
+      text-align:center;
+      font-size:0.8rem;
+      color:var(--muted);
+      padding:1rem;
+      border-top:1px solid var(--border);
+      margin-top:1rem;
+    ">
+      Programação II – ECO &nbsp;|&nbsp;
+      <a href="https://wilcilene.github.io/estudos/disciplinas/programacãoii-eco/index.html"
+         style="color:var(--primary);">
+        Página da disciplina
+      </a>
+    </footer>
+
+  </body>
+</html>
+
