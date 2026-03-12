@@ -82,10 +82,9 @@
             font-family: Consolas, "Courier New", monospace;
         }
 
+        /* Agora os cards ficam em coluna, um embaixo do outro */
         .concept-card {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            display: block;
             margin-top: 1.5rem;
         }
 
@@ -94,6 +93,7 @@
             padding: 1rem;
             border-radius: 5px;
             background: #fafafa;
+            margin-bottom: 1.5rem;
         }
 
         .tip {
@@ -154,7 +154,7 @@
     <!-- 2. Saída de dados -->
     <section id="saida-dados">
         <h2>2. Saída de dados: mostrando informações no console</h2>
-        <p>Saída de dados é tudo o que o programa “fala” para o usuário. Em Java, usamos principalmente <code>System.out.print</code> e <code>System.out.println</code>.</p>
+        <p>Saída de dados é tudo o que o programa “fala” para o usuário. Em Java, usamos principalmente <code>System.out.print</code>, <code>System.out.println</code> e <code>System.out.printf</code>.</p>
 
         <div class="concept-card">
             <div class="card">
@@ -170,6 +170,7 @@ public class ExemploSaida {
 }
                 </code></pre>
             </div>
+
             <div class="card">
                 <h3><code>System.out.print</code></h3>
                 <p>Imprime o texto, mas <strong>não</strong> pula de linha.</p>
@@ -184,6 +185,7 @@ public class ExemploSaida2 {
 }
                 </code></pre>
             </div>
+
             <div class="card">
                 <h3><code>System.out.printf</code></h3>
                 <p>Permite formatar a mensagem, muito usado para números.</p>
@@ -257,6 +259,7 @@ public class EntradaNumeros {
 }
                 </code></pre>
             </div>
+
             <div class="card">
                 <h3>Lendo nome e sobrenome</h3>
                 <p>Exemplo para treinar <code>nextLine()</code> e concatenação.</p>
@@ -494,40 +497,240 @@ public class ExemploFor {
         <p class="tip"><strong>Resumo mental:</strong> use <code>for</code> quando souber exatamente quantas vezes repetir; <code>while</code> quando repetir “enquanto” uma condição for verdadeira.</p>
     </section>
 
-    <!-- 7. Exercícios criativos -->
+    <!-- 7. Exercícios com objetos -->
     <section id="desafios">
-        <h2>7. Exercícios criativos para praticar</h2>
-        <p>Use tudo o que foi visto até aqui: entrada, saída, operadores, decisões e loops. A ideia é praticar e se divertir um pouco.</p>
+        <h2>7. Exercícios com objetos e controle de fluxo</h2>
+        <p>Agora vamos juntar estruturas básicas com manipulação de <strong>objetos</strong>. Em todos os exercícios, crie classes simples, instancie objetos, atribua valores e use entrada/saída para interagir com o usuário.</p>
 
-        <h3>Exercício 1 – Calculadora do Lanche</h3>
-        <p>Crie um programa que pergunte ao usuário:</p>
+        <!-- Exercício 1 -->
+        <h3>Exercício 1 – Cofrinho Digital</h3>
+        <p>
+            Crie uma classe <code>Cofrinho</code> com os atributos <code>nomeDono</code> (String) e <code>saldo</code> (double).<br>
+            No <code>main</code>:
+        </p>
         <ul>
-            <li>quantos <strong>salgados</strong> ele quer (preço unitário: 5.00);</li>
-            <li>quantos <strong>refrigerantes</strong> (preço unitário: 4.50);</li>
-            <li>quantos <strong>doces</strong> (preço unitário: 3.25).</li>
+            <li>peça ao usuário o nome do dono e o valor que ele quer guardar;</li>
+            <li>crie um objeto <code>Cofrinho</code>, atribua o nome e atualize o saldo com o valor digitado;</li>
+            <li>mostre uma mensagem: <code>"O cofrinho de NOME agora tem SALDO reais."</code>.</li>
         </ul>
-        <p>Calcule o total a pagar e mostre formatado com duas casas decimais usando <code>System.out.printf</code>.</p>
 
-        <h3>Exercício 2 – Termômetro do Humor</h3>
-        <p>Peça ao usuário que informe um número inteiro de 1 a 5 representando o humor do dia (1 = péssimo, 5 = ótimo). Use um <code>switch</code> para imprimir uma mensagem divertida para cada caso.</p>
+        <button class="btn-resposta" data-target="resp-cofrinho"
+                style="margin-bottom:0.5rem; padding:0.4rem 0.8rem; background-color: var(--primary-color); color:#fff; border:none; border-radius:4px; cursor:pointer;">
+            Mostrar/ocultar resposta em Java
+        </button>
 
-        <h3>Exercício 3 – Contador de Café</h3>
-        <p>Peça ao usuário um número N e, usando um <code>for</code>, imprima de 1 até N mensagens do tipo: <code>"Café número X"</code>. Esse é o contador oficial de cafés tomados enquanto estuda Programação I.</p>
+        <div id="resp-cofrinho" style="display:none; margin-bottom:1.5rem;">
+            <pre><code class="language-java">
+import java.util.Scanner;
 
-        <h3>Exercício 4 – Senha da Wi‑Fi da Sala</h3>
-        <p>Simule um sistema simples que:</p>
+class Cofrinho {
+    String nomeDono;
+    double saldo;
+}
+
+public class ProgramaCofrinho {
+
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+
+        Cofrinho cofre = new Cofrinho();
+
+        System.out.print("Nome do dono do cofrinho: ");
+        cofre.nomeDono = entrada.nextLine();
+
+        System.out.print("Quanto deseja guardar agora? ");
+        double valor = entrada.nextDouble();
+
+        cofre.saldo = valor;
+
+        System.out.println("O cofrinho de " + cofre.nomeDono
+                + " agora tem R$ " + cofre.saldo + " reais.");
+
+        entrada.close();
+    }
+}
+            </code></pre>
+        </div>
+
+        <!-- Exercício 2 -->
+        <h3>Exercício 2 – Termômetro de Sala</h3>
+        <p>
+            Crie uma classe <code>Sala</code> com os atributos <code>nome</code> (String) e <code>temperatura</code> (double).<br>
+            No <code>main</code>:
+        </p>
         <ul>
-            <li>pede que o usuário digite uma senha (por exemplo, “java123”);</li>
-            <li>se a senha estiver correta, exibe “Acesso liberado!”;</li>
-            <li>se estiver errada, exibe “Senha incorreta, tente novamente.”.</li>
+            <li>leia do teclado o nome da sala e a temperatura atual;</li>
+            <li>crie um objeto <code>Sala</code> com esses valores;</li>
+            <li>use um <code>if</code>/<code>else</code> para dizer se a sala está “Fria” (&lt; 20), “Confortável” (entre 20 e 25) ou “Quente” (&gt; 25).</li>
         </ul>
-        <p>Use <code>if</code>, <code>else</code> e comparação de <code>String</code> com <code>.equals()</code>. (Se quiser ir além, permita até 3 tentativas usando um loop.)</p>
 
-        <h3>Exercício 5 – Playlist da Semana</h3>
-        <p>Peça ao usuário um número de 1 a 7 representando o dia da semana e, usando <code>switch</code>, sugira um tipo de playlist para estudar (por exemplo, “Lo‑fi para focar”, “Rock para depurar”, “Clássica para revisar teória”...).</p>
+        <button class="btn-resposta" data-target="resp-sala"
+                style="margin-bottom:0.5rem; padding:0.4rem 0.8rem; background-color: var(--primary-color); color:#fff; border:none; border-radius:4px; cursor:pointer;">
+            Mostrar/ocultar resposta em Java
+        </button>
+
+        <div id="resp-sala" style="display:none; margin-bottom:1.5rem;">
+            <pre><code class="language-java">
+import java.util.Scanner;
+
+class Sala {
+    String nome;
+    double temperatura;
+}
+
+public class ProgramaSala {
+
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+
+        Sala sala = new Sala();
+
+        System.out.print("Nome da sala: ");
+        sala.nome = entrada.nextLine();
+
+        System.out.print("Temperatura atual da sala: ");
+        sala.temperatura = entrada.nextDouble();
+
+        System.out.println("Sala: " + sala.nome
+                + " | Temperatura: " + sala.temperatura + " ºC");
+
+        if (sala.temperatura < 20) {
+            System.out.println("Situação: Fria");
+        } else if (sala.temperatura <= 25) {
+            System.out.println("Situação: Confortável");
+        } else {
+            System.out.println("Situação: Quente");
+        }
+
+        entrada.close();
+    }
+}
+            </code></pre>
+        </div>
+
+        <!-- Exercício 3 -->
+        <h3>Exercício 3 – Agenda de Estudo</h3>
+        <p>
+            Crie uma classe <code>Estudo</code> com os atributos <code>disciplina</code> (String) e <code>minutos</code> (int).<br>
+            No <code>main</code>:
+        </p>
+        <ul>
+            <li>peça ao usuário o nome de uma disciplina e quantos minutos ele estudou hoje;</li>
+            <li>crie um objeto <code>Estudo</code> e preencha os atributos;</li>
+            <li>use um <code>if</code> para escrever:
+                <ul>
+                    <li>“Bom começo!” se minutos &lt; 30;</li>
+                    <li>“Boa dedicação!” se entre 30 e 59;</li>
+                    <li>“Modo focado ativado!” se minutos ≥ 60.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <button class="btn-resposta" data-target="resp-estudo"
+                style="margin-bottom:0.5rem; padding:0.4rem 0.8rem; background-color: var(--primary-color); color:#fff; border:none; border-radius:4px; cursor:pointer;">
+            Mostrar/ocultar resposta em Java
+        </button>
+
+        <div id="resp-estudo" style="display:none; margin-bottom:1.5rem;">
+            <pre><code class="language-java">
+import java.util.Scanner;
+
+class Estudo {
+    String disciplina;
+    int minutos;
+}
+
+public class ProgramaEstudo {
+
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+
+        Estudo estudo = new Estudo();
+
+        System.out.print("Disciplina estudada: ");
+        estudo.disciplina = entrada.nextLine();
+
+        System.out.print("Quantos minutos você estudou hoje? ");
+        estudo.minutos = entrada.nextInt();
+
+        System.out.println("Você estudou " + estudo.minutos
+                + " minutos de " + estudo.disciplina + ".");
+
+        if (estudo.minutos < 30) {
+            System.out.println("Bom começo!");
+        } else if (estudo.minutos < 60) {
+            System.out.println("Boa dedicação!");
+        } else {
+            System.out.println("Modo focado ativado!");
+        }
+
+        entrada.close();
+    }
+}
+            </code></pre>
+        </div>
+
+        <!-- Exercício 4 -->
+        <h3>Exercício 4 – Loja de Camisetas</h3>
+        <p>
+            Crie uma classe <code>Camiseta</code> com os atributos <code>tamanho</code> (String), <code>cor</code> (String) e <code>preco</code> (double).<br>
+            No <code>main</code>:
+        </p>
+        <ul>
+            <li>leia tamanho, cor e preço digitados pelo usuário;</li>
+            <li>crie um objeto <code>Camiseta</code> com esses dados;</li>
+            <li>se o preço for maior que 100, mostre “Camiseta premium”; caso contrário, “Camiseta padrão”.</li>
+        </ul>
+
+        <button class="btn-resposta" data-target="resp-camiseta"
+                style="margin-bottom:0.5rem; padding:0.4rem 0.8rem; background-color: var(--primary-color); color:#fff; border:none; border-radius:4px; cursor:pointer;">
+            Mostrar/ocultar resposta em Java
+        </button>
+
+        <div id="resp-camiseta" style="display:none; margin-bottom:1.5rem;">
+            <pre><code class="language-java">
+import java.util.Scanner;
+
+class Camiseta {
+    String tamanho;
+    String cor;
+    double preco;
+}
+
+public class ProgramaCamiseta {
+
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+
+        Camiseta camiseta = new Camiseta();
+
+        System.out.print("Tamanho da camiseta: ");
+        camiseta.tamanho = entrada.nextLine();
+
+        System.out.print("Cor da camiseta: ");
+        camiseta.cor = entrada.nextLine();
+
+        System.out.print("Preço da camiseta: ");
+        camiseta.preco = entrada.nextDouble();
+
+        System.out.println("Camiseta " + camiseta.cor
+                + " tamanho " + camiseta.tamanho
+                + " custa R$ " + camiseta.preco);
+
+        if (camiseta.preco > 100) {
+            System.out.println("Categoria: Camiseta premium");
+        } else {
+            System.out.println("Categoria: Camiseta padrão");
+        }
+
+        entrada.close();
+    }
+}
+            </code></pre>
+        </div>
 
         <div class="tip">
-            <strong>Dica final:</strong> não precisa resolver tudo de uma vez. Escolha 1 ou 2 exercícios, implemente, teste e compartilhe com colegas. Programar também é um processo colaborativo.
+            <strong>Dica:</strong> se estiver confortável, tente adaptar esses exercícios para usar mais de um objeto (por exemplo, dois cofrinhos, duas salas, etc.) antes de partirmos para arrays.
         </div>
     </section>
 
@@ -536,6 +739,23 @@ public class ExemploFor {
 <footer>
     <p>Use esta página como apoio: volte sempre que precisar revisar entrada, saída, operadores ou estruturas de controle.</p>
 </footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const botoes = document.querySelectorAll('.btn-resposta');
+
+    botoes.forEach(function (botao) {
+      const alvoId = botao.getAttribute('data-target');
+      const alvo = document.getElementById(alvoId);
+      if (!alvo) return;
+
+      botao.addEventListener('click', function () {
+        const visivel = alvo.style.display === 'block';
+        alvo.style.display = visivel ? 'none' : 'block';
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
