@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estruturas Básicas: Entrada, Saída, Operadores e Controle</title>
+    <style>
+        :root {
+            --primary-color: #0073b7;
+            --secondary-color: #2c3e50;
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --code-bg: #2d2d2d;
+            --accent-color: #e67e22;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 3rem 1rem 2rem 1rem;
+            text-align: center;
+            border-bottom: 5px solid var(--primary-color);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 999px;
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover {
+            background-color: #005a8d;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--primary-color);
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            color: #ccc;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+
+        code {
+            font-family: Consolas, "Courier New", monospace;
+        }
+
+        .concept-card {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            border-radius: 5px;
+            background: #fafafa;
+        }
+
+        .tip {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 0.75rem;
+            margin: 0.5rem 0 1rem;
+            font-size: 0.9rem;
+        }
+
+        .step {
+            margin-bottom: 1rem;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            line-height: 22px;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #777;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Estruturas Básicas em Java</h1>
+    <p>Entrada e saída de dados, operadores e estruturas de controle</p>
+    <a class="back-link" href="https://wilcilene.github.io/estudos/disciplinas/programacaoi-eco/index.html">
+        ← Voltar para página principal
+    </a>
+</header>
+
+<div class="container">
+
+    <!-- 1. Visão geral -->
+    <section id="visao-geral">
+        <h2>1. Para que serve esta página?</h2>
+        <p>Esta página resume as <strong>estruturas básicas</strong> que você vai usar o tempo todo em Java: como ler e mostrar dados, fazer contas e tomar decisões no código.</p>
+        <p>A ideia é que você consiga revisar sozinho(a) em casa, experimentando os exemplos no seu ambiente Java já instalado.</p>
+
+        <div class="tip">
+            <strong>Sugestão de estudo:</strong> leia cada seção, copie os exemplos para o VS Code, altere os valores e observe o que muda na saída.
+        </div>
+    </section>
+
+    <!-- 2. Saída de dados -->
+    <section id="saida-dados">
+        <h2>2. Saída de dados: mostrando informações no console</h2>
+        <p>Saída de dados é tudo o que o programa “fala” para o usuário. Em Java, usamos principalmente <code>System.out.print</code> e <code>System.out.println</code>.</p>
+
+        <div class="concept-card">
+            <div class="card">
+                <h3><code>System.out.println</code></h3>
+                <p>Imprime o texto e pula para a próxima linha.</p>
+                <pre><code class="language-java">
+public class ExemploSaida {
+
+    public static void main(String[] args) {
+        System.out.println("Olá, mundo!");
+        System.out.println("Segunda linha de mensagem.");
+    }
+}
+                </code></pre>
+            </div>
+            <div class="card">
+                <h3><code>System.out.print</code></h3>
+                <p>Imprime o texto, mas <strong>não</strong> pula de linha.</p>
+                <pre><code class="language-java">
+public class ExemploSaida2 {
+
+    public static void main(String[] args) {
+        System.out.print("Olá, ");
+        System.out.print("estudante!");
+        // Saída: Olá, estudante!
+    }
+}
+                </code></pre>
+            </div>
+            <div class="card">
+                <h3><code>System.out.printf</code></h3>
+                <p>Permite formatar a mensagem, muito usado para números.</p>
+                <pre><code class="language-java">
+public class ExemploPrintf {
+
+    public static void main(String[] args) {
+        String nome = "Ana";
+        double nota = 8.75;
+
+        System.out.printf("Aluno(a): %s - Nota: %.2f%n", nome, nota);
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Entrada de dados -->
+    <section id="entrada-dados">
+        <h2>3. Entrada de dados: lendo informações do teclado</h2>
+        <p>Para ler o que o usuário digita, usaremos a classe <code>Scanner</code> do pacote <code>java.util</code>.</p>
+
+        <div class="step">
+            <span class="step-number">1</span>
+            <strong>Importar e criar o Scanner</strong>
+            <pre><code class="language-java">
+import java.util.Scanner;
+
+public class EntradaSimples {
+
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+
+        System.out.print("Digite seu nome: ");
+        String nome = entrada.nextLine();
+
+        System.out.print("Digite sua idade: ");
+        int idade = entrada.nextInt();
+
+        System.out.println("Olá, " + nome + "! Você tem " + idade + " anos.");
+
+        entrada.close();
+    }
+}
+            </code></pre>
+        </div>
+
+        <div class="concept-card">
+            <div class="card">
+                <h3>Lendo inteiros e decimais</h3>
+                <pre><code class="language-java">
+import java.util.Scanner;
+
+public class EntradaNumeros {
+
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+
+        System.out.print("Digite um número inteiro: ");
+        int inteiro = entrada.nextInt();
+
+        System.out.print("Digite um número decimal: ");
+        double decimal = entrada.nextDouble();
+
+        System.out.println("Inteiro = " + inteiro);
+        System.out.println("Decimal = " + decimal);
+
+        entrada.close();
+    }
+}
+                </code></pre>
+            </div>
+            <div class="card">
+                <h3>Lendo nome e sobrenome</h3>
+                <p>Exemplo para treinar <code>nextLine()</code> e concatenação.</p>
+                <pre><code class="language-java">
+import java.util.Scanner;
+
+public class NomeCompleto {
+
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+
+        System.out.print("Digite seu primeiro nome: ");
+        String primeiro = entrada.nextLine();
+
+        System.out.print("Digite seu sobrenome: ");
+        String sobrenome = entrada.nextLine();
+
+        String nomeCompleto = primeiro + " " + sobrenome;
+
+        System.out.println("Olá, " + nomeCompleto + "!");
+
+        entrada.close();
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Operadores básicos -->
+    <section id="operadores">
+        <h2>4. Operadores: fazendo contas e comparações</h2>
+
+        <div class="concept-card">
+            <div class="card">
+                <h3>Operadores aritméticos</h3>
+                <ul>
+                    <li><code>+</code> soma</li>
+                    <li><code>-</code> subtração</li>
+                    <li><code>*</code> multiplicação</li>
+                    <li><code>/</code> divisão</li>
+                    <li><code>%</code> resto da divisão (módulo)</li>
+                </ul>
+                <pre><code class="language-java">
+public class OperadoresAritmeticos {
+
+    public static void main(String[] args) {
+        int a = 10;
+        int b = 3;
+
+        System.out.println("Soma: " + (a + b));
+        System.out.println("Diferença: " + (a - b));
+        System.out.println("Produto: " + (a * b));
+        System.out.println("Quociente inteiro: " + (a / b));
+        System.out.println("Resto da divisão: " + (a % b));
+    }
+}
+                </code></pre>
+            </div>
+
+            <div class="card">
+                <h3>Operadores relacionais</h3>
+                <ul>
+                    <li><code>==</code>, <code>!=</code></li>
+                    <li><code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code></li>
+                </ul>
+                <pre><code class="language-java">
+public class OperadoresRelacionais {
+
+    public static void main(String[] args) {
+        int x = 5;
+        int y = 8;
+
+        System.out.println(x == y); // false
+        System.out.println(x != y); // true
+        System.out.println(x &lt; y);  // true
+    }
+}
+                </code></pre>
+                <p class="tip"><strong>Atenção:</strong> para comparar <em>Strings</em>, use <code>.equals()</code>, não <code>==</code>.</p>
+            </div>
+
+            <div class="card">
+                <h3>Operadores lógicos</h3>
+                <ul>
+                    <li><code>&amp;&amp;</code> (E lógico)</li>
+                    <li><code>||</code> (OU lógico)</li>
+                    <li><code>!</code> (NÃO lógico)</li>
+                </ul>
+                <pre><code class="language-java">
+public class OperadoresLogicos {
+
+    public static void main(String[] args) {
+        boolean temCarteira = true;
+        boolean maiorDeIdade = false;
+
+        boolean podeDirigir = temCarteira && maiorDeIdade;
+        System.out.println("Pode dirigir? " + podeDirigir);
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Estruturas de controle: if / else / switch -->
+    <section id="controle-decisoes">
+        <h2>5. Estruturas de controle: tomando decisões</h2>
+        <p>Estruturas de controle definem “caminhos” diferentes no programa, dependendo dos valores das variáveis.</p>
+
+        <div class="concept-card">
+            <div class="card">
+                <h3><code>if</code> e <code>else</code></h3>
+                <pre><code class="language-java">
+public class ExemploIf {
+
+    public static void main(String[] args) {
+        int idade = 17;
+
+        if (idade >= 18) {
+            System.out.println("Você é maior de idade.");
+        } else {
+            System.out.println("Você é menor de idade.");
+        }
+    }
+}
+                </code></pre>
+            </div>
+
+            <div class="card">
+                <h3><code>if</code> encadeado</h3>
+                <pre><code class="language-java">
+public class ExemploIfEncadeado {
+
+    public static void main(String[] args) {
+        double nota = 8.5;
+
+        if (nota >= 9.0) {
+            System.out.println("Conceito A");
+        } else if (nota >= 7.0) {
+            System.out.println("Conceito B");
+        } else if (nota >= 5.0) {
+            System.out.println("Conceito C");
+        } else {
+            System.out.println("Conceito D");
+        }
+    }
+}
+                </code></pre>
+            </div>
+
+            <div class="card">
+                <h3><code>switch</code> (múltiplos casos)</h3>
+                <pre><code class="language-java">
+public class ExemploSwitch {
+
+    public static void main(String[] args) {
+        int dia = 3;
+
+        switch (dia) {
+            case 1:
+                System.out.println("Segunda-feira");
+                break;
+            case 2:
+                System.out.println("Terça-feira");
+                break;
+            case 3:
+                System.out.println("Quarta-feira");
+                break;
+            default:
+                System.out.println("Outro dia");
+        }
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Estruturas de repetição -->
+    <section id="loops">
+        <h2>6. Estruturas de repetição (loops)</h2>
+        <p>Loops permitem repetir um bloco de código várias vezes. Aqui estão os três principais: <code>while</code>, <code>do-while</code> e <code>for</code>.</p>
+
+        <div class="concept-card">
+            <div class="card">
+                <h3><code>while</code></h3>
+                <pre><code class="language-java">
+public class ExemploWhile {
+
+    public static void main(String[] args) {
+        int contador = 1;
+
+        while (contador <= 5) {
+            System.out.println("Valor: " + contador);
+            contador = contador + 1;
+        }
+    }
+}
+                </code></pre>
+            </div>
+
+            <div class="card">
+                <h3><code>do-while</code></h3>
+                <pre><code class="language-java">
+public class ExemploDoWhile {
+
+    public static void main(String[] args) {
+        int numero = 1;
+
+        do {
+            System.out.println("Número: " + numero);
+            numero++;
+        } while (numero <= 3);
+    }
+}
+                </code></pre>
+            </div>
+
+            <div class="card">
+                <h3><code>for</code></h3>
+                <pre><code class="language-java">
+public class ExemploFor {
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 5; i++) {
+            System.out.println("i vale: " + i);
+        }
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <p class="tip"><strong>Resumo mental:</strong> use <code>for</code> quando souber exatamente quantas vezes repetir; <code>while</code> quando repetir “enquanto” uma condição for verdadeira.</p>
+    </section>
+
+    <!-- 7. Exercícios criativos -->
+    <section id="desafios">
+        <h2>7. Exercícios criativos para praticar</h2>
+        <p>Use tudo o que foi visto até aqui: entrada, saída, operadores, decisões e loops. A ideia é praticar e se divertir um pouco.</p>
+
+        <h3>Exercício 1 – Calculadora do Lanche</h3>
+        <p>Crie um programa que pergunte ao usuário:</p>
+        <ul>
+            <li>quantos <strong>salgados</strong> ele quer (preço unitário: 5.00);</li>
+            <li>quantos <strong>refrigerantes</strong> (preço unitário: 4.50);</li>
+            <li>quantos <strong>doces</strong> (preço unitário: 3.25).</li>
+        </ul>
+        <p>Calcule o total a pagar e mostre formatado com duas casas decimais usando <code>System.out.printf</code>.</p>
+
+        <h3>Exercício 2 – Termômetro do Humor</h3>
+        <p>Peça ao usuário que informe um número inteiro de 1 a 5 representando o humor do dia (1 = péssimo, 5 = ótimo). Use um <code>switch</code> para imprimir uma mensagem divertida para cada caso.</p>
+
+        <h3>Exercício 3 – Contador de Café</h3>
+        <p>Peça ao usuário um número N e, usando um <code>for</code>, imprima de 1 até N mensagens do tipo: <code>"Café número X"</code>. Esse é o contador oficial de cafés tomados enquanto estuda Programação I.</p>
+
+        <h3>Exercício 4 – Senha da Wi‑Fi da Sala</h3>
+        <p>Simule um sistema simples que:</p>
+        <ul>
+            <li>pede que o usuário digite uma senha (por exemplo, “java123”);</li>
+            <li>se a senha estiver correta, exibe “Acesso liberado!”;</li>
+            <li>se estiver errada, exibe “Senha incorreta, tente novamente.”.</li>
+        </ul>
+        <p>Use <code>if</code>, <code>else</code> e comparação de <code>String</code> com <code>.equals()</code>. (Se quiser ir além, permita até 3 tentativas usando um loop.)</p>
+
+        <h3>Exercício 5 – Playlist da Semana</h3>
+        <p>Peça ao usuário um número de 1 a 7 representando o dia da semana e, usando <code>switch</code>, sugira um tipo de playlist para estudar (por exemplo, “Lo‑fi para focar”, “Rock para depurar”, “Clássica para revisar teória”...).</p>
+
+        <div class="tip">
+            <strong>Dica final:</strong> não precisa resolver tudo de uma vez. Escolha 1 ou 2 exercícios, implemente, teste e compartilhe com colegas. Programar também é um processo colaborativo.
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p>Use esta página como apoio: volte sempre que precisar revisar entrada, saída, operadores ou estruturas de controle.</p>
+</footer>
+
+</body>
+</html>
