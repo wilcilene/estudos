@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>História da Computação, JDK e Primeiros Programas</title>
+    <style>
+        :root {
+            --primary-color: #0073b7;
+            --secondary-color: #2c3e50;
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --code-bg: #2d2d2d;
+            --accent-color: #e67e22;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            border-bottom: 5px solid var(--primary-color);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--primary-color);
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            color: #ccc;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+
+        .concept-card {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            border-radius: 5px;
+            background: #fafafa;
+        }
+
+        .step {
+            margin-bottom: 1rem;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            line-height: 22px;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+        }
+
+        .os-badge {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            background-color: #ecf0f1;
+            color: #555;
+            margin-left: 0.5rem;
+        }
+
+        .tip {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 0.75rem;
+            margin: 0.5rem 0 1rem;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #777;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>História da Computação, JDK e Primeiros Programas</h1>
+    <p>Guia para você configurar o ambiente Java em casa e dar os primeiros passos</p>
+</header>
+
+<div class="container">
+
+    <!-- Seção 1: História em 5 minutos -->
+    <section id="historia">
+        <h2>1. Uma viagem rápida pela história da computação</h2>
+        <p>Esta aula será comentada rapidamente em sala, mas o estudo principal é feito por você, com calma. A ideia é ter contexto: de onde veio tudo isso até chegarmos ao Java.</p>
+
+        <div class="concept-card">
+            <div class="card">
+                <h3>Da contagem manual às máquinas</h3>
+                <ul>
+                    <li>Ábaco e outras ferramentas de contagem.</li>
+                    <li>Máquina Analítica de Charles Babbage (século XIX) como “ancestral” do computador programável.</li>
+                    <li>Cartões perfurados usados em teares e depois em computadores.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Computadores eletrônicos</h3>
+                <ul>
+                    <li>Primeiras máquinas eletrônicas na década de 1940 (ENIAC, Colossus).</li>
+                    <li>Transistores e circuitos integrados permitindo computadores menores.</li>
+                    <li>Chegada dos computadores pessoais (PCs) nas décadas de 70–80.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Do “código de máquina” ao Java</h3>
+                <ul>
+                    <li>Linguagens de baixo nível (Assembly) evoluindo para linguagens de alto nível (C, Pascal, etc.).</li>
+                    <li>Java surgindo na década de 90 com a proposta <span class="highlight">“Write Once, Run Anywhere”</span>.</li>
+                    <li>Hoje, Java roda em servidores, aplicações desktop, Android, sistemas embarcados e muito mais.</li>
+                </ul>
+            </div>
+        </div>
+
+        <p class="tip"><strong>Dica:</strong> se quiser se aprofundar, procure depois por “gerações de computadores” e “história da linguagem Java”. Não é cobrado em prova, é cultura de programador.</p>
+    </section>
+
+    <!-- Seção 2: O que vamos instalar -->
+    <section id="visao-geral-ambiente">
+        <h2>2. O que exatamente você precisa instalar?</h2>
+        <p>Para programar em Java em casa, vamos precisar de três elementos:</p>
+        <ul>
+            <li><strong>JDK (Java Development Kit)</strong>: kit com compilador (<code>javac</code>) e ferramentas para desenvolver em Java.</li>
+            <li><strong>Editor ou IDE</strong>: programa onde vamos escrever o código (usaremos VS Code, mas você pode usar outro se preferir).</li>
+            <li><strong>Extensão de suporte ao Java no editor</strong>: para ter highlight, execução fácil e ajuda da IDE.</li>
+        </ul>
+        <p class="tip"><strong>Objetivo desta página:</strong> que você consiga, sozinho(a), instalar tudo e rodar um “Olá, Mundo!” em casa, independente do sistema operacional.</p>
+    </section>
+
+    <!-- Seção 3: Instalação do JDK no Windows -->
+    <section id="jdk-windows">
+        <h2>3. Instalando o JDK no Windows <span class="os-badge">Windows 10/11</span></h2>
+
+        <div class="step">
+            <span class="step-number">1</span>
+            <strong>Baixar o JDK</strong>
+            <p>Acesse o site oficial da Oracle ou uma distribuição OpenJDK (como Temurin). Procure pela versão LTS (por exemplo, Java 17 ou 21) para Windows x64.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-number">2</span>
+            <strong>Executar o instalador</strong>
+            <p>Depois de baixar o arquivo <code>.exe</code>, dê dois cliques e siga o assistente (Next &gt; Next &gt; Finish). Guarde o caminho de instalação (por exemplo, <code>C:\Program Files\Java\jdk-17</code>).</p>
+        </div>
+
+        <div class="step">
+            <span class="step-number">3</span>
+            <strong>Configurar a variável de ambiente (se necessário)</strong>
+            <p>Muitos instaladores já configuram o <code>PATH</code> automaticamente. Para conferir:</p>
+            <ol>
+                <li>Abra o menu Iniciar e digite <strong>cmd</strong> para abrir o Prompt de Comando.</li>
+                <li>Digite <code>java -version</code> e pressione Enter.</li>
+                <li>Digite <code>javac -version</code> e pressione Enter.</li>
+            </ol>
+            <p>Se os comandos mostrarem a versão (por exemplo, <code>17.0.x</code>), está tudo certo. Se aparecer mensagem de erro, será necessário ajustar o <code>PATH</code> nas variáveis de ambiente do Windows.</p>
+        </div>
+
+        <p class="tip"><strong>Se deu erro em <code>javac</code>:</strong> anote a mensagem e traga na próxima aula, mas tente antes reinstalar o JDK e marcar a opção que adiciona o Java ao PATH, se o instalador tiver.</p>
+    </section>
+
+    <!-- Seção 4: Instalação do JDK no Linux -->
+    <section id="jdk-linux">
+        <h2>4. Instalando o JDK no Linux <span class="os-badge">Ubuntu / derivados</span></h2>
+
+        <div class="step">
+            <span class="step-number">1</span>
+            <strong>Abrir o terminal</strong>
+            <p>Use o atalho <strong>Ctrl + Alt + T</strong> ou procure por “Terminal” no menu do sistema.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-number">2</span>
+            <strong>Instalar o OpenJDK pelo gerenciador de pacotes</strong>
+            <p>No terminal, digite:</p>
+            <pre><code>sudo apt update
+sudo apt install -y openjdk-17-jdk
+</code></pre>
+        </div>
+
+        <div class="step">
+            <span class="step-number">3</span>
+            <strong>Conferir se deu certo</strong>
+            <p>No terminal, rode:</p>
+            <pre><code>java -version
+javac -version
+</code></pre>
+            <p>Se as versões aparecerem (por exemplo, <code>openjdk version "17..."</code>), o JDK está pronto.</p>
+        </div>
+
+        <p class="tip"><strong>Outras distribuições Linux:</strong> em Fedora, Arch, etc., o comando muda um pouco, mas a ideia é sempre instalar o pacote <code>openjdk-XX-jdk</code> pelo gerenciador de pacotes nativo.</p>
+    </section>
+
+    <!-- Seção 5: Instalação do JDK no macOS -->
+    <section id="jdk-macos">
+        <h2>5. Instalando o JDK no macOS <span class="os-badge">macOS</span></h2>
+
+        <div class="step">
+            <span class="step-number">1</span>
+            <strong>Baixar o JDK</strong>
+            <p>Acesse o site da Oracle ou uma distribuição OpenJDK para macOS (Intel ou Apple Silicon, conforme seu computador). Baixe o instalador <code>.dmg</code>.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-number">2</span>
+            <strong>Instalar</strong>
+            <p>Abra o arquivo <code>.dmg</code>, clique duas vezes no pacote de instalação e siga o assistente.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-number">3</span>
+            <strong>Conferir no Terminal</strong>
+            <p>Abra o app <strong>Terminal</strong> (via Spotlight) e digite:</p>
+            <pre><code>java -version
+javac -version
+</code></pre>
+            <p>Se aparecer a versão do Java, o ambiente está configurado.</p>
+        </div>
+    </section>
+
+    <!-- Seção 6: Instalar o VS Code -->
+    <section id="vscode">
+        <h2>6. Instalando o VS Code e extensão de Java</h2>
+
+        <div class="step">
+            <span class="step-number">1</span>
+            <strong>Baixar e instalar o VS Code</strong>
+            <p>Acesse o site do Visual Studio Code e baixe a versão para o seu sistema (Windows, Linux ou macOS). Instale normalmente (próximo, próximo, concluir).</p>
+        </div>
+
+        <div class="step">
+            <span class="step-number">2</span>
+            <strong>Instalar a extensão de Java</strong>
+            <ol>
+                <li>Abra o VS Code.</li>
+                <li>Clique no ícone de extensões (quadradinho) na barra lateral esquerda.</li>
+                <li>Pesquise por <strong>“Extension Pack for Java”</strong>.</li>
+                <li>Clique em <strong>Install</strong>.</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <span class="step-number">3</span>
+            <strong>Conferir se a extensão reconheceu o JDK</strong>
+            <p>Depois da instalação, o VS Code costuma detectar o JDK automaticamente. Se surgir uma mensagem sobre “Java runtime”, escolha o JDK que você instalou.</p>
+
+        </div>
+
+        <p class="tip"><strong>Importante:</strong> primeiro instale o JDK, depois o VS Code + extensão. Isso evita vários erros.</p>
+    </section>
+
+    <!-- Seção 7: Primeiro programa via terminal -->
+    <section id="primeiro-programa-terminal">
+        <h2>7. Seu primeiro programa Java pelo terminal</h2>
+        <p>Antes de usar a IDE, vamos garantir que o compilador funciona. Siga os passos abaixo:</p>
+
+        <div class="step">
+            <span class="step-number">1</span>
+            <strong>Criar o arquivo</strong>
+            <p>Crie uma pasta simples, por exemplo <code>C:\java-testes</code> (Windows) ou <code>~/java-testes</code> (Linux/macOS).</p>
+            <p>Dentro dela, crie um arquivo chamado <code>OlaMundo.java</code> com este conteúdo:</p>
+            <pre><code class="language-java">
+public class OlaMundo {
+
+    public static void main(String[] args) {
+        System.out.println("Olá, Mundo Java!");
+    }
+}
+            </code></pre>
+        </div>
+
+        <div class="step">
+            <span class="step-number">2</span>
+            <strong>Compilar</strong>
+            <p>Abra o terminal/prompt dentro dessa pasta e execute:</p>
+            <pre><code>javac OlaMundo.java
+</code></pre>
+            <p>Se tudo deu certo, um arquivo <code>OlaMundo.class</code> será criado.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-number">3</span>
+            <strong>Executar</strong>
+            <p>No mesmo terminal, rode:</p>
+            <pre><code>java OlaMundo
+</code></pre>
+            <p>Você deve ver no console: <code>Olá, Mundo Java!</code></p>
+        </div>
+
+        <p class="tip"><strong>Se aparecer erro:</strong> confira se o nome da classe é exatamente <code>OlaMundo</code> e se o arquivo tem o nome <code>OlaMundo.java</code> (sem espaços a mais).</p>
+    </section>
+
+    <!-- Seção 8: Primeiro programa pelo VS Code -->
+    <section id="primeiro-programa-vscode">
+        <h2>8. Primeiro programa Java no VS Code</h2>
+        <p>Agora vamos repetir a ideia do “Olá, Mundo!” usando o VS Code, como você fará nas próximas aulas.</p>
+
+        <div class="step">
+            <span class="step-number">1</span>
+            <strong>Abrir a pasta do projeto</strong>
+            <ol>
+                <li>Abra o VS Code.</li>
+                <li>Clique em <strong>File &gt; Open Folder...</strong> e selecione a pasta onde deseja guardar seus códigos de Java (por exemplo, <code>java-projetos</code>).</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <span class="step-number">2</span>
+            <strong>Criar o arquivo Java</strong>
+            <ol>
+                <li>No VS Code, clique em “New File” e crie um arquivo chamado <code>OlaEstudante.java</code>.</li>
+                <li>Cole o código abaixo:</li>
+            </ol>
+            <pre><code class="language-java">
+public class OlaEstudante {
+
+    public static void main(String[] args) {
+        System.out.println("Olá, estudante de Programação I!");
+    }
+}
+            </code></pre>
+        </div>
+
+        <div class="step">
+            <span class="step-number">3</span>
+            <strong>Executar pelo VS Code</strong>
+            <p>Se a extensão de Java estiver instalada, deve aparecer um link ou ícone de <strong>Run</strong> (▶) perto do método <code>main</code> ou no canto superior direito do editor.</p>
+            <ol>
+                <li>Clique em <strong>Run</strong> ou use o atalho sugerido pela extensão.</li>
+                <li>Veja o resultado na janela de saída/terminal integrada ao VS Code.</li>
+            </ol>
+        </div>
+
+        <p class="tip"><strong>Meta desta página:</strong> se você conseguir chegar no “Olá, Mundo Java!” (terminal) e no “Olá, estudante de Programação I!” (VS Code), o ambiente está pronto para as próximas aulas.</p>
+    </section>
+
+    <!-- Seção 9: Checklist final -->
+    <section id="checklist">
+        <h2>9. Checklist rápido (antes da próxima aula)</h2>
+        <ul>
+            <li>[ ] JDK instalado e <code>java -version</code> funcionando.</li>
+            <li>[ ] <code>javac -version</code> funcionando.</li>
+            <li>[ ] VS Code instalado.</li>
+            <li>[ ] Extensão “Extension Pack for Java” instalada.</li>
+            <li>[ ] “Olá, Mundo!” rodando no terminal.</li>
+            <li>[ ] “Olá, estudante de Programação I!” rodando no VS Code.</li>
+        </ul>
+        <p class="tip"><strong>Se alguma etapa não funcionar:</strong> tire prints da tela de erro ou copie a mensagem e leve para discutirmos em sala. A ideia é que você tente sozinho(a) primeiro, mas não ficará travado por isso.</p>
+    </section>
+
+</div>
+
+<footer>
+    <p>Esta página foi pensada para você configurar tudo com autonomia. Se algo não funcionar, leve sua dúvida (e o erro) para a próxima aula.</p>
+</footer>
+
+</body>
+</html>
