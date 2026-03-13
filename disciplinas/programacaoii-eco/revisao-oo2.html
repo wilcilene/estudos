@@ -622,14 +622,22 @@ try {
           arquivo de texto.
         </p>
 
-        <pre><code>&lt;h3&gt;Gerenciador de tarefas&lt;/h3&gt;
-&lt;input id="novaTarefa" placeholder="Digite uma tarefa"&gt;
-&lt;button id="btnAdicionar"&gt;Adicionar&lt;/button&gt;
-&lt;button id="btnExportar"&gt;Exportar tarefas&lt;/button&gt;
+        <pre><code><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gerenciador de Tarefas</title>
+</head>
+<body>
 
-&lt;ul id="listaTarefas"&gt;&lt;/ul&gt;
+<h3>Gerenciador de tarefas</h3>
+<input id="novaTarefa" placeholder="Digite uma tarefa">
+<button id="btnAdicionar">Adicionar</button>
+<button id="btnExportar">Exportar tarefas</button>
 
-&lt;script&gt;
+<ul id="listaTarefas"></ul>
+
+<script>
 // "Interface" RepositorioTarefas: add(tarefa), listar()
 class RepositorioTarefas {
   add(tarefa) {
@@ -690,29 +698,7 @@ function atualizarLista() {
   lista.innerHTML = "";
   for (const t of repo.listar()) {
     const li = document.createElement("li");
-    li.textContent = t;
-    lista.appendChild(li);
-  }
-}
 
-btnAdicionar.addEventListener("click", () =&gt; {
-  try {
-    repo.add(input.value);
-    input.value = "";
-    atualizarLista();
-  } catch (erro) {
-    alert("Erro ao adicionar tarefa: " + erro.message);
-  }
-});
-
-btnExportar.addEventListener("click", () =&gt; {
-  try {
-    exportarTarefasComoArquivo(repo.listar());
-  } catch (erro) {
-    alert("Erro ao exportar: " + erro.message);
-  }
-});
-&lt;/script&gt;
 </code></pre>
 
         <!-- ========================= ÁUDIO / VÍDEO (LUGAR RESERVADO) ========================= -->
