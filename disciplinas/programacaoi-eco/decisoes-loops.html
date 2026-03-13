@@ -146,7 +146,7 @@
         <p>A meta é que você consiga usar objetos para modelar situações reais (contas, pedidos, tarefas) e controlar o fluxo do programa com base nos atributos desses objetos.</p>
 
         <div class="tip">
-            Leia os exemplos, depois execute e modifique o código em um compilador online ou no seu VS Code. Os exemplos abaixo já podem ser executados diretamente na página via JDoodle.
+            Leia os exemplos, depois execute e modifique o código em um compilador online ou no seu VS Code. Os dois primeiros exemplos já podem ser executados diretamente aqui via JDoodle.
         </div>
     </section>
 
@@ -334,13 +334,237 @@ public class Lanchonete {
     </section>
 
     <!-- 4. Exercícios com objetos e loops/decisões -->
-    <!-- (mantém igual à versão anterior que te enviei) -->
-    <!-- ... cole aqui a seção de exercícios que já está usando btn-resposta ... -->
+    <section id="exercicios">
+        <h2>4. Exercícios para praticar (com respostas)</h2>
+        <p>Os exercícios abaixo combinam objetos, decisões e loops. Cada um tem uma sugestão de resolução em Java que você pode exibir/ocultar.</p>
+
+        <!-- Ex 1: Lista de tarefas -->
+        <h3>Exercício 1 – Lista de Tarefas da Semana</h3>
+        <p>
+            Crie uma classe <code>Tarefa</code> com os atributos <code>descricao</code> (String) e <code>concluida</code> (boolean).<br>
+            No <code>main</code>:
+        </p>
+        <ul>
+            <li>pergunte ao usuário quantas tarefas ele quer registrar;</li>
+            <li>use um <code>for</code> para criar um array de <code>Tarefa</code> e preencher a descrição de cada uma;</li>
+            <li>em seguida, use um <code>while</code> para perguntar ao usuário qual tarefa foi concluída (informando o número) até que ele digite 0;</li>
+            <li>ao final, exiba todas as tarefas com a indicação “OK” ou “Pendente”.</li>
+        </ul>
+
+        <button class="btn-resposta" data-target="resp-tarefas">
+            Mostrar/ocultar resposta em Java
+        </button>
+
+        <div id="resp-tarefas" style="display:none; margin-top:0.5rem; margin-bottom:1.5rem;">
+            <pre><code class="language-java">
+import java.util.Scanner;
+
+class Tarefa {
+    String descricao;
+    boolean concluida;
+}
+
+public class ListaTarefas {
+
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+
+        System.out.print("Quantas tarefas deseja registrar? ");
+        int n = entrada.nextInt();
+        entrada.nextLine(); // consumir quebra de linha
+
+        Tarefa[] tarefas = new Tarefa[n];
+
+        for (int i = 0; i < n; i++) {
+            tarefas[i] = new Tarefa();
+            System.out.print("Descrição da tarefa " + (i + 1) + ": ");
+            tarefas[i].descricao = entrada.nextLine();
+            tarefas[i].concluida = false;
+        }
+
+        int escolha;
+        do {
+            System.out.print("Digite o número da tarefa concluída (0 para sair): ");
+            escolha = entrada.nextInt();
+
+            if (escolha > 0 && escolha <= n) {
+                tarefas[escolha - 1].concluida = true;
+            }
+
+        } while (escolha != 0);
+
+        System.out.println("\n=== Situação das tarefas ===");
+        for (int i = 0; i < n; i++) {
+            String status = tarefas[i].concluida ? "OK" : "Pendente";
+            System.out.println((i + 1) + ". " + tarefas[i].descricao + " [" + status + "]");
+        }
+
+        entrada.close();
+    }
+}
+            </code></pre>
+        </div>
+
+        <!-- Ex 2: Academia -->
+        <h3>Exercício 2 – Academia JavaFit</h3>
+        <p>
+            Crie uma classe <code>AlunoAcademia</code> com os atributos <code>nome</code> (String) e <code>frequenciaSemanal</code> (int).<br>
+            No <code>main</code>:
+        </p>
+        <ul>
+            <li>leia dados de vários alunos (por exemplo, 5) usando um <code>for</code>;</li>
+            <li>para cada aluno, use um <code>if</code> para classificar:
+                <ul>
+                    <li>0 dias: “Plano fantasma”;</li>
+                    <li>1–2 dias: “Modo iniciante”;</li>
+                    <li>3–4 dias: “Modo focado”;</li>
+                    <li>5 ou mais: “Modo atleta!”.</li>
+                </ul>
+            </li>
+            <li>ao final, mostre quantos alunos estão em cada categoria.</li>
+        </ul>
+
+        <button class="btn-resposta" data-target="resp-academia">
+            Mostrar/ocultar resposta em Java
+        </button>
+
+        <div id="resp-academia" style="display:none; margin-top:0.5rem; margin-bottom:1.5rem;">
+            <pre><code class="language-java">
+import java.util.Scanner;
+
+class AlunoAcademia {
+    String nome;
+    int frequenciaSemanal;
+}
+
+public class AcademiaJavaFit {
+
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+
+        System.out.print("Quantos alunos serão cadastrados? ");
+        int n = entrada.nextInt();
+        entrada.nextLine();
+
+        AlunoAcademia[] alunos = new AlunoAcademia[n];
+
+        int fantasma = 0, iniciante = 0, focado = 0, atleta = 0;
+
+        for (int i = 0; i < n; i++) {
+            alunos[i] = new AlunoAcademia();
+
+            System.out.print("Nome do aluno " + (i + 1) + ": ");
+            alunos[i].nome = entrada.nextLine();
+
+            System.out.print("Frequência semanal (dias por semana): ");
+            alunos[i].frequenciaSemanal = entrada.nextInt();
+            entrada.nextLine();
+
+            int f = alunos[i].frequenciaSemanal;
+
+            if (f == 0) {
+                fantasma++;
+                System.out.println("Plano fantasma.");
+            } else if (f <= 2) {
+                iniciante++;
+                System.out.println("Modo iniciante.");
+            } else if (f <= 4) {
+                focado++;
+                System.out.println("Modo focado.");
+            } else {
+                atleta++;
+                System.out.println("Modo atleta!");
+            }
+            System.out.println();
+        }
+
+        System.out.println("=== Resumo da Academia ===");
+        System.out.println("Plano fantasma: " + fantasma);
+        System.out.println("Modo iniciante: " + iniciante);
+        System.out.println("Modo focado: " + focado);
+        System.out.println("Modo atleta!: " + atleta);
+
+        entrada.close();
+    }
+}
+            </code></pre>
+        </div>
+
+        <!-- Ex 3: Biblioteca -->
+        <h3>Exercício 3 – Biblioteca Noturna</h3>
+        <p>
+            Crie uma classe <code>LivroEmprestado</code> com os atributos <code>titulo</code> (String) e <code>diasAtraso</code> (int).<br>
+            No <code>main</code>:
+        </p>
+        <ul>
+            <li>use um <code>while</code> para ler livros emprestados até o usuário digitar um título vazio (“Enter” direto);</li>
+            <li>para cada livro, leia o número de dias de atraso e calcule a multa: R$ 1,00 por dia até 5 dias, R$ 2,00 por dia acima disso;</li>
+            <li>mostre o total de multas a receber.</li>
+        </ul>
+
+        <button class="btn-resposta" data-target="resp-biblioteca">
+            Mostrar/ocultar resposta em Java
+        </button>
+
+        <div id="resp-biblioteca" style="display:none; margin-top:0.5rem; margin-bottom:1.5rem;">
+            <pre><code class="language-java">
+import java.util.Scanner;
+
+class LivroEmprestado {
+    String titulo;
+    int diasAtraso;
+    double multa;
+}
+
+public class BibliotecaNoturna {
+
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+
+        double totalMultas = 0.0;
+
+        while (true) {
+            System.out.print("Título do livro (Enter para sair): ");
+            String titulo = entrada.nextLine();
+
+            if (titulo.isEmpty()) {
+                break;
+            }
+
+            LivroEmprestado livro = new LivroEmprestado();
+            livro.titulo = titulo;
+
+            System.out.print("Dias de atraso: ");
+            livro.diasAtraso = entrada.nextInt();
+            entrada.nextLine();
+
+            if (livro.diasAtraso <= 5) {
+                livro.multa = livro.diasAtraso * 1.0;
+            } else {
+                livro.multa = 5 * 1.0 + (livro.diasAtraso - 5) * 2.0;
+            }
+
+            System.out.println("Multa para \"" + livro.titulo + "\": R$ " + livro.multa + "\n");
+            totalMultas += livro.multa;
+        }
+
+        System.out.println("Total de multas a receber: R$ " + totalMultas);
+
+        entrada.close();
+    }
+}
+            </code></pre>
+        </div>
+
+        <div class="tip">
+            Tente adaptar um desses exercícios para o contexto do projeto da disciplina (por exemplo, aplicar decisões e loops em cima das classes do seu projeto).
+        </div>
+    </section>
 
 </div>
 
 <footer>
-    <p>Pode usar esta página como guia de estudo para as semanas 7–8. Traga dúvidas específicas de código para discutirmos em aula.</p>
+    <p>Estude!!!</p>
 </footer>
 
 <script>
