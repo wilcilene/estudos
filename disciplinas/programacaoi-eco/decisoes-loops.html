@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semanas 7–8 – Decisões e Loops com Objetos</title>
+    <style>
+        :root {
+            --primary-color: #0073b7;
+            --secondary-color: #2c3e50;
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --code-bg: #2d2d2d;
+            --accent-color: #e67e22;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 3rem 1rem 2rem 1rem;
+            text-align: center;
+            border-bottom: 5px solid var(--primary-color);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 999px;
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover {
+            background-color: #005a8d;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--primary-color);
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            color: #ccc;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+
+        code {
+            font-family: Consolas, "Courier New", monospace;
+        }
+
+        .tip {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 0.75rem;
+            margin: 0.5rem 0 1rem;
+            font-size: 0.9rem;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            border-radius: 5px;
+            background: #fafafa;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-resposta {
+            margin-bottom: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-resposta:hover {
+            background-color: #005a8d;
+        }
+
+        .media-wrapper {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .media-caption {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #777;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Semanas 7–8 – Decisões e Loops com Objetos</h1>
+    <p>if, switch, while e for aplicados a situações do mundo real em Java</p>
+    <a class="back-link" href="https://wilcilene.github.io/estudos/disciplinas/programacaoi-eco/index.html">
+        ← Voltar para página principal
+    </a>
+</header>
+
+<div class="container">
+
+    <!-- 1. Visão geral -->
+    <section id="visao-geral">
+        <h2>1. Objetivo desta unidade</h2>
+        <p>Nestas semanas vamos aprofundar o uso de <strong>decisões</strong> (<code>if</code>, <code>switch</code>) e <strong>repetições</strong> (<code>while</code>, <code>for</code>) sempre combinados com <strong>objetos</strong>.</p>
+        <p>A meta é que você consiga usar objetos para modelar situações reais (contas, pedidos, tarefas) e controlar o fluxo do programa com base nos atributos desses objetos.</p>
+
+        <div class="tip">
+            Leia os exemplos, depois execute e modifique o código em um compilador online ou no seu VS Code. Os exemplos abaixo já podem ser executados diretamente na página via JDoodle.
+        </div>
+    </section>
+
+    <!-- 2. Exemplo 1: Banco simples com if e while -->
+    <section id="exemplo-banco">
+        <h2>2. Exemplo: Banco simples com if e while</h2>
+        <p>Neste exemplo, criamos uma conta bancária e permitimos que o usuário faça depósitos e saques até decidir sair.</p>
+
+        <div class="card">
+            <h3>Código Java</h3>
+            <pre><code class="language-java">
+import java.util.Scanner;
+
+class ContaBancaria {
+    String titular;
+    double saldo;
+
+    void depositar(double valor) {
+        saldo = saldo + valor;
+    }
+
+    void sacar(double valor) {
+        if (valor <= saldo) {
+            saldo = saldo - valor;
+        } else {
+            System.out.println("Saldo insuficiente.");
+        }
+    }
+
+    void exibirResumo() {
+        System.out.println("Titular: " + titular + " | Saldo: R$ " + saldo);
+    }
+}
+
+public class BancoSimples {
+
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+
+        ContaBancaria conta = new ContaBancaria();
+        System.out.print("Nome do titular: ");
+        conta.titular = entrada.nextLine();
+        conta.saldo = 0.0;
+
+        int opcao;
+        do {
+            System.out.println("\n=== MENU BANCO ===");
+            System.out.println("1 - Depositar");
+            System.out.println("2 - Sacar");
+            System.out.println("3 - Exibir resumo");
+            System.out.println("0 - Sair");
+            System.out.print("Escolha: ");
+            opcao = entrada.nextInt();
+
+            if (opcao == 1) {
+                System.out.print("Valor para depósito: ");
+                double valor = entrada.nextDouble();
+                conta.depositar(valor);
+            } else if (opcao == 2) {
+                System.out.print("Valor para saque: ");
+                double valor = entrada.nextDouble();
+                conta.sacar(valor);
+            } else if (opcao == 3) {
+                conta.exibirResumo();
+            } else if (opcao != 0) {
+                System.out.println("Opção inválida.");
+            }
+
+        } while (opcao != 0);
+
+        System.out.println("Encerrando... Obrigado por usar o nosso banco!");
+        entrada.close();
+    }
+}
+            </code></pre>
+        </div>
+
+        <div class="card">
+            <h3>Executar este exemplo online</h3>
+            <div class="media-wrapper">
+                <iframe
+                    src="https://www.jdoodle.com/ga/WQz6EObvrGSyR7q9alDBlg%3D%3D"
+                    width="100%"
+                    height="450"
+                    frameborder="0">
+                </iframe>
+            </div>
+            <p class="media-caption">
+                Editor interativo JDoodle – BancoSimples.
+            </p>
+        </div>
+    </section>
+
+    <!-- 3. Exemplo 2: Sistema de pedidos com switch e for -->
+    <section id="exemplo-pedidos">
+        <h2>3. Exemplo: Sistema de pedidos com switch e for</h2>
+        <p>Agora vamos usar <code>switch</code> e um <code>for</code> para registrar vários pedidos de lanchonete, cada um representado por um objeto.</p>
+
+        <div class="card">
+            <h3>Código Java</h3>
+            <pre><code class="language-java">
+import java.util.Scanner;
+
+class Pedido {
+    int codigoProduto; // 1 = Hambúrguer, 2 = Pizza, 3 = Suco
+    int quantidade;
+    double valorTotal;
+}
+
+public class Lanchonete {
+
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+
+        System.out.print("Quantos pedidos deseja registrar? ");
+        int n = entrada.nextInt();
+
+        Pedido[] pedidos = new Pedido[n];
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("\n--- Pedido " + (i + 1) + " ---");
+            pedidos[i] = new Pedido();
+
+            System.out.println("1 - Hambúrguer (R$ 15.00)");
+            System.out.println("2 - Pizza      (R$ 40.00)");
+            System.out.println("3 - Suco       (R$  7.50)");
+            System.out.print("Código do produto: ");
+            pedidos[i].codigoProduto = entrada.nextInt();
+
+            System.out.print("Quantidade: ");
+            pedidos[i].quantidade = entrada.nextInt();
+
+            double precoUnitario;
+
+            switch (pedidos[i].codigoProduto) {
+                case 1:
+                    precoUnitario = 15.0;
+                    break;
+                case 2:
+                    precoUnitario = 40.0;
+                    break;
+                case 3:
+                    precoUnitario = 7.5;
+                    break;
+                default:
+                    precoUnitario = 0.0;
+                    System.out.println("Código inválido, valor será 0.");
+            }
+
+            pedidos[i].valorTotal = precoUnitario * pedidos[i].quantidade;
+        }
+
+        System.out.println("\n=== RESUMO DOS PEDIDOS ===");
+        double somaTotal = 0.0;
+        for (int i = 0; i < n; i++) {
+            System.out.println("Pedido " + (i + 1) +
+                    " | código: " + pedidos[i].codigoProduto +
+                    " | qtd: " + pedidos[i].quantidade +
+                    " | total: R$ " + pedidos[i].valorTotal);
+            somaTotal += pedidos[i].valorTotal;
+        }
+
+        System.out.println("Valor total de todos os pedidos: R$ " + somaTotal);
+
+        entrada.close();
+    }
+}
+            </code></pre>
+        </div>
+
+        <div class="card">
+            <h3>Executar este exemplo online</h3>
+            <div class="media-wrapper">
+                <iframe
+                    src="https://www.jdoodle.com/ga/W8M3QSUXMiV%2FqtrNIX1sPQ%3D%3D"
+                    width="100%"
+                    height="450"
+                    frameborder="0">
+                </iframe>
+            </div>
+            <p class="media-caption">
+                Editor interativo JDoodle – Lanchonete.
+            </p>
+        </div>
+    </section>
+
+    <!-- 4. Exercícios com objetos e loops/decisões -->
+    <!-- (mantém igual à versão anterior que te enviei) -->
+    <!-- ... cole aqui a seção de exercícios que já está usando btn-resposta ... -->
+
+</div>
+
+<footer>
+    <p>Pode usar esta página como guia de estudo para as semanas 7–8. Traga dúvidas específicas de código para discutirmos em aula.</p>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const botoes = document.querySelectorAll('.btn-resposta');
+
+    botoes.forEach(function (botao) {
+      const alvoId = botao.getAttribute('data-target');
+      const alvo = document.getElementById(alvoId);
+      if (!alvo) return;
+
+      botao.addEventListener('click', function () {
+        const visivel = alvo.style.display === 'block';
+        alvo.style.display = visivel ? 'none' : 'block';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
