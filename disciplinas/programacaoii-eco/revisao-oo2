@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Programação II – Interfaces, Exceções e Arquivos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: #f5f5f5;
+        --bg-card: #ffffff;
+        --primary: #006699;
+        --primary-dark: #004766;
+        --accent: #ff9800;
+        --text: #222222;
+        --muted: #666666;
+        --border: #dddddd;
+        --code-bg: #272822;
+        --code-text: #f8f8f2;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      header {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: #ffffff;
+        padding: 1.5rem 1rem;
+      }
+
+      header .container {
+        max-width: 960px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 1.8rem;
+      }
+
+      header p {
+        margin: 0;
+        max-width: 640px;
+        font-size: 0.95rem;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      nav a {
+        color: #ffffff;
+        text-decoration: none;
+        padding: 0.25rem 0.6rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+      }
+
+      nav a:hover {
+        background-color: rgba(255, 255, 255, 0.16);
+      }
+
+      main {
+        max-width: 960px;
+        margin: 1.5rem auto 2.5rem;
+        padding: 0 1rem;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.5rem;
+      }
+
+      @media (min-width: 900px) {
+        main {
+          grid-template-columns: minmax(0, 2fr) minmax(260px, 0.9fr);
+          align-items: flex-start;
+        }
+      }
+
+      .card {
+        background-color: var(--bg-card);
+        border-radius: 0.5rem;
+        padding: 1.25rem 1.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border);
+      }
+
+      .card h2,
+      .card h3,
+      .card h4 {
+        margin-top: 0;
+      }
+
+      .card h2 {
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.4rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .tag {
+        display: inline-block;
+        padding: 0.1rem 0.5rem;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        background-color: #e3f2fd;
+        color: var(--primary-dark);
+        margin-right: 0.4rem;
+      }
+
+      .tag--nivel {
+        background-color: #fff3e0;
+        color: #e65100;
+      }
+
+      .tag--aulas {
+        background-color: #e8f5e9;
+        color: #1b5e20;
+      }
+
+      h3 {
+        margin-top: 1.1rem;
+      }
+
+      h4 {
+        margin-top: 0.8rem;
+      }
+
+      p {
+        margin: 0.3rem 0 0.7rem;
+      }
+
+      ul {
+        margin: 0.2rem 0 0.7rem 1.2rem;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 0.25rem;
+      }
+
+      code {
+        font-family: "Fira Code", "SF Mono", "Consolas", "Roboto Mono", monospace;
+        background-color: #ececec;
+        padding: 0.1rem 0.25rem;
+        border-radius: 3px;
+        font-size: 0.9em;
+      }
+
+      pre {
+        background-color: var(--code-bg);
+        color: var(--code-text);
+        padding: 0.9rem 1rem;
+        border-radius: 0.4rem;
+        overflow-x: auto;
+        font-size: 0.88rem;
+        margin: 0.4rem 0 0.9rem;
+      }
+
+      pre code {
+        background: none;
+        padding: 0;
+        color: inherit;
+      }
+
+      .note {
+        border-left: 4px solid var(--primary);
+        padding-left: 0.75rem;
+        margin: 0.4rem 0 0.8rem;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .callout {
+        border-radius: 0.4rem;
+        padding: 0.75rem 0.9rem;
+        background-color: #fff8e1;
+        border: 1px solid #ffe082;
+        font-size: 0.9rem;
+        margin: 0.5rem 0 1rem;
+      }
+
+      .callout strong {
+        color: #e65100;
+      }
+
+      details {
+        margin: 0.4rem 0 0.7rem;
+        border-radius: 0.4rem;
+        border: 1px solid var(--border);
+        background-color: #fafafa;
+      }
+
+      details summary {
+        padding: 0.5rem 0.7rem;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      details[open] summary {
+        border-bottom: 1px solid var(--border);
+      }
+
+      details > div {
+        padding: 0.6rem 0.8rem 0.7rem;
+      }
+
+      aside {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .mini-list {
+        list-style: none;
+        margin: 0.3rem 0 0.2rem;
+        padding: 0;
+        font-size: 0.9rem;
+      }
+
+      .mini-list li {
+        margin-bottom: 0.25rem;
+      }
+
+      footer {
+        border-top: 1px solid var(--border);
+        margin-top: 1rem;
+        padding-top: 0.6rem;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      footer p {
+        margin: 0.1rem 0;
+      }
+
+      .pill-list {
+        list-style: none;
+        padding: 0;
+        margin: 0.2rem 0 0.8rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+
+      .pill-list li {
+        background-color: #e0f7fa;
+        color: #006064;
+        border-radius: 999px;
+        padding: 0.2rem 0.7rem;
+        font-size: 0.8rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="container">
+        <div>
+          <span class="tag">Programação II – ECO</span>
+          <span class="tag tag--aulas">Aulas</span>
+          <span class="tag tag--nivel">Conceitos avançados</span>
+        </div>
+        <h1>Interfaces, exceções e manipulação de arquivos em JavaScript</h1>
+        <p>
+          Nesta unidade vamos conectar três ideias importantes para desenvolver sistemas
+          mais organizados e robustos: “interfaces” em JavaScript, tratamento de exceções
+          e leitura/gravação de arquivos no navegador e em Node.js.
+        </p>
+        <nav>
+          <a href="#ambiente">Configuração do ambiente</a>
+          <a href="#interfaces">Interfaces em JavaScript</a>
+          <a href="#excecoes">Exceções</a>
+          <a href="#arquivos">Manipulação de arquivos</a>
+          <a href="#integracao">Integração dos conceitos</a>
+          <a href="#atividades">Exercícios</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Introdução</h2>
+        <p>
+          Em Programação I e na revisão de OO, você trabalhou com classes, objetos e
+          herança em Java. Nesta página vamos olhar para três temas que aparecem em
+          praticamente todo sistema real: contratos de código (interfaces), erros em
+          tempo de execução (exceções) e persistência simples com arquivos, agora em JavaScript.
+        </p>
+
+        <!-- ========================= AMBIENTE ========================= -->
+
+        <h2 id="ambiente">Configuração do ambiente para os exemplos</h2>
+
+        <p>
+          Podemos reutilizar a mesma estrutura de arquivo HTML da revisão de OO,
+          alterando apenas o nome do arquivo JavaScript para esta unidade.
+        </p>
+
+        <h3>Opção 1 – Navegador (recomendado)</h3>
+        <ol>
+          <li>Crie uma pasta, por exemplo <code>prog2-interfaces-excecoes</code>.</li>
+          <li>
+            Dentro da pasta, crie um arquivo chamado <code>index.html</code> com o conteúdo abaixo.
+          </li>
+        </ol>
+
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;title&gt;Interfaces, exceções e arquivos - Programação II&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Interfaces, exceções e manipulação de arquivos&lt;/h1&gt;
+    &lt;p&gt;Abra o console do navegador para ver a saída dos exemplos.&lt;/p&gt;
+
+    &lt;script src="interfaces-excecoes-arquivos.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+        <ol start="3">
+          <li>
+            Crie um arquivo <code>interfaces-excecoes-arquivos.js</code> na mesma pasta.
+            É nele que você vai colar e adaptar os exemplos desta página.
+          </li>
+          <li>Abra o <code>index.html</code> no navegador.</li>
+          <li>
+            Pressione <strong>F12</strong> e acesse a aba <strong>Console</strong> para
+            acompanhar a saída dos códigos.
+          </li>
+        </ol>
+
+        <div class="note">
+          Se você já configurou o ambiente da revisão de OO, pode apenas criar
+          um novo arquivo JS e trocar o <code>src</code> da tag
+          <code>&lt;script&gt;</code> para testar esta unidade.
+        </div>
+
+        <h3>Opção 2 – Node.js (para exploração extra)</h3>
+        <ol>
+          <li>Mantenha um arquivo <code>interfaces-excecoes-arquivos.js</code> com os exemplos.</li>
+          <li>
+            No terminal, execute:
+            <pre><code>node interfaces-excecoes-arquivos.js</code></pre>
+          </li>
+        </ol>
+
+        <!-- ========================= INTERFACES ========================= -->
+
+        <h2 id="interfaces">1. “Interfaces” em JavaScript</h2>
+
+        <p>
+          JavaScript não possui a palavra-chave <code>interface</code> como Java, mas
+          usamos o conceito de interface como um contrato: um conjunto de métodos
+          que uma função ou classe espera receber. Fazemos isso principalmente com
+          objetos que seguem um formato (duck typing) ou com classes base.
+        </p>
+
+        <h3>1.1 Interfaces via duck typing (objeto com formato esperado)</h3>
+
+        <pre><code>// "Interface" Logger: qualquer objeto que tenha um método log(mensagem)
+function processarPedido(pedido, logger) {
+  // Dependemos apenas de logger.log(...)
+  logger.log(`Processando pedido ${pedido.id} do cliente ${pedido.cliente}`);
+}
+
+// Implementação 1: logger que escreve no console
+const ConsoleLogger = {
+  log(mensagem) {
+    console.log("[CONSOLE] " + mensagem);
+  }
+};
+
+// Implementação 2: logger que guarda mensagens em memória
+const MemoryLogger = {
+  mensagens: [],
+  log(mensagem) {
+    this.mensagens.push(mensagem);
+  }
+};
+
+const pedido = { id: 123, cliente: "Ana" };
+
+processarPedido(pedido, ConsoleLogger);
+processarPedido(pedido, MemoryLogger);
+
+console.log("Mensagens em memória:", MemoryLogger.mensagens);
+</code></pre>
+
+        <div class="callout">
+          <strong>Ideia-chave:</strong> a função não precisa saber a classe concreta,
+          apenas que o objeto recebido possui o método esperado. Esse padrão é
+          muito comum em JavaScript moderno.
+        </div>
+
+        <h3>1.2 Interfaces com classes base</h3>
+
+        <pre><code>// Classe base que funciona como "interface" de pagamento
+class Pagamento {
+  pagar(valor) {
+    throw new Error("Método pagar(valor) deve ser implementado pela subclasse");
+  }
+}
+
+class PagamentoCartao extends Pagamento {
+  pagar(valor) {
+    console.log(`Pagando R$ ${valor} com cartão de crédito`);
+  }
+}
+
+class PagamentoPix extends Pagamento {
+  pagar(valor) {
+    console.log(`Pagando R$ ${valor} via PIX`);
+  }
+}
+
+function finalizarCompra(valor, meioPagamento) {
+  // Aqui dependemos da "interface" Pagamento
+  meioPagamento.pagar(valor);
+}
+
+finalizarCompra(100, new PagamentoCartao());
+finalizarCompra(75.5, new PagamentoPix());
+</code></pre>
+
+        <p>
+          Assim como na revisão de OO, usamos herança e sobrescrita de métodos;
+          mas aqui a classe base é pensada como um contrato, e lança erro se
+          alguém esquecer de sobrescrever o método obrigatório.
+        </p>
+
+        <!-- ========================= EXCEÇÕES ========================= -->
+
+        <h2 id="excecoes">2. Exceções em JavaScript</h2>
+
+        <p>
+          Uma exceção é um erro que interrompe o fluxo normal do programa.
+          Em JavaScript, usamos <code>throw</code> para lançar erros e
+          <code>try...catch...finally</code> para tratá-los. [web:17][web:19]
+        </p>
+
+        <h3>2.1 Lançando e tratando erros</h3>
+
+        <pre><code>function dividir(a, b) {
+  if (b === 0) {
+    throw new Error("Divisão por zero não é permitida");
+  }
+  return a / b;
+}
+
+try {
+  console.log(dividir(10, 2));  // ok
+  console.log(dividir(5, 0));   // lança erro
+  console.log("Esta linha não será executada");
+} catch (erro) {
+  console.error("Ocorreu um erro:", erro.message);
+} finally {
+  console.log("Bloco finally sempre executa (com ou sem erro).");
+}
+</code></pre>
+
+        <h3>2.2 Exceções para validação de dados</h3>
+
+        <pre><code>function validarUsuario(usuario) {
+  if (!usuario.nome) {
+    throw new Error("Nome é obrigatório");
+  }
+  if (!usuario.email || !usuario.email.includes("@")) {
+    throw new Error("Email inválido");
+  }
+  if (usuario.idade &lt; 18) {
+    throw new Error("Usuário deve ser maior de 18 anos");
+  }
+}
+
+function cadastrarUsuario(usuario) {
+  try {
+    validarUsuario(usuario);
+    console.log("Usuário cadastrado com sucesso:", usuario.nome);
+  } catch (erro) {
+    console.error("Erro ao cadastrar usuário:", erro.message);
+  }
+}
+
+cadastrarUsuario({ nome: "João", email: "joao@ifc.edu.br", idade: 20 });
+cadastrarUsuario({ nome: "", email: "invalido", idade: 15 });
+</code></pre>
+
+        <div class="note">
+          Em sistemas maiores, é comum criar classes específicas de erro
+          (por exemplo <code>ValidacaoErro</code>) para diferenciar tipos de falhas,
+          mas o padrão acima já é suficiente para os exercícios da disciplina.
+        </div>
+
+        <!-- ========================= ARQUIVOS ========================= -->
+
+        <h2 id="arquivos">3. Manipulação de arquivos em JavaScript</h2>
+
+        <p>
+          A forma de manipular arquivos depende do ambiente onde o JavaScript
+          está rodando:
+        </p>
+        <ul>
+          <li><strong>Navegador:</strong> acesso controlado (upload, download, APIs como <code>FileReader</code> e <code>Blob</code>). [web:21][web:24]</li>
+          <li><strong>Node.js:</strong> acesso direto ao sistema de arquivos via módulo <code>fs</code>. [web:28]</li>
+        </ul>
+
+        <h3>3.1 Lendo um arquivo de texto no navegador</h3>
+
+        <p>
+          Exemplo de página que permite ao usuário escolher um arquivo <code>.txt</code>
+          e exibe o conteúdo:
+        </p>
+
+        <pre><code>&lt;!-- HTML --&gt;
+&lt;input type="file" id="arquivoTexto" accept=".txt"&gt;
+&lt;pre id="conteudoArquivo"&gt;&lt;/pre&gt;
+
+&lt;script&gt;
+  const inputArquivo = document.getElementById("arquivoTexto");
+  const areaConteudo = document.getElementById("conteudoArquivo");
+
+  inputArquivo.addEventListener("change", () =&gt; {
+    const arquivo = inputArquivo.files[0];
+    if (!arquivo) return;
+
+    const leitor = new FileReader();
+
+    leitor.onload = () =&gt; {
+      areaConteudo.textContent = leitor.result;
+    };
+
+    leitor.onerror = () =&gt; {
+      console.error("Erro ao ler o arquivo");
+    };
+
+    leitor.readAsText(arquivo, "utf-8");
+  });
+&lt;/script&gt;
+</code></pre>
+
+        <h3>3.2 Gerando um arquivo para download</h3>
+
+        <pre><code>&lt;button id="btnSalvar"&gt;Baixar relatório&lt;/button&gt;
+
+&lt;script&gt;
+  const botao = document.getElementById("btnSalvar");
+
+  botao.addEventListener("click", () =&gt; {
+    const dados = [
+      "Relatório de vendas",
+      "-------------------",
+      "Item A - 10 unidades",
+      "Item B - 5 unidades"
+    ].join("\n");
+
+    const blob = new Blob([dados], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "relatorio.txt";
+    link.click();
+
+    URL.revokeObjectURL(url);
+  });
+&lt;/script&gt;
+</code></pre>
+
+        <p>
+          Esse padrão é útil para exportar relatórios, backups simples ou dados
+          de exercícios sem depender de um back-end.
+        </p>
+
+        <h3>3.3 Visão rápida: arquivos em Node.js</h3>
+
+        <pre><code>// Exemplo mínimo em Node.js (não roda no navegador)
+const fs = require("fs");
+
+// Leitura síncrona
+try {
+  const conteudo = fs.readFileSync("dados.txt", "utf-8");
+  console.log("Conteúdo do arquivo:", conteudo);
+} catch (erro) {
+  console.error("Erro ao ler arquivo:", erro.message);
+}
+
+// Escrita síncrona
+try {
+  fs.writeFileSync("saida.txt", "Nova linha de conteúdo");
+  console.log("Arquivo salvo com sucesso!");
+} catch (erro) {
+  console.error("Erro ao escrever arquivo:", erro.message);
+}
+</code></pre>
+
+        <!-- ========================= INTEGRAÇÃO ========================= -->
+
+        <h2 id="integracao">4. Integração: interfaces, exceções e arquivos</h2>
+
+        <p>
+          Vamos juntar os conceitos em um mini “gerenciador de tarefas”:
+          uma classe base que funciona como interface de repositório, uma
+          implementação em memória e um botão que exporta as tarefas para um
+          arquivo de texto.
+        </p>
+
+        <pre><code>&lt;h3&gt;Gerenciador de tarefas&lt;/h3&gt;
+&lt;input id="novaTarefa" placeholder="Digite uma tarefa"&gt;
+&lt;button id="btnAdicionar"&gt;Adicionar&lt;/button&gt;
+&lt;button id="btnExportar"&gt;Exportar tarefas&lt;/button&gt;
+
+&lt;ul id="listaTarefas"&gt;&lt;/ul&gt;
+
+&lt;script&gt;
+// "Interface" RepositorioTarefas: add(tarefa), listar()
+class RepositorioTarefas {
+  add(tarefa) {
+    throw new Error("Método add(tarefa) deve ser implementado");
+  }
+
+  listar() {
+    throw new Error("Método listar() deve ser implementado");
+  }
+}
+
+// Implementação em memória
+class RepositorioMemoria extends RepositorioTarefas {
+  constructor() {
+    super();
+    this.tarefas = [];
+  }
+
+  add(tarefa) {
+    if (!tarefa || tarefa.trim() === "") {
+      throw new Error("Tarefa não pode ser vazia");
+    }
+    this.tarefas.push(tarefa.trim());
+  }
+
+  listar() {
+    return this.tarefas;
+  }
+}
+
+// Função utilitária para exportar tarefas como arquivo (Blob)
+function exportarTarefasComoArquivo(tarefas) {
+  if (!tarefas.length) {
+    throw new Error("Não há tarefas para exportar");
+  }
+
+  const conteudo = tarefas.join("\n");
+  const blob = new Blob([conteudo], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "tarefas.txt";
+  link.click();
+
+  URL.revokeObjectURL(url);
+}
+
+// --- Código da interface da página ---
+const repo = new RepositorioMemoria();
+
+const input = document.getElementById("novaTarefa");
+const btnAdicionar = document.getElementById("btnAdicionar");
+const btnExportar = document.getElementById("btnExportar");
+const lista = document.getElementById("listaTarefas");
+
+function atualizarLista() {
+  lista.innerHTML = "";
+  for (const t of repo.listar()) {
+    const li = document.createElement("li");
+    li.textContent = t;
+    lista.appendChild(li);
+  }
+}
+
+btnAdicionar.addEventListener("click", () =&gt; {
+  try {
+    repo.add(input.value);
+    input.value = "";
+    atualizarLista();
+  } catch (erro) {
+    alert("Erro ao adicionar tarefa: " + erro.message);
+  }
+});
+
+btnExportar.addEventListener("click", () =&gt; {
+  try {
+    exportarTarefasComoArquivo(repo.listar());
+  } catch (erro) {
+    alert("Erro ao exportar: " + erro.message);
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+        <!-- ========================= ÁUDIO / VÍDEO (LUGAR RESERVADO) ========================= -->
+
+        <section id="audio-aula">
+          <h3>Áudio/Vídeo da explicação (opcional)</h3>
+          <p>
+            Aqui você pode adicionar posteriormente um áudio ou vídeo desta aula,
+            seguindo o mesmo padrão da revisão de OO.
+          </p>
+          <!-- Exemplo de player (substitua o src quando tiver o arquivo) -->
+          <!--
+          <audio controls preload="metadata" style="width: 100%;">
+            <source src="Interfaces-excecoes-arquivos.m4a" type="audio/mp4" />
+            Seu navegador não suporta a reprodução desse áudio.
+          </audio>
+          -->
+        </section>
+
+        <!-- ========================= ATIVIDADES ========================= -->
+
+        <h2 id="atividades">5. Exercícios para praticar</h2>
+
+        <details open>
+          <summary>Exercício 1 – Calculadora com interface de operação</summary>
+          <div>
+            <p><strong>Descrição:</strong></p>
+            <ul>
+              <li>Defina uma “interface” <code>Operacao</code> com o método <code>calcular(a, b)</code>.</li>
+              <li>Implemente <code>Soma</code>, <code>Subtracao</code> e <code>Multiplicacao</code> como classes concretas.</li>
+              <li>Crie uma função <code>executarOperacao(a, b, operacao)</code> que usa o contrato para calcular o resultado.</li>
+              <li>
+                No HTML, crie campos para os valores e um <code>&lt;select&gt;</code>
+                para escolher a operação, exibindo o resultado na página.
+              </li>
+              <li>
+                Use <code>try/catch</code> para tratar valores inválidos e exibir
+                mensagens amigáveis ao usuário.
+              </li>
+            </ul>
+            <p><strong>Desafio criativo:</strong> adicione “Potência” e uma “Divisão segura” que lança exceção se <code>b === 0</code>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Exercício 2 – Leitor de arquivo CSV simples</summary>
+          <div>
+            <p><strong>Descrição:</strong></p>
+            <ul>
+              <li>Crie um <code>&lt;input type="file"&gt;</code> que aceite <code>.csv</code>.</li>
+              <li>Use <code>FileReader.readAsText</code> para ler o arquivo. [web:21]</li>
+              <li>Separe linhas com <code>split("\n")</code> e colunas com <code>split(",")</code>.</li>
+              <li>Monte uma tabela HTML (<code>&lt;table&gt;</code>) para exibir os dados.</li>
+              <li>Trate erros se o arquivo estiver vazio ou fora do formato esperado.</li>
+            </ul>
+            <p><strong>Desafio criativo:</strong> destaque a linha com maior valor em uma coluna numérica (por exemplo, “nota” ou “preço”).</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Exercício 3 – “Diário de estudos” com exportação</summary>
+          <div>
+            <p><strong>Descrição:</strong></p>
+            <ul>
+              <li>Crie um formulário com data, disciplina e resumo do estudo.</li>
+              <li>
+                Defina uma “interface” <code>RepositorioDiario</code> com
+                <code>adicionar(registro)</code> e <code>listar()</code>.
+              </li>
+              <li>Implemente uma versão em memória e exiba os registros em lista ou tabela.</li>
+              <li>Adicione um botão “Exportar diário” que gera um <code>.txt</code> com todos os registros.</li>
+              <li>Use exceções para validar: data obrigatória, disciplina não vazia e resumo com tamanho mínimo.</li>
+            </ul>
+            <p><strong>Desafio criativo:</strong> crie um filtro para mostrar apenas registros de Programação II.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Exercício 4 – Tratamento de erros de rede (extra)</summary>
+          <div>
+            <p><strong>Descrição:</strong></p>
+            <ul>
+              <li>Use <code>fetch</code> para buscar um JSON em uma API pública de testes.</li>
+              <li>Implemente uma função <code>async</code> com <code>try/catch</code> para tratar erros de rede. [web:26]</li>
+              <li>Mostre os dados na página ou, em caso de erro, uma mensagem clara ao usuário.</li>
+              <li>
+                Crie uma “interface” para fontes de dados (por exemplo, “API de usuários”,
+                “API de posts”) e duas classes que só mudam a URL.
+              </li>
+            </ul>
+          </div>
+        </details>
+
+        <h3>Roteiro de estudo para quem faltou</h3>
+        <ul>
+          <li>Configure o ambiente (arquivo HTML + <code>interfaces-excecoes-arquivos.js</code>).</li>
+          <li>Reproduza e modifique os exemplos de interfaces, exceções e arquivos.</li>
+          <li>Implemente pelo menos dois exercícios completos (1, 2 ou 3).</li>
+          <li>Liste dúvidas específicas para discutirmos na próxima aula.</li>
+        </ul>
+      </section>
+
+      <!-- ========================= SIDEBAR ========================= -->
+
+      <aside>
+        <section class="card">
+          <h3>Aulas – Checklist</h3>
+          <ul class="mini-list">
+            <li>☑ Entender o conceito de “interface” em JS</li>
+            <li>☑ Usar <code>try...catch</code> e <code>throw</code></li>
+            <li>☑ Ler arquivos de texto no navegador</li>
+            <li>☑ Gerar arquivos para download (Blob)</li>
+            <li>☑ Integrar interface + exceção + arquivo</li>
+          </ul>
+        </section>
+
+        <section class="card">
+          <h3>Boas práticas usadas</h3>
+          <ul class="pill-list">
+            <li>Mensagens de erro claras</li>
+            <li>Validação de entrada</li>
+            <li>Responsabilidade única</li>
+            <li>Contrato por interface</li>
+            <li>Experimentos em arquivos separados</li>
+          </ul>
+          <p class="note">
+            Tente reaproveitar esses padrões no projeto da disciplina, principalmente
+            quando precisar validar entradas e salvar/recuperar dados.
+          </p>
+          Entregar em:
+          <a href="https://github.com/wilcilene/prog2-eco-2026-projetos/tree/main">
+            repositório da disciplina
+          </a>
+        </section>
+
+        <section class="card">
+          <h3>Material complementar</h3>
+          <ul class="mini-list">
+            <li>MDN – <code>try...catch</code> e <code>throw</code> em JavaScript. [web:17][web:19]</li>
+            <li>MDN – <code>FileReader</code>, <code>Blob</code> e APIs de arquivos. [web:21][web:24][web:30]</li>
+            <li>Documentação do módulo <code>fs</code> do Node.js. [web:28]</li>
+          </ul>
+
+          <footer>
+            <p>
+              <strong>Dica:</strong> salve links úteis e exemplos no repositório
+              da disciplina para uso no projeto final.
+            </p>
+          </footer>
+        </section>
+      </aside>
+    </main>
+  </body>
+</html>
