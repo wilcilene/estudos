@@ -408,12 +408,12 @@ public class ListaTarefas {
         <!-- Ex 2: Academia -->
         <h3>Exercício 2 – Academia JavaFit</h3>
         <p>
-            Crie uma classe <code>AlunoAcademia</code> com os atributos <code>nome</code> (String) e <code>frequenciaSemanal</code> (int).<br>
+            Crie uma classe <code>EstudanteAcademia</code> com os atributos <code>nome</code> (String) e <code>frequenciaSemanal</code> (int).<br>
             No <code>main</code>:
         </p>
         <ul>
-            <li>leia dados de vários alunos (por exemplo, 5) usando um <code>for</code>;</li>
-            <li>para cada aluno, use um <code>if</code> para classificar:
+            <li>leia dados de vários estudantes (por exemplo, 5) usando um <code>for</code>;</li>
+            <li>para cada estudante, use um <code>if</code> para classificar:
                 <ul>
                     <li>0 dias: “Plano fantasma”;</li>
                     <li>1–2 dias: “Modo iniciante”;</li>
@@ -421,7 +421,7 @@ public class ListaTarefas {
                     <li>5 ou mais: “Modo atleta!”.</li>
                 </ul>
             </li>
-            <li>ao final, mostre quantos alunos estão em cada categoria.</li>
+            <li>ao final, mostre quantos estudantes estão em cada categoria.</li>
         </ul>
 
         <button class="btn-resposta" data-target="resp-academia">
@@ -432,7 +432,7 @@ public class ListaTarefas {
             <pre><code class="language-java">
 import java.util.Scanner;
 
-class AlunoAcademia {
+class EstudanteAcademia {
     String nome;
     int frequenciaSemanal;
 }
@@ -442,25 +442,25 @@ public class AcademiaJavaFit {
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
 
-        System.out.print("Quantos alunos serão cadastrados? ");
+        System.out.print("Quantos estudantes serão cadastrados? ");
         int n = entrada.nextInt();
         entrada.nextLine();
 
-        AlunoAcademia[] alunos = new AlunoAcademia[n];
+        EstudanteAcademia[] estudantes = new EstudanteAcademia[n];
 
         int fantasma = 0, iniciante = 0, focado = 0, atleta = 0;
 
         for (int i = 0; i < n; i++) {
-            alunos[i] = new AlunoAcademia();
+            estudantes[i] = new EstudanteAcademia();
 
-            System.out.print("Nome do aluno " + (i + 1) + ": ");
-            alunos[i].nome = entrada.nextLine();
+            System.out.print("Nome do estudante " + (i + 1) + ": ");
+            estudantes[i].nome = entrada.nextLine();
 
             System.out.print("Frequência semanal (dias por semana): ");
-            alunos[i].frequenciaSemanal = entrada.nextInt();
+            estudantes[i].frequenciaSemanal = entrada.nextInt();
             entrada.nextLine();
 
-            int f = alunos[i].frequenciaSemanal;
+            int f = estudantes[i].frequenciaSemanal;
 
             if (f == 0) {
                 fantasma++;
