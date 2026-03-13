@@ -488,77 +488,87 @@ public class AcademiaJavaFit {
     }
 }
             </code></pre>
-        </div>
-
-        <!-- Ex 3: Biblioteca -->
-        <h3>Exercício 3 – Biblioteca Noturna</h3>
-        <p>
-            Crie uma classe <code>LivroEmprestado</code> com os atributos <code>titulo</code> (String) e <code>diasAtraso</code> (int).<br>
-            No <code>main</code>:
-        </p>
-        <ul>
-            <li>use um <code>while</code> para ler livros emprestados até o usuário digitar um título vazio (“Enter” direto);</li>
-            <li>para cada livro, leia o número de dias de atraso e calcule a multa: R$ 1,00 por dia até 5 dias, R$ 2,00 por dia acima disso;</li>
-            <li>mostre o total de multas a receber.</li>
-        </ul>
-
-        <button class="btn-resposta" data-target="resp-biblioteca">
-            Mostrar/ocultar resposta em Java
-        </button>
-
-        <div id="resp-biblioteca" style="display:none; margin-top:0.5rem; margin-bottom:1.5rem;">
-            <pre><code class="language-java">
-import java.util.Scanner;
-
-class LivroEmprestado {
-    String titulo;
-    int diasAtraso;
-    double multa;
-}
-
-public class BibliotecaNoturna {
-
-    public static void main(String[] args) {
-        Scanner entrada = new Scanner(System.in);
-
-        double totalMultas = 0.0;
-
-        while (true) {
-            System.out.print("Título do livro (Enter para sair): ");
-            String titulo = entrada.nextLine();
-
-            if (titulo.isEmpty()) {
-                break;
-            }
-
-            LivroEmprestado livro = new LivroEmprestado();
-            livro.titulo = titulo;
-
-            System.out.print("Dias de atraso: ");
-            livro.diasAtraso = entrada.nextInt();
-            entrada.nextLine();
-
-            if (livro.diasAtraso <= 5) {
-                livro.multa = livro.diasAtraso * 1.0;
-            } else {
-                livro.multa = 5 * 1.0 + (livro.diasAtraso - 5) * 2.0;
-            }
-
-            System.out.println("Multa para \"" + livro.titulo + "\": R$ " + livro.multa + "\n");
-            totalMultas += livro.multa;
-        }
-
-        System.out.println("Total de multas a receber: R$ " + totalMultas);
-
-        entrada.close();
+            </div>
+    
+            <!-- Ex 3: Cinema -->
+            <h3>Exercício 3 – Cinema JavaFlix</h3>
+            <p>
+                Crie uma classe <code>IngressoCinema</code> com os atributos <code>filme</code> (String),
+                <code>horario</code> (String) e <code>meiaEntrada</code> (boolean).<br>
+                No <code>main</code>:
+            </p>
+            <ul>
+                <li>use um <code>while</code> para registrar ingressos até o usuário digitar um filme vazio (“Enter” direto);</li>
+                <li>para cada ingresso, leia o nome do filme, o horário (por exemplo, “19:30”) e se é meia-entrada (S/N);</li>
+                <li>considere que o valor do ingresso inteiro é R$ 30,00 e meia-entrada é R$ 15,00;</li>
+                <li>ao final, mostre quantos ingressos foram vendidos e o faturamento total do cinema.</li>
+            </ul>
+    
+            <button class="btn-resposta" data-target="resp-cinema">
+                Mostrar/ocultar resposta em Java
+            </button>
+    
+            <div id="resp-cinema" style="display:none; margin-top:0.5rem; margin-bottom:1.5rem;">
+                <pre><code class="language-java">
+    import java.util.Scanner;
+    
+    class IngressoCinema {
+        String filme;
+        String horario;
+        boolean meiaEntrada;
+        double valorPago;
     }
-}
-            </code></pre>
-        </div>
+    
+    public class CinemaJavaFlix {
+    
+        public static void main(String[] args) {
+            Scanner entrada = new Scanner(System.in);
+    
+            double totalFaturado = 0.0;
+            int quantidadeIngressos = 0;
+    
+            while (true) {
+                System.out.print("Nome do filme (Enter para sair): ");
+                String filme = entrada.nextLine();
+    
+                if (filme.isEmpty()) {
+                    break;
+                }
+    
+                IngressoCinema ingresso = new IngressoCinema();
+                ingresso.filme = filme;
+    
+                System.out.print("Horário da sessão (ex: 19:30): ");
+                ingresso.horario = entrada.nextLine();
+    
+                System.out.print("Meia-entrada? (S/N): ");
+                String resposta = entrada.nextLine();
+    
+                if (resposta.equalsIgnoreCase("S")) {
+                    ingresso.meiaEntrada = true;
+                    ingresso.valorPago = 15.0;
+                } else {
+                    ingresso.meiaEntrada = false;
+                    ingresso.valorPago = 30.0;
+                }
+    
+                System.out.println("Ingresso registrado: " + ingresso.filme
+                        + " às " + ingresso.horario
+                        + " | valor: R$ " + ingresso.valorPago + "\n");
+    
+                totalFaturado += ingresso.valorPago;
+                quantidadeIngressos++;
+            }
+    
+            System.out.println("Total de ingressos vendidos: " + quantidadeIngressos);
+            System.out.println("Faturamento total: R$ " + totalFaturado);
+    
+            entrada.close();
+        }
+    }
+                </code></pre>
+            </div>
 
-        <div class="tip">
-            Tente adaptar um desses exercícios para o contexto do projeto da disciplina (por exemplo, aplicar decisões e loops em cima das classes do seu projeto).
-        </div>
     </section>
 
 </div>
