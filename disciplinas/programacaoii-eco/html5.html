@@ -18,10 +18,11 @@
         <p>Compreendendo a base semântica da web moderna e a organização de projetos front-end.</p>
         <nav>
             <a href="#introducao">1. Introdução</a>
-            <a href="#semantica">2. Estrutura Semântica</a>
-            <a href="#formularios">3. Formulários</a>
-            <a href="#multimidia">4. Multimídia</a>
-            <a href="#atividades">5. Atividades</a>
+            <a href="#semantica">2. Estrutura </a>
+            <a href="#css">3. CSS</a>
+            <a href="#formularios">4. Formulários</a>
+            <a href="#multimidia">5. Multimídia</a>
+            <a href="#atividades">6. Atividades</a>
             <a href="index.html">Página Inicial</a>
         </nav>
     </div>
@@ -78,9 +79,60 @@
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
         </section>
+        
+ <!-- 3. CSS -->
+            <section class="card" id="css">
+                <h2>3. O que é CSS?</h2>
+                <p><strong>CSS</strong> (Cascading Style Sheets) é uma linguagem de "folhas de estilo" usada para descrever a apresentação de um documento escrito em HTML.</p>
+                
+                <h3>Para que serve?</h3>
+                <ul>
+                    <li><strong>Visual:</strong> Define cores, fontes, tamanhos e espaçamentos.</li>
+                    <li><strong>Layout:</strong> Controla o posicionamento dos elementos (grades, colunas, etc).</li>
+                    <li><strong>Adaptatividade:</strong> Permite que o site mude de aparência em celulares (Responsividade).</li>
+                </ul>
 
+                <h3>Como e quando usar?</h3>
+                <p>Existem três formas de aplicar CSS, sendo a <strong>Externa</strong> a mais recomendada para projetos reais:</p>
+                <ol>
+                    <li><strong>Externo:</strong> Arquivo <code>.css</code> separado (Melhor organização).</li>
+                    <li><strong>Interno:</strong> Dentro da tag <code>&lt;style&gt;</code> no <code>&lt;head&gt;</code>.</li>
+                    <li><strong>Inline:</strong> Atributo <code>style="..."</code> direto na tag (Evite).</li>
+                </ol>
+
+                <div class="example-box">
+                    <h3>Exemplo: HTML + CSS Combinados</h3>
+                    <p>Abaixo, um exemplo completo que você pode salvar como <code>estilo.html</code>:</p>
+                    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;style&gt;
+        /* Seleciona o corpo da página */
+        body { background: #eee; font-family: sans-serif; }
+        
+        /* Seleciona todos os h1 */
+        h1 { color: #006699; text-align: center; }
+        
+        /* Seleciona elementos pela classe "destaque" */
+        .destaque { 
+            background: yellow; 
+            padding: 10px; 
+            border-radius: 5px; 
+            font-weight: bold;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Minha Página com Estilo&lt;/h1&gt;
+    &lt;p&gt;Este é um parágrafo comum.&lt;/p&gt;
+    &lt;p class="destaque"&gt;Este parágrafo usa CSS para se destacar!&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+            </section>
+        
         <section id="formularios" class="card">
-            <h2>3. Formulários e Validação</h2>
+            <h2>4. Formulários e Validação</h2>
             <p>O HTML5 trouxe tipos de campos que já realizam validação automática, facilitando a coleta de dados estruturados.</p>
             <div class="callout">
                 <strong>Tipos de Input Úteis:</strong>
@@ -147,7 +199,7 @@
         </section>
 
         <section id="multimidia" class="card">
-            <h2>4. Multimídia e Embeds</h2>
+            <h2>5. Multimídia e Embeds</h2>
             <p>O HTML5 eliminou a necessidade de plugins (como o Flash) para reproduzir áudio e vídeo nativamente no navegador.</p>
             <h3>Áudio e Vídeo:</h3>
             <p>Use as tags <code>&lt;audio&gt;</code> e <code>&lt;video&gt;</code> com o atributo <code>controls</code> para exibir os controles nativos do navegador.</p>
