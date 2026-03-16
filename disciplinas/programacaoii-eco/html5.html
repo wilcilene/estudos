@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8" />
-    <title>Programação II - HTML5 e Estrutura de Documentos</title>
+    <title>Programação II – HTML5 e Estrutura de Documentos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
         :root {
@@ -17,11 +17,9 @@
             --code-bg: #272822;
             --code-text: #f8f8f2;
         }
-
         * {
             box-sizing: border-box;
         }
-
         body {
             margin: 0;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -29,13 +27,11 @@
             color: var(--text);
             line-height: 1.6;
         }
-
         header {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: #ffffff;
             padding: 1.5rem 1rem;
         }
-
         header .container {
             max-width: 960px;
             margin: 0 auto;
@@ -43,25 +39,40 @@
             flex-direction: column;
             gap: 0.75rem;
         }
-
         header h1 {
             margin: 0;
             font-size: 1.8rem;
         }
-
         header p {
             margin: 0;
             max-width: 640px;
             font-size: 0.95rem;
         }
-
+        .tag {
+            display: inline-block;
+            padding: 0.1rem 0.5rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            background-color: #e3f2fd;
+            color: var(--primary-dark);
+            margin-right: 0.4rem;
+        }
+        .tag--aulas {
+            background-color: #e8f5e9;
+            color: #1b5e20;
+        }
+        .tag--nivel {
+            background-color: #fff3e0;
+            color: #e65100;
+        }
         nav {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
             font-size: 0.9rem;
         }
-
         nav a {
             color: #ffffff;
             text-decoration: none;
@@ -69,11 +80,9 @@
             border-radius: 999px;
             border: 1px solid rgba(255, 255, 255, 0.4);
         }
-
         nav a:hover {
             background-color: rgba(255, 255, 255, 0.16);
         }
-
         main {
             max-width: 960px;
             margin: 1.5rem auto 2.5rem;
@@ -82,14 +91,12 @@
             grid-template-columns: minmax(0, 1fr);
             gap: 1.5rem;
         }
-
         @media (min-width: 900px) {
             main {
                 grid-template-columns: minmax(0, 2fr) minmax(260px, 0.9fr);
                 align-items: flex-start;
             }
         }
-
         .card {
             background-color: var(--bg-card);
             border-radius: 0.5rem;
@@ -98,20 +105,17 @@
             border: 1px solid var(--border);
             margin-bottom: 1.5rem;
         }
-
         .card h2 {
             border-bottom: 1px solid var(--border);
             padding-bottom: 0.4rem;
             margin-bottom: 0.8rem;
             color: var(--primary);
         }
-
         .card h3 {
-            margin-top: 1rem;
+            margin-top: 1.2rem;
             font-size: 1.2rem;
             color: var(--primary-dark);
         }
-
         code {
             font-family: "Fira Code", "SF Mono", "Consolas", "Roboto Mono", monospace;
             background-color: #ececec;
@@ -119,7 +123,6 @@
             border-radius: 3px;
             font-size: 0.9em;
         }
-
         pre {
             background-color: var(--code-bg);
             color: var(--code-text);
@@ -131,14 +134,12 @@
             line-height: 1.4;
             border: 1px solid #333;
         }
-
         pre code {
             background-color: transparent;
             padding: 0;
             color: inherit;
             display: block;
         }
-
         .note {
             border-left: 4px solid var(--primary);
             padding-left: 0.75rem;
@@ -147,7 +148,6 @@
             font-size: 0.95rem;
             font-style: italic;
         }
-
         .callout {
             border-radius: 0.4rem;
             padding: 1rem;
@@ -156,11 +156,9 @@
             font-size: 0.95rem;
             margin: 1rem 0;
         }
-
         .callout strong {
             color: #e65100;
         }
-
         footer {
             border-top: 1px solid var(--border);
             margin-top: 2rem;
@@ -169,13 +167,11 @@
             color: var(--muted);
             text-align: center;
         }
-
         aside {
             display: flex;
             flex-direction: column;
             gap: 1rem;
         }
-
         .pill-list {
             list-style: none;
             padding: 0;
@@ -184,7 +180,6 @@
             flex-wrap: wrap;
             gap: 0.5rem;
         }
-
         .pill-list li {
             background-color: #e0f7fa;
             color: #006064;
@@ -193,11 +188,9 @@
             font-size: 0.85rem;
             font-weight: 500;
         }
-
         .step {
             margin-bottom: 1.5rem;
         }
-
         .example-box {
             background: #f8f9fa;
             border: 1px solid var(--border);
@@ -205,7 +198,32 @@
             padding: 1rem;
             margin: 0.5rem 0;
         }
-
+        details {
+            margin: 0.4rem 0 0.7rem;
+            border-radius: 0.4rem;
+            border: 1px solid var(--border);
+            background-color: #fafafa;
+        }
+        details summary {
+            padding: 0.5rem 0.7rem;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        details[open] summary {
+            border-bottom: 1px solid var(--border);
+        }
+        details > div {
+            padding: 0.6rem 0.8rem 0.7rem;
+        }
+        .mini-list {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+        .mini-list li {
+            margin-bottom: 0.4rem;
+        }
         /* Preview Frame Style */
         .preview-frame {
             border: 2px dashed var(--border);
@@ -214,7 +232,6 @@
             border-radius: 8px;
             margin-top: 1rem;
         }
-        
         .preview-header {
             background: #eee;
             padding: 0.5rem;
@@ -224,7 +241,6 @@
             border-radius: 6px 6px 0 0;
             color: var(--muted);
         }
-
         .preview-form label { display: block; margin-top: 10px; font-weight: bold; font-size: 0.9rem; }
         .preview-form input { width: 100%; padding: 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 4px; }
         .preview-form button { margin-top: 15px; padding: 10px 20px; background: var(--primary); color: #fff; border: none; border-radius: 4px; cursor: pointer; }
@@ -233,18 +249,27 @@
 <body>
     <header>
         <div class="container">
-            <nav>
-                <a href="index.html">Início</a>
-            </nav>
+            <div>
+                <span class="tag">Programação II – ECO</span>
+                <span class="tag tag--aulas">Aulas</span>
+                <span class="tag tag--nivel">Web</span>
+            </div>
             <h1>HTML5 e Estrutura de Documentos</h1>
             <p>Compreendendo a base semântica da web moderna e a organização de projetos front-end.</p>
+            <nav>
+                <a href="#introducao">1. Introdução</a>
+                <a href="#semantica">2. Estrutura Semântica</a>
+                <a href="#formularios">3. Formulários</a>
+                <a href="#multimidia">4. Multimídia</a>
+                <a href="#atividades">5. Atividades</a>
+                <a href="index.html">Página Inicial</a>
+            </nav>
         </div>
     </header>
-
     <main>
         <div class="content">
-            <!-- Introdução -->
-            <section class="card">
+            <!-- 1. Introdução -->
+            <section class="card" id="introducao">
                 <h2>1. Introdução ao HTML5</h2>
                 <p>O HTML5 representou uma revolução no desenvolvimento web, deixando de ser apenas uma linguagem de marcação para se tornar uma plataforma robusta. Seus principais pilares são:</p>
                 <ul>
@@ -258,11 +283,10 @@
                 </div>
             </section>
 
-            <!-- Semântica -->
-            <section class="card">
+            <!-- 2. Semântica -->
+            <section class="card" id="semantica">
                 <h2>2. Estrutura Semântica (Layout)</h2>
                 <p>O uso de tags semânticas é vital para a acessibilidade (leitores de tela) e SEO (motores de busca). Abaixo, as tags que definem as grandes áreas de uma página:</p>
-                
                 <div class="step">
                     <h3>Principais Tags de Bloco:</h3>
                     <ul>
@@ -275,7 +299,6 @@
                         <li><code>&lt;footer&gt;</code>: Rodapé do documento ou seção.</li>
                     </ul>
                 </div>
-
                 <h3>Exemplo Prático de Estrutura:</h3>
                 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="pt-BR"&gt;
@@ -295,17 +318,16 @@
         &lt;/article&gt;
     &lt;/main&gt;
     &lt;footer&gt;
-        &lt;p&gt;&copy; Wilcilene&lt;/p&gt;
+        &lt;p&gt;&copy; 2026&lt;/p&gt;
     &lt;/footer&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
             </section>
 
-            <!-- Formulários -->
-            <section class="card">
+            <!-- 3. Formulários -->
+            <section class="card" id="formularios">
                 <h2>3. Formulários e Validação</h2>
                 <p>O HTML5 trouxe tipos de campos que já realizam validação automática, facilitando a coleta de dados estruturados.</p>
-                
                 <div class="example-box">
                     <strong>Tipos de Input Úteis:</strong>
                     <ul class="pill-list">
@@ -317,20 +339,16 @@
                         <li><code>tel</code></li>
                     </ul>
                 </div>
-
                 <h3>Exemplo Executável: Cadastro Completo</h3>
-                <p>O código abaixo é um documento HTML5 completo. Você pode copiá-lo integralmente para um arquivo chamado <code>formulario.html</code> e abri-lo no seu navegador para testar.</p>
-
+                <p>O código abaixo é um documento HTML5 completo. Você pode copiá-lo integralmente e salvá-lo como <code>formulario.html</code> para testar.</p>
                 <div class="step">
                     <strong>Passo a passo para execução:</strong>
                     <ol>
                         <li>Abra seu editor de código (ex: VS Code).</li>
-                        <li>Crie um novo arquivo e salve-o como <code>formulario.html</code>.</li>
-                        <li>Copie o código abaixo e cole no arquivo.</li>
-                        <li>Abra o arquivo no seu navegador (Chrome, Edge ou Firefox).</li>
+                        <li>Crie um novo arquivo e salve como <code>formulario.html</code>.</li>
+                        <li>Cole o código abaixo e abra no navegador.</li>
                     </ol>
                 </div>
-
                 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="pt-BR"&gt;
 &lt;head&gt;
@@ -342,7 +360,6 @@
         label { display: block; margin-top: 15px; font-weight: bold; }
         input { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
         button { margin-top: 20px; padding: 10px 20px; background: #006699; color: white; border: none; border-radius: 4px; cursor: pointer; }
-        button:hover { background: #004766; }
     &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -350,71 +367,92 @@
     &lt;form action="#" method="post"&gt;
         &lt;label for="email"&gt;E-mail Acadêmico (Obrigatório):&lt;/label&gt;
         &lt;input type="email" id="email" required placeholder="nome@estudante.edu.br"&gt;
-
         &lt;label for="idade"&gt;Idade (16-99 anos):&lt;/label&gt;
         &lt;input type="number" id="idade" min="16" max="99" value="18"&gt;
-
         &lt;label for="nascimento"&gt;Data de Nascimento:&lt;/label&gt;
         &lt;input type="date" id="nascimento"&gt;
-
-        &lt;label for="cor"&gt;Cor Preferida para o Crachá:&lt;/label&gt;
+        &lt;label for="cor"&gt;Cor Preferida:&lt;/label&gt;
         &lt;input type="color" id="cor" value="#006699"&gt;
-
-        &lt;label for="nivel"&gt;Conhecimento Prévio em HTML (1 a 10):&lt;/label&gt;
-        &lt;input type="range" id="nivel" min="1" max="10" step="1"&gt;
-
-        &lt;label for="tel"&gt;Telefone (Formato: 47 999998888):&lt;/label&gt;
-        &lt;input type="tel" id="tel" pattern="[0-9]{2} [0-9]{9}" placeholder="47 999998888"&gt;
-
+        &lt;label for="nivel"&gt;Conhecimento Prévio (1 a 10):&lt;/label&gt;
+        &lt;input type="range" id="nivel" min="1" max="10"&gt;
         &lt;button type="submit"&gt;Finalizar Inscrição&lt;/button&gt;
     &lt;/form&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-
                 <div class="preview-frame">
-                    <div class="preview-header">Prévia Visual: Como a página aparecerá no navegador</div>
+                    <div class="preview-header">Prévia Visual: Simulação do formulário</div>
                     <div class="preview-form">
                         <h2 style="margin-top: 0; font-size: 1.3rem;">Inscrição de Estudante</h2>
                         <label>E-mail Acadêmico (Obrigatório):</label>
                         <input type="text" placeholder="nome@estudante.edu.br" disabled>
                         <label>Idade (16-99 anos):</label>
                         <input type="text" value="18" disabled style="width: 60px;">
-                        <label>Data de Nascimento:</label>
-                        <input type="text" placeholder="dd/mm/aaaa" disabled style="width: 150px;">
                         <button disabled>Finalizar Inscrição</button>
                     </div>
                 </div>
-
-                <div class="callout">
-                    <strong>Nota:</strong> O frame acima é apenas uma simulação visual. Para ver o formulário funcionando com todos os seletores nativos (calendário, seletor de cores, slider), você deve executar o código no seu navegador.
-                </div>
             </section>
 
-            <!-- Atividades -->
-            <section class="card">
-                <h2>4. Atividades Práticas</h2>
-                <div class="step">
-                    <h3>Atividade 1: Landing Page de Portfólio</h3>
-                    <p>Crie uma página de perfil profissional usando as tags semânticas estudadas (header, nav, main, article, aside, footer).</p>
-                </div>
-                <div class="step">
-                    <h3>Atividade 2: Formulário de Pré-Inscrição</h3>
-                    <p>Desenvolva um formulário de contato usando ao menos 5 tipos de inputs diferentes e atributos de validação como <code>required</code>, <code>min</code> e <code>max</code>.</p>
-                </div>
+            <!-- 4. Multimídia -->
+            <section class="card" id="multimidia">
+                <h2>4. Multimídia e Embeds</h2>
+                <p>O HTML5 eliminou a necessidade de plugins (como o Flash) para reproduzir áudio e vídeo nativamente no navegador.</p>
+                <h3>Áudio e Vídeo:</h3>
+                <p>Use as tags <code>&lt;audio&gt;</code> e <code>&lt;video&gt;</code> com o atributo <code>controls</code> para exibir os controles nativos do navegador.</p>
+                <pre><code>&lt;!-- Player de Áudio --&gt;
+&lt;audio controls&gt;
+    &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+    Seu navegador não suporta áudio.
+&lt;/audio&gt;
+
+&lt;!-- Player de Vídeo --&gt;
+&lt;video controls width="100%"&gt;
+    &lt;source src="video.mp4" type="video/mp4"&gt;
+    Seu navegador não suporta vídeo.
+&lt;/video&gt;</code></pre>
+                <h3>Iframe (Incorporação):</h3>
+                <p>A tag <code>&lt;iframe&gt;</code> permite incorporar conteúdo externo, como mapas ou vídeos do YouTube.</p>
+                <pre><code>&lt;iframe src="https://www.google.com/maps/embed?..." 
+        width="100%" height="300" style="border:0;"&gt;&lt;/iframe&gt;</code></pre>
+            </section>
+
+            <!-- 5. Atividades -->
+            <section class="card" id="atividades">
+                <h2>5. Atividades Práticas</h2>
+                <details open>
+                    <summary>Atividade 1: Landing Page de Portfólio</summary>
+                    <div>
+                        <p>Crie uma página de perfil profissional usando as tags semânticas estudadas (<code>header</code>, <code>nav</code>, <code>main</code>, <code>article</code>, <code>aside</code>, <code>footer</code>).</p>
+                    </div>
+                </details>
+                <details>
+                    <summary>Atividade 2: Formulário de Pré-Inscrição</summary>
+                    <div>
+                        <p>Desenvolva um formulário de contato usando ao menos 5 tipos de inputs diferentes e atributos de validação como <code>required</code>, <code>min</code> e <code>max</code>.</p>
+                    </div>
+                </details>
                 <div class="note">
                     <strong>Entrega:</strong> Publique seus arquivos no repositório de projetos e envie o link para a professora.
                 </div>
             </section>
         </div>
-
         <aside>
             <div class="card">
                 <h3>Checklist de Estudo</h3>
-                <ul class="mini-list" style="list-style: none; padding: 0; font-size: 0.9rem;">
-                    <li>✅ Semântica de Layout</li>
-                    <li>✅ Hierarquia de Tags</li>
-                    <li>✅ Novos Tipos de Input</li>
-                    <li>✅ Validação Nativa</li>
+                <ul class="mini-list">
+                    <li>[ ] Semântica de Layout</li>
+                    <li>[ ] Hierarquia de Tags</li>
+                    <li>[ ] Novos Tipos de Input</li>
+                    <li>[ ] Validação Nativa</li>
+                    <li>[ ] Multimídia (Audio/Video)</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Boas Práticas</h3>
+                <ul class="pill-list">
+                    <li>Tags Semânticas</li>
+                    <li>Acessibilidade</li>
+                    <li>SEO Friendly</li>
+                    <li>Validação Nativa</li>
                 </ul>
             </div>
             <div class="card">
@@ -424,16 +462,12 @@
                     <a href="https://web.dev/learn/html/" target="_blank" style="color: var(--primary); font-weight: bold;">Curso web.dev</a>
                 </nav>
             </div>
-            <div class="card" style="background-color: #e8f5e9; border-color: #c8e6c9;">
-                <h3>Para quem faltou</h3>
-                <p style="font-size: 0.85rem;">Estude os pilares do HTML5 e realize as duas atividades propostas. Dúvidas via GitHub Issues.</p>
-            </div>
         </aside>
     </main>
-
     <footer>
         <div class="container">
             <p>Programação II • Aula sobre HTML5 • 2026</p>
+            <p><a href="index.html" style="color: var(--primary);">Voltar para a página da disciplina</a></p>
         </div>
     </footer>
 </body>
