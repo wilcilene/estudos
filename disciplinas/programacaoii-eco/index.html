@@ -5,7 +5,6 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Programação II</title>
 
     <link rel="stylesheet"
@@ -13,14 +12,22 @@
 
 <style>
 
+/* ===================== */
+/* BASE */
+/* ===================== */
+
 body {
+
     margin: 0;
     font-family: "Segoe UI", Roboto, Arial;
     background: #f4f6fb;
     color: #1f2933;
+
 }
 
+/* ===================== */
 /* HEADER */
+/* ===================== */
 
 header {
 
@@ -43,11 +50,12 @@ header p {
 
     max-width: 720px;
     margin: auto;
-    opacity: .95;
 
 }
 
+/* ===================== */
 /* LAYOUT */
+/* ===================== */
 
 main {
 
@@ -57,14 +65,16 @@ main {
 
 }
 
+/* ===================== */
 /* INTRO */
+/* ===================== */
 
 .intro {
 
     background: white;
     padding: 30px;
-    border-radius: 14px;
 
+    border-radius: 14px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 
     margin-bottom: 40px;
@@ -78,7 +88,9 @@ main {
 
 }
 
+/* ===================== */
 /* PROGRESSO */
+/* ===================== */
 
 .progress-container {
 
@@ -90,6 +102,7 @@ main {
 
     height: 10px;
     background: #e5e7eb;
+
     border-radius: 20px;
     overflow: hidden;
 
@@ -98,94 +111,44 @@ main {
 .progress {
 
     height: 100%;
-    width: 0%;
+    width: 15%;
+
     background: linear-gradient(90deg,#6366f1,#818cf8);
 
-    transition: width 1s ease;
-
 }
 
-/* TIMELINE */
-
-.timeline {
-
-    margin: 40px 0;
-    position: relative;
-
-}
-
-.timeline::before {
-
-    content: "";
-    position: absolute;
-
-    left: 0;
-    right: 0;
-    top: 50%;
-
-    height: 4px;
-    background: #e5e7eb;
-
-}
-
-.timeline-steps {
-
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-
-}
-
-.step {
-
-    width: 18px;
-    height: 18px;
-
-    border-radius: 50%;
-    background: #e5e7eb;
-
-    z-index: 2;
-
-}
-
-.step.passado {
-    background: #10b981;
-}
-
-.step.atual {
-    background: #6366f1;
-}
-
+/* ===================== */
 /* GRID */
+/* ===================== */
 
 .grid {
 
     display: grid;
 
     grid-template-columns:
-        repeat(auto-fit,minmax(260px,1fr));
+        repeat(auto-fit, minmax(260px,1fr));
 
     gap: 22px;
 
 }
 
+/* ===================== */
 /* CARDS */
+/* ===================== */
 
 .card {
 
     background: white;
 
     border-radius: 16px;
-
     padding: 24px;
 
     text-decoration: none;
-
     color: inherit;
 
     border: 1px solid #e5e7eb;
 
-    transition: all .25s ease;
+    transition: .25s;
 
     position: relative;
 
@@ -221,9 +184,7 @@ main {
 
 .card h3 {
 
-    margin-top: 0;
-    margin-bottom: 6px;
-
+    margin: 0 0 6px 0;
     font-size: 1.1rem;
 
 }
@@ -231,26 +192,19 @@ main {
 .card p {
 
     margin: 0;
-
     font-size: .9rem;
     color: #6b7280;
 
 }
 
-.tag {
-
-    font-size: .75rem;
-
-    font-weight: 600;
-
-    letter-spacing: .05em;
-
-    color: #6b7280;
-
-}
+/* ===================== */
+/* ESTADOS */
+/* ===================== */
 
 .passado {
+
     border-left: 6px solid #10b981;
+
 }
 
 .atual {
@@ -261,7 +215,9 @@ main {
 }
 
 .futuro {
+
     border-left: 6px solid #e5e7eb;
+
 }
 
 .badge {
@@ -272,21 +228,24 @@ main {
     right: 12px;
 
     background: #6366f1;
-
     color: white;
 
     font-size: .7rem;
-
     padding: 5px 8px;
 
     border-radius: 6px;
 
 }
 
+/* ===================== */
+/* FOOTER */
+/* ===================== */
+
 footer {
 
     text-align: center;
     margin-top: 60px;
+
     font-size: .85rem;
     color: #6b7280;
 
@@ -297,7 +256,6 @@ footer {
 </head>
 
 <body>
-
 
 <header>
 
@@ -313,165 +271,336 @@ footer {
 
 <main>
 
+<!-- ===================== -->
+<!-- INTRO -->
+<!-- ===================== -->
 
 <div class="intro">
 
-<h2>Sobre a disciplina</h2>
+    <h2>Sobre a disciplina</h2>
 
-<p>
+    <p>
+        A disciplina revisa conceitos fundamentais de Orientação a Objetos
+        e evolui para o desenvolvimento de aplicações web completas
+        integrando front-end, back-end e banco de dados.
+    </p>
 
-A disciplina revisa conceitos fundamentais de Orientação a Objetos
-e evolui para o desenvolvimento de aplicações web completas
-integrando front-end, back-end e banco de dados.
+    <p>
+        Durante o semestre os estudantes desenvolvem um
+        <strong>projeto completo</strong>
+        utilizando JavaScript, Node.js, Express e APIs.
+    </p>
 
-</p>
+    <div class="progress-container">
 
-<p>
+        <p><strong>Progresso do semestre</strong></p>
 
-Durante o semestre os estudantes desenvolvem um
-<strong>projeto completo</strong>
-utilizando JavaScript, Node.js, Express e APIs.
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
 
-</p>
-
-<div class="progress-container">
-
-<p><strong>Progresso do semestre</strong></p>
-
-<div class="progress-bar">
-<div class="progress" id="progress"></div>
-</div>
-
-</div>
+    </div>
 
 </div>
 
 
-<!-- TIMELINE -->
-
-<div class="timeline">
-
-<div class="timeline-steps" id="timeline">
-
-<div class="step"></div>
-<div class="step"></div>
-<div class="step"></div>
-<div class="step"></div>
-<div class="step"></div>
-<div class="step"></div>
-<div class="step"></div>
-<div class="step"></div>
-
-</div>
-
-</div>
-
-
+<!-- ===================== -->
 <!-- CARDS -->
+<!-- ===================== -->
 
-<div class="grid" id="cards">
-
-
-<a href="revisao-oo.html" class="card" data-semana="1">
-
-<i class="fa-solid fa-cube"></i>
-
-<div class="tag">Semana 1</div>
-
-<h3>Revisão OO</h3>
-
-<p>Classes, objetos e encapsulamento.</p>
-
-</a>
+<div class="grid">
 
 
-<a href="revisao-oo2.html" class="card" data-semana="2">
+<a href="https://wilcilene.github.io/estudos/disciplinas/programacaoii-eco/revisao-oo.html"
+   class="card passado">
 
-<i class="fa-solid fa-layer-group"></i>
+    <i class="fa-solid fa-cube"></i>
 
-<div class="tag">Semana 2</div>
+    <h3>Revisão OO: classes, herança, polimorfismo</h3>
 
-<h3>Revisão OO – Parte 2</h3>
-
-<p>Interfaces, exceções e arquivos.</p>
+    <p>Revisão de Programação I.</p>
 
 </a>
 
 
-<a href="ferramentas.html" class="card" data-semana="3">
+<a href="https://wilcilene.github.io/estudos/disciplinas/programacaoii-eco/revisao-oo2.html"
+   class="card passado">
 
-<i class="fa-solid fa-screwdriver-wrench"></i>
+    <i class="fa-solid fa-layer-group"></i>
 
-<div class="tag">Semana 3</div>
+    <h3>Revisão OO: interfaces, exceções e arquivos</h3>
 
-<h3>Ferramentas de desenvolvimento</h3>
-
-<p>Ambientes e ferramentas web.</p>
-
-</a>
-
-
-<a href="html5.html" class="card" data-semana="4">
-
-<i class="fa-brands fa-html5"></i>
-
-<div class="tag">Semana 4</div>
-
-<h3>HTML5</h3>
-
-<p>Estrutura e semântica de páginas web.</p>
+    <p>Revisão de Programação I.</p>
 
 </a>
 
 
-<a href="dom.html" class="card" data-semana="5">
+<a href="https://wilcilene.github.io/estudos/disciplinas/programacaoii-eco/ferramentas.html"
+   class="card passado">
 
-<i class="fa-solid fa-code"></i>
+    <i class="fa-solid fa-screwdriver-wrench"></i>
 
-<div class="tag">Semana 5</div>
+    <h3>Ferramentas para desenvolvimento web</h3>
 
-<h3>Manipulação do DOM</h3>
-
-<p>querySelector e eventos.</p>
-
-</a>
-
-
-<a href="node.html" class="card" data-semana="10">
-
-<i class="fa-brands fa-node-js"></i>
-
-<div class="tag">Node.js</div>
-
-<h3>Node.js</h3>
-
-<p>Execução de JavaScript no servidor.</p>
+    <p>Levantamento e avaliação de ferramentas.</p>
 
 </a>
 
 
-<a href="express.html" class="card" data-semana="12">
+<a href="https://wilcilene.github.io/estudos/disciplinas/programacaoii-eco/html5.html"
+   class="card atual">
 
-<i class="fa-solid fa-server"></i>
+    <div class="badge">
+        Semana atual
+    </div>
 
-<div class="tag">Express</div>
+    <i class="fa-brands fa-html5"></i>
 
-<h3>Express</h3>
+    <h3>HTML5 e estrutura de documentos web</h3>
 
-<p>Criação de APIs.</p>
+    <p>Semântica e estrutura de páginas.</p>
 
 </a>
 
 
-<a href="sql.html" class="card" data-semana="14">
+<a href="#" class="card futuro">
 
-<i class="fa-solid fa-database"></i>
+    <i class="fa-solid fa-code"></i>
 
-<div class="tag">SQL</div>
+    <h3>Manipulação do DOM</h3>
 
-<h3>Banco de dados</h3>
+    <p>querySelector, eventos e innerHTML.</p>
 
-<p>Consultas SQL.</p>
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-solid fa-list"></i>
+
+    <h3>Exercícios DOM</h3>
+
+    <p>Formulários, listas e interação.</p>
+
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-solid fa-function"></i>
+
+    <h3>Funções em JavaScript</h3>
+
+    <p>Callbacks e arrow functions.</p>
+
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-solid fa-table"></i>
+
+    <h3>Arrays e objetos</h3>
+
+    <p>Métodos essenciais.</p>
+
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-solid fa-lightbulb"></i>
+
+    <h3>Estudo de Caso</h3>
+
+    <p>Aplicação prática.</p>
+
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-solid fa-diagram-project"></i>
+
+    <h3>Padrões de Projeto</h3>
+
+    <p>Introdução aos padrões GoF.</p>
+
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-solid fa-broadcast-tower"></i>
+
+    <h3>Padrão Observer</h3>
+
+    <p>Observer e EventEmitter.</p>
+
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-solid fa-industry"></i>
+
+    <h3>Factory e Strategy</h3>
+
+    <p>Padrões aplicados ao JavaScript.</p>
+
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-brands fa-node-js"></i>
+
+    <h3>Introdução ao Node.js</h3>
+
+    <p>Event loop e módulos.</p>
+
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-solid fa-box"></i>
+
+    <h3>NPM e package.json</h3>
+
+    <p>Gerenciamento de dependências.</p>
+
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-solid fa-laptop-code"></i>
+
+    <h3>Projeto semestral</h3>
+
+    <p>Desenvolvimento da aplicação.</p>
+
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-solid fa-server"></i>
+
+    <h3>Express.js</h3>
+
+    <p>Servidor e rotas.</p>
+
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-solid fa-plug"></i>
+
+    <h3>APIs REST</h3>
+
+    <p>Verbos HTTP e status codes.</p>
+
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-solid fa-cloud"></i>
+
+    <h3>Consumo de APIs</h3>
+
+    <p>fetch e axios.</p>
+
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-solid fa-triangle-exclamation"></i>
+
+    <h3>Tratamento de erros</h3>
+
+    <p>Middlewares de erro no Express.</p>
+
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-solid fa-database"></i>
+
+    <h3>SQL essencial</h3>
+
+    <p>SELECT, INSERT, UPDATE e DELETE.</p>
+
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-solid fa-link"></i>
+
+    <h3>Node + Banco de dados</h3>
+
+    <p>Integração com banco.</p>
+
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-solid fa-layer-group"></i>
+
+    <h3>Padrão Repository</h3>
+
+    <p>Camada de persistência.</p>
+
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-solid fa-paintbrush"></i>
+
+    <h3>HTML + CSS básico</h3>
+
+    <p>Interfaces funcionais.</p>
+
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-solid fa-arrows-left-right"></i>
+
+    <h3>Integração front-back</h3>
+
+    <p>Fetch consumindo a própria API.</p>
+
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-solid fa-lock"></i>
+
+    <h3>Autenticação</h3>
+
+    <p>Sessões e JWT.</p>
+
+</a>
+
+
+<a href="#" class="card futuro">
+
+    <i class="fa-solid fa-repeat"></i>
+
+    <h3>Revisão</h3>
+
+    <p>Fechamento da disciplina.</p>
 
 </a>
 
@@ -481,118 +610,28 @@ utilizando JavaScript, Node.js, Express e APIs.
 
 <footer>
 
-Programação II • Engenharia de Computação
+    Programação II • Engenharia de Computação
 
 </footer>
 
 </main>
 
 
-
 <script>
 
-/* DATA DE INÍCIO DO SEMESTRE */
-
-const inicioSemestre = new Date("2026-03-03")
-
-
-/* CALCULAR SEMANA */
-
-const hoje = new Date()
-
-const diff = hoje - inicioSemestre
-
-const semanaAtual =
-    Math.floor(diff / (1000*60*60*24*7)) + 1
-
-
-/* ATUALIZAR CARDS */
-
 document
-.querySelectorAll(".card")
-.forEach(card => {
+    .querySelectorAll(".card")
+    .forEach((card, i) => {
 
-    const semana =
-        parseInt(card.dataset.semana)
+        setTimeout(() => {
 
-    if(semana < semanaAtual){
+            card.classList.add("show")
 
-        card.classList.add("passado")
+        }, i * 80)
 
-    }
-
-    else if(semana === semanaAtual){
-
-        card.classList.add("atual")
-
-        const badge =
-            document.createElement("div")
-
-        badge.className="badge"
-        badge.innerText="Semana atual"
-
-        card.appendChild(badge)
-
-    }
-
-    else{
-
-        card.classList.add("futuro")
-
-    }
-
-})
-
-
-/* BARRA PROGRESSO */
-
-const progresso =
-    (semanaAtual / 16) * 100
-
-document
-.getElementById("progress")
-.style.width = progresso + "%"
-
-
-/* TIMELINE */
-
-const steps =
-    document.querySelectorAll(".step")
-
-steps.forEach((step,i)=>{
-
-    if(i+1 < semanaAtual){
-
-        step.classList.add("passado")
-
-    }
-
-    else if(i+1 === semanaAtual){
-
-        step.classList.add("atual")
-
-    }
-
-})
-
-
-/* ANIMAÇÃO CARDS */
-
-const cards =
-    document.querySelectorAll(".card")
-
-cards.forEach((card,i)=>{
-
-    setTimeout(()=>{
-
-        card.classList.add("show")
-
-    }, i*120)
-
-})
+    })
 
 </script>
 
 </body>
-
 </html>
