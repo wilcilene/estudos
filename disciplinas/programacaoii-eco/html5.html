@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8" />
-    <title>Programação II – HTML5, Estrutura e Estilo (CSS)</title>
+    <title>Programação II – HTML5 e Estrutura de Documentos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
         :root {
@@ -252,16 +252,16 @@
             <div>
                 <span class="tag">Programação II – ECO</span>
                 <span class="tag tag--aulas">Aulas</span>
-                <span class="tag tag--nivel">Web Design</span>
+                <span class="tag tag--nivel">Web</span>
             </div>
-            <h1>HTML5 e CSS: Estrutura e Estilo</h1>
-            <p>Compreendendo a base semântica da web e como o CSS transforma documentos em interfaces visuais.</p>
+            <h1>HTML5 e Estrutura de Documentos</h1>
+            <p>Compreendendo a base semântica da web moderna e a organização de projetos front-end.</p>
             <nav>
                 <a href="#introducao">1. Introdução</a>
-                <a href="#semantica">2. Estrutura</a>
-                <a href="#css">3. O que é CSS?</a>
-                <a href="#formularios">4. Formulários</a>
-                <a href="#multimidia">5. Multimídia</a>
+                <a href="#semantica">2. Estrutura Semântica</a>
+                <a href="#formularios">3. Formulários</a>
+                <a href="#multimidia">4. Multimídia</a>
+                <a href="#atividades">5. Atividades</a>
                 <a href="index.html">Página Inicial</a>
             </nav>
         </div>
@@ -276,136 +276,197 @@
                     <li><strong>Semântica:</strong> Dar significado ao conteúdo para máquinas e humanos.</li>
                     <li><strong>Conectividade:</strong> Novas formas de comunicação com o servidor.</li>
                     <li><strong>Multimídia:</strong> Suporte nativo a áudio e vídeo sem plugins externos.</li>
+                    <li><strong>APIs de Dispositivo:</strong> Acesso a geolocalização, câmera, armazenamento local, etc.</li>
                 </ul>
                 <div class="note">
-                    Lembre-se: HTML estrutura o conteúdo; CSS cuida da apresentação.
+                    HTML5 é sobre "o que o conteúdo é" e não "como ele deve aparecer".
                 </div>
             </section>
 
             <!-- 2. Semântica -->
             <section class="card" id="semantica">
                 <h2>2. Estrutura Semântica (Layout)</h2>
-                <p>O uso de tags semânticas é vital para a acessibilidade (leitores de tela) e SEO (motores de busca).</p>
+                <p>O uso de tags semânticas é vital para a acessibilidade (leitores de tela) e SEO (motores de busca). Abaixo, as tags que definem as grandes áreas de uma página:</p>
                 <div class="step">
-                    <h3>Principais Tags:</h3>
+                    <h3>Principais Tags de Bloco:</h3>
                     <ul>
-                        <li><code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;footer&gt;</code>.</li>
+                        <li><code>&lt;header&gt;</code>: Cabeçalho do documento ou seção.</li>
+                        <li><code>&lt;nav&gt;</code>: Blocos de links de navegação.</li>
+                        <li><code>&lt;main&gt;</code>: Conteúdo principal e exclusivo da página.</li>
+                        <li><code>&lt;section&gt;</code>: Agrupamento temático de conteúdo.</li>
+                        <li><code>&lt;article&gt;</code>: Conteúdo independente e reutilizável.</li>
+                        <li><code>&lt;aside&gt;</code>: Conteúdo periférico (sidebar).</li>
+                        <li><code>&lt;footer&gt;</code>: Rodapé do documento ou seção.</li>
                     </ul>
                 </div>
+                <h3>Exemplo Prático de Estrutura:</h3>
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Exemplo Estrutural&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Portal Acadêmico&lt;/h1&gt;
+        &lt;nav&gt;...&lt;/nav&gt;
+    &lt;/header&gt;
+    &lt;main&gt;
+        &lt;article&gt;
+            &lt;h2&gt;Aula de HTML5&lt;/h2&gt;
+            &lt;p&gt;Conteúdo da aula...&lt;/p&gt;
+        &lt;/article&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;
+        &lt;p&gt;&copy; 2026&lt;/p&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
             </section>
 
-            <!-- 3. CSS -->
-            <section class="card" id="css">
-                <h2>3. O que é CSS?</h2>
-                <p><strong>CSS</strong> (Cascading Style Sheets) é uma linguagem de "folhas de estilo" usada para descrever a apresentação de um documento escrito em HTML.</p>
-                
-                <h3>Para que serve?</h3>
-                <ul>
-                    <li><strong>Visual:</strong> Define cores, fontes, tamanhos e espaçamentos.</li>
-                    <li><strong>Layout:</strong> Controla o posicionamento dos elementos (grades, colunas, etc).</li>
-                    <li><strong>Adaptatividade:</strong> Permite que o site mude de aparência em celulares (Responsividade).</li>
-                </ul>
-
-                <h3>Como e quando usar?</h3>
-                <p>Existem três formas de aplicar CSS, sendo a <strong>Externa</strong> a mais recomendada para projetos reais:</p>
-                <ol>
-                    <li><strong>Externo:</strong> Arquivo <code>.css</code> separado (Melhor organização).</li>
-                    <li><strong>Interno:</strong> Dentro da tag <code>&lt;style&gt;</code> no <code>&lt;head&gt;</code>.</li>
-                    <li><strong>Inline:</strong> Atributo <code>style="..."</code> direto na tag (Evite).</li>
-                </ol>
-
+            <!-- 3. Formulários -->
+            <section class="card" id="formularios">
+                <h2>3. Formulários e Validação</h2>
+                <p>O HTML5 trouxe tipos de campos que já realizam validação automática, facilitando a coleta de dados estruturados.</p>
                 <div class="example-box">
-                    <h3>Exemplo: HTML + CSS Combinados</h3>
-                    <p>Abaixo, um exemplo completo que você pode salvar como <code>estilo.html</code>:</p>
-                    <pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
+                    <strong>Tipos de Input Úteis:</strong>
+                    <ul class="pill-list">
+                        <li><code>email</code></li>
+                        <li><code>number</code></li>
+                        <li><code>date</code></li>
+                        <li><code>color</code></li>
+                        <li><code>range</code></li>
+                        <li><code>tel</code></li>
+                    </ul>
+                </div>
+                <h3>Exemplo Executável: Cadastro Completo</h3>
+                <p>O código abaixo é um documento HTML5 completo. Você pode copiá-lo integralmente e salvá-lo como <code>formulario.html</code> para testar.</p>
+                <div class="step">
+                    <strong>Passo a passo para execução:</strong>
+                    <ol>
+                        <li>Abra seu editor de código (ex: VS Code).</li>
+                        <li>Crie um novo arquivo e salve como <code>formulario.html</code>.</li>
+                        <li>Cole o código abaixo e abra no navegador.</li>
+                    </ol>
+                </div>
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
 &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Teste de Formulário HTML5&lt;/title&gt;
     &lt;style&gt;
-        /* Seleciona o corpo da página */
-        body { background: #eee; font-family: sans-serif; }
-        
-        /* Seleciona todos os h1 */
-        h1 { color: #006699; text-align: center; }
-        
-        /* Seleciona elementos pela classe "destaque" */
-        .destaque { 
-            background: yellow; 
-            padding: 10px; 
-            border-radius: 5px; 
-            font-weight: bold;
-        }
+        body { font-family: sans-serif; padding: 20px; line-height: 1.5; }
+        form { max-width: 400px; background: #f9f9f9; padding: 20px; border-radius: 8px; border: 1px solid #ddd; }
+        label { display: block; margin-top: 15px; font-weight: bold; }
+        input { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+        button { margin-top: 20px; padding: 10px 20px; background: #006699; color: white; border: none; border-radius: 4px; cursor: pointer; }
     &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
-    &lt;h1&gt;Minha Página com Estilo&lt;/h1&gt;
-    &lt;p&gt;Este é um parágrafo comum.&lt;/p&gt;
-    &lt;p class="destaque"&gt;Este parágrafo usa CSS para se destacar!&lt;/p&gt;
+    &lt;h2&gt;Inscrição de Estudante&lt;/h2&gt;
+    &lt;form action="#" method="post"&gt;
+        &lt;label for="email"&gt;E-mail Acadêmico (Obrigatório):&lt;/label&gt;
+        &lt;input type="email" id="email" required placeholder="nome@estudante.edu.br"&gt;
+        &lt;label for="idade"&gt;Idade (16-99 anos):&lt;/label&gt;
+        &lt;input type="number" id="idade" min="16" max="99" value="18"&gt;
+        &lt;label for="nascimento"&gt;Data de Nascimento:&lt;/label&gt;
+        &lt;input type="date" id="nascimento"&gt;
+        &lt;label for="cor"&gt;Cor Preferida:&lt;/label&gt;
+        &lt;input type="color" id="cor" value="#006699"&gt;
+        &lt;label for="nivel"&gt;Conhecimento Prévio (1 a 10):&lt;/label&gt;
+        &lt;input type="range" id="nivel" min="1" max="10"&gt;
+        &lt;button type="submit"&gt;Finalizar Inscrição&lt;/button&gt;
+    &lt;/form&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
+                <div class="preview-frame">
+                    <div class="preview-header">Prévia Visual: Simulação do formulário</div>
+                    <div class="preview-form">
+                        <h2 style="margin-top: 0; font-size: 1.3rem;">Inscrição de Estudante</h2>
+                        <label>E-mail Acadêmico (Obrigatório):</label>
+                        <input type="text" placeholder="nome@estudante.edu.br" disabled>
+                        <label>Idade (16-99 anos):</label>
+                        <input type="text" value="18" disabled style="width: 60px;">
+                        <button disabled>Finalizar Inscrição</button>
+                    </div>
                 </div>
             </section>
 
-            <!-- 4. Formulários -->
-            <section class="card" id="formularios">
-                <h2>4. Formulários e Validação</h2>
-                <p>O HTML5 trouxe tipos de campos que já realizam validação automática (<code>email</code>, <code>number</code>, <code>date</code>, etc).</p>
-                <h3>Exemplo Executável:</h3>
-                <pre><code>&lt;form&gt;
-    &lt;label&gt;E-mail:&lt;/label&gt;
-    &lt;input type="email" required&gt;
-    &lt;button type="submit"&gt;Enviar&lt;/button&gt;
-&lt;/form&gt;</code></pre>
-            </section>
-
-            <!-- 5. Multimídia -->
+            <!-- 4. Multimídia -->
             <section class="card" id="multimidia">
-                <h2>5. Multimídia e Embeds</h2>
-                <p>Uso nativo de áudio, vídeo e incorporação de mapas ou vídeos externos.</p>
-                <pre><code>&lt;video controls width="100%"&gt;
+                <h2>4. Multimídia e Embeds</h2>
+                <p>O HTML5 eliminou a necessidade de plugins (como o Flash) para reproduzir áudio e vídeo nativamente no navegador.</p>
+                <h3>Áudio e Vídeo:</h3>
+                <p>Use as tags <code>&lt;audio&gt;</code> e <code>&lt;video&gt;</code> com o atributo <code>controls</code> para exibir os controles nativos do navegador.</p>
+                <pre><code>&lt;!-- Player de Áudio --&gt;
+&lt;audio controls&gt;
+    &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+    Seu navegador não suporta áudio.
+&lt;/audio&gt;
+
+&lt;!-- Player de Vídeo --&gt;
+&lt;video controls width="100%"&gt;
     &lt;source src="video.mp4" type="video/mp4"&gt;
+    Seu navegador não suporta vídeo.
 &lt;/video&gt;</code></pre>
+                <h3>Iframe (Incorporação):</h3>
+                <p>A tag <code>&lt;iframe&gt;</code> permite incorporar conteúdo externo, como mapas ou vídeos do YouTube.</p>
+                <pre><code>&lt;iframe src="https://www.google.com/maps/embed?..." 
+        width="100%" height="300" style="border:0;"&gt;&lt;/iframe&gt;</code></pre>
             </section>
 
-            <!-- 6. Atividades -->
+            <!-- 5. Atividades -->
             <section class="card" id="atividades">
-                <h2>6. Atividades Práticas</h2>
+                <h2>5. Atividades Práticas</h2>
                 <details open>
-                    <summary>Atividade 1: Estilizando seu Portfólio</summary>
+                    <summary>Atividade 1: Landing Page de Portfólio</summary>
                     <div>
-                        <p>Pegue a estrutura criada na aula anterior e adicione uma folha de estilo CSS (interna ou externa) para definir cores, fontes e um layout organizado.</p>
+                        <p>Crie uma página de perfil profissional usando as tags semânticas estudadas (<code>header</code>, <code>nav</code>, <code>main</code>, <code>article</code>, <code>aside</code>, <code>footer</code>).</p>
                     </div>
                 </details>
                 <details>
-                    <summary>Atividade 2: Formulário com Validação e Estilo</summary>
+                    <summary>Atividade 2: Formulário de Pré-Inscrição</summary>
                     <div>
-                        <p>Crie um formulário de cadastro e use CSS para deixar os campos com bordas arredondadas e o botão com uma cor de destaque.</p>
+                        <p>Desenvolva um formulário de contato usando ao menos 5 tipos de inputs diferentes e atributos de validação como <code>required</code>, <code>min</code> e <code>max</code>.</p>
                     </div>
                 </details>
+                <div class="note">
+                    <strong>Entrega:</strong> Publique seus arquivos no repositório de projetos e envie o link para a professora.
+                </div>
             </section>
         </div>
         <aside>
             <div class="card">
                 <h3>Checklist de Estudo</h3>
                 <ul class="mini-list">
-                    <li>[ ] Seletores CSS (Tag, Classe)</li>
-                    <li>[ ] Propriedades (color, background)</li>
-                    <li>[ ] CSS Interno vs Externo</li>
-                    <li>[ ] Semântica HTML5</li>
-                    <li>[ ] Validação de Forms</li>
+                    <li>[ ] Semântica de Layout</li>
+                    <li>[ ] Hierarquia de Tags</li>
+                    <li>[ ] Novos Tipos de Input</li>
+                    <li>[ ] Validação Nativa</li>
+                    <li>[ ] Multimídia (Audio/Video)</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Boas Práticas</h3>
+                <ul class="pill-list">
+                    <li>Tags Semânticas</li>
+                    <li>Acessibilidade</li>
+                    <li>SEO Friendly</li>
+                    <li>Validação Nativa</li>
                 </ul>
             </div>
             <div class="card">
                 <h3>Recursos Extras</h3>
                 <nav style="flex-direction: column; gap: 0.5rem;">
-                    <a href="https://developer.mozilla.org/pt-BR/docs/Web/CSS" target="_blank" style="color: var(--primary); font-weight: bold;">Guia CSS - MDN</a>
-                    <a href="https://css-tricks.com/" target="_blank" style="color: var(--primary); font-weight: bold;">CSS-Tricks</a>
+                    <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element" target="_blank" style="color: var(--primary); font-weight: bold;">Referência MDN</a>
+                    <a href="https://web.dev/learn/html/" target="_blank" style="color: var(--primary); font-weight: bold;">Curso web.dev</a>
                 </nav>
             </div>
         </aside>
     </main>
     <footer>
         <div class="container">
-            <p>Programação II • Aula sobre HTML5 e CSS • 2026</p>
+            <p>Programação II • Aula sobre HTML5 • 2026</p>
             <p><a href="index.html" style="color: var(--primary);">Voltar para a página da disciplina</a></p>
         </div>
     </footer>
