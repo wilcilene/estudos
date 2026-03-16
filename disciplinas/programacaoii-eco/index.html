@@ -2,159 +2,140 @@
 <html lang="pt-BR">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programação II</title>
 
-<title>Programação II</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
 
-<style>
+        header {
+            background: linear-gradient(135deg, #5b5fc7, #7c83ff);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
 
-:root{
---roxo:#5b5fc7;
---fundo:#f4f6fb;
---texto:#1f2933;
---muted:#6b7280;
+        header h1 {
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
 
---passado:#d1fae5;
---atual:#dbeafe;
---futuro:#ffffff;
+        header p {
+            max-width: 700px;
+            margin: auto;
+            opacity: 0.95;
+        }
 
---borda:#e5e7eb;
-}
+        main {
+            max-width: 1200px;
+            margin: auto;
+            padding: 40px 20px;
+        }
 
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-}
+        .intro {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
 
-body{
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
-background:var(--fundo);
-color:var(--texto);
-line-height:1.6;
-}
+        .intro h2 {
+            margin-top: 0;
+        }
 
-header{
-background:linear-gradient(135deg,var(--roxo),#7c7ff0);
-color:white;
-padding:3rem 1.5rem;
-text-align:center;
-}
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+        }
 
-header h1{
-font-size:2.4rem;
-margin-bottom:.4rem;
-}
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 22px;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid #e5e7eb;
+            transition: all 0.25s ease;
+            position: relative;
+        }
 
-header p{
-max-width:700px;
-margin:auto;
-opacity:.95;
-}
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 28px rgba(0,0,0,0.12);
+        }
 
-main{
-max-width:1100px;
-margin:auto;
-padding:2rem 1.2rem;
-}
+        .card h3 {
+            margin-top: 8px;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
 
-.intro{
-background:white;
-border:1px solid var(--borda);
-padding:1.6rem;
-border-radius:12px;
-margin-bottom:2rem;
-}
+        .card p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
 
-.intro p{
-margin-bottom:.8rem;
-}
+        .tag {
+            font-size: 0.75rem;
+            font-weight: bold;
+            letter-spacing: .04em;
+        }
 
-.legenda{
-display:flex;
-gap:1rem;
-margin-top:1rem;
-flex-wrap:wrap;
-font-size:.9rem;
-}
+        .passado {
+            border-left: 6px solid #10b981;
+        }
 
-.legenda span{
-display:flex;
-align-items:center;
-gap:.4rem;
-}
+        .atual {
+            border-left: 6px solid #6366f1;
+            background: #eef2ff;
+        }
 
-.box{
-width:14px;
-height:14px;
-border-radius:4px;
-}
+        .futuro {
+            border-left: 6px solid #e5e7eb;
+        }
 
-.passado{background:var(--passado);}
-.atual{background:var(--atual);}
-.futuro{background:white;border:1px solid var(--borda);}
+        .badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #6366f1;
+            color: white;
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
 
-section h2{
-margin-bottom:1rem;
-color:var(--roxo);
-}
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:1.2rem;
-}
-
-.card{
-
-padding:1.4rem;
-border-radius:14px;
-border:1px solid var(--borda);
-
-text-decoration:none;
-color:inherit;
-
-display:block;
-
-transition:all .2s ease;
-}
-
-.card:hover{
-transform:translateY(-4px);
-box-shadow:0 10px 22px rgba(0,0,0,.08);
-}
-
-.card h3{
-font-size:1.05rem;
-margin-bottom:.3rem;
-}
-
-.card p{
-font-size:.9rem;
-color:var(--muted);
-}
-
-footer{
-margin-top:2.5rem;
-text-align:center;
-font-size:.85rem;
-color:var(--muted);
-}
-
-</style>
+    </style>
 </head>
 
 <body>
 
 <header>
 
-<h1>Programação II</h1>
+    <h1>Programação II</h1>
 
-<p>
-Desenvolvimento de aplicações web modernas utilizando
-JavaScript, Node.js, APIs e banco de dados.
-</p>
+    <p>
+        Desenvolvimento de aplicações web modernas utilizando JavaScript,
+        Node.js, APIs e banco de dados. O roadmap abaixo apresenta os
+        conteúdos trabalhados ao longo do semestre.
+    </p>
 
 </header>
 
@@ -163,202 +144,123 @@ JavaScript, Node.js, APIs e banco de dados.
 
 <div class="intro">
 
-<h2>Sobre a disciplina</h2>
+    <h2>Roadmap da disciplina</h2>
 
-<p>
-A disciplina revisa conceitos fundamentais de Orientação a Objetos e evolui
-para o desenvolvimento de aplicações web completas integrando front-end,
-back-end e banco de dados.
-</p>
-
-<p>
-Durante o semestre os estudantes desenvolvem um <strong>projeto completo</strong>
-utilizando JavaScript, Node.js, Express e APIs.
-</p>
-
-<div class="legenda">
-
-<span><div class="box passado"></div>conteúdo já visto</span>
-
-<span><div class="box atual"></div>semana atual</span>
-
-<span><div class="box futuro"></div>conteúdo futuro</span>
+    <p>
+        Cada card representa um tópico da disciplina.  
+        O destaque indica o conteúdo da semana atual.
+    </p>
 
 </div>
 
-</div>
-
-
-<section>
-
-<h2>Roadmap da disciplina</h2>
 
 <div class="grid">
 
-<a href="revisao-oo.html" class="card" data-semana="1">
-<h3>Revisão OO</h3>
-<p>Classes, herança, polimorfismo e abstração.</p>
+<a href="revisao-oo.html" class="card passado">
+    <span class="tag">Semana 1</span>
+    <h3>Revisão OO</h3>
+    <p>Classes, objetos, encapsulamento e fundamentos.</p>
 </a>
 
-<a href="revisao-oo2.html" class="card" data-semana="2">
-<h3>Revisão OO – Parte 2</h3>
-<p>Interfaces, exceções e manipulação de arquivos.</p>
+
+<a href="revisao-oo2.html" class="card passado">
+    <span class="tag">Semana 2</span>
+    <h3>Revisão OO – Parte 2</h3>
+    <p>Interfaces, exceções e manipulação de arquivos.</p>
 </a>
 
-<a href="ferramentas.html" class="card" data-semana="3">
-<h3>Ferramentas de desenvolvimento</h3>
-<p>Levantamento e avaliação de ferramentas web.</p>
+
+<a href="ferramentas.html" class="card passado">
+    <span class="tag">Semana 3</span>
+    <h3>Ferramentas de desenvolvimento</h3>
+    <p>Ambientes, frameworks e ferramentas web.</p>
 </a>
 
-<a href="html5.html" class="card" data-semana="4">
-<h3>HTML5</h3>
-<p>Estrutura de documentos web.</p>
+
+<a href="html5.html" class="card atual">
+
+    <div class="badge">Semana atual</div>
+
+    <span class="tag">Semana 4</span>
+    <h3>HTML5</h3>
+    <p>Estrutura de páginas web, semântica e boas práticas.</p>
+
 </a>
 
-<a href="dom.html" class="card" data-semana="5">
-<h3>Manipulação do DOM</h3>
-<p>querySelector, eventos e innerHTML.</p>
+
+<a href="dom.html" class="card futuro">
+    <span class="tag">Semana 5</span>
+    <h3>Manipulação do DOM</h3>
+    <p>querySelector, eventos e interação com a página.</p>
 </a>
 
-<a href="dom-exercicios.html" class="card" data-semana="6">
-<h3>Exercícios DOM</h3>
-<p>Formulários, listas e interação.</p>
+
+<a href="dom-exercicios.html" class="card futuro">
+    <span class="tag">Semana 6</span>
+    <h3>Exercícios DOM</h3>
+    <p>Prática com formulários e elementos dinâmicos.</p>
 </a>
 
-<a href="funcoes-js.html" class="card" data-semana="7">
-<h3>Funções em JavaScript</h3>
-<p>Callbacks e arrow functions.</p>
+
+<a href="funcoes-js.html" class="card futuro">
+    <span class="tag">Semana 7</span>
+    <h3>Funções em JavaScript</h3>
+    <p>Callbacks, arrow functions e organização de código.</p>
 </a>
 
-<a href="arrays-objetos.html" class="card" data-semana="8">
-<h3>Arrays e Objetos</h3>
-<p>Métodos essenciais.</p>
+
+<a href="arrays-objetos.html" class="card futuro">
+    <span class="tag">Semana 8</span>
+    <h3>Arrays e Objetos</h3>
+    <p>Métodos essenciais para manipulação de dados.</p>
 </a>
 
-<a href="estudo-caso.html" class="card" data-semana="9">
-<h3>Estudo de Caso</h3>
-<p>Construção guiada de aplicação.</p>
+
+<a href="node.html" class="card futuro">
+    <span class="tag">Semana 13</span>
+    <h3>Introdução ao Node.js</h3>
+    <p>Execução de JavaScript no servidor.</p>
 </a>
 
-<a href="padroes.html" class="card" data-semana="10">
-<h3>Padrões de Projeto</h3>
-<p>Introdução aos padrões GoF.</p>
+
+<a href="express.html" class="card futuro">
+    <span class="tag">Semana 15</span>
+    <h3>Express.js</h3>
+    <p>Construção de servidores e APIs.</p>
 </a>
 
-<a href="observer.html" class="card" data-semana="11">
-<h3>Observer</h3>
-<p>EventEmitter e eventos.</p>
+
+<a href="rest.html" class="card futuro">
+    <span class="tag">Semana 16</span>
+    <h3>APIs REST</h3>
+    <p>Verbos HTTP, endpoints e arquitetura REST.</p>
 </a>
 
-<a href="factory-strategy.html" class="card" data-semana="12">
-<h3>Factory e Strategy</h3>
-<p>Padrões aplicados ao JS.</p>
+
+<a href="sql.html" class="card futuro">
+    <span class="tag">Semana 18</span>
+    <h3>SQL Essencial</h3>
+    <p>Consultas básicas e manipulação de dados.</p>
 </a>
 
-<a href="node.html" class="card" data-semana="13">
-<h3>Introdução ao Node.js</h3>
-<p>Event loop e módulos.</p>
+
+<a href="projeto.html" class="card futuro">
+    <span class="tag">Projeto</span>
+    <h3>Projeto Final</h3>
+    <p>Construção de aplicação web completa.</p>
 </a>
 
-<a href="npm.html" class="card" data-semana="14">
-<h3>NPM</h3>
-<p>package.json e organização de projeto.</p>
-</a>
-
-<a href="express.html" class="card" data-semana="15">
-<h3>Express.js</h3>
-<p>Servidor e rotas.</p>
-</a>
-
-<a href="rest.html" class="card" data-semana="16">
-<h3>APIs REST</h3>
-<p>Verbos HTTP e status codes.</p>
-</a>
-
-<a href="api-consumo.html" class="card" data-semana="17">
-<h3>Consumo de APIs</h3>
-<p>fetch e axios.</p>
-</a>
-
-<a href="sql.html" class="card" data-semana="18">
-<h3>SQL Essencial</h3>
-<p>SELECT, INSERT, UPDATE, DELETE.</p>
-</a>
-
-<a href="node-banco.html" class="card" data-semana="19">
-<h3>Node + Banco</h3>
-<p>Integração com banco.</p>
-</a>
-
-<a href="auth.html" class="card" data-semana="20">
-<h3>Autenticação</h3>
-<p>Sessões e JWT.</p>
-</a>
-
-<a href="revisao.html" class="card" data-semana="21">
-<h3>Revisão Final</h3>
-<p>Preparação para entrega do projeto.</p>
-</a>
 
 </div>
 
-</section>
 
 <footer>
 
-<p>
 Programação II • Engenharia de Computação
-</p>
 
 </footer>
 
 </main>
-
-
-<script>
-
-/* DATA DE INÍCIO DO SEMESTRE */
-
-const inicioSemestre = new Date("2026-03-10");
-
-
-/* CALCULA SEMANA ATUAL */
-
-const hoje = new Date();
-
-const diff = hoje - inicioSemestre;
-
-const semanaAtual = Math.floor(diff / (1000*60*60*24*7)) + 1;
-
-
-/* ATUALIZA CARDS */
-
-document.querySelectorAll(".card").forEach(card=>{
-
-const semana = parseInt(card.dataset.semana);
-
-if(semana < semanaAtual){
-
-card.style.background = "var(--passado)";
-
-}
-
-else if(semana === semanaAtual){
-
-card.style.background = "var(--atual)";
-card.style.border = "2px solid var(--roxo)";
-
-}
-
-else{
-
-card.style.background = "var(--futuro)";
-
-}
-
-});
-
-</script>
 
 </body>
 </html>
