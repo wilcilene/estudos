@@ -96,6 +96,7 @@
             padding: 1.25rem 1.5rem;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
         }
 
         .card h2, .card h3, .card h4 {
@@ -106,6 +107,7 @@
             border-bottom: 1px solid var(--border);
             padding-bottom: 0.4rem;
             margin-bottom: 0.8rem;
+            color: var(--primary);
         }
 
         code {
@@ -119,36 +121,51 @@
         pre {
             background-color: var(--code-bg);
             color: var(--code-text);
-            padding: 0.9rem 1rem;
+            padding: 1rem;
             border-radius: 0.4rem;
             overflow-x: auto;
-            font-size: 0.88rem;
-            margin: 0.4rem 0 0.9rem;
+            font-size: 0.9rem;
+            margin: 0.5rem 0 1rem;
+            line-height: 1.4;
+            border: 1px solid #333;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: inherit;
+            display: block;
         }
 
         .note {
             border-left: 4px solid var(--primary);
             padding-left: 0.75rem;
-            margin: 0.4rem 0 0.8rem;
+            margin: 0.8rem 0;
             color: var(--muted);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            font-style: italic;
         }
 
         .callout {
             border-radius: 0.4rem;
-            padding: 0.75rem 0.9rem;
+            padding: 1rem;
             background-color: #fff8e1;
             border: 1px solid #ffe082;
-            font-size: 0.9rem;
-            margin: 0.5rem 0 1rem;
+            font-size: 0.95rem;
+            margin: 1rem 0;
+        }
+
+        .callout strong {
+            color: #e65100;
         }
 
         footer {
             border-top: 1px solid var(--border);
-            margin-top: 1rem;
-            padding-top: 0.6rem;
+            margin-top: 2rem;
+            padding-top: 1rem;
             font-size: 0.85rem;
             color: var(--muted);
+            text-align: center;
         }
 
         aside {
@@ -160,18 +177,37 @@
         .pill-list {
             list-style: none;
             padding: 0;
-            margin: 0.2rem 0 0.8rem;
+            margin: 0.5rem 0 1rem;
             display: flex;
             flex-wrap: wrap;
-            gap: 0.4rem;
+            gap: 0.5rem;
         }
 
         .pill-list li {
             background-color: #e0f7fa;
             color: #006064;
             border-radius: 999px;
-            padding: 0.2rem 0.7rem;
-            font-size: 0.8rem;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .step {
+            margin-bottom: 1.5rem;
+        }
+
+        .step h3 {
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .example-box {
+            background: #f8f9fa;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 0.5rem 0;
         }
     </style>
 </head>
@@ -180,7 +216,6 @@
         <div class="container">
             <nav>
                 <a href="index.html">Início</a>
-                <a href="revisao-oo.html">Revisão OO</a>
             </nav>
             <h1>HTML5 e Estrutura de Documentos</h1>
             <p>Compreendendo a base semântica da web moderna e a organização de projetos front-end.</p>
@@ -189,99 +224,169 @@
 
     <main>
         <div class="content">
+            <!-- Introdução -->
             <section class="card">
-                <h2>Introdução ao HTML5</h2>
-                <p>O HTML5 não é apenas a quinta versão da linguagem de marcação; é uma plataforma de desenvolvimento completa que trouxe semântica, multimídia e APIs poderosas para o navegador.</p>
+                <h2>1. Introdução ao HTML5</h2>
+                <p>O HTML5 representou uma revolução no desenvolvimento web, deixando de ser apenas uma linguagem de marcação para se tornar uma plataforma robusta. Seus principais pilares são:</p>
+                <ul>
+                    <li><strong>Semântica:</strong> Dar significado ao conteúdo para máquinas e humanos.</li>
+                    <li><strong>Conectividade:</strong> Novas formas de comunicação com o servidor.</li>
+                    <li><strong>Multimídia:</strong> Suporte nativo a áudio e vídeo sem plugins externos.</li>
+                    <li><strong>APIs de Dispositivo:</strong> Acesso a geolocalização, câmera, armazenamento local, etc.</li>
+                </ul>
                 <div class="note">
-                    <strong>Dica:</strong> HTML5 é sobre significado (semântica) e não apenas sobre como as coisas se parecem (apresentação).
+                    HTML5 é sobre "o que o conteúdo é" e não "como ele deve aparecer".
                 </div>
             </section>
 
+            <!-- Semântica -->
             <section class="card">
-                <h2>Estrutura Semântica</h2>
-                <p>Tags semânticas descrevem seu significado tanto para o navegador quanto para o desenvolvedor e tecnologias assistivas (leitores de tela).</p>
-                <ul>
-                    <li><code>&lt;header&gt;</code>: Cabeçalho do documento ou seção.</li>
-                    <li><code>&lt;nav&gt;</code>: Conjunto de links de navegação.</li>
-                    <li><code>&lt;main&gt;</code>: Conteúdo principal e exclusivo da página.</li>
-                    <li><code>&lt;section&gt;</code>: Seção genérica de conteúdo temático.</li>
-                    <li><code>&lt;article&gt;</code>: Conteúdo independente e reutilizável.</li>
-                    <li><code>&lt;aside&gt;</code>: Conteúdo tangencial (barras laterais).</li>
-                    <li><code>&lt;footer&gt;</code>: Rodapé do documento ou seção.</li>
-                </ul>
-                <p><strong>Exemplo de Estrutura:</strong></p>
+                <h2>2. Estrutura Semântica (Layout)</h2>
+                <p>O uso de tags semânticas é vital para a acessibilidade (leitores de tela) e SEO (motores de busca). Abaixo, as tags que definem as grandes áreas de uma página:</p>
+                
+                <div class="step">
+                    <h3>Principais Tags de Bloco:</h3>
+                    <ul>
+                        <li><code>&lt;header&gt;</code>: Define o cabeçalho de uma página ou de uma seção específica. Geralmente contém títulos, logos e navegação.</li>
+                        <li><code>&lt;nav&gt;</code>: Destinado a blocos que contenham links de navegação principal.</li>
+                        <li><code>&lt;main&gt;</code>: Delimita o conteúdo principal e exclusivo da página. Só deve haver um por documento.</li>
+                        <li><code>&lt;section&gt;</code>: Agrupa conteúdos relacionados tematicamente (ex: seção de depoimentos, seção de preços).</li>
+                        <li><code>&lt;article&gt;</code>: Representa uma composição independente (ex: um post de blog, um comentário, um card de produto).</li>
+                        <li><code>&lt;aside&gt;</code>: Conteúdo periférico ou barras laterais que não são essenciais para o entendimento do conteúdo principal.</li>
+                        <li><code>&lt;footer&gt;</code>: Rodapé da página ou de uma seção.</li>
+                    </ul>
+                </div>
+
+                <h3>Exemplo Prático de Código:</h3>
+                <p>Observe a organização hierárquica abaixo. Note como cada tag "abraça" uma funcionalidade específica:</p>
                 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="pt-BR"&gt;
 &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
-    &lt;title&gt;Meu Site&lt;/title&gt;
+    &lt;title&gt;Exemplo de Estrutura HTML5&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
     &lt;header&gt;
-        &lt;h1&gt;Título do Site&lt;/h1&gt;
-        &lt;nav&gt;...&lt;/nav&gt;
+        &lt;h1&gt;Portal de Notícias&lt;/h1&gt;
+        &lt;nav&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Tecnologia&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Educação&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/nav&gt;
     &lt;/header&gt;
+
     &lt;main&gt;
         &lt;article&gt;
-            &lt;h2&gt;Postagem&lt;/h2&gt;
-            &lt;p&gt;Conteúdo...&lt;/p&gt;
+            &lt;h2&gt;Avanços do HTML5 em 2026&lt;/h2&gt;
+            &lt;p&gt;O desenvolvimento web nunca foi tão acessível...&lt;/p&gt;
         &lt;/article&gt;
+
+        &lt;section&gt;
+            &lt;h2&gt;Notícias Relacionadas&lt;/h2&gt;
+            &lt;p&gt;Confira outros tópicos importantes abaixo.&lt;/p&gt;
+        &lt;/section&gt;
     &lt;/main&gt;
+
+    &lt;aside&gt;
+        &lt;h3&gt;Publicidade&lt;/h3&gt;
+        &lt;p&gt;Anuncie aqui seu curso!&lt;/p&gt;
+    &lt;/aside&gt;
+
     &lt;footer&gt;
-        &lt;p&gt;&copy; 2026&lt;/p&gt;
+        &lt;p&gt;&copy; 2026 - Desenvolvido em Aula&lt;/p&gt;
     &lt;/footer&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
             </section>
 
+            <!-- Formulários -->
             <section class="card">
-                <h2>Novidades em Formulários</h2>
-                <p>O HTML5 introduziu novos tipos de input que facilitam a validação e melhoram a experiência no mobile.</p>
-                <ul class="pill-list">
-                    <li>email</li>
-                    <li>number</li>
-                    <li>date</li>
-                    <li>range</li>
-                    <li>color</li>
-                    <li>url</li>
-                </ul>
+                <h2>3. Formulários e Validação</h2>
+                <p>O HTML5 trouxe tipos de campos que já realizam validação automática sem necessidade de JavaScript complexo.</p>
+                
+                <div class="example-box">
+                    <strong>Tipos de Input Úteis:</strong>
+                    <ul class="pill-list">
+                        <li><code>email</code>: Valida o formato de e-mail.</li>
+                        <li><code>number</code>: Permite apenas números.</li>
+                        <li><code>date</code>: Abre um calendário nativo.</li>
+                        <li><code>color</code>: Seletor de cores do sistema.</li>
+                        <li><code>range</code>: Slider para seleção de valores.</li>
+                        <li><code>tel</code>: Para números de telefone.</li>
+                    </ul>
+                </div>
+
                 <div class="callout">
-                    <strong>Validação nativa:</strong> Use o atributo <code>required</code> para campos obrigatórios e o navegador impedirá o envio sem preenchimento.
+                    <strong>Poder da Validação Nativa:</strong> Use o atributo <code>required</code> para tornar o campo obrigatório e <code>placeholder</code> para dar uma dica de preenchimento ao usuário.
                 </div>
             </section>
 
+            <!-- Atividades -->
             <section class="card">
-                <h2>Atividade Prática</h2>
-                <h3>Exercício 1: Landing Page Semântica</h3>
-                <p>Crie uma estrutura completa para uma página de venda de um curso, utilizando todas as tags semânticas estudadas.</p>
-                <h3>Exercício 2: Validação de Dados</h3>
-                <p>Crie um formulário de cadastro de usuário que utilize ao menos 5 tipos diferentes de inputs do HTML5 e utilize atributos de validação como <code>min</code>, <code>max</code> e <code>pattern</code>.</p>
+                <h2>4. Atividades Práticas</h2>
+                
+                <div class="step">
+                    <h3>Atividade 1: Landing Page de Portfólio</h3>
+                    <p>Crie uma página para apresentar seu perfil profissional. Ela deve conter obrigatoriamente:</p>
+                    <ul>
+                        <li>Um <code>header</code> com seu nome e uma <code>nav</code> com links (fictícios) para "Sobre", "Projetos" e "Contato".</li>
+                        <li>Um <code>main</code> contendo dois <code>article</code> (descrição de dois projetos seus).</li>
+                        <li>Um <code>aside</code> lateral com uma lista de suas habilidades (tags <code>ul</code> e <code>li</code>).</li>
+                        <li>Um <code>footer</code> com suas redes sociais e copyright.</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <h3>Atividade 2: Formulário de Pré-Inscrição</h3>
+                    <p>Desenvolva um formulário de contato que capture os seguintes dados usando os tipos de input corretos do HTML5:</p>
+                    <ul>
+                        <li>Nome Completo (tipo text, obrigatório).</li>
+                        <li>E-mail (tipo email, obrigatório).</li>
+                        <li>Data de Nascimento (tipo date).</li>
+                        <li>Nível de Conhecimento (tipo range de 0 a 10).</li>
+                        <li>Cor Favorita para o tema (tipo color).</li>
+                    </ul>
+                </div>
+
+                <div class="note">
+                    <strong>Entrega:</strong> Publique seus arquivos no repositório de projetos da disciplina e envie o link para a professora.
+                </div>
             </section>
         </div>
 
+        <!-- Sidebar -->
         <aside>
             <div class="card">
-                <h3>Resumo da Aula</h3>
+                <h3>Checklist de Estudo</h3>
                 <ul class="mini-list" style="list-style: none; padding: 0; font-size: 0.9rem;">
-                    <li>✅ Evolução do HTML</li>
-                    <li>✅ Tags Semânticas</li>
-                    <li>✅ Acessibilidade</li>
-                    <li>✅ Novos Inputs</li>
+                    <li>✅ Por que usar HTML5?</li>
+                    <li>✅ Tags Semânticas de Layout</li>
+                    <li>✅ Hierarquia de Cabeçalhos</li>
+                    <li>✅ Tipos de Input</li>
+                    <li>✅ Atributos de Validação</li>
                 </ul>
             </div>
             
             <div class="card">
-                <h3>Links Úteis</h3>
-                <nav style="flex-direction: column; gap: 0.3rem;">
-                    <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML" target="_blank" style="color: var(--primary);">MDN Web Docs</a>
-                    <a href="https://www.w3schools.com/html/html5_semantic_elements.asp" target="_blank" style="color: var(--primary);">W3Schools Semantic</a>
+                <h3>Recursos Extras</h3>
+                <nav style="flex-direction: column; gap: 0.5rem;">
+                    <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element" target="_blank" style="color: var(--primary); font-weight: bold;">Referência de Tags (MDN)</a>
+                    <a href="https://web.dev/learn/html/" target="_blank" style="color: var(--primary); font-weight: bold;">Curso de HTML (web.dev)</a>
                 </nav>
+            </div>
+
+            <div class="card" style="background-color: #e8f5e9; border-color: #c8e6c9;">
+                <h3>Para quem faltou</h3>
+                <p style="font-size: 0.85rem;">Estude os pilares do HTML5, reproduza o exemplo de estrutura em seu VS Code e realize as duas atividades propostas. Dúvidas podem ser tiradas via GitHub Issues do repositório.</p>
             </div>
         </aside>
     </main>
 
-    <footer class="container">
-        <p>Programação II • Aula sobre HTML5 e Estrutura</p>
+    <footer>
+        <div class="container">
+            <p>Programação II • Aula sobre HTML5 e Estrutura Semântica • 2026</p>
+        </div>
     </footer>
 </body>
 </html>
