@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <title>Programação II - HTML5 e Estrutura de Documentos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        :root {
+            --bg: #f5f5f5;
+            --bg-card: #ffffff;
+            --primary: #006699;
+            --primary-dark: #004766;
+            --accent: #ff9800;
+            --text: #222222;
+            --muted: #666666;
+            --border: #dddddd;
+            --code-bg: #272822;
+            --code-text: #f8f8f2;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #ffffff;
+            padding: 1.5rem 1rem;
+        }
+
+        header .container {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        header p {
+            margin: 0;
+            max-width: 640px;
+            font-size: 0.95rem;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.16);
+        }
+
+        main {
+            max-width: 960px;
+            margin: 1.5rem auto 2.5rem;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 900px) {
+            main {
+                grid-template-columns: minmax(0, 2fr) minmax(260px, 0.9fr);
+                align-items: flex-start;
+            }
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 0.5rem;
+            padding: 1.25rem 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+        }
+
+        .card h2, .card h3, .card h4 {
+            margin-top: 0;
+        }
+
+        .card h2 {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        code {
+            font-family: "Fira Code", "SF Mono", "Consolas", "Roboto Mono", monospace;
+            background-color: #ececec;
+            padding: 0.1rem 0.25rem;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            padding: 0.9rem 1rem;
+            border-radius: 0.4rem;
+            overflow-x: auto;
+            font-size: 0.88rem;
+            margin: 0.4rem 0 0.9rem;
+        }
+
+        .note {
+            border-left: 4px solid var(--primary);
+            padding-left: 0.75rem;
+            margin: 0.4rem 0 0.8rem;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .callout {
+            border-radius: 0.4rem;
+            padding: 0.75rem 0.9rem;
+            background-color: #fff8e1;
+            border: 1px solid #ffe082;
+            font-size: 0.9rem;
+            margin: 0.5rem 0 1rem;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            margin-top: 1rem;
+            padding-top: 0.6rem;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        aside {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .pill-list {
+            list-style: none;
+            padding: 0;
+            margin: 0.2rem 0 0.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .pill-list li {
+            background-color: #e0f7fa;
+            color: #006064;
+            border-radius: 999px;
+            padding: 0.2rem 0.7rem;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html">Início</a>
+                <a href="revisao-oo.html">Revisão OO</a>
+            </nav>
+            <h1>HTML5 e Estrutura de Documentos</h1>
+            <p>Compreendendo a base semântica da web moderna e a organização de projetos front-end.</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="content">
+            <section class="card">
+                <h2>Introdução ao HTML5</h2>
+                <p>O HTML5 não é apenas a quinta versão da linguagem de marcação; é uma plataforma de desenvolvimento completa que trouxe semântica, multimídia e APIs poderosas para o navegador.</p>
+                <div class="note">
+                    <strong>Dica:</strong> HTML5 é sobre significado (semântica) e não apenas sobre como as coisas se parecem (apresentação).
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>Estrutura Semântica</h2>
+                <p>Tags semânticas descrevem seu significado tanto para o navegador quanto para o desenvolvedor e tecnologias assistivas (leitores de tela).</p>
+                <ul>
+                    <li><code>&lt;header&gt;</code>: Cabeçalho do documento ou seção.</li>
+                    <li><code>&lt;nav&gt;</code>: Conjunto de links de navegação.</li>
+                    <li><code>&lt;main&gt;</code>: Conteúdo principal e exclusivo da página.</li>
+                    <li><code>&lt;section&gt;</code>: Seção genérica de conteúdo temático.</li>
+                    <li><code>&lt;article&gt;</code>: Conteúdo independente e reutilizável.</li>
+                    <li><code>&lt;aside&gt;</code>: Conteúdo tangencial (barras laterais).</li>
+                    <li><code>&lt;footer&gt;</code>: Rodapé do documento ou seção.</li>
+                </ul>
+                <p><strong>Exemplo de Estrutura:</strong></p>
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Meu Site&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Título do Site&lt;/h1&gt;
+        &lt;nav&gt;...&lt;/nav&gt;
+    &lt;/header&gt;
+    &lt;main&gt;
+        &lt;article&gt;
+            &lt;h2&gt;Postagem&lt;/h2&gt;
+            &lt;p&gt;Conteúdo...&lt;/p&gt;
+        &lt;/article&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;
+        &lt;p&gt;&copy; 2026&lt;/p&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </section>
+
+            <section class="card">
+                <h2>Novidades em Formulários</h2>
+                <p>O HTML5 introduziu novos tipos de input que facilitam a validação e melhoram a experiência no mobile.</p>
+                <ul class="pill-list">
+                    <li>email</li>
+                    <li>number</li>
+                    <li>date</li>
+                    <li>range</li>
+                    <li>color</li>
+                    <li>url</li>
+                </ul>
+                <div class="callout">
+                    <strong>Validação nativa:</strong> Use o atributo <code>required</code> para campos obrigatórios e o navegador impedirá o envio sem preenchimento.
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>Atividade Prática</h2>
+                <h3>Exercício 1: Landing Page Semântica</h3>
+                <p>Crie uma estrutura completa para uma página de venda de um curso, utilizando todas as tags semânticas estudadas.</p>
+                <h3>Exercício 2: Validação de Dados</h3>
+                <p>Crie um formulário de cadastro de usuário que utilize ao menos 5 tipos diferentes de inputs do HTML5 e utilize atributos de validação como <code>min</code>, <code>max</code> e <code>pattern</code>.</p>
+            </section>
+        </div>
+
+        <aside>
+            <div class="card">
+                <h3>Resumo da Aula</h3>
+                <ul class="mini-list" style="list-style: none; padding: 0; font-size: 0.9rem;">
+                    <li>✅ Evolução do HTML</li>
+                    <li>✅ Tags Semânticas</li>
+                    <li>✅ Acessibilidade</li>
+                    <li>✅ Novos Inputs</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3>Links Úteis</h3>
+                <nav style="flex-direction: column; gap: 0.3rem;">
+                    <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML" target="_blank" style="color: var(--primary);">MDN Web Docs</a>
+                    <a href="https://www.w3schools.com/html/html5_semantic_elements.asp" target="_blank" style="color: var(--primary);">W3Schools Semantic</a>
+                </nav>
+            </div>
+        </aside>
+    </main>
+
+    <footer class="container">
+        <p>Programação II • Aula sobre HTML5 e Estrutura</p>
+    </footer>
+</body>
+</html>
