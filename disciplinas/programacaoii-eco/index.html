@@ -1,302 +1,183 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Programação II – ECO</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Estilos específicos do index */
-        header {
-            background: linear-gradient(135deg, #5b5fc7, #7c7ff0);
-            color: #fff;
-            padding: 3rem 1.5rem;
-            text-align: center;
-        }
-        header h1 {
-            font-size: 2.4rem;
-            margin-bottom: 0.5rem;
-        }
-        header p {
-            max-width: 720px;
-            margin: 0 auto;
-            font-size: 1.05rem;
-            opacity: 0.95;
-        }
-        main {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 2.5rem 1.5rem;
-        }
-        section {
-            margin-bottom: 3rem;
-        }
-        section h2 {
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
-            color: #5b5fc7;
-        }
-        .intro {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-        }
-        .intro p {
-            margin-bottom: 1rem;
-        }
-        .topics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-        .topic-card {
-            background: var(--bg-card);
-            padding: 1.5rem;
-            border-radius: 14px;
-            border: 1px solid var(--border);
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .topic-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-        }
-        .topic-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-        .topic-card p {
-            font-size: 0.95rem;
-            color: var(--muted);
-        }
-        .topic-card.disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-        .topic-card.disabled:hover {
-            transform: none;
-            box-shadow: none;
-        }
-        .status-badge {
-            display: inline-block;
-            padding: 0.2rem 0.6rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-top: 0.5rem;
-        }
-        .status-disponivel {
-            background: #d1fae5;
-            color: #065f46;
-        }
-        .status-em-breve {
-            background: #fef3c7;
-            color: #92400e;
-        }
-    </style>
+<!DOCTYPE html><html lang="pt-BR"><head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programação II</title>
+  <style>
+    :root {
+      --primary: #5b5fc7;
+      --secondary: #f4f6fb;
+      --text: #1f2933;
+      --muted: #6b7280;
+      --card: #ffffff;
+      --border: #e5e7eb;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+        "Helvetica Neue", sans-serif;
+      background: var(--secondary);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary), #7c7ff0);
+      color: #fff;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.4rem;
+      margin-bottom: 0.5rem;
+    }
+    header p {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      opacity: 0.95;
+    }
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+    section {
+      margin-bottom: 3rem;
+    }
+    section h2 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    .intro {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .intro p {
+      margin-bottom: 1rem;
+    }
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .topic-card {
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .topic-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    }
+    .topic-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .topic-card p {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Programação II</h1>
-        <p>
-            Aprofundamento em Programação Orientada a Objetos, desenvolvimento web, 
-            padrões de projeto e arquitetura de software.
-        </p>
-    </header>
-
-    <main>
-        <section class="intro">
-            <h2>Sobre a disciplina</h2>
-            <p>
-                A disciplina de <strong>Programação II</strong> consolida os conceitos 
-                fundamentais de Orientação a Objetos e avança para práticas modernas 
-                de desenvolvimento de software, com foco em desenvolvimento web full-stack.
-            </p>
-            <p>
-                Ao longo do curso, serão explorados padrões de projeto, JavaScript moderno, 
-                Node.js, Express, APIs REST, bancos de dados e autenticação.
-            </p>
-        </section>
-
-        <section>
-            <h2>Conteúdos da disciplina</h2>
-            <div class="topics-grid">
-                <!-- Revisão OO -->
-                <a href="revisao-oo.html" class="topic-card">
-                    <h3>Revisão de conceitos OO - Parte 1</h3>
-                    <p>Classes, herança, polimorfismo e abstração.</p>
-                    <span class="status-badge status-disponivel">Disponível</span>
-                </a>
-
-                <a href="revisao-oo2.html" class="topic-card">
-                    <h3>Revisão de conceitos OO - Parte 2</h3>
-                    <p>Interfaces, exceções e manipulação de arquivos.</p>
-                    <span class="status-badge status-disponivel">Disponível</span>
-                </a>
-
-                <!-- Ferramentas -->
-                <a href="ferramentas.html" class="topic-card">
-                    <h3>Ferramentas para desenvolvimento web</h3>
-                    <p>Levantamento e avaliação de ferramentas e ambientes.</p>
-                    <span class="status-badge status-disponivel">Disponível</span>
-                </a>
-
-                <!-- HTML5 -->
-                <a href="html5.html" class="topic-card">
-                    <h3>HTML5 e Estrutura de Documentos</h3>
-                    <p>Tags semânticas, formulários, multimídia e boas práticas.</p>
-                    <span class="status-badge status-disponivel">Disponível</span>
-                </a>
-
-                <!-- JavaScript DOM -->
-                <a href="#" class="topic-card disabled">
-                    <h3>Manipulação do DOM com JavaScript</h3>
-                    <p>querySelector, eventos, innerHTML e manipulação dinâmica.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <a href="#" class="topic-card disabled">
-                    <h3>Exercícios DOM e Interação</h3>
-                    <p>Formulários, listas e interação com o usuário.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <!-- JavaScript Avançado -->
-                <a href="#" class="topic-card disabled">
-                    <h3>Funções em JavaScript</h3>
-                    <p>Callbacks, arrow functions e funções de alta ordem.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <a href="#" class="topic-card disabled">
-                    <h3>Arrays e Objetos em JavaScript</h3>
-                    <p>Métodos essenciais: map, filter, reduce, spread, destructuring.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <a href="#" class="topic-card disabled">
-                    <h3>Estudo de Caso</h3>
-                    <p>Aplicação prática dos conceitos aprendidos.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <!-- Padrões de Projeto -->
-                <a href="#" class="topic-card disabled">
-                    <h3>Introdução a Padrões de Projeto (GoF)</h3>
-                    <p>O que são, para que servem e principais categorias.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <a href="#" class="topic-card disabled">
-                    <h3>Padrão Observer e Event Emitter</h3>
-                    <p>Implementação no contexto web e aplicações práticas.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <a href="#" class="topic-card disabled">
-                    <h3>Padrão Factory e Strategy</h3>
-                    <p>Exemplos em JavaScript e casos de uso.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <!-- Node.js -->
-                <a href="#" class="topic-card disabled">
-                    <h3>Introdução ao Node.js</h3>
-                    <p>Modelo assíncrono, event loop e sistema de módulos.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <a href="#" class="topic-card disabled">
-                    <h3>NPM e Organização de Projetos</h3>
-                    <p>Gerenciamento de pacotes, package.json e estrutura de projeto.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <a href="#" class="topic-card disabled">
-                    <h3>Projeto Semestral</h3>
-                    <p>Desenvolvimento de projeto integrador full-stack.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <!-- Express e APIs -->
-                <a href="#" class="topic-card disabled">
-                    <h3>Express.js - Fundamentos</h3>
-                    <p>Primeiro servidor, rotas e middlewares.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <a href="#" class="topic-card disabled">
-                    <h3>APIs REST</h3>
-                    <p>Conceitos, verbos HTTP, status codes e criação de API REST.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <a href="#" class="topic-card disabled">
-                    <h3>Consumo de APIs Externas</h3>
-                    <p>Uso de fetch/axios no front-end e back-end.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <a href="#" class="topic-card disabled">
-                    <h3>Tratamento de Erros no Express</h3>
-                    <p>Middlewares de erro, try/catch async e boas práticas.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <!-- Banco de Dados -->
-                <a href="#" class="topic-card disabled">
-                    <h3>Banco de Dados Relacionais</h3>
-                    <p>SQL essencial: SELECT, INSERT, UPDATE, DELETE.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <a href="#" class="topic-card disabled">
-                    <h3>Node.js + Banco de Dados</h3>
-                    <p>Conectando Node.js a um banco de dados relacional.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <a href="#" class="topic-card disabled">
-                    <h3>Padrão Repository</h3>
-                    <p>Integrando banco ao projeto com camada de repositório.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <!-- Front-end -->
-                <a href="#" class="topic-card disabled">
-                    <h3>HTML + CSS para Interfaces</h3>
-                    <p>Formulários, tabelas e layout funcional.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <a href="#" class="topic-card disabled">
-                    <h3>Integração Front-Back</h3>
-                    <p>Fetch no navegador consumindo a própria API.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <!-- Autenticação e Revisão -->
-                <a href="#" class="topic-card disabled">
-                    <h3>Autenticação Básica</h3>
-                    <p>Sessões, JWT e controle de acesso em APIs.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-
-                <a href="#" class="topic-card disabled">
-                    <h3>Revisão</h3>
-                    <p>Consolidação dos conteúdos e preparação para avaliação.</p>
-                    <span class="status-badge status-em-breve">Em breve</span>
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>Programação II • Página inicial da disciplina • 2026</p>
-    </footer>
-</body>
-</html>
+  <header>
+    <h1>Programação II</h1>
+    <p>
+      Aprofundamento em Programação Orientada a Objetos, padrões de projeto,
+      arquitetura de software e desenvolvimento de aplicações completas.
+    </p>
+  </header>
+  <main>
+    <section class="intro">
+      <h2>Sobre a disciplina</h2>
+      <p>
+        A disciplina de <strong>Programação II</strong> consolida os conceitos
+        fundamentais de Orientação a Objetos e avança para práticas modernas
+        de desenvolvimento de software, com foco em qualidade, organização
+        e manutenção de código.
+      </p>
+      <p>
+        Ao longo do curso, serão explorados padrões de projeto, princípios
+        SOLID, APIs, banco de dados, desenvolvimento web e testes.
+      </p>
+    </section>
+    <section>
+      <h2>Conteúdos da disciplina</h2>
+      <div class="topics-grid">
+        <a href="revisao-oo.html" class="topic-card">
+          <h3>Revisão de conceitos de Orientação a Objetos</h3>
+          <p>Classes, herança, polimorfismo, abstração, interfaces, exceções e arquivos.</p>
+        </a>
+        <a href="ferramentas.html" class="topic-card">
+          <h3>Ferramentas e ambientes de desenvolvimento</h3>
+          <p>IDEs, debugging, refatoração automatizada e versionamento com Git.</p>
+        </a>
+        <a href="dependencias/" class="topic-card">
+          <h3>Gerenciamento de dependências</h3>
+          <p>Organização e integração de bibliotecas externas.</p>
+        </a>
+        <a href="padroes-criacionais/" class="topic-card">
+          <h3>Padrões de projeto criacionais</h3>
+          <p>Singleton, Factory e Builder.</p>
+        </a>
+        <a href="padroes-estruturais/" class="topic-card">
+          <h3>Padrões de projeto estruturais</h3>
+          <p>Adapter, Decorator e Facade.</p>
+        </a>
+        <a href="padroes-comportamentais/" class="topic-card">
+          <h3>Padrões de projeto comportamentais</h3>
+          <p>Observer, Strategy e Template Method.</p>
+        </a>
+        <a href="solid/" class="topic-card">
+          <h3>Princípios SOLID e projetos OO</h3>
+          <p>Boas práticas de design orientado a objetos.</p>
+        </a>
+        <a href="apis-java/" class="topic-card">
+          <h3>APIs Java e desenvolvimento de APIs</h3>
+          <p>Streams, Optional, Date/Time e APIs REST.</p>
+        </a>
+        <a href="interfaces-graficas/" class="topic-card">
+          <h3>Interface gráfica</h3>
+          <p>Introdução ao desenvolvimento de interfaces.</p>
+        </a>
+        <a href="modelagem/" class="topic-card">
+          <h3>Modelagem e documentação</h3>
+          <p>Diagramas, prototipação e documentação do projeto.</p>
+        </a>
+        <a href="banco-dados/" class="topic-card">
+          <h3>Banco de dados</h3>
+          <p>Conceitos, conectividade e integração com aplicações.</p>
+        </a>
+        <a href="html5.html" class="topic-card">
+          <h3>Desenvolvimento web</h3>
+          <p>HTML5, CSS, frameworks web, segurança e arquitetura.</p>
+        </a>
+        <a href="testes/" class="topic-card">
+          <h3>Testes e qualidade de software</h3>
+          <p>Testes, refatoração, integração e deploy.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>Programação II &bull; Página inicial da disciplina</p>
+  </footer>
+</body></html
