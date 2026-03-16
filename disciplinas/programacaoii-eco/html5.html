@@ -205,6 +205,29 @@
             padding: 1rem;
             margin: 0.5rem 0;
         }
+
+        /* Preview Frame Style */
+        .preview-frame {
+            border: 2px dashed var(--border);
+            padding: 1.5rem;
+            background: #fff;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        
+        .preview-header {
+            background: #eee;
+            padding: 0.5rem;
+            font-size: 0.8rem;
+            border-bottom: 1px solid var(--border);
+            margin: -1.5rem -1.5rem 1rem -1.5rem;
+            border-radius: 6px 6px 0 0;
+            color: var(--muted);
+        }
+
+        .preview-form label { display: block; margin-top: 10px; font-weight: bold; font-size: 0.9rem; }
+        .preview-form input { width: 100%; padding: 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 4px; }
+        .preview-form button { margin-top: 15px; padding: 10px 20px; background: var(--primary); color: #fff; border: none; border-radius: 4px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -295,38 +318,75 @@
                     </ul>
                 </div>
 
-                <h3>Exemplo de Formulário Completo:</h3>
-                <p>Abaixo, um exemplo que utiliza todos os tipos de input mencionados acima, com validações nativas:</p>
-                <pre><code>&lt;form action="#" method="post"&gt;
-    &lt;!-- Campo de E-mail com validação nativa --&gt;
-    &lt;label for="email"&gt;E-mail Acadêmico:&lt;/label&gt;
-    &lt;input type="email" id="email" name="email" required placeholder="exemplo@univ.edu"&gt;
+                <h3>Exemplo Executável: Cadastro Completo</h3>
+                <p>O código abaixo é um documento HTML5 completo. Você pode copiá-lo integralmente para um arquivo chamado <code>formulario.html</code> e abri-lo no seu navegador para testar.</p>
 
-    &lt;!-- Campo Numérico com limites --&gt;
-    &lt;label for="idade"&gt;Idade:&lt;/label&gt;
-    &lt;input type="number" id="idade" name="idade" min="16" max="100"&gt;
+                <div class="step">
+                    <strong>Passo a passo para execução:</strong>
+                    <ol>
+                        <li>Abra seu editor de código (ex: VS Code).</li>
+                        <li>Crie um novo arquivo e salve-o como <code>formulario.html</code>.</li>
+                        <li>Copie o código abaixo e cole no arquivo.</li>
+                        <li>Abra o arquivo no seu navegador (Chrome, Edge ou Firefox).</li>
+                    </ol>
+                </div>
 
-    &lt;!-- Seleção de Data --&gt;
-    &lt;label for="data"&gt;Data da Matrícula:&lt;/label&gt;
-    &lt;input type="date" id="data" name="data"&gt;
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Teste de Formulário HTML5&lt;/title&gt;
+    &lt;style&gt;
+        body { font-family: sans-serif; padding: 20px; line-height: 1.5; }
+        form { max-width: 400px; background: #f9f9f9; padding: 20px; border-radius: 8px; border: 1px solid #ddd; }
+        label { display: block; margin-top: 15px; font-weight: bold; }
+        input { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+        button { margin-top: 20px; padding: 10px 20px; background: #006699; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #004766; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;Inscrição de Estudante&lt;/h2&gt;
+    &lt;form action="#" method="post"&gt;
+        &lt;label for="email"&gt;E-mail Acadêmico (Obrigatório):&lt;/label&gt;
+        &lt;input type="email" id="email" required placeholder="nome@estudante.edu.br"&gt;
 
-    &lt;!-- Seletor de Cores --&gt;
-    &lt;label for="cor"&gt;Cor do Perfil:&lt;/label&gt;
-    &lt;input type="color" id="cor" name="cor" value="#006699"&gt;
+        &lt;label for="idade"&gt;Idade (16-99 anos):&lt;/label&gt;
+        &lt;input type="number" id="idade" min="16" max="99" value="18"&gt;
 
-    &lt;!-- Controle de Faixa (Range) --&gt;
-    &lt;label for="satisfacao"&gt;Nível de Satisfação (1-10):&lt;/label&gt;
-    &lt;input type="range" id="satisfacao" name="satisfacao" min="1" max="10"&gt;
+        &lt;label for="nascimento"&gt;Data de Nascimento:&lt;/label&gt;
+        &lt;input type="date" id="nascimento"&gt;
 
-    &lt;!-- Campo de Telefone --&gt;
-    &lt;label for="telefone"&gt;WhatsApp:&lt;/label&gt;
-    &lt;input type="tel" id="telefone" name="telefone" pattern="[0-9]{2} [0-9]{9}" placeholder="47 988887777"&gt;
+        &lt;label for="cor"&gt;Cor Preferida para o Crachá:&lt;/label&gt;
+        &lt;input type="color" id="cor" value="#006699"&gt;
 
-    &lt;button type="submit"&gt;Enviar Cadastro&lt;/button&gt;
-&lt;/form&gt;</code></pre>
+        &lt;label for="nivel"&gt;Conhecimento Prévio em HTML (1 a 10):&lt;/label&gt;
+        &lt;input type="range" id="nivel" min="1" max="10" step="1"&gt;
+
+        &lt;label for="tel"&gt;Telefone (Formato: 47 999998888):&lt;/label&gt;
+        &lt;input type="tel" id="tel" pattern="[0-9]{2} [0-9]{9}" placeholder="47 999998888"&gt;
+
+        &lt;button type="submit"&gt;Finalizar Inscrição&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+                <div class="preview-frame">
+                    <div class="preview-header">Prévia Visual: Como a página aparecerá no navegador</div>
+                    <div class="preview-form">
+                        <h2 style="margin-top: 0; font-size: 1.3rem;">Inscrição de Estudante</h2>
+                        <label>E-mail Acadêmico (Obrigatório):</label>
+                        <input type="text" placeholder="nome@estudante.edu.br" disabled>
+                        <label>Idade (16-99 anos):</label>
+                        <input type="text" value="18" disabled style="width: 60px;">
+                        <label>Data de Nascimento:</label>
+                        <input type="text" placeholder="dd/mm/aaaa" disabled style="width: 150px;">
+                        <button disabled>Finalizar Inscrição</button>
+                    </div>
+                </div>
 
                 <div class="callout">
-                    <strong>Dica de Validação:</strong> O atributo <code>pattern</code> permite usar Expressões Regulares (RegEx) para validar formatos específicos, como o telefone acima.
+                    <strong>Nota:</strong> O frame acima é apenas uma simulação visual. Para ver o formulário funcionando com todos os seletores nativos (calendário, seletor de cores, slider), você deve executar o código no seu navegador.
                 </div>
             </section>
 
