@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
+<!DOCTYPE html><html lang="pt-BR"><head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Programação II</title>
-
   <style>
     :root {
       --primary: #5b5fc7;
@@ -14,74 +11,62 @@
       --card: #ffffff;
       --border: #e5e7eb;
     }
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
-                   "Helvetica Neue", sans-serif;
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+        "Helvetica Neue", sans-serif;
       background: var(--secondary);
       color: var(--text);
       line-height: 1.6;
     }
-
     header {
       background: linear-gradient(135deg, var(--primary), #7c7ff0);
       color: #fff;
       padding: 3rem 1.5rem;
       text-align: center;
     }
-
     header h1 {
       font-size: 2.4rem;
       margin-bottom: 0.5rem;
     }
-
     header p {
       max-width: 720px;
       margin: 0 auto;
       font-size: 1.05rem;
       opacity: 0.95;
     }
-
     main {
       max-width: 1100px;
       margin: 0 auto;
       padding: 2.5rem 1.5rem;
     }
-
     section {
       margin-bottom: 3rem;
     }
-
     section h2 {
       font-size: 1.6rem;
       margin-bottom: 1rem;
       color: var(--primary);
     }
-
     .intro {
       background: var(--card);
       padding: 2rem;
       border-radius: 12px;
       border: 1px solid var(--border);
     }
-
     .intro p {
       margin-bottom: 1rem;
     }
-
     .topics-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 1.5rem;
     }
-
     .topic-card {
       background: var(--card);
       padding: 1.5rem;
@@ -92,22 +77,18 @@
       display: block;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-
     .topic-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
     }
-
     .topic-card h3 {
       font-size: 1.1rem;
       margin-bottom: 0.5rem;
     }
-
     .topic-card p {
       font-size: 0.95rem;
       color: var(--muted);
     }
-
     footer {
       text-align: center;
       padding: 2rem 1rem;
@@ -116,9 +97,7 @@
     }
   </style>
 </head>
-
 <body>
-
   <header>
     <h1>Programação II</h1>
     <p>
@@ -126,9 +105,7 @@
       arquitetura de software e desenvolvimento de aplicações completas.
     </p>
   </header>
-
   <main>
-
     <section class="intro">
       <h2>Sobre a disciplina</h2>
       <p>
@@ -142,85 +119,65 @@
         SOLID, APIs, banco de dados, desenvolvimento web e testes.
       </p>
     </section>
-
     <section>
       <h2>Conteúdos da disciplina</h2>
-
       <div class="topics-grid">
-
         <a href="revisao-oo.html" class="topic-card">
           <h3>Revisão de conceitos de Orientação a Objetos</h3>
           <p>Classes, herança, polimorfismo, abstração, interfaces, exceções e arquivos.</p>
         </a>
-
         <a href="ferramentas.html" class="topic-card">
           <h3>Ferramentas e ambientes de desenvolvimento</h3>
           <p>IDEs, debugging, refatoração automatizada e versionamento com Git.</p>
         </a>
-
         <a href="dependencias/" class="topic-card">
           <h3>Gerenciamento de dependências</h3>
           <p>Organização e integração de bibliotecas externas.</p>
         </a>
-
         <a href="padroes-criacionais/" class="topic-card">
           <h3>Padrões de projeto criacionais</h3>
           <p>Singleton, Factory e Builder.</p>
         </a>
-
         <a href="padroes-estruturais/" class="topic-card">
           <h3>Padrões de projeto estruturais</h3>
           <p>Adapter, Decorator e Facade.</p>
         </a>
-
         <a href="padroes-comportamentais/" class="topic-card">
           <h3>Padrões de projeto comportamentais</h3>
           <p>Observer, Strategy e Template Method.</p>
         </a>
-
         <a href="solid/" class="topic-card">
           <h3>Princípios SOLID e projetos OO</h3>
           <p>Boas práticas de design orientado a objetos.</p>
         </a>
-
         <a href="apis-java/" class="topic-card">
           <h3>APIs Java e desenvolvimento de APIs</h3>
           <p>Streams, Optional, Date/Time e APIs REST.</p>
         </a>
-
         <a href="interfaces-graficas/" class="topic-card">
           <h3>Interface gráfica</h3>
           <p>Introdução ao desenvolvimento de interfaces.</p>
         </a>
-
         <a href="modelagem/" class="topic-card">
           <h3>Modelagem e documentação</h3>
           <p>Diagramas, prototipação e documentação do projeto.</p>
         </a>
-
         <a href="banco-dados/" class="topic-card">
           <h3>Banco de dados</h3>
           <p>Conceitos, conectividade e integração com aplicações.</p>
         </a>
-
-        <a href="desenvolvimento-web/" class="topic-card">
+        <a href="html5.html" class="topic-card">
           <h3>Desenvolvimento web</h3>
-          <p>HTML, CSS, frameworks web, segurança e arquitetura.</p>
+          <p>HTML5, CSS, frameworks web, segurança e arquitetura.</p>
         </a>
-
         <a href="testes/" class="topic-card">
           <h3>Testes e qualidade de software</h3>
           <p>Testes, refatoração, integração e deploy.</p>
         </a>
-
       </div>
     </section>
-
   </main>
-
   <footer>
-    <p>Programação II • Página inicial da disciplina</p>
+    <p>Programação II &bull; Página inicial da disciplina</p>
   </footer>
-
-</body>
-</html>
+</body></html
