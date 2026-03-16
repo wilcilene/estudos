@@ -99,15 +99,17 @@
             margin-bottom: 1.5rem;
         }
 
-        .card h2, .card h3, .card h4 {
-            margin-top: 0;
-        }
-
         .card h2 {
             border-bottom: 1px solid var(--border);
             padding-bottom: 0.4rem;
             margin-bottom: 0.8rem;
             color: var(--primary);
+        }
+
+        .card h3 {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: var(--primary-dark);
         }
 
         code {
@@ -196,12 +198,6 @@
             margin-bottom: 1.5rem;
         }
 
-        .step h3 {
-            color: var(--primary-dark);
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
         .example-box {
             background: #f8f9fa;
             border: 1px solid var(--border);
@@ -247,54 +243,36 @@
                 <div class="step">
                     <h3>Principais Tags de Bloco:</h3>
                     <ul>
-                        <li><code>&lt;header&gt;</code>: Define o cabeçalho de uma página ou de uma seção específica. Geralmente contém títulos, logos e navegação.</li>
-                        <li><code>&lt;nav&gt;</code>: Destinado a blocos que contenham links de navegação principal.</li>
-                        <li><code>&lt;main&gt;</code>: Delimita o conteúdo principal e exclusivo da página. Só deve haver um por documento.</li>
-                        <li><code>&lt;section&gt;</code>: Agrupa conteúdos relacionados tematicamente (ex: seção de depoimentos, seção de preços).</li>
-                        <li><code>&lt;article&gt;</code>: Representa uma composição independente (ex: um post de blog, um comentário, um card de produto).</li>
-                        <li><code>&lt;aside&gt;</code>: Conteúdo periférico ou barras laterais que não são essenciais para o entendimento do conteúdo principal.</li>
-                        <li><code>&lt;footer&gt;</code>: Rodapé da página ou de uma seção.</li>
+                        <li><code>&lt;header&gt;</code>: Cabeçalho do documento ou seção.</li>
+                        <li><code>&lt;nav&gt;</code>: Blocos de links de navegação.</li>
+                        <li><code>&lt;main&gt;</code>: Conteúdo principal e exclusivo da página.</li>
+                        <li><code>&lt;section&gt;</code>: Agrupamento temático de conteúdo.</li>
+                        <li><code>&lt;article&gt;</code>: Conteúdo independente e reutilizável.</li>
+                        <li><code>&lt;aside&gt;</code>: Conteúdo periférico (sidebar).</li>
+                        <li><code>&lt;footer&gt;</code>: Rodapé do documento ou seção.</li>
                     </ul>
                 </div>
 
-                <h3>Exemplo Prático de Código:</h3>
-                <p>Observe a organização hierárquica abaixo. Note como cada tag "abraça" uma funcionalidade específica:</p>
+                <h3>Exemplo Prático de Estrutura:</h3>
                 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="pt-BR"&gt;
 &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
-    &lt;title&gt;Exemplo de Estrutura HTML5&lt;/title&gt;
+    &lt;title&gt;Exemplo Estrutural&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
     &lt;header&gt;
-        &lt;h1&gt;Portal de Notícias&lt;/h1&gt;
-        &lt;nav&gt;
-            &lt;ul&gt;
-                &lt;li&gt;&lt;a href="#"&gt;Tecnologia&lt;/a&gt;&lt;/li&gt;
-                &lt;li&gt;&lt;a href="#"&gt;Educação&lt;/a&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-        &lt;/nav&gt;
+        &lt;h1&gt;Portal Acadêmico&lt;/h1&gt;
+        &lt;nav&gt;...&lt;/nav&gt;
     &lt;/header&gt;
-
     &lt;main&gt;
         &lt;article&gt;
-            &lt;h2&gt;Avanços do HTML5 em 2026&lt;/h2&gt;
-            &lt;p&gt;O desenvolvimento web nunca foi tão acessível...&lt;/p&gt;
+            &lt;h2&gt;Aula de HTML5&lt;/h2&gt;
+            &lt;p&gt;Conteúdo da aula...&lt;/p&gt;
         &lt;/article&gt;
-
-        &lt;section&gt;
-            &lt;h2&gt;Notícias Relacionadas&lt;/h2&gt;
-            &lt;p&gt;Confira outros tópicos importantes abaixo.&lt;/p&gt;
-        &lt;/section&gt;
     &lt;/main&gt;
-
-    &lt;aside&gt;
-        &lt;h3&gt;Publicidade&lt;/h3&gt;
-        &lt;p&gt;Anuncie aqui seu curso!&lt;/p&gt;
-    &lt;/aside&gt;
-
     &lt;footer&gt;
-        &lt;p&gt;&copy; 2026 - Desenvolvido em Aula&lt;/p&gt;
+        &lt;p&gt;&copy; 2026&lt;/p&gt;
     &lt;/footer&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
@@ -303,89 +281,99 @@
             <!-- Formulários -->
             <section class="card">
                 <h2>3. Formulários e Validação</h2>
-                <p>O HTML5 trouxe tipos de campos que já realizam validação automática sem necessidade de JavaScript complexo.</p>
+                <p>O HTML5 trouxe tipos de campos que já realizam validação automática, facilitando a coleta de dados estruturados.</p>
                 
                 <div class="example-box">
                     <strong>Tipos de Input Úteis:</strong>
                     <ul class="pill-list">
-                        <li><code>email</code>: Valida o formato de e-mail.</li>
-                        <li><code>number</code>: Permite apenas números.</li>
-                        <li><code>date</code>: Abre um calendário nativo.</li>
-                        <li><code>color</code>: Seletor de cores do sistema.</li>
-                        <li><code>range</code>: Slider para seleção de valores.</li>
-                        <li><code>tel</code>: Para números de telefone.</li>
+                        <li><code>email</code></li>
+                        <li><code>number</code></li>
+                        <li><code>date</code></li>
+                        <li><code>color</code></li>
+                        <li><code>range</code></li>
+                        <li><code>tel</code></li>
                     </ul>
                 </div>
 
+                <h3>Exemplo de Formulário Completo:</h3>
+                <p>Abaixo, um exemplo que utiliza todos os tipos de input mencionados acima, com validações nativas:</p>
+                <pre><code>&lt;form action="#" method="post"&gt;
+    &lt;!-- Campo de E-mail com validação nativa --&gt;
+    &lt;label for="email"&gt;E-mail Acadêmico:&lt;/label&gt;
+    &lt;input type="email" id="email" name="email" required placeholder="exemplo@univ.edu"&gt;
+
+    &lt;!-- Campo Numérico com limites --&gt;
+    &lt;label for="idade"&gt;Idade:&lt;/label&gt;
+    &lt;input type="number" id="idade" name="idade" min="16" max="100"&gt;
+
+    &lt;!-- Seleção de Data --&gt;
+    &lt;label for="data"&gt;Data da Matrícula:&lt;/label&gt;
+    &lt;input type="date" id="data" name="data"&gt;
+
+    &lt;!-- Seletor de Cores --&gt;
+    &lt;label for="cor"&gt;Cor do Perfil:&lt;/label&gt;
+    &lt;input type="color" id="cor" name="cor" value="#006699"&gt;
+
+    &lt;!-- Controle de Faixa (Range) --&gt;
+    &lt;label for="satisfacao"&gt;Nível de Satisfação (1-10):&lt;/label&gt;
+    &lt;input type="range" id="satisfacao" name="satisfacao" min="1" max="10"&gt;
+
+    &lt;!-- Campo de Telefone --&gt;
+    &lt;label for="telefone"&gt;WhatsApp:&lt;/label&gt;
+    &lt;input type="tel" id="telefone" name="telefone" pattern="[0-9]{2} [0-9]{9}" placeholder="47 988887777"&gt;
+
+    &lt;button type="submit"&gt;Enviar Cadastro&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
                 <div class="callout">
-                    <strong>Poder da Validação Nativa:</strong> Use o atributo <code>required</code> para tornar o campo obrigatório e <code>placeholder</code> para dar uma dica de preenchimento ao usuário.
+                    <strong>Dica de Validação:</strong> O atributo <code>pattern</code> permite usar Expressões Regulares (RegEx) para validar formatos específicos, como o telefone acima.
                 </div>
             </section>
 
             <!-- Atividades -->
             <section class="card">
                 <h2>4. Atividades Práticas</h2>
-                
                 <div class="step">
                     <h3>Atividade 1: Landing Page de Portfólio</h3>
-                    <p>Crie uma página para apresentar seu perfil profissional. Ela deve conter obrigatoriamente:</p>
-                    <ul>
-                        <li>Um <code>header</code> com seu nome e uma <code>nav</code> com links (fictícios) para "Sobre", "Projetos" e "Contato".</li>
-                        <li>Um <code>main</code> contendo dois <code>article</code> (descrição de dois projetos seus).</li>
-                        <li>Um <code>aside</code> lateral com uma lista de suas habilidades (tags <code>ul</code> e <code>li</code>).</li>
-                        <li>Um <code>footer</code> com suas redes sociais e copyright.</li>
-                    </ul>
+                    <p>Crie uma página de perfil profissional usando as tags semânticas estudadas (header, nav, main, article, aside, footer).</p>
                 </div>
-
                 <div class="step">
                     <h3>Atividade 2: Formulário de Pré-Inscrição</h3>
-                    <p>Desenvolva um formulário de contato que capture os seguintes dados usando os tipos de input corretos do HTML5:</p>
-                    <ul>
-                        <li>Nome Completo (tipo text, obrigatório).</li>
-                        <li>E-mail (tipo email, obrigatório).</li>
-                        <li>Data de Nascimento (tipo date).</li>
-                        <li>Nível de Conhecimento (tipo range de 0 a 10).</li>
-                        <li>Cor Favorita para o tema (tipo color).</li>
-                    </ul>
+                    <p>Desenvolva um formulário de contato usando ao menos 5 tipos de inputs diferentes e atributos de validação como <code>required</code>, <code>min</code> e <code>max</code>.</p>
                 </div>
-
                 <div class="note">
-                    <strong>Entrega:</strong> Publique seus arquivos no repositório de projetos da disciplina e envie o link para a professora.
+                    <strong>Entrega:</strong> Publique seus arquivos no repositório de projetos e envie o link para a professora.
                 </div>
             </section>
         </div>
 
-        <!-- Sidebar -->
         <aside>
             <div class="card">
                 <h3>Checklist de Estudo</h3>
                 <ul class="mini-list" style="list-style: none; padding: 0; font-size: 0.9rem;">
-                    <li>✅ Por que usar HTML5?</li>
-                    <li>✅ Tags Semânticas de Layout</li>
-                    <li>✅ Hierarquia de Cabeçalhos</li>
-                    <li>✅ Tipos de Input</li>
-                    <li>✅ Atributos de Validação</li>
+                    <li>✅ Semântica de Layout</li>
+                    <li>✅ Hierarquia de Tags</li>
+                    <li>✅ Novos Tipos de Input</li>
+                    <li>✅ Validação Nativa</li>
                 </ul>
             </div>
-            
             <div class="card">
                 <h3>Recursos Extras</h3>
                 <nav style="flex-direction: column; gap: 0.5rem;">
-                    <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element" target="_blank" style="color: var(--primary); font-weight: bold;">Referência de Tags (MDN)</a>
-                    <a href="https://web.dev/learn/html/" target="_blank" style="color: var(--primary); font-weight: bold;">Curso de HTML (web.dev)</a>
+                    <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element" target="_blank" style="color: var(--primary); font-weight: bold;">Referência MDN</a>
+                    <a href="https://web.dev/learn/html/" target="_blank" style="color: var(--primary); font-weight: bold;">Curso web.dev</a>
                 </nav>
             </div>
-
             <div class="card" style="background-color: #e8f5e9; border-color: #c8e6c9;">
                 <h3>Para quem faltou</h3>
-                <p style="font-size: 0.85rem;">Estude os pilares do HTML5, reproduza o exemplo de estrutura em seu VS Code e realize as duas atividades propostas. Dúvidas podem ser tiradas via GitHub Issues do repositório.</p>
+                <p style="font-size: 0.85rem;">Estude os pilares do HTML5 e realize as duas atividades propostas. Dúvidas via GitHub Issues.</p>
             </div>
         </aside>
     </main>
 
     <footer>
         <div class="container">
-            <p>Programação II • Aula sobre HTML5 e Estrutura Semântica • 2026</p>
+            <p>Programação II • Aula sobre HTML5 • 2026</p>
         </div>
     </footer>
 </body>
