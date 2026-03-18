@@ -306,6 +306,62 @@
             <p>o que mostra que a propriedade vale para \(k+1\). Pela indução, vale para todo \(n \geq 1\).</p>
         </div>
     </div>
+        <div class="exercicio">
+        <h3>Exercício 2 – Soma de potências de 2</h3>
+        <p>
+            Prove, por indução, que para todo \(n \geq 0\),
+            \[
+                1 + 2 + 4 + \dots + 2^n = 2^{n+1} - 1.
+            \]
+        </p>
+        <button onclick="toggleRes('ex2')">Ver resolução</button>
+        <div id="ex2" class="resolucao">
+            <p><strong>Passo base:</strong> para \(n = 0\), LHS = \(2^0 = 1\), RHS = \(2^{1} - 1 = 1\).</p>
+            <p><strong>Hipótese de indução:</strong> suponha que para algum \(k \geq 0\),</p>
+            <p>\[
+                1 + 2 + 4 + \dots + 2^k = 2^{k+1} - 1.
+            \]</p>
+            <p><strong>Passo indutivo:</strong> queremos provar para \(k+1\):</p>
+            <p>\[
+                1 + 2 + \dots + 2^k + 2^{k+1} = 2^{k+2} - 1.
+            \]</p>
+            <p>Usando a hipótese:</p>
+            <p>\[
+                (2^{k+1} - 1) + 2^{k+1}
+                = 2 \cdot 2^{k+1} - 1
+                = 2^{k+2} - 1.
+            \]</p>
+            <p>Portanto, a fórmula vale para \(k+1\). Pela indução, vale para todo \(n \geq 0\).</p>
+        </div>
+    </div>
+
+    <div class="resumo">
+        <h2>6. Resumo da aula</h2>
+        <ul>
+            <li>Indução é uma técnica para provar afirmações sobre todos os inteiros a partir de um caso base e de um passo indutivo.</li>
+            <li>Indução forte permite usar vários casos anteriores ao mesmo tempo.</li>
+            <li>Indução é muito usada para provar fórmulas de somas, desigualdades e corretude de algoritmos recursivos e laços.</li>
+        </ul>
+        <p>
+            Sugestão: tente reescrever provas de outros tópicos (como soma de ímpares, propriedades de paridade)
+            seguindo explicitamente o formato “base, hipótese, passo indutivo”.
+        </p>
+    </div>
+
+    <footer>
+        <p>IFC São Bento do Sul · Matemática Discreta · Princípio da Indução Matemática</p>
+    </footer>
+</div>
+
+<script>
+function toggleRes(id) {
+    const elem = document.getElementById(id);
+    if (!elem) return;
+    elem.style.display = (elem.style.display === 'block') ? 'none' : 'block';
+}
+</script>
+</body>
+</html>
 
     <div class="exercicio">
         <h3>Exercício 2 – Soma de potências de 2</h3>
