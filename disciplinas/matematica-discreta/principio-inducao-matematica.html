@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Princípio da Indução Matemática - Matemática Discreta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- MathJax para fórmulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="principio-inducao-matematica.css">
+</head>
+<body>
+<div class="container">
+    <h1>Princípio da Indução Matemática</h1>
+    <p><strong>Disciplina:</strong> Matemática Discreta – Bacharelado em Ciência da Computação (IFC São Bento do Sul)</p>
+    <p><strong>Esta página foi pensada</strong> para servir como roteiro da aula e também como material de estudo
+        para quem quiser revisar sozinho ou não pôde estar presente.</p>
+
+    <div class="intro">
+        <h2>Por que Indução Matemática?</h2>
+        <p>
+            Muitas afirmações em Matemática Discreta falam sobre <strong>todos</strong> os inteiros \(n\):
+            “para todo \(n \geq 1\), vale tal fórmula”, “para qualquer tamanho de entrada, o algoritmo faz isso”.
+        </p>
+        <p>
+            É impossível testar um a um todos os valores de \(n\). O Princípio da Indução Matemática
+            é uma técnica geral para provar esse tipo de afirmação de forma rigorosa e finita.
+        </p>
+    </div>
+
+    <div class="objetivos">
+        <h3>O que você deve entender ao final deste tópico</h3>
+        <ul>
+            <li>O enunciado formal do Princípio da Indução Matemática.</li>
+            <li>A diferença entre <strong>passo base</strong> e <strong>passo indutivo</strong>.</li>
+            <li>Como escrever uma prova por indução em forma de roteiro.</li>
+            <li>O que é indução forte e quando ela é útil.</li>
+            <li>Como conectar indução à prova de corretude de algoritmos recursivos e laços.</li>
+        </ul>
+    </div>
+
+    <h2>1. Ideia Intuitiva: a escada infinita</h2>
+    <p>
+        Imagine uma escada com infinitos degraus numerados \(1, 2, 3, \dots\).  
+        Você quer mostrar que consegue alcançar <strong>todos</strong> os degraus.
+    </p>
+    <ul>
+        <li>Passo base: você mostra que consegue ficar no primeiro degrau.</li>
+        <li>Passo indutivo: mostra que, se consegue ficar em qualquer degrau \(k\), então consegue ir para o degrau \(k+1\).</li>
+    </ul>
+    <p>
+        Se essas duas coisas forem verdade, então você consegue alcançar todos os degraus.
+        É exatamente isso que a indução formaliza.
+    </p>
+
+    <h2>2. Enunciado formal do Princípio da Indução</h2>
+    <p>
+        Seja \(P(n)\) uma proposição sobre inteiros \(n\). Para provar que \(P(n)\) é verdadeira para todo \(n \geq n_0\),
+        basta seguir dois passos:
+    </p>
+    <ol>
+        <li><strong>Passo base:</strong> mostrar que \(P(n_0)\) é verdadeira.</li>
+        <li><strong>Passo indutivo:</strong> supor que \(P(k)\) é verdadeira para um \(k \geq n_0\)
+            (hipótese de indução) e provar que \(P(k+1)\) também é verdadeira.</li>
+    </ol>
+    <p>
+        Se ambos os passos forem concluídos, podemos afirmar que \(P(n)\) vale para todo \(n \geq n_0\).
+    </p>
+
+    <div class="nota">
+        <p>
+            É muito comum em livros ver a notação \(P(n)\) para “a proposição sobre \(n\)”.
+            Tente sempre escrever claramente o que é \(P(n)\) antes de começar a prova.
+        </p>
+    </div>
+
+    <!-- EXEMPLO 1: soma 1+2+...+n -->
+    <div class="exemplo">
+        <h3>Exemplo 1 – Soma dos primeiros \(n\) números naturais</h3>
+        <p>
+            Vamos provar que, para todo inteiro \(n \geq 1\),
+        </p>
+        <p>\[
+            1 + 2 + 3 + \dots + n = \frac{n(n+1)}{2}.
+        \]</p>
+
+        <h4>2.1. Definindo \(P(n)\)</h4>
+        <p>
+            Seja \(P(n)\) a proposição:
+        </p>
+        <p>\[
+            P(n):\quad 1 + 2 + 3 + \dots + n = \frac{n(n+1)}{2}.
+        \]</p>
+
+        <h4>2.2. Passo base</h4>
+        <p>Para \(n = 1\):</p>
+        <ul>
+            <li>Lado esquerdo: \(1\).</li>
+            <li>Lado direito: \(\dfrac{1(1+1)}{2} = \dfrac{2}{2} = 1.\)</li>
+        </ul>
+        <p>Logo, \(P(1)\) é verdadeira.</p>
+
+        <h4>2.3. Passo indutivo</h4>
+        <p><strong>Hipótese de indução:</strong> suponha que \(P(k)\) é verdadeira para algum inteiro \(k \geq 1\), ou seja,</p>
+        <p>\[
+            1 + 2 + 3 + \dots + k = \frac{k(k+1)}{2}.
+        \]</p>
+        <p>
+            Queremos mostrar que \(P(k+1)\) é verdadeira:
+        </p>
+        <p>\[
+            1 + 2 + 3 + \dots + k + (k+1) = \frac{(k+1)(k+2)}{2}.
+        \]</p>
+
+        <p>Começando pelo lado esquerdo de \(P(k+1)\):</p>
+        <p>\[
+            \begin{aligned}
+            1 + 2 + \dots + k + (k+1)
+                &= \underbrace{(1 + 2 + \dots + k)}_{\text{hipótese de indução}} + (k+1) \\
+                &= \frac{k(k+1)}{2} + (k+1).
+            \end{aligned}
+        \]</p>
+        <p>Soma das frações:</p>
+        <p>\[
+            \frac{k(k+1)}{2} + (k+1)
+            = \frac{k(k+1)}{2} + \frac{2(k+1)}{2}
+            = \frac{(k+1)(k+2)}{2}.
+        \]</p>
+        <p>Portanto, \(P(k+1)\) é verdadeira.</p>
+
+        <h4>2.4. Conclusão</h4>
+        <p>
+            Como \(P(1)\) é verdadeira (base) e \(P(k) \Rightarrow P(k+1)\) para todo \(k \geq 1\) (indução),
+            concluímos que a fórmula vale para todo \(n \geq 1\).
+        </p>
+    </div>
+
+    <!-- Algoritmo ligado ao exemplo 1 -->
+    <div class="exemplo">
+        <h3>Exemplo em algoritmo (ligado ao Exemplo 1)</h3>
+        <p>
+            Considere o algoritmo iterativo que calcula a soma de \(1\) até \(n\):
+        </p>
+<pre><code>int soma(int n) {
+    int s = 0;
+    for (int i = 1; i &lt;= n; i++) {
+        s = s + i;
+    }
+    return s;
+}</code></pre>
+        <p>
+            A afirmação que queremos provar é: “para todo \(n \geq 1\), após o laço,
+            <code>s</code> contém \(\frac{n(n+1)}{2}\)”. A prova da fórmula por indução
+            nos dá exatamente o comportamento esperado da soma. Em cursos mais avançados,
+            podemos formalizar a corretude com invariantes de laço e indução.
+        </p>
+    </div>
+
+    <!-- EXEMPLO 2: soma de ímpares -->
+    <div class="exemplo">
+        <h3>Exemplo 2 – Soma dos primeiros \(n\) números ímpares</h3>
+        <p>Afirmação: para todo inteiro \(n \geq 1\),</p>
+        <p>\[
+            1 + 3 + 5 + \dots + (2n - 1) = n^2.
+        \]</p>
+
+        <h4>3.1. Passo base</h4>
+        <p>Para \(n = 1\): \(1 = 1^2\). Base ok.</p>
+
+        <h4>3.2. Hipótese de indução</h4>
+        <p>Suponha que para algum \(k \geq 1\),</p>
+        <p>\[
+            1 + 3 + 5 + \dots + (2k - 1) = k^2.
+        \]</p>
+
+        <h4>3.3. Passo indutivo</h4>
+        <p>Queremos mostrar que então</p>
+        <p>\[
+            1 + 3 + 5 + \dots + (2k - 1) + (2k + 1) = (k+1)^2.
+        \]</p>
+        <p>Usando a hipótese:</p>
+        <p>\[
+            \begin{aligned}
+            1 + 3 + \dots + (2k - 1) + (2k + 1)
+                &= k^2 + (2k + 1) \\
+                &= k^2 + 2k + 1 \\
+                &= (k+1)^2.
+            \end{aligned}
+        \]</p>
+        <p>Logo, \(P(k) \Rightarrow P(k+1)\). Pela indução, a igualdade vale para todo \(n \geq 1\).</p>
+    </div>
+
+    <!-- 4. Indução forte -->
+    <h2>4. Indução Forte (Segundo Princípio)</h2>
+    <p>
+        Na <strong>indução forte</strong>, no passo indutivo, em vez de supor apenas \(P(k)\),
+        supomos que <strong>todas</strong> as proposições anteriores são verdadeiras:
+    </p>
+    <p>\[
+        P(n_0), P(n_0+1), \dots, P(k) \quad \Rightarrow \quad P(k+1).
+    \]</p>
+    <p>
+        Ela é muito útil quando \(P(k+1)\) depende de vários casos anteriores, como em definições recursivas
+        (ex.: números de Fibonacci) ou decomposições em fatores primos.
+    </p>
+
+    <div class="exemplo">
+        <h3>Exemplo 3 – Todo inteiro \(n &gt; 1\) é produto de primos (esboço)</h3>
+        <p><strong>Afirmação:</strong> para todo inteiro \(n &gt; 1\), \(n\) pode ser escrito como produto de números primos.</p>
+
+        <h4>4.1. Passo base</h4>
+        <p>Para \(n = 2\): ele já é primo, então é produto “de um único primo”.</p>
+
+        <h4>4.2. Hipótese de indução forte</h4>
+        <p>
+            Suponha que qualquer inteiro \(m\) com \(2 \leq m \leq k\) pode ser escrito como produto de primos.
+        </p>
+
+        <h4>4.3. Passo indutivo</h4>
+        <p>
+            Considere \(k+1\).
+        </p>
+        <ul>
+            <li>Se \(k+1\) é primo, já é produto de primos.</li>
+            <li>Se não é primo, então \(k+1 = ab\), com \(2 \leq a,b \leq k\).</li>
+        </ul>
+        <p>
+            Pela hipótese de indução forte, tanto \(a\) quanto \(b\) podem ser escritos como produto de primos.
+            Multiplicando essas decomposições, obtemos uma decomposição em primos para \(k+1\).
+        </p>
+        <p>
+            Pela indução forte, todo inteiro \(n &gt; 1\) é produto de primos.
+        </p>
+    </div>
+
+    <!-- Exemplo de algoritmo recursivo com indução -->
+    <div class="exemplo">
+        <h3>Exemplo 4 – Indução e algoritmo recursivo (fatorial)</h3>
+        <p>Considere a definição recursiva de fatorial:</p>
+        <ul>
+            <li>\(0! = 1\) (caso base);</li>
+            <li>\(n! = n \cdot (n-1)!\) para \(n \geq 1\).</li>
+        </ul>
+<pre><code>int fat(int n) {
+    if (n == 0) return 1;
+    return n * fat(n - 1);
+}</code></pre>
+        <p>
+            Queremos provar, por indução, que para todo \(n \geq 0\) o algoritmo retorna exatamente \(n!\).
+        </p>
+
+        <h4>4.1. Passo base</h4>
+        <p>
+            Para \(n = 0\), a função retorna 1. Pela definição matemática, \(0! = 1\), então está correto.
+        </p>
+
+        <h4>4.2. Passo indutivo</h4>
+        <p>
+            Suponha que para algum \(k \geq 0\), a função <code>fat(k)</code> retorna \(k!\)
+            (hipótese de indução). Queremos mostrar que <code>fat(k+1)</code> retorna \((k+1)!\).
+        </p>
+        <p>
+            Pela definição do algoritmo:
+        </p>
+<pre><code>fat(k + 1) = (k + 1) * fat(k);</code></pre>
+        <p>
+            Pela hipótese de indução, <code>fat(k)</code> retorna \(k!\). Então,
+        </p>
+        <p>\[
+            fat(k+1) = (k+1) \cdot k! = (k+1)!.
+        \]</p>
+        <p>
+            Logo, por indução, o algoritmo está correto para todo \(n \geq 0\).
+        </p>
+    </div>
+
+    <!-- Exercícios -->
+    <h2>5. Exercícios para praticar</h2>
+    <p>Resolva sem olhar a solução. Depois clique em “Ver resolução” para conferir o passo a passo.</p>
+
+    <div class="exercicio">
+        <h3>Exercício 1 – Desigualdade</h3>
+        <p>
+            Prove, por indução, que para todo \(n \geq 1\),
+            \[
+                2^n \geq n + 1.
+            \]
+        </p>
+        <button onclick="toggleRes('ex1')">Ver resolução</button>
+        <div id="ex1" class="resolucao">
+            <p><strong>Passo base:</strong> para \(n = 1\), \(2^1 = 2 \geq 2 = 1 + 1\).</p>
+            <p><strong>Hipótese de indução:</strong> suponha que \(2^k \geq k + 1\) para algum \(k \geq 1\).</p>
+            <p><strong>Passo indutivo:</strong></p>
+            <p>\[
+                2^{k+1} = 2 \cdot 2^k \geq 2(k+1).
+            \]</p>
+            <p>Mas \(2(k+1) = 2k + 2 \geq (k+1) + 1\) para \(k \geq 1\). Logo,</p>
+            <p>\[
+                2^{k+1} \geq (k+1) + 1,
+            \]</p>
+            <p>o que mostra que a propriedade vale para \(k+1\). Pela indução, vale para todo \(n \geq 1\).</p>
+        </div>
+    </div>
+
+    <div class="exercicio">
+        <h3>Exercício 2 – Soma de potências de 2</h3>
+        <p>
+            Prove, por indução, que 
