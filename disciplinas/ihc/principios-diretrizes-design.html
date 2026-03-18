@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Princípios e diretrizes de design </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Fonte + CSS comum da disciplina -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="ihc.css">
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="index.html">
+      <span>←</span> voltar para o índice da disciplina
+    </a>
+
+    <header>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Princípios e diretrizes de design web
+      </div>
+      <h1>Princípios e diretrizes para projetar interfaces web</h1>
+      <p>
+        Esta página reúne regras práticas de design que podem ser usadas como referência 
+        no projeto da disciplina. Sempre que estiver em dúvida no Figma (“deixo assim ou 
+        assado?”), volte aqui e veja qual princípio se aplica ao seu caso.
+      </p>
+    </header>
+
+    <main>
+      <article class="content-card">
+        <!-- 1. Introdução -->
+        <section>
+          <h2 class="section-title">1. O que são princípios e diretrizes de design?</h2>
+          <p>
+            Princípios e diretrizes de design são <span class="highlight">regras gerais</span> que ajudam a tomar
+            decisões coerentes ao desenhar telas e fluxos. Eles não dizem exatamente “onde colocar
+            cada pixel”, mas orientam escolhas como: tamanho de botões, forma de dar feedback,
+            quantidade de informação por tela, padrões de navegação etc.
+          </p>
+          <p>
+            Trabalhar com princípios e diretrizes é importante porque:
+          </p>
+          <ul>
+            <li>reduz decisões aleatórias (“porque eu achei bonito”);</li>
+            <li>melhora consistência entre telas e entre membros do time;</li>
+            <li>facilita a avaliação do protótipo (é mais fácil criticar com base em regras claras);</li>
+            <li>aproxima o projeto daquilo que a literatura de IHC considera uma interface de qualidade.</li>
+          </ul>
+        </section>
+
+        <!-- 2. Visibilidade e feedback -->
+        <section>
+          <h2 class="section-title">2. Visibilidade do estado do sistema e feedback</h2>
+          <p>
+            O usuário precisa entender <span class="highlight">o que está acontecendo agora</span> e se a ação que
+            acabou de realizar teve efeito. Para isso, o sistema deve oferecer sinais claros de
+            estado e feedback imediato. Exemplos de feedback: barra de progresso, mensagens de sucesso/erro, 
+            alteração de cor de botão após clique.
+          </p>
+
+          <div class="media-wrapper">
+            <img src="loading.png" alt="Exemplos de feedback: barra de carregamento">
+            <div class="media-caption">
+              Exemplos de feedback: barra de progresso.
+            </div>
+          </div>
+
+          <ul>
+            <li>Use rótulos claros em botões (ex.: “Salvar rascunho”, “Enviar formulário”).</li>
+            <li>Mostre mensagens de confirmação quando ações importantes forem concluídas.</li>
+            <li>Em operações demoradas, exiba indicador de progresso (spinner, barra, texto “Carregando…”).</li>
+            <li>Deixe evidente em que página/etapa do fluxo o usuário está (breadcrumb, destaque no menu, título da tela).</li>
+          </ul>
+
+          <div class="example-box">
+            <div class="example-label">Para se questionar!</div>
+            <ul>
+              <li>Ao clicar em um botão, algo visual muda imediatamente?</li>
+              <li>Se o sistema estiver carregando dados, existe algum indicador visível?</li>
+              <li>É possível saber facilmente em qual etapa do fluxo de cadastro/navegação a pessoa está?</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 3. Consistência -->
+        <section>
+          <h2 class="section-title">3. Consistência e padrões</h2>
+          <p>
+            <span class="highlight">Consistência</span> significa que elementos semelhantes se comportam de forma
+            semelhante. Isso reduz esforço cognitivo: depois de aprender um padrão em uma tela,
+            o usuário espera encontrar a mesma lógica nas demais.
+          </p>
+
+          <div class="media-wrapper">
+            <img src="padrao.png" alt="Várias telas usando o mesmo padrão de botões e cabeçalhos">
+            <div class="media-caption">
+              Mesmos estilos de botões, cabeçalhos e formulários em telas diferentes ajudam o usuário a reconhecer padrões.
+            </div>
+          </div>
+
+          <ul>
+            <li>Mantenha mesma cor e estilo para ações de mesmo tipo (ex.: todos os botões primários na mesma cor).</li>
+            <li>Reutilize componentes (cards, listas, campos de formulário) com a mesma estrutura ao longo do sistema.</li>
+            <li>Use convenções da web: ícone de lupa para busca, carrinho para compras, três linhas para menu (“hambúrguer”).</li>
+            <li>Evite reinventar padrões sem necessidade, especialmente em controles comuns.</li>
+          </ul>
+
+          <div class="example-box">
+            <div class="example-label">Para se questionar!</div>
+            <ul>
+              <li>Todos os botões primários parecem pertencer à mesma família?</li>
+              <li>Campos de formulário têm alinhamento, bordas e tipografia consistentes?</li>
+              <li>O posicionamento do menu, logo e busca se mantém entre as páginas?</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 4. Simplicidade e hierarquia -->
+        <section>
+          <h2 class="section-title">4. Simplicidade, foco e hierarquia visual</h2>
+          <p>
+            Uma tela não deve tentar resolver tudo ao mesmo tempo. Quanto mais elementos, mais difícil
+            é entender por onde começar. <span class="highlight">Hierarquia visual</span> é o uso de tamanho, cor,
+            contraste e espaçamento para indicar o que é mais importante.
+          </p>
+
+          <div class="media-wrapper">
+            <img src="media/hierarquia-visual.png" alt="Comparação entre tela poluída e tela com boa hierarquia visual">
+            <div class="media-caption">
+              Telas com poucos elementos em destaque e bom espaçamento são mais fáceis de escanear visualmente.
+            </div>
+          </div>
+
+          <ul>
+            <li>Defina uma ação principal por tela (call to action) e destaque esse elemento.</li>
+            <li>Use títulos e subtítulos para organizar o conteúdo; separe blocos com espaçamento generoso.</li>
+            <li>Evite textos longos em caixa alta; prefira frases curtas e parágrafos pequenos.</li>
+            <li>Use cor e peso de fonte para indicar importância, mas com moderação.</li>
+          </ul>
+
+          <div class="example-box">
+            <div class="example-label">Dica prática</div>
+            <p>
+              Faça o teste do “olhar rápido”: abra a tela do protótipo, olhe por 3 segundos e
+              feche. Pergunte: qual ação parecia mais importante? Se a resposta for “não sei”
+              ou “tudo chamava atenção igual”, a hierarquia visual pode ser melhorada.
+            </p>
+          </div>
+        </section>
+
+        <!-- 5. Prevenção de erros -->
+        <section>
+          <h2 class="section-title">5. Prevenção de erros e mensagens claras</h2>
+          <p>
+            Erros são inevitáveis, mas o sistema pode <span class="highlight">reduzir a chance de erro</span> e
+            também ajudar o usuário a se recuperar sem traumas. Mensagens vagas como “Erro 500”
+            normalmente não ajudam.
+          </p>
+
+          <div class="media-wrapper">
+            <img src="media/mensagem-clara.png" alt="Formulário com campo em destaque e mensagem clara de erro">
+            <div class="media-caption">
+              Indique o campo com problema, explique o que aconteceu e sugira como corrigir.
+            </div>
+          </div>
+
+          <ul>
+            <li>Evite ações destrutivas sem confirmação (excluir, enviar definitivamente).</li>
+            <li>Use máscaras e validação em campos (datas, e‑mail, CPF) para evitar dados inválidos.</li>
+            <li>Indique claramente qual campo está com erro e explique o motivo (“Digite um e‑mail válido”).</li>
+            <li>Quando possível, permita desfazer ações (undo) ou oferecer um caminho de volta seguro.</li>
+          </ul>
+        </section>
+
+        <!-- 6. Controle e navegação -->
+        <section>
+          <h2 class="section-title">6. Controle, liberdade e navegação</h2>
+          <p>
+            O usuário deve sentir que está no comando da interface, não preso em um labirinto.
+            Isso significa oferecer <span class="highlight">caminhos de saída</span>, opções de voltar e navegação
+            previsível.
+          </p>
+<!--
+          <div class="media-wrapper">
+            <img src="xxx" alt="Barra de navegação e breadcrumb em um site">
+            <div class="media-caption">
+              Botões de voltar, links claros e breadcrumbs ajudam o usuário a se localizar e recuperar o caminho.
+            </div>
+          </div>
+
+          <ul>
+            <li>Mantenha um menu principal visível ou facilmente acessível.</li>
+            <li>Evite “dead ends”: telas sem opções claras de seguir ou retornar.</li>
+            <li>Use breadcrumbs ou títulos claros para mostrar em que seção o usuário está.</li>
+            <li>Respeite o comportamento padrão do navegador (botão de voltar deve funcionar como esperado).</li>
+          </ul>
+        </section>
+-->
+        <!-- 7. Acessibilidade básica
+        <section>
+          <h2 class="section-title">7. Acessibilidade básica desde o início</h2>
+          <p>
+            Mesmo antes de estudar acessibilidade em profundidade, já é possível evitar erros graves.
+            Pequenas decisões de layout e cor podem tornar o sistema mais inclusivo.
+          </p>
+
+          <div class="media-wrapper">
+            <img src="xxx" alt="Comparação entre textos com bom e mau contraste de cor">
+            <div class="media-caption">
+              Contraste adequado e fontes legíveis ajudam pessoas com baixa visão e beneficiam todos.
+            </div>
+          </div>
+
+          <ul>
+            <li>Evite textos muito pequenos; teste a leitura em diferentes monitores e níveis de zoom.</li>
+            <li>Use contraste suficiente entre texto e fundo, especialmente em botões e links.</li>
+            <li>Não dependa apenas de cor para transmitir informação (use também ícones e rótulos).</li>
+            <li>Planeje a ordem de foco para navegação por teclado (tabulação lógica).</li>
+          </ul>
+        </section>
+-->
+        <!-- 8. Atividade
+        <section>
+          <h2 class="section-title">8. Atividade: criando o “contrato de design” do projeto</h2>
+          <div class="activity-box">
+            <div class="activity-title">atividade avaliativa · base para o protótipo</div>
+            <p>
+              Em grupo, elaborem um documento curto (pode ser slide, texto ou mural digital) com
+              as <strong>regras de design</strong> que o projeto seguirá. Usem os princípios desta página
+              como base.
+            </p>
+            <ol>
+              <li>Escolham pelo menos 5 princípios (ex.: feedback, consistência, hierarquia visual,
+                  prevenção de erros, acessibilidade).</li>
+              <li>Para cada princípio, escrevam:
+                <ul>
+                  <li>uma frase que resuma a ideia (em linguagem de vocês);</li>
+                  <li>2 a 3 “regras práticas” que vocês se comprometerão a seguir no Figma.</li>
+                </ul>
+              </li>
+              <li>Incluam 1 ou 2 exemplos (prints, rascunhos) mostrando como a regra será aplicada.</li>
+            </ol>
+            <p>
+              Este documento será usado como referência durante toda a construção do protótipo
+              e poderá ser citado na apresentação final como parte da justificativa de design.
+            </p>
+          </div>
+        </section>
+      </article>
+-->
+      <aside class="side-card">
+        <div>
+          <div class="side-section-title">Palavras‑chave</div>
+          <div class="tag-list">
+            <span class="tag">usabilidade</span>
+            <span class="tag">feedback</span>
+            <span class="tag">consistência</span>
+            <span class="tag">hierarquia visual</span>
+            <span class="tag">erros</span>
+            <span class="tag">acessibilidade</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="side-section-title">Como usar esta página no projeto</div>
+          <p>
+            Mantenha esta página aberta enquanto modela suas telas no Figma. Ao finalizar uma
+            tela, faça um checklist rápido: ela segue os princípios de feedback, consistência,
+            hierarquia, prevenção de erros e acessibilidade básica?
+          </p>
+        </div>
+
+        <div>
+          <div class="side-section-title">Leituras de apoio</div>
+          <ul class="resources-list">
+            <li>Barbosa &amp; Silva – capítulos sobre princípios de IHC e diretrizes de design.</li>
+            <li>Rogers, Sharp &amp; Preece – princípios de design de interação.</li>
+            <li>Textos on‑line sobre heurísticas de Nielsen e padrões de interface web/mobile.</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <footer>
+    <p>
+      Atualize esta página com exemplos do próprio projeto ao longo do semestre. Ela deve
+      funcionar como o “guia de estilo” conceitual do sistema que vocês estão criando.
+    </p>
+  </footer>
+</body>
+</html>
