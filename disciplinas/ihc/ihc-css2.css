@@ -256,6 +256,11 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.page > .section-header {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .section-header-main {
   display: flex;
   flex-direction: column;
@@ -390,6 +395,7 @@ body {
   font-size: 0.94rem;
   color: var(--text-soft);
   line-height: 1.7;
+  max-width: 720px;
 }
 
 .topic-article h3 {
