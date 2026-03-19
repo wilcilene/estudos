@@ -172,7 +172,7 @@ body {
   margin: 0 0 1.2rem;
 }
 
-/* Metadados no hero, como “cards compactos” */
+/* Metadados no hero */
 .hero-meta {
   display: flex;
   flex-wrap: wrap;
@@ -199,7 +199,7 @@ body {
   font-weight: 600;
 }
 
-/* Cards laterais no hero (padrão LMS “course summary”) */
+/* Cards laterais no hero */
 .hero-side {
   display: flex;
   flex-direction: column;
@@ -282,7 +282,7 @@ body {
   margin: 0;
 }
 
-/* “Filtros”/legenda de categorias (pílulas) */
+/* “Filtros”/legenda de categorias */
 .topics-filters {
   display: flex;
   flex-wrap: wrap;
@@ -298,7 +298,7 @@ body {
   color: var(--text-soft);
 }
 
-/* Grid de tópicos no estilo cards de cursos do LMS */
+/* Grid de tópicos */
 .topics-grid {
   list-style: none;
   margin: 0;
@@ -385,7 +385,7 @@ body {
   margin: 0;
 }
 
-/* Texto de artigos dentro de páginas de tópico */
+/* Texto de artigos em páginas de tópico */
 .topic-article {
   font-size: 0.94rem;
   color: var(--text-soft);
@@ -416,30 +416,33 @@ body {
   padding-top: 1.25rem;
 }
 
-/* TABELA DE FERRAMENTAS – VISIBILIDADE APRIMORADA */
+/* =========================== */
+/*  TABELA DE FERRAMENTAS v2   */
+/* =========================== */
+
 .tools-table-wrapper {
   overflow-x: auto;
-  margin-top: 1rem;
-  border-radius: 12px;
-  border: 1px solid rgba(148, 163, 184, 0.6);
-  background: #020617;
-  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.9);
+  margin-top: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.15), transparent 60%),
+              #020617;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.95);
 }
 
+/* base */
 .tools-table {
   width: 100%;
-  border-collapse: collapse;
-  font-size: 0.83rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.84rem;
   color: var(--text-soft);
   min-width: 760px;
 }
 
-/* Cabeçalho com fundo e bordas marcadas */
+/* cabeçalho */
 .tools-table thead {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  background: linear-gradient(90deg, #0b1120, #020617);
+  background: linear-gradient(90deg, #0f172a, #0b1120);
 }
 
 .tools-table th {
@@ -447,25 +450,35 @@ body {
   font-weight: 600;
   font-size: 0.8rem;
   color: var(--text);
-  padding: 0.7rem 0.75rem;
-  border-bottom: 2px solid rgba(148, 163, 184, 0.7);
+  padding: 0.75rem 0.9rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.6);
   border-right: 1px solid rgba(30, 41, 59, 0.9);
   white-space: nowrap;
 }
 
 .tools-table th:first-child {
-  border-top-left-radius: 12px;
+  border-top-left-radius: 16px;
 }
 
 .tools-table th:last-child {
-  border-top-right-radius: 12px;
+  border-top-right-radius: 16px;
   border-right: none;
 }
 
-/* Corpo da tabela com listrado suave */
+/* corpo */
+.tools-table tbody tr {
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.tools-table tbody tr:nth-child(odd) {
+  background: rgba(15, 23, 42, 0.84);
+}
+
+/* linhas */
 .tools-table td {
-  padding: 0.6rem 0.75rem;
-  border-bottom: 1px solid rgba(30, 41, 59, 0.9);
+  padding: 0.6rem 0.9rem;
+  border-top: 1px solid rgba(15, 23, 42, 0.9);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.9);
   border-right: 1px solid rgba(30, 41, 59, 0.9);
   vertical-align: top;
 }
@@ -474,20 +487,13 @@ body {
   border-right: none;
 }
 
-.tools-table tbody tr:nth-child(even) {
-  background: rgba(15, 23, 42, 0.9);
-}
-
-.tools-table tbody tr:nth-child(odd) {
-  background: rgba(15, 23, 42, 0.78);
-}
-
-/* Hover discreto */
+/* hover */
 .tools-table tbody tr:hover {
-  background: rgba(30, 64, 175, 0.45);
+  background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.18), transparent 55%),
+              rgba(15, 23, 42, 0.98);
 }
 
-/* Larguras e ênfases por coluna */
+/* colunas principais */
 .tools-table td:first-child {
   font-weight: 600;
   color: var(--text);
@@ -495,18 +501,52 @@ body {
 }
 
 .tools-table td:nth-child(2) {
-  width: 26%;
+  width: 28%;
 }
 
+/* colunas de ferramenta – “chip” */
 .tools-table td:nth-child(3),
 .tools-table td:nth-child(4),
 .tools-table td:nth-child(5) {
   text-align: center;
-  width: 9%;
+  width: 8%;
+  padding: 0.5rem 0.3rem;
+  position: relative;
 }
 
+.tools-table td:nth-child(3)::before,
+.tools-table td:nth-child(4)::before,
+.tools-table td:nth-child(5)::before {
+  content: "—";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  border: 1px dashed rgba(148, 163, 184, 0.7);
+  color: rgba(148, 163, 184, 0.9);
+  font-size: 0.78rem;
+}
+
+.tools-table td:nth-child(3) span,
+.tools-table td:nth-child(4) span,
+.tools-table td:nth-child(5) span {
+  position: relative;
+  z-index: 1;
+}
+
+/* coluna de observações */
 .tools-table td:nth-child(6) {
   width: 22%;
+}
+
+/* cantos inferiores arredondados */
+.tools-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 16px;
+}
+.tools-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 16px;
 }
 
 /* Responsividade */
