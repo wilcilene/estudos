@@ -429,4 +429,45 @@ body {
   .topics-grid {
     grid-template-columns: minmax(0, 1fr);
   }
+
+  .tools-table-wrapper {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: #020617;
+}
+
+.tools-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  color: var(--text-soft);
+}
+
+.tools-table thead {
+  background: rgba(15, 23, 42, 0.95);
+}
+
+.tools-table th,
+.tools-table td {
+  padding: 0.6rem 0.7rem;
+  border-bottom: 1px solid rgba(30, 41, 59, 0.9);
+  vertical-align: top;
+}
+
+.tools-table th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--text);
+}
+
+.tools-table tbody tr:nth-child(even) {
+  background: rgba(15, 23, 42, 0.8);
+}
+
+.tools-table tbody tr:hover {
+  background: rgba(30, 64, 175, 0.35);
+}
+
 }
