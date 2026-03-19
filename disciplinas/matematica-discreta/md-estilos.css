@@ -108,11 +108,26 @@ code {
 }
 
 pre {
-    background: #f8f9fa;
-    padding: 10px;
+    background: #f8f9fa;          /* cinza bem claro */
+    border: 1px solid #dee2e6;
     border-radius: 5px;
+    padding: 10px 12px;
+    margin: 10px 0;
     overflow-x: auto;
 }
+
+pre code {
+    display: block;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 0.95rem;
+    color: #212529;               /* texto mais escuro para contraste */
+    background: transparent;      /* evita herdar cor estranha */
+}
+
+code {
+    font-family: "Consolas", "Courier New", monospace;
+}
+
 
 /* Vídeos responsivos (se usar) */
 .video-container {
