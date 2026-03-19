@@ -702,67 +702,8 @@ public class ProgramaEstudo {
             </code></pre>
         </div>
 
-        <!-- Exercício 4 -->
-        <h3>Exercício 4 – Loja de Camisetas</h3>
-        <p>
-            Crie uma classe <code>Camiseta</code> com os atributos <code>tamanho</code> (String), <code>cor</code> (String) e <code>preco</code> (double).<br>
-            No <code>main</code>:
-        </p>
-        <ul>
-            <li>leia tamanho, cor e preço digitados pelo usuário;</li>
-            <li>crie um objeto <code>Camiseta</code> com esses dados;</li>
-            <li>se o preço for maior que 100, mostre “Camiseta premium”; caso contrário, “Camiseta padrão”.</li>
-        </ul>
-
-        <button class="btn-resposta" data-target="resp-camiseta"
-                style="margin-bottom:0.5rem; padding:0.4rem 0.8rem; background-color: var(--primary-color); color:#fff; border:none; border-radius:4px; cursor:pointer;">
-            Mostrar/ocultar resposta em Java
-        </button>
-
-        <div id="resp-camiseta" style="display:none; margin-bottom:1.5rem;">
-            <pre><code class="language-java">
-import java.util.Scanner;
-
-class Camiseta {
-    String tamanho;
-    String cor;
-    double preco;
-}
-
-public class ProgramaCamiseta {
-
-    public static void main(String[] args) {
-        Scanner entrada = new Scanner(System.in);
-
-        Camiseta camiseta = new Camiseta();
-
-        System.out.print("Tamanho da camiseta: ");
-        camiseta.tamanho = entrada.nextLine();
-
-        System.out.print("Cor da camiseta: ");
-        camiseta.cor = entrada.nextLine();
-
-        System.out.print("Preço da camiseta: ");
-        camiseta.preco = entrada.nextDouble();
-
-        System.out.println("Camiseta " + camiseta.cor
-                + " tamanho " + camiseta.tamanho
-                + " custa R$ " + camiseta.preco);
-
-        if (camiseta.preco > 100) {
-            System.out.println("Categoria: Camiseta premium");
-        } else {
-            System.out.println("Categoria: Camiseta padrão");
-        }
-
-        entrada.close();
-    }
-}
-            </code></pre>
-        </div>
-
         <div class="tip">
-            <strong>Dica:</strong> se estiver confortável, tente adaptar esses exercícios para usar mais de um objeto (por exemplo, dois cofrinhos, duas salas, etc.) antes de partirmos para arrays.
+            <strong>Extra:</strong> tente adaptar esses exercícios para usar mais de um objeto (por exemplo, dois cofrinhos, duas salas, etc.) antes de partirmos para arrays.
         </div>
     </section>
 
