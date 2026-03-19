@@ -10,11 +10,476 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <!-- CSS global reutilizado -->
-  <link rel="stylesheet" href="ihc-css2.css">
+  <style>
+    :root {
+      --bg-body: #050816;
+      --bg-surface: #0b1120;
+      --bg-surface-soft: #0f172a;
+      --accent: #38bdf8;
+      --accent-soft: #e0f2fe;
+      --accent-dark: #0ea5e9;
+      --text: #e5e7eb;
+      --text-soft: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.35);
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 999px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.7);
+      --shadow-card: 0 10px 30px rgba(15, 23, 42, 0.6);
+      --transition-fast: 180ms ease-out;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #020617 0, #020617 35%, #000 100%);
+      color: var(--text);
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 3rem;
+    }
+
+    .page-narrow {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    /* HEADER SUPERIOR */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to bottom, rgba(2, 6, 23, 0.9), rgba(2, 6, 23, 0.8));
+      border-bottom: 1px solid rgba(15, 23, 42, 0.9);
+    }
+
+    .site-header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 0 0, #38bdf8, #6366f1);
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.9);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .logo-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-soft);
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+      text-decoration: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      transition: color var(--transition-fast), background-color var(--transition-fast);
+    }
+
+    .nav-link:hover {
+      color: var(--text);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    /* HERO */
+    .hero {
+      padding-top: 1.5rem;
+      padding-bottom: 2.5rem;
+      background: radial-gradient(circle at top left, #0f172a 0, #020617 45%, #000 100%);
+      border-bottom: 1px solid rgba(15, 23, 42, 0.9);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.3fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .hero-content {
+      max-width: 640px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 3vw, 2.5rem);
+      letter-spacing: 0.02em;
+      line-height: 1.25;
+      margin: 0 0 0.75rem;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-text {
+      font-size: 0.96rem;
+      color: var(--text-soft);
+      line-height: 1.7;
+      margin: 0 0 1.2rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+    }
+
+    .hero-meta-item {
+      min-width: 160px;
+      padding: 0.6rem 0.8rem;
+      border-radius: 0.9rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .hero-meta-label {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--text-soft);
+      margin-bottom: 0.15rem;
+    }
+
+    .hero-meta-value {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .hero-side {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .info-card {
+      border-radius: var(--radius-lg);
+      background: var(--bg-surface-soft);
+      border: 1px solid var(--border-subtle);
+      padding: 1.1rem 1.2rem;
+      box-shadow: var(--shadow-card);
+    }
+
+    .info-card-title {
+      margin: 0 0 0.6rem;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .info-list {
+      padding-left: 1.1rem;
+      margin: 0;
+      font-size: 0.86rem;
+      color: var(--text-soft);
+    }
+
+    .info-list li + li {
+      margin-top: 0.25rem;
+    }
+
+    /* SEÇÕES DE CONTEÚDO */
+    .section {
+      background: #020617;
+    }
+
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-eyebrow {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent-soft);
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      margin: 0;
+      max-width: 720px;
+    }
+
+    .topic-article {
+      font-size: 0.94rem;
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+
+    .topic-article h3 {
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .topic-article p {
+      margin: 0 0 0.9rem;
+    }
+
+    .topic-article ol {
+      margin: 0.4rem 0 0.9rem 1.1rem;
+      padding-left: 0.5rem;
+    }
+
+    /* VÍDEO */
+    .page-video-wrapper {
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      padding: 0.75rem;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.15), transparent 55%),
+                  #020617;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.95);
+    }
+
+    .page-video-aspect {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #020617;
+    }
+
+    .page-video-aspect iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* TABELA */
+    .tools-table-wrapper {
+      overflow-x: auto;
+      margin-top: 1.5rem;
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.15), transparent 60%),
+                  #020617;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.95);
+    }
+
+    .tools-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 0.84rem;
+      color: var(--text-soft);
+      min-width: 760px;
+    }
+
+    .tools-table thead {
+      background: linear-gradient(90deg, #0f172a, #0b1120);
+    }
+
+    .tools-table th {
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: var(--text);
+      padding: 0.75rem 0.9rem;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.6);
+      border-right: 1px solid rgba(30, 41, 59, 0.9);
+      white-space: nowrap;
+    }
+
+    .tools-table th:first-child {
+      border-top-left-radius: 16px;
+    }
+
+    .tools-table th:last-child {
+      border-top-right-radius: 16px;
+      border-right: none;
+    }
+
+    .tools-table tbody tr {
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .tools-table tbody tr:nth-child(odd) {
+      background: rgba(15, 23, 42, 0.84);
+    }
+
+    .tools-table td {
+      padding: 0.6rem 0.9rem;
+      border-top: 1px solid rgba(15, 23, 42, 0.9);
+      border-bottom: 1px solid rgba(15, 23, 42, 0.9);
+      border-right: 1px solid rgba(30, 41, 59, 0.9);
+      vertical-align: top;
+    }
+
+    .tools-table td:last-child {
+      border-right: none;
+    }
+
+    .tools-table tbody tr:hover {
+      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.18), transparent 55%),
+                  rgba(15, 23, 42, 0.98);
+    }
+
+    .tools-table td:first-child {
+      font-weight: 600;
+      color: var(--text);
+      width: 18%;
+    }
+
+    .tools-table td:nth-child(2) {
+      width: 28%;
+    }
+
+    .tools-table td:nth-child(3),
+    .tools-table td:nth-child(4),
+    .tools-table td:nth-child(5) {
+      text-align: center;
+      width: 8%;
+      padding: 0.5rem 0.3rem;
+      position: relative;
+    }
+
+    .tools-table td:nth-child(3)::before,
+    .tools-table td:nth-child(4)::before,
+    .tools-table td:nth-child(5)::before {
+      content: "—";
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      color: rgba(148, 163, 184, 0.9);
+      font-size: 0.78rem;
+    }
+
+    .tools-table td:nth-child(6) {
+      width: 22%;
+    }
+
+    .tools-table tbody tr:last-child td:first-child {
+      border-bottom-left-radius: 16px;
+    }
+
+    .tools-table tbody tr:last-child td:last-child {
+      border-bottom-right-radius: 16px;
+    }
+
+    /* RODAPÉ */
+    .site-footer {
+      border-top: 1px solid rgba(15, 23, 42, 0.9);
+      background: #020617;
+    }
+
+    .site-footer p {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      margin: 0;
+      padding-top: 1.25rem;
+    }
+
+    /* Responsivo */
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .site-header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .main-nav {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding-inline: 1rem;
+      }
+
+      .hero {
+        padding-top: 1.25rem;
+        padding-bottom: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- HEADER GLOBAL -->
   <header class="site-header">
     <div class="site-header-inner">
       <div class="logo-area">
@@ -35,7 +500,7 @@
   </header>
 
   <main>
-    <!-- HERO DO TÓPICO -->
+    <!-- HERO -->
     <section class="hero">
       <div class="page hero-grid">
         <div class="hero-content">
@@ -79,17 +544,17 @@
       </div>
     </section>
 
-    <!-- CONTEÚDO PRINCIPAL + VÍDEO + ATIVIDADE + TABELA -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <section class="section">
       <div class="page">
         <div class="page-narrow">
-          <!-- 1. Introdução didática -->
-          <header class="section-header section-header-single">
+          <!-- Introdução -->
+          <header class="section-header">
             <div class="section-header-main">
               <div class="section-eyebrow">Conteúdo do tópico</div>
               <h2 class="section-title">Por que avaliar ferramentas em grupo?</h2>
             </div>
-            <p class="section-subtitle section-subtitle-full">
+            <p class="section-subtitle">
               Como temos apenas um grupo na turma, a escolha da ferramenta impacta o trabalho
               de todos. Por isso, é importante que a decisão seja argumentada e registrada,
               considerando o contexto do projeto real que iremos desenvolver para o campus.
@@ -112,14 +577,14 @@
             </p>
           </article>
 
-          <!-- 2. VÍDEO DIDÁTICO -->
+          <!-- VÍDEO -->
           <section aria-label="Vídeo sobre critérios de avaliação">
-            <header class="section-header section-header-single">
+            <header class="section-header" style="margin-top: 1.75rem;">
               <div class="section-header-main">
                 <div class="section-eyebrow">Recurso em vídeo</div>
                 <h2 class="section-title">Pensando em critérios de avaliação</h2>
               </div>
-              <p class="section-subtitle section-subtitle-full">
+              <p class="section-subtitle">
                 O vídeo abaixo discute critérios para avaliar softwares educacionais.
                 Assista ao trecho indicado e pense em como esses critérios podem ser
                 adaptados para comparar ferramentas de prototipagem.
@@ -149,14 +614,14 @@
             </article>
           </section>
 
-          <!-- 3. Atividade – um único grupo -->
+          <!-- ATIVIDADE -->
           <section aria-label="Atividade da turma">
-            <header class="section-header section-header-single" style="margin-top: 2rem;">
+            <header class="section-header" style="margin-top: 2rem;">
               <div class="section-header-main">
                 <div class="section-eyebrow">Atividade da turma</div>
                 <h2 class="section-title">Como vamos preencher a tabela</h2>
               </div>
-              <p class="section-subtitle section-subtitle-full">
+              <p class="section-subtitle">
                 Toda a turma trabalha como um único grupo. Juntos, vocês vão comparar
                 algumas ferramentas sugeridas pela professora e registrar a análise na
                 tabela abaixo.
@@ -179,14 +644,14 @@
             </article>
           </section>
 
-          <!-- 4. TABELA DE AVALIAÇÃO -->
+          <!-- TABELA -->
           <section aria-label="Tabela comparativa de ferramentas">
-            <header class="section-header section-header-single">
+            <header class="section-header" style="margin-top: 2rem;">
               <div class="section-header-main">
                 <div class="section-eyebrow">Instrumento de análise</div>
                 <h2 class="section-title">Tabela de avaliação de ferramentas de prototipagem</h2>
               </div>
-              <p class="section-subtitle section-subtitle-full">
+              <p class="section-subtitle">
                 Usem notas (1–5), símbolos (✓, ~, ✗) ou comentários curtos nas colunas das
                 ferramentas. A última coluna é para registrar a discussão da turma.
               </p>
@@ -277,7 +742,7 @@
                     <td></td><td></td><td></td><td></td>
                   </tr>
 
-                  <!-- Linha final: decisão -->
+                  <!-- Decisão -->
                   <tr>
                     <td><strong>Decisão da turma</strong></td>
                     <td>Ferramenta escolhida e principais motivos para a escolha.</td>
