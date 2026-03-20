@@ -246,11 +246,27 @@ botao.addEventListener("click", function () {
 
       <pre><code>let teclasDigitadas = 0;
 const saida = document.querySelector("#saida-teclas");
+const campoTeclas = document.querySelector("#campo-teclas");
 
-document.addEventListener("keyup", () =&gt; {
+// Aqui nós registramos um "ouvinte de eventos" no documento inteiro.
+// "keyup" é disparado sempre que uma tecla é SOLTA.
+// A função (evento) => { ... } será executada a cada vez que isso acontecer.
+//campoTeclas.addEventListener("keyup", (evento) => { conta apenas no campo
+        
+document.addEventListener("keyup", (evento) => {
   teclasDigitadas++;
   saida.textContent = "Teclas digitadas: " + teclasDigitadas;
 });</code></pre>
+
+      <div class="preview-frame">
+        <div class="preview-header">Preview – Contando teclas digitadas (keyup)</div>
+        <div class="dom-card">
+          <p>Digite qualquer coisa no campo abaixo e observe o contador:</p>
+          <input type="text" id="campo-teclas" placeholder="Comece a digitar aqui...">
+          <p id="saida-teclas">Teclas digitadas: 0</p>
+        </div>
+      </div>
+      
     </article>
 
     <article class="card" id="innerhtml">
