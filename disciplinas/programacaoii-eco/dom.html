@@ -33,6 +33,53 @@
       <p>Quando escrevemos JavaScript para o navegador, nosso “campo de trabalho” é o DOM (Document Object Model): uma representação em árvore do HTML da página.</p>
       <p>Manipular o DOM significa selecionar elementos, ler e alterar conteúdo, estilos e atributos, além de reagir a interações do usuário (cliques, teclas, envio de formulário, etc.).</p>
 
+      <section id="ilustracao-dom" class="card">
+          <h2>Ilustração da árvore DOM</h2>
+        
+          <p>
+            O DOM (Document Object Model) representa a página HTML como uma <strong>árvore</strong> de nós, 
+            em que cada elemento e cada texto viram objetos conectados hierarquicamente.
+          </p>
+        
+          <h3>Exemplo de código HTML</h3>
+        
+          <pre><code>&lt;!DOCTYPE html&gt;
+        &lt;html&gt;
+          &lt;head&gt;
+            &lt;title&gt;Página exemplo&lt;/title&gt;
+          &lt;/head&gt;
+          &lt;body&gt;
+            &lt;h1&gt;Olá, DOM!&lt;/h1&gt;
+            &lt;p&gt;Um parágrafo de teste.&lt;/p&gt;
+          &lt;/body&gt;
+        &lt;/html&gt;
+        </code></pre>
+        
+          <h3>Representação da árvore DOM</h3>
+        
+          <p class="dom-arvore-texto">
+            A estrutura acima é convertida pelo navegador em uma árvore de nós, começando em 
+            <code>Document</code>, com o elemento <code>html</code> como raiz do documento.
+          </p>
+        
+          <pre class="dom-arvore"><code>Document
+        └── html
+            ├── head
+            │   └── title
+            │       └── "Página exemplo"
+            └── body
+                ├── h1
+                │   └── "Olá, DOM!"
+                └── p
+                    └── "Um parágrafo de teste."
+        </code></pre>
+        
+          <p class="note">
+            Cada elemento da marcação (html, head, body, h1, p, title) é um nó do tipo <code>Element</code>, 
+            e os textos entre as tags são nós do tipo <code>Text</code> na árvore DOM.
+          </p>
+        </section>
+      
       <div class="note">
         Vamos focar em três ideias fundamentais: <code>querySelector</code> para selecionar, eventos para reagir e <code>innerHTML</code> para atualizar o conteúdo.
       </div>
