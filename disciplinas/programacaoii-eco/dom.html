@@ -88,11 +88,9 @@
     <article class="card" id="dom-queryselector">
       <h2>1. DOM e querySelector</h2>
 
-      <h3>1.1 O que é o DOM?</h3>
-      <p>O DOM é uma estrutura em árvore que representa cada tag HTML como um objeto JavaScript (nós e elementos).</p>
       <p>Com JavaScript, podemos acessar esses objetos pelo objeto global <code>document</code> e alterar a página sem recarregar.</p>
 
-      <h3>1.2 Selecionando elementos com querySelector</h3>
+      <h3>1.1 Selecionando elementos com querySelector</h3>
       <p><code>document.querySelector(seletor)</code> retorna o primeiro elemento que combina com o seletor CSS informado.</p>
       <p>O seletor é exatamente o mesmo que você usaria no CSS: <code>#id</code>, <code>.classe</code>, <code>tag</code>, combinações, etc.</p>
 
@@ -109,7 +107,7 @@ const destaque = document.querySelector(".destaque");</code></pre>
         <strong>Resumo:</strong> use <code>#</code> para id, <code>.</code> para classe e o nome da tag para elementos simples.
       </div>
 
-      <h3>1.3 querySelector dentro de outro elemento</h3>
+      <h3>1.2 querySelector dentro de outro elemento</h3>
       <p>Também podemos chamar <code>querySelector</code> em um elemento, não só em <code>document</code>, para procurar dentro dele.</p>
 
       <pre><code>// Seleciona a seção principal
