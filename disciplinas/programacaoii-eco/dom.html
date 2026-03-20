@@ -537,6 +537,19 @@ inputTarefa.addEventListener("keyup", (evento) =&gt; {
     });
   }
 
+  // Exemplo 4: contando teclas digitadas (keyup)
+  let teclasDigitadas = 0;
+  const saida = document.querySelector("#saida-teclas");
+  const campoTeclas = document.querySelector("#campo-teclas");
+
+  if (saida && campoTeclas) {
+    // Conta apenas quando a tecla é solta dentro do campo
+    campoTeclas.addEventListener("keyup", (evento) => {
+      teclasDigitadas++;
+      saida.textContent = "Teclas digitadas: " + teclasDigitadas;
+    });
+  }
+
   // Mini-projeto da própria página
   const inputTarefa = document.querySelector("#tarefa-input");
   const btnAdicionar = document.querySelector("#btn-adicionar-tarefa");
