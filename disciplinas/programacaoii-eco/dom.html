@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Programação II – DOM: querySelector, eventos e innerHTML</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="container">
+    <div>
+      <span class="tag">Programação II – ECO</span>
+      <span class="tag tag--aulas">Aulas</span>
+      <span class="tag tag--nivel">DOM & Eventos</span>
+    </div>
+    <h1>Manipulação do DOM: querySelector, eventos e innerHTML</h1>
+    <p>Vamos aprender a selecionar elementos na página, reagir a eventos do usuário e atualizar o conteúdo HTML dinamicamente com JavaScript.</p>
+    <nav>
+      <a href="#introducao">Introdução</a>
+      <a href="#dom-queryselector">DOM e querySelector</a>
+      <a href="#eventos">Eventos</a>
+      <a href="#innerhtml">innerHTML na prática</a>
+      <a href="#mini-projeto">Mini-projeto DOM</a>
+      <a href="#atividades">Atividades para praticar</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section>
+    <article class="card" id="introducao">
+      <h2>Introdução</h2>
+      <p>Quando escrevemos JavaScript para o navegador, nosso “campo de trabalho” é o DOM (Document Object Model): uma representação em árvore do HTML da página.</p>
+      <p>Manipular o DOM significa selecionar elementos, ler e alterar conteúdo, estilos e atributos, além de reagir a interações do usuário (cliques, teclas, envio de formulário, etc.).</p>
+
+      <div class="note">
+        Vamos focar em três ideias fundamentais: <code>querySelector</code> para selecionar, eventos para reagir e <code>innerHTML</code> para atualizar o conteúdo.
+      </div>
+    </article>
+
+    <article class="card" id="dom-queryselector">
+      <h2>1. DOM e querySelector</h2>
+
+      <h3>1.1 O que é o DOM?</h3>
+      <p>O DOM é uma estrutura em árvore que representa cada tag HTML como um objeto JavaScript (nós e elementos).</p>
+      <p>Com JavaScript, podemos acessar esses objetos pelo objeto global <code>document</code> e alterar a página sem recarregar.</p>
+
+      <h3>1.2 Selecionando elementos com querySelector</h3>
+      <p><code>document.querySelector(seletor)</code> retorna o primeiro elemento que combina com o seletor CSS informado.</p>
+      <p>O seletor é exatamente o mesmo que você usaria no CSS: <code>#id</code>, <code>.classe</code>, <code>tag</code>, combinações, etc.</p>
+
+      <pre><code>// Seleciona o primeiro parágrafo da página
+const primeiroParagrafo = document.querySelector("p");
+
+// Seleciona o elemento com id "titulo"
+const titulo = document.querySelector("#titulo");
+
+// Seleciona o primeiro elemento com a classe "destaque"
+const destaque = document.querySelector(".destaque");</code></pre>
+
+      <div class="callout">
+        <strong>Resumo:</strong> use <code>#</code> para id, <code>.</code> para classe e o nome da tag para elementos simples.
+      </div>
+
+      <h3>1.3 querySelector dentro de outro elemento</h3>
+      <p>Também podemos chamar <code>querySelector</code> em um elemento, não só em <code>document</code>, para procurar dentro dele.</p>
+
+      <pre><code>// Seleciona a seção principal
+const secao = document.querySelector("section");
+
+// Dentro da seção, seleciona o primeiro &lt;h2&gt;
+const subtitulo = secao.querySelector("h2");</code></pre>
+
+      <h3>1.4 Preview rápido: selecionando e destacando um elemento</h3>
+      <p>Veja o exemplo abaixo: vamos buscar um parágrafo pelo id e mudar o estilo dele via JavaScript.</p>
+
+      <div class="preview-frame" id="preview-destaque">
+        <div class="preview-header">Preview – Seleção com querySelector</div>
+        <div class="dom-card">
+          <p id="paragrafo-destaque">Este parágrafo será destacado ao clicar no botão.</p>
+          <button class="btn" id="btn-destacar">Destacar parágrafo</button>
+        </div>
+      </div>
+
+      <pre><code>&lt;p id="paragrafo-destaque"&gt;Este parágrafo será destacado...&lt;/p&gt;
+&lt;button id="btn-destacar"&gt;Destacar parágrafo&lt;/button&gt;
+
+&lt;script&gt;
+  const paragrafo = document.querySelector("#paragrafo-destaque");
+  const botao = document.querySelector("#btn-destacar");
+
+  botao.addEventListener("click", () =&gt; {
+    paragrafo.style.backgroundColor = "#fff3e0";
+    paragrafo.style.borderLeft = "4px solid #ff9800";
+  });
+&lt;/script&gt;</code></pre>
+    </article>
+
+    <article class="card" id="eventos">
+      <h2>2. Eventos: reagindo a cliques e teclas</h2>
+
+      <h3>2.1 O que é um evento?</h3>
+      <p>Um evento é qualquer coisa que acontece na página: clique, movimento do mouse, tecla pressionada, envio de formulário, carregamento da página, etc.</p>
+      <p>Podemos “escutar” esses eventos e executar uma função quando eles acontecem, deixando a página interativa.</p>
+
+      <h3>2.2 addEventListener</h3>
+      <p>A forma mais usada é <code>elemento.addEventListener(tipo, funcao)</code>, onde <code>tipo</code> pode ser <code>"click"</code>, <code>"keyup"</code>, <code>"submit"</code> e muitos outros.</p>
+
+      <pre><code>const botao = document.querySelector("#meu-botao");
+
+botao.addEventListener("click", function () {
+  console.log("Botão foi clicado!");
+});</code></pre>
+
+      <h3>2.3 Exemplo: contador com clique</h3>
+      <p>No exemplo abaixo, cada clique no botão incrementa um número exibido na tela.</p>
+
+      <div class="preview-frame">
+        <div class="preview-header">Preview – Contador com evento de clique</div>
+        <div class="dom-card">
+          <p>Cliques: <span id="contador-cliques" class="contador">0</span></p>
+          <button class="btn" id="btn-contar">Clique aqui</button>
+        </div>
+      </div>
+
+      <pre><code>&lt;p&gt;Cliques: &lt;span id="contador-cliques"&gt;0&lt;/span&gt;&lt;/p&gt;
+&lt;button id="btn-contar"&gt;Clique aqui&lt;/button&gt;
+
+&lt;script&gt;
+  const spanContador = document.querySelector("#contador-cliques");
+  const btnContar = document.querySelector("#btn-contar");
+  let totalCliques = 0;
+
+  btnContar.addEventListener("click", () =&gt; {
+    totalCliques++;
+    spanContador.textContent = totalCliques;
+  });
+&lt;/script&gt;</code></pre>
+
+      <h3>2.4 Evento de teclado (keyup)</h3>
+      <p>Podemos ouvir eventos no <code>document</code> inteiro, por exemplo para contar quantas teclas o usuário digitou.</p>
+
+      <pre><code>let teclasDigitadas = 0;
+const saida = document.querySelector("#saida-teclas");
+
+document.addEventListener("keyup", () =&gt; {
+  teclasDigitadas++;
+  saida.textContent = "Teclas digitadas: " + teclasDigitadas;
+});</code></pre>
+    </article>
+
+    <article class="card" id="innerhtml">
+      <h2>3. innerHTML na prática</h2>
+
+      <h3>3.1 O que é innerHTML?</h3>
+      <p><code>innerHTML</code> é uma propriedade que representa o conteúdo HTML interno de um elemento.</p>
+      <p>Podemos ler esse conteúdo ou sobrescrevê-lo com uma nova string contendo HTML.</p>
+
+      <pre><code>const caixa = document.querySelector("#caixa");
+
+// Lendo o HTML interno
+console.log(caixa.innerHTML);
+
+// Substituindo o conteúdo
+caixa.innerHTML = "&lt;strong&gt;Novo conteúdo&lt;/strong&gt; gerado via JS!";</code></pre>
+
+      <div class="note">
+        Se você só precisa trocar texto simples, prefira <code>textContent</code>. Use <code>innerHTML</code> quando realmente quiser inserir tags HTML (por exemplo, &lt;strong&gt;, &lt;li&gt;, &lt;em&gt;, etc.).
+      </div>
+
+      <h3>3.2 Exemplo: mensagem dinâmica</h3>
+      <p>No exemplo abaixo, ao clicar no botão trocamos o conteúdo de uma <code>&lt;div&gt;</code> usando <code>innerHTML</code>.</p>
+
+      <div class="preview-frame">
+        <div class="preview-header">Preview – innerHTML para atualizar mensagem</div>
+        <div class="dom-card">
+          <div id="mensagem-dom" class="dom-destaque">
+            Clique no botão para alterar esta mensagem.
+          </div>
+          <button class="btn-secundario btn" id="btn-mudar-mensagem">
+            Mudar mensagem
+          </button>
+        </div>
+      </div>
+
+      <pre><code>&lt;div id="mensagem-dom"&gt;
+  Clique no botão para alterar esta mensagem.
+&lt;/div&gt;
+&lt;button id="btn-mudar-mensagem"&gt;Mudar mensagem&lt;/button&gt;
+
+&lt;script&gt;
+  const mensagem = document.querySelector("#mensagem-dom");
+  const btnMensagem = document.querySelector("#btn-mudar-mensagem");
+
+  btnMensagem.addEventListener("click", () =&gt; {
+    mensagem.innerHTML = "Mensagem &lt;strong&gt;atualizada&lt;/strong&gt; com innerHTML!";
+  });
+&lt;/script&gt;</code></pre>
+
+      <h3>3.3 Montando uma lista com innerHTML</h3>
+      <p>Também podemos construir um HTML inteiro em uma string e atribuir de uma vez para montar uma lista dinamicamente.</p>
+
+      <pre><code>const frutas = ["Maçã", "Banana", "Laranja"];
+const lista = document.querySelector("#lista-frutas");
+
+let html = "";
+for (const fruta of frutas) {
+  html += "&lt;li&gt;" + fruta + "&lt;/li&gt;";
+}
+
+lista.innerHTML = html;</code></pre>
+
+      <div class="note">
+        Em aplicações maiores, é comum preferir <code>document.createElement</code> e <code>appendChild</code> para manipular nós de forma mais controlada, mas <code>innerHTML</code> é ótimo para exemplos simples e protótipos.
+      </div>
+    </article>
+
+    <article class="card" id="mini-projeto">
+      <h2>4. Mini-projeto: lista de tarefas com DOM</h2>
+      <p>Agora vamos juntar <code>querySelector</code>, eventos e <code>innerHTML</code> em um mini “gerenciador” de tarefas simples.</p>
+
+      <h3>4.1 Comportamento desejado</h3>
+      <ul class="mini-list">
+        <li>O usuário digita uma tarefa em um input.</li>
+        <li>Clica em “Adicionar” ou aperta Enter.</li>
+        <li>A tarefa aparece em uma lista abaixo.</li>
+        <li>Se o campo estiver vazio, exibimos uma mensagem de erro.</li>
+      </ul>
+
+      <div class="preview-frame">
+        <div class="preview-header">Preview – Lista de tarefas com DOM</div>
+        <div class="dom-card">
+          <label for="tarefa-input"><strong>Nova tarefa</strong></label>
+          <input type="text" id="tarefa-input" placeholder="Ex: Estudar DOM e eventos">
+          <button class="btn" id="btn-adicionar-tarefa">Adicionar tarefa</button>
+          <p id="erro-tarefa" class="erro"></p>
+          <ul id="lista-tarefas" class="lista-dinamica"></ul>
+        </div>
+      </div>
+
+      <h3>4.2 Código HTML + JavaScript completo</h3>
+      <details>
+        <summary>Ver HTML básico da página</summary>
+        <div>
+<pre><code>&lt;body&gt;
+  &lt;h1&gt;Lista de tarefas&lt;/h1&gt;
+
+  &lt;label for="tarefa-input"&gt;Nova tarefa&lt;/label&gt;
+  &lt;input type="text" id="tarefa-input" placeholder="Ex: Estudar DOM"&gt;
+  &lt;button id="btn-adicionar-tarefa"&gt;Adicionar tarefa&lt;/button&gt;
+
+  &lt;p id="erro-tarefa"&gt;&lt;/p&gt;
+  &lt;ul id="lista-tarefas"&gt;&lt;/ul&gt;
+
+  &lt;script src="tarefas.js"&gt;&lt;/script&gt;
+&lt;/body&gt;</code></pre>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Ver JavaScript comentado (tarefas.js)</summary>
+        <div>
+<pre><code>// 1. Selecionar elementos da página
+const inputTarefa = document.querySelector("#tarefa-input");
+const btnAdicionar = document.querySelector("#btn-adicionar-tarefa");
+const listaTarefas = document.querySelector("#lista-tarefas");
+const pErro = document.querySelector("#erro-tarefa");
+
+// 2. Array para guardar as tarefas (estado da aplicação)
+const tarefas = [];
+
+// 3. Função para redesenhar a lista usando innerHTML
+function atualizarLista() {
+  let html = "";
+
+  for (const tarefa of tarefas) {
+    html += "&lt;li&gt;" + tarefa + "&lt;/li&gt;";
+  }
+
+  listaTarefas.innerHTML = html;
+}
+
+// 4. Função para adicionar uma nova tarefa
+function adicionarTarefa() {
+  const texto = inputTarefa.value.trim();
+
+  if (texto === "") {
+    pErro.textContent = "Digite uma tarefa antes de adicionar.";
+    return;
+  }
+
+  pErro.textContent = ""; // limpa mensagem de erro
+  tarefas.push(texto);
+  inputTarefa.value = "";
+  atualizarLista();
+}
+
+// 5. Conectar eventos
+btnAdicionar.addEventListener("click", adicionarTarefa);
+
+// Permite adicionar com Enter
+inputTarefa.addEventListener("keyup", (evento) =&gt; {
+  if (evento.key === "Enter") {
+    adicionarTarefa();
+  }
+});</code></pre>
+        </div>
+      </details>
+
+      <div class="note">
+        Para testar em um arquivo separado, crie um <code>index.html</code> simples e um <code>tarefas.js</code> com o código acima, da mesma forma que você já fez nas aulas anteriores.
+      </div>
+    </article>
+
+    <article class="card" id="atividades">
+      <h2>5. Atividades para praticar</h2>
+
+      <h3>Atividade 1 – Alterando o tema da página</h3>
+      <p>Crie dois botões: “Tema claro” e “Tema escuro”. Ao clicar em cada um, altere o <code>backgroundColor</code> do <code>body</code> e a cor do texto usando <code>querySelector</code> e eventos.</p>
+      <ul class="mini-list">
+        <li>Use <code>document.querySelector("body")</code> para pegar o body.</li>
+        <li>No evento de clique dos botões, altere <code>style.backgroundColor</code> e <code>style.color</code>.</li>
+      </ul>
+
+      <h3>Atividade 2 – Lista de compras</h3>
+      <p>Baseando-se na lista de tarefas, crie uma lista de compras que mostre a quantidade de itens abaixo da lista.</p>
+      <ul class="mini-list">
+        <li>Use um <code>&lt;span&gt;</code> para exibir o total de itens.</li>
+        <li>Atualize o texto do <code>span</code> sempre que adicionar um item, com <code>textContent</code>.</li>
+      </ul>
+
+      <h3>Atividade 3 – Perguntas e respostas</h3>
+      <p>Monte uma página com três perguntas de revisão. Ao clicar em um botão “Mostrar resposta”, mostre a resposta usando <code>innerHTML</code> em uma <code>&lt;div&gt;</code> escondida.</p>
+      <ul class="mini-list">
+        <li>Comece com a <code>&lt;div&gt;</code> vazia.</li>
+        <li>No clique, use <code>div.innerHTML = "Resposta: ..."</code>.</li>
+      </ul>
+
+      <h3>Roteiro de estudo para quem faltou</h3>
+      <ul>
+        <li>Revise a ideia de DOM e como o navegador transforma HTML em uma árvore de elementos.</li>
+        <li>Pratique <code>querySelector</code> e <code>addEventListener</code> com pequenos exemplos (botões, parágrafos, inputs).</li>
+        <li>Experimente trocar <code>innerHTML</code> e <code>textContent</code> e observe a diferença.</li>
+        <li>Implemente o mini-projeto da lista de tarefas e uma das atividades propostas.</li>
+      </ul>
+    </article>
+  </section>
+
+  <aside>
+    <div class="card">
+      <h3>Aulas – Checklist</h3>
+      <ul>
+        <li>☑ Entender o que é o DOM</li>
+        <li>☑ Selecionar elementos com <code>querySelector</code></li>
+        <li>☑ Usar <code>addEventListener</code> para eventos</li>
+        <li>☑ Atualizar conteúdo com <code>innerHTML</code> e <code>textContent</code></li>
+        <li>☑ Montar uma pequena interface interativa</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Boa prática</h3>
+      <ul>
+        <li>Separar HTML, CSS e JS em arquivos diferentes.</li>
+        <li>Dar nomes claros para ids e classes.</li>
+        <li>Evitar repetir muito código: crie funções reutilizáveis.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Material complementar</h3>
+      <ul>
+        <li>MDN – <code>document.querySelector</code> e <code>querySelectorAll</code>.</li>
+        <li>MDN – Introdução a eventos em JavaScript.</li>
+        <li>MDN – Propriedade <code>innerHTML</code> do elemento.</li>
+      </ul>
+    </div>
+  </aside>
+</main>
+
+<footer>
+  <p><strong>Estude!</strong> Pratique os exemplos no seu próprio arquivo e traga dúvidas para a próxima aula.</p>
+</footer>
+
+<script>
+  // Exemplo 1: destacar parágrafo
+  const paragrafoDestaque = document.querySelector("#paragrafo-destaque");
+  const btnDestacar = document.querySelector("#btn-destacar");
+
+  if (paragrafoDestaque && btnDestacar) {
+    btnDestacar.addEventListener("click", () => {
+      paragrafoDestaque.style.backgroundColor = "#fff3e0";
+      paragrafoDestaque.style.borderLeft = "4px solid #ff9800";
+      paragrafoDestaque.style.paddingLeft = "0.5rem";
+    });
+  }
+
+  // Exemplo 2: contador de cliques
+  const spanContador = document.querySelector("#contador-cliques");
+  const btnContar = document.querySelector("#btn-contar");
+  let totalCliques = 0;
+
+  if (spanContador && btnContar) {
+    btnContar.addEventListener("click", () => {
+      totalCliques++;
+      spanContador.textContent = totalCliques;
+    });
+  }
+
+  // Exemplo 3: innerHTML mensagem
+  const mensagem = document.querySelector("#mensagem-dom");
+  const btnMensagem = document.querySelector("#btn-mudar-mensagem");
+
+  if (mensagem && btnMensagem) {
+    btnMensagem.addEventListener("click", () => {
+      mensagem.innerHTML = 'Mensagem <strong>atualizada</strong> com innerHTML!';
+    });
+  }
+
+  // Mini-projeto da própria página
+  const inputTarefa = document.querySelector("#tarefa-input");
+  const btnAdicionar = document.querySelector("#btn-adicionar-tarefa");
+  const listaTarefas = document.querySelector("#lista-tarefas");
+  const pErro = document.querySelector("#erro-tarefa");
+  const tarefas = [];
+
+  function atualizarLista() {
+    let html = "";
+    for (const tarefa of tarefas) {
+      html += "<li>" + tarefa + "</li>";
+    }
+    listaTarefas.innerHTML = html;
+  }
+
+  function adicionarTarefa() {
+    const texto = inputTarefa.value.trim();
+
+    if (texto === "") {
+      pErro.textContent = "Digite uma tarefa antes de adicionar.";
+      return;
+    }
+
+    pErro.textContent = "";
+    tarefas.push(texto);
+    inputTarefa.value = "";
+    atualizarLista();
+  }
+
+  if (btnAdicionar && inputTarefa) {
+    btnAdicionar.addEventListener("click", adicionarTarefa);
+
+    inputTarefa.addEventListener("keyup", (evento) => {
+      if (evento.key === "Enter") {
+        adicionarTarefa();
+      }
+    });
+  }
+</script>
+</body>
+</html>
