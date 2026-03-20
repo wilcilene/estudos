@@ -344,3 +344,27 @@ details > div {
   color: #c62828;
   font-weight: bold;
 }
+
+/* Bloco de ilustração da árvore DOM */
+#ilustracao-dom p {
+  margin-top: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+
+#ilustracao-dom h3 {
+  margin-top: 1.2rem;
+}
+
+/* Texto explicativo imediatamente antes da árvore */
+.dom-arvore-texto {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Caixa da árvore DOM (usa tema de código, mas com contraste levemente ajustado) */
+.dom-arvore {
+  background-color: #111827;
+  color: #e5e7eb;
+  border-color: #333;
+  font-size: 0.9rem;
+}
