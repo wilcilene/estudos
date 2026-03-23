@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Exercícios Integrados – Prog II ECO 2026</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #2563eb; --primary-dk: #1d4ed8;
+      --accent: #7c3aed; --success: #16a34a;
+      --warn: #d97706; --danger: #dc2626;
+      --bg: #f8fafc; --surface: #ffffff;
+      --border: #e2e8f0; --text: #1e293b;
+      --muted: #64748b; --code-bg: #0f172a;
+      --radius: 12px;
+    }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+
+    header { background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 100%); color: #fff; padding: 2.5rem 2rem 2rem; }
+    .header-inner { max-width: 980px; margin: 0 auto; }
+    .breadcrumb { font-size: .85rem; opacity: .75; margin-bottom: .5rem; }
+    .breadcrumb a { color: #fff; text-decoration: none; }
+    header h1 { font-size: 2rem; font-weight: 800; display: flex; align-items: center; gap: .6rem; }
+    header .subtitle { margin-top: .5rem; opacity: .9; font-size: 1rem; max-width: 700px; }
+    .badges { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: .5rem; }
+    .badge { background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3); border-radius: 20px; padding: .25rem .85rem; font-size: .8rem; font-weight: 600; }
+
+    .instrucao-box { background: #fffbeb; border-left: 4px solid #d97706; border-radius: 0 var(--radius) var(--radius) 0; padding: 1rem 1.4rem; margin: 1.8rem 0 1.2rem; font-size: .95rem; }
+    .instrucao-box strong { display: block; color: #92400e; margin-bottom: .3rem; font-size: 1rem; }
+
+    .cobertura { display: flex; flex-wrap: wrap; gap: .4rem; margin: 1rem 0 1.8rem; }
+    .topico-pill { font-size: .78rem; font-weight: 700; padding: .3rem .85rem; border-radius: 20px; }
+    .t1 { background: #dbeafe; color: #1e40af; }
+    .t2 { background: #ede9fe; color: #5b21b6; }
+    .t3 { background: #dcfce7; color: #166534; }
+    .t4 { background: #fce7f3; color: #9d174d; }
+    .t5 { background: #ffedd5; color: #9a3412; }
+
+    .progress-wrap { background: var(--surface); border-bottom: 1px solid var(--border); padding: .75rem 2rem; }
+    .progress-inner { max-width: 980px; margin: 0 auto; display: flex; align-items: center; gap: 1rem; }
+    .progress-inner > span { font-size: .85rem; color: var(--muted); white-space: nowrap; }
+    .bar-bg { flex: 1; background: var(--border); border-radius: 10px; height: 9px; overflow: hidden; }
+    .bar-fill { height: 100%; background: linear-gradient(90deg, #2563eb, #7c3aed); border-radius: 10px; width: 0%; transition: width .5s; }
+    #prog-txt { font-weight: 700; color: var(--primary); white-space: nowrap; }
+
+    main { max-width: 980px; margin: 2rem auto; padding: 0 1rem 4rem; }
+    .ex-grid { display: grid; gap: 1.4rem; }
+
+    .ex-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.04); transition: box-shadow .2s, border-color .2s; }
+    .ex-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,.09); }
+    .ex-card.escolhido { border-color: #86efac; }
+    .ex-card.escolhido .ex-card-header { background: linear-gradient(135deg, #f0fdf4, #dcfce7); }
+
+    .ex-card-header { padding: 1.3rem 1.5rem; cursor: pointer; user-select: none; transition: background .2s; }
+    .ex-card-header:hover { background: #f8fafc; }
+    .ex-card.escolhido .ex-card-header:hover { background: #dcfce7; }
+
+    .ex-top-row { display: flex; align-items: center; gap: .75rem; margin-bottom: .7rem; }
+    .ex-num-badge { width: 2.4rem; height: 2.4rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .9rem; flex-shrink: 0; background: linear-gradient(135deg, var(--primary), var(--accent)); color: #fff; box-shadow: 0 2px 8px rgba(37,99,235,.3); transition: all .2s; }
+    .ex-card.escolhido .ex-num-badge { background: linear-gradient(135deg, #16a34a, #15803d); box-shadow: 0 2px 8px rgba(22,163,74,.3); }
+    .ex-emoji { font-size: 1.6rem; flex-shrink: 0; }
+    .ex-titulo-wrap { flex: 1; }
+    .ex-titulo { font-size: 1.05rem; font-weight: 700; line-height: 1.3; }
+    .ex-subtitulo { font-size: .82rem; color: var(--muted); margin-top: .15rem; font-style: italic; }
+    .ex-card.escolhido .ex-titulo { color: #15803d; }
+
+    .ex-check-btn { width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 2px solid var(--border); background: var(--surface); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: .85rem; transition: all .2s; flex-shrink: 0; }
+    .ex-check-btn:hover { border-color: var(--success); color: var(--success); }
+    .ex-card.escolhido .ex-check-btn { background: var(--success); border-color: var(--success); color: #fff; }
+
+    .ex-arrow { font-size: .8rem; color: var(--muted); transition: transform .3s; flex-shrink: 0; }
+    .ex-arrow.open { transform: rotate(180deg); }
+
+    .ex-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .ex-dif { font-size: .73rem; font-weight: 700; padding: .22rem .7rem; border-radius: 20px; }
+    .d-medio   { background: #fef9c3; color: #a16207; }
+    .d-dificil { background: #fee2e2; color: #dc2626; }
+    .ex-tag-pill { font-size: .72rem; font-weight: 600; padding: .22rem .65rem; border-radius: 20px; }
+
+    .ex-body { display: none; border-top: 1px solid var(--border); }
+    .ex-body.open { display: block; }
+    .ex-body-inner { padding: 1.4rem 1.6rem; }
+    .ex-body-inner p { margin-bottom: .7rem; font-size: .95rem; }
+    .ex-body-inner ol { padding-left: 1.5rem; margin-bottom: .9rem; }
+    .ex-body-inner li { margin-bottom: .5rem; font-size: .95rem; }
+    .ex-body-inner strong { color: #1e40af; }
+
+    .contexto { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border-radius: 10px; padding: 1rem 1.3rem; margin-bottom: 1.1rem; border-left: 4px solid #0ea5e9; font-size: .95rem; font-style: italic; }
+    .contexto strong { font-style: normal; color: #0c4a6e; display: block; margin-bottom: .3rem; }
+
+    .req-title { font-weight: 700; color: var(--text); margin: 1rem 0 .4rem; font-size: .95rem; display: flex; align-items: center; gap: .4rem; }
+
+    .callout { border-radius: 8px; padding: .85rem 1.1rem; margin: .9rem 0; border-left: 4px solid; font-size: .9rem; }
+    .callout.dica { background: #f0fdf4; border-color: #16a34a; }
+    .callout.warn { background: #fffbeb; border-color: #d97706; }
+    .callout.info { background: #eff6ff; border-color: #2563eb; }
+    .callout strong { display: block; margin-bottom: .25rem; }
+
+    .entrega { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: .9rem 1.1rem; margin-top: 1rem; font-size: .88rem; }
+    .entrega strong { color: var(--accent); display: block; margin-bottom: .35rem; }
+
+    pre { background: var(--code-bg); color: #e2e8f0; border-radius: 8px; padding: 1.1rem 1.3rem; overflow-x: auto; font-size: .85rem; line-height: 1.7; margin: .8rem 0; position: relative; font-family: 'Cascadia Code','Fira Code','Courier New',monospace; }
+    .copy-btn { position: absolute; top: .5rem; right: .7rem; background: #1e293b; border: 1px solid #334155; color: #94a3b8; padding: .25rem .65rem; border-radius: 6px; font-size: .73rem; cursor: pointer; transition: all .2s; }
+    .copy-btn:hover { background: var(--primary); color: #fff; }
+    code { background: #e2e8f0; color: #7c3aed; padding: .1rem .35rem; border-radius: 4px; font-size: .87em; font-family: 'Cascadia Code','Fira Code',monospace; }
+    pre code { background: transparent; color: inherit; padding: 0; }
+    .ck { color: #93c5fd; } .cs { color: #86efac; } .cf { color: #fde68a; }
+    .cc { color: #94a3b8; font-style: italic; } .cn { color: #f9a8d4; }
+    .ct { color: #f97316; }
+
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 1.5rem 2rem; text-align: center; color: var(--muted); font-size: .85rem; margin-top: 2rem; }
+    footer strong { color: var(--primary); }
+
+    @media (max-width: 640px) {
+      header h1 { font-size: 1.4rem; }
+      .ex-subtitulo { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="breadcrumb"><a href="#">Prog II – ECO 2026/1</a> › Exercícios Integrados</div>
+    <h1>🧩 Exercícios Integrados</h1>
+    <p class="subtitle">8 problemas criativos em JavaScript + HTML que cobrem todos os tópicos da disciplina. Cada grupo escolhe 4.</p>
+    <div class="badges">
+      <span class="badge">👥 Atividade em grupo</span>
+      <span class="badge">🎯 Escolha 4 dos 8</span>
+      <span class="badge">⏱ 3 aulas de 45 min</span>
+      <span class="badge">🟡 JavaScript + 🌐 HTML5</span>
+    </div>
+  </div>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-inner">
+    <span>Exercícios escolhidos:</span>
+    <div class="bar-bg"><div class="bar-fill" id="barFill"></div></div>
+    <span id="prog-txt">0 / 4</span>
+  </div>
+</div>
+
+<main>
+
+  <div class="instrucao-box">
+    <strong>📌 Como funciona</strong>
+    Cada exercício integra <em>todos</em> os tópicos estudados: classes JavaScript (herança com de>extends</code>), simulação de interfaces, tratamento de erros com de>try/catch</code>, persistência com de>localStorage</code>, HTML5 semântico, manipulação do DOM, de>querySelector</code>, de>innerHTML</code> e eventos. Clique no card para ver o enunciado. Marque com ✓ os 4 que seu grupo escolheu.
+  </div>
+
+  <div class="cobertura">
+    <span class="topico-pill t1">🏗️ Classes e Herança JS</span>
+    <span class="topico-pill t2">🔌 Simulação de Interfaces</span>
+    <span class="topico-pill t3">⚠️ try/catch e Erros</span>
+    <span class="topico-pill t4">💾 localStorage</span>
+    <span class="topico-pill t5">🌐 DOM, eventos e innerHTML</span>
+  </div>
+
+  <div class="ex-grid">
+
+    <!-- ======================== EX 1 ======================== -->
+    <div class="ex-card" id="ex1">
+      <div class="ex-card-header" onclick="toggleEx('ex1')">
+        <div class="ex-top-row">
+          <div class="ex-num-badge">1</div>
+          <span class="ex-emoji">🧙</span>
+          <div class="ex-titulo-wrap">
+            <div class="ex-titulo">O Grimório dos Heróis</div>
+            <div class="ex-subtitulo">Sistema de personagens para um RPG de texto em JS</div>
+          </div>
+          <div class="ex-check-btn" onclick="marcar(event,'ex1')" title="Marcar como escolhido">✓</div>
+          <span class="ex-arrow" id="arrow-ex1">▼</span>
+        </div>
+        <div class="ex-tags">
+          <span class="ex-dif d-dificil">Difícil</span>
+          <span class="ex-tag-pill t1">Herança</span>
+          <span class="ex-tag-pill t2">Interfaces</span>
+          <span class="ex-tag-pill t3">try/catch</span>
+          <span class="ex-tag-pill t4">localStorage</span>
+          <span class="ex-tag-pill t5">DOM + eventos</span>
+        </div>
+      </div>
+      <div class="ex-body" id="body-ex1">
+        <div class="ex-body-inner">
+          <div class="contexto">
+            <strong>🗺️ Contexto</strong>
+            O reino de Algorithmia está ameaçado por bugs ancestrais. Você foi convocado para criar o Grimório dos Heróis — um sistema que registra e exibe os guerreiros que defenderão o reino. Cada herói tem habilidades únicas, e o sistema precisa ser robusto o suficiente para sobreviver a entradas inválidas dos recrutas desastrados.
+          </div>
+
+          <p class="req-title">⚙️ Parte JavaScript — O Motor do Grimório</p>
+          <ol>
+            >Crie a classe de>Heroi</code> com os atributos de>nome</code>, de>nivel</code> e de>pontosDeVida</code>. No construtor, se de>nome</code> estiver vazio, lance um de>Error</code> com mensagem adequada. Adicione o método de>getStatus()</code> que retorna uma string formatada com os dados do herói.</li>
+            >Crie as subclasses de>Mago</code> (tem de>mana</code>; método de>atacar()</code> consome 10 de mana — se não tiver, lança de>Error</code>), de>Guerreiro</code> (tem de>forca</code>; de>atacar()</code> retorna dano baseado na força) e de>Arqueiro</code> (tem de>flechas</code>; de>atacar()</code> só funciona se de>flechas &gt; 0</code>).</li>
+            >Simule uma "interface" de>Combatente</code>: crie uma função de>verificarCombatente(obj)</code> que recebe um objeto e verifica se ele possui os métodos de>atacar()</code> e de>getStatus()</code>. Se não possuir, lança um de>Error</code> informando qual método está faltando.</li>
+            >Crie o objeto de>grimorio</code> (não precisa ser classe) com os métodos:<br>
+              — de>adicionarHeroi(heroi)</code>: usa de>verificarCombatente()</code> antes de adicionar<br>
+              — de>salvar()</code>: serializa o array de heróis com de>JSON.stringify</code> e salva no de>localStorage</code><br>
+              — de>carregar()</code>: lê do de>localStorage</code>, faz de>JSON.parse</code> e reconstrói os objetos<br>
+              — de>buscarPorNome(nome)</code>: retorna o herói ou lança de>Error</code> se não encontrar
+            </li>
+          </ol>
+
+          <p class="req-title">🌐 Parte HTML + DOM</p>
+          <ol>
+            >Crie um formulário com campos: nome, tipo (select: Mago/Guerreiro/Arqueiro) e nível. Ao submeter (evento de>submit</code> com de>preventDefault()</code>), instancie o herói correto e chame de>grimorio.adicionarHeroi()</code> dentro de um de>try/catch</code>.</li>
+            >Exiba cada herói cadastrado como um card gerado com de>innerHTML</code>. O card deve mostrar nome, tipo, nível e status — com cor diferente por tipo (azul = Mago, vermelho = Guerreiro, verde = Arqueiro).</li>
+            >Cada card deve ter um botão "⚔️ Atacar" que chama de>atacar()</code> dentro de um de>try/catch</code> e exibe o resultado (ou o erro) em um parágrafo abaixo do card, sem usar de>alert()</code>.</li>
+            >Adicione os botões "💾 Salvar Grimório" e "📂 Carregar Grimório" que chamam de>grimorio.salvar()</code> e de>grimorio.carregar()</code> e atualizam a lista de cards na tela.</li>
+          </ol>
+
+          <div class="callout dica">
+            <strong>💡 Dica</strong>
+            Ao carregar do de>localStorage</code>, os dados vêm como objetos planos — sem os métodos das classes. Você precisa recriar as instâncias com de>new Mago(...)</code>, de>new Guerreiro(...)</code> etc., usando o campo de>tipo</code> salvo no JSON para saber qual classe usar.
+          </div>
+
+          <pre><span class="ck">class</span> <span class="cf">Heroi</span> {
+  <span class="cf">constructor</span>(nome, nivel, pontosDeVida) {
+    <span class="ck">if</span> (!nome) <span class="ck">throw new</span> <span class="cf">Error</span>(<span class="cs">"Nome não pode ser vazio!"</span>);
+    <span class="ck">this</span>.nome = nome;
+    <span class="ck">this</span>.nivel = nivel;
+    <span class="ck">this</span>.pontosDeVida = pontosDeVida;
+    <span class="ck">this</span>.tipo = <span class="cs">"Heroi"</span>; <span class="cc">// será sobrescrito nas subclasses</span>
+  }
+  <span class="cf">getStatus</span>() {
+    <span class="ck">return</span> <span class="cs">`${this.nome} | Nível ${this.nivel} | HP: ${this.pontosDeVida}`</span>;
+  }
+}
+
+<span class="ck">class</span> <span class="cf">Mago</span> <span class="ck">extends</span> <span class="cf">Heroi</span> {
+  <span class="cf">constructor</span>(nome, nivel, pontosDeVida, mana) {
+    <span class="ck">super</span>(nome, nivel, pontosDeVida);
+    <span class="ck">this</span>.mana = mana;
+    <span class="ck">this</span>.tipo = <span class="cs">"Mago"</span>;
+  }
+  <span class="cf">atacar</span>() {
+    <span class="ck">if</span> (<span class="ck">this</span>.mana &lt;= <span class="cn">0</span>) <span class="ck">throw new</span> <span class="cf">Error</span>(<span class="cs">`${this.nome} não tem mana!`</span>);
+    <span class="ck">this</span>.mana -= <span class="cn">10</span>;
+    <span class="ck">return</span> <span class="cs">`${this.nome} lança bola de fogo! Mana: ${this.mana}`</span>;
+  }
+}
+<button class="copy-btn" onclick="copiar(this)">Copiar</button></pre>
+
+          <div class="entrega">
+            <strong>📁 Entrega</strong>
+            Um único arquivo de>grimorio.html</code> com todo o JavaScript no de>&lt;script&gt;</code> e o HTML na mesma página. Teste com ao menos 3 heróis de tipos diferentes, salvando e recarregando do de>localStorage</code>.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================== EX 2 ======================== -->
+    <div class="ex-card" id="ex2">
+      <div class="ex-card-header" onclick="toggleEx('ex2')">
+        <div class="ex-top-row">
+          <div class="ex-num-badge">2</div>
+          <span class="ex-emoji">🎬</span>
+          <div class="ex-titulo-wrap">
+            <div class="ex-titulo">CinemaCode — Plataforma de Streaming</div>
+            <div class="ex-subtitulo">Catálogo de mídias com busca e filtro em tempo real</div>
+          </div>
+          <div class="ex-check-btn" onclick="marcar(event,'ex2')" title="Marcar como escolhido">✓</div>
+          <span class="ex-arrow" id="arrow-ex2">▼</span>
+        </div>
+        <div class="ex-tags">
+          <span class="ex-dif d-dificil">Difícil</span>
+          <span class="ex-tag-pill t1">Herança</span>
+          <span class="ex-tag-pill t2">Interfaces</span>
+          <span class="ex-tag-pill t3">try/catch</span>
+          <span class="ex-tag-pill t4">localStorage</span>
+          <span class="ex-tag-pill t5">DOM + eventos</span>
+        </div>
+      </div>
+      <div class="ex-body" id="body-ex2">
+        <div class="ex-body-inner">
+          <div class="contexto">
+            <strong>🎥 Contexto</strong>
+            A startup CinemaCode quer lançar uma plataforma de streaming, mas o desenvolvedor principal fugiu para as montanhas com um laptop. Você herdou o projeto pela metade e precisa terminar o catálogo, a busca e os controles de reprodução — antes que os investidores percebam.
+          </div>
+
+          <p class="req-title">⚙️ Parte JavaScript</p>
+          <ol>
+            >Crie a classe de>Midia</code> com de>titulo</code>, de>ano</code> e de>genero</code>. Se o ano for anterior a 1888 (primeiro filme da história), lance um de>Error</code>. Adicione o método de>getInfo()</code> retornando uma string formatada.</li>
+            >Crie as subclasses de>Filme</code> (adiciona de>diretor</code> e de>duracao</code> em minutos), de>Serie</code> (adiciona de>temporadas</code> e de>episodiosPorTemporada</code> — de>getInfo()</code> calcula o total de episódios) e de>Documentario</code> (adiciona de>tema</code>).</li>
+            >Simule uma interface de>Reproducivel</code>: crie a função de>verificarReproducivel(obj)</code> que confere se o objeto tem os métodos de>play()</code>, de>pause()</code> e de>getInfo()</code>. Adicione esses métodos em de>Midia</code> — de>play()</code> muda o estado de>reproduzindo</code> para de>true</code>, de>pause()</code> para de>false</code>.</li>
+            >Crie o objeto de>catalogo</code> com:<br>
+              — de>adicionar(midia)</code>: usa de>verificarReproducivel()</code> e adiciona à lista<br>
+              — de>salvar()</code> e de>carregar()</code>: persistência com de>localStorage</code><br>
+              — de>filtrarPorGenero(genero)</code>: retorna array filtrado<br>
+              — de>buscarPorTitulo(texto)</code>: retorna mídias cujo título contenha o texto (case insensitive)
+            </li>
+          </ol>
+
+          <p class="req-title">🌐 Parte HTML + DOM</p>
+          <ol>
+            >Crie um formulário para cadastrar mídia (título, tipo, ano, gênero e campo extra conforme o tipo). Ao submeter, instancie a classe correta dentro de um de>try/catch</code> e adicione ao catálogo.</li>
+            >Exiba as mídias em cards. Cada card deve ter botões "▶ Play" e "⏸ Pause" que alteram visualmente o card (cor de fundo, texto de status) via manipulação de classe CSS com de>classList</code>.</li>
+            >Adicione um campo de busca: ao digitar (evento de>input</code>), filtre os cards em tempo real usando de>buscarPorTitulo()</code> — oculte os que não batem com de>style.display = 'none'</code>.</li>
+            >Exiba um contador "X títulos encontrados" atualizado a cada busca com de>textContent</code>.</li>
+          </ol>
+
+          <div class="callout info">
+            <strong>💡 Dica de filtro em tempo real</strong>
+            Use o evento de>input</code> no campo de busca (não de>keyup</code>). Ele dispara para qualquer mudança, incluindo colar texto. Percorra todos os cards com de>querySelectorAll</code> e compare o texto do título com de>includes()</code>.
+          </div>
+
+          <div class="entrega">
+            <strong>📁 Entrega</strong>
+            Arquivo único de>cinemacode.html</code>. Pré-cadastre ao menos 5 mídias de tipos diferentes no de>localStorage</code> para demonstrar a busca funcionando.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================== EX 3 ======================== -->
+    <div class="ex-card" id="ex3">
+      <div class="ex-card-header" onclick="toggleEx('ex3')">
+        <div class="ex-top-row">
+          <div class="ex-num-badge">3</div>
+          <span class="ex-emoji">🚀</span>
+          <div class="ex-titulo-wrap">
+            <div class="ex-titulo"> 
+                          Banco Intergaláctico S.A.</div>
+            <div class="ex-subtitulo">Sistema bancário para colônias espaciais</div>
+          </div>
+          <div class="ex-check-btn" onclick="marcar(event,'ex3')" title="Marcar como escolhido">✓</div>
+          <span class="ex-arrow" id="arrow-ex3">▼</span>
+        </div>
+        <div class="ex-tags">
+          <span class="ex-dif d-dificil">Difícil</span>
+          <span class="ex-tag-pill t1">Herança</span>
+          <span class="ex-tag-pill t2">Interfaces</span>
+          <span class="ex-tag-pill t3">try/catch</span>
+          <span class="ex-tag-pill t4">localStorage</span>
+          <span class="ex-tag-pill t5">DOM + innerHTML</span>
+        </div>
+      </div>
+      <div class="ex-body" id="body-ex3">
+        <div class="ex-body-inner">
+          <div class="contexto">
+            <strong>🌌 Contexto</strong>
+            O Banco Intergaláctico S.A. opera em 7 colônias espaciais e aceita pagamentos em créditos galácticos. O sistema antigo foi destruído por uma tempestade de meteoros. Você tem até o nascer de Kepler-442b para entregar o novo sistema — ou os colonos ficam sem acesso às suas contas.
+          </div>
+
+          <p class="req-title">⚙️ Parte JavaScript</p>
+          <ol>
+            >Crie a classe de>Conta</code> com de>titular</code>, de>numero</code> e de>saldo</code>. No construtor, valide que o saldo inicial não é negativo — se for, lance um de>Error</code>. Mantenha um array de>historico</code> de strings para registrar cada transação.</li>
+            >Adicione os métodos de>depositar(valor)</code> e de>sacar(valor)</code> na classe de>Conta</code>. Lance de>Error</code> para valor zero ou negativo em qualquer operação, e para saldo insuficiente no saque. Cada operação bem-sucedida deve adicionar uma entrada ao de>historico</code>.</li>
+            >Crie as subclasses:<br>
+              — de>ContaCorrente</code>: tem de>limiteCredito</code>; pode sacar além do saldo até o limite (saldo pode ficar negativo até de>-limiteCredito</code>)<br>
+              — de>ContaPoupanca</code>: tem de>taxaJuros</code>; adicione o método de>aplicarJuros()</code> que aumenta o saldo pela taxa e registra no histórico<br>
+              — de>ContaGalactica</code>: herda de de>ContaCorrente</code>; tem de>taxaCambio</code> (padrão 3.7); adicione de>depositarCreditos(creditos)</code> que converte e deposita em reais
+            </li>
+            >Simule a interface de>Transacionavel</code>: crie de>verificarTransacionavel(obj)</code> que confere se o objeto tem de>depositar</code>, de>sacar</code> e de>getExtrato</code>. Implemente de>getExtrato()</code> em de>Conta</code> retornando o array de>historico</code> formatado.</li>
+            >Crie o objeto de>banco</code> com:<br>
+              — de>abrirConta(conta)</code>: valida com de>verificarTransacionavel()</code><br>
+              — de>buscarConta(numero)</code>: lança de>Error</code> se não encontrar<br>
+              — de>transferir(origem, destino, valor)</code>: usa de>buscarConta()</code> nos dois números, faz saque e depósito dentro de um de>try/catch</code><br>
+              — de>salvar()</code> e de>carregar()</code>: persistência com de>localStorage</code>
+            </li>
+          </ol>
+
+          <p class="req-title">🌐 Parte HTML + DOM</p>
+          <ol>
+            >Crie uma interface com três abas (Contas, Operações, Extrato) alternadas por eventos de clique que mostram/ocultam seções com de>style.display</code>.</li>
+            >Na aba Contas: formulário para abrir conta (titular, número, tipo, saldo inicial) com feedback de erro inline via de>innerHTML</code>.</li>
+            >Na aba Operações: campos para número da conta e valor, com botões "Depositar", "Sacar" e "Transferir". Resultados exibidos em um painel de log gerado com de>innerHTML</code>. Linhas de erro em vermelho, sucesso em verde.</li>
+            >Na aba Extrato: campo para digitar o número da conta e botão "Ver Extrato" que gera uma tabela dinamicamente com de>innerHTML</code>, mostrando cada transação do histórico.</li>
+          </ol>
+
+          <div class="callout warn">
+            <strong>⚠️ Atenção</strong>
+            Ao carregar contas do de>localStorage</code>, reconstrua as instâncias corretas com base no campo de>tipo</code> salvo — os métodos das classes são perdidos na serialização JSON.
+          </div>
+
+          <div class="entrega">
+            <strong>📁 Entrega</strong>
+            Arquivo único de>banco-galactico.html</code>. Demonstre ao menos 4 contas de tipos diferentes, uma transferência e a visualização do extrato.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================== EX 4 ======================== -->
+    <div class="ex-card" id="ex4">
+      <div class="ex-card-header" onclick="toggleEx('ex4')">
+        <div class="ex-top-row">
+          <div class="ex-num-badge">4</div>
+          <span class="ex-emoji">🤖</span>
+          <div class="ex-titulo-wrap">
+            <div class="ex-titulo">Hospital dos Robôs</div>
+            <div class="ex-subtitulo">Sistema de triagem e prontuário para androides</div>
+          </div>
+          <div class="ex-check-btn" onclick="marcar(event,'ex4')" title="Marcar como escolhido">✓</div>
+          <span class="ex-arrow" id="arrow-ex4">▼</span>
+        </div>
+        <div class="ex-tags">
+          <span class="ex-dif d-dificil">Difícil</span>
+          <span class="ex-tag-pill t1">Herança</span>
+          <span class="ex-tag-pill t2">Interfaces</span>
+          <span class="ex-tag-pill t3">try/catch</span>
+          <span class="ex-tag-pill t4">localStorage</span>
+          <span class="ex-tag-pill t5">DOM + eventos</span>
+        </div>
+      </div>
+      <div class="ex-body" id="body-ex4">
+        <div class="ex-body-inner">
+          <div class="contexto">
+            <strong>🏥 Contexto</strong>
+            No ano 2157, robôs também adoecem. O Hospital dos Robôs de Nova Curitiba atende androides com superaquecimento, falha de memória e corrosão de articulações. Você foi contratado para desenvolver o sistema de triagem e prontuário eletrônico antes que a fila de robôs enferrujados tome conta do corredor.
+          </div>
+
+          <p class="req-title">⚙️ Parte JavaScript</p>
+          <ol>
+            >Crie a classe de>Robo</code> com de>id</code>, de>modelo</code>, de>fabricante</code> e de>anoFabricacao</code>. No construtor, valide que de>modelo</code> tem ao menos 3 caracteres — caso contrário, lance um de>Error</code>.</li>
+            >Adicione o método de>diagnosticar()</code> na classe base retornando uma string genérica. Crie as subclasses:<br>
+              — de>AndroideServico</code>: de>diagnosticar()</code> verifica se de>anoFabricacao &lt; 2140</code> e retorna aviso de superaquecimento; de>calcularCusto()</code> retorna R$500<br>
+              — de>RoboIndustrial</code>: tem de>articulacoesDanificadas</code>; de>calcularCusto()</code> retorna de>200 × articulacoesDanificadas</code><br>
+              — de>RoboMedico</code>: de>calcularCusto()</code> sempre retorna R$1200; de>diagnosticar()</code> sempre retorna urgência crítica
+            </li>
+            >Simule a interface de>Diagnosticavel</code> com a função de>verificarDiagnosticavel(obj)</code> que confere se o objeto possui de>diagnosticar()</code> e de>calcularCusto()</code>.</li>
+            >Crie o objeto de>hospital</code> com:<br>
+              — de>admitir(robo)</code>: valida com de>verificarDiagnosticavel()</code><br>
+              — de>buscarPorId(id)</code>: lança de>Error</code> se não encontrar<br>
+              — de>realizarTriagem()</code>: retorna array com de>{ robo, diagnostico, custo }</code> de cada paciente<br>
+              — de>salvar()</code> e de>carregar()</code>: usa de>localStorage</code>
+            </li>
+          </ol>
+
+          <p class="req-title">🌐 Parte HTML + DOM</p>
+          <ol>
+            >Crie um formulário de admissão (id, modelo, fabricante, tipo, ano). Ao submeter, instancie o robô correto dentro de de>try/catch</code> e exiba um card de prontuário gerado com de>innerHTML</code>.</li>
+            >A cor do card deve refletir a urgência: vermelho (de>RoboMedico</code>), amarelo (de>AndroideServico</code>), verde (de>RoboIndustrial</code>) — aplique via de>classList.add</code>.</li>
+            >Adicione um campo de busca por ID: ao digitar (evento de>input</code>), destaque o card correspondente com borda azul e role até ele com de>scrollIntoView()</code>.</li>
+            >Adicione evento de duplo clique (de>dblclick</code>) em cada card para marcar como "Alta" — o card fica cinza com texto riscado (use de>classList.toggle</code>).</li>
+          </ol>
+
+          <div class="callout dica">
+            <strong>💡 Dica</strong>
+            Para o de>scrollIntoView()</code>, primeiro remova a classe de destaque de todos os cards com de>querySelectorAll</code> + de>forEach</code>, depois adicione só no card encontrado. Assim apenas um card fica destacado por vez.
+          </div>
+
+          <div class="entrega">
+            <strong>📁 Entrega</strong>
+            Arquivo único de>hospital-robos.html</code>. Demonstre admissão de ao menos 5 robôs de tipos variados, busca por ID e marcação de alta com duplo clique.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================== EX 5 ======================== -->
+    <div class="ex-card" id="ex5">
+      <div class="ex-card-header" onclick="toggleEx('ex5')">
+        <div class="ex-top-row">
+          <div class="ex-num-badge">5</div>
+          <span class="ex-emoji">🪄</span>
+          <div class="ex-titulo-wrap">
+            <div class="ex-titulo">Escola de Magia Algorithmia</div>
+            <div class="ex-subtitulo">Boletim mágico com cálculo de média e situação</div>
+          </div>
+          <div class="ex-check-btn" onclick="marcar(event,'ex5')" title="Marcar como escolhido">✓</div>
+          <span class="ex-arrow" id="arrow-ex5">▼</span>
+        </div>
+        <div class="ex-tags">
+          <span class="ex-dif d-medio">Médio</span>
+          <span class="ex-tag-pill t1">Herança</span>
+          <span class="ex-tag-pill t2">Interfaces</span>
+          <span class="ex-tag-pill t3">try/catch</span>
+          <span class="ex-tag-pill t4">localStorage</span>
+          <span class="ex-tag-pill t5">DOM + formulários</span>
+        </div>
+      </div>
+      <div class="ex-body" id="body-ex5">
+        <div class="ex-body-inner">
+          <div class="contexto">
+            <strong>🏰 Contexto</strong>
+            A Escola de Magia Algorithmia tem um problemão: o livro de registros foi transformado em sapo por um aluno descuidado. Agora você precisa criar um sistema digital para gerenciar os estudantes, suas notas em Feitiçaria Básica, Poções e Transfiguração, e emitir o boletim mágico antes da festa de formatura.
+          </div>
+
+          <p class="req-title">⚙️ Parte JavaScript</p>
+          <ol>
+            >Crie a classe de>Estudante</code> com de>nome</code>, de>matricula</code> e um objeto de>notas</code> no formato de>{ feiticaria: 0, pocoes: 0, transfiguracao: 0 }</code>.</li>
+            >Adicione o método de>lancarNota(disciplina, valor)</code>: valide que de>valor</code> está entre 0 e 10 (lance de>Error</code> se não estiver) e que a disciplina existe no objeto de>notas</code> (lance de>Error</code> diferente se não existir).</li>
+            >Adicione de>calcularMedia()</code> que retorna a média das três notas. Crie as subclasses:<br>
+              — de>EstudanteBolsista</code>: de>getSituacao()</code> retorna "Aprovado" se média ≥               7.0, "Recuperação" se ≥ 5.0, "Reprovado" se abaixo<br>
+              — de>EstudanteRegular</code>: de>getSituacao()</code> retorna "Aprovado" se média ≥ 6.0, "Recuperação" se ≥ 4.0, "Reprovado" se abaixo
+            </li>
+            >Simule a interface de>Avaliavel</code> com de>verificarAvaliavel(obj)</code> que confere se o objeto tem de>calcularMedia()</code> e de>getSituacao()</code>.</li>
+            >Crie o objeto de>secretaria</code> com:<br>
+              — de>matricular(estudante)</code>: valida com de>verificarAvaliavel()</code><br>
+              — de>buscarPorMatricula(matricula)</code>: lança de>Error</code> se não encontrar<br>
+              — de>gerarRanking()</code>: retorna o array de estudantes ordenado por média decrescente usando de>sort()</code><br>
+              — de>salvar()</code> e de>carregar()</code>: persistência com de>localStorage</code>, reconstruindo instâncias pelo campo de>tipo</code>
+            </li>
+          </ol>
+
+          <p class="req-title">🌐 Parte HTML + DOM</p>
+          <ol>
+            >Crie um formulário com nome, matrícula, tipo (Bolsista/Regular) e os três campos de nota. Ao submeter com de>preventDefault()</code>, instancie o estudante correto e lance as notas dentro de de>try/catch</code>.</li>
+            >Exiba o boletim de cada estudante como um card gerado com de>innerHTML</code>. O card deve mostrar nome, as três notas, média e situação. Use cores para a situação: verde (Aprovado), amarelo (Recuperação), vermelho (Reprovado) via de>classList.add</code>.</li>
+            >Adicione um botão "🏆 Ver Ranking" que ordena os cards na tela pela média, do maior para o menor, reordenando os elementos no DOM sem recarregar a página.</li>
+            >Valide os campos de nota em tempo real com evento de>input</code>: se o valor digitado estiver fora de 0–10, exiba uma mensagem de erro vermelha abaixo do campo usando de>querySelector</code> e de>textContent</code>.</li>
+          </ol>
+
+          <div class="callout dica">
+            <strong>💡 Dica para reordenar no DOM</strong>
+            Para reordenar os cards visualmente, selecione o container pai com de>querySelector</code>, converta os filhos em array com de>Array.from()</code>, ordene com de>sort()</code> e reinsira cada elemento com de>appendChild()</code>. O DOM atualiza automaticamente.
+          </div>
+
+          <div class="entrega">
+            <strong>📁 Entrega</strong>
+            Arquivo único de>escola-magia.html</code>. Demonstre ao menos 6 estudantes (3 bolsistas, 3 regulares) com notas variadas, e mostre o ranking funcionando.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================== EX 6 ======================== -->
+    <div class="ex-card" id="ex6">
+      <div class="ex-card-header" onclick="toggleEx('ex6')">
+        <div class="ex-top-row">
+          <div class="ex-num-badge">6</div>
+          <span class="ex-emoji">🦁</span>
+          <div class="ex-titulo-wrap">
+            <div class="ex-titulo">Zoológico de Criaturas Impossíveis</div>
+            <div class="ex-subtitulo">Gerenciador de espécies que não deveriam existir</div>
+          </div>
+          <div class="ex-check-btn" onclick="marcar(event,'ex6')" title="Marcar como escolhido">✓</div>
+          <span class="ex-arrow" id="arrow-ex6">▼</span>
+        </div>
+        <div class="ex-tags">
+          <span class="ex-dif d-medio">Médio</span>
+          <span class="ex-tag-pill t1">Herança</span>
+          <span class="ex-tag-pill t2">Interfaces</span>
+          <span class="ex-tag-pill t3">try/catch</span>
+          <span class="ex-tag-pill t4">localStorage</span>
+          <span class="ex-tag-pill t5">DOM + eventos</span>
+        </div>
+      </div>
+      <div class="ex-body" id="body-ex6">
+        <div class="ex-body-inner">
+          <div class="contexto">
+            <strong>🌿 Contexto</strong>
+            O Zoológico Digital de Criaturas Impossíveis abriga seres fantásticos: Dragões que espirram HTML, Unicórnios que depuram código e Fênix que reiniciam o sistema quando tudo dá errado. O zelador foi transformado em variável local (saiu de escopo) e você precisa assumir o controle do sistema de alimentação e exibição das criaturas.
+          </div>
+
+          <p class="req-title">⚙️ Parte JavaScript</p>
+          <ol>
+            >Crie a classe de>Criatura</code> com de>nome</code>, de>especie</code> e de>nivelFome</code> (0 a 10). Adicione o método de>alimentar(comida)</code> que reduz o nível de fome em 3 (mínimo 0) e retorna uma mensagem. Se de>nivelFome</code> já for 0, lance um de>Error</code> informando que a criatura está saciada.</li>
+            >Crie as subclasses:<br>
+              — de>Dragao</code>: de>alimentar(comida)</code> verifica se de>comida === "código compilado"</code> — qualquer outra coisa lança de>Error</code> com mensagem criativa<br>
+              — de>Unicornio</code>: aceita qualquer comida, mas se não for de>"arco-íris"</code>, o nível de fome só reduz 1 em vez de 3<br>
+              — de>Fenix</code>: ao ser alimentada com de>nivelFome === 0</code> lança de>Error</code> "A Fênix renasceu e resetou tudo!" e zera todos os atributos para os valores iniciais
+            </li>
+            >Simule a interface de>Alimentavel</code> com de>verificarAlimentavel(obj)</code> que confere se o objeto tem de>alimentar()</code> e de>getNivelFome()</code>. Adicione de>getNivelFome()</code> em de>Criatura</code> retornando de>this.nivelFome</code>.</li>
+            >Crie o objeto de>zoologico</code> com:<br>
+              — de>adicionar(criatura)</code>: valida com de>verificarAlimentavel()</code><br>
+              — de>alimentarTodas(comida)</code>: tenta alimentar cada criatura em um de>try/catch</code> individual, registrando sucessos e erros separadamente<br>
+              — de>listarFamintas()</code>: retorna criaturas com de>nivelFome &gt; 7</code><br>
+              — de>salvar()</code> e de>carregar()</code>: usa de>localStorage</code>
+            </li>
+          </ol>
+
+          <p class="req-title">🌐 Parte HTML + DOM</p>
+          <ol>
+            >Exiba um card fixo para cada criatura (Dragão, Unicórnio e Fênix) com uma barra de fome visual — um de>&lt;div&gt;</code> cuja largura em % representa o nível de fome (de>nivelFome × 10 + "%"</code>), atualizada via de>style.width</code>.</li>
+            >Adicione um campo "O que servir?" e botões "Alimentar Todas" e "Alimentar Individualmente". Ao alimentar, atualize as barras e exiba o resultado de cada criatura em um log com de>innerHTML</code> — erros em vermelho, sucessos em verde.</li>
+            >Adicione evento de>mouseover</code> em cada card para exibir uma curiosidade sobre a criatura em um tooltip posicionado com CSS, criado e removido via de>innerHTML</code>.</li>
+            >Use de>querySelector</code> para atualizar o título da seção "🚨 Criaturas com fome crítica: X" sempre que uma alimentação ocorrer.</li>
+          </ol>
+
+          <div class="callout warn">
+            <strong>⚠️ Atenção</strong>
+            O de>alimentarTodas()</code> não deve parar se uma criatura lançar erro — use de>try/catch</code> dentro do de>forEach</code> para que cada criatura seja tratada independentemente.
+          </div>
+
+          <div class="entrega">
+            <strong>📁 Entrega</strong>
+            Arquivo único de>zoologico.html</code>. Demonstre a alimentação com comida errada para o Dragão (erro), certa para o Unicórnio (sucesso parcial) e o renascimento da Fênix.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================== EX 7 ======================== -->
+    <div class="ex-card" id="ex7">
+      <div class="ex-card-header" onclick="toggleEx('ex7')">
+        <div class="ex-top-row">
+          <div class="ex-num-badge">7</div>
+          <span class="ex-emoji">🛸</span>
+          <div class="ex-titulo-wrap">
+            <div class="ex-titulo">Agência Espacial BugFree</div>
+            <div class="ex-subtitulo">Gerenciamento de missões e tripulação interestelar</div>
+          </div>
+          <div class="ex-check-btn" onclick="marcar(event,'ex7')" title="Marcar como escolhido">✓</div>
+          <span class="ex-arrow" id="arrow-ex7">▼</span>
+        </div>
+        <div class="ex-tags">
+          <span class="ex-dif d-dificil">Difícil</span>
+          <span class="ex-tag-pill t1">Herança</span>
+          <span class="ex-tag-pill t2">Interfaces</span>
+          <span class="ex-tag-pill t3">try/catch</span>
+          <span class="ex-tag-pill t4">localStorage</span>
+          <span class="ex-tag-pill t5">DOM + setInterval</span>
+        </div>
+      </div>
+      <div class="ex-body" id="body-ex7">
+        <div class="ex-body-inner">
+          <div class="contexto">
+            <strong>🌠 Contexto</strong>
+            A Agência Espacial BugFree planeja colonizar o planeta Kotlin-9, mas o sistema de gerenciamento de missões foi escrito em COBOL por um estagiário em 1974. Você tem 3 aulas para reescrever tudo antes do lançamento. A tripulação está na sala ao lado, nervosa, comendo chips e esperando o sistema funcionar.
+          </div>
+
+          <p class="req-title">⚙️ Parte JavaScript</p>
+          <ol>
+            >Crie a classe de>Astronauta</code> com de>nome</code>, de>codigoCracha</code> e de>nivelExperiencia</code> (1–5). Valide no construtor que o nível está nesse intervalo — lance de>Error</code> caso contrário. Adicione de>executarFuncao()</code> retornando uma string genérica.</li>
+            >Crie as subclasses:<br>
+              — de>Piloto</code>: de>executarFuncao()</code> retorna uma manobra calculada pelo nível de experiência<br>
+              — de>Cientista</code>: tem array de>experimentos</code>; de>executarFuncao()</code> retorna o próximo experimento da fila com de>shift()</code> — se vazio, lança de>Error</code> "Sem experimentos na fila!"<br>
+              — de>Engenheiro</code>: tem de>sistemaResponsavel</code>; de>executarFuncao()</code> tem 30% de chance de lançar de>Error</code> "Falha no sistema: " + de>sistemaResponsavel</code> (use de>Math.random()</code>)
+            </li>
+            >Simule a interface de>Tripulante</code> com de>verificarTripulante(obj)</code> que confere se tem de>executarFuncao()</code> e de>nome</code>.</li>
+            >Crie a classe de>Missao</code> com de>nome</code>, de>destino</code>, de>duracaoDias</code> e array de>tripulacao</code>. Implemente:<br>
+              — de>adicionarTripulante(astronauta)</code>: valida com de>verificarTripulante()</code> e lança de>Error</code> se já houver 7 membros<br>
+              — de>iniciar()</code>: chama de>executarFuncao()</code> de cada membro em de>try/catch</code> individual, retorna array de logs<br>
+              — de>salvar()</code> e de>carregar()</code>: usa de>localStorage</code>
+            </li>
+          </ol>
+
+          <p class="req-title">🌐 Parte HTML + DOM</p>
+          <ol>
+            >Crie um painel de missão: um formulário para adicionar tripulantes (nome, crachá, tipo, nível) e uma lista gerada com de>innerHTML</code> exibindo cada membro.</li>
+            >Destaque automaticamente com fundo amarelo todos os tripulantes do tipo Engenheiro usando de>querySelectorAll</code> após cada adição.</li>
+            >Adicione um botão "🚀 Iniciar Missão" que chama de>missao.iniciar()</code> e exibe o log de cada tripulante em um painel — erros em vermelho, sucessos em verde.</li>
+            >Implemente um contador regressivo de             lançamento usando de>setInterval</code>: ao clicar em "🚀 Iniciar Missão", inicie uma contagem regressiva de 10 segundos exibida na tela com de>textContent</code>. Ao chegar a zero, limpe o intervalo com de>clearInterval</code>, mude o fundo da página para de>#0f172a</code> e exiba "🚀 Missão iniciada! Boa viagem, tripulação!" com de>innerHTML</code>.</li>
+          </ol>
+
+          <div class="callout info">
+            <strong>💡 Dica sobre setInterval</strong>
+            Guarde o retorno do de>setInterval</code> em uma variável: de>const timer = setInterval(fn, 1000)</code>. Quando o contador chegar a zero, chame de>clearInterval(timer)</code> para parar. Sem isso, o intervalo continua rodando para sempre mesmo após o zero.
+          </div>
+
+          <div class="entrega">
+            <strong>📁 Entrega</strong>
+            Arquivo único de>agencia-espacial.html</code>. Demonstre uma missão com ao menos 5 tripulantes de tipos variados, incluindo um Engenheiro que falha sem abortar o restante da tripulação.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================== EX 8 ======================== -->
+    <div class="ex-card" id="ex8">
+      <div class="ex-card-header" onclick="toggleEx('ex8')">
+        <div class="ex-top-row">
+          <div class="ex-num-badge">8</div>
+          <span class="ex-emoji">🏆</span>
+          <div class="ex-titulo-wrap">
+            <div class="ex-titulo">Torneio de IAs — Quem Programa Melhor?</div>
+            <div class="ex-subtitulo">Campeonato entre inteligências artificiais amadoras</div>
+          </div>
+          <div class="ex-check-btn" onclick="marcar(event,'ex8')" title="Marcar como escolhido">✓</div>
+          <span class="ex-arrow" id="arrow-ex8">▼</span>
+        </div>
+        <div class="ex-tags">
+          <span class="ex-dif d-dificil">Difícil</span>
+          <span class="ex-tag-pill t1">Herança</span>
+          <span class="ex-tag-pill t2">Interfaces</span>
+          <span class="ex-tag-pill t3">try/catch</span>
+          <span class="ex-tag-pill t4">localStorage</span>
+          <span class="ex-tag-pill t5">DOM + eventos</span>
+        </div>
+      </div>
+      <div class="ex-body" id="body-ex8">
+        <div class="ex-body-inner">
+          <div class="contexto">
+            <strong>🤖 Contexto</strong>
+            Todo ano, a universidade de Compilópolis realiza o grande Torneio de IAs: sistemas de inteligência artificial amadora competem entre si para ver qual resolve mais desafios sem entrar em loop infinito. Você foi designado para criar o sistema de inscrição, pontuação e placar — e ele precisa tratar todos os erros possíveis, porque IAs amadoras são completamente imprevisíveis.
+          </div>
+
+          <p class="req-title">⚙️ Parte JavaScript</p>
+          <ol>
+            >Crie a classe de>InteligenciaArtificial</code> com de>nome</code>, de>versao</code> e de>pontuacao</code> (inicia em 0). Valide no construtor que de>nome</code> não está vazio. Adicione de>resolver(desafio)</code> e de>getNome()</code>.</li>
+            >Crie as subclasses:<br>
+              — de>IAOtimista</code>: de>resolver()</code> tenta sempre, mas com 40% de chance lança de>Error("Loop infinito detectado! Reiniciando...")</code><br>
+              — de>IAPessimista</code>: de>resolver()</code> só aceita desafios com menos de 20 caracteres — senão lança de>Error("Desafio complexo demais. Entrando em modo pânico.")</code><br>
+              — de>IAEquilibrada</code>: de>resolver()</code> sempre funciona, mas usa de>multiplicador = 0.5</code> na pontuação
+            </li>
+            >Simule a interface de>Competidor</code> com de>verificarCompetidor(obj)</code> que confere se o objeto tem de>resolver()</code>, de>getNome()</code> e a propriedade de>pontuacao</code>.</li>
+            >Crie o objeto de>torneio</code> com:<br>
+              — de>inscrever(ia)</code>: valida com de>verificarCompetidor()</code> e lança de>Error</code> se o nome já estiver inscrito<br>
+              — de>executarRodada(desafio, pontosPorAcerto)</code>: chama de>resolver()</code> de cada IA em de>try/catch</code> individual — quem resolver ganha os pontos multiplicados pelo de>multiplicador</code> da IA (padrão 1)<br>
+              — de>getPlacar()</code>: retorna o array ordenado por pontuação decrescente com de>sort()</code><br>
+              — de>salvar()</code> e de>carregar()</code>: usa de>localStorage</code>, reconstruindo instâncias pelo campo de>tipo</code>
+            </li>
+          </ol>
+
+          <p class="req-title">🌐 Parte HTML + DOM</p>
+          <ol>
+            >Crie uma tabela de placar gerada com de>innerHTML</code>: posição, nome, versão, tipo e pontuação. A linha do líder tem fundo dourado (de>#fef9c3</code>) e emoji 🏆 antes do nome, aplicado via de>classList</code>.</li>
+            >Adicione campo "Desafio da rodada" e botão "▶ Executar Rodada". Ao clicar, chame de>torneio.executarRodada()</code> e atualize a tabela completamente com de>innerHTML</code>, reordenando pelo placar.</li>
+            >Exiba um log da última rodada abaixo da tabela: ✅ resolveu / ❌ falhou + mensagem do erro, com cores diferentes via de>innerHTML</code>.</li>
+            >Formulário para inscrever nova IA (nome, versão, tipo) com validação inline: se o nome já existir, exiba erro com de>textContent</code> sem usar de>alert()</code>.</li>
+          </ol>
+
+          <div class="callout dica">
+            <strong>💡 Dica de ordenação</strong>
+            Para ordenar o placar use: de>ias.sort((a, b) => b.pontuacao - a.pontuacao)</code>. Valores negativos indicam que de>b</code> vem antes de de>a</code>. Compare essa abordagem com a reordenação de cards do DOM do Exercício 5 — é o mesmo conceito em contextos diferentes.
+          </div>
+
+          <div class="entrega">
+            <strong>📁 Entrega</strong>
+            Arquivo único de>torneio-ia.html</code>. Demonstre ao menos 4 IAs de tipos diferentes, 3 rodadas com desafios variados (um curto para a IAPessimista funcionar, um longo para ela falhar) e placar final salvo no de>localStorage</code>.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- fim ex-grid -->
+</main>
+
+<footer>
+  <strong>Programação II – ECO 2026/1</strong> · Universidade do Estado de Santa Catarina ·
+  Exercícios Integrados – JavaScript + HTML5
+</footer>
+
+<script>
+  // TOGGLE DOS CARDS
+  function toggleEx(id) {
+    const body  = document.getElementById('body-' + id);
+    const arrow = document.getElementById('arrow-' + id);
+    const isOpen = body.classList.contains('open');
+    document.querySelectorAll('.ex-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.ex-arrow').forEach(a => a.classList.remove('open'));
+    if (!isOpen) {
+      body.classList.add('open');
+      arrow.classList.add('open');
+      body.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  // MARCAR COMO ESCOLHIDO
+  const escolhidos = new Set();
+
+  function marcar(event, id) {
+    event.stopPropagation();
+    const card = document.getElementById(id);
+    const btn  = card.querySelector('.ex-check-btn');
+    if (escolhidos.has(id)) {
+      escolhidos.delete(id);
+      card.classList.remove('escolhido');
+      btn.textContent = '✓';
+      btn.title = 'Marcar como escolhido';
+    } else {
+      if (escolhidos.size >= 4) {
+        mostrarAviso('Seu grupo já escolheu 4 exercícios! Desmarque um antes de escolher outro.');
+        return;
+      }
+      escolhidos.add(id);
+      card.classList.add('escolhido');
+      btn.textContent = '★';
+      btn.title = 'Desmarcar';
+    }
+    atualizarProgresso();
+  }
+
+  // BARRA DE PROGRESSO
+  function atualizarProgresso() {
+    const atual = escolhidos.size;
+    const pct   = Math.min((atual / 4) * 100, 100);
+    document.getElementById('barFill').style.width = pct + '%';
+    document.getElementById('prog-txt').textContent =
+      atual < 4 ? atual + ' / 4 escolhidos' : '✅ 4 / 4 — Seleção completa!';
+  }
+
+  // AVISO FLUTUANTE
+  function mostrarAviso(msg) {
+    let aviso = document.getElementById('aviso-flutuante');
+    if (!aviso) {
+      aviso = document.createElement('div');
+      aviso.id = 'aviso-flutuante';
+      aviso.style.cssText = `
+        position:fixed; bottom:2rem; left:50%;
+        transform:translateX(-50%);
+        background:#1e293b; color:#fff;
+        padding:.8rem 1.5rem; border-radius:10px;
+        font-size:.9rem; font-weight:600;
+        box-shadow:0 8px 24px rgba(0,0,0,.25);
+        z-index:9999; border-left:4px solid #f59e0b;
+        max-width:90vw; text-align:center;
+      `;
+      document.body.appendChild(aviso);
+    }
+    aviso.textContent = '⚠️ ' + msg;
+    aviso.style.display = 'block';
+    clearTimeout(aviso._t);
+    aviso._t = setTimeout(() => { aviso.style.display = 'none'; }, 3500);
+  }
+
+  // COPIAR CÓDIGO
+  function copiar(btn) {
+    const text = btn.parentElement.innerText.replace('Copiar','').trim();
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✅ Copiado!';
+      setTimeout(() => { btn.textContent = 'Copiar'; }, 2000);
+    }).catch(() => {
+      btn.textContent = '❌ Erro';
+      setTimeout(() => { btn.textContent = 'Copiar'; }, 2000);
+    });
+  }
+
+  // ANIMAÇÕES DE ENTRADA
+  const s = document.createElement('style');
+  s.textContent = `
+    @keyframes entrar {
+      from { opacity:0; transform:translateY(18px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .ex-card { animation: entrar .45s ease both; }
+    .ex-card:nth-child(1) { animation-delay:.05s; }
+    .ex-card:nth-child(2) { animation-delay:.10s; }
+    .ex-card:nth-child(3) { animation-delay:.15s; }
+    .ex-card:nth-child(4) { animation-delay:.20s; }
+    .ex-card:nth-child(5) { animation-delay:.25s; }
+    .ex-card:nth-child(6) { animation-delay:.30s; }
+    .ex-card:nth-child(7) { animation-delay:.35s; }
+    .ex-card:nth-child(8) { animation-delay:.40s; }
+  `;
+  document.head.appendChild(s);
+
+  atualizarProgresso();
+</script>
+
+</body>
+</html>
