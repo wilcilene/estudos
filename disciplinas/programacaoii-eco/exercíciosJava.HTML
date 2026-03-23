@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Exercícios Integrados – Prog II ECO 2026</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #2563eb; --primary-dk: #1d4ed8;
+      --accent: #7c3aed; --success: #16a34a;
+      --warn: #d97706; --danger: #dc2626;
+      --bg: #f8fafc; --surface: #ffffff;
+      --border: #e2e8f0; --text: #1e293b;
+      --muted: #64748b; --code-bg: #0f172a;
+      --radius: 12px;
+    }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+
+    /* HEADER */
+    header { background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 100%); color: #fff; padding: 2.5rem 2rem 2rem; }
+    .header-inner { max-width: 980px; margin: 0 auto; }
+    .breadcrumb { font-size: .85rem; opacity: .75; margin-bottom: .5rem; }
+    .breadcrumb a { color: #fff; text-decoration: none; }
+    header h1 { font-size: 2rem; font-weight: 800; display: flex; align-items: center; gap: .6rem; }
+    header .subtitle { margin-top: .5rem; opacity: .9; font-size: 1rem; max-width: 700px; }
+    .badges { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: .5rem; }
+    .badge { background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3); border-radius: 20px; padding: .25rem .85rem; font-size: .8rem; font-weight: 600; }
+
+    /* INSTRUÇÃO */
+    .instrucao-box { background: #fffbeb; border-left: 4px solid #d97706; border-radius: 0 var(--radius) var(--radius) 0; padding: 1rem 1.4rem; margin: 1.8rem 0 1.2rem; font-size: .95rem; }
+    .instrucao-box strong { display: block; color: #92400e; margin-bottom: .3rem; font-size: 1rem; }
+
+    /* COBERTURA DE TÓPICOS */
+    .cobertura { display: flex; flex-wrap: wrap; gap: .4rem; margin: 1rem 0 1.8rem; }
+    .topico-pill { font-size: .78rem; font-weight: 700; padding: .3rem .85rem; border-radius: 20px; }
+    .t1 { background: #dbeafe; color: #1e40af; }
+    .t2 { background: #ede9fe; color: #5b21b6; }
+    .t3 { background: #dcfce7; color: #166534; }
+    .t4 { background: #fce7f3; color: #9d174d; }
+    .t5 { background: #ffedd5; color: #9a3412; }
+
+    /* PROGRESS */
+    .progress-wrap { background: var(--surface); border-bottom: 1px solid var(--border); padding: .75rem 2rem; }
+    .progress-inner { max-width: 980px; margin: 0 auto; display: flex; align-items: center; gap: 1rem; }
+    .progress-inner > span { font-size: .85rem; color: var(--muted); white-space: nowrap; }
+    .bar-bg { flex: 1; background: var(--border); border-radius: 10px; height: 9px; overflow: hidden; }
+    .bar-fill { height: 100%; background: linear-gradient(90deg, #2563eb, #7c3aed); border-radius: 10px; width: 0%; transition: width .5s; }
+    #prog-txt { font-weight: 700; color: var(--primary); white-space: nowrap; }
+
+    /* MAIN */
+    main { max-width: 980px; margin: 2rem auto; padding: 0 1rem 4rem; }
+
+    /* GRID DE CARDS */
+    .ex-grid { display: grid; gap: 1.4rem; }
+
+    /* CARD */
+    .ex-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+      transition: box-shadow .2s, border-color .2s;
+    }
+    .ex-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,.09); }
+    .ex-card.concluido { border-color: #86efac; }
+    .ex-card.concluido .ex-card-header { background: linear-gradient(135deg, #f0fdf4, #dcfce7); }
+
+    /* CARD HEADER */
+    .ex-card-header { padding: 1.3rem 1.5rem; cursor: pointer; user-select: none; transition: background .2s; position: relative; }
+    .ex-card-header:hover { background: #f8fafc; }
+    .ex-card.concluido .ex-card-header:hover { background: #dcfce7; }
+
+    .ex-top-row { display: flex; align-items: center; gap: .75rem; margin-bottom: .7rem; }
+    .ex-num-badge {
+      width: 2.4rem; height: 2.4rem; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: .9rem; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff; box-shadow: 0 2px 8px rgba(37,99,235,.3);
+    }
+    .ex-card.concluido .ex-num-badge { background: linear-gradient(135deg, #16a34a, #15803d); }
+    .ex-emoji { font-size: 1.6rem; flex-shrink: 0; }
+    .ex-titulo-wrap { flex: 1; }
+    .ex-titulo { font-size: 1.05rem; font-weight: 700; line-height: 1.3; }
+    .ex-subtitulo { font-size: .82rem; color: var(--muted); margin-top: .15rem; font-style: italic; }
+    .ex-check-btn {
+      width: 1.5rem; height: 1.5rem; border-radius: 50%;
+      border: 2px solid var(--border); background: var(--surface);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: .85rem; transition: all .2s; flex-shrink: 0;
+    }
+    .ex-card.concluido .ex-check-btn { background: var(--success); border-color: var(--success); color: #fff; }
+    .ex-arrow { font-size: .8rem; color: var(--muted); transition: transform .3s; flex-shrink: 0; }
+    .ex-arrow.open { transform: rotate(180deg); }
+
+    /* PILLS DE TÓPICOS E DIFICULDADE */
+    .ex-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .ex-dif { font-size: .73rem; font-weight: 700; padding: .22rem .7rem; border-radius: 20px; }
+    .d-medio   { background: #fef9c3; color: #a16207; }
+    .d-dificil { background: #fee2e2; color: #dc2626; }
+    .ex-tag-pill { font-size: .72rem; font-weight: 600; padding: .22rem .65rem; border-radius: 20px; }
+
+    /* CARD BODY */
+    .ex-body { display: none; border-top: 1px solid var(--border); }
+    .ex-body.open { display: block; }
+    .ex-body-inner { padding: 1.4rem 1.6rem; }
+    .ex-body-inner p { margin-bottom: .7rem; font-size: .95rem; }
+    .ex-body-inner ol { padding-left: 1.5rem; margin-bottom: .9rem; }
+    .ex-body-inner li { margin-bottom: .5rem; font-size: .95rem; }
+    .ex-body-inner strong { color: #1e40af; }
+
+    /* CONTEXTO (história) */
+    .contexto {
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      border-radius: 10px; padding: 1rem 1.3rem; margin-bottom: 1.1rem;
+      border-left: 4px solid #0ea5e9; font-size: .95rem; font-style: italic;
+    }
+    .contexto strong { font-style: normal; color: #0c4a6e; display: block; margin-bottom: .3rem; }
+
+    /* REQUISITOS */
+    .req-title { font-weight: 700; color: var(--text); margin: 1rem 0 .4rem; font-size: .92rem; display: flex; align-items: center; gap: .4rem; }
+
+    /* COBERTURA NO CARD */
+    .card-cobertura { margin: 1rem 0; }
+    .card-cobertura-title { font-size: .78rem; font-weight: 700; color: var(--muted); margin-bottom: .4rem; text-transform: uppercase; letter-spacing: .5px; }
+    .card-cobertura-pills { display: flex; flex-wrap: wrap; gap: .35rem; }
+
+    /* CALLOUTS */
+    .callout { border-radius: 8px; padding: .85rem 1.1rem; margin: .9rem 0; border-left: 4px solid; font-size: .9rem; }
+    .callout.dica { background: #f0fdf4; border-color: #16a34a; }
+    .callout.warn { background: #fffbeb; border-color: #d97706; }
+    .callout strong { display: block; margin-bottom: .25rem; }
+
+    /* ENTREGA */
+    .entrega { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: .9rem 1.1rem; margin-top: 1rem; font-size: .88rem; }
+    .entrega strong { color: var(--accent); display: block; margin-bottom: .35rem; }
+
+    /* CÓDIGO */
+    pre { background: var(--code-bg); color: #e2e8f0; border-radius: 8px; padding: 1.1rem 1.3rem; overflow-x: auto; font-size: .85rem; line-height: 1.7; margin: .8rem 0; position: relative; font-family: 'Cascadia Code','Fira Code','Courier New',monospace; }
+    .copy-btn { position: absolute; top: .5rem; right: .7rem; background: #1e293b; border: 1px solid #334155; color: #94a3b8; padding: .25rem .65rem; border-radius: 6px; font-size: .73rem; cursor: pointer; transition: all .2s; }
+    .copy-btn:hover { background: var(--primary); color: #fff; }
+    code { background: #e2e8f0; color: #7c3aed; padding: .1rem .35rem; border-radius: 4px; font-size: .87em; font-family: 'Cascadia Code','Fira Code',monospace; }
+    pre code { background: transparent; color: inherit; padding: 0; }
+    .ck { color: #93c5fd; } .cs { color: #86efac; } .cf { color: #fde68a; }
+    .cc { color: #94a3b8; font-style: italic; } .cn { color: #f9a8d4; }
+
+    /* FOOTER */
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 1.5rem 2rem; text-align: center; color: var(--muted); font-size: .85rem; }
+    footer strong { color: var(--primary); }
+
+    @media (max-width: 640px) {
+      header h1 { font-size: 1.4rem; }
+      .ex-subtitulo { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="breadcrumb"><a href="#">Prog II – ECO 2026/1</a> › Exercícios Integrados</div>
+    <h1>🧩 Exercícios Integrados</h1>
+    <p class="subtitle">8 problemas criativos que cobrem todos os tópicos da disciplina de forma simultânea. Cada grupo escolhe 4.</p>
+    <div class="badges">
+      <span class="badge">👥 Atividade em grupo</span>
+      <span class="badge">🎯 Escolha 4 dos 8</span>
+      <span class="badge">⏱ 3 aulas de 45 min</span>
+      <span class="badge">☕ Java + 🌐 Web</span>
+    </div>
+  </div>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-inner">
+    <span>Exercícios marcados:</span>
+    <div class="bar-bg"><div class="bar-fill" id="barFill"></div></div>
+    <span id="prog-txt">0 / 8</span>
+  </div>
+</div>
+
+<main>
+
+  <div class="instrucao-box">
+    <strong>📌 Como funciona</strong>
+    Cada exercício integra <em>todos</em> os tópicos estudados: OO (classes, herança, polimorfismo), interfaces, exceções, leitura/escrita de arquivos, HTML5, DOM e eventos JavaScript. Clique em cada card para ver o enunciado completo. Marque os que seu grupo escolheu com o botão ✓.
+  </div>
+
+  <div class="cobertura">
+    <span class="topico-pill t1">☕ Classes e Herança</span>
+        <span class="topico-pill t2">🔌 Interfaces</span>
+    <span class="topico-pill t3">⚠️ Exceções</span>
+    <span class="topico-pill t4">📁 Arquivos</span>
+    <span class="topico-pill t5">🌐 HTML5 / DOM / Eventos</span>
+  </div>
+
+  <div class="ex-grid">
+
+    <!-- ============================
+         EX 1 — RPGZINHO
+         ============================ -->
+    <div class="ex-card" id="ex1">
+      <div class="ex-card-header" onclick="toggleEx('ex1')">
+        <div class="ex-top-row">
+          <div class="ex-num-badge">1</div>
+          <span class="ex-emoji">🧙</span>
+          <div class="ex-titulo-wrap">
+            <div class="ex-titulo">O Grimório dos Heróis</div>
+            <div class="ex-subtitulo">Sistema de personagens para um RPG de texto</div>
+          </div>
+          <div class="ex-check-btn" onclick="marcar(event,'ex1')" title="Marcar como escolhido">✓</div>
+          <span class="ex-arrow" id="arrow-ex1">▼</span>
+        </div>
+        <div class="ex-tags">
+          <span class="ex-dif d-dificil">Difícil</span>
+          <span class="ex-tag-pill t1">Herança</span>
+          <span class="ex-tag-pill t2">Interfaces</span>
+          <span class="ex-tag-pill t3">Exceções</span>
+          <span class="ex-tag-pill t4">Arquivos</span>
+          <span class="ex-tag-pill t5">DOM</span>
+        </div>
+      </div>
+      <div class="ex-body" id="body-ex1">
+        <div class="ex-body-inner">
+          <div class="contexto">
+            <strong>🗺️ Contexto</strong>
+            O reino de Algorithmia está ameaçado por bugs ancestrais. Você foi convocado para criar o Grimório dos Heróis — um sistema que registra, salva e exibe os guerreiros que defenderão o reino. Cada herói tem habilidades únicas, e o sistema precisa ser robusto o suficiente para sobreviver a entradas inválidas dos recrutas desastrados.
+          </div>
+
+          <p class="req-title">⚙️ Parte Java — O Motor do Grimório</p>
+          <ol>
+            >Crie a interface de>Combatente</code> com os métodos de>atacar()</code>, de>defender()</code> e de>getStatus()</code> (retorna String).</li>
+            >Crie a classe abstrata de>Heroi</code> implementando de>Combatente</code>, com atributos de>nome</code>, de>nivel</code> e de>pontosDeVida</code>. Implemente de>getStatus()</code> retornando um resumo formatado.</li>
+            >Crie as subclasses de>Mago</code> (tem de>manaAtual</code>; atacar consome mana), de>Guerreiro</code> (tem de>forca</code>; defender reduz dano pela metade) e de>Arqueiro</code> (tem de>flechas</code>; atacar só funciona se tiver flechas).</li>
+            >Crie a exceção customizada de>HeroiSemRecursosException</code> lançada quando de>Mago</code> ataca sem mana ou de>Arqueiro</code> ataca sem flechas.</li>
+            >Crie a classe de>Grimorio</code> que mantém uma de>List&lt;Heroi&gt;</code> e implementa:<br>
+              — de>adicionarHeroi(Heroi h)</code><br>
+              — de>salvarEmArquivo(String caminho)</code>: salva o de>getStatus()</code> de cada herói em um de>.txt</code><br>
+              — de>carregarDeArquivo(String caminho)</code>: lê o arquivo e imprime os status no console<br>
+              — de>buscarPorNome(String nome)</code>: lança de>HeroiNaoEncontradoException</code> se não existir
+            </li>
+          </ol>
+
+          <p class="req-title">🌐 Parte Web — A Vitrine do Grimório</p>
+          <ol>
+            >Crie uma página HTML com um formulário para cadastrar um herói (nome, tipo, nível).</li>
+            >Ao submeter o formulário via evento JavaScript (sem recarregar a página), exiba o herói em um card dinâmico gerado com de>innerHTML</code>.</li>
+            >Cada card deve ter um botão "Remover" que, ao clicado, remove o card do DOM com de>remove()</code>.</li>
+            >Use de>querySelector</code> para validar os campos: se nome estiver vazio, exiba uma mensagem de erro vermelha abaixo do campo sem usar de>alert()</code>.</li>
+          </ol>
+
+          <div class="callout dica">
+            <strong>💡 Dica de integração</strong>
+            O método de>getStatus()</code> do Java e a exibição do card HTML são análogos — ambos "serializam" o herói em texto legível. Pense em como o mesmo dado seria representado nas duas linguagens.
+          </div>
+
+          <div class="entrega">
+            <strong>📁 Entrega</strong>
+            Arquivo de>Grimorio.java</code> + arquivo de>grimorio.html</code>. O arquivo de>herois.txt</code> gerado deve ser incluído como exemplo.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================
+         EX 2 — STREAMING
+         ============================ -->
+    <div class="ex-card" id="ex2">
+      <div class="ex-card-header" onclick="toggleEx('ex2')">
+        <div class="ex-top-row">
+          <div class="ex-num-badge">2</div>
+          <span class="ex-emoji">🎬</span>
+          <div class="ex-titulo-wrap">
+            <div class="ex-titulo">CinemaCode — Plataforma de Streaming</div>
+            <div class="ex-subtitulo">Catálogo de filmes com recomendação e histórico</div>
+          </div>
+          <div class="ex-check-btn" onclick="marcar(event,'ex2')" title="Marcar como escolhido">✓</div>
+          <span class="ex-arrow" id="arrow-ex2">▼</span>
+        </div>
+        <div class="ex-tags">
+          <span class="ex-dif d-dificil">Difícil</span>
+          <span class="ex-tag-pill t1">Polimorfismo</span>
+          <span class="ex-tag-pill t2">Interfaces</span>
+          <span class="ex-tag-pill t3">Exceções</span>
+          <span class="ex-tag-pill t4">Arquivos</span>
+          <span class="ex-tag-pill t5">DOM + Eventos</span>
+        </div>
+      </div>
+      <div class="ex-body" id="body-ex2">
+        <div class="ex-body-inner">
+          <div class="contexto">
+            <strong>🎥 Contexto</strong>
+            A startup CinemaCode quer lançar uma plataforma de streaming, mas o desenvolvedor principal fugiu para as montanhas com um laptop. Você herdou o projeto pela metade e precisa terminar o backend em Java E a interface web — antes que os investidores percebam.
+          </div>
+
+          <p class="req-title">⚙️ Parte Java</p>
+          <ol>
+            >Crie a interface de>Reproducivel</code> com os métodos de>play()</code>, de>pause()</code> e de>getDuracao()</code>.</li>
+            >Crie a classe abstrata de>Midia</code> (com de>titulo</code>, de>ano</code>, de>genero</code>) implementando de>Reproducivel</code>.</li>
+            >Crie de>Filme</code> (com de>diretor</code>), de>Serie</code> (com de>temporadas</code> e de>episodiosPorTemporada</code>) e de>Documentario</code> (com de>tema</code>). Cada um sobrescreve de>getDuracao()</code> com cálculo próprio.</li>
+            >Crie de>MidiaNaoDisponivelException</code> lançada quando tentar dar de>play()</code> em mídia com ano anterior a 2000 (conteúdo "fora do catálogo").</li>
+            >Crie a classe de>Catalogo</code> com:<br>
+              — de>adicionarMidia(Midia m)</code><br>
+              — de>exportarCatalogo(String arquivo)</code>: salva título, tipo e duração de cada mídia em CSV<br>
+              — de>importarCatalogo(String arquivo)</code>: lê o CSV e reconstrói a lista<br>
+              — de>recomendarPorGenero(String genero)</code>: retorna lista filtrada
+            </li>
+          </ol>
+
+          <p class="req-title">🌐 Parte Web</p>
+          <ol>
+            >Crie uma página com um campo de busca. Ao digitar (evento de>input</code>), filtre em tempo real os cards de filmes exibidos na tela.</li>
+            >Cada card de mídia deve ter botões "▶ Play" e "⏸ Pause" que alteram o estilo do card (cor de fundo, ícone) via manipulação do DOM.</li>
+            >Adicione um contador no topo: "X títulos encontrados", atualizado dinamicamente com de>querySelector</code> e de>textContent</code>.</li>
+          </ol>
+
+          <div class="callout warn">
+            <strong>⚠️ Atenção</strong>
+            O CSV exportado deve usar de>;</code> como separador para facilitar a leitura. Trate o caso em que o arquivo não existe ao importar — lance uma exceção adequada em vez de deixar o programa travar.
+          </div>
+
+          <div class="entrega">
+            <strong>📁 Entrega</strong>
+            de>CinemaCode.java</code> + de>catalogo.html</code> + arquivo de>catalogo.csv</code> de exemplo com pelo menos 6 mídias.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================
+         EX 3 — BANCO INTERGALÁCTICO
+         ============================ -->
+    <div class="ex-card" id="ex3">
+      <div class="ex-card-header" onclick="toggleEx('ex3')">
+        <div class="ex-top-row">
+          <div class="ex-num-badge">3</div>
+          <span class="ex-emoji">🚀</span>
+          <div class="ex-titulo-wrap">
+            <div class="ex-titulo">Banco Intergaláctico S.A.</div>
+            <div class="ex-subtitulo">Sistema bancário para colônias espaciais</div>
+          </div>
+          <div class="ex-check-btn" onclick="marcar(event,'ex3')" title="Marcar como escolhido">✓</div>
+          <span class="ex-arrow" id="arrow-ex3">▼</span>
+        </div>
+        <div class="ex-tags">
+          <span class="ex-dif d-dificil">Difícil</span>
+          <span class="ex-tag-pill t1">Herança</span>
+          <span class="ex-tag-pill t2">Interfaces</span>
+          <span class="ex-tag-pill t3">Exceções</span>
+          <span class="ex-tag-pill t4">Arquivos</span>
+          <span class="ex-tag-pill t5">DOM + innerHTML</span>
+        </div>
+      </div>
+      <div class="ex-body" id="body-ex3">
+        <div class="ex-body-inner">
+          <div class="contexto">
+            <strong>🌌 Contexto</strong>
+            O Banco Intergaláctico S.A. opera em 7 colônias espaciais e aceita pagamentos em créditos galácticos. O sistema antigo foi destruído por uma tempestade de meteoros. Você tem até o nascer de Kepler-442b para entregar o novo sistema — ou os colonos ficam sem acesso às suas contas.
+          </div>
+
+          <p class="req-title">⚙️ Parte Java</p>
+          <ol>
+            >Crie a interface de>Transacionavel</code> com de>depositar(double valor)</code>, de>sacar(double valor)</code> e de>getExtrato()</code>.</li>
+            >Crie a classe abstrata de>Conta</code> implementando de>Transacionavel</code>, com de>titular</code>, de>numero</code> e de>saldo</code>. Mantenha um de>List&lt;String&gt;</code> de histórico de transações.</li>
+            >Crie de>ContaCorrente</code> (tem de>limiteCredito</code>; pode sacar além do saldo até o limite), de>ContaPoupanca</code> (tem de>taxaJuros</code>; método de>aplicarJuros()</code>) e de>ContaGalactica</code> (converte automaticamente créditos galácticos para reais na taxa 1:3,7).</li>
+            >Crie as exceções de>SaldoInsuficienteException</code> e de>ValorInvalidoException</code> (lançada para valores negativos ou zero).</li>
+            >Crie a classe de>Banco</code> com:<br>
+              — de>abrirConta(Conta c)</code><br>
+              — de>salvarContas(String arquivo)</code>: persiste número, titular, tipo e saldo em arquivo<br>
+              — de>carregarContas(String arquivo)</code>: reconstrói a lista de contas<br>
+              — de>transferir(String numOrigem, String numDestino, double valor)</code>: lança exceção se conta não existir ou saldo insuficiente
+            </li>
+          </ol>
+
+          <p class="req-title">🌐 Parte Web</p>
+          <ol>
+            >Crie uma página de extrato: ao digitar o             número da conta e clicar em "Buscar", exiba o extrato em uma tabela gerada dinamicamente com de>innerHTML</code>.</li>
+            >Cada linha da tabela deve ter uma cor diferente para débitos (vermelho claro) e créditos (verde claro), aplicada via manipulação de estilo pelo DOM.</li>
+            >Adicione um botão "Limpar Extrato" que remove todas as linhas da tabela usando de>querySelector</code> e de>innerHTML = ''</code>.</li>
+          </ol>
+
+          <div class="callout dica">
+            <strong>💡 Dica</strong>
+            No arquivo de contas, salve cada conta em uma linha no formato de>numero;titular;tipo;saldo</code>. Ao carregar, use de>split(";")</code> para reconstruir os dados.
+          </div>
+
+          <div class="entrega">
+            <strong>📁 Entrega</strong>
+            de>BancoGalactico.java</code> + de>extrato.html</code> + arquivo de>contas.txt</code> de exemplo com ao menos 4 contas de tipos diferentes.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================
+         EX 4 — HOSPITAL DOS ROBÔS
+         ============================ -->
+    <div class="ex-card" id="ex4">
+      <div class="ex-card-header" onclick="toggleEx('ex4')">
+        <div class="ex-top-row">
+          <div class="ex-num-badge">4</div>
+          <span class="ex-emoji">🤖</span>
+          <div class="ex-titulo-wrap">
+            <div class="ex-titulo">Hospital dos Robôs</div>
+            <div class="ex-subtitulo">Sistema de triagem e prontuário para androides</div>
+          </div>
+          <div class="ex-check-btn" onclick="marcar(event,'ex4')" title="Marcar como escolhido">✓</div>
+          <span class="ex-arrow" id="arrow-ex4">▼</span>
+        </div>
+        <div class="ex-tags">
+          <span class="ex-dif d-dificil">Difícil</span>
+          <span class="ex-tag-pill t1">Polimorfismo</span>
+          <span class="ex-tag-pill t2">Interfaces</span>
+          <span class="ex-tag-pill t3">Exceções</span>
+          <span class="ex-tag-pill t4">Arquivos</span>
+          <span class="ex-tag-pill t5">DOM + Eventos</span>
+        </div>
+      </div>
+      <div class="ex-body" id="body-ex4">
+        <div class="ex-body-inner">
+          <div class="contexto">
+            <strong>🏥 Contexto</strong>
+            No ano 2157, robôs também adoecem. O Hospital dos Robôs de Nova Curitiba atende androides com os mais variados problemas: superaquecimento, falha de memória, corrosão de articulações. Você foi contratado para desenvolver o sistema de triagem e prontuário eletrônico antes que a fila de robôs enferrujados tome conta do corredor.
+          </div>
+
+          <p class="req-title">⚙️ Parte Java</p>
+          <ol>
+            >Crie a interface de>Diagnosticavel</code> com os métodos de>diagnosticar()</code> (retorna String com o diagnóstico) e de>calcularCustoCirurgia()</code> (retorna double).</li>
+            >Crie a classe abstrata de>Robo</code> com atributos de>id</code>, de>modelo</code>, de>fabricante</code> e de>anoFabricacao</code>, implementando de>Diagnosticavel</code>.</li>
+            >Crie as subclasses:<br>
+              — de>AndroideServico</code>: diagnóstico verifica superaquecimento (se ano &lt; 2140, custo base R$500)<br>
+              — de>RoboIndustrial</code>: diagnóstico verifica corrosão (custo = R$200 × número de articulações danificadas)<br>
+              — de>RoboMedico</code>: diagnóstico verifica falha de sensor (custo fixo R$1200, urgência sempre alta)
+            </li>
+            >Crie as exceções de>RoboNaoCadastradoException</code> e de>ModeloInvalidoException</code> (lançada se o modelo tiver menos de 3 caracteres).</li>
+            >Crie a classe de>Hospital</code> com:<br>
+              — de>admitirRobo(Robo r)</code><br>
+              — de>realizarTriagem()</code>: percorre todos os robôs, chama de>diagnosticar()</code> e imprime o relatório<br>
+              — de>salvarProntuarios(String arquivo)</code>: salva id, modelo, diagnóstico e custo em arquivo<br>
+              — de>buscarPorId(String id)</code>: lança de>RoboNaoCadastradoException</code> se não encontrar
+            </li>
+          </ol>
+
+          <p class="req-title">🌐 Parte Web</p>
+          <ol>
+            >Crie uma página de triagem: um formulário com campos id, modelo, tipo e ano de fabricação.</li>
+            >Ao clicar em "Admitir Robô", gere dinamicamente com de>innerHTML</code> um card de prontuário com cor de urgência (vermelho = RoboMedico, amarelo = AndroideServico, verde = RoboIndustrial).</li>
+            >Adicione um campo de busca: ao digitar o id, destaque o card correspondente com uma borda azul usando de>querySelector</code> e manipulação de estilo.</li>
+            >Adicione evento de duplo clique (de>dblclick</code>) em cada card para marcá-lo como "Alta" (muda o card para cinza com texto riscado).</li>
+          </ol>
+
+          <div class="callout warn">
+            <strong>⚠️ Atenção</strong>
+            O método de>calcularCustoCirurgia()</code> nunca deve retornar valor negativo. Valide isso dentro do método e lance uma exceção adequada se os dados de entrada gerarem um resultado inválido.
+          </div>
+
+          <div class="entrega">
+            <strong>📁 Entrega</strong>
+            de>HospitalRobos.java</code> + de>triagem.html</code> + arquivo de>prontuarios.txt</code> com ao menos 5 robôs de tipos variados.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================
+         EX 5 — ESCOLA DE MAGIA
+         ============================ -->
+    <div class="ex-card" id="ex5">
+      <div class="ex-card-header" onclick="toggleEx('ex5')">
+        <div class="ex-top-row">
+          <div class="ex-num-badge">5</div>
+          <span class="ex-emoji">🪄</span>
+          <div class="ex-titulo-wrap">
+            <div class="ex-titulo">Escola de Magia Algorithmia</div>
+            <div class="ex-subtitulo">Sistema de notas e feitiços para estudantes de magia</div>
+          </div>
+          <div class="ex-check-btn" onclick="marcar(event,'ex5')" title="Marcar como escolhido">✓</div>
+          <span class="ex-arrow" id="arrow-ex5">▼</span>
+        </div>
+        <div class="ex-tags">
+          <span class="ex-dif d-dificil">Difícil</span>
+          <span class="ex-tag-pill t1">Herança</span>
+          <span class="ex-tag-pill t2">Interfaces</span>
+          <span class="ex-tag-pill t3">Exceções</span>
+          <span class="ex-tag-pill t4">Arquivos</span>
+          <span class="ex-tag-pill t5">DOM + Formulários</span>
+        </div>
+      </div>
+      <div class="ex-body" id="body-ex5">
+        <div class="ex-body-inner">
+          <div class="contexto">
+            <strong>🏰 Contexto</strong>
+            A Escola de Magia Algorithmia tem um problemão: o livro de registros foi transformado em sapo por um aluno descuidado. Agora você precisa criar um sistema digital para gerenciar os estudantes, suas notas em Feitiçaria Básica, Poções e Transfiguração, e emitir o boletim mágico de cada um antes da festa de formatura.
+          </div>
+
+          <p class="req-title">⚙️ Parte Java</p>
+          <ol>
+            >Crie a interface de>Avaliavel</code> com de>calcularMedia()</code> e de>getSituacao()</code> (retorna "Aprovado", "Recuperação" ou "Reprovado").</li>
+            >Crie a classe abstrata de>Estudante</code> com de>nome</code>, de>matricula</code> e um de>Map&lt;String, Double&gt;</code> de notas por disciplina, implementando de>Avaliavel</code>.</li>
+            >Crie as subclasses de>EstudanteBolsista</code> (média mínima para aprovação = 7,0) e de>EstudanteRegular</code> (média mínima = 6,0).</li>
+            >Crie as exceções de>NotaInvalidaException</code> (nota fora do intervalo 0–10) e de>DisciplinaNaoEncontradaException</code>.</li>
+            >Crie a classe de>SecretariaEscolar</code> com:<br>
+              — de>matricularEstudante(Estudante e)</code><br>
+              — de>lancarNota(String matricula, String disciplina, double nota)</code>: lança ambas as exceções quando necessário<br>
+              — de>emitirBoletins(String arquivo)</code>: salva nome, matrícula, notas, média e situação de cada aluno<br>
+              — de>gerarRankingAprovados()</code>: retorna lista ordenada por média decrescente
+            </li>
+          </ol>
+
+          <p class="req-title">🌐 Parte Web</p>
+          <ol>
+            >Crie uma página de boletim: um formulário com campos nome, matrícula e as 3 notas (Feitiçaria, Poções, Transfiguração).</li>
+            >Ao submeter (evento de>submit</code> com de>preventDefault()</code>), calcule a média via JavaScript e exiba o boletim em um card gerado com de>innerHTML</code>.</li>
+            >O card deve ter cor de fundo diferente conforme a situação: verde (aprovado), amarelo (recuperação), vermelho (reprovado).</li>
+            >Valide com de>querySelector</code> se alguma nota está fora do intervalo 0–10 e exiba mensagem de erro no próprio campo, sem de>alert()</code>.</li>
+          </ol>
+
+          <div class="callout dica">
+            <strong>💡 Dica</strong>
+            Para o boletim web, use de>document.querySelectorAll('input[type="number"]')</code> para percorrer todos os campos de nota de uma vez e validar em loop.
+          </div>
+
+          <div class="entrega">
+            <strong>📁 Entrega</strong>
+            de>EscolaMagia.java</code> + de>boletim.html</code> + arquivo de>boletins.txt</code> com ao menos 6 estudantes (3 bolsistas, 3 regulares).
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================
+         EX 6 — ZOOLÓGICO DIGITAL
+         ============================ -->
+    <div class="ex-card" id="ex6">
+      <div class="ex-card-header" onclick="toggleEx('ex6')">
+        <div class="ex-top-row">
+          <div class="ex-num-badge">6</div>
+          <span class="ex-emoji">🦁</span>
+          <div class="ex-titulo-wrap">
+            <div class="ex-titulo">Zoológico Digital de Criaturas Impossíveis</div>
+            <div class="ex-subtitulo">Gerenciador de espécies que não deveriam existir</div>
+          </div>
+          <div class="ex-check-btn" onclick="marcar(event,'ex6')" title="Marcar como escolhido">✓</div>
+          <span class="ex-arrow" id="arrow-ex6">▼</span>
+        </div>
+        <div class="ex-tags">
+          <span class="ex-dif d-medio">Médio</span>
+          <span class="ex-tag-pill t1">Herança</span>
+          <span class="ex-tag-pill t2">Interfaces</span>
+          <span class="ex-tag-pill t3">Exceções</span>
+          <span class="ex-tag-pill t4">Arquivos</span>
+          <span class="ex-tag-pill t5">DOM + innerHTML</span>
+        </div>
+      </div>
+      <div class="ex-body" id="body-ex6">
+        <div class="ex-body-inner">
+          <div class="contexto">
+            <strong>🌿 Contexto</strong>
+            O Zoológico Digital de Criaturas Impossíveis abriga seres fantásticos: Dragões que espirram HTML, Unicórnios que depuram código e Fênix que reiniciam o sistema quando tudo dá errado. O zelador foi transformado em variável local (saiu de escopo) e você precisa assumir o controle do sistema de alimentação e exibição das criaturas.
+          </div>
+
+          <p class="req-title">⚙️ Parte Java</p>
+          <ol>
+            >Crie a interface de>Alimentavel</code> com de>alimentar(String comida)</code> e de>getNivelFome()</code> (retorna int de 0 a 10).</li>
+            >Crie a classe abstrata de>Criatura</code> com de>nome</code>, de>especie</code> e de>nivelFome</code>, implementando de>Alimentavel</code>.</li>
+            >Crie de>Dragao</code> (só come "código compilado"; qualquer outra comida lança de>Comida InaceitavelException</code>), de>Unicornio</code> (come qualquer coisa, mas dobra o nível de fome se a comida não for "arco-íris") e de>Fenix</code> (ao ser alimentada com nível de fome 0, lança de>CriaturaJaSaciadaException</code> e "renasce" resetando todos os atributos).</li>
+            >Crie as exceções de>ComidaInaceitavelException</code> e de>CriaturaJaSaciadaException</code>, ambas com mensagens criativas e temáticas.</li>
+            >Crie a classe de>Zoologico</code> com:<br>
+              — de>adicionarCriatura(Criatura c)</code><br>
+              — de>alimentarTodas(String comida)</code>: tenta alimentar todas, captura exceções individualmente e continua<br>
+              — de>salvarRegistro(String arquivo)</code>: salva nome, espécie e nível de fome em arquivo<br>
+              — de>listarCriaturasFamintas()</code>: retorna criaturas com nível de fome &gt; 7
+            </li>
+          </ol>
+
+          <p class="req-title">🌐 Parte Web</p>
+          <ol>
+            >Crie uma página com cards fixos para cada criatura (Dragão, Unicórnio e Fênix), cada um com uma barra de fome visual (div com largura em % manipulada pelo DOM).</li>
+            >Adicione um campo de texto "O que servir?" e um botão "Alimentar Todas". Ao clicar, atualize as barras de fome com de>querySelector</code> e de>style.width</code>.</li>
+            >Se a comida for inaceitável para o Dragão, exiba uma mensagem de erro animada abaixo do card (adicione/remova uma classe CSS com de>classList.add</code> e de>classList.remove</code>).</li>
+            >Adicione evento de>mouseover</code> em cada card para exibir uma curiosidade sobre a criatura em um tooltip gerado com de>innerHTML</code>.</li>
+          </ol>
+
+          <div class="callout dica">
+            <strong>💡 Dica</strong>
+            Para a barra de fome, use um elemento assim: de>&lt;div class="barra-fome" style="width: 70%"&gt;&lt;/div&gt;</code>. No JavaScript, selecione com de>querySelector</code> e altere de>style.width</code> conforme o nível de fome (nível × 10 + "%").
+          </div>
+
+          <div class="entrega">
+            <strong>📁 Entrega</strong>
+            de>Zoologico.java</code> + de>zoologico.html</code> + arquivo de>registro.txt</code> com ao menos 6 criaturas cadastradas.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================
+         EX 7 — AGÊNCIA ESPACIAL
+         ============================ -->
+    <div class="ex-card" id="ex7">
+      <div class="ex-card-header" onclick="toggleEx('ex7')">
+        <div class="ex-top-row">
+          <div class="ex-num-badge">7</div>
+          <span class="ex-emoji">🛸</span>
+          <div class="ex-titulo-wrap">
+            <div class="ex-titulo">Agência Espacial BugFree</div>
+            <div class="ex-subtitulo">Gerenciamento de missões e tripulação interestelar</div>
+          </div>
+          <div class="ex-check-btn" onclick="marcar(event,'ex7')" title="Marcar como escolhido">✓</div>
+          <span class="ex-arrow" id="arrow-ex7">▼</span>
+        </div>
+        <div class="ex-tags">
+          <span class="ex-dif d-dificil">Difícil</span>
+          <span class="ex-tag-pill t1">Herança</span>
+          <span class="ex-tag-pill t2">Interfaces</span>
+          <span class="ex-tag-pill t3">Exceções</span>
+          <span class="ex-tag-pill t4">Arquivos</span>
+          <span class="ex-tag-pill t5">DOM + Eventos</span>
+        </div>
+      </div>
+      <div class="ex-body" id="body-ex7">
+        <div class="ex-body-inner">
+          <div class="contexto">
+            <strong>🌠 Contexto</strong>
+            A Agência Espacial BugFree planeja colonizar o planeta Kotlin-9, mas o sistema de gerenciamento de missões foi escrito em COBOL por um estagiário em 1974. Você tem 3 aulas para reescrever tudo antes do lançamento. A tripulação está na sala ao lado, nervosa, comendo chips e esperando o sistema funcionar.
+          </div>
+
+          <p class="req-title">⚙️ Parte Java</p>
+          <ol>
+            >Crie a interface de>Tripulante</code> com de>executarFuncao()</code> (retorna String descrevendo a ação) e de>getNivelExperiencia()</code> (retorna int 1–5).</li>
+            >Crie a classe abstrata de>Astronauta</code> com de>nome</code>, de>codigoCracha</code> e de>nivelExperiencia</code>, implementando de>Tripulante</code>.</li>
+            >Crie as subclasses:<br>
+              — de>Piloto</code>: de>executarFuncao()</code> retorna manobra calculada com base no nível<br>
+              — de>Cientista</code>: tem lista de de>experimentos</code>; de>executarFuncao()</code> retorna o próximo experimento da fila<br>
+              — de>Engenheiro</code>: tem de>sistemaResponsavel</code>; lança de>FalhaNoSistemaException</code> com 30% de chance (use de>Math.random()</code>)
+            </li>
+            >Crie a classe de>Missao</code> com de>nome</code>, de>destino</code>, de>duracaoDias</code> e uma de>List&lt;Astronauta&gt;</code>. Implemente:<br>
+              — de>iniciarMissao()</code>: chama de>executarFuncao()</code> de cada tripulante, trata de>FalhaNoSistemaException</code> sem abortar a missão<br>
+              — de>salvarRelatorio(String arquivo)</code>: grava nome da missão, destino e log de cada tripulante<br>
+              — de>carregarMissao(String arquivo)</code>: lê e reconstrói os dados básicos da missão<br>
+              — de>adicionarTripulante(Astronauta a)</code>: lança de>TripulacaoLotadaException</code> se já houver 7 membros
+            </li>
+          </ol>
+
+          <p class="req-title">🌐 Parte Web</p>
+          <ol>
+            >Crie uma página de painel de missão com uma lista de tripulantes gerada dinamicamente com de>innerHTML</code> ao carregar a página (use um array JavaScript com os dados).</li>
+            >Cada item da lista deve ter um botão "Executar Função" que, ao clicado, exibe em um painel lateral a ação daquele tripulante (manipule o DOM com de>textContent</code>).</li>
+            >Adicione um contador regressivo de lançamento (ex.: 10 segundos) usando de>setInterval</code>. Ao chegar a zero, altere o fundo da página para preto e exiba "🚀 Missão iniciada!" com de>innerHTML</code>.</li>
+            >Use de>querySelectorAll</code> para destacar em amarelo todos os tripulantes do tipo "Engenheiro" assim que a página carregar.</li>
+          </ol>
+
+          <div class="callout warn">
+            <strong>⚠️ Atenção</strong>
+            A de>FalhaNoSistemaException</code> não deve encerrar a missão — apenas registrar o problema no log. Demonstre isso no de>main</code> rodando a missão e mostrando que os outros tripulantes continuam executando mesmo após uma falha do Engenheiro.
+          </div>
+
+          <div class="entrega">
+            <strong>📁 Entrega</strong>
+            de>AgenciaEspacial.java</code> + de>painel.html</code> + arquivo de>relatorio_missao.txt</code> com log completo de uma missão com 5 tripulantes.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================
+         EX 8 — TORNEIO DE IAS
+         ============================ -->
+    <div class="ex-card" id="ex8">
+      <div class="ex-card-header" onclick="toggleEx('ex8')">
+        <div class="ex-top-row">
+          <div class="ex-num-badge">8</div>
+          <span class="ex-emoji">🏆</span>
+          <div class="ex-titulo-wrap">
+            <div class="ex-titulo">Torneio de IAs — Quem Programa Melhor?</div>
+            <div class="ex-subtitulo">Campeonato entre inteligências artificiais amadoras</div>
+          </div>
+          <div class="ex-check-btn" onclick="marcar(event,'ex8')" title="Marcar como escolhido">✓</div>
+          <span class="ex-arrow" id="arrow-ex8">▼</span>
+        </div>
+        <div class="ex-tags">
+          <span class="ex-dif d-dificil">Difícil</span>
+          <span class="ex-tag-pill t1">Polimorfismo</span>
+          <span class="ex-tag-pill t2">Interfaces</span>
+          <span class="ex-tag-pill t3">Exceções</span>
+          <span class="ex-tag-pill t4">Arquivos</span>
+          <span class="ex-tag-pill t5">DOM + Eventos</span>
+        </div>
+      </div>
+      <div class="ex-body" id="body-ex8">
+        <div class="ex-body-inner">
+          <div class="contexto">
+            <strong>🤖 Contexto</strong>
+            Todo ano, a universidade de Compilópolis realiza o grande Torneio de IAs: sistemas de inteligência artificial amadora competem entre si para ver qual delas resolve mais desafios de programação sem entrar em loop infinito. Você foi designado para criar o sistema de inscrição, pontuação e placar do torneio — e claro, ele precisa tratar todos os erros possíveis, porque IAs amadoras são imprevisíveis.
+          </div>
+
+          <p class="req-title">⚙️ Parte Java</p>
+          <ol>
+            >Crie a interface de>Competidor</code> com de>resolver(String desafio)</code> (retorna String com a solução), de>getPontuacao()</code> e de>getNome()</code>.</li>
+            >Crie a classe abstrata de>InteligenciaArtificial</code> implementando de>Competidor</code>, com de>nome</code>, de>versao</code> e de>pontuacao</code>.</li>
+            >Crie as subclasses:<br>
+              — de>IAOtimista</code>: sempre tenta resolver, mas com 40% de chance lança de>LoopInfinitoException</code><br>
+              — de>IAPessimista</code>: resolve apenas desafios com menos de 20 caracteres, caso contrário lança de>DesafioComplexoDemaisException</code><br>
+              — de>IAEquilibrada</code>: resolve qualquer desafio, mas ganha metade da pontuação base
+            </li>
+            >Crie as exceções de>LoopInfinitoException</code> e de>DesafioComplexoDemaisException</code>, com mensagens bem-humoradas.</li>
+            >Crie a classe de>Torneio</code> com:<br>
+              — de>inscreverIA(InteligenciaArtificial ia)</code>: lança de>IaJaInscritaException</code> se o nome já existir<br>
+              — de>executarRodada(String desafio)</code>: chama de>resolver()</code> de cada IA, trata exceções, pontua quem resolver<br>
+              — de>salvarPlacar(String arquivo)</code>: grava nome, versão e pontuação de cada IA em ordem decrescente<br>
+              — de>getVencedor()</code>: retorna a IA com maior pontuação, lança de>TorneioSemParticipantesException</code> se a lista estiver vazia
+            </li>
+          </ol>
+
+          <p class="req-title">🌐 Parte Web</p>
+          <ol>
+            >Crie uma página de placar ao vivo: uma tabela gerada com de>innerHTML</code> exibindo nome, tipo e pontuação de cada IA.</li>
+            >Adicione um campo "Novo desafio" e um botão "Executar Rodada". Ao clicar, simule uma rodada em JavaScript: para cada linha da tabela, gere uma pontuação aleatória e atualize o valor com de>querySelector</code> e de>textContent</code>.</li>
+            >Após cada rodada, reordene as linhas da tabela no DOM pela pontuação (maior para menor) sem recarregar a página.</li>
+            >Destaque o líder atual com um emoji 🏆 e fundo dourado, atualizando a cada rodada com de>classList</code>.</li>
+          </ol>
+
+          <div class="callout dica">
+            <strong>💡 Dica de integração</strong>
+            A lógica de ordenação do placar em Java (de>Collections.sort</code> com de>Comparator</code>) e a ordenação das linhas no DOM em JavaScript são o mesmo conceito em linguagens diferentes. Implemente os dois e compare a elegância de cada abordagem.
+          </div>
+
+          <div class="entrega">
+            <strong>📁 Entrega</strong>
+            de>TorneioIA.java</code> + de>placar.html</code> + arquivo de>placar_final.txt</code> com             resultado de ao menos 3 rodadas com 4 IAs diferentes.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- fim ex-grid -->
+</main>
+
+<footer>
+  <strong>Programação II – ECO 2026/1</strong> · Universidade do Estado de Santa Catarina ·
+  Exercícios Integrados – Todos os tópicos da disciplina
+</footer>
+
+<script>
+  // =============================================
+  // TOGGLE DOS CARDS
+  // =============================================
+  function toggleEx(id) {
+    const body  = document.getElementById('body-' + id);
+    const arrow = document.getElementById('arrow-' + id);
+    const isOpen = body.classList.contains('open');
+    document.querySelectorAll('.ex-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.ex-arrow').forEach(a => a.classList.remove('open'));
+    if (!isOpen) {
+      body.classList.add('open');
+      arrow.classList.add('open');
+      body.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  // =============================================
+  // MARCAR EXERCÍCIO COMO ESCOLHIDO
+  // =============================================
+  const escolhidos = new Set();
+
+  function marcar(event, id) {
+    event.stopPropagation();
+    const card = document.getElementById(id);
+    const btn  = card.querySelector('.ex-check-btn');
+
+    if (escolhidos.has(id)) {
+      escolhidos.delete(id);
+      card.classList.remove('concluido');
+      btn.textContent = '✓';
+      btn.title = 'Marcar como escolhido';
+    } else {
+      if (escolhidos.size >= 4) {
+        mostrarAviso('Seu grupo já escolheu 4 exercícios! Desmarque um antes de escolher outro.');
+        return;
+      }
+      escolhidos.add(id);
+      card.classList.add('concluido');
+      btn.textContent = '★';
+      btn.title = 'Desmarcar';
+    }
+    atualizarProgresso();
+  }
+
+  // =============================================
+  // BARRA DE PROGRESSO
+  // =============================================
+  function atualizarProgresso() {
+    const atual = escolhidos.size;
+    const pct   = Math.min((atual / 4) * 100, 100);
+    document.getElementById('barFill').style.width = pct + '%';
+    document.getElementById('prog-txt').textContent =
+      atual < 4 ? atual + ' / 4 escolhidos' : '✅ 4 / 4 — Seleção completa!';
+  }
+
+  // =============================================
+  // AVISO FLUTUANTE
+  // =============================================
+  function mostrarAviso(msg) {
+    let aviso = document.getElementById('aviso-flutuante');
+    if (!aviso) {
+      aviso = document.createElement('div');
+      aviso.id = 'aviso-flutuante';
+      aviso.style.cssText = `
+        position: fixed; bottom: 2rem; left: 50%;
+        transform: translateX(-50%);
+        background: #1e293b; color: #fff;
+        padding: .8rem 1.4rem; border-radius: 10px;
+        font-size: .9rem; font-weight: 600;
+        box-shadow: 0 8px 24px rgba(0,0,0,.2);
+        z-index: 9999; border-left: 4px solid #f59e0b;
+        max-width: 90vw; text-align: center;
+        animation: fadeIn .3s ease;
+      `;
+      document.body.appendChild(aviso);
+    }
+    aviso.textContent = '⚠️ ' + msg;
+    aviso.style.display = 'block';
+    clearTimeout(aviso._timeout);
+    aviso._timeout = setTimeout(() => { aviso.style.display = 'none'; }, 3500);
+  }
+
+  // =============================================
+  // COPIAR CÓDIGO
+  // =============================================
+  function copiar(btn) {
+    const text = btn.parentElement.innerText.replace('Copiar','').trim();
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✅ Copiado!';
+      setTimeout(() => { btn.textContent = 'Copiar'; }, 2000);
+    }).catch(() => {
+      btn.textContent = '❌ Erro';
+      setTimeout(() => { btn.textContent = 'Copiar'; }, 2000);
+    });
+  }
+
+  // =============================================
+  // ANIMAÇÕES E INICIALIZAÇÃO
+  // =============================================
+  const s = document.createElement('style');
+  s.textContent = `
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    @keyframes entrar {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .ex-card { animation: entrar .45s ease both; }
+    .ex-card:nth-child(1) { animation-delay: .05s; }
+    .ex-card:nth-child(2) { animation-delay: .10s; }
+    .ex-card:nth-child(3) { animation-delay: .15s; }
+    .ex-card:nth-child(4) { animation-delay: .20s; }
+    .ex-card:nth-child(5) { animation-delay: .25s; }
+    .ex-card:nth-child(6) { animation-delay: .30s; }
+    .ex-card:nth-child(7) { animation-delay: .35s; }
+    .ex-card:nth-child(8) { animation-delay: .40s; }
+  `;
+  document.head.appendChild(s);
+
+  atualizarProgresso();
+</script>
+
+</body>
+</html>
