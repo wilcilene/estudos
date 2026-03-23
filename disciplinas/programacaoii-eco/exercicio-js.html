@@ -146,7 +146,7 @@
 
   <div class="instrucao-box">
     <strong>📌 Como funciona</strong>
-    Cada exercício integra <em>todos</em> os tópicos estudados: classes JavaScript (herança com de>extends</code>), simulação de interfaces, tratamento de erros com de>try/catch</code>, persistência com de>localStorage</code>, HTML5 semântico, manipulação do DOM, de>querySelector</code>, de>innerHTML</code> e eventos. Clique no card para ver o enunciado. Marque com ✓ os 4 que seu grupo escolheu.
+    Cada exercício integra <em>todos</em> os tópicos estudados: classes JavaScript (herança com <code>extends</co<code>), simulação de interfaces, tratamento de erros com <code>try/catch</co<code>, persistência com <code>localStorage</co<code>, HTML5 semântico, manipulação do DOM, <code>querySelector</co<code>, <code>innerHTML</co<code> e eventos. Clique no card para ver o enunciado. Marque com ✓ os 4 que seu grupo escolheu.
   </div>
 
   <div class="cobertura">
@@ -190,28 +190,28 @@
 
           <p class="req-title">⚙️ Parte JavaScript — O Motor do Grimório</p>
           <ol>
-            >Crie a classe de>Heroi</code> com os atributos de>nome</code>, de>nivel</code> e de>pontosDeVida</code>. No construtor, se de>nome</code> estiver vazio, lance um de>Error</code> com mensagem adequada. Adicione o método de>getStatus()</code> que retorna uma string formatada com os dados do herói.</li>
-            >Crie as subclasses de>Mago</code> (tem de>mana</code>; método de>atacar()</code> consome 10 de mana — se não tiver, lança de>Error</code>), de>Guerreiro</code> (tem de>forca</code>; de>atacar()</code> retorna dano baseado na força) e de>Arqueiro</code> (tem de>flechas</code>; de>atacar()</code> só funciona se de>flechas &gt; 0</code>).</li>
-            >Simule uma "interface" de>Combatente</code>: crie uma função de>verificarCombatente(obj)</code> que recebe um objeto e verifica se ele possui os métodos de>atacar()</code> e de>getStatus()</code>. Se não possuir, lança um de>Error</code> informando qual método está faltando.</li>
-            >Crie o objeto de>grimorio</code> (não precisa ser classe) com os métodos:<br>
-              — de>adicionarHeroi(heroi)</code>: usa de>verificarCombatente()</code> antes de adicionar<br>
-              — de>salvar()</code>: serializa o array de heróis com de>JSON.stringify</code> e salva no de>localStorage</code><br>
-              — de>carregar()</code>: lê do de>localStorage</code>, faz de>JSON.parse</code> e reconstrói os objetos<br>
-              — de>buscarPorNome(nome)</code>: retorna o herói ou lança de>Error</code> se não encontrar
+            >Crie a classe <code>Heroi</co<code> com os atributos <code>nome</co<code>, <code>nivel</co<code> e <code>pontosDeVida</co<code>. No construtor, se <code>nome</co<code> estiver vazio, lance um <code>Error</co<code> com mensagem adequada. Adicione o método <code>getStatus()</co<code> que retorna uma string formatada com os dados do herói.</li>
+            >Crie as subclasses <code>Mago</co<code> (tem <code>mana</co<code>; método <code>atacar()</co<code> consome 10 de mana — se não tiver, lança <code>Error</co<code>), <code>Guerreiro</co<code> (tem <code>forca</co<code>; <code>atacar()</co<code> retorna dano baseado na força) e <code>Arqueiro</co<code> (tem <code>flechas</co<code>; <code>atacar()</co<code> só funciona se <code>flechas &gt; 0</co<code>).</li>
+            >Simule uma "interface" <code>Combatente</co<code>: crie uma função <code>verificarCombatente(obj)</co<code> que recebe um objeto e verifica se ele possui os métodos <code>atacar()</co<code> e <code>getStatus()</co<code>. Se não possuir, lança um <code>Error</co<code> informando qual método está faltando.</li>
+            >Crie o objeto <code>grimorio</co<code> (não precisa ser classe) com os métodos:<br>
+              — <code>adicionarHeroi(heroi)</co<code>: usa <code>verificarCombatente()</co<code> antes de adicionar<br>
+              — <code>salvar()</co<code>: serializa o array de heróis com <code>JSON.stringify</co<code> e salva no <code>localStorage</co<code><br>
+              — <code>carregar()</co<code>: lê do <code>localStorage</co<code>, faz <code>JSON.parse</co<code> e reconstrói os objetos<br>
+              — <code>buscarPorNome(nome)</co<code>: retorna o herói ou lança <code>Error</co<code> se não encontrar
             </li>
           </ol>
 
           <p class="req-title">🌐 Parte HTML + DOM</p>
           <ol>
-            >Crie um formulário com campos: nome, tipo (select: Mago/Guerreiro/Arqueiro) e nível. Ao submeter (evento de>submit</code> com de>preventDefault()</code>), instancie o herói correto e chame de>grimorio.adicionarHeroi()</code> dentro de um de>try/catch</code>.</li>
-            >Exiba cada herói cadastrado como um card gerado com de>innerHTML</code>. O card deve mostrar nome, tipo, nível e status — com cor diferente por tipo (azul = Mago, vermelho = Guerreiro, verde = Arqueiro).</li>
-            >Cada card deve ter um botão "⚔️ Atacar" que chama de>atacar()</code> dentro de um de>try/catch</code> e exibe o resultado (ou o erro) em um parágrafo abaixo do card, sem usar de>alert()</code>.</li>
-            >Adicione os botões "💾 Salvar Grimório" e "📂 Carregar Grimório" que chamam de>grimorio.salvar()</code> e de>grimorio.carregar()</code> e atualizam a lista de cards na tela.</li>
+            >Crie um formulário com campos: nome, tipo (select: Mago/Guerreiro/Arqueiro) e nível. Ao submeter (evento <code>submit</co<code> com <code>preventDefault()</co<code>), instancie o herói correto e chame <code>grimorio.adicionarHeroi()</co<code> dentro de um <code>try/catch</co<code>.</li>
+            >Exiba cada herói cadastrado como um card gerado com <code>innerHTML</co<code>. O card deve mostrar nome, tipo, nível e status — com cor diferente por tipo (azul = Mago, vermelho = Guerreiro, verde = Arqueiro).</li>
+            >Cada card deve ter um botão "⚔️ Atacar" que chama <code>atacar()</co<code> dentro de um <code>try/catch</co<code> e exibe o resultado (ou o erro) em um parágrafo abaixo do card, sem usar <code>alert()</co<code>.</li>
+            >Adicione os botões "💾 Salvar Grimório" e "📂 Carregar Grimório" que chamam <code>grimorio.salvar()</co<code> e <code>grimorio.carregar()</co<code> e atualizam a lista de cards na tela.</li>
           </ol>
 
           <div class="callout dica">
             <strong>💡 Dica</strong>
-            Ao carregar do de>localStorage</code>, os dados vêm como objetos planos — sem os métodos das classes. Você precisa recriar as instâncias com de>new Mago(...)</code>, de>new Guerreiro(...)</code> etc., usando o campo de>tipo</code> salvo no JSON para saber qual classe usar.
+            Ao carregar do <code>localStorage</co<code>, os dados vêm como objetos planos — sem os métodos das classes. Você precisa recriar as instâncias com <code>new Mago(...)</co<code>, <code>new Guerreiro(...)</co<code> etc., usando o campo <code>tipo</co<code> salvo no JSON para saber qual classe usar.
           </div>
 
           <pre><span class="ck">class</span> <span class="cf">Heroi</span> {
@@ -243,7 +243,7 @@
 
           <div class="entrega">
             <strong>📁 Entrega</strong>
-            Um único arquivo de>grimorio.html</code> com todo o JavaScript no de>&lt;script&gt;</code> e o HTML na mesma página. Teste com ao menos 3 heróis de tipos diferentes, salvando e recarregando do de>localStorage</code>.
+            Um único arquivo <code>grimorio.html</co<code> com todo o JavaScript no <code>&lt;script&gt;</co<code> e o HTML na mesma página. Teste com ao menos 3 heróis de tipos diferentes, salvando e recarregando do <code>localStorage</co<code>.
           </div>
         </div>
       </div>
@@ -280,33 +280,33 @@
 
           <p class="req-title">⚙️ Parte JavaScript</p>
           <ol>
-            >Crie a classe de>Midia</code> com de>titulo</code>, de>ano</code> e de>genero</code>. Se o ano for anterior a 1888 (primeiro filme da história), lance um de>Error</code>. Adicione o método de>getInfo()</code> retornando uma string formatada.</li>
-            >Crie as subclasses de>Filme</code> (adiciona de>diretor</code> e de>duracao</code> em minutos), de>Serie</code> (adiciona de>temporadas</code> e de>episodiosPorTemporada</code> — de>getInfo()</code> calcula o total de episódios) e de>Documentario</code> (adiciona de>tema</code>).</li>
-            >Simule uma interface de>Reproducivel</code>: crie a função de>verificarReproducivel(obj)</code> que confere se o objeto tem os métodos de>play()</code>, de>pause()</code> e de>getInfo()</code>. Adicione esses métodos em de>Midia</code> — de>play()</code> muda o estado de>reproduzindo</code> para de>true</code>, de>pause()</code> para de>false</code>.</li>
-            >Crie o objeto de>catalogo</code> com:<br>
-              — de>adicionar(midia)</code>: usa de>verificarReproducivel()</code> e adiciona à lista<br>
-              — de>salvar()</code> e de>carregar()</code>: persistência com de>localStorage</code><br>
-              — de>filtrarPorGenero(genero)</code>: retorna array filtrado<br>
-              — de>buscarPorTitulo(texto)</code>: retorna mídias cujo título contenha o texto (case insensitive)
+            >Crie a classe <code>Midia</co<code> com <code>titulo</co<code>, <code>ano</co<code> e <code>genero</co<code>. Se o ano for anterior a 1888 (primeiro filme da história), lance um <code>Error</co<code>. Adicione o método <code>getInfo()</co<code> retornando uma string formatada.</li>
+            >Crie as subclasses <code>Filme</co<code> (adiciona <code>diretor</co<code> e <code>duracao</co<code> em minutos), <code>Serie</co<code> (adiciona <code>temporadas</co<code> e <code>episodiosPorTemporada</co<code> — <code>getInfo()</co<code> calcula o total de episódios) e <code>Documentario</co<code> (adiciona <code>tema</co<code>).</li>
+            >Simule uma interface <code>Reproducivel</co<code>: crie a função <code>verificarReproducivel(obj)</co<code> que confere se o objeto tem os métodos <code>play()</co<code>, <code>pause()</co<code> e <code>getInfo()</co<code>. Adicione esses métodos em <code>Midia</co<code> — <code>play()</co<code> muda o estado <code>reproduzindo</co<code> para <code>true</co<code>, <code>pause()</co<code> para <code>false</co<code>.</li>
+            >Crie o objeto <code>catalogo</co<code> com:<br>
+              — <code>adicionar(midia)</co<code>: usa <code>verificarReproducivel()</co<code> e adiciona à lista<br>
+              — <code>salvar()</co<code> e <code>carregar()</co<code>: persistência com <code>localStorage</co<code><br>
+              — <code>filtrarPorGenero(genero)</co<code>: retorna array filtrado<br>
+              — <code>buscarPorTitulo(texto)</co<code>: retorna mídias cujo título contenha o texto (case insensitive)
             </li>
           </ol>
 
           <p class="req-title">🌐 Parte HTML + DOM</p>
           <ol>
-            >Crie um formulário para cadastrar mídia (título, tipo, ano, gênero e campo extra conforme o tipo). Ao submeter, instancie a classe correta dentro de um de>try/catch</code> e adicione ao catálogo.</li>
-            >Exiba as mídias em cards. Cada card deve ter botões "▶ Play" e "⏸ Pause" que alteram visualmente o card (cor de fundo, texto de status) via manipulação de classe CSS com de>classList</code>.</li>
-            >Adicione um campo de busca: ao digitar (evento de>input</code>), filtre os cards em tempo real usando de>buscarPorTitulo()</code> — oculte os que não batem com de>style.display = 'none'</code>.</li>
-            >Exiba um contador "X títulos encontrados" atualizado a cada busca com de>textContent</code>.</li>
+            >Crie um formulário para cadastrar mídia (título, tipo, ano, gênero e campo extra conforme o tipo). Ao submeter, instancie a classe correta dentro de um <code>try/catch</co<code> e adicione ao catálogo.</li>
+            >Exiba as mídias em cards. Cada card deve ter botões "▶ Play" e "⏸ Pause" que alteram visualmente o card (cor de fundo, texto de status) via manipulação de classe CSS com <code>classList</co<code>.</li>
+            >Adicione um campo de busca: ao digitar (evento <code>input</co<code>), filtre os cards em tempo real usando <code>buscarPorTitulo()</co<code> — oculte os que não batem com <code>style.display = 'none'</co<code>.</li>
+            >Exiba um contador "X títulos encontrados" atualizado a cada busca com <code>textContent</co<code>.</li>
           </ol>
 
           <div class="callout info">
             <strong>💡 Dica de filtro em tempo real</strong>
-            Use o evento de>input</code> no campo de busca (não de>keyup</code>). Ele dispara para qualquer mudança, incluindo colar texto. Percorra todos os cards com de>querySelectorAll</code> e compare o texto do título com de>includes()</code>.
+            Use o evento <code>input</co<code> no campo de busca (não <code>keyup</co<code>). Ele dispara para qualquer mudança, incluindo colar texto. Percorra todos os cards com <code>querySelectorAll</co<code> e compare o texto do título com <code>includes()</co<code>.
           </div>
 
           <div class="entrega">
             <strong>📁 Entrega</strong>
-            Arquivo único de>cinemacode.html</code>. Pré-cadastre ao menos 5 mídias de tipos diferentes no de>localStorage</code> para demonstrar a busca funcionando.
+            Arquivo único <code>cinemacode.html</co<code>. Pré-cadastre ao menos 5 mídias de tipos diferentes no <code>localStorage</co<code> para demonstrar a busca funcionando.
           </div>
         </div>
       </div>
@@ -344,38 +344,38 @@
 
           <p class="req-title">⚙️ Parte JavaScript</p>
           <ol>
-            >Crie a classe de>Conta</code> com de>titular</code>, de>numero</code> e de>saldo</code>. No construtor, valide que o saldo inicial não é negativo — se for, lance um de>Error</code>. Mantenha um array de>historico</code> de strings para registrar cada transação.</li>
-            >Adicione os métodos de>depositar(valor)</code> e de>sacar(valor)</code> na classe de>Conta</code>. Lance de>Error</code> para valor zero ou negativo em qualquer operação, e para saldo insuficiente no saque. Cada operação bem-sucedida deve adicionar uma entrada ao de>historico</code>.</li>
+            >Crie a classe <code>Conta</co<code> com <code>titular</co<code>, <code>numero</co<code> e <code>saldo</co<code>. No construtor, valide que o saldo inicial não é negativo — se for, lance um <code>Error</co<code>. Mantenha um array <code>historico</co<code> de strings para registrar cada transação.</li>
+            >Adicione os métodos <code>depositar(valor)</co<code> e <code>sacar(valor)</co<code> na classe <code>Conta</co<code>. Lance <code>Error</co<code> para valor zero ou negativo em qualquer operação, e para saldo insuficiente no saque. Cada operação bem-sucedida deve adicionar uma entrada ao <code>historico</co<code>.</li>
             >Crie as subclasses:<br>
-              — de>ContaCorrente</code>: tem de>limiteCredito</code>; pode sacar além do saldo até o limite (saldo pode ficar negativo até de>-limiteCredito</code>)<br>
-              — de>ContaPoupanca</code>: tem de>taxaJuros</code>; adicione o método de>aplicarJuros()</code> que aumenta o saldo pela taxa e registra no histórico<br>
-              — de>ContaGalactica</code>: herda de de>ContaCorrente</code>; tem de>taxaCambio</code> (padrão 3.7); adicione de>depositarCreditos(creditos)</code> que converte e deposita em reais
+              — <code>ContaCorrente</co<code>: tem <code>limiteCredito</co<code>; pode sacar além do saldo até o limite (saldo pode ficar negativo até <code>-limiteCredito</co<code>)<br>
+              — <code>ContaPoupanca</co<code>: tem <code>taxaJuros</co<code>; adicione o método <code>aplicarJuros()</co<code> que aumenta o saldo pela taxa e registra no histórico<br>
+              — <code>ContaGalactica</co<code>: herda de <code>ContaCorrente</co<code>; tem <code>taxaCambio</co<code> (padrão 3.7); adicione <code>depositarCreditos(creditos)</co<code> que converte e deposita em reais
             </li>
-            >Simule a interface de>Transacionavel</code>: crie de>verificarTransacionavel(obj)</code> que confere se o objeto tem de>depositar</code>, de>sacar</code> e de>getExtrato</code>. Implemente de>getExtrato()</code> em de>Conta</code> retornando o array de>historico</code> formatado.</li>
-            >Crie o objeto de>banco</code> com:<br>
-              — de>abrirConta(conta)</code>: valida com de>verificarTransacionavel()</code><br>
-              — de>buscarConta(numero)</code>: lança de>Error</code> se não encontrar<br>
-              — de>transferir(origem, destino, valor)</code>: usa de>buscarConta()</code> nos dois números, faz saque e depósito dentro de um de>try/catch</code><br>
-              — de>salvar()</code> e de>carregar()</code>: persistência com de>localStorage</code>
+            >Simule a interface <code>Transacionavel</co<code>: crie <code>verificarTransacionavel(obj)</co<code> que confere se o objeto tem <code>depositar</co<code>, <code>sacar</co<code> e <code>getExtrato</co<code>. Implemente <code>getExtrato()</co<code> em <code>Conta</co<code> retornando o array <code>historico</co<code> formatado.</li>
+            >Crie o objeto <code>banco</co<code> com:<br>
+              — <code>abrirConta(conta)</co<code>: valida com <code>verificarTransacionavel()</co<code><br>
+              — <code>buscarConta(numero)</co<code>: lança <code>Error</co<code> se não encontrar<br>
+              — <code>transferir(origem, destino, valor)</co<code>: usa <code>buscarConta()</co<code> nos dois números, faz saque e depósito dentro de um <code>try/catch</co<code><br>
+              — <code>salvar()</co<code> e <code>carregar()</co<code>: persistência com <code>localStorage</co<code>
             </li>
           </ol>
 
           <p class="req-title">🌐 Parte HTML + DOM</p>
           <ol>
-            >Crie uma interface com três abas (Contas, Operações, Extrato) alternadas por eventos de clique que mostram/ocultam seções com de>style.display</code>.</li>
-            >Na aba Contas: formulário para abrir conta (titular, número, tipo, saldo inicial) com feedback de erro inline via de>innerHTML</code>.</li>
-            >Na aba Operações: campos para número da conta e valor, com botões "Depositar", "Sacar" e "Transferir". Resultados exibidos em um painel de log gerado com de>innerHTML</code>. Linhas de erro em vermelho, sucesso em verde.</li>
-            >Na aba Extrato: campo para digitar o número da conta e botão "Ver Extrato" que gera uma tabela dinamicamente com de>innerHTML</code>, mostrando cada transação do histórico.</li>
+            >Crie uma interface com três abas (Contas, Operações, Extrato) alternadas por eventos de clique que mostram/ocultam seções com <code>style.display</co<code>.</li>
+            >Na aba Contas: formulário para abrir conta (titular, número, tipo, saldo inicial) com feedback de erro inline via <code>innerHTML</co<code>.</li>
+            >Na aba Operações: campos para número da conta e valor, com botões "Depositar", "Sacar" e "Transferir". Resultados exibidos em um painel de log gerado com <code>innerHTML</co<code>. Linhas de erro em vermelho, sucesso em verde.</li>
+            >Na aba Extrato: campo para digitar o número da conta e botão "Ver Extrato" que gera uma tabela dinamicamente com <code>innerHTML</co<code>, mostrando cada transação do histórico.</li>
           </ol>
 
           <div class="callout warn">
             <strong>⚠️ Atenção</strong>
-            Ao carregar contas do de>localStorage</code>, reconstrua as instâncias corretas com base no campo de>tipo</code> salvo — os métodos das classes são perdidos na serialização JSON.
+            Ao carregar contas do <code>localStorage</co<code>, reconstrua as instâncias corretas com base no campo <code>tipo</co<code> salvo — os métodos das classes são perdidos na serialização JSON.
           </div>
 
           <div class="entrega">
             <strong>📁 Entrega</strong>
-            Arquivo único de>banco-galactico.html</code>. Demonstre ao menos 4 contas de tipos diferentes, uma transferência e a visualização do extrato.
+            Arquivo único <code>banco-galactico.html</co<code>. Demonstre ao menos 4 contas de tipos diferentes, uma transferência e a visualização do extrato.
           </div>
         </div>
       </div>
@@ -412,37 +412,37 @@
 
           <p class="req-title">⚙️ Parte JavaScript</p>
           <ol>
-            >Crie a classe de>Robo</code> com de>id</code>, de>modelo</code>, de>fabricante</code> e de>anoFabricacao</code>. No construtor, valide que de>modelo</code> tem ao menos 3 caracteres — caso contrário, lance um de>Error</code>.</li>
-            >Adicione o método de>diagnosticar()</code> na classe base retornando uma string genérica. Crie as subclasses:<br>
-              — de>AndroideServico</code>: de>diagnosticar()</code> verifica se de>anoFabricacao &lt; 2140</code> e retorna aviso de superaquecimento; de>calcularCusto()</code> retorna R$500<br>
-              — de>RoboIndustrial</code>: tem de>articulacoesDanificadas</code>; de>calcularCusto()</code> retorna de>200 × articulacoesDanificadas</code><br>
-              — de>RoboMedico</code>: de>calcularCusto()</code> sempre retorna R$1200; de>diagnosticar()</code> sempre retorna urgência crítica
+            >Crie a classe <code>Robo</co<code> com <code>id</co<code>, <code>modelo</co<code>, <code>fabricante</co<code> e <code>anoFabricacao</co<code>. No construtor, valide que <code>modelo</co<code> tem ao menos 3 caracteres — caso contrário, lance um <code>Error</co<code>.</li>
+            >Adicione o método <code>diagnosticar()</co<code> na classe base retornando uma string genérica. Crie as subclasses:<br>
+              — <code>AndroideServico</co<code>: <code>diagnosticar()</co<code> verifica se <code>anoFabricacao &lt; 2140</co<code> e retorna aviso de superaquecimento; <code>calcularCusto()</co<code> retorna R$500<br>
+              — <code>RoboIndustrial</co<code>: tem <code>articulacoesDanificadas</co<code>; <code>calcularCusto()</co<code> retorna <code>200 × articulacoesDanificadas</co<code><br>
+              — <code>RoboMedico</co<code>: <code>calcularCusto()</co<code> sempre retorna R$1200; <code>diagnosticar()</co<code> sempre retorna urgência crítica
             </li>
-            >Simule a interface de>Diagnosticavel</code> com a função de>verificarDiagnosticavel(obj)</code> que confere se o objeto possui de>diagnosticar()</code> e de>calcularCusto()</code>.</li>
-            >Crie o objeto de>hospital</code> com:<br>
-              — de>admitir(robo)</code>: valida com de>verificarDiagnosticavel()</code><br>
-              — de>buscarPorId(id)</code>: lança de>Error</code> se não encontrar<br>
-              — de>realizarTriagem()</code>: retorna array com de>{ robo, diagnostico, custo }</code> de cada paciente<br>
-              — de>salvar()</code> e de>carregar()</code>: usa de>localStorage</code>
+            >Simule a interface <code>Diagnosticavel</co<code> com a função <code>verificarDiagnosticavel(obj)</co<code> que confere se o objeto possui <code>diagnosticar()</co<code> e <code>calcularCusto()</co<code>.</li>
+            >Crie o objeto <code>hospital</co<code> com:<br>
+              — <code>admitir(robo)</co<code>: valida com <code>verificarDiagnosticavel()</co<code><br>
+              — <code>buscarPorId(id)</co<code>: lança <code>Error</co<code> se não encontrar<br>
+              — <code>realizarTriagem()</co<code>: retorna array com <code>{ robo, diagnostico, custo }</co<code> de cada paciente<br>
+              — <code>salvar()</co<code> e <code>carregar()</co<code>: usa <code>localStorage</co<code>
             </li>
           </ol>
 
           <p class="req-title">🌐 Parte HTML + DOM</p>
           <ol>
-            >Crie um formulário de admissão (id, modelo, fabricante, tipo, ano). Ao submeter, instancie o robô correto dentro de de>try/catch</code> e exiba um card de prontuário gerado com de>innerHTML</code>.</li>
-            >A cor do card deve refletir a urgência: vermelho (de>RoboMedico</code>), amarelo (de>AndroideServico</code>), verde (de>RoboIndustrial</code>) — aplique via de>classList.add</code>.</li>
-            >Adicione um campo de busca por ID: ao digitar (evento de>input</code>), destaque o card correspondente com borda azul e role até ele com de>scrollIntoView()</code>.</li>
-            >Adicione evento de duplo clique (de>dblclick</code>) em cada card para marcar como "Alta" — o card fica cinza com texto riscado (use de>classList.toggle</code>).</li>
+            >Crie um formulário de admissão (id, modelo, fabricante, tipo, ano). Ao submeter, instancie o robô correto dentro de <code>try/catch</co<code> e exiba um card de prontuário gerado com <code>innerHTML</co<code>.</li>
+            >A cor do card deve refletir a urgência: vermelho (<code>RoboMedico</co<code>), amarelo (<code>AndroideServico</co<code>), verde (<code>RoboIndustrial</co<code>) — aplique via <code>classList.add</co<code>.</li>
+            >Adicione um campo de busca por ID: ao digitar (evento <code>input</co<code>), destaque o card correspondente com borda azul e role até ele com <code>scrollIntoView()</co<code>.</li>
+            >Adicione evento de duplo clique (<code>dblclick</co<code>) em cada card para marcar como "Alta" — o card fica cinza com texto riscado (use <code>classList.toggle</co<code>).</li>
           </ol>
 
           <div class="callout dica">
             <strong>💡 Dica</strong>
-            Para o de>scrollIntoView()</code>, primeiro remova a classe de destaque de todos os cards com de>querySelectorAll</code> + de>forEach</code>, depois adicione só no card encontrado. Assim apenas um card fica destacado por vez.
+            Para o <code>scrollIntoView()</co<code>, primeiro remova a classe de destaque de todos os cards com <code>querySelectorAll</co<code> + <code>forEach</co<code>, depois adicione só no card encontrado. Assim apenas um card fica destacado por vez.
           </div>
 
           <div class="entrega">
             <strong>📁 Entrega</strong>
-            Arquivo único de>hospital-robos.html</code>. Demonstre admissão de ao menos 5 robôs de tipos variados, busca por ID e marcação de alta com duplo clique.
+            Arquivo único <code>hospital-robos.html</co<code>. Demonstre admissão de ao menos 5 robôs de tipos variados, busca por ID e marcação de alta com duplo clique.
           </div>
         </div>
       </div>
@@ -479,37 +479,37 @@
 
           <p class="req-title">⚙️ Parte JavaScript</p>
           <ol>
-            >Crie a classe de>Estudante</code> com de>nome</code>, de>matricula</code> e um objeto de>notas</code> no formato de>{ feiticaria: 0, pocoes: 0, transfiguracao: 0 }</code>.</li>
-            >Adicione o método de>lancarNota(disciplina, valor)</code>: valide que de>valor</code> está entre 0 e 10 (lance de>Error</code> se não estiver) e que a disciplina existe no objeto de>notas</code> (lance de>Error</code> diferente se não existir).</li>
-            >Adicione de>calcularMedia()</code> que retorna a média das três notas. Crie as subclasses:<br>
-              — de>EstudanteBolsista</code>: de>getSituacao()</code> retorna "Aprovado" se média ≥               7.0, "Recuperação" se ≥ 5.0, "Reprovado" se abaixo<br>
-              — de>EstudanteRegular</code>: de>getSituacao()</code> retorna "Aprovado" se média ≥ 6.0, "Recuperação" se ≥ 4.0, "Reprovado" se abaixo
+            >Crie a classe <code>Estudante</co<code> com <code>nome</co<code>, <code>matricula</co<code> e um objeto <code>notas</co<code> no formato <code>{ feiticaria: 0, pocoes: 0, transfiguracao: 0 }</co<code>.</li>
+            >Adicione o método <code>lancarNota(disciplina, valor)</co<code>: valide que <code>valor</co<code> está entre 0 e 10 (lance <code>Error</co<code> se não estiver) e que a disciplina existe no objeto <code>notas</co<code> (lance <code>Error</co<code> diferente se não existir).</li>
+            >Adicione <code>calcularMedia()</co<code> que retorna a média das três notas. Crie as subclasses:<br>
+              — <code>EstudanteBolsista</co<code>: <code>getSituacao()</co<code> retorna "Aprovado" se média ≥               7.0, "Recuperação" se ≥ 5.0, "Reprovado" se abaixo<br>
+              — <code>EstudanteRegular</co<code>: <code>getSituacao()</co<code> retorna "Aprovado" se média ≥ 6.0, "Recuperação" se ≥ 4.0, "Reprovado" se abaixo
             </li>
-            >Simule a interface de>Avaliavel</code> com de>verificarAvaliavel(obj)</code> que confere se o objeto tem de>calcularMedia()</code> e de>getSituacao()</code>.</li>
-            >Crie o objeto de>secretaria</code> com:<br>
-              — de>matricular(estudante)</code>: valida com de>verificarAvaliavel()</code><br>
-              — de>buscarPorMatricula(matricula)</code>: lança de>Error</code> se não encontrar<br>
-              — de>gerarRanking()</code>: retorna o array de estudantes ordenado por média decrescente usando de>sort()</code><br>
-              — de>salvar()</code> e de>carregar()</code>: persistência com de>localStorage</code>, reconstruindo instâncias pelo campo de>tipo</code>
+            >Simule a interface <code>Avaliavel</co<code> com <code>verificarAvaliavel(obj)</co<code> que confere se o objeto tem <code>calcularMedia()</co<code> e <code>getSituacao()</co<code>.</li>
+            >Crie o objeto <code>secretaria</co<code> com:<br>
+              — <code>matricular(estudante)</co<code>: valida com <code>verificarAvaliavel()</co<code><br>
+              — <code>buscarPorMatricula(matricula)</co<code>: lança <code>Error</co<code> se não encontrar<br>
+              — <code>gerarRanking()</co<code>: retorna o array de estudantes ordenado por média decrescente usando <code>sort()</co<code><br>
+              — <code>salvar()</co<code> e <code>carregar()</co<code>: persistência com <code>localStorage</co<code>, reconstruindo instâncias pelo campo <code>tipo</co<code>
             </li>
           </ol>
 
           <p class="req-title">🌐 Parte HTML + DOM</p>
           <ol>
-            >Crie um formulário com nome, matrícula, tipo (Bolsista/Regular) e os três campos de nota. Ao submeter com de>preventDefault()</code>, instancie o estudante correto e lance as notas dentro de de>try/catch</code>.</li>
-            >Exiba o boletim de cada estudante como um card gerado com de>innerHTML</code>. O card deve mostrar nome, as três notas, média e situação. Use cores para a situação: verde (Aprovado), amarelo (Recuperação), vermelho (Reprovado) via de>classList.add</code>.</li>
+            >Crie um formulário com nome, matrícula, tipo (Bolsista/Regular) e os três campos de nota. Ao submeter com <code>preventDefault()</co<code>, instancie o estudante correto e lance as notas dentro de <code>try/catch</co<code>.</li>
+            >Exiba o boletim de cada estudante como um card gerado com <code>innerHTML</co<code>. O card deve mostrar nome, as três notas, média e situação. Use cores para a situação: verde (Aprovado), amarelo (Recuperação), vermelho (Reprovado) via <code>classList.add</co<code>.</li>
             >Adicione um botão "🏆 Ver Ranking" que ordena os cards na tela pela média, do maior para o menor, reordenando os elementos no DOM sem recarregar a página.</li>
-            >Valide os campos de nota em tempo real com evento de>input</code>: se o valor digitado estiver fora de 0–10, exiba uma mensagem de erro vermelha abaixo do campo usando de>querySelector</code> e de>textContent</code>.</li>
+            >Valide os campos de nota em tempo real com evento <code>input</co<code>: se o valor digitado estiver fora de 0–10, exiba uma mensagem de erro vermelha abaixo do campo usando <code>querySelector</co<code> e <code>textContent</co<code>.</li>
           </ol>
 
           <div class="callout dica">
             <strong>💡 Dica para reordenar no DOM</strong>
-            Para reordenar os cards visualmente, selecione o container pai com de>querySelector</code>, converta os filhos em array com de>Array.from()</code>, ordene com de>sort()</code> e reinsira cada elemento com de>appendChild()</code>. O DOM atualiza automaticamente.
+            Para reordenar os cards visualmente, selecione o container pai com <code>querySelector</co<code>, converta os filhos em array com <code>Array.from()</co<code>, ordene com <code>sort()</co<code> e reinsira cada elemento com <code>appendChild()</co<code>. O DOM atualiza automaticamente.
           </div>
 
           <div class="entrega">
             <strong>📁 Entrega</strong>
-            Arquivo único de>escola-magia.html</code>. Demonstre ao menos 6 estudantes (3 bolsistas, 3 regulares) com notas variadas, e mostre o ranking funcionando.
+            Arquivo único <code>escola-magia.html</co<code>. Demonstre ao menos 6 estudantes (3 bolsistas, 3 regulares) com notas variadas, e mostre o ranking funcionando.
           </div>
         </div>
       </div>
@@ -546,37 +546,37 @@
 
           <p class="req-title">⚙️ Parte JavaScript</p>
           <ol>
-            >Crie a classe de>Criatura</code> com de>nome</code>, de>especie</code> e de>nivelFome</code> (0 a 10). Adicione o método de>alimentar(comida)</code> que reduz o nível de fome em 3 (mínimo 0) e retorna uma mensagem. Se de>nivelFome</code> já for 0, lance um de>Error</code> informando que a criatura está saciada.</li>
+            >Crie a classe <code>Criatura</co<code> com <code>nome</co<code>, <code>especie</co<code> e <code>nivelFome</co<code> (0 a 10). Adicione o método <code>alimentar(comida)</co<code> que reduz o nível de fome em 3 (mínimo 0) e retorna uma mensagem. Se <code>nivelFome</co<code> já for 0, lance um <code>Error</co<code> informando que a criatura está saciada.</li>
             >Crie as subclasses:<br>
-              — de>Dragao</code>: de>alimentar(comida)</code> verifica se de>comida === "código compilado"</code> — qualquer outra coisa lança de>Error</code> com mensagem criativa<br>
-              — de>Unicornio</code>: aceita qualquer comida, mas se não for de>"arco-íris"</code>, o nível de fome só reduz 1 em vez de 3<br>
-              — de>Fenix</code>: ao ser alimentada com de>nivelFome === 0</code> lança de>Error</code> "A Fênix renasceu e resetou tudo!" e zera todos os atributos para os valores iniciais
+              — <code>Dragao</co<code>: <code>alimentar(comida)</co<code> verifica se <code>comida === "código compilado"</co<code> — qualquer outra coisa lança <code>Error</co<code> com mensagem criativa<br>
+              — <code>Unicornio</co<code>: aceita qualquer comida, mas se não for <code>"arco-íris"</co<code>, o nível de fome só reduz 1 em vez de 3<br>
+              — <code>Fenix</co<code>: ao ser alimentada com <code>nivelFome === 0</co<code> lança <code>Error</co<code> "A Fênix renasceu e resetou tudo!" e zera todos os atributos para os valores iniciais
             </li>
-            >Simule a interface de>Alimentavel</code> com de>verificarAlimentavel(obj)</code> que confere se o objeto tem de>alimentar()</code> e de>getNivelFome()</code>. Adicione de>getNivelFome()</code> em de>Criatura</code> retornando de>this.nivelFome</code>.</li>
-            >Crie o objeto de>zoologico</code> com:<br>
-              — de>adicionar(criatura)</code>: valida com de>verificarAlimentavel()</code><br>
-              — de>alimentarTodas(comida)</code>: tenta alimentar cada criatura em um de>try/catch</code> individual, registrando sucessos e erros separadamente<br>
-              — de>listarFamintas()</code>: retorna criaturas com de>nivelFome &gt; 7</code><br>
-              — de>salvar()</code> e de>carregar()</code>: usa de>localStorage</code>
+            >Simule a interface <code>Alimentavel</co<code> com <code>verificarAlimentavel(obj)</co<code> que confere se o objeto tem <code>alimentar()</co<code> e <code>getNivelFome()</co<code>. Adicione <code>getNivelFome()</co<code> em <code>Criatura</co<code> retornando <code>this.nivelFome</co<code>.</li>
+            >Crie o objeto <code>zoologico</co<code> com:<br>
+              — <code>adicionar(criatura)</co<code>: valida com <code>verificarAlimentavel()</co<code><br>
+              — <code>alimentarTodas(comida)</co<code>: tenta alimentar cada criatura em um <code>try/catch</co<code> individual, registrando sucessos e erros separadamente<br>
+              — <code>listarFamintas()</co<code>: retorna criaturas com <code>nivelFome &gt; 7</co<code><br>
+              — <code>salvar()</co<code> e <code>carregar()</co<code>: usa <code>localStorage</co<code>
             </li>
           </ol>
 
           <p class="req-title">🌐 Parte HTML + DOM</p>
           <ol>
-            >Exiba um card fixo para cada criatura (Dragão, Unicórnio e Fênix) com uma barra de fome visual — um de>&lt;div&gt;</code> cuja largura em % representa o nível de fome (de>nivelFome × 10 + "%"</code>), atualizada via de>style.width</code>.</li>
-            >Adicione um campo "O que servir?" e botões "Alimentar Todas" e "Alimentar Individualmente". Ao alimentar, atualize as barras e exiba o resultado de cada criatura em um log com de>innerHTML</code> — erros em vermelho, sucessos em verde.</li>
-            >Adicione evento de>mouseover</code> em cada card para exibir uma curiosidade sobre a criatura em um tooltip posicionado com CSS, criado e removido via de>innerHTML</code>.</li>
-            >Use de>querySelector</code> para atualizar o título da seção "🚨 Criaturas com fome crítica: X" sempre que uma alimentação ocorrer.</li>
+            >Exiba um card fixo para cada criatura (Dragão, Unicórnio e Fênix) com uma barra de fome visual — um <code>&lt;div&gt;</co<code> cuja largura em % representa o nível de fome (<code>nivelFome × 10 + "%"</co<code>), atualizada via <code>style.width</co<code>.</li>
+            >Adicione um campo "O que servir?" e botões "Alimentar Todas" e "Alimentar Individualmente". Ao alimentar, atualize as barras e exiba o resultado de cada criatura em um log com <code>innerHTML</co<code> — erros em vermelho, sucessos em verde.</li>
+            >Adicione evento <code>mouseover</co<code> em cada card para exibir uma curiosidade sobre a criatura em um tooltip posicionado com CSS, criado e removido via <code>innerHTML</co<code>.</li>
+            >Use <code>querySelector</co<code> para atualizar o título da seção "🚨 Criaturas com fome crítica: X" sempre que uma alimentação ocorrer.</li>
           </ol>
 
           <div class="callout warn">
             <strong>⚠️ Atenção</strong>
-            O de>alimentarTodas()</code> não deve parar se uma criatura lançar erro — use de>try/catch</code> dentro do de>forEach</code> para que cada criatura seja tratada independentemente.
+            O <code>alimentarTodas()</co<code> não deve parar se uma criatura lançar erro — use <code>try/catch</co<code> dentro do <code>forEach</co<code> para que cada criatura seja tratada independentemente.
           </div>
 
           <div class="entrega">
             <strong>📁 Entrega</strong>
-            Arquivo único de>zoologico.html</code>. Demonstre a alimentação com comida errada para o Dragão (erro), certa para o Unicórnio (sucesso parcial) e o renascimento da Fênix.
+            Arquivo único <code>zoologico.html</co<code>. Demonstre a alimentação com comida errada para o Dragão (erro), certa para o Unicórnio (sucesso parcial) e o renascimento da Fênix.
           </div>
         </div>
       </div>
@@ -613,36 +613,36 @@
 
           <p class="req-title">⚙️ Parte JavaScript</p>
           <ol>
-            >Crie a classe de>Astronauta</code> com de>nome</code>, de>codigoCracha</code> e de>nivelExperiencia</code> (1–5). Valide no construtor que o nível está nesse intervalo — lance de>Error</code> caso contrário. Adicione de>executarFuncao()</code> retornando uma string genérica.</li>
+            >Crie a classe <code>Astronauta</co<code> com <code>nome</co<code>, <code>codigoCracha</co<code> e <code>nivelExperiencia</co<code> (1–5). Valide no construtor que o nível está nesse intervalo — lance <code>Error</co<code> caso contrário. Adicione <code>executarFuncao()</co<code> retornando uma string genérica.</li>
             >Crie as subclasses:<br>
-              — de>Piloto</code>: de>executarFuncao()</code> retorna uma manobra calculada pelo nível de experiência<br>
-              — de>Cientista</code>: tem array de>experimentos</code>; de>executarFuncao()</code> retorna o próximo experimento da fila com de>shift()</code> — se vazio, lança de>Error</code> "Sem experimentos na fila!"<br>
-              — de>Engenheiro</code>: tem de>sistemaResponsavel</code>; de>executarFuncao()</code> tem 30% de chance de lançar de>Error</code> "Falha no sistema: " + de>sistemaResponsavel</code> (use de>Math.random()</code>)
+              — <code>Piloto</co<code>: <code>executarFuncao()</co<code> retorna uma manobra calculada pelo nível de experiência<br>
+              — <code>Cientista</co<code>: tem array <code>experimentos</co<code>; <code>executarFuncao()</co<code> retorna o próximo experimento da fila com <code>shift()</co<code> — se vazio, lança <code>Error</co<code> "Sem experimentos na fila!"<br>
+              — <code>Engenheiro</co<code>: tem <code>sistemaResponsavel</co<code>; <code>executarFuncao()</co<code> tem 30% de chance de lançar <code>Error</co<code> "Falha no sistema: " + <code>sistemaResponsavel</co<code> (use <code>Math.random()</co<code>)
             </li>
-            >Simule a interface de>Tripulante</code> com de>verificarTripulante(obj)</code> que confere se tem de>executarFuncao()</code> e de>nome</code>.</li>
-            >Crie a classe de>Missao</code> com de>nome</code>, de>destino</code>, de>duracaoDias</code> e array de>tripulacao</code>. Implemente:<br>
-              — de>adicionarTripulante(astronauta)</code>: valida com de>verificarTripulante()</code> e lança de>Error</code> se já houver 7 membros<br>
-              — de>iniciar()</code>: chama de>executarFuncao()</code> de cada membro em de>try/catch</code> individual, retorna array de logs<br>
-              — de>salvar()</code> e de>carregar()</code>: usa de>localStorage</code>
+            >Simule a interface <code>Tripulante</co<code> com <code>verificarTripulante(obj)</co<code> que confere se tem <code>executarFuncao()</co<code> e <code>nome</co<code>.</li>
+            >Crie a classe <code>Missao</co<code> com <code>nome</co<code>, <code>destino</co<code>, <code>duracaoDias</co<code> e array <code>tripulacao</co<code>. Implemente:<br>
+              — <code>adicionarTripulante(astronauta)</co<code>: valida com <code>verificarTripulante()</co<code> e lança <code>Error</co<code> se já houver 7 membros<br>
+              — <code>iniciar()</co<code>: chama <code>executarFuncao()</co<code> de cada membro em <code>try/catch</co<code> individual, retorna array de logs<br>
+              — <code>salvar()</co<code> e <code>carregar()</co<code>: usa <code>localStorage</co<code>
             </li>
           </ol>
 
           <p class="req-title">🌐 Parte HTML + DOM</p>
           <ol>
-            >Crie um painel de missão: um formulário para adicionar tripulantes (nome, crachá, tipo, nível) e uma lista gerada com de>innerHTML</code> exibindo cada membro.</li>
-            >Destaque automaticamente com fundo amarelo todos os tripulantes do tipo Engenheiro usando de>querySelectorAll</code> após cada adição.</li>
-            >Adicione um botão "🚀 Iniciar Missão" que chama de>missao.iniciar()</code> e exibe o log de cada tripulante em um painel — erros em vermelho, sucessos em verde.</li>
-            >Implemente um contador regressivo de             lançamento usando de>setInterval</code>: ao clicar em "🚀 Iniciar Missão", inicie uma contagem regressiva de 10 segundos exibida na tela com de>textContent</code>. Ao chegar a zero, limpe o intervalo com de>clearInterval</code>, mude o fundo da página para de>#0f172a</code> e exiba "🚀 Missão iniciada! Boa viagem, tripulação!" com de>innerHTML</code>.</li>
+            >Crie um painel de missão: um formulário para adicionar tripulantes (nome, crachá, tipo, nível) e uma lista gerada com <code>innerHTML</co<code> exibindo cada membro.</li>
+            >Destaque automaticamente com fundo amarelo todos os tripulantes do tipo Engenheiro usando <code>querySelectorAll</co<code> após cada adição.</li>
+            >Adicione um botão "🚀 Iniciar Missão" que chama <code>missao.iniciar()</co<code> e exibe o log de cada tripulante em um painel — erros em vermelho, sucessos em verde.</li>
+            >Implemente um contador regressivo de             lançamento usando <code>setInterval</co<code>: ao clicar em "🚀 Iniciar Missão", inicie uma contagem regressiva de 10 segundos exibida na tela com <code>textContent</co<code>. Ao chegar a zero, limpe o intervalo com <code>clearInterval</co<code>, mude o fundo da página para <code>#0f172a</co<code> e exiba "🚀 Missão iniciada! Boa viagem, tripulação!" com <code>innerHTML</co<code>.</li>
           </ol>
 
           <div class="callout info">
             <strong>💡 Dica sobre setInterval</strong>
-            Guarde o retorno do de>setInterval</code> em uma variável: de>const timer = setInterval(fn, 1000)</code>. Quando o contador chegar a zero, chame de>clearInterval(timer)</code> para parar. Sem isso, o intervalo continua rodando para sempre mesmo após o zero.
+            Guarde o retorno do <code>setInterval</co<code> em uma variável: <code>const timer = setInterval(fn, 1000)</co<code>. Quando o contador chegar a zero, chame <code>clearInterval(timer)</co<code> para parar. Sem isso, o intervalo continua rodando para sempre mesmo após o zero.
           </div>
 
           <div class="entrega">
             <strong>📁 Entrega</strong>
-            Arquivo único de>agencia-espacial.html</code>. Demonstre uma missão com ao menos 5 tripulantes de tipos variados, incluindo um Engenheiro que falha sem abortar o restante da tripulação.
+            Arquivo único <code>agencia-espacial.html</co<code>. Demonstre uma missão com ao menos 5 tripulantes de tipos variados, incluindo um Engenheiro que falha sem abortar o restante da tripulação.
           </div>
         </div>
       </div>
@@ -679,37 +679,37 @@
 
           <p class="req-title">⚙️ Parte JavaScript</p>
           <ol>
-            >Crie a classe de>InteligenciaArtificial</code> com de>nome</code>, de>versao</code> e de>pontuacao</code> (inicia em 0). Valide no construtor que de>nome</code> não está vazio. Adicione de>resolver(desafio)</code> e de>getNome()</code>.</li>
+            >Crie a classe <code>InteligenciaArtificial</co<code> com <code>nome</co<code>, <code>versao</co<code> e <code>pontuacao</co<code> (inicia em 0). Valide no construtor que <code>nome</co<code> não está vazio. Adicione <code>resolver(desafio)</co<code> e <code>getNome()</co<code>.</li>
             >Crie as subclasses:<br>
-              — de>IAOtimista</code>: de>resolver()</code> tenta sempre, mas com 40% de chance lança de>Error("Loop infinito detectado! Reiniciando...")</code><br>
-              — de>IAPessimista</code>: de>resolver()</code> só aceita desafios com menos de 20 caracteres — senão lança de>Error("Desafio complexo demais. Entrando em modo pânico.")</code><br>
-              — de>IAEquilibrada</code>: de>resolver()</code> sempre funciona, mas usa de>multiplicador = 0.5</code> na pontuação
+              — <code>IAOtimista</co<code>: <code>resolver()</co<code> tenta sempre, mas com 40% de chance lança <code>Error("Loop infinito detectado! Reiniciando...")</co<code><br>
+              — <code>IAPessimista</co<code>: <code>resolver()</co<code> só aceita desafios com menos de 20 caracteres — senão lança <code>Error("Desafio complexo demais. Entrando em modo pânico.")</co<code><br>
+              — <code>IAEquilibrada</co<code>: <code>resolver()</co<code> sempre funciona, mas usa <code>multiplicador = 0.5</co<code> na pontuação
             </li>
-            >Simule a interface de>Competidor</code> com de>verificarCompetidor(obj)</code> que confere se o objeto tem de>resolver()</code>, de>getNome()</code> e a propriedade de>pontuacao</code>.</li>
-            >Crie o objeto de>torneio</code> com:<br>
-              — de>inscrever(ia)</code>: valida com de>verificarCompetidor()</code> e lança de>Error</code> se o nome já estiver inscrito<br>
-              — de>executarRodada(desafio, pontosPorAcerto)</code>: chama de>resolver()</code> de cada IA em de>try/catch</code> individual — quem resolver ganha os pontos multiplicados pelo de>multiplicador</code> da IA (padrão 1)<br>
-              — de>getPlacar()</code>: retorna o array ordenado por pontuação decrescente com de>sort()</code><br>
-              — de>salvar()</code> e de>carregar()</code>: usa de>localStorage</code>, reconstruindo instâncias pelo campo de>tipo</code>
+            >Simule a interface <code>Competidor</co<code> com <code>verificarCompetidor(obj)</co<code> que confere se o objeto tem <code>resolver()</co<code>, <code>getNome()</co<code> e a propriedade <code>pontuacao</co<code>.</li>
+            >Crie o objeto <code>torneio</co<code> com:<br>
+              — <code>inscrever(ia)</co<code>: valida com <code>verificarCompetidor()</co<code> e lança <code>Error</co<code> se o nome já estiver inscrito<br>
+              — <code>executarRodada(desafio, pontosPorAcerto)</co<code>: chama <code>resolver()</co<code> de cada IA em <code>try/catch</co<code> individual — quem resolver ganha os pontos multiplicados pelo <code>multiplicador</co<code> da IA (padrão 1)<br>
+              — <code>getPlacar()</co<code>: retorna o array ordenado por pontuação decrescente com <code>sort()</co<code><br>
+              — <code>salvar()</co<code> e <code>carregar()</co<code>: usa <code>localStorage</co<code>, reconstruindo instâncias pelo campo <code>tipo</co<code>
             </li>
           </ol>
 
           <p class="req-title">🌐 Parte HTML + DOM</p>
           <ol>
-            >Crie uma tabela de placar gerada com de>innerHTML</code>: posição, nome, versão, tipo e pontuação. A linha do líder tem fundo dourado (de>#fef9c3</code>) e emoji 🏆 antes do nome, aplicado via de>classList</code>.</li>
-            >Adicione campo "Desafio da rodada" e botão "▶ Executar Rodada". Ao clicar, chame de>torneio.executarRodada()</code> e atualize a tabela completamente com de>innerHTML</code>, reordenando pelo placar.</li>
-            >Exiba um log da última rodada abaixo da tabela: ✅ resolveu / ❌ falhou + mensagem do erro, com cores diferentes via de>innerHTML</code>.</li>
-            >Formulário para inscrever nova IA (nome, versão, tipo) com validação inline: se o nome já existir, exiba erro com de>textContent</code> sem usar de>alert()</code>.</li>
+            >Crie uma tabela de placar gerada com <code>innerHTML</co<code>: posição, nome, versão, tipo e pontuação. A linha do líder tem fundo dourado (<code>#fef9c3</co<code>) e emoji 🏆 antes do nome, aplicado via <code>classList</co<code>.</li>
+            >Adicione campo "Desafio da rodada" e botão "▶ Executar Rodada". Ao clicar, chame <code>torneio.executarRodada()</co<code> e atualize a tabela completamente com <code>innerHTML</co<code>, reordenando pelo placar.</li>
+            >Exiba um log da última rodada abaixo da tabela: ✅ resolveu / ❌ falhou + mensagem do erro, com cores diferentes via <code>innerHTML</co<code>.</li>
+            >Formulário para inscrever nova IA (nome, versão, tipo) com validação inline: se o nome já existir, exiba erro com <code>textContent</co<code> sem usar <code>alert()</co<code>.</li>
           </ol>
 
           <div class="callout dica">
             <strong>💡 Dica de ordenação</strong>
-            Para ordenar o placar use: de>ias.sort((a, b) => b.pontuacao - a.pontuacao)</code>. Valores negativos indicam que de>b</code> vem antes de de>a</code>. Compare essa abordagem com a reordenação de cards do DOM do Exercício 5 — é o mesmo conceito em contextos diferentes.
+            Para ordenar o placar use: <code>ias.sort((a, b) => b.pontuacao - a.pontuacao)</co<code>. Valores negativos indicam que <code>b</co<code> vem antes de <code>a</co<code>. Compare essa abordagem com a reordenação de cards do DOM do Exercício 5 — é o mesmo conceito em contextos diferentes.
           </div>
 
           <div class="entrega">
             <strong>📁 Entrega</strong>
-            Arquivo único de>torneio-ia.html</code>. Demonstre ao menos 4 IAs de tipos diferentes, 3 rodadas com desafios variados (um curto para a IAPessimista funcionar, um longo para ela falhar) e placar final salvo no de>localStorage</code>.
+            Arquivo único <code>torneio-ia.html</co<code>. Demonstre ao menos 4 IAs de tipos diferentes, 3 rodadas com desafios variados (um curto para a IAPessimista funcionar, um longo para ela falhar) e placar final salvo no <code>localStorage</co<code>.
           </div>
         </div>
       </div>
