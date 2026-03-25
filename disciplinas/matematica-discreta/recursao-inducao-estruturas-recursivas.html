@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Recursão e Indução em Estruturas Recursivas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- MathJax para fórmulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <!-- CSS geral da disciplina -->
+    <link rel="stylesheet" href="md-estilos-gerais.css">
+</head>
+<body>
+<div class="container">
+    <h1>Recursão e Indução em Estruturas Recursivas<br>
+        <span style="font-size:0.8em;">Funções recursivas e provas de corretude</span>
+    </h1>
+    <p><strong>Disciplina:</strong> Matemática Discreta – Bacharelado em Ciência da Computação (IFC São Bento do Sul)</p>
+    <p>Esta página foi feita para acompanhar a aula e também para que você possa estudar sozinho(a)
+       e implementar os algoritmos apresentados. A ideia é: ler o conceito, ver o exemplo matemático,
+       e em seguida <strong>codar</strong> a versão recursiva.</p>
+
+    <!-- SEÇÃO 1: IDEIA GERAL -->
+    <div class="aula">
+        <h2>1. O que é recursão?</h2>
+        <div class="objetivos">
+            <strong>Objetivos da seção:</strong> Entender a ideia de recursão, ver a ligação com indução
+            e reconhecer casos base e chamadas recursivas.
+        </div>
+
+        <p>
+            Uma função é <strong>recursiva</strong> quando ela é definida em termos de si mesma,
+            mas sempre “diminuindo” o problema. De forma geral:
+        </p>
+        <ul>
+            <li><strong>Caso base:</strong> situações mais simples, em que a resposta é direta.</li>
+            <li><strong>Passo recursivo:</strong> expressa o problema em função de uma versão menor dele mesmo.</li>
+        </ul>
+
+        <div class="exemplo">
+            <h3>Exemplo rápido – Fatorial</h3>
+            <p>Definição matemática recursiva:</p>
+            <ul>
+                <li>\(0! = 1\) (caso base);</li>
+                <li>\(n! = n \cdot (n-1)!\) para \(n \geq 1\) (passo recursivo).</li>
+            </ul>
+            <p>Perceba como é igual ao “formato” de uma prova por indução: base + passo que reduz de \(n\) para \(n-1\).</p>
+        </div>
+    </div>
+
+    <!-- SEÇÃO 2: DEFINIÇÕES RECURSIVAS DE FUNÇÕES -->
+    <div class="aula">
+        <h2>2. Definições recursivas de funções</h2>
+        <p>Uma definição recursiva típica tem duas partes:</p>
+        <ol>
+            <li><strong>Base:</strong> define o valor da função para um ou mais casos iniciais.</li>
+            <li><strong>Passo recursivo:</strong> define \(f(n)\) em função de valores “menores” \(f(k)\).</li>
+        </ol>
+
+        <div class="exemplo">
+            <h3>Exemplo 1 – Fatorial (matemática → algoritmo)</h3>
+
+            <h4>2.1. Definição matemática</h4>
+            <p>\[
+                f(0) = 1,\quad
+                f(n) = n \cdot f(n-1)\ \text{para}\ n \geq 1.
+            \]</p>
+
+            <h4>2.2. Como a recursão “anda”</h4>
+            <p>Para calcular \(4!\):</p>
+            <ul>
+                <li>\(4! = 4 \cdot 3!\)</li>
+                <li>\(3! = 3 \cdot 2!\)</li>
+                <li>\(2! = 2 \cdot 1!\)</li>
+                <li>\(1! = 1 \cdot 0!\)</li>
+                <li>\(0! = 1\) (base, pára aqui)</li>
+            </ul>
+
+            <h4>2.3. Algoritmo recursivo em C/Java-like</h4>
+<pre><code>int fat(int n) {
+    if (n == 0) {       // caso base
+        return 1;
+    }
+    return n * fat(n - 1);  // chamada recursiva, problema menor
+}</code></pre>
+
+            <p><strong>Atividade:</strong> copie este código para seu ambiente (C, C++, Java, etc.),
+               execute para alguns valores e observe a sequência de chamadas.</p>
+        </div>
+
+        <div class="exemplo">
+            <h3>Exemplo 2 – Sequência definida recursivamente</h3>
+            <p>Considere a função \(f:\mathbb{N} \to \mathbb{Z}\) definida por:</p>
+            <ul>
+                <li>\(f(0) = 3\);</li>
+                <li>\(f(n+1) = 2f(n) + 1\) para \(n \geq 0\).</li>
+            </ul>
+            <p>Calcule manualmente \(f(1), f(2), f(3)\):</p>
+            <ul>
+                <li>\(f(1) = 2f(0) + 1 = 2\cdot 3 + 1 = 7\);</li>
+                <li>\(f(2) = 2f(1) + 1 = 2\cdot 7 + 1 = 15\);</li>
+                <li>\(f(3) = 2f(2) + 1 = 2\cdot 15 + 1 = 31\).</li>
+            </ul>
+
+            <h4>Algoritmo correspondente</h4>
+<pre><code>int f(int n) {
+    if (n == 0) {       // caso base
+        return 3;
+    }
+    return 2 * f(n - 1) + 1;  // passo recursivo
+}</code></pre>
+            <p><strong>Atividade:</strong> implemente e confira se <code>f(1)</code>, <code>f(2)</code> e
+               <code>f(3)</code> batem com os valores calculados à mão.</p>
+        </div>
+    </div>
+
+    <!-- SEÇÃO 3: PROVAS POR INDUÇÃO DE FUNÇÕES RECURSIVAS -->
+    <div class="aula">
+        <h2>3. Indução aplicada a funções recursivas</h2>
+        <div class="objetivos">
+            <strong>Objetivos:</strong> Ver como usar indução para provar propriedades de funções
+            definidas recursivamente e ligar isso à corretude do algoritmo.
+        </div>
+
+        <div class="exemplo">
+            <h3>Exemplo 3 – Fechamento da função \(f(n)\)</h3>
+            <p>Da seção anterior, temos:</p>
+            <ul>
+                <li>\(f(0) = 3\);</li>
+                <li>\(f(n+1) = 2f(n) + 1\).</li>
+            </ul>
+            <p>Conjectura (observando os valores 3, 7, 15, 31…):</p>
+            <p>\[
+                f(n) = 2^{n+2} - 1.
+            \]</p>
+
+            <h4>3.1. Prova por indução</h4>
+            <p><strong>Base:</strong> para \(n = 0\): \(f(0) = 3\). Pela fórmula,</p>
+            <p>\[
+                2^{0+2} - 1 = 2^2 - 1 = 4 - 1 = 3.
+            \]</p>
+            <p>Base ok.</p>
+
+            <p><strong>Hipótese de indução:</strong> suponha que, para algum \(k \geq 0\),</p>
+            <p>\[
+                f(k) = 2^{k+2} - 1.
+            \]</p>
+
+            <p><strong>Passo indutivo:</strong> queremos mostrar que</p>
+            <p>\[
+                f(k+1) = 2^{(k+1)+2} - 1 = 2^{k+3} - 1.
+            \]</p>
+            <p>Usando a definição recursiva:</p>
+            <p>\[
+                f(k+1) = 2f(k) + 1.
+            \]</p>
+            <p>Substituindo a hipótese de indução:</p>
+            <p>\[
+                f(k+1) = 2(2^{k+2} - 1) + 1 = 2^{k+3} - 2 + 1 = 2^{k+3} - 1.
+            \]</p>
+            <p>Logo, a fórmula vale para \(k+1\). Pela indução, vale para todo \(n \ge 0\).</p>
+
+            <h4>3.2. Ligando com o algoritmo</h4>
+            <p>
+                Se implementarmos a função recursiva <code>f(n)</code> como no Exemplo 2,
+                acabamos de provar que, para todo \(n\), o valor retornado é exatamente
+                \(2^{n+2} - 1\). Isso é uma <strong>prova de corretude</strong> baseada em indução.
+            </p>
+        </div>
+    </div>
+
+    <!-- SEÇÃO 4: FUNÇÕES FIBONACCI E CORRETUDE -->
+    <div class="aula">
+        <h2>4. Exemplo clássico: Fibonacci</h2>
+        <p>A sequência de Fibonacci é definida por:</p>
+        <ul>
+            <li>\(F(0) = 0\), \(F(1) = 1\) (casos base);</li>
+            <li>\(F(n) = F(n-1) + F(n-2)\) para \(n \geq 2\) (passo recursivo).</li>
+        </ul>
+
+        <div class="exemplo">
+            <h3>4.1. Algoritmo recursivo de Fibonacci</h3>
+<pre><code>int fib(int n) {
+    if (n == 0) {      // caso base 1
+        return 0;
+    }
+    if (n == 1) {      // caso base 2
+        return 1;
+    }
+    return fib(n - 1) + fib(n - 2);  // chamadas recursivas
+}</code></pre>
+            <p>
+                Esse algoritmo é didático, mas não é eficiente para valores grandes de <code>n</code>.
+                Ainda assim, ele é ótimo para enxergar a estrutura recursiva.
+            </p>
+        </div>
+
+        <div class="exemplo">
+            <h3>4.2. Esboço de prova de corretude por indução forte</h3>
+            <p>Queremos provar que, para todo \(n \geq 0\), a função <code>fib(n)</code> retorna o \(n\)-ésimo número de Fibonacci.</p>
+            <ol>
+                <li><strong>Base:</strong> Verificar que <code>fib(0) = 0</code> e <code>fib(1) = 1</code>, iguais à definição.</li>
+                <li><strong>Hipótese de indução forte:</strong> Suponha que, para todo \(k\) com \(0 \le k \le n\),
+                    <code>fib(k)</code> retorna o valor correto.</li>
+                <li><strong>Passo indutivo:</strong> Para \(n+1\), o código usa apenas <code>fib(n)</code> e <code>fib(n-1)</code>.
+                    Pela hipótese, esses dois valores estão corretos, então
+                    <code>fib(n+1)</code> retorna \(F(n) + F(n-1) = F(n+1)\).</li>
+            </ol>
+            <p>Concluímos, por indução forte, que o algoritmo está correto para todo \(n\).</p>
+        </div>
+    </div>
+
+    <!-- SEÇÃO 5: EXERCÍCIOS GUIADOS -->
+    <div class="aula">
+        <h2>5. Exercícios guiados (para você implementar)</h2>
+        <p>Nos exercícios abaixo, siga o padrão: (1) entenda a definição matemática, (2) escreva a função recursiva,
+           (3) pense em como provar a corretude por indução.</p>
+
+        <div class="exercicio">
+            <h3>Exercício 1 – Potência recursiva</h3>
+            <p>
+                Defina recursivamente a função \(p(n) = x^n\) para \(n \ge 0\) e \(x \in \mathbb{R}\).  
+                Em seguida, implemente a versão recursiva em código e prove, por indução em \(n\),
+                que a função realmente calcula \(x^n\).
+            </p>
+            <button onclick="toggleRes('exPot')">Ver sugestão</button>
+            <div id="exPot" class="resolucao">
+                <p><strong>Definição sugerida:</strong></p>
+                <ul>
+                    <li>\(p(0) = 1\);</li>
+                    <li>\(p(n) = x \cdot p(n-1)\) para \(n \ge 1\).</li>
+                </ul>
+<pre><code>double pot(double x, int n) {
+    if (n == 0) {
+        return 1.0;
+    }
+    return x * pot(x, n - 1);
+}</code></pre>
+                <p>
+                    A prova por indução em \(n\) segue exatamente a definição: base em \(n=0\) e passo indutivo
+                    usando \(p(n) = x \cdot p(n-1)\).
+                </p>
+            </div>
+        </div>
+
+        <div class="exercicio">
+            <h3>Exercício 2 – Soma recursiva dos elementos de um vetor</h3>
+            <p>
+                Dado um vetor <code>a[0..n-1]</code>, defina recursivamente a soma dos elementos
+                \(S(n) = a_0 + a_1 + \dots + a_{n-1}\) e implemente um algoritmo recursivo que
+                devolva essa soma.
+            </p>
+            <button onclick="toggleRes('exSomaVet')">Ver sugestão</button>
+            <div id="exSomaVet" class="resolucao">
+<pre><code>int somaVetor(int a[], int n) {
+    if (n == 0) {      // vetor vazio
+        return 0;
+    }
+    return somaVetor(a, n - 1) + a[n - 1];
+}</code></pre>
+                <p>
+                    Defina \(P(n)\): “<code>somaVetor(a, n)</code> retorna a soma de <code>a[0..n-1]</code>”.
+                    Prove por indução em \(n\) que \(P(n)\) é verdadeira para todo \(n \ge 0\).
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>IFC São Bento do Sul · Matemática Discreta · Recursão e Indução em Estruturas Recursivas</p>
+    </footer>
+</div>
+
+<script>
+function toggleRes(id) {
+    const elem = document.getElementById(id);
+    if (!elem) return;
+    elem.style.display = (elem.style.display === 'block') ? 'none' : 'block';
+}
+</script>
+</body>
+</html>
