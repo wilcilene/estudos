@@ -101,9 +101,9 @@ button:hover {
 .algoritmo,
 code {
     background: #f8f9fa;
-    padding: 5px;
+    padding: 1px;
     border: 1px solid #dee2e6;
-    border-radius: 5px;
+    border-radius: 1px;
     font-family: monospace;
 }
 
