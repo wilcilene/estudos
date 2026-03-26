@@ -1,0 +1,280 @@
+/* ================================================
+   git-github-guia.css
+   Guia Git e GitHub - Programacao I - ECO
+   ================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --cor-primaria: #0366d6;
+  --cor-sucesso:  #2da44e;
+  --cor-perigo:   #d73a49;
+  --cor-bg:       #f5f7fa;
+  --cor-branco:   #ffffff;
+  --cor-borda:    #d0d7de;
+  --cor-texto:    #24292f;
+  --cor-texto-leve: #57606a;
+  --cor-code-bg:  #f6f8fa;
+  --cor-terminal: #0d1117;
+  --cor-terminal-text: #e6edf3;
+  --raio:         8px;
+  --fonte-mono:   "Consolas", "SFMono-Regular", Menlo, Monaco, monospace;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  background-color: var(--cor-bg);
+  color: var(--cor-texto);
+}
+
+/* ---------- CABECALHO ---------- */
+header {
+  background: #24292e;
+  color: #ffffff;
+  padding: 20px 24px;
+  border-bottom: 3px solid var(--cor-primaria);
+}
+header h1 {
+  font-size: 1.55rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+header p {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+/* ---------- LAYOUT PRINCIPAL ---------- */
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+}
+
+/* ---------- NAVEGACAO ---------- */
+nav.sumario {
+  background: var(--cor-branco);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 14px 18px;
+  margin-bottom: 20px;
+}
+nav.sumario h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--cor-texto);
+}
+nav.sumario ol {
+  margin-left: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 4px 24px;
+  font-size: 0.9rem;
+}
+nav.sumario a {
+  color: var(--cor-primaria);
+  text-decoration: none;
+}
+nav.sumario a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- SECOES ---------- */
+section {
+  background: var(--cor-branco);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 20px 22px;
+  margin-bottom: 20px;
+  scroll-margin-top: 16px;
+}
+section h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding-left: 10px;
+  border-left: 4px solid var(--cor-primaria);
+  margin-bottom: 12px;
+}
+section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 14px;
+  margin-bottom: 6px;
+  color: var(--cor-texto);
+}
+
+p {
+  margin-bottom: 10px;
+  font-size: 0.97rem;
+}
+
+ol, ul {
+  margin-left: 20px;
+  margin-bottom: 10px;
+  font-size: 0.96rem;
+}
+li {
+  margin-bottom: 4px;
+}
+
+a {
+  color: var(--cor-primaria);
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- CODIGO INLINE ---------- */
+code {
+  background: var(--cor-code-bg);
+  border: 1px solid var(--cor-borda);
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: var(--fonte-mono);
+  font-size: 0.875rem;
+  color: #d63384;
+}
+
+/* ---------- BLOCOS DE CODIGO (TERMINAL) ---------- */
+pre {
+  background: var(--cor-terminal);
+  color: var(--cor-terminal-text);
+  padding: 12px 14px;
+  border-radius: var(--raio);
+  overflow-x: auto;
+  font-size: 0.88rem;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* ---------- ALERTAS E DICAS ---------- */
+.dica {
+  border-left: 4px solid var(--cor-sucesso);
+  background: #f0fff4;
+  padding: 10px 12px;
+  border-radius: 0 var(--raio) var(--raio) 0;
+  margin-bottom: 12px;
+  font-size: 0.92rem;
+}
+.dica strong { color: var(--cor-sucesso); }
+
+.alerta {
+  border-left: 4px solid var(--cor-perigo);
+  background: #fff5f5;
+  padding: 10px 12px;
+  border-radius: 0 var(--raio) var(--raio) 0;
+  margin-bottom: 12px;
+  font-size: 0.92rem;
+}
+.alerta strong { color: var(--cor-perigo); }
+
+.destaque {
+  border-left: 4px solid var(--cor-primaria);
+  background: #f0f6ff;
+  padding: 10px 12px;
+  border-radius: 0 var(--raio) var(--raio) 0;
+  margin-bottom: 12px;
+  font-size: 0.92rem;
+}
+.destaque strong { color: var(--cor-primaria); }
+
+/* ---------- TABELA ---------- */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.92rem;
+  margin-bottom: 12px;
+  border-radius: var(--raio);
+  overflow: hidden;
+  border: 1px solid var(--cor-borda);
+}
+th {
+  background: var(--cor-code-bg);
+  font-weight: 600;
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--cor-borda);
+}
+td {
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--cor-borda);
+}
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* ---------- BADGES DE PASSO ---------- */
+.passo-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--cor-primaria);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+
+/* ---------- REPOSITORIO DESTAQUE ---------- */
+.repo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--cor-code-bg);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 8px 14px;
+  text-decoration: none;
+  color: var(--cor-texto);
+  font-size: 0.92rem;
+  margin-top: 4px;
+  font-family: var(--fonte-mono);
+  transition: border-color 0.15s, background 0.15s;
+}
+.repo-link:hover {
+  background: #e8f0fe;
+  border-color: var(--cor-primaria);
+  text-decoration: none;
+}
+.repo-link::before {
+  content: "\1F4E6";
+  font-style: normal;
+}
+
+/* ---------- RODAPE ---------- */
+footer {
+  text-align: center;
+  padding: 20px 16px;
+  font-size: 0.84rem;
+  color: var(--cor-texto-leve);
+  border-top: 1px solid var(--cor-borda);
+  margin-top: 12px;
+}
+
+/* ---------- RESPONSIVO ---------- */
+@media (max-width: 600px) {
+  header h1 { font-size: 1.2rem; }
+  section { padding: 14px 12px; }
+  nav.sumario ol { grid-template-columns: 1fr; }
+  table { font-size: 0.82rem; }
+  pre { font-size: 0.78rem; }
+}
