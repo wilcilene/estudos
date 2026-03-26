@@ -22,7 +22,7 @@
 <li><a href="#fluxo-git">4. Fluxo basico do Git (init, add, commit, push)</a></li>
 <li><a href="#primeiro-repo">5. Subindo seu primeiro projeto para o GitHub</a></li>
 <li><a href="#entregas-exercicios">6. Entrega dos exercicios da disciplina</a></li>
-<li><a href="#projeto-semestral">7. Projeto semestral em equipe</a></li>
+<li><a href="#projeto-semestral">7. Projeto semestral</a></li>
 <li><a href="#resumo-comandos">8. Resumo dos principais comandos</a></li>
 </ol>
 </nav>
@@ -32,11 +32,11 @@
 <ol>
 <li>Acesse <a href="https://github.com" target="_blank">https://github.com</a></li>
 <li>Clique em <strong>Sign up</strong></li>
-<li>Informe seu e-mail e crie um nome de usuario simples</li>
+<li>Informe seu e-mail e crie um nome de usuario</li>
 <li>Confirme seu e-mail clicando no link enviado pelo GitHub</li>
 </ol>
 <div class="dica">
-<strong>Dica:</strong> Guarde seu usuario e senha do GitHub, eles serao usados em varias disciplinas.
+<strong>Dica:</strong> Guarde seu usuario e senha do GitHub!
 </div>
 </section>
 
@@ -45,13 +45,13 @@
 <h3>2.1 Instalar o Git (Windows)</h3>
 <ol>
 <li>Acesse <a href="https://git-scm.com/downloads" target="_blank">https://git-scm.com/downloads</a> e baixe o instalador</li>
-<li>Execute o arquivo baixado e avance clicando em <strong>Next</strong> ate o fim</li>
+<li>Execute o arquivo baixado e avance clicando em <strong>Next</strong> até o fim</li>
 <li>Abra o <strong>Git Bash</strong> ou o Prompt de Comando</li>
 <li>Digite <code>git --version</code> e pressione Enter</li>
 </ol>
 <h3>2.2 Configurar seu nome e e-mail</h3>
 <pre><code>git config --global user.name "Seu Nome Completo"
-git config --global user.email "seu-email@example.com"</code></pre>
+git config --global user.email "seu-email@ifc.edu.br"</code></pre>
 </section>
 
 <section id="fluxo-git">
@@ -62,20 +62,20 @@ git config --global user.email "seu-email@example.com"</code></pre>
 </thead>
 <tbody>
 <tr><td>1. Iniciar repositorio</td><td><code>git init</code></td><td>Cria um repositorio Git em uma pasta</td></tr>
-<tr><td>2. Adicionar arquivos</td><td><code>git add .</code></td><td>Coloca arquivos na area de preparacao</td></tr>
-<tr><td>3. Confirmar alteracoes</td><td><code>git commit -m "mensagem"</code></td><td>Registra um ponto na historia do projeto</td></tr>
-<tr><td>4. Enviar para o GitHub</td><td><code>git push origin main</code></td><td>Envia os commits para o repositorio remoto</td></tr>
+<tr><td>2. Adicionar arquivos</td><td><code>git add .</code></td><td>Coloca arquivos na área de preparação</td></tr>
+<tr><td>3. Confirmar alterações</td><td><code>git commit -m "mensagem"</code></td><td>Registra um ponto na história do projeto</td></tr>
+<tr><td>4. Enviar para o GitHub</td><td><code>git push origin main</code></td><td>Envia os commits para o repositório remoto</td></tr>
 </tbody>
 </table>
 </section>
 
 <section id="entregas-exercicios">
 <h2>6. Entrega dos exercicios da disciplina</h2>
-<p>Para a disciplina de Programacao I, temos um repositorio especifico no GitHub onde as entregas serao organizadas por aula e por estudante.</p>
+<p>Para a disciplina de Programacao I, temos um repositório no GitHub onde as entregas são organizadas por aula e por estudante (ou grupo).</p>
 <a href="https://github.com/wilcilene/prog1-eco-2026-entregas" target="_blank" class="repo-link">wilcilene/prog1-eco-2026-entregas</a>
 <h3>Fluxo de entrega</h3>
 <ol>
-<li>Clone o repositorio:
+<li>Clone o repositório:
 <pre><code>git clone https://github.com/wilcilene/prog1-eco-2026-entregas.git
 cd prog1-eco-2026-entregas</code></pre>
 </li>
@@ -92,15 +92,15 @@ git push</code></pre>
 
 <section id="projeto-semestral">
 <h2>7. Projeto semestral em equipe</h2>
-<p>O projeto semestral sera feito em equipes. Cada equipe ficara responsavel por uma parte do sistema, mas o resultado final sera um unico projeto utilizavel na vida real.</p>
-<p>Dentro do repositorio da disciplina, cada equipe trabalha na sua pasta:</p>
+<p>O projeto semestral será feito em equipes. Cada equipe ficará responsável por uma parte do sistema, mas o resultado final será um único projeto.</p>
+<p>Dentro do repositório da disciplina, cada equipe trabalha na sua pasta:</p>
 <pre><code>projetos/equipes/equipe-01/
 projetos/equipes/equipe-02/
 projetos/equipes/equipe-03/
 projetos/equipes/equipe-04/</code></pre>
-<p>Ao final do semestre, o codigo sera integrado em <code>projetos/produto-final/</code></p>
+<p>Ao final, o código será integrado em <code>projetos/produto-final/</code></p>
 <div class="alerta">
-<strong>Atencao:</strong> Sempre escreva mensagens de commit que expliquem rapidamente o que foi feito.
+<strong>Atenção:</strong> Sempre digite mensagens de commit que expliquem resumidamente o que foi feito.
 </div>
 </section>
 
@@ -113,11 +113,11 @@ projetos/equipes/equipe-04/</code></pre>
 <tbody>
 <tr><td><code>git init</code></td><td>Primeira vez que usa Git em uma pasta</td></tr>
 <tr><td><code>git status</code></td><td>Para checar o estado antes de fazer commit</td></tr>
-<tr><td><code>git add .</code></td><td>Quando quer incluir todas as alteracoes</td></tr>
-<tr><td><code>git commit -m "msg"</code></td><td>Apos preparar os arquivos</td></tr>
+<tr><td><code>git add .</code></td><td>Quando quer incluir todas as alterações</td></tr>
+<tr><td><code>git commit -m "msg"</code></td><td>Após preparar os arquivos</td></tr>
 <tr><td><code>git push</code></td><td>Depois de um ou mais commits</td></tr>
-<tr><td><code>git pull</code></td><td>Antes de comecar a trabalhar, para atualizar</td></tr>
-<tr><td><code>git clone URL</code></td><td>No inicio, para baixar o repositorio</td></tr>
+<tr><td><code>git pull</code></td><td>Antes de começar a trabalhar, para atualizar</td></tr>
+<tr><td><code>git clone URL</code></td><td>No início, para baixar o repositório</td></tr>
 </tbody>
 </table>
 </section>
@@ -125,7 +125,7 @@ projetos/equipes/equipe-04/</code></pre>
 </main>
 
 <footer>
-<p>Disciplina de Programacao I · IFC · Uso de Git e GitHub para estudos, exercicios e projeto semestral.</p>
+<p>Disciplina de Programacao I · IFC · Uso de Git e GitHub na disciplina.</p>
 </footer>
 </body>
 </html>
