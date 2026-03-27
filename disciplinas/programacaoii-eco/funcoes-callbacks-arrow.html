@@ -56,8 +56,8 @@
 
           <div class="callout">
             <strong>Para estudantes que faltaram:</strong> todos os exemplos desta página podem
-            ser copiados para um arquivo de>.js</code> e executados com
-            de>node arquivo.js</code> no terminal, ou colados diretamente no console do
+            ser copiados para um arquivo <code>.js</code> e executados com
+            <code>node arquivo.js</code> no terminal, ou colados diretamente no console do
             navegador (F12 → aba Console). Recomendamos reproduzir e modificar cada exemplo
             antes de avançar para o próximo.
           </div>
@@ -69,11 +69,11 @@
 
           <h3>1.1 Declaração de função</h3>
           <p>
-            É a forma mais clássica. A palavra-chave de>function</code> é seguida pelo
+            É a forma mais clássica. A palavra-chave <code>function</code> é seguida pelo
             nome, pelos parâmetros entre parênteses e pelo corpo entre chaves.
           </p>
 
-<pre>// Declaração de função
+<pre><code>// Declaração de função
 function saudar(nome) {
   return "Olá, " + nome + "!";
 }
@@ -86,12 +86,12 @@ console.log(saudar("João"));  // Olá, João!
           <div class="example-box">
             <strong>Entendendo linha a linha:</strong>
             <ul>
-              >function saudar(nome)</code> — declara uma função chamada
-                de>saudar</code> que recebe um parâmetro chamado de>nome</code>.</li>
-              >return</code> — devolve um valor para quem chamou a função.
-                Sem de>return</code>, a função retorna de>undefined</code>.</li>
-              >saudar("Ana")</code> — chama a função passando de>"Ana"</code>
-                como argumento. O parâmetro de>nome</code> recebe esse valor dentro
+              ><code>function saudar(nome)</code> — declara uma função chamada
+                <code>saudar</code> que recebe um parâmetro chamado <code>nome</code>.</li>
+              ><code>return</code> — devolve um valor para quem chamou a função.
+                Sem <code>return</code>, a função retorna <code>undefined</code>.</li>
+              ><code>saudar("Ana")</code> — chama a função passando <code>"Ana"</code>
+                como argumento. O parâmetro <code>nome</code> recebe esse valor dentro
                 da função.</li>
             </ul>
           </div>
@@ -104,7 +104,7 @@ console.log(saudar("João"));  // Olá, João!
             antes de serem usadas.
           </p>
 
-<pre>// Expressão de função
+<pre><code>// Expressão de função
 const dobrar = function(numero) {
   return numero * 2;
 };
@@ -120,7 +120,7 @@ console.log(typeof dobrar); // "function"
             argumento não for passado pelo chamador.
           </p>
 
-<pre>function criarMensagem(texto, autor = "Anônimo") {
+<pre><code>function criarMensagem(texto, autor = "Anônimo") {
   return `"${texto}" — ${autor}`;
 }
 
@@ -132,9 +132,9 @@ console.log(criarMensagem("Tente sempre"));
 </code></pre>
 
           <div class="note">
-            O texto entre crases (de>`</code>) com de>${}</code> é chamado de
+            O texto entre crases (<code>`</code>) com <code>${}</code> é chamado de
             <strong>template literal</strong>. Ele permite embutir expressões JavaScript
-            diretamente dentro de strings, sem precisar concatenar com de>+</code>.
+            diretamente dentro de strings, sem precisar concatenar com <code>+</code>.
           </div>
 
           <h3>1.4 Funções que retornam funções</h3>
@@ -143,7 +143,7 @@ console.log(criarMensagem("Tente sempre"));
             Esse padrão será muito útil quando estudarmos closures e callbacks.
           </p>
 
-<pre>function criarMultiplicador(fator) {
+<pre><code>function criarMultiplicador(fator) {
   // Retorna uma nova função que usa "fator" do escopo externo
   return function(numero) {
     return numero * fator;
@@ -160,11 +160,11 @@ console.log(quadruplicar(5)); // 20
           <div class="example-box">
             <strong>O que acontece aqui?</strong>
             <ul>
-              >criarMultiplicador(3)</code> executa e retorna uma função que
-                multiplica por 3. Essa função é guardada em de>triplicar</code>.</li>
-              >Quando chamamos de>triplicar(5)</code>, a função interna ainda
-                "lembra" que de>fator</code> é 3 — mesmo depois de
-                de>criarMultiplicador</code> ter terminado. Isso é chamado de
+              >c<code>riarMultiplicador(3)</code> executa e retorna uma função que
+                multiplica por 3. Essa função é guardada em <code>triplicar</code>.</li>
+              >Quando chamamos <code>triplicar(5)</code>, a função interna ainda
+                "lembra" que <code>fator</code> é 3 — mesmo depois de
+                <code>criarMultiplicador</code> ter terminado. Isso é chamado de
                 <strong>closure</strong>.</li>
             </ul>
           </div>
@@ -184,7 +184,7 @@ console.log(quadruplicar(5)); // 20
             em qualquer lugar do código.
           </p>
 
-<pre>const disciplina = "Programação II"; // variável global
+<pre><code>const disciplina = "Programação II"; // variável global
 
 function exibir() {
   // Pode acessar variável global aqui dentro
@@ -197,11 +197,11 @@ console.log(disciplina); // Programação II
 
           <h3>2.2 Escopo de função</h3>
           <p>
-            Variáveis declaradas com de>var</code> dentro de uma função existem apenas
+            Variáveis declaradas com <code>var</code> dentro de uma função existem apenas
             dentro dela.
           </p>
 
-<pre>function calcular() {
+<pre><code>function calcular() {
   var resultado = 42; // existe só dentro de calcular()
   console.log(resultado); // 42
 }
@@ -212,12 +212,12 @@ calcular();
 
           <h3>2.3 Escopo de bloco (let e const)</h3>
           <p>
-            Com de>let</code> e de>const</code> (introduzidos no ES6), variáveis ficam
-            restritas ao bloco de>{ }</code> em que foram declaradas — seja um
-            de>if</code>, um de>for</code> ou qualquer outro bloco.
+            Com <code>let</code> e <code>const</code> (introduzidos no ES6), variáveis ficam
+            restritas ao bloco <code>{ }</code> em que foram declaradas — seja um
+            <code>if</code>, um <code>for</code> ou qualquer outro bloco.
           </p>
 
-<pre>if (true) {
+<pre><code>if (true) {
   let mensagem = "Dentro do bloco";
   const constante = 100;
   console.log(mensagem);  // Dentro do bloco
@@ -235,9 +235,9 @@ console.log(vazado); // "var vaza do bloco" ← comportamento problemático
 </code></pre>
 
           <div class="callout">
-            <strong>Regra prática:</strong> sempre use de>const</code> por padrão.
-            Use de>let</code> quando precisar reatribuir a variável. Evite
-            de>var</code> em código moderno.
+            <strong>Regra prática:</strong> sempre use <code>const</code> por padrão.
+            Use <code>let</code> quando precisar reatribuir a variável. Evite
+            <code>var</code> em código moderno.
           </div>
         </div>
 
@@ -252,7 +252,7 @@ console.log(vazado); // "var vaza do bloco" ← comportamento problemático
 
           <h3>3.1 Sintaxe básica</h3>
 
-<pre>// Função tradicional
+<pre><code>// Função tradicional
 function somar(a, b) {
   return a + b;
 }
@@ -274,20 +274,20 @@ console.log(somarCurta(3, 4));  // 7
             <strong>Regras da sintaxe curta:</strong>
             <ul>
               >Se houver <strong>um único parâmetro</strong>, os parênteses são opcionais:
-                de>x => x * 2</code></li>
+                <code>x => x * 2</code></li>
               >Se não houver parâmetros, os parênteses são obrigatórios:
-                de>() => "olá"</code></li>
+                <code>() => "olá"</code></li>
               >Se o corpo tiver <strong>uma única expressão</strong>, as chaves e o
-                de>return</code> podem ser omitidos — o resultado da expressão é
+                <code>return</code> podem ser omitidos — o resultado da expressão é
                 retornado automaticamente.</li>
               >Se o corpo tiver <strong>múltiplas linhas</strong>, use chaves e
-                de>return</code> explícito normalmente.</li>
+                <code>return</code> explícito normalmente.</li>
             </ul>
           </div>
 
           <h3>3.2 Exemplos variados de sintaxe</h3>
 
-<pre>// Um parâmetro: parênteses opcionais
+<pre><code>// Um parâmetro: parênteses opcionais
 const dobrar = x => x * 2;
 
 // Sem parâmetros: parênteses obrigatórios
@@ -304,15 +304,15 @@ console.log(dizerOla());              // Olá!
 console.log(calcularDesconto(100, 10)); // 90
 </code></pre>
 
-          <h3>3.3 Diferença importante: o de>this</code></h3>
+          <h3>3.3 Diferença importante: o <code>this</code></h3>
           <p>
-            Arrow functions <strong>não possuem seu próprio de>this</code></strong> —
-            elas herdam o de>this</code> do contexto em que foram criadas. Isso resolve
+            Arrow functions <strong>não possuem seu próprio <code>this</code></strong> —
+            elas herdam o <code>this</code> do contexto em que foram criadas. Isso resolve
             um problema clássico com funções tradicionais dentro de classes e eventos.
             Veremos isso com mais detalhe quando estudarmos o DOM e os eventos.
           </p>
 
-<pre>// Em funções tradicionais, "this" dentro do callback
+<pre><code>// Em funções tradicionais, "this" dentro do callback
 // pode ser diferente do esperado:
 function Contador() {
   this.valor = 0;
@@ -329,7 +329,7 @@ const c = new Contador(); // imprime 1, 2, 3... a cada segundo
 
           <div class="note">
             Por ora, o mais importante é saber <em>escrever</em> arrow functions com
-            conforto. O comportamento do de>this</code> ficará mais claro quando
+            conforto. O comportamento do <code>this</code> ficará mais claro quando
             trabalharmos com classes e eventos do DOM.
           </div>
         </div>
@@ -353,11 +353,11 @@ const c = new Contador(); // imprime 1, 2, 3... a cada segundo
 
           <h3>4.1 Callback simples</h3>
           <p>
-            No exemplo abaixo, a função de>executar</code> recebe outra função como
+            No exemplo abaixo, a função <code>executar</code> recebe outra função como
             argumento e a chama internamente.
           </p>
 
-<pre>// "operacao" é um callback: uma função passada como argumento
+<pre><code>// "operacao" é um callback: uma função passada como argumento
 function executar(operacao) {
   console.log("Antes da operação");
   operacao(); // chama o callback
@@ -376,10 +376,10 @@ executar(minhaOperacao);
 </code></pre>
 
           <div class="example-box">
-            <strong>Repare:</strong> passamos de>minhaOperacao</code> sem os parênteses.
+            <strong>Repare:</strong> passamos <code>minhaOperacao</code> sem os parênteses.
             <ul>
-              >minhaOperacao</code> → passa a <em>função em si</em> como valor.</li>
-              >minhaOperacao()</code> → <em>executa</em> a função imediatamente
+              ><code>minhaOperacao</code> → passa a <em>função em si</em> como valor.</li>
+              ><code>minhaOperacao()</code> → <em>executa</em> a função imediatamente
                 e passa o resultado.</li>
             </ul>
             Essa distinção é fundamental para entender callbacks corretamente.
@@ -391,7 +391,7 @@ executar(minhaOperacao);
             invocar o callback.
           </p>
 
-<pre>function processarNota(nota, callback) {
+<pre><code>function processarNota(nota, callback) {
   if (nota < 0 || nota > 10) {
     throw new Error("Nota inválida");
   }
@@ -413,7 +413,7 @@ processarNota(4.0, exibirResultado); // Nota: 4.0 → Reprovado
             de um nome. Esse é o padrão mais comum no código web real.
           </p>
 
-<pre>function processarNota(nota, callback) {
+<pre><code>function processarNota(nota, callback) {
   if (nota < 0 || nota > 10) throw new Error("Nota inválida");
   callback(nota);
 }
@@ -436,7 +436,7 @@ processarNota(5, nota => console.log(`Nota: ${nota}`));
             o callback só é chamado quando o evento acontece.
           </p>
 
-<pre>// setTimeout: executa o callback após um tempo (em milissegundos)
+<pre><code>// setTimeout: executa o callback após um tempo (em milissegundos)
 console.log("Início");
 
 setTimeout(() => {
@@ -452,7 +452,7 @@ console.log("Fim"); // aparece ANTES do setTimeout
 </code></pre>
 
           <div class="note">
-            Repare que "Fim" aparece antes do callback do de>setTimeout</code>.
+            Repare que "Fim" aparece antes do callback do <code>setTimeout</code>.
             Isso mostra o comportamento <strong>assíncrono</strong>: o JavaScript não
             espera o timer terminar — ele continua executando o resto do código e,
             quando o timer dispara, chama o callback. Esse modelo é a base de todo
@@ -470,12 +470,12 @@ console.log("Fim"); // aparece ANTES do setTimeout
             JavaScript para trabalhar com arrays.
           </p>
 
-          <h3>5.1 de>forEach</code> — percorrer</h3>
+          <h3>5.1 forEach — percorrer</h3>
           <p>
             Executa um callback para cada elemento do array. Não retorna nada.
           </p>
 
-<pre>const estudantes = ["Ana", "João", "Maria", "Pedro"];
+<pre><code>const estudantes = ["Ana", "João", "Maria", "Pedro"];
 
 estudantes.forEach((estudante, indice) => {
   console.log(`${indice + 1}. ${estudante}`);
@@ -487,13 +487,13 @@ estudantes.forEach((estudante, indice) => {
 // 4. Pedro
 </code></pre>
 
-          <h3>5.2 de>map</code> — transformar</h3>
+          <h3>5.2 map — transformar</h3>
           <p>
             Retorna um <strong>novo array</strong> com o resultado do callback aplicado a
             cada elemento. O array original não é alterado.
           </p>
 
-<pre>const notas = [6.0, 8.5, 4.0, 9.2];
+<pre><code>const notas = [6.0, 8.5, 4.0, 9.2];
 
 // Adiciona 1 ponto em todas as notas
 const notasAjustadas = notas.map(nota => nota + 1);
@@ -515,22 +515,22 @@ console.log(resultado);
 </code></pre>
 
           <div class="example-box">
-            <strong>Por que usar de>map</code> em vez de de>forEach</code>?</strong>
+            <strong>Por que usar <code>map</code> em vez de <code>forEach</code>?</strong>
             <ul>
-              >Use de>forEach</code> quando quiser apenas <em>percorrer</em> o array
+              >Use <code>forEach</code> quando quiser apenas <em>percorrer</em> o array
                 para fazer algo (ex: imprimir, salvar).</li>
-              >Use de>map</code> quando quiser <em>transformar</em> o array em outro
+              >Use <code>map</code> quando quiser <em>transformar</em> o array em outro
                 array de mesma quantidade de elementos.</li>
             </ul>
           </div>
 
-          <h3>5.3 de>filter</code> — filtrar</h3>
+          <h3>5.3 filter — filtrar</h3>
           <p>
             Retorna um novo array contendo apenas os elementos para os quais o callback
-            retornou de>true</code>.
+            retornou <code>true</code>.
           </p>
 
-<pre>const notas = [6.0, 8.5, 4.0, 9.2, 3.5, 7.0];
+<pre><code>const notas = [6.0, 8.5, 4.0, 9.2, 3.5, 7.0];
 
 const aprovados = notas.filter(nota => nota >= 6);
 const reprovados = notas.filter(nota => nota < 6);
@@ -539,13 +539,13 @@ console.log(aprovados);  // [6, 8.5, 9.2, 7]
 console.log(reprovados); // [4, 3.5]
 </code></pre>
 
-          <h3>5.4 de>reduce</code> — acumular</h3>
+          <h3>5.4 <code>reduce</code> — acumular</h3>
           <p>
             Reduz o array a um único valor, acumulando o resultado do callback a cada
             iteração. É o mais poderoso e o mais complexo dos três.
           </p>
 
-<pre>const notas = [6.0, 8.5, 4.0, 9.2];
+<pre><code>const notas = [6.0, 8.5, 4.0, 9.2];
 
 // Soma todas as notas
 const soma = notas.reduce((acumulador, nota) => acumulador + nota, 0);
@@ -558,25 +558,25 @@ console.log(media.toFixed(2)); // 6.93
 </code></pre>
 
           <div class="example-box">
-            <strong>Como o de>reduce</code> funciona passo a passo:</strong>
+            <strong>Como o <code>reduce</code> funciona passo a passo:</strong>
             <ul>
-              >O segundo argumento (de>0</code>) é o valor inicial do acumulador.</li>
+              >O segundo argumento (<code>0</code>) é o valor inicial do acumulador.</li>
               >A cada iteração, o callback recebe o acumulador e o elemento atual,
                 e retorna o novo acumulador.</li>
-              >Iteração 1: de>0 + 6.0 = 6.0</code></li>
-              >Iteração 2: de>6.0 + 8.5 = 14.5</code></li>
-              >Iteração 3: de>14.5 + 4.0 = 18.5</code></li>
-              >Iteração 4: de>18.5 + 9.2 = 27.7</code> → resultado final</li>
+              >Iteração 1: <code>0 + 6.0 = 6.0</code></li>
+              >Iteração 2: <code>6.0 + 8.5 = 14.5</code></li>
+              >Iteração 3: <code>14.5 + 4.0 = 18.5</code></li>
+              >Iteração 4: <code>18.5 + 9.2 = 27.7</code> → resultado final</li>
             </ul>
           </div>
 
           <h3>5.5 Encadeamento de métodos</h3>
           <p>
-            Como de>map</code> e de>filter</code> retornam novos arrays, podemos
+            Como <code>map</code> e <code>filter</code> retornam novos arrays, podemos
             encadear várias operações em sequência.
           </p>
 
-<pre>const estudantes = [
+<pre><code>const estudantes = [
   { nome: "Ana",   nota: 8.5 },
   { nome: "João",  nota: 4.0 },
   { nome: "Maria", nota: 9.2 },
@@ -600,13 +600,13 @@ console.log(nomesAprovados); // ["Ana", "Maria"]
           <details open>
             <summary>Exercício 1 – Funções e parâmetros padrão</summary>
             <div>
-              <p>Crie uma função de>apresentar</code> que receba de>nome</code>,
-                de>curso</code> e de>semestre</code> (padrão: 1) e retorne uma string
+              <p>Crie uma função <code>apresentar</code> que receba <code>nome</code>,
+                <code>curso</code> e de>semestre</code> (padrão: 1) e retorne uma string
                 formatada com template literal. Exemplos de saída esperada:</p>
               <ul>
-                apresentar("Ana", "Eng. Computação", 3)</code>
+                <code> apresentar("Ana", "Eng. Computação", 3)</code>
                   → <em>"Ana – Eng. Computação – 3º semestre"</em></li>
-                apresentar("João", "Eng. Computação")</code>
+               <code> apresentar("João", "Eng. Computação")</code>
                   → <em>"João – Eng. Computação – 1º semestre"</em></li>
               </ul>
               <p><strong>Desafio:</strong> reescreva a função como arrow function.</p>
@@ -616,7 +616,7 @@ console.log(nomesAprovados); // ["Ana", "Maria"]
           <details>
             <summary>Exercício 2 – Callbacks e validação</summary>
             <div>
-              <p>Crie uma função de>processarIdade</code> que receba um número e um
+              <p>Crie uma função <code>processarIdade</code> que receba um número e um
                 callback. A função deve:</p>
               <ul>
                 >Lançar um erro se a idade for negativa ou maior que 120.</li>
@@ -631,7 +631,7 @@ console.log(nomesAprovados); // ["Ana", "Maria"]
             <summary>Exercício 3 – map, filter e reduce</summary>
             <div>
               <p>Dado o array de produtos abaixo, resolva cada item usando o método indicado:</p>
-<pre>const produtos = [
+<pre><code>const produtos = [
   { nome: "Mouse",    preco: 80,  estoque: 5  },
   { nome: "Teclado",  preco: 150, estoque: 0  },
   { nome: "Monitor",  preco: 900, estoque: 2  },
@@ -644,7 +644,7 @@ console.log(nomesAprovados); // ["Ana", "Maria"]
                 ><strong>map:</strong> aplique 10% de desconto em todos os preços e retorne
                   um novo array com nome e novo preço.</li>
                 ><strong>reduce:</strong> calcule o valor total do estoque
-                  (de>preco × estoque</code>) de todos os produtos.</li>
+                  (<code>preco × estoque</code>) de todos os produtos.</li>
               </ul>
               <p><strong>Desafio:</strong> usando encadeamento, calcule o valor total apenas
                 dos produtos disponíveis em estoque.</p>
@@ -654,11 +654,11 @@ console.log(nomesAprovados); // ["Ana", "Maria"]
           <details>
             <summary>Exercício 4 – Funções que retornam funções (closure)</summary>
             <div>
-              <p>Crie uma função de>criarSaudacao</code> que receba um idioma
-                (de>"pt"</code>, de>"en"</code> ou de>"es"</code>) e retorne
+              <p>Crie uma função <code>criarSaudacao</code> que receba um idioma
+                (<code>"pt"</code>, <code>"en"</code> ou <code>"es"</code>) e retorne
                 uma função que, ao receber um nome, exiba a saudação no idioma correto.
                 Exemplo:</p>
-<pre>const saudarEmPortugues = criarSaudacao("pt");
+<pre><code>const saudarEmPortugues = criarSaudacao("pt");
 const saudarEmIngles    = criarSaudacao("en");
 
 saudarEmPortugues("Ana");  // Olá, Ana!
@@ -672,12 +672,12 @@ saudarEmIngles("Ana");     // Hello, Ana!
             <div>
                             <p>Crie um array com pelo menos 6 objetos de estudantes
               (nome, nota, turma). Em seguida, usando encadeamento de
-              de>filter</code>, de>map</code> e de>reduce</code>:</p>
+              <code>filter</code>, <code>map</code> e <code>reduce</code>:</p>
               <ul>
-                >Filtre apenas os estudantes da turma de>"ECO"</code>.</li>
+                >Filtre apenas os estudantes da turma <code>"ECO"</code>.</li>
                 >Filtre entre esses apenas os aprovados (nota ≥ 6).</li>
-                >Use de>map</code> para extrair só os nomes.</li>
-                >Use de>reduce</code> para construir uma string final no formato:<br>
+                >Use <code>map</code> para extrair só os nomes.</li>
+                >Use <code>reduce</code> para construir uma string final no formato:<br>
                   <em>"Aprovados da turma ECO: Ana, Maria, Pedro"</em></li>
               </ul>
               <p><strong>Dica:</strong> cada método retorna um array, então você pode
@@ -688,7 +688,7 @@ saudarEmIngles("Ana");     // Hello, Ana!
           <h3>Roteiro de estudo para quem faltou</h3>
           <ul>
             >Leia as seções 1, 2 e 3 com atenção e reproduza cada exemplo em um arquivo
-              de>funcoes.js</code>, executando com de>node funcoes.js</code> ou no
+              <code>funcoes.js</code>, executando com <code>node funcoes.js</code> ou no
               console do navegador (F12).</li>
             >Modifique os exemplos: troque valores, adicione parâmetros, reescreva funções
               tradicionais como arrow functions.</li>
