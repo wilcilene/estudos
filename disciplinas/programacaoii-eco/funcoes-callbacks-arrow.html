@@ -168,6 +168,24 @@ console.log(quadruplicar(5)); // 20
                 <strong>closure</strong>.</li>
             </ul>
           </div>
+          <p> Outro exemplo simples para entender melhor:</p>
+          <pre><code>function criarContador() {
+  let contador = 0;         // variável do escopo externo
+
+  return function () {      // função interna — a closure
+    contador++;
+    console.log(contador);
+  };
+}
+const contarA = criarContador(); // estado A
+const contarB = criarContador(); // estado B — separado!
+
+contarA(); // 1
+contarA(); // 2
+contarB(); // 1  ← começa do zero
+contarA(); // 3
+          </code></pre>
+          
         </div>
 
         <!-- ESCOPO -->
