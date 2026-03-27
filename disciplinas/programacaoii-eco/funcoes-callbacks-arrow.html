@@ -86,11 +86,11 @@ console.log(saudar("João"));  // Olá, João!
           <div class="example-box">
             <strong>Entendendo linha a linha:</strong>
             <ul>
-              ><code>function saudar(nome)</code> — declara uma função chamada
+              <li><code>function saudar(nome)</code> — declara uma função chamada
                 <code>saudar</code> que recebe um parâmetro chamado <code>nome</code>.</li>
-              ><code>return</code> — devolve um valor para quem chamou a função.
+              <li><code>return</code> — devolve um valor para quem chamou a função.
                 Sem <code>return</code>, a função retorna <code>undefined</code>.</li>
-              ><code>saudar("Ana")</code> — chama a função passando <code>"Ana"</code>
+              <li><code>saudar("Ana")</code> — chama a função passando <code>"Ana"</code>
                 como argumento. O parâmetro <code>nome</code> recebe esse valor dentro
                 da função.</li>
             </ul>
@@ -160,9 +160,9 @@ console.log(quadruplicar(5)); // 20
           <div class="example-box">
             <strong>O que acontece aqui?</strong>
             <ul>
-              >c<code>riarMultiplicador(3)</code> executa e retorna uma função que
+              <li>c<code>riarMultiplicador(3)</code> executa e retorna uma função que
                 multiplica por 3. Essa função é guardada em <code>triplicar</code>.</li>
-              >Quando chamamos <code>triplicar(5)</code>, a função interna ainda
+              <li>Quando chamamos <code>triplicar(5)</code>, a função interna ainda
                 "lembra" que <code>fator</code> é 3 — mesmo depois de
                 <code>criarMultiplicador</code> ter terminado. Isso é chamado de
                 <strong>closure</strong>.</li>
@@ -273,14 +273,14 @@ console.log(somarCurta(3, 4));  // 7
           <div class="example-box">
             <strong>Regras da sintaxe curta:</strong>
             <ul>
-              >Se houver <strong>um único parâmetro</strong>, os parênteses são opcionais:
+              <li>Se houver <strong>um único parâmetro</strong>, os parênteses são opcionais:
                 <code>x => x * 2</code></li>
-              >Se não houver parâmetros, os parênteses são obrigatórios:
+              <li>Se não houver parâmetros, os parênteses são obrigatórios:
                 <code>() => "olá"</code></li>
-              >Se o corpo tiver <strong>uma única expressão</strong>, as chaves e o
+              <li>Se o corpo tiver <strong>uma única expressão</strong>, as chaves e o
                 <code>return</code> podem ser omitidos — o resultado da expressão é
                 retornado automaticamente.</li>
-              >Se o corpo tiver <strong>múltiplas linhas</strong>, use chaves e
+              <li>Se o corpo tiver <strong>múltiplas linhas</strong>, use chaves e
                 <code>return</code> explícito normalmente.</li>
             </ul>
           </div>
@@ -378,8 +378,8 @@ executar(minhaOperacao);
           <div class="example-box">
             <strong>Repare:</strong> passamos <code>minhaOperacao</code> sem os parênteses.
             <ul>
-              ><code>minhaOperacao</code> → passa a <em>função em si</em> como valor.</li>
-              ><code>minhaOperacao()</code> → <em>executa</em> a função imediatamente
+              <li><code>minhaOperacao</code> → passa a <em>função em si</em> como valor.</li>
+              <li><code>minhaOperacao()</code> → <em>executa</em> a função imediatamente
                 e passa o resultado.</li>
             </ul>
             Essa distinção é fundamental para entender callbacks corretamente.
@@ -517,9 +517,9 @@ console.log(resultado);
           <div class="example-box">
             <strong>Por que usar <code>map</code> em vez de <code>forEach</code>?</strong>
             <ul>
-              >Use <code>forEach</code> quando quiser apenas <em>percorrer</em> o array
+              <li>Use <code>forEach</code> quando quiser apenas <em>percorrer</em> o array
                 para fazer algo (ex: imprimir, salvar).</li>
-              >Use <code>map</code> quando quiser <em>transformar</em> o array em outro
+              <li>Use <code>map</code> quando quiser <em>transformar</em> o array em outro
                 array de mesma quantidade de elementos.</li>
             </ul>
           </div>
@@ -560,13 +560,13 @@ console.log(media.toFixed(2)); // 6.93
           <div class="example-box">
             <strong>Como o <code>reduce</code> funciona passo a passo:</strong>
             <ul>
-              >O segundo argumento (<code>0</code>) é o valor inicial do acumulador.</li>
-              >A cada iteração, o callback recebe o acumulador e o elemento atual,
+              <li>O segundo argumento (<code>0</code>) é o valor inicial do acumulador.</li>
+              <li>A cada iteração, o callback recebe o acumulador e o elemento atual,
                 e retorna o novo acumulador.</li>
-              >Iteração 1: <code>0 + 6.0 = 6.0</code></li>
-              >Iteração 2: <code>6.0 + 8.5 = 14.5</code></li>
-              >Iteração 3: <code>14.5 + 4.0 = 18.5</code></li>
-              >Iteração 4: <code>18.5 + 9.2 = 27.7</code> → resultado final</li>
+              <li>Iteração 1: <code>0 + 6.0 = 6.0</code></li>
+              <li>Iteração 2: <code>6.0 + 8.5 = 14.5</code></li>
+              <li>Iteração 3: <code>14.5 + 4.0 = 18.5</code></li>
+              <li>Iteração 4: <code>18.5 + 9.2 = 27.7</code> → resultado final</li>
             </ul>
           </div>
 
@@ -604,9 +604,9 @@ console.log(nomesAprovados); // ["Ana", "Maria"]
                 <code>curso</code> e de>semestre</code> (padrão: 1) e retorne uma string
                 formatada com template literal. Exemplos de saída esperada:</p>
               <ul>
-                <code> apresentar("Ana", "Eng. Computação", 3)</code>
+                <li><code> apresentar("Ana", "Eng. Computação", 3)</code>
                   → <em>"Ana – Eng. Computação – 3º semestre"</em></li>
-               <code> apresentar("João", "Eng. Computação")</code>
+               <li><code> apresentar("João", "Eng. Computação")</code>
                   → <em>"João – Eng. Computação – 1º semestre"</em></li>
               </ul>
               <p><strong>Desafio:</strong> reescreva a função como arrow function.</p>
@@ -619,8 +619,8 @@ console.log(nomesAprovados); // ["Ana", "Maria"]
               <p>Crie uma função <code>processarIdade</code> que receba um número e um
                 callback. A função deve:</p>
               <ul>
-                >Lançar um erro se a idade for negativa ou maior que 120.</li>
-                >Chamar o callback com a idade se for válida.</li>
+                <li>Lançar um erro se a idade for negativa ou maior que 120.</li>
+                <li>Chamar o callback com a idade se for válida.</li>
               </ul>
               <p>Teste passando callbacks diferentes: um que exibe se a pessoa é maior de
                 idade, outro que calcula o ano de nascimento aproximado.</p>
@@ -640,10 +640,10 @@ console.log(nomesAprovados); // ["Ana", "Maria"]
 ];
 </code></pre>
               <ul>
-                ><strong>filter:</strong> retorne apenas os produtos com estoque maior que zero.</li>
-                ><strong>map:</strong> aplique 10% de desconto em todos os preços e retorne
+                <li><strong>filter:</strong> retorne apenas os produtos com estoque maior que zero.</li>
+                <li><strong>map:</strong> aplique 10% de desconto em todos os preços e retorne
                   um novo array com nome e novo preço.</li>
-                ><strong>reduce:</strong> calcule o valor total do estoque
+                <li><strong>reduce:</strong> calcule o valor total do estoque
                   (<code>preco × estoque</code>) de todos os produtos.</li>
               </ul>
               <p><strong>Desafio:</strong> usando encadeamento, calcule o valor total apenas
@@ -674,10 +674,10 @@ saudarEmIngles("Ana");     // Hello, Ana!
               (nome, nota, turma). Em seguida, usando encadeamento de
               <code>filter</code>, <code>map</code> e <code>reduce</code>:</p>
               <ul>
-                >Filtre apenas os estudantes da turma <code>"ECO"</code>.</li>
-                >Filtre entre esses apenas os aprovados (nota ≥ 6).</li>
-                >Use <code>map</code> para extrair só os nomes.</li>
-                >Use <code>reduce</code> para construir uma string final no formato:<br>
+                <li>Filtre apenas os estudantes da turma <code>"ECO"</code>.</li>
+                <li>Filtre entre esses apenas os aprovados (nota ≥ 6).</li>
+                <li>Use <code>map</code> para extrair só os nomes.</li>
+                <li>Use <code>reduce</code> para construir uma string final no formato:<br>
                   <em>"Aprovados da turma ECO: Ana, Maria, Pedro"</em></li>
               </ul>
               <p><strong>Dica:</strong> cada método retorna um array, então você pode
@@ -687,15 +687,15 @@ saudarEmIngles("Ana");     // Hello, Ana!
 
           <h3>Roteiro de estudo para quem faltou</h3>
           <ul>
-            >Leia as seções 1, 2 e 3 com atenção e reproduza cada exemplo em um arquivo
+            <li>Leia as seções 1, 2 e 3 com atenção e reproduza cada exemplo em um arquivo
               <code>funcoes.js</code>, executando com <code>node funcoes.js</code> ou no
               console do navegador (F12).</li>
-            >Modifique os exemplos: troque valores, adicione parâmetros, reescreva funções
+            <li>Modifique os exemplos: troque valores, adicione parâmetros, reescreva funções
               tradicionais como arrow functions.</li>
-            >Leia a seção 4 (Callbacks) com cuidado — é o conceito mais novo e será base
+            <li>Leia a seção 4 (Callbacks) com cuidado — é o conceito mais novo e será base
               para as próximas unidades.</li>
-            >Resolva os exercícios 1 a 4. O exercício 5 é desafio opcional.</li>
-            >Anote dúvidas para discutirmos na próxima aula.</li>
+            <li>Resolva os exercícios 1 a 4. O exercício 5 é desafio opcional.</li>
+            <li>Anote dúvidas para discutirmos na próxima aula.</li>
           </ul>
         </div>
 
@@ -707,14 +707,14 @@ saudarEmIngles("Ana");     // Hello, Ana!
         <div class="card">
           <h2>Checklist da unidade</h2>
           <ul class="mini-list">
-            >☑ Declaração de função</li>
-            >☑ Expressão de função</li>
-            >☑ Parâmetros padrão</li>
-            >☑ Escopo (global, função, bloco)</li>
-            >☑ Arrow functions</li>
-            >☑ Callbacks</li>
-            >☑ forEach, map, filter, reduce</li>
-            >☑ Encadeamento de métodos</li>
+            <li>☑ Declaração de função</li>
+            <li>☑ Expressão de função</li>
+            <li>☑ Parâmetros padrão</li>
+            <li>☑ Escopo (global, função, bloco)</li>
+            <li>☑ Arrow functions</li>
+            <li>☑ Callbacks</li>
+            <li>☑ forEach, map, filter, reduce</li>
+            <li>☑ Encadeamento de métodos</li>
           </ul>
         </div>
 
@@ -739,12 +739,12 @@ const somar = (a, b) => a + b;
         <div class="card">
           <h2>Boas práticas</h2>
           <ul class="pill-list">
-            >Nomes descritivos</li>
-            >Uma responsabilidade por função</li>
-            >Prefira const para funções</li>
-            >Evite funções muito longas</li>
-            >Arrow functions em callbacks</li>
-            >Sem var</li>
+            <li>Nomes descritivos</li>
+            <li>Uma responsabilidade por função</li>
+            <li>Prefira const para funções</li>
+            <li>Evite funções muito longas</li>
+            <li>Arrow functions em callbacks</li>
+            <li>Sem var</li>
           </ul>
           <p class="note">
             Uma função deve fazer uma coisa só e fazê-la bem.
@@ -755,19 +755,19 @@ const somar = (a, b) => a + b;
         <div class="card">
           <h2>Quando usar cada método</h2>
           <ul class="mini-list">
-            ><strong>forEach</strong> — percorrer sem retorno</li>
-            ><strong>map</strong> — transformar cada elemento</li>
-            ><strong>filter</strong> — selecionar elementos</li>
-            ><strong>reduce</strong> — acumular em um valor</li>
+            <li><strong>forEach</strong> — percorrer sem retorno</li>
+            <li><strong>map</strong> — transformar cada elemento</li>
+            <li><strong>filter</strong> — selecionar elementos</li>
+            <li><strong>reduce</strong> — acumular em um valor</li>
           </ul>
         </div>
 
         <div class="card">
           <h2>Material complementar</h2>
           <ul class="mini-list">
-            >MDN – Functions (developer.mozilla.org)</li>
-            >MDN – Arrow function expressions</li>
-            >MDN – Array.prototype.map / filter / reduce</li>
+            <li>MDN – Functions (developer.mozilla.org)</li>
+            <li>MDN – Arrow function expressions</li>
+            <li>MDN – Array.prototype.map / filter / reduce</li>
           </ul>
           <footer>
             <p><strong>Dica:</strong> sempre que encontrar um conceito desconhecido,
