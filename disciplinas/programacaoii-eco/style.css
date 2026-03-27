@@ -409,3 +409,10 @@ details > div {
   visibility: visible;
   opacity: 1;
 }
+
+.tooltip {
+  position: relative;
+  cursor: help;
+  border-bottom: 1px dotted currentColor;
+  display: inline-block;   /* ← adicione esta linha */
+}
