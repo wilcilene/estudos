@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Programação II – Funções, Callbacks e Arrow Functions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    " />
+  </head>
+
+  <body>
+    <header>
+      <div class="container">
+        <div>
+          <span class="tag">Programação II – ECO</span>
+          <span class="tag tag--aulas">Aulas</span>
+          <span class="tag tag--nivel">JavaScript Moderno</span>
+        </div>
+        <h1>Funções, Callbacks e Arrow Functions em JavaScript</h1>
+        <p>
+          Nesta unidade entendemos como as funções funcionam em JavaScript — da sintaxe
+          clássica às arrow functions — e aprendemos o conceito de callback,
+          base de toda programação assíncrona e orientada a eventos na web.
+        </p>
+        <nav>
+          <a href="index.html">⌂ Índice da disciplina</a>
+          <a href="#introducao">Introdução</a>
+          <a href="#funcoes">Funções</a>
+          <a href="#escopo">Escopo</a>
+          <a href="#arrow">Arrow Functions</a>
+          <a href="#callbacks">Callbacks</a>
+          <a href="#hof">Ordem superior</a>
+          <a href="#atividades">Exercícios</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- =================== COLUNA PRINCIPAL =================== -->
+      <section>
+
+        <!-- INTRODUÇÃO -->
+        <div class="card" id="introducao">
+          <h2>Introdução</h2>
+          <p>
+            Em JavaScript, funções são <strong>cidadãs de primeira classe</strong>: elas podem
+            ser atribuídas a variáveis, passadas como argumentos para outras funções e retornadas
+            como resultado de outras funções. Esse comportamento é a base de padrões muito usados
+            no desenvolvimento web — eventos de clique, requisições HTTP, temporizadores e muito mais.
+          </p>
+          <p>
+            Nesta unidade vamos estudar três formas de declarar funções, entender o conceito de
+            escopo, aprender o que são callbacks e conhecer as funções de ordem superior mais usadas
+            no dia a dia com JavaScript.
+          </p>
+
+          <div class="callout">
+            <strong>Para estudantes que faltaram:</strong> todos os exemplos desta página podem
+            ser copiados para um arquivo de>.js</code> e executados com
+            de>node arquivo.js</code> no terminal, ou colados diretamente no console do
+            navegador (F12 → aba Console). Recomendamos reproduzir e modificar cada exemplo
+            antes de avançar para o próximo.
+          </div>
+        </div>
+
+        <!-- FUNÇÕES -->
+        <div class="card" id="funcoes">
+          <h2>1. Funções em JavaScript</h2>
+
+          <h3>1.1 Declaração de função</h3>
+          <p>
+            É a forma mais clássica. A palavra-chave de>function</code> é seguida pelo
+            nome, pelos parâmetros entre parênteses e pelo corpo entre chaves.
+          </p>
+
+<pre>de>// Declaração de função
+function saudar(nome) {
+  return "Olá, " + nome + "!";
+}
+
+// Chamando (invocando) a função
+console.log(saudar("Ana"));   // Olá, Ana!
+console.log(saudar("João"));  // Olá, João!
+</code></pre>
+
+          <div class="example-box">
+            <strong>Entendendo linha a linha:</strong>
+            <ul>
+              >de>function saudar(nome)</code> — declara uma função chamada
+                de>saudar</code> que recebe um parâmetro chamado de>nome</code>.</li>
+              >de>return</code> — devolve um valor para quem chamou a função.
+                Sem de>return</code>, a função retorna de>undefined</code>.</li>
+              >de>saudar("Ana")</code> — chama a função passando de>"Ana"</code>
+                como argumento. O parâmetro de>nome</code> recebe esse valor dentro
+                da função.</li>
+            </ul>
+          </div>
+
+          <h3>1.2 Expressão de função</h3>
+          <p>
+            Uma função também pode ser atribuída a uma variável. Essa forma é chamada de
+            <strong>expressão de função</strong>. A diferença prática é que expressões de
+            função <strong>não</strong> são içadas (hoisting) — precisam ser definidas
+            antes de serem usadas.
+          </p>
+
+<pre>de>// Expressão de função
+const dobrar = function(numero) {
+  return numero * 2;
+};
+
+console.log(dobrar(5));    // 10
+console.log(dobrar(12));   // 24
+console.log(typeof dobrar); // "function"
+</code></pre>
+
+          <h3>1.3 Parâmetros com valor padrão</h3>
+          <p>
+            JavaScript permite definir valores padrão para parâmetros, usados quando o
+            argumento não for passado pelo chamador.
+          </p>
+
+<pre>de>function criarMensagem(texto, autor = "Anônimo") {
+  return `"${texto}" — ${autor}`;
+}
+
+console.log(criarMensagem("Aprender é crescer", "Maria"));
+// "Aprender é crescer" — Maria
+
+console.log(criarMensagem("Tente sempre"));
+// "Tente sempre" — Anônimo  ← usou o valor padrão
+</code></pre>
+
+          <div class="note">
+            O texto entre crases (de>`</code>) com de>${}</code> é chamado de
+            <strong>template literal</strong>. Ele permite embutir expressões JavaScript
+            diretamente dentro de strings, sem precisar concatenar com de>+</code>.
+          </div>
+
+          <h3>1.4 Funções que retornam funções</h3>
+          <p>
+            Como funções são valores, uma função pode retornar outra função.
+            Esse padrão será muito útil quando estudarmos closures e callbacks.
+          </p>
+
+<pre>de>function criarMultiplicador(fator) {
+  // Retorna uma nova função que usa "fator" do escopo externo
+  return function(numero) {
+    return numero * fator;
+  };
+}
+
+const triplicar = criarMultiplicador(3);
+const quadruplicar = criarMultiplicador(4);
+
+console.log(triplicar(5));    // 15
+console.log(quadruplicar(5)); // 20
+</code></pre>
+
+          <div class="example-box">
+            <strong>O que acontece aqui?</strong>
+            <ul>
+              >de>criarMultiplicador(3)</code> executa e retorna uma função que
+                multiplica por 3. Essa função é guardada em de>triplicar</code>.</li>
+              >Quando chamamos de>triplicar(5)</code>, a função interna ainda
+                "lembra" que de>fator</code> é 3 — mesmo depois de
+                de>criarMultiplicador</code> ter terminado. Isso é chamado de
+                <strong>closure</strong>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ESCOPO -->
+        <div class="card" id="escopo">
+          <h2>2. Escopo em JavaScript</h2>
+          <p>
+            <strong>Escopo</strong> define onde uma variável pode ser acessada no código.
+            Em JavaScript moderno existem três escopos principais:
+          </p>
+
+          <h3>2.1 Escopo global</h3>
+          <p>
+            Variáveis declaradas fora de qualquer função ou bloco são globais — acessíveis
+            em qualquer lugar do código.
+          </p>
+
+<pre>de>const disciplina = "Programação II"; // variável global
+
+function exibir() {
+  // Pode acessar variável global aqui dentro
+  console.log(disciplina);
+}
+
+exibir(); // Programação II
+console.log(disciplina); // Programação II
+</code></pre>
+
+          <h3>2.2 Escopo de função</h3>
+          <p>
+            Variáveis declaradas com de>var</code> dentro de uma função existem apenas
+            dentro dela.
+          </p>
+
+<pre>de>function calcular() {
+  var resultado = 42; // existe só dentro de calcular()
+  console.log(resultado); // 42
+}
+
+calcular();
+// console.log(resultado); // ← ERRO: resultado is not defined
+</code></pre>
+
+          <h3>2.3 Escopo de bloco (let e const)</h3>
+          <p>
+            Com de>let</code> e de>const</code> (introduzidos no ES6), variáveis ficam
+            restritas ao bloco de>{ }</code> em que foram declaradas — seja um
+            de>if</code>, um de>for</code> ou qualquer outro bloco.
+          </p>
+
+<pre>de>if (true) {
+  let mensagem = "Dentro do bloco";
+  const constante = 100;
+  console.log(mensagem);  // Dentro do bloco
+  console.log(constante); // 100
+}
+
+// console.log(mensagem);  // ← ERRO: não existe aqui fora
+// console.log(constante); // ← ERRO: não existe aqui fora
+
+// Comparação com var (NÃO recomendado em código moderno):
+if (true) {
+  var vazado = "var vaza do bloco";
+}
+console.log(vazado); // "var vaza do bloco" ← comportamento problemático
+</code></pre>
+
+          <div class="callout">
+            <strong>Regra prática:</strong> sempre use de>const</code> por padrão.
+            Use de>let</code> quando precisar reatribuir a variável. Evite
+            de>var</code> em código moderno.
+          </div>
+        </div>
+
+        <!-- ARROW FUNCTIONS -->
+        <div class="card" id="arrow">
+          <h2>3. Arrow Functions</h2>
+          <p>
+            Introduzidas no ES6, as <strong>arrow functions</strong> são uma sintaxe mais
+            curta para escrever funções. São muito usadas em callbacks e em código
+            JavaScript moderno.
+          </p>
+
+          <h3>3.1 Sintaxe básica</h3>
+
+<pre>de>// Função tradicional
+function somar(a, b) {
+  return a + b;
+}
+
+// Equivalente como arrow function
+const somarArrow = (a, b) => {
+  return a + b;
+};
+
+// Versão ainda mais curta: retorno implícito (sem chaves e sem return)
+const somarCurta = (a, b) => a + b;
+
+console.log(somar(3, 4));       // 7
+console.log(somarArrow(3, 4));  // 7
+console.log(somarCurta(3, 4));  // 7
+</code></pre>
+
+          <div class="example-box">
+            <strong>Regras da sintaxe curta:</strong>
+            <ul>
+              >Se houver <strong>um único parâmetro</strong>, os parênteses são opcionais:
+                de>x => x * 2</code></li>
+              >Se não houver parâmetros, os parênteses são obrigatórios:
+                de>() => "olá"</code></li>
+              >Se o corpo tiver <strong>uma única expressão</strong>, as chaves e o
+                de>return</code> podem ser omitidos — o resultado da expressão é
+                retornado automaticamente.</li>
+              >Se o corpo tiver <strong>múltiplas linhas</strong>, use chaves e
+                de>return</code> explícito normalmente.</li>
+            </ul>
+          </div>
+
+          <h3>3.2 Exemplos variados de sintaxe</h3>
+
+<pre>de>// Um parâmetro: parênteses opcionais
+const dobrar = x => x * 2;
+
+// Sem parâmetros: parênteses obrigatórios
+const dizerOla = () => "Olá!";
+
+// Múltiplas linhas: chaves e return obrigatórios
+const calcularDesconto = (preco, percentual) => {
+  const desconto = preco * (percentual / 100);
+  return preco - desconto;
+};
+
+console.log(dobrar(6));               // 12
+console.log(dizerOla());              // Olá!
+console.log(calcularDesconto(100, 10)); // 90
+</code></pre>
+
+          <h3>3.3 Diferença importante: o de>this</code></h3>
+          <p>
+            Arrow functions <strong>não possuem seu próprio de>this</code></strong> —
+            elas herdam o de>this</code> do contexto em que foram criadas. Isso resolve
+            um problema clássico com funções tradicionais dentro de classes e eventos.
+            Veremos isso com mais detalhe quando estudarmos o DOM e os eventos.
+          </p>
+
+<pre>de>// Em funções tradicionais, "this" dentro do callback
+// pode ser diferente do esperado:
+function Contador() {
+  this.valor = 0;
+
+  // Arrow function: "this" vem do Contador, funciona corretamente
+  setInterval(() => {
+    this.valor++;
+    console.log(this.valor);
+  }, 1000);
+}
+
+const c = new Contador(); // imprime 1, 2, 3... a cada segundo
+</code></pre>
+
+          <div class="note">
+            Por ora, o mais importante é saber <em>escrever</em> arrow functions com
+            conforto. O comportamento do de>this</code> ficará mais claro quando
+            trabalharmos com classes e eventos do DOM.
+          </div>
+        </div>
+
+        <!-- CALLBACKS -->
+        <div class="card" id="callbacks">
+          <h2>4. Callbacks</h2>
+          <p>
+            Um <strong>callback</strong> é uma função passada como argumento para outra
+            função, para ser executada em algum momento posterior — quando um evento ocorre,
+            quando uma operação termina, etc.
+          </p>
+
+          <div class="callout">
+            <strong>Analogia:</strong> imagine que você faz um pedido em um restaurante e
+            deixa seu número de celular. Quando o pedido ficar pronto, o restaurante             <strong>Analogia:</strong> imagine que você faz um pedido em um restaurante
+            e deixa seu número de celular. Quando o pedido ficar pronto, o restaurante
+            te liga. Você não fica parado esperando — você passa uma "instrução de retorno"
+            (o callback) e continua fazendo outras coisas.
+          </div>
+
+          <h3>4.1 Callback simples</h3>
+          <p>
+            No exemplo abaixo, a função de>executar</code> recebe outra função como
+            argumento e a chama internamente.
+          </p>
+
+<pre>de>// "operacao" é um callback: uma função passada como argumento
+function executar(operacao) {
+  console.log("Antes da operação");
+  operacao(); // chama o callback
+  console.log("Depois da operação");
+}
+
+// Passando uma função declarada
+function minhaOperacao() {
+  console.log("Executando a operação!");
+}
+
+executar(minhaOperacao);
+// Antes da operação
+// Executando a operação!
+// Depois da operação
+</code></pre>
+
+          <div class="example-box">
+            <strong>Repare:</strong> passamos de>minhaOperacao</code> sem os parênteses.
+            <ul>
+              >de>minhaOperacao</code> → passa a <em>função em si</em> como valor.</li>
+              >de>minhaOperacao()</code> → <em>executa</em> a função imediatamente
+                e passa o resultado.</li>
+            </ul>
+            Essa distinção é fundamental para entender callbacks corretamente.
+          </div>
+
+          <h3>4.2 Callback com argumentos</h3>
+          <p>
+            Callbacks podem receber argumentos. O chamador decide o que passar quando
+            invocar o callback.
+          </p>
+
+<pre>de>function processarNota(nota, callback) {
+  if (nota < 0 || nota > 10) {
+    throw new Error("Nota inválida");
+  }
+  callback(nota);
+}
+
+function exibirResultado(nota) {
+  const situacao = nota >= 6 ? "Aprovado" : "Reprovado";
+  console.log(`Nota: ${nota} → ${situacao}`);
+}
+
+processarNota(8.5, exibirResultado); // Nota: 8.5 → Aprovado
+processarNota(4.0, exibirResultado); // Nota: 4.0 → Reprovado
+</code></pre>
+
+          <h3>4.3 Callback com função anônima</h3>
+          <p>
+            Muitas vezes o callback é escrito diretamente no lugar da chamada, sem precisar
+            de um nome. Esse é o padrão mais comum no código web real.
+          </p>
+
+<pre>de>function processarNota(nota, callback) {
+  if (nota < 0 || nota > 10) throw new Error("Nota inválida");
+  callback(nota);
+}
+
+// Passando uma arrow function anônima diretamente como callback
+processarNota(7, (nota) => {
+  console.log(`Nota recebida: ${nota}`);
+});
+// Nota recebida: 7
+
+// Versão ainda mais curta com retorno implícito:
+processarNota(5, nota => console.log(`Nota: ${nota}`));
+// Nota: 5
+</code></pre>
+
+          <h3>4.4 Callback assíncrono — o caso mais comum na web</h3>
+          <p>
+            O uso mais frequente de callbacks na web é em operações que levam tempo:
+            esperar um clique, um timer, uma resposta de rede. O código não trava —
+            o callback só é chamado quando o evento acontece.
+          </p>
+
+<pre>de>// setTimeout: executa o callback após um tempo (em milissegundos)
+console.log("Início");
+
+setTimeout(() => {
+  console.log("Isso aparece depois de 2 segundos");
+}, 2000);
+
+console.log("Fim"); // aparece ANTES do setTimeout
+
+// Saída:
+// Início
+// Fim
+// Isso aparece depois de 2 segundos
+</code></pre>
+
+          <div class="note">
+            Repare que "Fim" aparece antes do callback do de>setTimeout</code>.
+            Isso mostra o comportamento <strong>assíncrono</strong>: o JavaScript não
+            espera o timer terminar — ele continua executando o resto do código e,
+            quando o timer dispara, chama o callback. Esse modelo é a base de todo
+            o comportamento assíncrono em JavaScript.
+          </div>
+        </div>
+
+        <!-- FUNÇÕES DE ORDEM SUPERIOR -->
+        <div class="card" id="hof">
+          <h2>5. Funções de ordem superior</h2>
+          <p>
+            Uma <strong>função de ordem superior</strong> (Higher-Order Function) é aquela
+            que recebe uma função como argumento e/ou retorna uma função. Você já viu isso
+            nos callbacks — agora vamos ver as funções de ordem superior mais usadas em
+            JavaScript para trabalhar com arrays.
+          </p>
+
+          <h3>5.1 de>forEach</code> — percorrer</h3>
+          <p>
+            Executa um callback para cada elemento do array. Não retorna nada.
+          </p>
+
+<pre>de>const estudantes = ["Ana", "João", "Maria", "Pedro"];
+
+estudantes.forEach((estudante, indice) => {
+  console.log(`${indice + 1}. ${estudante}`);
+});
+
+// 1. Ana
+// 2. João
+// 3. Maria
+// 4. Pedro
+</code></pre>
+
+          <h3>5.2 de>map</code> — transformar</h3>
+          <p>
+            Retorna um <strong>novo array</strong> com o resultado do callback aplicado a
+            cada elemento. O array original não é alterado.
+          </p>
+
+<pre>de>const notas = [6.0, 8.5, 4.0, 9.2];
+
+// Adiciona 1 ponto em todas as notas
+const notasAjustadas = notas.map(nota => nota + 1);
+
+console.log(notas);          // [6, 8.5, 4, 9.2]  ← original intacto
+console.log(notasAjustadas); // [7, 9.5, 5, 10.2]
+
+// Transformando em objetos com situação
+const resultado = notas.map(nota => ({
+  nota,
+  situacao: nota >= 6 ? "Aprovado" : "Reprovado"
+}));
+
+console.log(resultado);
+// [ { nota: 6, situacao: 'Aprovado' },
+//   { nota: 8.5, situacao: 'Aprovado' },
+//   { nota: 4, situacao: 'Reprovado' },
+//   { nota: 9.2, situacao: 'Aprovado' } ]
+</code></pre>
+
+          <div class="example-box">
+            <strong>Por que usar de>map</code> em vez de de>forEach</code>?</strong>
+            <ul>
+              >Use de>forEach</code> quando quiser apenas <em>percorrer</em> o array
+                para fazer algo (ex: imprimir, salvar).</li>
+              >Use de>map</code> quando quiser <em>transformar</em> o array em outro
+                array de mesma quantidade de elementos.</li>
+            </ul>
+          </div>
+
+          <h3>5.3 de>filter</code> — filtrar</h3>
+          <p>
+            Retorna um novo array contendo apenas os elementos para os quais o callback
+            retornou de>true</code>.
+          </p>
+
+<pre>de>const notas = [6.0, 8.5, 4.0, 9.2, 3.5, 7.0];
+
+const aprovados = notas.filter(nota => nota >= 6);
+const reprovados = notas.filter(nota => nota < 6);
+
+console.log(aprovados);  // [6, 8.5, 9.2, 7]
+console.log(reprovados); // [4, 3.5]
+</code></pre>
+
+          <h3>5.4 de>reduce</code> — acumular</h3>
+          <p>
+            Reduz o array a um único valor, acumulando o resultado do callback a cada
+            iteração. É o mais poderoso e o mais complexo dos três.
+          </p>
+
+<pre>de>const notas = [6.0, 8.5, 4.0, 9.2];
+
+// Soma todas as notas
+const soma = notas.reduce((acumulador, nota) => acumulador + nota, 0);
+
+console.log(soma); // 27.7
+
+// Calculando a média
+const media = soma / notas.length;
+console.log(media.toFixed(2)); // 6.93
+</code></pre>
+
+          <div class="example-box">
+            <strong>Como o de>reduce</code> funciona passo a passo:</strong>
+            <ul>
+              >O segundo argumento (de>0</code>) é o valor inicial do acumulador.</li>
+              >A cada iteração, o callback recebe o acumulador e o elemento atual,
+                e retorna o novo acumulador.</li>
+              >Iteração 1: de>0 + 6.0 = 6.0</code></li>
+              >Iteração 2: de>6.0 + 8.5 = 14.5</code></li>
+              >Iteração 3: de>14.5 + 4.0 = 18.5</code></li>
+              >Iteração 4: de>18.5 + 9.2 = 27.7</code> → resultado final</li>
+            </ul>
+          </div>
+
+          <h3>5.5 Encadeamento de métodos</h3>
+          <p>
+            Como de>map</code> e de>filter</code> retornam novos arrays, podemos
+            encadear várias operações em sequência.
+          </p>
+
+<pre>de>const estudantes = [
+  { nome: "Ana",   nota: 8.5 },
+  { nome: "João",  nota: 4.0 },
+  { nome: "Maria", nota: 9.2 },
+  { nome: "Pedro", nota: 5.5 },
+];
+
+// Nomes dos estudantes aprovados, em ordem alfabética
+const nomesAprovados = estudantes
+  .filter(estudante => estudante.nota >= 6)       // filtra aprovados
+  .map(estudante => estudante.nome)               // extrai só o nome
+  .sort();                                // ordena alfabeticamente
+
+console.log(nomesAprovados); // ["Ana", "Maria"]
+</code></pre>
+        </div>
+
+        <!-- EXERCÍCIOS -->
+        <div class="card" id="atividades">
+          <h2>6. Para memorizar!</h2>
+
+          <details open>
+            <summary>Exercício 1 – Funções e parâmetros padrão</summary>
+            <div>
+              <p>Crie uma função de>apresentar</code> que receba de>nome</code>,
+                de>curso</code> e de>semestre</code> (padrão: 1) e retorne uma string
+                formatada com template literal. Exemplos de saída esperada:</p>
+              <ul>
+                >de>apresentar("Ana", "Eng. Computação", 3)</code>
+                  → <em>"Ana – Eng. Computação – 3º semestre"</em></li>
+                >de>apresentar("João", "Eng. Computação")</code>
+                  → <em>"João – Eng. Computação – 1º semestre"</em></li>
+              </ul>
+              <p><strong>Desafio:</strong> reescreva a função como arrow function.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>Exercício 2 – Callbacks e validação</summary>
+            <div>
+              <p>Crie uma função de>processarIdade</code> que receba um número e um
+                callback. A função deve:</p>
+              <ul>
+                >Lançar um erro se a idade for negativa ou maior que 120.</li>
+                >Chamar o callback com a idade se for válida.</li>
+              </ul>
+              <p>Teste passando callbacks diferentes: um que exibe se a pessoa é maior de
+                idade, outro que calcula o ano de nascimento aproximado.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>Exercício 3 – map, filter e reduce</summary>
+            <div>
+              <p>Dado o array de produtos abaixo, resolva cada item usando o método indicado:</p>
+<pre>de>const produtos = [
+  { nome: "Mouse",    preco: 80,  estoque: 5  },
+  { nome: "Teclado",  preco: 150, estoque: 0  },
+  { nome: "Monitor",  preco: 900, estoque: 2  },
+  { nome: "Headset",  preco: 200, estoque: 8  },
+  { nome: "Webcam",   preco: 120, estoque: 0  },
+];
+</code></pre>
+              <ul>
+                ><strong>filter:</strong> retorne apenas os produtos com estoque maior que zero.</li>
+                ><strong>map:</strong> aplique 10% de desconto em todos os preços e retorne
+                  um novo array com nome e novo preço.</li>
+                ><strong>reduce:</strong> calcule o valor total do estoque
+                  (de>preco × estoque</code>) de todos os produtos.</li>
+              </ul>
+              <p><strong>Desafio:</strong> usando encadeamento, calcule o valor total apenas
+                dos produtos disponíveis em estoque.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>Exercício 4 – Funções que retornam funções (closure)</summary>
+            <div>
+              <p>Crie uma função de>criarSaudacao</code> que receba um idioma
+                (de>"pt"</code>, de>"en"</code> ou de>"es"</code>) e retorne
+                uma função que, ao receber um nome, exiba a saudação no idioma correto.
+                Exemplo:</p>
+<pre>de>const saudarEmPortugues = criarSaudacao("pt");
+const saudarEmIngles    = criarSaudacao("en");
+
+saudarEmPortugues("Ana");  // Olá, Ana!
+saudarEmIngles("Ana");     // Hello, Ana!
+</code></pre>
+            </div>
+          </details>
+
+          <details>
+            <summary>Exercício 5 – Pipeline de dados (desafio)</summary>
+            <div>
+                            <p>Crie um array com pelo menos 6 objetos de estudantes
+              (nome, nota, turma). Em seguida, usando encadeamento de
+              de>filter</code>, de>map</code> e de>reduce</code>:</p>
+              <ul>
+                >Filtre apenas os estudantes da turma de>"ECO"</code>.</li>
+                >Filtre entre esses apenas os aprovados (nota ≥ 6).</li>
+                >Use de>map</code> para extrair só os nomes.</li>
+                >Use de>reduce</code> para construir uma string final no formato:<br>
+                  <em>"Aprovados da turma ECO: Ana, Maria, Pedro"</em></li>
+              </ul>
+              <p><strong>Dica:</strong> cada método retorna um array, então você pode
+              chamar o próximo diretamente encadeado.</p>
+            </div>
+          </details>
+
+          <h3>Roteiro de estudo para quem faltou</h3>
+          <ul>
+            >Leia as seções 1, 2 e 3 com atenção e reproduza cada exemplo em um arquivo
+              de>funcoes.js</code>, executando com de>node funcoes.js</code> ou no
+              console do navegador (F12).</li>
+            >Modifique os exemplos: troque valores, adicione parâmetros, reescreva funções
+              tradicionais como arrow functions.</li>
+            >Leia a seção 4 (Callbacks) com cuidado — é o conceito mais novo e será base
+              para as próximas unidades.</li>
+            >Resolva os exercícios 1 a 4. O exercício 5 é desafio opcional.</li>
+            >Anote dúvidas para discutirmos na próxima aula.</li>
+          </ul>
+        </div>
+
+      </section>
+
+      <!-- =================== SIDEBAR =================== -->
+      <aside>
+
+        <div class="card">
+          <h2>Checklist da unidade</h2>
+          <ul class="mini-list">
+            >☑ Declaração de função</li>
+            >☑ Expressão de função</li>
+            >☑ Parâmetros padrão</li>
+            >☑ Escopo (global, função, bloco)</li>
+            >☑ Arrow functions</li>
+            >☑ Callbacks</li>
+            >☑ forEach, map, filter, reduce</li>
+            >☑ Encadeamento de métodos</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Comparativo de sintaxe</h2>
+          <p>As três formas de escrever a mesma função:</p>
+<pre>de>// 1. Declaração
+function somar(a, b) {
+  return a + b;
+}
+
+// 2. Expressão
+const somar = function(a, b) {
+  return a + b;
+};
+
+// 3. Arrow function
+const somar = (a, b) => a + b;
+</code></pre>
+        </div>
+
+        <div class="card">
+          <h2>Boas práticas</h2>
+          <ul class="pill-list">
+            >Nomes descritivos</li>
+            >Uma responsabilidade por função</li>
+            >Prefira const para funções</li>
+            >Evite funções muito longas</li>
+            >Arrow functions em callbacks</li>
+            >Sem var</li>
+          </ul>
+          <p class="note">
+            Uma função deve fazer uma coisa só e fazê-la bem.
+            Se precisar de mais de 10 linhas, avalie se pode dividir em funções menores.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>Quando usar cada método</h2>
+          <ul class="mini-list">
+            ><strong>forEach</strong> — percorrer sem retorno</li>
+            ><strong>map</strong> — transformar cada elemento</li>
+            ><strong>filter</strong> — selecionar elementos</li>
+            ><strong>reduce</strong> — acumular em um valor</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Material complementar</h2>
+          <ul class="mini-list">
+            >MDN – Functions (developer.mozilla.org)</li>
+            >MDN – Arrow function expressions</li>
+            >MDN – Array.prototype.map / filter / reduce</li>
+          </ul>
+          <footer>
+            <p><strong>Dica:</strong> sempre que encontrar um conceito desconhecido,
+              pesquise no MDN — é a documentação mais completa e confiável do JavaScript.</p>
+          </footer>
+        </div>
+
+      </aside>
+
+    </main>
+
+  </body>
+</html> 
