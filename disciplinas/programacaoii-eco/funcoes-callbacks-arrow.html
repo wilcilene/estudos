@@ -73,7 +73,7 @@
             nome, pelos parâmetros entre parênteses e pelo corpo entre chaves.
           </p>
 
-<pre>de>// Declaração de função
+<pre>// Declaração de função
 function saudar(nome) {
   return "Olá, " + nome + "!";
 }
@@ -86,11 +86,11 @@ console.log(saudar("João"));  // Olá, João!
           <div class="example-box">
             <strong>Entendendo linha a linha:</strong>
             <ul>
-              >de>function saudar(nome)</code> — declara uma função chamada
+              >function saudar(nome)</code> — declara uma função chamada
                 de>saudar</code> que recebe um parâmetro chamado de>nome</code>.</li>
-              >de>return</code> — devolve um valor para quem chamou a função.
+              >return</code> — devolve um valor para quem chamou a função.
                 Sem de>return</code>, a função retorna de>undefined</code>.</li>
-              >de>saudar("Ana")</code> — chama a função passando de>"Ana"</code>
+              >saudar("Ana")</code> — chama a função passando de>"Ana"</code>
                 como argumento. O parâmetro de>nome</code> recebe esse valor dentro
                 da função.</li>
             </ul>
@@ -104,7 +104,7 @@ console.log(saudar("João"));  // Olá, João!
             antes de serem usadas.
           </p>
 
-<pre>de>// Expressão de função
+<pre>// Expressão de função
 const dobrar = function(numero) {
   return numero * 2;
 };
@@ -120,7 +120,7 @@ console.log(typeof dobrar); // "function"
             argumento não for passado pelo chamador.
           </p>
 
-<pre>de>function criarMensagem(texto, autor = "Anônimo") {
+<pre>function criarMensagem(texto, autor = "Anônimo") {
   return `"${texto}" — ${autor}`;
 }
 
@@ -143,7 +143,7 @@ console.log(criarMensagem("Tente sempre"));
             Esse padrão será muito útil quando estudarmos closures e callbacks.
           </p>
 
-<pre>de>function criarMultiplicador(fator) {
+<pre>function criarMultiplicador(fator) {
   // Retorna uma nova função que usa "fator" do escopo externo
   return function(numero) {
     return numero * fator;
@@ -160,7 +160,7 @@ console.log(quadruplicar(5)); // 20
           <div class="example-box">
             <strong>O que acontece aqui?</strong>
             <ul>
-              >de>criarMultiplicador(3)</code> executa e retorna uma função que
+              >criarMultiplicador(3)</code> executa e retorna uma função que
                 multiplica por 3. Essa função é guardada em de>triplicar</code>.</li>
               >Quando chamamos de>triplicar(5)</code>, a função interna ainda
                 "lembra" que de>fator</code> é 3 — mesmo depois de
@@ -184,7 +184,7 @@ console.log(quadruplicar(5)); // 20
             em qualquer lugar do código.
           </p>
 
-<pre>de>const disciplina = "Programação II"; // variável global
+<pre>const disciplina = "Programação II"; // variável global
 
 function exibir() {
   // Pode acessar variável global aqui dentro
@@ -201,7 +201,7 @@ console.log(disciplina); // Programação II
             dentro dela.
           </p>
 
-<pre>de>function calcular() {
+<pre>function calcular() {
   var resultado = 42; // existe só dentro de calcular()
   console.log(resultado); // 42
 }
@@ -217,7 +217,7 @@ calcular();
             de>if</code>, um de>for</code> ou qualquer outro bloco.
           </p>
 
-<pre>de>if (true) {
+<pre>if (true) {
   let mensagem = "Dentro do bloco";
   const constante = 100;
   console.log(mensagem);  // Dentro do bloco
@@ -252,7 +252,7 @@ console.log(vazado); // "var vaza do bloco" ← comportamento problemático
 
           <h3>3.1 Sintaxe básica</h3>
 
-<pre>de>// Função tradicional
+<pre>// Função tradicional
 function somar(a, b) {
   return a + b;
 }
@@ -287,7 +287,7 @@ console.log(somarCurta(3, 4));  // 7
 
           <h3>3.2 Exemplos variados de sintaxe</h3>
 
-<pre>de>// Um parâmetro: parênteses opcionais
+<pre>// Um parâmetro: parênteses opcionais
 const dobrar = x => x * 2;
 
 // Sem parâmetros: parênteses obrigatórios
@@ -312,7 +312,7 @@ console.log(calcularDesconto(100, 10)); // 90
             Veremos isso com mais detalhe quando estudarmos o DOM e os eventos.
           </p>
 
-<pre>de>// Em funções tradicionais, "this" dentro do callback
+<pre>// Em funções tradicionais, "this" dentro do callback
 // pode ser diferente do esperado:
 function Contador() {
   this.valor = 0;
@@ -357,7 +357,7 @@ const c = new Contador(); // imprime 1, 2, 3... a cada segundo
             argumento e a chama internamente.
           </p>
 
-<pre>de>// "operacao" é um callback: uma função passada como argumento
+<pre>// "operacao" é um callback: uma função passada como argumento
 function executar(operacao) {
   console.log("Antes da operação");
   operacao(); // chama o callback
@@ -378,8 +378,8 @@ executar(minhaOperacao);
           <div class="example-box">
             <strong>Repare:</strong> passamos de>minhaOperacao</code> sem os parênteses.
             <ul>
-              >de>minhaOperacao</code> → passa a <em>função em si</em> como valor.</li>
-              >de>minhaOperacao()</code> → <em>executa</em> a função imediatamente
+              >minhaOperacao</code> → passa a <em>função em si</em> como valor.</li>
+              >minhaOperacao()</code> → <em>executa</em> a função imediatamente
                 e passa o resultado.</li>
             </ul>
             Essa distinção é fundamental para entender callbacks corretamente.
@@ -391,7 +391,7 @@ executar(minhaOperacao);
             invocar o callback.
           </p>
 
-<pre>de>function processarNota(nota, callback) {
+<pre>function processarNota(nota, callback) {
   if (nota < 0 || nota > 10) {
     throw new Error("Nota inválida");
   }
@@ -413,7 +413,7 @@ processarNota(4.0, exibirResultado); // Nota: 4.0 → Reprovado
             de um nome. Esse é o padrão mais comum no código web real.
           </p>
 
-<pre>de>function processarNota(nota, callback) {
+<pre>function processarNota(nota, callback) {
   if (nota < 0 || nota > 10) throw new Error("Nota inválida");
   callback(nota);
 }
@@ -436,7 +436,7 @@ processarNota(5, nota => console.log(`Nota: ${nota}`));
             o callback só é chamado quando o evento acontece.
           </p>
 
-<pre>de>// setTimeout: executa o callback após um tempo (em milissegundos)
+<pre>// setTimeout: executa o callback após um tempo (em milissegundos)
 console.log("Início");
 
 setTimeout(() => {
@@ -475,7 +475,7 @@ console.log("Fim"); // aparece ANTES do setTimeout
             Executa um callback para cada elemento do array. Não retorna nada.
           </p>
 
-<pre>de>const estudantes = ["Ana", "João", "Maria", "Pedro"];
+<pre>const estudantes = ["Ana", "João", "Maria", "Pedro"];
 
 estudantes.forEach((estudante, indice) => {
   console.log(`${indice + 1}. ${estudante}`);
@@ -493,7 +493,7 @@ estudantes.forEach((estudante, indice) => {
             cada elemento. O array original não é alterado.
           </p>
 
-<pre>de>const notas = [6.0, 8.5, 4.0, 9.2];
+<pre>const notas = [6.0, 8.5, 4.0, 9.2];
 
 // Adiciona 1 ponto em todas as notas
 const notasAjustadas = notas.map(nota => nota + 1);
@@ -530,7 +530,7 @@ console.log(resultado);
             retornou de>true</code>.
           </p>
 
-<pre>de>const notas = [6.0, 8.5, 4.0, 9.2, 3.5, 7.0];
+<pre>const notas = [6.0, 8.5, 4.0, 9.2, 3.5, 7.0];
 
 const aprovados = notas.filter(nota => nota >= 6);
 const reprovados = notas.filter(nota => nota < 6);
@@ -545,7 +545,7 @@ console.log(reprovados); // [4, 3.5]
             iteração. É o mais poderoso e o mais complexo dos três.
           </p>
 
-<pre>de>const notas = [6.0, 8.5, 4.0, 9.2];
+<pre>const notas = [6.0, 8.5, 4.0, 9.2];
 
 // Soma todas as notas
 const soma = notas.reduce((acumulador, nota) => acumulador + nota, 0);
@@ -576,7 +576,7 @@ console.log(media.toFixed(2)); // 6.93
             encadear várias operações em sequência.
           </p>
 
-<pre>de>const estudantes = [
+<pre>const estudantes = [
   { nome: "Ana",   nota: 8.5 },
   { nome: "João",  nota: 4.0 },
   { nome: "Maria", nota: 9.2 },
@@ -604,9 +604,9 @@ console.log(nomesAprovados); // ["Ana", "Maria"]
                 de>curso</code> e de>semestre</code> (padrão: 1) e retorne uma string
                 formatada com template literal. Exemplos de saída esperada:</p>
               <ul>
-                >de>apresentar("Ana", "Eng. Computação", 3)</code>
+                apresentar("Ana", "Eng. Computação", 3)</code>
                   → <em>"Ana – Eng. Computação – 3º semestre"</em></li>
-                >de>apresentar("João", "Eng. Computação")</code>
+                apresentar("João", "Eng. Computação")</code>
                   → <em>"João – Eng. Computação – 1º semestre"</em></li>
               </ul>
               <p><strong>Desafio:</strong> reescreva a função como arrow function.</p>
@@ -631,7 +631,7 @@ console.log(nomesAprovados); // ["Ana", "Maria"]
             <summary>Exercício 3 – map, filter e reduce</summary>
             <div>
               <p>Dado o array de produtos abaixo, resolva cada item usando o método indicado:</p>
-<pre>de>const produtos = [
+<pre>const produtos = [
   { nome: "Mouse",    preco: 80,  estoque: 5  },
   { nome: "Teclado",  preco: 150, estoque: 0  },
   { nome: "Monitor",  preco: 900, estoque: 2  },
@@ -658,7 +658,7 @@ console.log(nomesAprovados); // ["Ana", "Maria"]
                 (de>"pt"</code>, de>"en"</code> ou de>"es"</code>) e retorne
                 uma função que, ao receber um nome, exiba a saudação no idioma correto.
                 Exemplo:</p>
-<pre>de>const saudarEmPortugues = criarSaudacao("pt");
+<pre>const saudarEmPortugues = criarSaudacao("pt");
 const saudarEmIngles    = criarSaudacao("en");
 
 saudarEmPortugues("Ana");  // Olá, Ana!
@@ -721,7 +721,7 @@ saudarEmIngles("Ana");     // Hello, Ana!
         <div class="card">
           <h2>Comparativo de sintaxe</h2>
           <p>As três formas de escrever a mesma função:</p>
-<pre>de>// 1. Declaração
+<pre>// 1. Declaração
 function somar(a, b) {
   return a + b;
 }
