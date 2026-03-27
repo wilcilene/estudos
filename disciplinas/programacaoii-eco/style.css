@@ -368,3 +368,44 @@ details > div {
   border-color: #333;
   font-size: 0.9rem;
 }
+
+.tooltip {
+  position: relative;
+  cursor: help;
+  border-bottom: 1px dotted currentColor;
+}
+
+.tooltip .tooltip-texto {
+  visibility: hidden;
+  opacity: 0;
+  background-color: #1e1e2e;
+  color: #f8f8f2;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  border-radius: 6px;
+  padding: 10px 14px;
+  width: 320px;
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: opacity 0.2s ease;
+  z-index: 100;
+}
+
+/* Seta apontando para baixo */
+.tooltip .tooltip-texto::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #1e1e2e;
+}
+
+.tooltip:hover .tooltip-texto {
+  visibility: visible;
+  opacity: 1;
+}
