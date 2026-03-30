@@ -13,6 +13,7 @@
     <p>Aprenda o fluxo completo de versionamento e como utilizar Fork para entregas.</p>
 
     <nav>
+      <a href="https://wilcilene.github.io/estudos/disciplinas/programacaoii-eco/index.html">Página principal</a>
       <a href="#intro">Introdução</a>
       <a href="#config">Configuração</a>
       <a href="#fluxo">Fluxo</a>
@@ -41,10 +42,13 @@
       <h2>2. Configuração Inicial</h2>
 
       <div class="step">
-        <h3>Instalar e configurar</h3>
+        <h3>Configurar usuário</h3>
 
         <pre><code>git config --global user.name "Seu Nome"
 git config --global user.email "seu@email.com"</code></pre>
+
+        <p><strong>O que faz:</strong> Define seu nome e email para identificar seus commits.</p>
+        <p><strong>Por que é importante:</strong> Sem isso, o Git não consegue registrar corretamente quem fez as alterações.</p>
       </div>
     </div>
 
@@ -54,22 +58,36 @@ git config --global user.email "seu@email.com"</code></pre>
       <div class="step">
         <h3>Inicializar repositório</h3>
         <pre><code>git init</code></pre>
+        <p><strong>O que faz:</strong> Cria um repositório Git na pasta atual.</p>
+        <p><strong>Por que usar:</strong> Permite começar a controlar versões do projeto.</p>
       </div>
 
       <div class="step">
         <h3>Adicionar arquivos</h3>
         <pre><code>git add .</code></pre>
+        <p><strong>O que faz:</strong> Prepara todos os arquivos modificados para o commit.</p>
+        <p><strong>Por que usar:</strong> O Git só salva mudanças que foram adicionadas explicitamente.</p>
       </div>
 
       <div class="step">
         <h3>Criar commit</h3>
         <pre><code>git commit -m "primeiro commit"</code></pre>
+        <p><strong>O que faz:</strong> Salva um “snapshot” do projeto.</p>
+        <p><strong>Por que usar:</strong> Permite registrar versões e voltar no tempo se necessário.</p>
       </div>
 
       <div class="step">
-        <h3>Enviar para o GitHub</h3>
-        <pre><code>git remote add origin URL_DO_REPOSITORIO
-git push -u origin main</code></pre>
+        <h3>Conectar ao GitHub</h3>
+        <pre><code>git remote add origin URL_DO_REPOSITORIO</code></pre>
+        <p><strong>O que faz:</strong> Liga o repositório local ao remoto no GitHub.</p>
+        <p><strong>Por que usar:</strong> Permite enviar seu código para a internet.</p>
+      </div>
+
+      <div class="step">
+        <h3>Enviar arquivos</h3>
+        <pre><code>git push -u origin main</code></pre>
+        <p><strong>O que faz:</strong> Envia os commits para o GitHub.</p>
+        <p><strong>Por que usar:</strong> Compartilha seu projeto e salva uma cópia online.</p>
       </div>
     </div>
 
@@ -82,33 +100,43 @@ git push -u origin main</code></pre>
 
       <div class="step">
         <h3>Passo 1: Fazer Fork</h3>
-        <p>No GitHub, clique em <code>Fork</code> no repositório do professor.</p>
+        <p><strong>O que faz:</strong> Cria uma cópia do repositório do professor na sua conta.</p>
+        <p><strong>Por que usar:</strong> Permite trabalhar sem alterar o original.</p>
       </div>
 
       <div class="step">
         <h3>Passo 2: Clonar o repositório</h3>
         <pre><code>git clone URL_DO_SEU_FORK</code></pre>
+        <p><strong>O que faz:</strong> Baixa o projeto para seu computador.</p>
+        <p><strong>Por que usar:</strong> Permite editar os arquivos localmente.</p>
       </div>
 
       <div class="step">
         <h3>Passo 3: Criar branch</h3>
         <pre><code>git checkout -b minha-atividade</code></pre>
+        <p><strong>O que faz:</strong> Cria uma nova linha de desenvolvimento.</p>
+        <p><strong>Por que usar:</strong> Mantém o projeto organizado e evita conflitos.</p>
       </div>
 
       <div class="step">
         <h3>Passo 4: Fazer alterações</h3>
         <pre><code>git add .
 git commit -m "resolução da atividade"</code></pre>
+        <p><strong>O que faz:</strong> Salva suas mudanças.</p>
+        <p><strong>Por que usar:</strong> Garante registro do progresso da atividade.</p>
       </div>
 
       <div class="step">
         <h3>Passo 5: Enviar alterações</h3>
         <pre><code>git push origin minha-atividade</code></pre>
+        <p><strong>O que faz:</strong> Envia sua branch para o GitHub.</p>
+        <p><strong>Por que usar:</strong> Permite criar o Pull Request.</p>
       </div>
 
       <div class="step">
         <h3>Passo 6: Criar Pull Request</h3>
-        <p>No GitHub, clique em <strong>Compare & Pull Request</strong>.</p>
+        <p><strong>O que faz:</strong> Solicita que suas alterações sejam analisadas.</p>
+        <p><strong>Por que usar:</strong> É a forma oficial de entrega da atividade.</p>
       </div>
 
       <div class="note">
@@ -120,15 +148,16 @@ git commit -m "resolução da atividade"</code></pre>
       <h2>5. Comandos Úteis</h2>
 
       <ul class="mini-list">
-        <li><code>git status</code> → ver estado dos arquivos</li>
-        <li><code>git log</code> → histórico</li>
-        <li><code>git pull</code> → atualizar projeto</li>
-        <li><code>git restore .</code> → desfazer alterações</li>
+        <li><code>git status</code> → Mostra arquivos modificados (evita erros antes do commit)</li>
+        <li><code>git log</code> → Mostra histórico de commits</li>
+        <li><code>git pull</code> → Atualiza o projeto com mudanças remotas</li>
+        <li><code>git restore .</code> → Descarta alterações não salvas</li>
       </ul>
 
       <div class="callout">
         <strong>Dica:</strong> use <code>git status</code> sempre antes de executar um commit.
       </div>
+
       <div class="card">
         <h2>Vídeo: Introdução ao GitHub</h2>
         <video controls width="100%">
@@ -137,6 +166,7 @@ git commit -m "resolução da atividade"</code></pre>
         </video>
       </div>
     </div>
+
   </section>
 
   <aside>
