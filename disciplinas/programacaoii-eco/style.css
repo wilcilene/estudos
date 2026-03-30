@@ -355,13 +355,13 @@ details > div {
   margin-top: 1.2rem;
 }
 
-/* Texto explicativo imediatamente antes da árvore */
+/* Texto explicativo antes da árvore */
 .dom-arvore-texto {
   color: var(--muted);
   font-size: 0.95rem;
 }
 
-/* Caixa da árvore DOM (usa tema de código, mas com contraste levemente ajustado) */
+/* Caixa da árvore DOM */
 .dom-arvore {
   background-color: #111827;
   color: #e5e7eb;
@@ -414,5 +414,10 @@ details > div {
   position: relative;
   cursor: help;
   border-bottom: 1px dotted currentColor;
-  display: inline-block;   /* ← adicione esta linha */
+  display: inline-block;
+}
+
+.fluxo {
+  font-weight: bold;
+  color: var(--primary-dark);
 }
