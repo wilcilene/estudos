@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Tutorial Git e GitHub (com Fork)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>Git e GitHub: Guia Completo</h1>
+    <p>Aprenda o fluxo completo de versionamento e como utilizar Fork para entregas.</p>
+
+    <nav>
+      <a href="#intro">Introdução</a>
+      <a href="#config">Configuração</a>
+      <a href="#fluxo">Fluxo</a>
+      <a href="#fork">Fork</a>
+      <a href="#erros">Erros</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section>
+
+    <div class="card" id="intro">
+      <h2>1. Git vs GitHub</h2>
+
+      <p><strong>Git</strong> é um sistema de controle de versão local.</p>
+      <p><strong>GitHub</strong> é uma plataforma online para hospedar repositórios.</p>
+
+      <div class="callout">
+        <strong>Importante:</strong> Git funciona sem internet. GitHub precisa de conexão.
+      </div>
+    </div>
+
+    <div class="card" id="config">
+      <h2>2. Configuração Inicial</h2>
+
+      <div class="step">
+        <h3>Instalar e configurar</h3>
+
+        <pre><code>git config --global user.name "Seu Nome"
+git config --global user.email "seu@email.com"</code></pre>
+      </div>
+    </div>
+
+    <div class="card" id="fluxo">
+      <h2>3. Fluxo Básico do Git</h2>
+
+      <div class="step">
+        <h3>Inicializar repositório</h3>
+        <pre><code>git init</code></pre>
+      </div>
+
+      <div class="step">
+        <h3>Adicionar arquivos</h3>
+        <pre><code>git add .</code></pre>
+      </div>
+
+      <div class="step">
+        <h3>Criar commit</h3>
+        <pre><code>git commit -m "primeiro commit"</code></pre>
+      </div>
+
+      <div class="step">
+        <h3>Enviar para o GitHub</h3>
+        <pre><code>git remote add origin URL_DO_REPOSITORIO
+git push -u origin main</code></pre>
+      </div>
+    </div>
+
+    <div class="card" id="fork">
+      <h2>4. Entregas usando Fork</h2>
+
+      <div class="callout">
+        <strong>Esse é o fluxo recomendado para atividades!</strong>
+      </div>
+
+      <div class="step">
+        <h3>Passo 1: Fazer Fork</h3>
+        <p>No GitHub, clique em <code>Fork</code> no repositório do professor.</p>
+      </div>
+
+      <div class="step">
+        <h3>Passo 2: Clonar o repositório</h3>
+        <pre><code>git clone URL_DO_SEU_FORK</code></pre>
+      </div>
+
+      <div class="step">
+        <h3>Passo 3: Criar branch</h3>
+        <pre><code>git checkout -b minha-atividade</code></pre>
+      </div>
+
+      <div class="step">
+        <h3>Passo 4: Fazer alterações</h3>
+        <pre><code>git add .
+git commit -m "resolução da atividade"</code></pre>
+      </div>
+
+      <div class="step">
+        <h3>Passo 5: Enviar alterações</h3>
+        <pre><code>git push origin minha-atividade</code></pre>
+      </div>
+
+      <div class="step">
+        <h3>Passo 6: Criar Pull Request</h3>
+        <p>No GitHub, clique em <strong>Compare & Pull Request</strong>.</p>
+      </div>
+
+      <div class="note">
+        O Pull Request é a forma de entregar sua atividade para correção.
+      </div>
+    </div>
+
+    <div class="card" id="erros">
+      <h2>5. Comandos Úteis</h2>
+
+      <ul class="mini-list">
+        <li><code>git status</code> → ver estado dos arquivos</li>
+        <li><code>git log</code> → histórico</li>
+        <li><code>git pull</code> → atualizar projeto</li>
+        <li><code>git restore .</code> → desfazer alterações</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Dica:</strong> use <code>git status</code> sempre antes de executar um commit.
+      </div>
+      <div class="card">
+        <h2>Vídeo: Introdução ao GitHub</h2>
+        <video controls width="100%">
+          <source src="media/introducao-ao-github.mp4" type="video/mp4">
+          Seu navegador não suporta a reprodução de vídeo.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <aside>
+
+    <div class="card">
+      <h2>Resumo</h2>
+
+      <ul class="pill-list">
+        <li>Git</li>
+        <li>GitHub</li>
+        <li>Fork</li>
+        <li>Branch</li>
+        <li>Pull Request</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Fluxo Simplificado</h2>
+
+      <pre><code>Fork → Clone → Branch
+→ Commit → Push → PR</code></pre>
+    </div>
+
+  </aside>
+
+</main>
+
+<footer>
+  Pensem! Resolvam! Entreguem!
+</footer>
+
+</body>
+</html>
