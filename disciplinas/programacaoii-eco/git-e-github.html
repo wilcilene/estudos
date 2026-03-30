@@ -18,6 +18,7 @@
       <a href="#config">Configuração</a>
       <a href="#fluxo">Fluxo</a>
       <a href="#fork">Fork</a>
+      <a href="#uteis">Úteis</a>
       <a href="#erros">Erros</a>
     </nav>
   </div>
@@ -144,7 +145,7 @@ git commit -m "resolução da atividade"</code></pre>
       </div>
     </div>
 
-    <div class="card" id="erros">
+    <div class="card" id="uteis">
       <h2>5. Comandos Úteis</h2>
 
       <ul class="mini-list">
@@ -153,7 +154,60 @@ git commit -m "resolução da atividade"</code></pre>
         <li><code>git pull</code> → Atualiza o projeto com mudanças remotas</li>
         <li><code>git restore .</code> → Descarta alterações não salvas</li>
       </ul>
-
+      <div class="card" id="erros">
+        <h2>6. Erros Comuns</h2>
+      
+        <div class="step">
+          <h3>❌ Esquecer de usar git add</h3>
+          <pre><code>nothing to commit, working tree clean</code></pre>
+          <p><strong>Problema:</strong> Você fez alterações, mas não adicionou os arquivos.</p>
+          <p><strong>Solução:</strong></p>
+          <pre><code>git add .
+git commit -m "mensagem"</code></pre>
+        </div>
+      
+        <div class="step">
+          <h3>❌ Commit sem mensagem</h3>
+          <p><strong>Problema:</strong> Mensagens vagas ou inexistentes.</p>
+          <p><strong>Solução:</strong> Use mensagens claras:</p>
+          <pre><code>git commit -m "corrige erro no formulário"</code></pre>
+        </div>
+      
+        <div class="step">
+          <h3>❌ Erro ao dar push (repositório divergente)</h3>
+          <pre><code>rejected - non-fast-forward</code></pre>
+          <p><strong>Problema:</strong> O repositório remoto tem alterações que você não tem.</p>
+          <p><strong>Solução:</strong></p>
+          <pre><code>git pull origin main
+git push origin main</code></pre>
+        </div>
+      
+        <div class="step">
+          <h3>❌ Trabalhando na branch errada</h3>
+          <p><strong>Problema:</strong> Alterações feitas na branch principal sem querer.</p>
+          <p><strong>Solução:</strong></p>
+          <pre><code>git checkout -b nova-branch</code></pre>
+          <p>Ou verifique antes:</p>
+          <pre><code>git branch</code></pre>
+        </div>
+      
+        <div class="step">
+          <h3>❌ Conflito de merge</h3>
+          <p><strong>Problema:</strong> Duas pessoas editaram o mesmo trecho.</p>
+          <p><strong>Solução:</strong></p>
+          <ul class="mini-list">
+            <li>Abrir o arquivo com conflito</li>
+            <li>Escolher qual versão manter</li>
+            <li>Salvar e executar:</li>
+          </ul>
+          <pre><code>git add .
+git commit -m "resolve conflito"</code></pre>
+        </div>
+      
+        <div class="callout">
+          <strong>Dica importante:</strong> erros são parte do aprendizado no Git. Sempre leia a mensagem exibida no terminal.
+        </div>
+      </div>
       <div class="callout">
         <strong>Dica:</strong> use <code>git status</code> sempre antes de executar um commit.
       </div>
