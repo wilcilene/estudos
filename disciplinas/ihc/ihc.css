@@ -287,6 +287,125 @@ main {
   text-decoration: underline;
 }
 
+/* HERO: cabeçalho com cartão principal + cartão lateral */
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 2.1fr) minmax(260px, 1.1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.9rem;
+}
+
+.hero-main {
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(135deg, rgba(15, 23, 42, 0.97), rgba(15, 23, 42, 0.97)) padding-box,
+    linear-gradient(135deg, rgba(56, 189, 248, 0.55), rgba(147, 51, 234, 0.5)) border-box;
+  border: 1px solid transparent;
+  padding: 1.6rem 1.7rem 1.8rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.hero-title {
+  font-size: clamp(1.9rem, 3vw, 2.4rem);
+  letter-spacing: 0.02em;
+  font-weight: 700;
+  margin-bottom: 0.85rem;
+}
+
+.hero-title span {
+  color: var(--accent);
+}
+
+.hero-text {
+  font-size: 0.95rem;
+  color: var(--muted);
+  max-width: 720px;
+  line-height: 1.7;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+}
+
+/* Cartão lateral específico do hero */
+
+.hero-side {
+  border-radius: var(--radius-lg);
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid var(--border-subtle);
+  padding: 1.25rem 1.3rem 1.5rem;
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.85);
+}
+
+.side-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 0.45rem;
+  color: var(--text);
+}
+
+.side-list {
+  list-style: none;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.side-list li + li {
+  margin-top: 0.45rem;
+}
+
+/* Layout alternativo deste tópico (separado do main padrão) */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2.3fr) minmax(0, 1.2fr);
+  gap: 1.8rem;
+}
+
+@media (max-width: 880px) {
+  .hero,
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Cartão lateral para materiais/recursos deste tópico */
+
+.materials-card {
+  border-radius: var(--radius-lg);
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid var(--border-subtle);
+  padding: 1.25rem 1.45rem 1.55rem;
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.85);
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* Lista de recursos específica deste tópico
+   (nome diferente para não conflitar com .resources-list existente) */
+
+.resource-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.3rem;
+  font-size: 0.87rem;
+}
+
+.resource-list li + li {
+  margin-top: 0.6rem;
+}
+
+.resource-list strong {
+  color: var(--text);
+}
+
 /* Rodapé */
 
 footer {
