@@ -103,9 +103,9 @@ main {
   gap: 1.8rem;
 }
 
-@media (max-width: 880px) {
-  main {
-    grid-template-columns: minmax(0, 1fr);
+@media (min-width: 880px) {
+  .content-card img.example-image {
+    max-width: 640px;
   }
 }
 
@@ -404,6 +404,15 @@ main {
 
 .resource-list strong {
   color: var(--text);
+}
+
+/* Imagens de exemplo dentro do conteúdo (FestaFit, etc.) */
+.content-card img.example-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-top: 0.4rem;
+  border-radius: 12px;
 }
 
 /* Rodapé */
