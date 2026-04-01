@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Conjuntos: Operações e Propriedades</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- MathJax para fórmulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- CSS geral da disciplina -->
+    <link rel="stylesheet" href="md-estilo.css">
+</head>
+<body>
+<div class="container">
+    <h1>Conjuntos: Operações e Propriedades<br>
+        <span style="font-size:0.8em;">União, interseção, potência e Leis de De Morgan</span>
+    </h1>
+
+    <p><strong>Disciplina:</strong> Matemática Discreta – Engenharia da Computação</p>
+    <p>
+        Esta página foi organizada para apoiar a aula e também servir como material completo de estudo.
+        A ideia é que você consiga aprender o conteúdo mesmo sem ter assistido à explicação presencial.
+    </p>
+
+    <div class="aula">
+        <h2>1. Visão geral do tópico</h2>
+        <div class="objetivos">
+            <strong>Objetivos:</strong> compreender o conceito de conjunto, realizar operações entre conjuntos,
+            interpretar o conjunto das partes e aplicar as Leis de De Morgan em matemática e em computação.
+        </div>
+
+        <p>
+            Em Matemática Discreta, conjuntos são uma forma de organizar objetos, elementos ou informações.
+            Em computação, eles aparecem em filtros, permissões, consultas, bancos de dados, busca,
+            agrupamentos de usuários, tags, testes e lógica de programação.
+        </p>
+
+        <p>
+            Ao estudar conjuntos, você desenvolve uma linguagem formal para representar coleções de dados
+            e regras sobre esses dados. Isso é muito útil em Engenharia de Software, porque sistemas reais
+            frequentemente manipulam grupos de usuários, arquivos, permissões, requisitos ou estados.
+        </p>
+    </div>
+
+    <div class="aula">
+        <h2>2. O que é um conjunto?</h2>
+
+        <p>
+            Um conjunto é uma coleção de elementos. Usamos chaves para representá-lo.
+            Exemplo:
+        </p>
+
+        <p>\[
+            A = \{1, 2, 3, 4\}
+        \]</p>
+
+        <p>
+            Isso significa que os elementos 1, 2, 3 e 4 pertencem ao conjunto \(A\).
+            Se quisermos dizer que o número 2 pertence a \(A\), escrevemos:
+        </p>
+
+        <p>\[
+            2 \in A
+        \]</p>
+
+        <p>
+            Se o número 7 não pertence a \(A\), escrevemos:
+        </p>
+
+        <p>\[
+            7 \notin A
+        \]</p>
+
+        <div class="exemplo">
+            <h3>Exemplo em contexto computacional</h3>
+            <p>Considere o conjunto dos estudantes que entregaram uma atividade:</p>
+            <p>\[
+                E = \{\text{Ana}, \text{Gustavo}, \text{Larissa}, \text{Natan}\}
+            \]</p>
+            <p>
+                Nesse caso, o conjunto representa uma coleção de estudantes com uma característica em comum:
+                terem entregue a atividade.
+            </p>
+        </div>
+
+        <div class="imagem-bloco">
+            <img src="media/IMAGEM-CONJUNTO-BASICO.png" alt="Representação visual de conjuntos com elementos" loading="lazy">
+            <p class="legenda-imagem">Imagem gerada pelo Copilot</p>
+        </div>
+    </div>
+
+    <div class="aula">
+        <h2>3. União de conjuntos</h2>
+
+        <p>
+            A união de dois conjuntos reúne todos os elementos que estão em pelo menos um deles.
+        </p>
+
+        <p>\[
+            A \cup B
+        \]</p>
+
+        <p>
+            Lê-se: “A união B”.
+        </p>
+
+        <div class="exemplo">
+            <h3>Exemplo matemático</h3>
+            <p>\[
+                A = \{1, 2, 3\}, \quad B = \{3, 4, 5\}
+            \]</p>
+            <p>\[
+                A \cup B = \{1, 2, 3, 4, 5\}
+            \]</p>
+            <p>
+                Observe que o elemento 3 aparece nos dois conjuntos, mas na união ele aparece apenas uma vez.
+            </p>
+        </div>
+
+        <div class="exemplo">
+            <h3>Exemplo em Engenharia de Software</h3>
+            <p>
+                Imagine um sistema com dois grupos:
+            </p>
+            <ul>
+                <li>\(A\): usuários com permissão de leitura;</li>
+                <li>\(B\): usuários com permissão de escrita.</li>
+            </ul>
+            <p>
+                O conjunto \(A \cup B\) representa todos os usuários que possuem leitura, escrita ou ambas.
+            </p>
+        </div>
+
+        <div class="algoritmo">
+<pre><code>leitura = {"Ana", "Gustavo", "Larissa"}
+escrita = {"Larissa", "Natan"}
+
+uniao = leitura.union(escrita)
+print(uniao)</code></pre>
+        </div>
+
+        <p>
+            <a href="https://colab.research.google.com/drive/19YcX9KqfrKb_9Uqrrp8Mv-UMpmjEW5E7?usp=sharing" target="_blank" rel="noopener noreferrer">Acesse o algoritmo aqui</a>.
+        </p>
+
+        <div class="imagem-bloco">
+            <img src="IMAGEM-UNIAO-CONJUNTOS.png" alt="Diagrama de Venn mostrando união entre dois conjuntos" loading="lazy">
+            <p class="legenda-imagem">Imagem gerada pelo ChatGPT</p>
+        </div>
+    </div>
+
+    <div class="aula">
+        <h2>4. Interseção de conjuntos</h2>
+
+        <p>
+            A interseção contém apenas os elementos que pertencem aos dois conjuntos ao mesmo tempo.
+        </p>
+
+        <p>\[
+            A \cap B
+        \]</p>
+
+        <div class="exemplo">
+            <h3>Exemplo matemático</h3>
+            <p>\[
+                A = \{1, 2, 3\}, \quad B = \{3, 4, 5\}
+            \]</p>
+            <p>\[
+                A \cap B = \{3\}
+            \]</p>
+        </div>
+
+        <div class="exemplo">
+            <h3>Exemplo em Engenharia de Software</h3>
+            <p>
+                Em um sistema de vagas:
+            </p>
+            <ul>
+                <li>\(A\): candidatos que sabem Java;</li>
+                <li>\(B\): candidatos que sabem banco de dados.</li>
+            </ul>
+            <p>
+                A interseção \(A \cap B\) representa os candidatos que sabem Java <strong>e</strong> banco de dados.
+            </p>
+        </div>
+
+        <div class="algoritmo">
+<pre><code>java = {"Ana", "Gustavo", "Larissa"}
+banco = {"Larissa", "Elisa"}
+
+intersecao = java.intersection(banco)
+print(intersecao)</code></pre>
+        </div>
+
+        <p>
+            <a href="https://colab.research.google.com/drive/19YcX9KqfrKb_9Uqrrp8Mv-UMpmjEW5E7?usp=sharing" target="_blank" rel="noopener noreferrer">Acesse o algoritmo aqui</a>.
+        </p>
+
+        <div class="imagem-bloco">
+            <img src="IMAGEM-INTERSECAO-CONJUNTOS.png" alt="Diagrama de Venn mostrando interseção entre dois conjuntos" loading="lazy">
+            <p class="legenda-imagem">Imagem gerada pelo chatGPT</p>
+        </div>
+    </div>
+
+    <div class="aula">
+        <h2>5. Conjunto das partes ou conjunto potência</h2>
+
+        <p>
+            O conjunto das partes de um conjunto \(A\), indicado por \(\mathcal{P}(A)\),
+            é o conjunto formado por todos os subconjuntos possíveis de \(A\).
+        </p>
+
+        <div class="exemplo">
+            <h3>Exemplo</h3>
+            <p>Se:</p>
+            <p>\[
+                A = \{a, b\}
+            \]</p>
+            <p>então:</p>
+            <p>\[
+                \mathcal{P}(A) = \{\emptyset, \{a\}, \{b\}, \{a,b\}\}
+            \]</p>
+
+            <p>
+                Observe que o conjunto vazio também é subconjunto de \(A\).
+            </p>
+        </div>
+
+        <p>
+            Se um conjunto tem \(n\) elementos, então seu conjunto das partes tem \(2^n\) subconjuntos.
+        </p>
+
+        <div class="exemplo">
+            <h3>Exemplo em Engenharia de Software</h3>
+            <p>
+                Suponha que um sistema tenha 3 funcionalidades opcionais:
+            </p>
+            <p>\[
+                F = \{\text{chat}, \text{notificações}, \text{tema escuro}\}
+            \]</p>
+            <p>
+                O conjunto das partes de \(F\) representa todas as combinações possíveis de funcionalidades.
+                Isso pode ser usado em testes de software, configuração de produtos e análise de feature flags.
+            </p>
+        </div>
+
+        <div class="algoritmo">
+<pre><code>from itertools import combinations
+
+elementos = ["chat", "notificacoes", "tema_escuro"]
+partes = []
+
+for i in range(len(elementos) + 1):
+    for c in combinations(elementos, i):
+        partes.append(set(c))
+
+print(partes)</code></pre>
+        </div>
+
+        <p>
+            <a href="https://colab.research.google.com/drive/19YcX9KqfrKb_9Uqrrp8Mv-UMpmjEW5E7?usp=sharing" target="_blank" rel="noopener noreferrer">Acesse o algoritmo aqui</a>.
+        </p>
+
+        <div class="imagem-bloco">
+            <img src="IMAGEM-CONJUNTO-POTENCIA.png" alt="Ilustração mostrando conjunto e seus subconjuntos" loading="lazy">
+            <p class="legenda-imagem">Imagem gerada pelo chatGPT</p>
+        </div>
+    </div>
+
+    <div class="aula">
+        <h2>6. Leis de De Morgan</h2>
+
+        <p>
+            As Leis de De Morgan mostram como negar união e interseção.
+            Elas são muito importantes em matemática, lógica e programação.
+        </p>
+
+        <p>\[
+            \overline{A \cup B} = \overline{A} \cap \overline{B}
+        \]</p>
+
+        <p>\[
+            \overline{A \cap B} = \overline{A} \cup \overline{B}
+        \]</p>
+
+        <p>
+            Em palavras:
+        </p>
+        <ul>
+            <li>o complemento da união é a interseção dos complementos;</li>
+            <li>o complemento da interseção é a união dos complementos.</li>
+        </ul>
+
+        <div class="exemplo">
+            <h3>Exemplo com conjuntos</h3>
+            <p>
+                Considere o universo:
+            </p>
+            <p>\[
+                U = \{1,2,3,4,5,6\}
+            \]</p>
+            <p>\[
+                A = \{1,2,3\}, \quad B = \{3,4\}
+            \]</p>
+
+            <p>Primeiro, calcule a união:</p>
+            <p>\[
+                A \cup B = \{1,2,3,4\}
+            \]</p>
+
+            <p>Agora o complemento da união em relação a \(U\):</p>
+            <p>\[
+                \overline{A \cup B} = \{5,6\}
+            \]</p>
+
+            <p>Agora os complementos individuais:</p>
+            <p>\[
+                \overline{A} = \{4,5,6\}, \quad \overline{B} = \{1,2,5,6\}
+            \]</p>
+
+            <p>E a interseção:</p>
+            <p>\[
+                \overline{A} \cap \overline{B} = \{5,6\}
+            \]</p>
+
+            <p>
+                Os dois lados são iguais. Portanto, a primeira lei foi confirmada.
+            </p>
+        </div>
+
+        <div class="exemplo">
+            <h3>Exemplo em programação</h3>
+            <p>
+                Em código, De Morgan aparece muito em condições lógicas.
+            </p>
+
+<pre><code>!(A || B)  equivale a  (!A && !B)
+!(A && B)  equivale a  (!A || !B)</code></pre>
+
+            <p>
+                Exemplo prático:
+            </p>
+
+<pre><code>if (!(usuarioEhAdmin || usuarioEhProfessor)) {
+    System.out.println("Acesso negado");
+}</code></pre>
+
+            <p>
+                Pode ser reescrito como:
+            </p>
+
+<pre><code>if (!usuarioEhAdmin && !usuarioEhProfessor) {
+    System.out.println("Acesso negado");
+}</code></pre>
+
+            <p>
+                Essa equivalência ajuda a simplificar expressões e tornar o código mais claro.
+            </p>
+        </div>
+
+        <div class="imagem-bloco">
+            <img src="IMAGEM-DE-MORGAN.png" alt="Diagrama explicando visualmente as Leis de De Morgan" loading="lazy">
+            <p class="legenda-imagem">Imagem gerada pelo chatGPT</p>
+        </div>
+    </div>
+
+    <div class="aula">
+        <h2>7. Aplicações práticas em Engenharia de Software</h2>
+
+        <div class="exemplo">
+            <h3>Aplicação 1 – Filtros de usuários</h3>
+            <p>
+                Em uma plataforma, podemos ter:
+            </p>
+            <ul>
+                <li>\(A\): usuários que compraram no último mês;</li>
+                <li>\(B\): usuários que acessaram o app nesta semana.</li>
+            </ul>
+            <p>
+                Então:
+            </p>
+            <ul>
+                <li>\(A \cup B\): usuários que compraram ou acessaram;</li>
+                <li>\(A \cap B\): usuários que compraram e acessaram;</li>
+                <li>\(\overline{A}\): usuários que não compraram;</li>
+                <li>\(\overline{A \cup B}\): usuários que nem compraram nem acessaram.</li>
+            </ul>
+        </div>
+
+        <div class="exemplo">
+            <h3>Aplicação 2 – Controle de permissões</h3>
+            <p>
+                Papéis de usuários podem ser modelados como conjuntos de permissões.
+                A união pode combinar permissões de múltiplos papéis;
+                a interseção pode mostrar permissões em comum.
+            </p>
+        </div>
+
+        <div class="exemplo">
+            <h3>Aplicação 3 – Testes de software</h3>
+            <p>
+                O conjunto das partes pode representar todas as combinações possíveis de funcionalidades ativadas.
+                Isso é útil para análise de cobertura e planejamento de testes.
+            </p>
+        </div>
+    </div>
+
+    <div class="aula">
+        <h2>8. Sugestão de divisão em 3 aulas de 45 minutos</h2>
+
+        <div class="exemplo">
+            <h3>Aula 1</h3>
+            <ul>
+                <li>Definição de conjunto;</li>
+                <li>Pertinência e subconjuntos;</li>
+                <li>União e interseção;</li>
+                <li>Exercícios com diagramas de Venn.</li>
+            </ul>
+        </div>
+
+        <div class="exemplo">
+            <h3>Aula 2</h3>
+            <ul>
+                <li>Conjunto das partes;</li>
+                <li>Cardinalidade do conjunto potência;</li>
+                <li>Exemplos com combinações de funcionalidades;</li>
+                <li>Implementação de algoritmos simples com conjuntos.</li>
+            </ul>
+        </div>
+
+        <div class="exemplo">
+            <h3>Aula 3</h3>
+            <ul>
+                <li>Leis de De Morgan;</li>
+                <li>Relação entre conjuntos e lógica booleana;</li>
+                <li>Aplicações em código e filtros;</li>
+                <li>Atividade prática.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="aula">
+        <h2>9. Atividade prática sugerida</h2>
+
+        <div class="objetivos">
+            <strong>Proposta:</strong> desenvolver uma pequena aplicação que trabalhe com conjuntos de usuários, permissões ou tags.
+        </div>
+
+        <p>
+            Uma possibilidade é criar um programa que receba três conjuntos:
+        </p>
+        <ul>
+            <li>usuários que assistiram a uma aula;</li>
+            <li>usuários que entregaram uma atividade;</li>
+            <li>usuários que participaram do fórum.</li>
+        </ul>
+
+        <p>
+            Depois, o programa deve calcular:
+        </p>
+        <ul>
+            <li>a união dos conjuntos;</li>
+            <li>a interseção de dois deles;</li>
+            <li>quem não participou de nenhuma atividade;</li>
+            <li>quem participou de exatamente uma atividade;</li>
+            <li>todas as combinações possíveis de participação.</li>
+        </ul>
+
+        <div class="exercicio">
+            <h3>Desafio</h3>
+            <p>
+                Modele os conjuntos em código e apresente o resultado de cada operação.
+                Depois, explique com suas palavras o significado de cada resultado no contexto do problema.
+            </p>
+        </div>
+    </div>
+
+    <div class="aula">
+        <h2>10. Para revisar</h2>
+        <ul>
+            <li>União junta elementos dos dois conjuntos.</li>
+            <li>Interseção pega somente os elementos em comum.</li>
+            <li>O conjunto potência contém todos os subconjuntos possíveis.</li>
+            <li>As Leis de De Morgan transformam complemento de união em interseção de complementos, e vice-versa.</li>
+            <li>Esses conceitos aparecem em filtros, permissões, consultas, lógica booleana e testes de software.</li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>Adote um gato!</p>
+    </footer>
+</div>
+</body>
+</html>
