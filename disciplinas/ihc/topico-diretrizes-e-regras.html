@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Diretrizes e regras de design · CPA1469</title>
+  <title>Diretrizes e regras de design</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,7 +54,7 @@
       </aside>
     </header>
 
-    <!-- CONTEÚDO PRINCIPAL + MATERIAIS -->
+    <!-- CONTEÚDO PRINCIPAL + ASIDE SIMPLIFICADO -->
     <main class="layout">
       <article class="content-card">
         <section>
@@ -223,12 +223,174 @@
             o sistema.
           </p>
         </section>
+
+        <section>
+          <h2 class="section-title">10. Sugestão de estudo</h2>
+          <p>
+            Nos próximos dias, observe interfaces do cotidiano e tente identificar exemplos
+            de boa e má aplicação dessas diretrizes: consistência, hierarquia visual,
+            feedback, prevenção de erros e clareza na navegação. Traga pelo menos um
+            exemplo para comentarmos em sala.
+          </p>
+        </section>
+
+                <!-- 10. Exemplo prático de aplicação de diretrizes -->
+        <section>
+          <h2 class="section-title">11. Exemplo prático: aplicativo para organizar festas de república</h2>
+          <p>
+            Imagine que você foi convidada(o) para projetar a interface do <span class="highlight">“FestaFit”</span>, um aplicativo
+            usado por estudantes para organizar festas no campus. O app deve ajudar a:
+            listar eventos, controlar limite de pessoas, combinar quem leva o quê e evitar confusões
+            com horário, endereço e regras de convivência.
+          </p>
+          <p>
+            Vamos ver como as diretrizes e regras de design podem orientar o passo a passo
+            da criação dessa interface, desde a tela inicial até o formulário de criação de eventos.
+          </p>
+
+          <div class="activity-box">
+            <div class="activity-title">passo 1 · contexto e principais tarefas</div>
+            <p>
+              As tarefas principais são: <span class="highlight">ver festas disponíveis</span>, 
+              <span class="highlight">confirmar presença</span> e <span class="highlight">criar uma nova festa</span>.
+              Isso significa que a tela inicial precisa destacar claramente essas ações, sem poluir
+              com opções secundárias.
+            </p>
+            <p>
+              <img src="media/festafit-1-wireframe.png"
+                 alt="Wireframe da tela inicial do aplicativo FestaFit com lista de festas e botão de criar nova festa"
+                 loading="lazy">
+                <em>Imagem criada pelo ChatGPT.</em>
+            </p>
+          </div>
+
+          <div class="example-box">
+            <div class="example-label">passo 2 · aplicando consistência e hierarquia</div>
+            <p>
+              Para manter consistência, definimos um padrão: cards de eventos sempre mostram
+              nome da festa, data, horário e status (vagas cheias ou disponíveis) na mesma ordem.
+              O botão de ação principal usa sempre a mesma cor e texto curto, como “Confirmar presença”.
+            </p>
+            <p>
+              A hierarquia visual destaca o próximo evento da noite em um card maior no topo,
+              enquanto as festas futuras aparecem em cards menores abaixo, com menos destaque.
+            </p>
+            <p>
+              <img
+                src="media/festafit-2-detalhes.png"
+                alt="Mockup detalhado dos cards de eventos do aplicativo FestaFit, com destaque para o próximo evento"
+                loading="lazy">
+            </p>
+              <em>Imagem criada pelo ChatGPT.</em>
+          </div>
+
+          <div class="activity-box">
+            <div class="activity-title">passo 3 · formulários e prevenção de erros</div>
+            <p>
+              Ao criar uma nova festa, o formulário de “Criar evento” pede apenas o essencial:
+              nome, data, horário, localização e limite de pessoas. Campos obrigatórios são marcados,
+              e mensagens de erro explicam claramente o problema (“informe uma data futura” em vez
+              de “erro no campo”).
+            </p>
+            <p>
+              Para prevenir erros, o app sugere horários que não chocam com outras festas já criadas
+              e avisa se o limite de pessoas for menor do que o número de convidados já confirmados.
+            </p>
+            <p>
+              <img
+                src="media/festafit-3-formulario.png"
+                alt="tela de formulário com labels claros, grupos de campos e mensagens de erro"
+                loading="lazy">
+            </p>
+              <em>Imagem criada pelo ChatGPT.</em>
+          </div>
+
+          <div class="example-box">
+            <div class="example-label">passo 4 · feedback e navegação</div>
+            <p>
+              Depois de criar a festa, o app mostra uma mensagem de sucesso (“Festa criada com sucesso!”)
+              e oferece duas ações imediatas: <span class="highlight">“Compartilhar convite”</span> e 
+              <span class="highlight">“Ver detalhes da festa”</span>. O usuário entende que a ação deu certo
+              e sabe qual é o próximo passo.
+            </p>
+            <p>
+              Na navegação, a barra inferior traz apenas três seções: “Festas”, “Minhas festas” e
+              “Perfil”. Isso mantém a estrutura simples, previsível e fácil de memorizar.
+            </p>
+              <img
+                src="media/festafit-4-confirmacao.png"
+                alt="tela de confirmação com mensagem de sucesso e barra de navegação simples"
+                loading="lazy">
+            </p>
+              <em>Imagem criada pelo ChatGPT.</em>
+
+          </div>
+
+          <p>
+            Ao longo desse exemplo, cada decisão de interface foi guiada por diretrizes: priorizar
+            tarefas principais, manter consistência, criar hierarquia visual, fornecer feedback claro,
+            planejar bons formulários e prevenir erros. Esses mesmos passos podem ser adaptados para
+            outros contextos de software, além das festas de república.
+          </p>
+        </section>
+        
+        <section>
+          <h2 class="section-title">12. Materiais de apoio</h2>
+          <p>
+            A lista a seguir reúne materiais introdutórios e referências de UI/UX para
+            aprofundar os conceitos apresentados neste tópico.
+          </p>
+          <ul class="resources-list">
+            <li>
+              <strong>Adobe XD Ideas</strong> – artigos curtos sobre UI/UX, com exemplos de layouts,
+              hierarquia visual, prototipagem e design systems aplicados a interfaces.<br>
+              <a href="https://xd.adobe.com/ideas/" target="_blank" rel="noopener noreferrer">
+                https://xd.adobe.com/ideas/
+              </a>
+            </li>
+            <li>
+              <strong>Adobe · UX Design</strong> – ponto de partida da Adobe para UX, com conceitos
+              básicos, tutoriais introdutórios e dicas de fluxo, wireframes e protótipos em XD.<br>
+              <a href="https://www.adobe.com/br/products/xd/learn/ux-design.html" target="_blank" rel="noopener noreferrer">
+                https://www.adobe.com/br/products/xd/learn/ux-design.html
+              </a>
+            </li>
+            <li>
+              <strong>Nielsen Norman Group</strong> – site clássico de usabilidade, com heurísticas,
+              pesquisas, artigos aprofundados e cursos sobre UX, testes com usuários e IHC.<br>
+              <a href="https://www.nngroup.com/" target="_blank" rel="noopener noreferrer">
+                https://www.nngroup.com/
+              </a>
+            </li>
+            <li>
+              <strong>Material Design 3</strong> – guidelines do Google com princípios, componentes
+              e exemplos de layout, cores, tipografia e navegação para apps e web.<br>
+              <a href="https://m3.material.io/" target="_blank" rel="noopener noreferrer">
+                https://m3.material.io/
+              </a>
+            </li>
+            <li>
+              <strong>Apple Human Interface Guidelines</strong> – conjunto de princípios e recomendações
+              de design visual e de interação para apps em iOS, iPadOS, macOS e outras plataformas Apple.<br>
+              <a href="https://developer.apple.com/design/human-interface-guidelines/" target="_blank" rel="noopener noreferrer">
+                https://developer.apple.com/design/human-interface-guidelines/
+              </a>
+            </li>
+            <li>
+              <strong>Laws of UX</strong> – coleção de leis e princípios de psicologia aplicados ao
+              design de interfaces, com explicações visuais, exemplos e sugestões de uso na prática.<br>
+              <a href="https://lawsofux.com/" target="_blank" rel="noopener noreferrer">
+                https://lawsofux.com/
+              </a>
+            </li>
+          </ul>
+        </section>
       </article>
 
-      <aside class="materials-card">
+      <aside class="side-card">
         <section>
           <h2 class="side-section-title">Palavras‑chave</h2>
-          <div class="hero-tags">
+          <div class="tag-list">
             <span class="tag">consistência</span>
             <span class="tag">hierarquia visual</span>
             <span class="tag">feedback</span>
@@ -238,59 +400,12 @@
         </section>
 
         <section>
-          <h2 class="side-section-title">Materiais indicados</h2>
-          <ul class="resource-list">
-            <li>
-              <strong>Adobe XD Ideas</strong><br>
-              Artigos sobre UI, UX, hierarquia visual e design systems.<br>
-              <a href="https://xd.adobe.com/ideas/" target="_blank" rel="noopener noreferrer">
-                https://xd.adobe.com/ideas/
-              </a>
-            </li>
-            <li>
-              <strong>Adobe · UX Design</strong><br>
-              Conteúdo introdutório e exemplos de experiência do usuário.<br>
-              <a href="https://www.adobe.com/br/products/xd/learn/ux-design.html" target="_blank" rel="noopener noreferrer">
-                https://www.adobe.com/br/products/xd/learn/ux-design.html
-              </a>
-            </li>
-            <li>
-              <strong>Nielsen Norman Group</strong><br>
-              Heurísticas, estudos de caso e artigos sobre usabilidade.<br>
-              <a href="https://www.nngroup.com/" target="_blank" rel="noopener noreferrer">
-                https://www.nngroup.com/
-              </a>
-            </li>
-            <li>
-              <strong>Material Design 3</strong><br>
-              Guidelines de componentes, layout, navegação e acessibilidade.<br>
-              <a href="https://m3.material.io/" target="_blank" rel="noopener noreferrer">
-                https://m3.material.io/
-              </a>
-            </li>
-            <li>
-              <strong>Apple Human Interface Guidelines</strong><br>
-              Recomendações de comportamento e visual para apps da Apple.<br>
-              <a href="https://developer.apple.com/design/human-interface-guidelines/" target="_blank" rel="noopener noreferrer">
-                https://developer.apple.com/design/human-interface-guidelines/
-              </a>
-            </li>
-            <li>
-              <strong>Laws of UX</strong><br>
-              Princípios psicológicos aplicados a UX e UI design.<br>
-              <a href="https://lawsofux.com/" target="_blank" rel="noopener noreferrer">
-                https://lawsofux.com/
-              </a>
-            </li>
-          </ul>
-        </section>
-
-        <section>
-          <h2 class="side-section-title">Sugestão de estudo</h2>
+          <h2 class="side-section-title">Sugestão rápida</h2>
           <p>
-            Nos próximos dias, observe interfaces do cotidiano e tente identificar exemplos
-            de boa e má aplicação dessas diretrizes: consistência, hierarquia visual,
-            feedback, prevenção de erros e clareza na navegação.
+            Ao navegar por apps e sites, repare onde as diretrizes se cumprem (ou falham):
+            estilos de botão, mensagens de erro, organização de formulários e clareza da
+            navegação. Use esses exemplos como inspiração ou contraexemplo para seus próprios
+            projetos.
           </p>
         </section>
       </aside>
@@ -298,7 +413,7 @@
   </div>
 
   <footer>
-    Vamos estudar!
+    Vamos trabalhar!
   </footer>
 </body>
 </html>
