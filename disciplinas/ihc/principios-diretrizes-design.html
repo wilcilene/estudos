@@ -2,13 +2,13 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Princípios e diretrizes de design </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diretrizes e regras de design · CPA1469</title>
 
-  <!-- Fonte + CSS comum da disciplina -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="ihc.css">
 </head>
 <body>
@@ -17,280 +17,403 @@
       <span>←</span> voltar para o índice da disciplina
     </a>
 
-    <header>
-      <div class="badge">
-        <span class="badge-dot"></span>
-        Princípios e diretrizes de design web
+    <!-- HERO: cartão principal + resumo lateral -->
+    <header class="hero">
+      <div class="hero-main">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          Unidade · Diretrizes de design e usabilidade
+        </div>
+
+        <h1 class="hero-title">
+          Diretrizes e <span>regras de design</span>
+        </h1>
+
+        <p class="hero-text">
+          Regras de ouro e guidelines para telas, formulários e navegação.
+          O objetivo é entender como aplicar princípios de usabilidade e UI
+          design para tornar a interação mais clara, consistente e eficiente.
+        </p>
+
+        <div class="hero-tags">
+          <span class="tag">Usabilidade</span>
+          <span class="tag">nível intermediário</span>
+          <span class="tag">UI design</span>
+          <span class="tag">guidelines</span>
+        </div>
       </div>
-      <h1>Princípios e diretrizes para projetar interfaces web</h1>
-      <p>
-        Esta página reúne regras práticas de design que podem ser usadas como referência 
-        no projeto da disciplina. Sempre que estiver em dúvida no protótipo (“deixo assim ou 
-        assado?”), volte aqui e veja qual princípio se aplica ao seu caso.
-        Use ferramentas como https://www.figma.com/ux-design-tool/
-        Consulte outros padrões: https://ui-patterns.com/patterns
-      </p>
+
+      <aside class="hero-side" aria-label="Resumo do tópico">
+        <h2 class="side-title">O que vamos estudar</h2>
+        <ul class="side-list">
+          <li>O que são diretrizes de design e por que elas existem.</li>
+          <li>Consistência, padrões visuais e hierarquia da informação.</li>
+          <li>Feedback, formulários e navegação clara.</li>
+          <li>Materiais de apoio (Adobe, guidelines de UI, heurísticas).</li>
+        </ul>
+      </aside>
     </header>
 
-    <main>
+    <!-- CONTEÚDO PRINCIPAL + ASIDE SIMPLIFICADO -->
+    <main class="layout">
       <article class="content-card">
-        <!-- 1. Introdução -->
         <section>
-          <h2 class="section-title">1. O que são princípios e diretrizes de design?</h2>
+          <h2 class="section-title">1. O que são diretrizes de design?</h2>
           <p>
-            Princípios e diretrizes de design são <span class="highlight">regras gerais</span> que ajudam a tomar
-            decisões coerentes ao desenhar telas e fluxos. Eles não dizem exatamente “onde colocar
-            cada pixel”, mas orientam escolhas como: tamanho de botões, forma de dar feedback,
-            quantidade de informação por tela, padrões de navegação etc.
+            Diretrizes de design são orientações que ajudam a tomar decisões mais adequadas
+            durante a criação de interfaces digitais. Elas servem como referência para
+            organizar elementos, definir comportamentos e manter a clareza do sistema.
           </p>
           <p>
-            Trabalhar com princípios e diretrizes é importante porque:
+            Em vez de criar cada tela apenas com base em gosto pessoal, usamos princípios
+            consolidados em IHC e UI design. Isso reduz inconsistências e melhora a
+            experiência de quem utiliza o sistema.
           </p>
-          <ul>
-            <li>reduz decisões aleatórias (“porque eu achei bonito”);</li>
-            <li>melhora consistência entre telas e entre membros do time;</li>
-            <li>facilita a avaliação do protótipo (é mais fácil criticar com base em regras claras);</li>
-            <li>aproxima o projeto daquilo que a literatura de IHC considera uma interface de qualidade.</li>
-          </ul>
-        </section>
-
-        <!-- 2. Visibilidade e feedback -->
-        <section>
-          <h2 class="section-title">2. Visibilidade do estado do sistema e feedback</h2>
-          <p>
-            O usuário precisa entender <span class="highlight">o que está acontecendo agora</span> e se a ação que
-            acabou de realizar teve efeito. Para isso, o sistema deve oferecer sinais claros de
-            estado e feedback imediato. Exemplos de feedback: barra de progresso, mensagens de sucesso/erro, 
-            alteração de cor de botão após clique.
-          </p>
-
-          <div class="media-wrapper">
-            <img src="loading.png" alt="Exemplos de feedback: barra de carregamento">
-            <div class="media-caption">
-              Exemplos de feedback: barra de progresso.
-            </div>
-          </div>
-
-          <ul>
-            <li>Use rótulos claros em botões (ex.: “Salvar rascunho”, “Enviar formulário”).</li>
-            <li>Mostre mensagens de confirmação quando ações importantes forem concluídas.</li>
-            <li>Em operações demoradas, exiba indicador de progresso (spinner, barra, texto “Carregando…”).</li>
-            <li>Deixe evidente em que página/etapa do fluxo o usuário está (breadcrumb, destaque no menu, título da tela).</li>
-          </ul>
 
           <div class="example-box">
-            <div class="example-label">Para se questionar!</div>
-            <ul>
-              <li>Ao clicar em um botão, algo visual muda imediatamente?</li>
-              <li>Se o sistema estiver carregando dados, existe algum indicador visível?</li>
-              <li>É possível saber facilmente em qual etapa do fluxo de cadastro/navegação a pessoa está?</li>
-            </ul>
+            <div class="example-label">Exemplo</div>
+            Se o botão de ação principal é azul em uma tela e vermelho em outra, sem motivo,
+            o usuário perde confiança na interface. Uma diretriz simples pode dizer:
+            “ações principais usam sempre o mesmo estilo de botão”.
           </div>
         </section>
 
-        <!-- 3. Consistência -->
         <section>
-          <h2 class="section-title">3. Consistência e padrões</h2>
+          <h2 class="section-title">2. Consistência e padrões</h2>
           <p>
-            <span class="highlight">Consistência</span> significa que elementos semelhantes se comportam de forma
-            semelhante. Isso reduz esforço cognitivo: depois de aprender um padrão em uma tela,
-            o usuário espera encontrar a mesma lógica nas demais.
+            Um dos princípios mais importantes é a <span class="highlight">consistência</span>.
+            Isso significa manter padrões de cores, tipografia, ícones, rótulos, tamanhos
+            de botão e comportamento dos componentes ao longo de todas as telas.
           </p>
-
-          <div class="media-wrapper">
-            <img src="media/padrao.png" alt="Várias telas usando o mesmo padrão de botões e cabeçalhos">
-            <div class="media-caption">
-              Mesmos estilos de botões, cabeçalhos e formulários em telas diferentes ajudam o usuário a reconhecer padrões.
-            </div>
-          </div>
-
-          <ul>
-            <li>Mantenha mesma cor e estilo para ações de mesmo tipo (ex.: todos os botões primários na mesma cor).</li>
-            <li>Reutilize componentes (cards, listas, campos de formulário) com a mesma estrutura ao longo do sistema.</li>
-            <li>Use convenções da web: ícone de lupa para busca, carrinho para compras, três linhas para menu (“hambúrguer”).</li>
-            <li>Evite reinventar padrões sem necessidade, especialmente em controles comuns.</li>
-          </ul>
+          <p>
+            Quando o sistema é consistente, a pessoa não precisa reaprender tudo a cada
+            nova tela. Ela reconhece padrões e consegue prever o que vai acontecer,
+            o que reduz erros e aumenta a sensação de controle.
+          </p>
 
           <div class="example-box">
-            <div class="example-label">Para se questionar!</div>
-            <ul>
-              <li>Todos os botões primários parecem pertencer à mesma família?</li>
-              <li>Campos de formulário têm alinhamento, bordas e tipografia consistentes?</li>
-              <li>O posicionamento do menu, logo e busca se mantém entre as páginas?</li>
-            </ul>
+            <div class="example-label">Para observar</div>
+            Em aplicativos que você usa no dia a dia, repare se o botão “voltar” aparece
+            sempre no mesmo lugar, se o ícone de busca é o mesmo em todas as telas e se
+            as mensagens usam o mesmo tipo de linguagem.
           </div>
         </section>
 
-        <!-- 4. Simplicidade e hierarquia -->
         <section>
-          <h2 class="section-title">4. Simplicidade, foco e hierarquia visual</h2>
+          <h2 class="section-title">3. Hierarquia visual</h2>
           <p>
-            Uma tela não deve tentar resolver tudo ao mesmo tempo. Quanto mais elementos, mais difícil
-            é entender por onde começar. <span class="highlight">Hierarquia visual</span> é o uso de tamanho, cor,
-            contraste e espaçamento para indicar o que é mais importante.
+            Hierarquia visual é a forma como organizamos os elementos para mostrar o que é
+            mais importante. Títulos, subtítulos, textos, cards, botões e ícones devem
+            ajudar o olhar da pessoa a seguir um fluxo lógico de leitura.
+          </p>
+          <p>
+            Podemos construir essa hierarquia usando tamanho de fonte, peso tipográfico,
+            cor, contraste, espaçamento e agrupamento. Se tudo tem o mesmo peso visual,
+            nada se destaca e a interface parece confusa.
           </p>
 
-          <div class="media-wrapper">
-            <img src="media/hierarquia-visual.png" alt="Comparação entre tela poluída e tela com boa hierarquia visual">
-            <div class="media-caption">
-              Telas com poucos elementos em destaque e bom espaçamento são mais fáceis de escanear visualmente.
-            </div>
-          </div>
-
-          <ul>
-            <li>Defina uma ação principal por tela (call to action) e destaque esse elemento.</li>
-            <li>Use títulos e subtítulos para organizar o conteúdo; separe blocos com espaçamento generoso.</li>
-            <li>Evite textos longos em caixa alta; prefira frases curtas e parágrafos pequenos.</li>
-            <li>Use cor e peso de fonte para indicar importância, mas com moderação.</li>
-          </ul>
-
-          <div class="example-box">
-            <div class="example-label">Dica prática</div>
-            <p>
-              Faça o teste do “olhar rápido”: abra a tela do protótipo, olhe por 3 segundos e
-              feche. Pergunte: qual ação parecia mais importante? Se a resposta for “não sei”
-              ou “tudo chamava atenção igual”, a hierarquia visual pode ser melhorada.
-            </p>
-          </div>
-        </section>
-
-        <!-- 5. Prevenção de erros -->
-        <section>
-          <h2 class="section-title">5. Prevenção de erros e mensagens claras</h2>
-          <p>
-            Erros são inevitáveis, mas o sistema pode <span class="highlight">reduzir a chance de erro</span> e
-            também ajudar o usuário a se recuperar sem traumas. Mensagens vagas como “Erro 500”
-            normalmente não ajudam.
-          </p>
-
-          <div class="media-wrapper">
-            <img src="media/mensagem-clara.png" alt="Formulário com campo em destaque e mensagem clara de erro">
-            <div class="media-caption">
-              Indique o campo com problema, explique o que aconteceu e sugira como corrigir.
-            </div>
-          </div>
-
-          <ul>
-            <li>Evite ações destrutivas sem confirmação (excluir, enviar definitivamente).</li>
-            <li>Use máscaras e validação em campos (datas, e‑mail, CPF) para evitar dados inválidos.</li>
-            <li>Indique claramente qual campo está com erro e explique o motivo (“Digite um e‑mail válido”).</li>
-            <li>Quando possível, permita desfazer ações (undo) ou oferecer um caminho de volta seguro.</li>
-          </ul>
-        </section>
-
-        <!-- 6. Controle e navegação -->
-        <section>
-          <h2 class="section-title">6. Controle, liberdade e navegação</h2>
-          <p>
-            O usuário deve sentir que está no comando da interface, não preso em um labirinto.
-            Isso significa oferecer <span class="highlight">caminhos de saída</span>, opções de voltar e navegação
-            previsível.
-          </p>
-          
-          <div class="media-wrapper">
-            <img src="media/breadcrumbs" alt="Barra de navegação e breadcrumb em um site">
-            <div class="media-caption">
-              Botões de voltar, links claros e breadcrumbs ajudam o usuário a se localizar e recuperar o caminho.
-            </div>
-          </div>
-
-          <ul>
-            <li>Mantenha um menu principal visível ou facilmente acessível.</li>
-            <li>Evite “dead ends”: telas sem opções claras de seguir ou retornar.</li>
-            <li>Use breadcrumbs ou títulos claros para mostrar em que seção o usuário está.</li>
-            <li>Respeite o comportamento padrão do navegador (botão de voltar deve funcionar como esperado).</li>
-          </ul>
-        </section>
-
-        <!-- 7. Acessibilidade básica -->
-        <section>
-          <h2 class="section-title">7. Acessibilidade básica desde o início</h2>
-          <p>
-            Mesmo antes de estudar acessibilidade em profundidade, já é possível evitar erros graves.
-            Pequenas decisões de layout e cor podem tornar o sistema mais inclusivo.
-            Acesse: https://color.adobe.com/pt/
-          </p>
-
-          <div class="media-wrapper">
-            <img src="media/contraste.png" alt="Comparação entre textos com bom e mau contraste de cor">
-            <div class="media-caption">
-              Contraste adequado e fontes legíveis ajudam pessoas com baixa visão e beneficiam todos.
-            </div>
-          </div>
-
-          <ul>
-            <li>Evite textos muito pequenos; teste a leitura em diferentes monitores e níveis de zoom.</li>
-            <li>Use contraste suficiente entre texto e fundo, especialmente em botões e links.</li>
-            <li>Não dependa apenas de cor para transmitir informação (use também ícones e rótulos).</li>
-            <li>Planeje a ordem de foco para navegação por teclado (tabulação lógica).</li>
-          </ul>
-        </section>
-
-        <!-- 8. Atividade
-        <section>
-          <h2 class="section-title">8. Atividade: criando o “contrato de design” do projeto</h2>
           <div class="activity-box">
-            <div class="activity-title">atividade avaliativa · base para o protótipo</div>
+            <div class="activity-title">atividade</div>
+            Escolha uma tela de aplicativo (por exemplo, uma página inicial). Em 3 minutos:
+            identifique o elemento de maior destaque, o segundo e o terceiro. Pergunte-se:
+            essa ordem ajuda ou atrapalha a tarefa principal?
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">4. Feedback e visibilidade do estado</h2>
+          <p>
+            Interfaces bem projetadas dão <span class="highlight">feedback</span> sempre que
+            o usuário realiza uma ação: clicar em um botão, enviar um formulário, carregar
+            uma lista ou cometer um erro.
+          </p>
+          <p>
+            O sistema pode responder com mudanças visuais, mensagens, indicadores de
+            progresso ou animações discretas. O importante é que a pessoa consiga entender
+            o que está acontecendo, evitando dúvidas como “será que funcionou?”.
+          </p>
+
+          <div class="example-box">
+            <div class="example-label">Exemplo</div>
+            Ao clicar em “Enviar formulário”, a interface pode mostrar “enviando...”
+            com um indicador de carregamento e, em seguida, exibir uma mensagem de sucesso
+            ou orientações em caso de erro.
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">5. Boas práticas para formulários</h2>
+          <p>
+            Formulários são pontos críticos de interação. Bons formulários têm campos bem
+            rotulados, ordem lógica, mensagens claras de erro e não pedem informações
+            desnecessárias.
+          </p>
+          <ul>
+            <li>Use rótulos claros e próximos aos campos.</li>
+            <li>Evite pedir mais dados do que o necessário para a tarefa.</li>
+            <li>Indique claramente quais campos são obrigatórios.</li>
+            <li>Mostre mensagens específicas de validação (o que está errado e como corrigir).</li>
+            <li>Organize os campos em blocos coerentes (dados pessoais, contato, etc.).</li>
+          </ul>
+
+          <div class="example-box">
+            <div class="example-label">Dica de UI</div>
+            Placeholder não substitui label. O texto de exemplo dentro do campo pode
+            desaparecer durante a digitação; por isso, o rótulo permanente continua essencial.
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">6. Navegação clara e previsível</h2>
+          <p>
+            A navegação ajuda a responder a três perguntas: onde estou, o que posso fazer
+            aqui e como volto. Menus, links, breadcrumbs, títulos de página e botões de
+            retorno devem colaborar para essa percepção.
+          </p>
+          <p>
+            Nomes vagos de menu, mudanças inesperadas de layout ou caminhos sem saída
+            aumentam a carga cognitiva. Já uma navegação clara apoia a pessoa na busca
+            por informações e na conclusão de tarefas.
+          </p>
+
+          <div class="activity-box">
+            <div class="activity-title">atividade</div>
+            Analise o site de uma instituição ou serviço público. Aponte um exemplo de
+            navegação clara e um exemplo em que a estrutura das páginas dificulta encontrar
+            o que você procura.
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">7. Prevenção de erros</h2>
+          <p>
+            Diretrizes de design também tratam de <span class="highlight">prevenir erros</span>,
+            não só de reagir a eles. Isso inclui confirmar ações críticas, limitar entradas
+            inválidas, oferecer escolhas guiadas e deixar claras as consequências de cada ação.
+          </p>
+          <p>
+            Desfazer (undo), confirmar exclusões importantes e restringir formatos de dados
+            são estratégias que reduzem frustrações e danos.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="section-title">8. Clareza e carga cognitiva</h2>
+          <p>
+            Uma interface pode ser visualmente bonita e, ainda assim, cansativa ou confusa.
+            A clareza depende de linguagem simples, organização em blocos, quantidade adequada
+            de informação por tela e bom uso de espaço em branco.
+          </p>
+          <p>
+            Quanto menos esforço a pessoa gasta para entender a interface, mais energia sobra
+            para se concentrar na tarefa principal.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="section-title">9. Relação com usabilidade e UX</h2>
+          <p>
+            Diretrizes e regras de design estão diretamente ligadas à
+            <span class="highlight">usabilidade</span>, porque tornam a interação mais fácil
+            de aprender, eficiente e menos propensa a erros.
+          </p>
+          <p>
+            Ao mesmo tempo, elas impactam a experiência do usuário (UX) como um todo, pois
+            contribuem para sentimentos de confiança, fluidez e satisfação ao interagir com
+            o sistema.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="section-title">10. Sugestão de estudo</h2>
+          <p>
+            Nos próximos dias, observe interfaces do cotidiano e tente identificar exemplos
+            de boa e má aplicação dessas diretrizes: consistência, hierarquia visual,
+            feedback, prevenção de erros e clareza na navegação. Traga pelo menos um
+            exemplo para comentarmos em sala.
+          </p>
+        </section>
+
+                <!-- 10. Exemplo prático de aplicação de diretrizes -->
+        <section>
+          <h2 class="section-title">11. Exemplo prático: aplicativo para organizar festas de república</h2>
+          <p>
+            Imagine que você foi convidada(o) para projetar a interface do <span class="highlight">“FestaFit”</span>, um aplicativo
+            usado por estudantes para organizar festas no campus. O app deve ajudar a:
+            listar eventos, controlar limite de pessoas, combinar quem leva o quê e evitar confusões
+            com horário, endereço e regras de convivência.
+          </p>
+          <p>
+            Vamos ver como as diretrizes e regras de design podem orientar o passo a passo
+            da criação dessa interface, desde a tela inicial até o formulário de criação de eventos.
+          </p>
+
+          <div class="activity-box">
+            <div class="activity-title">passo 1 · contexto e principais tarefas</div>
             <p>
-              Em grupo, elaborem um documento curto (pode ser slide, texto ou mural digital) com
-              as <strong>regras de design</strong> que o projeto seguirá. Usem os princípios desta página
-              como base.
+              As tarefas principais são: <span class="highlight">ver festas disponíveis</span>, 
+              <span class="highlight">confirmar presença</span> e <span class="highlight">criar uma nova festa</span>.
+              Isso significa que a tela inicial precisa destacar claramente essas ações, sem poluir
+              com opções secundárias.
             </p>
-            <ol>
-              <li>Escolham pelo menos 5 princípios (ex.: feedback, consistência, hierarquia visual,
-                  prevenção de erros, acessibilidade).</li>
-              <li>Para cada princípio, escrevam:
-                <ul>
-                  <li>uma frase que resuma a ideia (em linguagem de vocês);</li>
-                  <li>2 a 3 “regras práticas” que vocês se comprometerão a seguir no protótipo</li>
-                </ul>
-              </li>
-              <li>Incluam 1 ou 2 exemplos (prints, rascunhos) mostrando como a regra será aplicada.</li>
-            </ol>
             <p>
-              Este documento será usado como referência durante toda a construção do protótipo
-              e poderá ser citado na apresentação final como parte da justificativa de design.
+              <img src="media/festafit-1-wireframe.png"
+                 alt="Wireframe da tela inicial do aplicativo FestaFit com lista de festas e botão de criar nova festa"
+                 loading="lazy">
+                <em>Imagem criada pelo ChatGPT.</em>
             </p>
           </div>
-        </section> -->
+
+          <div class="example-box">
+            <div class="example-label">passo 2 · aplicando consistência e hierarquia</div>
+            <p>
+              Para manter consistência, definimos um padrão: cards de eventos sempre mostram
+              nome da festa, data, horário e status (vagas cheias ou disponíveis) na mesma ordem.
+              O botão de ação principal usa sempre a mesma cor e texto curto, como “Confirmar presença”.
+            </p>
+            <p>
+              A hierarquia visual destaca o próximo evento da noite em um card maior no topo,
+              enquanto as festas futuras aparecem em cards menores abaixo, com menos destaque.
+            </p>
+            <p>
+              <img
+                src="media/festafit-2-detalhes.png"
+                alt="Mockup detalhado dos cards de eventos do aplicativo FestaFit, com destaque para o próximo evento"
+                loading="lazy">
+            </p>
+              <em>Imagem criada pelo ChatGPT.</em>
+          </div>
+
+          <div class="activity-box">
+            <div class="activity-title">passo 3 · formulários e prevenção de erros</div>
+            <p>
+              Ao criar uma nova festa, o formulário de “Criar evento” pede apenas o essencial:
+              nome, data, horário, localização e limite de pessoas. Campos obrigatórios são marcados,
+              e mensagens de erro explicam claramente o problema (“informe uma data futura” em vez
+              de “erro no campo”).
+            </p>
+            <p>
+              Para prevenir erros, o app sugere horários que não chocam com outras festas já criadas
+              e avisa se o limite de pessoas for menor do que o número de convidados já confirmados.
+            </p>
+            <p>
+              <img
+                src="media/festafit-3-formulario.png"
+                alt="tela de formulário com labels claros, grupos de campos e mensagens de erro"
+                loading="lazy">
+            </p>
+              <em>Imagem criada pelo ChatGPT.</em>
+          </div>
+
+          <div class="example-box">
+            <div class="example-label">passo 4 · feedback e navegação</div>
+            <p>
+              Depois de criar a festa, o app mostra uma mensagem de sucesso (“Festa criada com sucesso!”)
+              e oferece duas ações imediatas: <span class="highlight">“Compartilhar convite”</span> e 
+              <span class="highlight">“Ver detalhes da festa”</span>. O usuário entende que a ação deu certo
+              e sabe qual é o próximo passo.
+            </p>
+            <p>
+              Na navegação, a barra inferior traz apenas três seções: “Festas”, “Minhas festas” e
+              “Perfil”. Isso mantém a estrutura simples, previsível e fácil de memorizar.
+            </p>
+              <img
+                src="media/festafit-4-confirmacao.png"
+                alt="tela de confirmação com mensagem de sucesso e barra de navegação simples"
+                loading="lazy">
+            </p>
+              <em>Imagem criada pelo ChatGPT.</em>
+
+          </div>
+
+          <p>
+            Ao longo desse exemplo, cada decisão de interface foi guiada por diretrizes: priorizar
+            tarefas principais, manter consistência, criar hierarquia visual, fornecer feedback claro,
+            planejar bons formulários e prevenir erros. Esses mesmos passos podem ser adaptados para
+            outros contextos de software, além das festas de república.
+          </p>
+        </section>
+        
+        <section>
+          <h2 class="section-title">12. Materiais de apoio</h2>
+          <p>
+            A lista a seguir reúne materiais introdutórios e referências de UI/UX para
+            aprofundar os conceitos apresentados neste tópico.
+          </p>
+          <ul class="resources-list">
+            <li>
+              <strong>Adobe XD Ideas</strong> – artigos curtos sobre UI/UX, com exemplos de layouts,
+              hierarquia visual, prototipagem e design systems aplicados a interfaces.<br>
+              <a href="https://xd.adobe.com/ideas/" target="_blank" rel="noopener noreferrer">
+                https://xd.adobe.com/ideas/
+              </a>
+            </li>
+            <li>
+              <strong>Adobe · UX Design</strong> – ponto de partida da Adobe para UX, com conceitos
+              básicos, tutoriais introdutórios e dicas de fluxo, wireframes e protótipos em XD.<br>
+              <a href="https://www.adobe.com/br/products/xd/learn/ux-design.html" target="_blank" rel="noopener noreferrer">
+                https://www.adobe.com/br/products/xd/learn/ux-design.html
+              </a>
+            </li>
+            <li>
+              <strong>Nielsen Norman Group</strong> – site clássico de usabilidade, com heurísticas,
+              pesquisas, artigos aprofundados e cursos sobre UX, testes com usuários e IHC.<br>
+              <a href="https://www.nngroup.com/" target="_blank" rel="noopener noreferrer">
+                https://www.nngroup.com/
+              </a>
+            </li>
+            <li>
+              <strong>Material Design 3</strong> – guidelines do Google com princípios, componentes
+              e exemplos de layout, cores, tipografia e navegação para apps e web.<br>
+              <a href="https://m3.material.io/" target="_blank" rel="noopener noreferrer">
+                https://m3.material.io/
+              </a>
+            </li>
+            <li>
+              <strong>Apple Human Interface Guidelines</strong> – conjunto de princípios e recomendações
+              de design visual e de interação para apps em iOS, iPadOS, macOS e outras plataformas Apple.<br>
+              <a href="https://developer.apple.com/design/human-interface-guidelines/" target="_blank" rel="noopener noreferrer">
+                https://developer.apple.com/design/human-interface-guidelines/
+              </a>
+            </li>
+            <li>
+              <strong>Laws of UX</strong> – coleção de leis e princípios de psicologia aplicados ao
+              design de interfaces, com explicações visuais, exemplos e sugestões de uso na prática.<br>
+              <a href="https://lawsofux.com/" target="_blank" rel="noopener noreferrer">
+                https://lawsofux.com/
+              </a>
+            </li>
+          </ul>
+        </section>
       </article>
 
       <aside class="side-card">
-        <div>
-          <div class="side-section-title">Palavras‑chave</div>
+        <section>
+          <h2 class="side-section-title">Palavras‑chave</h2>
           <div class="tag-list">
-            <span class="tag">usabilidade</span>
-            <span class="tag">feedback</span>
             <span class="tag">consistência</span>
             <span class="tag">hierarquia visual</span>
-            <span class="tag">erros</span>
-            <span class="tag">acessibilidade</span>
+            <span class="tag">feedback</span>
+            <span class="tag">formulários</span>
+            <span class="tag">navegação</span>
           </div>
-        </div>
+        </section>
 
-        <div>
-          <div class="side-section-title">Como usar esta página no projeto</div>
+        <section>
+          <h2 class="side-section-title">Sugestão rápida</h2>
           <p>
-            Mantenha esta página aberta enquanto modela suas telas do projeto. Ao finalizar uma
-            tela, faça um checklist rápido: ela segue os princípios de feedback, consistência,
-            hierarquia, prevenção de erros e acessibilidade básica?
+            Ao navegar por apps e sites, repare onde as diretrizes se cumprem (ou falham):
+            estilos de botão, mensagens de erro, organização de formulários e clareza da
+            navegação. Use esses exemplos como inspiração ou contraexemplo para seus próprios
+            projetos.
           </p>
-        </div>
-
-        <div>
-          <div class="side-section-title">Leituras de apoio</div>
-          <ul class="resources-list">
-            <li>Barbosa &amp; Silva – capítulos sobre princípios de IHC e diretrizes de design.</li>
-            <li>Rogers, Sharp &amp; Preece – princípios de design de interação.</li>
-            <li>Textos on‑line sobre heurísticas de Nielsen e padrões de interface web/mobile.</li>
-          </ul>
-        </div>
+        </section>
       </aside>
     </main>
   </div>
 
   <footer>
-    <p>Estudem!!!</p>
+    Vamos trabalhar!
   </footer>
 </body>
 </html>
