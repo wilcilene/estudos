@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semanas 11–12 — Orientação a Objetos em PHP</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+  
+<body>
+    <header class="hero">
+        <div class="container">
+            <p class="eyebrow">Programação I</p>
+            <h1>Semanas 11–12 — Orientação a Objetos</h1>
+            <p class="subtitle">Classes, encapsulamento e construtores em PHP</p>
+            <a class="back-link" href="https://wilcilene.github.io/estudos/disciplinas/programacaoi-eco/index.html">← Voltar para página principal</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <section>
+            <h2>1. O que vamos aprender</h2>
+            <p>
+                Nesta etapa da disciplina, vamos estudar como organizar programas usando <strong>objetos</strong>.
+                Em vez de pensar apenas em variáveis soltas, passamos a modelar entidades do mundo real,
+                como estudante, produto, conta, filme, ingresso...
+            </p>
+
+            <div class="tip">
+                <strong>Ideia central:</strong> orientação a objetos é uma forma de organizar melhor o código,
+                aproximando a programação de coisas que existem no mundo real.
+            </div>
+        </section>
+
+        <section>
+            <h2>2. Antes de tudo: o que é um objeto?</h2>
+            <p>
+                Um <strong>objeto</strong> é uma estrutura que guarda dados e também pode ter comportamentos.
+                Por exemplo: um <code>Estudante</code> pode ter nome e matricula, e um <code>Produto</code> pode ter descricao e preco.
+            </p>
+            <p>
+                Para criar objetos, usamos uma <strong>classe</strong>, que funciona como um molde.
+                A classe define quais dados e comportamentos os objetos daquele tipo terão.
+            </p>
+
+            <div class="concept-grid">
+                <article class="card">
+                    <h3>Classe</h3>
+                    <p>É o molde. Define atributos e métodos.</p>
+                    <pre><code>class Estudante {
+    // definição
+}</code></pre>
+                </article>
+
+                <article class="card">
+                    <h3>Objeto</h3>
+                    <p>É uma instância concreta criada a partir da classe.</p>
+                    <pre><code>$a1 = new Estudante();</code></pre>
+                </article>
+
+                <article class="card">
+                    <h3>Atributos</h3>
+                    <p>São os dados do objeto, como nome, idade ou preco.</p>
+                    <pre><code>private $nome;</code></pre>
+                </article>
+
+                <article class="card">
+                    <h3>Métodos</h3>
+                    <p>São as ações que o objeto pode realizar.</p>
+                    <pre><code>public function exibir() { }</code></pre>
+                </article>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. Classes em PHP</h2>
+            <p>
+                Em PHP, uma classe é declarada com a palavra-chave <code>class</code>.
+                Dentro dela, colocamos os atributos e os métodos relacionados.
+            </p>
+
+            <div class="example-block">
+                <h3>Exemplo 1</h3>
+                <pre><code class="language-php">&lt;?php
+
+class Livro {
+    public $titulo;
+    public $autor;
+
+    public function exibirInformacoes() {
+        echo "Livro: " . $this-&gt;titulo . "&lt;br&gt;";
+        echo "Autor: " . $this-&gt;autor . "&lt;br&gt;";
+    }
+}
+
+$livro1 = new Livro();
+$livro1-&gt;titulo = "Introdução ao PHP";
+$livro1-&gt;autor = "Maria Kowal";
+
+$livro1-&gt;exibirInformacoes();
+?&gt;</code></pre>
+
+                <div class="annotation">
+                    <h4>Explicando o código</h4>
+                    <ul>
+                        <li><code>class Livro</code> cria o molde do objeto.</li>
+                        <li><code>public $titulo</code> e <code>public $autor</code> são atributos.</li>
+                        <li><code>public function exibirInformacoes()</code> é um método.</li>
+                        <li><code>$this-&gt;titulo</code> significa “o título deste objeto”.</li>
+                        <li><code>new Livro()</code> cria um objeto baseado na classe.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>4. Encapsulamento</h2>
+            <p>
+                Encapsulamento é a ideia de proteger os dados do objeto.
+                Em vez de deixar tudo livre para ser alterado de qualquer jeito,
+                controlamos o acesso usando métodos.
+            </p>
+            <p>
+                Em PHP, isso aparece com modificadores como <code>public</code> e <code>private</code>.
+                Para começar:
+            </p>
+
+            <ul>
+                <li><code>public</code>: pode ser acessado de fora da classe.</li>
+                <li><code>private</code>: só pode ser acessado dentro da própria classe.</li>
+            </ul>
+
+            <div class="example-block">
+                <h3>Exemplo 2 — Encapsulando atributos</h3>
+                <pre><code class="language-php">&lt;?php
+
+class ContaBancaria {
+    private $titular;
+    private $saldo;
+
+    public function definirTitular($nome) {
+        $this-&gt;titular = $nome;
+    }
+
+    public function depositar($valor) {
+        if ($valor &gt; 0) {
+            $this-&gt;saldo += $valor;
+        }
+    }
+
+    public function exibirResumo() {
+        echo "Titular: " . $this-&gt;titular . "&lt;br&gt;";
+        echo "Saldo: R$ " . $this-&gt;saldo . "&lt;br&gt;";
+    }
+}
+
+$conta = new ContaBancaria();
+$conta-&gt;definirTitular("Ana");
+$conta-&gt;depositar(150);
+$conta-&gt;exibirResumo();
+
+?&gt;</code></pre>
+
+                <div class="annotation">
+                    <h4>Explicando o código</h4>
+                    <ul>
+                        <li>Os atributos <code>$titular</code> e <code>$saldo</code> são <code>private</code>.</li>
+                        <li>Isso significa que eles não devem ser alterados diretamente fora da classe.</li>
+                        <li>O método <code>definirTitular()</code> controla a mudança do titular.</li>
+                        <li>O método <code>depositar()</code> só aceita valores maiores que zero.</li>
+                        <li>Assim, a classe protege melhor seus próprios dados.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tip">
+                <strong>Resumo simples:</strong> encapsular é evitar bagunça.
+                Em vez de qualquer parte do programa mexer nos dados de qualquer forma,
+                a própria classe controla isso.
+            </div>
+        </section>
+
+        <section>
+            <h2>5. Construtores</h2>
+            <p>
+                Um construtor é um método especial que roda automaticamente quando o objeto é criado.
+                Em PHP, o construtor tem o nome <code>__construct()</code>.
+            </p>
+            <p>
+                Ele é útil para garantir que o objeto já nasça com valores importantes preenchidos.
+            </p>
+
+            <div class="example-block">
+                <h3>Exemplo 3 — Usando construtor</h3>
+                <pre><code class="language-php">&lt;?php
+
+class Filme {
+    private $titulo;
+    private $categoria;
+
+    public function __construct($titulo, $categoria) {
+        $this-&gt;titulo = $titulo;
+        $this-&gt;categoria = $categoria;
+    }
+
+    public function exibirFicha() {
+        echo "Filme: " . $this-&gt;titulo . "&lt;br&gt;";
+        echo "Categoria: " . $this-&gt;categoria . "&lt;br&gt;";
+    }
+}
+
+$filme1 = new Filme("Aventura no Espaço", "Ficção Científica");
+$filme1-&gt;exibirFicha();
+
+?&gt;</code></pre>
+
+                <div class="annotation">
+                    <h4>Explicando o código</h4>
+                    <ul>
+                        <li><code>__construct()</code> é chamado automaticamente ao usar <code>new Filme(...)</code>.</li>
+                        <li>O objeto já é criado com título e categoria.</li>
+                        <li>Isso evita esquecer de preencher informações importantes depois.</li>
+                        <li>Construtores ajudam a deixar os objetos mais consistentes.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>6. Exemplo extra</h2>
+            <p>
+                A seguir, veja um exemplo que junta classe, encapsulamento e construtor em um único programa.
+            </p>
+
+            <div class="example-block">
+                <h3>Exemplo 4 — Produto de loja</h3>
+                <pre><code class="language-php">&lt;?php
+
+class Produto {
+    private $nome;
+    private $preco;
+
+    public function __construct($nome, $preco) {
+        $this-&gt;nome = $nome;
+        $this-&gt;preco = $preco;
+    }
+
+    public function aplicarDesconto($percentual) {
+        if ($percentual &gt; 0 && $percentual &lt;= 100) {
+            $desconto = $this-&gt;preco * ($percentual / 100);
+            $this-&gt;preco -= $desconto;
+        }
+    }
+
+    public function exibirProduto() {
+        echo "Produto: " . $this-&gt;nome . "&lt;br&gt;";
+        echo "Preço atual: R$ " . number_format($this-&gt;preco, 2, ",", ".") . "&lt;br&gt;";
+    }
+}
+
+$produto1 = new Produto("Mouse Gamer", 120.00);
+
+$produto1-&gt;exibirProduto();
+echo "&lt;hr&gt;";
+$produto1-&gt;aplicarDesconto(10);
+$produto1-&gt;exibirProduto();
+
+?&gt;</code></pre>
+
+                <div class="annotation">
+                    <h4>Explicando o código</h4>
+                    <ul>
+                        <li>A classe <code>Produto</code> tem os atributos privados <code>$nome</code> e <code>$preco</code>.</li>
+                        <li>O construtor recebe esses valores no momento da criação do objeto.</li>
+                        <li>O método <code>aplicarDesconto()</code> faz uma regra simples de negócio.</li>
+                        <li>O método <code>exibirProduto()</code> mostra os dados formatados.</li>
+                        <li><code>number_format()</code> ajuda a exibir o preço no formato monetário brasileiro.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>7. Comparando os conceitos</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Conceito</th>
+                        <th>O que significa</th>
+                        <th>Exemplo em PHP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Classe</td>
+                        <td>Molde para criar objetos.</td>
+                        <td><code>class Estudante { }</code></td>
+                    </tr>
+                    <tr>
+                        <td>Objeto</td>
+                        <td>Instância criada a partir da classe.</td>
+                        <td><code>$a = new Estudante();</code></td>
+                    </tr>
+                    <tr>
+                        <td>Encapsulamento</td>
+                        <td>Proteção e controle do acesso aos dados.</td>
+                        <td><code>private $saldo;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Construtor</td>
+                        <td>Método executado ao criar o objeto.</td>
+                        <td><code>public function __construct(...)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="exercicios">
+            <h2>8. Exercícios para praticar</h2>
+            <p>
+                Agora é a sua vez. Tente resolver os exercícios primeiro.
+                Depois, use o botão para ver uma solução possível.
+            </p>
+
+            <h3>Exercício 1 — Estudante</h3>
+            <p>
+                Crie uma classe <code>Estudante</code> com os atributos <code>nome</code> e <code>curso</code>.
+                Use um construtor para receber esses valores e crie um método <code>exibirDados()</code>.
+            </p>
+            <button class="btn-resposta" data-target="resp-estudante">Mostrar/ocultar resposta em PHP</button>
+            <div id="resp-estudante" class="resposta">
+                <pre><code class="language-php">&lt;?php
+
+class Estudante {
+    private $nome;
+    private $curso;
+
+    public function __construct($nome, $curso) {
+        $this-&gt;nome = $nome;
+        $this-&gt;curso = $curso;
+    }
+
+    public function exibirDados() {
+        echo "Estudante: " . $this-&gt;nome . "&lt;br&gt;";
+        echo "Curso: " . $this-&gt;curso . "&lt;br&gt;";
+    }
+}
+
+$estudante1 = new Estudante("Carlos", "Engenharia de Computação");
+$estudante1-&gt;exibirDados();
+
+?&gt;</code></pre>
+            </div>
+
+            <h3>Exercício 2 — Conta de energia</h3>
+            <p>
+                Crie uma classe <code>ContaEnergia</code> com os atributos <code>titular</code> e <code>valor</code>.
+                Use encapsulamento e crie um método que aplique desconto de 5% se a conta for maior que 200.
+            </p>
+            <button class="btn-resposta" data-target="resp-energia">Mostrar/ocultar resposta em PHP</button>
+            <div id="resp-energia" class="resposta">
+                <pre><code class="language-php">&lt;?php
+
+class ContaEnergia {
+    private $titular;
+    private $valor;
+
+    public function __construct($titular, $valor) {
+        $this-&gt;titular = $titular;
+        $this-&gt;valor = $valor;
+    }
+
+    public function aplicarDesconto() {
+        if ($this-&gt;valor &gt; 200) {
+            $this-&gt;valor = $this-&gt;valor * 0.95;
+        }
+    }
+
+    public function exibirConta() {
+        echo "Titular: " . $this-&gt;titular . "&lt;br&gt;";
+        echo "Valor final: R$ " . number_format($this-&gt;valor, 2, ",", ".") . "&lt;br&gt;";
+    }
+}
+
+$conta = new ContaEnergia("Juliana", 240.00);
+$conta-&gt;aplicarDesconto();
+$conta-&gt;exibirConta();
+
+?&gt;</code></pre>
+            </div>
+
+            <h3>Exercício 3 — Personagem de jogo</h3>
+            <p>
+                Crie uma classe <code>Personagem</code> com os atributos <code>nome</code> e <code>vida</code>.
+                Use construtor e crie um método <code>receberDano($valor)</code> que diminui a vida.
+            </p>
+            <button class="btn-resposta" data-target="resp-personagem">Mostrar/ocultar resposta em PHP</button>
+            <div id="resp-personagem" class="resposta">
+                <pre><code class="language-php">&lt;?php
+
+class Personagem {
+    private $nome;
+    private $vida;
+
+    public function __construct($nome, $vida) {
+        $this-&gt;nome = $nome;
+        $this-&gt;vida = $vida;
+    }
+
+    public function receberDano($valor) {
+        $this-&gt;vida -= $valor;
+
+        if ($this-&gt;vida &lt; 0) {
+            $this-&gt;vida = 0;
+        }
+    }
+
+    public function exibirStatus() {
+        echo "Personagem: " . $this-&gt;nome . "&lt;br&gt;";
+        echo "Vida: " . $this-&gt;vida . "&lt;br&gt;";
+    }
+}
+
+$p1 = new Personagem("Mago Azul", 100);
+$p1-&gt;receberDano(35);
+$p1-&gt;exibirStatus();
+
+?&gt;</code></pre>
+            </div>
+
+            <div class="tip">
+                <strong>Importante:</strong> em programação, quase sempre existe mais de uma solução possível.
+                O objetivo é <strong>entender os conceitos</strong>, não decorar uma única resposta.
+            </div>
+        </section>
+
+        <section>
+            <h2>9. Para lembrar</h2>
+            <ul>
+                <li>Classe é o molde; objeto é a instância.</li>
+                <li>Encapsulamento ajuda a proteger os dados.</li>
+                <li>Construtores facilitam a criação de objetos prontos para uso.</li>
+                <li>PHP continua permitindo programação orientada a objetos de forma bem clara e didática.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Nova linguagem! Mais aprendizagem!</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const botoes = document.querySelectorAll('.btn-resposta');
+
+            botoes.forEach(function (botao) {
+                const alvoId = botao.getAttribute('data-target');
+                const alvo = document.getElementById(alvoId);
+
+                if (!alvo) return;
+
+                botao.addEventListener('click', function () {
+                    const visivel = alvo.style.display === 'block';
+                    alvo.style.display = visivel ? 'none' : 'block';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
