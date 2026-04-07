@@ -306,85 +306,51 @@
     </div>
     
     <div class="arrow">→</div>
-    
-    </a>
-    
+    </a>  
     </div>
-    
     </section>
     
     <section>
-    
-    <h2>Projeto da disciplina</h2>
-    
-    <p class="projeto">
-    
-    Durante o semestre será desenvolvido um projeto em Java no qual os
-    estudantes aplicarão os conceitos aprendidos nas aulas.
-    O projeto envolve análise do problema, modelagem do sistema,
-    implementação e apresentação final.
-    
-    </p>
-    
+      <h2>Projeto da disciplina</h2>
+      <p class="projeto">
+        Durante o semestre será desenvolvido um projeto no qual os
+        estudantes aplicarão os conceitos aprendidos nas aulas.
+        O projeto envolve análise do problema, modelagem do sistema,
+        implementação e apresentação final.
+      </p>
     </section>
     
     <section>
-    
-    <h2>Como vamos aprender</h2>
-    
-    <ul class="metodo">
-    
-    <li>Aulas expositivas com demonstrações de programação.</li>
-    
-    <li>Exercícios progressivos para fixação dos conceitos.</li>
-    
-    <li>Resolução colaborativa de problemas.</li>
-    
-    <li>Desenvolvimento de um projeto aplicado.</li>
-    
-    </ul>
-    
+      <h2>Como vamos aprender</h2>
+      <ul class="metodo">
+        <li>Aulas expositivas com demonstrações de programação.</li>
+        <li>Exercícios progressivos para fixação dos conceitos.</li>
+        <li>Resolução colaborativa de problemas.</li>
+        <li>Desenvolvimento de um projeto aplicado.</li>
+      </ul>
     </section>
     
     <footer>
-    
-    <p>Disciplina de Programação I</p>
-    <p>Curso de Engenharia de Computação</p>
-    
+      <p>Disciplina de Programação I</p>
+      <p>Curso de Engenharia de Computação</p>  
     </footer>
     
     <script>
-    
-    const currentWeek = 9;
-    
-    const items = document.querySelectorAll(".roadmap-item");
-    
-    items.forEach(item => {
-    
-    let start = parseInt(item.dataset.start);
-    let end = parseInt(item.dataset.end);
-    
-    if(end < currentWeek){
-    
-    item.classList.add("completed");
-    
-    }
-    
-    else if(currentWeek >= start && currentWeek <= end){
-    
-    item.classList.add("current");
-    
-    }
-    
-    else{
-    
-    item.classList.add("future");
-    
-    }
-    
-    });
-    
-    </script>
-    
+      const currentWeek = 11;
+      const items = document.querySelectorAll(".roadmap-item");
+      items.forEach(item => {
+        let start = parseInt(item.dataset.start);
+        let end = parseInt(item.dataset.end);
+        if(end < currentWeek){
+          item.classList.add("completed");
+        }
+        else if(currentWeek >= start && currentWeek <= end){
+          item.classList.add("current");
+        }
+        else{
+          item.classList.add("future");
+        }
+      });
+    </script> 
   </body>
 </html>
