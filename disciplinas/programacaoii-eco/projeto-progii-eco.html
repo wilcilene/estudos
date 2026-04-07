@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>PROG II – Projeto Semestral</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+  <div class="container">
+    <div>
+      <span class="tag">Engenharia de Computação</span>
+      <span class="tag tag--aulas">PROG II</span>
+      <span class="tag tag--nivel">Projeto semestral</span>
+    </div>
+    <h1>Projeto Semestral – Desenvolvimento Web Orientado a Objetos</h1>
+    <p>
+      Nesta página você encontra as orientações gerais para o projeto semestral da disciplina de Programação II,
+      com foco em desenvolvimento web, modelagem orientada a objetos e boas práticas de engenharia de software.
+    </p>
+    <nav>
+      <a href="#introducao">Introdução</a>
+      <a href="#avaliacao">Critérios de avaliação</a>
+      <a href="#metodologia">Metodologia</a>
+      <a href="#projeto">Descrição do projeto</a>
+      <a href="#diagramas">Diagramas UML</a>
+      <a href="#interface">Interface visual (IHC)</a>
+      <a href="#banco">Banco de dados</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section>
+    <article class="card" id="introducao">
+      <h2>Introdução ao projeto semestral</h2>
+      <p>
+        O projeto semestral consiste no desenvolvimento de um sistema web completo, aplicando de forma integrada
+        os conceitos de <strong>orientação</strong> a objetos e os fundamentos de desenvolvimento web vistos ao longo do semestre.
+      </p>
+      <p>
+        A partir de um problema qualquer, o grupo deverá definir o domínio da aplicação, modelar as classes,
+        projetar a interface e implementar um protótipo funcional utilizando tecnologias da web (HTML, CSS,
+        JavaScript...).
+      </p>
+      <div class="note">
+        A ideia é que você experimente o ciclo de desenvolvimento de software: levantar requisitos, modelar, projetar,
+        implementar, testar e documentar o sistema.
+      </div>
+    </article>
+
+    <article class="card" id="avaliacao">
+      <h2>Critérios de avaliação</h2>
+
+      <h3>Aspectos de programação</h3>
+      <ul class="mini-list">
+        <li><strong>Uso</strong> adequado de objetos: criação de classes coerentes com o domínio, encapsulamento, atributos e métodos bem definidos.</li>
+        <li>Relacionamentos entre classes (associação, agregação, herança, composição) quando fizerem sentido no contexto.</li>
+        <li>Tratamento de exceções: uso de blocos <code>try/catch/finally</code> e lançamento de exceções personalizadas quando necessário.</li>
+      </ul>
+
+      <h3>Banco de dados</h3>
+      <ul class="mini-list">
+        <li>Modelagem de tabelas coerente com o diagrama de classes e modelo de domínio.</li>
+        <li>Uso de chaves primárias e estrangeiras e tipos de dados adequados.</li>
+      </ul>
+
+      <h3>Padrões visuais e organização de código</h3>
+      <ul class="mini-list">
+        <li>Consistência visual entre telas (cores, tipografia, alinhamento, espaçamento, componentes de interface...).</li>
+        <li>Organização do código em camadas (por exemplo: fronteira, controle, entidade), evite “tudo em um arquivo só”.</li>
+        <li>Nomes significativos para classes, métodos, variáveis e pacotes; comentários pontuais e úteis.</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Dica:</strong> mantenha um repositório organizado (por exemplo, no GitHub) com commits frequentes e mensagens claras.
+      </div>
+    </article>
+
+    <article class="card" id="metodologia">
+      <h2>Metodologia de trabalho</h2>
+
+      <div class="step">
+        <h3>1. Formação dos grupos e definição do sistema</h3>
+        <p>
+          Os estudantes deverão se organizar em duplas e escolher um sistema web a ser desenvolvido,
+          preferencialmente criativo, que seja atrativo/agradável para trabalharem no decorrer do semestre.
+        </p>
+      </div>
+
+      <div class="step">
+        <h3>2. Escolha e registro das ferramentas</h3>
+        <p>
+          Cada grupo deve registrar as ferramentas que serão utilizadas no desenvolvimento, por exemplo: IDE, servidor de aplicação,
+          framework de backend, sistema de controle de versão, gerenciador de banco de dados e ferramentas de modelagem UML.
+          Vocês já fizeram essa atividade, reutilizem os resultados e complementem se necessário.
+        </p>
+        <div class="example-box">
+          Exemplos de ferramentas: VS Code, IntelliJ, Eclipse, Git/GitHub, PostgreSQL/MySQL, Astah Student, Figma, Draw.io...
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>3. Entregas parciais e acompanhamento</h3>
+        <p>
+          Ao longo do semestre haverá entregas parciais (modelos, protótipos de tela, primeiras versões do código) para acompanhamento
+          da evolução do projeto e avaliação.
+        </p>
+      </div>
+    </article>
+
+    <article class="card" id="projeto">
+      <h2>Descrição do projeto</h2>
+      <p>
+        A primeira etapa do projeto é a descrição textual do sistema: contextualize o problema, descreva os principais usuários,
+        liste as funcionalidades esperadas e explicite as restrições ou regras de negócio mais importantes.
+      </p>
+      <p>
+        Use linguagem clara e objetiva, o texto deve permitir que qualquer pessoa da turma
+        entenda o que o sistema faz e porque ele é relevante.
+      </p>
+
+      <details>
+        <summary>Exemplo de tópicos para a descrição</summary>
+        <div>
+          <ul class="mini-list">
+            <li>Nome do sistema.</li>
+            <li>Contexto (onde será utilizado, qual problema resolve).</li>
+            <li>Regras de negócio importantes.</li>
+          </ul>
+        </div>
+      </details>
+    </article>
+
+    <article class="card" id="diagramas">
+      <h2>Diagramas UML obrigatórios</h2>
+
+      <h3>Diagrama de casos de uso</h3>
+      <p>
+        O diagrama de casos de uso descreve, de forma visual, como os diferentes atores interagem com o sistema e quais funcionalidades
+        (casos de uso) cada um pode executar.
+      </p>
+
+      <h4>Como criar um diagrama de casos de uso</h4>
+      <ol class="mini-list">
+        <li>Identifique os atores: pessoas ou sistemas externos que interagem com a aplicação (ex.: Cliente, Administrador, Sistema de Pagamento).</li>
+        <li>Liste os objetivos desses atores em relação ao sistema (ex.: “Realizar login”, “Cadastrar produto”, “Emitir relatório”).</li>
+        <li>Desenhe o sistema como um retângulo e coloque os casos de uso (elipses) dentro dele, conectando cada caso de uso aos atores correspondentes.</li>
+        <li>Atribua nomes simples e iniciados por verbos aos casos de uso (ex.: “Registrar nave”, “Receber alienigena”).</li>
+        <li>Use relações de inclusão/extends apenas quando fizerem sentido e ajudarem a diminuir repetição entre casos.</li>
+      </ol>
+
+      <details>
+        <summary>Ferramentas sugeridas para o diagrama de casos de uso</summary>
+        <div>
+          <ul class="mini-list">
+            <li>Astah Student (versão acadêmica) - permite exportar a estrutura do código após modelado.</li>
+            <li>Draw.io / diagrams.net (online e gratuito).</li>
+            <li>Lucidchart, Miro ou Creately (versões gratuitas limitadas).</li>
+          </ul>
+          <p>
+            Em todas elas você encontrará elementos prontos para atores (boneco), casos de uso (elipses) e relacionamentos.
+          </p>
+        </div>
+      </details>
+
+      <h3>Diagrama de classes</h3>
+      <p>
+        O diagrama de classes apresenta a estrutura estática do sistema: classes, atributos, métodos e relacionamentos.
+        Ele deve refletir o modelo orientado a objetos que será implementado no código.
+      </p>
+
+      <h4>Como criar o diagrama de classes com Astah Student</h4>
+      <ol class="mini-list">
+        <li>Instale o Astah Student e crie um novo projeto UML.</li>
+        <li>Adicione um diagrama de classes e crie as classes principais do seu domínio, definindo atributos e operações (métodos).</li>
+        <li>Defina visibilidade (público, privado, protegido), tipos de dados e, quando necessário, classes abstratas ou interfaces.</li>
+        <li>Modele os relacionamentos (associação, herança, etc.), incluindo multiplicidade (1, 0..1, 1..*, *..*).</li>
+        <li>Utilize os recursos da versão estudante para gerar código base (stubs) a partir do diagrama e depois complete a implementação na IDE.</li>
+      </ol>
+
+      <div class="note">
+        A estrutura de classes deve permitir a manipulação de objetos de forma clara, o tratamento de exceções em pontos críticos
+        (como operações de banco de dados) e o uso de padrões de projeto simples sempre que fizer sentido.
+      </div>
+    </article>
+
+    <article class="card" id="interface">
+      <h2>Interface visual e IHC</h2>
+      <p>
+        A interface deve seguir princípios básicos de IHC, priorizando usabilidade, acessibilidade e consistência.
+        Lembre-se de que o usuário não precisa conhecer a estrutura interna do código, mas deve conseguir usar o sistema com facilidade.
+      </p>
+
+      <h3>Dicas de interface</h3>
+      <ul class="mini-list">
+        <li>Consistência: mantenha o mesmo padrão de cores, ícones, botões e posicionamento de elementos em todas as telas.</li>
+        <li>Visibilidade: deixe claras as ações disponíveis (botões, links) e o estado do sistema (mensagens de sucesso, erro, carregamento).</li>
+        <li>Feedback: sempre informe o usuário sobre o resultado de suas ações (por exemplo, mensagens de confirmação ou erro).</li>
+        <li>Prevenção de erros: valide dados nos formulários, use máscaras quando apropriado e destaque campos obrigatórios.</li>
+        <li>Acessibilidade: utilize textos alternativos em imagens, contraste adequado entre texto e fundo e tamanhos de fonte legíveis.</li>
+      </ul>
+
+      <div class="example-box">
+        Uma boa prática é começar com um rascunho em papel ou em ferramentas de prototipação (como Figma) antes de implementar diretamente em HTML/CSS.
+      </div>
+    </article>
+
+    <article class="card" id="banco">
+      <h2>Banco de dados</h2>
+      <p>
+        O banco de dados deve ser planejado a partir do modelo conceitual (classes e relacionamentos), garantindo que cada entidade importante
+        do sistema tenha uma representação adequada em tabelas.
+      </p>
+      <ul class="mini-list">
+        <li>Mapeie as classes principais para tabelas, e os atributos para colunas, cuidando dos tipos de dados.</li>
+        <li>Defina chaves primárias e estrangeiras para representar os relacionamentos entre as tabelas.</li>
+        <li>Implemente operações CRUD (criar, ler, atualizar e excluir) para as entidades do sistema.</li>
+        <li>Trate exceções de acesso ao banco (falhas de conexão, violação de restrição, etc.) de forma amigável ao usuário.</li>
+      </ul>
+    </article>
+  </section>
+
+  <aside>
+    <section class="card">
+      <h2>Checklist rápido do grupo</h2>
+      <ul class="pill-list">
+        <li>Descrição do sistema</li>
+        <li>Casos de uso</li>
+        <li>Manipulação de objetos</li>
+        <li>Diagrama de classes</li>
+        <li>Banco de dados</li>
+        <li>Interface web</li>
+        <li>Tratamento de exceções</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Etapas recomendadas</h2>
+      <ol class="mini-list">
+        <li>Definir o problema e o escopo do sistema.</li>
+        <li>Identificar atores e casos de uso.</li>
+        <li>Criar o diagrama de casos de uso.</li>
+        <li>Modelar o diagrama de classes e revisar com o grupo.</li>
+        <li>Planejar o banco de dados e a arquitetura do código.</li>
+        <li>Prototipar a interface e iniciar a implementação.</li>
+      </ol>
+    </section>
+  </aside>
+</main>
+
+<footer>
+  Projeto de prog II.
+</footer>
+</body>
+</html>
