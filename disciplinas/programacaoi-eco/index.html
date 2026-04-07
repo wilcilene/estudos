@@ -1,441 +1,402 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-<meta charset="UTF-8">
-<title>Programação I – Introdução ao Java</title>
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:"Segoe UI",Arial,sans-serif;
-}
-
-body{
-background:#f4f6fb;
-color:#2b2b2b;
-line-height:1.6;
-}
-
-/* HERO */
-
-.hero{
-background:linear-gradient(135deg,#3f51b5,#673ab7);
-color:white;
-text-align:center;
-padding:80px 20px;
-}
-
-.hero h1{
-font-size:44px;
-margin-bottom:10px;
-}
-
-.hero p{
-font-size:20px;
-}
-
-.mensagem{
-margin-top:16px;
-background:rgba(255,255,255,0.15);
-padding:12px 20px;
-display:inline-block;
-border-radius:10px;
-}
-
-/* SECTIONS */
-
-section{
-max-width:1100px;
-margin:auto;
-padding:60px 20px;
-}
-
-h2{
-color:#3f51b5;
-margin-bottom:10px;
-font-size:32px;
-}
-
-.sub{
-color:#666;
-margin-bottom:30px;
-}
-
-/* TEXTO PRINCIPAL */
-
-.texto{
-max-width:800px;
-font-size:18px;
-}
-
-/* OBJETIVOS */
-
-.objetivos{
-margin-top:20px;
-padding-left:20px;
-font-size:18px;
-}
-
-.objetivos li{
-margin-bottom:12px;
-}
-
-/* ROADMAP */
-
-.roadmap{
-margin-top:30px;
-border-top:3px solid #ddd;
-}
-
-.roadmap-item{
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-
-padding:22px;
-
-border-bottom:1px solid #ddd;
-
-text-decoration:none;
-color:inherit;
-
-transition:0.25s;
-cursor:pointer;
-
-}
-
-.roadmap-item:hover{
-
-background:#eef2ff;
-transform:translateX(6px);
-
-}
-
-/* CORES PROGRESSO */
-
-.completed{
-border-left:6px solid #2e7d32;
-background:#e8f5e9;
-}
-
-.current{
-border-left:6px solid #ffb300;
-background:#fff8e1;
-}
-
-.future{
-border-left:6px solid #90a4ae;
-background:#f5f5f5;
-}
-
-.roadmap-text h3{
-color:#3f51b5;
-margin-bottom:4px;
-}
-
-.roadmap-text p{
-font-size:14px;
-color:#555;
-}
-
-.arrow{
-font-size:20px;
-color:#888;
-}
-
-/* SEÇÃO PROJETO */
-
-.projeto{
-
-border-left:6px solid #3f51b5;
-padding-left:25px;
-margin-top:20px;
-font-size:18px;
-
-}
-
-/* METODOLOGIA */
-
-.metodo{
-margin-top:20px;
-font-size:18px;
-}
-
-.metodo li{
-margin-bottom:10px;
-}
-
-/* FOOTER */
-
-footer{
-background:#222b45;
-color:white;
-text-align:center;
-padding:40px 20px;
-margin-top:60px;
-}
-
-</style>
-</head>
-
-<body>
-
-<header class="hero">
-
-<h1>Programação I</h1>
-<p>Introdução à programação com Java</p>
-
-<div class="mensagem">
-Aprender programação é um processo progressivo.
-Cada semana representa um novo passo.
-</div>
-
-</header>
-
-<section>
-
-<h2>O que é esta disciplina</h2>
-
-<p class="texto">
-Esta disciplina apresenta os fundamentos da programação utilizando a linguagem Java.
-O objetivo é desenvolver raciocínio lógico, compreender conceitos de programação
-orientada a objetos e aprender a estruturar soluções computacionais para problemas
-reais.
-</p>
-
-</section>
-
-<section>
-
-<h2>Objetivos de aprendizagem</h2>
-
-<ul class="objetivos">
-
-<li>Desenvolver pensamento algorítmico.</li>
-
-<li>Aprender os fundamentos da programação em Java.</li>
-
-<li>Compreender os princípios da orientação a objetos.</li>
-
-<li>Aplicar os conceitos em um projeto de software.</li>
-
-</ul>
-
-</section>
-
-<section>
-
-<h2>Roadmap do semestre</h2>
-
-<p class="sub"> Clique em cada etapa para acessar os conteúdos e materiais da disciplina.
-  <br> Fundo verde representa conteúdos já estudados, amarelo conteúdo atual e cinza os futuros.
-</p>
   
-<div class="roadmap">
-  <a class="roadmap-item" data-start="0" data-end="0" href="git-github-guia.html">
-  <div class="roadmap-text">
-  <h3>Semana 0 — Uso de Git e GitHub na disciplina</h3>
-  <p>Entrega dos exercícios e projeto</p>
-</div>
+  <head>
+    <meta charset="UTF-8">
+      <title>Programação I – Introdução a programação orientada a objetos</title>
     
-<div class="roadmap">
-  <a class="roadmap-item" data-start="1" data-end="2" href="fundamentos-da-programacao.html">
-  <div class="roadmap-text">
-  <h3>Semanas 1–2 — Fundamentos da programação</h3>
-  <p>Paradigmas de programação e pensamento computacional.</p>
-</div>
-
-<div class="arrow">→</div>
-  </a>
-  <a class="roadmap-item" data-start="3" data-end="4" href="ambiente-java.html">
-  <div class="roadmap-text">
-  <h3>Semanas 3–4 — Ambiente Java</h3>
-  <p>História da computação, instalação do JDK e primeiros programas.</p>
-</div>
-
-<div class="arrow">→</div>
-
-</a>
-
-<a class="roadmap-item" data-start="5" data-end="6" href="estruturas-basicas.html">
-
-<div class="roadmap-text">
-
-<h3>Semanas 5–6 — Estruturas básicas</h3>
-
-<p>Entrada e saída de dados, operadores e estruturas de controle.</p>
-
-</div>
-
-<div class="arrow">→</div>
-
-</a>
-
-<a class="roadmap-item" data-start="7" data-end="8" href="decisoes-loops.html">
-
-<div class="roadmap-text">
-
-<h3>Semanas 7–8 — Decisões e loops</h3>
-
-<p>Estruturas if, switch, while e for.</p>
-
-</div>
-
-<div class="arrow">→</div>
-
-</a>
-
-<a class="roadmap-item" data-start="9" data-end="10" href="estrutura-dados.html">
-
-<div class="roadmap-text">
-
-<h3>Semanas 9–10 — Estruturas de dados</h3>
-
-<p>Arrays e ArrayLists.</p>
-
-</div>
-
-<div class="arrow">→</div>
-
-</a>
-
-<a class="roadmap-item" data-start="11" data-end="12" href="fundamentos-da-programacao.html">
-
-<div class="roadmap-text">
-
-<h3>Semanas 11–12 — Orientação a Objetos</h3>
-
-<p>Classes, encapsulamento e construtores.</p>
-
-</div>
-
-<div class="arrow">→</div>
-
-</a>
-
-<a class="roadmap-item" data-start="13" data-end="14" href="semana13.html">
-
-<div class="roadmap-text">
-
-<h3>Semanas 13–14 — Herança e polimorfismo</h3>
-
-<p>Reutilização e organização de código.</p>
-
-</div>
-
-<div class="arrow">→</div>
-
-</a>
-
-<a class="roadmap-item" data-start="15" data-end="16" href="semana15.html">
-
-<div class="roadmap-text">
-
-<h3>Semanas 15–16 — Exceções e arquivos</h3>
-
-<p>Tratamento de erros e persistência.</p>
-
-</div>
-
-<div class="arrow">→</div>
-
-</a>
-
-<a class="roadmap-item" data-start="17" data-end="18" href="semana17.html">
-
-<div class="roadmap-text">
-
-<h3>Semanas 17–18 — Interface gráfica e conclusão</h3>
-
-<p>Interfaces gráficas e finalização do projeto.</p>
-
-</div>
-
-<div class="arrow">→</div>
-
-</a>
-
-</div>
-
-</section>
-
-<section>
-
-<h2>Projeto da disciplina</h2>
-
-<p class="projeto">
-
-Durante o semestre será desenvolvido um projeto em Java no qual os
-estudantes aplicarão os conceitos aprendidos nas aulas.
-O projeto envolve análise do problema, modelagem do sistema,
-implementação e apresentação final.
-
-</p>
-
-</section>
-
-<section>
-
-<h2>Como vamos aprender</h2>
-
-<ul class="metodo">
-
-<li>Aulas expositivas com demonstrações de programação.</li>
-
-<li>Exercícios progressivos para fixação dos conceitos.</li>
-
-<li>Resolução colaborativa de problemas.</li>
-
-<li>Desenvolvimento de um projeto aplicado.</li>
-
-</ul>
-
-</section>
-
-<footer>
-
-<p>Disciplina de Programação I</p>
-<p>Curso de Engenharia de Computação</p>
-
-</footer>
-
-<script>
-
-const currentWeek = 9;
-
-const items = document.querySelectorAll(".roadmap-item");
-
-items.forEach(item => {
-
-let start = parseInt(item.dataset.start);
-let end = parseInt(item.dataset.end);
-
-if(end < currentWeek){
-
-item.classList.add("completed");
-
-}
-
-else if(currentWeek >= start && currentWeek <= end){
-
-item.classList.add("current");
-
-}
-
-else{
-
-item.classList.add("future");
-
-}
-
-});
-
-</script>
-
-</body>
+    <style>
+      *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:"Segoe UI",Arial,sans-serif;
+      }
+      
+      body{
+        background:#f4f6fb;
+        color:#2b2b2b;
+        line-height:1.6;
+      }
+      
+      /* HERO */
+      
+      .hero{
+        background:linear-gradient(135deg,#3f51b5,#673ab7);
+        color:white;
+        text-align:center;
+        padding:80px 20px;
+      }
+      
+      .hero h1{
+        font-size:44px;
+        margin-bottom:10px;
+      }
+      
+      .hero p{
+        font-size:20px;
+      }
+      
+      .mensagem{
+        margin-top:16px;
+        background:rgba(255,255,255,0.15);
+        padding:12px 20px;
+        display:inline-block;
+        border-radius:10px;
+      }
+      
+      /* SECTIONS */
+      
+      section{
+        max-width:1100px;
+        margin:auto;
+        padding:60px 20px;
+      }
+      
+      h2{
+        color:#3f51b5;
+        margin-bottom:10px;
+        font-size:32px;
+      }
+      
+      .sub{
+        color:#666;
+        margin-bottom:30px;
+      }
+      
+      /* TEXTO PRINCIPAL */
+      
+      .texto{
+        max-width:800px;
+        font-size:18px;
+      }
+      
+      /* OBJETIVOS */
+      
+      .objetivos{
+        margin-top:20px;
+        padding-left:20px;
+        font-size:18px;
+      }
+      
+      .objetivos li{
+        margin-bottom:12px;
+      }
+      
+      /* ROADMAP */
+      
+      .roadmap{
+        margin-top:30px;
+        border-top:3px solid #ddd;
+      }
+      
+      .roadmap-item{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:22px;
+        border-bottom:1px solid #ddd;
+        text-decoration:none;
+        color:inherit;
+        transition:0.25s;
+        cursor:pointer;
+      }
+      
+      .roadmap-item:hover{
+        background:#eef2ff;
+        transform:translateX(6px);
+      }
+      
+      /* CORES PROGRESSO */
+      
+      .completed{
+        border-left:6px solid #2e7d32;
+        background:#e8f5e9;
+      }
+      
+      .current{
+        border-left:6px solid #ffb300;
+        background:#fff8e1;
+      }
+      
+      .future{
+        border-left:6px solid #90a4ae;
+        background:#f5f5f5;
+      }
+      
+      .roadmap-text h3{
+        color:#3f51b5;
+        margin-bottom:4px;
+      }
+      
+      .roadmap-text p{
+        font-size:14px;
+        color:#555;
+      }
+      
+      .arrow{
+        font-size:20px;
+        color:#888;
+      }
+      
+      /* SEÇÃO PROJETO */
+      
+      .projeto{
+        border-left:6px solid #3f51b5;
+        padding-left:25px;
+        margin-top:20px;
+        font-size:18px;
+      }
+      
+      /* METODOLOGIA */
+      
+      .metodo{
+        margin-top:20px;
+        font-size:18px;
+      }
+      
+      .metodo li{
+        margin-bottom:10px;
+      }
+      
+      /* FOOTER */
+      
+      footer{
+        background:#222b45;
+        color:white;
+        text-align:center;
+        padding:40px 20px;
+        margin-top:60px;
+      }
+      
+    </style>
+  </head>
+  
+  <body>
+    
+    <header class="hero">
+    <h1>Programação I</h1>
+    <p>Introdução à programação com Java e PHP</p>
+
+    <div class="mensagem">
+      Aprender programação é um processo progressivo.
+      Cada semana representa um novo passo.
+    </div>
+    
+    </header>
+    
+    <section>
+      <h2>O que é esta disciplina</h2>  
+      <p class="texto">
+        Esta disciplina apresenta os fundamentos da programação utilizando as linguagens Java e PHP
+        O objetivo é desenvolver raciocínio lógico, compreender conceitos de programação
+        orientada a objetos e aprender a estruturar soluções computacionais para problemas reais.
+      </p>
+    </section>
+    
+    <section>
+      <h2>Objetivos de aprendizagem</h2>
+      <ul class="objetivos">
+        <li>Desenvolver pensamento algorítmico.</li>  
+        <li>Revisar os fundamentos da programação.</li>
+        <li>Compreender os princípios da orientação a objetos.</li>
+        <li>Aplicar os conceitos em um projeto de software.</li>
+      </ul>
+    </section>
+    
+    <section>
+    <h2>Roadmap do semestre</h2>
+    <p class="sub"> Clique em cada etapa para acessar os conteúdos e materiais da disciplina.
+      <br> Fundo verde representa conteúdos já estudados, amarelo conteúdo atual e cinza os futuros.
+    </p>
+      
+    <div class="roadmap">
+      <a class="roadmap-item" data-start="1" data-end="1" href="git-github-guia.html">
+        <div class="roadmap-text">
+          <h3>Semana 0 — Uso de Git e GitHub na disciplina</h3>
+          <p>Entrega dos exercícios e projeto</p>
+        </div>
+        <div class="arrow">→</div>
+      </a>
+      
+      <a class="roadmap-item" data-start="1" data-end="2" href="fundamentos-da-programacao.html">
+        <div class="roadmap-text">
+          <h3>Semanas 1–2 — Fundamentos da programação</h3>
+          <p>Paradigmas de programação e pensamento computacional.</p>
+        </div>
+        <div class="arrow">→</div>
+      </a>
+      
+      <a class="roadmap-item" data-start="3" data-end="4" href="ambiente-java.html">
+        <div class="roadmap-text">
+          <h3>Semanas 3–4 — Ambiente Java</h3>
+          <p>História da computação, instalação do JDK e primeiros programas.</p>
+        </div>
+        <div class="arrow">→</div>
+      </a>
+      
+      <a class="roadmap-item" data-start="5" data-end="6" href="estruturas-basicas.html">
+      <div class="roadmap-text">
+        <h3>Semanas 5–6 — Estruturas básicas</h3>
+        <p>Entrada e saída de dados, operadores e estruturas de controle.</p>
+      </div>
+        
+    <div class="arrow">→</div>
+    </a>
+      <a class="roadmap-item" data-start="7" data-end="8" href="decisoes-loops.html">
+      <div class="roadmap-text">
+        <h3>Semanas 7–8 — Decisões e loops</h3>
+        <p>Estruturas if, switch, while e for.</p>
+      </div>
+      
+    <div class="arrow">→</div>
+      </a>
+    <a class="roadmap-item" data-start="9" data-end="10" href="estrutura-dados.html">
+    
+    <div class="roadmap-text">
+    
+    <h3>Semanas 9–10 — Estruturas de dados</h3>
+    
+    <p>Arrays e ArrayLists.</p>
+    
+    </div>
+    
+    <div class="arrow">→</div>
+    
+    </a>
+    
+    <a class="roadmap-item" data-start="11" data-end="12" href="fundamentos-da-programacao.html">
+    
+    <div class="roadmap-text">
+    
+    <h3>Semanas 11–12 — Orientação a Objetos</h3>
+    
+    <p>Classes, encapsulamento e construtores.</p>
+    
+    </div>
+    
+    <div class="arrow">→</div>
+    
+    </a>
+    
+    <a class="roadmap-item" data-start="13" data-end="14" href="semana13.html">
+    
+    <div class="roadmap-text">
+    
+    <h3>Semanas 13–14 — Herança e polimorfismo</h3>
+    
+    <p>Reutilização e organização de código.</p>
+    
+    </div>
+    
+    <div class="arrow">→</div>
+    
+    </a>
+    
+    <a class="roadmap-item" data-start="15" data-end="16" href="semana15.html">
+    
+    <div class="roadmap-text">
+    
+    <h3>Semanas 15–16 — Exceções e arquivos</h3>
+    
+    <p>Tratamento de erros e persistência.</p>
+    
+    </div>
+    
+    <div class="arrow">→</div>
+    
+    </a>
+    
+    <a class="roadmap-item" data-start="17" data-end="18" href="semana17.html">
+    
+    <div class="roadmap-text">
+    
+    <h3>Semanas 17–18 — Interface gráfica e conclusão</h3>
+    
+    <p>Interfaces gráficas e finalização do projeto.</p>
+    
+    </div>
+    
+    <div class="arrow">→</div>
+    
+    </a>
+    
+    </div>
+    
+    </section>
+    
+    <section>
+    
+    <h2>Projeto da disciplina</h2>
+    
+    <p class="projeto">
+    
+    Durante o semestre será desenvolvido um projeto em Java no qual os
+    estudantes aplicarão os conceitos aprendidos nas aulas.
+    O projeto envolve análise do problema, modelagem do sistema,
+    implementação e apresentação final.
+    
+    </p>
+    
+    </section>
+    
+    <section>
+    
+    <h2>Como vamos aprender</h2>
+    
+    <ul class="metodo">
+    
+    <li>Aulas expositivas com demonstrações de programação.</li>
+    
+    <li>Exercícios progressivos para fixação dos conceitos.</li>
+    
+    <li>Resolução colaborativa de problemas.</li>
+    
+    <li>Desenvolvimento de um projeto aplicado.</li>
+    
+    </ul>
+    
+    </section>
+    
+    <footer>
+    
+    <p>Disciplina de Programação I</p>
+    <p>Curso de Engenharia de Computação</p>
+    
+    </footer>
+    
+    <script>
+    
+    const currentWeek = 9;
+    
+    const items = document.querySelectorAll(".roadmap-item");
+    
+    items.forEach(item => {
+    
+    let start = parseInt(item.dataset.start);
+    let end = parseInt(item.dataset.end);
+    
+    if(end < currentWeek){
+    
+    item.classList.add("completed");
+    
+    }
+    
+    else if(currentWeek >= start && currentWeek <= end){
+    
+    item.classList.add("current");
+    
+    }
+    
+    else{
+    
+    item.classList.add("future");
+    
+    }
+    
+    });
+    
+    </script>
+    
+  </body>
 </html>
