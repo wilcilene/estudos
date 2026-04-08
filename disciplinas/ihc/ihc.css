@@ -447,6 +447,101 @@ main {
   border-radius: 12px;
 }
 
+/* --------- INDEX IHC: GRID DE TÓPICOS + BADGE DE DATA --------- */
+
+/* Grid de cartões da página-índice da disciplina */
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.topic-card {
+  position: relative;
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.15), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.18), transparent 55%),
+    rgba(15, 23, 42, 0.96);
+  border: 1px solid var(--border-subtle);
+  padding: 0.95rem 1rem 1.25rem;
+  cursor: pointer;
+  transition: transform var(--transition-fast),
+              box-shadow var(--transition-fast),
+              border-color var(--transition-fast),
+              background 220ms ease-out;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.65);
+}
+
+.topic-card:hover {
+  transform: translateY(-4px) translateZ(0);
+  box-shadow: 0 22px 50px rgba(15, 23, 42, 0.9);
+  border-color: rgba(56, 189, 248, 0.7);
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.28), transparent 60%),
+    radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.3), transparent 60%),
+    rgba(15, 23, 42, 1);
+}
+
+.topic-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: var(--text);
+}
+
+.topic-desc {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 0.45rem;
+}
+
+.topic-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+.topic-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.topic-meta span::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.65);
+}
+
+.topic-card a {
+  position: absolute;
+  inset: 0;
+  text-indent: -9999px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Badge de data no canto superior direito do card */
+.topic-date {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  font-size: 0.7rem;
+  color: var(--muted);
+  z-index: 1;
+  pointer-events: none;
+}
+
 /* Rodapé */
 
 footer {
@@ -456,3 +551,4 @@ footer {
   font-size: 0.8rem;
   color: var(--muted);
 }
+
