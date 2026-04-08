@@ -110,6 +110,38 @@ main {
 }
 
 /* Cartão de conteúdo principal */
+.card {
+  position: relative;
+}
+
+/* Versão canto superior direito */
+.card-meta {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+/* Estilo visual da data */
+.card-date {
+  background-color: #e0f7fa;
+  color: #006064;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid #b2ebf2;
+}
+
+/* Canto inferior esquerdo */
+/*
+.card-meta {
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+*/
 
 .content-card {
   border-radius: var(--radius-lg);
