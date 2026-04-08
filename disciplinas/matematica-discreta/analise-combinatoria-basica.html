@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Análise Combinatória Básica</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- MathJax para fórmulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- CSS geral da disciplina -->
+    <link rel="stylesheet" href="md-estilo.css">
+</head>
+<body>
+<div class="container">
+    <h1>Análise Combinatória Básica<br>
+        <span style="font-size:0.8em;">Princípio aditivo e multiplicativo</span>
+    </h1>
+
+    <p><strong>Disciplina:</strong> Matemática Discreta – Engenharia de Computação</p>
+
+    <div class="aula">
+        <h2>1. O que é análise combinatória?</h2>
+        <div class="objetivos">
+            <strong>Objetivos desta seção:</strong> entender o que a análise combinatória estuda e
+            por que esse conteúdo é importante em Matemática Discreta e em Engenharia de Computação.
+        </div>
+
+        <p>
+            A análise combinatória é a parte da matemática que estuda maneiras de <strong>contar</strong>
+            possibilidades sem precisar listar todas uma por uma.
+        </p>
+
+        <p>
+            Em vez de escrever todos os casos possíveis manualmente, usamos princípios e técnicas
+            para calcular quantas formas existem de realizar uma tarefa.
+        </p>
+
+        <div class="exemplo">
+            <h3>Exemplo intuitivo</h3>
+            <p>
+                Imagine que uma pessoa vai montar uma senha de 4 dígitos.
+                Em vez de testar e escrever todas as senhas possíveis, queremos calcular
+                quantas possibilidades existem.
+            </p>
+            <p>
+                Esse tipo de problema é típico da análise combinatória.
+            </p>
+        </div>
+
+        <div class="exemplo">
+            <h3>Exemplos em computação</h3>
+            <ul>
+                <li>Quantidade de senhas possíveis em um sistema.</li>
+                <li>Número de configurações possíveis de funcionalidades em um software.</li>
+                <li>Número de testes possíveis para combinações de entrada.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="aula">
+        <h2>2. Ideia central: contar sem enumerar tudo</h2>
+        <p>
+            Em muitos problemas, listar manualmente todas as possibilidades funciona apenas
+            quando o número de casos é muito pequeno.
+        </p>
+        <p>
+            Quando o número de casos cresce, essa abordagem fica inviável.
+            Por isso, a análise combinatória fornece regras de contagem.
+        </p>
+        <div class="exemplo">
+            <h3>Exemplo</h3>
+            <p>
+                Suponha que um estudante possa escolher um entre 3 gatos:
+            </p>
+            <p>\[
+                \{\text{laranjinha, branco, mesclado}\}
+            \]</p>
+            <p>
+                Se a pergunta for “de quantas formas ele pode escolher o gato?”,
+                a resposta é 3.
+            </p>
+            <p>
+                Esse exemplo é simples, mas já ilustra a ideia de contar possibilidades.
+                Qual gato você vai escolher?
+            </p>
+            <div class="imagem-bloco">
+                <p><strong>Representação visual do conjunto de gatos</strong></p>
+                <figure>
+                    <img src="media/IMAGEM-GATOS.png"
+                         alt="Ilustração com gatos representando um conjunto"
+                         loading="lazy">
+                    <figcaption>Imagem personalizada pelo chatGPT</figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
+
+    <div class="aula">
+        <h2>3. Princípio Aditivo</h2>
+        <div class="objetivos">
+            <strong>Ideia principal:</strong> usamos o princípio aditivo quando temos alternativas
+            excludentes, isto é, quando escolhemos <strong>uma coisa ou outra</strong>.
+        </div>
+
+        <p>
+            O princípio aditivo diz:
+        </p>
+
+        <p>
+            Se uma tarefa pode ser realizada de \(m\) maneiras e uma segunda tarefa pode ser realizada
+            de \(n\) maneiras, e essas possibilidades não acontecem ao mesmo tempo, então o total é:
+        </p>
+
+        <p>\[
+            m + n
+        \]</p>
+
+        <p>
+            Em palavras: quando é “ou”, geralmente pensamos em soma.
+        </p>
+
+        <div class="exemplo">
+            <h3>Exemplo 1 – Escolha de transporte</h3>
+            <p>
+                Um estudante pode ir ao campus:
+            </p>
+            <ul>
+                <li>de ônibus, com 4 opções de horário;</li>
+                <li>ou de carona, com 2 opções.</li>
+            </ul>
+
+            <p>
+                Como ele escolhe ônibus <strong>OU</strong> carona,
+                o número total de possibilidades é:
+            </p>
+
+            <p>\[
+                4 + 2 = 6
+            \]</p>
+        </div>
+
+        <div class="exemplo">
+            <h3>Exemplo 2 – Login em um sistema</h3>
+            <p>
+                Um sistema permite autenticação de duas formas:
+            </p>
+            <ul>
+                <li>por e-mail, com 1 modo de acesso;</li>
+                <li>ou por conta institucional, com 1 modo de acesso.</li>
+            </ul>
+
+            <p>
+                Há 2 formas de entrar no sistema:
+            </p>
+
+            <p>\[
+                1 + 1 = 2
+            \]</p>
+        </div>
+
+        <div class="exemplo">
+            <h3>Passo a passo para identificar o princípio aditivo</h3>
+            <ol>
+                <li>Leia com atenção o enunciado.</li>
+                <li>Verifique se ele fala em alternativas.</li>
+                <li>Pergunte: a escolha é “uma possibilidade ou outra”?</li>
+                <li>Confirme se os casos não se sobrepõem.</li>
+                <li>Some as quantidades.</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="aula">
+        <h2>4. Princípio Multiplicativo</h2>
+        <div class="objetivos">
+            <strong>Ideia principal:</strong> usamos o princípio multiplicativo quando uma tarefa
+            é realizada em etapas sucessivas, isto é, quando acontece <strong>uma coisa e depois outra</strong>.
+        </div>
+
+        <p>
+            O princípio multiplicativo diz:
+        </p>
+
+        <p>
+            Se uma tarefa é realizada em duas etapas, sendo a primeira com \(m\) possibilidades
+            e a segunda com \(n\) possibilidades, então o número total de maneiras de realizar
+            a tarefa completa é:
+        </p>
+
+        <p>\[
+            m \cdot n
+        \]</p>
+
+        <p>
+            Em palavras: quando é “e depois”, geralmente pensamos em multiplicação.
+        </p>
+
+        <div class="exemplo">
+            <h3>Exemplo 1 – Montagem de lanche</h3>
+            <p>
+                Uma pessoa vai montar um lanche escolhendo:
+            </p>
+            <ul>
+                <li>1 tipo de pão entre 3 opções;</li>
+                <li>1 tipo de recheio entre 4 opções.</li>
+            </ul>
+
+            <p>
+                Como a escolha acontece em duas etapas, o total de combinações é:
+            </p>
+
+            <p>\[
+                3 \cdot 4 = 12
+            \]</p>
+        </div>
+
+        <div class="exemplo">
+            <h3>Exemplo 2 – Formação de senha numérica</h3>
+            <p>
+                Suponha uma senha com 3 dígitos, e em cada posição podemos escolher um número de 0 a 9.
+            </p>
+
+            <p>
+                Para a primeira posição há 10 escolhas.
+                Para a segunda posição, mais 10.
+                Para a terceira posição, mais 10.
+            </p>
+
+            <p>
+                Logo, o número total de senhas possíveis é:
+            </p>
+
+            <p>\[
+                10 \cdot 10 \cdot 10 = 10^3 = 1000
+            \]</p>
+        </div>
+
+        <div class="exemplo">
+            <h3>Exemplo</h3>
+            <p>
+                Imagine que um sistema permite configurar:
+            </p>
+            <ul>
+                <li>2 temas visuais;</li>
+                <li>3 idiomas;</li>
+                <li>2 modos de notificação.</li>
+            </ul>
+            <p>
+                O número total de configurações possíveis é:
+            </p>
+            <p>\[
+                2 \cdot 3 \cdot 2 = 12
+            \]</p>
+            <p>
+              <figure class="imagem-bloco">
+                  <img src="media/IMAGEM-ANALISE-COMBINATORIA.png"
+                       alt="Ilustração sobre análise combinatória básica"
+                       loading="lazy">
+                  <figcaption>Imagem gerada pelo chatGPT</figcaption>
+              </figure>
+            </p>
+            <p>
+                Esse raciocínio é muito comum ao estudar espaço de estados,
+                configurações de software e testes combinatórios.
+            </p>
+        </div>
+
+        <div class="exemplo">
+            <h3>Passo a passo para identificar o princípio multiplicativo</h3>
+            <ol>
+                <li>Observe se o problema tem etapas.</li>
+                <li>Conte quantas opções existem em cada etapa.</li>
+                <li>Verifique se todas as etapas devem ser realizadas.</li>
+                <li>Multiplique as quantidades.</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="aula">
+        <h2>5. Como diferenciar soma e multiplicação</h2>
+
+        <p>
+            Um dos maiores desafios no início é decidir se um problema deve ser resolvido com soma ou com multiplicação.
+        </p>
+
+        <div class="exemplo">
+            <h3>Regra prática</h3>
+            <ul>
+                <li>Se a situação descreve alternativas: <strong>use soma</strong>.</li>
+                <li>Se a situação descreve etapas sucessivas: <strong>use multiplicação</strong>.</li>
+            </ul>
+        </div>
+
+        <div class="exemplo">
+            <h3>Exemplo comparativo</h3>
+            <p>
+                Uma pessoa pode escolher:
+            </p>
+            <ul>
+                <li>ou uma sobremesa entre 5 opções;</li>
+                <li>ou uma bebida entre 3 opções.</li>
+            </ul>
+            <p>
+                Como é uma escolha entre alternativas, usamos soma:
+            </p>
+            <p>\[
+                5 + 3 = 8
+            \]</p>
+
+            <p>
+                Agora, se ela for escolher:
+            </p>
+            <ul>
+                <li>1 sobremesa entre 5 opções;</li>
+                <li>e 1 bebida entre 3 opções.</li>
+            </ul>
+            <p>
+                Como as duas escolhas acontecem juntas, usamos multiplicação:
+            </p>
+            <p>\[
+                5 \cdot 3 = 15
+            \]</p>
+            <div class="imagem-bloco">
+              <p><strong>Comparação entre os princípios aditivo e multiplicativo</strong> Obs: Falhou no bolo de chocolate, então use a imaginação!</p>
+              <figure>
+                  <img src="media/IMAGEM-PRINCIPIOS-ADITIVO-MULTIPLICATIVO.png"
+                       alt="Ilustração comparando o princípio aditivo e o princípio multiplicativo"
+                       loading="lazy">
+                  <figcaption>Imagem gerada pelo chatGPT</figcaption>
+              </figure>
+          </div>
+        </div>
+    </div>
+
+    <div class="aula">
+        <h2>6. Problemas resolvidos passo a passo</h2>
+
+        <div class="exemplo">
+            <h3>Problema 1 – Escolha de disciplina optativa</h3>
+            <p>
+                Um estudante pode escolher uma disciplina optativa entre:
+            </p>
+            <ul>
+                <li>4 disciplinas da área de programação;</li>
+                <li>3 disciplinas da área de redes.</li>
+            </ul>
+
+            <p><strong>Passo 1:</strong> identificar o tipo de situação.</p>
+            <p>
+                O estudante vai escolher uma disciplina da primeira área <strong>ou</strong> da segunda.
+            </p>
+
+            <p><strong>Passo 2:</strong> aplicar o princípio adequado.</p>
+            <p>
+                Como é “ou”, usamos o princípio aditivo.
+            </p>
+
+            <p><strong>Passo 3:</strong> calcular.</p>
+            <p>\[
+                4 + 3 = 7
+            \]</p>
+
+            <p><strong>Resposta:</strong> existem 7 possibilidades.</p>
+        </div>
+
+        <div class="exemplo">
+            <h3>Problema 2 – Identificador de sistema</h3>
+            <p>
+                Um identificador é formado por:
+            </p>
+            <ul>
+                <li>2 letras, cada uma escolhida entre 26 letras do alfabeto;</li>
+                <li>seguidas de 3 dígitos, cada um escolhido entre 10 opções.</li>
+            </ul>
+
+            <p><strong>Passo 1:</strong> identificar as etapas.</p>
+            <p>
+                Temos 5 posições: letra, letra, dígito, dígito, dígito.
+            </p>
+
+            <p><strong>Passo 2:</strong> contar as possibilidades por etapa.</p>
+            <ul>
+                <li>primeira letra: 26 opções;</li>
+                <li>segunda letra: 26 opções;</li>
+                <li>primeiro dígito: 10 opções;</li>
+                <li>segundo dígito: 10 opções;</li>
+                <li>terceiro dígito: 10 opções.</li>
+            </ul>
+
+            <p><strong>Passo 3:</strong> multiplicar.</p>
+            <p>\[
+                26 \cdot 26 \cdot 10 \cdot 10 \cdot 10 = 676000
+            \]</p>
+
+            <p><strong>Resposta:</strong> existem 676.000 identificadores possíveis.</p>
+        </div>
+    </div>
+
+    <div class="aula">
+        <h2>7. Aplicações em computação</h2>
+        <div class="exemplo">
+            <h3>1. Espaço de senhas</h3>
+            <p>
+                Ao projetar um sistema de autenticação, precisamos estimar quantas senhas podem existir
+                para avaliar segurança, complexidade e resistência a ataques.
+            </p>
+        </div>
+
+        <div class="exemplo">
+            <h3>2. Testes de software</h3>
+            <p>
+                Quando um sistema possui várias opções de entrada, a quantidade de combinações possíveis
+                pode crescer rapidamente. A análise combinatória ajuda a entender o tamanho do espaço de testes.
+            </p>
+        </div>
+
+        <div class="exemplo">
+            <h3>3. Configurações de sistemas</h3>
+            <p>
+                Sistemas com múltiplos modos, temas, permissões ou recursos opcionais geram muitas combinações.
+                Saber contar essas combinações ajuda no planejamento e na análise de casos.
+            </p>
+        </div>
+    </div>
+
+    <div class="aula">
+        <h2>8. Exemplo em algoritmo</h2>
+        <div class="objetivos">
+            <strong>Objetivo:</strong> mostrar como os princípios de contagem também aparecem em programas.
+        </div>
+        <p>
+            O algoritmo a seguir calcula o número de senhas numéricas de 4 dígitos, assumindo
+            que cada posição pode receber qualquer número de 0 a 9.
+        </p>
+
+        <div class="algoritmo">
+<pre><code>quantidade_posicoes = 4
+opcoes_por_posicao = 10
+  
+total = opcoes_por_posicao ** quantidade_posicoes
+
+print("Quantidade total de senhas:", total)</code></pre>
+        </div>
+
+        <p>
+            Esse código implementa diretamente o princípio multiplicativo:
+        </p>
+        <p>\[
+            10 \cdot 10 \cdot 10 \cdot 10 = 10^4
+        \]</p>
+        <p>
+            Alterem ___ e calculem a quantidade de opções:
+        </p>
+        <ul>
+            <li>1. o número de posições;</li>
+            <li>2. o conjunto de caracteres permitidos;</li>
+        </ul>
+    </div>
+
+    <div class="aula">
+        <h2>9. Exercícios</h2>
+
+        <div class="exercicio">
+            <h3>Exercício 1</h3>
+            <p>
+                Uma lanchonete oferece 6 tipos de salgado e 4 tipos de suco.
+                De quantas formas uma pessoa pode escolher:
+            </p>
+            <ul>
+                <li>apenas um salgado ou um suco?</li>
+                <li>um salgado e um suco?</li>
+            </ul>
+            <button onclick="toggleRes('res1')">Ver resolução</button>
+            <div id="res1" class="resolucao">
+                <p>
+                    No primeiro caso, é uma escolha entre alternativas:
+                </p>
+                <p>\[
+                    6 + 4 = 10
+                \]</p>
+                <p>
+                    No segundo caso, são duas etapas:
+                </p>
+                <p>\[
+                    6 \cdot 4 = 24
+                \]</p>
+            </div>
+        </div>
+
+        <div class="exercicio">
+            <h3>Exercício 2</h3>
+            <p>
+                Uma placa de identificação é formada por 2 letras seguidas de 2 algarismos.
+                Quantas placas diferentes podem ser formadas, assumindo 26 letras e 10 dígitos?
+            </p>
+            <button onclick="toggleRes('res2')">Ver resolução</button>
+            <div id="res2" class="resolucao">
+                <p>
+                    São 4 etapas:
+                </p>
+                <p>\[
+                    26 \cdot 26 \cdot 10 \cdot 10 = 67600
+                \]</p>
+            </div>
+        </div>
+
+        <div class="exercicio">
+            <h3>Exercício 3</h3>
+            <p>
+                Em um sistema, o usuário pode escolher um entre 3 idiomas
+                e um entre 2 temas de interface. Quantas configurações diferentes existem?
+            </p>
+            <button onclick="toggleRes('res3')">Ver resolução</button>
+            <div id="res3" class="resolucao">
+                <p>
+                    Como são duas escolhas realizadas juntas:
+                </p>
+                <p>\[
+                    3 \cdot 2 = 6
+                \]</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="aula">
+        <h2>10. Erros comuns</h2>
+
+        <div class="exemplo">
+            <h3>Erro 1 – Somar quando deveria multiplicar</h3>
+            <p>
+                Isso acontece quando o problema tem etapas, mas é tratado como alternativas.
+            </p>
+        </div>
+
+        <div class="exemplo">
+            <h3>Erro 2 – Multiplicar quando deveria somar</h3>
+            <p>
+                Isso acontece quando o problema descreve uma escolha entre opções,
+                mas é tratado como se precisasse fazer todas as escolhas.
+            </p>
+        </div>
+
+        <div class="exemplo">
+            <h3>Erro 3 – Não identificar corretamente o que está sendo contado</h3>
+            <p>
+                Antes de aplicar qualquer fórmula ou princípio, é essencial entender exatamente
+                o que o enunciado pede.
+            </p>
+        </div>
+    </div>
+
+    <div class="aula">
+        <h2>11. Resumo para revisão</h2>
+        <ul>
+            <li>A análise combinatória estuda técnicas de contagem.</li>
+            <li>O princípio aditivo é usado quando temos alternativas excludentes.</li>
+            <li>O princípio multiplicativo é usado quando temos etapas sucessivas.</li>
+            <li>Uma boa estratégia é perguntar: o problema envolve “ou” ou envolve “e depois”?</li>
+            <li>Esses princípios aparecem em senhas, testes, configurações, menus e sistemas computacionais.</li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>IFC São Bento do Sul · Matemática Discreta · Análise Combinatória Básica</p>
+    </footer>
+</div>
+
+<script>
+function toggleRes(id) {
+    const elem = document.getElementById(id);
+    if (!elem) return;
+    elem.style.display = (elem.style.display === 'block') ? 'none' : 'block';
+}
+</script>
+</body>
+</html>
