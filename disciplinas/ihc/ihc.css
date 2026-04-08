@@ -95,9 +95,11 @@ header p {
   line-height: 1.7;
 }
 
-/* Layout principal */
+/* Layout principal
+   - páginas internas: main em grid
+   - index (body.index-page): main em coluna única, como no index original */
 
-main {
+body:not(.index-page) main {
   display: grid;
   grid-template-columns: minmax(0, 2.3fr) minmax(0, 1.2fr);
   gap: 1.8rem;
@@ -527,7 +529,7 @@ main {
   white-space: nowrap;
 }
 
-/* Badge de data discreta, alinhada ao texto do card */
+/* Badge de data */
 .topic-date {
   position: absolute;
   top: 8px;
@@ -552,4 +554,3 @@ footer {
   font-size: 0.8rem;
   color: var(--muted);
 }
-
