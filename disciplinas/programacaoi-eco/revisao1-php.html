@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revisão para a prova I PHP – Programação I</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="hero">
+    <div class="container">
+        <p class="eyebrow">Programação I</p>
+        <h1>Revisão para a prova I PHP</h1>
+        <p class="subtitle">
+            Fundamentos, estruturas básicas, decisões, loops, arrays e orientação a objetos (PHP). Obs: Página gerada por IA a partir da revisão Java.
+        </p>
+        <a class="back-link"
+           href="https://wilcilene.github.io/estudos/disciplinas/programacaoi-eco/index.html">
+            ← Voltar para página principal
+        </a>
+    </div>
+</header>
+
+<main class="container">
+
+    <section id="como-estudar">
+        <h2>1. Como usar esta página</h2>
+        <p>
+            Esta página reúne uma revisão rápida dos conceitos da disciplina e uma lista de exercícios
+            em nível intermediário, parecidos com situações que podem aparecer na prova.
+        </p>
+        <p>
+            A ideia é que você releia cada tópico, revise os exemplos e depois tente resolver os exercícios
+            <strong>sem olhar a resposta</strong>. Se tiver dificuldade peça ajuda ou clique no mostrar/ocultar para conferir.
+            Mas tente resolver antes de olhar, pois olhar a resposta primeiro condiciona sua solução.
+            Seja criativo e exercite seu pensamento lógico.
+        </p>
+
+        <div class="tip">
+            <strong>Dica para estudar:</strong> tente sempre escrever o código em um editor (VS Code, por exemplo),
+            executar, testar com valores diferentes.
+        </div>
+    </section>
+
+  <section id="como-executar-php">
+    <h2>2. Como executar os exemplos em PHP (passo a passo)</h2>
+    <p>
+        Se você nunca usou PHP antes, siga estes passos para conseguir executar os exemplos da página.
+        Vamos usar o PHP pela linha de comando, que é mais simples para começar.
+    </p>
+
+    <h3>2.1. Instalar o PHP</h3>
+    <ol>
+        <li>
+            Acesse o site oficial do PHP:
+            <a href="https://www.php.net/downloads.php" target="_blank" rel="noopener noreferrer">
+                https://www.php.net/downloads.php
+            </a>.
+        </li>
+        <li>
+            Baixe a versão estável do PHP adequada ao seu sistema operacional
+            (Windows, Linux ou macOS).
+        </li>
+        <li>
+            Siga as instruções de instalação do seu sistema. Em muitos Linux e macOS o PHP já vem instalado
+            ou pode ser instalado pelo gerenciador de pacotes (por exemplo, <code>sudo apt install php</code>).
+        </li>
+        <li>
+            Depois de instalar, abra o terminal (Prompt de Comando, PowerShell ou Terminal) e digite:
+            <pre><code>php -v</code></pre>
+            Se aparecer a versão do PHP, a instalação deu certo.
+        </li>
+    </ol>
+
+    <h3>2.2. Criar um arquivo PHP</h3>
+    <ol>
+        <li>
+            Crie uma pasta para os testes, por exemplo <code>C:\php-prova</code> ou <code>/home/seuusuario/php-prova</code>.
+        </li>
+        <li>
+            Abra essa pasta no VS Code (ou outro editor) e crie um arquivo chamado
+            <code>exemplo1.php</code>.
+        </li>
+        <li>
+            Copie e cole dentro dele um dos exemplos desta página. Lembre-se de manter as tags
+            <code>&lt;?php</code> no início e <code>?&gt;</code> no final quando estiverem presentes.
+        </li>
+        <li>
+            Salve o arquivo.
+        </li>
+    </ol>
+
+    <h3>2.3. Executar o arquivo pelo terminal</h3>
+    <ol>
+        <li>
+            Abra o terminal na mesma pasta onde salvou o arquivo
+            (no VS Code você pode usar o menu <em>Terminal → New Terminal</em>).
+        </li>
+        <li>
+            Digite o comando:
+            <pre><code>php exemplo1.php</code></pre>
+        </li>
+        <li>
+            Se o script pedir entradas (por exemplo, “Digite sua idade:”), digite o valor no terminal
+            e pressione Enter. O resultado aparecerá logo abaixo.
+        </li>
+    </ol>
+
+    <h3>2.4. Dicas importantes</h3>
+    <ul>
+        <li>Cada exemplo da página pode ser salvo em um arquivo diferente: <code>ex1.php</code>, <code>ex2.php</code>, etc.</li>
+        <li>Comece testando exemplos bem pequenos (como “Olá, mundo”) antes de partir para exercícios longos.</li>
+        <li>Se aparecer uma mensagem de erro, leia com calma: geralmente o PHP informa a linha onde algo está escrito errado.</li>
+        <li>Se nada aparecer quando você executa, verifique se salvou o arquivo e se está na pasta correta no terminal.</li>
+    </ul>
+    <section id="como-executar-laravel">
+        <h2>2.5. Primeiro contato com Laravel</h2>
+        <p>
+            Depois de aprender a executar arquivos PHP simples, o próximo passo é conhecer o
+            <strong>Laravel</strong>, que é um framework PHP usado para criar sistemas web mais organizados.
+        </p>
+        <p>
+            Pense assim: no PHP puro, você escreve scripts diretamente. No Laravel, você passa a trabalhar
+            com uma estrutura pronta de projeto, com pastas, rotas, views e comandos que ajudam a desenvolver
+            aplicações web maiores.
+        </p>
+    
+        <div class="tip">
+            <strong>Importante:</strong> neste momento, o objetivo não é dominar Laravel, mas entender
+            como criar e executar um projeto básico.
+        </div>
+    
+        <h3>2.6. O que precisa estar instalado antes</h3>
+        <ul>
+            <li>PHP instalado no computador.</li>
+            <li>Composer instalado, porque o Laravel usa o Composer para gerenciar dependências.</li>
+            <li>De preferência, Node.js e NPM instalados, pois o Laravel recomenda isso para assets front-end.</li>
+        </ul>
+    
+        <p>
+            Se o comando abaixo funcionar no terminal, o PHP está instalado:
+        </p>
+        <pre><code>php -v</code></pre>
+    
+        <p>
+            Se este funcionar, o Composer também está instalado:
+        </p>
+        <pre><code>composer -V</code></pre>
+    
+        <h3>2.7. Criando um projeto Laravel</h3>
+        <p>
+            Existem duas formas simples de criar o projeto. Para iniciantes, a mais fácil costuma ser usando o Composer.
+        </p>
+    
+        <p><strong>Opção 1 – Criar projeto com Composer</strong></p>
+        <pre><code>composer create-project laravel/laravel meu-primeiro-laravel</code></pre>
+    
+        <p><strong>Opção 2 – Usar o instalador do Laravel</strong></p>
+        <pre><code>laravel new meu-primeiro-laravel</code></pre>
+    
+        <p>
+            Depois que o projeto for criado, entre na pasta:
+        </p>
+        <pre><code>cd meu-primeiro-laravel</code></pre>
+    
+        <h3>2.8. Executando o projeto</h3>
+        <p>
+            Para iniciar o servidor local do Laravel, use:
+        </p>
+        <pre><code>php artisan serve</code></pre>
+    
+        <p>
+            Em seguida, abra o navegador no endereço:
+        </p>
+        <pre><code>http://localhost:8000</code></pre>
+    
+        <p>
+            Se tudo estiver certo, você verá a página inicial padrão do Laravel.
+        </p>
+    
+        <h3>2.9. Entendendo a ideia geral</h3>
+        <p>
+            No Laravel, você normalmente não começa escrevendo tudo em um único arquivo.
+            Em vez disso, o framework organiza a aplicação em partes.
+        </p>
+    
+        <div class="concept-grid">
+            <div class="card">
+                <h4>Rotas</h4>
+                <p>Definem qual código será executado quando o usuário acessar uma URL.</p>
+                <pre><code>routes/web.php</code></pre>
+            </div>
+    
+            <div class="card">
+                <h4>Views</h4>
+                <p>São os arquivos que exibem HTML para o usuário.</p>
+                <pre><code>resources/views/</code></pre>
+            </div>
+    
+            <div class="card">
+                <h4>Artisan</h4>
+                <p>É a ferramenta de linha de comando do Laravel.</p>
+                <pre><code>php artisan</code></pre>
+            </div>
+        </div>
+    
+        <h3>2.10. Seu primeiro exemplo no Laravel</h3>
+        <p>
+            Um bom primeiro teste é criar uma rota simples que mostre uma mensagem na tela.
+        </p>
+        <ol>
+            <li>Abra o projeto Laravel no VS Code.</li>
+            <li>Abra o arquivo <code>routes/web.php</code>.</li>
+            <li>Adicione este código:</li>
+        </ol>
+    
+        <pre><code>&lt;?php
+    
+    use Illuminate\Support\Facades\Route;
+    
+    Route::get('/', function () {
+        return 'Olá! Este é meu primeiro teste com Laravel.';
+    });</code></pre>
+    
+        <p>
+            Agora salve o arquivo, volte ao navegador e recarregue a página em
+            <code>http://localhost:8000</code>.
+        </p>
+    
+        <p>
+            Se tudo deu certo, a mensagem será exibida na tela.
+        </p>
+    
+        <h3>2.11. Próximo passo: mostrar uma página HTML</h3>
+        <p>
+            Depois de mostrar um texto simples, o próximo passo é fazer o Laravel retornar uma view.
+        </p>
+    
+        <ol>
+            <li>Crie o arquivo <code>resources/views/inicio.blade.php</code>.</li>
+            <li>Dentro dele, escreva:</li>
+        </ol>
+    
+        <pre><code>&lt;h1&gt;Olá!&lt;/h1&gt;
+    &lt;p&gt;Minha primeira página com Laravel.&lt;/p&gt;</code></pre>
+    
+        <ol start="3">
+            <li>Agora altere a rota em <code>routes/web.php</code> para:</li>
+        </ol>
+    
+        <pre><code>&lt;?php
+    
+    use Illuminate\Support\Facades\Route;
+    
+    Route::get('/', function () {
+        return view('inicio');
+    });</code></pre>
+    
+        <p>
+            Ao recarregar o navegador, o Laravel passará a mostrar a página HTML criada por você.
+        </p>
+    
+        <div class="tip">
+            <strong>Resumo:</strong> no começo, pense no Laravel assim:
+            rota = endereço,
+            view = página,
+            artisan = comando do projeto.
+        </div>
+    </section>
+</section>
+
+    <!-- Fundamentos -->
+    <section id="fundamentos">
+        <h2>3. Fundamentos da programação</h2>
+        <p>
+            Nos primeiros encontros, vimos a ideia de algoritmo, variáveis, tipos básicos, operadores
+            e a estrutura geral de um script em PHP.
+        </p>
+
+        <div class="concept-grid">
+            <div class="card">
+                <h3>Algoritmo</h3>
+                <p>Conjunto de passos para resolver um problema.</p>
+                <pre><code>// Exemplo simples em pseudocódigo
+ler A, B
+soma ← A + B
+escrever soma</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>Script PHP mínimo</h3>
+                <pre><code class="language-php">&lt;?php
+
+echo "Olá, mundo!";
+
+?&gt;</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>Tipos básicos</h3>
+                <ul>
+                    <li><code>int</code> – inteiros</li>
+                    <li><code>float</code> – reais</li>
+                    <li><code>bool</code> – verdadeiro/falso</li>
+                    <li><code>string</code> – textos</li>
+                    <li><code>array</code> – coleção de valores</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estruturas básicas -->
+    <section id="estruturas-basicas">
+        <h2>4. Estruturas básicas em PHP</h2>
+        <p>
+            Neste tópico consolidamos entrada e saída de dados, operadores aritméticos e lógicos
+            e as estruturas de controle <code>if</code>, <code>while</code> e <code>for</code> em PHP.
+        </p>
+
+        <div class="example-block">
+            <h3>Exemplo – Lendo dados do terminal e tomando decisão</h3>
+            <pre><code class="language-php">&lt;?php
+
+echo "Digite sua idade: ";
+$linha = trim(fgets(STDIN));
+$idade = (int) $linha;
+
+if ($idade >= 18) {
+    echo "Maior de idade." . PHP_EOL;
+} else {
+    echo "Menor de idade." . PHP_EOL;
+}
+
+?&gt;</code></pre>
+        </div>
+
+        <div class="tip">
+            Lembre que o <code>while</code> repete “enquanto” a condição for verdadeira
+            e o <code>for</code> é útil quando sabemos quantas repetições serão feitas.
+        </div>
+    </section>
+
+    <!-- Decisões e loops com "objetos" simples -->
+    <section id="decisoes-loops">
+        <h2>5. Decisões, loops e arrays associativos</h2>
+        <p>
+            Aqui combinamos <code>if</code>, <code>switch</code>, <code>while</code> e <code>for</code>
+            com arrays (simples e associativos) para representar pequenas estruturas de dados.
+        </p>
+
+        <div class="example-block">
+            <h3>Exemplo – Menu simples com array associativo</h3>
+            <pre><code class="language-php">&lt;?php
+
+$conta = [
+    "titular" =&gt; "Ana",
+    "saldo" =&gt; 0.0
+];
+
+do {
+    echo "1 - Depositar" . PHP_EOL;
+    echo "2 - Ver saldo" . PHP_EOL;
+    echo "0 - Sair" . PHP_EOL;
+    echo "Opção: ";
+    $opcao = (int) trim(fgets(STDIN));
+
+    if ($opcao === 1) {
+        echo "Valor: ";
+        $valor = (float) trim(fgets(STDIN));
+        $conta["saldo"] += $valor;
+    } elseif ($opcao === 2) {
+        echo "Saldo: R$ " . $conta["saldo"] . PHP_EOL;
+    }
+} while ($opcao !== 0);
+
+?&gt;</code></pre>
+        </div>
+    </section>
+
+    <!-- Arrays -->
+    <section id="estruturas-dados">
+        <h2>6. Arrays em PHP</h2>
+        <p>
+            Depois, vimos como usar arrays numéricos e associativos em PHP
+            para armazenar vários valores (ou estruturas) em uma única variável.
+        </p>
+
+        <div class="concept-grid">
+            <div class="card">
+                <h3>Array de inteiros</h3>
+                <pre><code class="language-php">&lt;?php
+
+$numeros = [10, 20, 30];
+
+for ($i = 0; $i &lt; count($numeros); $i++) {
+    echo $numeros[$i] . PHP_EOL;
+}
+
+?&gt;</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>Array de arrays (estrutura de dados)</h3>
+                <pre><code class="language-php">&lt;?php
+
+$tarefas = [];
+
+$tarefas[] = ["descricao" =&gt; "Estudar para a prova"];
+$tarefas[] = ["descricao" =&gt; "Fazer exercícios"];
+
+echo "Total: " . count($tarefas) . PHP_EOL;
+
+?&gt;</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- OO em PHP -->
+    <section id="oo-php">
+        <h2>7. Orientação a objetos em PHP</h2>
+        <p>
+            Estudamos também os conceitos de classe, objeto, encapsulamento e construtor em PHP.
+            A ideia é criar moldes de objetos com dados e comportamentos bem definidos.
+        </p>
+
+        <div class="example-block">
+            <h3>Exemplo – Classe com construtor e encapsulamento em PHP</h3>
+            <pre><code class="language-php">&lt;?php
+
+class Produto {
+    private string $nome;
+    private float $preco;
+
+    public function __construct(string $nome, float $preco) {
+        $this-&gt;nome = $nome;
+        $this-&gt;preco = $preco;
+    }
+
+    public function aplicarDesconto(float $percentual): void {
+        if ($percentual &gt; 0 && $percentual &lt;= 100) {
+            $desconto = $this-&gt;preco * ($percentual / 100);
+            $this-&gt;preco -= $desconto;
+        }
+    }
+
+    public function exibir(): void {
+        echo "Produto: " . $this-&gt;nome . PHP_EOL;
+        echo "Preço: R$ " . number_format($this-&gt;preco, 2, ",", ".") . PHP_EOL;
+    }
+}
+
+$produto1 = new Produto("Mouse", 100.00);
+
+$produto1-&gt;exibir();
+echo "----------------" . PHP_EOL;
+$produto1-&gt;aplicarDesconto(10);
+$produto1-&gt;exibir();
+
+?&gt;</code></pre>
+        </div>
+    </section>
+<section id="revisao-java">
+    <h2>Revisão paralela em Java</h2>
+    <p>
+        Essa página foi criada por IA a partir da revisão em Java. 
+        <a href="revisao1-java.html">Acessar revisão I em Java</a>
+    </p>
+</section>
+    <!-- Lista de exercícios -->
+    <section id="exercicios">
+        <h2>7. Lista de exercícios de revisão (PHP)</h2>
+        <p>
+            Os exercícios abaixo misturam mais de um tema
+            (entrada/saída, decisões, loops, arrays e objetos em PHP) em situações próximas às da prova.
+        </p>
+
+        <!-- Ex 1 -->
+        <h3>Exercício 1 – Média da turma</h3>
+        <p>
+            Crie um script em PHP que:
+        </p>
+        <ul>
+            <li>leia do terminal a quantidade de alunos de uma turma;</li>
+            <li>use um array para armazenar as notas (números reais);</li>
+            <li>calcule a média e mostre quantos alunos ficaram:
+                abaixo de 6, entre 6 e 7.9, e 8 ou mais.</li>
+        </ul>
+        <button class="btn-resposta" data-target="resp-ex1">Mostrar/ocultar sugestão de solução</button>
+        <div id="resp-ex1" class="resposta">
+            <pre><code class="language-php">&lt;?php
+
+echo "Quantidade de alunos: ";
+$n = (int) trim(fgets(STDIN));
+
+$notas = [];
+
+for ($i = 0; $i &lt; $n; $i++) {
+    echo "Nota do aluno " . ($i + 1) . ": ";
+    $notas[$i] = (float) trim(fgets(STDIN));
+}
+
+$soma = 0.0;
+$abaixo6 = 0;
+$entre6e79 = 0;
+$acima8 = 0;
+
+foreach ($notas as $nota) {
+    $soma += $nota;
+
+    if ($nota &lt; 6) {
+        $abaixo6++;
+    } elseif ($nota &lt; 8) {
+        $entre6e79++;
+    } else {
+        $acima8++;
+    }
+}
+
+$media = $soma / $n;
+
+echo "Média: $media" . PHP_EOL;
+echo "Abaixo de 6: $abaixo6" . PHP_EOL;
+echo "Entre 6 e 7.9: $entre6e79" . PHP_EOL;
+echo "8 ou mais: $acima8" . PHP_EOL;
+
+?&gt;</code></pre>
+        </div>
+
+        <!-- Ex 2 -->
+        <h3>Exercício 2 – Lanchonete com objetos</h3>
+        <p>
+            Crie uma classe <code>ItemPedido</code> com os atributos <code>nome</code> (string),
+            <code>quantidade</code> (int) e <code>precoUnitario</code> (float).
+            Depois, escreva um script que:
+        </p>
+        <ul>
+            <li>use um array de <code>ItemPedido</code> para armazenar os itens de um pedido;</li>
+            <li>mostre um menu simples para o usuário escolher entre cadastrar novo item, listar itens
+                e ver o total do pedido;</li>
+            <li>encerre quando a opção “0 – sair” for escolhida.</li>
+        </ul>
+        <button class="btn-resposta" data-target="resp-ex2">Mostrar/ocultar sugestão de solução</button>
+        <div id="resp-ex2" class="resposta">
+            <pre><code class="language-php">&lt;?php
+
+class ItemPedido {
+    public string $nome;
+    public int $quantidade;
+    public float $precoUnitario;
+
+    public function calcularTotal(): float {
+        return $this-&gt;quantidade * $this-&gt;precoUnitario;
+    }
+}
+
+$itens = [];
+
+do {
+    echo PHP_EOL;
+    echo "1 - Adicionar item" . PHP_EOL;
+    echo "2 - Listar itens" . PHP_EOL;
+    echo "3 - Ver total" . PHP_EOL;
+    echo "0 - Sair" . PHP_EOL;
+    echo "Escolha: ";
+    $opcao = (int) trim(fgets(STDIN));
+
+    if ($opcao === 1) {
+        $item = new ItemPedido();
+
+        echo "Nome do item: ";
+        $item->nome = trim(fgets(STDIN));
+
+        echo "Quantidade: ";
+        $item->quantidade = (int) trim(fgets(STDIN));
+
+        echo "Preço unitário: ";
+        $item->precoUnitario = (float) trim(fgets(STDIN));
+
+        $itens[] = $item;
+    } elseif ($opcao === 2) {
+        echo PHP_EOL . "=== Itens do pedido ===" . PHP_EOL;
+        foreach ($itens as $indice =&gt; $it) {
+            echo ($indice + 1) . ". {$it->nome} - qtd: {$it->quantidade}"
+                . " - total: R$ " . $it->calcularTotal() . PHP_EOL;
+        }
+    } elseif ($opcao === 3) {
+        $total = 0.0;
+        foreach ($itens as $it) {
+            $total += $it->calcularTotal();
+        }
+        echo "Total do pedido: R$ " . $total . PHP_EOL;
+    }
+
+} while ($opcao !== 0);
+
+?&gt;</code></pre>
+        </div>
+
+        <!-- Ex 3 -->
+        <h3>Exercício 3 – Controle de estudos</h3>
+        <p>
+            Crie uma classe <code>EstudoDia</code> com os atributos <code>dia</code> (string) e
+            <code>minutos</code> (int). Escreva um script que:
+        </p>
+        <ul>
+            <li>use um array de 7 objetos <code>EstudoDia</code> para armazenar o tempo de estudo em cada dia da semana;</li>
+            <li>ao final, mostre o total de minutos e o dia com maior tempo de estudo.</li>
+        </ul>
+        <button class="btn-resposta" data-target="resp-ex3">Mostrar/ocultar sugestão de solução</button>
+        <div id="resp-ex3" class="resposta">
+            <pre><code class="language-php">&lt;?php
+
+class EstudoDia {
+    public string $dia;
+    public int $minutos;
+}
+
+$nomesDias = [
+    "Segunda", "Terça", "Quarta", "Quinta",
+    "Sexta", "Sábado", "Domingo"
+];
+
+$semana = [];
+$total = 0;
+$maisEstudado = null;
+
+for ($i = 0; $i &lt; 7; $i++) {
+    $e = new EstudoDia();
+    $e->dia = $nomesDias[$i];
+
+    echo "Minutos estudados na {$e->dia}: ";
+    $e->minutos = (int) trim(fgets(STDIN));
+
+    $semana[] = $e;
+    $total += $e->minutos;
+
+    if ($maisEstudado === null || $e->minutos &gt; $maisEstudado->minutos) {
+        $maisEstudado = $e;
+    }
+}
+
+echo PHP_EOL . "Total de minutos na semana: $total" . PHP_EOL;
+echo "Dia com mais estudo: {$maisEstudado->dia}"
+    . " ({$maisEstudado->minutos} minutos)" . PHP_EOL;
+
+?&gt;</code></pre>
+        </div>
+
+        <!-- Ex 4 -->
+        <h3>Exercício 4 – Ingressos de cinema</h3>
+        <p>
+            Refaça o exercício de ingressos de cinema usando:
+        </p>
+        <ul>
+            <li>classe <code>IngressoCinema</code> com construtor e atributo <code>valorPago</code> calculado no construtor;</li>
+            <li>array de objetos para armazenar todos os ingressos;</li>
+            <li>ao final, mostr
+            e uma listagem completa de ingressos e o faturamento total.</li>
+        </ul>
+        <button class="btn-resposta" data-target="resp-ex4">Mostrar/ocultar sugestão de solução</button>
+        <div id="resp-ex4" class="resposta">
+            <pre><code class="language-php">&lt;?php
+
+class IngressoCinema {
+    public string $filme;
+    public string $horario;
+    public bool $meiaEntrada;
+    public float $valorPago;
+
+    public function __construct(string $filme, string $horario, bool $meiaEntrada) {
+        $this-&gt;filme = $filme;
+        $this-&gt;horario = $horario;
+        $this-&gt;meiaEntrada = $meiaEntrada;
+        $this-&gt;valorPago = $meiaEntrada ? 15.0 : 30.0;
+    }
+}
+
+$ingressos = [];
+$total = 0.0;
+
+while (true) {
+    echo "Filme (Enter para sair): ";
+    $filme = trim(fgets(STDIN));
+
+    if ($filme === "") {
+        break;
+    }
+
+    echo "Horário (ex: 19:30): ";
+    $horario = trim(fgets(STDIN));
+
+    echo "Meia-entrada? (S/N): ";
+    $resp = trim(fgets(STDIN));
+    $meia = (strtoupper($resp) === "S");
+
+    $ingresso = new IngressoCinema($filme, $horario, $meia);
+    $ingressos[] = $ingresso;
+    $total += $ingresso->valorPago;
+}
+
+echo PHP_EOL . "=== Ingressos vendidos ===" . PHP_EOL;
+foreach ($ingressos as $i =&gt; $ing) {
+    echo ($i + 1) . ". {$ing->filme} ({$ing->horario}) - R$ "
+        . $ing->valorPago . PHP_EOL;
+}
+
+echo "Faturamento total: R$ "
+    . number_format($total, 2, ",", ".") . PHP_EOL;
+
+?&gt;</code></pre>
+        </div>
+
+        <!-- Ex 5 -->
+        <h3>Exercício 5 – Revisão geral OO</h3>
+        <p>
+            Modele uma classe <code>Livro</code> em PHP com os atributos <code>titulo</code>,
+            <code>autor</code> e <code>paginas</code>. Crie:
+        </p>
+        <ul>
+            <li>um construtor que recebe todos os atributos;</li>
+            <li>um método <code>resumir()</code> que imprime uma frase com os dados;</li>
+            <li>um script que lê livros do terminal, guarda em um array de objetos e depois mostra apenas
+                os livros com mais de 300 páginas.</li>
+        </ul>
+        <button class="btn-resposta" data-target="resp-ex5">Mostrar/ocultar sugestão de solução</button>
+        <div id="resp-ex5" class="resposta">
+            <pre><code class="language-php">&lt;?php
+
+class Livro {
+    public string $titulo;
+    public string $autor;
+    public int $paginas;
+
+    public function __construct(string $titulo, string $autor, int $paginas) {
+        $this-&gt;titulo = $titulo;
+        $this-&gt;autor = $autor;
+        $this-&gt;paginas = $paginas;
+    }
+
+    public function resumir(): void {
+        echo $this-&gt;titulo . " - " . $this-&gt;autor
+            . " (" . $this-&gt;paginas . " páginas)" . PHP_EOL;
+    }
+}
+
+$livros = [];
+
+while (true) {
+    echo "Título do livro (fim para encerrar): ";
+    $titulo = trim(fgets(STDIN));
+
+    if (strcasecmp($titulo, "fim") === 0) {
+        break;
+    }
+
+    echo "Autor: ";
+    $autor = trim(fgets(STDIN));
+
+    echo "Número de páginas: ";
+    $paginas = (int) trim(fgets(STDIN));
+
+    $livros[] = new Livro($titulo, $autor, $paginas);
+}
+
+echo PHP_EOL . "Livros com mais de 300 páginas:" . PHP_EOL;
+foreach ($livros as $livro) {
+    if ($livro->paginas &gt; 300) {
+        $livro->resumir();
+    }
+}
+
+?&gt;</code></pre>
+        </div>
+
+        <div class="tip">
+            Se você conseguir resolver esses exercícios com segurança, revisando os conceitos envolvidos,
+            estará bem preparado(a) para a prova.
+        </div>
+    </section>
+
+    <section id="checklist">
+        <h2>8. Checklist rápido antes da prova</h2>
+        <ul>
+            <li>[ ] Sei criar e executar scripts PHP em linha de comando.</li>
+            <li>[ ] Sei ler dados com <code>fgets(STDIN)</code> e converter para <code>int</code> ou <code>float</code>.</li>
+            <li>[ ] Consigo usar <code>if</code>, <code>else</code>, <code>switch</code>, <code>while</code> e <code>for</code> em PHP.</li>
+            <li>[ ] Sei declarar e percorrer <code>array</code> e arrays associativos.</li>
+            <li>[ ] Sei criar classes simples em PHP, com construtor, atributos e métodos.</li>
+            <li>[ ] Entendo a ideia de encapsulamento e uso de <code>public</code> e <code>private</code>.</li>
+        </ul>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>Disciplina de Programação I — Página de revisão para a prova (PHP)</p>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const botoes = document.querySelectorAll('.btn-resposta');
+
+        botoes.forEach(function (botao) {
+            const alvoId = botao.getAttribute('data-target');
+            const alvo = document.getElementById(alvoId);
+            if (!alvo) return;
+
+            botao.addEventListener('click', function () {
+                const visivel = alvo.style.display === 'block';
+                alvo.style.display = visivel ? 'none' : 'block';
+            });
+        });
+    });
+</script>
+</body>
+</html>
