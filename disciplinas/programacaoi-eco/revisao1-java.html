@@ -275,7 +275,7 @@ public class LojaOO {
         <h2>7. Lista de exercícios de revisão</h2>
         <p>
             Os exercícios abaixo têm foco em consolidação. Eles misturam mais de um tema
-            (entrada/saída, decisões, loops, arrays, objetos e PHP) em situações próximas às da prova.
+            (entrada/saída, decisões, loops, arrays, objetos) em situações próximas às da prova.
         </p>
 
         <!-- Ex 1 -->
@@ -471,66 +471,6 @@ public class ControleEstudos {
     }
 }</code></pre>
         </div>
-
-        <!-- Ex 4 -->
-        <h3>Exercício 4 – Ingressos de cinema (PHP)</h3>
-        <p>
-            Em PHP, crie a classe <code>IngressoCinema</code> com os atributos <code>filme</code>,
-            <code>horario</code> e <code>meiaEntrada</code> (boolean). Depois, escreva um script que:
-        </p>
-        <ul>
-            <li>use um loop <code>while</code> para cadastrar ingressos até o usuário enviar um filme vazio;</li>
-            <li>calcule o valor pago em cada ingresso (R$ 30,00 inteiro, R$ 15,00 meia);</li>
-            <li>ao final, exiba quantos ingressos foram vendidos e o total arrecadado.</li>
-        </ul>
-        <button class="btn-resposta" data-target="resp-ex4">Mostrar/ocultar sugestão de solução</button>
-        <div id="resp-ex4" class="resposta">
-            <pre><code class="language-php">&lt;?php
-
-class IngressoCinema {
-    public $filme;
-    public $horario;
-    public $meiaEntrada;
-    public $valorPago;
-
-    public function __construct($filme, $horario, $meiaEntrada) {
-        $this-&gt;filme = $filme;
-        $this-&gt;horario = $horario;
-        $this-&gt;meiaEntrada = $meiaEntrada;
-        $this-&gt;valorPago = $meiaEntrada ? 15.0 : 30.0;
-    }
-}
-
-$ingressos = [];
-$totalFaturado = 0.0;
-
-while (true) {
-    echo "Filme (Enter para sair): ";
-    $filme = trim(fgets(STDIN));
-
-    if ($filme === "") {
-        break;
-    }
-
-    echo "Horário (ex: 19:30): ";
-    $horario = trim(fgets(STDIN));
-
-    echo "Meia-entrada? (S/N): ";
-    $resposta = trim(fgets(STDIN));
-
-    $meia = (strtoupper($resposta) === "S");
-
-    $ingresso = new IngressoCinema($filme, $horario, $meia);
-    $ingressos[] = $ingresso;
-    $totalFaturado += $ingresso-&gt;valorPago;
-}
-
-echo "Total de ingressos: " . count($ingressos) . PHP_EOL;
-echo "Faturamento: R$ " . number_format($totalFaturado, 2, ",", ".") . PHP_EOL;
-
-?&gt;</code></pre>
-        </div>
-
         <!-- Ex 5 -->
         <h3>Exercício 5 – Revisão geral (Java + conceito OO)</h3>
         <p>
@@ -615,7 +555,8 @@ public class BibliotecaRevisao {
             <li>[ ] Consigo usar <code>if</code>, <code>else</code>, <code>switch</code>, <code>while</code> e <code>for</code>.</li>
             <li>[ ] Sei declarar e percorrer <code>arrays</code> e <code>ArrayList</code>.</li>
             <li>[ ] Sei criar classes simples em Java, com atributos e métodos.</li>
-            <li>[ ] Sei criar classes em PHP com construtor e encapsulamento básico.</li>
+            <li>[ ] Sei criar classes com construtor e encapsulamento básico.</li>
+            <li>[ ] Entendo bem o conceito de objetos.</li>
         </ul>
     </section>
 </main>
