@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revisão para a prova I Java – Programação I</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="hero">
+    <div class="container">
+        <p class="eyebrow">Programação I</p>
+        <h1>Revisão para a prova I Java</h1>
+        <p class="subtitle">
+            Fundamentos, estruturas básicas, decisões, loops, arrays, ArrayLists e orientação a objetos (Java)
+        </p>
+        <a class="back-link"
+           href="https://wilcilene.github.io/estudos/disciplinas/programacaoi-eco/index.html">
+            ← Voltar para página principal
+        </a>
+    </div>
+</header>
+
+<main class="container">
+
+    <section id="como-estudar">
+        <h2>1. Como usar esta página</h2>
+        <p>
+            Esta página reúne uma revisão rápida dos conceitos da disciplina e uma lista de exercícios
+            em nível intermediário, parecidos com situações que podem aparecer na prova.
+        </p>
+        <p>
+            A ideia é que você releia cada tópico, revise os exemplos e depois tente resolver os exercícios
+            <strong>sem olhar a resposta</strong>. Se tiver dificuldade peça ajuda ou clique no mostrar/ocultar para conferir.
+            Mas tente resolver antes de olhar, pois olhar a resposta primeiro condiciona sua solução. 
+            Seja criativo e exercite seupensamento lógico.
+        </p>
+
+        <div class="tip">
+            <strong>Dica para estudar:</strong> tente sempre escrever o código em um editor (VS Code, por exemplo),
+            executar, testar com valores diferentes.
+        </div>
+    </section>
+
+    <!-- Fundamentos -->
+    <section id="fundamentos">
+        <h2>2. Fundamentos da programação</h2>
+        <p>
+            Nos primeiros encontros, vimos a ideia de algoritmo, variáveis, tipos básicos, operadores
+            e estrutura geral de um programa em Java.
+        </p>
+
+        <div class="concept-grid">
+            <div class="card">
+                <h3>Algoritmo</h3>
+                <p>Conjunto de passos para resolver um problema.</p>
+                <pre><code>// Exemplo simples em pseudocódigo
+ler A, B
+soma ← A + B
+escrever soma</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>Programa Java mínimo</h3>
+                <pre><code class="language-java">public class Ola {
+
+    public static void main(String[] args) {
+        System.out.println("Olá, mundo!");
+    }
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>Tipos básicos</h3>
+                <ul>
+                    <li><code>int</code> – inteiros</li>
+                    <li><code>double</code> – reais</li>
+                    <li><code>boolean</code> – verdadeiro/falso</li>
+                    <li><code>String</code> – textos</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estruturas básicas -->
+    <section id="estruturas-basicas">
+        <h2>3. Estruturas básicas em Java</h2>
+        <p>
+            Neste tópico consolidamos entrada e saída de dados com <code>Scanner</code>, operadores aritméticos e lógicos
+            e as estruturas de controle <code>if</code>, <code>while</code> e <code>for</code>.
+        </p>
+
+        <div class="example-block">
+            <h3>Exemplo – Lendo dados e tomando decisão</h3>
+            <pre><code class="language-java">import java.util.Scanner;
+
+public class MaiorIdade {
+
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+
+        System.out.print("Digite sua idade: ");
+        int idade = entrada.nextInt();
+
+        if (idade >= 18) {
+            System.out.println("Maior de idade.");
+        } else {
+            System.out.println("Menor de idade.");
+        }
+
+        entrada.close();
+    }
+}</code></pre>
+        </div>
+
+        <div class="tip">
+            Lembre que o índice do <code>for</code> geralmente começa em 0, e o <code>while</code> repete
+            “enquanto” a condição for verdadeira.
+        </div>
+    </section>
+
+    <!-- Decisões e loops com objetos -->
+    <section id="decisoes-loops">
+        <h2>4. Decisões e loops com objetos</h2>
+        <p>
+            Avançamos nos <code>if</code>, <code>switch</code>, <code>while</code>, <code>do-while</code> e
+            <code>for</code>, agora combinando essas estruturas com objetos e arrays de objetos.
+        </p>
+
+        <div class="example-block">
+            <h3>Exemplo – Menu simples com objeto</h3>
+            <pre><code class="language-java">class Conta {
+    String titular;
+    double saldo;
+
+    void depositar(double valor) {
+        saldo += valor;
+    }
+}
+
+public class BancoMenu {
+
+    public static void main(String[] args) {
+        java.util.Scanner entrada = new java.util.Scanner(System.in);
+
+        Conta conta = new Conta();
+        conta.titular = "Ana";
+        conta.saldo = 0.0;
+
+        int opcao;
+        do {
+            System.out.println("1 - Depositar");
+            System.out.println("2 - Ver saldo");
+            System.out.println("0 - Sair");
+            System.out.print("Opção: ");
+            opcao = entrada.nextInt();
+
+            if (opcao == 1) {
+                System.out.print("Valor: ");
+                double v = entrada.nextDouble();
+                conta.depositar(v);
+            } else if (opcao == 2) {
+                System.out.println("Saldo: " + conta.saldo);
+            }
+
+        } while (opcao != 0);
+
+        entrada.close();
+    }
+}</code></pre>
+        </div>
+    </section>
+
+    <!-- Arrays e ArrayLists -->
+    <section id="estruturas-dados">
+        <h2>5. Arrays e ArrayLists</h2>
+        <p>
+            Em seguida, estudamos estruturas de dados básicas: <code>arrays</code> e <code>ArrayList</code>.
+            Elas permitem armazenar vários valores (ou objetos) em uma única variável.
+        </p>
+
+        <div class="concept-grid">
+            <div class="card">
+                <h3>Array de inteiros</h3>
+                <pre><code class="language-java">int[] numeros = new int[3];
+numeros[0] = 10;
+numeros[1] = 20;
+numeros[2] = 30;
+
+for (int i = 0; i < numeros.length; i++) {
+    System.out.println(numeros[i]);
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>ArrayList de objetos</h3>
+                <pre><code class="language-java">import java.util.ArrayList;
+
+class Tarefa {
+    String descricao;
+}
+
+public class Lista {
+
+    public static void main(String[] args) {
+        ArrayList&lt;Tarefa&gt; tarefas = new ArrayList&lt;&gt;();
+
+        Tarefa t = new Tarefa();
+        t.descricao = "Estudar para a prova";
+        tarefas.add(t);
+
+        System.out.println("Total: " + tarefas.size());
+    }
+}</code></pre>
+            </div>
+        </div>
+    </section>
+  
+    <section id="oo-java">
+        <h2>6. Orientação a objetos em Java (Semanas 11–12)</h2>
+        <p>
+            Estudamos também os conceitos de classe, objeto, encapsulamento e construtor em Java.
+            A ideia é criar moldes de objetos com dados e comportamentos bem definidos.
+        </p>
+
+        <div class="example-block">
+            <h3>Exemplo – Classe com construtor e encapsulamento em Java</h3>
+            <pre><code class="language-java">class Produto {
+    private String nome;
+    private double preco;
+
+    // Construtor
+    public Produto(String nome, double preco) {
+        this.nome = nome;
+        this.preco = preco;
+    }
+
+    // Método que aplica desconto, protegendo a regra de negócio
+    public void aplicarDesconto(double percentual) {
+        if (percentual > 0 && percentual <= 100) {
+            double desconto = preco * (percentual / 100);
+            preco -= desconto;
+        }
+    }
+
+    public void exibir() {
+        System.out.println("Produto: " + nome);
+        System.out.println("Preço: R$ " + preco);
+    }
+}
+
+public class LojaOO {
+
+    public static void main(String[] args) {
+        Produto produto1 = new Produto("Mouse", 100.00);
+
+        produto1.exibir();
+        System.out.println("----------------");
+        produto1.aplicarDesconto(10);
+        produto1.exibir();
+    }
+}</code></pre>
+        </div>
+    </section>
+
+  <section id="revisao-php">
+    <h2>Revisão extra em PHP</h2>
+    <p>
+        <a href="revisao1-php.html">Acessar revisão1 em PHP</a>
+    </p>
+</section>
+  
+    <!-- Lista de exercícios -->
+    <section id="exercicios">
+        <h2>7. Lista de exercícios de revisão</h2>
+        <p>
+            Os exercícios abaixo têm foco em consolidação. Eles misturam mais de um tema
+            (entrada/saída, decisões, loops, arrays, objetos e PHP) em situações próximas às da prova.
+        </p>
+
+        <!-- Ex 1 -->
+        <h3>Exercício 1 – Média da turma (Java)</h3>
+        <p>
+            Crie um programa em Java que:
+        </p>
+        <ul>
+            <li>leia do teclado a quantidade de alunos de uma turma;</li>
+            <li>use um <code>array</code> de <code>double</code> para armazenar as notas;</li>
+            <li>calcule a média e mostre quantos alunos ficaram:
+                abaixo de 6, entre 6 e 7.9, e 8 ou mais.</li>
+        </ul>
+        <button class="btn-resposta" data-target="resp-ex1">Mostrar/ocultar sugestão de solução</button>
+        <div id="resp-ex1" class="resposta">
+            <pre><code class="language-java">import java.util.Scanner;
+
+public class MediaTurma {
+
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+
+        System.out.print("Quantidade de alunos: ");
+        int n = entrada.nextInt();
+
+        double[] notas = new double[n];
+
+        for (int i = 0; i &lt; n; i++) {
+            System.out.print("Nota do aluno " + (i + 1) + ": ");
+            notas[i] = entrada.nextDouble();
+        }
+
+        double soma = 0.0;
+        int abaixo6 = 0, entre6e79 = 0, acima8 = 0;
+
+        for (int i = 0; i &lt; n; i++) {
+            soma += notas[i];
+
+            if (notas[i] &lt; 6) {
+                abaixo6++;
+            } else if (notas[i] &lt; 8) {
+                entre6e79++;
+            } else {
+                acima8++;
+            }
+        }
+
+        double media = soma / n;
+
+        System.out.println("Média: " + media);
+        System.out.println("Abaixo de 6: " + abaixo6);
+        System.out.println("Entre 6 e 7.9: " + entre6e79);
+        System.out.println("8 ou mais: " + acima8);
+
+        entrada.close();
+    }
+}</code></pre>
+        </div>
+
+        <!-- Ex 2 -->
+        <h3>Exercício 2 – Lanchonete com objetos (Java)</h3>
+        <p>
+            Crie uma classe <code>ItemPedido</code> com os atributos <code>nome</code> (String),
+            <code>quantidade</code> (int) e <code>precoUnitario</code> (double).
+            Depois, faça um programa que:
+        </p>
+        <ul>
+            <li>use um <code>ArrayList&lt;ItemPedido&gt;</code> para armazenar os itens de um pedido;</li>
+            <li>mostre um menu simples para o usuário escolher entre cadastrar novo item, listar itens
+                e ver o total do pedido;</li>
+            <li>encerre quando a opção “0 – sair” for escolhida.</li>
+        </ul>
+        <button class="btn-resposta" data-target="resp-ex2">Mostrar/ocultar sugestão de solução</button>
+        <div id="resp-ex2" class="resposta">
+            <pre><code class="language-java">import java.util.ArrayList;
+import java.util.Scanner;
+
+class ItemPedido {
+    String nome;
+    int quantidade;
+    double precoUnitario;
+
+    double calcularTotal() {
+        return quantidade * precoUnitario;
+    }
+}
+
+public class LanchoneteRevisao {
+
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+        ArrayList&lt;ItemPedido&gt; itens = new ArrayList&lt;&gt;();
+
+        int opcao;
+        do {
+            System.out.println("\n1 - Adicionar item");
+            System.out.println("2 - Listar itens");
+            System.out.println("3 - Ver total");
+            System.out.println("0 - Sair");
+            System.out.print("Escolha: ");
+            opcao = entrada.nextInt();
+            entrada.nextLine();
+
+            if (opcao == 1) {
+                ItemPedido item = new ItemPedido();
+
+                System.out.print("Nome do item: ");
+                item.nome = entrada.nextLine();
+
+                System.out.print("Quantidade: ");
+                item.quantidade = entrada.nextInt();
+
+                System.out.print("Preço unitário: ");
+                item.precoUnitario = entrada.nextDouble();
+                entrada.nextLine();
+
+                itens.add(item);
+            } else if (opcao == 2) {
+                System.out.println("\n=== Itens do pedido ===");
+                for (int i = 0; i &lt; itens.size(); i++) {
+                    ItemPedido it = itens.get(i);
+                    System.out.println((i + 1) + ". " + it.nome
+                            + " - qtd: " + it.quantidade
+                            + " - total: R$ " + it.calcularTotal());
+                }
+            } else if (opcao == 3) {
+                double total = 0.0;
+                for (ItemPedido it : itens) {
+                    total += it.calcularTotal();
+                }
+                System.out.println("Total do pedido: R$ " + total);
+            }
+
+        } while (opcao != 0);
+
+        entrada.close();
+    }
+}</code></pre>
+        </div>
+
+        <!-- Ex 3 -->
+        <h3>Exercício 3 – Controle de estudos (Java)</h3>
+        <p>
+            Crie uma classe <code>EstudoDia</code> com os atributos <code>dia</code> (String) e
+            <code>minutos</code> (int). Escreva um programa que:
+        </p>
+        <ul>
+            <li>use um array de 7 posições para armazenar o tempo de estudo em cada dia da semana;</li>
+            <li>ao final, mostre o total de minutos e o dia com maior tempo de estudo.</li>
+        </ul>
+        <button class="btn-resposta" data-target="resp-ex3">Mostrar/ocultar sugestão de solução</button>
+        <div id="resp-ex3" class="resposta">
+            <pre><code class="language-java">import java.util.Scanner;
+
+class EstudoDia {
+    String dia;
+    int minutos;
+}
+
+public class ControleEstudos {
+
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+        EstudoDia[] semana = new EstudoDia[7];
+
+        String[] nomesDias = {
+            "Segunda", "Terça", "Quarta", "Quinta",
+            "Sexta", "Sábado", "Domingo"
+        };
+
+        int total = 0;
+        EstudoDia maisEstudado = null;
+
+        for (int i = 0; i &lt; semana.length; i++) {
+            semana[i] = new EstudoDia();
+            semana[i].dia = nomesDias[i];
+
+            System.out.print("Minutos estudados na " + nomesDias[i] + ": ");
+            semana[i].minutos = entrada.nextInt();
+
+            total += semana[i].minutos;
+
+            if (maisEstudado == null || semana[i].minutos &gt; maisEstudado.minutos) {
+                maisEstudado = semana[i];
+            }
+        }
+
+        System.out.println("\nTotal de minutos na semana: " + total);
+        System.out.println("Dia com mais estudo: " + maisEstudado.dia
+                + " (" + maisEstudado.minutos + " minutos)");
+
+        entrada.close();
+    }
+}</code></pre>
+        </div>
+
+        <!-- Ex 4 -->
+        <h3>Exercício 4 – Ingressos de cinema (PHP)</h3>
+        <p>
+            Em PHP, crie a classe <code>IngressoCinema</code> com os atributos <code>filme</code>,
+            <code>horario</code> e <code>meiaEntrada</code> (boolean). Depois, escreva um script que:
+        </p>
+        <ul>
+            <li>use um loop <code>while</code> para cadastrar ingressos até o usuário enviar um filme vazio;</li>
+            <li>calcule o valor pago em cada ingresso (R$ 30,00 inteiro, R$ 15,00 meia);</li>
+            <li>ao final, exiba quantos ingressos foram vendidos e o total arrecadado.</li>
+        </ul>
+        <button class="btn-resposta" data-target="resp-ex4">Mostrar/ocultar sugestão de solução</button>
+        <div id="resp-ex4" class="resposta">
+            <pre><code class="language-php">&lt;?php
+
+class IngressoCinema {
+    public $filme;
+    public $horario;
+    public $meiaEntrada;
+    public $valorPago;
+
+    public function __construct($filme, $horario, $meiaEntrada) {
+        $this-&gt;filme = $filme;
+        $this-&gt;horario = $horario;
+        $this-&gt;meiaEntrada = $meiaEntrada;
+        $this-&gt;valorPago = $meiaEntrada ? 15.0 : 30.0;
+    }
+}
+
+$ingressos = [];
+$totalFaturado = 0.0;
+
+while (true) {
+    echo "Filme (Enter para sair): ";
+    $filme = trim(fgets(STDIN));
+
+    if ($filme === "") {
+        break;
+    }
+
+    echo "Horário (ex: 19:30): ";
+    $horario = trim(fgets(STDIN));
+
+    echo "Meia-entrada? (S/N): ";
+    $resposta = trim(fgets(STDIN));
+
+    $meia = (strtoupper($resposta) === "S");
+
+    $ingresso = new IngressoCinema($filme, $horario, $meia);
+    $ingressos[] = $ingresso;
+    $totalFaturado += $ingresso-&gt;valorPago;
+}
+
+echo "Total de ingressos: " . count($ingressos) . PHP_EOL;
+echo "Faturamento: R$ " . number_format($totalFaturado, 2, ",", ".") . PHP_EOL;
+
+?&gt;</code></pre>
+        </div>
+
+        <!-- Ex 5 -->
+        <h3>Exercício 5 – Revisão geral (Java + conceito OO)</h3>
+        <p>
+            Em Java, modele uma classe <code>Livro</code> com os atributos <code>titulo</code>,
+            <code>autor</code> e <code>paginas</code>. Crie:
+        </p>
+        <ul>
+            <li>um construtor que recebe todos os atributos;</li>
+            <li>um método <code>resumir()</code> que imprime uma frase com os dados;</li>
+            <li>um programa com um <code>ArrayList&lt;Livro&gt;</code> que:
+                lê livros do teclado, guarda todos e depois mostra apenas os livros com mais de 300 páginas.</li>
+        </ul>
+        <button class="btn-resposta" data-target="resp-ex5">Mostrar/ocultar sugestão de solução</button>
+        <div id="resp-ex5" class="resposta">
+            <pre><code class="language-java">import java.util.ArrayList;
+import java.util.Scanner;
+
+class Livro {
+    String titulo;
+    String autor;
+    int paginas;
+
+    Livro(String titulo, String autor, int paginas) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.paginas = paginas;
+    }
+
+    void resumir() {
+        System.out.println(titulo + " - " + autor
+                + " (" + paginas + " páginas)");
+    }
+}
+
+public class BibliotecaRevisao {
+
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+        ArrayList&lt;Livro&gt; livros = new ArrayList&lt;&gt;();
+
+        while (true) {
+            System.out.print("Título do livro (fim para encerrar): ");
+            String titulo = entrada.nextLine();
+
+            if (titulo.equalsIgnoreCase("fim")) {
+                break;
+            }
+
+            System.out.print("Autor: ");
+            String autor = entrada.nextLine();
+
+            System.out.print("Número de páginas: ");
+            int paginas = entrada.nextInt();
+            entrada.nextLine();
+
+            livros.add(new Livro(titulo, autor, paginas));
+        }
+
+        System.out.println("\nLivros com mais de 300 páginas:");
+        for (Livro l : livros) {
+            if (l.paginas &gt; 300) {
+                l.resumir();
+            }
+        }
+
+        entrada.close();
+    }
+}</code></pre>
+        </div>
+
+        <div class="tip">
+            Se você conseguir resolver esses exercícios com segurança, revisando os conceitos envolvidos,
+            estará bem preparado(a) para a prova.
+        </div>
+    </section>
+
+    <section id="checklist">
+        <h2>8. Checklist rápido antes da prova</h2>
+        <ul>
+            <li>[ ] Sei criar um programa Java com <code>main</code> e compilar/executar.</li>
+            <li>[ ] Sei usar <code>Scanner</code> para ler dados do teclado.</li>
+            <li>[ ] Consigo usar <code>if</code>, <code>else</code>, <code>switch</code>, <code>while</code> e <code>for</code>.</li>
+            <li>[ ] Sei declarar e percorrer <code>arrays</code> e <code>ArrayList</code>.</li>
+            <li>[ ] Sei criar classes simples em Java, com atributos e métodos.</li>
+            <li>[ ] Sei criar classes em PHP com construtor e encapsulamento básico.</li>
+        </ul>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>Disciplina de Programação I — Página de revisão para a prova</p>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const botoes = document.querySelectorAll('.btn-resposta');
+
+        botoes.forEach(function (botao) {
+            const alvoId = botao.getAttribute('data-target');
+            const alvo = document.getElementById(alvoId);
+            if (!alvo) return;
+
+            botao.addEventListener('click', function () {
+                const visivel = alvo.style.display === 'block';
+                alvo.style.display = visivel ? 'none' : 'block';
+            });
+        });
+    });
+</script>
+</body>
+</html>
