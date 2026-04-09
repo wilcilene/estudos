@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Protótipo principal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="ihc.css">
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="index.html"><span>←</span> Voltar para a página da disciplina</a>
+
+    <header>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Projeto · Prototipagem
+      </div>
+      <h1>Protótipo principal</h1>
+      <p>
+        Neste tópico, vamos consolidar as principais telas e fluxos do sistema em um protótipo mais completo,
+        coerente e navegável. A ideia não é apenas “desenhar telas bonitas”, mas representar o funcionamento
+        da solução com clareza suficiente para comunicar decisões de interface, testar tarefas importantes
+        e revisar problemas antes da implementação.
+      </p>
+    </header>
+
+    <main>
+      <article class="content-card">
+        <section>
+          <h2 class="section-title">O que é o protótipo principal</h2>
+          <p>
+            O protótipo principal é a versão mais representativa da proposta de interface dentro do projeto.
+            Ele reúne as telas centrais, as conexões entre elas e as principais interações que o usuário
+            precisa realizar para cumprir objetivos reais, como navegar, preencher dados, confirmar ações
+            ou consultar informações.
+          </p>
+          <p>
+            Em geral, ele é mais detalhado do que wireframes iniciais, porque já incorpora decisões sobre
+            layout, componentes, rotulação, hierarquia e comportamento da interface. Mesmo assim, ainda não
+            é o sistema implementado: trata-se de uma simulação planejada para validar o design.
+          </p>
+
+          <div class="example-box">
+            <div class="example-label">Exemplo</div>
+            Em um sistema acadêmico, o protótipo principal pode incluir login, página inicial, consulta de
+            disciplinas, envio de atividade e confirmação de entrega, formando um fluxo coerente e testável.
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">Por que ele é importante</h2>
+          <p>
+            Criar o protótipo principal ajuda a verificar se a solução realmente funciona como experiência,
+            e não apenas como conjunto de telas isoladas. Ele permite perceber problemas de navegação,
+            inconsistências visuais, excesso de cliques, rótulos confusos e lacunas no fluxo antes que o
+            projeto avance para o desenvolvimento.
+          </p>
+          <p>
+            Também é uma forma eficiente de comunicação entre estudantes, professores, equipe e possíveis
+            usuários, porque torna visível o que antes estava apenas em ideias, anotações ou wireframes
+            desconectados.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="section-title">Diferença entre wireframe, mockup e protótipo principal</h2>
+          <p>
+            O wireframe organiza a estrutura da tela. O mockup apresenta a aparência visual com mais
+            fidelidade. Já o protótipo principal combina organização visual e interação para simular o uso
+            do sistema em tarefas relevantes.
+          </p>
+          <ul>
+            <li><span class="highlight">Wireframe:</span> estrutura, disposição e hierarquia.</li>
+            <li><span class="highlight">Mockup:</span> aparência visual estática.</li>
+            <li><span class="highlight">Protótipo principal:</span> conjunto navegável de telas com fluxo e interação.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="section-title">O que deve entrar no protótipo principal</h2>
+          <p>
+            Nem toda funcionalidade do sistema precisa estar no protótipo principal. O foco deve recair
+            nas partes mais importantes para compreender a solução, demonstrar a proposta e testar o uso.
+          </p>
+          <ul>
+            <li>Tela inicial ou ponto de entrada do sistema.</li>
+            <li>Fluxo principal da tarefa mais importante.</li>
+            <li>Telas secundárias necessárias para completar esse fluxo.</li>
+            <li>Elementos de navegação consistentes entre as telas.</li>
+            <li>Mensagens de retorno, confirmação, erro ou conclusão.</li>
+            <li>Estados relevantes, como lista vazia, campo obrigatório ou ação concluída.</li>
+          </ul>
+
+          <div class="activity-box">
+            <div class="activity-title">Regra prática</div>
+            Se uma tela não ajuda a explicar a lógica principal do sistema nem participa de um fluxo importante,
+            ela provavelmente não precisa estar na primeira versão do protótipo principal.
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">Como selecionar as telas principais</h2>
+          <p>
+            Uma boa seleção começa pela pergunta: quais são as tarefas mais importantes do usuário? A partir
+            dela, o grupo escolhe os fluxos essenciais e identifica quais telas são indispensáveis para que
+            essas tarefas possam ser iniciadas, executadas e concluídas com clareza.
+          </p>
+          <ol>
+            <li>Defina o objetivo principal do sistema.</li>
+            <li>Liste as ações mais importantes do usuário.</li>
+            <li>Escolha os fluxos que melhor representam a proposta do projeto.</li>
+            <li>Mapeie início, meio e fim de cada fluxo.</li>
+            <li>Elimine telas redundantes ou pouco relevantes.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2 class="section-title">Construção do fluxo</h2>
+          <p>
+            O protótipo principal precisa ser pensado como percurso. Isso significa que cada tela deve ter
+            relação clara com a anterior e com a próxima, evitando “saltos” difíceis de entender. Quando
+            uma pessoa usa o protótipo, ela deve conseguir perceber o que fazer, para onde ir e qual foi o
+            resultado de sua ação.
+          </p>
+          <p>
+            Um bom fluxo costuma ser simples, previsível e consistente. Botões semelhantes devem agir de
+            forma semelhante, nomes de ações devem manter o mesmo padrão e a direção da navegação deve ser
+            fácil de acompanhar.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="section-title">Boas práticas de prototipagem</h2>
+          <ul>
+            <li>Defina claramente o que o protótipo precisa demonstrar.</li>
+            <li>Trabalhe com conteúdo plausível, evitando excesso de lorem ipsum.</li>
+            <li>Mantenha consistência visual entre componentes, espaçamentos e nomenclaturas.</li>
+            <li>Prototipe primeiro as tarefas centrais e depois refine detalhes.</li>
+            <li>Use interações que façam sentido para o teste, sem exagerar em animações.</li>
+            <li>Inclua feedback de sistema, como sucesso, erro, carregamento ou confirmação.</li>
+            <li>Revise o protótipo navegando como se fosse o usuário final.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="section-title">Erros comuns</h2>
+          <ul>
+            <li>Montar telas bonitas, mas sem fluxo coerente entre elas.</li>
+            <li>Adicionar muitas funcionalidades irrelevantes e perder foco no essencial.</li>
+            <li>Ignorar estados de erro, vazio ou confirmação.</li>
+            <li>Usar rótulos diferentes para a mesma ação em telas distintas.</li>
+            <li>Criar protótipos difíceis de testar porque faltam conexões entre telas.</li>
+            <li>Priorizar animação e efeito visual em vez de clareza de uso.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="section-title">Ferramentas e organização</h2>
+          <p>
+            Ferramentas como Figma facilitam a criação do protótipo principal porque permitem organizar
+            componentes, reutilizar elementos, criar conexões entre frames e compartilhar a navegação com
+            colegas e avaliadores.
+          </p>
+          <p>
+            Para manter o trabalho organizado, vale estruturar as telas por fluxo, nomear claramente os
+            frames e reaproveitar componentes como menus, botões, cabeçalhos e formulários. Isso melhora
+            a consistência e reduz retrabalho.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="section-title">Roteiro de estudo</h2>
+          <div class="activity-box">
+            <div class="activity-title">Etapa 1 · Entender o objetivo do protótipo</div>
+            <p>
+              Antes de construir qualquer tela, é importante definir o que o protótipo precisa demonstrar.
+              Neste tópico, pense no problema do sistema, nas tarefas principais do usuário e no que precisa
+              estar visível para que a solução seja compreendida.
+            </p>
+          </div>
+
+          <div class="activity-box">
+            <div class="activity-title">Etapa 2 · Selecionar e organizar as telas principais</div>
+            <p>
+              Depois, identifique quais telas representam melhor o núcleo do sistema. O ideal é incluir
+              somente as interfaces necessárias para mostrar o caminho principal de uso, evitando excesso
+              de páginas pouco relevantes ou repetitivas.
+            </p>
+          </div>
+
+          <div class="activity-box">
+            <div class="activity-title">Etapa 3 · Conectar, revisar e refinar</div>
+            <p>
+              Na etapa final, conecte as telas, revise os caminhos de navegação e observe se a experiência
+              está clara. Releia o fluxo como se você fosse o usuário e procure pontos de dúvida, repetição,
+              inconsistência ou falta de feedback.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">Exemplo de estrutura mínima</h2>
+          <p>
+            Abaixo está um exemplo simples de conjunto de telas que já pode formar um protótipo principal,
+            dependendo do projeto:
+          </p>
+          <ul>
+            <li>Tela inicial.</li>
+            <li>Tela de login ou acesso.</li>
+            <li>Tela principal com conteúdo ou funcionalidades centrais.</li>
+            <li>Tela de execução da tarefa principal.</li>
+            <li>Tela de confirmação ou resultado.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="section-title">Checklist de revisão</h2>
+          <ul>
+            <li>As telas representam o núcleo do sistema?</li>
+            <li>O fluxo principal pode ser percorrido sem ajuda externa?</li>
+            <li>Os rótulos estão claros e consistentes?</li>
+            <li>Há feedback para ações importantes?</li>
+            <li>Os componentes visuais seguem um padrão?</li>
+            <li>O protótipo comunica bem a proposta mesmo sem explicação oral?</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="section-title">Síntese</h2>
+          <p>
+            O protótipo principal é uma etapa de consolidação do projeto. Ele organiza as telas mais
+            importantes, evidencia a lógica da interface e permite verificar se a solução faz sentido
+            para quem vai usá-la. Quando bem construído, ele reduz incertezas, melhora a comunicação do
+            projeto e prepara o caminho para avaliações e implementação.
+          </p>
+        </section>
+      </article>
+
+      <aside class="side-card">
+        <section>
+          <h3 class="side-section-title">Tempo de estudo</h3>
+          <p>Material planejado para cerca de 2 horas de leitura, análise e revisão do próprio projeto.</p>
+        </section>
+
+        <section>
+          <h3 class="side-section-title">Palavras-chave</h3>
+          <div class="tag-list">
+            <span class="tag">protótipo</span>
+            <span class="tag">fluxo</span>
+            <span class="tag">Figma</span>
+            <span class="tag">interface</span>
+            <span class="tag">consistência</span>
+            <span class="tag">teste</span>
+          </div>
+        </section>
+
+        <section>
+          <h3 class="side-section-title">Foque em</h3>
+          <ul class="resources-list">
+            <li>Escolher as telas realmente centrais.</li>
+            <li>Garantir coerência entre início, ação e resultado.</li>
+            <li>Manter padrão visual e textual.</li>
+            <li>Representar feedbacks importantes do sistema.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3 class="side-section-title">Materiais indicados</h3>
+          <ul class="resources-list">
+            <li><a href="https://help.figma.com/hc/en-us/articles/360040314193-Guide-to-prototyping-in-Figma" target="_blank" rel="noopener noreferrer">Guia de prototipagem no Figma</a></li>
+            <li><a href="https://www.figma.com/best-practices/five-ways-to-improve-your-prototyping-workflow/" target="_blank" rel="noopener noreferrer">Boas práticas de workflow em prototipagem</a></li>
+            <li><a href="https://www.softdesign.com.br/blog/prototipo-baixa-e-alta-fidelidade/" target="_blank" rel="noopener noreferrer">Protótipos de baixa e alta fidelidade</a></li>
+          </ul>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <footer>
+    <p>
+      Página de apoio da disciplina de IHC - IFC SBS
+    </p>
+  </footer>
+</body>
+</html>
