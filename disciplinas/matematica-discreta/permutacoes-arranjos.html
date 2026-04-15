@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Permutações e Arranjos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- MathJax para fórmulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- CSS geral da disciplina -->
+    <link rel="stylesheet" href="md-estilo.css">
+
+</head>
+<body>
+<div class="container">
+    <h1>Permutações e Arranjos<br>
+        <span style="font-size:0.8em;">Fórmulas e problemas computacionais</span>
+    </h1>
+
+    <p><strong>Disciplina:</strong> Matemática Discreta – Engenharia da Computação</p>
+    <p>
+        Esta página foi planejada para servir como apoio durante a aula e também como material de estudo 
+        para quem não estiver presente.
+    </p>
+
+    <div class="aula">
+        <h2>1. Ideia geral do tópico</h2>
+        <div class="objetivos">
+            <strong>Objetivos:</strong> compreender o que são permutações e arranjos, interpretar suas fórmulas,
+            diferenciar seus usos e aplicar esses conceitos em problemas relacionados à computação.
+        </div>
+
+        <p>
+            Em muitos problemas, não basta saber quais elementos foram escolhidos:
+            também precisamos saber <strong>em que ordem</strong> eles aparecem.
+        </p>
+
+        <p>
+            É justamente nesse tipo de situação que entram as permutações e os arranjos.
+        </p>
+
+        <div class="exemplo">
+            <h3>Visão inicial</h3>
+            <ul>
+                <li><strong>Permutação:</strong> usamos todos os elementos e a ordem importa.</li>
+                <li><strong>Arranjo:</strong> usamos apenas parte dos elementos e a ordem importa.</li>
+            </ul>
+        </div>
+
+        <figure class="imagem-bloco">
+            <img src="media/IMAGEM-VISAO-GERAL-PERMUTACOES-ARRANJOS.png"
+                 alt="Imagem comparando permutação e arranjo"
+                 loading="lazy">
+            <figcaption>Imagem gerada pelo chatGPT</figcaption>
+        </figure>
+    </div>
+
+    <div class="aula">
+        <h2>2. Fatorial</h2>
+
+        <p>
+            Antes de trabalhar com permutações e arranjos, precisamos revisar o fatorial,
+            porque ele aparecerá novamente nas fórmulas.
+        </p>
+
+        <p>\[
+            n! = n \cdot (n-1) \cdot (n-2) \cdots 2 \cdot 1
+        \]</p>
+
+        <p>\[
+            0! = 1
+        \]</p>
+
+        <div class="exemplo">
+            <h3>Exemplos de cálculo</h3>
+            <p>\[
+                3! = 3 \cdot 2 \cdot 1 = 6
+            \]</p>
+            <p>\[
+                4! = 4 \cdot 3 \cdot 2 \cdot 1 = 24
+            \]</p>
+            <p>\[
+                5! = 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1 = 120
+            \]</p>
+        </div>
+
+        <div class="algoritmo">
+<pre><code>import math
+
+for n in range(6):
+    print(f"{n}! = {math.factorial(n)}")</code></pre>
+        </div>
+
+        <div class="codigo-observacao">
+            <p>
+                Esse exemplo usa a função <code>math.factorial()</code>, que calcula o fatorial de um número em Python.
+                Você também pode calcular pelo passo a passo dos exemplos de algoritmo das aulas anteriores.
+            </p>
+        </div>
+
+        <figure class="imagem-bloco">
+            <img src="media/IMAGEM-FATORIAL-PERMUTACOES.png"
+                 alt="Imagem ilustrando o conceito de fatorial com escolhas em sequência"
+                 loading="lazy">
+            <figcaption>Imagem gerada pelo chatGPT</figcaption>
+        </figure>
+    </div>
+
+    <div class="aula">
+        <h2>3. Permutação simples</h2>
+
+        <p>
+            A permutação simples é usada quando temos \(n\) elementos distintos
+            e queremos organizar <strong>todos eles</strong>, considerando a ordem.
+        </p>
+
+        <p>\[
+            P_n = n!
+        \]</p>
+
+        <div class="exemplo">
+            <h3>Exemplo 1 – Letras A, B e C</h3>
+            <p>
+                Quantas palavras diferentes podemos formar usando as letras A, B e C?
+            </p>
+
+            <p><strong>Passo 1:</strong> usamos todas as letras.</p>
+            <p><strong>Passo 2:</strong> a ordem importa.</p>
+            <p><strong>Conclusão:</strong> é uma permutação simples.</p>
+
+            <p>\[
+                P_3 = 3! = 6
+            \]</p>
+
+            <p>
+                As possibilidades são:
+                ABC, ACB, BAC, BCA, CAB, CBA.
+            </p>
+        </div>
+
+        <div class="algoritmo">
+<pre><code>from itertools import permutations
+
+elementos = ["A", "B", "C"]
+
+print("Permutações de A, B e C:")
+for p in permutations(elementos):
+    print(p)</code></pre>
+        </div>
+
+        <div class="codigo-observacao">
+            <p>
+                O módulo <code>itertools</code> possui a função <code>permutations()</code>,
+                que gera arranjos ordenados dos elementos informados.
+            </p>
+        </div>
+
+        <figure class="imagem-bloco">
+            <img src="media/IMAGEM-PERMUTACAO-SIMPLES.png"
+                 alt="Imagem ilustrando permutações simples com letras em ordens diferentes"
+                 loading="lazy">
+            <figcaption>Imagem gerada pelo chatGPT</figcaption>
+        </figure>
+    </div>
+
+    <div class="aula">
+        <h2>4. Arranjo simples</h2>
+
+        <p>
+            O arranjo simples é usado quando temos \(n\) elementos disponíveis,
+            mas vamos escolher e ordenar apenas \(p\) deles, sem repetição.
+        </p>
+
+        <p>\[
+            A(n,p) = \frac{n!}{(n-p)!}
+        \]</p>
+
+        <div class="exemplo">
+            <h3>Exemplo – Cargos distintos</h3>
+            <p>
+                Há 5 pessoas disponíveis para ocupar 3 cargos: presidente, vice e secretário.
+            </p>
+
+            <p><strong>Passo 1:</strong> não usamos todas as 5 pessoas, apenas 3.</p>
+            <p><strong>Passo 2:</strong> a ordem importa, porque os cargos são diferentes.</p>
+            <p><strong>Conclusão:</strong> é arranjo.</p>
+
+            <p>\[
+                A(5,3) = \frac{5!}{2!} = 5 \cdot 4 \cdot 3 = 60
+            \]</p>
+        </div>
+
+        <div class="algoritmo">
+<pre><code>import math
+
+n = 5
+p = 3
+
+arranjo = math.factorial(n) // math.factorial(n - p)
+
+print(f"A({n},{p}) =", arranjo)</code></pre>
+        </div>
+
+        <div class="codigo-observacao">
+            <p>
+                Esse exemplo implementa a fórmula do arranjo usando fatoriais em Python.
+            </p>
+        </div>
+
+        <figure class="imagem-bloco">
+            <img src="media/IMAGEM-ARRANJO-SIMPLES.png"
+                 alt="Imagem ilustrando arranjo simples com seleção de elementos para posições distintas"
+                 loading="lazy">
+            <figcaption>Imagem gerada pelo chatGPT</figcaption>
+        </figure>
+    </div>
+
+    <div class="aula">
+        <h2>5. Diferença entre permutação e arranjo</h2>
+
+        <div class="exemplo">
+            <h3>Resumo comparativo</h3>
+            <ul>
+                <li><strong>Permutação:</strong> todos os elementos são usados e a ordem importa.</li>
+                <li><strong>Arranjo:</strong> apenas parte dos elementos é usada e a ordem importa.</li>
+            </ul>
+        </div>
+
+        <div class="algoritmo">
+<pre><code>from itertools import permutations
+
+elementos = ["A", "B", "C", "D"]
+
+print("Permutações usando todos os elementos:")
+for p in permutations(elementos):
+    print(p)
+
+print("\nArranjos de 2 elementos:")
+for a in permutations(elementos, 2):
+    print(a)</code></pre>
+        </div>
+
+        <div class="codigo-observacao">
+            <p>
+                Em Python, <code>permutations(lista)</code> usa todos os elementos; já
+                <code>permutations(lista, 2)</code> gera arranjos ordenados de tamanho 2.
+            </p>
+        </div>
+
+        <figure class="imagem-bloco">
+            <img src="media/IMAGEM-COMPARACAO-PERMUTACAO-ARRANJO.png"
+                 alt="Imagem comparando permutação e arranjo"
+                 loading="lazy">
+            <figcaption>Imagem gerada pelo chatGPT</figcaption>
+        </figure>
+    </div>
+
+    <div class="aula">
+        <h2>6. Permutação com repetição</h2>
+
+        <p>
+            Quando há elementos repetidos, trocar dois elementos iguais não gera uma nova ordem.
+            Por isso, a fórmula precisa corrigir a contagem.
+        </p>
+
+        <p>\[
+            P = \frac{n!}{n_1! \cdot n_2! \cdot \cdots \cdot n_k!}
+        \]</p>
+
+        <div class="exemplo">
+            <h3>Exemplo – Palavra OVO</h3>
+            <p>
+                A palavra OVO tem 3 letras, com 2 letras O iguais.
+            </p>
+            <p>\[
+                \frac{3!}{2!} = 3
+            \]</p>
+        </div>
+
+        <div class="algoritmo">
+<pre><code>import math
+from collections import Counter
+
+palavra = "ARARA"
+contagem = Counter(palavra)
+
+n = len(palavra)
+resultado = math.factorial(n)
+
+for repeticoes in contagem.values():
+    resultado //= math.factorial(repeticoes)
+
+print("Quantidade de permutações distintas:", resultado)</code></pre>
+        </div>
+
+        <div class="codigo-observacao">
+            <p>
+                Esse código usa <code>Counter</code> para contar repetições e divide o fatorial total
+                pelos fatoriais de cada repetição, seguindo a fórmula da permutação com repetição.
+            </p>
+        </div>
+
+        <figure class="imagem-bloco">
+            <img src="media/IMAGEM-PERMUTACAO-REPETICAO.png"
+                 alt="Imagem ilustrando permutação com repetição em uma palavra com letras repetidas"
+                 loading="lazy">
+            <figcaption>Imagem gerada pelo chatGPT</figcaption>
+        </figure>
+    </div>
+    <div class="aula">
+      <h3>6.1 Permutação com repetição: cálculo manual</h3>
+  
+      <div class="objetivos">
+          <strong>Objetivo:</strong> aprender a calcular permutação com repetição manualmente,
+          entendendo por que a fórmula funciona e como aplicá-la passo a passo.
+      </div>
+  
+      <p>
+          Quando temos elementos repetidos, trocar a posição de elementos iguais
+          <strong>não gera uma nova organização</strong>. Por isso, não podemos usar apenas \(n!\)
+          sem corrigir a contagem.
+      </p>
+  
+      <p>
+          A fórmula geral é:
+      </p>
+  
+      <p>\[
+          P = \frac{n!}{n_1! \cdot n_2! \cdot \cdots \cdot n_k!}
+      \]</p>
+  
+      <p>
+          em que:
+      </p>
+      <ul>
+          <li>\(n\) é o total de elementos;</li>
+          <li>\(n_1, n_2, \dots, n_k\) são as quantidades de elementos repetidos.</li>
+      </ul>
+  
+      <div class="exemplo">
+          <h3>Ideia intuitiva</h3>
+          <p>
+              Primeiro, imaginamos que todos os elementos são diferentes.
+              Nesse caso, haveria \(n!\) maneiras de organizá-los.
+          </p>
+          <p>
+              Depois, corrigimos o excesso de contagem dividindo pelos fatoriais
+              das repetições, porque permutações que trocam apenas elementos iguais
+              não produzem uma nova organização.
+          </p>
+      </div>
+  
+      <div class="exemplo">
+          <h3>Exemplo 1 – Palavra ANA</h3>
+  
+          <p><strong>Passo 1:</strong> contar o total de letras.</p>
+          <p>
+              A palavra ANA tem 3 letras. Portanto:
+          </p>
+          <p>\[
+              n = 3
+          \]</p>
+  
+          <p><strong>Passo 2:</strong> identificar as repetições.</p>
+          <ul>
+              <li>A aparece 2 vezes;</li>
+              <li>N aparece 1 vez.</li>
+          </ul>
+  
+          <p><strong>Passo 3:</strong> escrever a fórmula.</p>
+          <p>\[
+              P = \frac{3!}{2! \cdot 1!}
+          \]</p>
+  
+          <p><strong>Passo 4:</strong> calcular os fatoriais.</p>
+          <p>\[
+              3! = 6,\quad 2! = 2,\quad 1! = 1
+          \]</p>
+  
+          <p><strong>Passo 5:</strong> substituir na fórmula.</p>
+          <p>\[
+              P = \frac{6}{2 \cdot 1} = \frac{6}{2} = 3
+          \]</p>
+  
+          <p><strong>Conclusão:</strong> existem 3 palavras diferentes formadas com ANA.</p>
+  
+          <p>
+              Elas são:
+          </p>
+          <p>
+              ANA, AAN, NAA
+          </p>
+      </div>
+  
+      <div class="exemplo">
+          <h3>Exemplo 2 – Palavra ARARA</h3>
+  
+          <p><strong>Passo 1:</strong> contar o total de letras.</p>
+          <p>
+              A palavra ARARA tem 5 letras. Então:
+          </p>
+          <p>\[
+              n = 5
+          \]</p>
+  
+          <p><strong>Passo 2:</strong> identificar as repetições.</p>
+          <ul>
+              <li>A aparece 3 vezes;</li>
+              <li>R aparece 2 vezes.</li>
+          </ul>
+  
+          <p><strong>Passo 3:</strong> montar a fórmula.</p>
+          <p>\[
+              P = \frac{5!}{3! \cdot 2!}
+          \]</p>
+  
+          <p><strong>Passo 4:</strong> calcular os fatoriais.</p>
+          <p>\[
+              5! = 120,\quad 3! = 6,\quad 2! = 2
+          \]</p>
+  
+          <p><strong>Passo 5:</strong> substituir os valores.</p>
+          <p>\[
+              P = \frac{120}{6 \cdot 2} = \frac{120}{12} = 10
+          \]</p>
+  
+          <p><strong>Conclusão:</strong> existem 10 palavras diferentes formadas com ARARA.</p>
+      </div>
+  
+      <div class="exemplo">
+          <h3>Como fazer manualmente em qualquer caso</h3>
+          <ol>
+              <li>Conte o número total de elementos.</li>
+              <li>Conte quantas vezes cada elemento se repete.</li>
+              <li>Escreva a fórmula da permutação com repetição.</li>
+              <li>Calcule os fatoriais com calma.</li>
+              <li>Substitua os valores e simplifique.</li>
+          </ol>
+      </div>
+  </div>
+    <div class="aula">
+        <h2>7. Problemas computacionais</h2>
+
+        <div class="exemplo">
+            <h3>1. Geração de senhas</h3>
+            <p>
+                Quando a ordem dos caracteres importa, a contagem pode envolver arranjos ou permutações,
+                dependendo das restrições do problema.
+            </p>
+        </div>
+
+        <div class="exemplo">
+            <h3>2. Escalonamento de tarefas</h3>
+            <p>
+                Diferentes ordens de execução podem gerar diferentes comportamentos ou tempos de processamento.
+            </p>
+        </div>
+
+        <div class="exemplo">
+            <h3>3. Testes de software</h3>
+            <p>
+                Fluxos de ações e sequências de entrada podem ser tratados como problemas de ordenação.
+            </p>
+        </div>
+
+        <figure class="imagem-bloco">
+            <img src="media/IMAGEM-PROBLEMAS-COMPUTACIONAIS-PERMUTACOES.png"
+                 alt="Imagem representando aplicações computacionais de permutações e arranjos"
+                 loading="lazy">
+            <figcaption>Imagem gerada pelo chatGPT</figcaption>
+        </figure>
+      <!--
+                Crie uma imagem ilustrando aplicações computacionais de permutações e arranjos.
+                Mostre, em estilo flat e acadêmico, elementos como senhas, tarefas em fila, servidores ocupando papéis,
+                testes de software e árvore de busca. Use visual organizado e pensado para estudantes de computação.
+      -->
+    <div class="aula">
+        <h2>8. Exercícios para praticar</h2>
+
+        <div class="exercicio">
+            <h3>Exercício 1</h3>
+            <p>
+                De quantas formas 5 tarefas distintas podem ser ordenadas?
+            </p>
+            <button onclick="toggleRes('res1')">Ver resolução</button>
+            <div id="res1" class="resolucao">
+                <p>\[
+                    5! = 120
+                \]</p>
+            </div>
+        </div>
+
+        <div class="exercicio">
+            <h3>Exercício 2</h3>
+            <p>
+                Entre 9 estudantes, quantas maneiras existem de escolher 3 para os cargos
+                de líder, vice e secretário?
+            </p>
+            <button onclick="toggleRes('res2')">Ver resolução</button>
+            <div id="res2" class="resolucao">
+                <p>\[
+                    A(9,3) = \frac{9!}{6!} = 9 \cdot 8 \cdot 7 = 504
+                \]</p>
+            </div>
+        </div>
+
+        <div class="exercicio">
+            <h3>Exercício 3</h3>
+            <p>
+                Em uma campanha de adoção, 7 estudantes se candidataram para adotar gatos.
+                A organização vai escolher 3 estudantes para receber, respectivamente,
+                o primeiro, o segundo e o terceiro gato resgatado. De quantas maneiras
+                diferentes essa distribuição pode ser feita?
+            </p>
+            <button onclick="toggleRes('res3')">Ver resolução</button>
+            <div id="res3" class="resolucao">
+                <p>
+                    Como estamos escolhendo 3 estudantes entre 7 e a ordem importa
+                    (primeiro gato, segundo gato e terceiro gato), temos um arranjo simples:
+                </p>
+                <p>\[
+                    A(7,3) = \frac{7!}{(7-3)!} = \frac{7!}{4!}
+                \]</p>
+                <p>\[
+                    A(7,3) = 7 \cdot 6 \cdot 5 = 210
+                \]</p>
+                <p>
+                    Portanto, existem <strong>210</strong> maneiras diferentes de fazer essa distribuição.
+                </p>
+            </div>
+        </div>
+      
+        <div class="exercicio">
+            <h3>Exercício 4</h3>
+            <p>
+                Quantas palavras distintas podem ser formadas com as letras de TATU?
+            </p>
+            <button onclick="toggleRes('res4')">Ver resolução</button>
+            <div id="res4" class="resolucao">
+                <p>\[
+                    \frac{4!}{2!} = 12
+                \]</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>IFC São Bento do Sul · Matemática Discreta · Permutações e Arranjos</p>
+    </footer>
+</div>
+
+<script>
+function toggleRes(id) {
+    const elem = document.getElementById(id);
+    if (!elem) return;
+    elem.style.display = elem.style.display === 'block' ? 'none' : 'block';
+}
+</script>
+</body>
+</html>
