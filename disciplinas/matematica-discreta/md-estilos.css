@@ -168,6 +168,42 @@ code {
     font-style: italic;
 }
 
+.imagem-bloco {
+            margin: 18px 0;
+            text-align: center;
+}
+
+.imagem-bloco img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.imagem-bloco figcaption {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 8px;
+    font-style: italic;
+}
+
+.prompt-imagem {
+    background: #f8f9fa;
+    border-left: 4px solid #6c757d;
+    padding: 12px;
+    margin: 12px 0 20px 0;
+    border-radius: 6px;
+}
+
+.codigo-observacao {
+    background: #eef6ff;
+    border-left: 4px solid #3498db;
+    padding: 12px;
+    margin: 12px 0 18px 0;
+    border-radius: 6px;
+}
+
 /* Rodapé */
 footer {
     text-align: center;
