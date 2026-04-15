@@ -472,80 +472,212 @@ print("Quantidade de permutações distintas:", resultado)</code></pre>
                  loading="lazy">
             <figcaption>Imagem gerada pelo chatGPT</figcaption>
         </figure>
-      <!--
-                Crie uma imagem ilustrando aplicações computacionais de permutações e arranjos.
-                Mostre, em estilo flat e acadêmico, elementos como senhas, tarefas em fila, servidores ocupando papéis,
-                testes de software e árvore de busca. Use visual organizado e pensado para estudantes de computação.
-      -->
     <div class="aula">
-        <h2>8. Exercícios para praticar</h2>
+    <h2>8. Exercícios para praticar – arranjo x combinação</h2>
 
-        <div class="exercicio">
-            <h3>Exercício 1</h3>
+    <div class="exercicio">
+        <h3>Exercício 1</h3>
+        <p>
+            Um conjunto de tarefas é dado por:
+        </p>
+        <p>\[
+            T = \{T_1, T_2, T_3, T_4, T_5\}
+        \]</p>
+        <p>
+            (a) De quantas formas essas 5 tarefas distintas podem ser ordenadas em uma fila de execução?  
+            (b) Se o gerente quiser escolher apenas 3 tarefas para executar, sem se importar com a ordem,
+            de quantas formas diferentes o subconjunto de 3 tarefas pode ser escolhido?
+        </p>
+        <button onclick="toggleRes('res1')">Ver resolução</button>
+        <div id="res1" class="resolucao">
+            <p><strong>(a) Ordem importa (permutação):</strong></p>
             <p>
-                De quantas formas 5 tarefas distintas podem ser ordenadas?
+                Estamos ordenando todos os elementos do conjunto \(T\), logo:
             </p>
-            <button onclick="toggleRes('res1')">Ver resolução</button>
-            <div id="res1" class="resolucao">
-                <p>\[
-                    5! = 120
-                \]</p>
-            </div>
-        </div>
+            <p>\[
+                P_5 = 5! = 120
+            \]</p>
+            <p>
+                Cada ordenação é uma sequência do tipo:
+            </p>
+            <p>\[
+                (T_1, T_3, T_5, T_2, T_4), \ (T_2, T_1, T_3, T_4, T_5), \dots
+            \]</p>
 
-        <div class="exercicio">
-            <h3>Exercício 2</h3>
+            <p><strong>(b) Apenas a escolha importa (combinação):</strong></p>
             <p>
-                Entre 9 estudantes, quantas maneiras existem de escolher 3 para os cargos
-                de líder, vice e secretário?
+                Agora queremos apenas subconjuntos de 3 tarefas, sem se importar com a ordem.
+                Usamos combinação:
             </p>
-            <button onclick="toggleRes('res2')">Ver resolução</button>
-            <div id="res2" class="resolucao">
-                <p>\[
-                    A(9,3) = \frac{9!}{6!} = 9 \cdot 8 \cdot 7 = 504
-                \]</p>
-            </div>
-        </div>
-
-        <div class="exercicio">
-            <h3>Exercício 3</h3>
+            <p>\[
+                C(5,3) = \binom{5}{3} = \frac{5!}{3! \cdot 2!} = 10
+            \]</p>
             <p>
-                Em uma campanha de adoção, 7 estudantes se candidataram para adotar gatos.
-                A organização vai escolher 3 estudantes para receber, respectivamente,
-                o primeiro, o segundo e o terceiro gato resgatado. De quantas maneiras
-                diferentes essa distribuição pode ser feita?
+                Exemplos de subconjuntos possíveis:
             </p>
-            <button onclick="toggleRes('res3')">Ver resolução</button>
-            <div id="res3" class="resolucao">
-                <p>
-                    Como estamos escolhendo 3 estudantes entre 7 e a ordem importa
-                    (primeiro gato, segundo gato e terceiro gato), temos um arranjo simples:
-                </p>
-                <p>\[
-                    A(7,3) = \frac{7!}{(7-3)!} = \frac{7!}{4!}
-                \]</p>
-                <p>\[
-                    A(7,3) = 7 \cdot 6 \cdot 5 = 210
-                \]</p>
-                <p>
-                    Portanto, existem <strong>210</strong> maneiras diferentes de fazer essa distribuição.
-                </p>
-            </div>
-        </div>
-      
-        <div class="exercicio">
-            <h3>Exercício 4</h3>
+            <p>\[
+                \{T_1, T_2, T_3\}, \ \{T_1, T_4, T_5\}, \ \{T_2, T_3, T_5\}, \dots
+            \]</p>
             <p>
-                Quantas palavras distintas podem ser formadas com as letras de TATU?
+                Note que \((T_1, T_2, T_3)\) e \((T_3, T_2, T_1)\) são o <strong>mesmo subconjunto</strong>
+                \(\{T_1, T_2, T_3\}\) quando não nos importamos com a ordem.
             </p>
-            <button onclick="toggleRes('res4')">Ver resolução</button>
-            <div id="res4" class="resolucao">
-                <p>\[
-                    \frac{4!}{2!} = 12
-                \]</p>
-            </div>
         </div>
     </div>
+
+    <div class="exercicio">
+        <h3>Exercício 2</h3>
+        <p>
+            O conjunto de estudantes de uma turma é:
+        </p>
+        <p>\[
+            E = \{e_1, e_2, e_3, \dots, e_9\}
+        \]</p>
+        <p>
+            (a) De quantas maneiras podemos escolher 3 estudantes para os cargos de líder, vice e secretário?  
+            (b) Se quisermos apenas formar uma equipe de 3 estudantes, sem cargos definidos,
+            de quantas formas essa equipe pode ser escolhida?
+        </p>
+        <button onclick="toggleRes('res2')">Ver resolução</button>
+        <div id="res2" class="resolucao">
+            <p><strong>(a) Arranjo – ordem importa (cargos diferentes):</strong></p>
+            <p>
+                Temos 9 estudantes no conjunto \(E\) e vamos escolher 3 em posições distintas:
+            </p>
+            <p>\[
+                A(9,3) = \frac{9!}{(9-3)!} = \frac{9!}{6!} = 9 \cdot 8 \cdot 7 = 504
+            \]</p>
+            <p>
+                Cada escolha pode ser representada como um trio ordenado:
+            </p>
+            <p>\[
+                (\text{líder}=e_1,\ \text{vice}=e_4,\ \text{secretário}=e_7)
+            \]</p>
+
+            <p><strong>(b) Combinação – apenas o subconjunto importa:</strong></p>
+            <p>
+                Agora queremos só o subconjunto de 3 estudantes, sem se importar
+                com quem é líder, vice ou secretário:
+            </p>
+            <p>\[
+                C(9,3) = \binom{9}{3} = \frac{9!}{3! \cdot 6!} = \frac{9 \cdot 8 \cdot 7}{3 \cdot 2 \cdot 1} = 84
+            \]</p>
+            <p>
+                Uma equipe é um subconjunto:
+            </p>
+            <p>\[
+                \{e_1, e_4, e_7\}
+            \]</p>
+            <p>
+                Note que todos os trios ordenados
+                \((e_1, e_4, e_7)\), \((e_4, e_7, e_1)\), \((e_7, e_1, e_4)\) etc.
+                correspondem ao <strong>mesmo</strong> subconjunto \(\{e_1, e_4, e_7\}\) na combinação.
+            </p>
+        </div>
+    </div>
+
+    <div class="exercicio">
+        <h3>Exercício 3</h3>
+        <p>
+            Em uma campanha de adoção, 7 estudantes se candidataram para adotar gatos.
+        </p>
+        <p>\[
+            S = \{s_1, s_2, s_3, s_4, s_5, s_6, s_7\}
+        \]</p>
+        <p>
+            (a) A organização vai escolher 3 estudantes para receber, respectivamente,
+            o primeiro, o segundo e o terceiro gato resgatado. De quantas maneiras diferentes
+            essa distribuição pode ser feita?  
+            (b) Se a organização quiser apenas escolher 3 estudantes para adotar gatos,
+            sem se importar com a ordem de entrega, de quantas formas diferentes o trio
+            de adotantes pode ser escolhido?
+        </p>
+        <button onclick="toggleRes('res3')">Ver resolução</button>
+        <div id="res3" class="resolucao">
+            <p><strong>(a) Arranjo – ordem importa (primeiro, segundo, terceiro gato):</strong></p>
+            <p>
+                Estamos escolhendo 3 estudantes em ordem:
+            </p>
+            <p>\[
+                A(7,3) = \frac{7!}{(7-3)!} = \frac{7!}{4!} = 7 \cdot 6 \cdot 5 = 210
+            \]</p>
+            <p>
+                Uma possível distribuição é o trio ordenado:
+            </p>
+            <p>\[
+                (\text{1º gato}=s_2,\ \text{2º gato}=s_5,\ \text{3º gato}=s_7)
+            \]</p>
+
+            <p><strong>(b) Combinação – apenas o conjunto de adotantes importa:</strong></p>
+            <p>
+                Agora queremos apenas saber quais 3 estudantes adotam gatos,
+                sem se importar com a ordem de entrega:
+            </p>
+            <p>\[
+                C(7,3) = \binom{7}{3} = \frac{7!}{3! \cdot 4!}
+                = \frac{7 \cdot 6 \cdot 5}{3 \cdot 2 \cdot 1} = 35
+            \]</p>
+            <p>
+                Um grupo de adotantes é um subconjunto:
+            </p>
+            <p>\[
+                \{s_2, s_5, s_7\}
+            \]</p>
+            <p>
+                Note que todas as permutações de \((s_2, s_5, s_7)\) representam
+                o mesmo subconjunto de adotantes quando a ordem não é importante.
+            </p>
+        </div>
+    </div>
+
+    <div class="exercicio">
+        <h3>Exercício 4</h3>
+        <p>
+            Considere o conjunto de letras da palavra TATU:
+        </p>
+        <p>\[
+            L = \{T, A, T, U\}
+        \]</p>
+        <p>
+            (a) Quantas palavras distintas podem ser formadas com todas as letras de TATU?  
+            (b) Se quisermos formar subconjuntos de 2 letras de \(L\) sem considerar ordem,
+            quantos subconjuntos distintos de 2 letras podemos obter?
+        </p>
+        <button onclick="toggleRes('res4')">Ver resolução</button>
+        <div id="res4" class="resolucao">
+            <p><strong>(a) Permutação com repetição – todas as letras, ordem importa:</strong></p>
+            <p>
+                A palavra TATU tem 4 letras, com T repetindo 2 vezes:
+            </p>
+            <p>\[
+                n = 4,\quad n_T = 2
+            \]</p>
+            <p>\[
+                P = \frac{4!}{2!} = \frac{24}{2} = 12
+            \]</p>
+            <p>
+                Cada organização é uma sequência ordenada, como, por exemplo:
+            </p>
+            <p>\[
+                (T, A, T, U),\ (A, T, U, T),\ (U, T, A, T),\dots
+            \]</p>
+
+            <p><strong>(b) Combinação de letras – apenas o subconjunto de 2 letras importa:</strong></p>
+            <p>
+                Vamos considerar subconjuntos de 2 letras, <strong>ignorando a ordem</strong>.
+                Como há T repetido, precisamos listar com cuidado.  
+                Possíveis subconjuntos distintos de 2 letras (como multiconjuntos) são:
+            </p>
+            <p>\[
+                \{T, T\},\ \{T, A\},\ \{T, U\},\ \{A, U\}
+            \]</p>
+            <p>
+                Portanto, existem <strong>4</strong> subconjuntos distintos de 2 letras,
+                se permitirmos repetição oriunda das letras repetidas na palavra.
+            </p>
+        </div>
+    </div>
+</div>
 
     <footer>
         <p>IFC São Bento do Sul · Matemática Discreta · Permutações e Arranjos</p>
