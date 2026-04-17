@@ -205,7 +205,6 @@ h1 {
   font-family: var(--font-display);
   font-size: var(--text-2xl);
   line-height: 1.04;
-  max-width: 14ch;
   margin-bottom: 1rem;
 }
 
