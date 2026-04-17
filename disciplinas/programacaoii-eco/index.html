@@ -109,12 +109,10 @@ main {
 }
 
 .progress {
-
     height: 100%;
-    width: 15%;
-
+    width: 0;  /* começa em 0, será alterado pelo JS */
     background: linear-gradient(90deg,#6366f1,#818cf8);
-
+    transition: width .4s ease;
 }
 
 /* ===================== */
@@ -571,6 +569,31 @@ document
     })
 
 </script>
-
+<script>
+    document
+        .querySelectorAll(".card")
+        .forEach((card, i) => {
+            setTimeout(() => {
+                card.classList.add("show")
+            }, i * 80)
+        })
+    
+    // === Cálculo do progresso ===
+    
+    // total de aulas (cards que representam semanas/conteúdos)
+    const cards = document.querySelectorAll(".grid .card");
+    
+    // quantos já foram vistos (classe .passado)
+    const cardsPassado = document.querySelectorAll(".grid .card.passado");
+    
+    // calcula porcentagem
+    const total = cards.length;
+    const feitos = cardsPassado.length;
+    const porcentagem = Math.round((feitos / total) * 100);
+    
+    // atualiza a barra
+    const progressBar = document.querySelector(".progress");
+    progressBar.style.width = porcentagem + "%";
+</script>
 </body>
 </html>
