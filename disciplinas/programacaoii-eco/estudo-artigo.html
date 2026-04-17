@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Estudo de Caso – Programação II (Portal CAPES)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div>
+        <span class="tag">Programação II</span>
+        <span class="tag tag--aulas">Estudo de caso</span>
+      </div>
+      <h1>Estudo de Caso com Artigo Científico no Portal de Periódicos CAPES</h1>
+      <p>
+        Nesta atividade você irá selecionar um artigo científico no Portal de Periódicos CAPES,
+        ler de forma crítica e preparar uma apresentação, conectando o texto aos
+        conteúdos da disciplina de Programação II.
+      </p>
+      <nav>
+        <a href="#acesso-cafe">1. Acesso via CAFe</a>
+        <a href="#escolha-artigo">2. Escolha do artigo</a>
+        <a href="#roteiro-estudo">3. Roteiro de leitura</a>
+        <a href="#apresentacao">4. Apresentação</a>
+        <a href="#avaliacao">5. Critérios de avaliação</a>
+        <a href="#checklist">Checklist</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- COLUNA PRINCIPAL -->
+    <section>
+      <article class="card" id="acesso-cafe">
+        <h2>1. Acesso ao Portal CAPES via CAFe</h2>
+        <p>
+          O acesso remoto ao Portal de Periódicos CAPES é feito pelo serviço CAFe,
+          que permite utilizar o login institucional para acessar o conteúdo assinado de qualquer lugar.
+        </p>
+
+        <div class="step">
+          <h3>1.1 Passo a passo inicial</h3>
+          <ol class="mini-list">
+            <li>Acesse: <code>https://www.periodicos.capes.gov.br</code> e clique em <strong>“Acesso CAFe”</strong>.</li>
+            <li>Na lista, selecione a <strong>instituição</strong>.</li>
+            <li>Você será redirecionado para a tela de autenticação da instituição.</li>
+            <li>Entre com seu <strong>usuário institucional</strong> (e-mail acadêmico) e <strong>senha</strong>.</li>
+            <li>Aguarde o retorno ao Portal: o nome/sigla da instituição deverá aparecer no topo da página.</li>
+          </ol>
+          <p class="note">
+            Obs: Em caso de erro de login (se usuário e senha corretos), verifique com a TI ou biblioteca do campus, pois a manutenção 
+            e o suporte ao acesso CAFe são de responsabilidade da instituição.
+          </p>
+        </div>
+      </article>
+
+      <article class="card" id="escolha-artigo">
+        <h2>2. Como escolher o artigo científico (Programação II)</h2>
+        <p>
+          A escolha do artigo é parte central do estudo: ele deve dialogar com os temas
+          de Programação II e permitir discussão crítica em sala.
+        </p>
+
+        <h3>2.1 Filtros e busca no Portal</h3>
+        <p>
+          No Portal de Periódicos, utilize a caixa de pesquisa para buscar por <strong>palavras-chave</strong>
+          relacionadas aos temas da disciplina. Combine 2 a 4 termos por vez.
+        </p>
+
+        <div class="example-box">
+          <p><strong>Sugestões de palavras‑chave por módulo da disciplina:</strong>
+            Sugiro escolher entre os conteúdos já estudados pois facilitará o entendimento.
+          </p>
+          <ul class="mini-list">
+            <li><strong>Orientação a Objetos (revisão Prog I)</strong> – classes, herança, polimorfismo, interfaces, exceções, arquivos:
+              “object oriented programming JavaScript”, “polymorphism in web applications”, “exception handling in web systems”.
+            </li>
+            <li><strong>Desenvolvimento front-end</strong> – HTML5, DOM, eventos, funções, callbacks, arrays, objetos:
+              “DOM manipulation JavaScript”, “event handling in web interfaces”, “JavaScript callbacks usability”.
+            </li>
+            <li><strong>Ferramentas para desenvolvimento web</strong>:
+              “web development tools comparison”, “JavaScript frameworks evaluation”, “Node.js vs other back-end technologies”.
+            </li>
+            <li><strong>Node.js, Express e APIs REST</strong> – arquitetura, rotas, CRUD, middlewares, tratamento de erros:
+              “Node.js REST API case study”, “Express.js routing and middleware”, “error handling in RESTful APIs”.
+            </li>
+            <li><strong>Consumo de APIs externas</strong> – fetch/axios, integração front‑back:
+              “JavaScript fetch API integration”, “axios case study web application”, “front-end back-end integration REST”.
+            </li>
+            <li><strong>Bancos de dados e persistência</strong> – SQL, conexão Node–BD, repositórios:
+              “Node.js database integration”, “repository pattern in web applications”, “REST API with relational database”.
+            </li>
+            <li><strong>Autenticação e segurança básica</strong> – sessões, JWT, controle de acesso:
+              “JWT authentication REST API”, “session management Node.js”, “access control in web APIs”.
+            </li>
+            <li><strong>Ensino de programação / projetos educacionais</strong> – ligado ao contexto de curso:
+              “teaching programming with web projects”, “tools for teaching programming”, “engagement in introductory programming courses”.
+            </li>
+          </ul>
+        </div>
+
+        <h3>2.2 Critérios mínimos para o artigo</h3>
+        <div class="example-box">
+          <p>Espera-se que artigo escolhido atenda os seguintes pontos:</p>
+          <ul class="mini-list">
+            <li>Ser um <strong>artigo científico completo</strong> (não apenas resumo, tutorial ou editorial).</li>
+            <li>Apresentar claramente: problema de pesquisa, objetivos, metodologia, resultados e conclusões.</li>
+            <li>Ter relação direta com um ou mais tópicos do plano de ensino de Programação II.</li>
+            <li>Ter extensão compatível com o tempo disponível (15–20 páginas).</li>
+            <li>Trazer, de preferência, estudo de caso, experimento, comparação de tecnologias ou relato de experiência real.</li>
+          </ul>
+        </div>
+
+        <details>
+          <summary>Exemplos de escolhas adequadas e inadequadas</summary>
+          <div>
+            <p><strong>Artigo adequado:</strong> estudo de caso sobre desenvolvimento de uma API REST em Node.js e Express para um sistema real, 
+              com avaliação de desempenho ou discussões sobre boas práticas de arquitetura.</p>
+            <p><strong>Artigo adequado:</strong> relato de experiência sobre uso de projetos web para ensino de programação, analisando engajamento 
+              e aprendizagem dos estudantes.</p>
+            <p><strong>Artigo inadequado:</strong> tutorial superficial sem metodologia, apenas mostrando “como fazer” sem discussão crítica, ou 
+              texto puramente opinativo sem dados.</p>
+          </div>
+        </details>
+
+        <div class="note">
+          Antes de confirmar a escolha, leia pelo menos o resumo, a introdução e as conclusões do artigo e para verificar se atende os requisitos.
+        </div>
+      </article>
+
+      <article class="card" id="roteiro-estudo">
+        <h2>3. Roteiro de leitura e análise (estudo de caso)</h2>
+        <p>
+          Após a escolha do artigo, siga um roteiro comum de leitura crítica para estruturar o estudo de caso e facilitar a
+          preparação da apresentação.
+        </p>
+
+        <div class="step">
+          <h3>3.1 Etapas sugeridas de leitura</h3>
+          <ol class="mini-list">
+            <li><strong>Leitura global:</strong> título, resumo e conclusões para entender o tema geral.</li>
+            <li><strong>Leitura detalhada:</strong> introdução (problema, objetivos, justificativa), metodologia, resultados.</li>
+            <li><strong>Marcação de trechos-chave:</strong> grife conceitos, definições, figuras e tabelas relacionados a OO, web, APIs ou banco de dados.</li>
+            <li><strong>Síntese:</strong> Se em equipe cada integrante resume uma parte e o grupo discute para construir uma visão comum. Em aula decidiremos.</li>
+          </ol>
+        </div>
+
+        <div class="step">
+          <h3>3.2 Perguntas norteadoras</h3>
+          <ul class="mini-list">
+            <li>Qual é o problema de programação ou de desenvolvimento web abordado pelo artigo?</li>
+            <li>Quais são os objetivos declarados e eles são coerentes com o problema?</li>
+            <li>Que tecnologias, linguagens e frameworks são utilizados (Node, Express, bancos de dados, bibliotecas JS, etc.)?</li>
+            <li>Que arquitetura de software ou padrões (MVC, Repository, Observer, Strategy, REST) aparecem, mesmo que não sejam nomeados explicitamente?</li>
+            <li>Quais são os principais resultados e contribuições do estudo para o desenvolvimento de sistemas ou para o ensino de programação?</li>
+            <li>Como o artigo se conecta diretamente com os conteúdos já vistos em Programação II (revisão OO, DOM, APIs, banco de dados, autenticação)?</li>
+            <li>Quais limitações os autores indicam? Você identifica outras limitações?</li>
+          </ul>
+        </div>
+
+        <div class="callout">
+          <strong>IMPORTANTE:</strong> o objetivo não é apenas “resumir o artigo”, mas interpretar criticamente o estudo
+          e relacioná-lo à prática de desenvolvimento e aos conceitos trabalhados na disciplina.
+        </div>
+      </article>
+
+      <article class="card" id="apresentacao">
+        <h2>4. Preparação da apresentação do trabalho</h2>
+        <p>
+          A apresentação é o momento de socializar o estudo de caso com a turma, destacando o que o artigo traz de relevante e como
+          isso se relaciona com Programação II.
+        </p>
+
+        <h3>4.1 Roteiro sugerido de apresentação (10–15 minutos)</h3>
+        <ol class="mini-list">
+          <li><strong>Identificação do artigo:</strong> título, autores, periódico, ano de publicação.</li>
+          <li><strong>Contexto e problema:</strong> qual situação leva à pesquisa? qual a lacuna na literatura ou na prática de desenvolvimento?</li>
+          <li><strong>Objetivos do estudo:</strong> o que os autores propuseram investigar, comparar ou propor?</li>
+          <li><strong>Metodologia:</strong> tipo de estudo, participantes, dados coletados, ferramentas e tecnologias utilizadas.</li>
+          <li><strong>Resultados principais:</strong> achados mais importantes, métricas de desempenho, feedback de usuários.</li>
+          <li><strong>Discussão e conclusões:</strong> implicações para projetos web, boas práticas, ensino de programação ou arquitetura de sistemas.</li>
+          <li><strong>Relação com a disciplina:</strong> conexão direta com conteúdos (OO, DOM, Node, Express, REST, BD, autenticação, git/github, documentação, padrões de projeto).</li>
+          <li><strong>Análise crítica (estudante):</strong> pontos fortes, limitações, o que poderia ser feito diferente/melhor?</li>
+        </ol>
+
+        <h3>4.2 Orientações para os slides (se for usar)</h3>
+        <ul class="mini-list">
+          <li>Limite o texto por slide; priorize tópicos curtos, esquemas, trechos de código e diagramas simples.</li>
+          <li>Não copie parágrafos inteiros do artigo; reescreva com as suas palavras.</li>
+          <li>Destaque, em cor ou negrito, os conceitos da disciplina que aparecem no artigo.</li>
+          <li>Cite a referência completa do artigo no último slide.</li>
+        </ul>
+
+        <div class="note">
+          Ensaiem a apresentação pelo menos uma vez, cronometrando o tempo e definindo o que falar em cada parte.
+        </div>
+      </article>
+
+      <article class="card" id="avaliacao">
+        <h2>5. Critérios de avaliação do trabalho</h2>
+        <p>
+          A atividade vale 20% da nota de Programação II. Serão avaliadas tanto a qualidade da análise quanto a apresentação oral do grupo.
+        </p>
+
+        <h3>5.1 Rubrica resumida</h3>
+        <ul class="mini-list">
+          <li><strong>Escolha do artigo (10%)</strong> – adequação ao tema da disciplina, atualidade, relevância e clareza da estrutura.</li>
+          <li><strong>Compreensão teórico‑técnica (30%)</strong> – identificação correta do problema, objetivos, metodologia, tecnologias e principais resultados.</li>
+          <li><strong>Análise crítica e relação com a disciplina (30%)</strong> – capacidade de relacionar o artigo com conteúdos do plano de ensino e discutir contribuições e limitações.</li>
+          <li><strong>Organização e clareza da apresentação (20%)</strong> – estrutura lógica, tempo bem distribuído, divisão de falas, qualidade dos slides.</li>
+          <li><strong>Comunicação oral (10%)</strong> – domínio do conteúdo, postura, uso adequado da voz, participação equilibrada.</li>
+        </ul>
+
+        <details>
+          <summary>Observações sobre a nota</summary>
+          <div>
+            <ul class="mini-list">
+              <li>Notas individuais podem ser ajustadas conforme a participação efetiva de cada integrante.</li>
+              <li>A não utilização de artigo obtido pelo Portal CAPES, conforme orientações, pode implicar desconto de nota.</li>
+              <li>Plágio (cópia de trechos sem citação) é falta grave e pode garantir um zero.</li>
+              <li>A ATIVIDADE É SIMPLES E IMPORTANTE PARA O DESENVOLVIMENTO ACADÊMICO. NÃO USEM APOIO DA IA NESSA ATIVIDADE!!!</li>
+            </ul>
+          </div>
+        </details>
+      </article>
+    </section>
+
+    <!-- COLUNA LATERAL -->
+    <aside>
+      <section class="card">
+        <h2>Objetivos da atividade</h2>
+        <ul class="pill-list">
+          <li>Leitura crítica</li>
+          <li>Pesquisa acadêmica</li>
+          <li>Síntese de ideias</li>
+          <li>Comunicação oral</li>
+        </ul>
+        <p>
+          Ao final da atividade, espera-se que você seja capaz de localizar, selecionar e analisar um artigo científico
+          da área de desenvolvimento de software, articulando seus resultados com os conteúdos de Programação II.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Perguntas para reflexão</h2>
+        <p class="dom-destaque">
+          Ao ler o artigo, pense em como você poderia aplicar ou adaptar os resultados do estudo
+          no projeto do semestre ou em outros sistemas que você venha a desenvolver.
+        </p>
+        <div class="dom-card">
+          <ul class="mini-list">
+            <li>Que parte da arquitetura, do código ou da metodologia do artigo você incorporaria ao seu projeto de Prog II?</li>
+            <li>Que decisões técnicas do artigo você questionaria ou faria diferente?</li>
+            <li>Que nova funcionalidade ou estudo surge como continuação natural do trabalho analisado?</li>
+          </ul>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <footer>
+    <p>Estudo de caso com artigo científico – Programação II – Portal de Periódicos CAPES / Acesso CAFe.</p>
+  </footer>
+</body>
+</html>
