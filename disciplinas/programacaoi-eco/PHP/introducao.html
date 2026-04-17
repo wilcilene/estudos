@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ambiente-php-laravel-aula</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./ambiente-php-laravel-aula.css">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="hero">
+    <div class="container topbar">
+      <div class="brand">
+        <svg viewBox="0 0 64 64" aria-label="Logo PHP Laravel"><rect x="7" y="10" width="50" height="44" rx="12" stroke="currentColor" stroke-width="4" fill="none"></rect><path d="M20 23h8c5 0 8 2 8 7s-3 7-8 7h-4v8" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M39 23v22h10" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        <div>
+          <div>PHP + Laravel</div>
+          <div class="footer-note">Guia didático de ambiente e escolhas do projeto</div>
+        </div>
+      </div>
+      <button class="theme-toggle" data-theme-toggle aria-label="Alternar tema">◐</button>
+    </div>
+  </header>
+
+  <div class="container intro">
+    <div class="eyebrow">Aula introdutória</div>
+    <h1>Configuração do ambiente e fundamentos para o projeto da disciplina</h1>
+    <p class="lead">Esta página foi organizada com os passos para preparar o ambiente local com XAMPP, PHP, Composer e Laravel, além de explicar de forma didática por que essas tecnologias foram escolhidas para o projeto de cadastro em concursos, desenvolvido com Scrum, sprints e entregas progressivas.</p>
+  </div>
+
+  <div class="container layout">
+    <nav class="toc" aria-label="Navegação da página">
+      <h2>Sumário</h2>
+      <ul>
+        <li><a href="#visao-geral">Visão geral</a></li>
+        <li><a href="#conceitos">Conceitos básicos</a></li>
+        <li><a href="#ambiente">Passos do ambiente</a></li>
+        <li><a href="#relacao">Como tudo se conecta</a></li>
+        <li><a href="#php">Por que PHP</a></li>
+        <li><a href="#laravel">Por que Laravel</a></li>
+        <li><a href="#troca">Por que trocar de linguagem</a></li>
+        <li><a href="#carreira">Impacto profissional</a></li>
+        <li><a href="#scrum">Scrum e sprints</a></li>
+        <li><a href="#plano">Plano das próximas aulas</a></li>
+      </ul>
+    </nav>
+
+    <main id="conteudo">
+      <article>
+        <section id="visao-geral">
+          <span class="badge">Panorama</span>
+          <h2 class="section-title">O que será construído</h2>
+          <p>O projeto da disciplina será um sistema web de cadastro em concursos, com preenchimento de dados, envio de foto e arquivos, análise posterior da inscrição e acompanhamento do status pelo inscrito. Esse tipo de problema é bom para ensino porque envolve cadastro, validação, armazenamento, regras de negócio, autenticação, perfis de usuário e fluxo real de trabalho.</p>
+          <p>Como a turma de IHC está desenvolvendo o protótipo, o trabalho de desenvolvimento poderá partir de uma base visual e funcional já pensada, o que aproxima a disciplina do cenário profissional em que equipes de design e desenvolvimento colaboram. Isso também ajuda a discutir separação de papéis, interpretação de protótipos e transformação de interface em software funcional.</p>
+          <div class="grid-2">
+            <div class="card"><strong>Foco desta semana</strong>Compreender PHP, o ambiente local, o papel do Composer e o lugar do Laravel no ecossistema.</div>
+            <div class="card"><strong>Foco da próxima semana em diante</strong>Iniciar o projeto com sprints, tarefas e entregas incrementais.</div>
+          </div>
+        </section>
+
+        <section id="conceitos">
+          <span class="badge">Fundamentos</span>
+          <h2 class="section-title">Conceitos que precisamos entender</h2>
+          <h3>O que é PHP</h3>
+          <p>PHP é uma linguagem de script open source, muito usada em desenvolvimento web e especialmente adequada para gerar conteúdo no servidor. 
+            Em termos simples, o navegador pede uma página, o servidor executa o código PHP e devolve HTML pronto para o navegador mostrar.</p>
+          <h3>O que é um servidor local</h3>
+          <p>Servidor local é o ambiente instalado no próprio computador para simular o funcionamento de um servidor web real. 
+            Em vez de publicar o sistema na internet desde o início, é possível testar tudo em localhost, o que facilita experimentação, erros e correções.</p>
+          <h3>O que é XAMPP</h3>
+          <p>XAMPP é um pacote que reúne ferramentas importantes para desenvolvimento local, como Apache, PHP e MySQL/MariaDB. 
+            A vantagem pedagógica é reduzir a dificuldade inicial de instalação separada de cada item e oferecer um ponto de partida mais uniforme conforme sugestão do Kauan.</p>
+          <h3>O que é Composer</h3>
+          <p>Composer é o gerenciador de dependências do PHP. Ele instala bibliotecas, frameworks e pacotes necessários ao projeto, controla versões e permite que o Laravel seja criado e atualizado de maneira mais organizada.</p>
+          <h3>O que é Laravel</h3>
+          <p>Laravel é um framework web para PHP. Um framework fornece estrutura inicial, organização e ferramentas prontas para acelerar o desenvolvimento, permitindo que o foco da disciplina esteja mais no problema da aplicação do que em montar tudo do zero.</p>
+        </section>
+
+        <section id="ambiente">
+          <span class="badge">Configuração</span>
+          <h2 class="section-title">Passos para preparar o ambiente</h2>
+          <p><div class="video-step">
+            <h3>Vídeo de apoio: instalação do ambiente</h3>
+            <p>
+              Se preferir acompanhar o passo a passo em vídeo, você pode assistir ao tutorial
+              abaixo. Ele mostra, na prática, como instalar o XAMPP, configurar o PHP,
+              preparar o Composer e criar o primeiro projeto Laravel no seu computador.
+            </p>
+          
+            <div class="responsive-video">
+              <iframe
+                src="https://www.youtube.com/embed/abXcxLla2iU"
+                title="Instalação do XAMPP, PHP, Composer e criação do projeto Laravel"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div></p>
+          <div class="callout">
+            Obs: ao baixar o executável do XAMPP, ocorre a instalção de um conjunto integrado de ferramentas com versões "atualizadas" do PHP, o que ajuda a criar um ambiente local mais estável para o Composer e para o Laravel.
+          </div>
+          <div class="steps">
+            <div class="step"><strong>Instalar o XAMPP</strong><br>Motivo: ele centraliza Apache, PHP e banco de dados em um pacote simples. Relação com o restante do ambiente: sem PHP e servidor web configurados, o Laravel não terá base para rodar localmente.</div>
+            <div class="step"><strong>Verificar a versão do PHP</strong><br>Motivo: versões recentes do Laravel exigem versões modernas do PHP. Relação com o restante do ambiente: se o PHP estiver abaixo do necessário, o Composer pode falhar na criação do projeto ou instalar dependências incompatíveis.</div>
+            <div class="step"><strong>Instalar o Composer</strong><br>Motivo: é ele quem baixa e organiza as dependências do projeto. Relação com o restante do ambiente: o Laravel depende do Composer para ser criado, atualizado e executado com suas bibliotecas.</div>
+            <div class="step"><strong>Testar os comandos no terminal</strong><br>Use <code>php -v</code> e <code>composer -V</code>. Motivo: confirmar que o sistema reconhece os executáveis. Relação com o restante do ambiente: se o terminal não encontra PHP ou Composer, o projeto não poderá ser criado corretamente.</div>
+            <div class="step"><strong>Criar o projeto Laravel</strong><br>Exemplo: <code>composer create-project laravel/laravel nome-do-projeto</code>. Motivo: gerar uma aplicação base já estruturada. Relação com o restante do ambiente: nesse momento o Composer usa o PHP instalado para baixar o framework e montar a pasta do projeto.</div>
+            <div class="step"><strong>Entrar na pasta e iniciar o servidor</strong><br>Exemplo: <code>cd nome-do-projeto</code> e <code>php artisan serve</code>. Motivo: testar se a aplicação sobe em ambiente local. Relação com o restante do ambiente: aqui os estudantes percebem na prática a integração entre PHP, Composer e ferramentas internas do Laravel.</div>
+            <div class="step"><strong>Configurar banco de dados depois da criação</strong><br>Motivo: o sistema de inscrições precisará persistir dados. Relação com o restante do ambiente: a aplicação Laravel conversa com o banco por configuração do arquivo <code>.env</code>, aproximando os estudantes de um fluxo profissional de configuração por ambiente.</div>
+          </div>
+        </section>
+
+        <section id="relacao">
+          <span class="badge">Integração</span>
+          <h2 class="section-title">Como cada peça se conecta</h2>
+          <table>
+            <thead>
+              <tr><th>Elemento</th><th>Função</th><th>Ligação com os demais</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>PHP</td><td>Executa a lógica do sistema no servidor</td><td>É a linguagem sobre a qual o Laravel funciona</td></tr>
+              <tr><td>Apache / servidor local</td><td>Recebe requisições e entrega a aplicação</td><td>Permite acessar o sistema pelo navegador durante o desenvolvimento</td></tr>
+              <tr><td>Composer</td><td>Gerencia pacotes e dependências</td><td>Instala o Laravel e mantém bibliotecas do projeto</td></tr>
+              <tr><td>Laravel</td><td>Organiza o sistema com estrutura e recursos prontos</td><td>Usa PHP e depende do Composer para instalação e manutenção</td></tr>
+              <tr><td>Banco de dados</td><td>Armazena inscrições, usuários, documentos e status</td><td>Será conectado ao Laravel por configuração de ambiente</td></tr>
+              <tr><td>Arquivo .env</td><td>Guarda configurações locais do projeto</td><td>Separa dados sensíveis e parâmetros do código-fonte</td></tr>
+            </tbody>
+          </table>
+          <p>Entender a relação entre linguagem, servidor, gerenciador de dependências, framework e banco, ajudam resolver problemas de forma menos mecânica e mais consciente.</p>
+          <div>
+              <figure class="concept-figure">
+                <img
+                  src="./media/IMAGEM-CONCEITOS.png"
+                  alt="Esquema visual relacionando PHP, servidor local, XAMPP, Composer e Laravel">
+                <figcaption>
+                  Esquema dos conceitos principais se conectam no ambiente usado na disciplina.
+                </figcaption>
+              </figure>
+            </div>
+        </section>
+
+        <section id="php">
+          <span class="badge">Escolha da linguagem</span>
+          <h2 class="section-title">Por que estudar PHP nesta disciplina</h2>
+          <p>PHP é uma linguagem muito associada ao desenvolvimento web no lado do servidor e tem a vantagem de permitir entrada relativamente rápida para quem já conhece lógica, HTML e programação. 
+            Para fins didáticos, PHP é interessante pois permite entender a passagem do navegador para o servidor e a geração de páginas dinâmicas.</p>
+          <div class="proscons">
+            <div class="card">
+              <strong>Vantagens do PHP</strong>
+              <ul>
+                <li>Sintaxe acessível para quem está migrando de outras linguagens.</li>
+                <li>Grande uso em aplicações web e vasto material de apoio.</li>
+                <li>Integração natural com HTML, útil para páginas dinâmicas.</li>
+                <li>Ecossistema maduro, com frameworks, bibliotecas e documentação.</li>
+                <li>Boa porta de entrada para estudar backend, formulários, sessões e banco de dados.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <strong>Desvantagens do PHP</strong>
+              <ul>
+                <li>Há muito material antigo na internet, o que pode confundir iniciantes.</li>
+                <li>Projetos sem framework tendem a ficar desorganizados com facilidade (em qualquer linguagem).</li>
+                <li>Diferenças entre ambientes locais podem gerar erros de configuração (o famoso "no meu computador funciona!").</li>
+                <li>Parte do preconceito com a linguagem vem de projetos legados e ruins.</li>
+                <li>Aprender backend exige também entender servidor, requisição e persistência (mas aprender na verdade é vantagem!).</li>
+              </ul>
+            </div>
+          </div>
+          <h3>Por que a escolha faz sentido na disciplina</h3>
+          <p>Para um sistema de inscrições, o PHP se encaixa bem porque atua naturalmente com formulários, upload de arquivos, autenticação e persistência em banco, que são exatamente os elementos centrais do projeto.
+            Além disso, teremos contato com uma tecnologia tradicional de desenvolvimento web.</p>
+        </section>
+
+        <section id="laravel">
+          <span class="badge">Escolha do framework</span>
+          <h2 class="section-title">Por que usar Laravel no projeto</h2>
+          <p>Laravel fornece uma estrutura inicial sólida, com organização de rotas, views, validação, configuração por ambiente, integração com banco de dados e ferramental de linha de comando. 
+            Isso favorece a aprendizagem e fixação dos conceitos de orientação a objetos porque o projeto passa a ter entidades, camadas e responsabilidades visíveis.</p>
+          <div class="grid-2">
+            <div class="card"><strong>Ganhos para a disciplina</strong>Melhor organização do código, base moderna de desenvolvimento, uso de convenções, contato com práticas de mercado e possibilidade de crescimento do projeto ao longo dos próximos semestres.</div>
+            <div class="card"><strong>Pontos de atenção</strong>Curva inicial maior do que PHP puro, necessidade de entender terminal e dependências, e maior quantidade de conceitos novos no começo.</div>
+          </div>
+          <h3>Por que não desenvolver tudo em PHP puro</h3>
+          <p>Fazer tudo “na mão” funciona, mas torna mais difícil discutir arquitetura, manutenção e evolução do sistema. 
+            O Laravel facilita a vida e é mais próximo de um ambiente real de desenvolvimento.</p>
+        </section>
+
+        <section id="troca">
+          <span class="badge">Mudança de stack</span>
+          <h2 class="section-title">Por que trocar de linguagem pode ser interessante</h2>
+          <p>Mudar de linguagem em uma disciplina não significa abandonar o que já foi aprendido; significa testar o que é fundamento e o que era apenas costume.
+            Quando você percebe que variáveis, estruturas de controle, funções, classes, objetos, formulários, banco e arquitetura reaparecem em outra linguagem, o aprendizado ganha profundidade e se torna mais flexível.</p>
+          <p>Essa troca também tem valor formativo porque desloca o foco da memorização de sintaxe para a compreensão de conceitos. Que é o que nos importa na disciplina!
+            Em outras palavras, você deixa de pensar “como faço isso em linguagem X?” e passa a pensar “qual problema precisa ser resolvido e quais recursos essa linguagem oferece?”.</p>
+        </section>
+
+        <section id="carreira">
+          <span class="badge">Formação profissional</span>
+          <h2 class="section-title">Como o projeto pode contribuir com a vida profissional?</h2>
+          <div class="grid-2">
+            <div class="card"><strong>Portfólio</strong>Um sistema de inscrições com perfis, upload, validação e acompanhamento é mais relevante no portfólio do que exercícios isolados.</div>
+            <div class="card"><strong>Leitura de requisitos</strong>O projeto obriga a transformar necessidade real em regra de negócio e interface funcional.</div>
+            <div class="card"><strong>Trabalho em equipe</strong>O contato com IHC, backlog, sprints e entregas aproxima a turma do modo como equipes trabalham.</div>
+            <div class="card"><strong>Visão de produto</strong>Os estudantes enxergam que software não é só código; envolve usuário, fluxo, decisão, validação e manutenção.</div>
+            <div class="card"><strong>Experiência real</strong>Apesar do horário reduzido, temos a formação de Squads e distribuição de atividades exatamente como em empresas reais, e teremos uma entrega de produto real, que será utilizado de verdade.</div>
+          </div>
+          <p>Do ponto de vista profissional, esse projeto conversa com situações comuns do mercado: sistemas administrativos, cadastros, análise documental, status de processos e painéis de acompanhamento.
+            Mesmo que você futuramente mude de stack, a experiência de construir esse tipo de solução continua valiosa e os conceitos serão os mesmos.</p>
+        </section>
+
+        <section id="scrum">
+          <span class="badge">Metodologia</span>
+          <h2 class="section-title">Apresentando Scrum de forma simplificada</h2>
+          <p>Scrum é uma metodologia ágil baseada em ciclos curtos de trabalho chamados Sprints. Em vez de tentar construir o sistema inteiro de uma vez, a equipe divide o projeto em partes menores, planeja prioridades, executa uma etapa, revisa o resultado e então segue para a próxima.</p>
+          <h3>Conceitos centrais</h3>
+          <ul>
+            <li><strong>Backlog:</strong> lista priorizada do que o produto precisa ter.</li>
+            <li><strong>Planning:</strong> organização das atividades de acordo com a complexidade, prioridade e estimativas.</li>
+            <li><strong>Sprint:</strong> período curto de desenvolvimento com objetivo definido.</li>
+            <li><strong>Entrega incremental:</strong> ao final de cada Sprint, algo funcional deve existir e ser entregue.</li>
+            <li><strong>Revisão:</strong> momento de olhar o que foi construído e ajustar rumos.</li>
+            <li><strong>Melhoria contínua (retrospectiva):</strong> aprender com erros e refinar o processo.</li>
+          </ul>
+          <h3>Por que Scrum combina com a disciplina</h3>
+          <p>Scrum ajuda a compreender que sistemas reais nascem por evolução e negociação, não por implementação linear e isolada. 
+            Além disso, a divisão em sprints favorece planejamento pedagógico, checkpoints claros e avaliação das entregas concretas.</p>
+        </section>
+
+        <section id="plano">
+          <span class="badge">Organização didática</span>
+          <h2 class="section-title">Plano imediato das aulas</h2>
+          <div class="timeline">
+            <div class="week"><strong>Aula de hoje</strong><br>Apresentação do ambiente, do papel do PHP, do motivo da escolha de PHP e Laravel, da visão geral do projeto e da metodologia de desenvolvimento com Scrum.</div>
+            <div class="week"><strong>Próxima aula</strong><br>Aprofundamento em PHP: sintaxe básica, execução no servidor, integração com HTML, variáveis, estruturas e primeiras noções para preparar a entrada no framework.</div>
+            <div class="week"><strong>Semana seguinte</strong><br>Início do desenvolvimento do projeto, já com foco em etapas, backlog, sprints e entregas progressivas orientadas pelo protótipo da turma de IHC.</div>
+          </div>
+          <h3>Vídeo de apoio para instalação</h3>
+          <p>Orientação indicada: <a href="https://www.youtube.com/watch?v=abXcxLla2iU" target="_blank" rel="noopener noreferrer">assistir ao vídeo de instalação recomendado</a>. A ideia é padronizar o processo para aumentar a chance de sucesso na configuração do XAMPP, do Composer e da criação do projeto Laravel.</p>
+          <p class="footer-note">Registre evidências da instalação de todos os itens, além de uma captura do navegador com a página inicial do Laravel em execução. 
+            Realize a entrega como EXERCÍCIO em exercicios/ambiente-php/seu-nome/README.md</p>
+        </section>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      const btn = document.querySelector('[data-theme-toggle]');
+      const root = document.documentElement;
+      let current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.setAttribute('data-theme', current);
+      btn.addEventListener('click', () => {
+        current = current === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', current);
+      });
+    })();
+  </script>
+</body>
+</html>
