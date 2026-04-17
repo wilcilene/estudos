@@ -27,7 +27,7 @@
   <div class="container intro">
     <div class="eyebrow">Aula introdutória</div>
     <h1>Configuração do ambiente e fundamentos para o projeto da disciplina</h1>
-    <p class="lead">Esta página foi organizada com os passos para preparar o ambiente local com XAMPP, PHP, Composer e Laravel, além de explicar de forma didática por que essas tecnologias foram escolhidas para o projeto de cadastro em concursos, desenvolvido com Scrum, sprints e entregas progressivas.</p>
+    <p class="lead">Esta página foi organizada com os passos para preparar o ambiente local com XAMPP, PHP, Composer e Laravel, além de explicar de forma didática por que essas tecnologias foram escolhidas para o projeto de cadastro de inscrições, desenvolvido com Scrum, sprints e entregas progressivas.</p>
   </div>
 
   <div class="container layout">
@@ -52,7 +52,7 @@
         <section id="visao-geral">
           <span class="badge">Panorama</span>
           <h2 class="section-title">O que será construído</h2>
-          <p>O projeto da disciplina será um sistema web de cadastro em concursos, com preenchimento de dados, envio de foto e arquivos, análise posterior da inscrição e acompanhamento do status pelo inscrito. Esse tipo de problema é bom para ensino porque envolve cadastro, validação, armazenamento, regras de negócio, autenticação, perfis de usuário e fluxo real de trabalho.</p>
+          <p>O projeto da disciplina será um sistema web de inscrições, com preenchimento de dados, envio de foto e arquivos, análise posterior da inscrição e acompanhamento do status pelo inscrito. Esse tipo de problema é bom para ensino porque envolve cadastro, validação, armazenamento, regras de negócio, autenticação, perfis de usuário e fluxo real de trabalho.</p>
           <p>Como a turma de IHC está desenvolvendo o protótipo, o trabalho de desenvolvimento poderá partir de uma base visual e funcional já pensada, o que aproxima a disciplina do cenário profissional em que equipes de design e desenvolvimento colaboram. Isso também ajuda a discutir separação de papéis, interpretação de protótipos e transformação de interface em software funcional.</p>
           <div class="grid-2">
             <div class="card"><strong>Foco desta semana</strong>Compreender PHP, o ambiente local, o papel do Composer e o lugar do Laravel no ecossistema.</div>
@@ -139,6 +139,7 @@
                 <figcaption>
                   Esquema dos conceitos principais se conectam no ambiente usado na disciplina.
                 </figcaption>
+                <p class="image-credit">Imagem gerada pelo ChatGPT</p>
               </figure>
             </div>
         </section>
@@ -188,7 +189,251 @@
           <p>Fazer tudo “na mão” funciona, mas torna mais difícil discutir arquitetura, manutenção e evolução do sistema. 
             O Laravel facilita a vida e é mais próximo de um ambiente real de desenvolvimento.</p>
         </section>
-
+        
+        <section id="mvc">
+          <span class="badge">Arquitetura</span>
+          <h2 class="section-title">Entendendo o padrão MVC</h2>
+        
+          <p>
+            Laravel segue o padrão MVC, isso quer dizer que a aplicação
+            é organizada em três blocos principais: <strong>Model</strong>, <strong>View</strong>
+            e <strong>Controller</strong>. A ideia central é separar responsabilidades para que
+            o código fique mais claro, mais fácil de manter e mais fácil de testar.
+          </p>
+        
+          <!-- IMAGEM 1: VISÃO GERAL DO MVC -->
+          <figure class="concept-figure">
+            <img
+              src="./media/IMAGEM-MVC-GERAL.png"
+              alt="Diagrama simples mostrando Model, View e Controller conectados entre si e com o usuário">
+            <figcaption>
+              Visão geral do MVC: o usuário interage com a View, o Controller recebe a requisição
+              e conversa com o Model, e o resultado volta para a View.
+            </figcaption>
+            <p class="image-credit">Imagem gerada pelo ChatGPT</p>
+          </figure>
+        
+          <h3>Separação de responsabilidades</h3>
+          <p>
+            O padrão MVC trabalha com o princípio de <strong>separação de responsabilidades</strong>.
+            Em vez de misturar tudo no mesmo arquivo, cada parte da aplicação cuida de um tipo
+            de tarefa. Isso ajuda você a localizar problemas, reaproveitar código e evoluir o
+            sistema sem “quebrar” tudo a cada alteração.
+          </p>
+        
+          <div class="grid-2">
+            <div class="card">
+              <strong>Model (Modelo)</strong>
+              <p>
+                O Model representa os dados e as regras de negócio. É a parte do sistema
+                que sabe conversar com o banco de dados e que sabe o que pode ou não pode
+                acontecer com essas informações. Em um sistema de inscrições, por exemplo,
+                os Models podem representar <em>Candidato</em>, <em>Edital</em>,
+                <em>Técnico</em>.
+              </p>
+            </div>
+            <div class="card">
+              <strong>View (Visão)</strong>
+              <p>
+                A View é a camada que cuida do que você enxerga na tela: HTML, CSS e,
+                no caso do Laravel, os arquivos Blade. Ela é responsável por exibir os
+                dados vindos do Model de forma organizada e amigável para o usuário.
+              </p>
+            </div>
+          </div>
+        
+          <div class="grid-2">
+            <div class="card">
+              <strong>Controller (Controlador)</strong>
+              <p>
+                O Controller faz a ponte entre o que o usuário pede e o que o sistema
+                precisa fazer. Ele recebe as requisições (por exemplo, um formulário de
+                inscrição enviado), conversa com os Models para ler ou gravar dados e
+                decide qual View deve ser retornada com o resultado.
+              </p>
+            </div>
+            <div class="card">
+              <strong>Por que isso é importante?</strong>
+              <p>
+                Em vez de ter um arquivo gigante misturando HTML, SQL e regras de negócio,
+                o MVC incentiva que você divida o sistema em partes menores, com funções
+                mais claras. Isso torna o código mais legível, mais fácil de testar e
+                mais simples de trabalhar em equipe.
+              </p>
+            </div>
+          </div>
+        
+          <!-- IMAGEM 2: EXEMPLO CONCRETO NO CONTEXTO DO PROJETO -->
+          <figure class="concept-figure">
+            <img
+              src="./media/IMAGEM-MVC-CONCURSO.png"
+              alt="Exemplo de MVC aplicado ao sistema de inscrições, mostrando View, Controller e Model específicos">
+            <figcaption>
+              Exemplo de MVC aplicado ao sistema de inscrições: View com o formulário,
+              Controller recebendo a requisição e Model gravando os dados da inscrição.
+            </figcaption>
+            <p class="image-credit">Imagem gerada pelo ChatGPT</p>
+          </figure>
+          <p>O protótipo do sistema real ainda não foi finalizado, por isso temos apenas um exemplo aqui. 
+            A data de entrega do protótipo está prevista para 22/04.</p>
+        
+          <h3>Como o fluxo acontece na prática</h3>
+          <p>
+            Em uma aplicação web, o fluxo mais comum é o seguinte: você acessa uma página
+            (View), interage com a interface (por exemplo, clicando em um botão ou
+            enviando um formulário), essa ação gera uma requisição que chega ao Controller,
+            o Controller conversa com os Models necessários, e, por fim, uma nova View
+            é enviada de volta com o resultado.
+          </p>
+        
+          <p>
+            No caso do sistema de inscrições, quando o candidato preenche uma inscrição e clica
+            em “Enviar”, a requisição passa pela rota, chega ao Controller responsável
+            por inscrições, que valida os dados, usa o Model para salvar no banco de dados
+            e, então, escolhe uma View para mostrar se deu tudo certo ou se há algo a
+            corrigir no formulário.
+          </p>
+        
+          <!-- IMAGEM 3: LINHA DO TEMPO DO FLUXO MVC -->
+          <figure class="concept-figure">
+            <img
+              src="./media/IMAGEM-MVC-FLUXO.png"
+              alt="Linha do tempo mostrando a sequência: View, Controller, Model e de volta para a View">
+            <figcaption>
+               Atribuição de tarefa em fluxo MVC <strong>simplificado</strong>: interação na View, processamento
+              no Controller, acesso ao Model e resposta de <strong>volta</strong> para a View.
+            </figcaption>
+            <p class="image-credit">Imagem gerada pelo ChatGPT</p>
+          </figure>
+        
+          <h3>Benefícios os desenvolvedores</h3>
+          <ul>
+            >Facilidade para localizar onde está um problema (na View, no Controller ou no Model).</li>
+            >Maior organização quando várias pessoas trabalham no mesmo projeto.</li>
+            >Possibilidade de reaproveitar Views com dados diferentes ou Models em telas diferentes.</li>
+            >Código mais preparado para evolução, manutenção e testes automatizados.</li>
+          </ul>
+        
+          <p>
+            Ao longo da disciplina, o objetivo é que você consiga reconhecer claramente
+            onde cada parte do seu código se encaixa nesse padrão. Isso é útil não só
+            em PHP e Laravel, mas também em outras tecnologias que organizam a aplicação
+            de forma parecida.
+          </p>
+        </section>
+        <section id="cliente-servidor">
+          <span class="badge">Arquitetura</span>
+          <h2 class="section-title">Como o sistema funciona em cliente–servidor</h2>
+        
+          <p>
+            O sistema de inscrições será executado em uma arquitetura do tipo
+            <strong>cliente–servidor</strong>. Isso significa que existe um lado
+            responsável por mostrar as telas e receber as ações do usuário
+            (cliente, normalmente o navegador) e um lado responsável por
+            processar as requisições, aplicar regras de negócio e conversar com
+            o banco de dados (servidor, onde o Laravel está rodando).
+          </p>
+        
+          <p>
+            Em termos práticos, você acessa o sistema pelo navegador, o navegador
+            envia uma requisição HTTP para o servidor Laravel, o servidor executa
+            o código PHP, acessa o banco de dados quando preciso e devolve uma
+            resposta (normalmente uma página HTML) para o navegador exibir.
+          </p>
+        
+          <!-- IMAGEM: DIAGRAMA CLIENTE–SERVIDOR + MVC -->
+          <figure class="concept-figure">
+            <img
+              src="./media/IMAGEM-CLIENTE-SERVIDOR-MVC.png"
+              alt="Diagrama mostrando navegador como cliente, servidor Laravel com MVC e banco de dados ao fundo">
+            <figcaption>
+              Arquitetura cliente–servidor usada no sistema: o navegador (cliente)
+              envia requisições HTTP para o servidor Laravel (MVC), que acessa o
+              banco de dados e retorna respostas para o navegador.
+            </figcaption>
+            <p class="image-credit">Imagem gerada pelo ChatGPT</p>
+          </figure>
+        
+          <h3>Fluxo passo a passo em uma inscrição</h3>
+          <p>
+            Veja um exemplo simplificado de como o sistema se comporta
+            quando o candidato realiza uma inscrição, nessa
+            arquitetura cliente–servidor.
+          </p>
+        
+          <ol>
+            <li>
+              <strong>O candidato acessa a página de inscrição.</strong><br>
+              No navegador, digita ou clica no endereço da página de
+              inscrição. O navegador envia uma requisição HTTP (método GET)
+              para o servidor.
+            </li>
+            <li>
+              <strong>O servidor Laravel recebe a requisição.</strong><br>
+              O Laravel identifica a rota configurada para aquela URL e chama o
+              Controller correspondente (por exemplo, <code>InscricaoController@create</code>),
+              que decide qual View deve ser exibida.
+            </li>
+            <li>
+              <strong>Uma View é enviada para o navegador.</strong><br>
+              O servidor renderiza um arquivo *.blade.php com o formulário de inscrição
+              (View) e devolve o HTML na resposta HTTP. O navegador exibe essa
+              página para o candidato
+            </li>
+            <li>
+              <strong>O candidato preenche o formulário e envia.</strong><br>
+              Ao clicar em “Enviar”, o navegador manda uma nova requisição HTTP
+              (agora normalmente POST) para o servidor, com todos os dados do
+              formulário e os arquivos anexados.
+            </li>
+            <li>
+              <strong>O Controller processa os dados.</strong><br>
+              O Controller responsável pela ação (por exemplo,
+              <code>InscricaoController@store</code>) recebe a requisição,
+              valida os campos, verifica regras de negócio e, se estiver tudo
+              certo, chama os Models necessários para salvar a inscrição no
+              banco de dados.
+            </li>
+            <li>
+              <strong>Os Models conversam com o banco de dados.</strong><br>
+              Os Models (como <code>Inscricao</code>, <code>Usuario</code>,
+              <code>Edital</code>) usam o Eloquent para criar ou atualizar
+              registros no banco de dados, registrando os dados da inscrição
+              e os caminhos dos arquivos enviados.
+            </li>
+            <li>
+              <strong>O servidor monta a resposta.</strong><br>
+              Depois de salvar ou encontrar um erro, o Controller escolhe qual
+              View devolver: uma página de sucesso com a confirmação da
+              inscrição ou o mesmo formulário com mensagens de erro nos campos
+              que precisam ser corrigidos.
+            </li>
+            <li>
+              <strong>O navegador exibe o resultado.</strong><br>
+              O navegador recebe o HTML na resposta e exibe a tela de confirmação
+              ou o formulário com os erros. Você vê o resultado da ação, mas
+              todo o processamento interno aconteceu no servidor.
+            </li>
+          </ol>
+        
+          <h3>Ligando isso com os conceitos da disciplina</h3>
+          <p>
+            Na prática, a arquitetura cliente–servidor se combina com o padrão
+            MVC da seguinte forma: o <strong>cliente</strong> (navegador) é
+            responsável pela interação com o candidato; o <strong>servidor Laravel</strong>
+            organiza o código em Model, View e Controller; e o
+            <strong>banco de dados</strong> guarda de forma persistente as
+            informações do sistema de inscrições
+          </p>
+        
+          <p>
+            Ao longo do projeto, cada vez que você criar uma rota, um Controller
+            ou um Model, estará reforçando essa ideia de que o cliente faz o
+            pedido, o servidor decide o que fazer e responde, e o banco de dados
+            fornece a memória de longo prazo para a aplicação.
+          </p>
+        </section>
+        
         <section id="troca">
           <span class="badge">Mudança de stack</span>
           <h2 class="section-title">Por que trocar de linguagem pode ser interessante</h2>
