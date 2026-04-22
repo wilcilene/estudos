@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Revisão – Matemática Discreta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="md-estilo.css">
+
+    <!-- MathJax para fórmulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1 id="topo">Revisão de Conteúdo</h1>
+
+    <p><strong>Disciplina:</strong> Matemática Discreta</p>
+
+    <p>
+        Esta página foi criada para você revisar os principais conceitos de Matemática Discreta
+        usando um único contexto. A ideia é que você consiga reforçar o que já viu em aula
+        e também acompanhar o conteúdo mesmo se não puder estar presente em alguma aula.
+    </p>
+
+    <div class="nota">
+        <h2>Como usar esta revisão</h2>
+        <ul>
+            <li>Leia o problema inicial e tente lembrar como modelar a situação com conjuntos.</li>
+            <li>Passe pelos tópicos na ordem ou vá direto ao que você quer revisar.</li>
+            <li>Antes de abrir cada resolução, tente resolver sozinho.</li>
+            <li>Use os códigos em Python (ou codifique em outra linguagem) como apoio para experimentar, testar e explorar os exemplos.</li>
+        </ul>
+    </div>
+
+    <div class="nota">
+        <h2>Índice da revisão</h2>
+        <ul>
+            <li><a href="#problema">Problema didático inicial</a></li>
+            <li><a href="#conjuntos">1. Conjuntos</a></li>
+            <li><a href="#operacoes">2. Operações com conjuntos</a></li>
+            <li><a href="#partes">3. Conjunto das partes</a></li>
+            <li><a href="#demorgan">4. Leis de De Morgan</a></li>
+            <li><a href="#principios-contagem">5. Análise combinatória básica</a></li>
+            <li><a href="#permutacoes">6. Permutações</a></li>
+            <li><a href="#arranjos">7. Arranjos</a></li>
+            <li><a href="#combinacoes">8. Combinações</a></li>
+            <li><a href="#metodos-prova">9. Métodos de prova</a></li>
+            <li><a href="#contradicao">10. Prova por contradição</a></li>
+            <li><a href="#inducao">11. Princípio da indução matemática</a></li>
+            <li><a href="#recursao">12. Recursão e estruturas recursivas</a></li>
+            <li><a href="#resumo-geral">13. Resumo geral</a></li>
+            <li><a href="#exercicios">14. Exercícios de fixação</a></li>
+            <li><a href="index.html">Voltar para a página principal</a></li>
+        </ul>
+    </div>
+
+    <!-- Problema -->
+    <div class="intro" id="problema">
+        <h2>Problema</h2>
+        <p>
+            Imagine que a turma tem 5 estudantes:
+        </p>
+        <p>\[
+            E = \{A, B, C, D, E\}
+        \]</p>
+        <p>
+            Durante a semana, vocês realizaram duas atividades:
+        </p>
+        <ul>
+            <li><strong>Projeto Web</strong></li>
+            <li><strong>Resolução de Problemas</strong></li>
+        </ul>
+        <p>
+            Os estudantes que realizaram cada atividade foram:
+        </p>
+        <p>\[
+            P = \{A, B, C\}
+        \]</p>
+        <p>\[
+            R = \{B, C, D\}
+        \]</p>
+        <p>
+            A partir desse cenário, vamos revisar conjuntos, operações, contagem,
+            métodos de prova, indução e recursão, sempre considerando esse mesmo exemplo.
+        </p>
+        <p><a href="#topo">Voltar ao topo</a></p>
+    </div>
+
+    <!-- 1. Conjuntos -->
+    <div class="aula" id="conjuntos">
+        <h2>1. Conjuntos</h2>
+
+        <div class="objetivos">
+            <strong>Ideia-chave:</strong> você usa conjuntos para representar coleções bem definidas
+            de elementos (estudantes, tarefas, números, etc.).
+        </div>
+
+        <div class="exemplo">
+            <h3>Revendo o exemplo</h3>
+            <p>Conjunto de todos os estudantes:</p>
+            <p>\[
+                E = \{A, B, C, D, E\}
+            \]</p>
+            <p>Conjunto de quem fez Projeto Web:</p>
+            <p>\[
+                P = \{A, B, C\}
+            \]</p>
+            <p>Conjunto de quem fez Resolução de Problemas:</p>
+            <p>\[
+                R = \{B, C, D\}
+            \]</p>
+        </div>
+
+        <div class="algoritmo">
+<pre><code>estudantes = {"A", "B", "C", "D", "E"}
+P = {"A", "B", "C"}
+R = {"B", "C", "D"}
+
+print("E =", estudantes)
+print("P =", P)
+print("R =", R)</code></pre>
+        </div>
+        <p><a href="#topo">Voltar ao topo</a> · <a href="index.html">Página principal</a></p>
+    </div>
+
+    <!-- 2. Operações com conjuntos -->
+    <div class="aula" id="operacoes">
+        <h2>2. Operações com conjuntos</h2>
+
+        <div class="objetivos">
+            <strong>Ideia-chave:</strong> união, interseção, diferença e complemento
+            ajudam você a responder perguntas do tipo “quem fez o quê?”.
+        </div>
+
+        <div class="exemplo">
+            <h3>União</h3>
+            <p>
+                Quem fez pelo menos uma das atividades?
+            </p>
+            <p>\[
+                P \cup R = \{A, B, C, D\}
+            \]</p>
+        </div>
+
+        <div class="exemplo">
+            <h3>Interseção</h3>
+            <p>
+                Quem fez as duas atividades?
+            </p>
+            <p>\[
+                P \cap R = \{B, C\}
+            \]</p>
+        </div>
+
+        <div class="exemplo">
+            <h3>Diferença</h3>
+            <p>
+                Quem fez Projeto Web, mas não fez Resolução de Problemas?
+            </p>
+            <p>\[
+                P - R = \{A\}
+            \]</p>
+        </div>
+
+        <div class="algoritmo">
+<pre><code>uniao = P.union(R)
+intersecao = P.intersection(R)
+diferenca = P.difference(R)
+
+print("P ∪ R =", uniao)
+print("P ∩ R =", intersecao)
+print("P - R =", diferenca)</code></pre>
+        </div>
+        <p><a href="#topo">Voltar ao topo</a> · <a href="index.html">Página principal</a></p>
+    </div>
+
+    <!-- 3. Conjunto das partes -->
+    <div class="aula" id="partes">
+        <h2>3. Conjunto das partes</h2>
+
+        <div class="objetivos">
+            <strong>Ideia-chave:</strong> o conjunto das partes de \(X\) (denotado \(\mathcal{P}(X)\))
+            contém todos os subconjuntos possíveis de \(X\).
+        </div>
+
+        <div class="exemplo">
+            <h3>Revendo o exemplo</h3>
+            <p>Se você olhar apenas para:</p>
+            <p>\[
+                P = \{A, B, C\}
+            \]</p>
+            <p>o conjunto das partes é:</p>
+            <p>\[
+                \mathcal{P}(P) =
+                \{
+                \emptyset,\{A\},\{B\},\{C\},
+                \{A,B\},\{A,C\},\{B,C\},\{A,B,C\}
+                \}
+            \]</p>
+            <p>
+                Cada subconjunto pode ser entendido como um grupo possível
+                de pessoas que fizeram Projeto Web.
+            </p>
+        </div>
+
+        <div class="algoritmo">
+<pre><code>from itertools import combinations
+
+P = ["A", "B", "C"]
+
+for k in range(len(P) + 1):
+    for grupo in combinations(P, k):
+        print(set(grupo))</code></pre>
+        </div>
+        <p><a href="#topo">Voltar ao topo</a> · <a href="index.html">Página principal</a></p>
+    </div>
+
+    <!-- 4. De Morgan -->
+    <div class="aula" id="demorgan">
+        <h2>4. Leis de De Morgan</h2>
+
+        <div class="objetivos">
+            <strong>Ideia-chave:</strong> as leis de De Morgan dizem como negar
+            afirmações com “ou” e “e” usando complementos de conjuntos.
+        </div>
+
+        <div class="exemplo">
+            <h3>Revendo o exemplo</h3>
+            <p>Considere o universo:</p>
+            <p>\[
+                U = E = \{A, B, C, D, E\}
+            \]</p>
+            <p>Complementos:</p>
+            <p>\[
+                \overline{P} = U - P = \{D, E\}, \quad
+                \overline{R} = U - R = \{A, E\}
+            \]</p>
+            <p>Você tem:</p>
+            <p>\[
+                P \cup R = \{A, B, C, D\}
+            \]</p>
+            <p>\[
+                \overline{P \cup R} = U - (P \cup R) = \{E\}
+            \]</p>
+            <p>\[
+                \overline{P} \cap \overline{R} = \{D, E\} \cap \{A, E\} = \{E\}
+            \]</p>
+        </div>
+
+        <div class="algoritmo">
+<pre><code>U = {"A", "B", "C", "D", "E"}
+P = {"A", "B", "C"}
+R = {"B", "C", "D"}
+
+comp_P = U - P
+comp_R = U - R
+
+lado_esq = U - (P.union(R))
+lado_dir = comp_P.intersection(comp_R)
+
+print("¬(P ∪ R) =", lado_esq)
+print("¬P ∩ ¬R =", lado_dir)</code></pre>
+        </div>
+        <p><a href="#topo">Voltar ao topo</a> · <a href="index.html">Página principal</a></p>
+    </div>
+
+    <!-- 5. Princípios de contagem -->
+    <div class="aula" id="principios-contagem">
+        <h2>5. Análise combinatória básica</h2>
+
+        <div class="objetivos">
+            <strong>Ideia-chave:</strong> você usa os princípios aditivo e multiplicativo
+            para transformar problemas em contagens.
+        </div>
+
+        <div class="exemplo">
+            <h3>Princípio aditivo</h3>
+            <p>
+                Quantos estudantes fizeram pelo menos uma das atividades?
+            </p>
+            <p>\[
+                |P \cup R| = |P| + |R| - |P \cap R|
+                = 3 + 3 - 2 = 4
+            \]</p>
+            <p>
+                Você soma as quantidades de cada “caso” e subtrai quem foi
+                contado duas vezes.
+            </p>
+        </div>
+
+        <div class="exemplo">
+            <h3>Princípio multiplicativo</h3>
+            <p>
+                Quantas maneiras existem de escolher um primeiro e um segundo
+                estudante para uma apresentação?
+            </p>
+            <ul>
+                <li>5 escolhas para o primeiro;</li>
+                <li>4 escolhas possíveis para o segundo.</li>
+            </ul>
+            <p>\[
+                5 \cdot 4 = 20
+            \]</p>
+        </div>
+
+        <div class="algoritmo">
+<pre><code>from itertools import permutations
+
+E = ["A", "B", "C", "D", "E"]
+
+pares = list(permutations(E, 2))
+print("Total de pares ordenados (2 estudantes):", len(pares))</code></pre>
+        </div>
+        <p><a href="#topo">Voltar ao topo</a> · <a href="index.html">Página principal</a></p>
+    </div>
+
+    <!-- 6. Permutações -->
+    <div class="aula" id="permutacoes">
+        <h2>6. Permutações</h2>
+
+        <div class="objetivos">
+            <strong>Ideia-chave:</strong> permutação é uma forma de você
+            contar ordenações de todos os elementos.
+        </div>
+
+        <div class="exemplo">
+            <h3>Revendo o exemplo</h3>
+            <p>Quantas ordens de apresentação diferentes vocês podem formar com os 5 estudantes?</p>
+            <p>\[
+                P_5 = 5! = 120
+            \]</p>
+            <p>Algumas ordens possíveis:</p>
+            <p>\[
+                (A,B,C,D,E), \quad (B,A,C,D,E)
+            \]</p>
+        </div>
+
+        <div class="algoritmo">
+<pre><code>from itertools import permutations
+
+E = ["A", "B", "C", "D", "E"]
+
+for i, ordem in enumerate(permutations(E), start=1):
+    print(ordem)
+    if i == 10:
+        break</code></pre>
+        </div>
+        <p><a href="#topo">Voltar ao topo</a> · <a href="index.html">Página principal</a></p>
+    </div>
+
+    <!-- 7. Arranjos -->
+    <div class="aula" id="arranjos">
+        <h2>7. Arranjos</h2>
+
+        <div class="objetivos">
+            <strong>Ideia-chave:</strong> em um arranjo, você escolhe <em>parte</em> dos elementos
+            e a ordem importa.
+        </div>
+
+        <div class="exemplo">
+            <h3>Revendo o exemplo</h3>
+            <p>
+                De quantas formas você pode escolher 3 estudantes para apresentar em ordem
+                (1º, 2º, 3º)?
+            </p>
+            <p>\[
+                A(5,3) = \frac{5!}{(5-3)!} = \frac{5!}{2!} = 60
+            \]</p>
+            <p>Um arranjo possível:</p>
+            <p>\[
+                (A,C,E)
+            \]</p>
+        </div>
+
+        <div class="algoritmo">
+<pre><code>import math
+
+n = 5
+p = 3
+
+print("A(5,3) =", math.factorial(n) // math.factorial(n - p))</code></pre>
+        </div>
+        <p><a href="#topo">Voltar ao topo</a> · <a href="index.html">Página principal</a></p>
+    </div>
+
+    <!-- 8. Combinações -->
+    <div class="aula" id="combinacoes">
+        <h2>8. Combinações</h2>
+
+        <div class="objetivos">
+            <strong>Ideia-chave:</strong> em uma combinação, você só se preocupa
+            com <em>quem</em> está no grupo, não com a ordem.
+        </div>
+
+        <div class="exemplo">
+            <h3>Revendo o exemplo</h3>
+            <p>
+                Quantos grupos diferentes de 3 estudantes podem ser formados?
+            </p>
+            <p>\[
+                C(5,3) = \frac{5!}{3! \cdot 2!} = 10
+            \]</p>
+            <p>Alguns grupos possíveis:</p>
+            <p>\[
+                \{A,B,C\}, \quad \{A,C,E\}
+            \]</p>
+        </div>
+
+        <div class="algoritmo">
+<pre><code>import math
+from itertools import combinations
+
+E = ["A", "B", "C", "D", "E"]
+
+print("C(5,3) =", math.comb(5, 3))
+
+for grupo in combinations(E, 3):
+    print(set(grupo))</code></pre>
+        </div>
+        <p><a href="#topo">Voltar ao topo</a> · <a href="index.html">Página principal</a></p>
+    </div>
+
+    <!-- 9. Métodos de prova -->
+    <div class="aula" id="metodos-prova">
+        <h2>9. Métodos de prova</h2>
+
+        <div class="objetivos">
+            <strong>Ideia-chave:</strong> você pode justificar propriedades com
+            prova direta ou por contraposição.
+        </div>
+
+        <div class="exemplo">
+            <h3>Prova direta</h3>
+            <p>Proposição: se \(x \in P \cap R\), então \(x \in P\) e \(x \in R\).</p>
+            <p><strong>Como raciocinar:</strong></p>
+            <ol>
+                <li>Pela definição de interseção, \(x \in P \cap R\) significa que \(x\) está nos dois conjuntos.</li>
+                <li>Logo, você conclui diretamente que \(x \in P\) e \(x \in R\).</li>
+            </ol>
+        </div>
+
+        <div class="exemplo">
+            <h3>Prova por contraposição</h3>
+            <p>
+                Proposição: “Se um estudante não está em \(P \cup R\),
+                então ele não fez Projeto Web.”
+            </p>
+            <p>Forma original: se \(x \notin P \cup R\), então \(x \notin P\).</p>
+            <p>Contrapositiva: se \(x \in P\), então \(x \in P \cup R\).</p>
+            <p><strong>Como raciocinar:</strong></p>
+            <ol>
+                <li>Assuma \(x \in P\).</li>
+                <li>Pela definição de união, todo elemento de \(P\) pertence a \(P \cup R\).</li>
+                <li>Assim, você mostra a contrapositi­va, que é logicamente equivalente
+                    à proposição original.</li>
+            </ol>
+        </div>
+
+        <div class="algoritmo">
+<pre><code>P = {"A", "B", "C"}
+R = {"B", "C", "D"}
+U = {"A", "B", "C", "D", "E"}
+
+for x in U:
+    if x not in P.union(R):
+        assert x not in P   # se isso quebrasse, a proposição seria falsa</code></pre>
+        </div>
+        <p><a href="#topo">Voltar ao topo</a> · <a href="index.html">Página principal</a></p>
+    </div>
+
+    <!-- 10. Prova por contradição -->
+    <div class="aula" id="contradicao">
+        <h2>10. Prova por contradição</h2>
+
+        <div class="objetivos">
+            <strong>Ideia-chave:</strong> você assume o contrário do que quer provar
+            e chega a um absurdo.
+        </div>
+
+        <div class="exemplo">
+            <h3>Exemplo com subconjuntos</h3>
+            <p>
+                Proposição: “Não existe estudante em \(P\) que não pertença a \(E\)”.
+            </p>
+            <p><strong>Como raciocinar:</strong></p>
+            <ol>
+                <li>Suponha que exista \(x\) tal que \(x \in P\) e \(x \notin E\).</li>
+                <li>Mas, pelo próprio enunciado, \(P\) é subconjunto de \(E\).</li>
+                <li>Então você teria ao mesmo tempo \(x \in E\) e \(x \notin E\), o que é impossível.</li>
+                <li>Logo, a suposição inicial está errada, e a proposição é verdadeira.</li>
+            </ol>
+        </div>
+
+        <div class="algoritmo">
+<pre><code>P = {"A", "B", "C"}
+E = {"A", "B", "C", "D", "E"}
+
+for x in P:
+    assert x in E</code></pre>
+        </div>
+        <p><a href="#topo">Voltar ao topo</a> · <a href="index.html">Página principal</a></p>
+    </div>
+
+    <!-- 11. Indução matemática -->
+    <div class="aula" id="inducao">
+        <h2>11. Princípio da indução matemática</h2>
+
+        <div class="objetivos">
+            <strong>Ideia-chave:</strong> com indução, você mostra que uma
+            propriedade vale para um valor inicial e que, se vale para \(n\),
+            então vale para \(n+1\).
+        </div>
+
+        <div class="exemplo">
+            <h3>Identidade binomial</h3>
+            <p>
+                Você já viu que o número de subconjuntos de um conjunto de tamanho \(n\)
+                é \(2^n\). Também vale que:
+            </p>
+            <p>\[
+                \sum_{k=0}^{n} \binom{n}{k} = 2^n
+            \]</p>
+            <p>
+                O lado esquerdo soma as combinações de tamanho \(0,1,\dots,n\);
+                o lado direito é o total de subconjuntos.
+            </p>
+
+            <p><strong>Base:</strong> \(n = 0\).</p>
+            <p>\[
+                \sum_{k=0}^0 \binom{0}{k} = \binom{0}{0} = 1 = 2^0
+            \]</p>
+
+            <p><strong>Ideia do passo indutivo:</strong></p>
+            <ol>
+                <li>Assuma que a igualdade vale para um certo \(n\).</li>
+                <li>Usando propriedades de \(\binom{n}{k}\), você reescreve a soma
+                    para \(n+1\) e obtém \(2^{n+1}\).</li>
+            </ol>
+        </div>
+
+        <div class="algoritmo">
+<pre><code>import math
+
+def soma_combinacoes(n):
+    return sum(math.comb(n, k) for k in range(n + 1))
+
+for n in range(0, 6):
+    print(n, soma_combinacoes(n), "=", 2**n)</code></pre>
+        </div>
+        <p><a href="#topo">Voltar ao topo</a> · <a href="index.html">Página principal</a></p>
+    </div>
+
+    <!-- 12. Recursão -->
+    <div class="aula" id="recursao">
+        <h2>12. Recursão e estruturas recursivas</h2>
+
+        <div class="objetivos">
+            <strong>Ideia-chave:</strong> em uma definição recursiva, você
+            descreve o caso base e depois como obter o próximo valor a partir dos anteriores.
+        </div>
+
+        <div class="exemplo">
+            <h3>Função recursiva f(n)</h3>
+            <p>
+                Defina \(f(n)\) como o número de subconjuntos de um conjunto com \(n\) elementos.
+            </p>
+            <p>Você pode descrever \(f\) assim:</p>
+            <p>\[
+                f(0) = 1
+            \]</p>
+            <p>\[
+                f(n+1) = 2 \cdot f(n)
+            \]</p>
+            <p>
+                Ao adicionar um novo estudante, cada subconjunto antigo gera
+                dois: um que não inclui e um que inclui esse novo estudante.
+            </p>
+        </div>
+
+        <div class="exemplo">
+            <h3>Ligando recursão e indução</h3>
+            <p>
+                Com indução, você mostra que a solução fechada dessa definição é \(f(n) = 2^n\).
+            </p>
+            <p><strong>Base:</strong> \(f(0) = 1 = 2^0\).</p>
+            <p><strong>Passo:</strong> se \(f(n) = 2^n\), então
+                \(f(n+1) = 2 \cdot f(n) = 2 \cdot 2^n = 2^{n+1}\).</p>
+        </div>
+
+        <div class="algoritmo">
+<pre><code>def f(n):
+    if n == 0:
+        return 1
+    return 2 * f(n - 1)
+
+for n in range(0, 6):
+    print(n, f(n))</code></pre>
+        </div>
+        <p><a href="#topo">Voltar ao topo</a> · <a href="index.html">Página principal</a></p>
+    </div>
+
+    <!-- 13. Resumo geral -->
+    <div class="resumo" id="resumo-geral">
+        <h2>13. Resumo geral dos conceitos</h2>
+        <ul>
+            <li>Você usa <strong>conjuntos</strong> para modelar coleções de elementos.</li>
+            <li>O <strong>conjunto das partes</strong> junta todos os subconjuntos possíveis.</li>
+            <li>As <strong>leis de De Morgan</strong> ajudam a negar condições com “ou” e “e”.</li>
+            <li>Os <strong>princípios de contagem</strong> transformam situações em produtos e somas.</li>
+            <li><strong>Permutações, arranjos e combinações</strong> formalizam as contagens de ordens e grupos.</li>
+            <li><strong>Métodos de prova</strong> (direta, contraposição, contradição) estruturam seus argumentos.</li>
+            <li><strong>Indução</strong> prova propriedades para todo \(n\) passo a passo.</li>
+            <li><strong>Recursão</strong> define objetos em função de versões menores deles mesmos.</li>
+        </ul>
+        <p><a href="#topo">Voltar ao topo</a> · <a href="index.html">Página principal</a></p>
+    </div>
+
+    <!-- 14. Exercícios -->
+    <div class="aula" id="exercicios">
+        <h2>14. Exercícios de fixação</h2>
+
+        <div class="exercicio">
+            <h3>Exercício 1 – interpretação de conjuntos</h3>
+            <p>
+                Responda em uma frase para cada item:
+            </p>
+            <ol>
+                <li>O que representa \(P \cup R\)?</li>
+                <li>O que representa \(P \cap R\)?</li>
+                <li>O que representa \(\overline{P \cup R}\)?</li>
+            </ol>
+            <button onclick="toggleRes('fix1')">Ver sugestão</button>
+            <div id="fix1" class="resolucao">
+                <p>
+                    \(P \cup R\): quem fez pelo menos uma atividade;
+                    \(P \cap R\): quem fez as duas;
+                    \(\overline{P \cup R}\): quem não fez nenhuma.
+                </p>
+            </div>
+        </div>
+
+        <div class="exercicio">
+            <h3>Exercício 2 – princípios de contagem</h3>
+            <p>
+                Justifique, com palavras, por que:
+            </p>
+            <ol>
+                <li>o número de pares ordenados (1º, 2º) de estudantes é \(5 \cdot 4\);</li>
+                <li>o número total de subconjuntos de \(E\) é \(2^5\).</li>
+            </ol>
+            <button onclick="toggleRes('fix2')">Ver sugestão</button>
+            <div id="fix2" class="resolucao">
+                <p>
+                    No primeiro caso, você faz duas escolhas em sequência:
+                    5 para o primeiro e 4 para o segundo, multiplicando.
+                    No segundo, para cada um dos 5 estudantes você decide se
+                    entra ou não no subconjunto, gerando 2 opções por estudante,
+                    o que dá \(2 \cdot 2 \cdot 2 \cdot 2 \cdot 2 = 2^5\).
+                </p>
+            </div>
+        </div>
+
+        <div class="exercicio">
+            <h3>Exercício 3 – permutação, arranjo e combinação</h3>
+            <p>Usando \(E = \{A,B,C,D,E\}\):</p>
+            <ol>
+                <li>Calcule \(5!\).</li>
+                <li>Calcule \(A(5,3)\).</li>
+                <li>Calcule \(C(5,3)\).</li>
+            </ol>
+            <button onclick="toggleRes('fix3')">Ver resolução</button>
+            <div id="fix3" class="resolucao">
+                <p>\[
+                    5! = 120
+                \]</p>
+                <p>\[
+                    A(5,3) = \frac{5!}{2!} = 60
+                \]</p>
+                <p>\[
+                    C(5,3) = \frac{5!}{3! \cdot 2!} = 10
+                \]</p>
+            </div>
+        </div>
+
+        <div class="exercicio">
+            <h3>Exercício 4 – prova direta</h3>
+            <p>
+                Escreva uma prova direta para a frase:
+                “Se \(x \in P\), então \(x \in E\)”.
+            </p>
+            <button onclick="toggleRes('fix4')">Ver sugestão</button>
+            <div id="fix4" class="resolucao">
+                <p>
+                    Pela definição do problema, \(P\) é composto apenas por estudantes de \(E\).
+                    Então, se \(x \in P\), automaticamente \(x\) é um estudante de \(E\),
+                    logo \(x \in E\).
+                </p>
+            </div>
+        </div>
+
+        <div class="exercicio">
+            <h3>Exercício 5 – indução</h3>
+            <p>
+                Complete os detalhes da prova por indução da identidade
+                \(\sum_{k=0}^n \binom{n}{k} = 2^n\).
+            </p>
+            <button onclick="toggleRes('fix5')">Ver esboço</button>
+            <div id="fix5" class="resolucao">
+                <p>
+                    Verifique a base em \(n=0\). Depois, suponha que a igualdade
+                    vale para um certo \(n\) e mostre que vale para \(n+1\) usando
+                    propriedades das combinações (por exemplo, o Triângulo de Pascal).
+                </p>
+            </div>
+        </div>
+
+        <div class="exercicio">
+            <h3>Exercício 6 – algoritmo recursivo</h3>
+            <p>
+                Implemente em Python a função recursiva <code>f(n)</code> descrita na seção de recursão
+                e teste para alguns valores de \(n\).
+            </p>
+            <button onclick="toggleRes('fix6')">Ver uma possível solução</button>
+            <div id="fix6" class="resolucao">
+<pre><code>def f(n):
+    if n == 0:
+        return 1
+    return 2 * f(n - 1)
+
+for n in range(0, 6):
+    print(n, f(n))</code></pre>
+            </div>
+        </div>
+
+        <p><a href="#topo">Voltar ao topo</a> · <a href="index.html">Página principal</a></p>
+    </div>
+
+    <footer>
+        <p>IFC São Bento do Sul · Engenharia de Computação (ECO) · Matemática Discreta</p>
+        <p>
+            <a href="https://saobentodosul.ifc.edu.br/eco/">
+                Página do curso
+            </a>
+        </p>
+    </footer>
+</div>
+
+<script>
+function toggleRes(id) {
+    const elem = document.getElementById(id);
+    if (!elem) return;
+    elem.style.display = elem.style.display === 'block' ? 'none' : 'block';
+}
+</script>
+</body>
+</html>
