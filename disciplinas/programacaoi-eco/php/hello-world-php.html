@@ -75,7 +75,7 @@
 
           <h3>Teste rápido: servidor funcionando</h3>
           <p>Crie um arquivo chamado <code>teste_servidor.php</code> em C:\xampp\htdocs:</p>
-          <pre><?php phpinfo(); ?></pre>
+          <pre><code><?php phpinfo(); ?></code></pre>
         </section>
 
         <!-- 2. ECHO E VARIÁVEIS -->
@@ -89,12 +89,10 @@
             <div>
               <h3>2.1. Echo básico</h3>
               <pre><?php
-echo htmlspecialchars(
-"<?php
-  echo 'Hello, World em PHP!<br>';
-  echo 'PHP é divertido!<br>';
-?>"
-);
+echo htmlspecialchars('<?php
+echo "Hello, World em PHP!<br>";
+echo "PHP é divertido!<br>";
+?>');
 ?></pre>
 
               <h3>2.2. Variáveis em PHP</h3>
@@ -102,42 +100,39 @@ echo htmlspecialchars(
                 Variáveis em PHP começam com <code>$</code> e podem guardar textos, números e outros tipos.
               </p>
               <pre><?php
-echo htmlspecialchars(
-"<?php
-$nome  = 'Wilcilene';
-$idade = 200;
+echo htmlspecialchars('<?php
+$nome  = "Wilcilene";
+$idade = 20;
 
-echo 'Nome: ' . $nome . '<br>';
-echo 'Idade: ' . $idade . ' anos<br>';
-?>"
-);
+echo "Nome: " . $nome . "<br>";
+echo "Idade: " . $idade . " anos<br>";
+?>');
 ?></pre>
             </div>
             
             <div class="card" style="margin-top: 1rem;">
               <strong>Aspas simples x aspas duplas em echo</strong>
               <p>
-                Em PHP, <code>echo</code> funciona com aspas simples (<code>'...'</code>) e aspas duplas (<code>"..."</code>), 
+                Em PHP, <code>echo</code> funciona com aspas simples (<code>&#39;...&#39;</code>) e aspas duplas (<code>"..."</code>), 
                 mas elas se comportam de forma diferente em relação a variáveis.
               </p>
               <ul>
                 <li>
                   Aspas simples não interpretam variáveis: o texto é exibido literalmente.
                   <br>
-                  <code>$nome = 'Wilcilene';<br>echo 'Olá, $nome'; <!-- saída: Olá, $nome -->
-                  </code>
+                  <code>$nome = 'Wilcilene';<br>echo 'Olá, $nome'; <!-- saída: Olá, $nome --></code>
                 </li>
                 <li>
                   Aspas duplas interpretam variáveis dentro da string (interpolação).
                   <br>
-                  <code>$nome = 'Wilcilene';<br> echo "Olá, $nome"; <!-- saída: Olá, Wilcilene -->
-                  </code>
+                  <code>$nome = 'Wilcilene';<br>echo "Olá, $nome"; <!-- saída: Olá, Wilcilene --></code>
                 </li>
               </ul>
               <p>
-                Regra prática: use aspas simples para textos fixos e concatene variáveis com <code>.</code>;<br>use aspas duplas 
-                quando quiser escrever a frase já com as variáveis dentro da própria string. 
-                <code>$nome = 'Wilcilene';<br> echo 'Olá, ' . $nome . '!<br>'; </code>
+                Regra prática: use aspas simples para textos fixos e concatene variáveis com <code>.</code>; 
+                use aspas duplas quando quiser escrever a frase já com as variáveis dentro da própria string.
+                <br>
+                <code>$nome = 'Wilcilene';<br>echo 'Olá, ' . $nome . '!&lt;br&gt;';</code>
               </p>
             </div>
           </div>
@@ -154,14 +149,14 @@ echo 'Idade: ' . $idade . ' anos<br>';
             </ul>
           </div>
 
-          <h3>Saída gerada por este arquivo</h3>
+          <h3>Saída gerada</h3>
           <?php
           $nome  = "Estudante PHP";
           $curso = "Desenvolvimento Web";
           $ano   = 2026;
           ?>
           <div class="card" style="margin-top: .75rem;">
-            <strong>Exemplo gerado agora com PHP:</strong>
+            <strong>Exemplo gerado:</strong>
             <p>
               <?php
                 echo "Bem-vindo(a), " . $nome . "!<br>";
@@ -221,18 +216,16 @@ echo 'Idade: ' . $idade . ' anos<br>';
               </table>
 
               <pre><?php
-echo htmlspecialchars(
-"<?php
+echo htmlspecialchars('<?php
 $a = 10;
 $b = 3;
 
-echo 'Adição: ' . ($a + $b) . '<br>';
-echo 'Subtração: ' . ($a - $b) . '<br>';
-echo 'Multiplicação: ' . ($a * $b) . '<br>';
-echo 'Divisão: ' . ($a / $b) . '<br>';
-echo 'Resto: ' . ($a % $b) . '<br>';
-?>"
-);
+echo "Adição: " . ($a + $b) . "<br>";
+echo "Subtração: " . ($a - $b) . "<br>";
+echo "Multiplicação: " . ($a * $b) . "<br>";
+echo "Divisão: " . ($a / $b) . "<br>";
+echo "Resto: " . ($a % $b) . "<br>";
+?>');
 ?></pre>
             </div>
 
@@ -251,35 +244,33 @@ echo 'Resto: ' . ($a % $b) . '<br>';
                 </thead>
                 <tbody>
                   <tr>
-                    <td><code>&&</code></td>
-                    <td><code>$a > 10 && $b < 5</code></td>
+                    <td><code>&amp;&amp;</code></td>
+                    <td><code>$a &gt; 10 &amp;&amp; $b &lt; 5</code></td>
                     <td>Verdadeiro se as duas condições forem verdadeiras</td>
                   </tr>
                   <tr>
                     <td><code>||</code></td>
-                    <td><code>$a > 10 || $b < 5</code></td>
+                    <td><code>$a &gt; 10 || $b &lt; 5</code></td>
                     <td>Verdadeiro se pelo menos uma condição for verdadeira</td>
                   </tr>
                   <tr>
                     <td><code>!</code></td>
-                    <td><code>!($a > 10)</code></td>
+                    <td><code>!($a &gt; 10)</code></td>
                     <td>Inverte o resultado lógico</td>
                   </tr>
                 </tbody>
               </table>
 
               <pre><?php
-echo htmlspecialchars(
-"<?php
+echo htmlspecialchars('<?php
 $idade = 18;
 $temCarteira = true;
 
 $podeDirigir = ($idade >= 18) && $temCarteira;
 
-echo 'Pode dirigir? ';
-echo $podeDirigir ? 'Sim' : 'Não';
-?>"
-);
+echo "Pode dirigir? ";
+echo $podeDirigir ? "Sim" : "Não";
+?>');
 ?></pre>
             </div>
           </div>
@@ -308,36 +299,32 @@ echo $podeDirigir ? 'Sim' : 'Não';
             <div>
               <h3>4.1. if e else</h3>
               <pre><?php
-echo htmlspecialchars(
-"<?php
+echo htmlspecialchars('<?php
 $nota = 7.5;
 
 if ($nota >= 6) {
-    echo 'Aprovado';
+    echo "Aprovado";
 } else {
-    echo 'Reprovado';
+    echo "Reprovado";
 }
-?>"
-);
+?>');
 ?></pre>
 
               <h3>4.2. if / elseif / else</h3>
               <pre><?php
-echo htmlspecialchars(
-"<?php
+echo htmlspecialchars('<?php
 $nota = 8.3;
 
 if ($nota >= 9) {
-    echo 'Conceito A';
+    echo "Conceito A";
 } elseif ($nota >= 7) {
-    echo 'Conceito B';
+    echo "Conceito B";
 } elseif ($nota >= 5) {
-    echo 'Conceito C';
+    echo "Conceito C";
 } else {
-    echo 'Reprovado';
+    echo "Reprovado";
 }
-?>"
-);
+?>');
 ?></pre>
             </div>
 
@@ -347,25 +334,23 @@ if ($nota >= 9) {
                 <code>switch</code> é útil quando se tem muitos casos para a mesma variável.
               </p>
               <pre><?php
-echo htmlspecialchars(
-"<?php
+echo htmlspecialchars('<?php
 $opcao = 2;
 
 switch ($opcao) {
     case 1:
-        echo 'Você escolheu a opção 1';
+        echo "Você escolheu a opção 1";
         break;
     case 2:
-        echo 'Você escolheu a opção 2';
+        echo "Você escolheu a opção 2";
         break;
     case 3:
-        echo 'Você escolheu a opção 3';
+        echo "Você escolheu a opção 3";
         break;
     default:
-        echo 'Opção inválida';
+        echo "Opção inválida";
 }
-?>"
-);
+?>');
 ?></pre>
 
               <div class="card">
@@ -401,43 +386,37 @@ switch ($opcao) {
             <div>
               <h3>5.1. for</h3>
               <pre><?php
-echo htmlspecialchars(
-"<?php
+echo htmlspecialchars('<?php
 for ($i = 1; $i <= 5; $i++) {
-    echo 'Contagem: ' . $i . '<br>';
+    echo "Contagem: " . $i . "<br>";
 }
-?>"
-);
+?>');
 ?></pre>
 
               <h3>5.2. while</h3>
               <pre><?php
-echo htmlspecialchars(
-"<?php
+echo htmlspecialchars('<?php
 $contador = 1;
 
 while ($contador <= 3) {
-    echo 'While: ' . $contador . '<br>';
+    echo "While: " . $contador . "<br>";
     $contador++;
 }
-?>"
-);
+?>');
 ?></pre>
             </div>
 
             <div>
               <h3>5.3. do...while</h3>
               <pre><?php
-echo htmlspecialchars(
-"<?php
+echo htmlspecialchars('<?php
 $numero = 1;
 
 do {
-    echo 'Do-while: ' . $numero . '<br>';
+    echo "Do-while: " . $numero . "<br>";
     $numero++;
 } while ($numero <= 3);
-?>"
-);
+?>');
 ?></pre>
 
               <div class="card">
@@ -474,30 +453,26 @@ do {
             <div>
               <h3>6.1. Criando um array</h3>
               <pre><?php
-echo htmlspecialchars(
-"<?php
-$linguagens = ['PHP', 'JavaScript', 'Python'];
+echo htmlspecialchars('<?php
+$linguagens = ["PHP", "JavaScript", "Python"];
 
-echo 'Primeira linguagem: ' . $linguagens[0] . '<br>';
-echo 'Segunda linguagem: ' . $linguagens[1] . '<br>';
-echo 'Terceira linguagem: ' . $linguagens[2] . '<br>';
-?>"
-);
+echo "Primeira linguagem: " . $linguagens[0] . "<br>";
+echo "Segunda linguagem: " . $linguagens[1] . "<br>";
+echo "Terceira linguagem: " . $linguagens[2] . "<br>";
+?>');
 ?></pre>
             </div>
 
             <div>
               <h3>6.2. Percorrendo com foreach</h3>
               <pre><?php
-echo htmlspecialchars(
-"<?php
-$linguagens = ['PHP', 'JavaScript', 'Python'];
+echo htmlspecialchars('<?php
+$linguagens = ["PHP", "JavaScript", "Python"];
 
 foreach ($linguagens as $linguagem) {
-    echo 'Linguagem: ' . $linguagem . '<br>';
+    echo "Linguagem: " . $linguagem . "<br>";
 }
-?>"
-);
+?>');
 ?></pre>
             </div>
           </div>
@@ -548,29 +523,27 @@ foreach ($linguagens as $linguagem) {
             <div>
               <h3>7.1. Classe e objeto simples</h3>
               <pre><?php
-echo htmlspecialchars(
-"<?php
+echo htmlspecialchars('<?php
 class Pessoa {
-    public string \$nome;
-    public int \$idade;
+    public string $nome;
+    public int $idade;
 
-    public function __construct(string \$nome, int \$idade) {
-        \$this->nome  = \$nome;
-        \$this->idade = \$idade;
+    public function __construct(string $nome, int $idade) {
+        $this->nome  = $nome;
+        $this->idade = $idade;
     }
 
     public function apresentar(): string {
-        return \"Olá, meu nome é {\$this->nome} e tenho {\$this->idade} anos.\";
+        return "Olá, meu nome é {$this->nome} e tenho {$this->idade} anos.";
     }
 }
 
-\$aluno1 = new Pessoa('Wilcilene', 20);
-\$aluno2 = new Pessoa('Bruno', 22);
+$estudante1 = new Pessoa("Wilcilene", 20);
+$estudante2 = new Pessoa("Bruno", 22);
 
-echo \$aluno1->apresentar() . '<br>';
-echo \$aluno2->apresentar() . '<br>';
-?>"
-);
+echo $estudante1->apresentar() . "<br>";
+echo $estudante2->apresentar() . "<br>";
+?>');
 ?></pre>
             </div>
 
@@ -623,13 +596,13 @@ echo \$aluno2->apresentar() . '<br>';
           </table>
 
           <div class="highlight">
-            <strong>Exercício 6 – Classe Aluno</strong>
+            <strong>Exercício 6 – Classe Estudante</strong>
             <p>
-              Crie <code>alunos.php</code> que:
+              Crie <code>estudantes.php</code> que:
             </p>
             <ul>
-              <li>Tenha a classe <code>Aluno</code> com nome, curso e semestre.</li>
-              <li>Crie pelo menos 3 objetos <code>Aluno</code> e guarde-os em um array.</li>
+              <li>Tenha a classe <code>Estudante</code> com nome, curso e semestre.</li>
+              <li>Crie pelo menos 3 objetos <code>Estudante</code> e guarde-os em um array.</li>
               <li>Use <code>foreach</code> para montar uma tabela com essas informações.</li>
             </ul>
           </div>
@@ -660,9 +633,9 @@ echo \$aluno2->apresentar() . '<br>';
             <div class="step">
               <p><strong>Desafio – Sistema de notas com objetos</strong></p>
               <p>
-                Crie uma classe <code>Aluno</code> com nome e um array de notas, calcule média, 
+                Crie uma classe <code>Estudante</code> com nome e um array de notas, calcule média, 
                 use operadores lógicos e condicionais para determinar o status (aprovado, recuperação, reprovado) 
-                e gere uma tabela com um aluno por linha.
+                e gere uma tabela com um estudante por linha.
               </p>
             </div>
           </div>
