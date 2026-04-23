@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <title>Introdução ao PHP – Echo, Operadores, Estruturas e Objetos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <div class="topbar">
+        <div class="brand">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.12"></circle>
+            <path d="M7 16h10v-2H7zm0-3.5h10v-2H7zM7 9h6.5V7H7z" fill="currentColor"></path>
+          </svg>
+          <span>Introdução ao PHP 8.5</span>
+        </div>
+        <button class="theme-toggle" type="button" id="toggle-theme">
+          Tema
+        </button>
+      </div>
+
+      <div class="intro">
+        <p class="eyebrow">Backend · PHP</p>
+        <h1>Primeiros passos com PHP, operadores, estruturas e objetos</h1>
+        <p class="lead">
+          Descrição, exemplos e exercícios com PHP 8.5:
+          saída com <code>echo</code>, variáveis, operadores, condicionais, laços, arrays e objetos.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <div class="container layout" id="conteudo">
+    <!-- SUMÁRIO -->
+    <nav class="toc">
+      <h2>Seções</h2>
+      <ul>
+        <li><a href="#introducao">1. Introdução ao PHP</a></li>
+        <li><a href="#echo-variaveis">2. Echo e variáveis</a></li>
+        <li><a href="#operadores">3. Operações matemáticas e lógicas</a></li>
+        <li><a href="#condicionais">4. Estruturas condicionais</a></li>
+        <li><a href="#loops">5. Laços de repetição</a></li>
+        <li><a href="#arrays">6. Arrays</a></li>
+        <li><a href="#objetos">7. Objetos em PHP</a></li>
+        <li><a href="#exercicios-finais">8. Exercícios e desafio</a></li>
+        <li><a href="https://wilcilene.github.io/estudos/disciplinas/programacaoi-eco/index.html">Voltar para página principal</a></li>
+      </ul>
+    </nav>
+
+    <!-- CONTEÚDO -->
+    <main>
+      <article>
+
+        <!-- 1. INTRODUÇÃO -->
+        <section id="introducao">
+          <h2 class="section-title">1. Introdução ao PHP</h2>
+          <p>
+            PHP é uma linguagem de script executada no lado do servidor, muito usada para construir páginas web dinâmicas.
+          </p>
+          <p>
+            Usaremos o XAMPP com PHP 8.5: arquivos <code>.php</code> salvos em <code>htdocs</code> podem ser abertos pelo navegador 
+            com endereços começando em <code>http://localhost/</code>.
+          </p>
+
+          <div class="callout">
+            <strong>Resumo conceitual</strong>
+            <ul>
+              <li>O navegador pede uma página <code>.php</code> ao servidor (Apache).</li>
+              <li>O servidor executa o código PHP e gera o código HTML como resposta.</li>
+              <li>O navegador lê o HTML final e exibe a página, não o código PHP.</li>
+            </ul>
+          </div>
+
+          <h3>Teste rápido: servidor funcionando</h3>
+          <p>Crie um arquivo chamado <code>teste_servidor.php</code> em C:\xampp\htdocs:</p>
+          <pre><?php phpinfo(); ?></pre>
+        </section>
+
+        <!-- 2. ECHO E VARIÁVEIS -->
+        <section id="echo-variaveis">
+          <h2 class="section-title">2. Echo e variáveis</h2>
+          <p>
+            O comando <code>echo</code> envia texto e valores para o navegador e é a forma mais comum de saída em PHP.
+          </p>
+
+          <div class="grid-2">
+            <div>
+              <h3>2.1. Echo básico</h3>
+              <pre><?php
+echo htmlspecialchars(
+"<?php
+  echo 'Hello, World em PHP!<br>';
+  echo 'PHP é divertido!<br>';
+?>"
+);
+?></pre>
+
+              <h3>2.2. Variáveis em PHP</h3>
+              <p>
+                Variáveis em PHP começam com <code>$</code> e podem guardar textos, números e outros tipos.
+              </p>
+              <pre><?php
+echo htmlspecialchars(
+"<?php
+$nome  = 'Wilcilene';
+$idade = 200;
+
+echo 'Nome: ' . $nome . '<br>';
+echo 'Idade: ' . $idade . ' anos<br>';
+?>"
+);
+?></pre>
+            </div>
+            
+            <div class="card" style="margin-top: 1rem;">
+              <strong>Aspas simples x aspas duplas em echo</strong>
+              <p>
+                Em PHP, <code>echo</code> funciona com aspas simples (<code>'...'</code>) e aspas duplas (<code>"..."</code>), 
+                mas elas se comportam de forma diferente em relação a variáveis.
+              </p>
+              <ul>
+                <li>
+                  Aspas simples não interpretam variáveis: o texto é exibido literalmente.
+                  <br>
+                  <code>$nome = 'Wilcilene';<br>echo 'Olá, $nome'; <!-- saída: Olá, $nome -->
+                  </code>
+                </li>
+                <li>
+                  Aspas duplas interpretam variáveis dentro da string (interpolação).
+                  <br>
+                  <code>$nome = 'Wilcilene';<br> echo "Olá, $nome"; <!-- saída: Olá, Wilcilene -->
+                  </code>
+                </li>
+              </ul>
+              <p>
+                Regra prática: use aspas simples para textos fixos e concatene variáveis com <code>.</code>;<br>use aspas duplas 
+                quando quiser escrever a frase já com as variáveis dentro da própria string. 
+                <code>$nome = 'Wilcilene';<br> echo 'Olá, ' . $nome . '!<br>'; </code>
+              </p>
+            </div>
+          </div>
+
+          <div class="highlight">
+            <strong>Exercício 1 – Cartão de apresentação</strong>
+            <p>
+              Crie um arquivo <code>apresentacao.php</code> e:
+            </p>
+            <ul>
+              <li>Defina variáveis para nome, curso e semestre.</li>
+              <li>Use <code>echo</code> para montar um pequeno “cartão de visita” com essas informações.</li>
+              <li>Adicione pelo menos uma quebra de linha com <code>&lt;br&gt;</code>.</li>
+            </ul>
+          </div>
+
+          <h3>Saída gerada por este arquivo</h3>
+          <?php
+          $nome  = "Estudante PHP";
+          $curso = "Desenvolvimento Web";
+          $ano   = 2026;
+          ?>
+          <div class="card" style="margin-top: .75rem;">
+            <strong>Exemplo gerado agora com PHP:</strong>
+            <p>
+              <?php
+                echo "Bem-vindo(a), " . $nome . "!<br>";
+                echo "Curso: " . $curso . "<br>";
+                echo "Ano: " . $ano . "<br>";
+              ?>
+            </p>
+          </div>
+        </section>
+
+        <!-- 3. OPERAÇÕES MATEMÁTICAS E LÓGICAS -->
+        <section id="operadores">
+          <h2 class="section-title">3. Operações matemáticas e lógicas</h2>
+          <p>
+            Operadores permitem fazer contas e tomar decisões com base em condições, como somar valores ou comparar números.
+          </p>
+
+          <div class="grid-2">
+            <div>
+              <h3>3.1. Operadores matemáticos básicos</h3>
+              <p>Alguns operadores aritméticos em PHP:</p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Operador</th>
+                    <th>Exemplo</th>
+                    <th>Significado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>+</code></td>
+                    <td><code>$a + $b</code></td>
+                    <td>Adição</td>
+                  </tr>
+                  <tr>
+                    <td><code>-</code></td>
+                    <td><code>$a - $b</code></td>
+                    <td>Subtração</td>
+                  </tr>
+                  <tr>
+                    <td><code>*</code></td>
+                    <td><code>$a * $b</code></td>
+                    <td>Multiplicação</td>
+                  </tr>
+                  <tr>
+                    <td><code>/</code></td>
+                    <td><code>$a / $b</code></td>
+                    <td>Divisão</td>
+                  </tr>
+                  <tr>
+                    <td><code>%</code></td>
+                    <td><code>$a % $b</code></td>
+                    <td>Resto da divisão (módulo)</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <pre><?php
+echo htmlspecialchars(
+"<?php
+$a = 10;
+$b = 3;
+
+echo 'Adição: ' . ($a + $b) . '<br>';
+echo 'Subtração: ' . ($a - $b) . '<br>';
+echo 'Multiplicação: ' . ($a * $b) . '<br>';
+echo 'Divisão: ' . ($a / $b) . '<br>';
+echo 'Resto: ' . ($a % $b) . '<br>';
+?>"
+);
+?></pre>
+            </div>
+
+            <div>
+              <h3>3.2. Operadores lógicos</h3>
+              <p>
+                Operadores lógicos combinam condições e retornam verdadeiro ou falso.
+              </p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Operador</th>
+                    <th>Exemplo</th>
+                    <th>Significado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>&&</code></td>
+                    <td><code>$a > 10 && $b < 5</code></td>
+                    <td>Verdadeiro se as duas condições forem verdadeiras</td>
+                  </tr>
+                  <tr>
+                    <td><code>||</code></td>
+                    <td><code>$a > 10 || $b < 5</code></td>
+                    <td>Verdadeiro se pelo menos uma condição for verdadeira</td>
+                  </tr>
+                  <tr>
+                    <td><code>!</code></td>
+                    <td><code>!($a > 10)</code></td>
+                    <td>Inverte o resultado lógico</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <pre><?php
+echo htmlspecialchars(
+"<?php
+$idade = 18;
+$temCarteira = true;
+
+$podeDirigir = ($idade >= 18) && $temCarteira;
+
+echo 'Pode dirigir? ';
+echo $podeDirigir ? 'Sim' : 'Não';
+?>"
+);
+?></pre>
+            </div>
+          </div>
+
+          <div class="highlight">
+            <strong>Exercício 2 – Calculadora simples</strong>
+            <p>
+              Crie um arquivo <code>calculadora.php</code> que:
+            </p>
+            <ul>
+              <li>Tenha duas variáveis numéricas, por exemplo <code>$x</code> e <code>$y</code>.</li>
+              <li>Calcule e mostre adição, subtração, multiplicação, divisão e resto.</li>
+              <li>Mostre uma mensagem dizendo se <code>$x</code> é maior, menor ou igual a <code>$y</code>.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 4. ESTRUTURAS CONDICIONAIS -->
+        <section id="condicionais">
+          <h2 class="section-title">4. Estruturas condicionais</h2>
+          <p>
+            Estruturas condicionais permitem executar blocos de código diferentes dependendo de uma condição (verdadeira ou falsa).
+          </p>
+
+          <div class="grid-2">
+            <div>
+              <h3>4.1. if e else</h3>
+              <pre><?php
+echo htmlspecialchars(
+"<?php
+$nota = 7.5;
+
+if ($nota >= 6) {
+    echo 'Aprovado';
+} else {
+    echo 'Reprovado';
+}
+?>"
+);
+?></pre>
+
+              <h3>4.2. if / elseif / else</h3>
+              <pre><?php
+echo htmlspecialchars(
+"<?php
+$nota = 8.3;
+
+if ($nota >= 9) {
+    echo 'Conceito A';
+} elseif ($nota >= 7) {
+    echo 'Conceito B';
+} elseif ($nota >= 5) {
+    echo 'Conceito C';
+} else {
+    echo 'Reprovado';
+}
+?>"
+);
+?></pre>
+            </div>
+
+            <div>
+              <h3>4.3. switch</h3>
+              <p>
+                <code>switch</code> é útil quando se tem muitos casos para a mesma variável.
+              </p>
+              <pre><?php
+echo htmlspecialchars(
+"<?php
+$opcao = 2;
+
+switch ($opcao) {
+    case 1:
+        echo 'Você escolheu a opção 1';
+        break;
+    case 2:
+        echo 'Você escolheu a opção 2';
+        break;
+    case 3:
+        echo 'Você escolheu a opção 3';
+        break;
+    default:
+        echo 'Opção inválida';
+}
+?>"
+);
+?></pre>
+
+              <div class="card">
+                <strong>Dica</strong>
+                <p>
+                  Não esqueça o <code>break</code> em cada <code>case</code> para evitar que o código “caia” nos casos seguintes.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="highlight">
+            <strong>Exercício 3 – Classificador de idade</strong>
+            <p>
+              Crie <code>idade.php</code> que:
+            </p>
+            <ul>
+              <li>Tenha uma variável <code>$idade</code>.</li>
+              <li>Use <code>if / elseif / else</code> para classificar: criança, adolescente, adulto, idoso.</li>
+              <li>Mostre o texto no navegador com <code>echo</code>.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 5. LAÇOS DE REPETIÇÃO -->
+        <section id="loops">
+          <h2 class="section-title">5. Laços de repetição</h2>
+          <p>
+            Laços de repetição executam um bloco de código várias vezes, úteis para listas, contadores e cálculos repetitivos.
+          </p>
+
+          <div class="grid-2">
+            <div>
+              <h3>5.1. for</h3>
+              <pre><?php
+echo htmlspecialchars(
+"<?php
+for ($i = 1; $i <= 5; $i++) {
+    echo 'Contagem: ' . $i . '<br>';
+}
+?>"
+);
+?></pre>
+
+              <h3>5.2. while</h3>
+              <pre><?php
+echo htmlspecialchars(
+"<?php
+$contador = 1;
+
+while ($contador <= 3) {
+    echo 'While: ' . $contador . '<br>';
+    $contador++;
+}
+?>"
+);
+?></pre>
+            </div>
+
+            <div>
+              <h3>5.3. do...while</h3>
+              <pre><?php
+echo htmlspecialchars(
+"<?php
+$numero = 1;
+
+do {
+    echo 'Do-while: ' . $numero . '<br>';
+    $numero++;
+} while ($numero <= 3);
+?>"
+);
+?></pre>
+
+              <div class="card">
+                <strong>Diferença importante</strong>
+                <p>
+                  No <code>while</code>, a condição é testada antes de executar o bloco; 
+                  no <code>do...while</code>, o bloco executa pelo menos uma vez, depois a condição é testada.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="highlight">
+            <strong>Exercício 4 – Tabuada</strong>
+            <p>
+              Crie um arquivo <code>tabuada.php</code> que:
+            </p>
+            <ul>
+              <li>Tenha uma variável <code>$numero</code>.</li>
+              <li>Use um <code>for</code> para mostrar a tabuada de 1 a 10 desse número.</li>
+              <li>Monte a saída em forma de lista ou tabela.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 6. ARRAYS -->
+        <section id="arrays">
+          <h2 class="section-title">6. Arrays</h2>
+          <p>
+            Um array armazena uma coleção de valores em uma única variável, e combiná-lo com loops é muito comum.
+          </p>
+
+          <div class="grid-2">
+            <div>
+              <h3>6.1. Criando um array</h3>
+              <pre><?php
+echo htmlspecialchars(
+"<?php
+$linguagens = ['PHP', 'JavaScript', 'Python'];
+
+echo 'Primeira linguagem: ' . $linguagens[0] . '<br>';
+echo 'Segunda linguagem: ' . $linguagens[1] . '<br>';
+echo 'Terceira linguagem: ' . $linguagens[2] . '<br>';
+?>"
+);
+?></pre>
+            </div>
+
+            <div>
+              <h3>6.2. Percorrendo com foreach</h3>
+              <pre><?php
+echo htmlspecialchars(
+"<?php
+$linguagens = ['PHP', 'JavaScript', 'Python'];
+
+foreach ($linguagens as $linguagem) {
+    echo 'Linguagem: ' . $linguagem . '<br>';
+}
+?>"
+);
+?></pre>
+            </div>
+          </div>
+
+          <!-- DEMO: TABELA -->
+          <?php
+          $linguagensDemo = ["PHP", "JavaScript", "Python", "Java", "C#"];
+          ?>
+          <h3>Exemplo executado: tabela simples gerada com array</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Linguagem</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach ($linguagensDemo as $indice => $linguagem): ?>
+                <tr>
+                  <td><?php echo $indice; ?></td>
+                  <td><?php echo $linguagem; ?></td>
+                </tr>
+              <?php endforeach; ?>
+            </tbody>
+          </table>
+
+          <div class="highlight">
+            <strong>Exercício 5 – Lista de itens favoritos</strong>
+            <p>
+              Crie <code>favoritos.php</code> que:
+            </p>
+            <ul>
+              <li>Defina um array com pelo menos 5 itens (filmes, músicas, jogos etc.).</li>
+              <li>Use <code>foreach</code> para montar uma lista HTML (&lt;ul&gt; e &lt;li&gt;).</li>
+              <li>Use <code>echo</code> para criar um título para a lista.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 7. OBJETOS -->
+        <section id="objetos">
+          <h2 class="section-title">7. Objetos em PHP</h2>
+          <p>
+            Uma classe define um modelo (propriedades e métodos) e um objeto é uma instância concreta desse modelo.
+          </p>
+
+          <div class="grid-2">
+            <div>
+              <h3>7.1. Classe e objeto simples</h3>
+              <pre><?php
+echo htmlspecialchars(
+"<?php
+class Pessoa {
+    public string \$nome;
+    public int \$idade;
+
+    public function __construct(string \$nome, int \$idade) {
+        \$this->nome  = \$nome;
+        \$this->idade = \$idade;
+    }
+
+    public function apresentar(): string {
+        return \"Olá, meu nome é {\$this->nome} e tenho {\$this->idade} anos.\";
+    }
+}
+
+\$aluno1 = new Pessoa('Wilcilene', 20);
+\$aluno2 = new Pessoa('Bruno', 22);
+
+echo \$aluno1->apresentar() . '<br>';
+echo \$aluno2->apresentar() . '<br>';
+?>"
+);
+?></pre>
+            </div>
+
+            <div class="card">
+              <strong>Elementos principais</strong>
+              <ul>
+                <li><code>class Pessoa { ... }</code> define a classe.</li>
+                <li><code>__construct</code> é chamado ao usar <code>new Pessoa(...)</code>.</li>
+                <li><code>$this</code> referencia o próprio objeto.</li>
+                <li>Métodos podem retornar strings para serem impressas com <code>echo</code>.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- DEMO REAL EXECUTADO: OBJETOS -->
+          <?php
+          class Produto {
+              public string $nome;
+              public float $preco;
+
+              public function __construct(string $nome, float $preco) {
+                  $this->nome  = $nome;
+                  $this->preco = $preco;
+              }
+          }
+
+          $produtosDemo = [
+              new Produto("Teclado", 150.0),
+              new Produto("Mouse", 80.5),
+              new Produto("Monitor", 899.9),
+          ];
+          ?>
+
+          <h3>Exemplo executado: tabela de objetos Produto</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Produto</th>
+                <th>Preço formatado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach ($produtosDemo as $produto): ?>
+                <tr>
+                  <td><?php echo $produto->nome; ?></td>
+                  <td><?php echo "R$ " . number_format($produto->preco, 2, ',', '.'); ?></td>
+                </tr>
+              <?php endforeach; ?>
+            </tbody>
+          </table>
+
+          <div class="highlight">
+            <strong>Exercício 6 – Classe Aluno</strong>
+            <p>
+              Crie <code>alunos.php</code> que:
+            </p>
+            <ul>
+              <li>Tenha a classe <code>Aluno</code> com nome, curso e semestre.</li>
+              <li>Crie pelo menos 3 objetos <code>Aluno</code> e guarde-os em um array.</li>
+              <li>Use <code>foreach</code> para montar uma tabela com essas informações.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 8. EXERCÍCIOS FINAIS E DESAFIO -->
+        <section id="exercicios-finais">
+          <h2 class="section-title">8. Exercícios finais e desafio</h2>
+          <p>
+            Abaixo, alguns exercícios para revisar os conceitos da página e um desafio de maior complexidade.
+          </p>
+
+          <div class="steps">
+            <div class="step">
+              <p><strong>Exercício 7 – Resumo da aula</strong></p>
+              <p>
+                Crie uma página que reúna: variáveis, operadores matemáticos, uma condição simples 
+                e um loop, mostrando todos os resultados de forma organizada.
+              </p>
+            </div>
+            <div class="step">
+              <p><strong>Exercício 8 – Boletim simples</strong></p>
+              <p>
+                Crie um array com disciplinas e notas e use <code>foreach</code> para mostrar uma tabela 
+                com nome da disciplina, nota e situação (aprovado/reprovado) usando condicionais.
+              </p>
+            </div>
+            <div class="step">
+              <p><strong>Desafio – Sistema de notas com objetos</strong></p>
+              <p>
+                Crie uma classe <code>Aluno</code> com nome e um array de notas, calcule média, 
+                use operadores lógicos e condicionais para determinar o status (aprovado, recuperação, reprovado) 
+                e gere uma tabela com um aluno por linha.
+              </p>
+            </div>
+          </div>
+
+          <p class="footer-note" style="margin-top:1.5rem;">
+            Use esta página como base, copiando e adaptando os exemplos para seus próprios arquivos e experimentos em PHP.
+          </p>
+        </section>
+
+      </article>
+    </main>
+  </div>
+
+  <script>
+    const btn = document.getElementById('toggle-theme');
+    btn.addEventListener('click', () => {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme') || 'light';
+      html.setAttribute('data-theme', current === 'light' ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>
