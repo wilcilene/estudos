@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Programação II – Introdução a Padrões de Projeto (GoF)</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Programação II – Introdução a Padrões de Projeto (GoF)</titltle>
+    " />
     <style>
       /* ── Tokens extras ────────────────────────────────────── */
       :root {
@@ -167,23 +167,12 @@
       .antes h4 { color: #c62828; margin: 0 0 .4rem; }
       .depois h4 { color: #2e7d32; margin: 0 0 .4rem; }
 
-      /* ── Layout main + aside mais fluido ─────────────────── */
-      main {
-        display: grid;
-        grid-template-columns: minmax(0, 3fr) minmax(260px, 1.2fr);
-        gap: 1.5rem;
-        align-items: flex-start;
+      /* Microajustes suaves que não quebram outras páginas */
+      .card h3 + p {
+        margin-top: 0.3rem;
       }
-      @media (max-width: 800px) {
-        main {
-          grid-template-columns: 1fr;
-        }
-        main > section {
-          order: 1;
-        }
-        main > aside {
-          order: 2;
-        }
+      .anotacao dl {
+        margin-bottom: 0;
       }
     </style>
   </head>
@@ -232,11 +221,12 @@
           </p>
           
           <h3>Por que usar padrões?</h3>
+          <u
           <ul>
-            <li><strong>Código mais fácil de manter</strong> — quem lê o código reconhece a estrutura e entende mais rápido a intenção do desenvolvedor.</li>
-            <li><strong>Vocabulário comum</strong> — dizer "aqui usei um Observer" comunica a estrutura inteira sem precisar desenhar tudo do zero.</li>
-            <li><strong>Menor acoplamento</strong> — os padrões promovem que partes do sistema se conheçam o mínimo necessário, facilitando mudanças.</li>
-            <li><strong>Reuso de boas soluções</strong> — são fruto de experiência acumulada de dezenas de projetos reais; você não precisa "reinventar a roda".</li>
+            ><strong>Código mais fácil de manter</strong> — quem lê o código reconhece a estrutura e entende mais rápido a intenção do desenvolvedor.</l/li>
+            ><strong>Vocabulário comum</strong> — dizer "aqui usei um Observer" comunica a estrutura inteira sem precisar desenhar tudo do zero.</l/li>
+            ><strong>Menor acoplamento</strong> — os padrões promovem que partes do sistema se conheçam o mínimo necessário, facilitando mudanças.</l/li>
+            ><strong>Reuso de boas soluções</strong> — são fruto de experiência acumulada de dezenas de projetos reais; você não precisa "reinventar a roda".</li>
           </ul>
 
           <div class="antes-depois">
@@ -320,12 +310,13 @@
                 Tratam <strong>como objetos são criados</strong>. Permitem que o código não
                 dependa diretamente de qual classe concreta está sendo instanciada.
               </p>
+              <u
               <ul>
-                <li>Singleton</li>
-                <li>Factory Method</li>
-                <li>Abstract Factory</li>
-                <li>Builder</li>
-                <li>Prototype</li>
+                >Singleton</l/li>
+                >Factory Method</l/li>
+                >Abstract Factory</l/li>
+                >Builder</l/li>
+                >Prototype</li>
               </ul>
             </div>
 
@@ -335,14 +326,15 @@
                 Tratam <strong>como classes e objetos se combinam</strong> para formar
                 estruturas maiores e mais flexíveis.
               </p>
+              <u
               <ul>
-                <li>Adapter</li>
-                <li>Bridge</li>
-                <li>Composite</li>
-                <li>Decorator</li>
-                <li>Facade</li>
-                <li>Flyweight</li>
-                <li>Proxy</li>
+                >Adapter</l/li>
+                >Bridge</l/li>
+                >Composite</l/li>
+                >Decorator</l/li>
+                >Facade</l/li>
+                >Flyweight</l/li>
+                >Proxy</li>
               </ul>
             </div>
 
@@ -352,18 +344,19 @@
                 Tratam <strong>como objetos se comunicam</strong> e distribuem
                 responsabilidades entre si.
               </p>
+              <u
               <ul>
-                <li>Observer</li>
-                <li>Strategy</li>
-                <li>Template Method</li>
-                <li>Command</li>
-                <li>Iterator</li>
-                <li>State</li>
-                <li>Chain of Responsibility</li>
-                <li>Mediator</li>
-                <li>Memento</li>
-                <li>Visitor</li>
-                <li>Interpreter</li>
+                >Observer</l/li>
+                >Strategy</l/li>
+                >Template Method</l/li>
+                >Command</l/li>
+                >Iterator</l/li>
+                >State</l/li>
+                >Chain of Responsibility</l/li>
+                >Mediator</l/li>
+                >Memento</l/li>
+                >Visitor</l/li>
+                >Interpreter</li>
               </ul>
             </div>
           </div>
@@ -372,7 +365,7 @@
             <p style="margin-top:0;"><strong>Como memorizar as categorias:</strong></p>
             <dl>
               <dt>Criacional → "Como nasce?"</dt>
-              <dd>Encapsula e controla a forma de criar objetos, reduzindo dependências do <code>new</code>.</dd>
+              <dd>Encapsula e controla a forma de criar objetos, reduzindo dependências do de>new</code>.</dd>
               <dt>Estrutural → "Como se encaixa?"</dt>
               <dd>Define composições de classes e objetos para montar estruturas mais complexas com flexibilidade.</dd>
               <dt>Comportamental → "Como conversa?"</dt>
@@ -442,18 +435,20 @@
           <p>Esta seção resume boas práticas ao decidir aplicar um padrão de projeto em seu código.</p>
 
           <h3>Use padrões quando…</h3>
+          <u
           <ul>
-            <li>O mesmo problema (ou algo muito parecido) aparece em diferentes partes do sistema.</li>
-            <li>Você percebe que alterar uma parte obriga a alterar muitas outras (alto acoplamento).</li>
-            <li>Precisa adicionar comportamentos sem reescrever classes existentes.</li>
-            <li>A equipe precisa de uma linguagem comum para descrever a arquitetura.</li>
+            >O mesmo problema (ou algo muito parecido) aparece em diferentes partes do sistema.</l/li>
+            >Você percebe que alterar uma parte obriga a alterar muitas outras (alto acoplamento).</l/li>
+            >Precisa adicionar comportamentos sem reescrever classes existentes.</l/li>
+            >A equipe precisa de uma linguagem comum para descrever a arquitetura.</li>
           </ul>
 
           <h3>Evite padrões quando…</h3>
+          <u
           <ul>
-            <li>O código é simples e funciona bem — adicionar um padrão aumentaria a complexidade sem ganho real.</li>
-            <li>Você está aprendendo e ainda não identificou claramente o problema que o padrão resolve.</li>
-            <li>A motivação é "parecer mais profissional" — padrões mal aplicados prejudicam legibilidade.</li>
+            >O código é simples e funciona bem — adicionar um padrão aumentaria a complexidade sem ganho real.</l/li>
+            >Você está aprendendo e ainda não identificou claramente o problema que o padrão resolve.</l/li>
+            >A motivação é "parecer mais profissional" — padrões mal aplicados prejudicam legibilidade.</li>
           </ul>
 
           <div class="callout">
@@ -469,13 +464,14 @@
           <h2>6. Primeiros exemplos em JavaScript</h2>
           <p>
             Os exemplos abaixo são introdutórios, o objetivo é <em>ver a ideia</em> funcionando em código.
-            Nesta aula, focamos em três padrões: <strong>Singleton</strong>, <strong>Observer</strong> e <strong>Strategy</strong>.
+            Nesta aula, focamos em cinco padrões: <strong>Singleton</strong>, <strong>Observer</strong>,
+            <strong>EventEmitter</strong>, <strong>Factory Method</strong> e <strong>Strategy</strong>.
           </p>
 
           <h3><span class="badge badge--c">Criacional</span> Singleton — instância única</h3>
           <p>Garante que exista apenas <em>um</em> objeto de determinada classe em todo o sistema.</p>
 
-          <pre><code>// Padrão Singleton — uma única instância compartilhada
+          <pre>de>// Padrão Singleton — uma única instância compartilhada
 class ConfiguracaoApp {
   static #instancia = null;
 
@@ -517,9 +513,9 @@ console.log(config1 === config2);         // true
 
           <div class="anotacao">
             <dl>
-              <dt><code>static #instancia = null</code></dt>
+              <dt>de>static #instancia = null</code></dt>
               <dd>Guarda a única instância como campo privado estático da própria classe, inacessível externamente.</dd>
-              <dt><code>static obterInstancia()</code></dt>
+              <dt>de>static obterInstancia()</code></dt>
               <dd>Ponto de acesso global: cria a instância na primeira chamada; nas seguintes, devolve a mesma que foi criada.</dd>
               <dt>Por que usar?</dt>
               <dd>Configurações, conexões com banco de dados, loggers — qualquer recurso que deve ser compartilhado e único em todo o sistema.</dd>
@@ -532,7 +528,7 @@ console.log(config1 === config2);         // true
             automaticamente quando seu estado muda.
           </p>
 
-          <pre><code>// Padrão Observer — notificação desacoplada
+          <pre>de>// Padrão Observer — notificação desacoplada
 class EventoCarrinho {
   #observadores = [];
 
@@ -586,12 +582,130 @@ carrinho.adicionarItem('Mouse sem fio');
 
           <div class="anotacao">
             <dl>
-              <dt><code>assinar(observador)</code> / <code>cancelarAssinatura(observador)</code></dt>
+              <dt>de>assinar(observador)</code> / de>cancelarAssinatura(observador)</code></dt>
               <dd>Permitem que qualquer objeto interessado entre ou saia da lista de notificados — sem que o carrinho precise conhecer os detalhes de quem está ouvindo.</dd>
-              <dt><code>notificar(dados)</code></dt>
-              <dd>Percorre todos os observadores e chama <code>atualizar()</code> em cada um, passando os dados do evento.</dd>
+              <dt>de>notificar(dados)</code></dt>
+              <dd>Percorre todos os observadores e chama de>atualizar()</code> em cada um, passando os dados do evento.</dd>
               <dt>Onde aparece no desenvolvimento web?</dt>
-              <dd>Eventos do DOM (<code>addEventListener</code>), stores de estado (Redux, Vuex), WebSockets, sistemas de notificação em tempo real — todos usam a ideia do Observer.</dd>
+              <dd>Eventos do DOM (de>addEventListener</code>), stores de estado (Redux, Vuex), WebSockets, sistemas de notificação em tempo real — todos usam a ideia do Observer.</dd>
+            </dl>
+          </div>
+
+          <h3><span class="badge badge--b">Comportamental</span> EventEmitter — eventos no estilo Node.js</h3>
+          <p>
+            Um de>EventEmitter</code> é uma implementação prática da ideia de Observer:
+            você registra ouvintes para eventos identificados por nome e emite esses eventos
+            passando dados para todos os ouvintes inscritos.[web:36]
+          </p>
+
+          <pre>de>// Implementação simples de EventEmitter em JavaScript
+class EventEmitter {
+  #eventos = {};
+
+  on(evento, listener) {
+    if (!this.#eventos[evento]) {
+      this.#eventos[evento] = [];
+    }
+    this.#eventos[evento].push(listener);
+  }
+
+  off(evento, listener) {
+    if (!this.#eventos[evento]) return;
+    this.#eventos[evento] = this.#eventos[evento].filter(l => l !== listener);
+  }
+
+  emit(evento, dados) {
+    if (!this.#eventos[evento]) return;
+    this.#eventos[evento].forEach(listener => listener(dados));
+  }
+}
+
+// Uso — simulando notificações em uma aplicação web
+const notificacoes = new EventEmitter();
+
+function mostrarToast(mensagem) {
+  console.log('[TOAST]', mensagem);
+}
+
+function registrarLog(mensagem) {
+  console.log('[LOG]', mensagem);
+}
+
+notificacoes.on('usuario:login', mostrarToast);
+notificacoes.on('usuario:login', registrarLog);
+
+notificacoes.emit('usuario:login', 'Usuário entrou no sistema');
+// [TOAST] Usuário entrou no sistema
+// [LOG]   Usuário entrou no sistema
+</code></pre>
+
+          <div class="anotacao">
+            <dl>
+              <dt>de>on(evento, listener)</code></dt>
+              <dd>Registra uma função para ser chamada sempre que o evento com esse nome for emitido.</dd>
+              <dt>de>emit(evento, dados)</code></dt>
+              <dd>Dispara o evento e chama todos os <em>listeners</em> cadastrados, passando os dados necessários.</dd>
+              <dt>Onde isso aparece?</dt>
+              <dd>APIs do Node.js, bibliotecas de front-end e sistemas de eventos em geral usam alguma forma de de>EventEmitter</code> por baixo.[web:36]</dd>
+            </dl>
+          </div>
+
+          <h3><span class="badge badge--c">Criacional</span> Factory Method — escolhendo o tipo certo</h3>
+          <p>
+            O <em>Factory Method</em> encapsula a lógica de criação de objetos em um único ponto,
+            permitindo que você devolva diferentes implementações da mesma interface sem espalhar
+            de>new</code> e de>if</code>/de>switch</code> pelo código.[web:2]
+          </p>
+
+          <pre>de>// Padrão Factory Method — escolhendo o tipo de notificador
+class Notificador {
+  enviar(mensagem) {
+    throw new Error('Método enviar() deve ser implementado.');
+  }
+}
+
+class NotificadorEmail extends Notificador {
+  enviar(mensagem) {
+    console.log(`Enviando e-mail: ${mensagem}`);
+  }
+}
+
+class NotificadorSMS extends Notificador {
+  enviar(mensagem) {
+    console.log(`Enviando SMS: ${mensagem}`);
+  }
+}
+
+class NotificadorPush extends Notificador {
+  enviar(mensagem) {
+    console.log(`Enviando notificação push: ${mensagem}`);
+  }
+}
+
+// Creator com o Factory Method
+class NotificadorFactory {
+  static criar(tipo) {
+    switch (tipo) {
+      case 'email': return new NotificadorEmail();
+      case 'sms':   return new NotificadorSMS();
+      case 'push':  return new NotificadorPush();
+      default:
+        throw new Error(`Tipo de notificador desconhecido: ${tipo}`);
+    }
+  }
+}
+
+// Uso — o código cliente só conhece a interface Notificador
+const notificador = NotificadorFactory.criar('email');
+notificador.enviar('Bem-vindo à plataforma!');
+</code></pre>
+
+          <div class="anotacao">
+            <dl>
+              <dt>de>NotificadorFactory.criar(tipo)</code></dt>
+              <dd>Centraliza a decisão de qual classe concreta instanciar, devolvendo sempre algo que se comporta como de>Notificador</code>.</dd>
+              <dt>Por que isso ajuda?</dt>
+              <dd>Se surgir um novo tipo de notificação (por exemplo, WhatsApp), você adiciona uma classe e ajusta a fábrica, sem mudar o código que consome o notificador.</dd>
             </dl>
           </div>
 
@@ -601,7 +715,7 @@ carrinho.adicionarItem('Mouse sem fio');
             os utiliza.
           </p>
 
-          <pre><code>// Padrão Strategy — forma de pagamento intercambiável
+          <pre>de>// Padrão Strategy — forma de pagamento intercambiável
 class ProcessadorPagamento {
   #estrategia;
 
@@ -647,10 +761,10 @@ console.log(processador.processar(150));
 
           <div class="anotacao">
             <dl>
-              <dt><code>this.#estrategia = estrategia</code></dt>
+              <dt>de>this.#estrategia = estrategia</code></dt>
               <dd>O processador guarda uma referência à estratégia ativa, sem depender de qual classe concreta ela é.</dd>
-              <dt><code>definirEstrategia()</code></dt>
-              <dd>Permite trocar o comportamento em tempo de execução — sem condicional <code>if/else</code> espalhado pelo código.</dd>
+              <dt>de>definirEstrategia()</code></dt>
+              <dd>Permite trocar o comportamento em tempo de execução — sem condicional de>if/else</code> espalhado pelo código.</dd>
               <dt>Por que isso importa para web?</dt>
               <dd>Gateways de pagamento, validações de formulário, algoritmos de ordenação, formatação de respostas de API — todos são candidatos naturais ao Strategy.</dd>
             </dl>
@@ -665,10 +779,11 @@ console.log(processador.processar(150));
             <summary>Atividade 1 – Identificação em sistemas reais</summary>
             <div>
               <p>Em duplas, discuta e anote respostas para as perguntas a seguir:</p>
+              <u
               <ul>
-                <li>Pense em um aplicativo que você usa no dia a dia (banco, e-commerce, streaming). Que partes dele poderiam se beneficiar de um Singleton? E de um Observer?</li>
-                <li>Por que um sistema de notificações (WhatsApp, Instagram) é naturalmente um Observer?</li>
-                <li>Que problema surgiria se, em vez de Observer, o sistema de notificações percorresse todos os usuários a cada mensagem procurando quem está "ouvindo"?</li>
+                >Pense em um aplicativo que você usa no dia a dia (banco, e-commerce, streaming). Que partes dele poderiam se beneficiar de um Singleton? E de um Observer?</l/li>
+                >Por que um sistema de notificações (WhatsApp, Instagram) é naturalmente um Observer?</l/li>
+                >Que problema surgiria se, em vez de Observer, o sistema de notificações percorresse todos os usuários a cada mensagem procurando quem está "ouvindo"?</li>
               </ul>
             </div>
           </details>
@@ -677,11 +792,11 @@ console.log(processador.processar(150));
             <summary>Atividade 2 – Classificando por categoria</summary>
             <div>
               <p>Para cada situação abaixo, diga qual categoria de padrão (Criacional, Estrutural ou Comportamental) melhor se encaixaria e por quê:</p>
-              <ol>
-                <li>Um sistema de log que deve ter somente uma instância compartilhada por toda a aplicação.</li>
-                <li>Uma interface que precisa usar uma biblioteca de terceiros com API diferente da esperada pelo sistema.</li>
-                <li>Um formulário cujas regras de validação mudam conforme o tipo de usuário (comum, empresa, governo).</li>
-                <li>Um sistema de e-mail que envia notificações para múltiplos módulos quando um pedido é aprovado.</li>
+              <o<ol>
+                >Um sistema de log que deve ter somente uma instância compartilhada por toda a aplicação.</l/li>
+                >Uma interface que precisa usar uma biblioteca de terceiros com API diferente da esperada pelo sistema.</l/li>
+                >Um formulário cujas regras de validação mudam conforme o tipo de usuário (comum, empresa, governo).</l/li>
+                >Um sistema de e-mail que envia notificações para múltiplos módulos quando um pedido é aprovado.</li>
               </ol>
             </div>
           </details>
@@ -694,10 +809,11 @@ console.log(processador.processar(150));
                 para um sistema de cadastro de usuários de uma aplicação web.
               </p>
               <p>Quando um usuário se cadastra, o sistema deve:</p>
+              <u
               <ul>
-                <li>Registrar um log no console com o e-mail cadastrado.</li>
-                <li>Simular o envio de um e-mail de boas-vindas.</li>
-                <li>Atualizar um contador de usuários cadastrados.</li>
+                >Registrar um log no console com o e-mail cadastrado.</l/li>
+                >Simular o envio de um e-mail de boas-vindas.</l/li>
+                >Atualizar um contador de usuários cadastrados.</li>
               </ul>
               <p>
                 Implemente os três como observadores independentes e registre todos no evento
@@ -713,10 +829,11 @@ console.log(processador.processar(150));
                 Modele um sistema de cálculo de frete para uma loja virtual usando o padrão
                 <strong>Strategy</strong>.
               </p>
+              <u
               <ul>
-                <li>Crie estratégias para: Sedex, PAC e Transportadora Particular.</li>
-                <li>Cada estratégia deve calcular o frete com base no peso e na distância (use valores fictícios).</li>
-                <li>O código que chama o cálculo não deve saber qual transportadora está sendo usada.</li>
+                >Crie estratégias para: Sedex, PAC e Transportadora Particular.</l/li>
+                >Cada estratégia deve calcular o frete com base no peso e na distância (use valores fictícios).</l/li>
+                >O código que chama o cálculo não deve saber qual transportadora está sendo usada.</li>
               </ul>
             </div>
           </details>
@@ -729,10 +846,12 @@ console.log(processador.processar(150));
 
         <div class="card">
           <h3><a href="#exemplos">Padrões desta aula</a></h3>
-          <ul class="check-list">
-            <li>Singleton</li>
-            <li>Observer</li>
-            <li>Strategy</li>
+          <ul class="check-listst">
+            >Singleton</l/li>
+            >Observer</l/li>
+            >EventEmitter</l/li>
+            >Factory Method</l/li>
+            >Strategy</li>
           </ul>
         </div>
 
@@ -747,22 +866,32 @@ console.log(processador.processar(150));
 
         <div class="card">
           <h3><a href="#quando-usar">Boas práticas</a></h3>
-          <ul class="pill-list">
-            <li>Identificar o problema antes do padrão</li>
-            <li>Preferir composição</li>
-            <li>Baixo acoplamento</li>
-            <li>Alta coesão</li>
-            <li>Código legível</li>
+          <ul class="pill-listst">
+            >Identificar o problema antes do padrão</l/li>
+            >Preferir composição</l/li>
+            >Baixo acoplamento</l/li>
+            >Alta coesão</l/li>
+            >Código legível</li>
           </ul>
         </div>
 
         <div class="card">
           <h3>Material de apoio</h3>
           <ul style="font-size:.88rem;padding-left:1rem;margin:.3rem 0;">
-            <li><a href="https://refactoring.guru/pt-br/design-patterns" target="_blank">Refactoring.Guru – Padrões de Projeto</a></li>
-            <li><a href="https://www.alura.com.br/artigos/design-patterns-introducao-padroes-projeto" target="_blank">Alura – Guia de Design Patterns</a></li>
-            <li><a href="https://www.freecodecamp.org/portuguese/news/os-3-tipos-de-padroes-de-projetos-que-todo-desenvolvedor-deveria-conhecer-com-exemplos" target="_blank">FreeCodeCamp – Os 3 tipos de padrões</a></li>
+            ><a href="https://refactoring.guru/pt-br/design-patterns" target="_blank">Refactoring.Guru – Padrões de Projeto</a></l/li>
+            ><a href="https://www.alura.com.br/artigos/design-patterns-introducao-padroes-projeto" target="_blank">Alura – Guia de Design Patterns</a></l/li>
+            ><a href="https://www.freecodecamp.org/portuguese/news/os-3-tipos-de-padroes-de-projetos-que-todo-desenvolvedor-deveria-conhecer-com-exemplos" target="_blank">FreeCodeCamp – Os 3 tipos de padrões</a></li>
           </ul>
+        </div>
+
+        <div class="card">
+          <h3>Roteiro para quem faltou</h3>
+          <ol style="font-size:.88rem;padding-left:1.1rem;margin:.3rem 0;">
+            >Leia as seções <strong>1, 2 e 3</strong> desta página (links no menu acima).</l/li>
+            >Consulte a tabela do catálogo (<strong>seção 4</strong>) e anote os 3 padrões que mais chamaram sua atenção.</l/li>
+            >Execute os cinco exemplos de código na <strong>seção 6</strong>.</l/li>
+            >Resolva as <strong>Atividades 3 e 4</strong> (seção 7).</li>
+          </ol>
         </div>
 
       </aside>
