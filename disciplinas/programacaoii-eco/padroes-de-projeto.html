@@ -166,6 +166,25 @@
       .depois { background: #e8f5e9; border: 1px solid #a5d6a7; }
       .antes h4 { color: #c62828; margin: 0 0 .4rem; }
       .depois h4 { color: #2e7d32; margin: 0 0 .4rem; }
+
+      /* ── Layout main + aside mais fluido ─────────────────── */
+      main {
+        display: grid;
+        grid-template-columns: minmax(0, 3fr) minmax(260px, 1.2fr);
+        gap: 1.5rem;
+        align-items: flex-start;
+      }
+      @media (max-width: 800px) {
+        main {
+          grid-template-columns: 1fr;
+        }
+        main > section {
+          order: 1;
+        }
+        main > aside {
+          order: 2;
+        }
+      }
     </style>
   </head>
 
@@ -184,13 +203,13 @@
           catalogadas pelo "Gang of Four" — base do desenvolvimento orientado a objetos moderno.
         </p>
         <nav>
-          <a href="#o-que-sao">O que são</a>
-          <a href="#origem">Origem GoF</a>
-          <a href="#categorias">3 categorias</a>
-          <a href="#catalogo">Catálogo</a>
-          <a href="#quando-usar">Quando usar</a>
-          <a href="#exemplos">Exemplos em JS</a>
-          <a href="#atividades">Atividades</a>
+          <a href="#o-que-sao">1. Conceito</a>
+          <a href="#origem">2. Origem (GoF)</a>
+          <a href="#categorias">3. Categorias GoF</a>
+          <a href="#catalogo">4. Catálogo (23 padrões)</a>
+          <a href="#exemplos">5. Exemplos em JavaScript</a>
+          <a href="#quando-usar">6. Quando usar (boas práticas)</a>
+          <a href="#atividades">7. Atividades da aula</a>
         </nav>
       </div>
     </header>
@@ -278,6 +297,11 @@
             O livro GoF foi escrito com exemplos em C++ e Smalltalk, mas os padrões se aplicam
             a qualquer linguagem orientada a objetos — inclusive JavaScript.
           </div>
+
+          <p style="font-size:.9rem;margin-top:.3rem;">
+            Próximo passo: veja o <a href="#categorias">agrupamento em categorias</a> para entender
+            como os 23 padrões se organizam.
+          </p>
         </div>
 
         <!-- ── 3. CATEGORIAS ─────────────────────────────────── -->
@@ -355,6 +379,11 @@
               <dd>Organiza a troca de mensagens e a distribuição de responsabilidades entre objetos em tempo de execução.</dd>
             </dl>
           </div>
+
+          <p style="font-size:.9rem;margin-top:.3rem;">
+            Próximo passo: veja o <a href="#catalogo">catálogo completo dos 23 padrões</a> e
+            identifique quais pertencem a cada categoria.
+          </p>
         </div>
 
         <!-- ── 4. CATÁLOGO COMPLETO ──────────────────────────── -->
@@ -399,11 +428,18 @@
             </tbody>
           </table>
 
+          <p style="font-size:.9rem;margin-top:.3rem;">
+            Em seguida, veja como alguns desses padrões aparecem em código na
+            <a href="#exemplos">seção de exemplos em JavaScript</a>.
+          </p>
         </div>
 
         <!-- ── 5. QUANDO USAR ────────────────────────────────── -->
         <div class="card" id="quando-usar">
           <h2>5. Quando usar (ou não)</h2>
+
+          <h3>Boas práticas gerais</h3>
+          <p>Esta seção resume boas práticas ao decidir aplicar um padrão de projeto em seu código.</p>
 
           <h3>Use padrões quando…</h3>
           <ul>
@@ -433,6 +469,7 @@
           <h2>6. Primeiros exemplos em JavaScript</h2>
           <p>
             Os exemplos abaixo são introdutórios, o objetivo é <em>ver a ideia</em> funcionando em código.
+            Nesta aula, focamos em três padrões: <strong>Singleton</strong>, <strong>Observer</strong> e <strong>Strategy</strong>.
           </p>
 
           <h3><span class="badge badge--c">Criacional</span> Singleton — instância única</h3>
@@ -691,7 +728,7 @@ console.log(processador.processar(150));
       <aside>
 
         <div class="card">
-          <h3>Padrões desta aula</h3>
+          <h3><a href="#exemplos">Padrões desta aula</a></h3>
           <ul class="check-list">
             <li>Singleton</li>
             <li>Observer</li>
@@ -700,7 +737,7 @@ console.log(processador.processar(150));
         </div>
 
         <div class="card">
-          <h3>Categorias GoF</h3>
+          <h3><a href="#categorias">Categorias GoF</a></h3>
           <p style="font-size:.88rem;">
             <span class="badge badge--c">Criacional</span> Como nasce?<br><br>
             <span class="badge badge--e">Estrutural</span> Como se encaixa?<br><br>
@@ -709,7 +746,7 @@ console.log(processador.processar(150));
         </div>
 
         <div class="card">
-          <h3>Boas práticas</h3>
+          <h3><a href="#quando-usar">Boas práticas</a></h3>
           <ul class="pill-list">
             <li>Identificar o problema antes do padrão</li>
             <li>Preferir composição</li>
@@ -726,16 +763,6 @@ console.log(processador.processar(150));
             <li><a href="https://www.alura.com.br/artigos/design-patterns-introducao-padroes-projeto" target="_blank">Alura – Guia de Design Patterns</a></li>
             <li><a href="https://www.freecodecamp.org/portuguese/news/os-3-tipos-de-padroes-de-projetos-que-todo-desenvolvedor-deveria-conhecer-com-exemplos" target="_blank">FreeCodeCamp – Os 3 tipos de padrões</a></li>
           </ul>
-        </div>
-
-        <div class="card">
-          <h3>Roteiro para quem faltou</h3>
-          <ol style="font-size:.88rem;padding-left:1.1rem;margin:.3rem 0;">
-            <li>Leia as seções 1, 2 e 3 desta página.</li>
-            <li>Consulte a tabela do catálogo (seção 4) e anote os 3 padrões que mais chamaram sua atenção.</li>
-            <li>Execute os três exemplos de código no seu ambiente.</li>
-            <li>Resolva as Atividades 3 e 4.</li>
-          </ol>
         </div>
 
       </aside>
