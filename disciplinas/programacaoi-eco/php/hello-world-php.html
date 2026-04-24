@@ -74,8 +74,10 @@
           </div>
 
           <h3>Teste rápido: servidor funcionando</h3>
-          <p>Crie um arquivo chamado <code>teste_servidor.php</code> em C:\xampp\htdocs:</p>
-          <pre><code><?php phpinfo(); ?></code></pre>
+          <p>Crie um arquivo chamado <code>teste_servidor.php</code> em <code>C:\xampp\htdocs</code>:</p>
+          <pre><code>&lt;?php
+phpinfo();
+?&gt;</code></pre>
         </section>
 
         <!-- 2. ECHO E VARIÁVEIS -->
@@ -88,26 +90,22 @@
           <div class="grid-2">
             <div>
               <h3>2.1. Echo básico</h3>
-              <pre><?php
-echo htmlspecialchars('<?php
-echo "Hello, World em PHP!<br>";
-echo "PHP é divertido!<br>";
-?>');
-?></pre>
+              <pre><code>&lt;?php
+echo "Hello, World em PHP!&lt;br&gt;";
+echo "PHP é divertido!&lt;br&gt;";
+?&gt;</code></pre>
 
               <h3>2.2. Variáveis em PHP</h3>
               <p>
                 Variáveis em PHP começam com <code>$</code> e podem guardar textos, números e outros tipos.
               </p>
-              <pre><?php
-echo htmlspecialchars('<?php
+              <pre><code>&lt;?php
 $nome  = "Wilcilene";
 $idade = 20;
 
-echo "Nome: " . $nome . "<br>";
-echo "Idade: " . $idade . " anos<br>";
-?>');
-?></pre>
+echo "Nome: " . $nome . "&lt;br&gt;";
+echo "Idade: " . $idade . " anos&lt;br&gt;";
+?&gt;</code></pre>
             </div>
             
             <div class="card" style="margin-top: 1rem;">
@@ -149,22 +147,16 @@ echo "Idade: " . $idade . " anos<br>";
             </ul>
           </div>
 
-          <h3>Saída gerada</h3>
-          <?php
-          $nome  = "Estudante PHP";
-          $curso = "Desenvolvimento Web";
-          $ano   = 2026;
-          ?>
-          <div class="card" style="margin-top: .75rem;">
-            <strong>Exemplo gerado:</strong>
-            <p>
-              <?php
-                echo "Bem-vindo(a), " . $nome . "!<br>";
-                echo "Curso: " . $curso . "<br>";
-                echo "Ano: " . $ano . "<br>";
-              ?>
-            </p>
-          </div>
+          <h3>Exemplo de saída agrupada</h3>
+          <pre><code>&lt;?php
+$nome  = "Estudante PHP";
+$curso = "Desenvolvimento Web";
+$ano   = 2026;
+
+echo "Bem-vindo(a), " . $nome . "!&lt;br&gt;";
+echo "Curso: " . $curso . "&lt;br&gt;";
+echo "Ano: " . $ano . "&lt;br&gt;";
+?&gt;</code></pre>
         </section>
 
         <!-- 3. OPERAÇÕES MATEMÁTICAS E LÓGICAS -->
@@ -215,18 +207,16 @@ echo "Idade: " . $idade . " anos<br>";
                 </tbody>
               </table>
 
-              <pre><?php
-echo htmlspecialchars('<?php
+              <pre><code>&lt;?php
 $a = 10;
 $b = 3;
 
-echo "Adição: " . ($a + $b) . "<br>";
-echo "Subtração: " . ($a - $b) . "<br>";
-echo "Multiplicação: " . ($a * $b) . "<br>";
-echo "Divisão: " . ($a / $b) . "<br>";
-echo "Resto: " . ($a % $b) . "<br>";
-?>');
-?></pre>
+echo "Adição: " . ($a + $b) . "&lt;br&gt;";
+echo "Subtração: " . ($a - $b) . "&lt;br&gt;";
+echo "Multiplicação: " . ($a * $b) . "&lt;br&gt;";
+echo "Divisão: " . ($a / $b) . "&lt;br&gt;";
+echo "Resto: " . ($a % $b) . "&lt;br&gt;";
+?&gt;</code></pre>
             </div>
 
             <div>
@@ -261,17 +251,15 @@ echo "Resto: " . ($a % $b) . "<br>";
                 </tbody>
               </table>
 
-              <pre><?php
-echo htmlspecialchars('<?php
+              <pre><code>&lt;?php
 $idade = 18;
 $temCarteira = true;
 
-$podeDirigir = ($idade >= 18) && $temCarteira;
+$podeDirigir = ($idade &gt;= 18) &amp;&amp; $temCarteira;
 
 echo "Pode dirigir? ";
 echo $podeDirigir ? "Sim" : "Não";
-?>');
-?></pre>
+?&gt;</code></pre>
             </div>
           </div>
 
@@ -298,34 +286,30 @@ echo $podeDirigir ? "Sim" : "Não";
           <div class="grid-2">
             <div>
               <h3>4.1. if e else</h3>
-              <pre><?php
-echo htmlspecialchars('<?php
+              <pre><code>&lt;?php
 $nota = 7.5;
 
-if ($nota >= 6) {
+if ($nota &gt;= 6) {
     echo "Aprovado";
 } else {
     echo "Reprovado";
 }
-?>');
-?></pre>
+?&gt;</code></pre>
 
               <h3>4.2. if / elseif / else</h3>
-              <pre><?php
-echo htmlspecialchars('<?php
+              <pre><code>&lt;?php
 $nota = 8.3;
 
-if ($nota >= 9) {
+if ($nota &gt;= 9) {
     echo "Conceito A";
-} elseif ($nota >= 7) {
+} elseif ($nota &gt;= 7) {
     echo "Conceito B";
-} elseif ($nota >= 5) {
+} elseif ($nota &gt;= 5) {
     echo "Conceito C";
 } else {
     echo "Reprovado";
 }
-?>');
-?></pre>
+?&gt;</code></pre>
             </div>
 
             <div>
@@ -333,8 +317,7 @@ if ($nota >= 9) {
               <p>
                 <code>switch</code> é útil quando se tem muitos casos para a mesma variável.
               </p>
-              <pre><?php
-echo htmlspecialchars('<?php
+              <pre><code>&lt;?php
 $opcao = 2;
 
 switch ($opcao) {
@@ -350,8 +333,7 @@ switch ($opcao) {
     default:
         echo "Opção inválida";
 }
-?>');
-?></pre>
+?&gt;</code></pre>
 
               <div class="card">
                 <strong>Dica</strong>
@@ -385,39 +367,33 @@ switch ($opcao) {
           <div class="grid-2">
             <div>
               <h3>5.1. for</h3>
-              <pre><?php
-echo htmlspecialchars('<?php
-for ($i = 1; $i <= 5; $i++) {
-    echo "Contagem: " . $i . "<br>";
+              <pre><code>&lt;?php
+for ($i = 1; $i &lt;= 5; $i++) {
+    echo "Contagem: " . $i . "&lt;br&gt;";
 }
-?>');
-?></pre>
+?&gt;</code></pre>
 
               <h3>5.2. while</h3>
-              <pre><?php
-echo htmlspecialchars('<?php
+              <pre><code>&lt;?php
 $contador = 1;
 
-while ($contador <= 3) {
-    echo "While: " . $contador . "<br>";
+while ($contador &lt;= 3) {
+    echo "While: " . $contador . "&lt;br&gt;";
     $contador++;
 }
-?>');
-?></pre>
+?&gt;</code></pre>
             </div>
 
             <div>
               <h3>5.3. do...while</h3>
-              <pre><?php
-echo htmlspecialchars('<?php
+              <pre><code>&lt;?php
 $numero = 1;
 
 do {
-    echo "Do-while: " . $numero . "<br>";
+    echo "Do-while: " . $numero . "&lt;br&gt;";
     $numero++;
-} while ($numero <= 3);
-?>');
-?></pre>
+} while ($numero &lt;= 3);
+?&gt;</code></pre>
 
               <div class="card">
                 <strong>Diferença importante</strong>
@@ -452,52 +428,34 @@ do {
           <div class="grid-2">
             <div>
               <h3>6.1. Criando um array</h3>
-              <pre><?php
-echo htmlspecialchars('<?php
+              <pre><code>&lt;?php
 $linguagens = ["PHP", "JavaScript", "Python"];
 
-echo "Primeira linguagem: " . $linguagens[0] . "<br>";
-echo "Segunda linguagem: " . $linguagens[1] . "<br>";
-echo "Terceira linguagem: " . $linguagens[2] . "<br>";
-?>');
-?></pre>
+echo "Primeira linguagem: " . $linguagens[0] . "&lt;br&gt;";
+echo "Segunda linguagem: " . $linguagens[1] . "&lt;br&gt;";
+echo "Terceira linguagem: " . $linguagens[2] . "&lt;br&gt;";
+?&gt;</code></pre>
             </div>
 
             <div>
               <h3>6.2. Percorrendo com foreach</h3>
-              <pre><?php
-echo htmlspecialchars('<?php
+              <pre><code>&lt;?php
 $linguagens = ["PHP", "JavaScript", "Python"];
 
 foreach ($linguagens as $linguagem) {
-    echo "Linguagem: " . $linguagem . "<br>";
+    echo "Linguagem: " . $linguagem . "&lt;br&gt;";
 }
-?>');
-?></pre>
+?&gt;</code></pre>
             </div>
           </div>
 
-          <!-- DEMO: TABELA -->
-          <?php
-          $linguagensDemo = ["PHP", "JavaScript", "Python", "Java", "C#"];
-          ?>
-          <h3>Exemplo executado: tabela simples gerada com array</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Linguagem</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach ($linguagensDemo as $indice => $linguagem): ?>
-                <tr>
-                  <td><?php echo $indice; ?></td>
-                  <td><?php echo $linguagem; ?></td>
-                </tr>
-              <?php endforeach; ?>
-            </tbody>
-          </table>
+          <h3>Exemplo: tabela simples gerada com array</h3>
+          <pre><code>&lt;?php
+$linguagens = ["PHP", "JavaScript", "Python", "Java", "C#"];
+?&gt;</code></pre>
+          <p>
+            Depois, use esse array para montar uma tabela com <code>foreach</code>.
+          </p>
 
           <div class="highlight">
             <strong>Exercício 5 – Lista de itens favoritos</strong>
@@ -522,8 +480,7 @@ foreach ($linguagens as $linguagem) {
           <div class="grid-2">
             <div>
               <h3>7.1. Classe e objeto simples</h3>
-              <pre><?php
-echo htmlspecialchars('<?php
+              <pre><code>&lt;?php
 class Pessoa {
     public string $nome;
     public int $idade;
@@ -538,13 +495,12 @@ class Pessoa {
     }
 }
 
-$estudante1 = new Pessoa("Wilcilene", 20);
-$estudante2 = new Pessoa("Bruno", 22);
+$aluno1 = new Pessoa("Wilcilene", 20);
+$aluno2 = new Pessoa("Bruno", 22);
 
-echo $estudante1->apresentar() . "<br>";
-echo $estudante2->apresentar() . "<br>";
-?>');
-?></pre>
+echo $aluno1->apresentar() . "&lt;br&gt;";
+echo $aluno2->apresentar() . "&lt;br&gt;";
+?&gt;</code></pre>
             </div>
 
             <div class="card">
@@ -558,51 +514,36 @@ echo $estudante2->apresentar() . "<br>";
             </div>
           </div>
 
-          <!-- DEMO REAL EXECUTADO: OBJETOS -->
-          <?php
-          class Produto {
-              public string $nome;
-              public float $preco;
+          <h3>Exemplo: tabela de objetos Produto</h3>
+          <pre><code>&lt;?php
+class Produto {
+    public string $nome;
+    public float $preco;
 
-              public function __construct(string $nome, float $preco) {
-                  $this->nome  = $nome;
-                  $this->preco = $preco;
-              }
-          }
+    public function __construct(string $nome, float $preco) {
+        $this->nome  = $nome;
+        $this->preco = $preco;
+    }
+}
 
-          $produtosDemo = [
-              new Produto("Teclado", 150.0),
-              new Produto("Mouse", 80.5),
-              new Produto("Monitor", 899.9),
-          ];
-          ?>
-
-          <h3>Exemplo executado: tabela de objetos Produto</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Produto</th>
-                <th>Preço formatado</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach ($produtosDemo as $produto): ?>
-                <tr>
-                  <td><?php echo $produto->nome; ?></td>
-                  <td><?php echo "R$ " . number_format($produto->preco, 2, ',', '.'); ?></td>
-                </tr>
-              <?php endforeach; ?>
-            </tbody>
-          </table>
+$produtos = [
+    new Produto("Teclado", 150.0),
+    new Produto("Mouse", 80.5),
+    new Produto("Monitor", 899.9),
+];
+?&gt;</code></pre>
+          <p>
+            Use esse array de objetos para montar uma tabela com nome e preço formatado.
+          </p>
 
           <div class="highlight">
-            <strong>Exercício 6 – Classe Estudante</strong>
+            <strong>Exercício 6 – Classe Aluno</strong>
             <p>
-              Crie <code>estudantes.php</code> que:
+              Crie <code>alunos.php</code> que:
             </p>
             <ul>
-              <li>Tenha a classe <code>Estudante</code> com nome, curso e semestre.</li>
-              <li>Crie pelo menos 3 objetos <code>Estudante</code> e guarde-os em um array.</li>
+              <li>Tenha a classe <code>Aluno</code> com nome, curso e semestre.</li>
+              <li>Crie pelo menos 3 objetos <code>Aluno</code> e guarde-os em um array.</li>
               <li>Use <code>foreach</code> para montar uma tabela com essas informações.</li>
             </ul>
           </div>
@@ -633,9 +574,9 @@ echo $estudante2->apresentar() . "<br>";
             <div class="step">
               <p><strong>Desafio – Sistema de notas com objetos</strong></p>
               <p>
-                Crie uma classe <code>Estudante</code> com nome e um array de notas, calcule média, 
+                Crie uma classe <code>Aluno</code> com nome e um array de notas, calcule média, 
                 use operadores lógicos e condicionais para determinar o status (aprovado, recuperação, reprovado) 
-                e gere uma tabela com um estudante por linha.
+                e gere uma tabela com um aluno por linha.
               </p>
             </div>
           </div>
