@@ -3,31 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Programação II – Introdução a Padrões de Projeto (GoF)</titltle>
-    " />
+    <title>Programação II – Introdução a Padrões de Projeto (GoF)</title>
+    <link rel="stylesheet" href="style.css" />
+
     <style>
       /* ── Tokens extras ────────────────────────────────────── */
       :root {
-        --cat-criacional:   #0277bd;
-        --cat-criacional-bg:#e1f5fe;
-        --cat-estrutural:   #2e7d32;
-        --cat-estrutural-bg:#e8f5e9;
-        --cat-comportamental:#6a1b9a;
-        --cat-comportamental-bg:#f3e5f5;
+        --cat-criacional: #0277bd;
+        --cat-criacional-bg: #e1f5fe;
+        --cat-estrutural: #2e7d32;
+        --cat-estrutural-bg: #e8f5e9;
+        --cat-comportamental: #6a1b9a;
+        --cat-comportamental-bg: #f3e5f5;
       }
 
       /* ── Anotação aninhada (mesma identidade da página) ──── */
       .anotacao {
         border-left: 4px solid var(--primary, #006699);
         background: #f3f6fb;
-        padding: .8rem 1rem;
-        margin: .4rem 0 1.2rem;
-        font-size: .93rem;
-        border-radius: 0 .35rem .35rem 0;
+        padding: 0.8rem 1rem;
+        margin: 0.4rem 0 1.2rem;
+        font-size: 0.93rem;
+        border-radius: 0 0.35rem 0.35rem 0;
       }
-      .anotacao dl { margin: .4rem 0 0; }
-      .anotacao dt { font-weight: 600; margin-top: .55rem; }
-      .anotacao dd { margin: .15rem 0 0 1rem; color: var(--muted, #666); }
+      .anotacao dl {
+        margin: 0.4rem 0 0;
+      }
+      .anotacao dt {
+        font-weight: 600;
+        margin-top: 0.55rem;
+      }
+      .anotacao dd {
+        margin: 0.15rem 0 0 1rem;
+        color: var(--muted, #666);
+      }
 
       /* ── Timeline da origem GoF ──────────────────────────── */
       .timeline {
@@ -36,10 +45,11 @@
         margin: 1rem 0 1.2rem;
       }
       .timeline::before {
-        content: '';
+        content: "";
         position: absolute;
-        left: .55rem;
-        top: 0; bottom: 0;
+        left: 0.55rem;
+        top: 0;
+        bottom: 0;
         width: 2px;
         background: var(--border, #ddd);
       }
@@ -48,20 +58,21 @@
         margin-bottom: 1rem;
       }
       .timeline-item::before {
-        content: '';
+        content: "";
         position: absolute;
         left: -1.3rem;
-        top: .35rem;
-        width: 10px; height: 10px;
+        top: 0.35rem;
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
         background: var(--primary, #006699);
         border: 2px solid #fff;
         box-shadow: 0 0 0 2px var(--primary, #006699);
       }
       .timeline-ano {
-        font-size: .75rem;
+        font-size: 0.75rem;
         text-transform: uppercase;
-        letter-spacing: .06em;
+        letter-spacing: 0.06em;
         color: var(--primary, #006699);
         font-weight: 700;
       }
@@ -74,66 +85,124 @@
         margin: 1rem 0 1.2rem;
       }
       .cat-card {
-        border-radius: .5rem;
+        border-radius: 0.5rem;
         padding: 1rem 1.1rem;
         border: 1px solid var(--border, #ddd);
       }
-      .cat-card--criacional   { background: var(--cat-criacional-bg); border-top: 4px solid var(--cat-criacional); }
-      .cat-card--estrutural   { background: var(--cat-estrutural-bg); border-top: 4px solid var(--cat-estrutural); }
-      .cat-card--comportamental { background: var(--cat-comportamental-bg); border-top: 4px solid var(--cat-comportamental); }
-      .cat-card h3 { margin: 0 0 .4rem; font-size: 1rem; }
-      .cat-card--criacional   h3 { color: var(--cat-criacional); }
-      .cat-card--estrutural   h3 { color: var(--cat-estrutural); }
-      .cat-card--comportamental h3 { color: var(--cat-comportamental); }
-      .cat-card p  { margin: 0 0 .6rem; font-size: .88rem; }
-      .cat-card ul { margin: 0; padding-left: 1.1rem; font-size: .85rem; }
-      .cat-card li { margin-bottom: .2rem; }
+      .cat-card--criacional {
+        background: var(--cat-criacional-bg);
+        border-top: 4px solid var(--cat-criacional);
+      }
+      .cat-card--estrutural {
+        background: var(--cat-estrutural-bg);
+        border-top: 4px solid var(--cat-estrutural);
+      }
+      .cat-card--comportamental {
+        background: var(--cat-comportamental-bg);
+        border-top: 4px solid var(--cat-comportamental);
+      }
+      .cat-card h3 {
+        margin: 0 0 0.4rem;
+        font-size: 1rem;
+      }
+      .cat-card--criacional h3 {
+        color: var(--cat-criacional);
+      }
+      .cat-card--estrutural h3 {
+        color: var(--cat-estrutural);
+      }
+      .cat-card--comportamental h3 {
+        color: var(--cat-comportamental);
+      }
+      .cat-card p {
+        margin: 0 0 0.6rem;
+        font-size: 0.88rem;
+      }
+      .cat-card ul {
+        margin: 0;
+        padding-left: 1.1rem;
+        font-size: 0.85rem;
+      }
+      .cat-card li {
+        margin-bottom: 0.2rem;
+      }
 
       /* ── Badge de categoria inline ───────────────────────── */
       .badge {
         display: inline-block;
-        padding: .1rem .55rem;
+        padding: 0.1rem 0.55rem;
         border-radius: 999px;
-        font-size: .72rem;
+        font-size: 0.72rem;
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: .05em;
-        margin-right: .3rem;
+        letter-spacing: 0.05em;
+        margin-right: 0.3rem;
       }
-      .badge--c { background: var(--cat-criacional-bg); color: var(--cat-criacional); }
-      .badge--e { background: var(--cat-estrutural-bg); color: var(--cat-estrutural); }
-      .badge--b { background: var(--cat-comportamental-bg); color: var(--cat-comportamental); }
+      .badge--c {
+        background: var(--cat-criacional-bg);
+        color: var(--cat-criacional);
+      }
+      .badge--e {
+        background: var(--cat-estrutural-bg);
+        color: var(--cat-estrutural);
+      }
+      .badge--b {
+        background: var(--cat-comportamental-bg);
+        color: var(--cat-comportamental);
+      }
 
       /* ── Tabela de padrões ───────────────────────────────── */
       .tabela-padroes {
         width: 100%;
         border-collapse: collapse;
-        font-size: .875rem;
-        margin: .5rem 0 1.2rem;
+        font-size: 0.875rem;
+        margin: 0.5rem 0 1.2rem;
       }
       .tabela-padroes th {
         background: #f0f4f8;
-        padding: .5rem .75rem;
+        padding: 0.5rem 0.75rem;
         text-align: left;
         border-bottom: 2px solid var(--border, #ddd);
-        font-size: .8rem;
+        font-size: 0.8rem;
         text-transform: uppercase;
-        letter-spacing: .05em;
+        letter-spacing: 0.05em;
         color: var(--muted, #666);
       }
       .tabela-padroes td {
-        padding: .45rem .75rem;
+        padding: 0.45rem 0.75rem;
         border-bottom: 1px solid var(--border, #ddd);
         vertical-align: top;
       }
-      .tabela-padroes tr:last-child td { border-bottom: none; }
-      .tabela-padroes tr:hover td { background: #f9fbfc; }
-      .nome-padrao { font-weight: 600; white-space: nowrap; }
+      .tabela-padroes tr:last-child td {
+        border-bottom: none;
+      }
+      .tabela-padroes tr:hover td {
+        background: #f9fbfc;
+      }
+      .nome-padrao {
+        font-weight: 600;
+        white-space: nowrap;
+      }
 
       /* ── Sidebar mini-lista com ícone ────────────────────── */
-      .check-list { list-style: none; padding: 0; margin: .5rem 0; font-size: .9rem; }
-      .check-list li { margin-bottom: .35rem; padding-left: 1.4rem; position: relative; }
-      .check-list li::before { content: '✓'; position: absolute; left: 0; color: #2e7d32; font-weight: 700; }
+      .check-list {
+        list-style: none;
+        padding: 0;
+        margin: 0.5rem 0;
+        font-size: 0.9rem;
+      }
+      .check-list li {
+        margin-bottom: 0.35rem;
+        padding-left: 1.4rem;
+        position: relative;
+      }
+      .check-list li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #2e7d32;
+        font-weight: 700;
+      }
 
       /* ── Analogia visual ─────────────────────────────────── */
       .analogia {
@@ -142,32 +211,52 @@
         align-items: flex-start;
         background: #fffde7;
         border: 1px solid #ffe082;
-        border-radius: .45rem;
-        padding: .9rem 1rem;
-        margin: .8rem 0 1.2rem;
-        font-size: .93rem;
+        border-radius: 0.45rem;
+        padding: 0.9rem 1rem;
+        margin: 0.8rem 0 1.2rem;
+        font-size: 0.93rem;
       }
-      .analogia-icone { font-size: 2rem; line-height: 1; flex-shrink: 0; }
+      .analogia-icone {
+        font-size: 2rem;
+        line-height: 1;
+        flex-shrink: 0;
+      }
 
       /* ── Fluxo antes/depois ──────────────────────────────── */
       .antes-depois {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1rem;
-        margin: .6rem 0 1.2rem;
+        margin: 0.6rem 0 1.2rem;
       }
-      @media (max-width: 600px) { .antes-depois { grid-template-columns: 1fr; } }
+      @media (max-width: 600px) {
+        .antes-depois {
+          grid-template-columns: 1fr;
+        }
+      }
       .antes-depois > div {
-        border-radius: .4rem;
-        padding: .75rem 1rem;
-        font-size: .88rem;
+        border-radius: 0.4rem;
+        padding: 0.75rem 1rem;
+        font-size: 0.88rem;
       }
-      .antes { background: #ffebee; border: 1px solid #ef9a9a; }
-      .depois { background: #e8f5e9; border: 1px solid #a5d6a7; }
-      .antes h4 { color: #c62828; margin: 0 0 .4rem; }
-      .depois h4 { color: #2e7d32; margin: 0 0 .4rem; }
+      .antes {
+        background: #ffebee;
+        border: 1px solid #ef9a9a;
+      }
+      .depois {
+        background: #e8f5e9;
+        border: 1px solid #a5d6a7;
+      }
+      .antes h4 {
+        color: #c62828;
+        margin: 0 0 0.4rem;
+      }
+      .depois h4 {
+        color: #2e7d32;
+        margin: 0 0 0.4rem;
+      }
 
-      /* Microajustes suaves que não quebram outras páginas */
+      /* Pequeno ajuste de espaçamento didático */
       .card h3 + p {
         margin-top: 0.3rem;
       }
@@ -192,13 +281,13 @@
           catalogadas pelo "Gang of Four" — base do desenvolvimento orientado a objetos moderno.
         </p>
         <nav>
-          <a href="#o-que-sao">1. Conceito</a>
-          <a href="#origem">2. Origem (GoF)</a>
-          <a href="#categorias">3. Categorias GoF</a>
-          <a href="#catalogo">4. Catálogo (23 padrões)</a>
-          <a href="#exemplos">5. Exemplos em JavaScript</a>
-          <a href="#quando-usar">6. Quando usar (boas práticas)</a>
-          <a href="#atividades">7. Atividades da aula</a>
+          <a href="#o-que-sao">O que são</a>
+          <a href="#origem">Origem GoF</a>
+          <a href="#categorias">3 categorias</a>
+          <a href="#catalogo">Catálogo</a>
+          <a href="#quando-usar">Quando usar</a>
+          <a href="#exemplos">Exemplos em JS</a>
+          <a href="#atividades">Atividades</a>
         </nav>
       </div>
     </header>
@@ -207,26 +296,36 @@
     <main>
       <!-- ░░░░░░░░░░░░ COLUNA PRINCIPAL ░░░░░░░░░░░░ -->
       <section>
-
         <!-- ── 1. O QUE SÃO ─────────────────────────────────── -->
         <div class="card" id="o-que-sao">
           <h2>1. O que são Padrões de Projeto?</h2>
 
           <p>
-            Padrões de Projeto (<em>Design Patterns</em>) são <strong>soluções reutilizáveis para
-            problemas recorrentes</strong> no desenvolvimento de software orientado a objetos.
-            Eles não são código pronto para copiar e colar, mas sim <em>receitas</em> ou
-            <em>modelos conceituais</em> que descrevem como organizar classes e objetos para
-            resolver um problema de forma elegante.
+            Padrões de Projeto (<em>Design Patterns</em>) são
+            <strong>soluções reutilizáveis para problemas recorrentes</strong> no desenvolvimento
+            de software orientado a objetos. Eles não são código pronto para copiar e colar, mas
+            sim <em>receitas</em> ou <em>modelos conceituais</em> que descrevem como organizar
+            classes e objetos para resolver um problema de forma elegante.
           </p>
-          
+
           <h3>Por que usar padrões?</h3>
-          <u
           <ul>
-            ><strong>Código mais fácil de manter</strong> — quem lê o código reconhece a estrutura e entende mais rápido a intenção do desenvolvedor.</l/li>
-            ><strong>Vocabulário comum</strong> — dizer "aqui usei um Observer" comunica a estrutura inteira sem precisar desenhar tudo do zero.</l/li>
-            ><strong>Menor acoplamento</strong> — os padrões promovem que partes do sistema se conheçam o mínimo necessário, facilitando mudanças.</l/li>
-            ><strong>Reuso de boas soluções</strong> — são fruto de experiência acumulada de dezenas de projetos reais; você não precisa "reinventar a roda".</li>
+            <li>
+              <strong>Código mais fácil de manter</strong> — quem lê o código reconhece a
+              estrutura e entende mais rápido a intenção do desenvolvedor.
+            </li>
+            <li>
+              <strong>Vocabulário comum</strong> — dizer "aqui usei um Observer" comunica a
+              estrutura inteira sem precisar desenhar tudo do zero.
+            </li>
+            <li>
+              <strong>Menor acoplamento</strong> — os padrões promovem que partes do sistema se
+              conheçam o mínimo necessário, facilitando mudanças.
+            </li>
+            <li>
+              <strong>Reuso de boas soluções</strong> — são fruto de experiência acumulada de
+              dezenas de projetos reais; você não precisa "reinventar a roda".
+            </li>
           </ul>
 
           <div class="antes-depois">
@@ -240,16 +339,16 @@
             <div class="depois">
               <h4>✅ Com padrão</h4>
               <p>
-                Responsabilidades bem definidas, pontos de extensão claros, código previsível
-                e testável, comunicação facilitada entre a equipe.
+                Responsabilidades bem definidas, pontos de extensão claros, código previsível e
+                testável, comunicação facilitada entre a equipe.
               </p>
             </div>
           </div>
 
           <div class="callout">
             <strong>Atenção:</strong> padrões são ferramentas, não receitas obrigatórias. Aplicar
-            um padrão onde ele não é necessário aumenta a complexidade sem benefício. Aprenda
-            a <em>reconhecer o problema</em> que cada padrão resolve.
+            um padrão onde ele não é necessário aumenta a complexidade sem benefício. Aprenda a
+            <em>reconhecer o problema</em> que cada padrão resolve.
           </div>
         </div>
 
@@ -258,40 +357,48 @@
           <h2>2. Origem — o "Gang of Four"</h2>
 
           <p>
-            O termo vem do livro <strong><em>Design Patterns: Elements of Reusable
-            Object-Oriented Software</em></strong>, publicado em 1994 pelos quatro autores
-            Erich Gamma, Richard Helm, Ralph Johnson e John Vlissides — apelidados de
-            <em>Gang of Four</em> (GoF), ou "Gangue dos Quatro".
+            O termo vem do livro
+            <strong
+              ><em>Design Patterns: Elements of Reusable Object-Oriented Software</em></strong
+            >, publicado em 1994 pelos quatro autores Erich Gamma, Richard Helm, Ralph Johnson e
+            John Vlissides — apelidados de <em>Gang of Four</em> (GoF), ou "Gangue dos Quatro".
           </p>
 
           <div class="timeline">
             <div class="timeline-item">
               <div class="timeline-ano">Década de 1970</div>
-              <p>O arquiteto Christopher Alexander publica o primeiro catálogo de padrões, voltado para construção civil — inspiração direta para os padrões de software.</p>
+              <p>
+                O arquiteto Christopher Alexander publica o primeiro catálogo de padrões, voltado
+                para construção civil — inspiração direta para os padrões de software.
+              </p>
             </div>
             <div class="timeline-item">
               <div class="timeline-ano">1987</div>
-              <p>Kent Beck e Ward Cunningham apresentam os primeiros padrões para software em Smalltalk na conferência OOPSLA.</p>
+              <p>
+                Kent Beck e Ward Cunningham apresentam os primeiros padrões para software em
+                Smalltalk na conferência OOPSLA.
+              </p>
             </div>
             <div class="timeline-item">
               <div class="timeline-ano">1994</div>
-              <p>Gamma, Helm, Johnson e Vlissides publicam o livro GoF com 23 padrões catalogados para linguagens orientadas a objetos.</p>
+              <p>
+                Gamma, Helm, Johnson e Vlissides publicam o livro GoF com 23 padrões catalogados
+                para linguagens orientadas a objetos.
+              </p>
             </div>
             <div class="timeline-item">
               <div class="timeline-ano">Hoje</div>
-              <p>Os 23 padrões GoF são referência e fazem parte de frameworks modernos como Spring, Angular e React.</p>
+              <p>
+                Os 23 padrões GoF são referência e fazem parte de frameworks modernos como Spring,
+                Angular e React.
+              </p>
             </div>
           </div>
 
           <div class="note">
-            O livro GoF foi escrito com exemplos em C++ e Smalltalk, mas os padrões se aplicam
-            a qualquer linguagem orientada a objetos — inclusive JavaScript.
+            O livro GoF foi escrito com exemplos em C++ e Smalltalk, mas os padrões se aplicam a
+            qualquer linguagem orientada a objetos — inclusive JavaScript.
           </div>
-
-          <p style="font-size:.9rem;margin-top:.3rem;">
-            Próximo passo: veja o <a href="#categorias">agrupamento em categorias</a> para entender
-            como os 23 padrões se organizam.
-          </p>
         </div>
 
         <!-- ── 3. CATEGORIAS ─────────────────────────────────── -->
@@ -299,8 +406,8 @@
           <h2>3. As 3 categorias dos padrões GoF</h2>
 
           <p>
-            Os 23 padrões estão organizados em três grandes grupos, conforme o tipo de
-            problema que resolvem:
+            Os 23 padrões estão organizados em três grandes grupos, conforme o tipo de problema
+            que resolvem:
           </p>
 
           <div class="cat-grid">
@@ -310,80 +417,82 @@
                 Tratam <strong>como objetos são criados</strong>. Permitem que o código não
                 dependa diretamente de qual classe concreta está sendo instanciada.
               </p>
-              <u
               <ul>
-                >Singleton</l/li>
-                >Factory Method</l/li>
-                >Abstract Factory</l/li>
-                >Builder</l/li>
-                >Prototype</li>
+                <li>Singleton</li>
+                <li>Factory Method</li>
+                <li>Abstract Factory</li>
+                <li>Builder</li>
+                <li>Prototype</li>
               </ul>
             </div>
 
             <div class="cat-card cat-card--estrutural">
               <h3>Estruturais</h3>
               <p>
-                Tratam <strong>como classes e objetos se combinam</strong> para formar
-                estruturas maiores e mais flexíveis.
+                Tratam <strong>como classes e objetos se combinam</strong> para formar estruturas
+                maiores e mais flexíveis.
               </p>
-              <u
               <ul>
-                >Adapter</l/li>
-                >Bridge</l/li>
-                >Composite</l/li>
-                >Decorator</l/li>
-                >Facade</l/li>
-                >Flyweight</l/li>
-                >Proxy</li>
+                <li>Adapter</li>
+                <li>Bridge</li>
+                <li>Composite</li>
+                <li>Decorator</li>
+                <li>Facade</li>
+                <li>Flyweight</li>
+                <li>Proxy</li>
               </ul>
             </div>
 
             <div class="cat-card cat-card--comportamental">
               <h3>Comportamentais</h3>
               <p>
-                Tratam <strong>como objetos se comunicam</strong> e distribuem
-                responsabilidades entre si.
+                Tratam <strong>como objetos se comunicam</strong> e distribuem responsabilidades
+                entre si.
               </p>
-              <u
               <ul>
-                >Observer</l/li>
-                >Strategy</l/li>
-                >Template Method</l/li>
-                >Command</l/li>
-                >Iterator</l/li>
-                >State</l/li>
-                >Chain of Responsibility</l/li>
-                >Mediator</l/li>
-                >Memento</l/li>
-                >Visitor</l/li>
-                >Interpreter</li>
+                <li>Observer</li>
+                <li>Strategy</li>
+                <li>Template Method</li>
+                <li>Command</li>
+                <li>Iterator</li>
+                <li>State</li>
+                <li>Chain of Responsibility</li>
+                <li>Mediator</li>
+                <li>Memento</li>
+                <li>Visitor</li>
+                <li>Interpreter</li>
               </ul>
             </div>
           </div>
 
           <div class="anotacao">
-            <p style="margin-top:0;"><strong>Como memorizar as categorias:</strong></p>
+            <p style="margin-top: 0;"><strong>Como memorizar as categorias:</strong></p>
             <dl>
               <dt>Criacional → "Como nasce?"</dt>
-              <dd>Encapsula e controla a forma de criar objetos, reduzindo dependências do de>new</code>.</dd>
+              <dd>
+                Encapsula e controla a forma de criar objetos, reduzindo dependências do
+                <code>new</code>.
+              </dd>
               <dt>Estrutural → "Como se encaixa?"</dt>
-              <dd>Define composições de classes e objetos para montar estruturas mais complexas com flexibilidade.</dd>
+              <dd>
+                Define composições de classes e objetos para montar estruturas mais complexas com
+                flexibilidade.
+              </dd>
               <dt>Comportamental → "Como conversa?"</dt>
-              <dd>Organiza a troca de mensagens e a distribuição de responsabilidades entre objetos em tempo de execução.</dd>
+              <dd>
+                Organiza a troca de mensagens e a distribuição de responsabilidades entre objetos
+                em tempo de execução.
+              </dd>
             </dl>
           </div>
-
-          <p style="font-size:.9rem;margin-top:.3rem;">
-            Próximo passo: veja o <a href="#catalogo">catálogo completo dos 23 padrões</a> e
-            identifique quais pertencem a cada categoria.
-          </p>
         </div>
 
         <!-- ── 4. CATÁLOGO COMPLETO ──────────────────────────── -->
         <div class="card" id="catalogo">
           <h2>4. Catálogo dos 23 padrões</h2>
           <p>
-            A tabela a seguir resume todos os padrões GoF descrevendo o problema que cada um resolve.
+            A tabela a seguir resume todos os padrões GoF descrevendo o problema que cada um
+            resolve.
           </p>
 
           <table class="tabela-padroes">
@@ -395,60 +504,174 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td><span class="badge badge--c">Criacional</span></td><td class="nome-padrao">Singleton</td><td>Garantir que uma classe tenha apenas uma instância em todo o sistema.</td></tr>
-              <tr><td><span class="badge badge--c">Criacional</span></td><td class="nome-padrao">Factory Method</td><td>Deixar que subclasses decidam qual objeto concreto criar.</td></tr>
-              <tr><td><span class="badge badge--c">Criacional</span></td><td class="nome-padrao">Abstract Factory</td><td>Criar famílias de objetos relacionados sem especificar suas classes concretas.</td></tr>
-              <tr><td><span class="badge badge--c">Criacional</span></td><td class="nome-padrao">Builder</td><td>Construir objetos complexos passo a passo, separando construção de representação.</td></tr>
-              <tr><td><span class="badge badge--c">Criacional</span></td><td class="nome-padrao">Prototype</td><td>Criar novos objetos copiando (clonando) um existente.</td></tr>
-              <tr><td><span class="badge badge--e">Estrutural</span></td><td class="nome-padrao">Adapter</td><td>Fazer duas interfaces incompatíveis trabalharem juntas.</td></tr>
-              <tr><td><span class="badge badge--e">Estrutural</span></td><td class="nome-padrao">Bridge</td><td>Separar abstração de implementação para que ambas possam variar independentemente.</td></tr>
-              <tr><td><span class="badge badge--e">Estrutural</span></td><td class="nome-padrao">Composite</td><td>Tratar objetos individuais e coleções de objetos de forma uniforme.</td></tr>
-              <tr><td><span class="badge badge--e">Estrutural</span></td><td class="nome-padrao">Decorator</td><td>Adicionar comportamentos a objetos dinamicamente sem alterar a classe.</td></tr>
-              <tr><td><span class="badge badge--e">Estrutural</span></td><td class="nome-padrao">Facade</td><td>Prover uma interface simplificada para um subsistema complexo.</td></tr>
-              <tr><td><span class="badge badge--e">Estrutural</span></td><td class="nome-padrao">Flyweight</td><td>Compartilhar objetos para suportar grandes quantidades com uso eficiente de memória.</td></tr>
-              <tr><td><span class="badge badge--e">Estrutural</span></td><td class="nome-padrao">Proxy</td><td>Prover um substituto para controlar o acesso a outro objeto.</td></tr>
-              <tr><td><span class="badge badge--b">Comportamental</span></td><td class="nome-padrao">Observer</td><td>Notificar múltiplos objetos sobre mudanças de estado de forma desacoplada.</td></tr>
-              <tr><td><span class="badge badge--b">Comportamental</span></td><td class="nome-padrao">Strategy</td><td>Definir uma família de algoritmos e torná-los intercambiáveis.</td></tr>
-              <tr><td><span class="badge badge--b">Comportamental</span></td><td class="nome-padrao">Template Method</td><td>Definir o esqueleto de um algoritmo na superclasse, deixando passos para subclasses.</td></tr>
-              <tr><td><span class="badge badge--b">Comportamental</span></td><td class="nome-padrao">Command</td><td>Encapsular uma requisição como objeto, permitindo desfazer, enfileirar e registrar ações.</td></tr>
-              <tr><td><span class="badge badge--b">Comportamental</span></td><td class="nome-padrao">Iterator</td><td>Percorrer elementos de uma coleção sem expor sua estrutura interna.</td></tr>
-              <tr><td><span class="badge badge--b">Comportamental</span></td><td class="nome-padrao">State</td><td>Alterar o comportamento de um objeto quando seu estado interno muda.</td></tr>
-              <tr><td><span class="badge badge--b">Comportamental</span></td><td class="nome-padrao">Chain of Responsibility</td><td>Passar uma requisição por uma cadeia de processadores até que um a trate.</td></tr>
-              <tr><td><span class="badge badge--b">Comportamental</span></td><td class="nome-padrao">Mediator</td><td>Centralizar a comunicação entre objetos, reduzindo dependências diretas.</td></tr>
-              <tr><td><span class="badge badge--b">Comportamental</span></td><td class="nome-padrao">Memento</td><td>Capturar e restaurar o estado interno de um objeto sem violar encapsulamento.</td></tr>
-              <tr><td><span class="badge badge--b">Comportamental</span></td><td class="nome-padrao">Visitor</td><td>Separar algoritmos dos objetos sobre os quais operam.</td></tr>
-              <tr><td><span class="badge badge--b">Comportamental</span></td><td class="nome-padrao">Interpreter</td><td>Definir uma gramática e um interpretador para uma linguagem simples.</td></tr>
+              <tr>
+                <td><span class="badge badge--c">Criacional</span></td>
+                <td class="nome-padrao">Singleton</td>
+                <td>Garantir que uma classe tenha apenas uma instância em todo o sistema.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--c">Criacional</span></td>
+                <td class="nome-padrao">Factory Method</td>
+                <td>Deixar que subclasses decidam qual objeto concreto criar.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--c">Criacional</span></td>
+                <td class="nome-padrao">Abstract Factory</td>
+                <td>Criar famílias de objetos relacionados sem especificar suas classes concretas.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--c">Criacional</span></td>
+                <td class="nome-padrao">Builder</td>
+                <td>
+                  Construir objetos complexos passo a passo, separando construção de
+                  representação.
+                </td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--c">Criacional</span></td>
+                <td class="nome-padrao">Prototype</td>
+                <td>Criar novos objetos copiando (clonando) um existente.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--e">Estrutural</span></td>
+                <td class="nome-padrao">Adapter</td>
+                <td>Fazer duas interfaces incompatíveis trabalharem juntas.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--e">Estrutural</span></td>
+                <td class="nome-padrao">Bridge</td>
+                <td>
+                  Separar abstração de implementação para que ambas possam variar
+                  independentemente.
+                </td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--e">Estrutural</span></td>
+                <td class="nome-padrao">Composite</td>
+                <td>Tratar objetos individuais e coleções de objetos de forma uniforme.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--e">Estrutural</span></td>
+                <td class="nome-padrao">Decorator</td>
+                <td>Adicionar comportamentos a objetos dinamicamente sem alterar a classe.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--e">Estrutural</span></td>
+                <td class="nome-padrao">Facade</td>
+                <td>Prover uma interface simplificada para um subsistema complexo.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--e">Estrutural</span></td>
+                <td class="nome-padrao">Flyweight</td>
+                <td>
+                  Compartilhar objetos para suportar grandes quantidades com uso eficiente de
+                  memória.
+                </td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--e">Estrutural</span></td>
+                <td class="nome-padrao">Proxy</td>
+                <td>Prover um substituto para controlar o acesso a outro objeto.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--b">Comportamental</span></td>
+                <td class="nome-padrao">Observer</td>
+                <td>Notificar múltiplos objetos sobre mudanças de estado de forma desacoplada.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--b">Comportamental</span></td>
+                <td class="nome-padrao">Strategy</td>
+                <td>Definir uma família de algoritmos e torná-los intercambiáveis.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--b">Comportamental</span></td>
+                <td class="nome-padrao">Template Method</td>
+                <td>
+                  Definir o esqueleto de um algoritmo na superclasse, deixando passos para
+                  subclasses.
+                </td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--b">Comportamental</span></td>
+                <td class="nome-padrao">Command</td>
+                <td>
+                  Encapsular uma requisição como objeto, permitindo desfazer, enfileirar e registrar
+                  ações.
+                </td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--b">Comportamental</span></td>
+                <td class="nome-padrao">Iterator</td>
+                <td>Percorrer elementos de uma coleção sem expor sua estrutura interna.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--b">Comportamental</span></td>
+                <td class="nome-padrao">State</td>
+                <td>Alterar o comportamento de um objeto quando seu estado interno muda.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--b">Comportamental</span></td>
+                <td class="nome-padrao">Chain of Responsibility</td>
+                <td>Passar uma requisição por uma cadeia de processadores até que um a trate.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--b">Comportamental</span></td>
+                <td class="nome-padrao">Mediator</td>
+                <td>
+                  Centralizar a comunicação entre objetos, reduzindo dependências diretas.
+                </td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--b">Comportamental</span></td>
+                <td class="nome-padrao">Memento</td>
+                <td>
+                  Capturar e restaurar o estado interno de um objeto sem violar encapsulamento.
+                </td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--b">Comportamental</span></td>
+                <td class="nome-padrao">Visitor</td>
+                <td>Separar algoritmos dos objetos sobre os quais operam.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge--b">Comportamental</span></td>
+                <td class="nome-padrao">Interpreter</td>
+                <td>Definir uma gramática e um interpretador para uma linguagem simples.</td>
+              </tr>
             </tbody>
           </table>
-
-          <p style="font-size:.9rem;margin-top:.3rem;">
-            Em seguida, veja como alguns desses padrões aparecem em código na
-            <a href="#exemplos">seção de exemplos em JavaScript</a>.
-          </p>
         </div>
 
         <!-- ── 5. QUANDO USAR ────────────────────────────────── -->
         <div class="card" id="quando-usar">
           <h2>5. Quando usar (ou não)</h2>
 
-          <h3>Boas práticas gerais</h3>
-          <p>Esta seção resume boas práticas ao decidir aplicar um padrão de projeto em seu código.</p>
-
           <h3>Use padrões quando…</h3>
-          <u
           <ul>
-            >O mesmo problema (ou algo muito parecido) aparece em diferentes partes do sistema.</l/li>
-            >Você percebe que alterar uma parte obriga a alterar muitas outras (alto acoplamento).</l/li>
-            >Precisa adicionar comportamentos sem reescrever classes existentes.</l/li>
-            >A equipe precisa de uma linguagem comum para descrever a arquitetura.</li>
+            <li>
+              O mesmo problema (ou algo muito parecido) aparece em diferentes partes do sistema.
+            </li>
+            <li>
+              Você percebe que alterar uma parte obriga a alterar muitas outras (alto acoplamento).
+            </li>
+            <li>Precisa adicionar comportamentos sem reescrever classes existentes.</li>
+            <li>A equipe precisa de uma linguagem comum para descrever a arquitetura.</li>
           </ul>
 
           <h3>Evite padrões quando…</h3>
-          <u
           <ul>
-            >O código é simples e funciona bem — adicionar um padrão aumentaria a complexidade sem ganho real.</l/li>
-            >Você está aprendendo e ainda não identificou claramente o problema que o padrão resolve.</l/li>
-            >A motivação é "parecer mais profissional" — padrões mal aplicados prejudicam legibilidade.</li>
+            <li>
+              O código é simples e funciona bem — adicionar um padrão aumentaria a complexidade sem
+              ganho real.
+            </li>
+            <li>
+              Você está aprendendo e ainda não identificou claramente o problema que o padrão
+              resolve.
+            </li>
+            <li>
+              A motivação é "parecer mais profissional" — padrões mal aplicados prejudicam
+              legibilidade.
+            </li>
           </ul>
 
           <div class="callout">
@@ -456,22 +679,24 @@
             padrões. É mais natural reconhecer um padrão em código existente do que tentar
             aplicá-lo antes de entender o problema.
           </div>
-          
         </div>
 
         <!-- ── 6. EXEMPLOS EM JS ─────────────────────────────── -->
         <div class="card" id="exemplos">
           <h2>6. Primeiros exemplos em JavaScript</h2>
           <p>
-            Os exemplos abaixo são introdutórios, o objetivo é <em>ver a ideia</em> funcionando em código.
-            Nesta aula, focamos em cinco padrões: <strong>Singleton</strong>, <strong>Observer</strong>,
-            <strong>EventEmitter</strong>, <strong>Factory Method</strong> e <strong>Strategy</strong>.
+            Os exemplos abaixo são introdutórios: o objetivo é <em>ver a ideia</em> funcionando em
+            código. Nesta aula vamos focar em cinco padrões muito presentes no desenvolvimento web:
+            <strong>Singleton</strong>, <strong>Observer</strong>, <strong>EventEmitter</strong>,
+            <strong>Factory Method</strong> e <strong>Strategy</strong>.
           </p>
 
           <h3><span class="badge badge--c">Criacional</span> Singleton — instância única</h3>
-          <p>Garante que exista apenas <em>um</em> objeto de determinada classe em todo o sistema.</p>
+          <p>
+            Garante que exista apenas <em>um</em> objeto de determinada classe em todo o sistema.
+          </p>
 
-          <pre>de>// Padrão Singleton — uma única instância compartilhada
+          <pre><code>// Padrão Singleton — uma única instância compartilhada
 class ConfiguracaoApp {
   static #instancia = null;
 
@@ -507,18 +732,27 @@ const config2 = ConfiguracaoApp.obterInstancia();
 
 config1.definir('tema', 'escuro');
 
-console.log(config2.obter('tema'));        // 'escuro' — é o mesmo objeto
-console.log(config1 === config2);         // true
+console.log(config2.obter('tema')); // 'escuro' — é o mesmo objeto
+console.log(config1 === config2);   // true
 </code></pre>
 
           <div class="anotacao">
             <dl>
-              <dt>de>static #instancia = null</code></dt>
-              <dd>Guarda a única instância como campo privado estático da própria classe, inacessível externamente.</dd>
-              <dt>de>static obterInstancia()</code></dt>
-              <dd>Ponto de acesso global: cria a instância na primeira chamada; nas seguintes, devolve a mesma que foi criada.</dd>
+              <dt><code>static #instancia = null</code></dt>
+              <dd>
+                Guarda a única instância como campo privado estático da própria classe, inacessível
+                externamente.
+              </dd>
+              <dt><code>static obterInstancia()</code></dt>
+              <dd>
+                Ponto de acesso global: cria a instância na primeira chamada; nas seguintes, devolve
+                a mesma que foi criada.
+              </dd>
               <dt>Por que usar?</dt>
-              <dd>Configurações, conexões com banco de dados, loggers — qualquer recurso que deve ser compartilhado e único em todo o sistema.</dd>
+              <dd>
+                Configurações, conexões com banco de dados, loggers — qualquer recurso que deve ser
+                compartilhado e único em todo o sistema.
+              </dd>
             </dl>
           </div>
 
@@ -528,7 +762,7 @@ console.log(config1 === config2);         // true
             automaticamente quando seu estado muda.
           </p>
 
-          <pre>de>// Padrão Observer — notificação desacoplada
+          <pre><code>// Padrão Observer — notificação desacoplada
 class EventoCarrinho {
   #observadores = [];
 
@@ -582,23 +816,32 @@ carrinho.adicionarItem('Mouse sem fio');
 
           <div class="anotacao">
             <dl>
-              <dt>de>assinar(observador)</code> / de>cancelarAssinatura(observador)</code></dt>
-              <dd>Permitem que qualquer objeto interessado entre ou saia da lista de notificados — sem que o carrinho precise conhecer os detalhes de quem está ouvindo.</dd>
-              <dt>de>notificar(dados)</code></dt>
-              <dd>Percorre todos os observadores e chama de>atualizar()</code> em cada um, passando os dados do evento.</dd>
+              <dt><code>assinar(observador)</code> / <code>cancelarAssinatura(observador)</code></dt>
+              <dd>
+                Permitem que qualquer objeto interessado entre ou saia da lista de notificados — sem
+                que o carrinho precise conhecer os detalhes de quem está ouvindo.
+              </dd>
+              <dt><code>notificar(dados)</code></dt>
+              <dd>
+                Percorre todos os observadores e chama <code>atualizar()</code> em cada um, passando
+                os dados do evento.
+              </dd>
               <dt>Onde aparece no desenvolvimento web?</dt>
-              <dd>Eventos do DOM (de>addEventListener</code>), stores de estado (Redux, Vuex), WebSockets, sistemas de notificação em tempo real — todos usam a ideia do Observer.</dd>
+              <dd>
+                Eventos do DOM (<code>addEventListener</code>), stores de estado (Redux, Vuex),
+                WebSockets, sistemas de notificação em tempo real — todos usam a ideia do Observer.
+              </dd>
             </dl>
           </div>
 
-          <h3><span class="badge badge--b">Comportamental</span> EventEmitter — eventos no estilo Node.js</h3>
+          <h3><span class="badge badge--b">Comportamental</span> EventEmitter — eventos nomeados</h3>
           <p>
-            Um de>EventEmitter</code> é uma implementação prática da ideia de Observer:
-            você registra ouvintes para eventos identificados por nome e emite esses eventos
-            passando dados para todos os ouvintes inscritos.[web:36]
+            Um <code>EventEmitter</code> é uma implementação concreta da ideia do Observer: você
+            registra ouvintes para eventos identificados por nome e emite esses eventos passando
+            dados para todos os ouvintes inscritos.
           </p>
 
-          <pre>de>// Implementação simples de EventEmitter em JavaScript
+          <pre><code>// Implementação simples de EventEmitter em JavaScript
 class EventEmitter {
   #eventos = {};
 
@@ -641,12 +884,20 @@ notificacoes.emit('usuario:login', 'Usuário entrou no sistema');
 
           <div class="anotacao">
             <dl>
-              <dt>de>on(evento, listener)</code></dt>
-              <dd>Registra uma função para ser chamada sempre que o evento com esse nome for emitido.</dd>
-              <dt>de>emit(evento, dados)</code></dt>
-              <dd>Dispara o evento e chama todos os <em>listeners</em> cadastrados, passando os dados necessários.</dd>
+              <dt><code>on(evento, listener)</code></dt>
+              <dd>
+                Registra uma função para ser chamada sempre que o evento com esse nome for emitido.
+              </dd>
+              <dt><code>emit(evento, dados)</code></dt>
+              <dd>
+                Dispara o evento e chama todos os <em>listeners</em> cadastrados, passando os dados
+                necessários.
+              </dd>
               <dt>Onde isso aparece?</dt>
-              <dd>APIs do Node.js, bibliotecas de front-end e sistemas de eventos em geral usam alguma forma de de>EventEmitter</code> por baixo.[web:36]</dd>
+              <dd>
+                APIs do Node.js, bibliotecas de front-end e sistemas de eventos em geral usam alguma
+                forma de <code>EventEmitter</code> por baixo.
+              </dd>
             </dl>
           </div>
 
@@ -654,10 +905,10 @@ notificacoes.emit('usuario:login', 'Usuário entrou no sistema');
           <p>
             O <em>Factory Method</em> encapsula a lógica de criação de objetos em um único ponto,
             permitindo que você devolva diferentes implementações da mesma interface sem espalhar
-            de>new</code> e de>if</code>/de>switch</code> pelo código.[web:2]
+            <code>new</code> e <code>if</code>/<code>switch</code> pelo código.
           </p>
 
-          <pre>de>// Padrão Factory Method — escolhendo o tipo de notificador
+          <pre><code>// Padrão Factory Method — escolhendo o tipo de notificador
 class Notificador {
   enviar(mensagem) {
     throw new Error('Método enviar() deve ser implementado.');
@@ -702,20 +953,26 @@ notificador.enviar('Bem-vindo à plataforma!');
 
           <div class="anotacao">
             <dl>
-              <dt>de>NotificadorFactory.criar(tipo)</code></dt>
-              <dd>Centraliza a decisão de qual classe concreta instanciar, devolvendo sempre algo que se comporta como de>Notificador</code>.</dd>
+              <dt><code>NotificadorFactory.criar(tipo)</code></dt>
+              <dd>
+                Centraliza a decisão de qual classe concreta instanciar, devolvendo sempre algo que
+                se comporta como <code>Notificador</code>.
+              </dd>
               <dt>Por que isso ajuda?</dt>
-              <dd>Se surgir um novo tipo de notificação (por exemplo, WhatsApp), você adiciona uma classe e ajusta a fábrica, sem mudar o código que consome o notificador.</dd>
+              <dd>
+                Se surgir um novo tipo de notificação (por exemplo, WhatsApp), você adiciona uma
+                classe e ajusta a fábrica, sem mudar o código que consome o notificador.
+              </dd>
             </dl>
           </div>
 
           <h3><span class="badge badge--b">Comportamental</span> Strategy — algoritmos intercambiáveis</h3>
           <p>
-            Define uma família de algoritmos e permite trocá-los sem alterar o código que
-            os utiliza.
+            Define uma família de algoritmos e permite trocá-los sem alterar o código que os
+            utiliza.
           </p>
 
-          <pre>de>// Padrão Strategy — forma de pagamento intercambiável
+          <pre><code>// Padrão Strategy — forma de pagamento intercambiável
 class ProcessadorPagamento {
   #estrategia;
 
@@ -761,12 +1018,21 @@ console.log(processador.processar(150));
 
           <div class="anotacao">
             <dl>
-              <dt>de>this.#estrategia = estrategia</code></dt>
-              <dd>O processador guarda uma referência à estratégia ativa, sem depender de qual classe concreta ela é.</dd>
-              <dt>de>definirEstrategia()</code></dt>
-              <dd>Permite trocar o comportamento em tempo de execução — sem condicional de>if/else</code> espalhado pelo código.</dd>
+              <dt><code>this.#estrategia = estrategia</code></dt>
+              <dd>
+                O processador guarda uma referência à estratégia ativa, sem depender de qual classe
+                concreta ela é.
+              </dd>
+              <dt><code>definirEstrategia()</code></dt>
+              <dd>
+                Permite trocar o comportamento em tempo de execução — sem condicional
+                <code>if/else</code> espalhado pelo código.
+              </dd>
               <dt>Por que isso importa para web?</dt>
-              <dd>Gateways de pagamento, validações de formulário, algoritmos de ordenação, formatação de respostas de API — todos são candidatos naturais ao Strategy.</dd>
+              <dd>
+                Gateways de pagamento, validações de formulário, algoritmos de ordenação, formatação
+                de respostas de API — todos são candidatos naturais ao Strategy.
+              </dd>
             </dl>
           </div>
         </div>
@@ -779,11 +1045,20 @@ console.log(processador.processar(150));
             <summary>Atividade 1 – Identificação em sistemas reais</summary>
             <div>
               <p>Em duplas, discuta e anote respostas para as perguntas a seguir:</p>
-              <u
               <ul>
-                >Pense em um aplicativo que você usa no dia a dia (banco, e-commerce, streaming). Que partes dele poderiam se beneficiar de um Singleton? E de um Observer?</l/li>
-                >Por que um sistema de notificações (WhatsApp, Instagram) é naturalmente um Observer?</l/li>
-                >Que problema surgiria se, em vez de Observer, o sistema de notificações percorresse todos os usuários a cada mensagem procurando quem está "ouvindo"?</li>
+                <li>
+                  Pense em um aplicativo que você usa no dia a dia (banco, e-commerce, streaming).
+                  Que partes dele poderiam se beneficiar de um Singleton? E de um Observer?
+                </li>
+                <li>
+                  Por que um sistema de notificações (WhatsApp, Instagram) é naturalmente um
+                  Observer ou um EventEmitter?
+                </li>
+                <li>
+                  Que problema surgiria se, em vez de Observer/EventEmitter, o sistema de
+                  notificações percorresse todos os usuários a cada mensagem procurando quem está
+                  "ouvindo"?
+                </li>
               </ul>
             </div>
           </details>
@@ -791,33 +1066,48 @@ console.log(processador.processar(150));
           <details>
             <summary>Atividade 2 – Classificando por categoria</summary>
             <div>
-              <p>Para cada situação abaixo, diga qual categoria de padrão (Criacional, Estrutural ou Comportamental) melhor se encaixaria e por quê:</p>
-              <o<ol>
-                >Um sistema de log que deve ter somente uma instância compartilhada por toda a aplicação.</l/li>
-                >Uma interface que precisa usar uma biblioteca de terceiros com API diferente da esperada pelo sistema.</l/li>
-                >Um formulário cujas regras de validação mudam conforme o tipo de usuário (comum, empresa, governo).</l/li>
-                >Um sistema de e-mail que envia notificações para múltiplos módulos quando um pedido é aprovado.</li>
+              <p>
+                Para cada situação abaixo, diga qual categoria de padrão (Criacional, Estrutural ou
+                Comportamental) melhor se encaixaria e por quê:
+              </p>
+              <ol>
+                <li>
+                  Um sistema de log que deve ter somente uma instância compartilhada por toda a
+                  aplicação.
+                </li>
+                <li>
+                  Uma interface que precisa usar uma biblioteca de terceiros com API diferente da
+                  esperada pelo sistema.
+                </li>
+                <li>
+                  Um formulário cujas regras de validação mudam conforme o tipo de usuário (comum,
+                  empresa, governo).
+                </li>
+                <li>
+                  Um sistema de e-mail que envia notificações para múltiplos módulos quando um
+                  pedido é aprovado.
+                </li>
               </ol>
             </div>
           </details>
 
           <details>
-            <summary>Atividade 3 – Adaptando o Observer ao projeto</summary>
+            <summary>Atividade 3 – Adaptando Observer / EventEmitter</summary>
             <div>
               <p>
-                Tomando como base o exemplo do <strong>Observer</strong> desta página, adapte-o
-                para um sistema de cadastro de usuários de uma aplicação web.
+                Tomando como base os exemplos de <strong>Observer</strong> e
+                <strong>EventEmitter</strong> desta página, adapte-os para um sistema de cadastro
+                de usuários de uma aplicação web.
               </p>
               <p>Quando um usuário se cadastra, o sistema deve:</p>
-              <u
               <ul>
-                >Registrar um log no console com o e-mail cadastrado.</l/li>
-                >Simular o envio de um e-mail de boas-vindas.</l/li>
-                >Atualizar um contador de usuários cadastrados.</li>
+                <li>Registrar um log no console com o e-mail cadastrado.</li>
+                <li>Simular o envio de um e-mail de boas-vindas.</li>
+                <li>Atualizar um contador de usuários cadastrados.</li>
               </ul>
               <p>
-                Implemente os três como observadores independentes e registre todos no evento
-                de cadastro.
+                Implemente os três como observadores independentes e registre todos no evento de
+                cadastro.
               </p>
             </div>
           </details>
@@ -829,73 +1119,80 @@ console.log(processador.processar(150));
                 Modele um sistema de cálculo de frete para uma loja virtual usando o padrão
                 <strong>Strategy</strong>.
               </p>
-              <u
               <ul>
-                >Crie estratégias para: Sedex, PAC e Transportadora Particular.</l/li>
-                >Cada estratégia deve calcular o frete com base no peso e na distância (use valores fictícios).</l/li>
-                >O código que chama o cálculo não deve saber qual transportadora está sendo usada.</li>
+                <li>Crie estratégias para: Sedex, PAC e Transportadora Particular.</li>
+                <li>
+                  Cada estratégia deve calcular o frete com base no peso e na distância (use
+                  valores fictícios).
+                </li>
+                <li>
+                  O código que chama o cálculo não deve saber qual transportadora está sendo usada.
+                </li>
               </ul>
             </div>
           </details>
         </div>
-
-      </section><!-- /coluna principal -->
+      </section>
+      <!-- /coluna principal -->
 
       <!-- ░░░░░░░░░░░░ SIDEBAR ░░░░░░░░░░░░ -->
       <aside>
-
         <div class="card">
-          <h3><a href="#exemplos">Padrões desta aula</a></h3>
-          <ul class="check-listst">
-            >Singleton</l/li>
-            >Observer</l/li>
-            >EventEmitter</l/li>
-            >Factory Method</l/li>
-            >Strategy</li>
+          <h3>Padrões desta aula</h3>
+          <ul class="check-list">
+            <li>Singleton</li>
+            <li>Observer</li>
+            <li>EventEmitter</li>
+            <li>Factory Method</li>
+            <li>Strategy</li>
           </ul>
         </div>
 
         <div class="card">
-          <h3><a href="#categorias">Categorias GoF</a></h3>
-          <p style="font-size:.88rem;">
-            <span class="badge badge--c">Criacional</span> Como nasce?<br><br>
-            <span class="badge badge--e">Estrutural</span> Como se encaixa?<br><br>
+          <h3>Categorias GoF</h3>
+          <p style="font-size: 0.88rem;">
+            <span class="badge badge--c">Criacional</span> Como nasce?<br /><br />
+            <span class="badge badge--e">Estrutural</span> Como se encaixa?<br /><br />
             <span class="badge badge--b">Comportamental</span> Como conversa?
           </p>
         </div>
 
         <div class="card">
-          <h3><a href="#quando-usar">Boas práticas</a></h3>
-          <ul class="pill-listst">
-            >Identificar o problema antes do padrão</l/li>
-            >Preferir composição</l/li>
-            >Baixo acoplamento</l/li>
-            >Alta coesão</l/li>
-            >Código legível</li>
+          <h3>Boas práticas</h3>
+          <ul class="pill-list">
+            <li>Identificar o problema antes do padrão</li>
+            <li>Preferir composição</li>
+            <li>Baixo acoplamento</li>
+            <li>Alta coesão</li>
+            <li>Código legível</li>
           </ul>
         </div>
 
         <div class="card">
           <h3>Material de apoio</h3>
-          <ul style="font-size:.88rem;padding-left:1rem;margin:.3rem 0;">
-            ><a href="https://refactoring.guru/pt-br/design-patterns" target="_blank">Refactoring.Guru – Padrões de Projeto</a></l/li>
-            ><a href="https://www.alura.com.br/artigos/design-patterns-introducao-padroes-projeto" target="_blank">Alura – Guia de Design Patterns</a></l/li>
-            ><a href="https://www.freecodecamp.org/portuguese/news/os-3-tipos-de-padroes-de-projetos-que-todo-desenvolvedor-deveria-conhecer-com-exemplos" target="_blank">FreeCodeCamp – Os 3 tipos de padrões</a></li>
+          <ul style="font-size: 0.88rem; padding-left: 1rem; margin: 0.3rem 0;">
+            <li>
+              <a href="https://refactoring.guru/pt-br/design-patterns" target="_blank"
+                >Refactoring.Guru – Padrões de Projeto</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.alura.com.br/artigos/design-patterns-introducao-padroes-projeto"
+                target="_blank"
+                >Alura – Guia de Design Patterns</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.freecodecamp.org/portuguese/news/os-3-tipos-de-padroes-de-projetos-que-todo-desenvolvedor-deveria-conhecer-com-exemplos"
+                target="_blank"
+                >FreeCodeCamp – Os 3 tipos de padrões</a
+              >
+            </li>
           </ul>
         </div>
-
-        <div class="card">
-          <h3>Roteiro para quem faltou</h3>
-          <ol style="font-size:.88rem;padding-left:1.1rem;margin:.3rem 0;">
-            >Leia as seções <strong>1, 2 e 3</strong> desta página (links no menu acima).</l/li>
-            >Consulte a tabela do catálogo (<strong>seção 4</strong>) e anote os 3 padrões que mais chamaram sua atenção.</l/li>
-            >Execute os cinco exemplos de código na <strong>seção 6</strong>.</l/li>
-            >Resolva as <strong>Atividades 3 e 4</strong> (seção 7).</li>
-          </ol>
-        </div>
-
       </aside>
-
     </main>
   </body>
 </html>
