@@ -20,6 +20,7 @@
         <nav>
           <a href="#o-que-sao">O que são</a>
           <a href="#origem">Origem GoF</a>
+          <a href="#analogia">Laravel</a>
           <a href="#categorias">Categorias</a>
           <a href="#catalogo">Catálogo</a>
           <a href="#quando-usar">Quando usar</a>
@@ -125,7 +126,7 @@
               <div class="timeline-ano">Hoje</div>
               <p>
                 Os 23 padrões GoF são referência e fazem parte de frameworks modernos como Spring,
-                Angular e React.
+                Angular, React e Laravel.
               </p>
             </div>
           </div>
@@ -135,8 +136,107 @@
             qualquer linguagem orientada a objetos — inclusive JavaScript.
           </div>
         </div>
-
-        <!-- ── 3. CATEGORIAS ─────────────────────────────────── -->
+        
+        <!-- ── LARAVEL E PADRÕES GOF ────────────── -->
+        <div class="analogia">
+          <div class="analogia-icone">🐘</div>
+          <div>
+            <p style="margin-top: 0;"><strong>Laravel e os Padrões GoF</strong></p>
+            <p>
+              O framework <strong>Laravel</strong> (PHP) é um exemplo prático de como os padrões GoF 
+              aparecem no desenvolvimento web moderno. Taylor Otwell, criador do Laravel, aplicou 
+              diversos desses padrões na arquitetura do framework:
+            </p>
+            <ul style="margin-bottom: 0;">
+              <li>
+                <strong>Singleton</strong> — a instância da aplicação Laravel garante um único 
+                container de dependências durante toda a requisição.
+              </li>
+              <li>
+                <strong>Factory</strong> — usado em Model Factories (testes), gerenciadores de 
+                sessão e drivers de banco de dados.
+              </li>
+              <li>
+                <strong>Facade</strong> — as facades do Laravel (<code>Cache</code>, <code>Auth</code>, 
+                <code>Log</code>) simplificam o acesso a subsistemas complexos.
+              </li>
+              <li>
+                <strong>Observer</strong> — Model Observers do Eloquent permitem reagir a eventos 
+                de criação, atualização e deleção de registros.
+              </li>
+              <li>
+                <strong>Strategy</strong> — presente em controllers, middleware e drivers de cache/sessão, 
+                permitindo trocar comportamentos sem alterar o código cliente.
+              </li>
+              <li>
+                <strong>Command</strong> — o Artisan CLI implementa este padrão, transformando 
+                operações em objetos reutilizáveis e parametrizáveis.
+              </li>
+              <li>
+                <strong>Decorator</strong> — o pipeline de Middleware adiciona comportamentos 
+                (autenticação, CORS, logs) dinamicamente às requisições HTTP.
+              </li>
+              <li>
+                <strong>Iterator</strong> — Collections do Laravel fornecem iteração fluente 
+                sobre conjuntos de dados.
+              </li>
+            </ul>
+          </div>
+                  <!-- ── JAVASCRIPT E PADRÕES GOF ──────────────────────── -->
+          <div class="analogia-icone">⚡</div>
+          <div>
+            <p style="margin-top: 0;"><strong>JavaScript, React, Angular, Node.js e os Padrões GoF</strong></p>
+            <p>
+              O ecossistema JavaScript aplica extensivamente os padrões GoF, tanto no lado do cliente 
+              (navegador) quanto no servidor (Node.js). Frameworks modernos como <strong>React</strong>, 
+              <strong>Angular</strong> e <strong>Vue.js</strong> incorporam esses padrões em sua arquitetura:
+            </p>
+            <ul style="margin-bottom: 0;">
+              <li>
+                <strong>Singleton</strong> — Redux/Vuex usam uma única store global de estado; módulos 
+                do Node.js são singletons por padrão (cache do <code>require()</code>).
+              </li>
+              <li>
+                <strong>Observer</strong> — a base de sistemas reativos: <code>addEventListener</code> 
+                no DOM, RxJS (Angular), hooks <code>useEffect</code> (React), Vuex watchers.
+              </li>
+              <li>
+                <strong>Factory</strong> — React.createElement, componentes factory no Angular, 
+                criação dinâmica de elementos no Vue.
+              </li>
+              <li>
+                <strong>Strategy</strong> — Context API (React), estratégias de validação de 
+                formulários, múltiplos algoritmos de ordenação/filtro em listas.
+              </li>
+              <li>
+                <strong>Decorator</strong> — Higher-Order Components (HOC) no React, decorators 
+                do Angular (<code>@Component</code>, <code>@Injectable</code>), middlewares no Express.js.
+              </li>
+              <li>
+                <strong>Facade</strong> — bibliotecas como Axios e jQuery simplificam APIs complexas 
+                (HTTP, manipulação DOM); Angular Services encapsulam lógica de negócio.
+              </li>
+              <li>
+                <strong>Proxy</strong> — Vue 3 usa Proxy nativo para reatividade; Immer.js para 
+                imutabilidade; lazy loading de módulos no Angular/React.
+              </li>
+              <li>
+                <strong>Iterator</strong> — métodos nativos <code>map()</code>, <code>filter()</code>, 
+                <code>reduce()</code>; generators (<code>function*</code>); iteradores customizados.
+              </li>
+              <li>
+                <strong>Module Pattern</strong> — ES6 modules (<code>import/export</code>), 
+                CommonJS no Node.js, encapsulamento de código em IIFE.
+              </li>
+              <li>
+                <strong>Middleware Pattern</strong> — Express.js, Koa, Redux middleware para 
+                interceptar requisições e ações.
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- ── 3 CATEGORIAS ────────── -->
         <div class="card" id="categorias">
           <h2>3. As 3 categorias dos padrões GoF</h2>
 
