@@ -9,6 +9,12 @@
   --border: #dddddd;
   --code-bg: #272822;
   --code-text: #f8f8f2;
+  --cat-criacional: #0277bd;
+  --cat-criacional-bg: #e1f5fe;
+  --cat-estrutural: #2e7d32;
+  --cat-estrutural-bg: #e8f5e9;
+  --cat-comportamental: #6a1b9a;
+  --cat-comportamental-bg: #f3e5f5;
 }
 
 * {
@@ -296,7 +302,7 @@ details > div {
   cursor: pointer;
 }
 
-/* Estilos específicos dos exemplos DOM da própria página */
+/* Estilos específicos dos exemplos DOM*/
 .dom-destaque {
   background-color: #e3f2fd;
   border-left: 4px solid var(--primary);
@@ -421,3 +427,250 @@ details > div {
   font-weight: bold;
   color: var(--primary-dark);
 }
+
+/* ── Anotação aninhada (mesma identidade da página) ──── */
+      .anotacao {
+        border-left: 4px solid var(--primary, #006699);
+        background: #f3f6fb;
+        padding: 0.8rem 1rem;
+        margin: 0.4rem 0 1.2rem;
+        font-size: 0.93rem;
+        border-radius: 0 0.35rem 0.35rem 0;
+      }
+      .anotacao dl {
+        margin: 0.4rem 0 0;
+      }
+      .anotacao dt {
+        font-weight: 600;
+        margin-top: 0.55rem;
+      }
+      .anotacao dd {
+        margin: 0.15rem 0 0 1rem;
+        color: var(--muted, #666);
+      }
+
+      /* ── Timeline da origem GoF ──────────────────────────── */
+      .timeline {
+        position: relative;
+        padding-left: 1.8rem;
+        margin: 1rem 0 1.2rem;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 0.55rem;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--border, #ddd);
+      }
+      .timeline-item {
+        position: relative;
+        margin-bottom: 1rem;
+      }
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -1.3rem;
+        top: 0.35rem;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--primary, #006699);
+        border: 2px solid #fff;
+        box-shadow: 0 0 0 2px var(--primary, #006699);
+      }
+      .timeline-ano {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--primary, #006699);
+        font-weight: 700;
+      }
+
+      /* ── Cards das 3 categorias ──────────────────────────── */
+      .cat-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
+        margin: 1rem 0 1.2rem;
+      }
+      .cat-card {
+        border-radius: 0.5rem;
+        padding: 1rem 1.1rem;
+        border: 1px solid var(--border, #ddd);
+      }
+      .cat-card--criacional {
+        background: var(--cat-criacional-bg);
+        border-top: 4px solid var(--cat-criacional);
+      }
+      .cat-card--estrutural {
+        background: var(--cat-estrutural-bg);
+        border-top: 4px solid var(--cat-estrutural);
+      }
+      .cat-card--comportamental {
+        background: var(--cat-comportamental-bg);
+        border-top: 4px solid var(--cat-comportamental);
+      }
+      .cat-card h3 {
+        margin: 0 0 0.4rem;
+        font-size: 1rem;
+      }
+      .cat-card--criacional h3 {
+        color: var(--cat-criacional);
+      }
+      .cat-card--estrutural h3 {
+        color: var(--cat-estrutural);
+      }
+      .cat-card--comportamental h3 {
+        color: var(--cat-comportamental);
+      }
+      .cat-card p {
+        margin: 0 0 0.6rem;
+        font-size: 0.88rem;
+      }
+      .cat-card ul {
+        margin: 0;
+        padding-left: 1.1rem;
+        font-size: 0.85rem;
+      }
+      .cat-card li {
+        margin-bottom: 0.2rem;
+      }
+
+      /* ── Badge de categoria inline ───────────────────────── */
+      .badge {
+        display: inline-block;
+        padding: 0.1rem 0.55rem;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-right: 0.3rem;
+      }
+      .badge--c {
+        background: var(--cat-criacional-bg);
+        color: var(--cat-criacional);
+      }
+      .badge--e {
+        background: var(--cat-estrutural-bg);
+        color: var(--cat-estrutural);
+      }
+      .badge--b {
+        background: var(--cat-comportamental-bg);
+        color: var(--cat-comportamental);
+      }
+
+      /* ── Tabela de padrões ───────────────────────────────── */
+      .tabela-padroes {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.875rem;
+        margin: 0.5rem 0 1.2rem;
+      }
+      .tabela-padroes th {
+        background: #f0f4f8;
+        padding: 0.5rem 0.75rem;
+        text-align: left;
+        border-bottom: 2px solid var(--border, #ddd);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--muted, #666);
+      }
+      .tabela-padroes td {
+        padding: 0.45rem 0.75rem;
+        border-bottom: 1px solid var(--border, #ddd);
+        vertical-align: top;
+      }
+      .tabela-padroes tr:last-child td {
+        border-bottom: none;
+      }
+      .tabela-padroes tr:hover td {
+        background: #f9fbfc;
+      }
+      .nome-padrao {
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      /* ── Sidebar mini-lista com ícone ────────────────────── */
+      .check-list {
+        list-style: none;
+        padding: 0;
+        margin: 0.5rem 0;
+        font-size: 0.9rem;
+      }
+      .check-list li {
+        margin-bottom: 0.35rem;
+        padding-left: 1.4rem;
+        position: relative;
+      }
+      .check-list li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #2e7d32;
+        font-weight: 700;
+      }
+
+      /* ── Analogia visual ─────────────────────────────────── */
+      .analogia {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+        background: #fffde7;
+        border: 1px solid #ffe082;
+        border-radius: 0.45rem;
+        padding: 0.9rem 1rem;
+        margin: 0.8rem 0 1.2rem;
+        font-size: 0.93rem;
+      }
+      .analogia-icone {
+        font-size: 2rem;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+
+      /* ── Fluxo antes/depois ──────────────────────────────── */
+      .antes-depois {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin: 0.6rem 0 1.2rem;
+      }
+      @media (max-width: 600px) {
+        .antes-depois {
+          grid-template-columns: 1fr;
+        }
+      }
+      .antes-depois > div {
+        border-radius: 0.4rem;
+        padding: 0.75rem 1rem;
+        font-size: 0.88rem;
+      }
+      .antes {
+        background: #ffebee;
+        border: 1px solid #ef9a9a;
+      }
+      .depois {
+        background: #e8f5e9;
+        border: 1px solid #a5d6a7;
+      }
+      .antes h4 {
+        color: #c62828;
+        margin: 0 0 0.4rem;
+      }
+      .depois h4 {
+        color: #2e7d32;
+        margin: 0 0 0.4rem;
+      }
+
+      /* Ajuste de espaçamento */
+      .card h3 + p {
+        margin-top: 0.3rem;
+      }
+      .anotacao dl {
+        margin-bottom: 0;
+      }
