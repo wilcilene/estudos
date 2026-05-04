@@ -197,7 +197,37 @@ console.log(soma(2, 3)); // 5
         </div>
 
         <div class="callout">
-          <strong>Para estudar em ~50 minutos:</strong> crie uma pasta vazia, rode <code>npm init -y</code>, abra o <code>package.json</code>, instale <code>express</code> e <code>nodemon</code>, e teste os scripts <code>npm start</code> e <code>npm run dev</code>.
+          <strong>Para estudar:</strong> crie uma pasta vazia, rode <code>npm init -y</code>, abra o <code>package.json</code>, instale <code>express</code> e <code>nodemon</code>, e teste os scripts <code>npm start</code> e <code>npm run dev</code>.
+
+          <div class="callout">
+          <strong>Passo a passo no laboratório do IFC:</strong>
+          <ol class="mini-list">
+            <li>Ligue o computador, abra o editor de código disponível no laboratório (por exemplo, VS Code) e abra também o terminal integrado.</li>
+            <li>Escolha ou crie uma pasta para salvar o projeto, por exemplo <code>Documentos</code> ou uma pasta da disciplina.</li>
+            <li>No terminal, navegue até essa pasta com o comando <code>cd</code>. Exemplo: <code>cd Documents</code> ou <code>cd Documentos</code>.</li>
+            <li>Crie uma pasta vazia para o projeto com <code>mkdir projeto-node</code> e entre nela com <code>cd projeto-node</code>.</li>
+            <li>Confirme que você está na pasta correta com <code>dir</code> (Windows) ou <code>ls</code>. Nesse momento, ela deve estar vazia.</li>
+            <li>Execute <code>npm init -y</code> para gerar automaticamente o arquivo <code>package.json</code> com a configuração inicial do projeto.</li>
+            <li>Abra o arquivo <code>package.json</code> no editor e observe campos como <code>name</code>, <code>version</code>, <code>main</code> e <code>scripts</code>.</li>
+            <li>Instale o Express com <code>npm install express</code>.</li>
+            <li>Instale o Nodemon com <code>npm install --save-dev nodemon</code>, pois ele será usado durante o desenvolvimento para reiniciar o servidor automaticamente quando houver alterações nos arquivos.</li>
+            <li>Edite o <code>package.json</code> e configure os scripts, por exemplo:</li>
+          </ol>
+        
+          <pre><code class="language-json">"scripts": {
+          "start": "node server.js",
+          "dev": "nodemon server.js"
+        }</code></pre>
+        
+          <ol class="mini-list">
+            <li>Crie o arquivo <code>server.js</code> na raiz do projeto.</li>
+            <li>No terminal, execute <code>npm start</code> para testar a execução normal do projeto pelo Node.</li>
+            <li>Depois execute <code>npm run dev</code> para testar a execução com o Nodemon.</li>
+            <li>Faça uma pequena alteração no arquivo <code>server.js</code> e salve. Observe se o Nodemon reinicia automaticamente o projeto no terminal.</li>
+            <li>Se algum comando não funcionar, confira primeiro se o terminal está dentro da pasta do projeto e se os arquivos <code>package.json</code> e <code>server.js</code> realmente existem nela.</li>
+          </ol>
+        </div>
+        
         </div>
       </article>
 
