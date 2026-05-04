@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Node.js e Setup do Projeto MVC com Express</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div>
+        <span class="tag">Programação Web</span>
+      </div>
+      <h1>Introdução ao Node.js e Setup de Projeto MVC com Express</h1>
+      <p>
+        Nesta página você vai ter um primeiro contato com o Node.js, entender o modelo assíncrono, o 
+        <span class="tooltip">event loop
+          <span class="tooltip-texto">
+            Mecanismo interno do Node.js que organiza a execução do código JavaScript, 
+            chamando callbacks de forma assíncrona conforme eventos e operações de I/O são concluídos.
+          </span>
+        </span>,
+        módulos, NPM e <code>package.json</code>, e em seguida montar o esqueleto do projeto do semestre em Node + Express, já organizado em MVC.
+      </p>
+      <nav>
+        <a href="#intro-node">1. Introdução ao Node.js</a>
+        <a href="#modelo-assincrono">2. Modelo assíncrono e event loop</a>
+        <a href="#modulos-npm">3. Módulos, NPM e package.json</a>
+        <a href="#org-projeto">4. Organização de projeto Node</a>
+        <a href="#setup-projeto">5. Setup do projeto MVC (prática)</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <!-- 1. Introdução geral ao Node -->
+      <article class="card" id="intro-node">
+        <h2>1. O que é Node.js?</h2>
+        <p>
+          Node.js é um ambiente de execução de JavaScript fora do navegador, construído sobre o motor V8 do Google Chrome e focado em aplicações de rede rápidas e escaláveis.
+        </p>
+        <p>
+          Em vez de usar JavaScript apenas para interagir com o DOM no browser, com Node.js podemos criar servidores HTTP, lidar com arquivos, acessar bancos de dados e construir APIs completas usando a mesma linguagem do front-end.
+        </p>
+
+        <div class="analogia">
+          <div class="analogia-icone">🧠</div>
+          <div>
+            <strong>Analogia rápida:</strong> pense no Node.js como um “cérebro de back-end” que entende JavaScript.  
+            No front-end, o navegador cuida da interface. No back-end, o Node cuida das regras de negócio, acesso a dados e comunicação com outros sistemas.
+          </div>
+        </div>
+
+        <div class="note">
+          Se você já escreveu funções, usou <code>if</code>, <code>for</code> ou arrays em JavaScript, já tem a base necessária.  
+          O que muda agora é o <em>ambiente</em> de execução e as bibliotecas que vamos usar.
+        </div>
+      </article>
+
+      <!-- 2. Modelo assíncrono e event loop -->
+      <article class="card" id="modelo-assincrono">
+        <h2>2. Modelo assíncrono e Event Loop</h2>
+
+        <h3>2.1. Execução single-thread e I/O não bloqueante</h3>
+        <p>
+          O Node.js executa JavaScript em uma única thread, mas consegue lidar com muitas conexões simultâneas porque delega operações de I/O (leitura de arquivos, acesso a rede) ao sistema operacional e usa um modelo assíncrono baseado em eventos.
+        </p>
+
+        <div class="anotacao">
+          <dl>
+            <dt>Bloqueante</dt>
+            <dd>O código espera a operação terminar para continuar (ex.: ler um arquivo grande de forma síncrona).</dd>
+            <dt>Não bloqueante</dt>
+            <dd>O código dispara a operação e registra um callback para ser chamado quando o resultado ficar pronto.</dd>
+          </dl>
+        </div>
+
+        <h3>2.2. O que é o Event Loop?</h3>
+        <p>
+          O <strong>event loop</strong> é o mecanismo interno que controla a ordem em que o Node.js executa o código, processa callbacks assíncronos e lida com timers e I/O.
+        </p>
+
+        <details>
+          <summary>Fluxo simplificado do event loop</summary>
+          <div>
+            <ol class="mini-list">
+              <li>Seu script é carregado e o código síncrono é executado linha a linha.</li>
+              <li>Chamadas assíncronas (como timers e I/O) são registradas e delegadas a APIs do sistema.</li>
+              <li>Quando essas operações terminam, callbacks são colocados em filas de eventos.</li>
+              <li>O event loop passa por fases organizadas (timers, I/O callbacks, etc.), esvaziando filas e executando callbacks.</li>
+            </ol>
+          </div>
+        </details>
+
+        <h3>2.3. Exemplo prático: setTimeout vs. código síncrono</h3>
+        <p>Observe este pequeno script em Node:</p>
+
+        <pre><code class="language-js">
+// arquivo: exemplo-event-loop.js
+
+console.log("Início");
+
+setTimeout(() =&gt; {
+  console.log("Timeout executado");
+}, 0);
+
+console.log("Fim");
+        </code></pre>
+
+        <div class="example-box">
+          <p><strong>Ordem da saída:</strong></p>
+          <ul class="mini-list">
+            <li><code>Início</code></li>
+            <li><code>Fim</code></li>
+            <li><code>Timeout executado</code></li>
+          </ul>
+          <p>
+            Mesmo com <code>setTimeout(..., 0)</code>, o callback só roda depois que o código síncrono terminou, porque o event loop primeiro esvazia a pilha principal e só depois trata a fila de timers.
+          </p>
+        </div>
+
+        <div class="callout">
+          <strong>Para estudar em ~40 minutos:</strong> execute exemplos com <code>setTimeout</code>, simule uma chamada assíncrona (por exemplo, leitura de arquivo) e use vários <code>console.log</code> para enxergar a ordem de execução.
+        </div>
+      </article>
+
+      <!-- 3. Módulos, NPM e package.json -->
+      <article class="card" id="modulos-npm">
+        <h2>3. Módulos, NPM e package.json</h2>
+
+        <h3>3.1. Módulos em Node.js</h3>
+        <p>
+          Em Node.js organizamos o código em módulos, que são arquivos separados que exportam funções, objetos ou classes para serem reutilizados em outras partes da aplicação.
+        </p>
+
+        <pre><code class="language-js">
+// arquivo: matematica.js
+function soma(a, b) {
+  return a + b;
+}
+
+module.exports = soma;
+
+// arquivo: app.js
+const soma = require("./matematica");
+
+console.log(soma(2, 3)); // 5
+        </code></pre>
+
+        <p>
+          Além de módulos próprios, o Node fornece módulos internos (como <code>fs</code> para arquivos, <code>http</code> para servidores) e permite instalar módulos de terceiros via NPM.
+        </p>
+
+        <h3>3.2. O que é o NPM?</h3>
+        <p>
+          O NPM (Node Package Manager) é o gerenciador de pacotes padrão do Node.js, usado para instalar bibliotecas, gerenciar versões e dependências de um projeto.
+        </p>
+
+        <div class="example-box">
+          <p><strong>Comandos básicos:</strong></p>
+          <ul class="mini-list">
+            <li><code>npm init</code> – cria um arquivo <code>package.json</code> interativamente.</li>
+            <li><code>npm init -y</code> – cria um <code>package.json</code> com respostas padrão.</li>
+            <li><code>npm install express</code> – instala o Express e adiciona em <code>dependencies</code>.</li>
+            <li><code>npm install nodemon --save-dev</code> – instala o Nodemon como dependência de desenvolvimento.</li>
+          </ul>
+        </div>
+
+        <h3>3.3. Arquivo package.json</h3>
+        <p>
+          O <code>package.json</code> descreve o projeto Node: nome, versão, ponto de entrada, scripts de execução e lista de dependências.
+        </p>
+
+        <pre><code class="language-json">
+{
+  "name": "meu-projeto-node",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
+        </code></pre>
+
+        <div class="note">
+          Sempre que você instalar um pacote com <code>npm install &lt;nome&gt;</code>, verifique se o campo <code>dependencies</code> (ou <code>devDependencies</code>) foi atualizado no <code>package.json</code>.
+        </div>
+
+        <div class="callout">
+          <strong>Para estudar em ~50 minutos:</strong> crie uma pasta vazia, rode <code>npm init -y</code>, abra o <code>package.json</code>, instale <code>express</code> e <code>nodemon</code>, e teste os scripts <code>npm start</code> e <code>npm run dev</code>.
+        </div>
+      </article>
+
+      <!-- 4. Organização de projeto Node -->
+      <article class="card" id="org-projeto">
+        <h2>4. Organização básica de um projeto Node</h2>
+
+        <p>
+          Em projetos pequenos é comum começar com poucos arquivos, mas conforme a aplicação cresce, é importante separar responsabilidades em pastas como <code>routes</code>, <code>controllers</code>, <code>models</code> e <code>views</code> (padrão MVC).
+        </p>
+
+        <div class="antes-depois">
+          <div class="antes">
+            <h4>Cenário “bagunçado”</h4>
+            <p>
+              Um único arquivo <code>server.js</code> contendo rotas, regras de negócio, acesso a banco 
+              e configurações de servidor misturados, difícil de testar e manter.
+            </p>
+          </div>
+          <div class="depois">
+            <h4>Com organização MVC</h4>
+            <p>
+              Arquivos separados: cada rota chama um controller, controllers usam models para dados,
+              views cuidam da renderização, deixando o código mais modular e sustentável.
+            </p>
+          </div>
+        </div>
+
+        <pre><code class="language-text">
+meu-projeto/
+├── package.json
+├── server.js
+├── src/
+│   ├── routes/
+│   ├── controllers/
+│   ├── models/
+│   └── views/
+└── node_modules/
+        </code></pre>
+
+        <div class="callout">
+          <strong>Para estudar em ~30 minutos:</strong> desenhe em papel o fluxo: <code>cliente → rota → controller → model → view → resposta</code> e escreva em uma frase o papel de cada camada no seu próprio vocabulário.
+        </div>
+      </article>
+
+      <!-- 5. Prática: Setup do projeto MVC -->
+      <article class="card" id="setup-projeto">
+        <h2>5. Prática: Setup do projeto do semestre (Node + Express + MVC)</h2>
+        <p>
+          Agora vamos montar, passo a passo, o esqueleto do projeto do semestre usando Node.js, Express e uma estrutura básica em MVC.
+        </p>
+
+        <div class="note">
+          Sugerido para ~3 horas de prática: faça com calma, rodando pequeno trecho por vez, sempre testando no navegador ou via linha de comando.  
+          A ideia é sair com o servidor rodando, uma rota simples e as pastas principais do projeto organizadas.
+        </div>
+
+        <!-- Passo 1 -->
+        <div class="step">
+          <h3>Passo 1 – Preparar o ambiente</h3>
+          <ol class="mini-list">
+            <li>Verifique se o Node.js está instalado: no terminal, execute <code>node -v</code> e <code>npm -v</code>.</li>
+            <li>Se não estiver, instale a versão LTS a partir do site oficial do Node.js e reinicie o terminal.</li>
+            <li>Crie uma pasta para o projeto do semestre, por exemplo <code>projeto-semestral-mvc</code>.</li>
+          </ol>
+        </div>
+
+        <!-- Passo 2 -->
+        <div class="step">
+          <h3>Passo 2 – Iniciar o projeto Node</h3>
+          <p>No terminal, dentro da pasta do projeto:</p>
+
+          <pre><code class="language-bash">
+cd projeto-semestral-mvc
+
+# cria o package.json com valores padrão
+npm init -y
+          </code></pre>
+
+          <p>
+            Abra o <code>package.json</code> e confira os campos gerados automaticamente, como <code>name</code>, <code>version</code>, <code>main</code> e <code>scripts</code>.
+          </p>
+        </div>
+
+        <!-- Passo 3 -->
+        <div class="step">
+          <h3>Passo 3 – Instalar Express e Nodemon</h3>
+          <p>Ainda na pasta do projeto, rode:</p>
+
+          <pre><code class="language-bash">
+# dependência de produção
+npm install express
+
+# dependência de desenvolvimento (reinicia servidor automaticamente)
+npm install --save-dev nodemon
+          </code></pre>
+
+          <p>
+            Depois disso, verifique que <code>express</code> aparece em <code>dependencies</code> e <code>nodemon</code> em <code>devDependencies</code> do <code>package.json</code>.
+          </p>
+        </div>
+
+        <!-- Passo 4 -->
+        <div class="step">
+          <h3>Passo 4 – Configurar scripts de execução</h3>
+          <p>Edite o <code>package.json</code> e ajuste a seção <code>scripts</code> para algo como:</p>
+
+          <pre><code class="language-json">
+"scripts": {
+  "start": "node server.js",
+  "dev": "nodemon server.js"
+}
+          </code></pre>
+
+          <div class="example-box">
+            <p><strong>Uso:</strong></p>
+            <ul class="mini-list">
+              <li><code>npm start</code> – executa o servidor uma vez com Node.</li>
+              <li><code>npm run dev</code> – executa o servidor com Nodemon, reiniciando a cada alteração de arquivo.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Passo 5 -->
+        <div class="step">
+          <h3>Passo 5 – Criar o servidor básico com Express</h3>
+          <p>Na raiz do projeto, crie o arquivo <code>server.js</code> com o seguinte conteúdo:</p>
+
+          <pre><code class="language-js">
+// server.js
+const express = require("express");
+const path = require("path");
+
+const app = express();
+const port = 3000;
+
+// middleware para servir arquivos estáticos (CSS, imagens, etc.)
+app.use(express.static(path.join(__dirname, "public")));
+
+// rota básica de teste
+app.get("/", (req, res) =&gt; {
+  res.send("Servidor Express funcionando!");
+});
+
+// inicia o servidor
+app.listen(port, () =&gt; {
+  console.log(`Servidor rodando em http://localhost:${port}`);
+});
+          </code></pre>
+
+          <p>
+            No terminal, rode <code>npm run dev</code> e acesse <code>http://localhost:3000</code> no navegador para verificar se o texto “Servidor Express funcionando!” aparece.
+          </p>
+        </div>
+
+        <!-- Passo 6 -->
+        <div class="step">
+          <h3>Passo 6 – Criar a estrutura de pastas em MVC</h3>
+          <p>Dentro da pasta do projeto, crie a seguinte estrutura:</p>
+
+          <pre><code class="language-text">
+projeto-semestral-mvc/
+├── package.json
+├── server.js
+├── src/
+│   ├── routes/
+│   ├── controllers/
+│   ├── models/
+│   └── views/
+└── public/
+    └── css/
+        └── style.css
+          </code></pre>
+
+          <p>
+            Essa organização segue o padrão MVC, separando rotas, controllers, models e views, e deixando o CSS em uma pasta pública para o front-end.
+          </p>
+        </div>
+
+        <!-- Passo 7 -->
+        <div class="step">
+          <h3>Passo 7 – Criar uma rota, um controller e uma view simples</h3>
+
+          <details>
+            <summary>7.1. Criar a view inicial</summary>
+            <div>
+              <p>Em <code>src/views/</code>, crie o arquivo <code>home.html</code>:</p>
+              <pre><code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;title&gt;Projeto do Semestre&lt;/title&gt;
+  &lt;link rel="stylesheet" href="/css/style.css" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Bem-vindo(a) ao projeto do semestre&lt;/h1&gt;
+  &lt;p&gt;Esta é a página inicial renderizada pelo servidor Express.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+              </code></pre>
+            </div>
+          </details>
+
+          <details>
+            <summary>7.2. Criar o controller</summary>
+            <div>
+              <p>Em <code>src/controllers/</code>, crie <code>homeController.js</code>:</p>
+              <pre><code class="language-js">
+// src/controllers/homeController.js
+const path = require("path");
+
+function getHome(req, res) {
+  const filePath = path.join(__dirname, "..", "views", "home.html");
+  res.sendFile(filePath);
+}
+
+module.exports = {
+  getHome,
+};
+              </code></pre>
+            </div>
+          </details>
+
+          <details>
+            <summary>7.3. Criar a rota</summary>
+            <div>
+              <p>Em <code>src/routes/</code>, crie <code>homeRoutes.js</code>:</p>
+              <pre><code class="language-js">
+// src/routes/homeRoutes.js
+const express = require("express");
+const router = express.Router();
+const homeController = require("../controllers/homeController");
+
+router.get("/", homeController.getHome);
+
+module.exports = router;
+              </code></pre>
+            </div>
+          </details>
+
+          <details>
+            <summary>7.4. Conectar as rotas no server.js</summary>
+            <div>
+              <p>Atualize o <code>server.js</code> para usar as rotas:</p>
+              <pre><code class="language-js">
+// server.js
+const express = require("express");
+const path = require("path");
+const homeRoutes = require("./src/routes/homeRoutes");
+
+const app = express();
+const port = 3000;
+
+app.use(express.static(path.join(__dirname, "public")));
+
+// usa o conjunto de rotas da home
+app.use("/", homeRoutes);
+
+app.listen(port, () =&gt; {
+  console.log(`Servidor rodando em http://localhost:${port}`);
+});
+              </code></pre>
+            </div>
+          </details>
+
+          <div class="example-box">
+            <p>
+              Recarregue <code>http://localhost:3000</code>. Você deve ver o HTML da view <code>home.html</code>, provando que o fluxo MVC básico está funcionando:
+            </p>
+            <p><code>rota "/" → homeController.getHome → home.html → resposta ao navegador</code>.</p>
+          </div>
+        </div>
+
+        <!-- Passo 8 -->
+        <div class="step">
+          <h3>Passo 8 – Ligar com o CSS externo</h3>
+          <p>
+            Copie o conteúdo do seu <code>style.css</code> para <code>public/css/style.css</code> e garanta que o caminho no <code>home.html</code> é <code>/css/style.css</code>, já que estamos servindo a pasta <code>public</code> como estática com Express.
+          </p>
+          <div class="note">
+            Assim você mantém separação clara entre back-end (Node/Express) e front-end (HTML/CSS), mas ainda dentro do mesmo projeto Node.
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>Sugestão para fechar as 3h de prática:</strong>  
+          1) Criar ao menos mais uma rota (por exemplo, <code>/sobre</code>) com seu próprio controller e view;  
+          2) Adicionar um link de navegação entre as páginas;  
+          3) Comentar, em grupo, quais responsabilidades você enxerga em cada camada (rota, controller, view) já pensando nas próximas iterações do projeto.
+        </div>
+      </article>
+
+      <footer>
+        Página didática de introdução ao Node.js e setup de projeto MVC com Express, para estudantes em primeiro contato com back-end em JavaScript.
+      </footer>
+    </section>
+
+    <!-- Sidebar -->
+    <aside>
+      <section class="card">
+        <h2>Mapa de estudo (6h)</h2>
+        <ul class="check-list">
+          <li>Entender o que é Node.js e o modelo assíncrono.</li>
+          <li>Compreender o event loop e fazer pequenos testes.</li>
+          <li>Usar NPM, criar e ler o <code>package.json</code>.</li>
+          <li>Visualizar a estrutura MVC em um projeto Express.</li>
+          <li>Subir um servidor Express e organizar pastas do projeto do semestre.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Conceitos-chave</h2>
+        <ul class="pill-list">
+          <li>Event Loop</li>
+          <li>Assincronismo</li>
+          <li>Módulos Node</li>
+          <li>NPM e package.json</li>
+          <li>Express</li>
+          <li>MVC</li>
+        </ul>
+      </section>
+    </aside>
+  </main>
+</body>
+</html>
