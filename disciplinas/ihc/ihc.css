@@ -545,6 +545,83 @@ body:not(.index-page) main {
   opacity: 0.9;
 }
 
+.note-box,
+.dialogue-box {
+  margin-top: 0.4rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.88rem;
+}
+
+.note-box {
+  background: rgba(88, 28, 135, 0.16);
+  border: 1px solid rgba(168, 85, 247, 0.45);
+  color: var(--text);
+}
+
+.dialogue-box {
+  background: rgba(8, 61, 46, 0.35);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  color: var(--text);
+}
+
+.study-plan {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 0.9rem;
+}
+
+.plan-step {
+  padding: 0.85rem 0.95rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(15, 23, 42, 0.72);
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.plan-step strong {
+  color: var(--text);
+}
+
+.mini-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0 1rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.mini-table th,
+.mini-table td {
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 0.7rem;
+  vertical-align: top;
+  text-align: left;
+}
+
+.mini-table th {
+  color: var(--text);
+  background: rgba(15, 23, 42, 0.92);
+}
+
+.checklist {
+  list-style: none;
+  margin-left: 0;
+}
+
+.checklist li {
+  padding-left: 1.35rem;
+  position: relative;
+}
+
+.checklist li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
 /* Rodapé */
 
 footer {
