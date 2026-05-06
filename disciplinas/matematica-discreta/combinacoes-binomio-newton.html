@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Combinações e Binômio de Newton</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS da disciplina -->
+    <link rel="stylesheet" href="md-estilo.css">
+
+    <!-- MathJax para fórmulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1 id="topo">Combinações e Binômio de Newton</h1>
+
+    <div class="intro">
+        <h2>Visão geral do tópico</h2>
+        <p>
+            Nesta página você vai revisar e praticar <strong>combinações</strong> e o
+            <strong>Binômio de Newton</strong>, com foco em coeficientes binomiais
+            e em como implementar esses conceitos em software.
+        </p>
+        <p>
+            O material foi organizado para cerca de <strong>4 horas de estudo</strong>, que você
+            pode distribuir em blocos menores, seguindo o índice abaixo.
+        </p>
+    </div>
+
+    <div class="nota">
+        <h2>Índice de estudo sugerido</h2>
+        <ul>
+            <li><a href="#objetivos">Objetivos de aprendizagem</a></li>
+            <li><a href="#combinacoes">1. Combinações e coeficientes binomiais</a></li>
+            <li><a href="#pascal">2. Triângulo de Pascal e propriedades</a></li>
+            <li><a href="#binomio">3. Binômio de Newton</a></li>
+            <li><a href="#software">4. Aplicações em software (algoritmos)</a></li>
+            <li><a href="#exercicios">5. Exercícios de fixação</a></li>
+        </ul>
+    </div>
+
+    <div class="objetivos" id="objetivos">
+        <h2>Objetivos de aprendizagem</h2>
+        <ul>
+            <li>Relembrar a definição de combinação \(C(n,k)\) e interpretar seus significados.</li>
+            <li>Relacionar combinações e coeficientes binomiais \(\binom{n}{k}\).</li>
+            <li>Construir e usar o Triângulo de Pascal para obter coeficientes.</li>
+            <li>Aplicar o Binômio de Newton para expandir \((a+b)^n\) simbolicamente.</li>
+            <li>Implementar funções para calcular combinações em software (por exemplo, em Python).</li>
+            <li>Resolver problemas que combinam interpretação, cálculo e implementação.</li>
+        </ul>
+    </div>
+
+    <!-- 1. Combinações -->
+    <div class="aula" id="combinacoes">
+        <h2>1. Combinações e coeficientes binomiais</h2>
+
+        <div class="exemplo">
+            <h3>1.1. Definição e ideia intuitiva</h3>
+            <p>
+                Uma <strong>combinação</strong> de \(n\) elementos tomados \(k\) a \(k\) é um
+                subconjunto de \(k\) elementos, sem se preocupar com a ordem.
+            </p>
+            <p>
+                A notação é:
+            </p>
+            <p>\[
+                C(n,k) = \binom{n}{k} = \frac{n!}{k!(n-k)!}
+            \]</p>
+            <p>
+                Exemplo: se você tem 5 arquivos e quer escolher 2 para enviar por e-mail,
+                \(C(5,2)\) é o número de subconjuntos de 2 arquivos dentre os 5.
+            </p>
+        </div>
+
+        <div class="exemplo">
+            <h3>1.2. Pequeno exemplo numérico</h3>
+            <p>
+                Calcule \(C(5,2)\):
+            </p>
+            <p>\[
+                C(5,2) = \frac{5!}{2! \cdot 3!} =
+                \frac{5 \cdot 4 \cdot 3!}{2! \cdot 3!} =
+                \frac{5 \cdot 4}{2 \cdot 1} = 10
+            \]</p>
+            <p>
+                Isso significa que há 10 grupos diferentes de 2 elementos
+                que podem ser escolhidos a partir de 5.
+            </p>
+        </div>
+
+        <div class="algoritmo">
+<pre><code># Exemplo em Python: função para combinação usando math.comb
+
+import math
+
+def combinacao(n, k):
+    return math.comb(n, k)
+
+print(combinacao(5, 2))  # deve imprimir 10</code></pre>
+        </div>
+
+        <div class="exercicio">
+            <h3>Atividade rápida 1 (combinações)</h3>
+            <p>
+                Sem usar calculadora, calcule:
+            </p>
+            <ol>
+                <li>\(C(6,3)\)</li>
+                <li>\(C(8,2)\)</li>
+                <li>\(C(7,1)\) e \(C(7,0)\)</li>
+            </ol>
+            <button onclick="toggleRes('res_c1')">Ver resolução</button>
+            <div id="res_c1" class="resolucao">
+                <p>\[
+                    C(6,3) = \frac{6!}{3! \cdot 3!} =
+                    \frac{6 \cdot 5 \cdot 4}{3 \cdot 2 \cdot 1} = 20
+                \]</p>
+                <p>\[
+                    C(8,2) = \frac{8!}{2! \cdot 6!} =
+                    \frac{8 \cdot 7}{2 \cdot 1} = 28
+                \]</p>
+                <p>\[
+                    C(7,1) = 7, \quad C(7,0) = 1
+                \]</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Triângulo de Pascal -->
+    <div class="aula" id="pascal">
+        <h2>2. Triângulo de Pascal e propriedades</h2>
+
+        <div class="exemplo">
+            <h3>2.1. Construção do Triângulo de Pascal</h3>
+            <p>
+                O Triângulo de Pascal organiza os coeficientes \(\binom{n}{k}\) em linhas.
+                Cada linha corresponde a um valor de \(n\) e cada entrada corresponde a um valor de \(k\).
+            </p>
+            <p>
+                Primeiras linhas (n = 0 a 5):
+            </p>
+            <pre>
+n = 0:              1
+n = 1:             1  1
+n = 2:            1  2  1
+n = 3:           1  3  3  1
+n = 4:          1  4  6  4  1
+n = 5:         1  5 10 10  5  1
+            </pre>
+            <p>
+                Cada número interno é a soma dos dois “de cima”:
+            </p>
+            <p>\[
+                \binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}
+            \]</p>
+        </div>
+
+        <div class="algoritmo">
+<pre><code># Geração simples do Triângulo de Pascal em Python
+
+def triangulo_pascal(n_linhas):
+    triangulo = []
+    for n in range(n_linhas):
+        linha = [1] * (n + 1)
+        for k in range(1, n):
+            linha[k] = triangulo[n-1][k-1] + triangulo[n-1][k]
+        triangulo.append(linha)
+    return triangulo
+
+for linha in triangulo_pascal(6):
+    print(linha)</code></pre>
+        </div>
+
+        <div class="exercicio">
+            <h3>Atividade rápida 2 (Pascal)</h3>
+            <p>
+                Usando apenas a linha anterior, complete a linha do Triângulo de Pascal para n = 6.
+            </p>
+            <p>
+                Lembre:<br>
+                n = 5: 1  5  10  10  5  1
+            </p>
+            <button onclick="toggleRes('res_p1')">Ver resolução</button>
+            <div id="res_p1" class="resolucao">
+                <p>
+                    Somando pares vizinhos da linha n = 5, você obtém:<br>
+                    n = 6: 1  6  15  20  15  6  1
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Binômio de Newton -->
+    <div class="aula" id="binomio">
+        <h2>3. Binômio de Newton</h2>
+
+        <div class="exemplo">
+            <h3>3.1. Enunciado</h3>
+            <p>
+                O <strong>Binômio de Newton</strong> permite expandir potências de expressões
+                da forma \((a + b)^n\) usando coeficientes binomiais:
+            </p>
+            <p>\[
+                (a + b)^n = \sum_{k=0}^{n} \binom{n}{k} a^{n-k} b^k
+            \]</p>
+            <p>
+                Cada termo da soma tem um coeficiente binomial \(\binom{n}{k}\),
+                uma potência de \(a\) e uma potência de \(b\).
+            </p>
+        </div>
+
+        <div class="exemplo">
+            <h3>3.2. Exemplos de expansão</h3>
+            <p>
+                Para n = 2:
+            </p>
+            <p>\[
+                (a + b)^2 = \binom{2}{0}a^2b^0
+                + \binom{2}{1}a^1b^1
+                + \binom{2}{2}a^0b^2
+            \]</p>
+            <p>\[
+                (a + b)^2 = a^2 + 2ab + b^2
+            \]</p>
+            <p>
+                Para n = 3:
+            </p>
+            <p>\[
+                (a + b)^3 =
+                \binom{3}{0}a^3 + \binom{3}{1}a^2b +
+                \binom{3}{2}ab^2 + \binom{3}{3}b^3
+            \]</p>
+            <p>\[
+                (a + b)^3 = a^3 + 3a^2b + 3ab^2 + b^3
+            \]</p>
+        </div>
+
+        <div class="algoritmo">
+<pre><code># Expansão simbólica simples de (a + b)^n usando coeficientes binomiais
+
+import math
+
+def binomio_newton(a, b, n):
+    termos = []
+    for k in range(n + 1):
+        coef = math.comb(n, k)
+        exp_a = n - k
+        exp_b = k
+        termos.append((coef, exp_a, exp_b))
+    return termos  # lista de tuplas (coef, expoente_de_a, expoente_de_b)
+
+# Exemplo para n = 3
+for coef, ea, eb in binomio_newton("a", "b", 3):
+    print(f"{coef} * a^{ea} * b^{eb}")</code></pre>
+        </div>
+
+        <div class="exercicio">
+            <h3>Atividade rápida 3 (Binômio de Newton)</h3>
+            <p>
+                Use o Binômio de Newton para escrever a expansão de:
+            </p>
+            <ol>
+                <li>\((x + 1)^3\)</li>
+                <li>\((2x - 1)^2\)</li>
+            </ol>
+            <button onclick="toggleRes('res_b1')">Ver resolução</button>
+            <div id="res_b1" class="resolucao">
+                <p>
+                    (1) \((x + 1)^3 = x^3 + 3x^2 + 3x + 1\)
+                </p>
+                <p>
+                    (2) \((2x - 1)^2 =
+                    \binom{2}{0}(2x)^2(-1)^0 +
+                    \binom{2}{1}(2x)^1(-1)^1 +
+                    \binom{2}{2}(2x)^0(-1)^2
+                    \)
+                </p>
+                <p>
+                    \((2x - 1)^2 = 4x^2 - 4x + 1\)
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Aplicações em software -->
+    <div class="aula" id="software">
+        <h2>4. Aplicações em software (algoritmos)</h2>
+
+        <div class="exemplo">
+            <h3>4.1. Cálculo de combinações</h3>
+            <p>
+                Em muitas aplicações de Engenharia de Computação, você precisa calcular
+                combinações para:
+            </p>
+            <ul>
+                <li>gerar subconjuntos de parâmetros de teste;</li>
+                <li>calcular probabilidades em algoritmos de simulação;</li>
+                <li>analisar combinações de componentes de hardware ou módulos de software.</li>
+            </ul>
+            <p>
+                Duas abordagens comuns:
+            </p>
+            <ul>
+                <li>Usar uma função pronta da linguagem (ex.: <code>math.comb</code> em Python).</li>
+                <li>Implementar você mesmo com fatorial ou com uma versão recursiva/dinâmica.</li>
+            </ul>
+        </div>
+
+        <div class="algoritmo">
+<pre><code># 1) Usando math.comb
+
+import math
+
+def comb_pronta(n, k):
+    return math.comb(n, k)
+
+# 2) Implementação própria usando fatorial
+
+def fatorial(n):
+    if n == 0 or n == 1:
+        return 1
+    resultado = 1
+    for i in range(2, n+1):
+        resultado *= i
+    return resultado
+
+def comb_fatorial(n, k):
+    return fatorial(n) // (fatorial(k) * fatorial(n - k))</code></pre>
+        </div>
+
+        <div class="exemplo">
+            <h3>4.2. Geração de todos os subconjuntos de tamanho k</h3>
+            <p>
+                Para testar combinações de configurações de um sistema, você pode precisar
+                listar todos os subconjuntos de tamanho k de uma lista.
+            </p>
+        </div>
+
+        <div class="algoritmo">
+<pre><code># Gerar todos os subconjuntos de tamanho k usando itertools.combinations
+
+from itertools import combinations
+
+itens = ["A", "B", "C", "D", "E"]
+k = 3
+
+for grupo in combinations(itens, k):
+    print(grupo)</code></pre>
+        </div>
+
+        <div class="exercicio">
+            <h3>Atividade rápida 4 (algoritmo)</h3>
+            <p>
+                Escreva (em pseudocódigo ou na linguagem que preferir) um algoritmo que:
+            </p>
+            <ol>
+                <li>leia n e k;</li>
+                <li>calcule \(C(n,k)\) usando uma função fatorial;</li>
+                <li>imprima o resultado e uma frase explicando o que ele significa
+                    (por exemplo, “número de grupos possíveis de k itens dentre n”).</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- 5. Exercícios de fixação -->
+    <div class="aula" id="exercicios">
+        <h2>5. Exercícios de fixação</h2>
+        <p style="font-size: 0.9rem; color: #555;">
+            Tente resolver primeiro sem olhar soluções. Use a resolução apenas
+            para conferir ou destravar o raciocínio.
+        </p>
+
+        <div class="exercicio">
+            <h3>Exercício 1 – interpretação de combinação</h3>
+            <p>
+                Em um sistema de login, um usuário pode escolher 3 perguntas
+                de segurança dentre 7 disponíveis.
+            </p>
+            <ol>
+                <li>Modele essa situação usando \(C(n,k)\).</li>
+                <li>Calcule o número de maneiras diferentes de escolher as perguntas.</li>
+            </ol>
+            <button onclick="toggleRes('res_e1')">Ver resolução</button>
+            <div id="res_e1" class="resolucao">
+                <p>
+                    (a) \(n = 7\), \(k = 3\): \(C(7,3)\).<br>
+                    (b) \[
+                        C(7,3) = \frac{7!}{3! \cdot 4!} =
+                        \frac{7 \cdot 6 \cdot 5}{3 \cdot 2 \cdot 1} = 35
+                    \]
+                </p>
+            </div>
+        </div>
+
+        <div class="exercicio">
+            <h3>Exercício 2 – Triângulo de Pascal</h3>
+            <p>
+                A partir das linhas de n = 0 até n = 4 do Triângulo de Pascal,
+                obtenha os valores de:
+            </p>
+            <ol>
+                <li>\(\binom{5}{2}\)</li>
+                <li>\(\binom{5}{3}\)</li>
+                <li>\(\binom{6}{3}\)</li>
+            </ol>
+            <button onclick="toggleRes('res_e2')">Ver resolução</button>
+            <div id="res_e2" class="resolucao">
+                <p>
+                    Linha de n = 5: 1  5  10  10  5  1  
+                    Logo, \(\binom{5}{2} = 10\) e \(\binom{5}{3} = 10\).<br>
+                    Linha de n = 6: 1  6  15  20  15  6  1  
+                    Logo, \(\binom{6}{3} = 20\).
+                </p>
+            </div>
+        </div>
+
+        <div class="exercicio">
+            <h3>Exercício 3 – Binômio de Newton</h3>
+            <p>
+                Use o Binômio de Newton para expandir:
+            </p>
+            <ol>
+                <li>\((x + 2)^4\)</li>
+                <li>\((3x - 1)^3\)</li>
+            </ol>
+            <button onclick="toggleRes('res_e3')">Ver resolução</button>
+            <div id="res_e3" class="resolucao">
+                <p>
+                    (1) \((x + 2)^4 =
+                    \binom{4}{0}x^4 2^0 +
+                    \binom{4}{1}x^3 2^1 +
+                    \binom{4}{2}x^2 2^2 +
+                    \binom{4}{3}x 2^3 +
+                    \binom{4}{4}2^4
+                    \)
+                </p>
+                <p>
+                    \((x + 2)^4 = x^4 + 8x^3 + 24x^2 + 32x + 16\)
+                </p>
+                <p>
+                    (2) \((3x - 1)^3 =
+                    \binom{3}{0}(3x)^3(-1)^0 +
+                    \binom{3}{1}(3x)^2(-1)^1 +
+                    \binom{3}{2}(3x)^1(-1)^2 +
+                    \binom{3}{3}(3x)^0(-1)^3
+                    \)
+                </p>
+                <p>
+                    \((3x - 1)^3 =
+                    27x^3 - 27x^2 + 9x - 1\)
+                </p>
+            </div>
+        </div>
+
+        <div class="exercicio">
+            <h3>Exercício 4 – Propriedade dos coeficientes</h3>
+            <p>
+                Mostre, com um argumento de contagem (sem fazer contas grandes),
+                que:
+            </p>
+            <p>\[
+                \sum_{k=0}^{n} \binom{n}{k} = 2^n
+            \]</p>
+            <button onclick="toggleRes('res_e4')">Ver sugestão</button>
+            <div id="res_e4" class="resolucao">
+                <p>
+                    A soma à esquerda conta todos os subconjuntos de um conjunto com n elementos,
+                    separados por tamanho (0, 1, 2, ..., n).  
+                    O lado direito é o número total de subconjuntos, já que para cada elemento
+                    você decide estar ou não no subconjunto (2 opções por elemento),
+                    resultando em \(2^n\).
+                </p>
+            </div>
+        </div>
+
+        <div class="exercicio">
+            <h3>Exercício 5 – Algoritmo</h3>
+            <p>
+                Escreva um algoritmo que, dado um valor n fornecido pelo usuário,
+                imprima na tela:
+            </p>
+            <ul>
+                <li>todos os valores de \(\binom{n}{k}\) para k = 0 até n;</li>
+                <li>a soma desses valores;</li>
+                <li>a comparação da soma com \(2^n\).</li>
+            </ul>
+            <p>
+                Você pode usar qualquer linguagem ou pseudocódigo, mas deixe claro
+                os laços (loops) utilizados.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>IFC São Bento do Sul · Engenharia de Computação (ECO) · Matemática Discreta</p>
+    </footer>
+</div>
+
+<script>
+function toggleRes(id) {
+    const elem = document.getElementById(id);
+    if (!elem) return;
+    elem.style.display = elem.style.display === 'block' ? 'none' : 'block';
+}
+</script>
+</body>
+</html>
