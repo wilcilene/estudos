@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REST, HTTP e CRUD com Express</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div>
+        <span class="tag">Programação II</span>
+        <span class="tag tag--aulas">REST + Express</span>
+      </div>
+      <p>
+        Esta página apresenta os conceitos essenciais de <strong>REST</strong>, mostra como funcionam os
+        <strong>verbos HTTP</strong> e os <strong>códigos de status</strong>, e constrói passo a passo uma API REST
+        simples com <strong>Express</strong> usando dados em memória.
+      </p>
+      <nav>
+        <a href="#visao-geral">Visão geral</a>
+        <a href="#rest">Conceito de REST</a>
+        <a href="#verbos">Verbos HTTP</a>
+        <a href="#status">Status codes</a>
+        <a href="#express">API com Express</a>
+        <a href="#crud">CRUD completo</a>
+        <a href="#testes">Como testar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <article class="card" id="visao-geral">
+        <h2>O que você vai aprender</h2>
+        <p>
+          Ao estudar esta página, o foco é entender <strong>recurso</strong>, <strong>rota</strong>,
+          <strong>requisição</strong>, <strong>resposta</strong>, <strong>JSON</strong> (JavaScript Object Notation), <strong>CRUD</strong> e a relação entre
+          <strong>URL + método HTTP + status code</strong>.
+        </p>
+        <ul class="pill-list">
+          <li>REST</li>
+          <li>HTTP</li>
+          <li>GET</li>
+          <li>POST</li>
+          <li>PUT</li>
+          <li>DELETE</li>
+          <li>Express</li>
+          <li>JSON</li>
+        </ul>
+        <div class="callout">
+          <strong>Ideia central:</strong> uma API REST organiza o acesso a recursos por meio de URLs claras,
+          métodos HTTP adequados e respostas com códigos de status que informam o resultado da operação.
+        </div>
+      </article>
+
+      <article class="card" id="rest">
+        <h2>1. Conceito de REST</h2>
+        <p>
+          REST é um estilo de organização para APIs no qual trabalhamos com <strong>recursos</strong>, como
+          <code>/estudantes</code>, <code>/produtos</code> ou <code>/tarefas</code>, e usamos os métodos do HTTP para dizer
+          o que queremos fazer com esses recursos.
+        </p>
+
+        <h3>1.1 Pensando em recursos</h3>
+        <div class="example-box">
+          <p>Em vez de criar URLs como:</p>
+          <pre><code>/buscarEstudantes
+/criarEstudante
+/removerEstudante</code></pre>
+          <p>em REST preferimos URLs que representam o recurso:</p>
+          <pre><code>/estudantes
+/estudantes/1</code></pre>
+        </div>
+
+        <div class="anotacao">
+          <dl>
+            <dt>Recurso</dt>
+            <dd>É a entidade principal da API, como estudante, livro, tarefa ou produto.</dd>
+            <dt>Coleção</dt>
+            <dd>É o conjunto do recurso, por exemplo <code>/tarefas</code>.</dd>
+            <dt>Item específico</dt>
+            <dd>É um elemento individual, por exemplo <code>/tarefas/3</code>.</dd>
+          </dl>
+        </div>
+
+        <h3>1.2 O que acontece em uma requisição</h3>
+        <ol class="mini-list">
+          <li>O cliente envia uma <strong>requisição HTTP</strong> para uma URL.</li>
+          <li>A requisição usa um <strong>método</strong>, como GET ou POST.</li>
+          <li>O servidor processa a rota correspondente.</li>
+          <li>O servidor devolve uma <strong>resposta</strong>, normalmente em JSON.</li>
+          <li>A resposta traz um <strong>status code</strong>, como 200, 201, 404 ou 500.</li>
+        </ol>
+
+        <div class="analogia">
+          <div class="analogia-icone">📦</div>
+          <div>
+            Pense na API como um <strong>balcão de atendimento</strong>. A URL identifica o assunto,
+            o método HTTP informa a ação desejada, e o status code responde se deu certo,
+            se faltou informação, se o item não existe ou se ocorreu um erro interno.
+          </div>
+        </div>
+      </article>
+
+      <article class="card" id="verbos">
+        <h2>2. Verbos HTTP</h2>
+        <p>
+          Os métodos HTTP indicam a <strong>intenção</strong> da requisição. Em APIs REST, os verbos mais usados são
+          <strong>GET</strong>, <strong>POST</strong>, <strong>PUT</strong> e <strong>DELETE</strong>.
+        </p>
+
+        <h3>2.1 Associação com CRUD</h3>
+        <table class="tabela-padroes">
+          <thead>
+            <tr>
+              <th>Operação</th>
+              <th>Método</th>
+              <th>Exemplo de rota</th>
+              <th>Ideia principal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge--c">Create</span></td>
+              <td>POST</td>
+              <td><code>/tarefas</code></td>
+              <td>Cria um novo item.</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge--e">Read</span></td>
+              <td>GET</td>
+              <td><code>/tarefas</code> ou <code>/tarefas/1</code></td>
+              <td>Lê todos os itens ou um item específico.</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge--b">Update</span></td>
+              <td>PUT</td>
+              <td><code>/tarefas/1</code></td>
+              <td>Atualiza um item existente.</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge--e">Delete</span></td>
+              <td>DELETE</td>
+              <td><code>/tarefas/1</code></td>
+              <td>Remove um item.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>2.2 Leituras rápidas sobre cada verbo</h3>
+        <details>
+          <summary>GET</summary>
+          <div>
+            <p><strong>GET</strong> é usado para <strong>consultar</strong> dados. Ele não deve alterar o estado do recurso.</p>
+            <pre><code>GET /tarefas
+GET /tarefas/2</code></pre>
+          </div>
+        </details>
+        <details>
+          <summary>POST</summary>
+          <div>
+            <p><strong>POST</strong> é usado para <strong>criar</strong> um novo recurso.</p>
+            <pre><code>POST /tarefas</code></pre>
+          </div>
+        </details>
+        <details>
+          <summary>PUT</summary>
+          <div>
+            <p><strong>PUT</strong> é usado para <strong>atualizar</strong> um recurso existente.</p>
+            <pre><code>PUT /tarefas/2</code></pre>
+          </div>
+        </details>
+        <details>
+          <summary>DELETE</summary>
+          <div>
+            <p><strong>DELETE</strong> é usado para <strong>remover</strong> um recurso.</p>
+            <pre><code>DELETE /tarefas/2</code></pre>
+          </div>
+        </details>
+      </article>
+
+      <article class="card" id="status">
+        <h2>3. Status codes mais importantes</h2>
+        <p>
+          Os códigos de status mostram o resultado da requisição. Em APIs REST, é importante usar um código coerente
+          com a operação realizada.
+        </p>
+
+        <div class="cat-grid">
+          <div class="cat-card cat-card--criacional">
+            <h3>2xx · Sucesso</h3>
+            <p>A requisição foi processada com sucesso.</p>
+            <ul>
+              <li><strong>200 OK</strong> – consulta ou atualização bem-sucedida.</li>
+              <li><strong>201 Created</strong> – recurso criado com sucesso.</li>
+              <li><strong>204 No Content</strong> – remoção sem conteúdo de retorno.</li>
+            </ul>
+          </div>
+          <div class="cat-card cat-card--estrutural">
+            <h3>4xx · Erro do cliente</h3>
+            <p>Há problema na requisição enviada.</p>
+            <ul>
+              <li><strong>400 Bad Request</strong> – dados inválidos.</li>
+              <li><strong>404 Not Found</strong> – recurso não encontrado.</li>
+            </ul>
+          </div>
+          <div class="cat-card cat-card--comportamental">
+            <h3>5xx · Erro do servidor</h3>
+            <p>O servidor falhou ao processar a operação.</p>
+            <ul>
+              <li><strong>500 Internal Server Error</strong> – erro interno inesperado.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="antes-depois">
+          <div class="antes">
+            <h4>Resposta ruim</h4>
+            <p>Devolver sempre 200, mesmo quando falta campo, quando o item não existe ou quando houve falha.</p>
+          </div>
+          <div class="depois">
+            <h4>Resposta melhor</h4>
+            <p>Usar 201 para criar, 400 para entrada inválida, 404 para item ausente e 204 para remoção sem corpo.</p>
+          </div>
+        </div>
+
+        <p class="note">
+          Uma API bem organizada não depende apenas do código funcionar; ela também precisa responder de forma clara e consistente.
+        </p>
+      </article>
+
+      <article class="card" id="express">
+        <h2>4. Criando a base da API com Express</h2>
+        <p>
+          Agora vamos montar uma API REST simples com <strong>Node.js</strong> e <strong>Express</strong>. O exemplo usará
+          uma lista de tarefas armazenada <strong>em memória</strong>, isto é, os dados existem apenas enquanto o servidor está ligado.
+        </p>
+
+        <h3>4.1 Instalação</h3>
+        <pre><code>npm init -y
+npm install express</code></pre>
+
+        <h3>4.2 Arquivo inicial</h3>
+        <p>Crie um arquivo chamado <code>server.js</code> com a estrutura abaixo:</p>
+        <pre><code>const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+const tarefas = [
+  { id: 1, titulo: 'Estudar REST', concluida: false },
+  { id: 2, titulo: 'Praticar Express', concluida: true }
+];
+
+app.get('/', (req, res) =&gt; {
+  res.send('API funcionando!');
+});
+
+app.listen(3000, () =&gt; {
+  console.log('Servidor rodando em http://localhost:3000');
+});</code></pre>
+
+        <div class="anotacao">
+          <dl>
+            <dt><code>express()</code></dt>
+            <dd>Cria a aplicação web.</dd>
+            <dt><code>app.use(express.json())</code></dt>
+            <dd>Permite ler JSON enviado no corpo da requisição.</dd>
+            <dt><code>app.listen(3000)</code></dt>
+            <dd>Coloca o servidor para escutar na porta 3000.</dd>
+          </dl>
+        </div>
+
+        <h3>4.3 Executando</h3>
+        <pre><code>node server.js</code></pre>
+        <p>
+          Se tudo estiver certo, ao acessar <code>http://localhost:3000</code> você verá a mensagem
+          <code>API funcionando!</code>.
+        </p>
+      </article>
+
+      <article class="card" id="crud">
+        <h2>5. CRUD completo em memória</h2>
+        <p>
+          Agora vamos implementar as quatro operações principais sobre o recurso <strong>tarefas</strong>.
+          A coleção será <code>/tarefas</code> e o item individual será <code>/tarefas/:id</code>.
+        </p>
+
+        <h3>5.1 Código completo</h3>
+        <pre><code>const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+let tarefas = [
+  { id: 1, titulo: 'Estudar REST', concluida: false },
+  { id: 2, titulo: 'Praticar Express', concluida: true }
+];
+
+let proximoId = 3;
+
+app.get('/tarefas', (req, res) =&gt; {
+  res.status(200).json(tarefas);
+});
+
+app.get('/tarefas/:id', (req, res) =&gt; {
+  const id = Number(req.params.id);
+  const tarefa = tarefas.find(t =&gt; t.id === id);
+
+  if (!tarefa) {
+    return res.status(404).json({ erro: 'Tarefa não encontrada' });
+  }
+
+  res.status(200).json(tarefa);
+});
+
+app.post('/tarefas', (req, res) =&gt; {
+  const { titulo, concluida } = req.body;
+
+  if (!titulo || typeof titulo !== 'string') {
+    return res.status(400).json({ erro: 'O campo titulo é obrigatório' });
+  }
+
+  const novaTarefa = {
+    id: proximoId++,
+    titulo,
+    concluida: concluida ?? false
+  };
+
+  tarefas.push(novaTarefa);
+  res.status(201).json(novaTarefa);
+});
+
+app.put('/tarefas/:id', (req, res) =&gt; {
+  const id = Number(req.params.id);
+  const { titulo, concluida } = req.body;
+
+  const indice = tarefas.findIndex(t =&gt; t.id === id);
+
+  if (indice === -1) {
+    return res.status(404).json({ erro: 'Tarefa não encontrada' });
+  }
+
+  if (!titulo || typeof titulo !== 'string') {
+    return res.status(400).json({ erro: 'O campo titulo é obrigatório' });
+  }
+
+  tarefas[indice] = {
+    id,
+    titulo,
+    concluida: Boolean(concluida)
+  };
+
+  res.status(200).json(tarefas[indice]);
+});
+
+app.delete('/tarefas/:id', (req, res) =&gt; {
+  const id = Number(req.params.id);
+  const indice = tarefas.findIndex(t =&gt; t.id === id);
+
+  if (indice === -1) {
+    return res.status(404).json({ erro: 'Tarefa não encontrada' });
+  }
+
+  tarefas.splice(indice, 1);
+  res.status(204).send();
+});
+
+app.listen(3000, () =&gt; {
+  console.log('Servidor rodando em http://localhost:3000');
+});</code></pre>
+
+        <h3>5.2 Entendendo rota por rota</h3>
+        <details>
+          <summary>GET /tarefas</summary>
+          <div>
+            <p>Retorna a lista completa de tarefas.</p>
+            <pre><code>app.get('/tarefas', (req, res) =&gt; {
+  res.status(200).json(tarefas);
+});</code></pre>
+            <p><strong>Palavras-chave:</strong> listar, coleção, leitura, 200 OK.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>GET /tarefas/:id</summary>
+          <div>
+            <p>Busca uma tarefa específica pelo identificador enviado na URL.</p>
+            <pre><code>app.get('/tarefas/:id', (req, res) =&gt; {
+  const id = Number(req.params.id);
+  const tarefa = tarefas.find(t =&gt; t.id === id);
+
+  if (!tarefa) {
+    return res.status(404).json({ erro: 'Tarefa não encontrada' });
+  }
+
+  res.status(200).json(tarefa);
+});</code></pre>
+            <p><strong>Palavras-chave:</strong> parâmetro de rota, busca, item único, 404.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>POST /tarefas</summary>
+          <div>
+            <p>Recebe dados no corpo da requisição, valida o título e cria uma nova tarefa.</p>
+            <pre><code>app.post('/tarefas', (req, res) =&gt; {
+  const { titulo, concluida } = req.body;
+
+  if (!titulo || typeof titulo !== 'string') {
+    return res.status(400).json({ erro: 'O campo titulo é obrigatório' });
+  }
+
+  const novaTarefa = {
+    id: proximoId++,
+    titulo,
+    concluida: concluida ?? false
+  };
+
+  tarefas.push(novaTarefa);
+  res.status(201).json(novaTarefa);
+});</code></pre>
+            <p><strong>Palavras-chave:</strong> body, validação, criação, 201 Created.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>PUT /tarefas/:id</summary>
+          <div>
+            <p>Atualiza os dados de uma tarefa que já existe.</p>
+            <pre><code>app.put('/tarefas/:id', (req, res) =&gt; {
+  const id = Number(req.params.id);
+  const { titulo, concluida } = req.body;
+
+  const indice = tarefas.findIndex(t =&gt; t.id === id);
+
+  if (indice === -1) {
+    return res.status(404).json({ erro: 'Tarefa não encontrada' });
+  }
+
+  if (!titulo || typeof titulo !== 'string') {
+    return res.status(400).json({ erro: 'O campo titulo é obrigatório' });
+  }
+
+  tarefas[indice] = {
+    id,
+    titulo,
+    concluida: Boolean(concluida)
+  };
+
+  res.status(200).json(tarefas[indice]);
+});</code></pre>
+            <p><strong>Palavras-chave:</strong> atualização, id, validação, substituição, 200 OK.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>DELETE /tarefas/:id</summary>
+          <div>
+            <p>Remove uma tarefa pelo id.</p>
+            <pre><code>app.delete('/tarefas/:id', (req, res) =&gt; {
+  const id = Number(req.params.id);
+  const indice = tarefas.findIndex(t =&gt; t.id === id);
+
+  if (indice === -1) {
+    return res.status(404).json({ erro: 'Tarefa não encontrada' });
+  }
+
+  tarefas.splice(indice, 1);
+  res.status(204).send();
+});</code></pre>
+            <p><strong>Palavras-chave:</strong> remoção, 204 No Content, item inexistente, 404.</p>
+          </div>
+        </details>
+      </article>
+
+      <article class="card" id="testes">
+        <h2>6. Como testar a API</h2>
+        <p>
+          Você pode testar com navegador, Postman, Insomnia ou VS Code REST Client. O importante é observar
+          <strong>método</strong>, <strong>URL</strong>, <strong>body</strong> e <strong>status code</strong>.
+        </p>
+
+        <h3>6.1 Fluxo de teste</h3>
+        <ol class="mini-list">
+          <li>Execute <code>node server.js</code>.</li>
+          <li>Teste <code>GET /tarefas</code> para verificar a lista inicial.</li>
+          <li>Teste <code>POST /tarefas</code> para criar uma nova tarefa.</li>
+          <li>Teste <code>GET /tarefas/:id</code> para consultar o item criado.</li>
+          <li>Teste <code>PUT /tarefas/:id</code> para alterar os dados.</li>
+          <li>Teste <code>DELETE /tarefas/:id</code> para remover o item.</li>
+          <li>Repita uma busca no item removido para observar o <code>404</code>.</li>
+        </ol>
+
+        <h3>6.2 Exemplos de requisição</h3>
+        <pre><code>GET http://localhost:3000/tarefas</code></pre>
+
+        <pre><code>POST http://localhost:3000/tarefas
+Content-Type: application/json
+
+{
+  "titulo": "Montar API REST",
+  "concluida": false
+}</code></pre>
+
+        <pre><code>PUT http://localhost:3000/tarefas/1
+Content-Type: application/json
+
+{
+  "titulo": "Montar API REST com Express",
+  "concluida": true
+}</code></pre>
+
+        <pre><code>DELETE http://localhost:3000/tarefas/1</code></pre>
+
+        <div class="callout">
+          <strong>Observe durante os testes:</strong> qual recurso foi acessado, qual método foi enviado,
+          qual código foi retornado e qual JSON apareceu na resposta.
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>7. Limitações do exemplo em memória</h2>
+        <p>
+          Esse modelo é excelente para <strong>aprender</strong> o funcionamento das rotas REST, mas possui uma limitação importante:
+          os dados ficam apenas na variável do programa.
+        </p>
+        <ul class="mini-list">
+          <li>Ao reiniciar o servidor, os dados são perdidos.</li>
+          <li>Não há banco de dados.</li>
+          <li>Não existe autenticação ou controle de acesso.</li>
+          <li>As validações ainda são simples.</li>
+        </ul>
+        <p class="note">
+          Mesmo assim, esse é o melhor ponto de partida para compreender o comportamento de uma API antes de integrar banco,
+          autenticação, camadas de serviço e tratamento de erros mais robusto.
+        </p>
+      </article>
+    </section>
+
+    <aside>
+      <section class="card">
+        <h2>Palavras-chave</h2>
+        <ul class="pill-list">
+          <li>Recurso</li>
+          <li>Endpoint</li>
+          <li>JSON</li>
+          <li>CRUD</li>
+          <li>Parâmetro</li>
+          <li>Status</li>
+          <li>Express</li>
+          <li>Req/Res</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Para lembrar!</h2>
+        <div class="dom-card">
+          <ul class="check-list">
+            <li>REST organiza a API por recursos.</li>
+            <li>HTTP define os métodos da ação.</li>
+            <li>Express cria as rotas com <code>app.get</code>, <code>app.post</code> e similares.</li>
+            <li>O corpo JSON é lido com <code>express.json()</code>.</li>
+            <li>O status code comunica o resultado.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Resumo para explicar</h2>
+        <p class="dom-destaque">
+          URL identifica o <strong>recurso</strong>, método HTTP indica a <strong>ação</strong>, e o status code informa o <strong>resultado</strong>.
+        </p>
+      </section>
+    </aside>
+  </main>
+
+  <footer>
+    <p>Material de apoio para estudo e apresentação: REST, HTTP, status codes e CRUD com Express.</p>
+  </footer>
+</body>
+</html>
