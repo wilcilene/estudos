@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IHC — Fatores humanos, modelos cognitivos, processamento de informação e diálogo humano-computador</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="ihc.css" />
+</head>
+<body class="topic-page">
+  <div class="page">
+    <a href="index.html" class="back-link"><span>↩</span>Voltar para a página inicial da disciplina</a>
+
+    <section class="hero" aria-labelledby="titulo-pagina">
+      <div class="hero-main">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          IHC • Fatores humanos • Modelos cognitivos • Diálogos
+        </div>
+        <h1 id="titulo-pagina" class="hero-title">
+          Fatores humanos, <span>modelos cognitivos</span>, processamento de informação e diálogo humano‑computador
+        </h1>
+        <p class="hero-text">
+          Esta página reúne quatro tópicos centrais de IHC em um único percurso didático: fatores humanos no projeto,
+          processamento de informação, modelos cognitivos e diálogo humano‑computador. O material foi planejado para
+          apoiar exposição em aula e também estudo autônomo aprofundado, conectando fundamentos teóricos a exemplos,
+          análise de interfaces e implicações práticas de projeto.
+        </p>
+        <div class="hero-tags" aria-label="Tópicos centrais">
+          <span class="tag">fatores humanos</span>
+          <span class="tag">processamento de informação</span>
+          <span class="tag">GOMS e KLM</span>
+          <span class="tag">feedback e interação</span>
+        </div>
+      </div>
+    </section>
+
+    <nav aria-label="Sumário desta página" class="content-toc">
+      <section class="content-card" style="margin-bottom: 1.4rem;">
+        <h2 class="section-title">Sumário</h2>
+        <ul>
+          <li><a href="#fatores-humanos">Fatores humanos no projeto</a></li>
+          <li><a href="#processamento-informacao">Processamento de informação</a></li>
+          <li><a href="#modelos-cognitivos">Modelos cognitivos, GOMS e KLM</a></li>
+          <li><a href="#dialogo-humano-computador">Diálogo humano‑computador</a></li>
+          <li><a href="#integracao">Integração dos quatro temas</a></li>
+          <li><a href="#caso-aplicado">Caso aplicado</a></li>
+          <li><a href="#orientacoes-analise">Roteiro de análise conceitual</a></li>
+          <li><a href="#atividade">Atividade orientada</a></li>
+        </ul>
+      </section>
+    </nav>
+
+    <main id="conteudo" class="content-card">
+
+      <section id="visao-geral">
+        <h2 class="section-title">Visão geral integrada</h2>
+        <p>Esses quatro assuntos se articulam de forma direta. Fatores humanos ajudam a compreender quem são as pessoas que usarão um sistema e em quais condições elas realizam suas tarefas. O processamento de informação explica limites e capacidades envolvidos em percepção, atenção, memória e decisão. Os modelos cognitivos oferecem formas mais sistemáticas de representar o comportamento humano em tarefas. Já o diálogo humano‑computador trata da dinâmica concreta da interação: eventos, estados, feedback, ciclos de ação e resposta.</p>
+        <p>Estudar esses temas em conjunto é importante porque eles mostram que uma interface não deve ser julgada apenas por aparência ou tecnologia. Ela precisa ser compreendida como parte de uma atividade humana situada, atravessada por objetivos, restrições, interpretações, erros, expectativas e processos cognitivos.</p>
+        <div class="activity-box">
+          <div class="activity-title">Pergunta de abertura</div>
+          Quando uma interface “não funciona bem”, o problema está na tela, na tarefa, no modo como a informação é apresentada, nas limitações cognitivas envolvidas ou na combinação desses fatores?
+        </div>
+      </section>
+
+      <section id="objetivos">
+        <h2 class="section-title">Objetivos de aprendizagem</h2>
+        <ul>
+          <li>Compreender como fatores humanos influenciam o levantamento de requisitos e decisões de projeto em IHC.</li>
+          <li>Explicar como o processamento humano de informação interfere na percepção, navegação, interpretação e tomada de decisão.</li>
+          <li>Identificar o papel de modelos cognitivos, com destaque para GOMS e KLM, na análise de tarefas e eficiência de interação.</li>
+          <li>Relacionar diálogo humano‑computador a eventos, estados, feedback e ciclos de interação.</li>
+          <li>Aplicar os conceitos a casos concretos, analisando interfaces digitais a partir de múltiplas perspectivas.</li>
+        </ul>
+      </section>
+
+      <section id="fatores-humanos">
+        <h2 class="section-title">Fatores humanos no projeto</h2>
+        <p>Fatores humanos dizem respeito às características, capacidades, limitações, necessidades e contextos das pessoas envolvidas no uso de um sistema. Em IHC, esse tema é essencial porque o projeto não deve partir apenas da lógica técnica da aplicação, mas da análise das tarefas, dos objetivos do usuário, do ambiente de uso, da frequência de utilização, das possíveis falhas e das consequências de erro.</p>
+        <p>Projetar com foco em fatores humanos significa refinar escopo e requisitos a partir da realidade do uso. Isso envolve observar quem usa o sistema, o que precisa fazer, quais conhecimentos prévios possui, quais obstáculos enfrenta, quais dispositivos utiliza, quanto tempo tem disponível, quão crítica é a tarefa e quão frequentes são interrupções, pressões e distrações.</p>
+        <p>Uma interface adequada para um usuário experiente pode ser inadequada para um iniciante. Um sistema aceitável em situação de baixa urgência pode falhar em contextos críticos. Uma organização de informação que funciona em ambiente silencioso pode ser difícil de usar em mobilidade. Por isso, fatores humanos não são detalhes periféricos; eles moldam a própria definição do problema de design.</p>
+        <div class="example-box">
+          <div class="example-label">Exemplo</div>
+          Em um sistema acadêmico, um servidor técnico pode compreender siglas internas e fluxos administrativos complexos, mas um estudante iniciante tende a pensar em tarefas concretas, como “emitir atestado”, “trancar disciplina” ou “enviar documento”. Quando o sistema é organizado segundo a lógica institucional e não segundo a lógica da tarefa, surgem barreiras de uso.
+        </div>
+        <div class="note-box">
+          <div class="example-label">Ponto central</div>
+          Fatores humanos ajudam a transformar requisitos genéricos em requisitos orientados ao uso real. Em vez de “o sistema deve permitir solicitações”, o projeto passa a considerar quem solicita, em que contexto, com quais dúvidas, com quais riscos de erro e com que expectativa de feedback.
+        </div>
+      </section>
+
+      <section id="processamento-informacao">
+        <h2 class="section-title">Processamento de informação</h2>
+        <p>O modelo de processamento humano da informação procura explicar como as pessoas recebem estímulos, percebem sinais, selecionam o que merece atenção, interpretam o que foi percebido, recorrem à memória e planejam ações. Em IHC, esse modelo é útil porque permite entender por que certas interfaces parecem evidentes e outras parecem cansativas, lentas ou confusas.</p>
+        <p>Quando uma pessoa usa uma interface, ela não “lê tudo” nem processa tudo de maneira profunda. Em geral, ela capta sinais visuais e textuais, faz interpretações rápidas, procura padrões conhecidos e toma decisões com base em informações parciais. Isso significa que a interface precisa apoiar reconhecimento, reduzir ambiguidades, organizar hierarquias visuais e evitar exigir esforço cognitivo desnecessário.</p>
+        <table class="mini-table">
+          <thead>
+            <tr>
+              <th>Componente</th>
+              <th>Descrição</th>
+              <th>Implicações em IHC</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Percepção</td>
+              <td>Captação inicial de estímulos visuais, textuais, sonoros ou táteis.</td>
+              <td>Contraste, hierarquia, proximidade, legibilidade e destaque orientam o que será percebido.</td>
+            </tr>
+            <tr>
+              <td>Atenção</td>
+              <td>Seleção do que será processado com prioridade.</td>
+              <td>Muitas opções e competição visual reduzem foco e dificultam tarefas.</td>
+            </tr>
+            <tr>
+              <td>Memória de trabalho</td>
+              <td>Espaço mental limitado para manter e manipular informações momentaneamente.</td>
+              <td>Fluxos longos, instruções dispersas e termos pouco familiares aumentam carga cognitiva.</td>
+            </tr>
+            <tr>
+              <td>Memória de longo prazo</td>
+              <td>Conhecimentos prévios, repertório e convenções aprendidas.</td>
+              <td>Interfaces que dialogam com convenções conhecidas são mais fáceis de aprender.</td>
+            </tr>
+            <tr>
+              <td>Tomada de decisão</td>
+              <td>Escolha de uma ação com base em metas, pistas e interpretação da situação.</td>
+              <td>Rótulos claros, feedback e caminhos previsíveis reduzem hesitação e erro.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Uma interface ruim frequentemente falha porque exige do usuário mais do que seu processamento momentâneo suporta. Ela apresenta muitos elementos ao mesmo tempo, não destaca prioridades, usa linguagem ambígua, exige memorização e oferece pouco feedback. Em contrapartida, uma interface bem projetada distribui melhor o esforço cognitivo, orienta a atenção e fornece pistas suficientes para que a pessoa avance com segurança.</p>
+        <div class="dialogue-box">
+          <div class="activity-title">Para discutir</div>
+          Quando alguém erra em uma interface, o erro revela incapacidade do usuário ou revela que o sistema foi projetado de modo a não apoiar adequadamente o processamento da informação?
+        </div>
+      </section>
+
+      <section id="modelos-cognitivos">
+        <h2 class="section-title">Modelos cognitivos</h2>
+        <p>Modelos cognitivos são representações teóricas usadas para explicar, prever ou analisar como as pessoas executam tarefas, tomam decisões, interpretam estímulos e interagem com sistemas. Em IHC, eles ajudam a transformar observações dispersas em raciocínio mais sistemático sobre o comportamento humano.</p>
+        <p>Esses modelos não substituem testes com usuários nem observação empírica, mas ajudam a estruturar análises. Eles permitem perguntar, por exemplo, quais etapas mentais e motoras uma tarefa envolve, onde há esforço excessivo, onde há necessidade de memorização, onde há hesitação e como o design pode reduzir tempo, erro ou carga cognitiva.</p>
+        <p>Entre os modelos cognitivos mais citados em IHC estão GOMS e KLM. Ambos são úteis para análise de tarefas, especialmente quando se deseja entender eficiência, decomposição de ações e impacto de escolhas de interface na execução prática.</p>
+      </section>
+
+      <section id="goms">
+        <h2 class="section-title">GOMS</h2>
+        <p>GOMS é um conjunto de ideias usado para modelar tarefas humanas em termos de objetivos, operadores, métodos e regras de seleção. A sigla costuma ser explicada da seguinte forma: <span class="highlight">Goals</span> (objetivos), <span class="highlight">Operators</span> (operações básicas), <span class="highlight">Methods</span> (métodos para atingir objetivos) e <span class="highlight">Selection rules</span> (regras para escolher entre métodos possíveis).</p>
+        <p>Esse modelo ajuda a decompor uma tarefa em partes menores. Em vez de olhar para a atividade de modo genérico, o analista passa a identificar qual é o objetivo do usuário, que operações ele precisa executar, que sequência de ações pode usar e em que situações escolheria um caminho ou outro.</p>
+        <div class="example-box">
+          <div class="example-label">Exemplo simplificado</div>
+          Objetivo: enviar um arquivo em um ambiente virtual. Operadores: mover mouse, clicar, digitar, selecionar arquivo, confirmar envio. Método A: clicar em “Atividade” e depois “Enviar”. Método B: acessar diretamente o atalho de submissão. Regra de seleção: usar o caminho mais visível ou o já conhecido.
+        </div>
+        <p>GOMS é especialmente útil quando o analista quer comparar maneiras diferentes de realizar uma tarefa ou entender em que ponto a interface introduz passos desnecessários. Ele revela que pequenos detalhes de navegação podem aumentar ou reduzir muito o esforço total.</p>
+      </section>
+
+      <section id="klm">
+        <h2 class="section-title">KLM</h2>
+        <p>KLM, ou Keystroke‑Level Model, pode ser visto como um refinamento voltado a estimar o tempo necessário para executar tarefas rotineiras por meio de operadores básicos. Em vez de olhar a tarefa apenas em nível conceitual, o modelo permite decompor a execução em ações menores, como pressionar teclas, apontar com mouse, mover a mão, tomar uma decisão simples e aguardar resposta do sistema.</p>
+        <p>Seu valor didático está em mostrar que eficiência não depende apenas de “ter a função”, mas de quantos passos, trocas de foco, movimentos e pequenas decisões uma interface exige para que a função seja realmente usada. Um sistema pode oferecer o mesmo resultado final, mas com esforço muito diferente entre uma versão e outra.</p>
+        <table class="mini-table">
+          <thead>
+            <tr>
+              <th>Operador</th>
+              <th>Ideia básica</th>
+              <th>Exemplo em interface</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>K</td>
+              <td>Pressionar tecla ou botão</td>
+              <td>Digitar texto ou confirmar uma ação</td>
+            </tr>
+            <tr>
+              <td>P</td>
+              <td>Apontar com dispositivo</td>
+              <td>Levar o cursor até um botão ou campo</td>
+            </tr>
+            <tr>
+              <td>H</td>
+              <td>Mover mão entre dispositivos</td>
+              <td>Sair do teclado e ir ao mouse</td>
+            </tr>
+            <tr>
+              <td>M</td>
+              <td>Preparação mental</td>
+              <td>Decidir qual comando usar ou interpretar uma opção</td>
+            </tr>
+            <tr>
+              <td>R</td>
+              <td>Resposta do sistema</td>
+              <td>Esperar carregamento ou confirmação</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box">
+          <div class="example-label">Leitura crítica</div>
+          O KLM não pretende representar toda a complexidade humana, mas é valioso para mostrar que escolhas de layout, rótulos, agrupamento de funções e atalhos afetam diretamente a fluidez da interação.
+        </div>
+      </section>
+
+      <section id="dialogo-humano-computador">
+        <h2 class="section-title">Diálogo humano‑computador</h2>
+        <p>O diálogo humano‑computador trata da interação como um processo dinâmico em que usuário e sistema alternam ações e respostas. Não se trata apenas de “clicar e receber algo”, mas de um encadeamento de estados, eventos, interpretações, feedbacks e novas decisões.</p>
+        <p>Em uma boa interação, esse diálogo é inteligível. O usuário compreende o que pode fazer, percebe o resultado do que fez, entende o estado atual do sistema e consegue decidir o próximo passo. Em uma interação ruim, o sistema parece mudo, imprevisível ou contraditório.</p>
+        <ul>
+          <li><span class="highlight">Estados</span>: condições em que o sistema se encontra em determinado momento.</li>
+          <li><span class="highlight">Eventos</span>: ações do usuário ou ocorrências do sistema que provocam mudanças.</li>
+          <li><span class="highlight">Feedback</span>: resposta perceptível que informa o resultado de uma ação.</li>
+          <li><span class="highlight">Ciclos de interação</span>: sequência contínua de intenção, ação, resposta, interpretação e nova ação.</li>
+        </ul>
+        <p>Esse tema é decisivo porque o usuário não interage com a implementação interna do software, mas com o diálogo que a interface torna possível. Se a conversa entre usuário e sistema é confusa, o sistema inteiro passa a ser percebido como difícil, mesmo quando suas funções são tecnicamente robustas.</p>
+      </section>
+
+      <section id="feedback-ciclos">
+        <h2 class="section-title">Estados, eventos, feedback e ciclos</h2>
+        <p>Considere a ação de enviar uma atividade em um ambiente virtual. O usuário forma uma intenção, escolhe o local de submissão, seleciona um arquivo, aciona o envio e espera confirmação. Ao longo desse processo, o sistema deveria tornar visível o estado da tarefa: arquivo selecionado, envio em andamento, envio concluído, erro detectado ou necessidade de correção.</p>
+        <p>Quando o feedback é insuficiente, o ciclo de interação se rompe. O usuário não sabe se deve aguardar, repetir a ação, verificar outra tela ou supor que houve falha. Isso aumenta ansiedade, retrabalho e perda de confiança. Em contextos educacionais, administrativos ou financeiros, essa ruptura é especialmente problemática.</p>
+        <div class="example-box">
+          <div class="example-label">Exemplo de ruptura</div>
+          Após clicar em “Enviar”, a tela recarrega sem mensagem clara. O estudante não sabe se o arquivo foi submetido, se precisa repetir a ação ou se houve erro silencioso. O sistema falha em manter o diálogo compreensível.
+        </div>
+        <div class="activity-box">
+          <div class="activity-title">Pergunta para análise</div>
+          Em uma interface real que você conhece, quais estados são visíveis? Quais eventos são claramente comunicados? Em que pontos o ciclo de interação fica opaco para o usuário?
+        </div>
+      </section>
+
+      <section id="integracao">
+        <h2 class="section-title">Como os quatro temas se conectam</h2>
+        <p>Esses quatro tópicos formam uma cadeia conceitual coerente. Fatores humanos ajudam a entender o contexto e os usuários; processamento de informação explica capacidades e limites cognitivos envolvidos na interação; modelos cognitivos oferecem estruturas de análise para tarefas e decisões; diálogo humano‑computador traduz tudo isso na dinâmica concreta da interface.</p>
+        <p>Na prática, isso significa que uma análise de IHC mais madura evita respostas simplistas. Em vez de dizer apenas que uma interface é “confusa”, passa a perguntar: confusa para quem, em qual tarefa, por quais razões cognitivas, em que momento do diálogo, com quais consequências para desempenho, erro e aprendizagem?</p>
+        <table class="mini-table">
+          <thead>
+            <tr>
+              <th>Tema</th>
+              <th>Pergunta central</th>
+              <th>Contribuição para a análise</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Fatores humanos</td>
+              <td>Quem usa e em que contexto?</td>
+              <td>Refina requisitos e evita abstrações genéricas sobre o usuário.</td>
+            </tr>
+            <tr>
+              <td>Processamento de informação</td>
+              <td>Como a pessoa percebe, interpreta e decide?</td>
+              <td>Explica limites de atenção, memória e compreensão.</td>
+            </tr>
+            <tr>
+              <td>Modelos cognitivos</td>
+              <td>Como descrever e analisar a tarefa de modo sistemático?</td>
+              <td>Permite decompor ações e comparar fluxos de interação.</td>
+            </tr>
+            <tr>
+              <td>Diálogo humano‑computador</td>
+              <td>Como a interação se desenvolve ao longo do tempo?</td>
+              <td>Evidencia estados, eventos, feedback e rupturas no ciclo de ação.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="caso-aplicado">
+        <h2 class="section-title">Caso aplicado</h2>
+        <p>Imagine um portal institucional em que o estudante precisa solicitar aproveitamento de disciplina. O menu está organizado por setores administrativos, os rótulos usam terminologia interna, os passos não indicam progresso, o formulário exige lembrança de códigos de disciplina e o envio final não apresenta confirmação clara. Essa situação pode ser analisada pelos quatro temas da página.</p>
+        <ul>
+          <li><span class="highlight">Fatores humanos</span>: o sistema ignora repertório e objetivos reais do estudante.</li>
+          <li><span class="highlight">Processamento de informação</span>: a interface exige esforço excessivo de atenção, interpretação e memória.</li>
+          <li><span class="highlight">Modelos cognitivos</span>: a tarefa possui etapas demais, operadores demais e pouca fluidez.</li>
+          <li><span class="highlight">Diálogo humano‑computador</span>: o sistema falha em comunicar estados, eventos e feedback.</li>
+        </ul>
+        <p>O valor pedagógico desse tipo de análise está em mostrar que um único problema de interface pode e deve ser lido por diferentes lentes. Isso enriquece o diagnóstico e produz propostas de redesign mais precisas.</p>
+      </section>
+
+      <section id="orientacoes-analise">
+        <h2 class="section-title">Roteiro de análise conceitual</h2>
+        <ol>
+          <li>Descreva a tarefa principal que o usuário pretende realizar.</li>
+          <li>Caracterize o usuário e o contexto de uso.</li>
+          <li>Identifique demandas perceptivas, atencionais e de memória impostas pela interface.</li>
+          <li>Decomponha a tarefa em objetivos, etapas e operadores sempre que fizer sentido.</li>
+          <li>Observe o diálogo entre usuário e sistema: quais eventos acontecem, quais estados são visíveis e quais feedbacks são fornecidos.</li>
+          <li>Relacione os problemas encontrados aos quatro tópicos estudados.</li>
+          <li>Proponha melhorias concretas, justificando por que reduzem carga cognitiva, aumentam previsibilidade e melhoram a interação.</li>
+        </ol>
+      </section>
+
+      <section id="aprofundamento">
+        <h2 class="section-title">Aprofundamento conceitual</h2>
+        <p>Em turmas intermediárias, um erro comum é tratar esses tópicos como compartimentos isolados. Entretanto, a força analítica da IHC aparece justamente quando o estudante consegue articular níveis diferentes de explicação. Um mesmo problema pode ser compreendido ao mesmo tempo como falha de arquitetura de informação, sobrecarga de memória de trabalho, excesso de operadores em uma tarefa e ruptura no ciclo de feedback.</p>
+        <p>Outro ponto importante é evitar leituras deterministas. Nem todo usuário reage da mesma maneira, nem todo contexto produz os mesmos resultados. Fatores humanos e modelos cognitivos ajudam a pensar com mais rigor, mas não eliminam a necessidade de observação, validação e sensibilidade ao contexto. Em IHC, teoria e prática se fortalecem mutuamente.</p>
+        <div class="dialogue-box">
+          <div class="activity-title">Questão para fechamento</div>
+          Ao analisar uma interface, qual desses quatro temas costuma ficar mais invisível para estudantes no início do curso: contexto humano, processamento cognitivo, estrutura da tarefa ou dinâmica do diálogo? Por quê?
+        </div>
+      </section>
+
+      <section id="atividade">
+        <h2 class="section-title">Atividade orientada</h2>
+        <p>Escolha um sistema real com o qual você ou sua turma já tenha interagido: portal acadêmico, ambiente virtual, aplicativo de serviços, e‑commerce, caixa eletrônico, formulário institucional ou aplicativo bancário. Analise uma tarefa específica utilizando os quatro temas estudados nesta página.</p>
+        <div class="activity-box">
+          <div class="activity-title">Produção sugerida</div>
+          Identifique o contexto de uso, descreva a tarefa, analise demandas cognitivas, decomponha a interação em etapas e explique como o diálogo entre usuário e sistema ocorre. Ao final, apresente melhorias justificadas com base nos conceitos estudados.
+        </div>
+      </section>
+
+      <section id="sintese">
+        <h2 class="section-title">Síntese conceitual</h2>
+        <ul class="checklist">
+          <li>Projetar bem exige compreender pessoas, tarefas e contexto, não apenas tecnologia.</li>
+          <li>Processamento de informação ajuda a explicar por que certas interfaces sobrecarregam usuários.</li>
+          <li>Modelos cognitivos tornam a análise de tarefas mais sistemática e argumentativa.</li>
+          <li>O diálogo humano‑computador depende de estados visíveis, eventos compreensíveis e feedback adequado.</li>
+          <li>Interfaces melhores surgem quando essas perspectivas são articuladas em conjunto.</li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>
