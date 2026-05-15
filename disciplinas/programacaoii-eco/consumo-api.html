@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Consumo de APIs – fetch e axios</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div>
+        <span class="tag">Programação II</span>
+        <span class="tag tag--aulas">Consumo de APIs</span>
+        <span class="tag tag--nivel">fetch e axios</span>
+      </div>
+      <h1>Consumo de APIs com fetch e axios</h1>
+      <p>
+        Nesta página você aprende, de forma passo a passo, como o front-end conversa com uma API REST
+        usando <strong>fetch</strong> (nativo do navegador) e <strong>axios</strong> (biblioteca externa).
+        Ela também serve como roteiro para a aula expositiva.
+      </p>
+      <nav>
+        <a href="#revisao-rest">Revisão rápida de REST</a>
+        <a href="#fetch">1. Usando fetch</a>
+        <a href="#axios">2. Usando axios</a>
+        <a href="#erros">Tratamento de erros</a>
+        <a href="#exercicios">Exercícios</a>
+        <a href="#desafio">Desafio</a>
+        <a href="#projeto">Aplicação no projeto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <!-- Revisão REST -->
+      <article class="card" id="revisao-rest">
+        <h2>Revisão rápida: o que a página anterior ensinou</h2>
+        <p>
+          Na página anterior (<strong>API REST</strong>) você construiu uma API em Node.js + Express,
+          com rotas como <code>GET /tarefas</code>, <code>POST /tarefas</code>, <code>PUT /tarefas/:id</code>
+          e <code>DELETE /tarefas/:id</code>, retornando dados em <strong>JSON</strong>.
+        </p>
+        <p>
+          Agora o foco é o outro lado da comunicação: como o <strong>front-end</strong> envia requisições HTTP
+          para essa API e exibe as respostas na interface.
+        </p>
+
+        <div class="example-box">
+          <p><strong>Lembrete essencial:</strong></p>
+          <ul class="mini-list">
+            <li>A API REST organiza o back-end em <strong>recursos</strong> (ex.: <code>/tarefas</code>).</li>
+            <li>Cada recurso usa <strong>verbos HTTP</strong> (GET, POST, PUT, DELETE).</li>
+            <li>A resposta vem com <strong>status code</strong> (200, 201, 400, 404, 500...).</li>
+            <li>O formato padrão de dados será <strong>JSON</strong>.</li>
+          </ul>
+        </div>
+
+        <p class="note">
+          Se ainda estiver inseguro sobre rotas, verbos HTTP ou status codes, volte primeiro para a página
+          de API REST e revise os exemplos antes de seguir com esta.
+        </p>
+      </article>
+
+      <!-- fetch -->
+      <article class="card" id="fetch">
+        <h2>1. Consumindo APIs com fetch</h2>
+        <p>
+          A função <strong>fetch</strong> é nativa do navegador e permite fazer requisições HTTP em JavaScript
+          sem instalar nenhuma biblioteca. Ela retorna uma <strong>Promise</strong> com a resposta.
+        </p>
+
+        <h3>1.1 Primeiro exemplo: GET simples (listar tarefas)</h3>
+        <p>
+          Suponha que sua API (da página anterior) esteja rodando em <code>http://localhost:3000</code> e tenha a rota
+          <code>GET /tarefas</code>. O código abaixo busca a lista de tarefas e mostra no console.
+        </p>
+        <pre><code>&lt;script&gt;
+async function carregarTarefas() {
+  try {
+    const resposta = await fetch('http://localhost:3000/tarefas');
+
+    if (!resposta.ok) {
+      // resposta HTTP com erro (404, 500, etc.)
+      throw new Error('Erro na requisição: ' + resposta.status);
+    }
+
+    const dados = await resposta.json();
+    console.log('Tarefas:', dados);
+  } catch (erro) {
+    console.error('Falha ao carregar tarefas:', erro.message);
+  }
+}
+
+// chama a função quando a página carregar
+carregarTarefas();
+&lt;/script&gt;</code></pre>
+
+        <div class="anotacao">
+          <dl>
+            <dt><code>await fetch(url)</code></dt>
+            <dd>Envia a requisição para a URL da API.</dd>
+            <dt><code>resposta.ok</code></dt>
+            <dd>Indica se o status está na faixa 200–299.</dd>
+            <dt><code>resposta.json()</code></dt>
+            <dd>Converte o corpo da resposta de JSON para objeto JavaScript.</dd>
+          </dl>
+        </div>
+
+        <h3>1.2 Exibindo o resultado na tela</h3>
+        <p>
+          A seguir, um exemplo que preenche uma lista HTML com as tarefas retornadas pela API.
+        </p>
+        <pre><code>&lt;ul id="lista-tarefas"&gt;&lt;/ul&gt;
+
+&lt;script&gt;
+async function carregarTarefas() {
+  const lista = document.querySelector('#lista-tarefas');
+  lista.innerHTML = '&lt;li&gt;Carregando...&lt;/li&gt;';
+
+  try {
+    const resposta = await fetch('http://localhost:3000/tarefas');
+    if (!resposta.ok) {
+      throw new Error('HTTP ' + resposta.status);
+    }
+
+    const tarefas = await resposta.json();
+
+    if (tarefas.length === 0) {
+      lista.innerHTML = '&lt;li&gt;Nenhuma tarefa cadastrada.&lt;/li&gt;';
+      return;
+    }
+
+    lista.innerHTML = '';
+    for (const tarefa of tarefas) {
+      const li = document.createElement('li');
+      li.textContent = `#${tarefa.id} - ${tarefa.titulo}`;
+      if (tarefa.concluida) {
+        li.style.textDecoration = 'line-through';
+      }
+      lista.appendChild(li);
+    }
+  } catch (erro) {
+    lista.innerHTML = '&lt;li&gt;Erro ao carregar tarefas.&lt;/li&gt;';
+    console.error(erro);
+  }
+}
+
+carregarTarefas();
+&lt;/script&gt;</code></pre>
+
+        <h3>1.3 Enviando dados com fetch (POST)</h3>
+        <p>
+          Para criar uma nova tarefa via <strong>POST</strong>, usamos <code>fetch</code> com opções:
+          <code>method</code>, <code>headers</code> e <code>body</code>.
+        </p>
+        <pre><code>&lt;form id="form-tarefa"&gt;
+  &lt;input type="text" id="titulo" placeholder="Título da tarefa"&gt;
+  &lt;button type="submit"&gt;Adicionar&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+const form = document.querySelector('#form-tarefa');
+
+form.addEventListener('submit', async (event) =&gt; {
+  event.preventDefault();
+
+  const titulo = document.querySelector('#titulo').value.trim();
+
+  if (!titulo) {
+    alert('Digite um título!');
+    return;
+  }
+
+  try {
+    const resposta = await fetch('http://localhost:3000/tarefas', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ titulo })
+    });
+
+    if (!resposta.ok) {
+      throw new Error('Erro ao criar tarefa: ' + resposta.status);
+    }
+
+    const novaTarefa = await resposta.json();
+    console.log('Criada:', novaTarefa);
+    form.reset();
+  } catch (erro) {
+    console.error(erro);
+    alert('Não foi possível criar a tarefa.');
+  }
+});
+&lt;/script&gt;</code></pre>
+
+        <p class="note">
+          Observe que o formato do <code>body</code> enviado no fetch precisa coincidir com o que o back-end espera
+          (mesmos nomes de campos e JSON válido).
+        </p>
+      </article>
+
+      <!-- axios -->
+      <article class="card" id="axios">
+        <h2>2. Consumindo APIs com axios</h2>
+        <p>
+          <strong>axios</strong> é uma biblioteca que simplifica requisições HTTP. Ele funciona tanto no navegador
+          quanto no Node.js, e já configura automaticamente os cabeçalhos mais comuns quando usamos JSON.
+        </p>
+
+        <h3>2.1 Como incluir axios na página</h3>
+        <p>
+          Para usar no navegador sem build, basta adicionar o link do CDN no seu HTML:
+        </p>
+        <pre><code>&lt;script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"&gt;&lt;/script&gt;</code></pre>
+
+        <h3>2.2 GET com axios</h3>
+        <p>
+          O exemplo abaixo faz a mesma consulta de tarefas, agora com axios.
+        </p>
+        <pre><code>&lt;script&gt;
+async function carregarTarefasComAxios() {
+  try {
+    const resposta = await axios.get('http://localhost:3000/tarefas');
+    console.log('Tarefas (axios):', resposta.data);
+  } catch (erro) {
+    console.error('Erro ao buscar com axios:', erro);
+  }
+}
+
+carregarTarefasComAxios();
+&lt;/script&gt;</code></pre>
+
+        <div class="anotacao">
+          <dl>
+            <dt><code>axios.get(url)</code></dt>
+            <dd>Retorna uma Promise com um objeto de resposta.</dd>
+            <dt><code>resposta.data</code></dt>
+            <dd>Já traz o corpo da resposta convertido (JSON → objeto).</dd>
+          </dl>
+        </div>
+
+        <h3>2.3 POST com axios</h3>
+        <p>
+          Aqui, criamos uma nova tarefa com <code>axios.post</code>.
+        </p>
+        <pre><code>&lt;script&gt;
+async function criarTarefaAxios(titulo) {
+  try {
+    const resposta = await axios.post(
+      'http://localhost:3000/tarefas',
+      { titulo } // axios transforma em JSON automaticamente
+    );
+
+    console.log('Criada (axios):', resposta.data);
+  } catch (erro) {
+    console.error('Erro ao criar com axios:', erro.response?.data || erro.message);
+  }
+}
+&lt;/script&gt;</code></pre>
+
+        <p class="note">
+          axios facilita o trabalho com JSON e tratamento de erros, mas os conceitos de <strong>rota</strong>,
+          <strong>verbo</strong> e <strong>status</strong> continuam os mesmos.
+        </p>
+      </article>
+
+      <!-- Tratamento de erros -->
+      <article class="card" id="erros">
+        <h2>3. Tratamento de erros no consumo de APIs</h2>
+        <p>
+          Tanto em <strong>fetch</strong> quanto em <strong>axios</strong>, é essencial tratar erros:
+          conexão recusada, rota errada, dados inválidos ou respostas 4xx/5xx.
+        </p>
+
+        <h3>3.1 Estratégia básica</h3>
+        <ul class="mini-list">
+          <li>Verificar o <strong>status code</strong> (<code>resposta.ok</code> em fetch, <code>erro.response.status</code> em axios).</li>
+          <li>Exibir mensagens amigáveis para o usuário (alert, mensagem na tela).</li>
+          <li>Registrar detalhes no console para facilitar o debug.</li>
+        </ul>
+
+        <h3>3.2 Exemplo com axios</h3>
+        <pre><code>try {
+  const resposta = await axios.get('http://localhost:3000/tarefas/999');
+  console.log(resposta.data);
+} catch (erro) {
+  if (erro.response) {
+    console.log('Status:', erro.response.status);
+    console.log('Dados de erro:', erro.response.data);
+  } else {
+    console.log('Erro de rede ou configuração:', erro.message);
+  }
+}</code></pre>
+
+        <p class="note">
+          Repare que, se a API retornar 404, o código do front-end consegue identificar esse status e, por exemplo,
+          exibir uma mensagem “Tarefa não encontrada”.
+        </p>
+      </article>
+
+      <!-- Exercícios -->
+      <article class="card" id="exercicios">
+        <h2>4. Bloco de exercícios</h2>
+        <p>
+          Os exercícios a seguir revisam o que foi visto na página de <strong>API REST</strong> e nesta página
+          de <strong>consumo de APIs</strong>.
+        </p>
+
+        <h3>4.1 Exercícios conceituais</h3>
+        <ol class="mini-list">
+          <li>Explique, com suas palavras, a diferença entre <strong>recurso</strong> e <strong>rota</strong> em uma API REST.</li>
+          <li>Descreva o papel dos métodos <strong>GET</strong>, <strong>POST</strong>, <strong>PUT</strong> e <strong>DELETE</strong> no CRUD.</li>
+          <li>Dê dois exemplos de situações em que a API deve retornar <strong>400</strong> e dois exemplos para <strong>404</strong>.</li>
+          <li>O que significa dizer que uma API retorna dados em <strong>JSON</strong>? Por que isso é útil no front-end?</li>
+        </ol>
+
+        <h3>4.2 Exercícios práticos com fetch</h3>
+        <ol class="mini-list">
+          <li>
+            Crie uma página HTML que busque a lista de tarefas da rota <code>GET /tarefas</code> usando
+            <strong>fetch</strong> e exiba os títulos em uma lista ordenada.
+          </li>
+          <li>
+            Adapte o exemplo anterior para exibir, ao lado de cada tarefa, um texto
+            <code>(concluída)</code> ou <code>(pendente)</code> com base no campo <code>concluida</code>.
+          </li>
+          <li>
+            Implemente um formulário para criar novas tarefas com <strong>fetch + POST</strong>.
+            Depois de criar, recarregue a lista automaticamente.
+          </li>
+          <li>
+            Faça a página exibir uma mensagem amigável quando a API estiver offline
+            (por exemplo, servidor desligado).
+          </li>
+        </ol>
+
+        <h3>4.3 Exercícios práticos com axios</h3>
+        <ol class="mini-list">
+          <li>
+            Refaça a leitura de tarefas (GET) usando <strong>axios</strong> ao invés de fetch.
+          </li>
+          <li>
+            Implemente um botão “Excluir” para cada tarefa que dispare um
+            <strong>DELETE</strong> com axios para a rota <code>/tarefas/:id</code>.
+          </li>
+          <li>
+            Crie uma função que atualize o título de uma tarefa usando
+            <strong>PUT</strong> com axios, lendo o novo título de um campo de texto.
+          </li>
+        </ol>
+      </article>
+
+      <!-- Desafio -->
+      <article class="card" id="desafio">
+        <h2>5. Desafio (nível mais difícil)</h2>
+        <p>
+          Este desafio integra o conteúdo de <strong>REST + Express</strong> com o de
+          <strong>consumo de APIs</strong>.
+        </p>
+
+        <div class="example-box">
+          <h3>Desafio: painel de tarefas completo</h3>
+          <p>
+            Implemente uma página única que funcione como um mini painel de tarefas para a API da disciplina.
+          </p>
+          <ul class="mini-list">
+            <li>
+              Exiba a lista de tarefas carregada da API (<strong>GET /tarefas</strong>), com título e status
+              (concluída/pendente).
+            </li>
+            <li>
+              Permita criar novas tarefas (<strong>POST /tarefas</strong>) a partir de um formulário.
+            </li>
+            <li>
+              Inclua um botão “Concluir” que atualize uma tarefa para <code>concluida: true</code>
+              usando <strong>PUT /tarefas/:id</strong>.
+            </li>
+            <li>
+              Adicione um botão “Excluir” que remova tarefas via <strong>DELETE /tarefas/:id</strong>.
+            </li>
+            <li>
+              Exiba mensagens claras de erro para casos como:
+              servidor offline, tarefa não encontrada e validação de título vazio.
+            </li>
+          </ul>
+        </div>
+
+        <p class="note">
+          Você pode escolher usar apenas <strong>fetch</strong>, apenas <strong>axios</strong> ou combinar os dois
+          (por exemplo, GET com fetch e modificações com axios). O importante é manter o código organizado
+          e as mensagens claras.
+        </p>
+      </article>
+
+      <!-- Aplicação no projeto -->
+      <article class="card" id="projeto">
+        <h2>6. Como isso entra no projeto do semestre</h2>
+        <p>
+          No projeto de Programação II você está desenvolvendo uma aplicação web completa.
+          O conteúdo desta página será usado na fase de integração entre <strong>front-end</strong> e
+          <strong>API do projeto</strong>.
+        </p>
+
+        <h3>6.1 Ponto de partida</h3>
+        <ul class="mini-list">
+          <li>O backend do projeto expõe uma API REST própria (rotas, verbos e status bem definidos).</li>
+          <li>O frontend precisará consumir essa API para listar, criar, atualizar e remover recursos.</li>
+        </ul>
+
+        <h3>6.2 Como você vai aplicar na prática</h3>
+        <ul class="mini-list">
+          <li>
+            Criar <strong>serviços de API</strong> em JavaScript (funções como
+            <code>buscarUsuarios()</code>, <code>criarPedido()</code>, <code>atualizarProduto()</code>)
+            usando <strong>fetch ou axios</strong>.
+          </li>
+          <li>
+            Ligar esses serviços aos componentes de interface:
+            formulários, tabelas, botões de ação, telas de detalhes.
+          </li>
+          <li>
+            Tratar respostas e erros para exibir feedback ao usuário
+            (mensagens de sucesso, alertas de falha, campos com erro).
+          </li>
+          <li>
+            Documentar as rotas consumidas no <strong>README</strong> do projeto,
+            descrevendo verbos, URLs e exemplos de JSON enviados/recebidos.
+          </li>
+        </ul>
+
+        <p class="note">
+          Quanto mais organizado estiver o consumo de APIs agora (funções reutilizáveis, mensagens claras e
+          boas práticas de status), mais fácil será evoluir o projeto para incluir autenticação, filtros,
+          paginação e outras funcionalidades.
+        </p>
+      </article>
+    </section>
+
+    <aside>
+      <section class="card">
+        <h2>Palavras-chave</h2>
+        <ul class="pill-list">
+          <li>fetch</li>
+          <li>axios</li>
+          <li>JSON</li>
+          <li>Promise</li>
+          <li>GET</li>
+          <li>POST</li>
+          <li>PUT</li>
+          <li>DELETE</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Resumo para apresentação</h2>
+        <p class="dom-destaque">
+          Front-end consome <strong>APIs REST</strong> usando <strong>fetch</strong> ou <strong>axios</strong>,
+          trocando <strong>JSON</strong> com o back-end através de <strong>rotas</strong> e
+          <strong>verbos HTTP</strong>.
+        </p>
+      </section>
+    </aside>
+  </main>
+
+  <footer>
+    <p>Material de apoio – Consumo de APIs (fetch e axios) – Programação II.</p>
+    <p>Esta página foi pensada para estudo autônomo e como roteiro de aula.</p>
+  </footer>
+</body>
+</html>
