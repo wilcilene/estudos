@@ -26,8 +26,6 @@
         <a href="#middleware-erro">Middleware de erro</a>
         <a href="#padronizacao">Erros padronizados</a>
         <a href="#boas-praticas">Boas práticas</a>
-        <a href="#exercicios">Exercícios</a>
-        <a href="#desafio">Desafio</a>
         <a href="#projeto">Aplicação no projeto</a>
       </nav>
     </div>
@@ -260,93 +258,22 @@ app.get('/produtos/:id', async (req, res, next) =&gt; {
         </div>
       </article>
 
-      <!-- Exercícios -->
-      <article class="card" id="exercicios">
-        <h2>6. Bloco de exercícios</h2>
-        <p>
-          Os exercícios abaixo conectam o conteúdo desta página com o que você já estudou sobre
-          <strong>REST</strong>, <strong>Express</strong> e <strong>consumo de APIs</strong>.
-        </p>
-
-        <h3>6.1 Exercícios conceituais</h3>
-        <ol class="mini-list">
-          <li>Explique a diferença entre um middleware comum <code>(req, res, next)</code> e um middleware de erro <code>(err, req, res, next)</code>.</li>
-          <li>O que acontece quando chamamos <code>next(err)</code> dentro de uma rota?</li>
-          <li>Por que é recomendável centralizar o tratamento de erros em um único middleware?</li>
-          <li>Dê dois exemplos de erros que pertencem à faixa 4xx e dois exemplos de erros 5xx na sua API.</li>
-        </ol>
-
-        <h3>6.2 Exercícios práticos</h3>
-        <ol class="mini-list">
-          <li>
-            Adicione um middleware de erro global na API de tarefas criada nas aulas de REST + Express.
-            Faça com que ele devolva JSON com <code>erro</code> e <code>caminho</code>.
-          </li>
-          <li>
-            Adapte uma rota existente para usar <code>next(new Error('mensagem'))</code> em vez de
-            responder diretamente com <code>res.status(500)</code> em caso de falha.
-          </li>
-          <li>
-            Crie uma classe <code>AppError</code> e use-a para representar erros 400 (dados inválidos)
-            e 404 (recurso não encontrado) em pelo menos duas rotas da sua API.
-          </li>
-          <li>
-            No front-end (fetch/axios), faça o código exibir mensagens diferentes quando a API
-            devolver 400, 404 ou 500 a partir do middleware de erro.
-          </li>
-        </ol>
-      </article>
-
-      <!-- Desafio -->
-      <article class="card" id="desafio">
-        <h2>7. Desafio (nível mais difícil)</h2>
-        <p>
-          Este desafio integra tratamento de erros no back-end com feedback adequado no front-end.
-        </p>
-
-        <div class="example-box">
-          <h3>Desafio: experiência de erro amigável</h3>
-          <ul class="mini-list">
-            <li>
-              Crie um <strong>middleware de erro global</strong> que devolve sempre o seguinte formato:
-              <code>{ erro: string, codigo: string, caminho: string }</code>.
-            </li>
-            <li>
-              Defina pelo menos três códigos internos de erro (<code>VALIDACAO</code>, <code>NAO_ENCONTRADO</code>,
-              <code>INTERNO</code>, por exemplo) e use-os dentro do middleware.
-            </li>
-            <li>
-              No front-end, exiba mensagens amigáveis para cada tipo de erro (ex.: campos obrigatórios,
-              item inexistente, erro inesperado).
-            </li>
-            <li>
-              Garanta que nenhuma rota devolva “200 OK” quando tiver ocorrido erro de fato.
-            </li>
-          </ul>
-        </div>
-
-        <p class="note">
-          O objetivo é fazer com que qualquer erro tratado no back-end resulte em uma mensagem
-          previsível no front-end, sem precisar tratar caso a caso em cada chamada.
-        </p>
-      </article>
-
       <!-- Aplicação no projeto -->
       <article class="card" id="projeto">
-        <h2>8. Como isso será usado no projeto do semestre</h2>
+        <h2>6. Como isso será usado no projeto do semestre</h2>
         <p>
           No projeto de Programação II, sua aplicação terá diversas rotas, formulários e chamadas à API.
           Erros vão acontecer: dados inválidos, recursos inexistentes, problemas com o banco, etc.
         </p>
 
-        <h3>8.1 No back-end</h3>
+        <h3>6.1 No back-end</h3>
         <ul class="mini-list">
           <li>Você terá um <strong>middleware de erro global</strong> cuidando das respostas em JSON.</li>
           <li>Rotas vão usar <code>next(err)</code> para comunicar problemas ao middleware.</li>
           <li>Você poderá diferenciar erros esperados (validação, não encontrado) de erros inesperados.</li>
         </ul>
 
-        <h3>8.2 No front-end</h3>
+        <h3>6.2 No front-end</h3>
         <ul class="mini-list">
           <li>
             Funções de consumo de API (fetch/axios) vão ler <code>status</code> e corpo de erro para
