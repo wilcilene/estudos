@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Tratamento de erros com Express</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div>
+        <span class="tag">Programação II</span>
+        <span class="tag tag--aulas">Tratamento de erros</span>
+        <span class="tag tag--nivel">Middlewares de erro no Express</span>
+      </div>
+      <h1>Tratamento de erros e middlewares de erro no Express</h1>
+      <p>
+        Nesta página você vai aprender, passo a passo, como organizar o <strong>tratamento de erros</strong>
+        na sua API Express usando <strong>middlewares de erro</strong>, de forma clara e padronizada.
+        O material serve tanto para estudo autônomo quanto como roteiro de apresentação da aula.
+      </p>
+      <nav>
+        <a href="#motivacao">Por que tratar erros?</a>
+        <a href="#conceitos">Conceitos básicos</a>
+        <a href="#middleware-erro">Middleware de erro</a>
+        <a href="#padronizacao">Erros padronizados</a>
+        <a href="#boas-praticas">Boas práticas</a>
+        <a href="#exercicios">Exercícios</a>
+        <a href="#desafio">Desafio</a>
+        <a href="#projeto">Aplicação no projeto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <!-- Motivação -->
+      <article class="card" id="motivacao">
+        <h2>1. Por que se preocupar com tratamento de erros?</h2>
+        <p>
+          Em uma API simples é comum escrever <strong>try/catch</strong> em cada rota e mandar mensagens diferentes
+          em cada resposta. Mas, conforme a aplicação cresce, isso se torna difícil de manter e de testar.
+        </p>
+        <p>
+          O Express oferece um recurso específico para isso: o <strong>middleware de erro global</strong>,
+          que centraliza o tratamento de erros em um único lugar, deixando as rotas mais limpas.
+        </p>
+
+        <div class="example-box">
+          <p><strong>Sintomas de que o tratamento de erros está ruim:</strong></p>
+          <ul class="mini-list">
+            <li>Cada rota devolve mensagens diferentes para o mesmo tipo de erro.</li>
+            <li>Alguns erros geram resposta 200 com mensagem de erro no body.</li>
+            <li>Muito código repetido de try/catch em todas as rotas.</li>
+            <li>É difícil encontrar onde logar um erro para debug.</li>
+          </ul>
+        </div>
+
+        <p class="note">
+          O objetivo desta aula é sair de um tratamento de erros “caseiro” para um formato mais
+          organizado, usando de forma correta o <strong>next(err)</strong> e um middleware de erro
+          registrado no final da aplicação Express.
+        </p>
+      </article>
+
+      <!-- Conceitos básicos -->
+      <article class="card" id="conceitos">
+        <h2>2. Conceitos básicos de tratamento de erros no Express</h2>
+        <p>
+          Em um app Express, o fluxo padrão de uma requisição passa por vários <strong>middlewares</strong> e
+          <strong>rotas</strong>. Se algo dá errado no meio do caminho, podemos:
+        </p>
+        <ul class="mini-list">
+          <li>Lançar uma exceção com <code>throw new Error(...)</code> dentro de um <code>try</code>.</li>
+          <li>Passar o erro para o próximo middleware usando <code>next(err)</code>.</li>
+          <li>Deixar que o <strong>middleware de erro</strong> trate e devolva a resposta padrão.</li>
+        </ul>
+
+        <div class="anotacao">
+          <dl>
+            <dt>Middleware comum</dt>
+            <dd>Função com assinatura <code>(req, res, next)</code>.</dd>
+            <dt>Middleware de erro</dt>
+            <dd>Função com assinatura <code>(err, req, res, next)</code> e registrada no final da cadeia.</dd>
+            <dt><code>next(err)</code></dt>
+            <dd>Interrompe o fluxo normal e pula para o próximo middleware de erro disponível.</dd>
+          </dl>
+        </div>
+
+        <div class="analogia">
+          <div class="analogia-icone">⚠️</div>
+          <div>
+            Pense no middleware de erro como uma central de atendimento:
+            as rotas apenas avisam “aconteceu um problema” e a central decide qual mensagem e qual
+            <strong>status HTTP</strong> devem ser enviados ao cliente.
+          </div>
+        </div>
+      </article>
+
+      <!-- Middleware de erro -->
+      <article class="card" id="middleware-erro">
+        <h2>3. Criando um middleware de erro no Express</h2>
+        <p>
+          Um middleware de erro é uma função com quatro parâmetros:
+          <code>(err, req, res, next)</code>. Ele deve ser registrado
+          <strong>depois</strong> de todas as rotas e outros middlewares.
+        </p>
+
+        <h3>3.1 Estrutura básica</h3>
+        <pre><code>const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+// Exemplo de rota que pode gerar erro
+app.get('/simular-erro', (req, res, next) =&gt; {
+  try {
+    // algo deu errado aqui...
+    throw new Error('Falha ao buscar dados');
+  } catch (erro) {
+    // encaminha o erro para o middleware de erro
+    next(erro);
+  }
+});
+
+// Middleware de erro (DEVE ser o último)
+app.use((err, req, res, next) =&gt; {
+  console.error('Erro capturado:', err.message);
+
+  res.status(500).json({
+    erro: 'Erro interno no servidor',
+    mensagem: err.message
+  });
+});
+
+app.listen(3000, () =&gt; {
+  console.log('Servidor rodando em http://localhost:3000');
+});</code></pre>
+
+        <div class="note">
+          O Express só reconhece um middleware como “de erro” se ele tiver
+          <strong>quatro parâmetros</strong> na assinatura (mesmo que você não use o <code>next</code>).
+        </div>
+
+        <h3>3.2 Encaminhando erros com next(err)</h3>
+        <p>
+          Dentro das rotas e middlewares, você pode chamar <code>next(err)</code> para avisar ao Express
+          que houve um problema. Ele então pula os demais middlewares comuns e vai direto para o
+          middleware de erro global.
+        </p>
+
+        <pre><code>app.get('/usuarios/:id', async (req, res, next) =&gt; {
+  try {
+    const id = Number(req.params.id);
+    if (Number.isNaN(id)) {
+      const erro = new Error('ID inválido');
+      erro.status = 400;
+      return next(erro);
+    }
+
+    const usuario = await buscarUsuarioNoBanco(id);
+    if (!usuario) {
+      const erro = new Error('Usuário não encontrado');
+      erro.status = 404;
+      return next(erro);
+    }
+
+    res.json(usuario);
+  } catch (erro) {
+    next(erro); // erros inesperados (banco, código, etc.)
+  }
+});</code></pre>
+      </article>
+
+      <!-- Padronização -->
+      <article class="card" id="padronizacao">
+        <h2>4. Padronizando respostas de erro</h2>
+        <p>
+          Em vez de devolver cada erro com um formato diferente, vamos padronizar a resposta.
+          Uma forma simples é sempre retornar um objeto com campos como <code>erro</code> e <code>detalhes</code>.
+        </p>
+
+        <h3>4.1 Middleware de erro com status dinâmico</h3>
+        <pre><code>app.use((err, req, res, next) =&gt; {
+  console.error(err);
+
+  const status = err.status || 500;
+  const mensagem = err.message || 'Erro interno no servidor';
+
+  res.status(status).json({
+    erro: mensagem,
+    caminho: req.path,
+  });
+});</code></pre>
+
+        <div class="example-box">
+          <p><strong>Boas ideias para incluir na resposta de erro:</strong></p>
+          <ul class="mini-list">
+            <li><code>erro</code>: mensagem legível para o cliente.</li>
+            <li><code>caminho</code>: rota em que o erro ocorreu.</li>
+            <li>(Opcional) código interno de erro, útil para o front-end.</li>
+          </ul>
+        </div>
+
+        <h3>4.2 Criando uma classe de erro da aplicação (opcional)</h3>
+        <pre><code>class AppError extends Error {
+  constructor(mensagem, status) {
+    super(mensagem);
+    this.status = status;
+  }
+}
+
+// Em uma rota:
+app.get('/produtos/:id', async (req, res, next) =&gt; {
+  try {
+    const id = Number(req.params.id);
+    if (Number.isNaN(id)) {
+      return next(new AppError('ID de produto inválido', 400));
+    }
+
+    const produto = await buscarProduto(id);
+    if (!produto) {
+      return next(new AppError('Produto não encontrado', 404));
+    }
+
+    res.json(produto);
+  } catch (erro) {
+    next(erro);
+  }
+});</code></pre>
+      </article>
+
+      <!-- Boas práticas -->
+      <article class="card" id="boas-praticas">
+        <h2>5. Boas práticas de tratamento de erros</h2>
+        <p>
+          Alguns cuidados simples ajudam a manter o tratamento de erros limpo e consistente
+          em toda a aplicação.
+        </p>
+
+        <h3>5.1 Pontos principais</h3>
+        <ul class="mini-list">
+          <li>Registrar o <strong>middleware de erro</strong> depois de todas as rotas.</li>
+          <li>Usar <strong>status codes corretos</strong> (400, 404, 500, etc.).</li>
+          <li>Evitar enviar detalhes sensíveis de erros para o cliente (como stack completa) em produção.</li>
+          <li>Usar mensagens claras e objetivas para o front-end.</li>
+          <li>Logar erros de forma centralizada (console hoje, serviço de log no futuro).</li>
+        </ul>
+
+        <div class="antes-depois">
+          <div class="antes">
+            <h4>Antes</h4>
+            <p>try/catch com <code>res.send('deu erro')</code> espalhado por todas as rotas.</p>
+          </div>
+          <div class="depois">
+            <h4>Depois</h4>
+            <p>Rotas chamam <code>next(err)</code> e o middleware de erro decide status e formato.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Exercícios -->
+      <article class="card" id="exercicios">
+        <h2>6. Bloco de exercícios</h2>
+        <p>
+          Os exercícios abaixo conectam o conteúdo desta página com o que você já estudou sobre
+          <strong>REST</strong>, <strong>Express</strong> e <strong>consumo de APIs</strong>.
+        </p>
+
+        <h3>6.1 Exercícios conceituais</h3>
+        <ol class="mini-list">
+          <li>Explique a diferença entre um middleware comum <code>(req, res, next)</code> e um middleware de erro <code>(err, req, res, next)</code>.</li>
+          <li>O que acontece quando chamamos <code>next(err)</code> dentro de uma rota?</li>
+          <li>Por que é recomendável centralizar o tratamento de erros em um único middleware?</li>
+          <li>Dê dois exemplos de erros que pertencem à faixa 4xx e dois exemplos de erros 5xx na sua API.</li>
+        </ol>
+
+        <h3>6.2 Exercícios práticos</h3>
+        <ol class="mini-list">
+          <li>
+            Adicione um middleware de erro global na API de tarefas criada nas aulas de REST + Express.
+            Faça com que ele devolva JSON com <code>erro</code> e <code>caminho</code>.
+          </li>
+          <li>
+            Adapte uma rota existente para usar <code>next(new Error('mensagem'))</code> em vez de
+            responder diretamente com <code>res.status(500)</code> em caso de falha.
+          </li>
+          <li>
+            Crie uma classe <code>AppError</code> e use-a para representar erros 400 (dados inválidos)
+            e 404 (recurso não encontrado) em pelo menos duas rotas da sua API.
+          </li>
+          <li>
+            No front-end (fetch/axios), faça o código exibir mensagens diferentes quando a API
+            devolver 400, 404 ou 500 a partir do middleware de erro.
+          </li>
+        </ol>
+      </article>
+
+      <!-- Desafio -->
+      <article class="card" id="desafio">
+        <h2>7. Desafio (nível mais difícil)</h2>
+        <p>
+          Este desafio integra tratamento de erros no back-end com feedback adequado no front-end.
+        </p>
+
+        <div class="example-box">
+          <h3>Desafio: experiência de erro amigável</h3>
+          <ul class="mini-list">
+            <li>
+              Crie um <strong>middleware de erro global</strong> que devolve sempre o seguinte formato:
+              <code>{ erro: string, codigo: string, caminho: string }</code>.
+            </li>
+            <li>
+              Defina pelo menos três códigos internos de erro (<code>VALIDACAO</code>, <code>NAO_ENCONTRADO</code>,
+              <code>INTERNO</code>, por exemplo) e use-os dentro do middleware.
+            </li>
+            <li>
+              No front-end, exiba mensagens amigáveis para cada tipo de erro (ex.: campos obrigatórios,
+              item inexistente, erro inesperado).
+            </li>
+            <li>
+              Garanta que nenhuma rota devolva “200 OK” quando tiver ocorrido erro de fato.
+            </li>
+          </ul>
+        </div>
+
+        <p class="note">
+          O objetivo é fazer com que qualquer erro tratado no back-end resulte em uma mensagem
+          previsível no front-end, sem precisar tratar caso a caso em cada chamada.
+        </p>
+      </article>
+
+      <!-- Aplicação no projeto -->
+      <article class="card" id="projeto">
+        <h2>8. Como isso será usado no projeto do semestre</h2>
+        <p>
+          No projeto de Programação II, sua aplicação terá diversas rotas, formulários e chamadas à API.
+          Erros vão acontecer: dados inválidos, recursos inexistentes, problemas com o banco, etc.
+        </p>
+
+        <h3>8.1 No back-end</h3>
+        <ul class="mini-list">
+          <li>Você terá um <strong>middleware de erro global</strong> cuidando das respostas em JSON.</li>
+          <li>Rotas vão usar <code>next(err)</code> para comunicar problemas ao middleware.</li>
+          <li>Você poderá diferenciar erros esperados (validação, não encontrado) de erros inesperados.</li>
+        </ul>
+
+        <h3>8.2 No front-end</h3>
+        <ul class="mini-list">
+          <li>
+            Funções de consumo de API (fetch/axios) vão ler <code>status</code> e corpo de erro para
+            mostrar mensagens adequadas ao usuário.
+          </li>
+          <li>
+            Formulários vão exibir feedback claro (por exemplo, avisar campos obrigatórios ou
+            mostrar que um item não foi encontrado).
+          </li>
+          <li>
+            O README do projeto deve documentar brevemente como os erros são tratados
+            (formato do JSON de erro e exemplos de respostas).
+          </li>
+        </ul>
+
+        <p class="note">
+          Um bom tratamento de erros melhora a experiência de quem usa o sistema,
+          facilita o debug e deixa o código mais organizado. É um dos diferenciais
+          de um projeto bem acabado.
+        </p>
+      </article>
+    </section>
+
+    <aside>
+      <section class="card">
+        <h2>Palavras-chave</h2>
+        <ul class="pill-list">
+          <li>Middleware</li>
+          <li>next(err)</li>
+          <li>Status HTTP</li>
+          <li>Erro 400</li>
+          <li>Erro 404</li>
+          <li>Erro 500</li>
+          <li>AppError</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Mini guia de estudo</h2>
+        <div class="dom-card">
+          <ul class="mini-list">
+            <li>Revise as rotas da sua API REST.</li>
+            <li>Implemente um middleware de erro simples.</li>
+            <li>Troque respostas “soltas” por <code>next(err)</code>.</li>
+            <li>Padronize o JSON de erro.</li>
+            <li>Integre o tratamento de erros com o front-end.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Resumo</h2>
+        <p class="dom-destaque">
+          Rotas detectam problemas e chamam <strong>next(err)</strong>; o
+          <strong>middleware de erro</strong> decide o <strong>status HTTP</strong> e o
+          <strong>formato da resposta</strong>.
+        </p>
+      </section>
+    </aside>
+  </main>
+
+  <footer>
+    <p>Material de apoio – Tratamento de erros e middlewares de erro no Express – Programação II.</p>
+  </footer>
+</body>
+</html>
