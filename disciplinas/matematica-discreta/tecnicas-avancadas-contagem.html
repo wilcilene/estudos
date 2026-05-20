@@ -44,122 +44,174 @@
       </div>
     </section>
 
+    <!-- 2. Inclusão-exclusão -->
     <section class="aula">
       <h2>2. Princípio da inclusão-exclusão</h2>
-      <p>Essa técnica é usada quando somar quantidades separadamente faz com que alguns elementos sejam contados mais de uma vez.</p>
+      <p>Essa técnica é usada quando somar quantidades separadamente faz com que alguns elementos sejam contados mais de uma vez. Em vez de evitar a sobreposição, nós a aceitamos e depois corrigimos o excesso de contagem.</p>
 
       <h3>Passo a passo</h3>
       <div class="resolucao" style="display:block;">
         <ol>
-          <li>Conte quantos elementos estão em cada conjunto.</li>
-          <li>Identifique os elementos que pertencem aos dois conjuntos.</li>
-          <li>Some os totais individuais.</li>
-          <li>Subtraia o que foi contado em duplicidade.</li>
+          <li>Identifique claramente os conjuntos envolvidos (por exemplo, quem gosta de Java, quem gosta de Python).</li>
+          <li>Conte quantos elementos há em cada conjunto separadamente.</li>
+          <li>Conte quantos elementos pertencem à interseção (estão em mais de um conjunto).</li>
+          <li>Some os totais individuais e depois subtraia as interseções para corrigir a contagem.</li>
         </ol>
         <p>Para dois conjuntos, usamos: <code>|A ∪ B| = |A| + |B| - |A ∩ B|</code>.</p>
       </div>
 
       <div class="exemplo">
         <h3>Exemplo</h3>
-        <p>Em uma turma, 18 estudantes gostam de Java e 12 gostam de Python sendo que dentre eles, 5 gostam das duas linguagens. Quantos gostam de Java ou Python?</p>
-        <p><strong>Raciocínio:</strong> somamos 18 + 12, mas os 5 que gostam das duas foram contados duas vezes.</p>
-        <p><strong>Resposta:</strong> 18 + 12 - 5 = 25.</p>
+        <p>Em uma turma, 23 estudantes gostam de Java e 17 gostam de Python, sendo que dentre eles, 5 gostam das duas linguagens. Quantos gostam de Java ou Python?</p>
+        <p><strong>Raciocínio:</strong> se apenas somarmos 23 + 17, os 5 estudantes que gostam das duas foram contados duas vezes.</p>
+        <p><strong>Cálculo:</strong> <code>|J ∪ P| = 23 + 17 - 5 = 35</code>.</p>
+      </div>
+
+      <!-- Bloco de imagem -->
+      <div class="imagem-bloco">
+        <figure>
+          <img src="media/IMAGEM_INCLUSAO_EXCLUSAO.png" alt="Diagrama de Venn mostrando dois conjuntos com interseção representando alunos que gostam de Java e Python" />
+          <figcaption>Diagrama de Venn ilustrando a união e interseção dos conjuntos “gostam de Java” e “gostam de Python”.</figcaption>
+        </figure>
       </div>
 
       <div class="exercicio">
         <h3>Exercício</h3>
-        <p>Em uma turma, 20 estudantes praticam futebol, 15 praticam vôlei e 6 praticam os dois esportes. Quantos praticam pelo menos um dos dois?</p>
+        <p>Em uma turma, 20 estudantes praticam futebol, 15 praticam vôlei, denter eles, 6 praticam os dois esportes. Quantos praticam pelo menos um dos dois? Exiba o cálculo e a representação.</p>
         <button onclick="toggleResolucao('r1')">Mostrar/Ocultar resolução</button>
         <div class="resolucao" id="r1">
           <p>Aplicando inclusão-exclusão:</p>
-          <p><code>20 + 15 - 6 = 29</code>.</p>
+          <p><code>|F ∪ V| = 20 + 15 - 6 = 29</code>.</p>
           <p>Logo, 29 estudantes praticam pelo menos um dos dois esportes.</p>
         </div>
       </div>
     </section>
 
+    <!-- 3. Relações de recorrência -->
     <section class="aula">
       <h2>3. Relações de recorrência</h2>
-      <p>Uma recorrência aparece quando a quantidade procurada em um passo depende de quantidades anteriores.</p>
+      <p>Uma <strong>relação de recorrência</strong> é uma forma de descrever uma sequência dizendo como cada termo depende de um ou mais termos anteriores. Ela sempre vem acompanhada de condições iniciais, que são os primeiros valores da sequência.</p>
+      <p>Em vez de encontrar uma fórmula pronta, pensamos: “se eu já conheço as soluções para tamanhos menores, como construir a solução para o tamanho <code>n</code>?”</p>
 
-      <h3>Passo a passo</h3>
+      <h3>Passo a passo para montar uma recorrência</h3>
       <div class="resolucao" style="display:block;">
         <ol>
-          <li>Defina claramente o que representa a sequência.</li>
-          <li>Observe como um caso de tamanho <code>n</code> pode ser construído a partir de casos menores.</li>
-          <li>Escreva a relação entre <code>a_n</code> e os termos anteriores.</li>
-          <li>Defina as condições iniciais.</li>
+          <li><strong>Defina a sequência:</strong> diga exatamente o que é <code>a_n</code> (por exemplo, número de sequências binárias válidas de tamanho <code>n</code>).</li>
+          <li><strong>Analise o caso geral:</strong> pense em como um objeto de tamanho <code>n</code> pode ser construído a partir de objetos menores.</li>
+          <li><strong>Separe em casos:</strong> que possibilidades existem para o “último passo” ou “primeiro elemento”?</li>
+          <li><strong>Escreva a equação:</strong> some as contribuições de cada caso e obtenha uma expressão para <code>a_n</code> em função de termos anteriores (por exemplo, <code>a_{n-1}</code>, <code>a_{n-2}</code>).</li>
+          <li><strong>Defina as condições iniciais:</strong> calcule manualmente os primeiros valores (como <code>a_1</code>, <code>a_2</code>) para completar a definição da sequência.</li>
         </ol>
       </div>
 
       <div class="exemplo">
-        <h3>Exemplo</h3>
-        <p>Quantas sequências binárias de tamanho <code>n</code> não possuem dois 1 consecutivos?</p>
-        <p>Se a sequência termina em 0, antes dela pode haver qualquer sequência válida de tamanho <code>n-1</code>. Se termina em 1, o termo anterior precisa ser 0, então restam sequências válidas de tamanho <code>n-2</code>.</p>
-        <p>Assim, obtemos <code>a_n = a_{n-1} + a_{n-2}</code>.</p>
+        <h3>Exemplo detalhado</h3>
+        <p><strong>Problema:</strong> quantas sequências binárias de tamanho <code>n</code> não possuem dois 1 consecutivos?</p>
+        <p>Definimos <code>a_n</code> como o número de sequências de 0 e 1, de tamanho <code>n</code>, sem dois 1 seguidos.</p>
+        <p>Agora, analisamos como pode terminar uma sequência válida de tamanho <code>n</code>:</p>
+        <ul>
+          <li><strong>Caso 1 – termina em 0:</strong> se o último símbolo é 0, os <code>n-1</code> símbolos anteriores formam qualquer sequência válida de tamanho <code>n-1</code>. Isso dá <code>a_{n-1}</code> possibilidades.</li>
+          <li><strong>Caso 2 – termina em 1:</strong> se o último símbolo é 1, o símbolo anterior deve ser 0 (para não termos “11”). Então, os primeiros <code>n-2</code> símbolos formam qualquer sequência válida de tamanho <code>n-2</code>. Isso dá <code>a_{n-2}</code> possibilidades.</li>
+        </ul>
+        <p>Somando os casos, obtemos a recorrência:</p>
+        <p><code>a_n = a_{n-1} + a_{n-2}</code>, para <code>n ≥ 3</code>.</p>
+        <p>Para completar, calculamos as condições iniciais manualmente:</p>
+        <ul>
+          <li><code>a_1 = 2</code> (sequências: 0, 1).</li>
+          <li><code>a_2 = 3</code> (sequências: 00, 01, 10).</li>
+        </ul>
+      </div>
+
+      <!-- Bloco de imagem -->
+      <div class="imagem-bloco">
+        <figure>
+          <img src="media/IMAGEM_RECORRENCIA.png" alt="Árvore de decisão mostrando a construção de sequências binárias sem dois 1 consecutivos" />
+          <figcaption>Árvore mostrando como sequências de tamanho <code>n</code> são construídas a partir de sequências de tamanhos <code>n-1</code> e <code>n-2</code> sem dois 1 consecutivos.</figcaption>
+        </figure>
       </div>
 
       <div class="codigo-observacao">
-        <p><strong>Dica:</strong> sempre procure dividir o problema pelo último passo, pelo primeiro elemento ou por um caso obrigatório. Isso ajuda muito a montar a recorrência.</p>
+        <p><strong>Dica:</strong> sempre tente responder: “se eu já soubesse a resposta para tamanhos menores, como isso ajuda a resolver o caso de tamanho <code>n</code>?” Essa pergunta quase sempre leva à recorrência correta.</p>
       </div>
 
       <div class="exercicio">
         <h3>Exercício</h3>
         <p>Explique por que a contagem de maneiras de subir uma escada de <code>n</code> degraus, dando passos de 1 ou 2 degraus, pode ser descrita por uma recorrência.</p>
         <button onclick="toggleResolucao('r2')">Mostrar/Ocultar resolução</button>
-        <div class="resolucao" id="r2">
+        <!--<div class="resolucao" id="r2">
           <p>Para chegar ao degrau <code>n</code>, o último movimento veio do degrau <code>n-1</code> com um passo de 1, ou do degrau <code>n-2</code> com um passo de 2.</p>
-          <p>Logo, a quantidade de maneiras satisfaz <code>a_n = a_{n-1} + a_{n-2}</code>, com condições iniciais adequadas.</p>
-        </div>
+          <p>Logo, o número de maneiras de chegar ao degrau <code>n</code> é a soma das maneiras de chegar a <code>n-1</code> e de chegar a <code>n-2</code>. Isso produz a recorrência <code>a_n = a_{n-1} + a_{n-2}</code>, com condições iniciais adequadas (por exemplo, <code>a_1 = 1</code>, <code>a_2 = 2</code>).</p>
+        </div> -->
       </div>
     </section>
 
+    <!-- 4. Funções geradoras -->
     <section class="aula">
       <h2>4. Funções geradoras</h2>
-      <p>Funções geradoras transformam uma sequência em uma expressão algébrica. Elas ajudam a organizar contagens, estudar recorrências e resolver problemas de distribuição.</p>
+      <p>Funções geradoras transformam uma sequência em uma expressão algébrica que “guarda” todos os termos ao mesmo tempo. Cada coeficiente de <code>x^n</code> representa o termo <code>a_n</code> da sequência.</p>
 
       <h3>Ideia central</h3>
       <div class="resolucao" style="display:block;">
         <p>Se uma sequência é <code>a_0, a_1, a_2, ...</code>, sua função geradora ordinária é:</p>
         <pre><code>G(x) = a_0 + a_1x + a_2x² + a_3x³ + ...</code></pre>
-        <p>O foco inicial não é decorar técnicas complexas, mas entender que o coeficiente de cada potência de <code>x</code> guarda a informação que queremos contar.</p>
+        <p>Ao multiplicar funções geradoras, estamos combinando escolhas. O coeficiente de cada potência de <code>x</code> no produto indica quantas maneiras diferentes produzem aquele “total”.</p>
       </div>
 
       <div class="exemplo">
-        <h3>Exemplo intuitivo</h3>
-        <p>Se queremos contar maneiras de escolher objetos com certas quantidades possíveis, cada fator representa uma escolha, e o produto organiza todas as combinações.</p>
+        <h3>Exemplo</h3>
+        <p>Considere o produto:</p>
         <pre><code>(1 + x + x²)(1 + x)</code></pre>
-        <p>O coeficiente de <code>x²</code>, por exemplo, informa quantas maneiras produzem total 2.</p>
+        <p>O primeiro fator diz que podemos escolher 0, 1 ou 2 unidades de um certo objeto; o segundo diz que podemos escolher 0 ou 1 unidade de outro objeto.</p>
+        <p>O coeficiente de <code>x²</code> na expansão mostra quantas combinações diferentes de escolhas resultam em total 2 unidades.</p>
+      </div>
+
+      <!-- Bloco de imagem -->
+      <div class="imagem-bloco">
+        <figure>
+          <img src="media/IMAGEM_FUNCAO_GERADORA.png" alt="Diagrama ilustrando fatores de uma função geradora e os coeficientes de cada potência de x" />
+          <figcaption>Ilustração mostrando fatores como “(1 + x + x²)” e a interpretação dos coeficientes de cada potência de <code>x</code> após o produto.</figcaption>
+        </figure>
       </div>
 
       <div class="nota">
-        <p>Neste estágio, o mais importante é entender a <strong>interpretação</strong> da função geradora, e não sair expandindo expressões sem saber o que os coeficientes significam.</p>
+        <p>O mais importante é entender a <strong>interpretação</strong> da função geradora, e não só sair expandindo expressões. Avalie toda vez: “o que cada coeficiente está contando?”</p>
       </div>
     </section>
 
+    <!-- 5. Contagem com restrições -->
     <section class="aula">
       <h2>5. Contagem com restrições</h2>
-      <p>Muitos problemas não pedem apenas “quantos existem”, mas “quantos existem obedecendo certas condições”.</p>
+      <p>Muitos problemas não pedem apenas “quantos existem”, mas “quantos existem obedecendo certas condições”. As restrições geralmente impedem o uso direto de uma fórmula única.</p>
 
       <h3>Estratégia prática</h3>
       <div class="resolucao" style="display:block;">
         <ol>
           <li>Conte primeiro o total sem restrições, se isso for fácil.</li>
-          <li>Identifique os casos proibidos.</li>
-          <li>Use complemento, separação em casos ou inclusão-exclusão.</li>
-          <li>Verifique se a ordem importa e se há repetição.</li>
+          <li>Identifique claramente quais situações são proibidas.</li>
+          <li>Use complemento (total − proibidos), separação em casos ou inclusão-exclusão para remover as situações inválidas.</li>
+          <li>Verifique se a ordem importa e se há repetição de elementos permitida.</li>
         </ol>
       </div>
 
       <div class="exemplo">
         <h3>Exemplo</h3>
         <p>Quantas palavras de 3 letras podem ser formadas com A, B e C, com repetição permitida, mas sem usar duas letras A consecutivas?</p>
-        <p>Nesse caso, não basta aplicar apenas uma fórmula. É preciso organizar os casos permitidos ou usar uma abordagem recursiva.</p>
+        <p>Primeiro, há <code>3³ = 27</code> palavras de 3 letras com A, B e C, sem restrição.</p>
+        <p>Depois, identificamos as palavras proibidas (aquelas que têm “AA” em posições consecutivas) e as excluímos da contagem. Outra abordagem é montar os casos válidos organizando as posições que podem (ou não) receber A.</p>
+      </div>
+
+      <!-- Bloco de imagem -->
+      <div class="imagem-bloco">
+        <figure>
+          <img src="media/IMAGEM_RESTRICOES.png" alt="Tabela ou diagrama destacando palavras de três letras formadas por A, B, C com as que têm AA marcadas em outra cor" />
+          <figcaption>Tabela simples listando algumas palavras de 3 letras com A, B e C, destacando em outra cor as que contêm o padrão proibido “AA”.</figcaption>
+        </figure>
       </div>
     </section>
 
+    <!-- 6. Roteiro de estudo -->
     <section class="aula">
-      <h2>6. Roteiro de estudo sugerido</h2>
+      <h2>6. Para estudar</h2>
       <div class="exemplo">
         <ol>
           <li>Revise rapidamente o que já foi estudado: princípio multiplicativo, arranjos, combinações e binômio.</li>
@@ -171,8 +223,9 @@
       </div>
     </section>
 
+    <!-- 7. Resumo visual -->
     <section class="resumo">
-      <h2>7. Resumo visual de decisão</h2>
+      <h2>7. Resumo de decisão</h2>
       <pre><code>Há sobreposição de casos?
 → Use inclusão-exclusão.
 
@@ -187,7 +240,7 @@ Há restrições que impedem aplicar fórmula direta?
     </section>
 
     <footer>
-      <p>Página didática produzida para apoiar o estudo de Matemática Discreta.</p>
+      <p>Estudem!</p>
     </footer>
   </div>
 
