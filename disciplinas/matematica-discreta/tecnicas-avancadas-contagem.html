@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Técnicas Avançadas de Contagem — passo a passo</title>
+  <link rel="stylesheet" href="md-estilos.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Técnicas Avançadas de Contagem</h1>
+      <div class="intro">
+        <p>Esta página foi organizada como um roteiro de estudo <strong>passo a passo</strong> para facilitar a compreensão dos conteúdos que normalmente vêm depois de análise combinatória básica, permutações, arranjos, combinações e binômio de Newton.</p>
+        <p>A ideia é mostrar <strong>quando usar</strong> cada técnica, <strong>como pensar</strong> antes de aplicar fórmulas e <strong>como resolver</strong> exercícios com mais segurança.</p>
+      </div>
+    </header>
+
+    <section class="objetivos">
+      <h2>Objetivos de aprendizagem</h2>
+      <ul>
+        <li>Reconhecer problemas em que há sobreposição de casos.</li>
+        <li>Aplicar o princípio da inclusão-exclusão em situações simples e intermediárias.</li>
+        <li>Montar relações de recorrência a partir de descrições verbais.</li>
+        <li>Perceber a ideia de função geradora como ferramenta para organizar contagens.</li>
+        <li>Resolver problemas com restrições usando complemento, casos e decomposição.</li>
+      </ul>
+    </section>
+
+    <section class="aula">
+      <h2>1. Antes de começar: como identificar o tipo de problema</h2>
+      <p>Antes de fazer contas, faça estas perguntas:</p>
+      <div class="exemplo">
+        <ol>
+          <li>Os casos se sobrepõem?</li>
+          <li>Existe alguma restrição que atrapalha contar diretamente?</li>
+          <li>O problema depende de resultados anteriores?</li>
+          <li>Estou contando escolhas, sequências ou distribuições?</li>
+        </ol>
+      </div>
+      <div class="nota">
+        <p>Se houver <strong>sobreposição</strong>, pense em inclusão-exclusão. Se o problema depender de etapas anteriores, pense em <strong>recorrência</strong>. Se houver muitas decomposições possíveis, pode aparecer a ideia de <strong>função geradora</strong>.</p>
+      </div>
+    </section>
+
+    <section class="aula">
+      <h2>2. Princípio da inclusão-exclusão</h2>
+      <p>Essa técnica é usada quando somar quantidades separadamente faz com que alguns elementos sejam contados mais de uma vez.</p>
+
+      <h3>Passo a passo</h3>
+      <div class="resolucao" style="display:block;">
+        <ol>
+          <li>Conte quantos elementos estão em cada conjunto.</li>
+          <li>Identifique os elementos que pertencem aos dois conjuntos.</li>
+          <li>Some os totais individuais.</li>
+          <li>Subtraia o que foi contado em duplicidade.</li>
+        </ol>
+        <p>Para dois conjuntos, usamos: <code>|A ∪ B| = |A| + |B| - |A ∩ B|</code>.</p>
+      </div>
+
+      <div class="exemplo">
+        <h3>Exemplo</h3>
+        <p>Em uma turma, 18 estudantes gostam de Java, 12 gostam de Python e 5 gostam das duas linguagens. Quantos gostam de Java ou Python?</p>
+        <p><strong>Raciocínio:</strong> somamos 18 + 12, mas os 5 que gostam das duas foram contados duas vezes.</p>
+        <p><strong>Resposta:</strong> 18 + 12 - 5 = 25.</p>
+      </div>
+
+      <div class="exercicio">
+        <h3>Exercício</h3>
+        <p>Em uma turma, 20 estudantes praticam futebol, 15 praticam vôlei e 6 praticam os dois esportes. Quantos praticam pelo menos um dos dois?</p>
+        <button onclick="toggleResolucao('r1')">Mostrar/Ocultar resolução</button>
+        <div class="resolucao" id="r1">
+          <p>Aplicando inclusão-exclusão:</p>
+          <p><code>20 + 15 - 6 = 29</code>.</p>
+          <p>Logo, 29 estudantes praticam pelo menos um dos dois esportes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="aula">
+      <h2>3. Relações de recorrência</h2>
+      <p>Uma recorrência aparece quando a quantidade procurada em um passo depende de quantidades anteriores.</p>
+
+      <h3>Passo a passo</h3>
+      <div class="resolucao" style="display:block;">
+        <ol>
+          <li>Defina claramente o que representa a sequência.</li>
+          <li>Observe como um caso de tamanho <code>n</code> pode ser construído a partir de casos menores.</li>
+          <li>Escreva a relação entre <code>a_n</code> e os termos anteriores.</li>
+          <li>Defina as condições iniciais.</li>
+        </ol>
+      </div>
+
+      <div class="exemplo">
+        <h3>Exemplo</h3>
+        <p>Quantas sequências binárias de tamanho <code>n</code> não possuem dois 1 consecutivos?</p>
+        <p>Se a sequência termina em 0, antes dela pode haver qualquer sequência válida de tamanho <code>n-1</code>. Se termina em 1, o termo anterior precisa ser 0, então restam sequências válidas de tamanho <code>n-2</code>.</p>
+        <p>Assim, obtemos <code>a_n = a_{n-1} + a_{n-2}</code>.</p>
+      </div>
+
+      <div class="codigo-observacao">
+        <p><strong>Dica:</strong> sempre procure dividir o problema pelo último passo, pelo primeiro elemento ou por um caso obrigatório. Isso ajuda muito a montar a recorrência.</p>
+      </div>
+
+      <div class="exercicio">
+        <h3>Exercício</h3>
+        <p>Explique por que a contagem de maneiras de subir uma escada de <code>n</code> degraus, dando passos de 1 ou 2 degraus, pode ser descrita por uma recorrência.</p>
+        <button onclick="toggleResolucao('r2')">Mostrar/Ocultar resolução</button>
+        <div class="resolucao" id="r2">
+          <p>Para chegar ao degrau <code>n</code>, o último movimento veio do degrau <code>n-1</code> com um passo de 1, ou do degrau <code>n-2</code> com um passo de 2.</p>
+          <p>Logo, a quantidade de maneiras satisfaz <code>a_n = a_{n-1} + a_{n-2}</code>, com condições iniciais adequadas.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="aula">
+      <h2>4. Funções geradoras</h2>
+      <p>Funções geradoras transformam uma sequência em uma expressão algébrica. Elas ajudam a organizar contagens, estudar recorrências e resolver problemas de distribuição.</p>
+
+      <h3>Ideia central</h3>
+      <div class="resolucao" style="display:block;">
+        <p>Se uma sequência é <code>a_0, a_1, a_2, ...</code>, sua função geradora ordinária é:</p>
+        <pre><code>G(x) = a_0 + a_1x + a_2x² + a_3x³ + ...</code></pre>
+        <p>O foco inicial não é decorar técnicas complexas, mas entender que o coeficiente de cada potência de <code>x</code> guarda a informação que queremos contar.</p>
+      </div>
+
+      <div class="exemplo">
+        <h3>Exemplo intuitivo</h3>
+        <p>Se queremos contar maneiras de escolher objetos com certas quantidades possíveis, cada fator representa uma escolha, e o produto organiza todas as combinações.</p>
+        <pre><code>(1 + x + x²)(1 + x)</code></pre>
+        <p>O coeficiente de <code>x²</code>, por exemplo, informa quantas maneiras produzem total 2.</p>
+      </div>
+
+      <div class="nota">
+        <p>Neste estágio, o mais importante é entender a <strong>interpretação</strong> da função geradora, e não sair expandindo expressões sem saber o que os coeficientes significam.</p>
+      </div>
+    </section>
+
+    <section class="aula">
+      <h2>5. Contagem com restrições</h2>
+      <p>Muitos problemas não pedem apenas “quantos existem”, mas “quantos existem obedecendo certas condições”.</p>
+
+      <h3>Estratégia prática</h3>
+      <div class="resolucao" style="display:block;">
+        <ol>
+          <li>Conte primeiro o total sem restrições, se isso for fácil.</li>
+          <li>Identifique os casos proibidos.</li>
+          <li>Use complemento, separação em casos ou inclusão-exclusão.</li>
+          <li>Verifique se a ordem importa e se há repetição.</li>
+        </ol>
+      </div>
+
+      <div class="exemplo">
+        <h3>Exemplo</h3>
+        <p>Quantas palavras de 3 letras podem ser formadas com A, B e C, com repetição permitida, mas sem usar duas letras A consecutivas?</p>
+        <p>Nesse caso, não basta aplicar apenas uma fórmula. É preciso organizar os casos permitidos ou usar uma abordagem recursiva.</p>
+      </div>
+    </section>
+
+    <section class="aula">
+      <h2>6. Roteiro de estudo sugerido</h2>
+      <div class="exemplo">
+        <ol>
+          <li>Revise rapidamente o que já foi estudado: princípio multiplicativo, arranjos, combinações e binômio.</li>
+          <li>Estude inclusão-exclusão com problemas de dois conjuntos e depois de três conjuntos.</li>
+          <li>Treine montagem de recorrências a partir de problemas descritos em linguagem natural.</li>
+          <li>Entenda a ideia de função geradora com exemplos pequenos.</li>
+          <li>Resolva exercícios com restrições, comparando estratégias diferentes.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="resumo">
+      <h2>7. Resumo visual de decisão</h2>
+      <pre><code>Há sobreposição de casos?
+→ Use inclusão-exclusão.
+
+O problema depende de resultados anteriores?
+→ Monte uma recorrência.
+
+O problema envolve distribuir, decompor ou extrair coeficientes?
+→ Pense em função geradora.
+
+Há restrições que impedem aplicar fórmula direta?
+→ Use complemento, casos ou recorrência.</code></pre>
+    </section>
+
+    <footer>
+      <p>Página didática produzida para apoiar o estudo de Matemática Discreta.</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleResolucao(id) {
+      const el = document.getElementById(id);
+      if (el.style.display === 'block') {
+        el.style.display = 'none';
+      } else {
+        el.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
