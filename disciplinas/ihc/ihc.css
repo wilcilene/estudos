@@ -97,7 +97,7 @@ header p {
 
 /* Layout principal
    - páginas internas: main em grid
-   - index (body.index-page): main em coluna única, como no index original */
+   - index (body.index-page): main em coluna única */
 
 body:not(.index-page) main {
   display: grid;
@@ -117,6 +117,7 @@ body.topic-page main {
 }
 
 /* Cartão de conteúdo principal */
+
 .card {
   position: relative;
 }
@@ -402,7 +403,7 @@ body.topic-page .hero {
   margin-top: 0.45rem;
 }
 
-/* Layout alternativo deste tópico (separado do main padrão) */
+/* Layout alternativo deste tópico */
 
 .layout {
   display: grid;
@@ -432,8 +433,7 @@ body.topic-page .hero {
   color: var(--muted);
 }
 
-/* Lista de recursos específica deste tópico
-   (nome diferente para não conflitar com .resources-list existente) */
+/* Lista de recursos específica deste tópico */
 
 .resource-list {
   list-style: none;
@@ -450,7 +450,7 @@ body.topic-page .hero {
   color: var(--text);
 }
 
-/* Imagens de exemplo dentro do conteúdo (FestaFit, etc.) */
+/* Imagens de exemplo dentro do conteúdo */
 .content-card img.example-image {
   display: block;
   max-width: 100%;
@@ -642,4 +642,29 @@ footer {
   position: absolute;
   left: 0;
   color: var(--accent);
+}
+
+/* --------- LINKS --------- */
+
+.resource-list a {
+  color: #bfdbfe;              /* azul claro, boa leitura no fundo escuro */
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-fast),
+              text-decoration-color var(--transition-fast);
+}
+
+.resource-list a:hover {
+  color: #e0f2fe;              /* mais claro no hover */
+  text-decoration: underline;
+  text-decoration-color: #e0f2fe;
+}
+
+.resource-list a:visited {
+  color: #93c5fd;              /* tom levemente diferente p/ links já visitados */
+}
+
+.resource-list a:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
 }
