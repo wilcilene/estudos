@@ -409,13 +409,14 @@
   <section>
     <div class="hero-card" id="timeline">
       <div class="hero-chip-row">
-        <span class="chip highlight">Período: até 19 de junho · Apresentação Final</span>
+        <span class="chip highlight">Período: 14 de maio a 19 de junho · Apresentação Final</span>
         <span class="chip">Checkpoints em todas as aulas (qui, sex e sábados de trabalho)</span>
       </div>
       <h1>Linha do Tempo do Projeto</h1>
       <p>
         A linha do tempo abaixo distribui o estudo e a implementação do sistema de inscrições
-        em Laravel até a apresentação final, usando as aulas como marcos de checkpoint.
+        em Laravel, iniciando em 14/05, com foco inicial em banco de dados e interface,
+        e avançando para refinamento e backend até a apresentação.
       </p>
       <div class="hero-meta">
         <span>Repositório: <a href="https://github.com/wilcilene/inscricoes-app-equipe1" target="_blank">inscricoes-app-equipe1</a></span>
@@ -438,100 +439,115 @@
       <div class="section-body">
         <div class="timeline">
 
-          <!-- 23/05 - sábado -->
+          <!-- Semana 14/05 (qui) – início das entregas -->
           <div class="timeline-item">
-            <div class="timeline-date">Sábado · 23 de maio</div>
+            <div class="timeline-date">14 de maio · Quinta-feira</div>
             <div class="timeline-title">
-              Checkpoint 1 – Ambientação & Estrutura do Projeto
-              <span class="timeline-tag">Fase 0</span>
+              Início das entregas – Banco & Interface
+              <span class="timeline-tag">Semana 1</span>
             </div>
             <div class="timeline-desc">
-              - Todos com ambiente Laravel configurado e projeto rodando localmente.<br>
-              - Leitura do README e entendimento do domínio (editais, inscrições, resultados).<br>
-              - Mapeamento inicial das telas do Figma com as tarefas do quadro Scrum.
+              - Levantar requisitos de banco a partir do protótipo e dos requisitos do projeto.<br>
+              - Definir, em rascunho, tabelas principais (Usuário, Edital, Inscrição, etc.).<br>
+              - Configurar base da interface (layouts Blade, navegação principal, componentes comuns).
             </div>
           </div>
 
-          <!-- 30/05 - sábado -->
+          <!-- Sábado 23/05 -->
           <div class="timeline-item">
-            <div class="timeline-date">Sábado · 30 de maio</div>
+            <div class="timeline-date">23 de maio · Sábado (4 aulas)</div>
             <div class="timeline-title">
-              Checkpoint 2 – MVC básico, Rotas e Controllers
-              <span class="timeline-tag">Fase 1</span>
+              Checkpoint 1 – Banco & Interface (versão inicial)
+              <span class="timeline-tag">Banco + UI</span>
             </div>
             <div class="timeline-desc">
-              - Revisão prática de PHP moderno e estrutura do projeto Laravel.<br>
-              - Rotas principais do sistema criadas em <code>routes/web.php</code> (login, mural de editais, formulário de inscrição, resultados).<br>
-              - Controllers principais esboçados, conectando rotas às views (mesmo com dados fictícios).
+              - Ambiente Laravel configurado e projeto rodando localmente em todos os grupos.<br>
+              - Versão inicial do esquema de banco (mesmo que ainda não esteja em migrations).<br>
+              - Interface base criada: menus principais, páginas do mural de editais, formulário de inscrição e tela de resultados esboçadas.
             </div>
           </div>
 
-          <!-- Sextas/Quintas entre 23/05 e 30/05 -->
+          <!-- Quinta/Sexta após 23/05 – refinando banco/interface -->
           <div class="timeline-item">
             <div class="timeline-date">Aulas entre 23/05 e 30/05</div>
             <div class="timeline-title">
-              Aulas regulares – Consolidação de MVC & Protótipo
-              <span class="timeline-tag">Fase 1</span>
+              Consolidação de Banco & Interface
+              <span class="timeline-tag">Semana 2</span>
             </div>
             <div class="timeline-desc">
-              - Discutir em sala as responsabilidades de Model, View e Controller no contexto do projeto.<br>
-              - Relacionar cada tela do Figma a uma rota/controller/view concreta.<br>
-              - Registrar dúvidas conceituais sobre MVC e Eloquent para serem respondidas na aula seguinte.
+              - Revisar estrutura de banco proposta, alinhando com o protótipo e regras de negócio.<br>
+              - Ajustar layout das páginas principais conforme o Figma, garantindo navegação coerente.<br>
+              - Registrar decisões de modelagem (entidades, relacionamentos) no README ou em documentação do projeto.
             </div>
           </div>
 
-          <!-- 13/06 - sábado -->
+          <!-- Sábado 30/05 -->
           <div class="timeline-item">
-            <div class="timeline-date">Sábado · 13 de junho</div>
+            <div class="timeline-date">30 de maio · Sábado (4 aulas)</div>
             <div class="timeline-title">
-              Checkpoint 3 – Models, Migrations & Banco de Dados
-              <span class="timeline-tag">Fase 2</span>
+              Checkpoint 2 – Migrations & Interface Navegável
+              <span class="timeline-tag">Banco & Interface</span>
             </div>
             <div class="timeline-desc">
-              - Migrations criadas para as entidades principais (Usuário, Edital, Inscrição, Documentos, Resultados).<br>
-              - Models Eloquent correspondentes criados, com <code>$fillable</code> e relacionamentos básicos.<br>
-              - Banco criado via <code>php artisan migrate</code> e testes de consultas simples realizados (por exemplo, listar editais).
+              - Migrations criadas para as tabelas principais, prontas para rodar com <code>php artisan migrate</code>.<br>
+              - Interface navegável: é possível percorrer as principais telas (home/mural, detalhes do edital, formulário de inscrição, consulta de resultados).<br>
+              - Quadro Scrum atualizado com cards de banco e interface marcados como Done ou em revisão.
             </div>
           </div>
 
-          <!-- Aulas entre 30/05 e 13/06 -->
+          <!-- Aulas entre 30/05 e 13/06 – foco em backend + refinamento -->
           <div class="timeline-item">
             <div class="timeline-date">Aulas entre 30/05 e 13/06</div>
             <div class="timeline-title">
-              Aulas regulares – Fluxos principais do sistema
-              <span class="timeline-tag">Fase 3</span>
+              Backend em construção & Refinamento de Banco/Interface
+              <span class="timeline-tag">Backend</span>
             </div>
             <div class="timeline-desc">
-              - Implementar autenticação e cadastro de usuários (usando Breeze ou solução definida em aula).<br>
-              - Implementar mural de editais, fluxo de inscrição e tela de consulta de resultados, conectando views ao banco via Models.<br>
-              - Revisar, em cada dia de aula, o progresso de cada grupo no quadro Scrum e ajustar cards conforme necessário.
+              - Ajustar migrations e Models conforme feedback e testes, incluindo relacionamentos e constraints necessários.<br>
+              - Iniciar implementação do backend: controllers conectando Models às views, validações de formulários, regras de negócio básicas.<br>
+              - Refinar interface (feedbacks, mensagens de erro, organização de formulários) a partir da experiência de uso.
+            </div>
+          </div>
+
+          <!-- Sábado 13/06 -->
+          <div class="timeline-item">
+            <div class="timeline-date">13 de junho · Sábado (4 aulas)</div>
+            <div class="timeline-title">
+              Checkpoint 3 – Fluxos principais com backend
+              <span class="timeline-tag">Backend + UI</span>
+            </div>
+            <div class="timeline-desc">
+              - Migrations e Models estáveis para as entidades principais (Usuário, Edital, Inscrição, etc.).<br>
+              - Fluxos principais conectados ao banco: cadastro/login, mural de editais, criação de inscrição, consulta de resultados (mesmo que com regras simplificadas).<br>
+              - Identificação de ajustes finais e pendências para a semana da apresentação.
+            </div>
+          </div>
+
+          <!-- Semana da apresentação -->
+          <div class="timeline-item">
+            <div class="timeline-date">Semana de 15 a 19 de junho</div>
+            <div class="timeline-title">
+              Checkpoint 4 – Testes, Refino & Ensaios
+              <span class="timeline-tag">Pré-apresentação</span>
+            </div>
+            <div class="timeline-desc">
+              - Rodada de testes completos nos fluxos principais, correção de erros críticos.<br>
+              - Refinar UX: mensagens, labels, organização visual, responsividade básica.<br>
+              - Ensaios de apresentação em sala: cada grupo executa o fluxo completo e recebe feedback.
             </div>
           </div>
 
           <!-- 19/06 - apresentação -->
           <div class="timeline-item">
-            <div class="timeline-date">Quinta/Sexta anterior a 19 de junho</div>
-            <div class="timeline-title">
-              Checkpoint 4 – Ensaios de Apresentação & Refino
-              <span class="timeline-tag">Fase 4</span>
-            </div>
-            <div class="timeline-desc">
-              - Rodada de testes básicos (rotas e fluxos principais).<br>
-              - Ajustes finais de UX com base no protótipo do Figma (layout, mensagens, feedback ao usuário).<br>
-              - Ensaios de apresentação: cada grupo demonstra o fluxo completo (do mural de editais até a visualização do resultado) e recebe feedback.
-            </div>
-          </div>
-
-          <div class="timeline-item">
             <div class="timeline-date">19 de junho · Apresentação</div>
             <div class="timeline-title">
               Entrega Final – Demonstração do Sistema de Inscrições
-              <span class="timeline-tag">Fase 4</span>
+              <span class="timeline-tag">Entrega</span>
             </div>
             <div class="timeline-desc">
-              - Demonstração do sistema em funcionamento (mural, inscrição, consulta de resultado), com base no repositório atualizado.<br>
-              - Apresentação da modelagem de banco de dados (Migrations/Models) e justificativas de decisões de projeto.<br>
-              - Entrega do README/documentação consolidada e, se possível, registro de próximos passos/funcionalidades futuras.
+              - Demonstração do sistema em funcionamento (mural, inscrição, consulta de resultado) com banco e backend integrados.<br>
+              - Apresentação da modelagem de banco (Migrations/Models) e das principais decisões de backend.<br>
+              - Entrega do README/documentação consolidada, com descrição das funcionalidades implementadas e possíveis evoluções futuras.
             </div>
           </div>
 
@@ -542,18 +558,18 @@
       </div>
     </article>
 
-    <!-- Fases conceituais (mantidas, mas agora alinhadas ao cronograma) -->
+    <!-- Fases conceituais (mantidas, mas alinhadas ao novo cronograma) -->
 
     <article class="section" id="fase-1">
       <div class="section-header">
         <div>
-          <div class="phase-flag">Fase 1 · Até 30/05</div>
-          <h2>Fundamentos Laravel, MVC e Protótipo</h2>
+          <div class="phase-flag">Fase 1 · 14/05 a 30/05</div>
+          <h2>Fundamentos Laravel, Banco & Interface</h2>
         </div>
-        <span class="tag">Ambientação & Estrutura</span>
+        <span class="tag">Banco + UI Inicial</span>
       </div>
       <div class="section-body">
-        <p>Meta até o checkpoint de 30/05: turma inteira com entendimento de MVC no contexto do projeto, rotas e controllers principais configurados.</p>
+        <p>Meta até o checkpoint de 30/05: turma inteira com banco inicial definido em migrations e interface principal navegável, refletindo o protótipo.</p>
         <div class="two-col">
           <div>
             <h3>Conteúdos de estudo</h3>
@@ -565,15 +581,15 @@
                 </span>
               </li>
               <li class="step-item">
-                <strong>Estrutura do projeto Laravel</strong>
+                <strong>Modelagem de banco</strong>
                 <span class="sub">
-                  Diretórios <code>app</code>, <code>routes</code>, <code>database</code>, <code>resources</code> e organização do código existente no repositório.
+                  Definir entidades, atributos e relacionamentos com base no protótipo e nas regras do projeto.
                 </span>
               </li>
               <li class="step-item">
-                <strong>Mapeamento Figma → Rotas</strong>
+                <strong>Estrutura de interface</strong>
                 <span class="sub">
-                  Para cada tela do Figma, definir pelo menos uma rota e uma action de controller correspondente.
+                  Criar layouts base, menus e páginas correspondentes às telas principais (mural, inscrição, resultados).
                 </span>
               </li>
             </ul>
@@ -582,15 +598,21 @@
             <h3>Resultados esperados</h3>
             <ul class="step-list">
               <li class="step-item">
-                <strong>Projeto rodando localmente</strong>
+                <strong>Migrations iniciais criadas</strong>
                 <span class="sub">
-                  Todos conseguem iniciar o servidor com <code>php artisan serve</code> e navegar pelas rotas básicas.
+                  Pelo menos as tabelas centrais do sistema com migrations definidas e testadas.
+                </span>
+              </li>
+              <li class="step-item">
+                <strong>Interface navegável</strong>
+                <span class="sub">
+                  Fluxo de navegação entre as principais páginas alinhado ao protótipo do Figma.
                 </span>
               </li>
               <li class="step-item">
                 <strong>Quadro Scrum atualizado</strong>
                 <span class="sub">
-                  Cards de ambientação e rotas marcados como concluídos ou em revisão, conforme o avanço do grupo.
+                  Cards de banco e interface atualizados com o status real de cada grupo.
                 </span>
               </li>
             </ul>
@@ -602,13 +624,13 @@
     <article class="section" id="fase-2">
       <div class="section-header">
         <div>
-          <div class="phase-flag">Fase 2 · Até 13/06</div>
-          <h2>Camada Model, Migrations e Banco de Dados</h2>
+          <div class="phase-flag">Fase 2 · 01/06 a 13/06</div>
+          <h2>Refinamento de Banco & Início do Backend</h2>
         </div>
-        <span class="tag">Metade do back-end</span>
+        <span class="tag">Model & Regras</span>
       </div>
       <div class="section-body">
-        <p>Meta até o checkpoint de 13/06: banco modelado por migrations e Models Eloquent cobrindo pelo menos 50% das entidades necessárias.</p>
+        <p>Meta até o checkpoint de 13/06: banco refinado (migrations/Models coerentes) e backend iniciando os fluxos principais.</p>
         <div class="two-col">
           <div>
             <h3>Estudo guiado</h3>
@@ -616,14 +638,13 @@
               <li class="step-item">
                 <strong>Vídeos de Migrations e Model</strong>
                 <span class="sub">
-                  Assistir aos vídeos sugeridos, focando em <code>php artisan make:migration</code>, <code>migrate</code>, rollback
-                  e mapeamento de tabelas para Models.
+                  Revisar vídeos sugeridos, focando em criação/alteração de migrations e uso de Eloquent.
                 </span>
               </li>
               <li class="step-item">
-                <strong>Mapeamento de entidades</strong>
+                <strong>Eloquent ORM</strong>
                 <span class="sub">
-                  Identificar tabelas a partir do protótipo (Usuário, Edital, Inscrição, Documentos, Resultados) e definir atributos e relacionamentos.
+                  Implementar Models com <code>$fillable</code>, relacionamentos (<code>hasMany</code>, <code>belongsTo</code>) e consultas básicas.
                 </span>
               </li>
             </ul>
@@ -632,15 +653,15 @@
             <h3>Produção no projeto</h3>
             <ul class="step-list">
               <li class="step-item">
-                <strong>Migrations criadas e rodadas</strong>
+                <strong>Banco refinado</strong>
                 <span class="sub">
-                  Criar e ajustar migrations para as tabelas principais, rodar <code>migrate</code> e validar o esquema no banco.
+                  Ajustar estrutura (novas colunas, índices, relacionamentos) conforme necessidade identificada nas primeiras implementações.
                 </span>
               </li>
               <li class="step-item">
-                <strong>Models Eloquent funcionando</strong>
+                <strong>Backend iniciando fluxos</strong>
                 <span class="sub">
-                  Criar Models com <code>$fillable</code> e relacionamentos (<code>hasMany</code>, <code>belongsTo</code>) e testar consultas básicas.
+                  Controllers conectando Models às views, começando pelos fluxos mais críticos (por exemplo, criação de inscrição).
                 </span>
               </li>
             </ul>
@@ -652,8 +673,8 @@
     <article class="section" id="fase-3">
       <div class="section-header">
         <div>
-          <div class="phase-flag">Fase 3 · Entre 30/05 e 19/06</div>
-          <h2>Fluxos principais do sistema</h2>
+          <div class="phase-flag">Fase 3 · 08/06 a 19/06</div>
+          <h2>Fluxos principais completos</h2>
         </div>
         <span class="tag">Funcionalidades</span>
       </div>
@@ -816,7 +837,7 @@
 </main>
 
 <footer>
-  <span>Roadmap elaborado para o projeto “Sistema de Gerenciamento de Inscrições e Editais” com linha do tempo até 19 de junho.</span>
+  <span>Roadmap elaborado para o projeto “Sistema de Gerenciamento de Inscrições e Editais” com linha do tempo de 14 de maio a 19 de junho.</span>
 </footer>
 
 </body>
