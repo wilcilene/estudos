@@ -136,14 +136,73 @@
       </div>
 
       <div class="exercicio">
-        <h3>Exercício</h3>
-        <p>Explique por que a contagem de maneiras de subir uma escada de <code>n</code> degraus, dando passos de 1 ou 2 degraus, pode ser descrita por uma recorrência.</p>
-        <button onclick="toggleResolucao('r2')">Mostrar/Ocultar resolução</button>
-        <!--<div class="resolucao" id="r2">
-          <p>Para chegar ao degrau <code>n</code>, o último movimento veio do degrau <code>n-1</code> com um passo de 1, ou do degrau <code>n-2</code> com um passo de 2.</p>
-          <p>Logo, o número de maneiras de chegar ao degrau <code>n</code> é a soma das maneiras de chegar a <code>n-1</code> e de chegar a <code>n-2</code>. Isso produz a recorrência <code>a_n = a_{n-1} + a_{n-2}</code>, com condições iniciais adequadas (por exemplo, <code>a_1 = 1</code>, <code>a_2 = 2</code>).</p>
-        </div> -->
-      </div>
+          <h3>Exercício</h3>
+          <p>Explique por que a contagem de maneiras de subir uma escada de <code>n</code> degraus, dando passos de 1 ou 2 degraus, pode ser descrita por uma recorrência.</p>
+          <button onclick="toggleResolucao('r2')">Mostrar/Ocultar resolução</button>
+        
+          <div class="resolucao" id="r2">
+            <h4>Passo a passo da modelagem</h4>
+        
+            <ol>
+              <li>
+                <strong>Definição da sequência.</strong>
+                <p>Seja <code>a_n</code> o número de maneiras diferentes de subir uma escada de <code>n</code> degraus, dando passos de 1 ou 2 degraus.</p>
+              </li>
+        
+              <li>
+                <strong>Análise do último passo.</strong>
+                <p>Para chegar exatamente ao degrau <code>n</code>, o último passo só pode ser de dois tipos:</p>
+                <ul>
+                  <li>um passo de 1 degrau, vindo do degrau <code>n-1</code>;</li>
+                  <li>um passo de 2 degraus, vindo do degrau <code>n-2</code>.</li>
+                </ul>
+              </li>
+        
+              <li>
+                <strong>Contagem por casos.</strong>
+                <p>
+                  − Se o último passo foi de 1 degrau, então antes dele há uma maneira qualquer de chegar ao degrau <code>n-1</code>.
+                  Existem <code>a_{n-1}</code> maneiras de fazer isso.
+                </p>
+                <p>
+                  − Se o último passo foi de 2 degraus, então antes dele há uma maneira qualquer de chegar ao degrau <code>n-2</code>.
+                  Existem <code>a_{n-2}</code> maneiras de fazer isso.
+                </p>
+              </li>
+        
+              <li>
+                <strong>Soma dos casos (princípio aditivo).</strong>
+                <p>Os dois casos são disjuntos (ou o último passo é 1, ou é 2), então somamos as quantidades:</p>
+                <p><code>a_n = a_{n-1} + a_{n-2}</code>, para <code>n ≥ 3</code>.</p>
+              </li>
+        
+              <li>
+                <strong>Condições iniciais.</strong>
+                <p>Agora calculamos manualmente os primeiros termos:</p>
+                <ul>
+                  <li>
+                    Para <code>n = 1</code>: a escada tem 1 degrau.
+                    Só existe uma maneira: dar um único passo de 1 degrau.
+                    Logo, <code>a_1 = 1</code>.
+                  </li>
+                  <li>
+                    Para <code>n = 2</code>: a escada tem 2 degraus.
+                    As possibilidades são:
+                    <code>(1,1)</code> (dois passos de 1) ou <code>(2)</code> (um passo de 2).
+                    Logo, <code>a_2 = 2</code>.
+                  </li>
+                </ul>
+              </li>
+        
+              <li>
+                <strong>Conclusão.</strong>
+                <p>Com isso, obtemos a relação de recorrência completa:</p>
+                <p><code>a_n = a_{n-1} + a_{n-2}</code>, para <code>n ≥ 3</code>, com <code>a_1 = 1</code> e <code>a_2 = 2</code>.</p>
+                <p>Esses valores permitem calcular <code>a_3</code>, <code>a_4</code>, <code>a_5</code>, etc., de forma recursiva.</p>
+              </li>
+            </ol>
+          </div>
+        </div>
     </section>
 
     <!-- 4. Funções geradoras -->
