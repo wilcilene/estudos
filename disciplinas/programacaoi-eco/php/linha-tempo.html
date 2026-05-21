@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Roadmap de Estudos - Projeto Inscrições (Laravel)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-card: #020617;
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.12);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --danger: #f97373;
+      --warning: #facc15;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1e293b 0, #020617 55%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    header {
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(to right, rgba(15,23,42,.95), rgba(15,23,42,.85));
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: radial-gradient(circle at 30% 20%, #4ade80 0, #22c55e 35%, #16a34a 75%, #14532d 100%);
+      box-shadow: 0 0 30px rgba(34,197,94,.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #020617;
+    }
+    .brand-title {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-title span:first-child {
+      font-weight: 600;
+      letter-spacing: .03em;
+      font-size: .95rem;
+    }
+    .brand-title span:last-child {
+      font-size: .8rem;
+      color: var(--muted);
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      font-size: .85rem;
+    }
+    nav a {
+      padding: .35rem .7rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, .9);
+      border: 1px solid rgba(148, 163, 184, .4);
+      color: var(--muted);
+    }
+    nav a:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.8rem 1.2rem 2.5rem;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(260px, 1.2fr);
+      gap: 2rem;
+    }
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+    h1, h2, h3 {
+      margin: 0;
+      letter-spacing: .02em;
+    }
+    h1 {
+      font-size: 1.9rem;
+    }
+    h2 {
+      font-size: 1.3rem;
+      margin-bottom: .4rem;
+    }
+    h3 {
+      font-size: 1.05rem;
+      margin-bottom: .3rem;
+    }
+    p {
+      margin: 0 0 .5rem 0;
+      color: var(--muted);
+    }
+    .hero-card {
+      border-radius: 1.1rem;
+      padding: 1.3rem 1.4rem;
+      border: 1px solid rgba(148, 163, 184, .5);
+      background: radial-gradient(circle at top left, rgba(34,197,94,.14) 0, rgba(15,23,42,.95) 55%);
+      box-shadow: 0 20px 60px rgba(15,23,42,.8);
+      margin-bottom: 1.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-bottom: .7rem;
+      font-size: .75rem;
+    }
+    .chip {
+      padding: .1rem .5rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184,.5);
+      color: var(--muted);
+      background: rgba(15,23,42,.95);
+    }
+    .chip.highlight {
+      border-color: var(--accent);
+      background: rgba(22, 163, 74, .16);
+      color: #bbf7d0;
+    }
+    .hero-meta {
+      margin-top: .5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: .28rem;
+    }
+    .hero-meta span::before {
+      content: "•";
+      color: var(--accent);
+    }
+
+    .section {
+      margin-bottom: 1.3rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      background: linear-gradient(to bottom right, rgba(15,23,42,.96), rgba(15,23,42,.92));
+      padding: 1.1rem 1.2rem;
+    }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: .4rem;
+    }
+    .tag {
+      font-size: .7rem;
+      padding: .1rem .5rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,.5);
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .section-body {
+      margin-top: .4rem;
+    }
+    .step-list {
+      list-style: none;
+      padding: 0;
+      margin: .4rem 0 0 0;
+    }
+    .step-item {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: .4rem;
+      font-size: .9rem;
+    }
+    .step-item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .35rem;
+      width: .55rem;
+      height: .55rem;
+      border-radius: 999px;
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 0 2px rgba(34,197,94,.22);
+    }
+    .step-item strong {
+      color: var(--text);
+    }
+    .sub {
+      font-size: .85rem;
+      color: var(--muted);
+      display: block;
+    }
+
+    .kanban-link {
+      font-size: .85rem;
+      padding: .4rem .6rem;
+      border-radius: .6rem;
+      border: 1px dashed rgba(148,163,184,.6);
+      background: rgba(15,23,42,.9);
+      margin-top: .4rem;
+    }
+    .kanban-link span {
+      display: block;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    .phase-flag {
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+      gap: .8rem;
+      margin-top: .5rem;
+    }
+    @media (max-width: 700px) {
+      .two-col {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .3rem;
+      margin-top: .25rem;
+    }
+    .badge {
+      font-size: .75rem;
+      padding: .12rem .45rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,.98);
+      border: 1px solid rgba(148,163,184,.45);
+      color: var(--muted);
+    }
+
+    /* Linha do tempo */
+    .timeline {
+      margin-top: .7rem;
+      border-left: 2px solid rgba(148,163,184,.5);
+      padding-left: 1.2rem;
+    }
+    .timeline-item {
+      margin-bottom: .9rem;
+      position: relative;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -1.35rem;
+      top: .3rem;
+      width: .7rem;
+      height: .7rem;
+      border-radius: 999px;
+      background: var(--bg);
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 0 3px rgba(34,197,94,.22);
+    }
+    .timeline-date {
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+      margin-bottom: .15rem;
+    }
+    .timeline-title {
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: .1rem;
+    }
+    .timeline-desc {
+      font-size: .85rem;
+      color: var(--muted);
+    }
+    .timeline-tag {
+      font-size: .7rem;
+      padding: .05rem .4rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,.5);
+      color: var(--muted);
+      margin-left: .35rem;
+    }
+
+    aside {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .aside-section {
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at top right, rgba(34,197,94,.18) 0, rgba(15,23,42,.96) 50%);
+      padding: 1rem 1rem;
+      font-size: .87rem;
+    }
+    .aside-section h3 {
+      margin-bottom: .2rem;
+    }
+    .aside-section ul {
+      padding-left: 1.1rem;
+      margin: .35rem 0 0 0;
+    }
+    .aside-section li {
+      margin-bottom: .25rem;
+      color: var(--muted);
+    }
+    .aside-section code {
+      background: rgba(15,23,42,.95);
+      border-radius: .25rem;
+      padding: .05rem .25rem;
+      border: 1px solid rgba(148,163,184,.4);
+      font-size: .8rem;
+      color: #e5e7eb;
+    }
+
+    .danger {
+      color: var(--danger);
+    }
+    .warning {
+      color: var(--warning);
+    }
+    .muted {
+      color: var(--muted);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.1rem 1.2rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      font-size: .8rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-logo">IN</div>
+      <div class="brand-title">
+        <span>Projeto Inscrições · Laravel</span>
+        <span>Roadmap com Linha do Tempo até 19/06</span>
+      </div>
+    </div>
+    <nav>
+      <a href="#timeline">Linha do tempo</a>
+      <a href="#fase-1">MVC & Laravel</a>
+      <a href="#fase-2">Models & Migrations</a>
+      <a href="#fase-3">Fluxos principais</a>
+      <a href="#fase-4">Qualidade & entrega</a>
+      <a href="#materiais">Materiais</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="hero-card" id="timeline">
+      <div class="hero-chip-row">
+        <span class="chip highlight">Período: até 19 de junho · Apresentação Final</span>
+        <span class="chip">Checkpoints em todas as aulas (qui, sex e sábados de trabalho)</span>
+      </div>
+      <h1>Linha do Tempo do Projeto</h1>
+      <p>
+        A linha do tempo abaixo distribui o estudo e a implementação do sistema de inscrições
+        em Laravel até a apresentação final, usando as aulas como marcos de checkpoint.
+      </p>
+      <div class="hero-meta">
+        <span>Repositório: <a href="https://github.com/wilcilene/inscricoes-app-equipe2" target="_blank">inscricoes-app-equipe2</a></span>
+        <span>Kanban: <a href="https://github.com/users/wilcilene/projects/2/views/1" target="_blank">Scrum - Inscrições App Equipe 2</a></span>
+        <span>Protótipo: <a href="https://www.figma.com/proto/Eyk1Fny59tbVx6ez68RLpq/Prot%C3%B3tipo---Inscri%C3%A7%C3%B5es?node-id=271-711" target="_blank">Figma - Protótipo Inscrições</a></span>
+      </div>
+    </div>
+
+    <!-- Linha do tempo detalhada -->
+    <article class="section">
+      <div class="section-header">
+        <div>
+          <div class="phase-flag">Cronograma</div>
+          <h2>Checkpoints por data de aula</h2>
+        </div>
+        <span class="tag">19 de junho · Apresentação</span>
+      </div>
+      <div class="section-body">
+        <div class="timeline">
+
+          <!-- 23/05 - sábado -->
+          <div class="timeline-item">
+            <div class="timeline-date">Sábado · 23 de maio</div>
+            <div class="timeline-title">
+              Checkpoint 1 – Ambientação & Estrutura do Projeto
+              <span class="timeline-tag">Fase 0</span>
+            </div>
+            <div class="timeline-desc">
+              - Todos com ambiente Laravel configurado e projeto rodando localmente.<br>
+              - Leitura do README e entendimento do domínio (editais, inscrições, resultados).<br>
+              - Mapeamento inicial das telas do Figma com as tarefas do quadro Scrum.
+            </div>
+          </div>
+
+          <!-- 30/05 - sábado -->
+          <div class="timeline-item">
+            <div class="timeline-date">Sábado · 30 de maio</div>
+            <div class="timeline-title">
+              Checkpoint 2 – MVC básico, Rotas e Controllers
+              <span class="timeline-tag">Fase 1</span>
+            </div>
+            <div class="timeline-desc">
+              - Revisão prática de PHP moderno e estrutura do projeto Laravel.<br>
+              - Rotas principais do sistema criadas em <code>routes/web.php</code> (login, mural de editais, formulário de inscrição, resultados).<br>
+              - Controllers principais esboçados, conectando rotas às views (mesmo com dados fictícios).
+            </div>
+          </div>
+
+          <!-- Sextas/Quintas entre 23/05 e 30/05 -->
+          <div class="timeline-item">
+            <div class="timeline-date">Aulas entre 23/05 e 30/05</div>
+            <div class="timeline-title">
+              Aulas regulares – Consolidação de MVC & Protótipo
+              <span class="timeline-tag">Fase 1</span>
+            </div>
+            <div class="timeline-desc">
+              - Discutir em sala as responsabilidades de Model, View e Controller no contexto do projeto.<br>
+              - Relacionar cada tela do Figma a uma rota/controller/view concreta.<br>
+              - Registrar dúvidas conceituais sobre MVC e Eloquent para serem respondidas na aula seguinte.
+            </div>
+          </div>
+
+          <!-- 13/06 - sábado -->
+          <div class="timeline-item">
+            <div class="timeline-date">Sábado · 13 de junho</div>
+            <div class="timeline-title">
+              Checkpoint 3 – Models, Migrations & Banco de Dados
+              <span class="timeline-tag">Fase 2</span>
+            </div>
+            <div class="timeline-desc">
+              - Migrations criadas para as entidades principais (Usuário, Edital, Inscrição, Documentos, Resultados).<br>
+              - Models Eloquent correspondentes criados, com <code>$fillable</code> e relacionamentos básicos.<br>
+              - Banco criado via <code>php artisan migrate</code> e testes de consultas simples realizados (por exemplo, listar editais).
+            </div>
+          </div>
+
+          <!-- Aulas entre 30/05 e 13/06 -->
+          <div class="timeline-item">
+            <div class="timeline-date">Aulas entre 30/05 e 13/06</div>
+            <div class="timeline-title">
+              Aulas regulares – Fluxos principais do sistema
+              <span class="timeline-tag">Fase 3</span>
+            </div>
+            <div class="timeline-desc">
+              - Implementar autenticação e cadastro de usuários (usando Breeze ou solução definida em aula).<br>
+              - Implementar mural de editais, fluxo de inscrição e tela de consulta de resultados, conectando views ao banco via Models.<br>
+              - Revisar, em cada dia de aula, o progresso de cada grupo no quadro Scrum e ajustar cards conforme necessário.
+            </div>
+          </div>
+
+          <!-- 19/06 - apresentação -->
+          <div class="timeline-item">
+            <div class="timeline-date">Quinta/Sexta anterior a 19 de junho</div>
+            <div class="timeline-title">
+              Checkpoint 4 – Ensaios de Apresentação & Refino
+              <span class="timeline-tag">Fase 4</span>
+            </div>
+            <div class="timeline-desc">
+              - Rodada de testes básicos (rotas e fluxos principais).<br>
+              - Ajustes finais de UX com base no protótipo do Figma (layout, mensagens, feedback ao usuário).<br>
+              - Ensaios de apresentação: cada grupo demonstra o fluxo completo (do mural de editais até a visualização do resultado) e recebe feedback.
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">19 de junho · Apresentação</div>
+            <div class="timeline-title">
+              Entrega Final – Demonstração do Sistema de Inscrições
+              <span class="timeline-tag">Fase 4</span>
+            </div>
+            <div class="timeline-desc">
+              - Demonstração do sistema em funcionamento (mural, inscrição, consulta de resultado), com base no repositório atualizado.<br>
+              - Apresentação da modelagem de banco de dados (Migrations/Models) e justificativas de decisões de projeto.<br>
+              - Entrega do README/documentação consolidada e, se possível, registro de próximos passos/funcionalidades futuras.
+            </div>
+          </div>
+
+        </div>
+        <div class="badge-row">
+          <span class="badge">Use cada dia de aula como mini-sprint review: atualizar o quadro Scrum e mostrar o que foi entregue.</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Fases conceituais (mantidas, mas agora alinhadas ao cronograma) -->
+
+    <article class="section" id="fase-1">
+      <div class="section-header">
+        <div>
+          <div class="phase-flag">Fase 1 · Até 30/05</div>
+          <h2>Fundamentos Laravel, MVC e Protótipo</h2>
+        </div>
+        <span class="tag">Ambientação & Estrutura</span>
+      </div>
+      <div class="section-body">
+        <p>Meta até o checkpoint de 30/05: turma inteira com entendimento de MVC no contexto do projeto, rotas e controllers principais configurados.</p>
+        <div class="two-col">
+          <div>
+            <h3>Conteúdos de estudo</h3>
+            <ul class="step-list">
+              <li class="step-item">
+                <strong>Revisão de PHP e Laravel básico</strong>
+                <span class="sub">
+                  Namespaces, classes, rotas, controllers, views Blade, comandos básicos do Artisan.
+                </span>
+              </li>
+              <li class="step-item">
+                <strong>Estrutura do projeto Laravel</strong>
+                <span class="sub">
+                  Diretórios <code>app</code>, <code>routes</code>, <code>database</code>, <code>resources</code> e organização do código existente no repositório.
+                </span>
+              </li>
+              <li class="step-item">
+                <strong>Mapeamento Figma → Rotas</strong>
+                <span class="sub">
+                  Para cada tela do Figma, definir pelo menos uma rota e uma action de controller correspondente.
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>Resultados esperados</h3>
+            <ul class="step-list">
+              <li class="step-item">
+                <strong>Projeto rodando localmente</strong>
+                <span class="sub">
+                  Todos conseguem iniciar o servidor com <code>php artisan serve</code> e navegar pelas rotas básicas.
+                </span>
+              </li>
+              <li class="step-item">
+                <strong>Quadro Scrum atualizado</strong>
+                <span class="sub">
+                  Cards de ambientação e rotas marcados como concluídos ou em revisão, conforme o avanço do grupo.
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="section" id="fase-2">
+      <div class="section-header">
+        <div>
+          <div class="phase-flag">Fase 2 · Até 13/06</div>
+          <h2>Camada Model, Migrations e Banco de Dados</h2>
+        </div>
+        <span class="tag">Metade do back-end</span>
+      </div>
+      <div class="section-body">
+        <p>Meta até o checkpoint de 13/06: banco modelado por migrations e Models Eloquent cobrindo pelo menos 50% das entidades necessárias.</p>
+        <div class="two-col">
+          <div>
+            <h3>Estudo guiado</h3>
+            <ul class="step-list">
+              <li class="step-item">
+                <strong>Vídeos de Migrations e Model</strong>
+                <span class="sub">
+                  Assistir aos vídeos sugeridos, focando em <code>php artisan make:migration</code>, <code>migrate</code>, rollback
+                  e mapeamento de tabelas para Models.
+                </span>
+              </li>
+              <li class="step-item">
+                <strong>Mapeamento de entidades</strong>
+                <span class="sub">
+                  Identificar tabelas a partir do protótipo (Usuário, Edital, Inscrição, Documentos, Resultados) e definir atributos e relacionamentos.
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>Produção no projeto</h3>
+            <ul class="step-list">
+              <li class="step-item">
+                <strong>Migrations criadas e rodadas</strong>
+                <span class="sub">
+                  Criar e ajustar migrations para as tabelas principais, rodar <code>migrate</code> e validar o esquema no banco.
+                </span>
+              </li>
+              <li class="step-item">
+                <strong>Models Eloquent funcionando</strong>
+                <span class="sub">
+                  Criar Models com <code>$fillable</code> e relacionamentos (<code>hasMany</code>, <code>belongsTo</code>) e testar consultas básicas.
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="section" id="fase-3">
+      <div class="section-header">
+        <div>
+          <div class="phase-flag">Fase 3 · Entre 30/05 e 19/06</div>
+          <h2>Fluxos principais do sistema</h2>
+        </div>
+        <span class="tag">Funcionalidades</span>
+      </div>
+      <div class="section-body">
+        <p>Meta: fluxos principais do protótipo funcionando de ponta a ponta (usuário → edital → inscrição → resultado) até a semana da apresentação.</p>
+        <div class="two-col">
+          <div>
+            <h3>Funcionalidades prioritárias</h3>
+            <ul class="step-list">
+              <li class="step-item">
+                <strong>Autenticação e cadastro</strong>
+                <span class="sub">
+                  Implementar login, cadastro e perfis básicos conforme regras do projeto.
+                </span>
+              </li>
+              <li class="step-item">
+                <strong>Mural de editais</strong>
+                <span class="sub">
+                  Listagem de editais com status (aberto/encerrado) e filtros simples.
+                </span>
+              </li>
+              <li class="step-item">
+                <strong>Fluxo de inscrição</strong>
+                <span class="sub">
+                  Formulário de inscrição integrado ao banco, com validações de regras de negócio.
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>Integração com o quadro Scrum</h3>
+            <ul class="step-list">
+              <li class="step-item">
+                <strong>Cards por fluxo</strong>
+                <span class="sub">
+                  Cada fluxo do sistema (ex.: “Implementar mural de editais”) deve ter um card associado no quadro, com responsável definido.
+                </span>
+              </li>
+              <li class="step-item">
+                <strong>Checkpoint em cada aula</strong>
+                <span class="sub">
+                  Atualizar status dos cards (Backlog → Doing → Done) em toda aula, conectando com o cronograma acima.
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="section" id="fase-4">
+      <div class="section-header">
+        <div>
+          <div class="phase-flag">Fase 4 · Semana da apresentação</div>
+          <h2>Testes, UX e Documentação</h2>
+        </div>
+        <span class="tag">Entrega final</span>
+      </div>
+      <div class="section-body">
+        <p>Meta: projeto estável, com interface alinhada ao protótipo e documentação clara para a apresentação do dia 19/06.</p>
+        <ul class="step-list">
+          <li class="step-item">
+            <strong>Testes básicos</strong>
+            <span class="sub">
+              Verificar se todos os fluxos principais funcionam sem erros (cadastro, inscrição, consulta de resultados).
+            </span>
+          </li>
+          <li class="step-item">
+            <strong>Refino de UX</strong>
+            <span class="sub">
+              Ajustar mensagens, feedbacks (sucesso/erro) e layout para ficar próximo ao Figma e fácil de usar.
+            </span>
+          </li>
+          <li class="step-item">
+            <strong>Documentação e ensaio</strong>
+            <span class="sub">
+              Atualizar README, listar funcionalidades implementadas, limitações e próximos passos; ensaiar a apresentação em grupo.
+            </span>
+          </li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="section" id="materiais">
+      <div class="section-header">
+        <div>
+          <div class="phase-flag">Materiais complementares</div>
+          <h2>Referências para estudo contínuo</h2>
+        </div>
+        <span class="tag">Consulta</span>
+      </div>
+      <div class="section-body">
+        <p>Use estes materiais ao longo de toda a linha do tempo para aprofundar o entendimento de Laravel, Migrations, Models e MVC.</p>
+        <ul class="step-list">
+          <li class="step-item">
+            <strong>Documentação oficial Laravel</strong>
+            <span class="sub">
+              Migrations: <a href="https://laravel.com/docs/5.7/migrations" target="_blank">https://laravel.com/docs/5.7/migrations</a><br>
+              Eloquent ORM: <a href="https://laravel.com/docs/4.2/eloquent" target="_blank">https://laravel.com/docs/4.2/eloquent</a>
+            </span>
+          </li>
+          <li class="step-item">
+            <strong>Roadmaps de aprendizado</strong>
+            <span class="sub">
+              Considere roadmaps de Laravel para visualizar habilidades além do projeto atual e planejar estudos futuros.
+            </span>
+          </li>
+          <li class="step-item">
+            <strong>Vídeos sugeridos</strong>
+            <span class="sub">
+              Revisar os vídeos indicados sobre Migrations e Model, fazendo anotações e repetindo exemplos no próprio projeto.
+            </span>
+          </li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <aside>
+    <div class="aside-section">
+      <h3>Checklist rápido por aluno</h3>
+      <ul>
+        <li>Consigo rodar o projeto localmente sem erros.</li>
+        <li>Sei onde ficam rotas, controllers, models e views.</li>
+        <li>Entendo o papel da camada Model no MVC.</li>
+        <li>Consigo criar e rodar uma migration simples.</li>
+        <li>Consigo usar um Model para salvar e buscar dados.</li>
+      </ul>
+    </div>
+
+    <div class="aside-section">
+      <h3>Comandos Laravel essenciais</h3>
+      <ul>
+        <li><code>php artisan serve</code> – inicia o servidor.</li>
+        <li><code>php artisan migrate</code> – executa migrations.</li>
+        <li><code>php artisan migrate:rollback</code> – desfaz a última migration.</li>
+        <li><code>php artisan make:model Nome -m</code> – cria Model e migration.</li>
+        <li><code>php artisan tinker</code> – console interativo para testar Models.</li>
+      </ul>
+    </div>
+
+    <div class="aside-section">
+      <h3>Boas práticas e alertas</h3>
+      <ul>
+        <li class="warning">
+          Sincronizar código com o repositório frequentemente para evitar conflitos grandes.
+        </li>
+        <li>
+          Manter migrations e Models coerentes, atualizando ambos sempre que a estrutura mudar.
+        </li>
+        <li class="danger">
+          Evitar editar tabelas diretamente no banco sem criar migrations correspondentes.
+        </li>
+        <li>
+          Registrar cada funcionalidade concluída no quadro Scrum e nas issues do GitHub.
+        </li>
+      </ul>
+    </div>
+  </aside>
+</main>
+
+<footer>
+  <span>Roadmap elaborado para o projeto “Sistema de Gerenciamento de Inscrições e Editais” com linha do tempo até 19 de junho.</span>
+</footer>
+
+</body>
+</html>
