@@ -1,0 +1,786 @@
+Entendido! Página totalmente independente, usando apenas o `style.css` que você enviou (sem estilos extras inline, aproveitando as classes já existentes no CSS). Aqui está o HTML completo:
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorial — CRUD Adoção de Pets com Node.js, Express e MySQL</title>
+  " />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  CABEÇALHO                                                  -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<header>
+  <div class="container">
+    <div>
+      <span class="tag">Tutorial</span>
+      <span class="tag tag--aulas">Programação Web</span>
+      <span class="tag tag--nivel">Intermediário</span>
+    </div>
+    <h1>&#128062; CRUD Adoção de Pets — Do Zero à Execução</h1>
+    <p>
+      Tutorial completo para entender, configurar e executar o projeto
+      <strong>crud-adocao-pets-js</strong>. Você vai partir do zero e ter a
+      aplicação rodando localmente, compreendendo cada camada: banco de dados,
+      servidor Node.js/Express e front-end com de>fetch()</code>.
+    </p>
+    <nav>
+      <a href="#o-que-e">O projeto</a>
+      <a href="#prereqs">Pré-requisitos</a>
+      <a href="#clonar">Clonar</a>
+      <a href="#banco">Banco de dados</a>
+      <a href="#configurar">Configurar</a>
+      <a href="#executar">Executar</a>
+      <a href="#estrutura">Estrutura</a>
+      <a href="#arquitetura">Arquitetura</a>
+      <a href="#api">Rotas da API</a>
+      <a href="#frontend">Front-end</a>
+      <a href="#erros">Erros comuns</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  CONTEÚDO PRINCIPAL + SIDEBAR                              -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<main>
+
+  <!-- ─── COLUNA PRINCIPAL ─────────────────────────────────── -->
+  <section>
+
+    <!-- 0. O QUE É ESTE PROJETO -->
+    <article class="card" id="o-que-e">
+      <h2>&#128218; O que é este projeto?</h2>
+      <p>
+        O <strong>crud-adocao-pets-js</strong> é uma aplicação web didática com
+        <strong>CRUD completo</strong> (Create, Read, Update, Delete). Ela simula
+        um sistema de cadastro de pessoas interessadas em adotar animais de estimação.
+      </p>
+      <p>
+        O objetivo é demonstrar, na prática, como o <strong>navegador</strong> (front-end)
+        conversa com um <strong>servidor Node.js</strong> (back-end), que lê e grava
+        dados em um <strong>banco MySQL</strong>. Toda a comunicação usa
+        de>fetch()</code>, a API nativa do JavaScript para requisições HTTP.
+      </p>
+
+      <div class="cat-grid">
+        <div class="cat-card cat-card--criacional">
+          <h3>&#127760; Navegador</h3>
+          <p>HTML + CSS + JavaScript. O usuário preenche formulários e vê os dados. Usa de>fetch()</code> para comunicar com a API.</p>
+        </div>
+        <div class="cat-card cat-card--estrutural">
+          <h3>&#9881;&#65039; Servidor Node.js</h3>
+          <p>Express recebe requisições HTTP, valida os dados e aciona a camada de banco. Serve também os arquivos estáticos.</p>
+        </div>
+        <div class="cat-card cat-card--comportamental">
+          <h3>&#128451; MySQL</h3>
+          <p>Banco de dados relacional que armazena os registros de forma persistente. Acessado com queries SQL parametrizadas.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Conceito fundamental:</strong> o navegador <em>nunca</em> acessa o
+        banco de dados diretamente. Todo acesso passa pelo servidor Node.js.
+        Isso é essencial para a segurança da aplicação.
+      </div>
+    </article>
+
+    <!-- 1. PRÉ-REQUISITOS -->
+    <article class="card" id="prereqs">
+      <h2>1. Pré-requisitos</h2>
+      <p>Antes de começar, certifique-se de ter os seguintes softwares instalados na sua máquina.</p>
+
+      <div class="step">
+        <h3>&#9312; Node.js (versão 18 ou superior)</h3>
+        <p>
+          O Node.js é o ambiente de execução JavaScript no servidor. Sem ele, não há como rodar o projeto.
+          Acesse <a href="https://nodejs.org" target="_blank">nodejs.org</a>, baixe a versão <strong>LTS</strong>
+          e instale normalmente. Após instalar, verifique no terminal:
+        </p>
+        <pre>de># Verifica a versão do Node.js instalada
+node --version
+# Saída esperada: v20.x.x ou superior
+
+# Verifica o npm (gerenciador de pacotes — vem junto com o Node)
+npm --version
+# Saída esperada: 10.x.x ou superior</code></pre>
+        <div class="note">O npm é instalado automaticamente junto com o Node.js. Ele gerencia todas as dependências do projeto.</div>
+      </div>
+
+      <div class="step">
+        <h3>&#9313; MySQL (versão 8 ou superior)</h3>
+        <p>
+          O MySQL é o banco de dados relacional utilizado no projeto. Você pode instalá-lo de duas formas:
+        </p>
+        <ul class="mini-list">
+          >&#128073; <strong>MySQL Community Server</strong> — instalação tradicional via <a href="https://dev.mysql.com/downloads/" target="_blank">dev.mysql.com</a>.</li>
+          >&#128073; <strong>XAMPP</strong> — pacote que inclui MySQL (MariaDB), Apache e PHP. Prático para quem já usa em aula.</li>
+          >&#128073; <strong>Docker</strong> — opção avançada: de>docker run --name mysql-pets -e MYSQL_ROOT_PASSWORD=senha -p 3306:3306 -d mysql:8</code>.</li>
+        </ul>
+        <p>Após instalar, confirme que o serviço está rodando antes de continuar.</p>
+      </div>
+
+      <div class="step">
+        <h3>&#9314; Git</h3>
+        <p>
+          O Git é necessário para clonar o repositório. Verifique com:
+        </p>
+        <pre>de>git --version
+# Saída esperada: git version 2.x.x</code></pre>
+        <p>Se não tiver, baixe em <a href="https://git-scm.com" target="_blank">git-scm.com</a>.</p>
+      </div>
+
+      <div class="step">
+        <h3>&#9315; Editor de código</h3>
+        <p>
+          Recomendamos o <a href="https://code.visualstudio.com" target="_blank">Visual Studio Code</a>
+          (gratuito). Instale também a extensão <strong>REST Client</strong> para testar a API
+          diretamente no editor.
+        </p>
+      </div>
+    </article>
+
+    <!-- 2. CLONAR O REPOSITÓRIO -->
+    <article class="card" id="clonar">
+      <h2>2. Clonar o repositório</h2>
+      <p>
+        Com o Git instalado, abra o terminal na pasta onde você quer criar o projeto e execute:
+      </p>
+      <pre>de># Clona o repositório para a sua máquina
+git clone https://github.com/wilcilene/crud-adocao-pets-js.git
+
+# Entra na pasta do projeto
+cd crud-adocao-pets-js</code></pre>
+
+      <p>Depois de clonar, instale as dependências do projeto com o npm:</p>
+      <pre>de># Instala todas as dependências listadas no package.json
+npm install</code></pre>
+
+      <div class="callout">
+        <strong>O que acontece aqui?</strong> O npm lê o arquivo de>package.json</code>
+        e baixa automaticamente todos os pacotes necessários: Express, mysql2, dotenv, cors
+        e nodemon. Eles ficam salvos na pasta de>node_modules/</code> (que <em>não</em>
+        deve ser enviada ao Git).
+      </div>
+    </article>
+
+    <!-- 3. BANCO DE DADOS -->
+    <article class="card" id="banco">
+      <h2>3. Criar o banco de dados</h2>
+      <p>
+        O projeto inclui um script SQL pronto em de>sql/schema.sql</code> que cria
+        o banco de dados, a tabela de>humans</code> e insere três registros de exemplo.
+        Você tem duas opções para executá-lo:
+      </p>
+
+      <div class="step">
+        <h3>Opção A — Via linha de comando</h3>
+        <pre>de># Substitua "seu_usuario" pelo seu usuário do MySQL (geralmente "root")
+# Será solicitada a senha logo após executar o comando
+mysql -u seu_usuario -p &lt; sql/schema.sql</code></pre>
+      </div>
+
+      <div class="step">
+        <h3>Opção B — Via MySQL Workbench ou phpMyAdmin</h3>
+        <ul class="mini-list">
+          >&#9312; Abra o MySQL Workbench (ou phpMyAdmin no XAMPP).</li>
+          >&#9313; Crie uma nova conexão com o servidor local.</li>
+          >&#9314; Abra o arquivo de>sql/schema.sql</code> no editor.</li>
+          >&#9315; Execute o script completo com o botão de execução (&#9889;).</li>
+        </ul>
+      </div>
+
+      <p>Após executar, o banco terá essa estrutura:</p>
+      <pre>de>-- Banco de dados criado
+adocao_pets
+
+-- Tabela principal
+humans (
+  id                   INT AUTO_INCREMENT PRIMARY KEY,
+  nome                 VARCHAR(120) NOT NULL,
+  email                VARCHAR(120) NOT NULL UNIQUE,
+  telefone             VARCHAR(30),
+  cidade               VARCHAR(80),
+  tipo_residencia      ENUM('casa','apartamento','chacara','outro'),
+  experiencia_com_pets TINYINT(1) DEFAULT 0,
+  preferencias         VARCHAR(255),
+  observacoes          TEXT,
+  criado_em            TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  atualizado_em        TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)</code></pre>
+
+      <div class="note">
+        O campo de>email</code> tem restrição de>UNIQUE</code>: não é possível
+        cadastrar dois humanos com o mesmo e-mail. Se você tentar, o servidor retorna
+        HTTP 409 (Conflict).
+      </div>
+    </article>
+
+    <!-- 4. CONFIGURAR -->
+    <article class="card" id="configurar">
+      <h2>4. Configurar as variáveis de ambiente</h2>
+      <p>
+        O projeto usa um arquivo de>.env</code> para guardar as credenciais do banco
+        de dados e a porta do servidor. Esse arquivo <strong>nunca é enviado ao Git</strong>
+        (já está no de>.gitignore</code>) porque contém informações sensíveis.
+      </p>
+      <p>
+        O repositório inclui um modelo chamado de>.env.example</code>. Copie-o e edite:
+      </p>
+
+      <div class="step">
+        <h3>No terminal:</h3>
+        <pre>de># No Linux / macOS
+cp .env.example .env
+
+# No Windows (Prompt de Comando)
+copy .env.example .env
+
+# No Windows (PowerShell)
+Copy-Item .env.example .env</code></pre>
+      </div>
+
+      <div class="step">
+        <h3>Edite o arquivo de>.env</code> com seus dados:</h3>
+        <pre>de># Configurações do banco de dados MySQL
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=root          # seu usuário do MySQL
+DB_PASSWORD=sua_senha # sua senha do MySQL
+DB_NAME=adocao_pets
+
+# Porta em que o servidor Express vai rodar
+PORT=3000</code></pre>
+      </div>
+
+      <div class="callout">
+        <strong>Por que usar .env?</strong> Nunca coloque senhas diretamente no código-fonte.
+        Variáveis de ambiente separam a configuração do código, permitindo que o mesmo
+        projeto rode em diferentes máquinas com configurações diferentes — sem alterar
+        nenhuma linha de código.
+      </div>
+    </article>
+
+    <!-- 5. EXECUTAR -->
+    <article class="card" id="executar">
+      <h2>5. Executar o projeto</h2>
+      <p>Com banco criado e de>.env</code> configurado, você está pronto para iniciar o servidor.</p>
+
+      <div class="step">
+        <h3>Modo desenvolvimento (recomendado para estudantes)</h3>
+        <pre>de>npm run dev</code></pre>
+        <p>
+          O comando de>dev</code> usa o <strong>nodemon</strong>, que reinicia o servidor
+          automaticamente sempre que você salvar um arquivo. Ideal para desenvolvimento.
+        </p>
+      </div>
+
+      <div class="step">
+        <h3>Modo produção</h3>
+        <pre>de>npm start</code></pre>
+        <p>Inicia o servidor com o Node.js diretamente, sem reinício automático.</p>
+      </div>
+
+      <p>Se tudo estiver correto, você verá no terminal:</p>
+      <pre>de>Servidor rodando em http://localhost:3000</code></pre>
+
+      <p>Abra o navegador e acesse:</p>
+      <ul class="mini-list">
+        >&#127760; de>http://localhost:3000</code> — Formulário CRUD de adoção.</li>
+        >&#128202; de>http://localhost:3000/api/humans</code> — Retorna o JSON com todos os cadastros.</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Dica:</strong> Deixe o terminal aberto enquanto
+        usa a aplicação. Mensagens de erro do servidor aparecem ali.
+        Para parar o servidor, pressione de>Ctrl + C</code> no terminal.
+      </div>
+    </article>
+
+    <!-- 6. ESTRUTURA DE PASTAS -->
+    <article class="card" id="estrutura">
+      <h2>6. Estrutura de pastas do projeto</h2>
+      <p>
+        Entender onde cada arquivo vive é essencial antes de começar a modificar o código.
+        O projeto segue uma organização em camadas, separando responsabilidades claramente:
+      </p>
+
+      <pre>de>crud-adocao-pets-js/
+│
+├── server.js              ← Ponto de entrada. Inicia o Express e registra as rotas.
+├── package.json           ← Dependências e scripts (start, dev).
+├── .env                   ← Suas credenciais locais (NÃO enviar ao Git).
+├── .env.example           ← Modelo do .env para outros desenvolvedores.
+├── .gitignore             ← Arquivos que o Git deve ignorar (node_modules, .env).
+├── LICENSE
+│
+├── config/
+│   └── db.js              ← Cria e exporta o pool de conexões com o MySQL.
+│
+├── controllers/
+│   └── human.controller.js  ← Lógica HTTP: valida a requisição e chama o model.
+│
+├── models/
+│   └── human.model.js       ← Queries SQL parametrizadas (findAll, create, update...).
+│
+├── routes/
+│   └── human.routes.js      ← Mapeia cada verbo HTTP para o controller correto.
+│
+├── sql/
+│   └── schema.sql           ← Script SQL para criar banco, tabela e dados de exemplo.
+│
+└── public/                  ← Arquivos estáticos servidos diretamente pelo Express.
+    ├── index.html           ← Página com o formulário de CRUD.
+    ├── style.css            ← Estilo visual da aplicação.
+    └── app.js               ← Lógica do front-end: fetch(), DOM, eventos.</code></pre>
+
+      <div class="note">
+        A pasta de>node_modules/</code> é criada automaticamente pelo de>npm install</code>
+        e não aparece no repositório. Ela pode ter centenas de MB — nunca a envie ao Git.
+      </div>
+    </article>
+
+    <!-- 7. ARQUITETURA -->
+    <article class="card" id="arquitetura">
+      <h2>7. Como as camadas se comunicam</h2>
+      <p>
+        O projeto segue uma arquitetura em três camadas bem definidas.
+        Cada camada tem uma responsabilidade única e não conhece os detalhes internos das outras.
+        Isso facilita a manutenção e o entendimento do código.
+      </p>
+
+      <h3>O caminho de uma requisição</h3>
+      <p>
+        Quando o usuário clica em <strong>Salvar</strong> no formulário, isso é o que acontece,
+        passo a passo:
+      </p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-ano">Passo 1 — Front-end</div>
+          <p>
+            O JavaScript em de>public/app.js</code> captura o evento de submit do formulário,
+            monta um objeto JSON com os dados preenchidos e chama de>fetch()</code>:
+          </p>
+          <pre>de>const resp = await fetch('/api/humans', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ nome: 'Ana', email: 'ana@exemplo.com', ... })
+});</code></pre>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-ano">Passo 2 — Rotas</div>
+          <p>
+            O Express recebe a requisição de>POST /api/humans</code> e consulta o arquivo
+            de>routes/human.routes.js</code> para saber qual função chamar:
+          </p>
+          <pre>de>router.post('/', HumanController.create);</code></pre>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-ano">Passo 3 — Controller</div>
+          <p>
+            O controller em de>controllers/human.controller.js</code> valida os dados
+            (nome e e-mail são obrigatórios), trata possíveis erros e aciona o model:
+          </p>
+          <pre>de>async create(req, res) {
+  const { nome, email } = req.body;
+  if (!nome || !email) {
+    return res.status(400).json({ error: 'Nome e e-mail são obrigatórios.' });
+  }
+  const created = await Human.create(req.body);
+  res.status(201).json(created);
+}</code></pre>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-ano">Passo 4 — Model</div>
+          <p>
+            O model em de>models/human.model.js</code> executa a query SQL com
+            parâmetros seguros (de>?</code>) e retorna o registro criado:
+          </p>
+          <pre>de>const [result] = await db.query(
+  `INSERT INTO humans (nome, email, telefone, ...)
+   VALUES (?, ?, ?, ...)`,
+  [nome, email, telefone, ...]
+);
+return this.findById(result.insertId);</code></pre>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-ano">Passo 5 — Resposta</div>
+          <p>
+            O novo registro é retornado como JSON pelo servidor. O de>fetch()</code>
+            no front-end recebe a resposta, exibe uma notificação de sucesso e recarrega
+            a tabela com os dados atualizados — tudo sem recarregar a página.
+          </p>
+          <pre>de>// Em public/app.js
+const data = await resp.json();
+mostrarNotificacao('Registro criado com sucesso!');
+await carregarLista(); // atualiza a tabela via GET /api/humans</code></pre>
+        </div>
+      </div>
+
+      <div class="anotacao">
+        <strong>Por que usar parâmetros de>?</code> no SQL?</strong>
+        <dl>
+          <dt>SQL Injection</dt>
+          <dd>
+            Se você montar a query concatenando strings (ex.: de>'WHERE id = ' + req.params.id</code>),
+            um usuário mal-intencionado pode injetar código SQL e destruir ou vazar seus dados.
+          </dd>
+          <dt>Queries parametrizadas</dt>
+          <dd>
+            Com de>?</code>, o driver MySQL trata o valor como dado puro, nunca como código.
+            É a forma correta e segura de fazer qualquer query com dados externos.
+          </dd>
+        </dl>
+      </div>
+    </article>
+
+    <!-- 8. ROTAS DA API -->
+    <article class="card" id="api">
+      <h2>8. Rotas da API REST</h2>
+      <p>
+        A API segue o padrão <strong>REST</strong>: cada verbo HTTP representa uma operação
+        diferente sobre o mesmo recurso (de>/api/humans</code>).
+      </p>
+
+      <table class="tabela-padroes">
+        <thead>
+          <tr>
+            <th>Método</th>
+            <th>Rota</th>
+            <th>Operação</th>
+            <th>Retorno</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge--e">GET</span></td>
+            <td>de>/api/humans</code></td>
+            <td>Lista todos os registros</td>
+            <td>Array JSON — HTTP 200</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge--e">GET</span></td>
+            <td>de>/api/humans/:id</code></td>
+            <td>Busca um registro por ID</td>
+            <td>Objeto JSON — HTTP 200 ou 404</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge--c">POST</span></td>
+            <td>de>/api/humans</code></td>
+            <td>Cria um novo registro</td>
+            <td>Objeto criado — HTTP 201</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge--b">PUT</span></td>
+            <td>de>/api/humans/:id</code></td>
+            <td>Atualiza um registro existente</td>
+            <td>Objeto atualizado — HTTP 200</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge--criacional" style="background:#ffebee;color:#b71c1c;">DELETE</span></td>
+            <td>de>/api/humans/:id</code></td>
+            <td>Remove um registro</td>
+            <td>Sem corpo — HTTP 204</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Testando a API pelo navegador</h3>
+      <p>
+        Com o servidor rodando, você pode testar a rota de listagem diretamente no navegador:
+      </p>
+      <pre>de>http://localhost:3000/api/humans</code></pre>
+      <p>
+        Para testar POST, PUT e DELETE (que precisam de corpo na requisição),
+        use o <strong>Thunder Client</strong> (extensão do VS Code) ou o
+        <strong>Insomnia</strong> / <strong>Postman</strong>.
+      </p>
+
+      <details>
+        <summary>Exemplo de requisição POST com fetch() no console do navegador</summary>
+        <div>
+          <p>Abra o DevTools (F12 → Console) com o servidor rodando e cole:</p>
+          <pre>de>fetch('/api/humans', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    nome: 'Teste Silva',
+    email: 'teste@exemplo.com',
+    cidade: 'Joinville',
+    tipo_residencia: 'casa',
+    experiencia_com_pets: true
+  })
+})
+.then(r => r.json())
+.then(console.log);</code></pre>
+        </div>
+      </details>
+
+      <details>
+        <summary>Exemplo de requisição DELETE</summary>
+        <div>
+          <pre>de>// Substitua 1 pelo ID real do registro
+fetch('/api/humans/1', { method: 'DELETE' })
+  .then(r => console.log('Status:', r.status)); // esperado: 204</code></pre>
+        </div>
+      </details>
+    </article>
+
+    <!-- 9. FRONT-END -->
+    <article class="card" id="frontend">
+      <h2>9. Como o front-end funciona</h2>
+      <p>
+        O front-end é composto por três arquivos na pasta de>public/</code>, servidos
+        diretamente pelo Express como arquivos estáticos:
+      </p>
+
+      <div class="step">
+        <h3>de>index.html</code> — A estrutura da página</h3>
+        <p>
+          Define o formulário de cadastro, a tabela de listagem e a seção explicativa da API.
+          Não contém nenhuma lógica JavaScript — toda a interatividade está em de>app.js</code>.
+        </p>
+      </div>
+
+      <div class="step">
+        <h3>de>style.css</code> — A aparência</h3>
+        <p>
+          Folha de estilos com variáveis CSS (de>:root</code>), responsividade via
+          CSS Grid e media queries. Nenhuma biblioteca externa é necessária.
+        </p>
+      </div>
+
+      <div class="step">
+        <h3>de>app.js</code> — A lógica do front-end</h3>
+        <p>
+          Este é o arquivo mais importante do front-end. Ele realiza as quatro operações CRUD:
+        </p>
+
+        <div class="antes-depois">
+          <div class="depois">
+            <h4>&#128221; CREATE e UPDATE — função de>salvar()</code></h4>
+            <p>
+              Detecta automaticamente se é uma inserção (formulário sem ID) ou edição
+              (formulário com ID preenchido). Usa de>POST</code> ou de>PUT</code>
+              conforme o caso.
+            </p>
+          </div>
+          <div class="depois">
+            <h4>&#128203; READ — função de>carregarLista()</code></h4>
+            <p>
+              Chamada ao carregar a página e após qualquer alteração. Faz de>GET /api/humans</code>
+              e renderiza os resultados na tabela via DOM.
+            </p>
+          </div>
+        </div>
+        <div class="antes-depois">
+          <div class="depois">
+            <h4>&#9998;&#65039; EDIT — função de>carregarParaEdicao()</code></h4>
+            <p>
+              Ao clicar em <strong>Editar</strong>, busca o registro por ID (de>GET /api/humans/:id</code>)
+              e preenche o formulário com os dados atuais. O botão Salvar vira "Atualizar".
+            </p>
+          </div>
+          <div class="antes">
+            <h4>&#128465;&#65039; DELETE — função de>remover()</code></h4>
+            <p>
+              Solicita confirmação antes de enviar de>DELETE /api/humans/:id</code>.
+              Após a remoção, recarrega a tabela automaticamente.
+            </p>
+          </div>
+        </div>
+
+        <p>Padrão importante usado no de>app.js</code>: <strong>delegação de eventos</strong>.</p>
+        <pre>de>// Em vez de adicionar um listener para cada botão da tabela,
+// um único listener na tabela detecta qualquer clique:
+tabelaBody.addEventListener('click', e => {
+  const btn = e.target.closest('[data-acao]');
+  if (!btn) return;
+
+  const { acao, id, nome } = btn.dataset;
+
+  if (acao === 'editar')  carregarParaEdicao(id);
+    if (acao === 'remover') remover(id, nome);
+});
+// Isso funciona mesmo para linhas adicionadas dinamicamente,
+// porque o listener está no elemento pai (tabelaBody), não nos botões.</code></pre>
+      </div>
+    </article>
+
+    <!-- 10. ERROS COMUNS -->
+    <article class="card" id="erros">
+      <h2>10. Erros comuns e como resolver</h2>
+
+      <div class="step">
+        <h3>&#10060; de>Error: connect ECONNREFUSED 127.0.0.1:3306</code></h3>
+        <p>O Node.js não conseguiu conectar ao MySQL. Causas prováveis:</p>
+        <ul class="mini-list">
+          >&#9888;&#65039; O serviço MySQL não está rodando — inicie-o pelo XAMPP, Services ou de>sudo service mysql start</code>.</li>
+          >&#9888;&#65039; A porta no de>.env</code> está errada (padrão é 3306).</li>
+          >&#9888;&#65039; O usuário ou senha no de>.env</code> está incorreto.</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <h3>&#10060; de>Unknown database 'adocao_pets'</code></h3>
+        <p>O banco de dados ainda não foi criado. Execute o script SQL:</p>
+        <pre>de>mysql -u root -p &lt; sql/schema.sql</code></pre>
+      </div>
+
+      <div class="step">
+        <h3>&#10060; de>Cannot find module 'express'</code></h3>
+        <p>As dependências não foram instaladas. Execute:</p>
+        <pre>de>npm install</code></pre>
+      </div>
+
+      <div class="step">
+        <h3>&#10060; de>Error: listen EADDRINUSE :::3000</code></h3>
+        <p>
+          A porta 3000 já está em uso por outro processo. Duas soluções:
+        </p>
+        <ul class="mini-list">
+          >&#9888;&#65039; Encerre o outro processo que usa a porta 3000.</li>
+          >&#9888;&#65039; Mude a porta no de>.env</code>: de>PORT=3001</code> e reinicie o servidor.</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <h3>&#10060; de>HTTP 409 — E-mail já cadastrado</code></h3>
+        <p>
+          O campo de>email</code> na tabela tem restrição de>UNIQUE</code>.
+          Tente cadastrar com outro e-mail ou remova o registro existente antes de reutilizá-lo.
+        </p>
+      </div>
+
+      <div class="step">
+        <h3>&#10060; A tabela da página aparece vazia mesmo após cadastrar</h3>
+        <ul class="mini-list">
+          >&#9888;&#65039; Verifique no console do navegador (F12) se há erros de rede.</li>
+          >&#9888;&#65039; Confirme que o servidor está rodando (de>npm run dev</code>).</li>
+          >&#9888;&#65039; Acesse de>http://localhost:3000/api/humans</code> diretamente para ver se a API responde.</li>
+        </ul>
+      </div>
+
+      <div class="callout">
+        <strong>Dica geral:</strong> Sempre que algo não funcionar, verifique dois lugares:
+        o <strong>terminal</strong> (erros do servidor Node.js) e o
+        <strong>console do navegador</strong> (F12 → Console), onde erros de JavaScript
+        e de rede aparecem com detalhes.
+      </div>
+    </article>
+
+  </section>
+
+  <!-- ─── SIDEBAR ───────────────────────────────────────────── -->
+  <aside>
+
+    <div class="card">
+      <h2>&#128197; Sumário</h2>
+      <ul class="mini-list">
+        ><a href="#o-que-e">O que é este projeto?</a></li>
+        ><a href="#prereqs">1. Pré-requisitos</a></li>
+        ><a href="#clonar">2. Clonar o repositório</a></li>
+        ><a href="#banco">3. Criar o banco de dados</a></li>
+        ><a href="#configurar">4. Configurar o .env</a></li>
+        ><a href="#executar">5. Executar o projeto</a></li>
+        ><a href="#estrutura">6. Estrutura de pastas</a></li>
+        ><a href="#arquitetura">7. Arquitetura e camadas</a></li>
+        ><a href="#api">8. Rotas da API REST</a></li>
+        ><a href="#frontend">9. Front-end (app.js)</a></li>
+        ><a href="#erros">10. Erros comuns</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>&#128230; Dependências</h2>
+      <ul class="pill-list">
+        >express</li>
+        >mysql2</li>
+        >dotenv</li>
+        >cors</li>
+        >nodemon</li>
+      </ul>
+      <p style="font-size:0.88rem; color:var(--muted);">
+        Instale com de>npm install</code>. Todas listadas no de>package.json</code>.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>&#128279; Links úteis</h2>
+      <ul class="mini-list">
+        >
+          <a href="https://github.com/wilcilene/crud-adocao-pets-js" target="_blank">
+            &#128201; Repositório no GitHub
+          </a>
+        </li>
+        >
+          <a href="https://nodejs.org" target="_blank">&#9989; nodejs.org</a>
+        </li>
+        >
+          <a href="https://expressjs.com/pt-br/" target="_blank">&#9989; expressjs.com</a>
+        </li>
+        >
+          <a href="https://dev.mysql.com/doc/" target="_blank">&#9989; MySQL Docs</a>
+        </li>
+        >
+          <a href="https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API" target="_blank">
+            &#9989; MDN — Fetch API
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>&#128161; Conceitos abordados</h2>
+      <ul class="check-list">
+        >Arquitetura MVC (Model-View-Controller)</li>
+        >API REST com Express</li>
+        >Pool de conexões MySQL</li>
+        >Queries parametrizadas (anti-SQL Injection)</li>
+        >fetch() assíncrono com async/await</li>
+        >Variáveis de ambiente (.env)</li>
+        >Delegação de eventos no DOM</li>
+        >Feedback visual ao usuário</li>
+        >Servir arquivos estáticos com Express</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>&#128640; Próximos passos</h2>
+      <ul class="check-list">
+        >Adicionar validação de formulário no front-end</li>
+        >Implementar busca/filtro por nome ou cidade</li>
+        >Criar uma tabela de pets e relacioná-la com humans</li>
+        >Adicionar autenticação com JWT</li>
+        >Escrever testes com Jest e Supertest</li>
+        >Fazer deploy no Railway ou Render</li>
+      </ul>
+    </div>
+
+  </aside>
+
+</main>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  RODAPÉ                                                     -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<footer>
+  <p>
+    Tutorial didático — CRUD Adoção de Pets com Node.js, Express e MySQL &mdash;
+    <a href="https://github.com/wilcilene/crud-adocao-pets-js" target="_blank">
+      Ver repositório no GitHub
+    </a>
+  </p>
+</footer>
+
+</body>
+</html>
