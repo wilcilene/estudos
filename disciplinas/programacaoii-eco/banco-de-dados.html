@@ -104,16 +104,39 @@ npm --version
       </div>
 
       <div class="step">
-        <h3>2. MySQL (versão 8 ou superior)</h3>
+        <h3>2. MySQL</h3>
         <p>
-          O MySQL é o banco de dados relacional utilizado no projeto. Você pode instalá-lo de duas formas:
+          O MySQL é o banco de dados relacional utilizado no projeto. No Windows, você pode usá‑lo de duas formas:
         </p>
         <ul class="mini-list">
-          <li><strong>MySQL Community Server</strong> — instalação tradicional via <a href="https://dev.mysql.com/downloads/" target="_blank">dev.mysql.com</a>.</li>
-          <li><strong>XAMPP</strong> — pacote que inclui MySQL (MariaDB), Apache e PHP. Prático para quem já usa em aula.</li>
-          <li><strong>Docker</strong> — opção avançada: <code>docker run --name mysql-pets -e MYSQL_ROOT_PASSWORD=senha -p 3306:3306 -d mysql:8</code>.</li>
+          <li><strong>MySQL Community Server</strong> — instalação tradicional no Windows.</li>
+          <li><strong>XAMPP</strong> — pacote que já inclui o MySQL (MariaDB) junto com Apache e PHP.</li>
         </ul>
         <p>Após instalar, confirme que o serviço está rodando antes de continuar.</p>
+      
+        <h4>2.1. Verificar o MySQL no Windows (instalação tradicional)</h4>
+        <ul class="mini-list">
+          <li>Pressione <code>Windows + R</code>, digite <code>services.msc</code> e confirme.</li>
+          <li>Procure por <strong>MySQL</strong> ou <strong>MySQL80</strong> na lista de serviços.</li>
+          <li>Se o status for <strong>Executando</strong>, o serviço está ativo; se estiver parado, clique com o botão direito e escolha <strong>Iniciar</strong>.</li>
+          <li>Para testar, abra o Prompt de Comando e execute:</li>
+        </ul>
+        <pre><code>mysql -u root -p</code></pre>
+        <p>
+          Se o comando abrir o prompt <code>mysql&gt;</code>, o MySQL está acessível.
+        </p>
+      
+        <h4>2.2. Verificar o MySQL no XAMPP</h4>
+        <ul class="mini-list">
+          <li>Abra o painel do <strong>XAMPP</strong>.</li>
+          <li>No módulo <strong>MySQL</strong>, veja se o status está em <strong>Running</strong> (cor verde).</li>
+          <li>Se estiver <strong>Stopped</strong>, clique em <strong>Start</strong>.</li>
+        </ul>
+      
+        <div class="callout">
+          <strong>Dica rápida:</strong> em qualquer um dos cenários, se o comando
+          <code>mysql -u root -p</code> funcionar sem erros, o MySQL está rodando e configurado corretamente.
+        </div>
       </div>
 
       <div class="step">
