@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trabalho de Matemática Discreta - Vila dos Miados</title>
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --card: #ffffff;
+      --text: #2a2a2a;
+      --primary: #6b4f3b;
+      --secondary: #9a7b5f;
+      --accent: #d7b08a;
+      --border: #e7ddd3;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.65;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg), #fff);
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-size: 2rem;
+    }
+
+    header p {
+      margin: 0.25rem auto 0;
+      max-width: 900px;
+      font-size: 1.05rem;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 6px solid var(--accent);
+      border-radius: 14px;
+      padding: 1.4rem 1.5rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: var(--primary);
+      font-size: 1.35rem;
+    }
+
+    h3 {
+      color: var(--secondary);
+      margin-bottom: 0.4rem;
+    }
+
+    ul, ol {
+      padding-left: 1.3rem;
+    }
+
+    .group {
+      border-left-color: var(--secondary);
+    }
+
+    .criteria {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .criteria article {
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fcfbf8;
+    }
+
+    .note {
+      background: #fff8ef;
+      border: 1px solid #efd7b8;
+      padding: 1rem;
+      border-radius: 12px;
+    }
+
+    .page-link {
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .footer {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cat-walk {
+      display: inline-block;
+      position: absolute;
+      top: -18px;
+      left: -2rem;
+      font-size: 1.4rem;
+      animation: walkAcross 6s linear infinite;
+    }
+    
+    @keyframes walkAcross {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(420px);
+      }
+    }
+
+    
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Trabalho de Matemática Discreta</h1>
+    <p>
+      Nesta atividade, é esperado que vocês conectem teoria e prática (ficticia, mas ainda assim prática).
+    </p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Vila dos Miados: relações, funções, grafos e o algoritmo de Dijkstra</h2>
+      <p>
+        Integraremos neste trabalho, os conteúdos de relações, funções e grafos (com algoritmo de Dijkstra).
+        Para isso, vamos trabalhar com um cenário fictício e comum a todos:
+        a <strong>Vila dos Miados</strong>, uma comunidade de gatos como contexto.
+      </p>
+      <p>
+        A ideia é que cada grupo mostre, com organização e clareza, como a matemática discreta ajuda a modelar
+        situações reais ou imaginárias de forma lógica e precisa.
+      </p>
+    </section>
+
+    <section>
+      <h2>Descrição da Vila dos Miados</h2>
+      <p>
+        A Vila dos Miados é uma comunidade de gatos que vive entre telhados, becos, praças, muros,
+        caixas d’água, janelas e outros pontos espalhados pelo bairro. Cada lugar tem sua importância:
+        alguns são mais seguros, outros mais rápidos, e alguns exigem mais cuidado para atravessar.
+      </p>
+      <p>
+        Nesse cenário, os lugares da vila serão os <strong>vértices do grafo</strong>. Os caminhos possíveis entre esses
+        lugares serão as <strong>arestas</strong>, e cada aresta terá um peso associado, representando tempo, esforço ou risco.
+      </p>
+      <p>
+        Por exemplo, um gato pode sair de um telhado e chegar a uma praça por uma rota curta, mas arriscada;
+        ou pode seguir por um beco mais longo, porém mais seguro. Uma passagem entre um muro e uma caixa d’água
+        pode exigir mais esforço, enquanto um trajeto entre dois telhados próximos pode ser rápido e leve.
+      </p>
+      <p>
+        Situações assim vão nos ajudar a discutir como representar caminhos, comparar rotas e escolher a melhor
+        alternativa de acordo com o critério definido no grafo.
+      </p>
+    </section>
+
+    <section>
+      <h2>Objetivo do trabalho</h2>
+      <p>
+        Estudem e mostrem que compreenderam os conceitos teóricos e que sabem aplicá-los na prática.
+        Para isso, usem relações, funções, grafos e Dijkstra associados a modelagem da Vila dos Miados,
+        mostrando que a matemática discreta serve para organizar, representar e resolver problemas.
+      </p>
+      <p>
+        Mostrem que conseguem transformar uma ideia abstrata em uma estrutura matemática bem definida,
+        com vértices, arestas, pesos, funções relevantes e análise dos caminhos mais curtos.
+      </p>
+    </section>
+
+    <section>
+      <h2>O que cada grupo deve entregar</h2>
+      <ul>
+        <li>
+          Um página web teórica explicando relações, funções, grafos e o algoritmo de Dijkstra com palavras próprias.
+        </li>
+        <li>
+          A modelagem da Vila dos Miados, com definição de vértices, arestas, pesos e pelo menos uma função relevante.
+        </li>
+        <li>
+          A implementação do algoritmo de Dijkstra, aplicada ao grafo criado.
+        </li>
+        <li>
+          Testes com pelo menos dois pares origem–destino e explicação dos resultados obtidos.
+        </li>
+        <li>
+          A apresentação dos resultados em sala.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Organização dos grupos</h2>
+      <p>
+        Serão formados <strong>3 grupos</strong>, com cerca de <strong>4 estudantes em cada um</strong>.
+        Todos os grupos terão o mesmo nível de complexidade esperado, então o que muda é o enfoque da apresentação,
+        não a dificuldade do trabalho.
+      </p>
+
+      <article class="group">
+        <h3>Grupo A</h3>
+        <p>
+          Foco em integrar as ideias de forma ampla, mostrando uma visão estratégica da Vila dos Miados e
+          articulando bem os conceitos entre si.
+        </p>
+        <p><span class="page-link">Página do grupo:</span> [espaço para link]</p>
+      </article>
+
+      <article class="group">
+        <h3>Grupo B</h3>
+        <p>
+          Foco em funções ligadas ao grafo e na interpretação dos resultados, destacando como as relações
+          entre os elementos ajudam na leitura do problema.
+        </p>
+        <p><span class="page-link">Página do grupo:</span> [espaço para link]</p>
+      </article>
+
+      <article class="group">
+        <h3>Grupo C</h3>
+        <p>
+          Foco em mostrar com clareza a construção do grafo e o passo a passo do algoritmo, valorizando
+          a organização da solução e a explicação do procedimento.
+        </p>
+        <p><span class="page-link">Página do grupo:</span> [espaço para link]</p>
+      </article>
+    </section>
+
+    <section>
+      <h2>Critérios de avaliação</h2>
+      <p>
+        A nota será distribuída seguirá os critérios. Lembrem que vou observar não só o resultado final,
+        mas também a qualidade da explicação e da organização do trabalho.
+      </p>
+
+      <div class="criteria">
+        <article>
+          <h3>Compreensão conceitual — 35%</h3>
+          <p>
+            Vou verificar se vocês entendem de fato os conceitos de relações, funções, grafos e algoritmo de Dijkstra,
+            e se conseguem explicá-los com clareza, sem depender apenas de copiar definições prontas.
+          </p>
+        </article>
+
+        <article>
+          <h3>Modelagem do problema — 25%</h3>
+          <p>
+            Vou observar se a Vila dos Miados foi modelada de forma coerente, com vértices, arestas, pesos e função
+            bem definidos, respeitando a lógica do cenário escolhido pelo grupo.
+          </p>
+        </article>
+
+        <article>
+          <h3>Implementação e testes — 20%</h3>
+          <p>
+            Vou analisar se o algoritmo de Dijkstra foi implementado corretamente, e se os testes realmente mostram o funcionamento da solução.
+            Eu não pretendo executar os algoritmos, então incluam os resultados dos testes na apresentação e disponibilizem o algoritmo. Pois olhar o algoritmo eu irei.
+          </p>
+        </article>
+
+        <article>
+          <h3>Análise dos resultados — 20%</h3>
+          <p>
+            Vou observar se vocês conseguem interpretar os caminhos encontrados, comparar os resultados e justificar
+            as escolhas feitas pelo algoritmo no grafo da Vila dos Miados.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Checklist para os grupos</h2>
+      <ul>
+        <li>Conceitos explicados.</li>
+        <li>Vila dos Miados modelada com vértices, arestas e pesos.</li>
+        <li>Funções definidas e justificadas.</li>
+        <li>Dijkstra implementado e testado em pelo menos dois casos.</li>
+        <li>Resultados analisados com explicação clara.</li>
+        <li>Página organizada e completa.</li>
+        <li>Apresentação preparada com participação de todos os integrantes.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Orientações finais</h2>
+      <div class="note">
+        <p>
+          Eu incentivo vocês a usar a criatividade na construção da Vila dos Miados, mas sem perder o rigor matemático.
+          A proposta precisa ser interessante, mas também precisa estar fundamentada e coerente com os conceitos
+          estudados em sala.
+        </p>
+        <p>
+          Se surgirem dúvidas durante o desenvolvimento, procurem-me antes da data da apresentação. Eu prefiro ajudar
+          com antecedência do que ver o trabalho sendo feito com insegurança de última hora ou por IA pura.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span class="cat-walk">🐈</span>
+    Matemática Discreta • Vila dos Miados • Trabalho em grupo
+  </footer>
+  
+</body>
+</html>
