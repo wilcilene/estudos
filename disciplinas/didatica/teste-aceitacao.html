@@ -1,1 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Testes de Aceitação e Testes Holísticos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
+<header class="topbar">
+  <div class="brand">
+    <img src="media/ifc-logo.png" alt="Logotipo do Instituto Federal Catarinense">
+    <div class="brand-text">
+      <span>Instituto Federal Catarinense</span>
+      <span class="course">Informática: Engenharia de Software e Banco de Dados</span>
+    </div>
+  </div>
+</header>
+
+<nav class="main-nav" aria-label="Navegação principal">
+  <ul>
+    <li><a href="#como-usar">Como usar esta página</a></li>
+    <li><a href="#motivacao">Motivação - A engenharia de softwrae</a></li>
+    <li><a href="#testes-aceitacao">Testes de aceitação</a></li>
+    <li><a href="#holistic-testing">Testes holísticos</a></li>
+    <li><a href="#nave-Explorer">Exemplo: Nave Explorer</a></li>
+    <li><a href="#atividade">Atividade guiada</a></li>
+    <li><a href="#referencias">Referências</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section id="como-usar" class="intro">
+    <h1>Testes de Aceitação em uma Perspectiva de Testes Holísticos</h1>
+    <p class="subtitle">
+      Material de estudo para revisão, compensação de ausências e apoio à aula.
+    </p>
+
+    <article class="info-box info-time">
+      <h2>Como usar esta página</h2>
+      <ol>
+        <li>Ler as seções na ordem apresentada (tempo estimado de leitura: 20 minutos).</li>
+        <li>Executar a atividade guiada da seção <strong>Atividade guiada</strong>.</li>
+        <li>Registrar suas respostas em uma folha.</li>
+      </ol>
+      <p class="small">
+        Este material está de acordo com a aula presencial sobre testes de aceitação de software. 
+        O conteúdo pode ser estudado de forma independente por interessados não presentes na aula.
+      </p>
+    </article>
+  </section>
+
+  <!-- Imagem 1: visão geral didática -->
+  <section class="media-block">
+    <figure>
+      <img src="media/visao-geral-testes.png" alt="Diagrama simples mostrando níveis de teste e a posição dos testes de aceitação">
+      <figcaption>
+        Esquema geral dos níveis de teste e posição dos testes de aceitação. 
+        <span class="generated-note">Gerado pelo chatGPT</span>
+      </figcaption>
+    </figure>
+  </section>
+
+  <section id="motivacao">
+    <h2>1. Motivação: entrega rápida e satisfação do cliente</h2>
+    <p>
+      Na literatura de Engenharia de Software, Roger Pressman destaca a 
+      <strong>ênfase na entrega rápida do software para satisfazer o cliente</strong>. 
+      Essa frase sintetiza um desafio clássico: entregar com velocidade sem comprometer a qualidade.
+    </p>
+    <p>
+      Em termos práticos, a satisfação do cliente não depende apenas de cumprir prazos, 
+      mas de validar se o produto <em>realmente</em> atende às necessidades do usuário, 
+      às regras de negócio e ao contexto de uso para o qual foi criado.
+    </p>
+    <article class="info-box info-highlight">
+      <h3>Por que precisamos de testes de aceitação?</h3>
+      <p>
+        Se queremos entrega rápida <strong>e</strong> satisfação do cliente, precisamos de mecanismos 
+        claros para decidir se o que foi construído realmente é aceito como solução do problema. Os 
+        <strong>testes de aceitação</strong> são justamente o conjunto de testes que respondem à pergunta:
+        “Este software está em condição de ser aceito para uso pelo cliente?”.
+      </p>
+    </article>
+  </section>
+
+  <section id="testes-aceitacao">
+    <h2>2. Testes de aceitação: conceitos fundamentais</h2>
+    <p>
+      Testes de aceitação (ou <em>Acceptance Testing</em>, frequentemente associados a 
+      <em>User Acceptance Testing – UAT</em>) são testes formais conduzidos para verificar 
+      se o sistema atende aos requisitos e expectativas acordadas com o cliente.
+    </p>
+    <p>
+      Enquanto testes de sistema verificam se o software cumpre sua especificação técnica, 
+      os testes de aceitação verificam se o software atende às <strong>necessidades de negócio</strong>, 
+      fluxos reais de uso e critérios de sucesso percebidos pelo cliente.
+    </p>
+
+    <div class="grid two-cols">
+      <article class="card">
+        <h3>Posição no ciclo de testes</h3>
+        <p>
+          Em muitas abordagens, os testes de aceitação ocorrem após os testes unitários, 
+          os de integração e os de sistema. Eles formam uma “última barreira” antes da 
+          liberação em produção para uso oficial.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>Quem participa</h3>
+        <p>
+          Dependendo do contexto, os testes de aceitação podem ser conduzidos por usuários 
+          finais, representantes do cliente, analistas de negócio, testadores, ou pelo 
+          próprio time de desenvolvimento em nome do cliente.
+        </p>
+      </article>
+    </div>
+
+    <article class="info-box info-quote">
+      <h3>Testes de aceitação e contrato</h3>
+      <p>
+        Em muitos projetos, os testes de aceitação estão vinculados a contratos, 
+        SLAs e critérios de aceite formal. Somente após a aprovação nesses testes 
+        o fornecedor pode considerar o sistema entregue.
+      </p>
+    </article>
+  </section>
+
+  <section id="holistic-testing">
+    <h2>3. Testes holísticos (Holistic Testing)</h2>
+    <p>
+      Lisa Crispin e Janet Gregory propõem o termo 
+      <strong>holistic testing</strong> para descrever uma abordagem em que 
+      a qualidade é responsabilidade de toda a equipe, e em que as atividades 
+      de teste são planejadas ao longo de todo o ciclo de desenvolvimento.
+    </p>
+    <p>
+      Em vez de tratar testes como uma fase isolada ao final do projeto, 
+      o modelo de testes holísticos mapeia diferentes tipos de teste – 
+      técnicos e voltados ao negócio – distribuídos desde a concepção 
+      até o uso em produção, com ciclos de feedback contínuos.
+    </p>
+
+    <!-- Imagem 2: modelo holístico -->
+    <section class="media-block">
+      <figure>
+        <img src="media/modelo-holistico.png" alt="Modelo visual de testes holísticos distribuídos ao longo do ciclo de desenvolvimento">
+        <figcaption>
+          Representação visual simplificada do modelo de testes holísticos.
+          <span class="generated-note">Imagem gerada pelo chatGPT</span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <article class="info-box info-highlight">
+      <h3>Onde entram os testes de aceitação?</h3>
+      <p>
+        No modelo de testes holísticos, os testes de aceitação fazem parte dos 
+        <strong>testes voltados ao negócio</strong> (business-facing tests), 
+        geralmente focados em validar se o produto entrega o valor esperado 
+        pelo cliente e pelas partes interessadas.
+      </p>
+    </article>
+  </section>
+
+  <section id="nave-Explorer">
+    <h2>4. Exemplo: Nave Explorer</h2>
+    <p>
+      Para tornar os conceitos mais concretos, vamos usar um exemplo 
+      fictício: o sistema de controle da nave espacial <strong>Explorer</strong>, 
+      utilizada em missões de exploração planetária.
+    </p>
+    <p>
+      Uma das funcionalidades críticas desse sistema é o 
+      <strong>modo de pouso automático em planetas autorizados</strong>. 
+      Do ponto de vista da agência responsável pela missão e da tripulação, 
+      aceitar o software significa confiar que esse modo de pouso funciona 
+      de forma segura e consistente.
+    </p>
+
+    <!-- Imagem 3: nave Explorer -->
+    <section class="media-block">
+      <figure>
+        <img src="media/nave-Explorer.png" alt="Ilustração de uma nave espacial futurista chamada Explorer em órbita de um planeta">
+        <figcaption>
+          Nave Explorer em órbita, cenário usado para exemplificar os testes de aceitação.
+          <span class="generated-note">Gerado pelo chatGPT</span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <article class="card">
+      <h3>História de usuário: Pouso automático</h3>
+      <p>
+        <strong>Como piloto da nave Explorer</strong>, quero ativar o modo de 
+        pouso automático em um planeta autorizado, para que a nave execute 
+        o pouso com segurança sem que eu precise controlar manualmente todos 
+        os detalhes.
+      </p>
+    </article>
+
+    <article class="card">
+      <h3>Critério de aceitação (Given–When–Then)</h3>
+      <p>
+        Um critério de aceitação para essa história pode ser descrito no formato 
+        Given–When–Then (Dado–Quando–Então):
+      </p>
+      <ul class="gwt-list">
+        <li><strong>Dado</strong> que a nave Explorer está em órbita estável em torno de um planeta autorizado, com combustível acima de 30% e todos os sistemas críticos operacionais;</li>
+        <li><strong>Quando</strong> o piloto selecionar esse planeta e acionar o botão “Pouso Automático” no painel de controle;</li>
+        <li><strong>Então</strong> o sistema deve calcular a trajetória de descida, iniciar a sequência de pouso e exibir, ao final, a mensagem “Pouso concluído com sucesso” para a tripulação.</li>
+      </ul>
+      <p>
+        Este critério pode ser transformado em um caso de teste de aceitação, 
+        detalhando estado inicial, dados de entrada, passos de execução e resultado esperado.
+      </p>
+    </article>
+
+    <article class="info-box info-highlight">
+      <h3>Conexão com satisfação do cliente</h3>
+      <p>
+        Se esse critério de aceitação não for atendido, o cliente 
+        (a agência responsável pela missão) não pode aceitar o software 
+        para uso em missões reais, mesmo que vários testes unitários 
+        e de integração tenham sido bem-sucedidos.
+      </p>
+    </article>
+  </section>
+
+  <section id="atividade">
+    <h2>5. Atividade guiada</h2>
+    <p>
+      Esta atividade tem como objetivo consolidar o entendimento de testes de aceitação e 
+      de critérios de aceitação em formato Given–When–Then, dentro da perspectiva de testes holísticos.
+    </p>
+
+    <ol class="activity-list">
+      <li>
+        <strong>Escolha de funcionalidade</strong><br>
+        Escolha outra funcionalidade da nave Explorer, por exemplo:
+        <ul>
+          <li>Ativar modo de emergência.</li>
+          <li>Configurar uma nova rota de viagem.</li>
+          <li>Gerar um relatório de status da missão.</li>
+          <li>Seja criativo...</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Escreva a história de usuário</strong><br>
+        Use o formato: “Como [tipo de usuário], quero [ação] para [benefício/resultado esperado]”.
+      </li>
+      <li>
+        <strong>Defina pelo menos dois critérios de aceitação</strong><br>
+        Para cada critério, use o formato Given–When–Then, 
+        garantindo que as condições sejam claras e verificáveis.
+      </li>
+      <li>
+        <strong>Transforme um critério em caso de teste</strong><br>
+        Complete o modelo abaixo em uma folha:
+        <pre class="code-block">
+Nome do caso de teste: _________________________
+Estado inicial / pré-condições:
+- _____________________________________________
+- _____________________________________________
+
+Entradas / dados de teste:
+- _____________________________________________
+- _____________________________________________
+
+Passos para execução:
+1) ____________________________________________
+2) ____________________________________________
+3) ____________________________________________
+
+Resultado esperado:
+- _____________________________________________
+        </pre>
+      </li>
+      <li>
+        <strong>Reflexão</strong><br>
+        Relacione seu critério de aceitação com o modelo de testes holísticos: 
+        em que momento do ciclo ele seria planejado e executado? Quem participaria?
+      </li>
+    </ol>
+  </section>
+
+  <section id="referencias">
+    <h2>6. Referências para estudo adicional</h2>
+    <ul class="ref-list">
+      <li>
+        PRESSMAN, Roger S.; MAXIM, Bruce. 
+        <em>Engenharia de Software: uma abordagem profissional</em>.
+      </li>
+      <li>
+        SOMMERVILLE, Ian. 
+        <em>Software Engineering</em>.
+      </li>
+      <li>
+        GREGORY, Janet; CRISPIN, Lisa. 
+        <em>Holistic Testing: Weave Quality into Your Product</em>.
+      </li>
+      <li>
+        GREGORY, Janet; CRISPIN, Lisa. 
+        <em>Agile Testing</em> e <em>Agile Testing Condensed</em>.
+      </li>
+    </ul>
+  </section>
+
+  <section id="video">
+    <h2>7. Vídeo complementar (NotebookLM)</h2>
+    <p>
+      Em breve, esta seção terá um vídeo gerado a partir deste material por meio do NotebookLM, 
+    </p>
+    <div class="video-container">
+      <iframe src="media/resumo.mp4" title="Vídeo sobre Testes de Aceitação e Testes Holísticos" 
+              loading="lazy"></iframe>
+      <p class="generated-note">vídeo gerado pelo NotebookLM com base no link dessa página.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>
+    Material didático para apoio à aula de teste de aceitação.
+  </p>
+</footer>
+
+</body>
+</html>
