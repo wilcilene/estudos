@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Autenticação básica: sessões, JWT e controle de acesso</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div>
+        <span class="tag">Programação II</span>
+        <span class="tag tag--aulas">Autenticação</span>
+        <span class="tag tag--nivel">Sessões, JWT e autorização</span>
+      </div>
+      <h1>Autenticação básica: sessões, JWT e controle de acesso em APIs</h1>
+      <p>
+        Nesta página você vai entender como uma aplicação identifica usuários,
+        mantém o login ativo e restringe o acesso em rotas protegidas.
+      </p>
+      <nav>
+        <a href="#visao-geral">Visão geral</a>
+        <a href="#sessoes">Sessões</a>
+        <a href="#jwt">JWT</a>
+        <a href="#controle-acesso">Controle de acesso</a>
+        <a href="#comparacao">Sessão x JWT</a>
+        <a href="#frontend">Front-end</a>
+        <a href="#exercicios">Exercícios</a>
+        <a href="#projeto">Projeto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <article class="card" id="visao-geral">
+        <h2>1. Visão geral</h2>
+        <p>
+          Quando um usuário faz login, a aplicação precisa responder a duas perguntas:
+          <strong>quem é essa pessoa?</strong> e <strong>o que ela pode acessar?</strong>
+        </p>
+        <p>
+          A primeira pergunta está relacionada à <strong>autenticação</strong>.
+          A segunda à <strong>autorização</strong> ou <strong>controle de acesso</strong>.
+        </p>
+
+        <div class="example-box">
+          <p><strong>Palavras-chave desta aula:</strong></p>
+          <ul class="mini-list">
+            <li><strong>Autenticação:</strong> verificar identidade.</li>
+            <li><strong>Autorização:</strong> verificar permissões.</li>
+            <li><strong>Sessão:</strong> estado mantido no servidor.</li>
+            <li><strong>JWT:</strong> token assinado enviado pelo cliente.</li>
+            <li><strong>Middleware:</strong> função intermediária entre requisição e resposta.</li>
+            <li><strong>Rota protegida:</strong> exige login para acesso.</li>
+          </ul>
+        </div>
+
+        <div class="callout">
+          <strong>Ideia central:</strong> autenticar é provar quem o usuário é;
+          autorizar é decidir o que ele pode fazer dentro da API.
+        </div>
+      </article>
+
+      <article class="card" id="sessoes">
+        <h2>2. Autenticação com sessões</h2>
+        <p>
+          Na autenticação por <strong>sessão</strong>, o servidor guarda o estado do login.
+          O navegador recebe um identificador de sessão, normalmente em cookie, e o envia automaticamente nas próximas requisições.
+        </p>
+
+        <h3>2.1 Fluxo básico</h3>
+        <ol class="mini-list">
+          <li>Usuário envia login e senha.</li>
+          <li>Servidor valida as credenciais.</li>
+          <li>Servidor cria uma sessão.</li>
+          <li>Servidor envia um cookie com o identificador da sessão.</li>
+          <li>Nas próximas requisições, o navegador envia esse cookie.</li>
+          <li>O servidor consulta a sessão e reconhece o usuário.</li>
+        </ol>
+
+        <h3>2.2 Exemplo simples com Express</h3>
+        <pre><code>const express = require('express');
+const session = require('express-session');
+
+const app = express();
+app.use(express.json());
+
+app.use(session({
+  secret: 'segredo-super-seguro',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true
+  }
+}));
+
+app.post('/login', (req, res) => {
+  const { email, senha } = req.body;
+
+  if (email === 'admin@email.com' && senha === '123456') {
+    req.session.usuario = {
+      id: 1,
+      nome: 'Administrador',
+      perfil: 'admin'
+    };
+
+    return res.json({ mensagem: 'Login realizado com sucesso' });
+  }
+
+  res.status(401).json({ erro: 'Credenciais inválidas' });
+});
+
+app.get('/perfil', (req, res) => {
+  if (!req.session.usuario) {
+    return res.status(401).json({ erro: 'Não autenticado' });
+  }
+
+  res.json(req.session.usuario);
+});
+
+app.post('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.json({ mensagem: 'Logout realizado' });
+  });
+});
+
+app.listen(3000, () => {
+  console.log('Servidor rodando na porta 3000');
+});</code></pre>
+
+        <div class="anotacao">
+          <dl>
+            <dt><code>express-session</code></dt>
+            <dd>Middleware que permite criar e gerenciar sessões no Express.</dd>
+            <dt><code>req.session.usuario</code></dt>
+            <dd>Armazena os dados do usuário autenticado na sessão.</dd>
+            <dt><code>httpOnly</code></dt>
+            <dd>Impede acesso ao cookie por JavaScript no navegador, aumentando a segurança.</dd>
+          </dl>
+        </div>
+
+        <p class="note">
+          Em sessão, o servidor “lembra” do usuário.
+          O cliente carrega apenas o identificador da sessão, não os dados completos do login.
+        </p>
+      </article>
+
+      <article class="card" id="jwt">
+        <h2>3. Autenticação com JWT</h2>
+        <p>
+          JWT significa <strong>JSON Web Token</strong>.
+          Nesse modelo, o servidor gera um token assinado após o login, e o cliente envia esse token nas próximas requisições, geralmente no cabeçalho <code>Authorization</code>.
+        </p>
+
+        <h3>3.1 Fluxo básico com JWT</h3>
+        <ol class="mini-list">
+          <li>Usuário envia login e senha.</li>
+          <li>Servidor valida as credenciais.</li>
+          <li>Servidor gera um token JWT assinado.</li>
+          <li>Cliente armazena o token.</li>
+          <li>Cliente envia o token nas próximas requisições.</li>
+          <li>Servidor valida o token antes de liberar o acesso.</li>
+        </ol>
+
+        <h3>3.2 Instalando a biblioteca</h3>
+        <pre><code>npm install jsonwebtoken</code></pre>
+
+        <h3>3.3 Exemplo de login com JWT</h3>
+        <pre><code>const express = require('express');
+const jwt = require('jsonwebtoken');
+
+const app = express();
+app.use(express.json());
+
+const SEGREDO_JWT = 'chave-super-secreta';
+
+app.post('/login', (req, res) => {
+  const { email, senha } = req.body;
+
+  if (email === 'admin@email.com' && senha === '123456') {
+    const usuario = {
+      id: 1,
+      nome: 'Administrador',
+      perfil: 'admin'
+    };
+
+    const token = jwt.sign(usuario, SEGREDO_JWT, {
+      expiresIn: '1h'
+    });
+
+    return res.json({
+      mensagem: 'Login realizado com sucesso',
+      token
+    });
+  }
+
+  res.status(401).json({ erro: 'Credenciais inválidas' });
+});
+
+app.listen(3000, () => {
+  console.log('Servidor rodando na porta 3000');
+});</code></pre>
+
+        <h3>3.4 Middleware para proteger rotas com JWT</h3>
+        <pre><code>function verificarToken(req, res, next) {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader) {
+    return res.status(401).json({ erro: 'Token não enviado' });
+  }
+
+  const partes = authHeader.split(' ');
+
+  if (partes.length !== 2 || partes[0] !== 'Bearer') {
+    return res.status(401).json({ erro: 'Formato do token inválido' });
+  }
+
+  const token = partes[1];
+
+  try {
+    const usuarioDecodificado = jwt.verify(token, SEGREDO_JWT);
+    req.usuario = usuarioDecodificado;
+    next();
+  } catch (erro) {
+    return res.status(401).json({ erro: 'Token inválido ou expirado' });
+  }
+}
+
+app.get('/perfil', verificarToken, (req, res) => {
+  res.json({
+    mensagem: 'Rota protegida acessada com sucesso',
+    usuario: req.usuario
+  });
+});</code></pre>
+
+        <div class="example-box">
+          <p><strong>Exemplo de cabeçalho enviado pelo cliente:</strong></p>
+          <pre><code>Authorization: Bearer SEU_TOKEN_AQUI</code></pre>
+        </div>
+
+        <p class="note">
+          No JWT, o servidor não precisa guardar a sessão do usuário da mesma forma que no modelo tradicional.
+          O cliente carrega o token e o servidor apenas verifica sua assinatura e validade.
+        </p>
+       <div class="example-box">
+  <h3>3.5 Outros tipos de autenticação e por que o JWT é tão usado</h3>
+
+  <p>
+    JWT não é a única forma de autenticação. Na prática, existem vários modelos,
+    e cada um faz mais sentido em determinados contextos.
+  </p>
+      <h4>Outros tipos comuns</h4>
+          <ul class="mini-list">
+            <li>
+              <strong>Sessão com cookie:</strong> o servidor guarda o estado do login e o navegador
+              envia automaticamente um cookie com o identificador da sessão.
+            </li>
+            <li>
+              <strong>HTTP Basic Auth:</strong> usuário e senha são enviados no cabeçalho da requisição.
+              É simples, mas não é a melhor escolha para aplicações modernas com login persistente.
+            </li>
+            <li>
+              <strong>Token opaco:</strong> o cliente envia um token que não carrega dados legíveis;
+              o servidor consulta esse token para descobrir quem é o usuário.
+            </li>
+            <li>
+              <strong>OAuth 2.0 / OpenID Connect:</strong> usados quando a autenticação envolve provedores
+              externos, como login com Google ou GitHub.
+            </li>
+            <li>
+              <strong>API Key:</strong> comum na autenticação entre sistemas e serviços,
+              mas não é a abordagem mais indicada para login de usuário final.
+            </li>
+          </ul>
+        
+          <h4>Por que o JWT é recomendado?</h4>
+          <ul class="mini-list">
+            <li>
+              <strong>É stateless:</strong> o servidor não precisa manter uma sessão tradicional
+              para cada usuário autenticado.
+            </li>
+            <li>
+              <strong>Funciona muito bem em APIs:</strong> especialmente quando o front-end está separado
+              do back-end e faz requisições com <code>fetch</code> ou <code>axios</code>.
+            </li>
+            <li>
+              <strong>É portátil:</strong> pode ser validado em diferentes serviços da aplicação.
+            </li>
+            <li>
+              <strong>Carrega informações úteis:</strong> como id do usuário, perfil, permissões e expiração.
+            </li>
+            <li>
+              <strong>É padronizado:</strong> bibliotecas e frameworks já oferecem suporte pronto
+              para geração e validação.
+            </li>
+          </ul>
+        
+          <h4>Mas...</h4>
+          <p>
+            JWT nem sempre é a melhor escolha. Em aplicações menores e mais simples, por exemplo,
+            autenticação por sessão pode ser mais simples de implementar e manter.
+            O importante é entender o contexto do projeto e escolher a estratégia adequada.
+          </p>
+        </div> 
+      </article>
+
+      <article class="card" id="controle-acesso">
+        <h2>4. Controle de acesso em APIs</h2>
+        <p>
+          Autenticar não basta. Muitas vezes precisamos verificar se o usuário pode acessar uma determinada ação,
+          como excluir registros, acessar relatórios ou administrar outros usuários.
+        </p>
+
+        <h3>4.1 Exemplo com perfil de usuário</h3>
+        <pre><code>function verificarAdmin(req, res, next) {
+  if (!req.usuario) {
+    return res.status(401).json({ erro: 'Não autenticado' });
+  }
+
+  if (req.usuario.perfil !== 'admin') {
+    return res.status(403).json({ erro: 'Acesso negado' });
+  }
+
+  next();
+}
+
+app.delete('/usuarios/:id', verificarToken, verificarAdmin, (req, res) => {
+  res.json({ mensagem: 'Usuário removido com sucesso' });
+});</code></pre>
+
+        <div class="anotacao">
+          <dl>
+            <dt>401 Unauthorized</dt>
+            <dd>Usuário não está autenticado ou token está ausente/inválido.</dd>
+            <dt>403 Forbidden</dt>
+            <dd>Usuário está autenticado, mas não tem permissão para aquela ação.</dd>
+          </dl>
+        </div>
+
+        <h3>4.2 Lógica importante</h3>
+        <ul class="mini-list">
+          <li>Primeiro verificamos se o usuário está autenticado.</li>
+          <li>Depois verificamos se ele tem o perfil ou permissão necessária.</li>
+          <li>Esse controle normalmente é implementado com middlewares reutilizáveis.</li>
+        </ul>
+      </article>
+
+      <article class="card" id="comparacao">
+        <h2>5. Sessões x JWT</h2>
+        <p>
+          Sessões e JWT resolvem o problema do login, mas funcionam de maneiras diferentes.
+          O importante é entender a lógica de cada modelo antes de decidir qual usar.
+        </p>
+
+        <table class="tabela-padroes">
+          <thead>
+            <tr>
+              <th>Critério</th>
+              <th>Sessões</th>
+              <th>JWT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Estado do login</td>
+              <td>Guardado no servidor</td>
+              <td>Representado no token enviado pelo cliente</td>
+            </tr>
+            <tr>
+              <td>Transporte</td>
+              <td>Normalmente via cookie</td>
+              <td>Normalmente via header Authorization</td>
+            </tr>
+            <tr>
+              <td>Logout</td>
+              <td>Destrói a sessão no servidor</td>
+              <td>Exige estratégia de expiração, remoção no cliente ou revogação</td>
+            </tr>
+            <tr>
+              <td>Uso comum</td>
+              <td>Apps tradicionais com sessão</td>
+              <td>APIs, SPAs e integrações entre serviços</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card" id="frontend">
+        <h2>6. Exemplo de consumo no front-end com JavaScript</h2>
+        <p>
+          Como já estudamos <strong>fetch</strong> e <strong>consumo de APIs</strong>,
+         vamos trabalhar com login.
+        </p>
+
+        <h3>6.1 Enviando login com fetch</h3>
+        <pre><code>async function fazerLogin() {
+  const email = 'admin@email.com';
+  const senha = '123456';
+
+  const resposta = await fetch('http://localhost:3000/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ email, senha })
+  });
+
+  const dados = await resposta.json();
+
+  if (!resposta.ok) {
+    alert(dados.erro);
+    return;
+  }
+
+  localStorage.setItem('token', dados.token);
+  alert('Login realizado com sucesso!');
+}</code></pre>
+
+        <h3>6.2 Acessando rota protegida com JWT</h3>
+        <pre><code>async function carregarPerfil() {
+  const token = localStorage.getItem('token');
+
+  const resposta = await fetch('http://localhost:3000/perfil', {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  const dados = await resposta.json();
+
+  if (!resposta.ok) {
+    console.log('Erro:', dados.erro);
+    return;
+  }
+
+  console.log('Usuário autenticado:', dados.usuario);
+}</code></pre>
+
+        <p class="note">
+          Esse exemplo ajuda a conectar os conteúdos já estudados: rota REST, middleware, status code,
+          JSON, fetch e agora autenticação.
+        </p>
+      </article>
+
+      <article class="card" id="exercicios">
+        <h2>7. Exercícios</h2>
+        <div class="callout">
+          <strong>Importante:</strong>
+          grupos que <strong>já implementaram autenticação e autorização</strong> no projeto
+          não precisam fazer o exercício desta página.
+          Grupos que <strong>ainda não implementaram</strong> devem entregar o exercício.
+        </div>
+        <div class="example-box">
+          <p><strong>Para ser considerado “já implementado”, o projeto deve ter pelo menos:</strong></p>
+          <ul class="mini-list">
+            <li>Uma rota de login funcionando.</li>
+            <li>Uma forma de manter o usuário autenticado (sessão ou JWT).</li>
+            <li>Pelo menos uma rota protegida.</li>
+            <li>Pelo menos uma verificação de permissão ou perfil de acesso.</li>
+          </ul>
+        </div>
+
+        <h3>7.1 Exercício básico obrigatório para quem ainda não implementou</h3>
+        <p>
+          Se o projeto do grupo <strong>ainda não possui autenticação e autorização</strong>,
+          implemente uma versão mínima com JavaScript no back-end usando Express.
+        </p>
+
+        <div class="example-box">
+          <h3>Exercício básico</h3>
+          <ul class="mini-list">
+            <li>Crie uma rota <code>POST /login</code> com usuário fixo para teste.</li>
+            <li>Após login válido, gere uma autenticação simples usando <strong>sessão</strong> ou <strong>JWT</strong>.</li>
+            <li>Crie uma rota protegida <code>GET /perfil</code> que só pode ser acessada por usuário autenticado.</li>
+            <li>Crie uma rota <code>DELETE /admin/exemplo</code> acessível apenas por usuário com perfil <code>admin</code>.</li>
+            <li>Retorne <code>401</code> quando o usuário não estiver autenticado.</li>
+            <li>Retorne <code>403</code> quando estiver autenticado, mas sem permissão.</li>
+          </ul>
+        </div>
+
+        <h3>7.2 Estrutura mínima esperada</h3>
+        <pre><code>POST   /login
+GET    /perfil
+DELETE /admin/exemplo</code></pre>
+
+        <h3>7.3 Exemplo de usuário fixo para teste</h3>
+        <pre><code>{
+  "email": "admin@email.com",
+  "senha": "123456",
+  "perfil": "admin"
+}</code></pre>
+
+        <h3>7.4 O que deve ser observado</h3>
+        <ul class="mini-list">
+          <li>O login funciona corretamente?</li>
+          <li>A rota protegida exige autenticação?</li>
+          <li>A rota administrativa exige permissão adequada?</li>
+          <li>Os status <code>401</code> e <code>403</code> foram usados corretamente?</li>
+          <li>A implementação está organizada e compreensível?</li>
+        </ul>
+
+        <p class="note">
+          O objetivo deste exercício não é criar um sistema completo de autenticação,
+          mas implementar o fluxo básico para entender como proteger rotas e controlar acesso na API.
+        </p>
+      </article>
+
+      <article class="card" id="projeto">
+        <h2>8. Relação com o projeto do semestre</h2>
+        <p>
+          Este conteúdo entra diretamente na fase em que o projeto deixa de ser apenas um CRUD aberto
+          e passa a ter <strong>usuários reais, login e restrições de acesso</strong>.
+        </p>
+
+        <h3>8.1 Exemplos de aplicação</h3>
+        <ul class="mini-list">
+          <li>Somente usuários autenticados podem criar ou editar dados.</li>
+          <li>Somente administradores podem excluir registros sensíveis.</li>
+          <li>O frontend pode redirecionar visitantes não autenticados para a tela de login.</li>
+        </ul>
+
+        <div class="callout">
+          <strong>Observação:</strong> autenticação organiza a entrada no sistema.
+          Controle de acesso organiza o que cada perfil pode fazer dentro dele.
+          Atualize seu README.
+        </div>
+      </article>
+    </section>
+
+    <aside>
+      <section class="card">
+        <h2>Palavras-chave</h2>
+        <ul class="pill-list">
+          <li>Login</li>
+          <li>Sessão</li>
+          <li>JWT</li>
+          <li>Middleware</li>
+          <li>401</li>
+          <li>403</li>
+          <li>Permissão</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Resumo rápido</h2>
+        <p class="dom-destaque">
+          Sessão: o servidor guarda o login. JWT: o cliente carrega um token assinado.
+          Controle de acesso: define quem pode usar cada rota.
+        </p>
+      </section>
+    </aside>
+  </main>
+
+  <footer>
+    <p>Material de apoio – Autenticação básica: sessões, JWT e controle de acesso em APIs.</p>
+  </footer>
+</body>
+</html>
