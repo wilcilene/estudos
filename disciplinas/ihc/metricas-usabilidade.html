@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IHC | Usabilidade, UX e Métricas</title>
+  <link rel="stylesheet" href="ihc.css" />
+</head>
+<body class="topic-page">
+  <div class="page">
+
+    <a class="back-link" href="index.html">
+      <span>←</span> Voltar
+    </a>
+
+    <div class="hero">
+      <div class="hero-main">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          Interface Humano-Computador
+        </div>
+
+        <h1 class="hero-title">
+          <span>Usabilidade</span>, UX e como medir a experiência do usuário
+        </h1>
+
+        <p class="hero-text">
+          Nesta página vamos conectar usabilidade, experiência do usuário,
+          eficácia, eficiência e satisfação.
+        </p>
+
+        <div class="hero-tags">
+          <span class="tag">ISO 9241-11</span>
+          <span class="tag">Heurísticas</span>
+          <span class="tag">Teste de usabilidade</span>
+          <span class="tag">SUS</span>
+          <span class="tag">HEART</span>
+        </div>
+      </div>
+    </div>
+
+    <main class="layout">
+      <article class="card content-card">
+        <div class="card-meta">
+          <span class="card-date"></span>
+        </div>
+
+        <!-- 1. Conceito geral -->
+        <section>
+          <h2 class="section-title">1. Usabilidade e UX em poucas linhas</h2>
+          <p>
+            A <span class="highlight">usabilidade</span> é a capacidade de um produto ser usado por usuários
+            específicos para atingir objetivos específicos com eficácia, eficiência e satisfação
+            em um contexto de uso definido.
+          </p>
+          <p>
+            A <span class="highlight">experiência do usuário (UX)</span> é mais ampla: inclui usabilidade,
+            emoções, expectativas, contexto, valor percebido e a jornada completa da pessoa
+            ao interagir com o sistema.
+          </p>
+
+          <div class="note-box">
+            <strong>Ideia-chave:</strong> Vamos usar a página da disciplina
+            como “laboratório” para observar como usabilidade e UX aparecem na prática.
+          </div>
+        </section>
+
+        <!-- 2. Eficácia, eficiência, satisfação -->
+        <section>
+          <h2 class="section-title">2. Eficácia, eficiência e satisfação na prática</h2>
+          <p>
+            Esses três componentes da usabilidade tornam o conceito mensurável e observável.
+            Vamos usá-los para analisar como vocês (estudantes) interagem com a página da disciplina.
+          </p>
+
+          <table class="mini-table">
+            <thead>
+              <tr>
+                <th>Conceito</th>
+                <th>O que significa</th>
+                <th>Aplicação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Eficácia</strong></td>
+                <td>Se o usuário consegue concluir a tarefa corretamente.</td>
+                <td>O estudante consegue encontrar o que procura, estudar e entregar as atividades?</td>
+              </tr>
+              <tr>
+                <td><strong>Eficiência</strong></td>
+                <td>Quanto esforço, tempo e recursos são gastos.</td>
+                <td>Quantos cliques e quanto tempo leva para achar a informação desejada?</td>
+              </tr>
+              <tr>
+                <td><strong>Satisfação</strong></td>
+                <td>Como o usuário se sente ao usar o sistema.</td>
+                <td>A navegação é clara, agradável e transmite segurança e organização?</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="example-box">
+            <div class="example-label">Para pensar</div>
+            Acesse a página da disciplina e responda:
+            1 - O que estudamos no decorrer do semestre?
+            2 - O que falta estudarmos?
+          </div>
+          <div>
+            <h2 class="section-title">Questionário de usabilidade da página da disciplina</h2>
+            <p>
+              Preencha este questionário apenas como <span class="highlight">reflexão individual</span>.
+              As respostas não serão enviadas nem armazenadas aqui: é só um modelo de formulário
+              que poderia ser aplicado em uma avaliação de usabilidade.
+            </p>
+          
+            <div class="note-box">
+              <strong>Como usar:</strong> pense na sua navegação real pela página da disciplina
+              nesta aula. Para cada afirmação, marque uma opção de 1 a 5.
+            </div>
+          
+            <table class="mini-table">
+              <thead>
+                <tr>
+                  <th>Afirmação</th>
+                  <th>1<br>Discordo totalmente</th>
+                  <th>2</th>
+                  <th>3</th>
+                  <th>4</th>
+                  <th>5<br>Concordo totalmente</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Q1: Eficácia geral -->
+                <tr>
+                  <td>
+                    1. Consegui encontrar facilmente as informações sobre o que já estudamos.
+                  </td>
+                  <td>◻</td>
+                  <td>◻</td>
+                  <td>◻</td>
+                  <td>◻</td>
+                  <td>◻</td>
+                </tr>
+          
+                <!-- Q2: Eficácia (conteúdo futuro) -->
+                <tr>
+                  <td>
+                    2. Consegui encontrar facilmente o que ainda falta ser estudado.
+                  </td>
+                  <td>◻</td>
+                  <td>◻</td>
+                  <td>◻</td>
+                  <td>◻</td>
+                  <td>◻</td>
+                </tr>
+          
+                <!-- Q3: Eficiência (tempo/esforço) -->
+                <tr>
+                  <td>
+                    3. Levei pouco tempo e poucos cliques para encontrar o que eu precisava.
+                  </td>
+                  <td>◻</td>
+                  <td>◻</td>
+                  <td>◻</td>
+                  <td>◻</td>
+                  <td>◻</td>
+                </tr>
+          
+                <!-- Q4: Satisfação (conforto/confiança) -->
+                <tr>
+                  <td>
+                    4. A organização da página me deixou confortável e confiante.
+                  </td>
+                  <td>◻</td>
+                  <td>◻</td>
+                  <td>◻</td>
+                  <td>◻</td>
+                  <td>◻</td>
+                </tr>
+          
+                <!-- Q5: Satisfação geral -->
+                <tr>
+                  <td>
+                    5. De modo geral, estou satisfeito(a) com a forma como a página apresenta as informações da disciplina.
+                  </td>
+                  <td>◻</td>
+                  <td>◻</td>
+                  <td>◻</td>
+                  <td>◻</td>
+                  <td>◻</td>
+                </tr>
+              </tbody>
+            </table>
+          
+            <div class="note-box">
+              <p>
+                Campo aberto (para reflexão individual): em poucas linhas, indique um ponto positivo
+                e um ponto que poderia ser melhorado na página da disciplina.
+              </p>
+            </div>
+          
+            <div class="activity-box">
+              <div class="activity-title">Discussão</div>
+              <p>
+                Com os dados coletados, organiza-los e responder:
+              </p>
+              <ul>
+                <li>Em quais afirmações o grupo teve notas mais altas (pontos fortes).</li>
+                <li>Em quais afirmações o grupo teve notas mais baixas (oportunidades de melhoria).</li>
+                <li>Que mudanças na página poderiam aumentar eficácia, eficiência e satisfação.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Heurísticas como ponte -->
+        <section>
+          <h2 class="section-title">3. Heurísticas como ponte entre teoria e prática</h2>
+          <p>
+            As heurísticas de usabilidade funcionam como um checklist de bom design de interface.
+            Elas ajudam a prever problemas que podem impactar eficácia, eficiência e satisfação.
+          </p>
+
+          <ul>
+            <li>Visibilidade do status do sistema.</li>
+            <li>Correspondência entre sistema e mundo real.</li>
+            <li>Controle e liberdade do usuário.</li>
+            <li>Consistência e padrões.</li>
+            <li>Prevenção de erros.</li>
+            <li>Reconhecimento em vez de memorização.</li>
+            <li>Flexibilidade e eficiência de uso.</li>
+            <li>Estética e design minimalista.</li>
+            <li>Ajuda os usuários a reconhecer, diagnosticar e recuperar erros.</li>
+            <li>Ajuda e documentação.</li>
+          </ul>
+
+          <div class="activity-box">
+            <div class="activity-title">Avaliação heurística da página</div>
+            <ol>
+              <li>Abra a página da disciplina.</li>
+              <li>Escolha 1 heurística para focar.</li>
+              <li>Para heurística escolhida, identifique: 1 ponto positivo e 1 possível problema.</li>
+              <li>Apresente: descrição, heurística violada e sugestão de melhoria.</li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- 4. Teste de usabilidade com tarefas -->
+        <section>
+          <h2 class="section-title">4. Teste de usabilidade com a página da disciplina</h2>
+          <p>
+            No teste de usabilidade, o foco é observar pessoas reais realizando tarefas
+            reais. Aqui, vamos usar tarefas típicas de um estudante ao usar a página
+            da disciplina e, em seguida, interpretar os resultados em termos de
+            eficácia, eficiência e satisfação.
+          </p>
+        
+          <div class="example-box">
+            <div class="example-label">Exemplo de roteiro de teste</div>
+            <ol>
+              <li>Tarefa 1: encontrar o cronograma da disciplina.</li>
+              <li>Tarefa 2: localizar o material da última aula.</li>
+            </ol>
+            <p>
+              Para cada tarefa, observe e registre:
+            </p>
+            <ul>
+              <li><strong>Se concluiu</strong> (sim / não / com dificuldade).</li>
+              <li><strong>Quanto tempo levou</strong> (em segundos ou minutos).</li>
+              <li><strong>Se precisou de ajuda</strong> (sim / não) e quais dúvidas surgiram.</li>
+            </ul>
+          </div>
+        
+          <div class="note-box">
+            <strong>Como interpretar os resultados de forma simples:</strong>
+            depois que alguns estudantes/usuários executarem as tarefas, discuta em grupo
+          </div>
+        
+          <div class="activity-box">
+            <div class="activity-title">Exemplo prático de interpretação</div>
+            <p><strong>Cenário hipotético:</strong></p>
+            <ul>
+              <li>
+                Na tarefa 1 (cronograma), 8 de 10 estudantes concluíram sem ajuda
+                em até 30 segundos.
+              </li>
+              <li>
+                Na tarefa 2 (material da última aula), apenas 4 de 10 encontraram o
+                material em menos de 30 segundos; 3 precisaram de ajuda.
+              </li>
+              <li>
+                No questionário de reflexão, a maioria marcou notas altas para a clareza
+                do cronograma, mas notas mais baixas para encontrar materiais.
+              </li>
+            </ul>
+            <p><strong>Interpretação em termos de usabilidade:</strong></p>
+            <ul>
+              <li>
+                <strong>Eficácia:</strong> a tarefa 1 tem alta eficácia (maioria conclui);
+                a tarefa 2 tem baixa eficácia (menos da metade conclui sem ajuda).
+              </li>
+              <li>
+                <strong>Eficiência:</strong> tempos curtos na tarefa 1 indicam boa eficiência;
+                tempos longos e necessidade de ajuda na tarefa 2 indicam baixa eficiência.
+              </li>
+              <li>
+                <strong>Satisfação:</strong> as notas mais baixas e comentários negativos
+                sobre encontrar materiais sugerem menor satisfação nessa parte da página.
+              </li>
+            </ul>
+            <p>
+              <strong>Conclusão prática:</strong> a página é usável para consultar o
+              cronograma, mas precisa de melhorias na forma de organizar e destacar
+              os materiais das aulas (por exemplo, rótulos mais claros, menos cliques,
+              agrupamento por data ou semana).
+            </p>
+          </div>
+        </section>
+
+        <!-- 5. Medindo eficácia, eficiência e satisfação -->
+        <section>
+          <h2 class="section-title">5. Medindo eficácia, eficiência e satisfação</h2>
+          <p>
+            A partir do teste com a página da disciplina, podemos transformar as
+            observações em dados simples. Esses dados ajudam a enxergar a usabilidade
+            de forma estruturada: o quanto a página é eficaz, eficiente e satisfatória
+            para tarefas típicas de estudantes.
+          </p>
+        
+          <table class="mini-table">
+            <thead>
+              <tr>
+                <th>Pilar</th>
+                <th>Métrica simples em sala</th>
+                <th>Como coletar na atividade</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Eficácia</strong></td>
+                <td>Taxa de sucesso por tarefa.</td>
+                <td>
+                  Para cada tarefa (ex.: achar cronograma), conte quantos estudantes
+                  concluíram sem ajuda e quantos não concluíram ou precisaram de ajuda.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Eficiência</strong></td>
+                <td>Tempo médio por tarefa.</td>
+                <td>
+                  Observar e anotar o tempo gasto em cada tarefa. Depois,
+                  calcular a média de tempo por tarefa.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Satisfação</strong></td>
+                <td>Nota de 1 a 5 para cada tarefa ou para a página como um todo.</td>
+                <td>
+                  Após o teste, cada estudante/usuário dá uma nota de 1 (muito insatisfeito)
+                  a 5 (muito satisfeito).
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        
+          <div class="activity-box">
+            <div class="activity-title">Atividade 2 — Resumo dos resultados em grupo</div>
+            <p>
+              Após executar o teste com a página da disciplina:
+            </p>
+            <ul>
+              <li>
+                Calcule a <strong>taxa de sucesso</strong> de cada tarefa
+                (ex.: 8 de 10 concluíram = 80%).
+              </li>
+              <li>
+                Calcule o <strong>tempo médio</strong> gasto em cada tarefa
+                (soma dos tempos ÷ número de participantes).
+              </li>
+              <li>
+                Calcule a <strong>nota média de satisfação</strong> dada pelos membros
+                do grupo.
+              </li>
+            </ul>
+            <p>
+              Em seguida, responda:
+            </p>
+            <ul>
+              <li>Qual tarefa teve melhor usabilidade (maior sucesso, menor tempo, maior satisfação)?</li>
+              <li>Qual tarefa mostrou mais problemas de usabilidade?</li>
+              <li>Que mudança na página poderia melhorar esses números na próxima oferta da disciplina?</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 6. SUS aplicado à página da disciplina -->
+        <section>
+          <h2 class="section-title">6. Aplicando o SUS na página da disciplina</h2>
+          <p>
+            O <span class="highlight">System Usability Scale (SUS)</span> é um questionário de 10 afirmações
+            que gera uma nota de usabilidade. Ele é adequado para ser aplicado após
+            os estudantes/usuários terem usado a página em tarefas reais.
+          </p>
+          <p>
+            Não é necessário calcular o escore completo em aula para ter valor didático:
+            a simples aplicação do SUS já estimula reflexão sobre facilidade de uso,
+            consistência, confiança e aprendizado.
+          </p>
+
+       <div class="example-box">
+          <div class="example-label">Exemplo — SUS em sala</div>
+          <p>
+            Exemplo da <span class="highlight">System Usability Scale (SUS)</span>,
+            adaptada para a página da disciplina. vamos usar esse formulário como
+            exercício de reflexão individual: pense na sua experiência usando a página
+            e marque uma opção de 1 a 5 para cada afirmação. As respostas não serão enviadas
+            nem armazenadas (não tem backend, nem banco).
+          </p>
+        
+          <p>
+            Escala de resposta para cada item:
+          </p>
+          <ul>
+            <li>1 — Discordo totalmente</li>
+            <li>2 — Discordo</li>
+            <li>3 — Nem discordo, nem concordo</li>
+            <li>4 — Concordo</li>
+            <li>5 — Concordo totalmente</li>
+          </ul>
+        
+          <!-- Formulário para marcação local -->
+          <form class="sus-form" onsubmit="return false;">
+            <table class="mini-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Afirmação (pensando na página da disciplina)</th>
+                  <th>1</th>
+                  <th>2</th>
+                  <th>3</th>
+                  <th>4</th>
+                  <th>5</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Eu acho que gostaria de usar esta página com frequência.</td>
+                  <td><input type="radio" name="sus_q1" value="1" /></td>
+                  <td><input type="radio" name="sus_q1" value="2" /></td>
+                  <td><input type="radio" name="sus_q1" value="3" /></td>
+                  <td><input type="radio" name="sus_q1" value="4" /></td>
+                  <td><input type="radio" name="sus_q1" value="5" /></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Eu acho esta página desnecessariamente complexa.</td>
+                  <td><input type="radio" name="sus_q2" value="1" /></td>
+                  <td><input type="radio" name="sus_q2" value="2" /></td>
+                  <td><input type="radio" name="sus_q2" value="3" /></td>
+                  <td><input type="radio" name="sus_q2" value="4" /></td>
+                  <td><input type="radio" name="sus_q2" value="5" /></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Eu achei esta página fácil de usar.</td>
+                  <td><input type="radio" name="sus_q3" value="1" /></td>
+                  <td><input type="radio" name="sus_q3" value="2" /></td>
+                  <td><input type="radio" name="sus_q3" value="3" /></td>
+                  <td><input type="radio" name="sus_q3" value="4" /></td>
+                  <td><input type="radio" name="sus_q3" value="5" /></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Eu acho que precisaria de ajuda de alguém para usar bem esta página.</td>
+                  <td><input type="radio" name="sus_q4" value="1" /></td>
+                  <td><input type="radio" name="sus_q4" value="2" /></td>
+                  <td><input type="radio" name="sus_q4" value="3" /></td>
+                  <td><input type="radio" name="sus_q4" value="4" /></td>
+                  <td><input type="radio" name="sus_q4" value="5" /></td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Eu acho que as seções e funções desta página estão bem integradas.</td>
+                  <td><input type="radio" name="sus_q5" value="1" /></td>
+                  <td><input type="radio" name="sus_q5" value="2" /></td>
+                  <td><input type="radio" name="sus_q5" value="3" /></td>
+                  <td><input type="radio" name="sus_q5" value="4" /></td>
+                  <td><input type="radio" name="sus_q5" value="5" /></td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Eu acho que esta página tem muita inconsistência.</td>
+                  <td><input type="radio" name="sus_q6" value="1" /></td>
+                  <td><input type="radio" name="sus_q6" value="2" /></td>
+                  <td><input type="radio" name="sus_q6" value="3" /></td>
+                  <td><input type="radio" name="sus_q6" value="4" /></td>
+                  <td><input type="radio" name="sus_q6" value="5" /></td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>Eu imagino que a maioria das pessoas aprenderia a usar esta página rapidamente.</td>
+                  <td><input type="radio" name="sus_q7" value="1" /></td>
+                  <td><input type="radio" name="sus_q7" value="2" /></td>
+                  <td><input type="radio" name="sus_q7" value="3" /></td>
+                  <td><input type="radio" name="sus_q7" value="4" /></td>
+                  <td><input type="radio" name="sus_q7" value="5" /></td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>Eu achei esta página muito “trabalhosa” ou confusa de usar.</td>
+                  <td><input type="radio" name="sus_q8" value="1" /></td>
+                  <td><input type="radio" name="sus_q8" value="2" /></td>
+                  <td><input type="radio" name="sus_q8" value="3" /></td>
+                  <td><input type="radio" name="sus_q8" value="4" /></td>
+                  <td><input type="radio" name="sus_q8" value="5" /></td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>Eu me senti muito confiante ao usar esta página.</td>
+                  <td><input type="radio" name="sus_q9" value="1" /></td>
+                  <td><input type="radio" name="sus_q9" value="2" /></td>
+                  <td><input type="radio" name="sus_q9" value="3" /></td>
+                  <td><input type="radio" name="sus_q9" value="4" /></td>
+                  <td><input type="radio" name="sus_q9" value="5" /></td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>Eu precisei aprender muitas coisas antes de conseguir usar esta página.</td>
+                  <td><input type="radio" name="sus_q10" value="1" /></td>
+                  <td><input type="radio" name="sus_q10" value="2" /></td>
+                  <td><input type="radio" name="sus_q10" value="3" /></td>
+                  <td><input type="radio" name="sus_q10" value="4" /></td>
+                  <td><input type="radio" name="sus_q10" value="5" /></td>
+                </tr>
+              </tbody>
+            </table>
+            <button type="reset" class="tag">
+              Limpar marcações
+            </button>
+          </form>
+        
+          <div class="note-box">
+            <strong>Vamos lá!</strong>
+            <ul class="checklist">
+              <li>Cada estudante/usuário marca suas respostas.</li>
+              <li>Depois, avaliam-se apenas os itens tiveram notas mais altas e mais baixas.</li>
+              <li>Discuta em plenária: em quais itens a turma converge (pontos fortes) e em quais diverge (oportunidades de melhoria).</li>
+            </ul>
+          </div>
+        </div>
+        </section>
+
+        <!-- 7. HEART no contexto da disciplina -->
+        <section>
+          <h2 class="section-title">7. HEART no contexto da disciplina</h2>
+          <p>
+            O framework <span class="highlight">HEART</span> organiza métricas de UX em cinco dimensões.
+            Aqui, vamos usá-lo como um checklist para refletir sobre a experiência dos
+            estudantes/usuários com a página da disciplina, conectando com o que foi observado nos
+            testes anteriores.
+          </p>
+        
+          <p>
+            Escala para cada dimensão (percepção do grupo):
+          </p>
+          <ul>
+            <li>1 — Muito baixo</li>
+            <li>2 — Baixo</li>
+            <li>3 — Médio</li>
+            <li>4 — Alto</li>
+            <li>5 — Muito alto</li>
+          </ul>
+        
+          <!-- Formulário para marcação local -->
+          <form class="heart-form" onsubmit="return false;">
+            <table class="mini-table">
+              <thead>
+                <tr>
+                  <th>Dimensão</th>
+                  <th>Pergunta para a página da disciplina</th>
+                  <th>1</th>
+                  <th>2</th>
+                  <th>3</th>
+                  <th>4</th>
+                  <th>5</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Happiness</strong></td>
+                  <td>Os estudantes têm uma percepção positiva da página? Recomendariam esse formato?</td>
+                  <td><input type="radio" name="heart_happiness" value="1" /></td>
+                  <td><input type="radio" name="heart_happiness" value="2" /></td>
+                  <td><input type="radio" name="heart_happiness" value="3" /></td>
+                  <td><input type="radio" name="heart_happiness" value="4" /></td>
+                  <td><input type="radio" name="heart_happiness" value="5" /></td>
+                </tr>
+                <tr>
+                  <td><strong>Engagement</strong></td>
+                  <td>Eles acessam a página com frequência? Usam os materiais disponibilizados?</td>
+                  <td><input type="radio" name="heart_engagement" value="1" /></td>
+                  <td><input type="radio" name="heart_engagement" value="2" /></td>
+                  <td><input type="radio" name="heart_engagement" value="3" /></td>
+                  <td><input type="radio" name="heart_engagement" value="4" /></td>
+                  <td><input type="radio" name="heart_engagement" value="5" /></td>
+                </tr>
+                <tr>
+                  <td><strong>Adoption</strong></td>
+                  <td>Todos (ou quase todos) os estudantes começaram a usar a página de fato?</td>
+                  <td><input type="radio" name="heart_adoption" value="1" /></td>
+                  <td><input type="radio" name="heart_adoption" value="2" /></td>
+                  <td><input type="radio" name="heart_adoption" value="3" /></td>
+                  <td><input type="radio" name="heart_adoption" value="4" /></td>
+                  <td><input type="radio" name="heart_adoption" value="5" /></td>
+                </tr>
+                <tr>
+                  <td><strong>Retention</strong></td>
+                  <td>Os estudantes continuam usando a página ao longo do semestre?</td>
+                  <td><input type="radio" name="heart_retention" value="1" /></td>
+                  <td><input type="radio" name="heart_retention" value="2" /></td>
+                  <td><input type="radio" name="heart_retention" value="3" /></td>
+                  <td><input type="radio" name="heart_retention" value="4" /></td>
+                  <td><input type="radio" name="heart_retention" value="5" /></td>
+                </tr>
+                <tr>
+                  <td><strong>Task Success</strong></td>
+                  <td>Conseguem realizar as tarefas típicas (achar materiais, prazos, notas) sem grandes dificuldades?</td>
+                  <td><input type="radio" name="heart_task_success" value="1" /></td>
+                  <td><input type="radio" name="heart_task_success" value="2" /></td>
+                  <td><input type="radio" name="heart_task_success" value="3" /></td>
+                  <td><input type="radio" name="heart_task_success" value="4" /></td>
+                  <td><input type="radio" name="heart_task_success" value="5" /></td>
+                </tr>
+              </tbody>
+            </table>
+        
+            <button type="reset" class="tag">
+              Limpar marcações
+            </button>
+          </form>
+        
+          <div class="activity-box">
+            <div class="activity-title">Atividade 3 — Debate guiado com HEART</div>
+            <p>
+              Discutam cada dimensão, marquem uma opção de 1 a 5 para cada linha
+              e anotem:
+            </p>
+            <ul>
+              <li>2 pontos fortes que justificam notas mais altas.</li>
+              <li>2 oportunidades de melhoria na página da disciplina.</li>
+            </ul>
+            <p>
+              Como perceberam a dimensão e quais mudanças ajudariam a melhorar a experiência dos estudantes?
+            </p>
+          </div>
+        </section>
+
+        <!-- 8. Imagens sugeridas -->
+        <section>
+          <h2 class="section-title">8. Imagem para ilustrar a atividade</h2>
+          <div class="media-wrapper">
+            <img
+              class="example-image"
+              src="media/ihc-usabilidade-ux-aula.png"
+              alt="Turma de IHC avaliando uma página de disciplina projetada em um telão"
+            />
+          </div>
+        </section>
+
+        <!-- 9. Fechamento -->
+        <section>
+          <h2 class="section-title">9. O que aprendemos?!</h2>
+          <p>
+            Ao avaliar a página da disciplina, experimentamos um pouco do processo de avaliação de usabilidade
+            de forma concreta: aplicar heurísticas, executar tarefas reais, medir eficácia,
+            eficiência e satisfação, e discutir resultados com base em métricas como SUS
+            e HEART.
+          </p>
+          <p>
+            Essa abordagem transforma a página em um laboratório de IHC, aproximando teoria,
+            prática e melhoria contínua do ambiente real de aprendizagem.
+          </p>
+        </section>
+      </article>
+
+      <aside class="materials-card">
+        <div>
+          <div class="side-section-title">Checklist</div>
+          <ul class="checklist">
+            <li>Definir 3 tarefas reais na página da disciplina.</li>
+            <li>Distribuir heurísticas.</li>
+            <li>Aplicar o teste de usabilidade.</li>
+            <li>Aplicar SUS ao final da atividade.</li>
+            <li>Fechar com discussão guiada usando HEART.</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <footer>
+    Material didático de IHC para avaliação prática da página da própria disciplina. Vamos melhorar!
+  </footer>
+</body>
+</html>
