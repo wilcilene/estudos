@@ -105,10 +105,10 @@ body:not(.index-page) main {
   gap: 1.8rem;
 }
 
-/* Página específica com conteúdo em uma coluna só */
+/* Página específica com conteúdo em uma coluna só 
 body.topic-page main {
   display: block;
-}
+}*/
 
 @media (min-width: 880px) {
   .content-card img.example-image {
