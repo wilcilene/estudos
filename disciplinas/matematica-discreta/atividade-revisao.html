@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matemática Discreta - Lista de Exercícios de revisão</title>
+
+  <!-- CSS da disciplina -->
+  <link rel="stylesheet" href="md-estilos.css" />
+</head>
+<body>
+  <main class="container">
+    <header>
+      <p>
+        <a href="index.html">
+          Matemática Discreta
+        </a>
+      </p>
+
+      <div class="aula">
+        <h1>Lista de Exercícios</h1>
+        <p>Não é necessário entregar, mas vou pedir que cada um resolva um exercício e me explique como e por que resolveu daquela forma.</p>
+<!--
+        <button id="btnGabarito" aria-controls="gabarito" aria-expanded="false">
+          Não tem resposta pronta!
+        </button>
+-->        
+      </div>
+    </header>
+
+    <section class="objetivos">
+      <h2>Objetivos da lista</h2>
+      <p><strong>Objetivo geral:</strong> permitir que todos os estudantes resolvam a lista e, em aula, cada um explique uma questão diferente.</p>
+      <p><strong>Orientação:</strong> responda com justificativas, etapas de raciocínio e, usando linguagem matemática adequada.</p>
+    </section>
+
+    <section>
+      <article class="exercicio">
+        <h3>1. Métodos de prova - prova direta</h3>
+        <p>
+          Mostre, por prova direta, que se <em>n</em> é um número inteiro par, então <em>n²</em> também é par.
+          Em seguida, discuta se a recíproca “se <em>n²</em> é par então <em>n</em> é par” é verdadeira e indique como ela pode ser demonstrada.
+        </p>
+      </article>
+
+      <article class="exercicio">
+        <h3>2. Prova por contrapositiva</h3>
+        <p>
+          Prove a afirmação: “Se <em>3n + 2</em> é par, então <em>n</em> é par” utilizando prova por contrapositiva.
+          Apresente claramente a proposição original, a contrapositiva e a conclusão.
+        </p>
+      </article>
+
+      <article class="exercicio">
+        <h3>3. Prova por contradição</h3>
+        <p>
+          Mostre, por contradição, que não existem dois inteiros consecutivos ambos ímpares.
+          Organize sua resposta a partir da suposição inicial e identifique o ponto em que surge a contradição.
+        </p>
+      </article>
+
+      <article class="exercicio">
+        <h3>4. Indução matemática</h3>
+        <p>Use o Princípio da Indução Matemática para provar que a soma dos <em>n</em> primeiros números ímpares é dada por:</p>
+        <p><strong>1 + 3 + 5 + ... + (2n - 1) = n²</strong></p>
+      </article>
+
+      <article class="exercicio">
+        <h3>5. Recursão</h3>
+        <p>
+          Defina recursivamente a sequência <em>a<sub>n</sub> = 3<sup>n</sup></em>, para <em>n ≥ 0</em>.
+          Depois, prove por indução que sua definição recursiva gera corretamente os termos da sequência.
+        </p>
+      </article>
+
+      <article class="exercicio">
+        <h3>6. Conjuntos</h3>
+        <p>Sejam <em>A = {x ∈ ℤ | -3 ≤ x ≤ 4}</em> e <em>B = {x ∈ ℤ | 1 ≤ x ≤ 7}</em>.</p>
+        <p>Determine:</p>
+        <ul>
+          <li><em>A ∪ B</em></li>
+          <li><em>A ∩ B</em></li>
+          <li><em>A - B</em></li>
+          <li><em>B - A</em></li>
+        </ul>
+        <p>Em seguida, verifique uma Lei de De Morgan no universo <em>U = {-5, -4, ..., 8}</em>.</p>
+      </article>
+
+      <article class="exercicio">
+        <h3>7. Princípio multiplicativo</h3>
+        <p>Uma senha é formada por 2 letras maiúsculas seguidas de 3 dígitos.</p>
+        <p>a) Quantas senhas podem ser formadas se letras e dígitos podem se repetir?</p>
+        <p>b) Quantas podem ser formadas se as letras não podem se repetir, mas os dígitos podem?</p>
+      </article>
+
+      <article class="exercicio">
+        <h3>8. Arranjos, permutações e combinações</h3>
+        <p>
+          Cinco estudantes concorrem aos cargos de coordenador(a), relator(a) e apresentador(a) de um trabalho,
+          sem acumulação de cargos.
+        </p>
+        <p>a) De quantas maneiras diferentes os cargos podem ser distribuídos?</p>
+        <p>b) Se a ordem dos cargos não importasse, esse seria um problema de arranjo, permutação ou combinação? Justifique.</p>
+      </article>
+
+      <article class="exercicio">
+        <h3>9. Binômio de Newton</h3>
+        <p>Considere a expansão de <em>(x + y)<sup>5</sup></em>.</p>
+        <p>a) Escreva o termo que contém <em>x³y²</em>.</p>
+        <p>b) Determine seu coeficiente numérico.</p>
+        <p>c) Explique como esse coeficiente se relaciona a combinações.</p>
+      </article>
+
+      <article class="exercicio">
+        <h3>10. Princípio da casa dos pombos</h3>
+        <p>Mostre que, em qualquer grupo de 13 pessoas, pelo menos duas fazem aniversário no mesmo mês.</p>
+        <p>Depois, generalize a ideia para um grupo de <em>12n + 1</em> pessoas.</p>
+      </article>
+
+      <article class="exercicio">
+        <h3>11. Inclusão-exclusão</h3>
+        <p>Em uma turma de 40 estudantes:</p>
+        <ul>
+          <li>22 estudam Programação;</li>
+          <li>18 estudam Matemática Discreta;</li>
+          <li>10 estudam ambas.</li>
+        </ul>
+        <p>a) Quantos estudam pelo menos uma das disciplinas?</p>
+        <p>b) Quantos estudam apenas Programação?</p>
+        <p>c) Quantos estudam apenas Matemática Discreta?</p>
+      </article>
+
+      <article class="exercicio">
+        <h3>12. Relações</h3>
+        <p>Considere o conjunto <em>A = {1, 2, 3}</em> e a relação <em>R = {(1,1), (2,2), (3,3), (1,2), (2,1)}</em>.</p>
+        <p>
+          Verifique se <em>R</em> é reflexiva, simétrica e transitiva.
+          Depois, conclua se ela é uma relação de equivalência.
+        </p>
+      </article>
+
+      <article class="exercicio">
+        <h3>13. Funções e grafos</h3>
+        <p>Considere a função <em>f: ℤ → ℤ</em> definida por <em>f(n) = 2n + 1</em>.</p>
+        <!--<p>a) Determine se <em>f</em> é injetora, sobrejetora e/ou bijetora.</p>-->
+        <p>
+          b) Modele um grafo em que cada vértice represente um inteiro e exista uma aresta de <em>n</em> para <em>f(n)</em>.
+          Descreva duas propriedades desse grafo.
+        </p>
+      </article>
+    </section>
+
+    <!-- Gabarito 
+    <section id="gabarito" class="resolucao">
+      <h2>Gabarito resumido</h2>
+
+      <div class="exemplo">
+        <h3>1.</h3>
+        <p>
+          Se <em>n = 2k</em>, então <em>n² = (2k)² = 4k² = 2(2k²)</em>, logo é par.
+          A recíproca também é verdadeira e pode ser demonstrada por contrapositiva:
+          se <em>n</em> é ímpar, então <em>n²</em> é ímpar.
+        </p>
+      </div>
+
+      <div class="exemplo">
+        <h3>2.</h3>
+        <p>
+          Contrapositiva: se <em>n</em> é ímpar, então <em>3n + 2</em> é ímpar.
+          Se <em>n = 2k + 1</em>, então <em>3n + 2 = 3(2k + 1) + 2 = 6k + 5 = 2(3k + 2) + 1</em>, que é ímpar.
+          Logo, a proposição original é verdadeira.
+        </p>
+      </div>
+
+      <div class="exemplo">
+        <h3>3.</h3>
+        <p>
+          Suponha que existam dois consecutivos ímpares: <em>n</em> e <em>n + 1</em>.
+          Se <em>n</em> é ímpar, então <em>n = 2k + 1</em>.
+          Assim, <em>n + 1 = 2k + 2 = 2(k + 1)</em>, que é par. Contradição.
+        </p>
+      </div>
+
+      <div class="exemplo">
+        <h3>4.</h3>
+        <p>
+          Base: para <em>n = 1</em>, temos <em>1 = 1²</em>.
+          Passo indutivo: assumindo <em>1 + 3 + ... + (2n - 1) = n²</em>, ao adicionar o próximo ímpar:
+          <em>n² + (2n + 1) = (n + 1)²</em>. Logo, vale para todo <em>n</em>.
+        </p>
+      </div>
+
+      <div class="exemplo">
+        <h3>5.</h3>
+        <p>
+          Definição recursiva: <em>a₀ = 1</em> e <em>a<sub>n+1</sub> = 3a<sub>n</sub></em>.
+          Por indução, mostra-se que isso gera <em>a<sub>n</sub> = 3<sup>n</sup></em> para todo <em>n ≥ 0</em>.
+        </p>
+      </div>
+
+      <div class="exemplo">
+        <h3>6.</h3>
+        <p>
+          <em>A = {-3,-2,-1,0,1,2,3,4}</em> e <em>B = {1,2,3,4,5,6,7}</em>.
+          Logo:
+        </p>
+        <ul>
+          <li><em>A ∪ B = {-3,-2,-1,0,1,2,3,4,5,6,7}</em></li>
+          <li><em>A ∩ B = {1,2,3,4}</em></li>
+          <li><em>A - B = {-3,-2,-1,0}</em></li>
+          <li><em>B - A = {5,6,7}</em></li>
+        </ul>
+        <p>Uma verificação possível: <em>(A ∪ B)<sup>c</sup> = A<sup>c</sup> ∩ B<sup>c</sup></em> no universo dado.</p>
+      </div>
+
+      <div class="exemplo">
+        <h3>7.</h3>
+        <p>
+          a) <em>26 × 26 × 10 × 10 × 10 = 676000</em>.<br />
+          b) <em>26 × 25 × 10 × 10 × 10 = 650000</em>.<br />
+          O princípio multiplicativo é usado ao multiplicar as opções de cada posição.
+        </p>
+      </div>
+
+      <div class="exemplo">
+        <h3>8.</h3>
+        <p>
+          a) Como os cargos são diferentes, temos um arranjo: <em>A(5,3) = 5 × 4 × 3 = 60</em>.<br />
+          b) Se a ordem não importasse, seria combinação: <em>C(5,3) = 10</em>.
+        </p>
+      </div>
+
+      <div class="exemplo">
+        <h3>9.</h3>
+        <p>
+          O termo com <em>x³y²</em> é <em>C(5,2)x³y²</em>. Como <em>C(5,2) = 10</em>, o termo é <em>10x³y²</em>.
+          O coeficiente binomial conta as escolhas das posições dos fatores.
+        </p>
+      </div>
+
+      <div class="exemplo">
+        <h3>10.</h3>
+        <p>
+          Há 13 pessoas e 12 meses.
+          Pelo princípio da casa dos pombos, pelo menos duas pessoas devem estar no mesmo mês.
+          Em geral, com <em>12n + 1</em> pessoas, ao menos um mês terá no mínimo <em>n + 1</em> aniversariantes.
+        </p>
+      </div>
+
+      <div class="exemplo">
+        <h3>11.</h3>
+        <p>
+          a) <em>22 + 18 - 10 = 30</em>.<br />
+          b) Apenas Programação: <em>22 - 10 = 12</em>.<br />
+          c) Apenas Matemática Discreta: <em>18 - 10 = 8</em>.
+        </p>
+      </div>
+
+      <div class="exemplo">
+        <h3>12.</h3>
+        <p>
+          A relação é reflexiva, pois contém <em>(1,1)</em>, <em>(2,2)</em> e <em>(3,3)</em>.
+          É simétrica, pois de <em>(1,2)</em> temos <em>(2,1)</em>.
+          Também é transitiva, então é uma relação de equivalência.
+        </p>
+      </div>
+
+      <div class="exemplo">
+        <h3>13.</h3>
+        <p>
+          A função é injetora, pois <em>f(a)=f(b)</em> implica <em>2a+1=2b+1</em>, logo <em>a=b</em>.
+          Não é sobrejetora em <em>ℤ</em>, pois não produz números pares.
+          Portanto, não é bijetora.
+        </p>
+        <p>
+          No grafo, cada vértice tem uma saída para <em>2n+1</em>;
+          não há ciclos finitos simples e nenhum vértice par pertence à imagem da função.
+        </p>
+     
+      </div>
+    </section>
+-->
+
+    <footer>
+      <p>Matemática Discreta – Lista de exercícios para estudar!</p>
+    </footer>
+  </main>
+
+  <script>
+    const botao = document.getElementById('btnGabarito');
+    const gabarito = document.getElementById('gabarito');
+
+    botao.addEventListener('click', () => {
+      const estaVisivel = gabarito.style.display === 'block';
+
+      if (estaVisivel) {
+        gabarito.style.display = 'none';
+        botao.textContent = 'Ver respostas';
+        botao.setAttribute('aria-expanded', 'false');
+      } else {
+        gabarito.style.display = 'block';
+        botao.textContent = 'Ocultar respostas';
+        botao.setAttribute('aria-expanded', 'true');
+        gabarito.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+
+    // Garante que o gabarito comece escondido,
+    // respeitando o display: none; definido em .resolucao no CSS
+    window.addEventListener('DOMContentLoaded', () => {
+      gabarito.style.display = 'none';
+      botao.setAttribute('aria-expanded', 'false');
+    });
+  </script>
+</body>
+</html>
