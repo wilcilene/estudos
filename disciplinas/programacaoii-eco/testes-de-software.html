@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Testes de Software: Tipos, Metodologias e Modelos de Desenvolvimento</title>
+  <meta name="description" content="Guia completo sobre testes de software: níveis (unitário, integração, sistema, aceitação), Test-Driven Development (TDD), Behavior-Driven Development (BDD), Acceptance Test-Driven Development (ATDD), Shift Left, teste contínuo, Modelo V, Scrum e muito mais. Ideal para estudantes de graduação e profissionais de Quality Assurance (QA)." />
+  <meta name="keywords" content="testes de software, Test-Driven Development (TDD), Behavior-Driven Development (BDD), Acceptance Test-Driven Development (ATDD), teste unitário, teste de integração, Shift Left, modelo V, teste contínuo, Quality Assurance (QA), qualidade de software, teste ágil, teste exploratório" />
+
+  <!-- SEO: Open Graph para compartilhamento em redes sociais -->
+  <meta property="og:title" content="Testes de Software: Tipos, Metodologias e Modelos de Desenvolvimento" />
+  <meta property="og:description" content="Guia didático sobre testes de software para graduação: Test-Driven Development (TDD), Behavior-Driven Development (BDD), Acceptance Test-Driven Development (ATDD), Shift Left, Modelo V, Scrum e muito mais." />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="pt_BR" />
+
+  <!-- SEO: Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Testes de Software: Guia Completo" />
+  <meta name="twitter:description" content="Tipos, níveis, Test-Driven Development (TDD), Behavior-Driven Development (BDD), Acceptance Test-Driven Development (ATDD), Shift Left e muito mais. Material didático para graduação." />
+  <link rel="canonical" href="https://example.com/testes-de-software" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Testes de Software: Tipos, Metodologias e Modelos de Desenvolvimento",
+    "description": "Guia completo sobre testes de software: Test-Driven Development (TDD), Behavior-Driven Development (BDD), Acceptance Test-Driven Development (ATDD), Shift Left, Modelo V, Scrum, testes não funcionais e práticas modernas.",
+    "inLanguage": "pt-BR",
+    "author": {
+      "@type": "Person",
+      "name": "Equipe Didática"
+    },
+    "educationalLevel": "Graduação",
+    "about": [
+      { "@type": "Thing", "name": "Testes de Software" },
+      { "@type": "Thing", "name": "Test-Driven Development (TDD)" },
+      { "@type": "Thing", "name": "Behavior-Driven Development (BDD)" },
+      { "@type": "Thing", "name": "Qualidade de Software" }
+    ]
+  }
+  </script>
+
+  <!-- SEO: Schema.org FAQPage (ajuda a aparecer em featured snippets) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "O que é Test-Driven Development (TDD)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Test-Driven Development (TDD) é uma metodologia de desenvolvimento onde os testes são escritos antes do código de produção. O ciclo Red-Green-Refactor guia o desenvolvedor: escreve-se um teste que falha (Red), implementa-se o mínimo de código para passar (Green) e então refatora-se o código sem quebrar os testes (Refactor)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Qual a diferença entre Test-Driven Development (TDD), Behavior-Driven Development (BDD) e Acceptance Test-Driven Development (ATDD)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Test-Driven Development (TDD) foca em testar unidades de código antes de implementá-las. Behavior-Driven Development (BDD) foca em comportamentos do sistema descritos em linguagem natural (Given/When/Then) para facilitar comunicação entre negócio e tecnologia. Acceptance Test-Driven Development (ATDD) usa critérios de aceitação para guiar o desenvolvimento, alinhando requisitos de negócio, desenvolvimento e Quality Assurance (QA) desde o início."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "O que é Shift Left em testes de software?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Shift Left é a prática de antecipar atividades de teste, qualidade e segurança para as fases iniciais do ciclo de desenvolvimento, em vez de concentrá-las ao final. Isso reduz o custo de correção de defeitos e aumenta a qualidade do produto entregue."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quais são os níveis de teste de software?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Os quatro níveis principais são: Unitário (testa funções e métodos isoladamente), Integração (verifica a interação entre componentes), Sistema (valida o software completo em ambiente controlado) e Aceitação (confirma se o sistema atende às necessidades do usuário e do negócio)."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- SEO: Schema.org BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://example.com" },
+      { "@type": "ListItem", "position": 2, "name": "Engenharia de Software", "item": "https://example.com/engenharia-de-software" },
+      { "@type": "ListItem", "position": 3, "name": "Testes de Software", "item": "https://example.com/testes-de-software" }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Home</a><span>›</span>
+        <a href="/engenharia-de-software">Engenharia de Software</a><span>›</span>
+        <span>Testes de Software</span>
+      </nav>
+
+      <div class="header-meta">
+        <span class="tag tag--aulas">Aula</span>
+        <span class="tag tag--nivel">Graduação</span>
+        <span class="tag tag--new">Atualizado 2026</span>
+      </div>
+
+      <h1>Testes de Software: Tipos, Níveis, Metodologias e Modelos de Desenvolvimento</h1>
+
+      <p>
+        Guia didático: níveis de teste (unitário, integração, sistema, aceitação),
+        Test-Driven Development (TDD), Behavior-Driven Development (BDD), Acceptance Test-Driven Development (ATDD), testes não funcionais, Modelo V, Scrum, Shift Left, teste contínuo
+        e quadrantes de teste ágil — tudo em um só lugar.
+      </p>
+
+      <nav aria-label="Índice do conteúdo">
+        <a href="#introducao">Conceitos fundamentais</a>
+        <a href="#tipos">Tipos de teste</a>
+        <a href="#nao-funcionais">Testes não funcionais</a>
+        <a href="#modelos">Modelos de desenvolvimento</a>
+        <a href="#tdd-bdd">TDD, BDD e ATDD</a>
+        <a href="#avancados">Tópicos avançados</a>
+        <a href="#quadrantes">Quadrantes ágeis</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+    <section>
+
+      <!-- 1. CONCEITOS FUNDAMENTAIS -->
+      <article class="card" id="introducao">
+        <h2>1. Conceitos Fundamentais de Testes de Software</h2>
+
+        <p>
+          <strong>Teste de software</strong> é o processo de avaliar e verificar se um sistema ou componente
+          atende aos requisitos especificados e funciona conforme o esperado. O objetivo principal é
+          encontrar defeitos antes que cheguem ao usuário final, mas também validar comportamentos,
+          garantir requisitos não funcionais e gerar confiança na entrega.
+        </p>
+
+        <div class="anotacao">
+          <strong>Princípio-chave:</strong> teste não é uma fase final isolada. Ele permeia todo o ciclo
+          de vida do desenvolvimento de software (Software Development Life Cycle – SDLC), desde a concepção até a entrega e manutenção.
+        </div>
+
+        <div class="metrics">
+          <div class="metric">Em torno de <strong>10×</strong> mais barato corrigir defeitos em requisitos do que em produção</div>
+          <div class="metric"><strong>4 níveis</strong> de teste formam a base do processo</div>
+          <div class="metric">Aproximadamente <strong>70%</strong> dos defeitos têm origem em requisitos mal definidos</div>
+        </div>
+
+        <div class="cat-grid">
+          <div class="cat-card cat-card--criacional">
+            <h3>Níveis de teste</h3>
+            <ul>
+              <li>Unitário</li>
+              <li>Integração</li>
+              <li>Sistema</li>
+              <li>Aceitação</li>
+            </ul>
+          </div>
+
+          <div class="cat-card cat-card--estrutural">
+            <h3>Tipos complementares</h3>
+            <ul>
+              <li>Regressão</li>
+              <li>Exploratório</li>
+              <li>Usabilidade</li>
+              <li>Desempenho</li>
+              <li>Segurança</li>
+            </ul>
+          </div>
+
+          <div class="cat-card cat-card--comportamental">
+            <h3>Foco de negócio</h3>
+            <ul>
+              <li>Critérios de aceitação</li>
+              <li>Experiência do usuário</li>
+              <li>Valor entregue</li>
+              <li>Risco reduzido</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="analogia">
+          <div class="analogia-icone">🧪</div>
+          <div>
+            Pense nos testes como uma rede de segurança em várias camadas: testes unitários pegam falhas
+            no código; testes de integração detectam problemas de comunicação entre módulos;
+            testes de sistema validam o comportamento completo; testes de aceitação confirmam o valor
+            para o negócio. Cada nível detecta um tipo diferente de falha.
+          </div>
+        </div>
+
+        <h3>Os 7 princípios de teste do International Software Testing Qualifications Board (ISTQB)</h3>
+        <ul class="check-list">
+          <li><strong>Teste revela defeitos, não sua ausência:</strong> nunca prova que o software está livre de bugs.</li>
+          <li><strong>Teste exaustivo é impossível:</strong> priorizamos com base em risco e criticidade.</li>
+          <li><strong>Teste antecipado (Shift Left):</strong> encontrar defeitos cedo é muito mais barato.</li>
+          <li><strong>Agrupamento de defeitos:</strong> a maioria dos bugs se concentra em poucos módulos.</li>
+          <li><strong>Paradoxo do pesticida:</strong> testes repetidos perdem eficácia — precisamos variá-los.</li>
+          <li><strong>Teste depende do contexto:</strong> metodologias variam conforme o tipo de software.</li>
+          <li><strong>Ausência de erros é uma falácia:</strong> um sistema sem bugs mas inútil não tem valor.</li>
+        </ul>
+      </article>
+
+      <!-- 2. TIPOS E NÍVEIS -->
+      <article class="card" id="tipos">
+        <h2>2. Tipos e Níveis de Teste de Software</h2>
+
+        <p class="note">
+          Entender os níveis de teste é fundamental para estruturar uma estratégia eficaz de
+          <span title="Quality Assurance">QA</span> — cada nível tem objetivo, escopo e artefatos distintos.
+        </p>
+
+        <table class="tabela-padroes">
+          <thead>
+            <tr>
+              <th>Nível / Tipo</th>
+              <th>Objetivo</th>
+              <th>Exemplo prático</th>
+              <th>Ferramentas comuns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="nome-padrao">Unitário</td>
+              <td>Verifica funções, métodos e classes de forma isolada, usando mocks e stubs para dependências externas.</td>
+              <td>Testar se o método <code>calcularDesconto()</code> retorna o valor correto para cada faixa de preço.</td>
+              <td>JUnit, pytest, Jest, NUnit</td>
+            </tr>
+            <tr>
+              <td class="nome-padrao">Integração</td>
+              <td>Verifica a interação entre dois ou mais componentes, serviços ou sistemas que se comunicam entre si.</td>
+              <td>Teste da comunicação entre a API REST e o banco de dados PostgreSQL.</td>
+              <td>Testcontainers, WireMock, Postman</td>
+            </tr>
+            <tr>
+              <td class="nome-padrao">Sistema</td>
+              <td>Valida o sistema completo em ambiente que simula produção, cobrindo fluxos ponta a ponta.</td>
+              <td>Executar o fluxo completo de compra (cadastro → carrinho → pagamento → confirmação).</td>
+              <td>Selenium, Cypress, Playwright</td>
+            </tr>
+            <tr>
+              <td class="nome-padrao">Aceitação (User Acceptance Test – UAT)</td>
+              <td>Confirma se o sistema atende às necessidades do usuário e aos critérios de aceitação do negócio.</td>
+              <td>Validar uma user story com o Product Owner usando critérios de aceitação definidos no refinamento.</td>
+              <td>Cucumber, SpecFlow, Robot Framework</td>
+            </tr>
+            <tr>
+              <td class="nome-padrao">Regressão</td>
+              <td>Garante que mudanças no código (novas features ou correções) não quebraram funcionalidades existentes.</td>
+              <td>Reexecutar a suíte automatizada completa após cada pull request aprovado no pipeline de <span title="Continuous Integration">CI</span>.</td>
+              <td>Jenkins, GitHub Actions, CircleCI</td>
+            </tr>
+            <tr>
+              <td class="nome-padrao">Exploratório</td>
+              <td>Investigação adaptativa e sem roteiro pré-definido para encontrar falhas ocultas e avaliar usabilidade.</td>
+              <td>Explorar fluxos inesperados, dados extremos e combinações raras de ações do usuário.</td>
+              <td>Xray, TestRail, Zephyr (gestão de sessões)</td>
+            </tr>
+            <tr>
+              <td class="nome-padrao">Fumaça (Smoke)</td>
+              <td>Verificação rápida e superficial para garantir que o build está estável o suficiente para testes aprofundados.</td>
+              <td>Verificar se a aplicação sobe, a tela principal carrega e o login funciona após um novo deploy.</td>
+              <td>Scripts de <span title="Continuous Integration">CI</span>/<span title="Continuous Delivery">CD</span>, Postman collections</td>
+            </tr>
+            <tr>
+              <td class="nome-padrao">Sanidade (Sanity)</td>
+              <td>Verificação focada em uma área específica após uma mudança cirúrgica para confirmar que foi corrigida.</td>
+              <td>Após corrigir um bug de cálculo de frete, testar apenas os cenários de frete afetados.</td>
+              <td>Scripts manuais ou automatizados</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          <strong>Pirâmide de Testes (Mike Cohn):</strong> o modelo recomenda muitos testes unitários
+          (base — rápidos e baratos), testes de integração em quantidade intermediária e poucos testes
+          de ponta a ponta (topo — lentos e caros). Fugir desse modelo gera "sorvete invertido" de testes:
+          caro, lento e frágil.
+        </div>
+      </article>
+
+      <!-- 3. TESTES NÃO FUNCIONAIS -->
+      <article class="card" id="nao-funcionais">
+        <h2>3. Testes Não Funcionais</h2>
+
+        <p>
+          Testes não funcionais avaliam <em>como</em> o sistema se comporta — não apenas <em>o que</em> ele faz.
+          São críticos para garantir qualidade de serviço, segurança e satisfação do usuário.
+        </p>
+
+        <h3>Testes de Desempenho (Performance)</h3>
+        <ul class="check-list">
+          <li><strong>Teste de carga:</strong> avalia o comportamento sob volume de usuários esperado em produção.</li>
+          <li><strong>Teste de estresse:</strong> empurra o sistema além do limite para encontrar o ponto de ruptura.</li>
+          <li><strong>Teste de pico (spike):</strong> simula aumento súbito e imprevisível de carga.</li>
+          <li><strong>Teste de resistência (soak/endurance):</strong> avalia estabilidade em carga sustentada por horas.</li>
+          <li><strong>Ferramentas:</strong> JMeter, k6, Gatling, Locust.</li>
+        </ul>
+
+        <h3>Testes de Segurança</h3>
+        <ul class="check-list">
+          <li><strong>Static Application Security Testing (SAST):</strong> analisa código-fonte em busca de vulnerabilidades sem executar o programa.</li>
+          <li><strong>Dynamic Application Security Testing (DAST):</strong> testa a aplicação em execução simulando ataques externos.</li>
+          <li><strong>Penetration Test (Pentest):</strong> teste de penetração manual conduzido por especialistas.</li>
+          <li><strong>Open Worldwide Application Security Project (OWASP) Top 10:</strong> referência das 10 vulnerabilidades mais críticas em aplicações web.</li>
+          <li><strong>Ferramentas:</strong> SonarQube (<span title="Static Application Security Testing">SAST</span>), OWASP ZAP (<span title="Dynamic Application Security Testing">DAST</span>), Burp Suite.</li>
+        </ul>
+
+        <h3>Testes de Usabilidade e Acessibilidade</h3>
+        <ul class="check-list">
+          <li>Avaliação heurística com base nos 10 heurísticos de Nielsen.</li>
+          <li>Testes com usuários reais (think-aloud protocol).</li>
+          <li>Conformidade com as Diretrizes de Acessibilidade para Conteúdo Web (Web Content Accessibility Guidelines – WCAG 2.1, nível AA).</li>
+          <li><strong>Ferramentas:</strong> Axe, Lighthouse, WAVE (auxiliam na verificação das <span title="Web Content Accessibility Guidelines">WCAG</span>).</li>
+        </ul>
+
+        <h3>Testes de Compatibilidade</h3>
+        <ul class="check-list">
+          <li><strong>Cross-browser:</strong> Chrome, Firefox, Safari, Edge.</li>
+          <li><strong>Cross-device:</strong> desktop, tablet, mobile (iOS e Android).</li>
+          <li><strong>Cross-Operating System (Cross-OS):</strong> Windows, macOS, Linux.</li>
+          <li><strong>Ferramentas:</strong> BrowserStack, Sauce Labs, LambdaTest (para diferentes <span title="Operating System">OS</span> e navegadores).</li>
+        </ul>
+      </article>
+
+      <!-- 4. MODELOS DE DESENVOLVIMENTO -->
+      <article class="card" id="modelos">
+        <h2>4. Testes nos Modelos de Desenvolvimento de Software</h2>
+
+        <h3>Modelo Cascata (Waterfall)</h3>
+        <p>
+          No modelo cascata, as fases ocorrem de forma <strong>sequencial e linear</strong>:
+          levantamento de requisitos → análise → projeto → implementação → teste → implantação → manutenção.
+          Os testes ficam concentrados ao final, o que aumenta drasticamente o custo de correção de defeitos
+          identificados tardiamente (regra do custo exponencial).
+        </p>
+
+        <div class="example-box">
+          <strong>Custo de correção no Cascata (National Institute of Standards and Technology – NIST, 2023):</strong><br />
+          Defeito em requisitos → 1× | Em design → 6× | Em código → 15× | Em teste → 22× | Em produção → 40–100×
+        </div>
+
+        <h3>Modelo V (V-Model)</h3>
+        <p>
+          O Modelo V associa cada etapa de desenvolvimento a um nível correspondente de teste,
+          definidos em paralelo e antecipados. A ideia é que o <em>planejamento</em> do teste ocorra
+          junto com a etapa de desenvolvimento correspondente, mesmo que a <em>execução</em> aconteça depois.
+        </p>
+
+        <div class="example-box">
+          <strong>Mapeamento do Modelo V:</strong><br />
+          Requisitos de negócio ↔ Teste de aceitação (<span title="User Acceptance Test">UAT</span>)<br />
+          Requisitos de sistema ↔ Teste de sistema<br />
+          Arquitetura / Design ↔ Teste de integração<br />
+          Design detalhado / Módulos ↔ Teste unitário
+        </div>
+
+        <h3>Scrum e Testes Ágeis</h3>
+        <p>
+          Em Scrum, os testes fazem parte do próprio sprint. A história de usuário só é considerada
+          <strong>Done</strong> quando passa pelas validações definidas no critério de Definição de Pronto (Definition of Done – DoD),
+          que normalmente inclui testes de aceitação automatizados, revisão de código, cobertura mínima e
+          aprovação do Product Owner.
+        </p>
+
+        <ul class="check-list">
+          <li><strong>Sprint Planning:</strong> critérios de aceitação são discutidos e refinados.</li>
+          <li><strong>Durante o sprint:</strong> <span title="Test-Driven Development">TDD</span> e <span title="Behavior-Driven Development">BDD</span> guiam o desenvolvimento.</li>
+          <li><strong>Sprint Review:</strong> demonstração com testes de aceitação executados.</li>
+          <li><strong>Retrospectiva:</strong> melhoria contínua do processo de qualidade.</li>
+        </ul>
+
+        <div class="antes-depois">
+          <div class="antes">
+            <h4>🔴 Cascata</h4>
+            <p>Desenvolvimento primeiro, testes concentrados ao final. Defeitos descobertos tarde custam muito.</p>
+          </div>
+          <div class="depois">
+            <h4>🟢 Ágil / Scrum</h4>
+            <p>Teste contínuo integrado ao sprint, feedback rápido, qualidade como responsabilidade do time inteiro.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5. TDD, BDD E ATDD -->
+      <article class="card" id="tdd-bdd">
+        <h2>5. Test-Driven Development (TDD), Behavior-Driven Development (BDD) e Acceptance Test-Driven Development (ATDD): Diferenças, Aplicações e Exemplos</h2>
+
+        <h3>Test-Driven Development (TDD)</h3>
+        <p>
+          Test-Driven Development (<span title="Test-Driven Development">TDD</span>) é uma prática de desenvolvimento em que o <strong>teste é escrito antes do código de produção</strong>.
+          O objetivo não é apenas garantir cobertura, mas usar o teste como ferramenta de design:
+          pensar na interface e no contrato da função antes de implementá-la força um design mais coeso e testável.
+        </p>
+
+        <h3>Ciclo Red-Green-Refactor</h3>
+
+        <div class="tdd-cycle">
+          <div class="tdd-step tdd-step--red">🔴 RED<br /><small>Escreva um teste que falha</small></div>
+          <div class="tdd-arrow">→</div>
+          <div class="tdd-step tdd-step--green">🟢 GREEN<br /><small>Mínimo de código para passar</small></div>
+          <div class="tdd-arrow">→</div>
+          <div class="tdd-step tdd-step--blue">🔵 REFACTOR<br /><small>Melhore sem quebrar testes</small></div>
+          <div class="tdd-arrow">→</div>
+          <div class="tdd-step tdd-step--red">🔴 RED<br /><small>Próximo teste...</small></div>
+        </div>
+
+        <pre><code>// Exemplo de Test-Driven Development (TDD) em JavaScript (Jest)
+
+// 1. RED: teste que falha
+test('deve calcular 10% de desconto para compras acima de R$ 100', () => {
+  expect(calcularDesconto(150)).toBe(135); // Função ainda não existe
+});
+
+// 2. GREEN: implementação mínima
+function calcularDesconto(valor) {
+  return valor > 100 ? valor * 0.9 : valor;
+}
+
+// 3. REFACTOR: melhorar sem quebrar
+function calcularDesconto(valor, percentual = 0.10, limiar = 100) {
+  return valor > limiar ? valor * (1 - percentual) : valor;
+}</code></pre>
+
+        <div class="example-box">
+          <strong>Benefícios do <span title="Test-Driven Development">TDD</span>:</strong> design mais testável, menor acoplamento, feedback imediato,
+          documentação viva via testes, regressão detectada instantaneamente e refatoração segura.
+        </div>
+
+        <h3>Behavior-Driven Development (BDD)</h3>
+        <p>
+          Behavior-Driven Development (<span title="Behavior-Driven Development">BDD</span>) expande o <span title="Test-Driven Development">TDD</span> para um nível de comportamento, expressando cenários em <strong>linguagem
+          próxima ao negócio</strong> usando a sintaxe Gherkin (Given/When/Then — Dado/Quando/Então). O objetivo principal é
+          criar uma linguagem ubíqua entre desenvolvedores, testadores e stakeholders de negócio.
+        </p>
+
+        <div class="example-box">
+          <strong>Exemplo <span title="Behavior-Driven Development">BDD</span> com Gherkin (Cucumber):</strong><br /><br />
+          <strong>Funcionalidade:</strong> Login de usuário<br /><br />
+          <strong>Cenário:</strong> Login com credenciais válidas<br />
+          &nbsp;&nbsp;<strong>Dado</strong> que um usuário cadastrado está na tela de login<br />
+          &nbsp;&nbsp;<strong>Quando</strong> ele digita o e-mail "joao@email.com" e senha "Senh@123"<br />
+          &nbsp;&nbsp;<strong>E</strong> clica no botão "Entrar"<br />
+          &nbsp;&nbsp;<strong>Então</strong> ele deve ser redirecionado para o dashboard<br />
+          &nbsp;&nbsp;<strong>E</strong> deve ver a mensagem "Bem-vindo, João"<br /><br />
+          <strong>Cenário:</strong> Login com senha inválida<br />
+          &nbsp;&nbsp;<strong>Dado</strong> que um usuário está na tela de login<br />
+          &nbsp;&nbsp;<strong>Quando</strong> ele digita a senha errada<br />
+          &nbsp;&nbsp;<strong>Então</strong> deve ver a mensagem "Credenciais inválidas"
+        </div>
+
+        <h3>Acceptance Test-Driven Development (ATDD)</h3>
+        <p>
+          Acceptance Test-Driven Development (<span title="Acceptance Test-Driven Development">ATDD</span>) vai além do <span title="Behavior-Driven Development">BDD</span> ao envolver <strong>todos os papéis do time</strong> (negócio, desenvolvedor e
+          <span title="Quality Assurance">QA</span>)
+          na definição dos critérios de aceitação <em>antes</em> de qualquer linha de código.
+          A "Three Amigos Session" (ou refinamento com 3 perspectivas) é a cerimônia típica do <span title="Acceptance Test-Driven Development">ATDD</span>.
+        </p>
+
+        <div class="example-box">
+          <strong>Story Map do <span title="Acceptance Test-Driven Development">ATDD</span>:</strong><br /><br />
+          <strong>Como</strong> cliente premium,<br />
+          <strong>quero</strong> receber 15% de desconto automático em todas as compras,<br />
+          <strong>para</strong> ter benefício real pelo meu plano de assinatura.<br /><br />
+          <strong>Critérios de aceitação:</strong><br />
+          ✓ Desconto aplicado automaticamente no checkout para clientes com status "premium"<br />
+          ✓ Desconto visível no resumo do pedido antes da confirmação<br />
+          ✓ Desconto registrado no histórico de pedidos<br />
+          ✓ Sem desconto para clientes "standard"
+        </div>
+
+        <div class="callout">
+          <strong><span title="Test-Driven Development">TDD</span> vs <span title="Behavior-Driven Development">BDD</span> vs <span title="Acceptance Test-Driven Development">ATDD</span> — resumo:</strong><br />
+          • <strong><span title="Test-Driven Development">TDD</span>:</strong> foco em código — unidade, design, desenvolvedor.<br />
+          • <strong><span title="Behavior-Driven Development">BDD</span>:</strong> foco em comportamento — linguagem natural, comunicação, time técnico e negócio.<br />
+          • <strong><span title="Acceptance Test-Driven Development">ATDD</span>:</strong> foco em aceitação — critérios de negócio, alinhamento entre
+          <span title="Quality Assurance">QA</span>, dev e PO, three amigos.
+        </div>
+      </article>
+
+      <!-- 6. TÓPICOS AVANÇADOS -->
+      <article class="card" id="avancados">
+        <h2>6. Tópicos Avançados em Testes de Software</h2>
+
+        <h3>Shift Left Testing</h3>
+        <p>
+          Shift Left é a prática de <strong>antecipar qualidade, testes e segurança</strong> para as
+          fases iniciais do <span title="Software Development Life Cycle">SDLC</span>. Ao testar mais cedo, defeitos custam menos para corrigir e o risco
+          de retrabalho em produção diminui drasticamente. Inclui revisão de requisitos, análise estática
+          de código, testes de segurança em desenvolvimento (Development, Security and Operations – DevSecOps) e automação de testes em pipeline de
+          <span title="Continuous Integration">CI</span>/<span title="Continuous Delivery">CD</span>.
+        </p>
+
+        <div class="example-box">
+          <strong>Shift Left na prática:</strong><br />
+          Requisitos → linting + análise estática (<span title="Static Application Security Testing">SAST</span>) → testes unitários → testes de integração →
+          testes de segurança → deploy automatizado → testes pós-deploy → monitoramento em produção
+        </div>
+
+        <h3>Teste Contínuo (Continuous Testing)</h3>
+        <p>
+          Teste contínuo integra a execução de testes automatizados em cada etapa do pipeline de
+          entrega contínua (<span title="Continuous Integration">CI</span>/<span title="Continuous Delivery">CD</span>). O objetivo é manter o sistema sempre em estado "entregável",
+          com feedback em minutos após um commit.
+        </p>
+
+        <ul class="check-list">
+          <li><strong>Integração Contínua (Continuous Integration – CI):</strong> testes unitários e de integração a cada push.</li>
+          <li><strong>Entrega Contínua (Continuous Delivery – CD):</strong> testes de sistema e aceitação automáticos antes de cada release.</li>
+          <li><strong>Feature flags:</strong> permitem ativar funcionalidades para subconjuntos de usuários (canary deploy).</li>
+          <li><strong>Monitoring como teste:</strong> alertas e observabilidade em produção completam o loop.</li>
+        </ul>
+
+        <h3>Teste Exploratório</h3>
+        <p>
+          Teste exploratório é uma abordagem <strong>manual e cognitiva</strong>, sem roteiro fixo,
+          onde o testador aprende sobre o sistema enquanto testa. É especialmente eficaz para descobrir
+          bugs de borda, problemas de usabilidade e falhas em fluxos não mapeados.
+        </p>
+        <ul class="check-list">
+          <li><strong>Session-based testing:</strong> sessões com charters definidos e limite de tempo.</li>
+          <li><strong>Mind maps:</strong> auxiliam no mapeamento do espaço de exploração.</li>
+          <li><strong>Persona testing:</strong> explorar o sistema "na pele" de diferentes perfis de usuário.</li>
+        </ul>
+
+        <h3>Mutation Testing</h3>
+        <p>
+          Mutation testing avalia a <strong>qualidade dos próprios testes</strong>: o framework introduz
+          pequenas mutações (bugs propositais) no código e verifica se algum teste detecta a mudança.
+          Testes que não detectam mutações são chamados de "sobreviventes" e indicam pontos cegos.
+        </p>
+        <div class="example-box">
+          <strong>Ferramentas:</strong> PIT (Java), Stryker (JavaScript/TypeScript), mutmut (Python).
+        </div>
+      </article>
+
+      <!-- 7. QUADRANTES ÁGEIS -->
+      <article class="card" id="quadrantes">
+        <h2>7. Quadrantes de Teste Ágil (Agile Testing Quadrants)</h2>
+
+        <p>
+          Criados por Brian Marick e popularizados por Lisa Crispin e Janet Gregory no livro
+          <em>Agile Testing</em>, os quadrantes organizam os testes em dois eixos:
+          <strong>voltados ao negócio vs. voltados à tecnologia</strong> e
+          <strong>suporte ao desenvolvimento vs. crítica ao produto</strong>.
+        </p>
+
+        <div class="quadrantes">
+          <div class="quadrante q1">
+            <strong>Q1 — Voltado à tecnologia, suporta o time</strong>
+            Testes unitários, testes de componente, <span title="Test-Driven Development">TDD</span>. Automatizados. Base da pirâmide.
+          </div>
+          <div class="quadrante q2">
+            <strong>Q2 — Voltado ao negócio, suporta o time</strong>
+            <span title="Behavior-Driven Development">BDD</span>, <span title="Acceptance Test-Driven Development">ATDD</span>, testes funcionais, protótipos, exemplos de negócio. Automatizados e manuais.
+          </div>
+          <div class="quadrante q3">
+            <strong>Q3 — Voltado ao negócio, critica o produto</strong>
+            Testes exploratórios, usabilidade, <span title="User Acceptance Test">UAT</span>, personas, testes de aceitação do usuário. Manuais.
+          </div>
+          <div class="quadrante q4">
+            <strong>Q4 — Voltado à tecnologia, critica o produto</strong>
+            Desempenho, segurança, compatibilidade, escalabilidade. Ferramentas especializadas.
+          </div>
+        </div>
+
+        <div class="anotacao">
+          <strong>Visão holística ágil:</strong> qualidade é responsabilidade de todo o time —
+          desenvolvedores, testadores, Product Owner (PO), Scrum Master e stakeholders. Não existe "fase de testes":
+          existe qualidade contínua integrada em cada sprint.
+        </div>
+      </article>
+
+      <!-- 8. FAQ -->
+      <article class="card" id="faq">
+        <h2>8. Perguntas Frequentes sobre Testes de Software</h2>
+        <p class="note">Perguntas mais buscadas no Google sobre o tema — com respostas diretas e técnicas.</p>
+
+        <div class="faq-section">
+          <details>
+            <summary>O que é Test-Driven Development (TDD)?</summary>
+            <div>
+              Test-Driven Development (<span title="Test-Driven Development">TDD</span>) é uma metodologia onde os testes são escritos <strong>antes</strong> do código de produção.
+              O ciclo Red-Green-Refactor guia o desenvolvimento: escreve-se um teste que falha (Red),
+              implementa-se o mínimo de código para passar (Green) e refatora-se sem quebrar os testes (Refactor).
+              Além de garantir cobertura, <span title="Test-Driven Development">TDD</span> melhora o design do código por forçar a pensar na interface antes da implementação.
+            </div>
+          </details>
+
+          <details>
+            <summary>Qual a diferença entre Test-Driven Development (TDD), Behavior-Driven Development (BDD) e Acceptance Test-Driven Development (ATDD)?</summary>
+            <div>
+              <strong><span title="Test-Driven Development">TDD</span></strong> é voltado a desenvolvedores e foca em unidades de código.
+              <strong><span title="Behavior-Driven Development">BDD</span></strong> usa linguagem natural (Given/When/Then) para expressar comportamentos
+              e promover comunicação entre negócio e tecnologia.
+              <strong><span title="Acceptance Test-Driven Development">ATDD</span></strong> envolve todo o time na definição de critérios de aceitação antes da implementação,
+              garantindo alinhamento entre Product Owner (PO), dev e
+              <span title="Quality Assurance">QA</span> desde o início.
+            </div>
+          </details>
+
+          <details>
+            <summary>O que é Shift Left em testes?</summary>
+            <div>
+              Shift Left significa mover testes, qualidade e segurança para o início do ciclo de desenvolvimento.
+              Em vez de testar apenas ao final, o time realiza análise estática, revisão de requisitos,
+              testes unitários e testes de segurança desde as primeiras fases, reduzindo drasticamente
+              o custo de correção de defeitos.
+            </div>
+          </details>
+
+          <details>
+            <summary>Quais são os 4 níveis de teste de software?</summary>
+            <div>
+              <strong>1. Unitário:</strong> testa funções e métodos isoladamente.
+              <strong>2. Integração:</strong> verifica comunicação entre componentes.
+              <strong>3. Sistema:</strong> valida o software completo em fluxos ponta a ponta.
+              <strong>4. Aceitação (User Acceptance Test – UAT):</strong> confirma que o sistema atende às necessidades do usuário e do negócio.
+            </div>
+          </details>
+
+          <details>
+            <summary>O que é teste de regressão?</summary>
+            <div>
+              Teste de regressão garante que mudanças no código (novas funcionalidades ou correções de bugs)
+              não quebraram comportamentos que já funcionavam. É geralmente automatizado e executado
+              em pipelines de <span title="Continuous Integration">CI</span>/<span title="Continuous Delivery">CD</span> após cada pull request ou deploy.
+            </div>
+          </details>
+
+          <details>
+            <summary>O que é teste exploratório?</summary>
+            <div>
+              Teste exploratório é uma abordagem manual, sem roteiro fixo, onde o testador aprende sobre
+              o sistema enquanto testa. É eficaz para encontrar falhas ocultas, problemas de usabilidade
+              e bugs em fluxos não mapeados. Sessões são tipicamente organizadas com "charters" e tempo definido.
+            </div>
+          </details>
+
+          <details>
+            <summary>Qual a diferença entre teste de fumaça e teste de sanidade?</summary>
+            <div>
+              <strong>Smoke test</strong> (fumaça) é uma verificação superficial e abrangente de que
+              o build básico está funcional — cobre as funcionalidades mais críticas rapidamente.
+              <strong>Sanity test</strong> (sanidade) é focado e profundo em uma área específica
+              após uma mudança cirúrgica, confirmando que aquela funcionalidade específica funciona corretamente.
+            </div>
+          </details>
+
+          <details>
+            <summary>O que é a Pirâmide de Testes?</summary>
+            <div>
+              A Pirâmide de Testes (Mike Cohn) recomenda: muitos testes unitários na base (rápidos e baratos),
+              quantidade intermediária de testes de integração no meio e poucos testes end-to-end (E2E) no topo
+              (lentos e caros). Inverter a pirâmide gera suítes lentas, frágeis e caras de manter.
+            </div>
+          </details>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- ===== ASIDE ===== -->
+    <aside>
+      <div class="card">
+        <h2>Níveis de teste</h2>
+        <ul class="pill-list">
+          <li>Unitário</li>
+          <li>Integração</li>
+          <li>Sistema</li>
+          <li>Aceitação</li>
+          <li>Regressão</li>
+          <li>Exploratório</li>
+          <li>Fumaça</li>
+          <li>Sanidade</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Pontos-chave</h2>
+        <ul class="check-list">
+          <li>Teste é atividade contínua no <span title="Software Development Life Cycle">SDLC</span>.</li>
+          <li>Modelo V conecta fases e testes.</li>
+          <li>Scrum integra <span title="Quality Assurance">QA</span> ao sprint.</li>
+          <li><span title="Test-Driven Development">TDD</span> orienta design pelo teste.</li>
+          <li><span title="Behavior-Driven Development">BDD</span> usa linguagem Gherkin.</li>
+          <li><span title="Acceptance Test-Driven Development">ATDD</span> envolve todo o time.</li>
+          <li>Shift Left reduz custo de defeitos.</li>
+          <li>Pirâmide: mais unitários, menos E2E.</li>
+          <li>Teste contínuo em pipelines de <span title="Continuous Integration">CI</span>/<span title="Continuous Delivery">CD</span>.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Roteiro da aula</h2>
+        <ol>
+          <li>Conceitos e princípios do <span title="International Software Testing Qualifications Board">ISTQB</span>.</li>
+          <li>Níveis e tipos de teste.</li>
+          <li>Testes não funcionais.</li>
+          <li>Modelos Cascata e V.</li>
+          <li>Scrum e testes ágeis.</li>
+          <li><span title="Test-Driven Development">TDD</span>, <span title="Behavior-Driven Development">BDD</span> e <span title="Acceptance Test-Driven Development">ATDD</span>.</li>
+          <li>Shift Left e teste contínuo.</li>
+          <li>Quadrantes ágeis.</li>
+          <li>Prática no projeto.</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h2>Ferramentas por nível</h2>
+        <ul class="check-list">
+          <li><strong>Unitário:</strong> JUnit, Jest, pytest</li>
+          <li><strong>Integração:</strong> Testcontainers, WireMock</li>
+          <li><strong>End-to-end (E2E):</strong> Cypress, Playwright, Selenium</li>
+          <li><strong><span title="Behavior-Driven Development">BDD</span>:</strong> Cucumber, SpecFlow</li>
+          <li><strong>Carga:</strong> k6, JMeter, Gatling</li>
+          <li><strong>Segurança:</strong> OWASP ZAP, SonarQube</li>
+          <li><strong><span title="Continuous Integration">CI</span>/<span title="Continuous Delivery">CD</span>:</strong> GitHub Actions, Jenkins</li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>Material didático sobre testes de software</p>
+  </footer>
+
+</body>
+</html>
