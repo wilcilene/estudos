@@ -674,3 +674,30 @@ details > div {
       .anotacao dl {
         margin-bottom: 0;
       }
+
+      .card--tabela {
+        overflow-x: auto;
+      }
+      
+      .tabela-padroes {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+      }
+      
+      .tabela-padroes th,
+      .tabela-padroes td {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        vertical-align: top;
+      }
+      
+      .tabela-padroes .nome-padrao {
+        white-space: normal;
+      }
+      
+      @media (max-width: 1200px) {
+        .tabela-padroes {
+          min-width: 900px;
+        }
+      }
