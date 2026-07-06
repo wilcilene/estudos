@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Revisão Final — Programação II</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div>
+        <span class="tag">Programação II</span>
+        <span class="tag tag--aulas">Revisão</span>
+        <span class="tag tag--nivel">4 horas</span>
+      </div>
+      <h1>Revisão Final — Mini Loja Web</h1>
+      <p>
+        Página de revisão da disciplina de Programação II, organizada para retomar orientação a objetos,
+        HTML5, DOM, JavaScript no navegador, Node.js, APIs REST, consumo de APIs externas e tratamento de erros.
+      </p>
+      <nav>
+        <a href="#visao-geral">Visão geral</a>
+        <a href="#entregas">Entregas</a>
+        <a href="#backend">Back-end</a>
+        <a href="#frontend">Front-end</a>
+        <a href="#api-externa">API externa</a>
+        <a href="#oo">Orientação a Objetos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <article class="card" id="visao-geral">
+        <h2>Visão geral</h2>
+        <p>
+          Esta revisão foi planejada para consolidar os conteúdos da disciplina em uma atividade prática compacta.
+        </p>
+        <p>
+          A proposta integra orientação a objetos, HTML5, DOM, JavaScript no navegador, Node.js com Express,
+          consumo de APIs e tratamento de erros em um único exercício.
+        </p>
+
+        <div class="anotacao">
+          <strong>Proposta:</strong> desenvolver uma mini aplicação de loja virtual com catálogo,
+          carrinho simples, API própria e uso de uma API pública externa.<br />
+        </div>
+      </article>
+
+      <article class="card" id="entregas">
+        <h2>Entregas esperadas</h2>
+        <p>Entregar uma mini aplicação web com os seguintes componentes:</p>
+        <ul class="check-list">
+          <li>Um pequeno servidor em Node.js com Express.</li>
+          <li>Uma página HTML com interface funcional.</li>
+          <li>Um arquivo JavaScript de front-end com uso de DOM e <code>fetch</code>.</li>
+          <li>Um carrinho em memória, sem necessidade de persistência (sem banco).</li>
+          <li>Integração com uma API externa pública.</li>
+          <li>Um README curto explicando a solução.</li>
+           <li>Um parágrafo no final do README indicando como se conectaria com o banco.</li>
+        </ul>
+
+        <div class="callout">
+          <strong>Importante:</strong> o foco da revisão é integrar conceitos da disciplina em uma atividade curta,
+          e não desenvolver um sistema completo com autenticação, banco e testes avançados. Entenda o código e aprenda os conceitos.
+        </div>
+      </article>
+
+      <article class="card" id="backend">
+        <h2>Parte 1 — Back-end</h2>
+        <p>
+          Implemente um servidor e uma entidade <code>Produto</code>, armazenando os dados em memória por meio de um array.
+        </p>
+
+        <div class="example-box">
+          <ul class="mini-list">
+            <li><strong>Classe:</strong> <code>Produto</code> com <code>id</code>, <code>nome</code>, <code>categoria</code>, <code>preco</code> e <code>estoque</code>.</li>
+            <li><strong>GET /api/produtos</strong> para listar os produtos.</li>
+            <li><strong>POST /api/produtos</strong> para cadastrar um produto.</li>
+            <li><strong>PUT /api/produtos/:id/estoque</strong> para atualizar o estoque.</li>
+          </ul>
+        </div>
+
+        <details>
+          <summary>Validações mínimas</summary>
+          <div>
+            <ul class="check-list">
+              <li>Nome obrigatório.</li>
+              <li>Preço numérico.</li>
+              <li>Estoque inteiro maior ou igual a zero.</li>
+              <li>Respostas com códigos adequados, como 400, 404 e 500.</li>
+            </ul>
+          </div>
+        </details>
+      </article>
+
+      <article class="card" id="frontend">
+        <h2>Parte 2 — Front-end</h2>
+        <p>
+          Crie uma interface HTML5 simples para listar produtos e manipular um carrinho, utilizando JavaScript no navegador.
+        </p>
+
+        <div class="preview-frame">
+          <div class="preview-header">Estrutura sugerida para a interface</div>
+          <form class="preview-form">
+            <label for="busca">Busca por nome</label>
+            <input id="busca" type="text" placeholder="Digite o nome do produto" />
+
+            <label for="categoria">Filtro por categoria</label>
+            <select id="categoria">
+              <option>Todas</option>
+              <option>Notebooks</option>
+              <option>Periféricos</option>
+              <option>Componentes</option>
+            </select>
+
+            <button type="button">Carregar produtos</button>
+          </form>
+        </div>
+
+        <ul class="check-list">
+          <li>Listar produtos com botão “Adicionar ao carrinho”.</li>
+          <li>Mostrar os itens do carrinho com quantidade e total.</li>
+          <li>Permitir busca por nome.</li>
+          <li>Permitir filtro por categoria.</li>
+          <li>Usar <code>innerHTML</code>, eventos e manipulação do DOM.</li>
+          <li>Consumir a rota <code>/api/produtos</code> com <code>fetch</code>.</li>
+        </ul>
+
+        <div class="callout">
+          <strong>Obs:</strong> o carrinho pode existir apenas durante a execução da página, sem necessidade de salvar.
+        </div>
+      </article>
+
+      <article class="card" id="api-externa">
+        <h2>Parte 3 — API externa</h2>
+        <p>
+          Integre uma API pública simples, como uma API de cotação de moeda ou de consulta de CEP.
+        </p>
+        <p>
+          A chamada à API deve ser protegida com <code>try/catch</code>, mostrando mensagem amigável ao usuário em caso de erro.
+        </p>
+      </article>
+
+      <article class="card" id="oo">
+        <h2>Parte 4 — Revisão de OO</h2>
+        <p>
+          Inclua um pequeno módulo de revisão orientada a objetos com classes, herança e polimorfismo.
+        </p>
+
+        <div class="example-box">
+          <pre><code>class Usuario {
+  constructor(nome, email) {
+    this.nome = nome;
+    this.email = email;
+  }
+
+  descricao() {
+    return `Usuário: ${this.nome}`;
+  }
+}
+
+class Admin extends Usuario {
+  descricao() {
+    return `Administrador: ${this.nome}`;
+  }
+}</code></pre>
+        </div>
+
+        <ul class="check-list">
+          <li>Criar a classe <code>Usuario</code>.</li>
+          <li>Criar a classe <code>Admin</code> com <code>extends</code>.</li>
+          <li>Implementar o método <code>descricao()</code> com comportamento diferente nas duas classes.</li>
+          <li>Demonstrar um exemplo simples de instanciação e uso.</li>
+        </ul>
+      </article>
+
+      <article class="card" id="criterios">
+        <h2>Critérios mínimos</h2>
+        <ul class="check-list">
+          <li>Servidor executa e responde corretamente às rotas solicitadas.</li>
+          <li>Front-end consome a API e renderiza os produtos.</li>
+          <li>O carrinho calcula o total corretamente.</li>
+          <li>Há uso visível de classes, herança e polimorfismo.</li>
+          <li>A API externa foi integrada com tratamento de falha.</li>
+          <li>O projeto apresenta organização mínima e clareza de código.</li>
+        </ul>
+
+        <div class="anotacao">
+          <strong>Resultado esperado:</strong> ao final da revisão, vocês terão revisado os conteúdos da disciplina de forma geral.
+        </div>
+      </article>
+    </section>
+
+    <aside>
+      <section class="card">
+        <h2>Resumo</h2>
+        <ul class="mini-list">
+          <li><span class="fluxo">Tempo:</span> +/- 4 horas.</li>
+          <li><span class="fluxo">Formato:</span> revisão prática.</li>
+          <li><span class="fluxo">Tema:</span> Mini Loja Web.</li>
+          <li><span class="fluxo">Entrega:</span> front-end + back-end simples.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Conteúdos revisados</h2>
+        <ul class="check-list">
+          <li>Classes e herança.</li>
+          <li>Polimorfismo.</li>
+          <li>HTML5 semântico.</li>
+          <li>Manipulação do DOM.</li>
+          <li>Eventos e <code>innerHTML</code>.</li>
+          <li>Node.js e Express.</li>
+          <li>APIs REST e status codes.</li>
+          <li>Consumo de APIs externas.</li>
+          <li>Tratamento de erros com <code>try/catch</code>.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Sugestão de estudo</h2>
+        <ul class="mini-list">
+          <li>1. Revisar OO e classes.</li>
+          <li>2. Montar as rotas da API.</li>
+          <li>3. Construir a interface HTML.</li>
+          <li>4. Fazer o consumo com <code>fetch</code>.</li>
+          <li>5. Integrar API externa e testar erros.</li>
+        </ul>
+      </section>
+    </aside>
+  </main>
+
+  <footer>
+    Material de revisão para o exame de Programação II
+  </footer>
+</body>
+</html>
