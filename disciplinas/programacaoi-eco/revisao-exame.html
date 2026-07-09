@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Exercício de revisão sobre orientação a objetos, padrões de código e organização em projetos.">
+    <title>Exercício de Revisão - POO e Padrões</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <p class="eyebrow">Programação I • Revisão</p>
+            <h1>Exercício de Revisão: Orientação a Objetos e Padrões</h1>
+            <p class="subtitle">Atividade com questões descritivas e práticas para consolidar os pilares da orientação a objetos, a organização do código e o uso de padrões.</p>
+            <a class="back-link" href="https://wilcilene.github.io/estudos/disciplinas/programacaoi-eco/index.html" target="_blank" rel="noopener noreferrer">Index da disciplina</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section>
+                <h2>Orientações de entrega</h2>
+                <ul>
+                    <li>Responda às questões em um arquivo *<code>.MD</code>. Nas respostas descritivas, use exemplos próprios e procure explicar os conceitos de forma clara e completa.</li>
+                    <li>Nas questões de programação, escreva o código e depois comente o que ele demonstra conceitualmente.</li>
+                    <li>Relacione suas respostas com a organização de projetos Laravel (que você desenvolveu no decorrer do semestre).</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Conceitos centrais da revisão</h2>
+                <div class="concept-grid">
+                    <article class="card">
+                        <h3>Encapsulamento</h3>
+                        <p>Controle do acesso aos dados e proteção do estado interno dos objetos.</p>
+                    </article>
+                    <article class="card">
+                        <h3>Herança</h3>
+                        <p>Reaproveitamento de comportamentos comuns a partir de classes base.</p>
+                    </article>
+                    <article class="card">
+                        <h3>Polimorfismo</h3>
+                        <p>Capacidade de diferentes objetos responderem à mesma operação de formas distintas.</p>
+                    </article>
+                    <article class="card">
+                        <h3>Organização</h3>
+                        <p>Separação de responsabilidades, clareza estrutural e padronização do projeto.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section>
+                <h2>Pilares da orientação a objetos</h2>
+
+                <h3>Questão 1</h3>
+                <p>Explique, com suas palavras, o que é orientação a objetos. Em seguida, descreva os pilares estudados e comente por que eles ajudam na construção de sistemas maiores e mais organizados.</p>
+                <div class="annotation">
+                    <p>Espera-se que você mostre compreensão do uso de classes, objetos, atributos e métodos, além da função dos pilares no REUSO, MANUTENÇÃO e organização do código.</p>
+                </div>
+
+                <h3>Questão 2</h3>
+                <p>Descreva o que você entendeu por encapsulamento. Explique como os modificadores <code>public</code>, <code>private</code> e <code>protected</code> ajudam na proteção dos dados de uma classe. Indique um exemplo e explique por que essa proteção é importante.</p>
+
+                <h3>Questão 3</h3>
+                <p>Explique o conceito de herança. Depois, descreva uma situação em que uma classe base pode compartilhar características com classes mais específicas.</p>
+
+                <h3>Questão 4</h3>
+                <p>Descreva o polimorfismo com suas palavras. Explique como diferentes classes podem responder de maneira diferente ao mesmo método e por que isso é útil em sistemas que evoluem com o tempo.</p>
+            </section>
+
+            <section>
+                <h2>Quando usar POO e como organizar o código</h2>
+
+                <h3>Questão 5</h3>
+                <p>Explique em quais situações a orientação a objetos é mais interessante do que um código apenas procedural. Considere principalmente sistemas que precisam crescer, receber manutenção e ganhar novas funcionalidades.</p>
+
+                <h3>Questão 6</h3>
+                <p>Descreva o que você entendeu por organização de código em um projeto inspirado nos padrões do Laravel. Explique a importância de separar responsabilidades entre rotas, controladores, modelos e visualizações.</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Elemento</th>
+                            <th>Função no projeto</th>
+                            <th>O que descrever</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Rotas</td>
+                            <td>Definem os caminhos e ações do sistema</td>
+                            <td>Como conectam a URL ao comportamento da aplicação</td>
+                        </tr>
+                        <tr>
+                            <td>Controladores</td>
+                            <td>Organizam o fluxo das ações</td>
+                            <td>Como ajudam a evitar lógica espalhada em vários arquivos</td>
+                        </tr>
+                        <tr>
+                            <td>Modelos</td>
+                            <td>Representam dados e regras ligadas ao domínio</td>
+                            <td>Como contribuem para a organização e reutilização</td>
+                        </tr>
+                        <tr>
+                            <td>Views</td>
+                            <td>Exibem a interface para o usuário</td>
+                            <td>Por que separar apresentação da lógica melhora o projeto</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Questão 7</h3>
+                <p>Escolha pelo menos três boas práticas de programação e explique por que elas melhoram a leitura e a manutenção do código. Você pode citar, por exemplo, nomes significativos, métodos curtos, reaproveitamento, comentários objetivos e padronização.</p>
+                <div class="tip">
+                    Lembre que para todas as respostas é esperada a relação com o trabalho em equipe realizado durante o semestre e a possibilidade de manutenção futura do mesmo.
+                </div>
+            </section>
+
+            <section>
+                <h2>Parte 3 - Questões práticas de programação</h2>
+
+                <h3>Questão 8</h3>
+                <p>Crie uma classe representando um elemento do mundo real. Sua classe deve conter:</p>
+                <ul>
+                    <li>Pelo menos três atributos.</li>
+                    <li>Um construtor para inicialização.</li>
+                    <li>Um método que retorne uma descrição do objeto.</li>
+                </ul>
+                <p>Depois do código, escreva um parágrafo explicando como a classe modela esse elemento e como diferentes objetos poderiam ser criados a partir dela.</p>
+
+                <h3>Questão 9</h3>
+                <p>Exiba uma hierarquia simples com herança. Crie uma classe base e duas classes derivadas. Em seguida, escreva um pequeno trecho de uso dessas classes e explique o que foi reaproveitado e o que foi especializado.</p>
+
+                <h3>Questão 10</h3>
+                <p>Implemente um exemplo de polimorfismo. Mostre duas classes diferentes respondendo ao mesmo método de maneiras distintas e explique por que esse padrão é útil.</p>
+            </section>
+
+            <section>
+                <h2>Questão integradora</h2>
+                <p>Escreva um texto final respondendo: <em>Quando vale a pena usar orientação a objetos e seguir padrões como os encontrados em projetos Laravel?</em> Em sua resposta, comente organização, manutenção, crescimento do sistema, legibilidade do código e colaboração em equipe.</p>
+                <div class="annotation">
+                    <h4>Expectativa</h4>
+                    <p>Essa resposta deve conectar teoria e prática, mostrando que você compreendeu não apenas os conceitos isolados, mas também a utilidade deles em projetos reais.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>Material de revisão para Programação I - foco em POO, organização do código e padrões em projetos.</p>
+    </footer>
+</body>
+</html>
