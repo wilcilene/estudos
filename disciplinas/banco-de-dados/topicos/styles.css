@@ -779,3 +779,73 @@ table.compare-table tbody tr:nth-child(even) { background: var(--surface-dim); }
   border-color: var(--primary);
   color: var(--primary);
 }
+
+/* Visibilidade SVG do schema */
+/* ---------------- Diagrama SVG corrigido ---------------- */
+.diagram-figure {
+  margin: 0 0 .9rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.2rem;
+  max-width: 72ch;
+  overflow: hidden;
+}
+
+.diagram-figure svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* Garante legibilidade no SVG */
+.diagram-figure svg text {
+  fill: var(--ink);
+  font-family: var(--font-body);
+}
+
+.diagram-figure svg .diagram-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  fill: var(--ink);
+}
+
+.diagram-figure svg .diagram-caption {
+  font-size: 12px;
+  fill: var(--ink-soft);
+}
+
+.diagram-figure svg .diagram-label {
+  font-size: 11px;
+  fill: var(--ink-soft);
+}
+
+.diagram-figure svg .diagram-box {
+  fill: var(--primary-soft);
+  stroke: var(--primary);
+  stroke-width: 1.5;
+}
+
+.diagram-figure svg .diagram-box--external {
+  fill: var(--cat-modelagem-de-dados-soft);
+  stroke: var(--cat-modelagem-de-dados);
+}
+
+.diagram-figure svg .diagram-box--conceptual {
+  fill: var(--primary-soft);
+  stroke: var(--primary);
+}
+
+.diagram-figure svg .diagram-box--internal {
+  fill: var(--cat-sgbd-soft);
+  stroke: var(--cat-sgbd);
+}
+
+.diagram-figure svg .diagram-arrow {
+  stroke: var(--ink-soft);
+  stroke-width: 1.5;
+  marker-end: none;
+}
