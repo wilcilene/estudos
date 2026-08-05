@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Atualize este arquivo conforme as páginas de cada tópico (pasta /topicos/)
+  forem publicadas ao longo do semestre, adicionando um novo bloco <url>.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

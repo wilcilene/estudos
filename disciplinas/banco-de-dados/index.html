@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banco de Dados — Índice da Disciplina | Engenharia de Computação</title>
+  <meta name="description" content="Índice didático da disciplina de Banco de Dados (60h): 20 tópicos organizados pela ementa — modelagem de dados, modelo relacional, álgebra relacional, SQL, normalização, restrições, visões, gatilhos e desenvolvimento de aplicações — com filtro por assunto e acompanhamento do progresso do semestre.">
+  <meta name="keywords" content="banco de dados, modelo relacional, álgebra relacional, SQL, normalização, engenharia de computação, DDL, DML, gatilhos, triggers, views, ementa">
+  <meta name="author" content="Disciplina de Banco de Dados">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Banco de Dados — Índice da Disciplina">
+  <meta property="og:description" content="20 tópicos organizados pela ementa oficial, com filtro por assunto e acompanhamento do progresso do semestre.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cellipse cx='12' cy='5' rx='9' ry='3.2' fill='%234338ca'/%3E%3Cpath d='M3 5v14c0 1.8 4 3.2 9 3.2s9-1.4 9-3.2V5' fill='none' stroke='%234338ca' stroke-width='2'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "Banco de Dados",
+    "description": "Disciplina de 60 horas sobre modelagem de dados, modelo relacional, álgebra relacional, SQL, normalização, restrições, visões, gatilhos e desenvolvimento de aplicações de banco de dados.",
+    "inLanguage": "pt-BR",
+    "isAccessibleForFree": true,
+    "about": [
+      "Conceitos Básicos", "Modelagem de Dados", "Modelo Relacional", "Álgebra Relacional",
+      "Sistemas Gerenciadores de Bancos de Dados", "Linguagens SQL",
+      "Linguagens de Definição e Manipulação de Dados", "Normalização de Dados",
+      "Restrições", "Visões", "Gatilhos e Procedimentos",
+      "Desenvolvimento de Aplicações de Banco de Dados"
+    ],
+    "provider": {
+      "@type": "CollegeOrUniversity",
+      "name": "Curso de Engenharia de Computação"
+    },
+    "hasCourseInstance": {
+      "@type": "CourseInstance",
+      "courseMode": "onsite",
+      "startDate": "2026-08-03",
+      "endDate": "2026-12-14"
+    }
+  }
+  </script>
+
+  <!--
+    =========================================================================
+    NOTA PARA A PROFESSORA — distribuição dos 20 tópicos em 30 blocos de aula
+    (1:30 cada bloco = 2 aulas de 45 min). Uso interno, não exibido na página.
+
+    Carga total: 72 aulas = 36 blocos de 1:30.
+      • 30 blocos (60 aulas) => os 20 tópicos abaixo + atividades/eventos.
+      • 6 blocos (12 aulas)  => revisões, provas e recuperação (distribuídos
+        ao longo do semestre, ex.: 2 blocos na prova 1, 2 na prova final,
+        2 em revisão/recuperação — ajustar conforme o calendário real).
+
+    Bloco  Aulas   Conteúdo
+    01     1-2     T01 Conceitos Básicos de Sistemas de Banco de Dados
+    02     3-4     T02 Modelo Entidade-Relacionamento (MER)
+    03     5-6     T03 Especialização, Generalização e Modelagem Avançada (parte 1)
+    04     7-8     T03 Modelagem Avançada — prática em ferramenta CASE (parte 2)
+    05     9-10    T04 Conceitos do Modelo Relacional e Chaves
+    06     11-12   T05 Mapeamento do MER para o Modelo Relacional
+    07     13-14   T06 Álgebra Relacional — operadores unários e de conjunto
+    08     15-16   T07 Álgebra Relacional — junções e divisão
+    09     17-18   Atividade: fixação de álgebra relacional (lista + correção)
+    10     19-20   T08 Arquitetura e Funcionamento de um SGBD
+    11     21-22   T09 Introdução ao SQL e Consultas Básicas (SELECT)
+    12     23-24   T12 DDL — definição de estruturas (CREATE/ALTER/DROP)
+    13     25-26   T13 DML — manipulação de dados (INSERT/UPDATE/DELETE)
+    14     27-28   Atividade: laboratório avaliativo de DDL/DML
+    15     29-30   T10 SQL — junções e subconsultas (parte 1)
+    16     31-32   T10 SQL — funções de agregação (parte 2, laboratório)
+    17     33-34   T11 SQL — window functions, CTEs e otimização de consultas
+    18     35-36   Atividade/evento: estudo de caso de otimização de consultas
+    19     37-38   T14 Dependências Funcionais e Formas Normais (1FN-3FN)
+    20     39-40   T15 Forma Normal de Boyce-Codd e Desnormalização
+    21     41-42   Atividade: exercício de normalização aplicada
+    22     43-44   T16 Restrições de Integridade e Transações (ACID)
+    23     45-46   T17 Visões (views)
+    24     47-48   T18 Procedimentos Armazenados e Funções
+    25     49-50   T19 Gatilhos (triggers) e Auditoria
+    26     51-52   Atividade: laboratório de gatilhos e procedimentos
+    27     53-54   T20 Desenvolvimento de Aplicações — drivers e ORMs (parte 1)
+    28     55-56   T20 Desenvolvimento de Aplicações — segurança e estudo de caso (parte 2)
+    29     57-58   Atividade/evento: orientação e desenvolvimento do projeto final
+    30     59-60   Atividade: apresentação dos projetos finais
+
+    + 6 blocos (61-72) intercalados no calendário real para revisão, provas
+      e recuperação, conforme datas letivas definidas pela instituição.
+
+    Para atualizar o andamento: em cada <a class="topic-card">, altere o
+    atributo data-status para "done" (concluído), "current" (tópico da
+    semana atual) ou "upcoming" (ainda não estudado). A barra de progresso
+    e o card "tópico atual" no topo da página são recalculados automaticamente.
+    =========================================================================
+  -->
+</head>
+<body>
+  <a class="skip-link" href="#topicos">Ir para os tópicos</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#inicio">
+        <span class="brand-mark" aria-hidden="true">BD</span>
+        <span class="brand-text">
+          <span class="brand-name">Banco de Dados</span>
+          <span class="brand-sub">Eng. de Computação · 60h</span>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="Navegação principal">
+        <ul>
+          <li><a href="#progresso">Progresso</a></li>
+          <li><a href="#topicos">Tópicos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Índice da disciplina</p>
+          <h1 id="hero-title">Banco de Dados</h1>
+          <p class="lead">Do modelo Entidade-Relacionamento ao SQL em produção. Esta página reúne os 20 tópicos de estudo do semestre, organizados pela ementa oficial — cada card leva à página com o conteúdo completo, publicada conforme as aulas acontecem.</p>
+
+          <dl class="stat-row">
+            <div class="stat">
+              <dt>Carga horária</dt>
+              <dd>60 horas</dd>
+            </div>
+            <div class="stat">
+              <dt>Tópicos</dt>
+              <dd>20</dd>
+            </div>
+            <div class="stat">
+              <dt>Encontros</dt>
+              <dd>Qua e Qui</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="progress-card" id="progresso" aria-labelledby="progress-title">
+          <p class="progress-title" id="progress-title">Progresso do semestre</p>
+          <div class="progress-ring-wrap">
+            <svg class="progress-ring" viewBox="0 0 120 120" role="img" aria-hidden="true">
+              <circle class="progress-ring-track" cx="60" cy="60" r="52"></circle>
+              <circle class="progress-ring-fill" id="progress-ring-fill" cx="60" cy="60" r="52"></circle>
+            </svg>
+            <div class="progress-ring-label">
+              <span id="progress-percent">0%</span>
+              <span class="progress-ring-caption">concluído</span>
+            </div>
+          </div>
+          <p class="progress-count" id="progress-count">carregando…</p>
+          <div class="progress-current" id="progress-current">
+            <span class="progress-current-label">Tópico atual</span>
+            <p id="progress-current-name">—</p>
+          </div>
+          <noscript><p class="progress-week">Ative o JavaScript para ver o progresso atualizado do semestre.</p></noscript>
+        </div>
+      </div>
+    </section>
+
+    <section class="filters-section" aria-label="Filtros de tópicos">
+      <div class="container">
+        <div class="filters-bar">
+          <div class="search-field">
+            <label for="topic-search" class="visually-hidden">Buscar tópico por palavra-chave</label>
+            <input type="search" id="topic-search" placeholder="Buscar tópico (ex.: SQL, normalização, chaves)…" autocomplete="off">
+          </div>
+          <div class="filter-pills" role="group" aria-label="Filtrar por assunto da ementa" id="filter-pills">
+            <button type="button" class="pill is-active" data-filter="todos" aria-pressed="true">Todos</button>
+            <button type="button" class="pill" data-filter="conceitos-basicos" aria-pressed="false">Conceitos Básicos</button>
+            <button type="button" class="pill" data-filter="modelagem-de-dados" aria-pressed="false">Modelagem de Dados</button>
+            <button type="button" class="pill" data-filter="modelo-relacional" aria-pressed="false">Modelo Relacional</button>
+            <button type="button" class="pill" data-filter="algebra-relacional" aria-pressed="false">Álgebra Relacional</button>
+            <button type="button" class="pill" data-filter="sgbd" aria-pressed="false">SGBD</button>
+            <button type="button" class="pill" data-filter="linguagens-sql" aria-pressed="false">Linguagens SQL</button>
+            <button type="button" class="pill" data-filter="ddl-dml" aria-pressed="false">DDL e DML</button>
+            <button type="button" class="pill" data-filter="normalizacao" aria-pressed="false">Normalização</button>
+            <button type="button" class="pill" data-filter="restricoes" aria-pressed="false">Restrições</button>
+            <button type="button" class="pill" data-filter="visoes" aria-pressed="false">Visões</button>
+            <button type="button" class="pill" data-filter="gatilhos-procedimentos" aria-pressed="false">Gatilhos e Procedimentos</button>
+            <button type="button" class="pill" data-filter="desenvolvimento-aplicacoes" aria-pressed="false">Desenvolvimento de Aplicações</button>
+          </div>
+        </div>
+        <p class="result-count" id="result-count" aria-live="polite">20 tópicos</p>
+      </div>
+    </section>
+
+    <section id="topicos" aria-labelledby="topicos-title">
+      <div class="container">
+        <h2 class="visually-hidden" id="topicos-title">Tópicos de estudo</h2>
+
+        <ul class="topics-grid" id="topics-grid">
+          <li class="topic-item" data-category="conceitos-basicos">
+            <a class="topic-card" href="topicos/conceitos-basicos.html" data-status="current">
+              <span class="card-top">
+                <span class="category-tag cat-conceitos-basicos">Conceitos Básicos</span>
+                <span class="status-badge"></span>
+              </span>
+              <h3>Conceitos Básicos de Sistemas de Banco de Dados</h3>
+              <p>Dado × informação, limitações de sistemas de arquivos, SGBD, esquema × instância e independência de dados.</p>
+              <span class="card-hint">Ver conteúdo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+
+          <li class="topic-item" data-category="modelagem-de-dados">
+            <a class="topic-card" href="topicos/mer.html" data-status="upcoming">
+              <span class="card-top">
+                <span class="category-tag cat-modelagem-de-dados">Modelagem de Dados</span>
+                <span class="status-badge"></span>
+              </span>
+              <h3>Modelo Entidade-Relacionamento (MER)</h3>
+              <p>Entidades, atributos, relacionamentos, cardinalidade e participação total/parcial no projeto conceitual.</p>
+              <span class="card-hint">Ver conteúdo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+
+          <li class="topic-item" data-category="modelagem-de-dados">
+            <a class="topic-card" href="topicos/modelagem-avancada.html" data-status="upcoming">
+              <span class="card-top">
+                <span class="category-tag cat-modelagem-de-dados">Modelagem de Dados</span>
+                <span class="status-badge"></span>
+              </span>
+              <h3>Especialização, Generalização e Modelagem Avançada</h3>
+              <p>Hierarquias de especialização/generalização, agregação e prática com ferramentas CASE de modelagem ER.</p>
+              <span class="card-hint">Ver conteúdo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+
+          <li class="topic-item" data-category="modelo-relacional">
+            <a class="topic-card" href="topicos/modelo-relacional-chaves.html" data-status="upcoming">
+              <span class="card-top">
+                <span class="category-tag cat-modelo-relacional">Modelo Relacional</span>
+                <span class="status-badge"></span>
+              </span>
+              <h3>Conceitos do Modelo Relacional e Chaves</h3>
+              <p>Relação, tupla, domínio, grau, superchave, chave candidata, primária, estrangeira e integridade referencial.</p>
+              <span class="card-hint">Ver conteúdo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+
+          <li class="topic-item" data-category="modelo-relacional">
+            <a class="topic-card" href="topicos/mapeamento-mer-relacional.html" data-status="upcoming">
+              <span class="card-top">
+                <span class="category-tag cat-modelo-relacional">Modelo Relacional</span>
+                <span class="status-badge"></span>
+              </span>
+              <h3>Mapeamento do MER para o Modelo Relacional</h3>
+              <p>Regras de conversão de entidades e relacionamentos 1:1, 1:N e N:M, entidades fracas e especializações.</p>
+              <span class="card-hint">Ver conteúdo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+
+          <li class="topic-item" data-category="algebra-relacional">
+            <a class="topic-card" href="topicos/algebra-relacional-unarios.html" data-status="upcoming">
+              <span class="card-top">
+                <span class="category-tag cat-algebra-relacional">Álgebra Relacional</span>
+                <span class="status-badge"></span>
+              </span>
+              <h3>Álgebra Relacional — Operadores Unários e de Conjunto</h3>
+              <p>Seleção (σ), projeção (π), união, interseção, diferença e produto cartesiano como base formal do SQL.</p>
+              <span class="card-hint">Ver conteúdo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+
+          <li class="topic-item" data-category="algebra-relacional">
+            <a class="topic-card" href="topicos/algebra-relacional-juncoes.html" data-status="upcoming">
+              <span class="card-top">
+                <span class="category-tag cat-algebra-relacional">Álgebra Relacional</span>
+                <span class="status-badge"></span>
+              </span>
+              <h3>Álgebra Relacional — Junções e Divisão</h3>
+              <p>Natural join, theta-join, junção externa e divisão; tradução de consultas para álgebra relacional.</p>
+              <span class="card-hint">Ver conteúdo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+
+          <li class="topic-item" data-category="sgbd">
+            <a class="topic-card" href="topicos/sgbd-arquitetura.html" data-status="upcoming">
+              <span class="card-top">
+                <span class="category-tag cat-sgbd">SGBD</span>
+                <span class="status-badge"></span>
+              </span>
+              <h3>Arquitetura e Funcionamento de um SGBD</h3>
+              <p>Funções de um SGBD, componentes internos e panorama de mercado: PostgreSQL, MySQL, Oracle e SQLite.</p>
+              <span class="card-hint">Ver conteúdo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+
+          <li class="topic-item" data-category="linguagens-sql">
+            <a class="topic-card" href="topicos/sql-introducao.html" data-status="upcoming">
+              <span class="card-top">
+                <span class="category-tag cat-linguagens-sql">Linguagens SQL</span>
+                <span class="status-badge"></span>
+              </span>
+              <h3>Introdução ao SQL e Consultas Básicas</h3>
+              <p>Padrão SQL (ISO/ANSI), estrutura do SELECT, cláusulas WHERE e ORDER BY.</p>
+              <span class="card-hint">Ver conteúdo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+
+          <li class="topic-item" data-category="ddl-dml">
+            <a class="topic-card" href="topicos/ddl.html" data-status="upcoming">
+              <span class="card-top">
+                <span class="category-tag cat-ddl-dml">DDL e DML</span>
+                <span class="status-badge"></span>
+              </span>
+              <h3>DDL — Definição de Estruturas</h3>
+              <p>CREATE, ALTER e DROP; tipos de dados e definição de chaves na criação de tabelas.</p>
+              <span class="card-hint">Ver conteúdo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+
+          <li class="topic-item" data-category="ddl-dml">
+            <a class="topic-card" href="topicos/dml.html" data-status="upcoming">
+              <span class="card-top">
+                <span class="category-tag cat-ddl-dml">DDL e DML</span>
+                <span class="status-badge"></span>
+              </span>
+              <h3>DML — Manipulação de Dados</h3>
+              <p>INSERT, UPDATE e DELETE; povoamento de tabelas e boas práticas de manipulação segura de dados.</p>
+              <span class="card-hint">Ver conteúdo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+
+          <li class="topic-item" data-category="linguagens-sql">
+            <a class="topic-card" href="topicos/sql-juncoes-agregacao.html" data-status="upcoming">
+              <span class="card-top">
+                <span class="category-tag cat-linguagens-sql">Linguagens SQL</span>
+                <span class="status-badge"></span>
+              </span>
+              <h3>Junções, Subconsultas e Agregação em SQL</h3>
+              <p>INNER/LEFT/RIGHT/FULL JOIN, subconsultas e funções de agregação com GROUP BY e HAVING.</p>
+              <span class="card-hint">Ver conteúdo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+
+          <li class="topic-item" data-category="linguagens-sql">
+            <a class="topic-card" href="topicos/sql-avancado.html" data-status="upcoming">
+              <span class="card-top">
+                <span class="category-tag cat-linguagens-sql">Linguagens SQL</span>
+                <span class="status-badge"></span>
+              </span>
+              <h3>Window Functions, CTEs e Otimização de Consultas</h3>
+              <p>Funções de janela, Common Table Expressions e introdução a índices (B-tree, hashing) para desempenho.</p>
+              <span class="card-hint">Ver conteúdo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+
+          <li class="topic-item" data-category="normalizacao">
+            <a class="topic-card" href="topicos/normalizacao-formas-normais.html" data-status="upcoming">
+              <span class="card-top">
+                <span class="category-tag cat-normalizacao">Normalização</span>
+                <span class="status-badge"></span>
+              </span>
+              <h3>Dependências Funcionais e Formas Normais (1FN-3FN)</h3>
+              <p>Anomalias de inserção, atualização e remoção; dependências funcionais e as três primeiras formas normais.</p>
+              <span class="card-hint">Ver conteúdo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+
+          <li class="topic-item" data-category="normalizacao">
+            <a class="topic-card" href="topicos/bcnf-desnormalizacao.html" data-status="upcoming">
+              <span class="card-top">
+                <span class="category-tag cat-normalizacao">Normalização</span>
+                <span class="status-badge"></span>
+              </span>
+              <h3>Forma Normal de Boyce-Codd e Desnormalização</h3>
+              <p>BCNF e os trade-offs de desnormalizar um esquema em favor de desempenho em sistemas de alta carga.</p>
+              <span class="card-hint">Ver conteúdo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+
+          <li class="topic-item" data-category="restricoes">
+            <a class="topic-card" href="topicos/restricoes-transacoes.html" data-status="upcoming">
+              <span class="card-top">
+                <span class="category-tag cat-restricoes">Restrições</span>
+                <span class="status-badge"></span>
+              </span>
+              <h3>Restrições de Integridade e Transações (ACID)</h3>
+              <p>CHECK, UNIQUE e NOT NULL; conceito de transação e as propriedades de atomicidade, consistência, isolamento e durabilidade.</p>
+              <span class="card-hint">Ver conteúdo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+
+          <li class="topic-item" data-category="visoes">
+            <a class="topic-card" href="topicos/visoes.html" data-status="upcoming">
+              <span class="card-top">
+                <span class="category-tag cat-visoes">Visões</span>
+                <span class="status-badge"></span>
+              </span>
+              <h3>Visões (Views)</h3>
+              <p>Criação de views, views atualizáveis e uso de visões para segurança e abstração de dados.</p>
+              <span class="card-hint">Ver conteúdo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+
+          <li class="topic-item" data-category="gatilhos-procedimentos">
+            <a class="topic-card" href="topicos/procedimentos-armazenados.html" data-status="upcoming">
+              <span class="card-top">
+                <span class="category-tag cat-gatilhos-procedimentos">Gatilhos e Procedimentos</span>
+                <span class="status-badge"></span>
+              </span>
+              <h3>Procedimentos Armazenados e Funções</h3>
+              <p>Stored procedures e funções definidas pelo usuário: lógica no banco de dados versus lógica na aplicação.</p>
+              <span class="card-hint">Ver conteúdo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+
+          <li class="topic-item" data-category="gatilhos-procedimentos">
+            <a class="topic-card" href="topicos/gatilhos.html" data-status="upcoming">
+              <span class="card-top">
+                <span class="category-tag cat-gatilhos-procedimentos">Gatilhos e Procedimentos</span>
+                <span class="status-badge"></span>
+              </span>
+              <h3>Gatilhos (Triggers) e Auditoria</h3>
+              <p>Eventos de gatilhos, uso para auditoria e para garantir integridade referencial complexa.</p>
+              <span class="card-hint">Ver conteúdo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+
+          <li class="topic-item" data-category="desenvolvimento-aplicacoes">
+            <a class="topic-card" href="topicos/desenvolvimento-aplicacoes.html" data-status="upcoming">
+              <span class="card-top">
+                <span class="category-tag cat-desenvolvimento-aplicacoes">Desenvolvimento de Aplicações</span>
+                <span class="status-badge"></span>
+              </span>
+              <h3>Desenvolvimento de Aplicações com Banco de Dados</h3>
+              <p>Drivers ODBC/JDBC, ORMs, connection pooling, prevenção de SQL injection e integração app-BD em um estudo de caso.</p>
+              <span class="card-hint">Ver conteúdo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+        </ul>
+
+        <p class="empty-state" id="empty-state" hidden>Nenhum tópico encontrado para esse filtro.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Banco de Dados · Engenharia de Computação · 2026/2</p>
+      <p>Página atualizada no decorrer do semestre. Salve o link e volte sempre que quiser estudar.</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

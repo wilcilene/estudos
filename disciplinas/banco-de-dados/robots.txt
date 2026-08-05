@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/sitemap.xml
