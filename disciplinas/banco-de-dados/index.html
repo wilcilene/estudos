@@ -56,14 +56,9 @@
 
   <!--
     =========================================================================
-    NOTA PARA A PROFESSORA — distribuição dos 20 tópicos em 30 blocos de aula
-    (1:30 cada bloco = 2 aulas de 45 min). Uso interno, não exibido na página.
-
     Carga total: 72 aulas = 36 blocos de 1:30.
-      • 30 blocos (60 aulas) => os 20 tópicos abaixo + atividades/eventos.
-      • 6 blocos (12 aulas)  => revisões, provas e recuperação (distribuídos
-        ao longo do semestre, ex.: 2 blocos na prova 1, 2 na prova final,
-        2 em revisão/recuperação — ajustar conforme o calendário real).
+      • 30 blocos (60 aulas) => os 20 tópicos abaixo + atividades
+      • 6 blocos (12 aulas)  => revisões, provas e recuperação
 
     Bloco  Aulas   Conteúdo
     01     1-2     T01 Conceitos Básicos de Sistemas de Banco de Dados
@@ -97,15 +92,11 @@
     29     57-58   Atividade/evento: orientação e desenvolvimento do projeto final
     30     59-60   Atividade: apresentação dos projetos finais
 
-    + 6 blocos (61-72) intercalados no calendário real para revisão, provas
-      e recuperação, conforme datas letivas definidas pela instituição.
-
-    Para atualizar o andamento: em cada <a class="topic-card">, altere o
-    atributo data-status para "done" (concluído), "current" (tópico da
-    semana atual) ou "upcoming" (ainda não estudado). A barra de progresso
-    e o card "tópico atual" no topo da página são recalculados automaticamente.
+    + 6 blocos/aulas (61-72) intercalados no calendário real para revisão, provas
+      e recuperação, conforme datas letivas.
     =========================================================================
   -->
+  
 </head>
 <body>
   <a class="skip-link" href="#topicos">Ir para os tópicos</a>
@@ -177,10 +168,12 @@
     <section class="filters-section" aria-label="Filtros de tópicos">
       <div class="container">
         <div class="filters-bar">
+          <!--
           <div class="search-field">
             <label for="topic-search" class="visually-hidden">Buscar tópico por palavra-chave</label>
             <input type="search" id="topic-search" placeholder="Buscar tópico (ex.: SQL, normalização, chaves)…" autocomplete="off">
           </div>
+            -->
           <div class="filter-pills" role="group" aria-label="Filtrar por assunto da ementa" id="filter-pills">
             <button type="button" class="pill is-active" data-filter="todos" aria-pressed="true">Todos</button>
             <button type="button" class="pill" data-filter="conceitos-basicos" aria-pressed="false">Conceitos Básicos</button>
