@@ -780,8 +780,16 @@ table.compare-table tbody tr:nth-child(even) { background: var(--surface-dim); }
   color: var(--primary);
 }
 
+/* Ajuste figura */
+.diagram-figure img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+  border-radius: var(--radius-sm);
+}
+
 /* Visibilidade SVG do schema */
-/* ---------------- Diagrama SVG corrigido ---------------- */
 .diagram-figure {
   margin: 0 0 .9rem;
   background: var(--surface);
@@ -800,7 +808,6 @@ table.compare-table tbody tr:nth-child(even) { background: var(--surface-dim); }
   overflow: visible;
 }
 
-/* Garante legibilidade no SVG */
 .diagram-figure svg text {
   fill: var(--ink);
   font-family: var(--font-body);
@@ -847,5 +854,5 @@ table.compare-table tbody tr:nth-child(even) { background: var(--surface-dim); }
 .diagram-figure svg .diagram-arrow {
   stroke: var(--ink-soft);
   stroke-width: 1.5;
-  marker-end: none;
+  fill: none;
 }
