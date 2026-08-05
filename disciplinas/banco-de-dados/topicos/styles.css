@@ -731,3 +731,51 @@ table.compare-table tbody tr:nth-child(even) { background: var(--surface-dim); }
   .topic-pager-inner { flex-direction: column; }
   .pager-link--next { text-align: left; margin-left: 0; }
 }
+
+
+/* =========================================================
+   Opções de Tooltip
+   ========================================================= */
+
+/* Elemento base para tooltip */
+.tooltip-term {
+  text-decoration: underline dotted;
+  text-decoration-skip-ink: none;
+  cursor: help;
+  color: var(--ink);
+  position: relative;
+  border-bottom: 1px dotted var(--ink-soft);
+}
+
+/* Tooltip nativo (fallback sempre presente) */
+.tooltip-term[title]:hover,
+.tooltip-term[title]:focus-visible {
+  /* O navegador mostra o title como tooltip padrão */
+}
+
+/* Dica visual extra no hover (opcional, sem JS) */
+.tooltip-term:hover {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+/* Versão “tag” para termos em listas ou tabelas (opcional) */
+.tooltip-tag {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  padding: .15rem .5rem;
+  border-radius: 999px;
+  background: var(--surface-dim);
+  border: 1px solid var(--border);
+  color: var(--ink-soft);
+  cursor: help;
+  text-decoration: none;
+}
+
+.tooltip-tag:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
