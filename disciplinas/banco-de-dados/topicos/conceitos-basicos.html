@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conceitos Básicos de Sistemas de Banco de Dados | Banco de Dados</title>
+  <meta name="description" content="Aula de 1:30 sobre conceitos básicos de banco de dados: dado x informação, limitações de sistemas de arquivos, SGBD, esquema x instância, independência de dados e arquitetura ANSI/SPARC.">
+  <meta name="keywords" content="conceitos básicos de banco de dados, SGBD, esquema, instância, independência de dados, ANSI/SPARC, sistemas de arquivos">
+  <meta name="author" content="Disciplina de Banco de Dados">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/conceitos-basicos.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Conceitos Básicos de Sistemas de Banco de Dados">
+  <meta property="og:description" content="Dado x informação, limitações de sistemas de arquivos, SGBD, esquema x instância, independência de dados e arquitetura ANSI/SPARC.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/conceitos-basicos.html">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cellipse cx='12' cy='5' rx='9' ry='3.2' fill='%234338ca'/%3E%3Cpath d='M3 5v14c0 1.8 4 3.2 9 3.2s9-1.4 9-3.2V5' fill='none' stroke='%234338ca' stroke-width='2'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Conceitos Básicos de Sistemas de Banco de Dados",
+    "description": "Dado x informação, limitações de sistemas de arquivos, SGBD, esquema x instância, independência de dados e arquitetura ANSI/SPARC.",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "aula",
+    "educationalLevel": "Graduação",
+    "timeRequired": "PT1H30M",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Banco de Dados",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Banco de Dados", "item": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/" },
+      { "@type": "ListItem", "position": 2, "name": "Tópicos", "item": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/#topicos" },
+      { "@type": "ListItem", "position": 3, "name": "Conceitos Básicos de Sistemas de Banco de Dados", "item": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/conceitos-basicos.html" }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">BD</span>
+        <span class="brand-text">
+          <span class="brand-name">Banco de Dados</span>
+          <span class="brand-sub">Eng. de Computação · 60h</span>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="Navegação principal">
+        <ul>
+          <li><a href="../index.html#progresso">Progresso</a></li>
+          <li><a href="../index.html#topicos">Tópicos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="../index.html">Banco de Dados</a></li>
+          <li><a href="../index.html#topicos">Tópicos</a></li>
+          <li aria-current="page">Conceitos Básicos</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="topic-article">
+      <div class="container">
+        <header class="topic-header">
+          <div class="topic-meta">
+            <span class="category-tag cat-conceitos-basicos">Conceitos Básicos</span>
+            <span class="duration-badge">1:30 · 90 min de aula</span>
+          </div>
+          <h1>Conceitos Básicos de Sistemas de Banco de Dados</h1>
+          <p class="topic-lead">Antes de projetar tabelas ou escrever SQL, é preciso entender por que sistemas de banco de dados existem: quais problemas de sistemas de arquivos eles resolvem e como um SGBD organiza a fronteira entre dado, esquema e aplicação.</p>
+        </header>
+
+        <section class="objectives" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">Objetivos de aprendizagem</h2>
+          <ul class="check-list">
+            <li>Diferenciar dado, informação e conhecimento em um contexto de engenharia.</li>
+            <li>Explicar as limitações de manter dados em sistemas de arquivos comuns.</li>
+            <li>Definir o que é um SGBD e listar suas principais funções.</li>
+            <li>Diferenciar esquema (schema) de instância (instance) de um banco de dados.</li>
+            <li>Explicar independência de dados lógica e física.</li>
+            <li>Descrever a arquitetura ANSI/SPARC de três esquemas.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="s1-title">
+          <h2 id="s1-title">1. Dado, informação e conhecimento</h2>
+          <p>Em engenharia da computação é comum tratar esses três termos como sinônimos, mas eles representam níveis diferentes de processamento:</p>
+          <ul>
+            <li><strong>Dado</strong> — um valor bruto, sem contexto: <code>23.4</code>, <code>"2026-08-05"</code>, <code>0x1F</code>.</li>
+            <li><strong>Informação</strong> — o dado interpretado dentro de um contexto: <em>"a temperatura do sensor 3 às 14h foi 23,4 °C"</em>.</li>
+            <li><strong>Conhecimento</strong> — o padrão extraído de várias informações, usado para decidir: <em>"a temperatura média da sala sobe 2 °C por hora durante a tarde; acionar o ar-condicionado às 13h"</em>.</li>
+          </ul>
+          <p>Um banco de dados armazena e organiza <strong>dados</strong>; é o esquema, as consultas e a aplicação que os transformam em informação — e, eventualmente, em conhecimento.</p>
+        </section>
+
+        <section aria-labelledby="s2-title">
+          <h2 id="s2-title">2. Por que não usar apenas arquivos?</h2>
+          <p>Antes dos SGBDs, sistemas guardavam dados em arquivos próprios de cada aplicação (texto, CSV, binários proprietários). Isso funciona para escala pequena, mas cria problemas conhecidos à medida que o sistema cresce:</p>
+
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Sistemas de arquivos × SGBD</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Problema em sistemas de arquivos</th>
+                  <th scope="col">Como um SGBD ataca isso</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Redundância e inconsistência</strong> — o mesmo dado duplicado em vários arquivos, podendo ficar desatualizado em um deles.</td>
+                  <td>Um único repositório lógico compartilhado por todas as aplicações.</td>
+                </tr>
+                <tr>
+                  <td><strong>Dificuldade de acesso</strong> — cada nova consulta exige escrever um programa novo para ler o arquivo.</td>
+                  <td>Linguagem declarativa (SQL) para consultar dados sem programar o acesso físico.</td>
+                </tr>
+                <tr>
+                  <td><strong>Isolamento de dados</strong> — formatos diferentes por aplicação dificultam integração.</td>
+                  <td>Esquema único, com tipos e relacionamentos definidos centralmente.</td>
+                </tr>
+                <tr>
+                  <td><strong>Anomalias de concorrência</strong> — dois processos escrevendo ao mesmo tempo corrompem o arquivo.</td>
+                  <td>Controle de concorrência (locks, MVCC) e transações.</td>
+                </tr>
+                <tr>
+                  <td><strong>Falta de atomicidade</strong> — uma queda de energia no meio de uma operação deixa dados parcialmente gravados.</td>
+                  <td>Transações com propriedades ACID e recuperação após falhas.</td>
+                </tr>
+                <tr>
+                  <td><strong>Segurança fraca</strong> — controle de acesso limitado ao sistema operacional de arquivos.</td>
+                  <td>Permissões por usuário, papel (role) e nível de dado (linha/coluna).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section aria-labelledby="s3-title">
+          <h2 id="s3-title">3. O que é um SGBD</h2>
+          <p>Um <strong>Sistema Gerenciador de Banco de Dados (SGBD)</strong> é o software que fica entre a aplicação e os dados fisicamente armazenados, oferecendo uma camada de abstração e controle. Suas funções principais:</p>
+          <ul>
+            <li><strong>Definição de dados</strong> — linguagem para descrever estruturas (DDL).</li>
+            <li><strong>Manipulação de dados</strong> — linguagem para inserir, alterar, remover e consultar (DML).</li>
+            <li><strong>Controle de concorrência</strong> — permitir múltiplos usuários/processos acessando os dados ao mesmo tempo sem corrupção.</li>
+            <li><strong>Recuperação de falhas</strong> — voltar a um estado consistente após uma queda do sistema.</li>
+            <li><strong>Segurança e controle de acesso</strong> — autenticação, autorização e auditoria.</li>
+          </ul>
+          <p>Exemplos que serão usados nas práticas de laboratório: PostgreSQL e MySQL (SGBDs cliente-servidor) e SQLite (SGBD embarcado, comum em aplicações mobile e sistemas embarcados).</p>
+        </section>
+
+        <section aria-labelledby="s4-title">
+          <h2 id="s4-title">4. Esquema × instância</h2>
+          <p>Dois termos que serão usados o semestre todo:</p>
+          <ul>
+            <li><strong>Esquema (schema)</strong> — a estrutura definida em tempo de projeto: quais tabelas existem, quais colunas, tipos e relacionamentos. Muda raramente.</li>
+            <li><strong>Instância (instance)</strong> — os dados armazenados em um momento específico. Muda a cada operação de escrita.</li>
+          </ul>
+          <p class="analogy">Analogia com programação orientada a objetos: <strong>esquema está para instância assim como classe está para objeto</strong>. A classe define a forma; o objeto é uma ocorrência concreta dela em memória.</p>
+        </section>
+
+        <section aria-labelledby="s5-title">
+          <h2 id="s5-title">5. Independência de dados</h2>
+          <p>Um dos principais objetivos de um SGBD é permitir que o esquema evolua sem quebrar as aplicações que o usam — o mesmo princípio de estabilidade de interface que se busca em APIs de software:</p>
+          <ul>
+            <li><strong>Independência lógica</strong> — é possível alterar o esquema conceitual (ex.: adicionar uma tabela ou coluna) sem reescrever as aplicações existentes.</li>
+            <li><strong>Independência física</strong> — é possível mudar a forma de armazenamento físico (ex.: trocar o tipo de índice, particionar uma tabela) sem alterar o esquema conceitual nem as aplicações.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="s6-title">
+          <h2 id="s6-title">6. Arquitetura ANSI/SPARC (três esquemas)</h2>
+          <p>A independência de dados é viabilizada pela arquitetura de três níveis, proposta pelo comitê ANSI/SPARC nos anos 1970 e ainda usada como modelo conceitual pelos SGBDs atuais:</p>
+
+          <figure class="diagram-figure">
+            <svg viewBox="0 0 700 300" role="img" aria-labelledby="ansi-sparc-title ansi-sparc-desc" xmlns="http://www.w3.org/2000/svg">
+              <title id="ansi-sparc-title">Arquitetura ANSI/SPARC de três esquemas</title>
+              <desc id="ansi-sparc-desc">Três níveis empilhados: nível externo com visões de usuários no topo, nível conceitual ao centro, nível interno de armazenamento físico na base, conectados por setas de mapeamento.</desc>
+
+              <rect x="60" y="20" width="580" height="60" rx="10" class="diagram-box diagram-box--external"></rect>
+              <text x="350" y="46" text-anchor="middle" class="diagram-title">Nível Externo</text>
+              <text x="350" y="66" text-anchor="middle" class="diagram-caption">Visões de usuários e aplicações (o que cada app enxerga)</text>
+
+              <line x1="350" y1="80" x2="350" y2="118" class="diagram-arrow"></line>
+              <text x="365" y="102" class="diagram-label">mapeamento externo/conceitual</text>
+
+              <rect x="60" y="120" width="580" height="60" rx="10" class="diagram-box diagram-box--conceptual"></rect>
+              <text x="350" y="146" text-anchor="middle" class="diagram-title">Nível Conceitual</text>
+              <text x="350" y="166" text-anchor="middle" class="diagram-caption">Esquema lógico único: entidades, relacionamentos, restrições</text>
+
+              <line x1="350" y1="180" x2="350" y2="218" class="diagram-arrow"></line>
+              <text x="365" y="202" class="diagram-label">mapeamento conceitual/interno</text>
+
+              <rect x="60" y="220" width="580" height="60" rx="10" class="diagram-box diagram-box--internal"></rect>
+              <text x="350" y="246" text-anchor="middle" class="diagram-title">Nível Interno</text>
+              <text x="350" y="266" text-anchor="middle" class="diagram-caption">Armazenamento físico: arquivos, índices, blocos em disco</text>
+            </svg>
+            <figcaption>A independência lógica corresponde ao mapeamento externo/conceitual; a independência física, ao mapeamento conceitual/interno.</figcaption>
+          </figure>
+        </section>
+
+        <section class="activity-box" aria-labelledby="activity-title">
+          <h2 id="activity-title">Atividade em aula</h2>
+          <p><strong>Cenário:</strong> uma secretaria acadêmica mantém matrículas em planilhas separadas por curso, cada uma em formato diferente. Em duplas:</p>
+          <ol>
+            <li>Liste três problemas concretos desse cenário usando os conceitos da seção 2 (redundância, isolamento, concorrência etc.).</li>
+            <li>Identifique um exemplo de mudança que exigiria independência <strong>lógica</strong> e outro que exigiria independência <strong>física</strong>.</li>
+            <li>Apresente para a turma em até 3 minutos por dupla.</li>
+          </ol>
+        </section>
+
+        <section class="materials" aria-labelledby="materials-title">
+          <h2 id="materials-title">Materiais complementares</h2>
+          <ul class="materials-list">
+            <li>Slides da aula — <em>adicionar link aqui</em>.</li>
+            <li>Vídeo de apoio sobre SGBDs — <em>adicionar link aqui</em>.</li>
+            <li>Leitura recomendada: ELMASRI, R.; NAVATHE, S. <em>Fundamentals of Database Systems</em>, capítulo 1 (Introdução e visão geral).</li>
+            <li>Leitura recomendada: DATE, C. J. <em>Introdução a Sistemas de Bancos de Dados</em>, capítulo 1.</li>
+          </ul>
+        </section>
+      </div>
+    </article>
+
+    <nav class="topic-pager" aria-label="Navegação entre tópicos">
+      <div class="container topic-pager-inner">
+        <a class="pager-link pager-link--back" href="../index.html#topicos">
+          <span class="pager-label">Voltar para</span>
+          <span class="pager-title">Todos os tópicos</span>
+        </a>
+        <a class="pager-link pager-link--next" href="mer.html">
+          <span class="pager-label">Próximo tópico</span>
+          <span class="pager-title">Modelo Entidade-Relacionamento (MER)</span>
+        </a>
+      </div>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Banco de Dados · Engenharia de Computação · 2026/2</p>
+      <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
+    </div>
+  </footer>
+</body>
+</html>
