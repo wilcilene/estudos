@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Conceitos Básicos de Sistemas de Banco de Dados | Banco de Dados</title>
-  <meta name="description" content="Aula de 1:30 sobre conceitos básicos de banco de dados: dado x informação, limitações de sistemas de arquivos, SGBD, esquema x instância, independência de dados e arquitetura ANSI/SPARC.">
+  <meta name="description" content="Aula sobre conceitos básicos de banco de dados: dado x informação, limitações de sistemas de arquivos, SGBD, esquema x instância, independência de dados e arquitetura ANSI/SPARC.">
   <meta name="keywords" content="conceitos básicos de banco de dados, SGBD, esquema, instância, independência de dados, ANSI/SPARC, sistemas de arquivos">
   <meta name="author" content="Disciplina de Banco de Dados">
   <meta name="robots" content="index, follow">
@@ -49,8 +49,6 @@
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Banco de Dados", "item": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/" },
-      { "@type": "ListItem", "position": 2, "name": "Tópicos", "item": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/#topicos" },
-      { "@type": "ListItem", "position": 3, "name": "Conceitos Básicos de Sistemas de Banco de Dados", "item": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/conceitos-basicos.html" }
     ]
   }
   </script>
@@ -81,8 +79,6 @@
       <div class="container">
         <ol>
           <li><a href="../index.html">Banco de Dados</a></li>
-          <li><a href="../index.html#topicos">Tópicos</a></li>
-          <li aria-current="page">Conceitos Básicos</li>
         </ol>
       </div>
     </nav>
@@ -92,7 +88,6 @@
         <header class="topic-header">
           <div class="topic-meta">
             <span class="category-tag cat-conceitos-basicos">Conceitos Básicos</span>
-            <span class="duration-badge">1:30 · 90 min de aula</span>
           </div>
           <h1>Conceitos Básicos de Sistemas de Banco de Dados</h1>
           <p class="topic-lead">Antes de projetar tabelas ou escrever SQL, é preciso entender por que sistemas de banco de dados existem: quais problemas de sistemas de arquivos eles resolvem e como um SGBD organiza a fronteira entre dado, esquema e aplicação.</p>
@@ -112,7 +107,7 @@
 
         <section aria-labelledby="s1-title">
           <h2 id="s1-title">1. Dado, informação e conhecimento</h2>
-          <p>Em engenharia da computação é comum tratar esses três termos como sinônimos, mas eles representam níveis diferentes de processamento:</p>
+          <p>Em engenharia de computação é comum tratar esses três termos como sinônimos, mas eles representam níveis diferentes de processamento:</p>
           <ul>
             <li><strong>Dado</strong> — um valor bruto, sem contexto: <code>23.4</code>, <code>"2026-08-05"</code>, <code>0x1F</code>.</li>
             <li><strong>Informação</strong> — o dado interpretado dentro de um contexto: <em>"a temperatura do sensor 3 às 14h foi 23,4 °C"</em>.</li>
@@ -153,7 +148,9 @@
                 </tr>
                 <tr>
                   <td><strong>Falta de atomicidade</strong> — uma queda de energia no meio de uma operação deixa dados parcialmente gravados.</td>
-                  <td>Transações com propriedades ACID e recuperação após falhas.</td>
+                  <td>
+                    Transações com propriedades <span class="tooltip-term" title="Atomicidade, Consistência, Isolamento, Durabilidade">ACID</span> e recuperação após falhas.
+                  </td>                  
                 </tr>
                 <tr>
                   <td><strong>Segurança fraca</strong> — controle de acesso limitado ao sistema operacional de arquivos.</td>
@@ -166,7 +163,7 @@
 
         <section aria-labelledby="s3-title">
           <h2 id="s3-title">3. O que é um SGBD</h2>
-          <p>Um <strong>Sistema Gerenciador de Banco de Dados (SGBD)</strong> é o software que fica entre a aplicação e os dados fisicamente armazenados, oferecendo uma camada de abstração e controle. Suas funções principais:</p>
+          <p>Um <strong>Sistema Gerenciador de Banco de Dados (SGBD)</strong> é o software que fica entre a aplicação e os dados armazenados, oferecendo uma camada de abstração e controle. Suas funções principais:</p>
           <ul>
             <li><strong>Definição de dados</strong> — linguagem para descrever estruturas (DDL).</li>
             <li><strong>Manipulação de dados</strong> — linguagem para inserir, alterar, remover e consultar (DML).</li>
@@ -174,7 +171,7 @@
             <li><strong>Recuperação de falhas</strong> — voltar a um estado consistente após uma queda do sistema.</li>
             <li><strong>Segurança e controle de acesso</strong> — autenticação, autorização e auditoria.</li>
           </ul>
-          <p>Exemplos que serão usados nas práticas de laboratório: PostgreSQL e MySQL (SGBDs cliente-servidor) e SQLite (SGBD embarcado, comum em aplicações mobile e sistemas embarcados).</p>
+          <p>Exemplos que podem ser usados nas práticas de laboratório: PostgreSQL e MySQL (SGBDs cliente-servidor) e SQLite (SGBD embarcado, comum em aplicações mobile e sistemas embarcados).</p>
         </section>
 
         <section aria-labelledby="s4-title">
@@ -198,30 +195,34 @@
 
         <section aria-labelledby="s6-title">
           <h2 id="s6-title">6. Arquitetura ANSI/SPARC (três esquemas)</h2>
-          <p>A independência de dados é viabilizada pela arquitetura de três níveis, proposta pelo comitê ANSI/SPARC nos anos 1970 e ainda usada como modelo conceitual pelos SGBDs atuais:</p>
-
+          <p>
+            A independência de dados é viabilizada pela arquitetura de três níveis, proposta pelo comitê
+            <span class="tooltip-term" title="American National Standards Institute">ANSI</span>/
+            <span class="tooltip-term" title="Standards Planning and Requirements Committee">SPARC</span>
+            nos anos 1970 e ainda usada como modelo conceitual pelos SGBDs atuais:
+          </p>
           <figure class="diagram-figure">
             <svg viewBox="0 0 700 300" role="img" aria-labelledby="ansi-sparc-title ansi-sparc-desc" xmlns="http://www.w3.org/2000/svg">
               <title id="ansi-sparc-title">Arquitetura ANSI/SPARC de três esquemas</title>
-              <desc id="ansi-sparc-desc">Três níveis empilhados: nível externo com visões de usuários no topo, nível conceitual ao centro, nível interno de armazenamento físico na base, conectados por setas de mapeamento.</desc>
-
+              <desc id="ansi-sparc-desc">Três níveis empilhados: nível externo com visões de usuários no topo, nível conceitual ao centro e nível interno de armazenamento físico na base.</desc>
+          
               <rect x="60" y="20" width="580" height="60" rx="10" class="diagram-box diagram-box--external"></rect>
               <text x="350" y="46" text-anchor="middle" class="diagram-title">Nível Externo</text>
-              <text x="350" y="66" text-anchor="middle" class="diagram-caption">Visões de usuários e aplicações (o que cada app enxerga)</text>
-
+              <text x="350" y="66" text-anchor="middle" class="diagram-caption">Visões de usuários e aplicações</text>
+          
               <line x1="350" y1="80" x2="350" y2="118" class="diagram-arrow"></line>
-              <text x="365" y="102" class="diagram-label">mapeamento externo/conceitual</text>
-
+              <text x="368" y="104" class="diagram-label">mapeamento externo / conceitual</text>
+          
               <rect x="60" y="120" width="580" height="60" rx="10" class="diagram-box diagram-box--conceptual"></rect>
               <text x="350" y="146" text-anchor="middle" class="diagram-title">Nível Conceitual</text>
-              <text x="350" y="166" text-anchor="middle" class="diagram-caption">Esquema lógico único: entidades, relacionamentos, restrições</text>
-
+              <text x="350" y="166" text-anchor="middle" class="diagram-caption">Esquema lógico único: entidades e relações</text>
+          
               <line x1="350" y1="180" x2="350" y2="218" class="diagram-arrow"></line>
-              <text x="365" y="202" class="diagram-label">mapeamento conceitual/interno</text>
-
+              <text x="368" y="204" class="diagram-label">mapeamento conceitual / interno</text>
+          
               <rect x="60" y="220" width="580" height="60" rx="10" class="diagram-box diagram-box--internal"></rect>
               <text x="350" y="246" text-anchor="middle" class="diagram-title">Nível Interno</text>
-              <text x="350" y="266" text-anchor="middle" class="diagram-caption">Armazenamento físico: arquivos, índices, blocos em disco</text>
+              <text x="350" y="266" text-anchor="middle" class="diagram-caption">Armazenamento físico: arquivos e índices</text>
             </svg>
             <figcaption>A independência lógica corresponde ao mapeamento externo/conceitual; a independência física, ao mapeamento conceitual/interno.</figcaption>
           </figure>
