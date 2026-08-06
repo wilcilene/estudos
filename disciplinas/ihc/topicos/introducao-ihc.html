@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Introdução à Interação Humano-Computador | IHC – IFC</title>
+<meta name="description" content="Aula 1 de Interação Humano-Computador (CPA1469, IFC): o que é IHC, por que ela importa, breve histórico da área, como reconhecer boas e más interfaces.">
+<meta name="author" content="Instituto Federal Catarinense">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0284c7">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Introdução à Interação Humano-Computador · CPA1469">
+<meta property="og:description" content="Panorama da disciplina de IHC: o que é interação humano-computador, por que estudá-la e como reconhecer boas e más interfaces.">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="topico.css">
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<div class="page">
+
+  <a class="breadcrumb" href="index.html">
+    <span class="breadcrumb-arrow" aria-hidden="true">←</span>
+    voltar para o índice da disciplina
+  </a>
+
+  <header class="lesson-header">
+    <span class="badge">
+      <span class="badge-dot" aria-hidden="true"></span>
+      Unidade 1 · Usuários e interfaces · nível básico
+    </span>
+
+    <h1>O que é Interação Humano-Computador?</h1>
+
+    <p class="lesson-intro">
+      Este é o material de apoio da nossa primeira aula. Use-o para acompanhar a explicação em
+      sala, revisar depois em casa e realizar a atividade proposta ao final. Leia com calma,
+      faça anotações e levante suas dúvidas para discutirmos na aula.
+    </p>
+
+    <div class="lesson-meta">
+      <span class="pill">Aula de 05/08</span>
+      <span class="pill">Nível básico</span>
+      <span class="pill">Com atividade avaliativa</span>
+    </div>
+  </header>
+
+  <div class="summary-card">
+    <h2>Você vai sair desta aula sabendo</h2>
+    <ul class="summary-list">
+      <li>Por que interfaces bem ou mal projetadas afetam diretamente a vida das pessoas.</li>
+      <li>O que é, de fato, a área de Interação Humano-Computador (IHC).</li>
+      <li>De onde vem essa área e como ela chegou até os sistemas que usamos hoje.</li>
+      <li>Como observar e descrever, com critérios, o que torna uma interface boa ou ruim.</li>
+      <li>Como os próximos temas da disciplina se encaixam nesse quebra-cabeça.</li>
+    </ul>
+  </div>
+
+  <div class="page-grid">
+
+    <main id="conteudo" class="content">
+
+      <section class="content-section" id="por-que-estudar" aria-labelledby="titulo-1">
+        <h2 id="titulo-1"><span class="section-number">01</span> Por que estudar IHC?</h2>
+
+        <p>
+          Computadores deixaram de ser apenas máquinas de cálculo escondidas em salas de
+          processamento de dados. Hoje eles estão em toda parte: smartphones, caixas eletrônicos,
+          televisões, relógios, painéis de carro, sistemas de atendimento, aplicações web, jogos,
+          assistentes de voz, geladeiras, catracas de ônibus. Em todas essas situações, existe uma
+          <strong>interface</strong> mediando a comunicação entre pessoas e tecnologia — e é
+          exatamente essa mediação que a IHC estuda.
+        </p>
+
+        <p>
+          Quando essa interface é mal projetada, tarefas simples se tornam confusas: pessoas
+          cometem erros, perdem tempo, sentem frustração e, em situações críticas — como painéis
+          hospitalares, sistemas de controle aéreo ou usinas nucleares — podem até colocar vidas em
+          risco. Por outro lado, uma boa interface passa quase despercebida: a pessoa simplesmente
+          consegue fazer o que precisa, no tempo esperado, com sensação de controle sobre o que
+          está acontecendo.
+
+        </p>
+
+        <figure class="content-figure">
+          <img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Pessoas usando diferentes telas digitais em um ambiente de trabalho">
+          <figcaption>Interfaces estão presentes em praticamente todas as atividades mediadas por tecnologia — do computador de mesa ao relógio no pulso.</figcaption>
+        </figure>
+
+        <div class="callout callout-example">
+          <span class="callout-label">Exemplo rápido</span>
+          <p>
+            Pense em um aplicativo de banco: se o fluxo de transferência é confuso, cheio de telas
+            desnecessárias e termos técnicos, a chance de erro aumenta e a pessoa pode desistir da
+            operação — ou pior, transferir para a conta errada. Agora compare com um app em que
+            você paga um boleto em poucos toques, com feedback claro em cada etapa e a
+            possibilidade de conferir tudo antes de confirmar. A diferença entre essas duas
+            experiências é, em grande parte, resultado de decisões de IHC.
+          </p>
+        </div>
+
+        <div class="callout callout-example">
+          <span class="callout-label">💡 Um exemplo com consequências reais</span>
+          <p>
+            Em 1979, o acidente na usina nuclear de Three Mile Island (EUA) teve como um dos
+            fatores agravantes um painel de controle mal projetado: um indicador luminoso mostrava
+            que uma válvula havia recebido o <em>comando</em> para fechar, mas não confirmava se
+            ela de fato havia fechado — e ela não tinha. Os operadores confiaram na luz errada e
+            demoraram a perceber o problema real. É um caso extremo, mas ilustra bem por que IHC
+            não é "só estética": interfaces comunicam (ou escondem) o estado real de um sistema.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section" id="o-que-e-ihc" aria-labelledby="titulo-2">
+        <h2 id="titulo-2"><span class="section-number">02</span> O que é Interação Humano-Computador?</h2>
+
+        <p>
+          <strong>Interação Humano-Computador (IHC)</strong> é a área que estuda, projeta e avalia
+          a comunicação entre pessoas e sistemas computacionais. Em vez de focar apenas na
+          implementação técnica — como o código funciona por trás da tela — IHC olha para
+          <strong>usuários</strong>, <strong>tarefas</strong> e o <strong>contexto</strong> em que
+          o sistema será utilizado.
+        </p>
+
+        <p>De forma simplificada, podemos dizer que IHC busca responder a perguntas como:</p>
+
+        <ul class="checklist">
+          <li>Quem são as pessoas que vão usar este sistema? O que elas já sabem e o que precisam aprender?</li>
+          <li>O que elas precisam fazer, e em quais situações (pressa, estresse, pouca luz, uma mão só)?</li>
+          <li>Quais dificuldades, dúvidas ou erros podem surgir ao executar essas tarefas?</li>
+          <li>Como a interface pode apoiar, orientar e dar feedback adequado em cada etapa?</li>
+          <li>O sistema é utilizável por pessoas com diferentes capacidades e necessidades?</li>
+        </ul>
+
+        <p>
+          A área é, por natureza, <strong>multidisciplinar</strong>: envolve ciência da
+          computação, psicologia cognitiva, design gráfico e de produto, ergonomia, comunicação,
+          sociologia e acessibilidade, entre outras. Em um projeto real, é comum encontrarmos
+          equipes com perfis variados — desenvolvimento, UX, UI, pesquisa com usuários, negócio —
+          trabalhando juntas para que o sistema final funcione bem tecnicamente <em>e</em> faça
+          sentido para quem vai usá-lo.
+        </p>
+
+        <div class="callout callout-connection">
+          <span class="callout-label">🔗 Um ciclo simples para guardar</span>
+          <p>
+            Uma forma útil de visualizar IHC é como um ciclo: a pessoa forma uma <strong>intenção</strong>
+            (o que ela quer fazer), executa uma <strong>ação</strong> sobre a interface, o sistema
+            processa e devolve um <strong>feedback</strong>, e a pessoa <strong>interpreta</strong>
+            esse retorno para decidir o próximo passo. Boas interfaces tornam cada uma dessas
+            quatro etapas clara; interfaces ruins quebram o ciclo em algum ponto — geralmente na
+            hora do feedback.
+          </p>
+        </div>
+
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/CtsXslWEyB0" title="Vídeo sobre modelos e paradigmas de design em IHC" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <p class="video-caption">Vídeo sugerido (YouTube): visão geral de modelos e paradigmas de design em IHC. Assista antes da próxima aula, se possível.</p>
+      </section>
+
+      <section class="content-section" id="historia" aria-labelledby="titulo-3">
+        <h2 id="titulo-3"><span class="section-number">03</span> Uma área jovem, com raízes antigas</h2>
+
+        <p>
+          IHC como campo de pesquisa organizado é relativamente recente, mas suas raízes remontam
+          a décadas de estudos sobre ergonomia e interação entre pessoas e máquinas. Conhecer esse
+          histórico ajuda a entender por que a área valoriza tanto observar pessoas reais em vez
+          de assumir como elas "deveriam" se comportar.
+        </p>
+
+        <ol class="timeline">
+          <li>
+            <span class="timeline-year">Décadas de 1940–50</span>
+            <span class="timeline-text">Origem da ergonomia moderna: estudos sobre painéis de aeronaves e erros de pilotos mostram que "erro humano" é, muitas vezes, erro de projeto da interface.</span>
+          </li>
+          <li>
+            <span class="timeline-year">1960s</span>
+            <span class="timeline-text">Douglas Engelbart demonstra o mouse, hipertexto e edição colaborativa na "Mãe de Todas as Demos" (1968), antecipando décadas de interação gráfica.</span>
+          </li>
+          <li>
+            <span class="timeline-year">1970s–80s</span>
+            <span class="timeline-text">O Xerox PARC desenvolve a interface gráfica com janelas, ícones e menus (WIMP), popularizada depois pelo Macintosh (1984) e pelo Windows.</span>
+          </li>
+          <li>
+            <span class="timeline-year">1980s</span>
+            <span class="timeline-text">IHC se consolida como campo acadêmico: surgem as primeiras conferências (como a CHI, em 1983) reunindo computação, psicologia e design.</span>
+          </li>
+          <li>
+            <span class="timeline-year">1990s–2000s</span>
+            <span class="timeline-text">Popularização da internet e da web trazem novos desafios: navegação, usabilidade em larga escala e a chegada dos primeiros métodos de avaliação heurística.</span>
+          </li>
+          <li>
+            <span class="timeline-year">2007 em diante</span>
+            <span class="timeline-text">Smartphones com telas sensíveis ao toque mudam radicalmente os paradigmas de interação: gestos, mobilidade, contextos de uso variados.</span>
+          </li>
+          <li>
+            <span class="timeline-year">Hoje</span>
+            <span class="timeline-text">IHC se expande para voz, realidade aumentada/virtual, wearables, interfaces conversacionais com IA e preocupações crescentes com acessibilidade e ética no design.</span>
+          </li>
+        </ol>
+
+        <p class="muted">
+          Não é preciso decorar datas — o importante é perceber que cada nova tecnologia de
+          interação (mouse, toque, voz, gestos) trouxe novas perguntas de IHC, e que muitos
+          princípios básicos (feedback, consistência, prevenção de erros) atravessam todas essas
+          décadas.
+        </p>
+      </section>
+
+      <section class="content-section" id="boas-ruins" aria-labelledby="titulo-4">
+        <h2 id="titulo-4"><span class="section-number">04</span> Interfaces boas x interfaces ruins</h2>
+
+        <p>
+          Uma maneira prática de iniciar o estudo em IHC é observar interfaces que você já usa.
+          Em vez de apenas "gostar" ou "não gostar", o objetivo é aprender a <strong>descrever com
+          critérios</strong> por que uma interface funciona bem ou mal.
+        </p>
+
+        <p>Algumas perguntas que ajudam nessa análise:</p>
+
+        <ul class="checklist">
+          <li>Eu entendo facilmente o que devo fazer assim que abro a tela?</li>
+          <li>Os elementos importantes se destacam ou ficam "escondidos" em meio a outros?</li>
+          <li>A interface responde rapidamente às minhas ações? Existe feedback visível?</li>
+          <li>Quando cometo um erro, consigo me recuperar sem medo de "estragar tudo"?</li>
+          <li>A interface usa uma linguagem que faz sentido para mim, ou está cheia de jargão técnico?</li>
+        </ul>
+
+        <p>Um exemplo concreto ajuda a fixar esses critérios. Compare dois formulários de cadastro:</p>
+
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Exemplo comparativo: mesmo objetivo (criar uma conta), duas abordagens de interface</caption>
+            <thead>
+              <tr>
+                <th scope="col">Critério</th>
+                <th scope="col" class="col-bad">Formulário mal projetado</th>
+                <th scope="col" class="col-good">Formulário bem projetado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Campos obrigatórios</td>
+                <td>Não indicados; só aparecem depois de tentar enviar.</td>
+                <td>Marcados desde o início com asterisco e texto de apoio.</td>
+              </tr>
+              <tr>
+                <td>Mensagens de erro</td>
+                <td>"Erro no formulário", sem dizer qual campo.</td>
+                <td>"E-mail inválido: verifique se falta o @", ao lado do campo.</td>
+              </tr>
+              <tr>
+                <td>Senha</td>
+                <td>Regras só reveladas após a rejeição da senha digitada.</td>
+                <td>Regras visíveis antes de digitar, com indicador de força.</td>
+              </tr>
+              <tr>
+                <td>Progresso</td>
+                <td>Sem indicação de quantas etapas faltam.</td>
+                <td>Barra de progresso ou numeração de etapas.</td>
+              </tr>
+              <tr>
+                <td>Recuperação</td>
+                <td>Ao voltar uma etapa, todos os dados digitados somem.</td>
+                <td>Dados preenchidos permanecem salvos ao navegar entre etapas.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-example">
+          <span class="callout-label">Exercício mental</span>
+          <p>
+            Lembre-se de um formulário que você já preencheu na web. Havia campos obrigatórios mal
+            indicados? As mensagens de erro explicavam claramente o problema? Quantos cliques
+            foram necessários para concluir a tarefa? Tudo isso está relacionado a decisões de
+            IHC — decisões que, com o conteúdo desta disciplina, você vai aprender a identificar,
+            justificar e propor de forma diferente.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section" id="organizacao" aria-labelledby="titulo-5">
+        <h2 id="titulo-5"><span class="section-number">05</span> Como a disciplina está organizada?</h2>
+
+        <p>
+          Ao longo do semestre, vamos avançar da fundamentação teórica até a aplicação prática em
+          um <strong>projeto de interface</strong> desenvolvido de forma incremental. Em paralelo,
+          trabalharemos exercícios menores que ajudam a fixar conceitos e que podem ser realizados
+          em sala ou em casa.
+        </p>
+
+        <p>Os grandes blocos da disciplina incluem:</p>
+
+        <div class="roadmap-grid">
+          <div class="roadmap-card">
+            <span class="roadmap-index">Bloco 1</span>
+            <h3>Fundamentos</h3>
+            <p>Usuários, interfaces, tarefas e contexto de uso.</p>
+          </div>
+          <div class="roadmap-card">
+            <span class="roadmap-index">Bloco 2</span>
+            <h3>Fatores humanos</h3>
+            <p>Percepção, memória, erros e modelos mentais.</p>
+          </div>
+          <div class="roadmap-card">
+            <span class="roadmap-index">Bloco 3</span>
+            <h3>Diálogos e modelagem</h3>
+            <p>Fluxos, casos de uso, wireframes e prototipagem.</p>
+          </div>
+          <div class="roadmap-card">
+            <span class="roadmap-index">Bloco 4</span>
+            <h3>Usabilidade e acessibilidade</h3>
+            <p>Heurísticas, padrões, normas e inclusão digital.</p>
+          </div>
+          <div class="roadmap-card">
+            <span class="roadmap-index">Bloco 5</span>
+            <h3>Avaliação</h3>
+            <p>Métodos, métricas, planejamento e análise com usuários.</p>
+          </div>
+          <div class="roadmap-card">
+            <span class="roadmap-index">Bloco 6</span>
+            <h3>Paradigmas e métodos de projeto</h3>
+            <p>Design Thinking, UCD, Lean UX e outras metodologias.</p>
+          </div>
+        </div>
+
+        <p>
+          Cada novo tópico adicionará uma peça ao seu projeto semestral: definição do problema,
+          público-alvo, cenários de uso, fluxos, protótipos, avaliação com usuários, ajustes e
+          documentação final. Ou seja: <strong>o projeto cresce junto com a disciplina</strong>, e
+          o que você aprender em cada aula será aplicado quase imediatamente.
+        </p>
+      </section>
+
+      <section class="content-section" id="atividade" aria-labelledby="titulo-6">
+        <h2 id="titulo-6"><span class="section-number">06</span> Atividade da aula · observando interfaces do cotidiano</h2>
+
+        <div class="callout callout-activity">
+          <span class="callout-label">Atividade</span>
+          <p>
+            Escolha <strong>dois sistemas digitais</strong> que você utiliza com frequência
+            (ex.: aplicativo de banco, rede social, sistema acadêmico, site de compras etc.).
+            Para cada sistema, responda às perguntas abaixo em um documento (texto, slides ou a
+            ferramenta indicada pela professora):
+          </p>
+          <ol>
+            <li>Qual é o sistema? Em que dispositivos você o utiliza?</li>
+            <li>Que tarefas principais você costuma realizar nele?</li>
+            <li>Quais aspectos da interface ajudam sua experiência? (dê exemplos concretos)</li>
+            <li>Quais aspectos atrapalham ou geram frustração? (explique por quê)</li>
+            <li>Com base no que você leu nesta página, por que essa interface é "boa" ou "ruim"?</li>
+          </ol>
+          <p>
+            Traga seu material na próxima aula ou envie pelo canal definido em sala. Essa
+            atividade compõe sua nota de exercícios e servirá de ponto de partida para escolher o
+            problema do seu projeto semestral.
+          </p>
+        </div>
+
+        <div class="callout callout-connection">
+          <span class="callout-label">🔗 Conexão com o projeto</span>
+          <p>
+            As observações que você fizer agora sobre interfaces reais podem se transformar no
+            tema do seu projeto. Guarde seus exemplos: eles ajudam a justificar por que o
+            problema escolhido é relevante lá na frente.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section" id="aprofundar" aria-labelledby="titulo-7">
+        <h2 id="titulo-7"><span class="section-number">07</span> Para aprofundar</h2>
+
+        <div class="callout callout-reading">
+          <span class="callout-label">📚 Leituras recomendadas</span>
+          <ul class="reading-list">
+            <li>Barbosa &amp; Silva, <em>Interação Humano-Computador</em>, cap. 1 (visão geral da área).</li>
+            <li>Preece, Rogers &amp; Sharp, <em>Design de Interação</em>, cap. 1 (o que é design de interação).</li>
+            <li><a href="https://lesandrop.github.io/site/teaching/IHC/" target="_blank" rel="noopener">Notas de aula de IHC (Prof. Lesandro Ponciano)<span class="external-indicator" aria-hidden="true">↗</span></a></li>
+          </ul>
+        </div>
+
+        <div class="callout callout-reflection">
+          <span class="callout-label">✨ Sugestão de reflexão para a semana</span>
+          <p>
+            Durante a semana, tente notar quantas vezes você "briga" com uma interface: um botão
+            que não aparece, uma tela que não rola direito, uma mensagem de erro pouco clara.
+            Anote esses momentos — eles são o material bruto de IHC, e vários deles vão reaparecer
+            nas próximas aulas com nome técnico e explicação teórica.
+          </p>
+        </div>
+
+        <h3>Palavras-chave desta aula</h3>
+        <div class="keyword-tags">
+          <span class="keyword-tag">IHC</span>
+          <span class="keyword-tag">interface</span>
+          <span class="keyword-tag">usuário</span>
+          <span class="keyword-tag">interação</span>
+          <span class="keyword-tag">experiência</span>
+          <span class="keyword-tag">usabilidade</span>
+          <span class="keyword-tag">acessibilidade</span>
+          <span class="keyword-tag">feedback</span>
+        </div>
+      </section>
+
+      <nav class="lesson-nav" aria-label="Navegação entre aulas">
+        <a class="lesson-nav-link prev" href="index.html">
+          <span class="lesson-nav-label">← Índice da disciplina</span>
+          <span class="lesson-nav-title">Todos os tópicos do semestre</span>
+        </a>
+        <a class="lesson-nav-link next" href="interface-interacao-ux.html">
+          <span class="lesson-nav-label">Próxima aula →</span>
+          <span class="lesson-nav-title">Interfaces, interação e UX</span>
+        </a>
+      </nav>
+
+    </main>
+
+    <aside class="toc" aria-label="Sumário da aula">
+      <h2>Nesta aula</h2>
+      <ol>
+        <li><a href="#por-que-estudar">Por que estudar IHC?</a></li>
+        <li><a href="#o-que-e-ihc">O que é IHC?</a></li>
+        <li><a href="#historia">Uma área jovem, raízes antigas</a></li>
+        <li><a href="#boas-ruins">Interfaces boas x ruins</a></li>
+        <li><a href="#organizacao">Como a disciplina é organizada</a></li>
+        <li><a href="#atividade">Atividade da aula</a></li>
+        <li><a href="#aprofundar">Para aprofundar</a></li>
+      </ol>
+      <p class="toc-progress">Unidade 1 de 8 · Usuários e interfaces</p>
+    </aside>
+
+  </div>
+</div>
+
+<footer>
+  <p>Interface Homem-Computador · Instituto Federal Catarinense</p>
+  <p>Esta página é atualizada no decorrer do semestre. Salve o link e retorne sempre que quiser revisar o conteúdo.</p>
+</footer>
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Voltar ao topo da página">↑</button>
+
+<script>
+  (function () {
+    var backToTop = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 480) {
+        backToTop.classList.add('is-visible');
+      } else {
+        backToTop.classList.remove('is-visible');
+      }
+    });
+
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>
