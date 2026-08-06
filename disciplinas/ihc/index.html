@@ -11,13 +11,11 @@
   <meta name="author" content="Instituto Federal Catarinense">
 
   <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/ihc/index.html">
-
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:title" content="Interface Homem-Computador (CPA1469) - Semestre 02/2026">
   <meta property="og:description" content="Design de interfaces centradas em pessoas: usabilidade, acessibilidade, prototipagem e métodos de avaliação em IHC.">
   <meta property="og:image" content="https://wilcilene.github.io/estudos/disciplinas/ihc/media/og-image.png">
-
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Interface Homem-Computador (CPA1469)">
   <meta name="twitter:description" content="Tópicos de estudo, usabilidade, acessibilidade e métodos de avaliação em IHC.">
@@ -25,6 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 
   <script type="application/ld+json">
   {
@@ -32,7 +31,7 @@
     "@type": "Course",
     "name": "Interface Homem-Computador",
     "courseCode": "CPA1469",
-    "description": "Disciplina que aborda o projeto, a implementação e a avaliação de interfaces computacionais úteis, usáveis e acessíveis, cobrindo tipos de usuários, técnicas de interação, fatores humanos, usabilidade, acessibilidade e métodos de avaliação.",
+    "description": "Disciplina que aborda o projeto, a implementação e a avaliação de interfaces computacionais úteis, usáveis e acessíveis.",
     "inLanguage": "pt-BR",
     "provider": {
       "@type": "CollegeOrUniversity",
@@ -41,8 +40,6 @@
     }
   }
   </script>
-
-  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
@@ -51,11 +48,13 @@
     <header>
       <div class="badge">
         <span class="badge-dot"></span>
-        Interface Homem-Computador - Semestre 02/2026
+        Interface Homem-Computador · CPA1469 · Semestre 02/2026
       </div>
+
       <h1>Design de <span>interfaces</span> centradas em pessoas</h1>
+
       <div class="subheader">
-        <span class="pill">Curso superior - 60h</span>
+        <span class="pill">Curso superior · 60h</span>
         <span class="pill">Modalidade: presencial</span>
         <span class="pill">Instituto Federal Catarinense</span>
       </div>
@@ -69,17 +68,20 @@
             modernas de prototipagem e avaliação com usuários reais.
           </p>
           <p>
-            A jornada cobre <strong>tipos de usuários e interfaces</strong>, <strong>técnicas de interação</strong>,
-            <strong>fatores humanos e diálogos</strong>, <strong>usabilidade e acessibilidade</strong>,
-            <strong>modelagem de interação humano-máquina</strong>, <strong>métodos e ferramentas de avaliação</strong>
-            e <strong>paradigmas, modelos e métodos de projeto de interfaces</strong>.
+            A jornada cobre <strong>tipos de usuários e interfaces</strong>,
+            <strong>técnicas de interação</strong>, <strong>fatores humanos e diálogos</strong>,
+            <strong>usabilidade e acessibilidade</strong>,
+            <strong>modelagem de interação humano-máquina</strong>,
+            <strong>métodos e ferramentas de avaliação</strong> e
+            <strong>paradigmas, modelos e métodos de projeto de interfaces</strong>.
           </p>
         </div>
+
         <div class="intro-meta">
           <span><b>Objetivo geral:</b> compreender conceitos de IHC e aplicá-los no desenvolvimento prático de interfaces reais.</span>
-          <span><b>Como estudar:</b> cada tópico abaixo leva a uma página com resumo, subtemas, relevância para Eng. de Computação e recursos.</span>
+          <span><b>Como estudar:</b> cada tópico leva a uma página com resumo, subtemas, relevância para Engenharia de Computação e recursos.</span>
           <span><b>Avaliação:</b> exercícios ao longo do semestre, prova, estudos de caso e um projeto desenvolvido de forma incremental.</span>
-          <span><span id="painel-resumo"> <b>Painel:</b> carregando resumo dos tópicos...</span></span>
+          <span id="painel-resumo"><b>Painel:</b> carregando resumo dos tópicos...</span>
         </div>
       </section>
 
@@ -107,12 +109,7 @@
 
         <div class="controls-bar" role="search" aria-label="Buscar e filtrar tópicos">
           <label for="busca-topico" class="visually-hidden">Buscar tópico por palavra-chave</label>
-          <input
-            type="text"
-            id="busca-topico"
-            class="search-field"
-            placeholder="Buscar por palavra-chave…"
-            autocomplete="off">
+          <input type="text" id="busca-topico" class="search-field" placeholder="Buscar por palavra-chave…" autocomplete="off">
 
           <div class="filter-chips" role="group" aria-label="Filtrar por categoria">
             <button type="button" class="filter-chip" data-filter="all" aria-pressed="true">Todos</button>
@@ -129,269 +126,7 @@
         </div>
 
         <p class="results-count" id="contador-resultados" aria-live="polite"></p>
-
-        <div class="topics-grid">
-          <article class="topic-card" id="introducao-ihc" data-category="Usuários e interfaces" data-status="passado">
-            <h3 class="topic-title">Introdução à IHC</h3>
-            <p class="topic-desc">Panorama da disciplina, importância da interação humano-computador e visão geral do semestre.</p>
-            <div class="topic-meta">
-              <span>Usuários e interfaces</span>
-              <span>nível básico</span>
-            </div>
-            <a href="topicos/introducao-ihc.html">Introdução à IHC</a>
-          </article>
-
-          <article class="topic-card" id="tipos-interfaces-interacao" data-category="Usuários e interfaces" data-status="atual">
-            <h3 class="topic-title">Interfaces, interação e tipos de interface</h3>
-            <p class="topic-desc">Conceitos de interface, interação, experiência do usuário e os principais paradigmas de interface: CLI, GUI, web, mobile, voz e RV/RA.</p>
-            <div class="topic-meta">
-              <span>Usuários e interfaces</span>
-              <span>nível básico</span>
-            </div>
-            <a href="topicos/tipos-interfaces-interacao.html">Interfaces, interação e tipos de interface</a>
-          </article>
-
-          <article class="topic-card" id="tipos-de-usuarios" data-category="Usuários e interfaces" data-status="futuro">
-            <h3 class="topic-title">Tipos de usuários e personas</h3>
-            <p class="topic-desc">Perfis, objetivos e contexto de uso; personas como ferramenta para representar grupos de usuários.</p>
-            <div class="topic-meta">
-              <span>Usuários e interfaces</span>
-              <span>nível básico</span>
-            </div>
-            <a href="topicos/tipos-de-usuarios.html">Tipos de usuários e personas</a>
-          </article>
-
-          <article class="topic-card" id="estilos-dispositivos-interacao" data-category="Técnicas de interação" data-status="futuro">
-            <div class="topic-date">20/08</div>
-            <h3 class="topic-title">Estilos de interação e dispositivos de entrada/saída</h3>
-            <p class="topic-desc">Menus, formulários, linguagem de comando, manipulação direta, e como mouse, teclado, toque e voz moldam a interação.</p>
-            <div class="topic-meta">
-              <span>Técnicas de interação</span>
-              <span>nível básico</span>
-            </div>
-            <a href="topicos/estilos-dispositivos-interacao.html">Estilos de interação e dispositivos de entrada/saída</a>
-          </article>
-
-          <article class="topic-card" id="interacao-multimodal" data-category="Técnicas de interação" data-status="futuro">
-            <div class="topic-date">21/08</div>
-            <h3 class="topic-title">Interação multimodal: voz, gestos e realidade aumentada</h3>
-            <p class="topic-desc">Interfaces de voz, reconhecimento de gestos, interação por olhar e realidade aumentada/virtual como técnicas emergentes de interação.</p>
-            <div class="topic-meta">
-              <span>Técnicas de interação</span>
-              <span>nível intermediário</span>
-            </div>
-            <a href="topicos/interacao-multimodal.html">Interação multimodal: voz, gestos e realidade aumentada</a>
-          </article>
-
-          <article class="topic-card" id="projeto-problema-escopo" data-category="Atividade" data-status="futuro">
-            <div class="topic-date">02 e 03/09</div>
-            <h3 class="topic-title">Projeto: problema e escopo</h3>
-            <p class="topic-desc">Definição do problema, contexto, usuários e objetivos do projeto incremental do semestre.</p>
-            <div class="topic-meta">
-              <span>Atividade</span>
-              <span>nível prático</span>
-            </div>
-            <a href="topicos/projeto-problema-escopo.html">Projeto: problema e escopo</a>
-          </article>
-
-          <article class="topic-card" id="prototipagem-ferramentas-wireframes" data-category="Paradigmas e métodos de projeto" data-status="futuro">
-            <div class="topic-date">09 e 10/09</div>
-            <h3 class="topic-title">Prototipagem: ferramentas e wireframes em baixa fidelidade</h3>
-            <p class="topic-desc">Avaliação de ferramentas como Figma e Sketch, e boas práticas de sketching e prototipagem rápida em baixa fidelidade.</p>
-            <div class="topic-meta">
-              <span>Paradigmas e métodos de projeto</span>
-              <span>nível básico</span>
-            </div>
-            <a href="topicos/prototipagem-ferramentas-wireframes.html">Prototipagem: ferramentas e wireframes em baixa fidelidade</a>
-          </article>
-
-          <article class="topic-card" id="diretrizes-regras-design" data-category="Usabilidade e acessibilidade" data-status="futuro">
-            <div class="topic-date">16/09</div>
-            <h3 class="topic-title">Diretrizes e regras de design</h3>
-            <p class="topic-desc">Regras de ouro e guidelines para telas, formulários e navegação.</p>
-            <div class="topic-meta">
-              <span>Usabilidade e acessibilidade</span>
-              <span>nível intermediário</span>
-            </div>
-            <a href="topicos/diretrizes-regras-design.html">Diretrizes e regras de design</a>
-          </article>
-
-          <article class="topic-card" id="construcao-prototipo-projeto" data-category="Atividade" data-status="futuro">
-            <div class="topic-date">23, 24/09 e 12/11</div>
-            <h3 class="topic-title">Construção do protótipo do projeto: telas e fluxos</h3>
-            <p class="topic-desc">Construção incremental dos principais wireframes, telas e fluxos de interação do projeto do semestre.</p>
-            <div class="topic-meta">
-              <span>Atividade</span>
-              <span>nível prático</span>
-            </div>
-            <a href="topicos/construcao-prototipo-projeto.html">Construção do protótipo do projeto: telas e fluxos</a>
-          </article>
-
-          <article class="topic-card" id="decisao-modelos-mentais-carga-cognitiva" data-category="Fatores humanos" data-status="futuro">
-            <div class="topic-date">30/09</div>
-            <h3 class="topic-title">Decisão, modelos mentais e carga cognitiva</h3>
-            <p class="topic-desc">Processos de tomada de decisão, modelos mentais e carga cognitiva aplicados a navegação e rotulagem.</p>
-            <div class="topic-meta">
-              <span>Fatores humanos</span>
-              <span>nível intermediário</span>
-            </div>
-            <a href="topicos/decisao-modelos-mentais-carga-cognitiva.html">Decisão, modelos mentais e carga cognitiva</a>
-          </article>
-
-          <article class="topic-card" id="fatores-humanos-processamento-informacao" data-category="Fatores humanos" data-status="futuro">
-            <div class="topic-date">07/10</div>
-            <h3 class="topic-title">Fatores humanos e processamento de informação</h3>
-            <p class="topic-desc">Fatores humanos, modelos cognitivos e processamento de informação aplicados ao diálogo humano-computador.</p>
-            <div class="topic-meta">
-              <span>Fatores humanos</span>
-              <span>nível intermediário</span>
-            </div>
-            <a href="topicos/fatores-humanos-processamento-informacao.html">Fatores humanos e processamento de informação</a>
-          </article>
-
-          <article class="topic-card" id="metodologias-ihc" data-category="Paradigmas e métodos de projeto" data-status="futuro">
-            <div class="topic-date">14 a 21/10</div>
-            <h3 class="topic-title">Metodologias de IHC</h3>
-            <p class="topic-desc">Design Thinking, Double Diamond, Design Centrado no Usuário, Design Participativo, Lean UX, Agile UX, Jornada do Usuário e Service Blueprint.</p>
-            <div class="topic-meta">
-              <span>Paradigmas e métodos de projeto</span>
-              <span>nível intermediário</span>
-            </div>
-            <a href="topicos/metodologias-ihc.html">Metodologias de IHC</a>
-          </article>
-
-          <article class="topic-card" id="estudos-caso-falhas-ihc" data-category="Atividade" data-status="futuro">
-            <div class="topic-date">22 e 28/10</div>
-            <h3 class="topic-title">Estudos de caso em IHC: falhas clássicas</h3>
-            <p class="topic-desc">Análise de falhas clássicas de IHC (acidentes, produtos mal projetados) e o que podemos aprender com elas.</p>
-            <div class="topic-meta">
-              <span>Atividade</span>
-              <span>nível intermediário</span>
-            </div>
-            <a href="topicos/estudos-caso-falhas-ihc.html">Estudos de caso em IHC: falhas clássicas</a>
-          </article>
-
-          <article class="topic-card" id="estrutura-dialogos-navegacao" data-category="Diálogos" data-status="futuro">
-            <div class="topic-date">29/10</div>
-            <h3 class="topic-title">Estrutura de diálogos e navegação</h3>
-            <p class="topic-desc">Menus, formulários, navegação e desenho de fluxos de diálogo entre humano e sistema.</p>
-            <div class="topic-meta">
-              <span>Diálogos</span>
-              <span>nível intermediário</span>
-            </div>
-            <a href="topicos/estrutura-dialogos-navegacao.html">Estrutura de diálogos e navegação</a>
-          </article>
-
-          <article class="topic-card" id="tipos-dialogo-feedback" data-category="Diálogos" data-status="futuro">
-            <div class="topic-date">04/11</div>
-            <h3 class="topic-title">Tipos de diálogo e feedback ao usuário</h3>
-            <p class="topic-desc">Diálogo por menu, formulário, linguagem de comando e linguagem natural; como projetar mensagens de feedback claras.</p>
-            <div class="topic-meta">
-              <span>Diálogos</span>
-              <span>nível intermediário</span>
-            </div>
-            <a href="topicos/tipos-dialogo-feedback.html">Tipos de diálogo e feedback ao usuário</a>
-          </article>
-
-          <article class="topic-card" id="casos-de-uso-historias" data-category="Modelagem de interação" data-status="futuro">
-            <div class="topic-date">05/11</div>
-            <h3 class="topic-title">Casos de uso e histórias de usuário</h3>
-            <p class="topic-desc">Modelagem de casos de uso focados em interação e user stories.</p>
-            <div class="topic-meta">
-              <span>Modelagem de interação</span>
-              <span>nível intermediário</span>
-            </div>
-            <a href="topicos/casos-de-uso-historias.html">Casos de uso e histórias de usuário</a>
-          </article>
-
-          <article class="topic-card" id="fluxos-interacao-notacao-tarefas" data-category="Modelagem de interação" data-status="futuro">
-            <div class="topic-date">11/11</div>
-            <h3 class="topic-title">Fluxos de interação, mapas de navegação e notação de tarefas</h3>
-            <p class="topic-desc">Diagramas de fluxo de interação, mapas de navegação, user journeys e notações formais de modelagem de tarefas (como diagramas de tarefa e GOMS).</p>
-            <div class="topic-meta">
-              <span>Modelagem de interação</span>
-              <span>nível intermediário</span>
-            </div>
-            <a href="topicos/fluxos-interacao-notacao-tarefas.html">Fluxos de interação, mapas de navegação e notação de tarefas</a>
-          </article>
-
-          <article class="topic-card" id="usabilidade-e-ux" data-category="Usabilidade e acessibilidade" data-status="futuro">
-            <div class="topic-date">18/11</div>
-            <h3 class="topic-title">Usabilidade e experiência do usuário</h3>
-            <p class="topic-desc">Eficácia, eficiência e satisfação; visão geral da qualidade de uso.</p>
-            <div class="topic-meta">
-              <span>Usabilidade e acessibilidade</span>
-              <span>nível intermediário</span>
-            </div>
-            <a href="topicos/usabilidade-e-ux.html">Usabilidade e experiência do usuário</a>
-          </article>
-
-          <article class="topic-card" id="heuristicas-usabilidade" data-category="Métodos de avaliação" data-status="futuro">
-            <div class="topic-date">19/11</div>
-            <h3 class="topic-title">Heurísticas de usabilidade</h3>
-            <p class="topic-desc">Heurísticas clássicas de Nielsen e como aplicá-las em sistemas reais.</p>
-            <div class="topic-meta">
-              <span>Métodos de avaliação</span>
-              <span>nível intermediário</span>
-            </div>
-            <a href="topicos/heuristicas-usabilidade.html">Heurísticas de usabilidade</a>
-          </article>
-
-          <article class="topic-card" id="metodos-avaliacao-usuarios" data-category="Métodos de avaliação" data-status="futuro">
-            <div class="topic-date">25/11</div>
-            <h3 class="topic-title">Métodos de avaliação com usuários</h3>
-            <p class="topic-desc">Testes de usabilidade, protocolo think-aloud, questionários e métricas de satisfação com usuários reais.</p>
-            <div class="topic-meta">
-              <span>Métodos de avaliação</span>
-              <span>nível intermediário</span>
-            </div>
-            <a href="topicos/metodos-avaliacao-usuarios.html">Métodos de avaliação com usuários</a>
-          </article>
-
-          <article class="topic-card" id="metricas-ux-ab-testing" data-category="Métodos de avaliação" data-status="futuro">
-            <div class="topic-date">26/11</div>
-            <h3 class="topic-title">Métricas de UX, SUS e A/B testing</h3>
-            <p class="topic-desc">Métricas quantitativas de UX: System Usability Scale (SUS), NPS, taxa de conclusão de tarefa e testes A/B.</p>
-            <div class="topic-meta">
-              <span>Métodos de avaliação</span>
-              <span>nível intermediário</span>
-            </div>
-            <a href="topicos/metricas-ux-ab-testing.html">Métricas de UX, SUS e A/B testing</a>
-          </article>
-
-          <article class="topic-card" id="estudos-caso-usabilidade" data-category="Atividade" data-status="futuro">
-            <div class="topic-date">02/12</div>
-            <h3 class="topic-title">Estudos de caso em usabilidade</h3>
-            <p class="topic-desc">Aplicação de heurísticas e padrões de usabilidade nos wireframes do próprio projeto do semestre.</p>
-            <div class="topic-meta">
-              <span>Atividade</span>
-              <span>nível prático</span>
-            </div>
-            <a href="topicos/estudos-caso-usabilidade.html">Estudos de caso em usabilidade</a>
-          </article>
-
-          <article class="topic-card" id="acessibilidade-digital" data-category="Usabilidade e acessibilidade" data-status="futuro">
-            <div class="topic-date">03/12</div>
-            <h3 class="topic-title">Acessibilidade digital e padrões</h3>
-            <p class="topic-desc">Conceitos de inclusão e desenho universal, princípios das WCAG/eMAG e barreiras comuns de acessibilidade.</p>
-            <div class="topic-meta">
-              <span>Usabilidade e acessibilidade</span>
-              <span>nível intermediário</span>
-            </div>
-            <a href="topicos/acessibilidade-digital.html">Acessibilidade digital e padrões</a>
-          </article>
-
-          <article class="topic-card" id="padroes-design-systems" data-category="Paradigmas e métodos de projeto" data-status="futuro">
-            <div class="topic-date">10/12</div>
-            <h3 class="topic-title">Padrões de design e design systems</h3>
-            <p class="topic-desc">Design patterns, componentes reutilizáveis e design systems em interfaces responsivas para web e mobile.</p>
-            <div class="topic-meta">
-              <span>Paradigmas e métodos de projeto</span>
-              <span>nível intermediário</span>
-            </div>
-            <a href="topicos/padroes-design-systems.html">Padrões de design e design systems</a>
-          </article>
-        </div>
+        <div class="topics-grid" id="topics-grid"></div>
       </section>
     </main>
   </div>
@@ -407,47 +142,123 @@
 
   <script>
     (function () {
-      var cards = Array.prototype.slice.call(document.querySelectorAll('.topic-card[data-category]'));
+      'use strict';
+
+      var topics = [
+        ['introducao-ihc', 'Usuários e interfaces', 'passado', 'Introdução à IHC', 'Panorama da disciplina, importância da interação humano-computador e visão geral do semestre.', 'introducao-ihc.html', ''],
+        ['tipos-interfaces-interacao', 'Usuários e interfaces', 'atual', 'Interfaces, interação e tipos de interface', 'Conceitos de interface, interação, experiência do usuário e os principais paradigmas de interface: CLI, GUI, web, mobile, voz e RV/RA.', 'tipos-interfaces-interacao.html', ''],
+        ['tipos-de-usuarios', 'Usuários e interfaces', 'futuro', 'Tipos de usuários e personas', 'Perfis, objetivos e contexto de uso; personas como ferramenta para representar grupos de usuários.', 'tipos-de-usuarios.html', ''],
+        ['estilos-dispositivos-interacao', 'Técnicas de interação', 'futuro', 'Estilos de interação e dispositivos de entrada/saída', 'Menus, formulários, linguagem de comando, manipulação direta, e como mouse, teclado, toque e voz moldam a interação.', 'estilos-dispositivos-interacao.html', '20/08'],
+        ['interacao-multimodal', 'Técnicas de interação', 'futuro', 'Interação multimodal: voz, gestos e realidade aumentada', 'Interfaces de voz, reconhecimento de gestos, interação por olhar e realidade aumentada/virtual como técnicas emergentes de interação.', 'interacao-multimodal.html', '21/08'],
+        ['projeto-problema-escopo', 'Atividade', 'futuro', 'Projeto: problema e escopo', 'Definição do problema, contexto, usuários e objetivos do projeto incremental do semestre.', 'projeto-problema-escopo.html', '02 e 03/09'],
+        ['prototipagem-ferramentas-wireframes', 'Paradigmas e métodos de projeto', 'futuro', 'Prototipagem: ferramentas e wireframes em baixa fidelidade', 'Avaliação de ferramentas como Figma e Sketch, e boas práticas de sketching e prototipagem rápida em baixa fidelidade.', 'prototipagem-ferramentas-wireframes.html', '09 e 10/09'],
+        ['diretrizes-regras-design', 'Usabilidade e acessibilidade', 'futuro', 'Diretrizes e regras de design', 'Regras de ouro e guidelines para telas, formulários e navegação.', 'diretrizes-regras-design.html', '16/09'],
+        ['construcao-prototipo-projeto', 'Atividade', 'futuro', 'Construção do protótipo do projeto: telas e fluxos', 'Construção incremental dos principais wireframes, telas e fluxos de interação do projeto do semestre.', 'construcao-prototipo-projeto.html', '23, 24/09 e 12/11'],
+        ['decisao-modelos-mentais-carga-cognitiva', 'Fatores humanos', 'futuro', 'Decisão, modelos mentais e carga cognitiva', 'Processos de tomada de decisão, modelos mentais e carga cognitiva aplicados à navegação e rotulagem.', 'decisao-modelos-mentais-carga-cognitiva.html', '30/09'],
+        ['fatores-humanos-processamento-informacao', 'Fatores humanos', 'futuro', 'Fatores humanos e processamento de informação', 'Fatores humanos, modelos cognitivos e processamento de informação aplicados ao diálogo humano-computador.', 'fatores-humanos-processamento-informacao.html', '07/10'],
+        ['metodologias-ihc', 'Paradigmas e métodos de projeto', 'futuro', 'Metodologias de IHC', 'Design Thinking, Double Diamond, Design Centrado no Usuário, Design Participativo, Lean UX, Agile UX, Jornada do Usuário e Service Blueprint.', 'metodologias-ihc.html', '14 a 21/10'],
+        ['estudos-caso-falhas-ihc', 'Atividade', 'futuro', 'Estudos de caso em IHC: falhas clássicas', 'Análise de falhas clássicas de IHC e o que podemos aprender com elas.', 'estudos-caso-falhas-ihc.html', '22 e 28/10'],
+        ['estrutura-dialogos-navegacao', 'Diálogos', 'futuro', 'Estrutura de diálogos e navegação', 'Menus, formulários, navegação e desenho de fluxos de diálogo entre humano e sistema.', 'estrutura-dialogos-navegacao.html', '29/10'],
+        ['tipos-dialogo-feedback', 'Diálogos', 'futuro', 'Tipos de diálogo e feedback ao usuário', 'Diálogo por menu, formulário, linguagem de comando e linguagem natural; como projetar mensagens de feedback claras.', 'tipos-dialogo-feedback.html', '04/11'],
+        ['casos-de-uso-historias', 'Modelagem de interação', 'futuro', 'Casos de uso e histórias de usuário', 'Modelagem de casos de uso focados em interação e user stories.', 'casos-de-uso-historias.html', '05/11'],
+        ['fluxos-interacao-notacao-tarefas', 'Modelagem de interação', 'futuro', 'Fluxos de interação, mapas de navegação e notação de tarefas', 'Diagramas de fluxo de interação, mapas de navegação, user journeys e notações formais de modelagem de tarefas.', 'fluxos-interacao-notacao-tarefas.html', '11/11'],
+        ['usabilidade-e-ux', 'Usabilidade e acessibilidade', 'futuro', 'Usabilidade e experiência do usuário', 'Eficácia, eficiência e satisfação; visão geral da qualidade de uso.', 'usabilidade-e-ux.html', '18/11'],
+        ['heuristicas-usabilidade', 'Métodos de avaliação', 'futuro', 'Heurísticas de usabilidade', 'Heurísticas clássicas de Nielsen e como aplicá-las em sistemas reais.', 'heuristicas-usabilidade.html', '19/11'],
+        ['metodos-avaliacao-usuarios', 'Métodos de avaliação', 'futuro', 'Métodos de avaliação com usuários', 'Testes de usabilidade, protocolo think-aloud, questionários e métricas de satisfação com usuários reais.', 'metodos-avaliacao-usuarios.html', '25/11'],
+        ['metricas-ux-ab-testing', 'Métodos de avaliação', 'futuro', 'Métricas de UX, SUS e A/B testing', 'Métricas quantitativas de UX: System Usability Scale, NPS, taxa de conclusão de tarefa e testes A/B.', 'metricas-ux-ab-testing.html', '26/11'],
+        ['estudos-caso-usabilidade', 'Atividade', 'futuro', 'Estudos de caso em usabilidade', 'Aplicação de heurísticas e padrões de usabilidade nos wireframes do próprio projeto do semestre.', 'estudos-caso-usabilidade.html', '02/12'],
+        ['acessibilidade-digital', 'Usabilidade e acessibilidade', 'futuro', 'Acessibilidade digital e padrões', 'Conceitos de inclusão e desenho universal, princípios das WCAG/eMAG e barreiras comuns de acessibilidade.', 'acessibilidade-digital.html', '03/12'],
+        ['padroes-design-systems', 'Paradigmas e métodos de projeto', 'futuro', 'Padrões de design e design systems', 'Design patterns, componentes reutilizáveis e design systems em interfaces responsivas para web e mobile.', 'padroes-design-systems.html', '10/12']
+      ];
+
+      var statusLabels = {
+        passado: 'Concluído',
+        atual: 'Atual',
+        futuro: 'Futuro'
+      };
+
+      var grid = document.getElementById('topics-grid');
       var chips = Array.prototype.slice.call(document.querySelectorAll('.filter-chip'));
       var searchField = document.getElementById('busca-topico');
       var counter = document.getElementById('contador-resultados');
-      var activeFilter = 'all';
       var progressBar = document.getElementById('barra-progresso');
       var progressText = document.getElementById('progresso-texto');
       var progressLegenda = document.getElementById('progresso-legenda');
       var progressContainer = document.querySelector('.progress-container');
+      var activeFilter = 'all';
 
-      var STATUS_LABEL = {
-        passado: 'Concluído',
-        atual: 'Atual',
-        futuro: 'Futuro',
-      };
-
-      function normalize(str) {
-        return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      function normalize(value) {
+        return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
       }
 
-      function updateCounter(visibleCount) {
-        counter.textContent = 'Mostrando ' + visibleCount + ' de ' + cards.length + ' tópicos.';
+      function createCard(topic) {
+        var card = document.createElement('article');
+        var id = topic[0];
+        var category = topic[1];
+        var status = topic[2];
+        var title = topic[3];
+        var description = topic[4];
+        var href = topic[5];
+        var date = topic[6];
+
+        card.className = 'topic-card ' + (status === 'passado' ? 'completed' : status);
+        card.id = id;
+        card.dataset.category = category;
+        card.dataset.status = status;
+
+        if (date) {
+          var dateElement = document.createElement('div');
+          dateElement.className = 'topic-date';
+          dateElement.textContent = date;
+          card.appendChild(dateElement);
+        }
+
+        var badge = document.createElement('span');
+        badge.className = 'status-badge status-' + status;
+        badge.textContent = statusLabels[status];
+        card.appendChild(badge);
+
+        var heading = document.createElement('h3');
+        heading.className = 'topic-title';
+        heading.textContent = title;
+        card.appendChild(heading);
+
+        var descriptionElement = document.createElement('p');
+        descriptionElement.className = 'topic-desc';
+        descriptionElement.textContent = description;
+        card.appendChild(descriptionElement);
+
+        var meta = document.createElement('div');
+        meta.className = 'topic-meta';
+        meta.innerHTML = '<span>' + category + '</span><span>nível intermediário</span>';
+        card.appendChild(meta);
+
+        var link = document.createElement('a');
+        link.href = 'topicos/' + href;
+        link.textContent = title;
+        card.appendChild(link);
+
+        return card;
       }
+
+      topics.forEach(function (topic) {
+        grid.appendChild(createCard(topic));
+      });
+
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.topic-card[data-category]'));
 
       function updatePanelSummary() {
-        var totalTopics = cards.length;
         var categories = cards.map(function (card) {
           return card.getAttribute('data-category');
         });
-
         var uniqueCategories = Array.from(new Set(categories));
-        var eixoCategories = uniqueCategories.filter(function (category) {
+        var axes = uniqueCategories.filter(function (category) {
           return category !== 'Atividade';
         });
 
-        var panelSummary = document.getElementById('painel-resumo');
-        panelSummary.innerHTML =
-          '<b>Painel:</b> ' +
-          totalTopics +
-          ' tópicos organizados nos ' +
-          eixoCategories.length +
+        document.getElementById('painel-resumo').innerHTML =
+          '<b>Painel:</b> ' + cards.length +
+          ' tópicos organizados nos ' + axes.length +
           ' eixos da ementa, mais a categoria "Atividade".';
       }
 
@@ -458,19 +269,48 @@
         cards.forEach(function (card) {
           var category = card.getAttribute('data-category');
           var matchesCategory = activeFilter === 'all' || category === activeFilter;
-          var text = normalize(card.textContent);
-          var matchesSearch = query === '' || text.indexOf(query) !== -1;
+          var matchesSearch = query === '' || normalize(card.textContent).indexOf(query) !== -1;
           var visible = matchesCategory && matchesSearch;
           card.hidden = !visible;
-          if (visible) visibleCount += 1;
+          if (visible) {
+            visibleCount += 1;
+          }
         });
 
-        updateCounter(visibleCount);
+        counter.textContent = 'Mostrando ' + visibleCount + ' de ' + cards.length + ' tópicos.';
+      }
+
+      function renderProgress() {
+        var total = cards.length;
+        var completedCount = 0;
+        var currentCount = 0;
+
+        cards.forEach(function (card) {
+          var status = card.getAttribute('data-status');
+          if (status === 'passado') {
+            completedCount += 1;
+          } else if (status === 'atual') {
+            currentCount += 1;
+          }
+        });
+
+        var percentage = total > 0 ? Math.round((completedCount / total) * 100) : 0;
+        var futureCount = total - completedCount - currentCount;
+
+        progressBar.style.width = percentage + '%';
+        progressText.textContent = percentage + '%';
+        progressContainer.setAttribute('aria-valuenow', percentage);
+        progressLegenda.textContent =
+          completedCount + ' concluída(s) · ' +
+          currentCount + ' em andamento · ' +
+          futureCount + ' futura(s).';
       }
 
       chips.forEach(function (chip) {
         chip.addEventListener('click', function () {
-          chips.forEach(function (c) { c.setAttribute('aria-pressed', 'false'); });
+          chips.forEach(function (item) {
+            item.setAttribute('aria-pressed', 'false');
+          });
           chip.setAttribute('aria-pressed', 'true');
           activeFilter = chip.getAttribute('data-filter');
           applyFilters();
@@ -479,85 +319,18 @@
 
       searchField.addEventListener('input', applyFilters);
 
-      updatePanelSummary();
-      applyFilters();
-
-      /* =========================================================
-         PROGRESSO A PARTIR DO CÓDIGO
-      ========================================================= */
-      function renderStatus() {
-        var total = cards.length;
-        var passadoCount = 0;
-        var atualCount = 0;
-      
-        cards.forEach(function (card) {
-          var status = card.getAttribute('data-status') || 'futuro';
-      
-          if (
-            status !== 'futuro' &&
-            status !== 'atual' &&
-            status !== 'passado'
-          ) {
-            status = 'futuro';
-          }
-      
-          card.classList.remove('completed', 'atual', 'futuro');
-      
-          if (status === 'passado') {
-            card.classList.add('completed');
-          } else {
-            card.classList.add(status);
-          }
-      
-          var badge = card.querySelector('.status-badge');
-      
-          if (!badge) {
-            badge = document.createElement('span');
-            badge.className = 'status-badge';
-            card.insertBefore(badge, card.firstChild);
-          }
-      
-          badge.className = 'status-badge status-' + status;
-          badge.textContent = STATUS_LABEL[status];
-      
-          if (status === 'passado') {
-            passadoCount += 1;
-          }
-      
-          if (status === 'atual') {
-            atualCount += 1;
-          }
-        });
-      
-        var percentual =
-          total > 0 ? Math.round((passadoCount / total) * 100) : 0;
-      
-        progressBar.style.width = percentual + '%';
-        progressText.textContent = percentual + '%';
-        progressContainer.setAttribute('aria-valuenow', percentual);
-      
-        var futuroCount = total - passadoCount - atualCount;
-      
-        progressLegenda.textContent =
-          passadoCount + ' concluída(s) · ' +
-          atualCount + ' em andamento · ' +
-          futuroCount + ' futura(s).';
-      }
-
-      renderStatus();
-
-      /* Botão voltar ao topo */
       var backToTop = document.getElementById('voltar-ao-topo');
       window.addEventListener('scroll', function () {
-        if (window.scrollY > 400) {
-          backToTop.classList.add('is-visible');
-        } else {
-          backToTop.classList.remove('is-visible');
-        }
+        backToTop.classList.toggle('is-visible', window.scrollY > 400);
       });
+
       backToTop.addEventListener('click', function () {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
+
+      updatePanelSummary();
+      applyFilters();
+      renderProgress();
     })();
   </script>
 </body>
