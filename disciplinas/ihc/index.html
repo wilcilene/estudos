@@ -484,52 +484,64 @@
 
       /* =========================================================
          PROGRESSO A PARTIR DO CÓDIGO
-         ---------------------------------------------------------
-         Cada <article class="topic-card" ...> tem um atributo
-         data-status="futuro" | "atual" | "passado".
-         Para marcar uma aula como dada, edite esse atributo
-         diretamente no index.html (pelo próprio GitHub) e faça
-         commit. O selo do card e a barra de progresso abaixo são
-         recalculados automaticamente ao carregar a página —
-         não depende de clique, login ou serviço externo.
       ========================================================= */
       function renderStatus() {
         var total = cards.length;
         var passadoCount = 0;
         var atualCount = 0;
-
+      
         cards.forEach(function (card) {
           var status = card.getAttribute('data-status') || 'futuro';
-          if (status !== 'futuro' && status !== 'atual' && status !== 'passado') {
+      
+          if (
+            status !== 'futuro' &&
+            status !== 'atual' &&
+            status !== 'passado'
+          ) {
             status = 'futuro';
           }
-
+      
           card.classList.remove('completed', 'atual', 'futuro');
-          card.classList.add(status === 'passado' ? 'completed' : status);
-
+      
+          if (status === 'passado') {
+            card.classList.add('completed');
+          } else {
+            card.classList.add(status);
+          }
+      
           var badge = card.querySelector('.status-badge');
+      
           if (!badge) {
             badge = document.createElement('span');
             badge.className = 'status-badge';
             card.insertBefore(badge, card.firstChild);
           }
+      
           badge.className = 'status-badge status-' + status;
           badge.textContent = STATUS_LABEL[status];
-
-          if (status === 'passado') passadoCount += 1;
-          if (status === 'atual') atualCount += 1;
+      
+          if (status === 'passado') {
+            passadoCount += 1;
+          }
+      
+          if (status === 'atual') {
+            atualCount += 1;
+          }
         });
-
-        var percentage = total > 0 ? Math.round((passadoCount / total) * 100) : 0;
-        progressBar.style.width = percentage + '%';
-        progressText.textContent = percentage + '%';
-        progressContainer.setAttribute('aria-valuenow', percentage);
-
+      
+        var percentual =
+          total > 0 ? Math.round((passadoCount / total) * 100) : 0;
+      
+        progressBar.style.width = percentual + '%';
+        progressText.textContent = percentual + '%';
+        progressContainer.setAttribute('aria-valuenow', percentual);
+      
         var futuroCount = total - passadoCount - atualCount;
+      
         progressLegenda.textContent =
           passadoCount + ' concluída(s) · ' +
           atualCount + ' em andamento · ' +
-          futuroCount + ' futura(s). ' +
+          futuroCount + ' futura(s).';
       }
 
       renderStatus();
