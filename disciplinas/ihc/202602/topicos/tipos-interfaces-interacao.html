@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interfaces, interação e experiência do usuário: conceitos, paradigmas e critérios de escolha em IHC.">
+  <title>Interfaces, interação e tipos de interface | IHC</title>
+  <link rel="stylesheet" href="topicos.css">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+  <main id="conteudo" class="topic-page">
+    <header class="topic-header">
+      <p class="topic-kicker">IHC · CPA1469 · Semestre 02/2026</p>
+      <h1>Interfaces, interação e tipos de interface</h1>
+      <p class="topic-lead">
+        Compreender como pessoas e sistemas se comunicam é o primeiro passo para projetar
+        experiências úteis, claras, acessíveis e adequadas ao contexto de uso.
+      </p>
+      <p><a href="../index.html">← Voltar ao índice da disciplina</a></p>
+    </header>
+
+    <section class="topic-section" aria-labelledby="objetivos">
+      <h2 id="objetivos">Objetivos de aprendizagem</h2>
+      <ul>
+        <li>Diferenciar interface, interação e experiência do usuário.</li>
+        <li>Reconhecer os principais paradigmas de interface e seus contextos de uso.</li>
+        <li>Relacionar dispositivos, técnicas de interação e características dos usuários.</li>
+        <li>Identificar critérios de qualidade, acessibilidade e adequação ao contexto.</li>
+      </ul>
+    </section>
+
+    <section class="topic-section" aria-labelledby="conceitos">
+      <h2 id="conceitos">1. Interface, interação e UX</h2>
+      <p>
+        A <strong>interface</strong> é a parte observável de um sistema por meio da qual a pessoa
+        percebe informações e realiza ações. Ela inclui elementos visuais, textos, sons,
+        gestos, comandos, feedbacks e regras de navegação.
+      </p>
+      <p>
+        A <strong>interação</strong> é o processo de troca entre a pessoa e o sistema: a pessoa
+        formula uma intenção, executa uma ação, observa a resposta e interpreta o resultado.
+        Uma interação bem projetada torna esse ciclo previsível, visível e recuperável quando
+        ocorre um erro.
+      </p>
+      <p>
+        A <strong>experiência do usuário (UX)</strong> abrange as percepções, expectativas,
+        emoções e resultados que surgem antes, durante e depois do uso. Por isso, uma interface
+        pode funcionar tecnicamente e, ainda assim, produzir uma experiência confusa,
+        frustrante ou excludente.
+      </p>
+    </section>
+
+    <section class="topic-section" aria-labelledby="ciclo">
+      <h2 id="ciclo">2. O ciclo de interação</h2>
+      <ol>
+        <li><strong>Objetivo:</strong> a pessoa identifica o que deseja realizar.</li>
+        <li><strong>Intenção:</strong> escolhe uma ação possível no sistema.</li>
+        <li><strong>Execução:</strong> utiliza um comando, gesto, controle ou dispositivo.</li>
+        <li><strong>Percepção:</strong> observa a resposta apresentada pela interface.</li>
+        <li><strong>Interpretação:</strong> verifica se o resultado corresponde ao objetivo.</li>
+      </ol>
+      <p>
+        O projeto deve reduzir a distância entre o objetivo da pessoa e as ações disponíveis,
+        além de oferecer feedback compreensível após cada operação relevante.
+      </p>
+    </section>
+
+    <section class="topic-section" aria-labelledby="paradigmas">
+      <h2 id="paradigmas">3. Principais tipos de interface</h2>
+
+      <article class="content-card">
+        <h3>CLI — interface de linha de comando</h3>
+        <p>
+          Utiliza comandos textuais digitados em um terminal. É poderosa, automatizável e
+          eficiente para usuários experientes, mas exige memorização de comandos, parâmetros e
+          regras de sintaxe.
+        </p>
+        <p><strong>Exemplos:</strong> terminal, shell, ferramentas de desenvolvimento e administração de servidores.</p>
+      </article>
+
+      <article class="content-card">
+        <h3>GUI — interface gráfica</h3>
+        <p>
+          Utiliza janelas, ícones, menus, botões, formulários e ponteiros. Favorece o
+          reconhecimento em vez da memorização, mas pode gerar excesso de opções e distrações
+          quando não há uma boa organização visual.
+        </p>
+        <p><strong>Exemplos:</strong> sistemas operacionais, editores gráficos e aplicações de escritório.</p>
+      </article>
+
+      <article class="content-card">
+        <h3>Interface web</h3>
+        <p>
+          É acessada por navegadores e precisa lidar com diferentes telas, dispositivos,
+          velocidades de conexão e tecnologias assistivas. Responsividade, acessibilidade,
+          navegação consistente e desempenho são requisitos importantes.
+        </p>
+      </article>
+
+      <article class="content-card">
+        <h3>Interface mobile</h3>
+        <p>
+          É projetada para telas menores e interação por toque, geralmente em situações de uso
+          com atenção parcial, mobilidade ou conectividade variável. O conteúdo deve ser
+          prioritário, os controles devem ser fáceis de tocar e os fluxos devem ser objetivos.
+        </p>
+      </article>
+
+      <article class="content-card">
+        <h3>Interface de voz e linguagem natural</h3>
+        <p>
+          Permite interagir por fala ou texto usando linguagem próxima da comunicação cotidiana.
+          É útil quando as mãos ou os olhos estão ocupados, mas depende de reconhecimento,
+          contexto, privacidade, confirmação de ações e alternativas para ambiguidades.
+        </p>
+      </article>
+
+      <article class="content-card">
+        <h3>Realidade virtual e realidade aumentada</h3>
+        <p>
+          A realidade virtual cria um ambiente imersivo; a realidade aumentada sobrepõe
+          informações digitais ao ambiente físico. Esses paradigmas exigem atenção a orientação
+          espacial, conforto, segurança, carga cognitiva e acessibilidade.
+        </p>
+      </article>
+    </section>
+
+    <section class="topic-section" aria-labelledby="escolha">
+      <h2 id="escolha">4. Como escolher um tipo de interface?</h2>
+      <p>A escolha não deve partir apenas da tecnologia disponível. Considere:</p>
+      <ul>
+        <li><strong>Usuários:</strong> experiência, limitações, preferências e necessidades de acessibilidade.</li>
+        <li><strong>Tarefa:</strong> frequência, complexidade, criticidade e necessidade de precisão.</li>
+        <li><strong>Contexto:</strong> local, ruído, iluminação, mobilidade, privacidade e conectividade.</li>
+        <li><strong>Dispositivo:</strong> tamanho, método de entrada, recursos disponíveis e ergonomia.</li>
+        <li><strong>Consequências do erro:</strong> possibilidade de desfazer, confirmar e recuperar operações.</li>
+      </ul>
+    </section>
+
+    <aside class="callout" aria-labelledby="acessibilidade">
+      <h2 id="acessibilidade">Acessibilidade desde o início</h2>
+      <p>
+        Não existe um único tipo de usuário. Uma interface deve oferecer informação perceptível,
+        operação possível por diferentes meios, linguagem compreensível e compatibilidade com
+        tecnologias assistivas. Sempre que possível, combine teclado, toque, ponteiro, voz e
+        alternativas textuais sem obrigar todas as pessoas a usar o mesmo caminho.
+      </p>
+    </aside>
+
+    <section class="topic-section" aria-labelledby="atividade">
+      <h2 id="atividade">Atividade de análise</h2>
+      <p>
+        Escolha uma aplicação conhecida e responda às perguntas abaixo:
+      </p>
+      <ol>
+        <li>Qual é o tipo ou combinação de tipos de interface utilizado?</li>
+        <li>Quem são os usuários e em qual contexto a aplicação é utilizada?</li>
+        <li>Quais ações são mais frequentes ou mais críticas?</li>
+        <li>Que feedback o sistema apresenta depois das ações?</li>
+        <li>Que barreiras de usabilidade ou acessibilidade podem ser encontradas?</li>
+        <li>Qual mudança melhoraria a interação? Justifique com base no contexto.</li>
+      </ol>
+    </section>
+
+    <section class="topic-section" aria-labelledby="sintese">
+      <h2 id="sintese">Síntese</h2>
+      <p>
+        Interfaces são meios de comunicação entre pessoas e sistemas. A qualidade da interação
+        depende da combinação entre objetivos, tarefas, dispositivos, contexto e características
+        dos usuários. Em IHC, escolher um paradigma adequado é importante, mas projetar feedback,
+        acessibilidade, recuperação de erros e consistência é igualmente essencial.
+      </p>
+    </section>
+
+    <footer class="topic-footer">
+      <p><a href="../index.html">← Voltar ao índice da disciplina</a></p>
+      <p>Material de estudo · Interface Homem-Computador · IFC</p>
+    </footer>
+  </main>
+</body>
+</html>
