@@ -7,11 +7,20 @@ Há também alguns materiais no youtube, relacionados principalmente a resoluç�
 Cada disciplina tem seu próprio layout e organização. 
 
 ## Disciplinas
+
+### Ano: 2026 Semestre:02
+- [Algoritmos e Programação](disciplinas/algoritmos/202602/index.md)
+- [Banco de Dados](disciplinas/banco-de-dados/202602/index.md)
+- [Engenharia de Software](disciplinas/engenharia-de-software/202602/index.md)
+- [IHC](disciplinas/ihc/202602/index.html)
+- [Lógica para Computação](disciplinas/logica-para-computacao/202602/index.md)
+  
+### Anteriores
 - [Economia](disciplinas/economia/index.md/)
 - [Empreendedorismo](disciplinas/empreendedorismo/index.md/)
 - [Engenharia de Software](disciplinas/engenharia-de-software/index.md)
 - [Estrutura de Dados](disciplinas/estrutura-de-dados/index.md)
-- [IHC](disciplinas/ihc/index.html)
+- [IHC](disciplinas/ihc/202601/index.html)
 - [Lógica para Computação](disciplinas/logica-para-computacao/index.md)
 - [Matemática Discreta](disciplinas/matematica-discreta/index.html)
 - [Programação I - Bacharelado ECO](disciplinas/programacaoi-eco/index.html)
