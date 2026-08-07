@@ -9,11 +9,11 @@ Cada disciplina tem seu próprio layout e organização, por isso apenas algumas
 ## Disciplinas
 
 ### Ano: 2026 Semestre:02
-- [Algoritmos e Programação](disciplinas/algoritmos/202602/index.md)
-- [Banco de Dados](disciplinas/banco-de-dados/202602/index.md)
-- [Engenharia de Software](disciplinas/engenharia-de-software/202602/index.md)
+- [Algoritmos e Programação](disciplinas/algoritmos/202602/index.html)
+- [Banco de Dados](disciplinas/banco-de-dados/202602/index.html)
+- [Engenharia de Software](disciplinas/engenharia-de-software/202602/index.html)
 - [IHC](disciplinas/ihc/202602/index.html)
-- [Lógica para Computação](disciplinas/logica-para-computacao/202602/index.md)
+- [Lógica para Computação](disciplinas/logica-para-computacao/202602/index.html)
   
 ### Anteriores
 - [Economia](disciplinas/economia/index.md/)
