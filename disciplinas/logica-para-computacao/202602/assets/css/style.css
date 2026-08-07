@@ -87,7 +87,11 @@ header.site .masthead{ max-width: 1180px; margin: 0 auto; padding: 1.1rem 1.5rem
 }
 
 /* ---------- Index hero ---------- */
-.hero{ padding: 3rem 0 2.25rem; }
+.hero{
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2.25rem;
+}
 .hero-eyebrow{
   display:inline-flex; align-items:center; gap:0.5rem;
   font-family:"IBM Plex Mono", monospace; font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase;
@@ -104,7 +108,13 @@ h1.hero-title{
 }
 h1.hero-title .accent{ color: var(--crime); }
 
-.hero-lede{ max-width: 62ch; font-size: 1.08rem; color: var(--ink-soft); margin: 0 0 1.75rem; }
+.hero-lede{
+  width: min(100%, 900px);
+  max-width: 78ch;
+  font-size: 1.08rem;
+  color: var(--ink-soft);
+  margin: 0 0 1.75rem;
+}
 
 .hero-facts{ display:flex; flex-wrap:wrap; gap: 0.6rem 1rem; font-family:"IBM Plex Mono", monospace; font-size: 0.82rem; color: var(--ink-soft); }
 .hero-facts span{ display:flex; align-items:center; gap:0.4rem; }
@@ -260,7 +270,7 @@ details p{ margin-top:0.6rem; }
 .page-nav{ display:flex; justify-content:space-between; gap:1rem; margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid var(--line-strong); font-family:"IBM Plex Mono",monospace; font-size:0.85rem; }
 .page-nav a{ text-decoration:none; display:flex; flex-direction:column; }
 .page-nav a:hover{ color: var(--crime-dark); }
-.page-nav .dir{ font-size:0.7rem; color: var(--ink-soft); text-transform:uppercase; letter-spacing:0.06em; }
+.page-nav .dir{ font-size:0.7em; color: var(--ink-soft); text-transform:uppercase; letter-spacing:0.06em; }
 .page-nav .next{ text-align:right; margin-left:auto; }
 
 /* ---------- Footer (shared) ---------- */
@@ -269,6 +279,14 @@ footer.site .wrap, footer.site .wrap-narrow{ display:flex; justify-content:space
 footer.site a{ color: var(--ink-soft); }
 
 @media (max-width: 640px){
-  .hero{ padding-top: 2rem; }
+  .hero{
+    padding-top: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .hero-lede{
+    width: 100%;
+    max-width: none;
+  }
   .search-row{ flex-wrap: wrap; }
 }
