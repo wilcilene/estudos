@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 05 — Tabelas-Verdade | Lógica para Computação</title>
+<meta name="description" content="Como construir tabelas-verdade para avaliar o valor lógico de fórmulas em todas as combinações possíveis.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI/topico-05-tabelas-verdade.html">
+<meta name="theme-color" content="#EFE6D2">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Caso Nº 05 — Tabelas-Verdade | Lógica para Computação">
+<meta property="og:description" content="Como construir tabelas-verdade para avaliar o valor lógico de fórmulas em todas as combinações possíveis.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI/topico-05-tabelas-verdade.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Tabelas-Verdade",
+  "description": "Como construir tabelas-verdade para avaliar o valor lógico de fórmulas em todas as combinações possíveis.",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Lógica para Computação"
+  },
+  "educationalLevel": "Ensino Superior"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 05 de 20</span>
+  </div>
+</header>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</div>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag indigo mono">Caso Nº 05 · Semântica</span>
+  <h1>Tabelas-Verdade</h1>
+  <p class="lede">A tabela-verdade é a lupa do investigador: ela examina uma fórmula sob todas as combinações possíveis de pistas e revela exatamente quando ela é verdadeira.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+
+  <h2>Por que construir uma tabela-verdade</h2>
+  <p>
+    O valor-verdade de uma fórmula composta depende dos valores-verdade das proposições que a formam. A tabela-verdade
+    lista sistematicamente <em>todas</em> as combinações possíveis de valores para essas proposições e mostra o
+    resultado da fórmula em cada uma delas — sem deixar nenhum cenário de fora.
+  </p>
+  <p>
+    Se uma fórmula tem <code>n</code> variáveis proposicionais distintas, existem <code>2ⁿ</code> combinações possíveis
+    de valores-verdade, logo a tabela terá <code>2ⁿ</code> linhas.
+  </p>
+
+  <h2>As tabelas dos conectivos básicos</h2>
+  <div class="evidence-box">
+    <span class="label">Referência rápida</span>
+    <p><code>¬p</code> é V quando <code>p</code> é F, e F quando <code>p</code> é V.</p>
+    <p><code>p ∧ q</code> é V somente quando <code>p</code> e <code>q</code> são ambas V.</p>
+    <p><code>p ∨ q</code> é F somente quando <code>p</code> e <code>q</code> são ambas F.</p>
+    <p><code>p → q</code> é F somente quando <code>p</code> é V e <code>q</code> é F.</p>
+    <p><code>p ↔ q</code> é V quando <code>p</code> e <code>q</code> têm o mesmo valor.</p>
+  </div>
+
+  <h2>Avaliando uma pista composta</h2>
+  <p>
+    Considere a fórmula <code>(p ∧ q) → r</code>, com três variáveis — logo, <code>2³ = 8</code> linhas. O procedimento
+    é sempre o mesmo: calcular primeiro as subfórmulas mais internas (<code>p ∧ q</code>) e só depois aplicar o
+    conectivo principal (<code>→ r</code>).
+  </p>
+  <p>Por exemplo, na linha em que <code>p</code> = V, <code>q</code> = V e <code>r</code> = F:</p>
+  <ol>
+    <li><code>p ∧ q</code> = V ∧ V = <strong>V</strong></li>
+    <li><code>(p ∧ q) → r</code> = V → F = <strong>F</strong></li>
+  </ol>
+  <p>Essa é a única combinação em que a fórmula toda resulta falsa — em todas as outras sete linhas, ela é verdadeira.</p>
+
+  <div class="exercise">
+    <span class="label">Exercício</span>
+    <p>Construa a tabela-verdade de <code>¬p ∨ q</code> (2 variáveis, 4 linhas) e identifique em quais linhas ela é falsa.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>
+        p=V,q=V → ¬p=F, ¬p∨q = V.<br>
+        p=V,q=F → ¬p=F, ¬p∨q = F.<br>
+        p=F,q=V → ¬p=V, ¬p∨q = V.<br>
+        p=F,q=F → ¬p=V, ¬p∨q = V.<br>
+        A fórmula é falsa apenas na linha p=V, q=F — coincidindo exatamente com a única linha em que <code>p → q</code>
+        também é falsa. Não é coincidência: <code>¬p ∨ q</code> é logicamente equivalente a <code>p → q</code>, como
+        veremos no caso sobre equivalência lógica.
+      </p>
+    </details>
+  </div>
+
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="5">
+    <label><input type="checkbox" aria-label="Marcar este tópico como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre tópicos">
+    <a href="topico-04-conectivos-logicos.html"><span class="dir">← Anterior</span>Conectivos lógicos</a>
+    <a class="next" href="topico-06-tautologia-contradicao.html"><span class="dir">Próximo caso →</span>Tautologia, contradição e contingência</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow">Guia de estudos · Lógica para Computação</div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 09 — Sistemas Dedutivos e Regras de Inferência | Lógica para Computação</title>
+<meta name="description" content="Modus ponens, modus tollens, silogismo disjuntivo e outras regras formais de inferência usadas para derivar conclusões passo a passo.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI/topico-09-sistemas-dedutivos.html">
+<meta name="theme-color" content="#EFE6D2">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Caso Nº 09 — Sistemas Dedutivos e Regras de Inferência | Lógica para Computação">
+<meta property="og:description" content="Modus ponens, modus tollens, silogismo disjuntivo e outras regras formais de inferência usadas para derivar conclusões passo a passo.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI/topico-09-sistemas-dedutivos.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Sistemas Dedutivos e Regras de Inferência",
+  "description": "Modus ponens, modus tollens, silogismo disjuntivo e outras regras formais de inferência usadas para derivar conclusões passo a passo.",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Lógica para Computação"
+  },
+  "educationalLevel": "Ensino Superior"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 09 de 20</span>
+  </div>
+</header>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</div>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag brass mono">Caso Nº 09 · Sistemas Dedutivos</span>
+  <h1>Sistemas Dedutivos e Regras de Inferência</h1>
+  <p class="lede">Em vez de testar todas as combinações em uma tabela-verdade, um sistema dedutivo permite ir de premissa a conclusão aplicando regras — como um investigador que segue um procedimento, não um palpite.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+
+  <h2>Por que regras de inferência</h2>
+  <p>
+    Tabelas-verdade funcionam bem para poucas variáveis, mas crescem exponencialmente (<code>2ⁿ</code> linhas). Um
+    <strong>sistema dedutivo</strong> oferece um caminho alternativo: um conjunto pequeno de <strong>regras de
+    inferência</strong>, comprovadamente válidas, que permitem derivar novas fórmulas a partir de fórmulas já
+    aceitas — sem nunca precisar checar todas as combinações.
+  </p>
+
+  <h2>As regras mais usadas</h2>
+  <div class="evidence-box">
+    <span class="label">Referência rápida</span>
+    <p><strong>Modus ponens:</strong> de <code>p → q</code> e <code>p</code>, deriva-se <code>q</code>.</p>
+    <p><strong>Modus tollens:</strong> de <code>p → q</code> e <code>¬q</code>, deriva-se <code>¬p</code>.</p>
+    <p><strong>Silogismo disjuntivo:</strong> de <code>p ∨ q</code> e <code>¬p</code>, deriva-se <code>q</code>.</p>
+    <p><strong>Silogismo hipotético:</strong> de <code>p → q</code> e <code>q → r</code>, deriva-se <code>p → r</code>.</p>
+    <p><strong>Introdução da conjunção:</strong> de <code>p</code> e <code>q</code>, deriva-se <code>p ∧ q</code>.</p>
+  </div>
+  <p>
+    Cada uma dessas regras corresponde a um argumento que já sabemos ser válido (podem ser confirmadas por tabela-verdade,
+    como fizemos com o modus ponens no caso anterior) — a diferença é que agora as aplicamos diretamente, como atalhos.
+  </p>
+
+  <h2>Encadeando regras para fechar um caso</h2>
+  <p>Considere as premissas de uma investigação:</p>
+  <ol>
+    <li><code>E → M</code> ("se havia pegadas na entrada, o mordomo esteve lá")</li>
+    <li><code>M → C</code> ("se o mordomo esteve lá, ele é o culpado")</li>
+    <li><code>E</code> ("havia pegadas na entrada")</li>
+  </ol>
+  <p>Aplicando modus ponens em (1) e (3), obtemos <code>M</code>. Aplicando modus ponens em (2) e em <code>M</code>, obtemos <code>C</code>: o mordomo é culpado — uma conclusão derivada passo a passo, sem tabela-verdade.</p>
+
+  <div class="exercise">
+    <span class="label">Exercício</span>
+    <p>
+      Das premissas <code>¬T</code> ("a testemunha não viu o carro") e <code>T ∨ P</code> ("a testemunha viu o carro
+      ou a placa"), que regra permite concluir <code>P</code>?
+    </p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Silogismo disjuntivo: de <code>T ∨ P</code> e <code>¬T</code>, deriva-se <code>P</code>.</p>
+    </details>
+  </div>
+
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="9">
+    <label><input type="checkbox" aria-label="Marcar este tópico como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre tópicos">
+    <a href="topico-08-consequencia-logica.html"><span class="dir">← Anterior</span>Consequência lógica e argumentação</a>
+    <a class="next" href="topico-10-demonstracoes.html"><span class="dir">Próximo caso →</span>Demonstrações em lógica proposicional</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow">Guia de estudos · Lógica para Computação</div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 02 — Proposições e Identificação de Sentenças | Lógica para Computação</title>
+<meta name="description" content="O que torna uma frase uma proposição lógica: sentenças declarativas, valor-verdade e notação com variáveis proposicionais.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI/topico-02-proposicoes.html">
+<meta name="theme-color" content="#EFE6D2">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Caso Nº 02 — Proposições e Identificação de Sentenças | Lógica para Computação">
+<meta property="og:description" content="O que torna uma frase uma proposição lógica: sentenças declarativas, valor-verdade e notação com variáveis proposicionais.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI/topico-02-proposicoes.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Proposições e Identificação de Sentenças",
+  "description": "O que torna uma frase uma proposição lógica: sentenças declarativas, valor-verdade e notação com variáveis proposicionais.",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Lógica para Computação"
+  },
+  "educationalLevel": "Ensino Superior"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 02 de 20</span>
+  </div>
+</header>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</div>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag crime mono">Caso Nº 02 · Lógica Proposicional</span>
+  <h1>Proposições e Identificação de Sentenças</h1>
+  <p class="lede">Nem toda frase é uma proposição. Aprenda a reconhecer, entre os relatos de um caso, quais afirmações podem ser avaliadas como verdadeiras ou falsas — e quais não passam de ruído.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+
+  <h2>O que é uma proposição</h2>
+  <p>
+    Uma <strong>proposição</strong> é uma sentença declarativa à qual se pode atribuir exatamente um valor-verdade:
+    <em>verdadeiro</em> ou <em>falso</em> — nunca os dois, nunca nenhum. Perguntas, ordens e exclamações não são
+    proposições, porque não fazem sentido classificadas como verdadeiras ou falsas.
+  </p>
+  <ul>
+    <li><code>"O crime ocorreu na biblioteca."</code> — proposição (pode ser V ou F).</li>
+    <li><code>"Quem estava na biblioteca?"</code> — não é proposição (é uma pergunta).</li>
+    <li><code>"Prenda o suspeito!"</code> — não é proposição (é uma ordem).</li>
+    <li><code>"Que noite estranha!"</code> — não é proposição (é uma exclamação).</li>
+  </ul>
+
+  <h2>Notação proposicional</h2>
+  <p>
+    Para trabalhar com precisão, representamos cada proposição simples por uma letra minúscula — geralmente
+    <code>p</code>, <code>q</code>, <code>r</code> — chamada <strong>variável proposicional</strong>. Isso nos
+    permite manipular o conteúdo lógico de uma frase sem nos perdermos no português.
+  </p>
+  <div class="evidence-box">
+    <span class="label">Cena do caso</span>
+    <p>
+      Sejam <code>p</code>: "O crime ocorreu na biblioteca" e <code>q</code>: "O mordomo é culpado". A frase composta
+      do início da investigação — "o crime ocorreu na biblioteca e foi cometido pelo mordomo" — pode agora ser
+      representada como <code>p ∧ q</code> (o símbolo <code>∧</code> será formalizado no próximo caso).
+    </p>
+  </div>
+
+  <h2>Proposições simples e compostas</h2>
+  <p>
+    Uma proposição é <strong>simples (ou atômica)</strong> quando não contém nenhum conectivo lógico — é uma única
+    afirmação, como <code>p</code>. Ela é <strong>composta (ou molecular)</strong> quando é formada pela combinação
+    de duas ou mais proposições simples usando conectivos, como <code>p ∧ q</code>.
+  </p>
+  <p>
+    Perceber essa diferença é o que permite decompor um depoimento longo e confuso em blocos simples e testáveis
+    — exatamente como um investigador separa um relato em fatos isolados antes de cruzá-los.
+  </p>
+
+  <div class="exercise">
+    <span class="label">Exercício</span>
+    <p>Classifique cada frase abaixo como proposição ou não-proposição. Se for proposição, diga se é simples ou composta.</p>
+    <ol>
+      <li>"A faca estava na cozinha."</li>
+      <li>"Você viu alguém suspeito?"</li>
+      <li>"O mordomo mentiu e o jardineiro sabia disso."</li>
+      <li>"Saia daqui agora!"</li>
+    </ol>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>
+        1. Proposição simples (pode ser V ou F).<br>
+        2. Não é proposição (pergunta).<br>
+        3. Proposição composta (une duas afirmações com "e").<br>
+        4. Não é proposição (ordem).
+      </p>
+    </details>
+  </div>
+
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="2">
+    <label><input type="checkbox" aria-label="Marcar este tópico como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre tópicos">
+    <a href="topico-01-introducao-a-logica.html"><span class="dir">← Anterior</span>Introdução à lógica e à investigação formal</a>
+    <a class="next" href="topico-03-linguagem-formal.html"><span class="dir">Próximo caso →</span>Linguagem formal e símbolos lógicos</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow">Guia de estudos · Lógica para Computação</div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

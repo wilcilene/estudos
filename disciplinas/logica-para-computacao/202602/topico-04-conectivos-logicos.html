@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 04 — Conectivos Lógicos | Lógica para Computação</title>
+<meta name="description" content="Negação, conjunção, disjunção, condicional e bicondicional: o significado de cada conectivo lógico e como combinar proposições.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI/topico-04-conectivos-logicos.html">
+<meta name="theme-color" content="#EFE6D2">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Caso Nº 04 — Conectivos Lógicos | Lógica para Computação">
+<meta property="og:description" content="Negação, conjunção, disjunção, condicional e bicondicional: o significado de cada conectivo lógico e como combinar proposições.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI/topico-04-conectivos-logicos.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Conectivos Lógicos",
+  "description": "Negação, conjunção, disjunção, condicional e bicondicional: o significado de cada conectivo lógico e como combinar proposições.",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Lógica para Computação"
+  },
+  "educationalLevel": "Ensino Superior"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 04 de 20</span>
+  </div>
+</header>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</div>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag crime mono">Caso Nº 04 · Lógica Proposicional</span>
+  <h1>Conectivos Lógicos</h1>
+  <p class="lede">Cinco conectivos bastam para descrever qualquer relação lógica entre pistas: negar, exigir as duas coisas, aceitar qualquer uma delas, condicionar uma à outra ou afirmar que valem juntas.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+
+  <h2>Negação (¬)</h2>
+  <p>
+    A negação inverte o valor-verdade de uma proposição: se <code>p</code> é verdadeira, <code>¬p</code> é falsa, e
+    vice-versa. Em uma investigação, negar uma pista é tão informativo quanto afirmá-la: <code>¬p</code>, onde
+    <code>p</code> é "o mordomo estava na biblioteca", elimina uma possibilidade inteira do quadro de suspeitos.
+  </p>
+
+  <h2>Conjunção (∧) e disjunção (∨)</h2>
+  <p>
+    A <strong>conjunção</strong> <code>p ∧ q</code> ("p e q") só é verdadeira quando <em>ambas</em> as proposições
+    são verdadeiras — é a linguagem de "todas as pistas precisam bater". A <strong>disjunção</strong> <code>p ∨ q</code>
+    ("p ou q") é verdadeira quando <em>pelo menos uma</em> das duas é verdadeira — é a linguagem de "qualquer uma das
+    hipóteses resolve o caso".
+  </p>
+  <div class="evidence-box">
+    <span class="label">Cena do caso</span>
+    <p>
+      "O assassino usou a faca ou o veneno" é uma disjunção: basta uma das armas ter sido usada para a frase ser
+      verdadeira — e pode até ser as duas. "O mordomo estava na biblioteca e possuía a chave" é uma conjunção: a
+      frase só se sustenta se as duas condições forem confirmadas.
+    </p>
+  </div>
+
+  <h2>Condicional (→) e bicondicional (↔)</h2>
+  <p>
+    O <strong>condicional</strong> <code>p → q</code> ("se p, então q") afirma que <code>q</code> é consequência de
+    <code>p</code>; ele só é falso no caso em que <code>p</code> é verdadeira e <code>q</code> é falsa — em qualquer
+    outra combinação, é considerado verdadeiro (o próximo caso mostra isso com uma tabela-verdade completa).
+    O <strong>bicondicional</strong> <code>p ↔ q</code> ("p se e somente se q") afirma que as duas proposições têm
+    sempre o mesmo valor-verdade: ou são verdadeiras juntas, ou são falsas juntas.
+  </p>
+  <p>
+    Em termos de investigação: um condicional é uma regra ("se houver esta pista, então aquela conclusão se aplica"),
+    enquanto um bicondicional é uma equivalência total ("essas duas coisas sempre andam juntas, sem exceção").
+  </p>
+
+  <h2>Traduzindo frases para fórmulas</h2>
+  <p>Palavras do português costumam sinalizar qual conectivo usar:</p>
+  <ul>
+    <li>"e", "mas", "também" → <code>∧</code></li>
+    <li>"ou" → <code>∨</code></li>
+    <li>"se ... então", "somente se" → <code>→</code></li>
+    <li>"se e somente se", "quando e apenas quando" → <code>↔</code></li>
+    <li>"não", "nunca", "jamais" → <code>¬</code></li>
+  </ul>
+
+  <div class="exercise">
+    <span class="label">Exercício</span>
+    <p>Sejam <code>p</code>: "o suspeito estava na cena" e <code>q</code>: "o suspeito tinha um álibi". Traduza:</p>
+    <ol>
+      <li>"O suspeito estava na cena e não tinha álibi."</li>
+      <li>"Se o suspeito tinha álibi, então não estava na cena."</li>
+      <li>"O suspeito estava na cena se e somente se não tinha álibi."</li>
+    </ol>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>
+        1. <code>p ∧ ¬q</code><br>
+        2. <code>q → ¬p</code><br>
+        3. <code>p ↔ ¬q</code>
+      </p>
+    </details>
+  </div>
+
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="4">
+    <label><input type="checkbox" aria-label="Marcar este tópico como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre tópicos">
+    <a href="topico-03-linguagem-formal.html"><span class="dir">← Anterior</span>Linguagem formal e símbolos lógicos</a>
+    <a class="next" href="topico-05-tabelas-verdade.html"><span class="dir">Próximo caso →</span>Tabelas-verdade</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow">Guia de estudos · Lógica para Computação</div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

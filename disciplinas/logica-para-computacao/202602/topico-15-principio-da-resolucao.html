@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 15 — Princípio da Resolução Proposicional | Lógica para Computação</title>
+<meta name="description" content="A regra de resolução: como combinar duas cláusulas que compartilham literais complementares para derivar uma nova conclusão.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI/topico-15-principio-da-resolucao.html">
+<meta name="theme-color" content="#EFE6D2">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Caso Nº 15 — Princípio da Resolução Proposicional | Lógica para Computação">
+<meta property="og:description" content="A regra de resolução: como combinar duas cláusulas que compartilham literais complementares para derivar uma nova conclusão.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI/topico-15-principio-da-resolucao.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Princípio da Resolução Proposicional",
+  "description": "A regra de resolução: como combinar duas cláusulas que compartilham literais complementares para derivar uma nova conclusão.",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Lógica para Computação"
+  },
+  "educationalLevel": "Ensino Superior"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 15 de 20</span>
+  </div>
+</header>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</div>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag crime mono">Caso Nº 15 · Princípio da Resolução</span>
+  <h1>Princípio da Resolução Proposicional</h1>
+  <p class="lede">Duas pistas, cada uma incompleta sozinha, podem ser combinadas para eliminar uma possibilidade e revelar uma nova conclusão. Essa é a regra de resolução.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+
+  <h2>A regra de resolução</h2>
+  <p>
+    Dadas duas cláusulas que contêm um par de <strong>literais complementares</strong> (uma variável em uma cláusula
+    e sua negação na outra, como <code>p</code> e <code>¬p</code>), a <strong>regra de resolução</strong> permite
+    combiná-las em uma nova cláusula: unem-se todos os literais das duas cláusulas, exceto o par complementar, que se
+    cancela.
+  </p>
+  <p>
+    Formalmente: de <code>{p} ∪ A</code> e <code>{¬p} ∪ B</code>, deriva-se a <strong>cláusula resolvente</strong>
+    <code>A ∪ B</code>.
+  </p>
+
+  <h2>Refutação: provar por contradição</h2>
+  <p>
+    A resolução é usada dentro de um procedimento chamado <strong>refutação por resolução</strong>: para provar que
+    uma conclusão <code>C</code> decorre de um conjunto de premissas, negamos <code>C</code>, adicionamos essa
+    negação ao conjunto de cláusulas, e aplicamos resolução repetidamente. Se chegarmos à <strong>cláusula vazia</strong>
+    (<code>{ }</code>) — uma contradição — isso prova que o conjunto original, com <code>¬C</code> incluída, é
+    insatisfazível, e portanto <code>C</code> era mesmo consequência das premissas.
+  </p>
+
+  <div class="evidence-box">
+    <span class="label">Combinando duas pistas</span>
+    <p>Cláusulas do caso: <code>{p, q}</code> ("o mordomo ou o jardineiro é culpado") e <code>{¬p, r}</code> ("se o mordomo é culpado, havia lama nas botas").</p>
+    <p>
+      O literal <code>p</code> aparece na primeira e <code>¬p</code> na segunda — são complementares. Resolvendo-as,
+      unimos os literais restantes: <code>{q, r}</code> ("o jardineiro é culpado ou havia lama nas botas"). Uma nova
+      pista, derivada automaticamente de duas outras, sem que precisássemos pensar em modus ponens ou modus tollens
+      explicitamente — a resolução generaliza essas regras em uma única operação.
+    </p>
+  </div>
+
+  <h2>Só um par de literais complementares por vez</h2>
+  <p>
+    Se duas cláusulas compartilham mais de um par de literais complementares, a resolução tradicional resolve apenas
+    um par por aplicação — resolver todos de uma vez poderia produzir uma tautologia inútil em vez de uma pista nova.
+  </p>
+
+  <div class="exercise">
+    <span class="label">Exercício</span>
+    <p>Aplique a resolução às cláusulas <code>{¬p, ¬q}</code> e <code>{p, r}</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>
+        O literal complementar é <code>p</code>/<code>¬p</code>. Unindo os literais restantes, a resolvente é
+        <code>{¬q, r}</code>.
+      </p>
+    </details>
+  </div>
+
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="15">
+    <label><input type="checkbox" aria-label="Marcar este tópico como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre tópicos">
+    <a href="topico-14-clausulas.html"><span class="dir">← Anterior</span>Cláusulas e representação por conjuntos</a>
+    <a class="next" href="topico-16-algoritmo-de-resolucao.html"><span class="dir">Próximo caso →</span>Algoritmo de resolução proposicional</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow">Guia de estudos · Lógica para Computação</div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

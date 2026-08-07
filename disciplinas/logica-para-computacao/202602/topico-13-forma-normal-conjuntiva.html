@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 13 — Forma Normal Conjuntiva | Lógica para Computação</title>
+<meta name="description" content="Como converter fórmulas lógicas para a forma normal conjuntiva (FNC), etapa preparatória para os algoritmos de resolução.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI/topico-13-forma-normal-conjuntiva.html">
+<meta name="theme-color" content="#EFE6D2">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Caso Nº 13 — Forma Normal Conjuntiva | Lógica para Computação">
+<meta property="og:description" content="Como converter fórmulas lógicas para a forma normal conjuntiva (FNC), etapa preparatória para os algoritmos de resolução.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI/topico-13-forma-normal-conjuntiva.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Forma Normal Conjuntiva",
+  "description": "Como converter fórmulas lógicas para a forma normal conjuntiva (FNC), etapa preparatória para os algoritmos de resolução.",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Lógica para Computação"
+  },
+  "educationalLevel": "Ensino Superior"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 13 de 20</span>
+  </div>
+</header>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</div>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag teal mono">Caso Nº 13 · Aspectos Computacionais e Resolução</span>
+  <h1>Forma Normal Conjuntiva</h1>
+  <p class="lede">Antes de submeter as pistas ao algoritmo de resolução, é preciso padronizá-las em um único formato: a forma normal conjuntiva.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+
+  <h2>O que é forma normal conjuntiva</h2>
+  <p>
+    Uma fórmula está na <strong>forma normal conjuntiva (FNC)</strong> quando é escrita como uma conjunção de
+    disjunções de literais — ou seja, algo como <code>(A ∨ B ∨ ¬C) ∧ (¬A ∨ D) ∧ (B ∨ C)</code>. Cada bloco entre
+    parênteses, unido por <code>∨</code>, é chamado de <strong>cláusula</strong>. Todo bloco unido por <code>∧</code>
+    é essa forma padronizada.
+  </p>
+  <p>Todas as fórmulas da lógica proposicional podem ser reescritas em FNC — é uma forma universal, o que a torna ideal para algoritmos automáticos.</p>
+
+  <h2>Passos para converter uma fórmula em FNC</h2>
+  <ol>
+    <li><strong>Eliminar <code>↔</code> e <code>→</code>:</strong> usar <code>p → q ≡ ¬p ∨ q</code> e <code>p ↔ q ≡ (¬p ∨ q) ∧ (¬q ∨ p)</code>.</li>
+    <li><strong>Empurrar as negações para dentro:</strong> aplicar as leis de De Morgan e a dupla negação até que <code>¬</code> só apareça diretamente sobre variáveis.</li>
+    <li><strong>Distribuir <code>∨</code> sobre <code>∧</code>:</strong> aplicar <code>A ∨ (B ∧ C) ≡ (A ∨ B) ∧ (A ∨ C)</code> até restar apenas conjunções de disjunções.</li>
+  </ol>
+
+  <div class="evidence-box">
+    <span class="label">Convertendo uma pista</span>
+    <p>Fórmula original: <code>¬(p ∧ q) → r</code></p>
+    <pre><code>1. Eliminar →:         ¬¬(p ∧ q) ∨ r
+2. Dupla negação:      (p ∧ q) ∨ r
+3. Distribuir ∨ sobre ∧: (p ∨ r) ∧ (q ∨ r)</code></pre>
+    <p>O resultado, <code>(p ∨ r) ∧ (q ∨ r)</code>, já está em FNC: duas cláusulas, <code>(p ∨ r)</code> e <code>(q ∨ r)</code>, unidas por conjunção.</p>
+  </div>
+
+  <h2>Por que isso prepara o terreno para a resolução</h2>
+  <p>
+    O algoritmo de resolução (visto adiante) trabalha exclusivamente sobre conjuntos de cláusulas — não sobre fórmulas
+    com qualquer estrutura. Ao padronizar toda fórmula em FNC, garantimos que qualquer argumento, por mais complexo
+    que pareça, possa ser alimentado ao mesmo procedimento uniforme de refutação.
+  </p>
+
+  <div class="exercise">
+    <span class="label">Exercício</span>
+    <p>Converta <code>p ↔ q</code> para a forma normal conjuntiva.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>
+        <code>p ↔ q ≡ (p → q) ∧ (q → p) ≡ (¬p ∨ q) ∧ (¬q ∨ p)</code> — já está em FNC, com as cláusulas
+        <code>(¬p ∨ q)</code> e <code>(¬q ∨ p)</code>.
+      </p>
+    </details>
+  </div>
+
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="13">
+    <label><input type="checkbox" aria-label="Marcar este tópico como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre tópicos">
+    <a href="topico-12-satisfatibilidade.html"><span class="dir">← Anterior</span>Satisfatibilidade e busca de modelos</a>
+    <a class="next" href="topico-14-clausulas.html"><span class="dir">Próximo caso →</span>Cláusulas e representação por conjuntos</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow">Guia de estudos · Lógica para Computação</div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

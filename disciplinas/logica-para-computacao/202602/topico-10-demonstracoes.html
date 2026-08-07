@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 10 — Demonstrações em Lógica Proposicional | Lógica para Computação</title>
+<meta name="description" content="Como construir demonstrações formais passo a passo em lógica proposicional, usando premissas e regras de inferência.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI/topico-10-demonstracoes.html">
+<meta name="theme-color" content="#EFE6D2">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Caso Nº 10 — Demonstrações em Lógica Proposicional | Lógica para Computação">
+<meta property="og:description" content="Como construir demonstrações formais passo a passo em lógica proposicional, usando premissas e regras de inferência.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI/topico-10-demonstracoes.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Demonstrações em Lógica Proposicional",
+  "description": "Como construir demonstrações formais passo a passo em lógica proposicional, usando premissas e regras de inferência.",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Lógica para Computação"
+  },
+  "educationalLevel": "Ensino Superior"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 10 de 20</span>
+  </div>
+</header>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</div>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag brass mono">Caso Nº 10 · Sistemas Dedutivos</span>
+  <h1>Demonstrações em Lógica Proposicional</h1>
+  <p class="lede">Uma demonstração formal é o relatório final do investigador: cada linha, justificada por uma regra, até a conclusão que fecha o caso sem margem para dúvida.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+
+  <h2>Estrutura de uma demonstração</h2>
+  <p>
+    Uma <strong>demonstração (ou prova) formal</strong> é uma sequência numerada de fórmulas, em que cada linha é ou
+    uma premissa dada, ou o resultado de aplicar uma regra de inferência a linhas anteriores. A última linha é a
+    conclusão que se queria provar. Cada linha deve trazer sua justificativa explícita.
+  </p>
+
+  <h2>Estratégias de demonstração</h2>
+  <ul>
+    <li><strong>Prova direta:</strong> aplicar regras de inferência às premissas até alcançar a conclusão.</li>
+    <li><strong>Prova por contradição (redução ao absurdo):</strong> assumir a negação da conclusão e mostrar que isso
+    leva a uma contradição — logo, a conclusão original deve ser verdadeira.</li>
+    <li><strong>Dedução condicional:</strong> para provar <code>p → q</code>, assume-se <code>p</code> como hipótese
+    adicional e deriva-se <code>q</code> a partir dela.</li>
+  </ul>
+
+  <h2>Demonstração completa do caso</h2>
+  <div class="evidence-box">
+    <span class="label">Dossiê final</span>
+    <p>Premissas: (1) <code>P → M</code>, (2) <code>M → C</code>, (3) <code>P</code>. Objetivo: provar <code>C</code>.</p>
+    <pre><code>1. P → M         (premissa)
+2. M → C         (premissa)
+3. P             (premissa)
+4. P → C         (silogismo hipotético, 1 e 2)
+5. C             (modus ponens, 4 e 3)</code></pre>
+    <p>
+      Cada linha é justificada por uma regra aplicada a linhas anteriores — não há espaço para "achismo": a conclusão
+      <code>C</code> é inevitável a partir das premissas aceitas.
+    </p>
+  </div>
+
+  <h2>Por que formalizar em vez de "só saber"</h2>
+  <p>
+    Uma demonstração formal permite que qualquer pessoa — ou qualquer programa — verifique mecanicamente se um
+    argumento é correto, sem precisar confiar na intuição de quem o escreveu. Essa verificabilidade é o que torna
+    a lógica proposicional a base de assistentes de prova e de verificadores automáticos de software.
+  </p>
+
+  <div class="exercise">
+    <span class="label">Exercício</span>
+    <p>
+      Complete a demonstração: premissas (1) <code>¬C → ¬P</code>, (2) <code>P</code>. Qual regra permite concluir <code>C</code> diretamente?
+    </p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>
+        Modus tollens aplicado à contrapositiva: de <code>¬C → ¬P</code> e <code>P</code> (equivalente a <code>¬¬P</code>),
+        deriva-se <code>¬¬C</code>, ou seja, <code>C</code> após eliminar a dupla negação.
+      </p>
+    </details>
+  </div>
+
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="10">
+    <label><input type="checkbox" aria-label="Marcar este tópico como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre tópicos">
+    <a href="topico-09-sistemas-dedutivos.html"><span class="dir">← Anterior</span>Sistemas dedutivos e regras de inferência</a>
+    <a class="next" href="topico-11-representacao-computacional.html"><span class="dir">Próximo caso →</span>Representação computacional de fórmulas lógicas</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow">Guia de estudos · Lógica para Computação</div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

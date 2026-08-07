@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 17 — Lógica de Predicados: Termos, Predicados e Quantificadores | Lógica para Computação</title>
+<meta name="description" content="Introdução à lógica de predicados: termos, predicados, variáveis e os quantificadores universal e existencial.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI/topico-17-logica-de-predicados.html">
+<meta name="theme-color" content="#EFE6D2">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Caso Nº 17 — Lógica de Predicados: Termos, Predicados e Quantificadores | Lógica para Computação">
+<meta property="og:description" content="Introdução à lógica de predicados: termos, predicados, variáveis e os quantificadores universal e existencial.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI/topico-17-logica-de-predicados.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Lógica de Predicados: Termos, Predicados e Quantificadores",
+  "description": "Introdução à lógica de predicados: termos, predicados, variáveis e os quantificadores universal e existencial.",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Lógica para Computação"
+  },
+  "educationalLevel": "Ensino Superior"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 17 de 20</span>
+  </div>
+</header>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</div>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag indigo mono">Caso Nº 17 · Lógica de Predicados</span>
+  <h1>Lógica de Predicados: Termos, Predicados e Quantificadores</h1>
+  <p class="lede">A lógica proposicional trata frases inteiras como blocos indivisíveis. Para investigar relações entre pessoas, lugares e objetos, é preciso um vocabulário mais rico.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+
+  <h2>Os limites da lógica proposicional</h2>
+  <p>
+    Até aqui, uma proposição como "o mordomo esteve na biblioteca" era um bloco único, sem estrutura interna. Isso
+    torna impossível expressar algo como "<em>todo</em> suspeito que esteve na biblioteca tinha um motivo" sem
+    escrever uma proposição separada para cada suspeito. A <strong>lógica de predicados</strong> (ou lógica de
+    primeira ordem) resolve isso introduzindo estrutura dentro da proposição.
+  </p>
+
+  <h2>Termos e predicados</h2>
+  <p>
+    Um <strong>termo</strong> nomeia um objeto do domínio: uma constante (<code>Mordomo</code>, <code>Biblioteca</code>)
+    ou uma variável (<code>x</code>, <code>y</code>). Um <strong>predicado</strong> expressa uma propriedade de um ou
+    mais termos, como <code>Suspeito(x)</code> ("x é suspeito") ou <code>EsteveEm(x, local)</code> ("x esteve em local").
+    Diferente de uma proposição, um predicado sozinho (com variáveis livres) não tem valor-verdade definido — ele só
+    ganha valor-verdade quando os termos são especificados ou quantificados.
+  </p>
+
+  <h2>Quantificadores universal e existencial</h2>
+  <p>Dois quantificadores permitem falar sobre "todos" ou "algum" elemento do domínio:</p>
+  <ul>
+    <li><strong>Universal (<code>∀</code>):</strong> <code>∀x P(x)</code> significa "para todo x, P(x) é verdadeiro".</li>
+    <li><strong>Existencial (<code>∃</code>):</strong> <code>∃x P(x)</code> significa "existe pelo menos um x tal que P(x) é verdadeiro".</li>
+  </ul>
+
+  <div class="evidence-box">
+    <span class="label">Traduzindo pistas do caso</span>
+    <p><code>∀x (Suspeito(x) → EsteveEm(x, Biblioteca))</code> — "todo suspeito esteve na biblioteca".</p>
+    <p><code>∃x (Suspeito(x) ∧ UsouArma(x, Faca))</code> — "existe (pelo menos) um suspeito que usou a faca".</p>
+    <p><code>EsteveEm(Mordomo, Biblioteca)</code> — uma afirmação totalmente concreta, sem variáveis, já tem valor-verdade definido.</p>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício</span>
+    <p>Traduza para lógica de predicados: "nenhum suspeito tinha um álibi" (use <code>Suspeito(x)</code> e <code>TemAlibi(x)</code>).</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>
+        <code>∀x (Suspeito(x) → ¬TemAlibi(x))</code> — equivalente a "não existe suspeito com álibi":
+        <code>¬∃x (Suspeito(x) ∧ TemAlibi(x))</code>.
+      </p>
+    </details>
+  </div>
+
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="17">
+    <label><input type="checkbox" aria-label="Marcar este tópico como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre tópicos">
+    <a href="topico-16-algoritmo-de-resolucao.html"><span class="dir">← Anterior</span>Algoritmo de resolução proposicional</a>
+    <a class="next" href="topico-18-semantica-predicados.html"><span class="dir">Próximo caso →</span>Semântica da lógica de predicados</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow">Guia de estudos · Lógica para Computação</div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 08 — Consequência Lógica e Argumentação | Lógica para Computação</title>
+<meta name="description" content="Consequência lógica: quando uma conclusão decorre necessariamente das premissas de um argumento, e como testar a validade de um argumento.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI/topico-08-consequencia-logica.html">
+<meta name="theme-color" content="#EFE6D2">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Caso Nº 08 — Consequência Lógica e Argumentação | Lógica para Computação">
+<meta property="og:description" content="Consequência lógica: quando uma conclusão decorre necessariamente das premissas de um argumento, e como testar a validade de um argumento.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI/topico-08-consequencia-logica.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Consequência Lógica e Argumentação",
+  "description": "Consequência lógica: quando uma conclusão decorre necessariamente das premissas de um argumento, e como testar a validade de um argumento.",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Lógica para Computação"
+  },
+  "educationalLevel": "Ensino Superior"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 08 de 20</span>
+  </div>
+</header>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</div>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag indigo mono">Caso Nº 08 · Semântica e Sistemas Dedutivos</span>
+  <h1>Consequência Lógica e Argumentação</h1>
+  <p class="lede">A partir das cartas já eliminadas, um bom investigador decide se uma acusação é consequência necessária das informações disponíveis — nunca um palpite.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+
+  <h2>O que é consequência lógica</h2>
+  <p>
+    Dizemos que uma fórmula <code>C</code> (a conclusão) é <strong>consequência lógica</strong> de um conjunto de
+    premissas <code>P₁, P₂, ..., Pₙ</code> quando é impossível que todas as premissas sejam verdadeiras e a conclusão
+    seja falsa. Notação: <code>P₁, P₂, ..., Pₙ ⊨ C</code>.
+  </p>
+  <p>
+    Isso equivale a dizer que a fórmula <code>(P₁ ∧ P₂ ∧ ... ∧ Pₙ) → C</code> é uma tautologia — o vínculo entre
+    consequência lógica e o material do caso anterior é direto.
+  </p>
+
+  <h2>Argumento válido não é argumento verdadeiro</h2>
+  <p>
+    Um argumento é <strong>válido</strong> quando sua estrutura garante que, se as premissas forem verdadeiras, a
+    conclusão também será. Isso é diferente de as premissas serem <em>de fato</em> verdadeiras no mundo real —
+    validade é sobre a forma do raciocínio, não sobre os fatos que alimentam esse raciocínio.
+  </p>
+  <div class="callout">
+    <span class="label">Armadilha comum</span>
+    <p>
+      Um argumento pode ser válido mesmo com premissas falsas ("todo suspeito com álibi é o culpado; o mordomo tem
+      álibi; logo o mordomo é o culpado" é válido na forma, mesmo que a primeira premissa seja absurda). E um
+      argumento pode ter conclusão verdadeira sem ser válido. Validade lógica e verdade factual são coisas diferentes.
+    </p>
+  </div>
+
+  <h2>Testando um argumento por tabela-verdade</h2>
+  <p>
+    Para verificar se <code>P₁, ..., Pₙ ⊨ C</code>, basta construir a tabela-verdade conjunta de todas as premissas e
+    da conclusão e checar: em toda linha onde todas as premissas são verdadeiras, a conclusão também precisa ser.
+  </p>
+  <div class="evidence-box">
+    <span class="label">Cena do caso</span>
+    <p>
+      Premissas: <code>p → q</code> ("se o mordomo estava na biblioteca, ele é o culpado") e <code>p</code>
+      ("o mordomo estava na biblioteca"). Nas quatro linhas da tabela conjunta, a única em que ambas as premissas são
+      verdadeiras é aquela em que <code>p</code> = V e <code>q</code> = V — e nela, <code>q</code> também é
+      verdadeira. Logo, <code>p → q, p ⊨ q</code>: o argumento é válido. Essa estrutura tem nome — modus ponens —
+      e será formalizada no próximo caso.
+    </p>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício</span>
+    <p>As premissas "p ∨ q" e "¬p" garantem logicamente a conclusão "q"? Justifique usando os valores-verdade possíveis.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>
+        Sim. Para as duas premissas serem verdadeiras, <code>¬p</code> = V exige <code>p</code> = F; e para
+        <code>p ∨ q</code> ser verdadeira com <code>p</code> = F, é preciso <code>q</code> = V. Não existe nenhuma
+        linha em que ambas as premissas são verdadeiras e <code>q</code> é falsa — logo, <code>p ∨ q, ¬p ⊨ q</code>.
+      </p>
+    </details>
+  </div>
+
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="8">
+    <label><input type="checkbox" aria-label="Marcar este tópico como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre tópicos">
+    <a href="topico-07-equivalencia-logica.html"><span class="dir">← Anterior</span>Equivalência lógica e leis da lógica</a>
+    <a class="next" href="topico-09-sistemas-dedutivos.html"><span class="dir">Próximo caso →</span>Sistemas dedutivos e regras de inferência</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow">Guia de estudos · Lógica para Computação</div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 07 — Equivalência Lógica e Leis da Lógica | Lógica para Computação</title>
+<meta name="description" content="Equivalência lógica e as leis clássicas da lógica proposicional, como as leis de De Morgan, para reescrever fórmulas sem alterar seu significado.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI/topico-07-equivalencia-logica.html">
+<meta name="theme-color" content="#EFE6D2">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Caso Nº 07 — Equivalência Lógica e Leis da Lógica | Lógica para Computação">
+<meta property="og:description" content="Equivalência lógica e as leis clássicas da lógica proposicional, como as leis de De Morgan, para reescrever fórmulas sem alterar seu significado.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI/topico-07-equivalencia-logica.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Equivalência Lógica e Leis da Lógica",
+  "description": "Equivalência lógica e as leis clássicas da lógica proposicional, como as leis de De Morgan, para reescrever fórmulas sem alterar seu significado.",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Lógica para Computação"
+  },
+  "educationalLevel": "Ensino Superior"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 07 de 20</span>
+  </div>
+</header>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</div>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag indigo mono">Caso Nº 07 · Semântica</span>
+  <h1>Equivalência Lógica e Leis da Lógica</h1>
+  <p class="lede">Duas pistas escritas de formas diferentes podem apontar exatamente para a mesma conclusão. As leis da lógica são as ferramentas para reconhecer — e provar — essa equivalência.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+
+  <h2>O que é equivalência lógica</h2>
+  <p>
+    Duas fórmulas <code>A</code> e <code>B</code> são <strong>logicamente equivalentes</strong> (escrito
+    <code>A ≡ B</code>) quando têm exatamente a mesma coluna de resultado na tabela-verdade — ou seja, para toda
+    combinação de valores-verdade das variáveis, <code>A</code> e <code>B</code> assumem o mesmo valor. Isso equivale
+    a dizer que <code>A ↔ B</code> é uma tautologia.
+  </p>
+
+  <h2>Leis clássicas da lógica</h2>
+  <p>Algumas equivalências aparecem com tanta frequência que ganham nome próprio:</p>
+  <ul>
+    <li><strong>Dupla negação:</strong> <code>¬¬p ≡ p</code></li>
+    <li><strong>Leis de De Morgan:</strong> <code>¬(p ∧ q) ≡ ¬p ∨ ¬q</code> e <code>¬(p ∨ q) ≡ ¬p ∧ ¬q</code></li>
+    <li><strong>Comutatividade:</strong> <code>p ∧ q ≡ q ∧ p</code> e <code>p ∨ q ≡ q ∨ p</code></li>
+    <li><strong>Distributividade:</strong> <code>p ∧ (q ∨ r) ≡ (p ∧ q) ∨ (p ∧ r)</code></li>
+    <li><strong>Condicional como disjunção:</strong> <code>p → q ≡ ¬p ∨ q</code></li>
+  </ul>
+
+  <div class="evidence-box">
+    <span class="label">Reescrevendo uma pista</span>
+    <p>
+      Um depoimento afirma: "não é verdade que o mordomo estava na cozinha e o jardineiro estava no jardim". Isso é
+      <code>¬(p ∧ q)</code>. Pela lei de De Morgan, essa afirmação equivale a <code>¬p ∨ ¬q</code>: "ou o mordomo não
+      estava na cozinha, ou o jardineiro não estava no jardim (ou os dois)". A segunda forma é muito mais fácil de
+      cruzar com outros depoimentos — é exatamente por isso que as leis da lógica são úteis, e não apenas decorativas.
+    </p>
+  </div>
+
+  <h2>Por que isso importa para a computação</h2>
+  <p>
+    Reescrever uma fórmula em uma forma equivalente, porém mais simples ou mais padronizada, é a base de otimização
+    de circuitos digitais, simplificação de condições em código e, como veremos adiante, da conversão de fórmulas
+    para a forma normal conjuntiva — pré-requisito dos algoritmos de resolução.
+  </p>
+
+  <div class="exercise">
+    <span class="label">Exercício</span>
+    <p>Aplique a lei de De Morgan para reescrever <code>¬(p ∨ ¬q)</code> sem negar uma disjunção diretamente.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>
+        <code>¬(p ∨ ¬q) ≡ ¬p ∧ ¬¬q ≡ ¬p ∧ q</code> (usando De Morgan e depois eliminando a dupla negação).
+      </p>
+    </details>
+  </div>
+
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="7">
+    <label><input type="checkbox" aria-label="Marcar este tópico como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre tópicos">
+    <a href="topico-06-tautologia-contradicao.html"><span class="dir">← Anterior</span>Tautologia, contradição e contingência</a>
+    <a class="next" href="topico-08-consequencia-logica.html"><span class="dir">Próximo caso →</span>Consequência lógica e argumentação</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow">Guia de estudos · Lógica para Computação</div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

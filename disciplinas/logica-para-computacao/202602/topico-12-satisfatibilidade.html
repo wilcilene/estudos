@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 12 — Satisfatibilidade e Busca de Modelos | Lógica para Computação</title>
+<meta name="description" content="O problema SAT: como verificar se existe uma combinação de valores-verdade (um modelo) que torna uma fórmula lógica verdadeira.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI/topico-12-satisfatibilidade.html">
+<meta name="theme-color" content="#EFE6D2">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Caso Nº 12 — Satisfatibilidade e Busca de Modelos | Lógica para Computação">
+<meta property="og:description" content="O problema SAT: como verificar se existe uma combinação de valores-verdade (um modelo) que torna uma fórmula lógica verdadeira.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI/topico-12-satisfatibilidade.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Satisfatibilidade e Busca de Modelos",
+  "description": "O problema SAT: como verificar se existe uma combinação de valores-verdade (um modelo) que torna uma fórmula lógica verdadeira.",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Lógica para Computação"
+  },
+  "educationalLevel": "Ensino Superior"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 12 de 20</span>
+  </div>
+</header>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</div>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag teal mono">Caso Nº 12 · Aspectos Computacionais</span>
+  <h1>Satisfatibilidade e Busca de Modelos</h1>
+  <p class="lede">Antes de fechar o caso, o investigador precisa saber: existe algum cenário — algum suspeito, arma e local — compatível com todas as pistas ao mesmo tempo?</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+
+  <h2>O problema da satisfatibilidade (SAT)</h2>
+  <p>
+    Uma fórmula é <strong>satisfazível</strong> quando existe pelo menos uma atribuição de valores-verdade às suas
+    variáveis que a torna verdadeira — essa atribuição é chamada de <strong>modelo</strong> da fórmula. O
+    <strong>problema SAT</strong> pergunta, para uma fórmula qualquer: existe um modelo para ela?
+  </p>
+  <p>
+    Note a relação com o caso anterior sobre tautologia e contradição: uma contradição nunca é satisfazível (nenhum
+    modelo a torna verdadeira); uma tautologia é satisfazível por qualquer atribuição; uma contingência é satisfazível
+    por algumas atribuições, mas não por todas.
+  </p>
+
+  <h2>Buscando um modelo</h2>
+  <p>
+    A forma mais direta de resolver SAT é a <strong>busca por força bruta</strong>: gerar todas as <code>2ⁿ</code>
+    combinações de valores-verdade (a mesma ideia da tabela-verdade) e verificar, uma a uma, se alguma torna a fórmula
+    verdadeira. Assim que uma é encontrada, paramos — não é preciso testar as demais.
+  </p>
+  <div class="evidence-box">
+    <span class="label">Cena do caso</span>
+    <p>
+      As pistas exigem que <code>(S₁ ∨ S₂) ∧ ¬(S₁ ∧ S₂)</code> seja verdadeira ("exatamente um dos dois suspeitos é o
+      culpado"). Testando as quatro combinações de <code>S₁, S₂</code>, encontramos dois modelos: <code>S₁=V, S₂=F</code>
+      e <code>S₁=F, S₂=V</code>. A fórmula é satisfazível — e além disso, os modelos encontrados <em>são</em> as
+      únicas hipóteses de culpa compatíveis com as pistas.
+    </p>
+  </div>
+
+  <h2>Por que SAT importa</h2>
+  <p>
+    SAT é um dos problemas mais estudados da ciência da computação: foi o primeiro problema provado ser
+    <strong>NP-completo</strong>. Isso significa que, no pior caso, nenhum algoritmo conhecido resolve SAT em tempo
+    razoável para fórmulas muito grandes — mas, na prática, resolvedores modernos (chamados <em>SAT solvers</em>)
+    conseguem lidar com milhões de variáveis usando heurísticas inteligentes, e são usados em verificação de hardware,
+    planejamento e até em resolver Sudoku.
+  </p>
+
+  <div class="exercise">
+    <span class="label">Exercício</span>
+    <p>A fórmula <code>(p ∨ q) ∧ ¬p ∧ ¬q</code> é satisfazível? Justifique.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>
+        Não. Para <code>¬p</code> e <code>¬q</code> serem verdadeiras, é preciso <code>p=F</code> e <code>q=F</code>,
+        mas nesse caso <code>p ∨ q</code> é falsa, contradizendo a conjunção. Não existe modelo: a fórmula é uma contradição.
+      </p>
+    </details>
+  </div>
+
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="12">
+    <label><input type="checkbox" aria-label="Marcar este tópico como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre tópicos">
+    <a href="topico-11-representacao-computacional.html"><span class="dir">← Anterior</span>Representação computacional de fórmulas lógicas</a>
+    <a class="next" href="topico-13-forma-normal-conjuntiva.html"><span class="dir">Próximo caso →</span>Forma normal conjuntiva</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow">Guia de estudos · Lógica para Computação</div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

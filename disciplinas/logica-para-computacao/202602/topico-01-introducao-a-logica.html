@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 01 — Introdução à Lógica e à Investigação Formal | Lógica para Computação</title>
+<meta name="description" content="Introdução à lógica para computação: o que é raciocínio lógico, por que ele importa para a computação e como a disciplina usa investigações para ensinar os conceitos.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI/topico-01-introducao-a-logica.html">
+<meta name="theme-color" content="#EFE6D2">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Caso Nº 01 — Introdução à Lógica e à Investigação Formal | Lógica para Computação">
+<meta property="og:description" content="Introdução à lógica para computação: o que é raciocínio lógico, por que ele importa para a computação e como a disciplina usa investigações para ensinar os conceitos.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI/topico-01-introducao-a-logica.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Introdução à Lógica e à Investigação Formal",
+  "description": "Introdução à lógica para computação: o que é raciocínio lógico, por que ele importa para a computação e como a disciplina usa investigações para ensinar os conceitos.",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Lógica para Computação"
+  },
+  "educationalLevel": "Ensino Superior"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 01 de 20</span>
+  </div>
+</header>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</div>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag brass mono">Caso Nº 01 · Visão Geral</span>
+  <h1>Introdução à Lógica e à Investigação Formal</h1>
+  <p class="lede">Antes de vasculhar qualquer pista, todo bom investigador precisa entender as regras do jogo. Este tópico apresenta o que é raciocínio lógico, por que ele é a base da computação e como vamos usar investigações para praticar cada conceito.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+
+  <h2>O que é lógica, afinal?</h2>
+  <p>
+    Lógica é o estudo dos princípios que tornam um raciocínio válido. Não se trata de saber se uma afirmação
+    é verdadeira no mundo real, mas de garantir que, <em>se</em> as premissas forem verdadeiras, a conclusão
+    seja necessariamente verdadeira também. Em outras palavras: lógica é a engenharia por trás de um argumento.
+  </p>
+  <p>
+    Para a computação, a lógica é ainda mais central: ela é a linguagem que descreve condições em um programa
+    (<code>if</code>, <code>and</code>, <code>or</code>), a base de bancos de dados e consultas, o fundamento
+    de circuitos digitais e a ferramenta usada para provar que um algoritmo está correto.
+  </p>
+
+  <div class="callout">
+    <span class="label">Pista inicial</span>
+    <p>Um argumento lógico sempre tem duas partes: as <strong>premissas</strong> (o que assumimos ser verdade)
+    e a <strong>conclusão</strong> (o que queremos provar a partir delas). A lógica formal nos dá as regras
+    para ir de um ponto ao outro sem erro.</p>
+  </div>
+
+  <h2>Por que investigar um crime para aprender lógica?</h2>
+  <p>
+    Ao longo da disciplina, cada tópico será acompanhado por um caso fictício de investigação. A ideia é simples:
+    resolver um mistério exige exatamente as mesmas habilidades que a lógica formal formaliza — separar fatos de
+    suposições, testar hipóteses contra as evidências e eliminar possibilidades até restar apenas uma conclusão
+    sustentável.
+  </p>
+  <div class="evidence-box">
+    <span class="label">Cena do caso</span>
+    <p>
+      "O crime ocorreu na biblioteca e foi cometido pelo mordomo." Essa frase parece uma única afirmação, mas
+      na verdade combina duas: <code>O crime ocorreu na biblioteca</code> e <code>O crime foi cometido pelo mordomo</code>.
+      Separar fatos, hipóteses e conclusões como essas é o primeiro passo de qualquer investigação — e da lógica proposicional,
+      que veremos no próximo caso.
+    </p>
+  </div>
+
+  <h2>O raciocínio dedutivo em três passos</h2>
+  <ol>
+    <li><strong>Observar:</strong> reunir as informações disponíveis (as premissas do caso).</li>
+    <li><strong>Formalizar:</strong> representar essas informações em uma linguagem precisa, sem ambiguidade.</li>
+    <li><strong>Concluir:</strong> aplicar regras válidas de inferência até chegar a uma conclusão que as evidências sustentam.</li>
+  </ol>
+  <p>
+    Esses três passos vão se repetir, com mais rigor a cada tópico, até chegarmos às demonstrações formais e à
+    resolução automática — quando um "algoritmo detetive" poderá, sozinho, provar quem é o culpado a partir de um
+    conjunto de cláusulas.
+  </p>
+
+  <h2>Panorama da disciplina</h2>
+  <p>A investigação está dividida em nove frentes, que você pode acompanhar e filtrar no guia de estudos:</p>
+  <ul>
+    <li><strong>Visão geral</strong> — o que é lógica e como a disciplina está organizada.</li>
+    <li><strong>Linguagem</strong> — os símbolos e regras da linguagem formal.</li>
+    <li><strong>Lógica proposicional</strong> — proposições e conectivos lógicos.</li>
+    <li><strong>Semântica</strong> — tabelas-verdade, tautologias e equivalências.</li>
+    <li><strong>Sistemas dedutivos</strong> — regras de inferência e demonstrações.</li>
+    <li><strong>Aspectos computacionais</strong> — representar e verificar fórmulas em código.</li>
+    <li><strong>Princípio da resolução</strong> — provar por refutação, cláusula a cláusula.</li>
+    <li><strong>Lógica de predicados</strong> — quantificadores e domínios de discurso.</li>
+    <li><strong>Substituição</strong> — unificação e resolução em lógica de primeira ordem.</li>
+  </ul>
+
+  <div class="exercise">
+    <span class="label">Exercício de abertura</span>
+    <p>Releia a afirmação do caso acima ("O crime ocorreu na biblioteca e foi cometido pelo mordomo") e tente
+    separá-la em fatos, hipóteses e uma possível conclusão, como faria um investigador antes de acusar alguém.</p>
+    <details>
+      <summary>Ver uma forma possível de resolver</summary>
+      <p>
+        <strong>Fatos observados:</strong> há um crime; a cena é a biblioteca.<br>
+        <strong>Hipótese levantada:</strong> o mordomo é o responsável.<br>
+        <strong>Conclusão (ainda não comprovada):</strong> "o mordomo é culpado" só pode ser aceita como conclusão
+        se houver evidências que a sustentem — por ora, é apenas uma proposição a ser testada, exatamente como
+        veremos ao formalizar proposições no próximo caso.
+      </p>
+    </details>
+  </div>
+
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="1">
+    <label><input type="checkbox" aria-label="Marcar este tópico como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre tópicos">
+    <a href="index.html"><span class="dir">← Anterior</span>Guia de estudos</a>
+    <a class="next" href="topico-02-proposicoes.html"><span class="dir">Próximo caso →</span>Proposições e identificação de sentenças</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow">Guia de estudos · Lógica para Computação</div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

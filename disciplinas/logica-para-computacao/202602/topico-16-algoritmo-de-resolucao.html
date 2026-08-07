@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 16 — Algoritmo de Resolução Proposicional | Lógica para Computação</title>
+<meta name="description" content="Implementação de um algoritmo automático de resolução: como um programa aplica a regra de resolução repetidamente até encontrar uma contradição.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI/topico-16-algoritmo-de-resolucao.html">
+<meta name="theme-color" content="#EFE6D2">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Caso Nº 16 — Algoritmo de Resolução Proposicional | Lógica para Computação">
+<meta property="og:description" content="Implementação de um algoritmo automático de resolução: como um programa aplica a regra de resolução repetidamente até encontrar uma contradição.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI/topico-16-algoritmo-de-resolucao.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Algoritmo de Resolução Proposicional",
+  "description": "Implementação de um algoritmo automático de resolução: como um programa aplica a regra de resolução repetidamente até encontrar uma contradição.",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Lógica para Computação"
+  },
+  "educationalLevel": "Ensino Superior"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 16 de 20</span>
+  </div>
+</header>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</div>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag crime mono">Caso Nº 16 · Resolução e Aspectos Computacionais</span>
+  <h1>Algoritmo de Resolução Proposicional</h1>
+  <p class="lede">É hora de automatizar o investigador: um algoritmo que recebe um conjunto de cláusulas e busca, sozinho, a contradição que fecha o caso.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+
+  <h2>Ideia geral do algoritmo</h2>
+  <p>
+    O algoritmo de resolução parte de um conjunto de cláusulas (a base de conhecimento, já incluindo a negação da
+    conclusão que se quer provar) e aplica a regra de resolução repetidamente sobre pares de cláusulas, adicionando
+    cada nova resolvente ao conjunto, até que aconteça uma de duas coisas: surge a cláusula vazia (contradição
+    encontrada — a conclusão está provada) ou nenhuma resolvente nova pode ser gerada (a conclusão não decorre das premissas).
+  </p>
+
+  <h2>Passo a passo</h2>
+  <div class="evidence-box">
+    <span class="label">Pseudocódigo</span>
+    <pre><code>função resolucao(clausulas):
+    enquanto verdadeiro:
+        novas = conjunto vazio
+        para cada par (C1, C2) em clausulas:
+            resolventes = resolver(C1, C2)
+            se cláusula vazia estiver em resolventes:
+                retorna "contradição encontrada — conclusão provada"
+            novas = novas ∪ resolventes
+        se novas ⊆ clausulas:
+            retorna "nenhuma contradição — conclusão não provada"
+        clausulas = clausulas ∪ novas</code></pre>
+    <p>
+      A cada rodada, o algoritmo tenta resolver todos os pares de cláusulas disponíveis; se nenhuma cláusula nova
+      surgir, é sinal de que já exploramos tudo o que era possível derivar — e a busca termina.
+    </p>
+  </div>
+
+  <h2>Resolvendo o caso automaticamente</h2>
+  <p>Conjunto de cláusulas: <code>{p, q}</code>, <code>{¬p}</code>, <code>{¬q}</code>.</p>
+  <ol>
+    <li>Resolver <code>{p, q}</code> com <code>{¬p}</code> → resolvente <code>{q}</code>.</li>
+    <li>Resolver <code>{q}</code> com <code>{¬q}</code> → resolvente <code>{ }</code> — cláusula vazia!</li>
+  </ol>
+  <p>
+    A contradição confirma que o conjunto original era insatisfazível — se essas cláusulas incluíam a negação de uma
+    acusação, o algoritmo acabou de provar, sem intervenção humana, que a acusação estava correta.
+  </p>
+
+  <div class="exercise">
+    <span class="label">Exercício</span>
+    <p>Trace os passos do algoritmo para o conjunto <code>{p}</code>, <code>{¬p, q}</code>, <code>{¬q}</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>
+        1. Resolver <code>{p}</code> com <code>{¬p, q}</code> → <code>{q}</code>.<br>
+        2. Resolver <code>{q}</code> com <code>{¬q}</code> → <code>{ }</code> — cláusula vazia, contradição encontrada.
+      </p>
+    </details>
+  </div>
+
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="16">
+    <label><input type="checkbox" aria-label="Marcar este tópico como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre tópicos">
+    <a href="topico-15-principio-da-resolucao.html"><span class="dir">← Anterior</span>Princípio da resolução proposicional</a>
+    <a class="next" href="topico-17-logica-de-predicados.html"><span class="dir">Próximo caso →</span>Lógica de predicados: termos, predicados e quantificadores</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow">Guia de estudos · Lógica para Computação</div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

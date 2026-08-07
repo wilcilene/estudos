@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 14 — Cláusulas e Representação por Conjuntos | Lógica para Computação</title>
+<meta name="description" content="Como representar fórmulas lógicas como conjuntos de cláusulas, a estrutura de dados usada pelo princípio da resolução.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI/topico-14-clausulas.html">
+<meta name="theme-color" content="#EFE6D2">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Caso Nº 14 — Cláusulas e Representação por Conjuntos | Lógica para Computação">
+<meta property="og:description" content="Como representar fórmulas lógicas como conjuntos de cláusulas, a estrutura de dados usada pelo princípio da resolução.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI/topico-14-clausulas.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Cláusulas e Representação por Conjuntos",
+  "description": "Como representar fórmulas lógicas como conjuntos de cláusulas, a estrutura de dados usada pelo princípio da resolução.",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Lógica para Computação"
+  },
+  "educationalLevel": "Ensino Superior"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 14 de 20</span>
+  </div>
+</header>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</div>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag crime mono">Caso Nº 14 · Princípio da Resolução</span>
+  <h1>Cláusulas e Representação por Conjuntos</h1>
+  <p class="lede">Uma vez em forma normal conjuntiva, cada pista vira uma cláusula — e o caso inteiro, um conjunto de cláusulas prontas para serem cruzadas.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+
+  <h2>O que é uma cláusula</h2>
+  <p>
+    Uma <strong>cláusula</strong> é uma disjunção de literais, onde um <strong>literal</strong> é uma variável
+    proposicional ou sua negação (<code>p</code> ou <code>¬p</code>). Em vez de escrevê-la com o símbolo
+    <code>∨</code>, é comum representá-la simplesmente como um <strong>conjunto de literais</strong> — já que a ordem
+    e a repetição não importam em uma disjunção.
+  </p>
+  <p>Por exemplo, a cláusula <code>(p ∨ ¬q ∨ r)</code> pode ser escrita como o conjunto <code>{p, ¬q, r}</code>.</p>
+
+  <h2>De FNC para conjunto de cláusulas</h2>
+  <p>
+    Como uma fórmula em FNC é uma conjunção de cláusulas, e a conjunção exige que todas sejam verdadeiras
+    simultaneamente, podemos representar a fórmula inteira como um <strong>conjunto de conjuntos de literais</strong>
+    — cada cláusula precisa ser satisfeita, mas a ordem entre cláusulas não importa.
+  </p>
+  <div class="evidence-box">
+    <span class="label">Representando pistas como cláusulas</span>
+    <p>A fórmula <code>(p ∨ r) ∧ (q ∨ r) ∧ (¬p ∨ ¬q)</code> vira o conjunto de cláusulas:</p>
+    <pre><code>{ {p, r}, {q, r}, {¬p, ¬q} }</code></pre>
+    <p>
+      Cada chave <code>{ }</code> interna é uma pista independente que precisa ser respeitada; juntas, elas formam
+      o dossiê completo do caso, pronto para ser processado por um algoritmo de resolução.
+    </p>
+  </div>
+
+  <h2>Cláusula vazia e cláusula unitária</h2>
+  <p>
+    Dois casos especiais merecem atenção. Uma <strong>cláusula unitária</strong> tem um único literal, como
+    <code>{p}</code> — equivale a afirmar <code>p</code> diretamente, sem alternativas. Uma <strong>cláusula vazia</strong>,
+    <code>{ }</code>, não tem literal algum que possa satisfazê-la — ela representa uma contradição, e sua
+    aparição durante uma resolução é o sinal de que o caso foi resolvido por refutação, como veremos a seguir.
+  </p>
+
+  <div class="exercise">
+    <span class="label">Exercício</span>
+    <p>Escreva o conjunto de cláusulas correspondente à FNC <code>(¬p ∨ q) ∧ (¬q ∨ p) ∧ p</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><code>{ {¬p, q}, {¬q, p}, {p} }</code> — note que a última é uma cláusula unitária.</p>
+    </details>
+  </div>
+
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="14">
+    <label><input type="checkbox" aria-label="Marcar este tópico como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre tópicos">
+    <a href="topico-13-forma-normal-conjuntiva.html"><span class="dir">← Anterior</span>Forma normal conjuntiva</a>
+    <a class="next" href="topico-15-principio-da-resolucao.html"><span class="dir">Próximo caso →</span>Princípio da resolução proposicional</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow">Guia de estudos · Lógica para Computação</div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

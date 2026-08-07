@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 19 — Substituição e Unificação | Lógica para Computação</title>
+<meta name="description" content="Técnicas de substituição de termos e unificação de expressões com variáveis em lógica de predicados.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI/topico-19-substituicao-unificacao.html">
+<meta name="theme-color" content="#EFE6D2">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Caso Nº 19 — Substituição e Unificação | Lógica para Computação">
+<meta property="og:description" content="Técnicas de substituição de termos e unificação de expressões com variáveis em lógica de predicados.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI/topico-19-substituicao-unificacao.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Substituição e Unificação",
+  "description": "Técnicas de substituição de termos e unificação de expressões com variáveis em lógica de predicados.",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Lógica para Computação"
+  },
+  "educationalLevel": "Ensino Superior"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 19 de 20</span>
+  </div>
+</header>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</div>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag brass mono">Caso Nº 19 · Substituição</span>
+  <h1>Substituição e Unificação</h1>
+  <p class="lede">Duas pistas escritas com variáveis diferentes só podem ser cruzadas se encontrarmos uma forma de fazê-las coincidir — é isso que a unificação resolve.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+
+  <h2>O que é substituição</h2>
+  <p>
+    Uma <strong>substituição</strong> é um mapeamento que troca variáveis por termos (constantes, ou outras
+    variáveis). Por exemplo, a substituição <code>{x/Mordomo}</code> aplicada à fórmula <code>EsteveEm(x, Biblioteca)</code>
+    produz <code>EsteveEm(Mordomo, Biblioteca)</code> — uma instância concreta da afirmação geral.
+  </p>
+
+  <h2>Unificação: encontrando substituições compatíveis</h2>
+  <p>
+    A <strong>unificação</strong> busca uma substituição que torne duas expressões idênticas. Dadas
+    <code>EsteveEm(x, Biblioteca)</code> e <code>EsteveEm(Mordomo, y)</code>, queremos uma substituição que faça as
+    duas coincidirem. Comparando posição a posição: <code>x</code> precisa virar <code>Mordomo</code>, e
+    <code>y</code> precisa virar <code>Biblioteca</code>. A substituição <code>{x/Mordomo, y/Biblioteca}</code> é o
+    <strong>unificador</strong> — aplicada a ambas as expressões, produz o mesmo resultado:
+    <code>EsteveEm(Mordomo, Biblioteca)</code>.
+  </p>
+
+  <div class="evidence-box">
+    <span class="label">Unificando pistas do caso</span>
+    <p>
+      Um depoimento genérico diz <code>∀x (EsteveEm(x, Biblioteca) → Suspeito(x))</code>. Uma evidência concreta
+      afirma <code>EsteveEm(Mordomo, Biblioteca)</code>. Para aplicar a regra geral a esse caso específico, unificamos
+      <code>x</code> com <code>Mordomo</code>, obtendo <code>EsteveEm(Mordomo, Biblioteca) → Suspeito(Mordomo)</code>
+      — e, por modus ponens, concluímos <code>Suspeito(Mordomo)</code>. A unificação é o que permite instanciar
+      regras gerais em conclusões específicas.
+    </p>
+  </div>
+
+  <h2>Quando a unificação falha</h2>
+  <p>
+    Nem sempre existe unificador. <code>EsteveEm(Mordomo, Biblioteca)</code> e <code>EsteveEm(Jardineiro, y)</code>
+    não podem ser unificadas: a primeira posição tem duas constantes diferentes (<code>Mordomo</code> e
+    <code>Jardineiro</code>), e nenhuma substituição pode fazer duas constantes distintas coincidirem.
+  </p>
+
+  <div class="exercise">
+    <span class="label">Exercício</span>
+    <p>Encontre o unificador (se existir) para <code>UsouArma(x, Faca)</code> e <code>UsouArma(Mordomo, y)</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><code>{x/Mordomo, y/Faca}</code> — aplicada às duas, ambas viram <code>UsouArma(Mordomo, Faca)</code>.</p>
+    </details>
+  </div>
+
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="19">
+    <label><input type="checkbox" aria-label="Marcar este tópico como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre tópicos">
+    <a href="topico-18-semantica-predicados.html"><span class="dir">← Anterior</span>Semântica da lógica de predicados</a>
+    <a class="next" href="topico-20-resolucao-predicados.html"><span class="dir">Próximo caso →</span>Resolução em lógica de predicados e investigação completa</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow">Guia de estudos · Lógica para Computação</div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

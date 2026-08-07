@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 20 — Resolução em Lógica de Predicados e Investigação Completa | Lógica para Computação</title>
+<meta name="description" content="Como aplicar a resolução com unificação para produzir provas completas em lógica de predicados, fechando um caso investigativo do início ao fim.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI/topico-20-resolucao-predicados.html">
+<meta name="theme-color" content="#EFE6D2">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Caso Nº 20 — Resolução em Lógica de Predicados e Investigação Completa | Lógica para Computação">
+<meta property="og:description" content="Como aplicar a resolução com unificação para produzir provas completas em lógica de predicados, fechando um caso investigativo do início ao fim.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI/topico-20-resolucao-predicados.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Resolução em Lógica de Predicados e Investigação Completa",
+  "description": "Como aplicar a resolução com unificação para produzir provas completas em lógica de predicados, fechando um caso investigativo do início ao fim.",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Lógica para Computação"
+  },
+  "educationalLevel": "Ensino Superior"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 20 de 20</span>
+  </div>
+</header>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</div>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag brass mono">Caso Nº 20 · Substituição e Resolução</span>
+  <h1>Resolução em Lógica de Predicados e Investigação Completa</h1>
+  <p class="lede">O caso final: combinar resolução e unificação para provar, com todo o rigor da lógica de primeira ordem, quem é o culpado — e revisar toda a investigação percorrida.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+
+  <h2>Resolução com unificação</h2>
+  <p>
+    Em lógica proposicional, a resolução exigia literais complementares idênticos (<code>p</code> e <code>¬p</code>).
+    Em lógica de predicados, os literais raramente são idênticos de cara — mas podem se tornar idênticos após uma
+    unificação. A <strong>regra de resolução com unificação</strong>: se um literal de uma cláusula e a negação de um
+    literal de outra cláusula são unificáveis por uma substituição <code>σ</code>, aplica-se <code>σ</code> a ambas as
+    cláusulas e resolve-se normalmente.
+  </p>
+
+  <h2>Passos de uma refutação em lógica de predicados</h2>
+  <ol>
+    <li>Converter todas as premissas (e a negação da conclusão) para a forma clausal, incluindo a eliminação de quantificadores.</li>
+    <li>Procurar pares de literais unificáveis e complementares entre as cláusulas.</li>
+    <li>Aplicar o unificador e resolver, gerando uma nova cláusula.</li>
+    <li>Repetir até obter a cláusula vazia (contradição — a conclusão está provada) ou esgotar as possibilidades.</li>
+  </ol>
+
+  <h2>Fechando o caso</h2>
+  <div class="evidence-box">
+    <span class="label">Dossiê final</span>
+    <p>Cláusulas do caso completo:</p>
+    <ol>
+      <li><code>{¬EsteveEm(x, Biblioteca), Suspeito(x)}</code> — "quem esteve na biblioteca é suspeito".</li>
+      <li><code>{EsteveEm(Mordomo, Biblioteca)}</code> — evidência concreta.</li>
+      <li><code>{¬Suspeito(Mordomo)}</code> — negação da conclusão que queremos provar (Mordomo é suspeito).</li>
+    </ol>
+    <p>Passo 1 — unificar <code>x/Mordomo</code> e resolver (1) com (2):</p>
+    <pre><code>{¬EsteveEm(Mordomo, Biblioteca), Suspeito(Mordomo)}  +  {EsteveEm(Mordomo, Biblioteca)}
+→ resolvente: {Suspeito(Mordomo)}</code></pre>
+    <p>Passo 2 — resolver o resultado com (3):</p>
+    <pre><code>{Suspeito(Mordomo)}  +  {¬Suspeito(Mordomo)}
+→ resolvente: { }  (cláusula vazia — contradição!)</code></pre>
+    <p>
+      A cláusula vazia prova, por refutação, que <code>Suspeito(Mordomo)</code> é consequência lógica das premissas.
+      O caso está fechado — e, mais importante, fechado com o mesmo rigor mecânico que percorremos desde a primeira
+      proposição isolada até aqui.
+    </p>
+  </div>
+
+  <h2>Olhando para trás: o percurso completo</h2>
+  <p>
+    Começamos separando fatos de hipóteses em uma única frase. Formalizamos uma linguagem para representar essas
+    afirmações sem ambiguidade. Aprendemos a avaliar seu valor-verdade e a classificá-las. Construímos sistemas para
+    derivar conclusões passo a passo. Ensinamos um algoritmo a fazer isso sozinho. E, por fim, estendemos tudo isso
+    para falar sobre pessoas, lugares e objetos específicos — até fechar um caso inteiro por refutação automática.
+    Esse é o percurso da lógica para a computação: da intuição de um investigador à precisão de uma máquina.
+  </p>
+
+  <div class="exercise">
+    <span class="label">Desafio final</span>
+    <p>
+      Monte seu próprio mini-caso: escreva duas premissas em lógica de predicados e uma conclusão, converta tudo em
+      cláusulas e tente chegar à cláusula vazia negando a conclusão — exatamente como fizemos acima.
+    </p>
+    <details>
+      <summary>Dica</summary>
+      <p>
+        Escolha um predicado unário simples (como <code>Suspeito(x)</code>) e uma regra geral com <code>∀x</code>;
+        combine com um fato concreto e negue a conclusão desejada como terceira cláusula, como no exemplo do dossiê final.
+      </p>
+    </details>
+  </div>
+
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="20">
+    <label><input type="checkbox" aria-label="Marcar este tópico como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre tópicos">
+    <a href="topico-19-substituicao-unificacao.html"><span class="dir">← Anterior</span>Substituição e unificação</a>
+    <a class="next" href="index.html"><span class="dir">Fim da investigação</span>Voltar ao guia de estudos</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow">Guia de estudos · Lógica para Computação</div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

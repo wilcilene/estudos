@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 11 — Representação Computacional de Fórmulas Lógicas | Lógica para Computação</title>
+<meta name="description" content="Como representar proposições e fórmulas lógicas como estruturas de dados em um programa, usando árvores sintáticas.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI/topico-11-representacao-computacional.html">
+<meta name="theme-color" content="#EFE6D2">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Caso Nº 11 — Representação Computacional de Fórmulas Lógicas | Lógica para Computação">
+<meta property="og:description" content="Como representar proposições e fórmulas lógicas como estruturas de dados em um programa, usando árvores sintáticas.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI/topico-11-representacao-computacional.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Representação Computacional de Fórmulas Lógicas",
+  "description": "Como representar proposições e fórmulas lógicas como estruturas de dados em um programa, usando árvores sintáticas.",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Lógica para Computação"
+  },
+  "educationalLevel": "Ensino Superior"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 11 de 20</span>
+  </div>
+</header>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</div>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag teal mono">Caso Nº 11 · Aspectos Computacionais</span>
+  <h1>Representação Computacional de Fórmulas Lógicas</h1>
+  <p class="lede">Para que um computador raciocine sobre uma fórmula, ela precisa virar dado: uma estrutura que o código possa percorrer, avaliar e transformar.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+
+  <h2>Fórmulas como árvores sintáticas</h2>
+  <p>
+    A definição recursiva de fórmula bem formada (vista no caso sobre linguagem formal) já sugere a estrutura de dados
+    ideal: uma <strong>árvore</strong>. Cada nó folha é uma variável proposicional; cada nó interno é um conectivo,
+    com um filho (para <code>¬</code>) ou dois filhos (para <code>∧, ∨, →, ↔</code>), que são, eles mesmos, subfórmulas.
+  </p>
+  <p>
+    A fórmula <code>(p ∧ q) → r</code>, por exemplo, vira uma árvore cuja raiz é <code>→</code>, com filho esquerdo
+    <code>∧</code> (que por sua vez tem filhos <code>p</code> e <code>q</code>) e filho direito <code>r</code>.
+  </p>
+
+  <h2>Representando em código</h2>
+  <div class="evidence-box">
+    <span class="label">Estrutura de dados</span>
+    <pre><code>// Uma variável proposicional
+{ tipo: "var", nome: "p" }
+
+// Uma fórmula composta: (p ∧ q) → r
+{
+  tipo: "implica",
+  esquerda: {
+    tipo: "e",
+    esquerda: { tipo: "var", nome: "p" },
+    direita:  { tipo: "var", nome: "q" }
+  },
+  direita: { tipo: "var", nome: "r" }
+}</code></pre>
+    <p>Cada objeto aninhado corresponde a um nó da árvore sintática — o código apenas segue a mesma recursão da definição formal.</p>
+  </div>
+
+  <h2>Um pequeno verificador de pistas</h2>
+  <p>
+    Para avaliar uma fórmula dado um conjunto de valores-verdade (uma "interpretação"), basta uma função recursiva:
+    se o nó é uma variável, consulta-se o valor atribuído a ela; se é um conectivo, avaliam-se os filhos recursivamente
+    e combina-se o resultado segundo a tabela-verdade daquele conectivo. Essa é, literalmente, a lógica por trás de um
+    verificador automático de pistas: dado um cenário (quem estava onde), o programa confirma se cada fórmula do caso
+    se sustenta.
+  </p>
+
+  <div class="exercise">
+    <span class="label">Exercício</span>
+    <p>Como você representaria a fórmula <code>¬p ∨ q</code> como uma árvore (em texto, indicando raiz e filhos)?</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>
+        Raiz: <code>∨</code>. Filho esquerdo: <code>¬</code> com filho <code>p</code>. Filho direito: <code>q</code>.
+        Em notação de objeto: <code>{tipo:"ou", esquerda:{tipo:"nao", filho:{tipo:"var",nome:"p"}}, direita:{tipo:"var",nome:"q"}}</code>.
+      </p>
+    </details>
+  </div>
+
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="11">
+    <label><input type="checkbox" aria-label="Marcar este tópico como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre tópicos">
+    <a href="topico-10-demonstracoes.html"><span class="dir">← Anterior</span>Demonstrações em lógica proposicional</a>
+    <a class="next" href="topico-12-satisfatibilidade.html"><span class="dir">Próximo caso →</span>Satisfatibilidade e busca de modelos</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow">Guia de estudos · Lógica para Computação</div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

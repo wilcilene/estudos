@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 03 — Linguagem Formal e Símbolos Lógicos | Lógica para Computação</title>
+<meta name="description" content="O alfabeto da lógica proposicional: variáveis, conectivos, parênteses e as regras que definem uma fórmula bem formada.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI/topico-03-linguagem-formal.html">
+<meta name="theme-color" content="#EFE6D2">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Caso Nº 03 — Linguagem Formal e Símbolos Lógicos | Lógica para Computação">
+<meta property="og:description" content="O alfabeto da lógica proposicional: variáveis, conectivos, parênteses e as regras que definem uma fórmula bem formada.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI/topico-03-linguagem-formal.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Linguagem Formal e Símbolos Lógicos",
+  "description": "O alfabeto da lógica proposicional: variáveis, conectivos, parênteses e as regras que definem uma fórmula bem formada.",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Lógica para Computação"
+  },
+  "educationalLevel": "Ensino Superior"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 03 de 20</span>
+  </div>
+</header>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</div>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag teal mono">Caso Nº 03 · Linguagem</span>
+  <h1>Linguagem Formal e Símbolos Lógicos</h1>
+  <p class="lede">Antes de montar fórmulas, o investigador precisa conhecer o alfabeto da lógica: os símbolos e as regras que dizem exatamente o que conta como uma expressão válida.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+
+  <h2>O alfabeto da lógica proposicional</h2>
+  <p>Toda linguagem formal começa com um conjunto fechado de símbolos. Na lógica proposicional, o alfabeto tem três partes:</p>
+  <ul>
+    <li><strong>Variáveis proposicionais:</strong> <code>p, q, r, s, ...</code> — representam proposições atômicas.</li>
+    <li><strong>Conectivos lógicos:</strong> <code>¬, ∧, ∨, →, ↔</code> — combinam ou modificam proposições.</li>
+    <li><strong>Símbolos auxiliares:</strong> <code>( )</code> — parênteses, usados para eliminar ambiguidade.</li>
+  </ul>
+
+  <h2>Regras de formação: o que é uma fórmula bem formada</h2>
+  <p>
+    Nem toda sequência de símbolos é uma fórmula válida. Uma <strong>fórmula bem formada (FBF)</strong> segue uma
+    definição recursiva:
+  </p>
+  <ol>
+    <li>Toda variável proposicional isolada (<code>p</code>, <code>q</code>...) é uma FBF.</li>
+    <li>Se <code>A</code> é uma FBF, então <code>¬A</code> também é.</li>
+    <li>Se <code>A</code> e <code>B</code> são FBFs, então <code>(A ∧ B)</code>, <code>(A ∨ B)</code>, <code>(A → B)</code> e <code>(A ↔ B)</code> também são.</li>
+    <li>Nada mais é uma FBF.</li>
+  </ol>
+  <p>
+    Essa definição "por camadas" é o que permite construir fórmulas arbitrariamente complexas a partir de peças simples
+    — e também é o que permite a um programa verificar automaticamente se uma expressão é válida.
+  </p>
+
+  <div class="evidence-box">
+    <span class="label">Representando o caso</span>
+    <p>
+      Imagine os símbolos <code>B</code>: "o crime ocorreu na biblioteca", <code>M</code>: "o mordomo é culpado" e
+      <code>F</code>: "a faca foi usada". A frase "se o crime ocorreu na biblioteca e o mordomo é culpado, então a faca foi usada"
+      vira a FBF <code>((B ∧ M) → F)</code>. Cada suspeito, arma e local do caso pode virar um símbolo — e cada pista, uma fórmula.
+    </p>
+  </div>
+
+  <h2>Por que os parênteses importam</h2>
+  <p>
+    Sem parênteses, uma expressão como <code>p ∧ q ∨ r</code> seria ambígua: significa <code>(p ∧ q) ∨ r</code> ou
+    <code>p ∧ (q ∨ r)</code>? Essas duas fórmulas podem ter valores-verdade diferentes. Por isso, a definição formal
+    exige parênteses sempre que dois conectivos binários se encontram — embora, na prática, adotemos convenções de
+    precedência (vistas no próximo caso) para escrever com menos parênteses sem perder precisão.
+  </p>
+
+  <div class="exercise">
+    <span class="label">Exercício</span>
+    <p>Quais das expressões abaixo são fórmulas bem formadas, segundo as regras de formação?</p>
+    <ol>
+      <li><code>(p ∧ q)</code></li>
+      <li><code>p ∧ ∧ q</code></li>
+      <li><code>¬(p → q)</code></li>
+      <li><code>(p ∨ )</code></li>
+    </ol>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>
+        1. FBF válida.<br>
+        2. Não é FBF — dois conectivos binários seguidos, sem uma FBF entre eles.<br>
+        3. FBF válida — negação aplicada a uma FBF entre parênteses.<br>
+        4. Não é FBF — falta a segunda subfórmula do conectivo <code>∨</code>.
+      </p>
+    </details>
+  </div>
+
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="3">
+    <label><input type="checkbox" aria-label="Marcar este tópico como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre tópicos">
+    <a href="topico-02-proposicoes.html"><span class="dir">← Anterior</span>Proposições e identificação de sentenças</a>
+    <a class="next" href="topico-04-conectivos-logicos.html"><span class="dir">Próximo caso →</span>Conectivos lógicos</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow">Guia de estudos · Lógica para Computação</div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

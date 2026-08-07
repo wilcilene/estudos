@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 06 — Tautologia, Contradição e Contingência | Lógica para Computação</title>
+<meta name="description" content="Classificação de fórmulas lógicas conforme seus valores-verdade em todas as interpretações: tautologia, contradição e contingência.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI/topico-06-tautologia-contradicao.html">
+<meta name="theme-color" content="#EFE6D2">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Caso Nº 06 — Tautologia, Contradição e Contingência | Lógica para Computação">
+<meta property="og:description" content="Classificação de fórmulas lógicas conforme seus valores-verdade em todas as interpretações: tautologia, contradição e contingência.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI/topico-06-tautologia-contradicao.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Tautologia, Contradição e Contingência",
+  "description": "Classificação de fórmulas lógicas conforme seus valores-verdade em todas as interpretações: tautologia, contradição e contingência.",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Lógica para Computação"
+  },
+  "educationalLevel": "Ensino Superior"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 06 de 20</span>
+  </div>
+</header>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</div>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag indigo mono">Caso Nº 06 · Semântica</span>
+  <h1>Tautologia, Contradição e Contingência</h1>
+  <p class="lede">Depois de montar a tabela-verdade, o investigador olha para a coluna final e classifica a fórmula: ela é sempre verdadeira, sempre falsa, ou depende do caso?</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+
+  <h2>Três destinos possíveis para uma fórmula</h2>
+  <p>Depois de completar a tabela-verdade de uma fórmula, existem apenas três resultados possíveis para a coluna final:</p>
+  <ul>
+    <li><strong>Tautologia:</strong> a fórmula é verdadeira em <em>todas</em> as linhas — é logicamente válida por si só.</li>
+    <li><strong>Contradição:</strong> a fórmula é falsa em <em>todas</em> as linhas — é logicamente impossível.</li>
+    <li><strong>Contingência:</strong> a fórmula é verdadeira em algumas linhas e falsa em outras — depende da interpretação.</li>
+  </ul>
+
+  <h2>Por que tautologias importam</h2>
+  <p>
+    Uma tautologia é verdadeira independentemente do que aconteça no mundo — ela não carrega informação sobre o caso,
+    mas garante que um raciocínio é <strong>estruturalmente válido</strong>. É exatamente isso que buscamos ao validar
+    um argumento: mostrar que a fórmula "premissas → conclusão" é uma tautologia, ou seja, que a conclusão é
+    inevitável sempre que as premissas forem verdadeiras.
+  </p>
+  <p>
+    Uma contradição, por sua vez, sinaliza um conjunto de afirmações que não podem ser todas verdadeiras ao mesmo
+    tempo — é o que um investigador procura ao confrontar depoimentos contraditórios.
+  </p>
+
+  <div class="evidence-box">
+    <span class="label">Cena do caso</span>
+    <p>
+      A fórmula <code>p ∨ ¬p</code> ("o suspeito é culpado ou não é culpado") é uma <strong>tautologia</strong>: é
+      sempre verdadeira, mas não ajuda a resolver o caso. Já <code>p ∧ ¬p</code> ("o suspeito é culpado e não é
+      culpado") é uma <strong>contradição</strong>: se um depoimento leva a essa fórmula, sabemos que há uma
+      inconsistência a investigar. Uma fórmula como <code>p ∧ q</code> é uma <strong>contingência</strong>: depende
+      dos fatos do caso.
+    </p>
+  </div>
+
+  <h2>Identificando o tipo sem tabela completa</h2>
+  <p>
+    Com a prática, é possível reconhecer padrões: qualquer fórmula da forma <code>A ∨ ¬A</code> é tautologia, e
+    qualquer fórmula da forma <code>A ∧ ¬A</code> é contradição, para qualquer subfórmula <code>A</code>. Esses
+    padrões reaparecem constantemente nas demonstrações formais do caso sobre sistemas dedutivos.
+  </p>
+
+  <div class="exercise">
+    <span class="label">Exercício</span>
+    <p>Classifique cada fórmula como tautologia, contradição ou contingência: <code>p → p</code>, <code>p ↔ ¬p</code>, <code>p → q</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>
+        <code>p → p</code>: tautologia (é sempre verdadeira, pois nunca acontece de p ser V e p ser F).<br>
+        <code>p ↔ ¬p</code>: contradição (p e ¬p nunca têm o mesmo valor).<br>
+        <code>p → q</code>: contingência (falsa apenas quando p=V e q=F; verdadeira nas demais linhas).
+      </p>
+    </details>
+  </div>
+
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="6">
+    <label><input type="checkbox" aria-label="Marcar este tópico como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre tópicos">
+    <a href="topico-05-tabelas-verdade.html"><span class="dir">← Anterior</span>Tabelas-verdade</a>
+    <a class="next" href="topico-07-equivalencia-logica.html"><span class="dir">Próximo caso →</span>Equivalência lógica e leis da lógica</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow">Guia de estudos · Lógica para Computação</div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>
