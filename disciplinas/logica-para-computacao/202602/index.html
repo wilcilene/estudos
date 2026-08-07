@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lógica para Computação | Guia de Estudos e Investigação</title>
+<meta name="description" content="Guia de estudos de Lógica para Computação: 20 tópicos sobre lógica proposicional, semântica, sistemas dedutivos, resolução e lógica de predicados, organizados como uma investigação passo a passo.">
+<meta name="keywords" content="lógica para computação, lógica proposicional, lógica de predicados, tabelas-verdade, sistemas dedutivos, resolução, semântica, ciência da computação">
+<meta name="author" content="Guia de Estudos">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI/index.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Lógica para Computação | Guia de Estudos e Investigação">
+<meta property="og:description" content="20 tópicos de Lógica para Computação organizados como uma investigação: da lógica proposicional à resolução em lógica de predicados.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI/index.html">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lógica para Computação | Guia de Estudos">
+<meta name="twitter:description" content="Guia de estudos de Lógica para Computação organizado como uma investigação passo a passo.">
+
+<meta name="theme-color" content="#EFE6D2">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Lógica para Computação",
+  "description": "Curso com 20 tópicos sobre lógica proposicional, semântica, sistemas dedutivos, aspectos computacionais, resolução e lógica de predicados.",
+  "inLanguage": "pt-BR",
+  "provider": {
+    "@type": "Organization",
+    "name": "Guia de Estudos"
+  },
+  "hasCourseInstance": {
+    "@type": "CourseInstance",
+    "courseMode": "online"
+  }
+}
+</script>
+
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="wrap masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Ementa completa · 20 tópicos</span>
+  </div>
+
+  <div class="wrap hero">
+    <p class="hero-eyebrow">Departamento de investigações lógicas</p>
+    <h1 class="hero-title">Todo argumento é uma <span class="accent">cena de crime</span>.</h1>
+    <p class="hero-lede">
+      Este guia organiza os tópicos da disciplina de Lógica para Computação como uma investigação:
+      partimos de proposições soltas, aprendemos a linguagem formal, cruzamos pistas em tabelas-verdade
+      e fechamos o caso com provas e resolução — em lógica proposicional e de predicados.
+    </p>
+    <div class="hero-facts mono">
+      <span><b>20</b> tópicos de estudo</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span><b>9</b> frentes de investigação</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>Da lógica proposicional à lógica de predicados</span>
+    </div>
+  </div>
+</header>
+
+<main id="conteudo">
+  <div class="wrap meter-section">
+    <section class="meter" aria-labelledby="meter-heading">
+      <div class="meter-top">
+        <div>
+          <p class="meter-label" id="meter-heading">Progresso da investigação</p>
+          <p class="meter-count">Casos resolvidos: <b id="meter-count">0</b> de <span id="meter-total">20</span></p>
+        </div>
+        <button class="reset-btn mono" id="reset-progress" type="button">Reiniciar progresso</button>
+      </div>
+      <div class="meter-track" role="progressbar" aria-labelledby="meter-heading" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0" id="meter-progressbar">
+        <div class="meter-fill" id="meter-fill"></div>
+      </div>
+      <div class="meter-ticks" aria-hidden="true">
+        <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
+      </div>
+      <p class="meter-hint">Marque "concluído" em cada tópico para acompanhar o andamento. O progresso fica salvo neste navegador.</p>
+    </section>
+  </div>
+
+  <div class="wrap toolbar">
+    <div class="search-row">
+      <label class="search-box" for="search-input">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="search" id="search-input" placeholder="Buscar tópico por palavra-chave (ex.: tabela-verdade, resolução, predicados)" aria-label="Buscar tópico por palavra-chave">
+      </label>
+    </div>
+    <p class="filter-label">Filtrar por relação com a ementa</p>
+    <div class="filters" id="filters" role="group" aria-label="Filtro por relação com a ementa"></div>
+    <p class="results-status" id="results-status" role="status" aria-live="polite"></p>
+  </div>
+
+  <div class="wrap">
+    <div class="grid" id="grid"></div>
+    <div class="empty-state" id="empty-state">
+      <span class="display">Nenhuma pista encontrada.</span>
+      Tente outra palavra-chave ou volte para "Todos".
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>Guia de estudos · Lógica para Computação</span>
+    <span class="mono">Atualizado ao longo do semestre — salve este link e estude!!!</span>
+  </div>
+</footer>
+
+<script src="assets/js/app.js" defer></script>
+</body>
+</html>
