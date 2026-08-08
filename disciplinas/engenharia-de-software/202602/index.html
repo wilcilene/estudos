@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Engenharia de Software | Menu de estudos</title>
+    <meta name="description"
+        content="Menu de estudos da disciplina Engenharia de Software para Engenharia da Computação: requisitos, análise, projeto, implementação, testes, qualidade e métodos de desenvolvimento.">
+    <meta name="theme-color" content="#102e46">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Engenharia de Software | Menu de estudos">
+    <meta property="og:description"
+        content="Da análise à construção: acompanhe a trilha de estudos e reflita sobre a Tower Bridge.">
+    <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --ink: #15232e;
+            --navy: #102e46;
+            --blue: #216887;
+            --teal: #25a6ad;
+            --gold: #f3bb4d;
+            --paper: #f5f8fa;
+            --muted: #617482;
+            --line: #dbe6ec;
+            --white: #fff;
+            --shadow: 0 16px 40px #102e4618
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font: 16px/1.65 'DM Sans', sans-serif
+        }
+
+        a {
+            color: inherit
+        }
+
+        .wrap {
+            width: min(1160px, calc(100% - 2.4rem));
+            margin: auto
+        }
+
+        .skip {
+            position: absolute;
+            left: -999px
+        }
+
+        .skip:focus {
+            left: 1rem;
+            top: 1rem;
+            background: #fff;
+            padding: .5rem;
+            z-index: 5
+        }
+
+        .top {
+            background: #0b2234;
+            color: #c9dfe5;
+            font-size: .82rem
+        }
+
+        .top .wrap {
+            display: flex;
+            justify-content: space-between;
+            padding: .5rem 0
+        }
+
+        header {
+            color: #fff;
+            background: linear-gradient(130deg, #102e46, #1b607b 70%, #20a0a7);
+            overflow: hidden
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 0
+        }
+
+        .brand {
+            font: 700 1.05rem 'Space Grotesk';
+            text-decoration: none
+        }
+
+        .brand i {
+            color: var(--gold);
+            font-style: normal
+        }
+
+        nav ul {
+            display: flex;
+            gap: 1.4rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            font-size: .9rem
+        }
+
+        nav a {
+            text-decoration: none
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.15fr .85fr;
+            align-items: center;
+            gap: 3rem;
+            padding: 5rem 0 5.5rem
+        }
+
+        .eyebrow {
+            color: #a9e5e7;
+            text-transform: uppercase;
+            letter-spacing: .14em;
+            font-size: .75rem;
+            font-weight: 700
+        }
+
+        .hero h1 {
+            font: 700 clamp(2.6rem, 6vw, 5rem)/1.02 'Space Grotesk';
+            margin: .7rem 0 1.2rem
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #e2f0f2;
+            max-width: 680px
+        }
+
+        .buttons {
+            display: flex;
+            gap: .8rem;
+            flex-wrap: wrap;
+            margin-top: 1.6rem
+        }
+
+        .btn {
+            border-radius: 99px;
+            padding: .68rem 1.1rem;
+            text-decoration: none;
+            font-weight: 700;
+            background: var(--gold);
+            color: var(--ink)
+        }
+
+        .btn.alt {
+            background: #ffffff18;
+            color: #fff;
+            border: 1px solid #ffffff66
+        }
+
+        .tower {
+            margin: 0
+        }
+
+        .tower img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 22px;
+            border: 1px solid #ffffff44;
+            box-shadow: 0 20px 40px #061a2c55
+        }
+
+        .tower figcaption {
+            font-size: .75rem;
+            color: #cfe5e7;
+            margin-top: .5rem
+        }
+
+        main {
+            padding: 4.2rem 0
+        }
+
+        .heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 2rem;
+            margin-bottom: 1.5rem
+        }
+
+        .heading h2 {
+            font: 700 2rem/1.1 'Space Grotesk';
+            margin: .4rem 0
+        }
+
+        .heading p {
+            color: var(--muted);
+            max-width: 560px;
+            margin: 0
+        }
+
+        .progress {
+            height: 9px;
+            background: #dfe9ee;
+            border-radius: 20px;
+            margin: 0 0 2rem;
+            overflow: hidden
+        }
+
+        .progress span {
+            display: block;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--teal), var(--gold));
+            transition: .3s
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 17px;
+            padding: 1.25rem;
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 15px #102e4608;
+            transition: .2s
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow)
+        }
+
+        .num {
+            color: var(--teal);
+            font: 700 1.2rem 'Space Grotesk'
+        }
+
+        .card h3 {
+            font: 600 1.08rem/1.25 'Space Grotesk';
+            margin: .45rem 0
+        }
+
+        .card p {
+            color: var(--muted);
+            font-size: .9rem;
+            margin: .2rem 0 1rem
+        }
+
+        .card a {
+            color: var(--blue);
+            font-weight: 700;
+            text-decoration: none;
+            margin-top: auto
+        }
+
+        .check {
+            color: var(--muted);
+            font-size: .83rem;
+            margin-top: .8rem
+        }
+
+        .check input {
+            accent-color: var(--teal)
+        }
+
+        .bridge {
+            margin: 4.5rem 0;
+            background: #e7f5f5;
+            border: 1px solid #c7e8e9;
+            border-radius: 25px;
+            overflow: hidden
+        }
+
+        .bridge-grid {
+            display: grid;
+            grid-template-columns: .95fr 1.05fr
+        }
+
+        .bridge-copy {
+            padding: 2.2rem
+        }
+
+        .bridge h2 {
+            font: 700 clamp(1.8rem, 3vw, 2.6rem)/1.1 'Space Grotesk';
+            margin: .5rem 0 1rem
+        }
+
+        .bridge-copy p {
+            color: #385767
+        }
+
+        .challenge {
+            border-left: 4px solid var(--gold);
+            padding-left: 1rem;
+            font-size: 1.12rem;
+            color: var(--ink) !important
+        }
+
+        .question {
+            background: #fff;
+            padding: 1.25rem;
+            border-radius: 15px;
+            margin-top: 1.2rem;
+            border: 1px solid #d6e8e9
+        }
+
+        .question strong {
+            color: var(--blue)
+        }
+
+        .video {
+            background: #102e46;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #fff
+        }
+
+        .video h3 {
+            font: 600 1.35rem 'Space Grotesk';
+            margin-top: 0
+        }
+
+        .video-frame {
+            position: relative;
+            padding-top: 56.25%;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #071b2a
+        }
+
+        .video-frame iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0
+        }
+
+        .video a {
+            color: #bfecee;
+            font-size: .86rem;
+            margin-top: .8rem
+        }
+
+        .reflection {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 1.6rem;
+            margin-bottom: 3rem
+        }
+
+        .reflection h2 {
+            font: 700 1.6rem 'Space Grotesk';
+            margin: .2rem 0 .5rem
+        }
+
+        .reflection ol {
+            padding-left: 1.3rem;
+            margin-bottom: .3rem
+        }
+
+        .reflection li {
+            margin: .45rem 0
+        }
+
+        .forum {
+            display: inline-flex;
+            background: var(--navy);
+            color: #fff;
+            border-radius: 99px;
+            text-decoration: none;
+            padding: .7rem 1.05rem;
+            font-weight: 700
+        }
+
+        .materials {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem
+        }
+
+        .material {
+            background: var(--navy);
+            color: #fff;
+            padding: 1.2rem;
+            border-radius: 15px;
+            text-decoration: none
+        }
+
+        .material small {
+            display: block;
+            color: #a9e5e7;
+            margin-bottom: .3rem
+        }
+
+        footer {
+            background: #0b2234;
+            color: #bfd3da;
+            padding: 2rem 0;
+            font-size: .9rem
+        }
+
+        footer a {
+            color: #fff
+        }
+
+        @media(max-width:800px) {
+
+            .hero,
+            .bridge-grid {
+                grid-template-columns: 1fr
+            }
+
+            .hero {
+                padding: 4rem 0
+            }
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        @media(max-width:560px) {
+            .wrap {
+                width: calc(100% - 1.4rem)
+            }
+
+            nav ul {
+                display: none
+            }
+
+            .top .wrap span:last-child {
+                display: none
+            }
+
+            .cards,
+            .materials {
+                grid-template-columns: 1fr
+            }
+
+            .heading {
+                display: block
+            }
+
+            .heading p {
+                margin-top: .5rem
+            }
+
+            .bridge-copy,
+            .video {
+                padding: 1.3rem
+            }
+        }
+    </style>
+    <script
+        type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"Engenharia de Software","description":"Disciplina de Engenharia de Software para o curso de Engenharia da Computação.","inLanguage":"pt-BR"}</script>
+</head>
+
+<body><a class="skip" href="#conteudo">Pular para o conteúdo</a>
+    <div class="top">
+        <div class="wrap"><span>Engenharia da Computação</span><span>Menu de estudos · acompanhamento do semestre</span>
+        </div>
+    </div>
+    <header>
+        <div class="wrap">
+            <nav aria-label="Navegação principal"><a class="brand" href="../../../">estudos<i>.</i></a>
+                <ul>
+                    <li><a href="#trilha">Trilha</a></li>
+                    <li><a href="#ponte">A ponte</a></li>
+                    <li><a href="#materiais">Materiais</a></li>
+                </ul>
+            </nav>
+            <div class="hero">
+                <div>
+                    <div class="eyebrow">Disciplina · Engenharia de Software</div>
+                    <h1>Construir software é projetar caminhos.</h1>
+                    <p>Esta disciplina apresenta os fundamentos, as técnicas e as práticas que apoiam a produção de
+                        software confiável, útil e sustentável — da compreensão do problema à evolução da solução.</p>
+                    <div class="buttons"><a class="btn" href="#trilha">Começar a estudar ↓</a><a class="btn alt"
+                            href="#ponte">Conhecer o desafio</a></div>
+                </div>
+                <figure class="tower"><img
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/Tower%20Bridge%20London%202016.jpg"
+                        alt="Tower Bridge sobre o rio Tâmisa, em Londres" loading="eager">
+                    <figcaption>Imagem: <a href="https://en.wikipedia.org/wiki/Tower_Bridge">Tower Bridge —
+                            Wikipedia</a>.</figcaption>
+                </figure>
+            </div>
+        </div>
+    </header>
+    <main id="conteudo">
+        <div class="wrap">
+            <section id="trilha" aria-labelledby="trilha-title">
+                <div class="heading">
+                    <div>
+                        <div class="eyebrow" style="color:var(--blue)">Roteiro do semestre</div>
+                        <h2 id="trilha-title">Uma trilha em sete etapas</h2>
+                    </div>
+                    <p>Avance pelos conteúdos na ordem sugerida e marque cada etapa conforme seus estudos evoluem.</p>
+                </div>
+                <div class="progress" aria-label="Progresso da trilha"><span id="bar"></span></div>
+                <div class="cards">
+                    <article class="card"><span class="num">01</span>
+                        <h3>Atividades de Engenharia de Software</h3>
+                        <p>Papéis, artefatos e responsabilidades ao longo da produção de software.</p><a
+                            href="fundamentos.md">Abrir conteúdo →</a><label class="check"><input type="checkbox">
+                            Estudado</label>
+                    </article>
+                    <article class="card"><span class="num">02</span>
+                        <h3>Ciclo de vida do software</h3>
+                        <p>Modelos, fases, entregas, riscos e decisões que organizam o desenvolvimento.</p><a
+                            href="fundamentos.md#ciclo-de-vida">Estudar tema →</a><label class="check"><input
+                                type="checkbox"> Estudado</label>
+                    </article>
+                    <article class="card"><span class="num">03</span>
+                        <h3>Especificação de requisitos</h3>
+                        <p>Stakeholders, requisitos funcionais, não funcionais e critérios de aceitação.</p><a
+                            href="fundamentos.md#requisitos">Estudar tema →</a><label class="check"><input
+                                type="checkbox"> Estudado</label>
+                    </article>
+                    <article class="card"><span class="num">04</span>
+                        <h3>Análise e projeto</h3>
+                        <p>Modelagem, arquitetura, abstração, componentes e decisões para estruturar a solução.</p><a
+                            href="fundamentos.md#analise-e-projeto">Estudar tema →</a><label class="check"><input
+                                type="checkbox"> Estudado</label>
+                    </article>
+                    <article class="card"><span class="num">05</span>
+                        <h3>Implementação, depuração e testes</h3>
+                        <p>Construção incremental, investigação de defeitos e estratégias de verificação.</p><a
+                            href="fundamentos.md#testes">Estudar tema →</a><label class="check"><input type="checkbox">
+                            Estudado</label>
+                    </article>
+                    <article class="card"><span class="num">06</span>
+                        <h3>Qualidade de software</h3>
+                        <p>Características de qualidade, métricas, revisão e melhoria contínua.</p><a
+                            href="fundamentos.md#qualidade">Estudar tema →</a><label class="check"><input
+                                type="checkbox"> Estudado</label>
+                    </article>
+                    <article class="card"><span class="num">07</span>
+                        <h3>Métodos de desenvolvimento</h3>
+                        <p>Abordagens tradicionais e ágeis, colaboração, iteração e entrega de valor.</p><a
+                            href="manifesto-agil.md">Abrir conteúdo →</a><label class="check"><input type="checkbox">
+                            Estudado</label>
+                    </article>
+                </div>
+            </section>
+            <section id="ponte" class="bridge" aria-labelledby="bridge-title">
+                <div class="bridge-grid">
+                    <div class="bridge-copy">
+                        <div class="eyebrow" style="color:var(--blue)">Problema de reflexão</div>
+                        <h2 id="bridge-title">Você atravessaria uma ponte construída sem projeto?</h2>
+                        <p>A Tower Bridge foi construída entre 1886 e 1894, projetada por Horace Jones e John Wolfe
+                            Barry para resolver um problema real: conectar as margens do Tâmisa sem impedir a passagem
+                            das embarcações. Seu projeto combinou ponte basculante, suspensão, torres, mecanismos
+                            hidráulicos e restrições de tráfego. <a
+                                href="https://en.wikipedia.org/wiki/Tower_Bridge">Conheça a história da ponte</a>.</p>
+                        <p class="challenge">E se a construção iniciasse sem levantamento de requisitos, sem análise,
+                            sem projeto e sem documentação?</p>
+                        <div class="question"><strong>Desafio para a turma</strong><br>E se fosse uma ponte mais
+                            simples, poderia ser construída sem planejamento algum? Você seria o primeiro a passar por
+                            ela dentro de um caminhão carregado, seguido por uma fila de outros caminhões?</div>
+                    </div>
+                    <div class="video">
+                        <h3>Assista e observe como a engenharia transforma uma necessidade em solução</h3>
+                        <div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/h6_bdI5NhtA"
+                                title="Símbolos da Europa: a Tower Bridge, em Londres" loading="lazy"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe></div><a
+                            href="https://www.youtube.com/watch?v=h6_bdI5NhtA">Abrir o vídeo no YouTube →</a>
+                    </div>
+                </div>
+            </section>
+            <section class="reflection" aria-labelledby="reflection-title">
+                <h2 id="reflection-title">Da ponte ao software</h2>
+                <p>Se você está pensando que a análise não é realmente importante, eu te desafio a construir uma ponte
+                    qualquer sem análise alguma e ser o primeiro a passar por ela.</p>
+                <p>E aí você inicia a construção ou a análise da situação para seguir com o projeto?</p>
+                <p>Por que com a construção do software seria diferente? Vamos analisar, documentar e refletir sobre:
+                </p>
+                <ol>
+                    <li>Como a análise impacta na qualidade do desenvolvimento?</li>
+                    <li>Como requisitos bem compreendidos influenciam a manutenção?</li>
+                    <li>Quais riscos surgem quando decisões importantes não são registradas?</li>
+                    <li>Como testes e documentação ajudam a sustentar a evolução do sistema?</li>
+                </ol><a class="forum" href="https://github.com/wilcilene/estudos/discussions/1">Compartilhe sua
+                    conclusão no fórum →</a>
+            </section>
+            <section id="materiais" aria-labelledby="materials-title">
+                <div class="heading">
+                    <div>
+                        <div class="eyebrow" style="color:var(--blue)">Acesso rápido</div>
+                        <h2 id="materials-title">Materiais da disciplina</h2>
+                    </div>
+                    <p>Consulte os textos-base e retome os assuntos no seu ritmo.</p>
+                </div>
+                <div class="materials"><a class="material" href="fundamentos.md"><small>CONTEÚDO-BASE</small>Fundamentos
+                        de Engenharia de Software →</a><a class="material"
+                        href="manifesto-agil.md"><small>MÉTODOS</small>Manifesto Ágil e desenvolvimento iterativo →</a>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <div class="wrap">
+            <p><strong>Engenharia de Software</strong> · Engenharia da Computação</p>
+            <p>Material de acompanhamento do semestre · <a href="../../../">Voltar ao menu de disciplinas</a></p>
+        </div>
+    </footer>
+    <script>const checks = [...document.querySelectorAll('.check input')], key = 'es-progresso'; const saved = JSON.parse(localStorage.getItem(key) || '[]'); checks.forEach((c, i) => { c.checked = !!saved[i]; c.addEventListener('change', () => { localStorage.setItem(key, JSON.stringify(checks.map(x => x.checked))); update() }) }); function update() { document.querySelector('#bar').style.width = (checks.filter(x => x.checked).length / checks.length * 100) + '%' } update();</script>
+</body>
+
+</html>
