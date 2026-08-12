@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modelo Entidade-Relacionamento (MER) | Banco de Dados</title>
+  <meta name="description" content="Aula completa sobre Modelo Entidade-Relacionamento (MER): entidades, atributos, relacionamentos, cardinalidade, participação, restrições e modelagem conceitual.">
+  <meta name="keywords" content="MER, modelo entidade-relacionamento, entidades, atributos, relacionamentos, cardinalidade, participação, banco de dados">
+  <meta name="author" content="Disciplina de Banco de Dados">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/topicos/mer.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Modelo Entidade-Relacionamento (MER)">
+  <meta property="og:description" content="Entidades, atributos, relacionamentos, cardinalidade e participação no projeto conceitual.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/topicos/mer.html">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cellipse cx='12' cy='5' rx='9' ry='3.2' fill='%234338ca'/%3E%3Cpath d='M3 5v14c0 1.8 4 3.2 9 3.2s9-1.4 9-3.2V5' fill='none' stroke='%234338ca' stroke-width='2'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Modelo Entidade-Relacionamento (MER)",
+    "description": "Entidades, atributos, relacionamentos, cardinalidade e participação no projeto conceitual.",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "aula",
+    "educationalLevel": "Graduação",
+    "timeRequired": "PT2H",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Banco de Dados",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/index.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">BD</span>
+        <span class="brand-text">
+          <span class="brand-name">Banco de Dados</span>
+          <span class="brand-sub">Eng. de Computação · 60h</span>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="Navegação principal">
+        <ul>
+          <li><a href="../index.html#progresso">Progresso</a></li>
+          <li><a href="../index.html#topicos">Tópicos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="../index.html">Banco de Dados</a></li>
+          <li aria-current="page">Modelo Entidade-Relacionamento (MER)</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="topic-article">
+      <div class="container">
+        <header class="topic-header">
+          <div class="topic-meta">
+            <span class="duration-badge">2 horas de estudo</span>
+            <span class="category-tag cat-modelagem-de-dados">Modelagem de Dados</span>
+          </div>
+          <h1>Modelo Entidade-Relacionamento (MER)</h1>
+          <p class="topic-lead">O MER é a etapa de modelagem conceitual que permite representar, de forma clara e independente de implementação, os elementos principais de um domínio: entidades, atributos, relacionamentos, cardinalidade e participação.</p>
+        </header>
+
+        <section class="objectives" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">Objetivos de aprendizagem</h2>
+          <ul class="check-list">
+            <li>Identificar entidades, atributos e relacionamentos em um problema real.</li>
+            <li>Classificar atributos simples, compostos, multivalorados e derivados.</li>
+            <li>Determinar cardinalidade e participação em diferentes cenários.</li>
+            <li>Aplicar o MER na modelagem de um domínio acadêmico ou de engenharia.</li>
+            <li>Interpretar um diagrama ER como documentação conceitual do sistema.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="s1-title">
+          <h2 id="s1-title">1. O que é o MER</h2>
+          <p>O Modelo Entidade-Relacionamento é uma técnica de <strong>modelagem conceitual</strong> proposta para representar os principais elementos de um domínio antes da implementação física do banco de dados. Ele descreve o que existe no mundo real que será armazenado, sem entrar ainda em detalhes de tabelas, índices ou SQL.</p>
+          <p>Em Engenharia de Computação, isso é especialmente útil porque ajuda a separar <strong>o problema</strong> da <strong>solução tecnológica</strong>. Primeiro entendemos a estrutura da informação; depois decidimos como implementá-la no SGBD.</p>
+        </section>
+
+        <section aria-labelledby="s2-title">
+          <h2 id="s2-title">2. Entidades, atributos e relacionamentos</h2>
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Elementos fundamentais do MER</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Elemento</th>
+                  <th scope="col">Descrição</th>
+                  <th scope="col">Exemplo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Entidade</strong></td>
+                  <td>Objeto ou conceito que precisa ser armazenado e identificado.</td>
+                  <td>Aluno, Disciplina, Professor</td>
+                </tr>
+                <tr>
+                  <td><strong>Atributo</strong></td>
+                  <td>Característica que descreve uma entidade ou relacionamento.</td>
+                  <td>nome, matrícula, carga horária</td>
+                </tr>
+                <tr>
+                  <td><strong>Relacionamento</strong></td>
+                  <td>Associação entre entidades.</td>
+                  <td>Aluno <em>matricula-se em</em> Disciplina</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Uma forma prática de identificar entidades é perguntar: <em>“isso precisa ter seus próprios dados e ser identificado de maneira independente?”</em> Se a resposta for sim, provavelmente estamos diante de uma entidade.</p>
+        </section>
+
+        <section aria-labelledby="s3-title">
+          <h2 id="s3-title">3. Tipos de atributos</h2>
+          <ul>
+            <li><strong>Simples</strong> — não podem ser decompostos: CPF, matrícula, código.</li>
+            <li><strong>Composto</strong> — podem ser divididos em partes: endereço, nome completo, coordenadas.</li>
+            <li><strong>Multivalorado</strong> — podem ter mais de um valor para a mesma entidade: telefones, e-mails alternativos.</li>
+            <li><strong>Derivado</strong> — calculado a partir de outros dados: idade, tempo de serviço, média final.</li>
+          </ul>
+          <p>Na prática de projeto, atributos multivalorados e derivados exigem atenção porque afetam a transição do modelo conceitual para o relacional.</p>
+        </section>
+
+        <section aria-labelledby="s4-title">
+          <h2 id="s4-title">4. Cardinalidade e participação</h2>
+          <p>A cardinalidade indica quantas ocorrências de uma entidade podem se associar a outra. Já a participação informa se essa associação é obrigatória ou opcional.</p>
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Cardinalidade e participação</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Conceito</th>
+                  <th scope="col">O que significa</th>
+                  <th scope="col">Exemplo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1:1</strong></td>
+                  <td>Uma ocorrência de A se relaciona com uma de B.</td>
+                  <td>Pessoa ↔ CPF</td>
+                </tr>
+                <tr>
+                  <td><strong>1:N</strong></td>
+                  <td>Uma ocorrência de A se relaciona com várias de B.</td>
+                  <td>Professor → Turmas</td>
+                </tr>
+                <tr>
+                  <td><strong>N:M</strong></td>
+                  <td>Várias ocorrências de A se relacionam com várias de B.</td>
+                  <td>Aluno ↔ Disciplina</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="analogy">A participação pode ser pensada como uma regra de obrigatoriedade: alguns relacionamentos são <strong>obrigatórios</strong>, outros são <strong>opcionais</strong>. Isso define se um registro pode existir sem estar vinculado a outro.</p>
+        </section>
+
+        <section aria-labelledby="s5-title">
+          <h2 id="s5-title">5. Exemplo de modelagem</h2>
+          <p>Considere um sistema acadêmico. Alguns elementos principais do domínio são:</p>
+          <ul>
+            <li><strong>Entidades</strong>: Aluno, Curso, Disciplina, Professor.</li>
+            <li><strong>Relacionamentos</strong>: Aluno cursa Disciplina, Professor ministra Disciplina, Curso possui Disciplina.</li>
+            <li><strong>Atributos</strong>: nome do aluno, código da disciplina, carga horária, semestre.</li>
+          </ul>
+          <p>Esse tipo de análise ajuda a reduzir ambiguidades e evitar que a implementação seja feita “direto no SQL” sem reflexão sobre o domínio.</p>
+        </section>
+
+        <section aria-labelledby="s6-title">
+          <h2 id="s6-title">6. Diagrama ER</h2>
+          <p>O diagrama ER é a representação gráfica do modelo. Ele ajuda a comunicar a estrutura do sistema para desenvolvedores, analistas e stakeholders.</p>
+          <figure class="diagram-figure">
+            <img src="medias/mer-diagrama.png" alt="Diagrama Entidade-Relacionamento de um sistema acadêmico com entidades Aluno, Curso, Disciplina e Professor." />
+            <figcaption>Diagrama ER ilustrativo de um sistema acadêmico. Imagem gerada no ChatGPT.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="s7-title">
+          <h2 id="s7-title">7. Erros comuns</h2>
+          <ul>
+            <li>Confundir entidade com atributo.</li>
+            <li>Modelar tudo como tabela sem refletir o domínio.</li>
+            <li>Ignorar cardinalidade e participação.</li>
+            <li>Usar nomes vagos, como “coisa” ou “dados”, em vez de termos do domínio.</li>
+          </ul>
+        </section>
+
+        <section class="activity-box" aria-labelledby="activity-title">
+          <h2 id="activity-title">Atividade em aula</h2>
+          <p><strong>Cenário:</strong> uma secretaria acadêmica precisa organizar informações de alunos, cursos e disciplinas em um modelo conceitual.</p>
+          <ol>
+            <li>Identifique pelo menos quatro entidades do cenário.</li>
+            <li>Liste os principais atributos de cada entidade.</li>
+            <li>Proponha ao menos dois relacionamentos com cardinalidade e participação.</li>
+            <li>Desenhe o MER em grupo e explique suas escolhas em até 5 minutos.</li>
+          </ol>
+
+          <figure class="diagram-figure activity-figure">
+            <img src="medias/atividade-mer.png" alt="Estudantes em atividade de sala de aula modelando um diagrama ER em um cenário acadêmico." />
+            <figcaption>Imagem gerada pelo ChatGPT.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="s8-title">
+          <h2 id="s8-title">8. Materiais complementares</h2>
+          <ul class="materials-list">
+            <li>Revisar o capítulo introdutório sobre modelagem conceitual no livro-base da disciplina.</li>
+            <li>Resolver exercícios de identificação de entidades, atributos e relacionamentos.</li>
+            <li>Comparar o MER de um sistema acadêmico com o de um sistema de biblioteca.</li>
+          </ul>
+        </section>
+
+        <section class="topic-pager" aria-label="Navegação entre tópicos">
+          <div class="topic-pager-inner">
+            <a class="pager-link pager-link--prev" href="conceptos-basicos.html">
+              <span class="pager-label">Anterior</span>
+              <span class="pager-title">Conceitos Básicos</span>
+            </a>
+            <a class="pager-link pager-link--next" href="../index.html#topicos">
+              <span class="pager-label">Próximo</span>
+              <span class="pager-title">Voltar ao índice</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Banco de Dados · Engenharia de Computação · 2026/2</p>
+      <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
+    </div>
+  </footer>
+</body>
+</html>
