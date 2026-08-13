@@ -391,7 +391,7 @@ main section#topicos { padding-block: 2.2rem 3rem; }
   box-shadow: var(--shadow);
   text-decoration: none;
   color: inherit;
-  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  transition: transform .15s ease, box-shadow .15s.ease, border-color .15s ease;
 }
 
 .topic-card:hover,
@@ -635,161 +635,7 @@ table.compare-table td {
 
 table.compare-table tbody tr:nth-child(even) { background: var(--surface-dim); }
 
-/* Diagrama SVG */
-.diagram-figure {
-  margin: 0 0 .9rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 1.2rem;
-  max-width: 72ch;
-}
-
-.diagram-figure svg { width: 100%; height: auto; display: block; }
-
-.diagram-box { fill: var(--primary-soft); stroke: var(--primary); stroke-width: 1.5; }
-.diagram-box--external { fill: var(--cat-modelagem-de-dados-soft); stroke: var(--cat-modelagem-de-dados); }
-.diagram-box--conceptual { fill: var(--primary-soft); stroke: var(--primary); }
-.diagram-box--internal { fill: var(--cat-sgbd-soft); stroke: var(--cat-sgbd); }
-
-.diagram-title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 15px;
-  fill: var(--ink);
-}
-.diagram-caption { font-size: 11px; fill: var(--ink-soft); }
-.diagram-label { font-size: 10px; fill: var(--ink-soft); }
-.diagram-arrow { stroke: var(--ink-soft); stroke-width: 1.5; marker-end: none; }
-
-.diagram-figure figcaption {
-  margin-top: .8rem;
-  font-size: .85rem;
-  color: var(--ink-soft);
-}
-
-/* Caixa de atividade */
-.activity-box {
-  background: var(--current-soft);
-  border: 1px solid var(--current);
-  border-radius: var(--radius);
-  padding: 1.2rem 1.3rem;
-  max-width: 72ch;
-}
-.activity-box h2 { border-top: none; padding-top: 0; color: var(--current); }
-
-/* Materiais complementares */
-.materials-list { list-style: none; padding-left: 0; }
-.materials-list li {
-  padding: .5rem .7rem;
-  background: var(--surface-dim);
-  border-radius: var(--radius-sm);
-  margin-bottom: .5rem;
-}
-.materials-list em { color: var(--ink-soft); font-style: italic; }
-
-/* Paginação entre tópicos */
-.topic-pager {
-  border-top: 1px solid var(--border);
-  padding-block: 1.6rem;
-  margin-top: 1rem;
-}
-
-.topic-pager-inner {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.pager-link {
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: inherit;
-  padding: .8rem 1.1rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
-  min-width: 200px;
-  transition: border-color .15s ease, transform .15s ease;
-}
-.pager-link:hover { border-color: var(--primary); transform: translateY(-2px); }
-.pager-link--next { text-align: right; margin-left: auto; }
-
-.pager-label {
-  font-family: var(--font-display);
-  font-size: .68rem;
-  text-transform: uppercase;
-  letter-spacing: .05em;
-  color: var(--primary);
-}
-.pager-title { font-weight: 700; font-size: .92rem; }
-
-@media (max-width: 560px) {
-  .topic-pager-inner { flex-direction: column; }
-  .pager-link--next { text-align: left; margin-left: 0; }
-}
-
-
-/* =========================================================
-   Opções de Tooltip
-   ========================================================= */
-
-/* Elemento base para tooltip */
-.tooltip-term {
-  text-decoration: underline dotted;
-  text-decoration-skip-ink: none;
-  cursor: help;
-  color: var(--ink);
-  position: relative;
-  border-bottom: 1px dotted var(--ink-soft);
-}
-
-/* Tooltip nativo (fallback sempre presente) */
-.tooltip-term[title]:hover,
-.tooltip-term[title]:focus-visible {
-  /* O navegador mostra o title como tooltip padrão */
-}
-
-/* Dica visual extra no hover (opcional, sem JS) */
-.tooltip-term:hover {
-  color: var(--primary);
-  border-bottom-color: var(--primary);
-}
-
-/* Versão “tag” para termos em listas ou tabelas (opcional) */
-.tooltip-tag {
-  display: inline-block;
-  font-family: var(--font-display);
-  font-size: .72rem;
-  font-weight: 700;
-  letter-spacing: .02em;
-  padding: .15rem .5rem;
-  border-radius: 999px;
-  background: var(--surface-dim);
-  border: 1px solid var(--border);
-  color: var(--ink-soft);
-  cursor: help;
-  text-decoration: none;
-}
-
-.tooltip-tag:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-}
-
-/* Ajuste figura */
-.diagram-figure img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  margin-inline: auto;
-  border-radius: var(--radius-sm);
-}
-
-/* Visibilidade SVG do schema */
+/* Diagrama SVG e figuras */
 .diagram-figure {
   margin: 0 0 .9rem;
   background: var(--surface);
@@ -855,4 +701,215 @@ table.compare-table tbody tr:nth-child(even) { background: var(--surface-dim); }
   stroke: var(--ink-soft);
   stroke-width: 1.5;
   fill: none;
+}
+
+.diagram-figure figcaption {
+  margin-top: .8rem;
+  font-size: .85rem;
+  color: var(--ink-soft);
+}
+
+.diagram-figure img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+  border-radius: var(--radius-sm);
+}
+
+/* Caixa de atividade */
+.activity-box {
+  background: var(--current-soft);
+  border: 1px solid var(--current);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.3rem;
+  max-width: 72ch;
+}
+.activity-box h2 { border-top: none; padding-top: 0; color: var(--current); }
+
+/* Materiais complementares */
+.materials-list { list-style: none; padding-left: 0; }
+.materials-list li {
+  padding: .5rem .7rem;
+  background: var(--surface-dim);
+  border-radius: var(--radius-sm);
+  margin-bottom: .5rem;
+}
+.materials-list em { color: var(--ink-soft); font-style: italic; }
+
+/* Paginação entre tópicos */
+.topic-pager {
+  border-top: 1px solid var(--border);
+  padding-block: 1.6rem;
+  margin-top: 1rem;
+}
+
+.topic-pager-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.pager-link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  padding: .8rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  min-width: 200px;
+  transition: border-color .15s ease, transform .15s ease;
+}
+.pager-link:hover { border-color: var(--primary); transform: translateY(-2px); }
+.pager-link--next { text-align: right; margin-left: auto; }
+
+.pager-label {
+  font-family: var(--font-display);
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--primary);
+}
+.pager-title { font-weight: 700; font-size: .92rem; }
+
+@media (max-width: 560px) {
+  .topic-pager-inner { flex-direction: column; }
+  .pager-link--next { text-align: left; margin-left: 0; }
+}
+
+/* =========================================================
+   Opções de Tooltip
+   ========================================================= */
+
+.tooltip-term {
+  text-decoration: underline dotted;
+  text-decoration-skip-ink: none;
+  cursor: help;
+  color: var(--ink);
+  position: relative;
+  border-bottom: 1px dotted var(--ink-soft);
+}
+
+.tooltip-term[title]:hover,
+.tooltip-term[title]:focus-visible {
+  /* Tooltip nativo do navegador */
+}
+
+.tooltip-term:hover {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.tooltip-tag {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  padding: .15rem .5rem;
+  border-radius: 999px;
+  background: var(--surface-dim);
+  border: 1px solid var(--border);
+  color: var(--ink-soft);
+  cursor: help;
+  text-decoration: none;
+}
+
+.tooltip-tag:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* =========================================================
+   Exercícios de fixação (MER)
+   ========================================================= */
+
+.manual-delivery {
+  background: var(--current-soft);
+  border-left: 3px solid var(--current);
+  padding: .9rem 1rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.hint-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin: .8rem 0 1rem;
+}
+
+.hint-toggle {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  padding: .55rem .9rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+
+.hint-toggle:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.hints-panel {
+  background: var(--primary-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1rem .8rem;
+  margin-bottom: 1.2rem;
+}
+
+.hints-panel.is-hidden {
+  display: none;
+}
+
+.hint-intro,
+.hint-note {
+  margin: 0 0 .8rem;
+  color: var(--ink-soft);
+}
+
+.exercise-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.2rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.exercise-block h3 {
+  margin: 0 0 .7rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.exercise-block ul {
+  margin: .75rem 0 1rem;
+}
+
+.hint-detail {
+  margin-top: .8rem;
+  background: var(--surface-dim);
+  border-radius: var(--radius-sm);
+  padding: .7rem .85rem;
+}
+
+.hint-detail summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.hint-detail p {
+  margin: .6rem 0 0;
+  color: var(--ink-soft);
 }

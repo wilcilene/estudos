@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Modelo Entidade-Relacionamento (MER) | Banco de Dados</title>
-  <meta name="description" content="Aula completa sobre Modelo Entidade-Relacionamento (MER): entidades, atributos, relacionamentos, cardinalidade, participação, restrições e modelagem conceitual.">
+  <meta name="description" content="Aula sobre Modelo Entidade-Relacionamento: entidades, atributos, relacionamentos, cardinalidade, participação e exercícios de fixação.">
   <meta name="keywords" content="MER, modelo entidade-relacionamento, entidades, atributos, relacionamentos, cardinalidade, participação, banco de dados">
   <meta name="author" content="Disciplina de Banco de Dados">
   <meta name="robots" content="index, follow">
@@ -25,24 +25,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../styles.css">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LearningResource",
-    "name": "Modelo Entidade-Relacionamento (MER)",
-    "description": "Entidades, atributos, relacionamentos, cardinalidade e participação no projeto conceitual.",
-    "inLanguage": "pt-BR",
-    "learningResourceType": "aula",
-    "educationalLevel": "Graduação",
-    "timeRequired": "PT2H",
-    "isPartOf": {
-      "@type": "Course",
-      "name": "Banco de Dados",
-      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/index.html"
-    }
-  }
-  </script>
 </head>
 <body>
   <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
@@ -197,9 +179,18 @@
         <section aria-labelledby="s6-title">
           <h2 id="s6-title">6. Diagrama ER</h2>
           <p>O diagrama ER é a representação gráfica do modelo. Ele ajuda a comunicar a estrutura do sistema para desenvolvedores, analistas e stakeholders.</p>
+
+          <!-- PROMPT PARA CHATGPT:
+          Gere uma imagem em estilo flat e didático para uma aula de Banco de Dados em Engenharia de Computação.
+          Mostre um diagrama Entidade-Relacionamento sobre um sistema acadêmico, com as entidades Aluno, Curso, Disciplina e Professor.
+          Indique claramente atributos como matrícula, nome, código da disciplina, carga horária e semestre.
+          Inclua relacionamentos como "cursa", "ministra" e "possui" com cardinalidades 1:1, 1:N e N:M em destaque.
+          O visual deve ser limpo, com fundo claro, cores suaves em azul e roxo, aparência de material de aula e boa legibilidade.
+          Salve a imagem em: topicos/medias/mer-diagrama.png
+          -->
           <figure class="diagram-figure">
             <img src="medias/mer-diagrama.png" alt="Diagrama Entidade-Relacionamento de um sistema acadêmico com entidades Aluno, Curso, Disciplina e Professor." />
-            <figcaption>Diagrama ER ilustrativo de um sistema acadêmico. Imagem gerada no ChatGPT.</figcaption>
+            <figcaption>Diagrama ER ilustrativo de um sistema acadêmico. Substitua o arquivo pela imagem gerada no ChatGPT, mantendo o mesmo nome.</figcaption>
           </figure>
         </section>
 
@@ -223,14 +214,136 @@
             <li>Desenhe o MER em grupo e explique suas escolhas em até 5 minutos.</li>
           </ol>
 
+          <!-- PROMPT PARA CHATGPT:
+          Gere uma imagem ilustrativa em estilo flat para uma atividade de modelagem de dados.
+          Mostre estudantes em sala de aula montando um diagrama ER em um quadro ou notebook.
+          Ao lado, destaque um cenário de secretaria acadêmica com entidades Aluno, Curso e Disciplina.
+          A imagem deve transmitir colaboração, raciocínio técnico e uso de modelagem conceitual.
+          Use cores suaves, ambiente acadêmico, iluminação clara e aparência limpa de material didático.
+          Salve a imagem em: topicos/medias/atividade-mer.png
+          -->
           <figure class="diagram-figure activity-figure">
             <img src="medias/atividade-mer.png" alt="Estudantes em atividade de sala de aula modelando um diagrama ER em um cenário acadêmico." />
-            <figcaption>Imagem gerada pelo ChatGPT.</figcaption>
+            <figcaption>Imagem gerada pelo ChatGPT para apoiar a atividade em sala. O HTML permanece funcional mesmo antes da imagem ser adicionada.</figcaption>
           </figure>
         </section>
 
-        <section aria-labelledby="s8-title">
-          <h2 id="s8-title">8. Materiais complementares</h2>
+        <section class="activity-box" aria-labelledby="practice-title">
+          <h2 id="practice-title">Exercícios de fixação — entrega manual</h2>
+
+          <p class="manual-delivery">
+            <strong>Entrega:</strong> esta atividade será feita em papel, manualmente, em sala de aula.
+            As respostas devem ser registradas de forma legível, com o diagrama MER desenhado à mão.
+          </p>
+
+          <p>
+            A seguir, você encontrará três problemas criativos para treinar a identificação de entidades,
+            atributos, relacionamentos, cardinalidades e participação. Estime cerca de 1 hora para
+            cada cenário.
+          </p>
+
+          <div class="hint-controls">
+            <button type="button" class="hint-toggle" aria-expanded="false" aria-controls="hints-panel">
+              Mostrar dicas
+            </button>
+          </div>
+
+          <div id="hints-panel" class="hints-panel is-hidden">
+            <p class="hint-intro">
+              <strong>Dicas gerais:</strong> antes de desenhar, separe o enunciado em palavras-chave.
+              Procure identificar:
+            </p>
+            <ul class="check-list">
+              <li>Quem são os “usuários” principais do sistema.</li>
+              <li>Quais objetos ou conceitos precisam ser armazenados.</li>
+              <li>Quais informações descrevem cada entidade.</li>
+              <li>Quais associações existem entre essas entidades.</li>
+              <li>Se a participação é total, parcial, opcional ou obrigatória.</li>
+            </ul>
+
+            <p class="hint-note">
+              As dicas podem ser escondidas a qualquer momento para simular a resolução sem apoio.
+            </p>
+          </div>
+
+          <article class="exercise-block">
+            <h3>Exercício 1 — Colônia de Gatos Ciborgues</h3>
+            <p>
+              Uma organização de pesquisa mantém uma colônia de gatos ciborgues em uma estação espacial.
+              Cada gato é monitorado por sensores e participa de missões de reconhecimento.
+            </p>
+            <ul>
+              <li>Cada gato possui um identificador único, nome de registro, data de ativação, nível de energia atual e status.</li>
+              <li>Um gato pode ter vários módulos cibernéticos instalados; o mesmo tipo de módulo pode aparecer em vários gatos.</li>
+              <li>A estação possui várias missões de reconhecimento, cada uma com código, descrição, setor explorado, nível de risco e janela de tempo.</li>
+              <li>Uma missão envolve um ou mais gatos, e um gato pode participar de várias missões.</li>
+              <li>Para cada missão, são registradas leituras de sensores associadas ao gato e à missão.</li>
+              <li>Cada missão deve ter exatamente um líder, que é um dos gatos participantes.</li>
+              <li>Há técnicos de manutenção responsáveis pelos módulos e pelas manutenções periódicas.</li>
+            </ul>
+
+            <details class="hint-detail">
+              <summary>Mostrar sugestão de foco</summary>
+              <p>
+                Pense em entidades como Gato, Módulo, Missão, Leitura de Sensor e Técnico.
+                Observe relacionamentos N:M e o papel especial do líder da missão.
+              </p>
+            </details>
+          </article>
+
+          <article class="exercise-block">
+            <h3>Exercício 2 — Arena de Robôs Gladiadores</h3>
+            <p>
+              Uma arena interplanetária organiza torneios de robôs gladiadores controlados por humanos,
+              alienígenas e IAs autônomas.
+            </p>
+            <ul>
+              <li>Cada robô possui ID, nome, modelo, fabricante, ano de construção e classe.</li>
+              <li>Todo robô é cadastrado por um proprietário, que pode ser humano, alienígena ou IA corporativa.</li>
+              <li>A arena organiza torneios compostos por várias partidas.</li>
+              <li>Cada partida tem código, data, hora, arena física e modalidade, envolvendo pelo menos dois robôs.</li>
+              <li>Robôs podem integrar equipes de combate, mas também podem lutar de forma independente.</li>
+              <li>Robôs podem equipar módulos de armas e defesa.</li>
+              <li>Após cada partida, é produzido um relatório de desempenho por robô.</li>
+            </ul>
+
+            <details class="hint-detail">
+              <summary>Mostrar sugestão de foco</summary>
+              <p>
+                Pense em entidades como Robô, Proprietário, Torneio, Partida, Equipe, Módulo e Relatório.
+                A participação de Partida em relação aos robôs é total.
+              </p>
+            </details>
+          </article>
+
+          <article class="exercise-block">
+            <h3>Exercício 3 — Rede de Estações de Pesquisa</h3>
+            <p>
+              Uma aliança entre humanos e a espécie alienígena Thar’Kuun opera uma rede de estações
+              de pesquisa em diferentes planetas, protegidas por soldados humanos e conduzidas por cientistas alienígenas.
+            </p>
+            <ul>
+              <li>Cada estação possui ID, nome, localização, tipo de ambiente e nível de segurança.</li>
+              <li>Em cada estação atuam equipes de pesquisa com área de estudo e data de início.</li>
+              <li>Os cientistas Thar’Kuun podem participar de múltiplas equipes.</li>
+              <li>Soldados humanos são alocados a estações e podem ser transferidos ao longo do tempo.</li>
+              <li>As estações armazenam artefatos alienígenas classificados por nível de risco.</li>
+              <li>As equipes registram experimentos que envolvem um ou mais artefatos.</li>
+              <li>O comando define protocolos de segurança aplicáveis a estações e artefatos.</li>
+            </ul>
+
+            <details class="hint-detail">
+              <summary>Mostrar sugestão de foco</summary>
+              <p>
+                Pense em entidades como Estação, Equipe de Pesquisa, Cientista, Soldado, Artefato, Experimento e Protocolo.
+                Repare em relacionamentos N:M e no histórico de alocação.
+              </p>
+            </details>
+          </article>
+        </section>
+
+        <section class="materials" aria-labelledby="materials-title">
+          <h2 id="materials-title">Materiais complementares</h2>
           <ul class="materials-list">
             <li>Revisar o capítulo introdutório sobre modelagem conceitual no livro-base da disciplina.</li>
             <li>Resolver exercícios de identificação de entidades, atributos e relacionamentos.</li>
@@ -240,7 +353,7 @@
 
         <section class="topic-pager" aria-label="Navegação entre tópicos">
           <div class="topic-pager-inner">
-            <a class="pager-link pager-link--prev" href="conceptos-basicos.html">
+            <a class="pager-link pager-link--prev" href="conceitos-basicos.html">
               <span class="pager-label">Anterior</span>
               <span class="pager-title">Conceitos Básicos</span>
             </a>
@@ -260,5 +373,18 @@
       <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
     </div>
   </footer>
+
+  <script>
+    const hintToggle = document.querySelector('.hint-toggle');
+    const hintsPanel = document.querySelector('#hints-panel');
+
+    if (hintToggle && hintsPanel) {
+      hintToggle.addEventListener('click', () => {
+        const hidden = hintsPanel.classList.toggle('is-hidden');
+        hintToggle.setAttribute('aria-expanded', String(!hidden));
+        hintToggle.textContent = hidden ? 'Mostrar dicas' : 'Ocultar dicas';
+      });
+    }
+  </script>
 </body>
 </html>
