@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Modelo Entidade-Relacionamento (MER) | Banco de Dados</title>
-  <meta name="description" content="Aula sobre Modelo Entidade-Relacionamento: entidades, atributos, relacionamentos, cardinalidade, participação e exercícios para pensar.">
-  <meta name="keywords" content="MER, modelo entidade-relacionamento, entidades, atributos, relacionamentos, cardinalidade, participação, exercícios">
+  <meta name="description" content="Aula completa sobre Modelo Entidade-Relacionamento (MER): entidades, atributos, relacionamentos, cardinalidade, participação, restrições e modelagem conceitual.">
+  <meta name="keywords" content="MER, modelo entidade-relacionamento, entidades, atributos, relacionamentos, cardinalidade, participação, banco de dados">
   <meta name="author" content="Disciplina de Banco de Dados">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#4338ca">
@@ -18,13 +18,31 @@
   <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/topicos/mer.html">
   <meta name="twitter:card" content="summary">
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cellipse cx='12' cy='5' rx='9' ry='3.2' fill='%234338ca'/%3E%3Cpath d='M3 5v14c0 1.8 4 3.2 9 3.2s9-1.4 9-3.2V5' fill='none' stroke='%234338ca' stroke-width='2'/%3E%3C/svg%3E'>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cellipse cx='12' cy='5' rx='9' ry='3.2' fill='%234338ca'/%3E%3Cpath d='M3 5v14c0 1.8 4 3.2 9 3.2s9-1.4 9-3.2V5' fill='none' stroke='%234338ca' stroke-width='2'/%3E%3C/svg%3E">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Modelo Entidade-Relacionamento (MER)",
+    "description": "Entidades, atributos, relacionamentos, cardinalidade e participação no projeto conceitual.",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "aula",
+    "educationalLevel": "Graduação",
+    "timeRequired": "PT2H",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Banco de Dados",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/index.html"
+    }
+  }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
@@ -179,18 +197,9 @@
         <section aria-labelledby="s6-title">
           <h2 id="s6-title">6. Diagrama ER</h2>
           <p>O diagrama ER é a representação gráfica do modelo. Ele ajuda a comunicar a estrutura do sistema para desenvolvedores, analistas e stakeholders.</p>
-
-          <!-- PROMPT PARA CHATGPT:
-          Gere uma imagem em estilo flat e didático para uma aula de Banco de Dados em Engenharia de Computação.
-          Mostre um diagrama Entidade-Relacionamento sobre um sistema acadêmico, com as entidades Aluno, Curso, Disciplina e Professor.
-          Indique claramente atributos como matrícula, nome, código da disciplina, carga horária e semestre.
-          Inclua relacionamentos como "cursa", "ministra" e "possui" com cardinalidades 1:1, 1:N e N:M em destaque.
-          O visual deve ser limpo, com fundo claro, cores suaves em azul e roxo, aparência de material de aula e boa legibilidade.
-          Salve a imagem em: topicos/medias/mer-diagrama.png
-          -->
           <figure class="diagram-figure">
-            <img src="medias/mer-diagrama.png" alt="Diagrama Entidade-Relacionamento de um sistema acadêmico com entidades Aluno, Curso, Disciplina e Professor.">
-            <figcaption>Diagrama ER ilustrativo de um sistema acadêmico. Substitua o arquivo pela imagem gerada no ChatGPT, mantendo o mesmo nome.</figcaption>
+            <img src="medias/mer-diagrama.png" alt="Diagrama Entidade-Relacionamento de um sistema acadêmico com entidades Aluno, Curso, Disciplina e Professor." />
+            <figcaption>Diagrama ER ilustrativo de um sistema acadêmico. Imagem gerada no ChatGPT.</figcaption>
           </figure>
         </section>
 
@@ -214,22 +223,14 @@
             <li>Desenhe o MER em grupo e explique suas escolhas em até 5 minutos.</li>
           </ol>
 
-          <!-- PROMPT PARA CHATGPT:
-          Gere uma imagem ilustrativa em estilo flat para uma atividade de modelagem de dados.
-          Mostre estudantes em sala de aula montando um diagrama ER em um quadro ou notebook.
-          Ao lado, destaque um cenário de secretaria acadêmica com entidades Aluno, Curso e Disciplina.
-          A imagem deve transmitir colaboração, raciocínio técnico e uso de modelagem conceitual.
-          Use cores suaves, ambiente acadêmico, iluminação clara e aparência limpa de material didático.
-          Salve a imagem em: topicos/medias/atividade-mer.png
-          -->
-          <figure class="diagram-figure">
-            <img src="medias/atividade-mer.png" alt="Estudantes em atividade de sala de aula modelando um diagrama ER em um cenário acadêmico.">
-            <figcaption>Imagem gerada pelo ChatGPT para apoiar a atividade em sala. O HTML permanece funcional mesmo antes da imagem ser adicionada.</figcaption>
+          <figure class="diagram-figure activity-figure">
+            <img src="medias/atividade-mer.png" alt="Estudantes em atividade de sala de aula modelando um diagrama ER em um cenário acadêmico." />
+            <figcaption>Imagem gerada pelo ChatGPT.</figcaption>
           </figure>
         </section>
 
-        <section class="materials" aria-labelledby="materials-title">
-          <h2 id="materials-title">Materiais complementares</h2>
+        <section aria-labelledby="s8-title">
+          <h2 id="s8-title">8. Materiais complementares</h2>
           <ul class="materials-list">
             <li>Revisar o capítulo introdutório sobre modelagem conceitual no livro-base da disciplina.</li>
             <li>Resolver exercícios de identificação de entidades, atributos e relacionamentos.</li>
@@ -237,138 +238,9 @@
           </ul>
         </section>
 
-        <section class="thinking-box" aria-labelledby="thinking-title">
-          <h2 id="thinking-title">Para pensar!</h2>
-          <p>
-            Para cada contexto represente o MER em papel com caneta, lápis ou outro material que evidencie a representação manual das soluções.
-            Lembre de incluir pelo menos todas as entidades com seus atributos, relacionamentos e identificação da chave primária.
-          </p>
-
-          <!-- Exercício 1 -->
-          <article class="thinking-exercise" id="ex1-gatos-ciborgues">
-            <header class="thinking-header">
-              <h3>Exercício 1 — Colônia de Gatos Ciborgues</h3>
-            </header>
-
-            <p><strong>Contexto:</strong> Uma organização de pesquisa mantém uma colônia de gatos ciborgues em uma estação espacial. Cada gato é monitorado por sensores e participa de missões de reconhecimento.</p>
-
-            <h4>Regras do domínio</h4>
-            <ul>
-              <li>Cada Gato Ciborgue possui um identificador único (ID_gato), nome de registro, data de ativação, nível de energia atual e status (em missão, em manutenção, em repouso).</li>
-              <li>Um gato pode ter vários Módulos Cibernéticos instalados; cada módulo tem código, tipo (visão noturna, reforço muscular, interface de rede, etc.), nível de versão e data de instalação.</li>
-              <li>Um mesmo tipo de módulo pode ser instalado em vários gatos.</li>
-              <li>A estação possui várias Missões de Reconhecimento com código, descrição, setor explorado, nível de risco e janela de tempo.</li>
-              <li>Uma missão envolve um ou mais gatos; um gato pode participar de várias missões.</li>
-              <li>Para cada missão são registradas Leituras de Sensores associadas ao gato e à missão, com tipo de sensor, valor e timestamp.</li>
-              <li>Alguns gatos são designados como Líderes de Missão; cada missão deve ter exatamente um líder, que é um dos gatos participantes.</li>
-              <li>Há Técnicos de Manutenção responsáveis pelos módulos, com ID, nome e especialidade, e registros de manutenção (data, tipo, técnico responsável).</li>
-            </ul>
-
-            <div class="thinking-toggle-wrap">
-              <button
-                type="button"
-                class="thinking-toggle"
-                data-target="hints-ex1"
-                aria-expanded="false"
-                aria-controls="hints-ex1">
-                Mostrar pistas para o MER
-              </button>
-            </div>
-
-            <div id="hints-ex1" class="thinking-hints thinking-hints--hidden" aria-hidden="true">
-              <h4>Pistas para o MER</h4>
-              <ul>
-                <li>Entidades principais: Gato Ciborgue, Módulo Cibernético, Missão, Leitura de Sensor, Técnico, Manutenção de Módulo.</li>
-                <li>Relacionamentos: gatos participam de missões (N:M); módulos são instalados em gatos; leituras vinculam gato + missão; técnicos instalam/manutêm módulos.</li>
-                <li>Cardinalidade e participação: missões devem ter pelo menos um gato; gatos podem existir sem missão ativa; líder de missão pode ser visto como relacionamento especial ou atributo.</li>
-              </ul>
-            </div>
-          </article>
-
-          <!-- Exercício 2 -->
-          <article class="thinking-exercise" id="ex2-robos-gladiadores">
-            <header class="thinking-header">
-              <h3>Exercício 2 — Arena de Robôs Gladiadores</h3>
-            </header>
-
-            <p><strong>Contexto:</strong> Uma grande arena interplanetária organiza torneios de robôs gladiadores controlados por humanos, alienígenas e IAs autônomas.</p>
-
-            <h4>Regras do domínio</h4>
-            <ul>
-              <li>Cada Robô Gladiador possui ID único, nome, modelo, fabricante, ano de construção e classe (leve, média, pesada).</li>
-              <li>Um robô é cadastrado por um Proprietário (humano, alienígena ou IA corporativa) com ID, nome, espécie/tipo e planeta ou estação de origem.</li>
-              <li>A arena organiza Torneios com nome, edição, tipo (1x1, equipe, sobrevivência) e prêmio principal; cada torneio possui diversas Partidas.</li>
-              <li>Cada Partida tem código, data/hora, arena física e modalidade, envolvendo pelo menos dois robôs e registrando qual robô ou equipe venceu.</li>
-              <li>Robôs podem se organizar em Equipes de Combate com nome, planeta de origem e ranking; um robô pode pertencer a uma equipe ou lutar de forma independente.</li>
-              <li>Há Módulos de Armas e Módulos de Defesa com ID, tipo (laser, plasma, escudo, armadura) e nível de potência; robôs podem equipar vários módulos, e um módulo pode estar em vários robôs.</li>
-              <li>Após cada partida é gerado um Relatório de Desempenho associado a um robô e a uma partida, registrando danos recebidos, danos causados, tempo em combate e status final.</li>
-            </ul>
-
-            <div class="thinking-toggle-wrap">
-              <button
-                type="button"
-                class="thinking-toggle"
-                data-target="hints-ex2"
-                aria-expanded="false"
-                aria-controls="hints-ex2">
-                Mostrar pistas para o MER
-              </button>
-            </div>
-
-            <div id="hints-ex2" class="thinking-hints thinking-hints--hidden" aria-hidden="true">
-              <h4>Pistas para o MER</h4>
-              <ul>
-                <li>Entidades principais: Robô, Proprietário, Torneio, Partida, Equipe, Módulo (arma/defesa), Relatório de Desempenho.</li>
-                <li>Relacionamentos: robôs são cadastrados por proprietários (1:N); robôs participam de partidas (N:M); partidas pertencem a torneios (1:N); robôs podem integrar equipes; robôs equipam módulos; relatórios descrevem desempenho em partidas.</li>
-                <li>Cardinalidade e participação: partidas devem ter pelo menos dois robôs; robôs podem existir sem partidas disputadas; torneios podem existir antes de terem partidas cadastradas.</li>
-              </ul>
-            </div>
-          </article>
-
-          <!-- Exercício 3 -->
-          <article class="thinking-exercise" id="ex3-estacoes-pesquisa">
-            <header class="thinking-header">
-              <h3>Exercício 3 — Rede de Estações de Pesquisa</h3>
-            </header>
-
-            <p><strong>Contexto:</strong> Uma aliança entre humanos e a espécie alienígena Thar’Kuun opera uma rede de estações de pesquisa em diferentes planetas. Soldados humanos protegem as estações; cientistas alienígenas conduzem experimentos.</p>
-
-            <h4>Regras do domínio</h4>
-            <ul>
-              <li>Cada Estação de Pesquisa possui ID, nome, planeta ou satélite, tipo de ambiente (deserto, gelo, atmosfera tóxica, órbita) e nível de segurança.</li>
-              <li>Em cada estação atuam Equipes de Pesquisa com ID, área de estudo (biologia, materiais, energia escura) e data de início.</li>
-              <li>Os Cientistas Thar’Kuun possuem ID, nome, especialidade e ciclo de vida, podendo participar de múltiplas equipes.</li>
-              <li>Soldados Humanos possuem ID, nome, patente e unidade militar; são alocados a estações e podem ser transferidos ao longo do tempo.</li>
-              <li>As estações podem armazenar Artefatos Alienígenas com ID, classificação (seguro, restrito, perigoso), origem e descrição; cada artefato é associado a uma estação e a uma equipe responsável.</li>
-              <li>As equipes registram Experimentos com ID, título, objetivo, data de início e status; cada experimento pode envolver um ou mais artefatos e gera Relatórios de Experimento.</li>
-              <li>O comando define Protocolos de Segurança com ID, nível (verde, amarelo, vermelho) e tipo (biológico, energético, psíquico), aplicados a estações e/ou artefatos; infrações geram Relatórios de Incidente.</li>
-            </ul>
-
-            <div class="thinking-toggle-wrap">
-              <button
-                type="button"
-                class="thinking-toggle"
-                data-target="hints-ex3"
-                aria-expanded="false"
-                aria-controls="hints-ex3">
-                Mostrar pistas para o MER
-              </button>
-            </div>
-
-            <div id="hints-ex3" class="thinking-hints thinking-hints--hidden" aria-hidden="true">
-              <h4>Pistas para o MER</h4>
-              <ul>
-                <li>Entidades principais: Estação, Equipe de Pesquisa, Cientista, Soldado, Artefato, Experimento, Relatório de Experimento, Protocolo de Segurança, Incidente.</li>
-                <li>Relacionamentos: estações têm equipes (1:N); cientistas participam de equipes (N:M); soldados são alocados a estações (N:M, com histórico); artefatos são armazenados em estações e estudados por equipes; experimentos envolvem artefatos e são conduzidos por equipes; protocolos se aplicam a estações e artefatos; incidentes vinculam pessoas, estação e protocolo.</li>
-                <li>Cardinalidade e participação: estações podem existir antes de terem equipes; experimentos devem estar associados a uma equipe; artefatos podem existir sem experimentos ainda; protocolos podem existir mesmo sem incidentes.</li>
-              </ul>
-            </div>
-          </article>
-        </section>
-
         <section class="topic-pager" aria-label="Navegação entre tópicos">
           <div class="topic-pager-inner">
-            <a class="pager-link pager-link--prev" href="conceitos-basicos.html">
+            <a class="pager-link pager-link--prev" href="conceptos-basicos.html">
               <span class="pager-label">Anterior</span>
               <span class="pager-title">Conceitos Básicos</span>
             </a>
@@ -388,21 +260,5 @@
       <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
     </div>
   </footer>
-
-  <script>
-    // Botões de mostrar/ocultar pistas na seção "Para pensar!"
-    document.querySelectorAll('.thinking-toggle').forEach(button => {
-      button.addEventListener('click', () => {
-        const targetId = button.getAttribute('data-target');
-        const panel = document.getElementById(targetId);
-        if (!panel) return;
-
-        const hidden = panel.classList.toggle('thinking-hints--hidden');
-        button.setAttribute('aria-expanded', String(!hidden));
-        button.textContent = hidden ? 'Mostrar pistas para o MER' : 'Ocultar pistas para o MER';
-        panel.setAttribute('aria-hidden', String(hidden));
-      });
-    });
-  </script>
 </body>
 </html>
