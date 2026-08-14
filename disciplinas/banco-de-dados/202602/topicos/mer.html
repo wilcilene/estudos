@@ -84,7 +84,6 @@
       <div class="container">
         <header class="topic-header">
           <div class="topic-meta">
-            <span class="duration-badge">2 horas de estudo</span>
             <span class="category-tag cat-modelagem-de-dados">Modelagem de Dados</span>
           </div>
           <h1>Modelo Entidade-Relacionamento (MER)</h1>
@@ -98,7 +97,7 @@
             <li>Classificar atributos simples, compostos, multivalorados e derivados.</li>
             <li>Determinar cardinalidade e participação em diferentes cenários.</li>
             <li>Aplicar o MER na modelagem de um domínio acadêmico ou de engenharia.</li>
-            <li>Interpretar um diagrama ER como documentação conceitual do sistema.</li>
+            <li>Interpretar um MER como documentação conceitual do sistema.</li>
           </ul>
         </section>
 
@@ -200,11 +199,11 @@
         </section>
 
         <section aria-labelledby="s6-title">
-          <h2 id="s6-title">6. Diagrama ER</h2>
-          <p>O diagrama ER é a representação gráfica do modelo. Ele ajuda a comunicar a estrutura do sistema para desenvolvedores, analistas e stakeholders.</p>
+          <h2 id="s6-title">6. Modelo Entidade Relacionamento</h2>
+          <p>O MER é a representação gráfica do modelo. Ele ajuda a comunicar a estrutura do sistema para desenvolvedores, analistas e stakeholders.</p>
           <figure class="diagram-figure">
-            <img src="medias/mer-diagrama.png" alt="Diagrama Entidade-Relacionamento de um sistema acadêmico com entidades Aluno, Curso, Disciplina e Professor.">
-            <figcaption>Diagrama ER ilustrativo de um sistema acadêmico. Imagem gerada no ChatGPT.</figcaption>
+            <img src="medias/mer-exemplo.png" alt="Modelo Entidade-Relacionamento de um sistema acadêmico com entidades Aluno, Curso, Disciplina e Professor.">
+            <figcaption>MER ilustrativo de um sistema acadêmico. Imagem gerada no ChatGPT.</figcaption>
           </figure>
         </section>
 
@@ -222,14 +221,14 @@
           <h2 id="activity-title">Atividade em aula</h2>
           <p><strong>Cenário:</strong> uma secretaria acadêmica precisa organizar informações de alunos, cursos e disciplinas em um modelo conceitual.</p>
           <ol>
-            <li>Identifique pelo menos quatro entidades do cenário.</li>
+            <li>Identifique as quatro entidades do cenário.</li>
             <li>Liste os principais atributos de cada entidade.</li>
-            <li>Proponha ao menos dois relacionamentos com cardinalidade e participação.</li>
-            <li>Desenhe o MER em grupo e explique suas escolhas em até 5 minutos.</li>
+            <li>Proponha relacionamentos com cardinalidade.</li>
+            <li>Desenhe o MER e explique suas escolhas em até 5 minutos.</li>
           </ol>
 
           <figure class="diagram-figure activity-figure">
-            <img src="medias/atividade-mer.png" alt="Estudantes em atividade de sala de aula modelando um diagrama ER em um cenário acadêmico.">
+            <img src="medias/atividade-mer.png" alt="Estudantes em atividade de sala de aula modelando um MER em um cenário acadêmico.">
             <figcaption>Imagem gerada pelo ChatGPT.</figcaption>
           </figure>
         </section>
@@ -239,7 +238,6 @@
           <ul class="materials-list">
             <li>Revisar o capítulo introdutório sobre modelagem conceitual no livro-base da disciplina.</li>
             <li>Resolver exercícios de identificação de entidades, atributos e relacionamentos.</li>
-            <li>Comparar o MER de um sistema acadêmico com o de um sistema de biblioteca.</li>
           </ul>
         </section>
 
@@ -251,21 +249,21 @@
           <!-- Exercício 1 -->
           <article class="thinking-exercise" id="ex1-gatos-ciborgues">
             <header class="thinking-header">
-              <h3>Exercício 1 — Colônia de Gatos Ciborgues</h3>
+              <h3>Exercício 1 — Colônia de Gatos</h3>
             </header>
 
-            <p><strong>Contexto:</strong> Uma organização de pesquisa mantém uma colônia de gatos ciborgues em uma estação espacial. Cada gato é monitorado por sensores e participa de missões de reconhecimento.</p>
+            <p><strong>Contexto:</strong> Uma organização de pesquisa mantém uma colônia de gatos cibernético em uma estação espacial. Cada gato é monitorado por sensores e participa de missões de reconhecimento.</p>
 
             <h4>Regras do domínio</h4>
             <ul>
-              <li>Cada Gato Ciborgue possui um identificador único (ID_gato), nome de registro, data de ativação, nível de energia atual e status (em missão, em manutenção, em repouso).</li>
-              <li>Um gato pode ter vários Módulos Cibernéticos instalados; cada módulo tem código, tipo (visão noturna, reforço muscular, interface de rede, etc.), nível de versão e data de instalação.</li>
+              <li>Cada gato cibernético possui um identificador único (id_gato), nome de registro, data de ativação, nível de energia atual e status (em missão, em manutenção, em repouso).</li>
+              <li>Um gato pode ter vários módulos instalados, cada módulo tem código, tipo (visão noturna, reforço muscular, interface de rede, etc.), nível de versão e data de instalação.</li>
               <li>Um mesmo tipo de módulo pode ser instalado em vários gatos.</li>
               <li>A estação possui várias Missões de Reconhecimento com código, descrição, setor explorado, nível de risco e janela de tempo.</li>
               <li>Uma missão envolve um ou mais gatos; um gato pode participar de várias missões.</li>
-              <li>Para cada missão são registradas Leituras de Sensores associadas ao gato e à missão, com tipo de sensor, valor e timestamp.</li>
-              <li>Alguns gatos são designados como Líderes de Missão; cada missão deve ter exatamente um líder, que é um dos gatos participantes.</li>
-              <li>Há Técnicos de Manutenção responsáveis pelos módulos, com ID, nome e especialidade, e registros de manutenção (data, tipo, técnico responsável).</li>
+              <li>Para cada missão são registradas leituras de sensores associadas ao gato e à missão, com tipo de sensor, valor e timestamp.</li>
+              <li>Alguns gatos são designados como líderes de missão; cada missão deve ter exatamente um líder, que é um dos gatos participantes.</li>
+              <li>Há Técnicos de manutenção responsáveis pelos módulos, com ID, nome e especialidade, e registros de manutenção (data, tipo, técnico responsável).</li>
             </ul>
 
             <div class="thinking-toggle-wrap">
@@ -283,7 +281,7 @@
                  aria-hidden="true">
               <h4>Pistas para o MER</h4>
               <ul>
-                <li>Entidades principais: Gato Ciborgue, Módulo Cibernético, Missão, Leitura de Sensor, Técnico, Manutenção de Módulo.</li>
+                <li>Entidades principais: Gato cibernético, Módulo, Missão, Leitura de Sensor, Técnico, Manutenção de Módulo.</li>
                 <li>Relacionamentos: gatos participam de missões (N:M); módulos são instalados em gatos; leituras vinculam gato + missão; técnicos instalam/manutêm módulos.</li>
                 <li>Cardinalidade e participação: missões devem ter pelo menos um gato; gatos podem existir sem missão ativa; líder de missão pode ser visto como relacionamento especial ou atributo.</li>
               </ul>
