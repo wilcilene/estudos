@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Especificação e priorização de requisitos: stakeholders, requisitos funcionais, não funcionais e critérios de aceitação.">
+  <title>Especificação de requisitos | Engenharia de Software</title>
+  <link rel="stylesheet" href="assets/css/topicos.css">
+</head>
+<body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <div class="topbar"><div class="wrap"><span>Engenharia da Computação</span><span>Engenharia de Software · Tópico 03</span></div></div>
+
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">Especificação de requisitos</div>
+        <h1>Stakeholders, requisitos funcionais, não funcionais e critérios de aceitação</h1>
+        <p>Antes de modelar diagramas ou escrever código, a equipe precisa compreender o problema, os envolvidos, as regras e as qualidades esperadas para a solução.</p>
+        <div class="hero-actions"><a class="button primary" href="#conceito">Começar o estudo</a><a class="button secondary" href="#atividade">Ver atividade</a></div>
+      </div>
+      <figure class="hero-media">
+        <img src="../assets/img/requisitos/requisitos-capa.jpg" alt="Ilustração sobre levantamento e especificação de requisitos" loading="eager">
+        <figcaption>Imagem de apoio ao estudo de requisitos.</figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <main id="conteudo" class="main">
+    <div class="wrap layout">
+      <aside class="toc" aria-label="Sumário"><strong>Nesta página</strong><a href="#conceito">1. Conceito</a><a href="#stakeholders">2. Stakeholders</a><a href="#tipos">3. Tipos</a><a href="#levantamento">4. Levantamento</a><a href="#modelo">5. Tabela</a><a href="#aceitacao">6. Aceitação</a><a href="#priorizacao">7. Priorização</a><a href="#ferramentas">8. Ferramentas</a><a href="#exemplos">9. Jogos</a><a href="#atividade">10. Atividade</a><a href="#java">11. Java</a></aside>
+
+      <article class="content">
+        <section id="conceito" class="panel">
+          <h2>O que é um requisito?</h2>
+          <p class="lead">Requisito é uma necessidade, condição, capacidade ou restrição que o software deve atender. Ele explica o que deve ser entregue e fornece uma base para análise, projeto, implementação, testes e aceitação.</p>
+          <div class="callout"><strong>Um bom requisito</strong> é claro, necessário, consistente, priorizado, rastreável, verificável e compreensível para pessoas técnicas e não técnicas.</div>
+        </section>
+
+        <section id="stakeholders" class="panel">
+          <h2>Stakeholders: quem participa ou é afetado?</h2>
+          <p>Stakeholders são pessoas, grupos ou instituições que usam, financiam, administram, aprovam, influenciam ou sofrem impacto do sistema. Identificá-los evita que necessidades importantes fiquem fora do projeto.</p>
+          <div class="table-wrap"><table><thead><tr><th>Stakeholder</th><th>Interesse</th><th>Como contribuir no levantamento</th></tr></thead><tbody>
+            <tr><td>Jogador</td><td>Realizar partidas de maneira clara, correta e divertida.</td><td>Descrever regras, decisões, dúvidas e dificuldades durante uma partida.</td></tr>
+            <tr><td>Cliente / Product Owner</td><td>Priorizar valor e decidir o que será entregue.</td><td>Definir objetivo, escopo, prioridade e aceite.</td></tr>
+            <tr><td>Equipe de desenvolvimento</td><td>Construir solução viável, sustentável e testável.</td><td>Identificar riscos, dependências, ambiguidades e restrições técnicas.</td></tr>
+            <tr><td>Professor / avaliador</td><td>Verificar aprendizagem, coerência e evidências do processo.</td><td>Revisar documentação, modelos, justificativas e resultados.</td></tr>
+          </tbody></table></div>
+        </section>
+
+        <section id="tipos" class="panel">
+          <h2>Requisitos funcionais, não funcionais e regras</h2>
+          <div class="cards">
+            <article class="mini-card"><h3>Requisitos funcionais</h3><p>Descrevem serviços, ações e comportamentos que o sistema deve oferecer.</p><p><strong>Forma útil:</strong> “O sistema deve permitir/registrar/calcular...”</p></article>
+            <article class="mini-card"><h3>Requisitos não funcionais</h3><p>Definem qualidades, restrições e condições sob as quais o sistema deve operar.</p><p><strong>Forma útil:</strong> “O sistema deve responder em..., ser acessível..., proteger...”</p></article>
+            <article class="mini-card"><h3>Regras de negócio</h3><p>Representam regras do domínio, independentemente da tecnologia.</p><p><strong>Exemplo:</strong> apenas o jogador da vez pode realizar uma jogada.</p></article>
+            <article class="mini-card"><h3>Restrições</h3><p>Limitam as opções de solução.</p><p><strong>Exemplo:</strong> o projeto deverá usar Java e versionamento no GitHub.</p></article>
+          </div>
+        </section>
+
+        <section id="levantamento" class="panel">
+          <h2>Levantamento e especificação</h2>
+          <p>Levantar requisitos é descobrir e organizar necessidades. Especificar é registrá-las de modo que possam ser compreendidas, revisadas, implementadas e testadas.</p>
+          <ol class="steps"><li><strong>Preparar:</strong> definir objetivo, escopo inicial, stakeholders e perguntas.</li><li><strong>Coletar:</strong> observar partidas, entrevistar jogadores, ler o manual, aplicar questionários e fazer brainstorming.</li><li><strong>Analisar:</strong> identificar ambiguidades, conflitos, dependências, regras e exceções.</li><li><strong>Especificar:</strong> registrar requisitos em tabela, histórias ou casos de uso.</li><li><strong>Validar:</strong> revisar com stakeholders e confirmar exemplos e critérios.</li><li><strong>Gerenciar:</strong> controlar versão, prioridade, mudanças e rastreabilidade.</li></ol>
+        </section>
+
+        <section id="modelo" class="panel">
+          <h2>Tabela de levantamento de requisitos</h2>
+          <p>A equipe deve registrar cada requisito usando uma identificação única e dados suficientes para compreender, priorizar e testar a necessidade.</p>
+          <div class="table-wrap"><table><thead><tr><th>Campo</th><th>Como preencher</th></tr></thead><tbody>
+            <tr><td>ID</td><td>Identificador único: RF01, RNF01, RN02 etc.</td></tr><tr><td>Nome</td><td>Título curto e significativo.</td></tr><tr><td>Tipo</td><td>Funcional, não funcional, regra de negócio ou restrição.</td></tr><tr><td>Descrição</td><td>Texto claro do que é esperado ou imposto.</td></tr><tr><td>Origem / stakeholder</td><td>Quem forneceu ou validará a necessidade.</td></tr><tr><td>Prioridade</td><td>Must, Should, Could ou Won't; ou alta, média e baixa.</td></tr><tr><td>Justificativa</td><td>Motivo pelo qual o item possui aquela prioridade.</td></tr><tr><td>Critérios de aceitação</td><td>Condições objetivas que comprovam o atendimento.</td></tr><tr><td>Dependências</td><td>Regras, requisitos, dados ou componentes relacionados.</td></tr><tr><td>Status</td><td>Proposto, em análise, aprovado, implementado, testado ou rejeitado.</td></tr><tr><td>Observações</td><td>Dúvidas, decisões, riscos e versões relevantes.</td></tr>
+          </tbody></table></div>
+        </section>
+
+        <section id="aceitacao" class="panel">
+          <h2>Critérios de aceitação</h2>
+          <p>Critérios de aceitação dizem como verificar objetivamente que um requisito foi atendido. Eles conectam requisito, testes e aceite do usuário.</p>
+          <div class="grid-2"><div class="card-soft"><h3>Critério forte</h3><p>“A partida só poderá iniciar com dois ou mais jogadores cadastrados e cada jogador deverá possuir um nome único.”</p></div><div class="card-soft"><h3>Critério fraco</h3><p>“A partida deve iniciar corretamente.” A expressão “corretamente” é ambígua e não orienta teste.</p></div></div>
+          <div class="callout"><strong>Dica:</strong> para cada requisito, pergunte “como alguém demonstrará que isso foi atendido?” A resposta deve aparecer nos critérios de aceitação.</div>
+        </section>
+
+        <section id="priorizacao" class="panel">
+          <h2>Como priorizar requisitos?</h2>
+          <p>Priorizar é decidir o que será feito primeiro. A decisão deve considerar valor para o usuário, importância para o objetivo do projeto, urgência, riscos, dependências e esforço. A prioridade não é definitiva: ela deve ser revisada quando a equipe aprende algo novo ou quando o escopo muda.</p>
+          <h3>Passo a passo</h3>
+          <ol class="steps"><li>Listar os requisitos e eliminar duplicidades.</li><li>Identificar dependências: o que precisa existir antes de outro item funcionar?</li><li>Discutir valor, risco, urgência e esforço com os stakeholders.</li><li>Classificar os requisitos e registrar a justificativa.</li><li>Selecionar os itens essenciais para o primeiro incremento.</li><li>Revisar a ordem de prioridade a cada ciclo de trabalho.</li></ol>
+          <h3>Método MoSCoW</h3>
+          <div class="table-wrap"><table><thead><tr><th>Categoria</th><th>Significado</th><th>Exemplo</th></tr></thead><tbody>
+            <tr><td><strong>Must have</strong></td><td>Indispensável. Sem este requisito, o objetivo principal não é alcançado.</td><td>No War, o sistema deve impedir que um jogador ataque fora do seu turno.</td></tr>
+            <tr><td><strong>Should have</strong></td><td>Muito importante, mas o produto ainda funciona sem ele na primeira versão.</td><td>No Banco Imobiliário, o sistema deve exibir histórico detalhado de transações.</td></tr>
+            <tr><td><strong>Could have</strong></td><td>Agrega valor, mas pode ser feito apenas se houver tempo e capacidade.</td><td>No Geomundo, o sistema pode exibir curiosidades extras após uma resposta.</td></tr>
+            <tr><td><strong>Won't have now</strong></td><td>Foi considerado, porém ficará fora do escopo desta versão.</td><td>Modo de partida on-line na primeira entrega.</td></tr>
+          </tbody></table></div>
+          <div class="callout"><strong>Cuidado:</strong> se todos os requisitos forem classificados como <em>Must have</em>, a equipe não priorizou. Um item só é Must quando sua ausência inviabiliza o objetivo da versão atual.</div>
+        </section>
+
+        <section id="ferramentas" class="panel">
+          <h2>Ferramentas para gerenciamento de requisitos</h2>
+          <p>Ferramentas ajudam a registrar, versionar, priorizar, atribuir responsáveis e relacionar requisitos a diagramas, testes e código. A ferramenta não substitui a análise: ela organiza as decisões da equipe.</p>
+          <div class="table-wrap"><table><thead><tr><th>Ferramenta</th><th>Uso resumido</th><th>Exemplo simples</th></tr></thead><tbody>
+            <tr><td><strong>GitHub Issues + Projects</strong></td><td>Boa opção para equipes que já usam GitHub. Cada requisito pode ser uma Issue; o Project organiza prioridade, status e iteração.</td><td>Criar a Issue “RF01 — Iniciar partida”; adicionar os campos <em>Prioridade: Must</em>, <em>Status: Em análise</em> e um link para o diagrama de casos de uso.</td></tr>
+            <tr><td><strong>Azure Boards</strong></td><td>Organiza requisitos como itens de trabalho em backlog, quadro Kanban e sprints.</td><td>Criar uma User Story “Como jogador, quero iniciar uma partida”; vinculá-la a tarefas, testes e bugs.</td></tr>
+            <tr><td><strong>Jira + Confluence</strong></td><td>Combina rastreamento de itens com documentação colaborativa.</td><td>Registrar “RF01” como tipo de item Requisito e documentar regras e decisões em uma página Confluence vinculada.</td></tr>
+            <tr><td><strong>Planilha compartilhada</strong></td><td>Útil para levantamento inicial e discussão em sala, com baixa curva de aprendizagem.</td><td>Criar colunas ID, tipo, descrição, prioridade, critérios de aceitação, responsável e status.</td></tr>
+          </tbody></table></div>
+        </section>
+
+        <section id="exemplos" class="panel">
+          <h2>Exemplos nos jogos estudados</h2>
+          <p>Os exemplos a seguir servem como ponto de partida. As equipes devem conferir o manual da edição utilizada e registrar as regras específicas do jogo escolhido.</p>
+          <div class="table-wrap"><table><thead><tr><th>Jogo</th><th>Exemplos funcionais</th><th>Exemplos não funcionais</th></tr></thead><tbody>
+            <tr><td><strong>Banco Imobiliário</strong></td><td>RF01: o sistema deve mover a peça conforme o resultado dos dados.<br>RF02: o sistema deve permitir comprar uma propriedade disponível.<br>RF03: o sistema deve calcular e transferir aluguel ao proprietário quando outro jogador parar em sua propriedade.<br>RF04: o sistema deve registrar compra, venda, hipoteca e saldo de cada jogador.</td><td>RNF01: o sistema deve exibir saldo, propriedades e jogador da vez em uma tela acessível.<br>RNF02: o cálculo financeiro deve ser concluído antes da confirmação da jogada.<br>RNF03: as transações devem manter histórico auditável, sem alteração silenciosa de saldo.</td></tr>
+            <tr><td><strong>Geomundo</strong></td><td>RF01: o sistema deve sortear ou apresentar uma carta com localidade a ser identificada.<br>RF02: o sistema deve registrar a resposta de localização e a resposta à pergunta de geografia/cultura.<br>RF03: o sistema deve atribuir ponto e carimbo ao passaporte quando o jogador acertar as etapas previstas.<br>RF04: o sistema deve manter a pontuação acumulada por jogador.</td><td>RNF01: mapas, textos e cartas devem ser legíveis em diferentes tamanhos de tela.<br>RNF02: o sistema deve fornecer retorno imediato e claro sobre acerto ou erro.<br>RNF03: o conteúdo de geografia e cultura deve ser armazenado de forma que possa ser revisado e atualizado sem alterar a lógica principal.</td></tr>
+            <tr><td><strong>War</strong></td><td>RF01: o sistema deve distribuir territórios e exércitos iniciais conforme a configuração da partida.<br>RF02: o sistema deve permitir atacar apenas territórios adversários adjacentes ou conectados conforme as regras.<br>RF03: o sistema deve resolver combates a partir dos resultados dos dados e atualizar os exércitos.<br>RF04: o sistema deve verificar se o objetivo secreto foi cumprido ao final do turno.</td><td>RNF01: o mapa deve diferenciar visualmente territórios, proprietários e quantidade de exércitos.<br>RNF02: o sistema deve registrar o histórico de ataques e resultados para consulta da partida.<br>RNF03: informações de objetivos secretos não devem ser exibidas a adversários.</td></tr>
+          </tbody></table></div>
+        </section>
+
+        <section id="atividade" class="panel"><h2>Atividade</h2><p>Cada equipe deverá levantar os requisitos do projeto escolhido e priorizá-los.</p></section>
+
+        <section id="java" class="panel">
+          <h2>Rastreabilidade em Java</h2>
+          <p>O código não substitui a especificação, mas pode tornar regras e critérios verificáveis. O exemplo abaixo representa uma regra de turno e uma mensagem associada a um requisito.</p>
+          <div class="code-block"><pre><code>public final class Partida {
+    private Jogador jogadorDaVez;
+
+    // Rastreabilidade: RN01 - somente o jogador da vez pode jogar.
+    public void realizarJogada(Jogador jogador, Jogada jogada) {
+        if (!jogador.equals(jogadorDaVez)) {
+            throw new IllegalStateException(
+                "RN01: apenas o jogador da vez pode realizar uma jogada."
+            );
+        }
+
+        jogada.executar();
+    }
+}
+</code></pre></div>
+          <p>Ao criar testes, a equipe deve relacionar o nome do teste ou seu comentário ao requisito correspondente. Assim, uma mudança no requisito revela quais modelos, classes e testes precisam ser revisados.</p>
+        </section>
+
+        <div class="next"><a href="../index.html">← Voltar ao menu</a><a href="analise-projeto.html">Próximo: análise e projeto →</a></div>
+      </article>
+    </div>
+  </main>
+
+  <footer><div class="wrap"><p><strong>Engenharia de Software</strong> · Material de estudos</p><p>Stakeholders, requisitos funcionais, não funcionais e critérios de aceitação.</p></div></footer>
+  <script src="assets/js/topicos.js" defer></script>
+</body>
+</html>
