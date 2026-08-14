@@ -79,8 +79,9 @@ a:hover { color: var(--primary-dark); }
   outline-offset: 2px;
 }
 
+/* Área útil mais ampla */
 .container {
-  max-width: var(--max-width);
+  max-width: 1280px;
   margin-inline: auto;
   padding-inline: 1.5rem;
 }
@@ -173,7 +174,18 @@ a:hover { color: var(--primary-dark); }
 
 .topic-article { padding-block: 1.4rem 2rem; }
 
-.topic-header { max-width: 72ch; margin-bottom: 2rem; }
+/* Coluna de leitura mais larga e centralizada */
+.topic-header,
+.topic-article section,
+.thinking-box,
+.activity-box,
+.diagram-figure {
+  width: min(100%, 860px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.topic-header { margin-bottom: 2rem; }
 
 .topic-meta {
   display: flex;
@@ -200,11 +212,6 @@ a:hover { color: var(--primary-dark); }
 }
 
 .topic-lead { font-size: 1.05rem; color: var(--ink-soft); margin: 0; }
-
-.topic-article section {
-  max-width: 72ch;
-  margin-bottom: 2.2rem;
-}
 
 .topic-article h2 {
   font-family: var(--font-display);
@@ -265,7 +272,6 @@ table.compare-table {
   width: 100%;
   border-collapse: collapse;
   min-width: 560px;
-  max-width: 72ch;
 }
 
 table.compare-table caption {
@@ -297,7 +303,7 @@ table.compare-table tbody tr:nth-child(even) { background: var(--surface-dim); }
 
 /* ---------------- Diagramas e figuras ---------------- */
 
-/* Contêiner da figura: mesma largura da coluna de texto e responsivo */
+/* Contêiner da figura: mesma largura da coluna de leitura, responsivo */
 .diagram-figure {
   margin: 0 0 .9rem;
   background: var(--surface);
@@ -305,9 +311,7 @@ table.compare-table tbody tr:nth-child(even) { background: var(--surface-dim); }
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 1.2rem;
-
-  max-width: 72ch;
-  width: 100%;
+  width: min(100%, 860px);
   margin-inline: auto;
   overflow: hidden;
 }
@@ -339,8 +343,8 @@ table.compare-table tbody tr:nth-child(even) { background: var(--surface-dim); }
 /* Imagens em figuras — responsivo, acompanha largura do texto */
 .diagram-figure img {
   display: block;
-  width: 100%;
-  height: auto;
+  width: 100%;      /* ocupa a largura da figura */
+  height: auto;     /* mantém proporção */
   margin-inline: auto;
   border-radius: var(--radius-sm);
 }
@@ -351,7 +355,6 @@ table.compare-table tbody tr:nth-child(even) { background: var(--surface-dim); }
   border: 1px solid var(--current);
   border-radius: var(--radius);
   padding: 1.2rem 1.3rem;
-  max-width: 72ch;
 }
 .activity-box h2 { border-top: none; padding-top: 0; color: var(--current); }
 
@@ -456,7 +459,6 @@ Seção "Para pensar!" — exercícios MER
 ========================================================= */
 
 .thinking-box {
-  max-width: 72ch;
   margin-bottom: 2.2rem;
 }
 
