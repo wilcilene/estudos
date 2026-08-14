@@ -1,0 +1,391 @@
+:root {
+    --ink: #15232e;
+    --navy: #102e46;
+    --blue: #216887;
+    --teal: #25a6ad;
+    --gold: #f3bb4d;
+    --paper: #f5f8fa;
+    --muted: #617482;
+    --line: #dbe6ec;
+    --white: #fff;
+    --shadow: 0 16px 40px rgba(16, 46, 70, .10)
+}
+
+* {
+    box-sizing: border-box
+}
+
+html {
+    scroll-behavior: smooth
+}
+
+body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 16px/1.65 system-ui, -apple-system, Segoe UI, Roboto, sans-serif
+}
+
+img {
+    max-width: 100%;
+    display: block
+}
+
+a {
+    color: inherit
+}
+
+.wrap {
+    width: min(1160px, calc(100% - 2.4rem));
+    margin: 0 auto
+}
+
+.skip {
+    position: absolute;
+    left: -9999px
+}
+
+.skip:focus {
+    left: 1rem;
+    top: 1rem;
+    background: #fff;
+    padding: .6rem 1rem;
+    z-index: 10;
+    border-radius: 10px
+}
+
+.topbar {
+    background: #0b2234;
+    color: #c9dfe5;
+    font-size: .82rem
+}
+
+.topbar .wrap {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .55rem 0
+}
+
+.hero {
+    background: linear-gradient(130deg, #102e46, #1b607b 70%, #20a0a7);
+    color: #fff;
+    overflow: hidden
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 2.2rem;
+    align-items: center;
+    padding: 4.5rem 0
+}
+
+.eyebrow {
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    font-size: .75rem;
+    font-weight: 700;
+    color: #a9e5e7
+}
+
+.hero h1 {
+    font-size: clamp(2.2rem, 5vw, 4.3rem);
+    line-height: 1.02;
+    margin: .65rem 0 1rem
+}
+
+.hero p {
+    font-size: 1.08rem;
+    color: #e2f0f2;
+    max-width: 700px
+}
+
+.hero-actions {
+    display: flex;
+    gap: .8rem;
+    flex-wrap: wrap;
+    margin-top: 1.6rem
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: .72rem 1.15rem;
+    text-decoration: none;
+    font-weight: 700;
+    border: 1px solid transparent
+}
+
+.button.primary {
+    background: var(--gold);
+    color: #15232e
+}
+
+.button.secondary {
+    background: #ffffff18;
+    color: #fff;
+    border-color: #ffffff60
+}
+
+.hero-media {
+    margin: 0
+}
+
+.hero-media img {
+    width: 100%;
+    height: 100%;
+    max-height: 340px;
+    object-fit: cover;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, .25);
+    box-shadow: 0 20px 40px rgba(6, 26, 44, .35)
+}
+
+.hero-media figcaption {
+    font-size: .78rem;
+    color: #d5eef0;
+    margin-top: .5rem
+}
+
+.main {
+    padding: 3.8rem 0
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 2rem;
+    align-items: start
+}
+
+.toc {
+    position: sticky;
+    top: 1rem;
+    align-self: start;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: 0 4px 15px rgba(16, 46, 70, .05)
+}
+
+.toc strong {
+    display: block;
+    margin-bottom: .55rem
+}
+
+.toc a {
+    display: block;
+    padding: .35rem 0;
+    text-decoration: none;
+    font-size: .92rem;
+    color: #2e4d63
+}
+
+.content {
+    min-width: 0
+}
+
+.panel {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 1.35rem;
+    margin-bottom: 1.15rem;
+    box-shadow: 0 4px 15px rgba(16, 46, 70, .05)
+}
+
+.panel h2 {
+    font-size: 1.7rem;
+    line-height: 1.15;
+    margin: 0 0 .8rem
+}
+
+.panel h3 {
+    font-size: 1.05rem;
+    color: var(--blue);
+    margin: 0 0 .45rem
+}
+
+.lead {
+    font-size: 1.08rem;
+    color: #385767;
+    margin-top: 0
+}
+
+.callout,
+.prompt-box {
+    background: #e9f5f5;
+    border: 1px solid #cce9eb;
+    border-radius: 16px;
+    padding: 1rem 1.1rem;
+    margin-top: 1rem
+}
+
+.prompt-box {
+    background: #fff8e8;
+    border-color: #f2d792
+}
+
+.grid-2,
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem
+}
+
+.mini-card,
+.card-soft {
+    background: #fafdff;
+    border: 1px solid #e3edf2;
+    border-radius: 14px;
+    padding: 1rem
+}
+
+.mini-card ul,
+.checklist {
+    margin: .55rem 0 0 1.2rem
+}
+
+.mini-card li,
+.checklist li {
+    margin: .35rem 0
+}
+
+.steps {
+    padding-left: 1.2rem
+}
+
+.steps li {
+    margin: .55rem 0
+}
+
+.table-wrap {
+    overflow: auto;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    margin-top: 1rem
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 900px;
+    background: #fff
+}
+
+th,
+td {
+    padding: .8rem .75rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    text-align: left
+}
+
+th {
+    background: #eef7f7;
+    color: var(--blue)
+}
+
+.code-block {
+    background: #102e46;
+    color: #e8f3f5;
+    border-radius: 16px;
+    padding: 1rem;
+    overflow: auto;
+    margin: 1rem 0
+}
+
+.code-block pre {
+    margin: 0
+}
+
+.code-block code {
+    font: 14px/1.6 ui-monospace, SFMono-Regular, Consolas, monospace;
+    white-space: pre
+}
+
+.next {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 1.5rem 0 0
+}
+
+.next a {
+    background: var(--navy);
+    color: #fff;
+    border-radius: 12px;
+    padding: .8rem 1rem;
+    text-decoration: none;
+    font-weight: 700
+}
+
+.prompt strong {
+    color: #865e0c
+}
+
+.prompt p {
+    margin: .4rem 0 0
+}
+
+footer {
+    background: #0b2234;
+    color: #bfd3da;
+    padding: 2rem 0;
+    font-size: .9rem
+}
+
+footer .wrap {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap
+}
+
+footer p {
+    margin: .25rem 0
+}
+
+@media(max-width:820px) {
+
+    .layout,
+    .hero-grid {
+        grid-template-columns: 1fr
+    }
+
+    .toc {
+        position: static
+    }
+
+    .grid-2,
+    .cards {
+        grid-template-columns: 1fr
+    }
+
+    .topbar .wrap span:last-child {
+        display: none
+    }
+}
+
+@media(max-width:520px) {
+    .wrap {
+        width: calc(100% - 1.4rem)
+    }
+
+    .next {
+        display: block
+    }
+
+    .next a {
+        display: block;
+        margin: .5rem 0
+    }
+
+    .hero h1 {
+        font-size: 2.1rem
+    }
+}
