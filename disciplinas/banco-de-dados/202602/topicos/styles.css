@@ -85,7 +85,7 @@ a:hover { color: var(--primary-dark); }
   padding-inline: 1.5rem;
 }
 
-/* ---------------- Header (compartilhado) ---------------- */
+/* ---------------- Header ---------------- */
 .site-header {
   position: sticky;
   top: 0;
@@ -296,6 +296,8 @@ table.compare-table td {
 table.compare-table tbody tr:nth-child(even) { background: var(--surface-dim); }
 
 /* ---------------- Diagramas e figuras ---------------- */
+
+/* Contêiner da figura: mesma largura da coluna de texto e responsivo */
 .diagram-figure {
   margin: 0 0 .9rem;
   background: var(--surface);
@@ -303,7 +305,9 @@ table.compare-table tbody tr:nth-child(even) { background: var(--surface-dim); }
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 1.2rem;
+
   max-width: 72ch;
+  width: 100%;
   margin-inline: auto;
   overflow: hidden;
 }
@@ -332,11 +336,10 @@ table.compare-table tbody tr:nth-child(even) { background: var(--surface-dim); }
   color: var(--ink-soft);
 }
 
-/* Imagens em figuras — ajuste proporcional */
+/* Imagens em figuras — responsivo, acompanha largura do texto */
 .diagram-figure img {
   display: block;
   width: 100%;
-  max-width: 820px;      /* limite para não ficar larga demais */
   height: auto;
   margin-inline: auto;
   border-radius: var(--radius-sm);
