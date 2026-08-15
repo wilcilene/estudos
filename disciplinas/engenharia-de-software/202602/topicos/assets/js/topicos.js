@@ -1,219 +1,793 @@
-/** 
- * 1. Utilidades
- * 2. Barra de progresso de leitura
- * 3. Sumário (TOC) com destaque da seção ativa (scrollspy)
- * 4. Botão "copiar código"
- * 5. Marcar tópico como estudado (localStorage)
- * 6. Inicialização
- */
-(function () {
-  "use strict";
+/* =========================================================================
+topico.css
+Estilos exclusivos das páginas de TÓ·PICO (ex.: topicos/requisitos.html).
+Nao e o mesmo arquivo/visual da home (index.html): a home e uma "capa"
+com hero de largura total; o topico e um artigo de estudo, com leitura
+longa, sumario e navegacao entre secoes.
 
-  /* ------------------------------------------------------------------ */
-  /* 1. Utilidades                                                       */
-  /* ------------------------------------------------------------------ */
-  var prefersReducedMotion =
-    window.matchMedia &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+Organizacao (sumario deste arquivo):
+1. Tokens (design system)
+2. Reset e base
+3. Utilitarios e acessibilidade
+4. Cabecalho do topico (breadcrumb + titulo)
+5. Barra de progresso de leitura
+6. Layout em duas colunas (sumario + conteudo)
+7. Sumario (TOC) lateral
+8. Conteudo do artigo (tipografia, tabelas, listas, figuras)
+9. Componentes: badges, callouts, codigo, botao "estudado"
+10. Paginacao entre topicos
+11. Rodape
+12. Responsivo (mobile-first: overrides em min-width)
+13. Impressao
+14. Reducao de movimento
+========================================================================= */
 
-  function qs(selector, scope) {
-    return (scope || document).querySelector(selector);
+/* -------------------------------------------------------------------------
+1. TOKENS
+Paleta "prancheta de projeto": a mesma base azul-marinho da home
+(identidade da disciplina), com um acento ambar de "anotacao de
+engenheiro" — usado so para prioridade/destaque, nunca como cor de fundo.
+---------------------------------------------------------------------- */
+:root {
+  /* Cor */
+  --color-brand-900: #0c2436;
+  --color-brand-700: #102e46; /* mesma cor da home (meta-theme-color) */
+  --color-brand-500: #1f4d6e;
+  --color-brand-100: #e8eef3;
+
+  --color-accent-600: #9c6a1f; /* ambar de anotacao/prioridade */
+  --color-accent-100: #f6ecd9;
+
+  --color-ink: #16212c;
+  --color-ink-soft: #45505c;
+  --color-ink-faint: #6b7684;
+
+  --color-bg: #f7f5f0; /* papel, nao branco puro */
+  --color-surface: #ffffff;
+  --color-line: #dde2e6;
+  --color-line-strong: #b9c2ca;
+
+  --color-code-bg: #101820;
+  --color-code-ink: #dbe4ea;
+
+  --color-ok: #2f6b4f;
+  --color-ok-bg: #e7f2ec;
+
+  /* Tipografia */
+  --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, Menlo, monospace;
+
+  --step--1: 0.875rem;
+  --step-0: 1rem;
+  --step-1: 1.125rem;
+  --step-2: 1.375rem;
+  --step-3: 1.75rem;
+  --step-4: 2.25rem;
+
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+
+  /* Layout */
+  --content-max: 42rem;
+  --page-max: 78rem;
+  --gap: clamp(1rem, 2vw, 2rem);
+  --radius: 10px;
+  --radius-sm: 6px;
+
+  --shadow-sm: 0 1px 2px rgba(16, 46, 70, 0.08);
+  --shadow-md: 0 8px 24px rgba(16, 46, 70, 0.12);
+
+  --header-h: 3.25rem;
+}
+
+/* -------------------------------------------------------------------------
+2. RESET E BASE
+---------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 1rem);
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--color-brand-500);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+
+a:hover {
+  color: var(--color-brand-700);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--color-brand-900);
+  line-height: var(--leading-tight);
+  margin: 0 0 0.6em;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+/* -------------------------------------------------------------------------
+3. UTILITARIOS E ACESSIBILIDADE
+---------------------------------------------------------------------- */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  background: var(--color-brand-900);
+  color: #fff;
+  padding: 0.6em 1em;
+  border-radius: var(--radius-sm);
+  z-index: 100;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent-600);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------------------------------
+4. CABECALHO DO TOPICO
+Diferente da home: sem hero de tela cheia. E uma faixa curta e densa,
+tipica de pagina de artigo/documentacao: breadcrumb, categoria, titulo.
+---------------------------------------------------------------------- */
+.topic-header {
+  background: linear-gradient(180deg, var(--color-brand-900), var(--color-brand-700));
+  color: #eef3f7;
+  padding: 1.75rem 1.25rem 2.25rem;
+}
+
+.topic-breadcrumb {
+  max-width: var(--page-max);
+  margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4em;
+  font-size: var(--step--1);
+  color: #c8d6e2;
+  list-style: none;
+  padding: 0;
+}
+
+.topic-breadcrumb a {
+  color: #dce8f2;
+}
+
+.topic-breadcrumb li[aria-current="page"] {
+  color: #fff;
+  font-weight: 600;
+}
+
+.topic-breadcrumb .sep {
+  opacity: 0.5;
+}
+
+.topic-header__meta {
+  max-width: var(--page-max);
+  margin: 1.1rem auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.topic-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #a9c2d6;
+}
+
+.topic-header h1 {
+  max-width: var(--page-max);
+  margin: 0.5rem auto 0.6rem;
+  color: #fff;
+  font-size: clamp(var(--step-3), 3.6vw, var(--step-4));
+}
+
+.topic-dek {
+  max-width: 46rem;
+  margin: 0 auto;
+  color: #d3e0ea;
+  font-size: var(--step-1);
+  line-height: var(--leading-relaxed);
+}
+
+.topic-header__info {
+  max-width: var(--page-max);
+  margin: 1.1rem auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  font-size: var(--step--1);
+  color: #b9cbdb;
+}
+
+.topic-header__info li {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.btn-track {
+  margin-left: auto;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  padding: 0.5em 0.9em;
+  border-radius: 999px;
+  font-size: var(--step--1);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-track:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.btn-track[aria-pressed="true"] {
+  background: var(--color-accent-600);
+  border-color: var(--color-accent-600);
+}
+
+/* -------------------------------------------------------------------------
+5. BARRA DE PROGRESSO DE LEITURA
+---------------------------------------------------------------------- */
+.reading-progress {
+  position: sticky;
+  top: 0;
+  height: 3px;
+  background: var(--color-line);
+  z-index: 40;
+}
+
+.reading-progress__fill {
+  height: 100%;
+  width: 0%;
+  background: var(--color-accent-600);
+  transform-origin: left;
+  transition: width 0.1s linear;
+}
+
+/* -------------------------------------------------------------------------
+6. LAYOUT EM DUAS COLUNAS
+---------------------------------------------------------------------- */
+.topic-layout {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+  align-items: start;
+}
+
+/* -------------------------------------------------------------------------
+7. SUMARIO (TOC) LATERAL
+Em telas pequenas vira um retratil; em telas largas fica
+fixo (sticky) ao lado do texto — comportamento de documentacao tecnica,
+nao de menu de site.
+---------------------------------------------------------------------- */
+.topic-toc {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: 0.25rem 1rem 1rem;
+}
+
+.topic-toc__summary {
+  cursor: pointer;
+  padding: 0.85rem 0;
+  font-family: var(--font-display);
+  font-size: var(--step-0);
+  color: var(--color-brand-900);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.topic-toc__summary::-webkit-details-marker {
+  display: none;
+}
+
+.topic-toc__summary .chevron {
+  transition: transform 0.2s ease;
+  color: var(--color-ink-faint);
+}
+
+.topic-toc[open] .topic-toc__summary .chevron {
+  transform: rotate(90deg);
+}
+
+.topic-toc nav ol {
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem 0 0.25rem 0;
+  border-top: 1px solid var(--color-line);
+}
+
+.topic-toc a {
+  display: block;
+  padding: 0.4rem 0.5rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-ink-soft);
+  font-size: var(--step--1);
+  text-decoration: none;
+  counter-increment: toc;
+}
+
+.topic-toc a::before {
+  content: counter(toc, decimal-leading-zero) " ";
+  font-family: var(--font-mono);
+  color: var(--color-ink-faint);
+}
+
+.topic-toc nav ol {
+  counter-reset: toc;
+}
+
+.topic-toc a:hover {
+  background: var(--color-brand-100);
+  color: var(--color-brand-900);
+}
+
+.topic-toc a[aria-current="true"] {
+  background: var(--color-brand-100);
+  color: var(--color-brand-900);
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 var(--color-accent-600);
+}
+
+/* -------------------------------------------------------------------------
+8. CONTEUDO DO ARTIGO
+---------------------------------------------------------------------- */
+.topic-content {
+  min-width: 0;
+}
+
+.topic-article {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.topic-lede {
+  font-size: var(--step-1);
+  color: var(--color-ink-soft);
+  line-height: var(--leading-relaxed);
+  max-width: var(--content-max);
+}
+
+.topic-figure {
+  margin: 1.75rem 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+}
+
+.topic-figure img {
+  width: 100%;
+}
+
+.topic-figure figcaption {
+  padding: 0.6rem 0.9rem;
+  font-size: var(--step--1);
+  color: var(--color-ink-faint);
+  background: var(--color-brand-100);
+}
+
+.topic-section {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding-block: 1.75rem;
+  border-top: 1px solid var(--color-line);
+  scroll-margin-top: calc(var(--header-h) + 1rem);
+}
+
+.topic-section:first-of-type {
+  border-top: 0;
+  padding-top: 0.25rem;
+}
+
+.topic-section h2 {
+  font-size: var(--step-2);
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.topic-section h2 .h2-index {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--color-accent-600);
+  font-weight: 600;
+}
+
+.topic-section h3 {
+  font-size: var(--step-1);
+  margin-top: 1.4em;
+}
+
+.topic-section p,
+.topic-section li {
+  color: var(--color-ink);
+}
+
+.topic-section ol,
+.topic-section ul {
+  padding-left: 1.25em;
+}
+
+.topic-section li + li {
+  margin-top: 0.35em;
+}
+
+/* Tabelas: rolagem horizontal propria em telas estreitas, sem quebrar
+o layout do artigo. */
+.table-scroll {
+  max-width: var(--content-max);
+  margin: 1.25rem auto;
+  overflow-x: auto;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+}
+
+.topic-table {
+  width: 100%;
+  min-width: 32rem;
+  border-collapse: collapse;
+  font-size: var(--step--1);
+}
+
+.topic-table caption {
+  text-align: left;
+  padding: 0.6rem 0.9rem;
+  font-size: var(--step--1);
+  color: var(--color-ink-faint);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.topic-table th,
+.topic-table td {
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--color-line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.topic-table thead th {
+  background: var(--color-brand-100);
+  color: var(--color-brand-900);
+  font-family: var(--font-display);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.topic-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.topic-table tbody tr:hover {
+  background: #fbfaf7;
+}
+
+/* Prioridade MoSCoW: reaproveita o acento ambar em badges de celula */
+.tag {
+  display: inline-block;
+  padding: 0.1em 0.55em;
+  border-radius: 999px;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.tag--must {
+  background: var(--color-accent-100);
+  color: var(--color-accent-600);
+}
+
+.tag--ok {
+  background: var(--color-ok-bg);
+  color: var(--color-ok);
+}
+
+/* -------------------------------------------------------------------------
+9. COMPONENTES
+---------------------------------------------------------------------- */
+
+/* Callouts: distingue "dica" e "atencao" sem depender so da cor
+(icone + rotulo textual, para acessibilidade). */
+.callout {
+  max-width: var(--content-max);
+  margin: 1.25rem auto;
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius-sm);
+  border-left: 4px solid var(--color-brand-500);
+  background: var(--color-brand-100);
+  font-size: var(--step--1);
+}
+
+.callout strong {
+  display: block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-brand-700);
+  margin-bottom: 0.25em;
+}
+
+.callout--warning {
+  border-left-color: var(--color-accent-600);
+  background: var(--color-accent-100);
+}
+
+.callout--warning strong {
+  color: var(--color-accent-600);
+}
+
+.example-pair {
+  max-width: var(--content-max);
+  margin: 1.25rem auto;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.example-card {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 1.1rem;
+}
+
+.example-card--good {
+  border-left: 4px solid var(--color-ok);
+}
+
+.example-card--bad {
+  border-left: 4px solid #a5433a;
+}
+
+.example-card p {
+  margin: 0.3em 0 0;
+}
+
+.example-card__label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-ink-faint);
+}
+
+/* Bloco de codigo com botao de copiar */
+.code-block {
+  position: relative;
+  max-width: var(--content-max);
+  margin: 1.25rem auto;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--color-code-bg);
+}
+
+.code-block__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.9rem;
+  background: #0b1219;
+  color: #9fb3c4;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.code-block pre {
+  margin: 0;
+  padding: 1rem 1.1rem 1.25rem;
+  overflow-x: auto;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: var(--leading-relaxed);
+  color: var(--color-code-ink);
+}
+
+.copy-btn {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: #cddae4;
+  font-size: 0.75rem;
+  padding: 0.3em 0.7em;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.copy-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.copy-btn[data-copied="true"] {
+  background: var(--color-ok);
+  border-color: var(--color-ok);
+  color: #fff;
+}
+
+/* -------------------------------------------------------------------------
+10. PAGINACAO ENTRE TOPICOS
+---------------------------------------------------------------------- */
+.topic-pager {
+  max-width: var(--content-max);
+  margin: 2rem auto 0;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 1fr;
+}
+
+.topic-pager__link {
+  display: block;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 1.1rem;
+  text-decoration: none;
+  background: var(--color-surface);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.topic-pager__link:hover {
+  border-color: var(--color-brand-500);
+  transform: translateY(-1px);
+}
+
+.topic-pager__eyebrow {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-ink-faint);
+  margin-bottom: 0.2em;
+}
+
+.topic-pager__title {
+  font-family: var(--font-display);
+  color: var(--color-brand-900);
+  font-size: var(--step-0);
+}
+
+.topic-pager__link--next {
+  text-align: right;
+}
+
+/* -------------------------------------------------------------------------
+11. RODAPE
+---------------------------------------------------------------------- */
+.topic-footer {
+  border-top: 1px solid var(--color-line);
+  padding: 1.5rem 1.25rem 2.5rem;
+  text-align: center;
+  color: var(--color-ink-faint);
+  font-size: var(--step--1);
+}
+
+.topic-footer a {
+  color: var(--color-brand-500);
+}
+
+/* -------------------------------------------------------------------------
+12. RESPONSIVO (mobile-first)
+---------------------------------------------------------------------- */
+@media (min-width: 62rem) {
+  .topic-layout {
+    grid-template-columns: 17rem minmax(0, 1fr);
   }
 
-  function qsa(selector, scope) {
-    return Array.prototype.slice.call(
-      (scope || document).querySelectorAll(selector)
-    );
+  .topic-toc {
+    position: sticky;
+    top: calc(var(--header-h) + 1rem);
+    max-height: calc(100vh - var(--header-h) - 2rem);
+    overflow-y: auto;
   }
 
-  /* ------------------------------------------------------------------ */
-  /* 2. Barra de progresso de leitura                                    */
-  /* ------------------------------------------------------------------ */
-  function setupReadingProgress() {
-    var fill = qs("[data-reading-progress-fill]");
-    var article = qs("[data-article]");
-    if (!fill || !article) return;
-
-    function update() {
-      var rect = article.getBoundingClientRect();
-      var articleHeight = rect.height - window.innerHeight;
-      var scrolled = -rect.top;
-      var ratio = articleHeight > 0 ? scrolled / articleHeight : 0;
-      ratio = Math.min(1, Math.max(0, ratio));
-      fill.style.width = ratio * 100 + "%";
-    }
-
-    document.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    update();
+  .topic-toc__summary {
+    cursor: default;
+    pointer-events: none;
   }
 
-  /* ------------------------------------------------------------------ */
-  /* 3. Sumário (TOC) com destaque da seção ativa                        */
-  /* ------------------------------------------------------------------ */
-  function setupTocScrollspy() {
-    var tocLinks = qsa("[data-toc] a[href^='#']");
-    if (!tocLinks.length) return;
-
-    var sections = tocLinks
-      .map(function (link) {
-        var id = link.getAttribute("href").slice(1);
-        return document.getElementById(id);
-      })
-      .filter(Boolean);
-
-    if (!sections.length || !("IntersectionObserver" in window)) return;
-
-    var linkById = {};
-    tocLinks.forEach(function (link) {
-      linkById[link.getAttribute("href").slice(1)] = link;
-    });
-
-    function setActive(id) {
-      tocLinks.forEach(function (link) {
-        link.removeAttribute("aria-current");
-      });
-      var active = linkById[id];
-      if (active) {
-        active.setAttribute("aria-current", "true");
-      }
-    }
-
-    var observer = new IntersectionObserver(
-      function (entries) {
-        var visible = entries
-          .filter(function (entry) {
-            return entry.isIntersecting;
-          })
-          .sort(function (a, b) {
-            return a.boundingClientRect.top - b.boundingClientRect.top;
-          });
-
-        if (visible.length) {
-          setActive(visible[0].target.id);
-        }
-      },
-      {
-        rootMargin: "-15% 0px -70% 0px",
-        threshold: 0,
-      }
-    );
-
-    sections.forEach(function (section) {
-      observer.observe(section);
-    });
-
-    // Em telas pequenas, o sumário fica dentro de um <details>: ao
-    // escolher um item, fecha o painel para liberar espaço de leitura.
-    var tocDetails = qs("[data-toc-panel]");
-    tocLinks.forEach(function (link) {
-      link.addEventListener("click", function () {
-        if (tocDetails && window.innerWidth < 992) {
-          tocDetails.removeAttribute("open");
-        }
-      });
-    });
+  .topic-toc__summary .chevron {
+    display: none;
   }
 
-  /* ------------------------------------------------------------------ */
-  /* 4. Botão "copiar código"                                            */
-  /* ------------------------------------------------------------------ */
-  function setupCopyButtons() {
-    qsa("[data-copy-target]").forEach(function (button) {
-      var targetSelector = button.getAttribute("data-copy-target");
-      var codeEl = qs(targetSelector);
-      if (!codeEl) return;
-
-      button.addEventListener("click", function () {
-        var text = codeEl.textContent;
-
-        function markCopied() {
-          var original = button.textContent;
-          button.textContent = "Copiado!";
-          button.setAttribute("data-copied", "true");
-          window.setTimeout(function () {
-            button.textContent = original;
-            button.removeAttribute("data-copied");
-          }, 1800);
-        }
-
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text).then(markCopied, function () {
-            // Falha silenciosa: usuário ainda pode selecionar o texto manualmente.
-          });
-        } else {
-          var range = document.createRange();
-          range.selectNodeContents(codeEl);
-          var selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          try {
-            document.execCommand("copy");
-            markCopied();
-          } catch (err) {
-            /* sem suporte a cópia: ignora silenciosamente */
-          }
-          selection.removeAllRanges();
-        }
-      });
-    });
+  .example-pair {
+    grid-template-columns: 1fr 1fr;
   }
 
-  /* ------------------------------------------------------------------ */
-  /* 5. Marcar tópico como estudado (localStorage)                       */
-  /*    Usa a mesma convenção de dados que a home ("Estudado"),          */
-  /*    marcar aqui também reflete lá.                                   */
-  /* ------------------------------------------------------------------ */
-  function setupStudyTracker() {
-    var button = qs("[data-track-topic]");
-    if (!button) return;
+  .topic-pager {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 
-    var topicId = button.getAttribute("data-track-topic");
-    var storageKey = "estudos:progresso:" + topicId;
-
-    function readState() {
-      try {
-        return window.localStorage.getItem(storageKey) === "true";
-      } catch (err) {
-        return false;
-      }
-    }
-
-    function render(isStudied) {
-      button.setAttribute("aria-pressed", String(isStudied));
-      button.textContent = isStudied ? "✓ Estudado" : "Marcar como estudado";
-    }
-
-    function writeState(isStudied) {
-      try {
-        window.localStorage.setItem(storageKey, String(isStudied));
-      } catch (err) {
-        /* localStorage indisponível (ex.: modo privado): apenas não persiste */
-      }
-    }
-
-    render(readState());
-
-    button.addEventListener("click", function () {
-      var next = !readState();
-      writeState(next);
-      render(next);
-    });
+/* -------------------------------------------------------------------------
+13. IMPRESSAO
+---------------------------------------------------------------------- */
+@media print {
+  .topic-header,
+  .reading-progress,
+  .topic-toc,
+  .btn-track,
+  .copy-btn,
+  .topic-pager,
+  .skip-link {
+    display: none !important;
   }
 
-  /* ------------------------------------------------------------------ */
-  /* 6. Inicialização                                                     */
-  /* ------------------------------------------------------------------ */
-  function init() {
-    setupReadingProgress();
-    setupTocScrollspy();
-    setupCopyButtons();
-    setupStudyTracker();
+  .topic-layout {
+    display: block;
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
-    init();
+  .topic-article {
+    border: 0;
+    padding: 0;
   }
-})();
+}
+
+/* -------------------------------------------------------------------------
+14. REDUCAO DE MOVIMENTO
+---------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+  }
+}
