@@ -1,22 +1,33 @@
 /* =========================================================================
-   topico.css
+topico.css
+Estilos exclusivos das páginas de TÓ·PICO (ex.: topicos/requisitos.html).
+Nao e o mesmo arquivo/visual da home (index.html): a home e uma "capa"
+com hero de largura total; o topico e um artigo de estudo, com leitura
+longa, sumario e navegacao entre secoes.
 
-   1. Tokens (design system)
-   2. Reset e base
-   3. Utilitários e acessibilidade
-   4. Cabeçalho do tópico (breadcrumb + título)
-   5. Barra de progresso de leitura
-   6. Layout em duas colunas (sumário + conteúdo)
-   7. Sumário (TOC) lateral
-   8. Conteúdo do artigo (tipografia, tabelas, listas, figuras)
-   9. Componentes: badges, callouts, código, botão "estudado"
-   10. Paginação entre tópicos
-   11. Rodapé
-   12. Responsivo (mobile-first: overrides em min-width)
-   13. Impressão
-   14. Redução de movimento
-   ========================================================================= */
+Organizacao (sumario deste arquivo):
+1. Tokens (design system)
+2. Reset e base
+3. Utilitarios e acessibilidade
+4. Cabecalho do topico (breadcrumb + titulo)
+5. Barra de progresso de leitura
+6. Layout em duas colunas (sumario + conteudo)
+7. Sumario (TOC) lateral
+8. Conteudo do artigo (tipografia, tabelas, listas, figuras)
+9. Componentes: badges, callouts, codigo, botao "estudado"
+10. Paginacao entre topicos
+11. Rodape
+12. Responsivo (mobile-first: overrides em min-width)
+13. Impressao
+14. Reducao de movimento
+========================================================================= */
 
+/* -------------------------------------------------------------------------
+1. TOKENS
+Paleta "prancheta de projeto": a mesma base azul-marinho da home
+(identidade da disciplina), com um acento ambar de "anotacao de
+engenheiro" — usado so para prioridade/destaque, nunca como cor de fundo.
+---------------------------------------------------------------------- */
 :root {
   /* Cor */
   --color-brand-900: #0c2436;
@@ -24,14 +35,14 @@
   --color-brand-500: #1f4d6e;
   --color-brand-100: #e8eef3;
 
-  --color-accent-600: #9c6a1f; /* âmbar de anotação/prioridade */
+  --color-accent-600: #9c6a1f; /* ambar de anotacao/prioridade */
   --color-accent-100: #f6ecd9;
 
   --color-ink: #16212c;
   --color-ink-soft: #45505c;
   --color-ink-faint: #6b7684;
 
-  --color-bg: #f7f5f0;          /* papel, não branco puro */
+  --color-bg: #f7f5f0; /* papel, nao branco puro */
   --color-surface: #ffffff;
   --color-line: #dde2e6;
   --color-line-strong: #b9c2ca;
@@ -72,8 +83,8 @@
 }
 
 /* -------------------------------------------------------------------------
-   2. RESET E BASE
-   ---------------------------------------------------------------------- */
+2. RESET E BASE
+---------------------------------------------------------------------- */
 *,
 *::before,
 *::after {
@@ -124,8 +135,8 @@ table {
 }
 
 /* -------------------------------------------------------------------------
-   3. UTILITÁRIOS E ACESSIBILIDADE
-   ---------------------------------------------------------------------- */
+3. UTILITARIOS E ACESSIBILIDADE
+---------------------------------------------------------------------- */
 .skip-link {
   position: absolute;
   left: 1rem;
@@ -157,8 +168,10 @@ table {
 }
 
 /* -------------------------------------------------------------------------
-   4. CABEÇALHO DO TÓPICO
-   ---------------------------------------------------------------------- */
+4. CABECALHO DO TOPICO
+Diferente da home: sem hero de tela cheia. E uma faixa curta e densa,
+tipica de pagina de artigo/documentacao: breadcrumb, categoria, titulo.
+---------------------------------------------------------------------- */
 .topic-header {
   background: linear-gradient(180deg, var(--color-brand-900), var(--color-brand-700));
   color: #eef3f7;
@@ -267,8 +280,8 @@ table {
 }
 
 /* -------------------------------------------------------------------------
-   5. BARRA DE PROGRESSO DE LEITURA
-   ---------------------------------------------------------------------- */
+5. BARRA DE PROGRESSO DE LEITURA
+---------------------------------------------------------------------- */
 .reading-progress {
   position: sticky;
   top: 0;
@@ -286,8 +299,8 @@ table {
 }
 
 /* -------------------------------------------------------------------------
-   6. LAYOUT EM DUAS COLUNAS
-   ---------------------------------------------------------------------- */
+6. LAYOUT EM DUAS COLUNAS
+---------------------------------------------------------------------- */
 .topic-layout {
   max-width: var(--page-max);
   margin: 0 auto;
@@ -299,10 +312,11 @@ table {
 }
 
 /* -------------------------------------------------------------------------
-   7. SUMÁRIO (TOC) LATERAL
-   Em telas pequenas vira um <details> retrátil; em telas largas fica
-   fixo (sticky) ao lado do texto
-   ---------------------------------------------------------------------- */
+7. SUMARIO (TOC) LATERAL
+Em telas pequenas vira um retratil; em telas largas fica
+fixo (sticky) ao lado do texto — comportamento de documentacao tecnica,
+nao de menu de site.
+---------------------------------------------------------------------- */
 .topic-toc {
   background: var(--color-surface);
   border: 1px solid var(--color-line);
@@ -353,7 +367,7 @@ table {
 }
 
 .topic-toc a::before {
-  content: counter(toc, decimal-leading-zero) "  ";
+  content: counter(toc, decimal-leading-zero) " ";
   font-family: var(--font-mono);
   color: var(--color-ink-faint);
 }
@@ -375,8 +389,8 @@ table {
 }
 
 /* -------------------------------------------------------------------------
-   8. CONTEÚDO DO ARTIGO
-   ---------------------------------------------------------------------- */
+8. CONTEUDO DO ARTIGO
+---------------------------------------------------------------------- */
 .topic-content {
   min-width: 0;
 }
@@ -459,8 +473,8 @@ table {
   margin-top: 0.35em;
 }
 
-/* Tabelas: rolagem horizontal própria em telas estreitas, sem quebrar
-   o layout do artigo. */
+/* Tabelas: rolagem horizontal propria em telas estreitas, sem quebrar
+o layout do artigo. */
 .table-scroll {
   max-width: var(--content-max);
   margin: 1.25rem auto;
@@ -508,7 +522,7 @@ table {
   background: #fbfaf7;
 }
 
-/* reaproveita o acento âmbar em badges de célula */
+/* Prioridade MoSCoW: reaproveita o acento ambar em badges de celula */
 .tag {
   display: inline-block;
   padding: 0.1em 0.55em;
@@ -528,10 +542,11 @@ table {
 }
 
 /* -------------------------------------------------------------------------
-   9. COMPONENTES
-   ---------------------------------------------------------------------- */
+9. COMPONENTES
+---------------------------------------------------------------------- */
 
-/*  "dica" e "atenção" */
+/* Callouts: distingue "dica" e "atencao" sem depender so da cor
+(icone + rotulo textual, para acessibilidade). */
 .callout {
   max-width: var(--content-max);
   margin: 1.25rem auto;
@@ -592,7 +607,7 @@ table {
   color: var(--color-ink-faint);
 }
 
-/* Bloco de código com botão de copiar */
+/* Bloco de codigo com botao de copiar */
 .code-block {
   position: relative;
   max-width: var(--content-max);
@@ -647,8 +662,8 @@ table {
 }
 
 /* -------------------------------------------------------------------------
-   10. PAGINAÇÃO ENTRE TÓPICOS
-   ---------------------------------------------------------------------- */
+10. PAGINACAO ENTRE TOPICOS
+---------------------------------------------------------------------- */
 .topic-pager {
   max-width: var(--content-max);
   margin: 2rem auto 0;
@@ -692,8 +707,8 @@ table {
 }
 
 /* -------------------------------------------------------------------------
-   11. RODAPÉ
-   ---------------------------------------------------------------------- */
+11. RODAPE
+---------------------------------------------------------------------- */
 .topic-footer {
   border-top: 1px solid var(--color-line);
   padding: 1.5rem 1.25rem 2.5rem;
@@ -707,8 +722,8 @@ table {
 }
 
 /* -------------------------------------------------------------------------
-   12. RESPONSIVO
-   ---------------------------------------------------------------------- */
+12. RESPONSIVO (mobile-first)
+---------------------------------------------------------------------- */
 @media (min-width: 62rem) {
   .topic-layout {
     grid-template-columns: 17rem minmax(0, 1fr);
@@ -740,8 +755,8 @@ table {
 }
 
 /* -------------------------------------------------------------------------
-   13. IMPRESSÃO
-   ---------------------------------------------------------------------- */
+13. IMPRESSAO
+---------------------------------------------------------------------- */
 @media print {
   .topic-header,
   .reading-progress,
@@ -764,8 +779,8 @@ table {
 }
 
 /* -------------------------------------------------------------------------
-   14. REDUÇÃO DE MOVIMENTO
-   ---------------------------------------------------------------------- */
+14. REDUCAO DE MOVIMENTO
+---------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
