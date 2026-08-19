@@ -20,6 +20,7 @@ Banco de Dados — páginas de tópicos (/topicos/*.html)
   --current-soft: #fdece1;
 
   --cat-modelagem-de-dados: #2563eb;     --cat-modelagem-de-dados-soft: #e6edfd;
+  --cat-sgbd: #0891b2;                   --cat-sgbd-soft: #e1f5f9;
 
   --font-display: 'Lexend', 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
@@ -79,14 +80,12 @@ a:hover { color: var(--primary-dark); }
   outline-offset: 2px;
 }
 
-/* Área útil mais ampla */
 .container {
   max-width: 1280px;
   margin-inline: auto;
   padding-inline: 1.5rem;
 }
 
-/* ---------------- Header ---------------- */
 .site-header {
   position: sticky;
   top: 0;
@@ -148,7 +147,6 @@ a:hover { color: var(--primary-dark); }
 }
 .site-nav a:hover { color: var(--primary); }
 
-/* ---------------- Breadcrumb + artigo ---------------- */
 .breadcrumb { padding-block: 1rem 0; }
 
 .breadcrumb ol {
@@ -174,7 +172,6 @@ a:hover { color: var(--primary-dark); }
 
 .topic-article { padding-block: 1.4rem 2rem; }
 
-/* Coluna de leitura mais larga e centralizada */
 .topic-header,
 .topic-article section,
 .thinking-box,
@@ -243,7 +240,6 @@ a:hover { color: var(--primary-dark); }
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
-/* Lista de objetivos */
 .check-list { list-style: none; padding-left: 0; }
 .check-list li {
   position: relative;
@@ -258,7 +254,6 @@ a:hover { color: var(--primary-dark); }
   font-weight: 700;
 }
 
-/* ---------------- Tabela comparativa ---------------- */
 .table-scroll {
   overflow-x: auto;
   border: 1px solid var(--border);
@@ -301,9 +296,6 @@ table.compare-table td {
 
 table.compare-table tbody tr:nth-child(even) { background: var(--surface-dim); }
 
-/* ---------------- Diagramas e figuras ---------------- */
-
-/* Contêiner da figura: mesma largura da coluna de leitura, responsivo */
 .diagram-figure {
   margin: 0 0 .9rem;
   background: var(--surface);
@@ -318,7 +310,6 @@ table.compare-table tbody tr:nth-child(even) { background: var(--surface-dim); }
 
 .diagram-figure svg { width: 100%; height: auto; display: block; }
 
-/* Diagrama ANSI/SPARC etc. */
 .diagram-box { fill: var(--primary-soft); stroke: var(--primary); stroke-width: 1.5; }
 .diagram-box--external { fill: var(--cat-modelagem-de-dados-soft); stroke: var(--cat-modelagem-de-dados); }
 .diagram-box--conceptual { fill: var(--primary-soft); stroke: var(--primary); }
@@ -340,16 +331,14 @@ table.compare-table tbody tr:nth-child(even) { background: var(--surface-dim); }
   color: var(--ink-soft);
 }
 
-/* Imagens em figuras — responsivo, acompanha largura do texto */
 .diagram-figure img {
   display: block;
-  width: 100%;      /* ocupa a largura da figura */
-  height: auto;     /* mantém proporção */
+  width: 100%;
+  height: auto;
   margin-inline: auto;
   border-radius: var(--radius-sm);
 }
 
-/* ---------------- Caixa de atividade ---------------- */
 .activity-box {
   background: var(--current-soft);
   border: 1px solid var(--current);
@@ -358,7 +347,6 @@ table.compare-table tbody tr:nth-child(even) { background: var(--surface-dim); }
 }
 .activity-box h2 { border-top: none; padding-top: 0; color: var(--current); }
 
-/* Materiais complementares */
 .materials-list { list-style: none; padding-left: 0; }
 .materials-list li {
   padding: .5rem .7rem;
@@ -368,7 +356,6 @@ table.compare-table tbody tr:nth-child(even) { background: var(--surface-dim); }
 }
 .materials-list em { color: var(--ink-soft); font-style: italic; }
 
-/* ---------------- Paginação ---------------- */
 .topic-pager {
   border-top: 1px solid var(--border);
   padding-block: 1.6rem;
@@ -411,10 +398,6 @@ table.compare-table tbody tr:nth-child(even) { background: var(--surface-dim); }
   .pager-link--next { text-align: left; margin-left: 0; }
 }
 
-/* =========================================================
-Tooltip reutilizável
-========================================================= */
-
 .tooltip-term {
   text-decoration: underline dotted;
   text-decoration-skip-ink: none;
@@ -422,11 +405,6 @@ Tooltip reutilizável
   color: var(--ink);
   position: relative;
   border-bottom: 1px dotted var(--ink-soft);
-}
-
-.tooltip-term[title]:hover,
-.tooltip-term[title]:focus-visible {
-  /* tooltip nativo do navegador */
 }
 
 .tooltip-term:hover {
@@ -453,10 +431,6 @@ Tooltip reutilizável
   border-color: var(--primary);
   color: var(--primary);
 }
-
-/* =========================================================
-Seção "Para pensar!" — exercícios MER
-========================================================= */
 
 .thinking-box {
   margin-bottom: 2.2rem;
@@ -508,7 +482,6 @@ Seção "Para pensar!" — exercícios MER
   margin: 0 0 .8rem;
 }
 
-/* Botão logo abaixo da seção de regras */
 .thinking-toggle-wrap {
   margin: .9rem 0 0;
   display: flex;
