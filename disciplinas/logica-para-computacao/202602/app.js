@@ -10,12 +10,17 @@
     { slug: "aspectos-computacionais", label: "Aspectos Computacionais", color: "teal" },
     { slug: "resolucao", label: "Princípio da Resolução", color: "crime" },
     { slug: "predicados", label: "Lógica de Predicados", color: "indigo" },
-    { slug: "substituicao", label: "Substituição", color: "brass" }
+    { slug: "substituicao", label: "Substituição", color: "brass" },
+    { slug: "revisao", label: "Revisão", color: "teal" }
   ];
 
   var CAT_MAP = {};
   CATEGORIES.forEach(function(c){ CAT_MAP[c.slug] = c; });
 
+  /*
+    Atividades extras de revisão usam `review: true`: aparecem na grade,
+    na busca e nos filtros, mas não entram no contador dos 20 tópicos.
+  */
   var TOPICS = [
     { id:1, title:"Introdução à lógica e à investigação formal", tags:["visao-geral"],
       desc:"Panorama da disciplina: o que é raciocínio lógico e como ele estrutura a investigação de problemas.",
@@ -76,7 +81,11 @@
       href:"topico-19-substituicao-unificacao.html" },
     { id:20, title:"Resolução em lógica de predicados e investigação completa", tags:["substituicao","resolucao"],
       desc:"Resolução combinada com unificação para fechar provas completas em lógica de primeira ordem.",
-      href:"topico-20-resolucao-predicados.html" }
+      href:"topico-20-resolucao-predicados.html" },
+
+    { id:"revisao-01", review:true, title:"Operação Floricultura", tags:["revisao","logica-proposicional","linguagem","semantica"],
+      desc:"Atividades de revisão sobre proposições, linguagem formal, fórmulas bem formadas, conectivos lógicos e tabelas-verdade.",
+      href:"revisao-01-logica-proposicional.html" }
   ];
 
   var STORAGE_KEY = "logica-computacao:progresso";
@@ -85,10 +94,15 @@
     try{
       var raw = localStorage.getItem(STORAGE_KEY);
       return raw ? JSON.parse(raw) : {};
-    }catch(e){ return {}; }
+    }catch(e){
+      return {};
+    }
   }
+
   function saveDone(done){
-    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(done)); }catch(e){}
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(done));
+    }catch(e){}
   }
 
   var done = loadDone();
@@ -100,13 +114,31 @@
   var emptyState = document.getElementById("empty-state");
   var statusEl = document.getElementById("results-status");
   var searchInput = document.getElementById("search-input");
+  var meterCount = document.getElementById("meter-count");
+  var meterTotal = document.getElementById("meter-total");
+  var meterFill = document.getElementById("meter-fill");
+  var meterProgressbar = document.getElementById("meter-progressbar");
+  var resetProgressButton = document.getElementById("reset-progress");
+
+  var COURSE_TOPICS = TOPICS.filter(function(topic){ return !topic.review; });
+
+  function escapeHtml(value){
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
 
   function countForCategory(slug){
     if(slug === "todos") return TOPICS.length;
-    return TOPICS.filter(function(t){ return t.tags.indexOf(slug) !== -1; }).length;
+    return TOPICS.filter(function(topic){ return topic.tags.indexOf(slug) !== -1; }).length;
   }
 
   function buildFilters(){
+    filtersEl.innerHTML = "";
+
     var all = [{ slug:"todos", label:"Todos" }].concat(CATEGORIES);
     all.forEach(function(cat){
       var btn = document.createElement("button");
@@ -114,88 +146,127 @@
       btn.className = "chip";
       btn.setAttribute("aria-pressed", cat.slug === activeFilter ? "true" : "false");
       btn.dataset.slug = cat.slug;
-      btn.innerHTML = cat.label + ' <span class="n">' + countForCategory(cat.slug) + '</span>';
+      btn.innerHTML = escapeHtml(cat.label) + ' <span class="n">' + countForCategory(cat.slug) + '</span>';
+
       btn.addEventListener("click", function(){
         activeFilter = cat.slug;
-        Array.prototype.forEach.call(filtersEl.children, function(c){
-          c.setAttribute("aria-pressed", c.dataset.slug === activeFilter ? "true" : "false");
+        Array.prototype.forEach.call(filtersEl.children, function(chip){
+          chip.setAttribute("aria-pressed", chip.dataset.slug === activeFilter ? "true" : "false");
         });
         render();
       });
+
       filtersEl.appendChild(btn);
     });
   }
 
   function matchesSearch(topic, term){
     if(!term) return true;
-    var haystack = (topic.title + " " + topic.desc).toLowerCase();
+
+    var categoryLabels = topic.tags.map(function(slug){
+      return CAT_MAP[slug] ? CAT_MAP[slug].label : slug;
+    }).join(" ");
+
+    var haystack = (topic.title + " " + topic.desc + " " + categoryLabels).toLowerCase();
     return haystack.indexOf(term) !== -1;
   }
 
   function tagChipHtml(slug){
     var cat = CAT_MAP[slug];
     if(!cat) return "";
-    return '<span class="tag ' + cat.color + '">' + cat.label + '</span>';
+    return '<span class="tag ' + escapeHtml(cat.color) + '">' + escapeHtml(cat.label) + '</span>';
   }
 
   function cardHtml(topic){
     var isDone = !!done[topic.id];
-    var num = String(topic.id).padStart(2, "0");
+    var label = topic.review ? "Atividade de revisão" : "Caso Nº " + String(topic.id).padStart(2, "0");
+    var ariaLabel = topic.review
+      ? "Marcar atividade de revisão como concluída"
+      : "Marcar tópico " + String(topic.id).padStart(2, "0") + " como concluído";
+
     return (
-      '<article class="card' + (isDone ? " is-done" : "") + '" data-id="' + topic.id + '" data-tags="' + topic.tags.join(" ") + '">' +
+      '<article class="card' + (isDone ? " is-done" : "") + (topic.review ? " review-card" : "") + '" data-id="' + escapeHtml(topic.id) + '" data-tags="' + escapeHtml(topic.tags.join(" ")) + '">' +
         '<div class="card-top">' +
-          '<span class="card-number mono">Caso Nº ' + num + '</span>' +
+          '<span class="card-number mono">' + escapeHtml(label) + '</span>' +
           '<label class="done-toggle">' +
-            '<input type="checkbox" data-id="' + topic.id + '" ' + (isDone ? "checked" : "") + ' aria-label="Marcar tópico ' + num + ' como concluído">' +
+            '<input type="checkbox" data-id="' + escapeHtml(topic.id) + '" ' + (isDone ? "checked" : "") + ' aria-label="' + escapeHtml(ariaLabel) + '">' +
             'concluído' +
           '</label>' +
         '</div>' +
-        '<h2><a href="' + topic.href + '">' + topic.title + '</a></h2>' +
-        '<p class="desc">' + topic.desc + '</p>' +
+        '<h2><a href="' + escapeHtml(topic.href) + '">' + escapeHtml(topic.title) + '</a></h2>' +
+        '<p class="desc">' + escapeHtml(topic.desc) + '</p>' +
         '<div class="tags">' + topic.tags.map(tagChipHtml).join("") + '</div>' +
         '<div class="card-cta">' +
-          '<a class="open-link" href="' + topic.href + '">Abrir dossiê →</a>' +
+          '<a class="open-link" href="' + escapeHtml(topic.href) + '">Abrir dossiê →</a>' +
           '<span class="stamp mono">RESOLVIDO</span>' +
         '</div>' +
       '</article>'
     );
   }
 
-  function render(){
+  function getVisibleTopics(){
     var term = searchTerm.trim().toLowerCase();
-    var visible = TOPICS.filter(function(t){
-      var matchesCat = activeFilter === "todos" || t.tags.indexOf(activeFilter) !== -1;
-      return matchesCat && matchesSearch(t, term);
+
+    return TOPICS.filter(function(topic){
+      var matchesCategory = activeFilter === "todos" || topic.tags.indexOf(activeFilter) !== -1;
+      return matchesCategory && matchesSearch(topic, term);
     });
+  }
 
-    grid.innerHTML = visible.map(cardHtml).join("");
-    emptyState.classList.toggle("show", visible.length === 0);
+  function updateResultsStatus(visibleCount){
+    var hasSearch = searchTerm.trim().length > 0;
+    var isShowingAll = activeFilter === "todos" && !hasSearch;
 
-    statusEl.textContent = visible.length === TOPICS.length
-      ? "Exibindo todos os " + TOPICS.length + " tópicos."
-      : "Exibindo " + visible.length + " de " + TOPICS.length + " tópicos.";
+    if(isShowingAll){
+      statusEl.textContent = "Exibindo todos os 20 tópicos e atividades de revisão.";
+      return;
+    }
 
-    Array.prototype.forEach.call(grid.querySelectorAll('input[type="checkbox"]'), function(cb){
-      cb.addEventListener("change", function(){
-        var id = cb.dataset.id;
-        if(cb.checked){ done[id] = true; } else { delete done[id]; }
+    if(activeFilter === "revisao" && !hasSearch){
+      statusEl.textContent = "Exibindo " + visibleCount + " atividade" + (visibleCount === 1 ? "" : "s") + " de revisão.";
+      return;
+    }
+
+    statusEl.textContent = "Exibindo " + visibleCount + " resultado" + (visibleCount === 1 ? "" : "s") + ".";
+  }
+
+  function attachCompletionListeners(){
+    Array.prototype.forEach.call(grid.querySelectorAll('input[type="checkbox"]'), function(checkbox){
+      checkbox.addEventListener("change", function(){
+        var id = checkbox.dataset.id;
+
+        if(checkbox.checked){
+          done[id] = true;
+        }else{
+          delete done[id];
+        }
+
         saveDone(done);
-        cb.closest(".card").classList.toggle("is-done", cb.checked);
+        checkbox.closest(".card").classList.toggle("is-done", checkbox.checked);
         updateMeter();
       });
     });
   }
 
+  function render(){
+    var visible = getVisibleTopics();
+
+    grid.innerHTML = visible.map(cardHtml).join("");
+    emptyState.classList.toggle("show", visible.length === 0);
+    updateResultsStatus(visible.length);
+    attachCompletionListeners();
+  }
+
   function updateMeter(){
-    var total = TOPICS.length;
-    var count = Object.keys(done).filter(function(k){ return done[k]; }).length;
-    var pct = Math.round((count / total) * 100);
-    document.getElementById("meter-count").textContent = count;
-    document.getElementById("meter-total").textContent = total;
-    document.getElementById("meter-fill").style.width = pct + "%";
-    var bar = document.getElementById("meter-progressbar");
-    bar.setAttribute("aria-valuenow", count);
-    bar.setAttribute("aria-valuemax", total);
+    var total = COURSE_TOPICS.length;
+    var count = COURSE_TOPICS.filter(function(topic){ return !!done[topic.id]; }).length;
+    var pct = total ? Math.round((count / total) * 100) : 0;
+
+    meterCount.textContent = count;
+    meterTotal.textContent = total;
+    meterFill.style.width = pct + "%";
+    meterProgressbar.setAttribute("aria-valuenow", count);
+    meterProgressbar.setAttribute("aria-valuemax", total);
   }
 
   searchInput.addEventListener("input", function(){
@@ -203,8 +274,8 @@
     render();
   });
 
-  document.getElementById("reset-progress").addEventListener("click", function(){
-    if(confirm("Reiniciar o progresso salvo neste navegador?")){
+  resetProgressButton.addEventListener("click", function(){
+    if(confirm("Reiniciar o progresso salvo dos 20 tópicos neste navegador?")){
       done = {};
       saveDone(done);
       render();

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revis&atilde;o 01 &mdash; Opera&ccedil;&atilde;o Floricultura | L&oacute;gica para Computa&ccedil;&atilde;o</title>
+  <meta name="description" content="Atividades de revis&atilde;o sobre proposi&ccedil;&otilde;es, linguagem formal, FBFs, conectivos l&oacute;gicos e tabelas-verdade.">
+  <meta name="robots" content="index, follow">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/revisao.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conte&uacute;do principal</a>
+
+  <header class="site">
+    <div class="masthead">
+      <a class="brand" href="index.html">
+        <span class="brand-badge" aria-hidden="true">&sect;</span>
+        <span class="brand-text"><strong>L&oacute;gica para Computa&ccedil;&atilde;o</strong>guia de estudos</span>
+      </a>
+      <span class="case-number mono">Revis&atilde;o 01</span>
+    </div>
+  </header>
+
+  <div class="wrap-narrow breadcrumb">
+    <a href="index.html">&larr; Voltar ao guia de estudos</a>
+  </div>
+
+  <div class="wrap-narrow case-header">
+    <span class="case-tag teal mono">Revis&atilde;o &middot; Casos 01 a 05</span>
+    <h1>Opera&ccedil;&atilde;o Floricultura</h1>
+    <p class="lede">O arquivo do caso foi reaberto. Use as pistas para revisar proposi&ccedil;&otilde;es, linguagem formal, FBFs, conectivos l&oacute;gicos e tabelas-verdade.</p>
+  </div>
+
+  <main id="conteudo" class="wrap-narrow">
+    <article class="topic">
+      <section class="review-intro" aria-labelledby="dossie-title">
+        <h2 id="dossie-title">O dossi&ecirc;</h2>
+        <p>O crime ocorreu na Floricultura. A investiga&ccedil;&atilde;o reuniu suspeitos, locais, armas e pistas, mas parte do material est&aacute; em linguagem comum e parte em linguagem formal. Sua miss&atilde;o &eacute; organizar o dossi&ecirc;, verificar as f&oacute;rmulas e justificar as conclus&otilde;es.</p>
+        <p><strong>Conven&ccedil;&atilde;o desta atividade:</strong> use <code>1</code> para verdadeiro e <code>0</code> para falso nas tabelas-verdade.</p>
+      </section>
+
+      <h2>Arquivo 1 &mdash; Separando fatos e perguntas</h2>
+      <section class="review-panel" data-exercise="q1">
+        <h3>Atividade 1: proposi&ccedil;&atilde;o ou n&atilde;o?</h3>
+        <p>Marque somente as frases que podem ser proposi&ccedil;&otilde;es l&oacute;gicas.</p>
+        <label><input type="checkbox" class="js-q1" data-correct="true"> O crime ocorreu na Floricultura.</label>
+        <label><input type="checkbox" class="js-q1" data-correct="false"> Quem usou a faca?</label>
+        <label><input type="checkbox" class="js-q1" data-correct="true"> O mordomo &eacute; culpado.</label>
+        <label><input type="checkbox" class="js-q1" data-correct="false"> Feche a porta da Floricultura.</label>
+        <label><input type="checkbox" class="js-q1" data-correct="true"> A faca foi usada no crime.</label>
+        <label><input type="checkbox" class="js-q1" data-correct="false"> Talvez o jardineiro seja culpado.</label>
+        <button class="answer-button js-check" type="button" data-exercise-id="q1">Conferir arquivo</button>
+        <div class="feedback" id="feedback-q1" role="status" aria-live="polite"></div>
+      </section>
+
+      <section class="review-panel" data-exercise="q2">
+        <h3>Atividade 2: fato, pergunta ou ordem?</h3>
+        <p>Classifique cada frase.</p>
+        <label>“O crime ocorreu na sala de jantar.”
+          <select class="js-q2" data-answer="fato"><option value="">Escolha</option><option value="fato">Proposi&ccedil;&atilde;o</option><option value="pergunta">Pergunta</option><option value="ordem">Ordem</option></select>
+        </label>
+        <label>“O mordomo usou o candelabro?”
+          <select class="js-q2" data-answer="pergunta"><option value="">Escolha</option><option value="fato">Proposi&ccedil;&atilde;o</option><option value="pergunta">Pergunta</option><option value="ordem">Ordem</option></select>
+        </label>
+        <label>“Investigue a Floricultura.”
+          <select class="js-q2" data-answer="ordem"><option value="">Escolha</option><option value="fato">Proposi&ccedil;&atilde;o</option><option value="pergunta">Pergunta</option><option value="ordem">Ordem</option></select>
+        </label>
+        <button class="answer-button js-check" type="button" data-exercise-id="q2">Conferir classifica&ccedil;&atilde;o</button>
+        <div class="feedback" id="feedback-q2" role="status" aria-live="polite"></div>
+      </section>
+
+      <h2>Arquivo 2 &mdash; Montando o alfabeto</h2>
+      <section class="review-panel" data-exercise="q3">
+        <h3>Atividade 3: crie as etiquetas do caso</h3>
+        <p>Associe cada s&iacute;mbolo &agrave; proposi&ccedil;&atilde;o correta. Considere:</p>
+        <span class="code-line">F = Floricultura &nbsp; M = Mordomo &nbsp; A = faca (arma) &nbsp; J = Jardineiro</span>
+        <label>F representa:
+          <select class="js-q3" data-answer="local"><option value="">Escolha</option><option value="local">O crime ocorreu na Floricultura.</option><option value="suspeito">O mordomo &eacute; culpado.</option><option value="arma">A faca foi usada.</option></select>
+        </label>
+        <label>M representa:
+          <select class="js-q3" data-answer="suspeito"><option value="">Escolha</option><option value="local">O crime ocorreu na Floricultura.</option><option value="suspeito">O mordomo &eacute; culpado.</option><option value="arma">A faca foi usada.</option></select>
+        </label>
+        <label>A representa:
+          <select class="js-q3" data-answer="arma"><option value="">Escolha</option><option value="local">O crime ocorreu na Floricultura.</option><option value="suspeito">O mordomo &eacute; culpado.</option><option value="arma">A faca foi usada.</option></select>
+        </label>
+        <button class="answer-button js-check" type="button" data-exercise-id="q3">Conferir etiquetas</button>
+        <div class="feedback" id="feedback-q3" role="status" aria-live="polite"></div>
+      </section>
+
+      <h2>Arquivo 3 &mdash; Laborat&oacute;rio de FBFs</h2>
+      <section class="review-panel" data-exercise="q4">
+        <h3>Atividade 4: a f&oacute;rmula passou pela per&iacute;cia?</h3>
+        <p>Marque as express&otilde;es que s&atilde;o f&oacute;rmulas bem formadas.</p>
+        <label><input type="checkbox" class="js-q4" data-correct="true"> <code>(F &and; M)</code></label>
+        <label><input type="checkbox" class="js-q4" data-correct="false"> <code>F &and; &and; M</code></label>
+        <label><input type="checkbox" class="js-q4" data-correct="true"> <code>&not;(M &rarr; F)</code></label>
+        <label><input type="checkbox" class="js-q4" data-correct="false"> <code>(F &or; )</code></label>
+        <label><input type="checkbox" class="js-q4" data-correct="true"> <code>((F &and; M) &rarr; A)</code></label>
+        <label><input type="checkbox" class="js-q4" data-correct="false"> <code>(F M &rarr; A)</code></label>
+        <button class="answer-button js-check" type="button" data-exercise-id="q4">Enviar para a per&iacute;cia</button>
+        <div class="feedback" id="feedback-q4" role="status" aria-live="polite"></div>
+      </section>
+
+      <section class="review-panel" data-exercise="q5">
+        <h3>Atividade 5: construa a f&oacute;rmula</h3>
+        <p><strong>Pista:</strong> “O crime ocorreu na Floricultura e o mordomo &eacute; culpado.”</p>
+        <label><input type="radio" name="q5" value="wrong"> <code>(F &rarr; M)</code></label>
+        <label><input type="radio" name="q5" value="correct"> <code>(F &and; M)</code></label>
+        <label><input type="radio" name="q5" value="wrong"> <code>&not;(F &and; M)</code></label>
+        <p><strong>Pista:</strong> “Se o mordomo &eacute; culpado, ent&atilde;o a faca foi usada.”</p>
+        <label><input type="radio" name="q5b" value="wrong"> <code>(A &rarr; M)</code></label>
+        <label><input type="radio" name="q5b" value="correct"> <code>(M &rarr; A)</code></label>
+        <label><input type="radio" name="q5b" value="wrong"> <code>(M &and; A)</code></label>
+        <button class="answer-button js-check" type="button" data-exercise-id="q5">Conferir tradu&ccedil;&atilde;o</button>
+        <div class="feedback" id="feedback-q5" role="status" aria-live="polite"></div>
+      </section>
+
+      <h2>Arquivo 4 &mdash; O interrogat&oacute;rio l&oacute;gico</h2>
+      <section class="review-panel" data-exercise="q6">
+        <h3>Atividade 6: traduza as pistas</h3>
+        <p>Use F, M, A, J e C: Floricultura, mordomo, faca, jardineiro e candelabro.</p>
+        <label>“O mordomo n&atilde;o &eacute; culpado.”
+          <input class="js-q6" type="text" data-text-answer="¬M|&not;M" placeholder="Digite a FBF">
+        </label>
+        <label>“O crime ocorreu na Floricultura ou foi cometido com o candelabro.”
+          <input class="js-q6" type="text" data-text-answer="(F ∨ C)|(F &or; C)" placeholder="Digite a FBF">
+        </label>
+        <label>“Se o jardineiro &eacute; culpado e o crime ocorreu na Floricultura, ent&atilde;o a faca foi usada.”
+          <input class="js-q6" type="text" data-text-answer="((J ∧ F) → A)|((J &and; F) &rarr; A)" placeholder="Digite a FBF">
+        </label>
+        <button class="answer-button js-check" type="button" data-exercise-id="q6">Comparar com o laudo</button>
+        <div class="feedback" id="feedback-q6" role="status" aria-live="polite"></div>
+      </section>
+
+      <h2>Arquivo 5 &mdash; A conclus&atilde;o da faca</h2>
+      <section class="review-panel" data-exercise="q7">
+        <h3>Atividade 7: conclus&atilde;o ou premissa?</h3>
+        <p>Considere as premissas:</p>
+        <ol>
+          <li><code>F</code>: o crime ocorreu na Floricultura;</li>
+          <li><code>M</code>: o mordomo &eacute; culpado;</li>
+          <li><code>((F &and; M) &rarr; A)</code>: se o crime ocorreu na Floricultura e o mordomo &eacute; culpado, ent&atilde;o a faca foi usada.</li>
+        </ol>
+        <p>Qual afirma&ccedil;&atilde;o expressa a conclus&atilde;o do caso?</p>
+        <label><input type="radio" name="q7" value="wrong"> A Floricultura &eacute; uma conclus&atilde;o.</label>
+        <label><input type="radio" name="q7" value="correct"> A faca foi usada: <code>A</code>.</label>
+        <label><input type="radio" name="q7" value="wrong"> O conectivo “e” &eacute; uma conclus&atilde;o.</label>
+        <button class="answer-button js-check" type="button" data-exercise-id="q7">Apresentar conclus&atilde;o</button>
+        <div class="feedback" id="feedback-q7" role="status" aria-live="polite"></div>
+      </section>
+
+      <section class="review-panel" data-exercise="q8">
+        <h3>Atividade 8: escolha a pista decisiva</h3>
+        <p>Qual conjunto permite aplicar diretamente a ideia “se F e M, ent&atilde;o A”?</p>
+        <label><input type="radio" name="q8" value="wrong"> Apenas <code>F</code>.</label>
+        <label><input type="radio" name="q8" value="wrong"> Apenas <code>M</code>.</label>
+        <label><input type="radio" name="q8" value="correct"> <code>F</code> e <code>M</code> juntos.</label>
+        <label><input type="radio" name="q8" value="wrong"> Apenas <code>A</code>.</label>
+        <button class="answer-button js-check" type="button" data-exercise-id="q8">Verificar racioc&iacute;nio</button>
+        <div class="feedback" id="feedback-q8" role="status" aria-live="polite"></div>
+      </section>
+
+      <h2>Arquivo 6 &mdash; Sala das tabelas-verdade</h2>
+      <section class="review-panel" data-exercise="q9">
+        <h3>Atividade 9: a pista da conjun&ccedil;&atilde;o</h3>
+        <p>Considere <code>F</code>: “o crime ocorreu na Floricultura” e <code>M</code>: “o mordomo &eacute; culpado”. Preencha a coluna de <code>(F &and; M)</code> com 0 ou 1.</p>
+        <table class="truth-table">
+          <thead><tr><th>F</th><th>M</th><th>F &and; M</th></tr></thead>
+          <tbody>
+            <tr><td class="given">1</td><td class="given">1</td><td><input class="js-q9" data-answer="1" inputmode="numeric" maxlength="1" aria-label="F igual a 1 e M igual a 1"></td></tr>
+            <tr><td class="given">1</td><td class="given">0</td><td><input class="js-q9" data-answer="0" inputmode="numeric" maxlength="1" aria-label="F igual a 1 e M igual a 0"></td></tr>
+            <tr><td class="given">0</td><td class="given">1</td><td><input class="js-q9" data-answer="0" inputmode="numeric" maxlength="1" aria-label="F igual a 0 e M igual a 1"></td></tr>
+            <tr><td class="given">0</td><td class="given">0</td><td><input class="js-q9" data-answer="0" inputmode="numeric" maxlength="1" aria-label="F igual a 0 e M igual a 0"></td></tr>
+          </tbody>
+        </table>
+        <button class="answer-button js-check" type="button" data-exercise-id="q9">Conferir tabela</button>
+        <div class="feedback" id="feedback-q9" role="status" aria-live="polite"></div>
+      </section>
+
+      <section class="review-panel" data-exercise="q10">
+        <h3>Atividade 10: o “ou” da arma</h3>
+        <p>Considere <code>A</code>: “a faca foi usada” e <code>C</code>: “o candelabro foi usado”. Preencha a coluna de <code>(A &or; C)</code>. Lembre-se: o “ou” l&oacute;gico &eacute; inclusivo.</p>
+        <table class="truth-table">
+          <thead><tr><th>A</th><th>C</th><th>A &or; C</th></tr></thead>
+          <tbody>
+            <tr><td class="given">1</td><td class="given">1</td><td><input class="js-q10" data-answer="1" inputmode="numeric" maxlength="1" aria-label="A igual a 1 e C igual a 1"></td></tr>
+            <tr><td class="given">1</td><td class="given">0</td><td><input class="js-q10" data-answer="1" inputmode="numeric" maxlength="1" aria-label="A igual a 1 e C igual a 0"></td></tr>
+            <tr><td class="given">0</td><td class="given">1</td><td><input class="js-q10" data-answer="1" inputmode="numeric" maxlength="1" aria-label="A igual a 0 e C igual a 1"></td></tr>
+            <tr><td class="given">0</td><td class="given">0</td><td><input class="js-q10" data-answer="0" inputmode="numeric" maxlength="1" aria-label="A igual a 0 e C igual a 0"></td></tr>
+          </tbody>
+        </table>
+        <button class="answer-button js-check" type="button" data-exercise-id="q10">Conferir tabela</button>
+        <div class="feedback" id="feedback-q10" role="status" aria-live="polite"></div>
+      </section>
+
+      <section class="review-panel" data-exercise="q11">
+        <h3>Atividade 11: a pista condicional</h3>
+        <p>Considere <code>J</code>: “o jardineiro &eacute; culpado” e <code>F</code>: “o crime ocorreu na Floricultura”. Preencha a tabela de <code>(J &rarr; F)</code>, lida como: “Se o jardineiro &eacute; culpado, ent&atilde;o o crime ocorreu na Floricultura”.</p>
+        <table class="truth-table">
+          <thead><tr><th>J</th><th>F</th><th>J &rarr; F</th></tr></thead>
+          <tbody>
+            <tr><td class="given">1</td><td class="given">1</td><td><input class="js-q11" data-answer="1" inputmode="numeric" maxlength="1" aria-label="J igual a 1 e F igual a 1"></td></tr>
+            <tr><td class="given">1</td><td class="given">0</td><td><input class="js-q11" data-answer="0" inputmode="numeric" maxlength="1" aria-label="J igual a 1 e F igual a 0"></td></tr>
+            <tr><td class="given">0</td><td class="given">1</td><td><input class="js-q11" data-answer="1" inputmode="numeric" maxlength="1" aria-label="J igual a 0 e F igual a 1"></td></tr>
+            <tr><td class="given">0</td><td class="given">0</td><td><input class="js-q11" data-answer="1" inputmode="numeric" maxlength="1" aria-label="J igual a 0 e F igual a 0"></td></tr>
+          </tbody>
+        </table>
+        <label class="small-note" for="implication-explanation">Depois de preencher, explique em uma frase por que a implica&ccedil;&atilde;o s&oacute; recebe 0 quando o antecedente &eacute; 1 e o consequente &eacute; 0.</label>
+        <textarea id="implication-explanation" placeholder="Minha explica&ccedil;&atilde;o..."></textarea>
+        <button class="answer-button js-check" type="button" data-exercise-id="q11">Conferir tabela</button>
+        <div class="feedback" id="feedback-q11" role="status" aria-live="polite"></div>
+      </section>
+
+      <h2>Arquivo 7 &mdash; Miss&atilde;o final</h2>
+      <section class="review-panel" data-exercise="q12">
+        <h3>Atividade 12: monte seu pr&oacute;prio dossi&ecirc;</h3>
+        <p>Crie uma pequena investiga&ccedil;&atilde;o com pelo menos quatro proposi&ccedil;&otilde;es at&ocirc;micas: um local, um suspeito, uma arma e uma pista adicional.</p>
+        <label>Suas proposi&ccedil;&otilde;es:
+          <textarea class="js-final-answer" placeholder="Exemplo: F: o crime ocorreu na Floricultura..."></textarea>
+        </label>
+        <label>Escreva tr&ecirc;s FBFs para as pistas:
+          <textarea class="js-final-answer" placeholder="Exemplo: ((F &and; M) &rarr; A)"></textarea>
+        </label>
+        <label>Qual conclus&atilde;o voc&ecirc; consegue defender? Explique quais premissas usou:
+          <textarea class="js-final-answer" placeholder="Minha conclus&atilde;o &eacute;... porque..."></textarea>
+        </label>
+        <button class="answer-button js-toggle-answer" type="button" aria-expanded="false" aria-controls="answer-final" data-target="answer-final">Mostrar crit&eacute;rios de confer&ecirc;ncia</button>
+        <div class="answer" id="answer-final">
+          <p>Seu dossi&ecirc; est&aacute; bem constru&iacute;do se cada s&iacute;mbolo representa uma frase declarativa, as f&oacute;rmulas obedecem &agrave;s regras de forma&ccedil;&atilde;o e a conclus&atilde;o &eacute; justificada pelas pistas apresentadas.</p>
+        </div>
+      </section>
+
+      <h2>Gabarito geral</h2>
+      <button class="answer-button js-toggle-answer" type="button" aria-expanded="false" aria-controls="answer-all" data-target="answer-all">Exibir ou ocultar gabarito geral</button>
+      <div class="answer" id="answer-all">
+        <p><strong>Atividade 1:</strong> marque: crime na Floricultura; mordomo culpado; faca usada.</p>
+        <p><strong>Atividade 2:</strong> proposi&ccedil;&atilde;o; pergunta; ordem.</p>
+        <p><strong>Atividade 3:</strong> F = local; M = suspeito; A = arma.</p>
+        <p><strong>Atividade 4:</strong> <code>(F &and; M)</code>, <code>&not;(M &rarr; F)</code> e <code>((F &and; M) &rarr; A)</code>.</p>
+        <p><strong>Atividade 5:</strong> <code>(F &and; M)</code> e <code>(M &rarr; A)</code>.</p>
+        <p><strong>Atividade 6:</strong> <code>&not;M</code>; <code>(F &or; C)</code>; <code>((J &and; F) &rarr; A)</code>.</p>
+        <p><strong>Atividade 7:</strong> a faca foi usada, representada por <code>A</code>.</p>
+        <p><strong>Atividade 8:</strong> as duas premissas <code>F</code> e <code>M</code> juntas.</p>
+        <p><strong>Atividade 9:</strong> 1, 0, 0, 0.</p>
+        <p><strong>Atividade 10:</strong> 1, 1, 1, 0.</p>
+        <p><strong>Atividade 11:</strong> 1, 0, 1, 1. A implica&ccedil;&atilde;o &eacute; falsa apenas quando promete F a partir de J, mas J &eacute; verdadeiro e F &eacute; falso.</p>
+        <p><strong>Atividade 12:</strong> resposta aberta; use os crit&eacute;rios de confer&ecirc;ncia.</p>
+      </div>
+
+      <section class="review-panel" id="entrega-pdf" aria-labelledby="entrega-title">
+        <h2 id="entrega-title">Entrega do dossi&ecirc;</h2>
+        <p>Informe seu nome, gere o PDF com as respostas preenchidas e envie para <a href="mailto:wilcilenekowal@gmail.com">wilcilenekowal@gmail.com</a>.</p>
+        <label for="student-name">Nome completo</label>
+        <input id="student-name" type="text" autocomplete="name" placeholder="Digite seu nome completo">
+        <p class="small-note">O PDF registra seu nome, as alternativas selecionadas, as tabelas-verdade e as respostas escritas. Campos vazios aparecem como “n&atilde;o respondido”.</p>
+        <button class="answer-button js-generate-pdf" type="button">Gerar PDF para entrega</button>
+        <div class="feedback" id="pdf-feedback" role="status" aria-live="polite"></div>
+      </section>
+
+      <div class="topic-done mono" id="topic-done-toggle" data-id="review-01">
+        <label><input type="checkbox" aria-label="Marcar revis&atilde;o como conclu&iacute;da"> conclu&iacute;da</label>
+        <span class="stamp">ARQUIVO REVISADO</span>
+      </div>
+
+      <nav class="page-nav" aria-label="Navega&ccedil;&atilde;o entre t&oacute;picos">
+        <a href="topico-05-tabelas-verdade.html"><span class="dir">&larr; Caso 05</span>Tabelas-verdade</a>
+        <a class="next" href="index.html"><span class="dir">Voltar ao &iacute;ndice &rarr;</span>Guia de estudos</a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site"><div class="wrap-narrow">Guia de estudos &middot; L&oacute;gica para Computa&ccedil;&atilde;o</div></footer>
+
+  <script src="assets/js/topic.js" defer></script>
+  <script src="assets/js/revisao.js" defer></script>
+  <script src="assets/js/pdf-entrega.js" defer></script>
+</body>
+</html>

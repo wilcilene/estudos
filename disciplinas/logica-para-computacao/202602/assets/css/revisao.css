@@ -1,0 +1,157 @@
+/* Estilos exclusivos das páginas de revisão. */
+
+.review-intro {
+  margin: 1.5rem 0;
+  padding: 1.4rem;
+  border: 2px solid #496b68;
+  border-radius: 8px;
+  background: #f4f0e5;
+}
+
+.review-panel {
+  margin: 1.5rem 0;
+  padding: 1.3rem;
+  border: 1px solid #cbbf9d;
+  border-radius: 8px;
+  background: #fbf7eb;
+}
+
+.review-panel h3 {
+  margin-top: 0;
+}
+
+.review-panel label {
+  display: block;
+  margin: 0.7rem 0;
+  cursor: pointer;
+}
+
+.review-panel input[type="text"],
+.review-panel textarea,
+.review-panel select {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.65rem;
+  border: 1px solid #b9ad8a;
+  border-radius: 4px;
+  background: #fffdf7;
+  font: inherit;
+}
+
+.review-panel textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.answer-button {
+  padding: 0.65rem 1rem;
+  border: 1px solid #496b68;
+  border-radius: 4px;
+  background: #496b68;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+}
+
+.answer-button:hover,
+.answer-button:focus-visible {
+  background: #395a57;
+}
+
+.answer-button:focus-visible,
+.review-panel input:focus-visible,
+.review-panel select:focus-visible,
+.review-panel textarea:focus-visible {
+  outline: 3px solid #d9b35e;
+  outline-offset: 2px;
+}
+
+.answer-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.feedback {
+  display: none;
+  margin-top: 1rem;
+  padding: 0.8rem;
+  border-left: 4px solid #496b68;
+  background: #eef3ed;
+}
+
+.feedback.show {
+  display: block;
+}
+
+.answer {
+  display: none;
+  margin-top: 1rem;
+  padding: 1rem;
+  border-left: 4px solid #b68b45;
+  background: #eee9d9;
+}
+
+.answer.open {
+  display: block;
+}
+
+.code-line {
+  display: block;
+  overflow: auto;
+  padding: 0.8rem;
+  border-radius: 4px;
+  background: #292d2b;
+  color: #f4f0e5;
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.small-note {
+  color: #5d5a50;
+  font-size: 0.92rem;
+}
+
+.truth-table {
+  width: 100%;
+  margin: 1rem 0;
+  border-collapse: collapse;
+  font-family: "IBM Plex Mono", monospace;
+  text-align: center;
+}
+
+.truth-table th,
+.truth-table td {
+  min-width: 54px;
+  padding: 0.55rem;
+  border: 1px solid #b9ad8a;
+}
+
+.truth-table th {
+  background: #e6ddc4;
+}
+
+.truth-table .given {
+  background: #f3eddb;
+  font-weight: 600;
+}
+
+.truth-table input {
+  box-sizing: border-box;
+  width: 42px !important;
+  margin: auto;
+  padding: 0.35rem !important;
+  border-radius: 3px !important;
+  text-align: center;
+}
+
+@media (max-width: 560px) {
+  .review-intro,
+  .review-panel {
+    padding: 1rem;
+  }
+
+  .truth-table th,
+  .truth-table td {
+    min-width: 0;
+    padding: 0.4rem;
+  }
+}
