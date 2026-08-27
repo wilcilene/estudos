@@ -138,6 +138,23 @@
       });
   }
 
+  function projectDistinctRows(rows, columns) {
+    var keys = new Set();
+
+    return rows.filter(function (row) {
+      var key = columns.map(function (column) {
+        return String(row[column]);
+      }).join('\u001F');
+
+      if (keys.has(key)) {
+        return false;
+      }
+
+      keys.add(key);
+      return true;
+    });
+  }
+
   function renderStudents() {
     var table = document.getElementById('ar-tabela-estudantes');
     var header = table.querySelector('thead tr');
@@ -146,9 +163,12 @@
     var expression = document.getElementById('ar-expressao-atual');
     var discipline = filter.value;
     var columns = getSelectedColumns();
-    var filteredStudents = students.filter(function (student) {
+    var selectedRows = students.filter(function (student) {
       return !discipline || student.Disciplina === discipline;
     });
+    var projectedRows = columns.length
+      ? projectDistinctRows(selectedRows, columns)
+      : [];
 
     header.innerHTML = columns.map(function (column) {
       return '<th>' + escapeHtml(columnLabels[column]) + '</th>';
@@ -156,11 +176,11 @@
 
     if (!columns.length) {
       body.innerHTML = '<tr><td>Selecione ao menos uma coluna.</td></tr>';
-    } else if (!filteredStudents.length) {
+    } else if (!projectedRows.length) {
       body.innerHTML =
-        '<tr><td colspan="' + columns.length + '">Nenhum estudante encontrado.</td></tr>';
+        '<tr><td colspan="' + columns.length + '">Nenhum resultado encontrado.</td></tr>';
     } else {
-      body.innerHTML = filteredStudents.map(function (student) {
+      body.innerHTML = projectedRows.map(function (student) {
         return '<tr>' + columns.map(function (column) {
           return '<td>' + escapeHtml(student[column]) + '</td>';
         }).join('') + '</tr>';

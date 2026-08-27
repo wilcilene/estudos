@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Álgebra Relacional: Junções e Divisão | Banco de Dados</title>
+<meta name="description" content="Aprenda theta-join, junção natural, junção externa (esquerda, direita e completa) e divisão na álgebra relacional, com exemplos práticos e tradução de consultas.">
+<meta name="author" content="Disciplina de Banco de Dados — Engenharia da Computação">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/topicos/algebra-relacional-juncoes-divisao.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Álgebra Relacional — Junções e Divisão">
+<meta property="og:description" content="Natural join, theta-join, junção externa e divisão; tradução de consultas para álgebra relacional.">
+<meta property="og:locale" content="pt_BR">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Início", "item": "../index.html" },
+    { "@type": "ListItem", "position": 2, "name": "Álgebra Relacional — Operadores Unários e de Conjunto", "item": "algebra-relacional-unarios.html" },
+    { "@type": "ListItem", "position": 3, "name": "Álgebra Relacional — Junções e Divisão" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Álgebra Relacional — Junções e Divisão",
+  "description": "Natural join, theta-join, junção externa e divisão; tradução de consultas para álgebra relacional.",
+  "educationalLevel": "Ensino Superior",
+  "learningResourceType": "Aula",
+  "inLanguage": "pt-BR",
+  "about": ["Álgebra Relacional", "Banco de Dados", "SQL", "JOIN"]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo-principal">Pular para o conteúdo principal</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark" aria-hidden="true">BD</span>
+      <span class="brand-text">
+        <span class="brand-name">Banco de Dados</span>
+        <span class="brand-sub">Engenharia da Computação · 2026/2</span>
+      </span>
+    </a>
+    <nav class="site-nav" aria-label="Navegação principal">
+      <ul>
+        <li><a href="../index.html">Início</a></li>
+        <li><a href="../index.html#topicos">Tópicos</a></li>
+        <li><a href="algebra-relacional-unarios.html">Tópico anterior</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <nav class="breadcrumb" aria-label="Trilha de navegação">
+    <ol>
+      <li><a href="../index.html">Início</a></li>
+      <li><a href="algebra-relacional-unarios.html">Álgebra Relacional — Unários e Conjunto</a></li>
+      <li aria-current="page">Junções e Divisão</li>
+    </ol>
+  </nav>
+</div>
+
+<main id="conteudo-principal">
+<article class="topic-article container">
+
+  <header class="topic-header">
+    <div class="topic-meta">
+      <span class="duration-badge">⏱ 55 min de leitura</span>
+      <span class="duration-badge">Modelagem de Dados</span>
+    </div>
+    <h1>Álgebra Relacional — Junções e Divisão</h1>
+    <p class="topic-lead">
+      Natural join, theta-join, junção externa e divisão; tradução de consultas para álgebra relacional.
+      Esta página parte de onde a anterior parou: o produto cartesiano seguido de uma seleção. A partir
+      daqui você vai nomear formalmente essa combinação e aprender operadores que vão além dela.
+    </p>
+  </header>
+
+  <section class="objectives">
+    <h2>O que você vai aprender</h2>
+    <ul class="check-list">
+      <li>Por que junção é, na essência, um <strong>produto cartesiano seguido de seleção</strong>.</li>
+      <li>Como escrever e calcular um <strong>theta-join (⋈<sub>θ</sub>)</strong>.</li>
+      <li>O que torna a <strong>junção natural (⋈)</strong> um caso especial do theta-join.</li>
+      <li>Como e por que usar <strong>junção externa</strong> — à esquerda (⟕), à direita (⟖) e completa (⟗) — e o papel dos valores <code>NULL</code>.</li>
+      <li>Como o operador de <strong>divisão (÷)</strong> responde perguntas do tipo "para todos os itens de um conjunto".</li>
+      <li>Como traduzir uma consulta em linguagem natural (ou SQL) para uma expressão completa de álgebra relacional.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Relembrando: do produto cartesiano à junção</h2>
+    <p>
+      No tópico anterior, o último exercício pedia a expressão
+      <code>σ<sub>TipoSolo=TipoSoloIdeal</sub>(Talhoes × Robos)</code> — um produto cartesiano seguido de uma
+      seleção que descarta as combinações inválidas. Essa combinação é usada com tanta frequência que ganhou
+      nome e símbolo próprios: <strong>junção (join)</strong>.
+    </p>
+    <div class="analogy">
+      <p style="margin:0;">
+        <strong>Analogia:</strong> se o produto cartesiano é "apresentar todo mundo de uma festa a todo mundo
+        de outra festa", a junção é "apresentar apenas as pessoas que têm algo em comum" — um mesmo sobrenome,
+        o mesmo bairro, a mesma equipe. É o produto cartesiano com um filtro de bom senso.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Theta-join (⋈<sub>θ</sub>) — junção com uma condição qualquer</h2>
+    <p>
+      O theta-join combina duas relações mantendo apenas as tuplas cujo par satisfaz uma condição θ
+      (que pode usar qualquer operador de comparação: <code>=</code>, <code>&lt;</code>, <code>&gt;</code>,
+      <code>≤</code>, <code>≥</code>, <code>≠</code>). Formalmente, é só uma forma abreviada de escrever
+      produto cartesiano + seleção:
+    </p>
+    <p style="text-align:center; font-size:1.15rem;"><code>R ⋈<sub>θ</sub> S ≡ σ<sub>θ</sub>(R × S)</code></p>
+    <p>
+      Uma fazenda quer saber quais combinações de robô e talhão são <strong>viáveis</strong>, considerando que
+      um robô só deve ser escalado se sua autonomia de bateria for suficiente para o tempo estimado de trabalho.
+    </p>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption><strong>RobosAgricolas</strong>(Codigo, Modelo, Tarefa, Setor, Autonomia_h)</caption>
+        <thead><tr><th>Codigo</th><th>Modelo</th><th>Tarefa</th><th>Setor</th><th>Autonomia_h</th></tr></thead>
+        <tbody>
+          <tr><td>R01</td><td>AgroBot-X</td><td>Colheita</td><td>Milho</td><td>8</td></tr>
+          <tr><td>R02</td><td>AgroBot-X</td><td>Pulverização</td><td>Soja</td><td>6</td></tr>
+          <tr><td>R03</td><td>SoloScan</td><td>Monitoramento</td><td>Milho</td><td>10</td></tr>
+          <tr><td>R04</td><td>AgroBot-X</td><td>Colheita</td><td>Soja</td><td>8</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption><strong>Talhoes</strong>(Talhao, TempoNecessario_h)</caption>
+        <thead><tr><th>Talhao</th><th>TempoNecessario_h</th></tr></thead>
+        <tbody>
+          <tr><td>A1</td><td>5</td></tr>
+          <tr><td>A2</td><td>9</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="text-align:center;"><code>RobosAgricolas ⋈<sub>Autonomia_h ≥ TempoNecessario_h</sub> Talhoes</code></p>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption>Resultado — 5 combinações viáveis, grau 7 (5 + 2 atributos, nenhum removido)</caption>
+        <thead><tr><th>Codigo</th><th>Modelo</th><th>Tarefa</th><th>Setor</th><th>Autonomia_h</th><th>Talhao</th><th>TempoNecessario_h</th></tr></thead>
+        <tbody>
+          <tr><td>R01</td><td>AgroBot-X</td><td>Colheita</td><td>Milho</td><td>8</td><td>A1</td><td>5</td></tr>
+          <tr><td>R02</td><td>AgroBot-X</td><td>Pulverização</td><td>Soja</td><td>6</td><td>A1</td><td>5</td></tr>
+          <tr><td>R03</td><td>SoloScan</td><td>Monitoramento</td><td>Milho</td><td>10</td><td>A1</td><td>5</td></tr>
+          <tr><td>R04</td><td>AgroBot-X</td><td>Colheita</td><td>Soja</td><td>8</td><td>A1</td><td>5</td></tr>
+          <tr><td>R03</td><td>SoloScan</td><td>Monitoramento</td><td>Milho</td><td>10</td><td>A2</td><td>9</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Note que <strong>nenhuma coluna foi removida</strong> — mesmo sem atributos com o mesmo nome, um
+      theta-join mantém todas as colunas das duas relações de origem. Quando θ usa apenas o operador
+      <code>=</code>, o theta-join também é chamado de <strong>equijoin</strong>.
+    </p>
+    <p><span class="tooltip-tag" title="Um theta-join equivale a um JOIN ... ON com a condição desejada.">⋈<sub>θ</sub> ↔ SQL</span> <code>SELECT * FROM RobosAgricolas JOIN Talhoes ON Autonomia_h &gt;= TempoNecessario_h;</code></p>
+  </section>
+
+  <section>
+    <h2>Junção natural (⋈) — o equijoin que remove a coluna repetida</h2>
+    <p>
+      A junção natural é um caso particular do equijoin: a condição é <em>implícita</em>. Ela junta as tuplas
+      cujos atributos <strong>de mesmo nome</strong> nas duas relações têm o mesmo valor, e devolve apenas
+      <strong>uma cópia</strong> de cada atributo repetido.
+    </p>
+    <p>
+      A Suzana também registra as consultas veterinárias dos gatos em uma tabela separada:
+    </p>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption><strong>GatosDaSuzana</strong>(Nome, Cor, Idade, Sexo, Peso_kg)</caption>
+        <thead><tr><th>Nome</th><th>Cor</th><th>Idade</th><th>Sexo</th><th>Peso_kg</th></tr></thead>
+        <tbody>
+          <tr><td>Mingau</td><td>Preto</td><td>3</td><td>M</td><td>4.2</td></tr>
+          <tr><td>Flor</td><td>Branco</td><td>1</td><td>F</td><td>3.5</td></tr>
+          <tr><td>Tofu</td><td>Cinza</td><td>5</td><td>M</td><td>5.1</td></tr>
+          <tr><td>Nuvem</td><td>Branco</td><td>2</td><td>F</td><td>3.8</td></tr>
+          <tr><td>Pistache</td><td>Caramelo</td><td>4</td><td>M</td><td>4.7</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption><strong>ConsultasVet</strong>(Nome, Data, Veterinario, Motivo)</caption>
+        <thead><tr><th>Nome</th><th>Data</th><th>Veterinario</th><th>Motivo</th></tr></thead>
+        <tbody>
+          <tr><td>Mingau</td><td>03/03/2026</td><td>Dra. Helena</td><td>Vacina</td></tr>
+          <tr><td>Flor</td><td>10/03/2026</td><td>Dr. Ivo</td><td>Check-up</td></tr>
+          <tr><td>Tofu</td><td>15/03/2026</td><td>Dra. Helena</td><td>Vermífugo</td></tr>
+          <tr><td>Doceo</td><td>20/03/2026</td><td>Dr. Ivo</td><td>Emergência</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      As duas relações compartilham o atributo <code>Nome</code>, então:
+    </p>
+    <p style="text-align:center;"><code>GatosDaSuzana ⋈ ConsultasVet</code></p>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption>Resultado — grau 8 (5 + 4 − 1, já que Nome aparece uma única vez)</caption>
+        <thead><tr><th>Nome</th><th>Cor</th><th>Idade</th><th>Sexo</th><th>Peso_kg</th><th>Data</th><th>Veterinario</th><th>Motivo</th></tr></thead>
+        <tbody>
+          <tr><td>Mingau</td><td>Preto</td><td>3</td><td>M</td><td>4.2</td><td>03/03/2026</td><td>Dra. Helena</td><td>Vacina</td></tr>
+          <tr><td>Flor</td><td>Branco</td><td>1</td><td>F</td><td>3.5</td><td>10/03/2026</td><td>Dr. Ivo</td><td>Check-up</td></tr>
+          <tr><td>Tofu</td><td>Cinza</td><td>5</td><td>M</td><td>5.1</td><td>15/03/2026</td><td>Dra. Helena</td><td>Vermífugo</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Repare em duas coisas: a coluna <code>Nome</code> aparece <strong>uma única vez</strong>, e dois gatos
+      (Nuvem e Pistache, que nunca foram ao veterinário) e uma consulta (Doceo, que não é gato registrado da
+      Suzana) <strong>desaparecem</strong> do resultado. A junção natural — assim como o theta-join — só mantém
+      as tuplas que encontram par na outra relação. Essa perda de informação é o problema que a junção externa
+      resolve, na próxima seção.
+    </p>
+    <p><span class="tooltip-tag" title="A junção natural corresponde ao NATURAL JOIN do SQL, ou a um JOIN ... USING quando só um atributo é comum.">⋈ ↔ SQL</span> <code>SELECT * FROM GatosDaSuzana NATURAL JOIN ConsultasVet;</code></p>
+  </section>
+
+  <section>
+    <h2>Junção externa — preservando quem não tem par</h2>
+    <p>
+      A junção externa (<em>outer join</em>) parte da junção natural, mas <strong>preserva</strong> as tuplas
+      sem correspondência, preenchendo com <code>NULL</code> os atributos que viriam da relação sem par.
+      Existem três variantes:
+    </p>
+    <ul class="check-list">
+      <li><strong>Externa à esquerda (⟕)</strong> — mantém todas as tuplas da relação da esquerda, mesmo sem par.</li>
+      <li><strong>Externa à direita (⟖)</strong> — mantém todas as tuplas da relação da direita, mesmo sem par.</li>
+      <li><strong>Externa completa (⟗)</strong> — mantém todas as tuplas de ambas as relações, com ou sem par.</li>
+    </ul>
+
+    <p style="text-align:center;"><code>GatosDaSuzana ⟕ ConsultasVet</code> — externa à esquerda</p>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption>Todos os 5 gatos aparecem; Nuvem e Pistache recebem NULL nas colunas da consulta</caption>
+        <thead><tr><th>Nome</th><th>Cor</th><th>Idade</th><th>Sexo</th><th>Peso_kg</th><th>Data</th><th>Veterinario</th><th>Motivo</th></tr></thead>
+        <tbody>
+          <tr><td>Mingau</td><td>Preto</td><td>3</td><td>M</td><td>4.2</td><td>03/03/2026</td><td>Dra. Helena</td><td>Vacina</td></tr>
+          <tr><td>Flor</td><td>Branco</td><td>1</td><td>F</td><td>3.5</td><td>10/03/2026</td><td>Dr. Ivo</td><td>Check-up</td></tr>
+          <tr><td>Tofu</td><td>Cinza</td><td>5</td><td>M</td><td>5.1</td><td>15/03/2026</td><td>Dra. Helena</td><td>Vermífugo</td></tr>
+          <tr><td>Nuvem</td><td>Branco</td><td>2</td><td>F</td><td>3.8</td><td><em>NULL</em></td><td><em>NULL</em></td><td><em>NULL</em></td></tr>
+          <tr><td>Pistache</td><td>Caramelo</td><td>4</td><td>M</td><td>4.7</td><td><em>NULL</em></td><td><em>NULL</em></td><td><em>NULL</em></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="text-align:center;"><code>GatosDaSuzana ⟖ ConsultasVet</code> — externa à direita</p>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption>Todas as 4 consultas aparecem; Doceo recebe NULL nas colunas do gato</caption>
+        <thead><tr><th>Nome</th><th>Cor</th><th>Idade</th><th>Sexo</th><th>Peso_kg</th><th>Data</th><th>Veterinario</th><th>Motivo</th></tr></thead>
+        <tbody>
+          <tr><td>Mingau</td><td>Preto</td><td>3</td><td>M</td><td>4.2</td><td>03/03/2026</td><td>Dra. Helena</td><td>Vacina</td></tr>
+          <tr><td>Flor</td><td>Branco</td><td>1</td><td>F</td><td>3.5</td><td>10/03/2026</td><td>Dr. Ivo</td><td>Check-up</td></tr>
+          <tr><td>Tofu</td><td>Cinza</td><td>5</td><td>M</td><td>5.1</td><td>15/03/2026</td><td>Dra. Helena</td><td>Vermífugo</td></tr>
+          <tr><td>Doceo</td><td><em>NULL</em></td><td><em>NULL</em></td><td><em>NULL</em></td><td><em>NULL</em></td><td>20/03/2026</td><td>Dr. Ivo</td><td>Emergência</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      A <strong>externa completa (⟗)</strong> combina as duas: todos os 5 gatos <em>e</em> a consulta do Doceo
+      aparecem no resultado — 6 tuplas ao todo, cada uma com <code>NULL</code> onde não houver correspondência.
+    </p>
+
+    <figure class="diagram-figure">
+      <svg viewBox="0 0 960 240" role="img" aria-labelledby="join-title join-desc">
+        <title id="join-title">Diagramas comparando junção natural, externa à esquerda, à direita e completa</title>
+        <desc id="join-desc">Quatro pares de círculos representando GatosDaSuzana (G) e ConsultasVet (C), destacando em cada painel a região preservada por cada tipo de junção.</desc>
+
+        <!-- Natural -->
+        <g>
+          <circle cx="85" cy="120" r="55" fill="none" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <circle cx="145" cy="120" r="55" fill="none" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <clipPath id="clipC1"><circle cx="145" cy="120" r="55"/></clipPath>
+          <circle cx="85" cy="120" r="55" class="diagram-box" clip-path="url(#clipC1)"/>
+          <text x="115" y="34" text-anchor="middle" class="diagram-title">Natural (⋈)</text>
+          <text x="55" y="90" class="diagram-label">G</text>
+          <text x="175" y="90" class="diagram-label">C</text>
+          <text x="115" y="220" text-anchor="middle" class="diagram-caption">Só quem tem par</text>
+        </g>
+
+        <!-- Esquerda -->
+        <g>
+          <circle cx="305" cy="120" r="55" class="diagram-box--external" fill-opacity="0.85"/>
+          <circle cx="365" cy="120" r="55" fill="none" stroke="var(--ink-soft)" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <text x="335" y="34" text-anchor="middle" class="diagram-title">Esquerda (⟕)</text>
+          <text x="275" y="90" class="diagram-label">G</text>
+          <text x="395" y="90" class="diagram-label">C</text>
+          <text x="335" y="220" text-anchor="middle" class="diagram-caption">Todo G, com ou sem par</text>
+        </g>
+
+        <!-- Direita -->
+        <g>
+          <circle cx="525" cy="120" r="55" fill="none" stroke="var(--ink-soft)" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <circle cx="585" cy="120" r="55" class="diagram-box--internal" fill-opacity="0.85"/>
+          <text x="555" y="34" text-anchor="middle" class="diagram-title">Direita (⟖)</text>
+          <text x="495" y="90" class="diagram-label">G</text>
+          <text x="615" y="90" class="diagram-label">C</text>
+          <text x="555" y="220" text-anchor="middle" class="diagram-caption">Todo C, com ou sem par</text>
+        </g>
+
+        <!-- Completa -->
+        <g>
+          <circle cx="745" cy="120" r="55" class="diagram-box--external" fill-opacity="0.7"/>
+          <circle cx="805" cy="120" r="55" class="diagram-box--internal" fill-opacity="0.7"/>
+          <text x="775" y="34" text-anchor="middle" class="diagram-title">Completa (⟗)</text>
+          <text x="715" y="90" class="diagram-label">G</text>
+          <text x="835" y="90" class="diagram-label">C</text>
+          <text x="775" y="220" text-anchor="middle" class="diagram-caption">Tudo de G e de C</text>
+        </g>
+      </svg>
+      <figcaption>Figura 1 — O que cada tipo de junção preserva, comparando GatosDaSuzana (G) e ConsultasVet (C).</figcaption>
+    </figure>
+
+    <p>
+      <span class="tooltip-tag" title="⟕, ⟖ e ⟗ correspondem a LEFT JOIN, RIGHT JOIN e FULL OUTER JOIN do SQL.">⟕ ⟖ ⟗ ↔ SQL</span>
+      <code>LEFT JOIN</code>, <code>RIGHT JOIN</code> e <code>FULL OUTER JOIN</code>, respectivamente — todos usando <code>NATURAL</code> ou <code>ON</code> conforme a condição desejada.
+    </p>
+  </section>
+
+  <section>
+    <h2>Divisão (÷) — "para todos os itens de um conjunto"</h2>
+    <p>
+      A divisão responde perguntas do tipo <em>"quem se relaciona com <strong>todos</strong> os elementos de um
+      determinado conjunto?"</em> — algo que nenhum dos operadores anteriores resolve sozinho.
+    </p>
+    <p style="text-align:center; font-size:1.15rem;"><code>R ÷ S</code></p>
+    <p>
+      Uma cooperativa quer certificar como <strong>"robô multifunção"</strong> apenas os robôs capazes de
+      executar <strong>todas</strong> as três tarefas obrigatórias.
+    </p>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption><strong>RoboTarefa</strong>(Codigo, Tarefa) — o que cada robô sabe fazer</caption>
+        <thead><tr><th>Codigo</th><th>Tarefa</th></tr></thead>
+        <tbody>
+          <tr><td>R01</td><td>Colheita</td></tr>
+          <tr><td>R01</td><td>Pulverização</td></tr>
+          <tr><td>R01</td><td>Monitoramento</td></tr>
+          <tr><td>R02</td><td>Colheita</td></tr>
+          <tr><td>R02</td><td>Pulverização</td></tr>
+          <tr><td>R03</td><td>Monitoramento</td></tr>
+          <tr><td>R04</td><td>Colheita</td></tr>
+          <tr><td>R04</td><td>Pulverização</td></tr>
+          <tr><td>R04</td><td>Monitoramento</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption><strong>TarefasObrigatorias</strong>(Tarefa)</caption>
+        <thead><tr><th>Tarefa</th></tr></thead>
+        <tbody><tr><td>Colheita</td></tr><tr><td>Pulverização</td></tr><tr><td>Monitoramento</td></tr></tbody>
+      </table>
+    </div>
+    <p style="text-align:center;"><code>RoboTarefa ÷ TarefasObrigatorias</code></p>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption>Resultado — apenas os robôs cujas tarefas incluem as três obrigatórias</caption>
+        <thead><tr><th>Codigo</th></tr></thead>
+        <tbody><tr><td>R01</td></tr><tr><td>R04</td></tr></tbody>
+      </table>
+    </div>
+    <p>
+      R02 fica de fora porque não faz Monitoramento; R03 fica de fora porque só faz Monitoramento. Apenas R01 e
+      R04 cobrem o conjunto completo de tarefas obrigatórias.
+    </p>
+    <div class="analogy">
+      <p style="margin:0;">
+        <strong>Como calcular na mão:</strong> para cada valor de <code>Codigo</code> em R, verifique se o
+        conjunto de valores de <code>Tarefa</code> associados a ele <strong>contém</strong> (é superconjunto de)
+        todo o conjunto S. Se contiver, o código entra no resultado.
+      </p>
+    </div>
+    <p>
+      A divisão não tem um equivalente direto e simples em SQL — normalmente é escrita com uma dupla negação
+      (<code>NOT EXISTS</code> combinado com <code>NOT IN</code>) ou com <code>GROUP BY</code> e <code>HAVING COUNT(*) = (SELECT COUNT(*) FROM TarefasObrigatorias)</code>. É um bom lembrete de que álgebra relacional e SQL são equivalentes em poder, mas nem sempre "parecidas" na forma.
+    </p>
+  </section>
+
+  <section>
+    <h2>Resumo comparativo</h2>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption>Os operadores estudados nesta página</caption>
+        <thead>
+          <tr><th>Símbolo</th><th>Nome</th><th>O que preserva</th><th>Remove coluna repetida?</th><th>Equivalente em SQL</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>⋈<sub>θ</sub></td><td>Theta-join</td><td>Só pares que satisfazem θ</td><td>Não</td><td><code>JOIN ... ON</code></td></tr>
+          <tr><td>⋈</td><td>Junção natural</td><td>Só pares com atributos comuns iguais</td><td>Sim</td><td><code>NATURAL JOIN</code></td></tr>
+          <tr><td>⟕</td><td>Externa à esquerda</td><td>Tudo da esquerda + pares</td><td>Sim</td><td><code>LEFT JOIN</code></td></tr>
+          <tr><td>⟖</td><td>Externa à direita</td><td>Tudo da direita + pares</td><td>Sim</td><td><code>RIGHT JOIN</code></td></tr>
+          <tr><td>⟗</td><td>Externa completa</td><td>Tudo dos dois lados</td><td>Sim</td><td><code>FULL OUTER JOIN</code></td></tr>
+          <tr><td>÷</td><td>Divisão</td><td>Quem se relaciona com todo o divisor</td><td>—</td><td>Sem equivalente direto</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Tradução de consultas para álgebra relacional</h2>
+    <p>
+      Consultas reais quase sempre combinam vários operadores das duas páginas. Veja três traduções completas,
+      do enunciado até a expressão final.
+    </p>
+
+    <h3>1. "Nome dos gatos atendidos pela Dra. Helena"</h3>
+    <p style="margin:0 0 .4rem;">Passo a passo: primeiro junte as duas tabelas, depois filtre pelo veterinário, depois projete só o nome.</p>
+    <p style="text-align:center;"><code>π<sub>Nome</sub>( σ<sub>Veterinario='Dra. Helena'</sub>( GatosDaSuzana ⋈ ConsultasVet ) )</code></p>
+    <p>Resultado: Mingau e Tofu.</p>
+
+    <h3>2. "Talhões que não têm nenhum robô compatível (por tempo de trabalho)"</h3>
+    <p style="margin:0 0 .4rem;">Aqui é mais fácil pensar ao contrário: pegue todos os talhões, subtraia os que aparecem no theta-join.</p>
+    <p style="text-align:center;"><code>π<sub>Talhao</sub>(Talhoes) − π<sub>Talhao</sub>( RobosAgricolas ⋈<sub>Autonomia_h ≥ TempoNecessario_h</sub> Talhoes )</code></p>
+    <p>Com os dados desta página, o resultado é vazio — todos os talhões têm ao menos um robô compatível.</p>
+
+    <h3>3. "Suspeitos do jogo Detetive da Estrela que não têm álibi confirmado"</h3>
+    <p style="margin:0 0 .4rem;">
+      As relações são <code>Suspeitos(Nome, Sala)</code> e <code>AlibisConfirmados(Nome, Testemunha)</code>.
+      Um suspeito "sem álibi" é aquele cujo <code>Testemunha</code> vira <code>NULL</code> numa junção externa
+      à esquerda — ou, de forma equivalente, aquele que não aparece na junção natural.
+    </p>
+    <p style="text-align:center;"><code>π<sub>Nome</sub>(Suspeitos) − π<sub>Nome</sub>(Suspeitos ⋈ AlibisConfirmados)</code></p>
+    <p>
+      As duas formas (junção externa filtrando <code>NULL</code>, ou diferença de projeções) chegam ao mesmo
+      resultado — é normal existir mais de uma expressão de álgebra relacional correta para a mesma pergunta.
+    </p>
+  </section>
+
+  <section class="thinking-box">
+    <h2>Pense como um detetive</h2>
+    <p>Use as pistas para treinar junção e divisão nas mesmas relações da tradução de consultas acima.</p>
+
+    <div class="thinking-exercise">
+      <div class="thinking-header"><h3>Caso 1 — O álibi que não bate</h3></div>
+      <p>
+        <code>Suspeitos(Nome, Sala)</code>: Rex (Sala de Estrelas), Luna (Observatório), Ora (Sala de Máquinas).
+        <code>AlibisConfirmados(Nome, Testemunha)</code>: Luna–Capitão Vega, Ora–Tenente Kai, Zurg–Comandante Rho.
+        Calcule <code>Suspeitos ⟕ AlibisConfirmados</code> e diga quem é o principal suspeito.
+      </p>
+      <div class="thinking-toggle-wrap">
+        <button type="button" class="thinking-toggle" aria-expanded="false">Ver dica e resposta</button>
+      </div>
+      <div class="thinking-hints thinking-hints--hidden">
+        <h4>Dica</h4>
+        <ul><li>A junção externa à esquerda mantém todos os suspeitos, mesmo sem álibi.</li></ul>
+        <h4>Resposta</h4>
+        <p style="margin:0;">
+          Resultado: Rex aparece com <code>Testemunha = NULL</code> (nenhum álibi encontrado); Luna e Ora
+          aparecem com seus respectivos álibis. Zurg não entra, pois não está em <code>Suspeitos</code>.
+          <strong>Rex é o principal suspeito</strong> — é o único sem álibi confirmado.
+        </p>
+      </div>
+    </div>
+
+    <div class="thinking-exercise">
+      <div class="thinking-header"><h3>Caso 2 — O agente que esteve em todas as salas</h3></div>
+      <p>
+        A relação <code>Patrulha(Nome, Sala)</code> registra em quais salas cada agente foi visto durante a
+        noite. A relação <code>SalasObrigatorias(Sala)</code> lista as três salas que o agente responsável pela
+        ronda completa precisa ter visitado: Observatório, Sala de Máquinas e Ponte de Comando. Que operador
+        você usaria para descobrir quem fez a ronda completa?
+      </p>
+      <div class="thinking-toggle-wrap">
+        <button type="button" class="thinking-toggle" aria-expanded="false">Ver dica e resposta</button>
+      </div>
+      <div class="thinking-hints thinking-hints--hidden">
+        <h4>Dica</h4>
+        <ul><li>"Esteve em todas as salas de uma lista" é a definição da divisão.</li></ul>
+        <h4>Resposta</h4>
+        <p style="margin:0;"><code>Patrulha ÷ SalasObrigatorias</code> — o resultado traz apenas os agentes cujo conjunto de salas visitadas contém as três salas obrigatórias.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="activity-box" id="atividade-pratica">
+    <h2>Atividade prática — simulador de junções e divisão</h2>
+    <p>Execute os operadores diretamente no navegador, sem instalar nada.</p>
+
+    <div class="thinking-exercise">
+      <h3>1. Junção natural e externas ao vivo</h3>
+      <p>Clique em um dos tipos de junção para combinar <code>GatosDaSuzana</code> e <code>ConsultasVet</code>.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:.9rem;">
+        <button type="button" class="thinking-toggle" data-jointype="natural">Natural (⋈)</button>
+        <button type="button" class="thinking-toggle" data-jointype="left">Esquerda (⟕)</button>
+        <button type="button" class="thinking-toggle" data-jointype="right">Direita (⟖)</button>
+        <button type="button" class="thinking-toggle" data-jointype="full">Completa (⟗)</button>
+      </div>
+      <div class="table-scroll">
+        <table class="compare-table" id="ar-tabela-join">
+          <thead><tr><th>Nome</th><th>Cor</th><th>Idade</th><th>Sexo</th><th>Peso_kg</th><th>Data</th><th>Veterinario</th><th>Motivo</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p id="ar-join-info" style="font-size:.9rem; color:var(--ink-soft);">Clique em um botão acima para gerar o resultado.</p>
+    </div>
+
+    <div class="thinking-exercise">
+      <h3>2. Divisão: quem é "robô multifunção"?</h3>
+      <p>Marque quais tarefas cada robô sabe executar e quais tarefas são obrigatórias — depois calcule a divisão.</p>
+
+      <div class="table-scroll">
+        <table class="compare-table" id="ar-tabela-capacidades">
+          <thead>
+            <tr><th>Robô</th><th>Colheita</th><th>Pulverização</th><th>Monitoramento</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <fieldset style="border:1px solid var(--border); border-radius:var(--radius-sm); padding:.7rem 1rem; margin:1rem 0;">
+        <legend style="font-family:var(--font-display); font-weight:700; font-size:.85rem;">Tarefas obrigatórias</legend>
+        <label style="display:inline-block; margin-right:1rem;"><input type="checkbox" class="ar-tarefa-obrig" value="Colheita" checked> Colheita</label>
+        <label style="display:inline-block; margin-right:1rem;"><input type="checkbox" class="ar-tarefa-obrig" value="Pulverização" checked> Pulverização</label>
+        <label style="display:inline-block;"><input type="checkbox" class="ar-tarefa-obrig" value="Monitoramento" checked> Monitoramento</label>
+      </fieldset>
+
+      <button type="button" class="thinking-toggle" id="ar-calcular-divisao">Calcular RoboTarefa ÷ TarefasObrigatorias</button>
+
+      <div class="thinking-hints" id="ar-divisao-resultado" style="margin-top:1rem;">
+        <h4>Resultado</h4>
+        <p style="margin:0;">Ajuste as tarefas e clique em calcular.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Lista de exercícios</h2>
+    <p>Resolva e depois confira sua resposta em "Ver resposta".</p>
+    <ol>
+      <li>
+        <p>Usando <code>RobosAgricolas</code> e <code>Talhoes</code> desta página, calcule
+        <code>RobosAgricolas ⋈<sub>Autonomia_h &gt; TempoNecessario_h + 2</sub> Talhoes</code> (autonomia com folga de 2 horas). Quais pares sobrevivem?</p>
+        <details><summary>Ver resposta</summary>
+          <p>Para A1 (tempo 5, limite 7): R01(8)✓, R02(6)✗, R03(10)✓, R04(8)✓. Para A2 (tempo 9, limite 11): nenhum robô tem autonomia ≥ 11. Resultado: (R01,A1), (R03,A1), (R04,A1) — 3 pares.</p>
+        </details>
+      </li>
+      <li>
+        <p>Explique com suas palavras por que <code>GatosDaSuzana ⋈ ConsultasVet</code> tem grau 8, e não 9.</p>
+        <details><summary>Ver resposta</summary>
+          <p>Porque a junção natural une pelo atributo comum <code>Nome</code> e devolve apenas uma cópia dele. Sem essa junção seriam 5 + 4 = 9 atributos (como no theta-join); com a natural, 5 + 4 − 1 = 8.</p>
+        </details>
+      </li>
+      <li>
+        <p>Reescreva em álgebra relacional: "nome e data da consulta de todo gato que foi ao veterinário, incluindo os que nunca foram (com data em branco)".</p>
+        <details><summary>Ver resposta</summary>
+          <p><code>π<sub>Nome, Data</sub>(GatosDaSuzana ⟕ ConsultasVet)</code> — a junção externa à esquerda preserva Nuvem e Pistache com <code>Data = NULL</code>.</p>
+        </details>
+      </li>
+      <li>
+        <p>No exemplo do Doceo (relação <code>ConsultasVet</code>), qual tipo de junção é o único capaz de mostrar essa linha no resultado, e por quê?</p>
+        <details><summary>Ver resposta</summary>
+          <p>Junção externa à direita (⟖) ou completa (⟗). Doceo não está em <code>GatosDaSuzana</code>, então a junção natural e a externa à esquerda o descartam; apenas as junções que preservam o lado direito o mantêm (com <code>NULL</code> nas colunas do gato).</p>
+        </details>
+      </li>
+      <li>
+        <p>Uma equipe de exploração alienígena registra <code>Visitas(Explorador, Planeta)</code>: Ari visitou {Kranos, Vetta, Oro}; Bex visitou {Kranos, Vetta}; Cass visitou {Kranos, Vetta, Oro, Mynn}. A relação <code>PlanetasObrigatorios(Planeta)</code> exige {Kranos, Vetta, Oro}. Calcule <code>Visitas ÷ PlanetasObrigatorios</code>.</p>
+        <details><summary>Ver resposta</summary>
+          <p>Resultado: <strong>{Ari, Cass}</strong>. Bex fica de fora por não ter visitado Oro. Cass entra mesmo tendo visitado um planeta a mais (Mynn) — a divisão exige "pelo menos todos", não "exatamente todos".</p>
+        </details>
+      </li>
+      <li>
+        <p>Traduza para álgebra relacional: "código dos robôs que fazem Colheita em talhões de Milho", combinando <code>RobosAgricolas</code> (do primeiro tópico, com o atributo <code>Setor</code>) com uma seleção e uma projeção.</p>
+        <details><summary>Ver resposta</summary>
+          <p><code>π<sub>Codigo</sub>( σ<sub>Tarefa='Colheita' ∧ Setor='Milho'</sub>(RobosAgricolas) )</code> — não é necessário nenhuma junção aqui, pois todos os atributos já estão na mesma relação.</p>
+        </details>
+      </li>
+      <li>
+        <p><strong>Desafio:</strong> usando <code>Suspeitos(Nome, Sala)</code> e <code>AlibisConfirmados(Nome, Testemunha)</code> do Caso 1 do "Pense como um detetive", escreva a expressão que retorna o nome de quem tem álibi confirmado <strong>mas não está na lista de suspeitos</strong> (ou seja, uma testemunha citando alguém "de fora").</p>
+        <details><summary>Ver resposta</summary>
+          <p><code>π<sub>Nome</sub>(AlibisConfirmados) − π<sub>Nome</sub>(Suspeitos)</code>. Com os dados do Caso 1, o resultado é <strong>{Zurg}</strong> — um nome que aparece com álibi, mas nunca foi listado como suspeito.</p>
+        </details>
+      </li>
+    </ol>
+  </section>
+
+  <nav class="topic-pager" aria-label="Navegação entre tópicos">
+    <div class="topic-pager-inner">
+      <a class="pager-link pager-link--prev" href="algebra-relacional-unarios.html">
+        <span class="pager-label">← Tópico anterior</span>
+        <span class="pager-title">Álgebra Relacional — Unários e Conjunto</span>
+      </a>
+      <div class="pager-link pager-link--next" aria-disabled="true">
+        <span class="pager-label">Próximo tópico</span>
+        <span class="pager-title">Em breve</span>
+      </div>
+    </div>
+  </nav>
+
+</article>
+</main>
+
+<footer class="container" style="padding-block:2rem; color:var(--ink-soft); font-size:.85rem;">
+  <p>Material didático da disciplina de Banco de Dados — Engenharia da Computação — 2026/2.</p>
+</footer>
+
+<script src="js/algebra-relacional-juncoes-divisao.js" defer></script>
+
+</body>
+</html>
