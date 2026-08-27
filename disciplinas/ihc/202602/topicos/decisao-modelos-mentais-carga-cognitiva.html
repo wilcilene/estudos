@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decisão, modelos mentais e carga cognitiva | IHC 2026.2</title>
+<meta name="description" content="Aula de IHC sobre fatores humanos aplicados a navegação e rotulagem: percepção visual, atenção e carga cognitiva na tomada de decisão e na formação de modelos mentais.">
+<meta name="keywords" content="IHC, interação humano-computador, fatores humanos, percepção visual, atenção, carga cognitiva, modelos mentais, tomada de decisão, gestalt, lei de hick, sweller">
+<meta name="author" content="Wilcilene">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/decisao-modelos-mentais-carga-cognitiva.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Decisão, modelos mentais e carga cognitiva — IHC 2026.2">
+<meta property="og:description" content="Percepção visual, atenção e carga cognitiva aplicados à navegação e rotulagem.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/decisao-modelos-mentais-carga-cognitiva.html">
+<meta property="og:locale" content="pt_BR">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!--
+  IMPORTANTE: ajuste o caminho abaixo para onde o topicos.css
+  realmente está hospedado no seu repositório. Este arquivo fica em
+  /disciplinas/ihc/202602/topicos/, então o exemplo abaixo sobe 4
+  níveis até a raiz e entra em /assets/css/. Troque se a sua
+  estrutura for diferente.
+-->
+<link rel="stylesheet" href="topicos.css">
+
+<style>
+  /* ---------------------------------------------------------
+     Extensões locais desta página, construídas sobre os mesmos
+     tokens de topicos.css (não redefine nada do arquivo base).
+     Cobrem dois componentes que a aula precisa e que ainda não
+     existem na folha compartilhada: placeholders de imagem/vídeo
+     e os "chips" dos 3 tipos de carga cognitiva.
+     --------------------------------------------------------- */
+
+  .media-placeholder {
+    max-width: 760px;
+    margin: 1.5rem 0;
+    border: 2px dashed var(--text-light);
+    border-radius: var(--radius-md);
+    background: var(--border-subtle);
+    padding: 2.25rem 1.5rem;
+    text-align: center;
+  }
+
+  .media-placeholder .mp-icon {
+    font-size: 1.7rem;
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+
+  .media-placeholder .mp-label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .media-placeholder .mp-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    max-width: 56ch;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .media-placeholder.video {
+    border-color: var(--accent-light);
+    background: var(--accent-soft);
+    padding: 3rem 1.5rem;
+  }
+
+  .media-placeholder.video .mp-label {
+    color: var(--accent);
+  }
+
+  .load-chips {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.9rem;
+    max-width: 760px;
+    margin: 1.2rem 0 1.6rem;
+  }
+
+  .load-chip {
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    box-shadow: var(--shadow-sm);
+    padding: 1rem 1.1rem;
+  }
+
+  .load-chip .lc-tag {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .load-chip p {
+    font-size: 0.86rem !important;
+    color: var(--text-muted);
+    margin: 0 !important;
+    line-height: 1.55;
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<div class="page">
+
+  <a class="breadcrumb" href="../index.html">
+    <span class="breadcrumb-arrow">←</span> IHC · 2026.2 · Tópicos
+  </a>
+
+  <div class="page-grid">
+
+    <div class="content" id="conteudo">
+
+      <header class="lesson-header">
+        <span class="badge"><span class="badge-dot"></span>Futuro</span>
+        <h1>Decisão, modelos mentais e carga cognitiva</h1>
+        <p class="lesson-intro">Como a percepção visual, a atenção e a carga cognitiva moldam a forma como as pessoas navegam e interpretam rótulos — e por que isso importa para quem projeta interfaces.</p>
+        <div class="lesson-meta">
+          <span class="pill">Fatores humanos</span>
+          <span class="pill">Nível intermediário</span>
+        </div>
+      </header>
+
+      <div class="summary-card">
+        <h2>Principais pontos</h2>
+        <ul class="summary-list">
+          <li>A percepção visual organiza estímulos usando princípios da Gestalt e atributos pré-atentivos.</li>
+          <li>A atenção é limitada e seletiva: só uma parte do que está na tela é realmente processada.</li>
+          <li>A carga cognitiva mede o esforço mental exigido — e a extrínseca deve ser reduzida pelo design.</li>
+          <li>Modelos mentais moldam como rótulos e menus são interpretados antes mesmo de qualquer clique.</li>
+          <li>Toda decisão de navegação segue um ciclo: perceber, interpretar, avaliar opções e escolher.</li>
+        </ul>
+      </div>
+
+      <section class="content-section" id="intro">
+        <h2><span class="section-number">00</span>Introdução</h2>
+        <p>Antes de clicar em qualquer botão, o cérebro do usuário já fez um trabalho enorme: enxergou formas e cores, decidiu para onde olhar primeiro e comparou o que viu com aquilo que já esperava encontrar. Esses três processos — <strong>percepção visual</strong>, <strong>atenção</strong> e <strong>carga cognitiva</strong> — são fatores humanos centrais em Interação Humano-Computador (IHC), porque determinam se uma pessoa vai entender rapidamente uma tela ou vai se perder nela.</p>
+        <p>Neste tópico vamos entender cada um desses processos separadamente e depois juntá-los em algo muito prático: como eles influenciam a <strong>tomada de decisão</strong> e a formação de <strong>modelos mentais</strong> quando alguém navega em um sistema ou tenta entender o significado de um rótulo (o nome de um menu, de um botão, de uma categoria).</p>
+
+        <div class="callout callout-connection">
+          <span class="callout-label">Por que isso importa</span>
+          <p>Um design pode estar "correto" tecnicamente e ainda assim falhar, se ele exigir do usuário mais atenção ou mais esforço mental do que ele está disposto — ou consegue — dar. Entender fatores humanos é entender os limites (e os atalhos) da mente humana para projetar dentro deles.</p>
+        </div>
+      </section>
+
+      <section class="content-section" id="percepcao">
+        <h2><span class="section-number">01</span>Percepção visual</h2>
+        <p>Percepção visual é o processo pelo qual o cérebro organiza e interpreta os estímulos captados pelos olhos, transformando pontos de luz e cor em formas, objetos e significados reconhecíveis. Isso não acontece de forma neutra: o cérebro segue padrões previsíveis para agrupar e priorizar informações, e é justamente esses padrões que o design de interfaces pode aproveitar — ou ignorar, gerando confusão.</p>
+
+        <h3>Os princípios da Gestalt</h3>
+        <p>A psicologia da Gestalt descreve regras que o cérebro usa, quase automaticamente, para organizar elementos visuais em grupos e totalidades. Os mais relevantes para navegação e rotulagem são:</p>
+        <ul>
+          <li><strong>Proximidade</strong> — elementos próximos entre si são percebidos como relacionados. É por isso que itens de um mesmo menu devem ficar visualmente agrupados e separados de outros grupos por espaço em branco.</li>
+          <li><strong>Similaridade</strong> — elementos com aparência parecida (cor, forma, tamanho) são percebidos como pertencentes à mesma categoria. Botões da mesma função devem ter o mesmo estilo visual em todo o sistema.</li>
+          <li><strong>Continuidade</strong> — o olho tende a seguir linhas e alinhamentos. Uma lista de opções alinhada verticalmente é lida como uma sequência única.</li>
+          <li><strong>Fechamento (closure)</strong> — o cérebro completa formas incompletas. Ícones simplificados funcionam porque a mente "preenche" os detalhes que faltam.</li>
+          <li><strong>Figura-fundo</strong> — distinguimos automaticamente o que é o "objeto principal" (figura) do que é "pano de fundo". Um bom contraste entre o conteúdo principal e o plano de fundo evita que o usuário confunda o que é clicável com o que é apenas decoração.</li>
+        </ul>
+
+          <figure class="content-figure">
+  		<img src="medias/menuagrupado.png" alt="Comparação entre um menu mal agrupado e um menu aplicando proximidade e similaridade">
+  		<figcaption>Fig. 1 — Proximidade e similaridade aplicadas a um menu de navegação. Imagem gerada pelo ChatGPT.</figcaption>
+	  </figure>
+
+        <h3>Atributos pré-atentivos</h3>
+        <p>Existem características visuais que o cérebro processa em frações de segundo, antes mesmo de qualquer atenção consciente ser direcionada a elas: cor, tamanho, orientação, forma e posição. Esses são os <strong>atributos pré-atentivos</strong>. Um botão vermelho em uma tela predominantemente cinza é notado quase instantaneamente, sem esforço — é isso que torna cores e tamanhos ferramentas poderosas (e perigosas, se usadas em excesso) para criar hierarquia visual.</p>
+
+        <div class="callout callout-example">
+          <span class="callout-label">Exemplo aplicado</span>
+          <p>Em um sistema de rotulagem de produtos, destacar apenas o rótulo "Esgotado" com uma cor de alto contraste (usando um atributo pré-atentivo) permite que o usuário identifique produtos indisponíveis sem precisar ler cada item da lista.</p>
+        </div>
+
+        <h3>Hierarquia visual</h3>
+        <p>A combinação desses princípios permite construir uma <strong>hierarquia visual</strong>: uma ordem sugerida de leitura, do mais para o menos importante, feita por meio de tamanho, peso da fonte, cor, contraste e posicionamento. Uma boa hierarquia visual guia o olho do usuário pelo caminho que o design pretende, reduzindo a necessidade de "procurar" informação.</p>
+      </section>
+
+      <section class="content-section" id="atencao">
+        <h2><span class="section-number">02</span>Atenção</h2>
+        <p>Enquanto a percepção organiza o que os olhos captam, a <strong>atenção</strong> decide o que, dentro desse campo visual, será efetivamente processado com mais profundidade. A atenção humana é um recurso limitado: não conseguimos prestar atenção plena em tudo ao mesmo tempo, então o cérebro seleciona.</p>
+
+        <h3>Atenção seletiva e o "gargalo" atencional</h3>
+        <p>A <strong>atenção seletiva</strong> é a capacidade de focar em um estímulo específico enquanto se ignoram outros presentes no mesmo campo visual. Isso cria um efeito de "gargalo": mesmo que uma tela tenha dez informações visíveis, o usuário provavelmente vai processar ativamente apenas duas ou três. As demais existem, mas são "vistas sem ser vistas".</p>
+
+        <div class="callout callout-reading">
+          <span class="callout-label">Conceito relacionado</span>
+          <p><strong>Cegueira à mudança</strong> (change blindness) e <strong>cegueira a banners</strong> (banner blindness) são efeitos práticos desse gargalo: alterações na tela, ou elementos que "parecem" propaganda ou aviso genérico, podem passar completamente despercebidos — inclusive avisos importantes de erro, se forem posicionados como um banner comum.</p>
+        </div>
+
+        <h3>Padrões de leitura em tela</h3>
+        <p>Estudos de rastreamento ocular (eye-tracking) mostram que, ao escanear uma página, os olhos tendem a seguir padrões característicos:</p>
+        <ul>
+          <li><strong>Padrão em F</strong> — comum em páginas com texto denso: o usuário lê a primeira linha inteira, depois escaneia a lateral esquerda, lendo cada vez menos das linhas seguintes.</li>
+          <li><strong>Padrão em Z</strong> — comum em páginas com pouco texto e elementos bem distribuídos: o olhar percorre do canto superior esquerdo ao direito, desce até o canto inferior esquerdo e termina no inferior direito.</li>
+        </ul>
+        <p>Saber qual padrão se aplica a uma tela ajuda a decidir onde posicionar rótulos essenciais, como o nome de uma categoria ou uma chamada para ação (call to action): normalmente nos pontos de maior concentração do olhar.</p>
+
+        <figure class="content-figure">
+          <img src="medias/heatmap-f.png" alt="Mapa de calor (heatmap) de eye-tracking mostrando o padrão em F sobre uma página de listagem">
+          <figcaption>Fig. 2 — Padrão de leitura em F identificado por eye-tracking. Imagem gerada pelo ChatGPT.</figcaption>
+        </figure>
+
+        <h3>Lei de Hick e o custo da escolha</h3>
+        <p>A <strong>Lei de Hick</strong> descreve algo bem intuitivo: quanto mais opções uma pessoa tem para escolher, mais tempo ela leva para decidir. Em termos de navegação, isso significa que menus muito extensos, ou rótulos ambíguos que obrigam o usuário a "pensar mais para escolher", aumentam o tempo — e o esforço — de decisão. Aqui a atenção já começa a se conectar diretamente com a tomada de decisão, tema que vamos aprofundar mais adiante.</p>
+      </section>
+
+      <section class="content-section" id="carga">
+        <h2><span class="section-number">03</span>Carga cognitiva</h2>
+        <p>Se a atenção decide o que será processado, a <strong>carga cognitiva</strong> descreve o quanto de esforço mental esse processamento exige — e qual a capacidade que temos disponível para isso. Ela está diretamente ligada à <strong>memória de trabalho</strong>: a "área de trabalho" temporária do cérebro, onde mantemos informações ativas enquanto raciocinamos.</p>
+
+        <div class="callout callout-reading">
+          <span class="callout-label">Definição</span>
+          <p>A memória de trabalho é limitada. O psicólogo George Miller descreveu, em um estudo clássico de 1956, que conseguimos manter cerca de <strong>7 (mais ou menos 2) itens</strong> simultaneamente em mente — número que pesquisas posteriores (como as de Nelson Cowan) sugerem ser ainda menor, próximo de 4 itens, quando os itens não podem ser agrupados.</p>
+        </div>
+
+        <h3>Os três tipos de carga cognitiva (Sweller)</h3>
+        <p>O pesquisador John Sweller propôs a <strong>Teoria da Carga Cognitiva</strong>, dividindo o esforço mental em três tipos:</p>
+
+        <div class="load-chips">
+          <div class="load-chip">
+            <span class="lc-tag">Intrínseca</span>
+            <p>Complexidade inerente à própria tarefa ou conteúdo — não pode ser eliminada, só gerenciada em etapas.</p>
+          </div>
+          <div class="load-chip">
+            <span class="lc-tag">Extrínseca</span>
+            <p>Esforço extra causado pela forma como a informação é apresentada — um mau design cria esse tipo de carga desnecessária.</p>
+          </div>
+          <div class="load-chip">
+            <span class="lc-tag">Relevante (germane)</span>
+            <p>Esforço investido na construção de entendimento e aprendizado — carga "boa", que ajuda a formar modelos mentais duradouros.</p>
+          </div>
+        </div>
+
+        <p>O objetivo do design de interação não é eliminar toda a carga cognitiva (a intrínseca é inevitável), mas sim <strong>reduzir a carga extrínseca</strong> — aquela gerada por rótulos confusos, layouts inconsistentes ou navegação imprevisível — para sobrar espaço mental para o que realmente importa: entender e decidir.</p>
+
+        <h3>Estratégias práticas para reduzir carga extrínseca</h3>
+        <ul>
+          <li><strong>Chunking (agrupamento)</strong> — dividir informações em blocos menores e nomeados, em vez de listas longas e uniformes.</li>
+          <li><strong>Divulgação progressiva</strong> — mostrar primeiro apenas o essencial, revelando detalhes ou opções avançadas sob demanda.</li>
+          <li><strong>Consistência</strong> — manter os mesmos rótulos, ícones e posições ao longo de todo o sistema, para que o usuário não precise reaprender a cada tela.</li>
+          <li><strong>Rótulos claros e previsíveis</strong> — usar palavras que já fazem parte do vocabulário do usuário, em vez de termos técnicos ou internos do sistema.</li>
+        </ul>
+
+        <figure class="content-figure">
+          <img src="medias/carga-cognitiva.png" alt="Diagrama ilustrando os três tipos de carga cognitiva (intrínseca, extrínseca e relevante) somados formando a carga cognitiva total">
+          <figcaption>Fig. 3 — Os três tipos de carga cognitiva de Sweller. Imagem gerada pelo ChatGPT.</figcaption>
+        </figure>
+      </section>
+
+      <section class="content-section" id="modelos">
+        <h2><span class="section-number">04</span>Modelos mentais e tomada de decisão</h2>
+        <p>Agora que já vimos percepção, atenção e carga cognitiva de forma isolada, é hora de juntar as peças em algo muito concreto: como uma pessoa forma expectativas sobre um sistema e como ela decide o que fazer dentro dele.</p>
+
+        <h3>O que é um modelo mental</h3>
+        <p>Um <strong>modelo mental</strong> é a representação interna e simplificada que uma pessoa constrói sobre como algo funciona, com base em experiências anteriores. Ao ver um ícone de lupa, a maioria das pessoas já espera que ele leve a uma busca — esse é um modelo mental formado por repetição de uso em diversos sistemas ao longo do tempo.</p>
+
+        <div class="callout callout-reflection">
+          <span class="callout-label">Conceito-chave</span>
+          <p>Existe uma diferença entre o <strong>modelo mental do usuário</strong> (o que ele acha que vai acontecer) e o <strong>modelo conceitual do sistema</strong> (o que a equipe de design realmente construiu). Quanto maior essa distância, mais erros de navegação e mais decisões equivocadas o usuário vai cometer — mesmo que o sistema, tecnicamente, esteja "correto".</p>
+        </div>
+
+        <h3>Como isso afeta rotulagem</h3>
+        <p>Um rótulo (o nome de um menu, categoria ou botão) é, na prática, uma promessa: ele ativa um modelo mental sobre o que vai acontecer ao ser clicado. Se o rótulo usar linguagem interna da empresa ("Módulo de Gestão de Fluxos") em vez da linguagem do usuário ("Meus Pedidos"), o modelo mental correto não é ativado, e a pessoa hesita, erra o caminho ou simplesmente desiste.</p>
+
+        <h3>Como isso afeta a navegação</h3>
+        <p>A estrutura de navegação de um sistema — como os menus são organizados e agrupados — deve corresponder ao modelo mental que o usuário já traz de experiências anteriores (com outros sites, apps ou até com o mundo físico). Estruturas muito diferentes do esperado aumentam a carga cognitiva extrínseca e o tempo de decisão previsto pela Lei de Hick.</p>
+
+        <h3>O processo de decisão, passo a passo</h3>
+        <p>Quando um usuário navega, ele passa repetidamente por um pequeno ciclo de decisão:</p>
+        <ol>
+          <li><strong>Percepção</strong> — o que está visível na tela? O que se destaca?</li>
+          <li><strong>Interpretação</strong> — o que esses elementos parecem significar, com base no meu modelo mental?</li>
+          <li><strong>Avaliação de opções</strong> — quais caminhos ou ações estão disponíveis, e qual parece levar ao meu objetivo?</li>
+          <li><strong>Escolha e ação</strong> — clico, seguindo a opção que exigiu menos esforço para ser entendida.</li>
+        </ol>
+        <p>A atenção limita o que entra na etapa 1; a carga cognitiva determina quanto esforço a etapa 2 e 3 vão exigir; e o modelo mental prévio molda a interpretação na etapa 2. Quando qualquer uma dessas etapas exige esforço demais, o risco de abandono ou erro aumenta.</p>
+
+        <h3>Checklist prática</h3>
+        <ul class="checklist">
+          <li>Os rótulos usam o vocabulário do usuário, não o vocabulário interno do sistema?</li>
+          <li>Itens relacionados estão agrupados visualmente (proximidade e similaridade)?</li>
+          <li>A informação mais importante está no caminho do olhar (padrão em F ou Z)?</li>
+          <li>O número de opções em cada menu é administrável, sem exigir escolha excessiva?</li>
+          <li>A navegação se comporta de forma consistente em todas as telas?</li>
+        </ul>
+
+        <figure class="content-figure">
+          <img src="medias/ciclo-decisao.png" alt="Ciclo de decisão do usuário (percepção → interpretação → avaliação → escolha), indicando onde atenção, carga cognitiva e modelo mental atuam em cada etapa">
+          <figcaption>Fig. 4 — Ciclo de decisão do usuário durante a navegação. Imagem gerada pelo ChatGPT.</figcaption>
+        </figure>
+      </section>
+
+      <section class="content-section" id="glossario">
+        <h2><span class="section-number">05</span>Glossário rápido</h2>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <thead>
+              <tr><th>Termo</th><th>Definição resumida</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Percepção visual</strong></td><td>Processo de organizar e interpretar estímulos visuais captados pelos olhos.</td></tr>
+              <tr><td><strong>Gestalt</strong></td><td>Princípios sobre como o cérebro agrupa elementos visuais (proximidade, similaridade, continuidade, fechamento, figura-fundo).</td></tr>
+              <tr><td><strong>Atributo pré-atentivo</strong></td><td>Característica visual (cor, forma, tamanho) processada quase instantaneamente, sem esforço consciente.</td></tr>
+              <tr><td><strong>Atenção seletiva</strong></td><td>Capacidade de focar em um estímulo e ignorar outros no mesmo campo visual.</td></tr>
+              <tr><td><strong>Lei de Hick</strong></td><td>Quanto mais opções disponíveis, mais tempo é necessário para decidir.</td></tr>
+              <tr><td><strong>Carga cognitiva</strong></td><td>Quantidade de esforço mental exigido para processar uma informação ou tarefa.</td></tr>
+              <tr><td><strong>Memória de trabalho</strong></td><td>Capacidade limitada de manter informações ativas na mente durante o raciocínio.</td></tr>
+              <tr><td><strong>Modelo mental</strong></td><td>Representação interna e simplificada de como algo funciona, construída pela experiência.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Palavras-chave</h3>
+        <div class="keyword-tags">
+          <span class="keyword-tag">Percepção visual</span>
+          <span class="keyword-tag">Atenção</span>
+          <span class="keyword-tag">Carga cognitiva</span>
+          <span class="keyword-tag">Modelos mentais</span>
+          <span class="keyword-tag">Tomada de decisão</span>
+          <span class="keyword-tag">Gestalt</span>
+          <span class="keyword-tag">Lei de Hick</span>
+        </div>
+      </section>
+
+      <section class="content-section" id="video">
+        <h2><span class="section-number">06</span>Resumo em vídeo</h2>
+        <p>Assista ao resumo em vídeo desta aula para revisar os principais pontos sobre percepção visual, atenção e carga cognitiva.</p>
+        <div class="video-embed">
+          <video controls width="100%">
+            <source src="medias/resumo-aula4.mp4" type="video/mp4">
+            Seu navegador não suporta a reprodução de vídeos.
+          </video>
+        </div>
+      </section>
+
+      <section class="content-section" id="referencias">
+        <h2><span class="section-number">07</span>Referências</h2>
+        <ul class="reading-list">
+          <li>MILLER, G. A. The magical number seven, plus or minus two: some limits on our capacity for processing information. <em>Psychological Review</em>, 1956.</li>
+          <li>SWELLER, J. Cognitive load during problem solving: effects on learning. <em>Cognitive Science</em>, 1988.</li>
+          <li>NORMAN, D. A. <em>O Design do Dia a Dia</em> (The Design of Everyday Things).</li>
+          <li>NIELSEN, J. Gestalt Principles for User Interface Design — Nielsen Norman Group.</li>
+          <li>HICK, W. E. On the rate of gain of information. <em>Quarterly Journal of Experimental Psychology</em>, 1952.</li>
+        </ul>
+      </section>
+
+    </div>
+
+    <aside class="toc">
+      <h2>Nesta aula</h2>
+      <ol>
+        <li><a href="#intro">Introdução</a></li>
+        <li><a href="#percepcao">Percepção visual</a></li>
+        <li><a href="#atencao">Atenção</a></li>
+        <li><a href="#carga">Carga cognitiva</a></li>
+        <li><a href="#modelos">Modelos mentais e decisão</a></li>
+        <li><a href="#glossario">Glossário rápido</a></li>
+        <li><a href="#video">Resumo em vídeo</a></li>
+        <li><a href="#referencias">Referências</a></li>
+      </ol>
+    </aside>
+
+  </div>
+</div>
+
+<footer>
+  <p>Material de apoio da disciplina de Interação Humano-Computador (IHC) — tópico "Decisão, modelos mentais e carga cognitiva".</p>
+  <p>Conteúdo produzido para acompanhamento de estudos — semestre 2026.2.</p>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
+
+<script>
+  var backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 400) {
+      backToTop.classList.add('is-visible');
+    } else {
+      backToTop.classList.remove('is-visible');
+    }
+  });
+  backToTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>

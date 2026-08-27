@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Álgebra Relacional: Seleção, Projeção e Operadores de Conjunto | Banco de Dados</title>
+<meta name="description" content="Aprenda os operadores unários e de conjunto da álgebra relacional — seleção (σ), projeção (π), união, interseção, diferença e produto cartesiano — com exemplos práticos e exercícios.">
+<meta name="author" content="Disciplina de Banco de Dados — Engenharia da Computação">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/topicos/algebra-relacional-unarios.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Álgebra Relacional — Operadores Unários e de Conjunto">
+<meta property="og:description" content="Seleção (σ), projeção (π), união, interseção, diferença e produto cartesiano como base formal do SQL.">
+<meta property="og:locale" content="pt_BR">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Início", "item": "../index.html" },
+    { "@type": "ListItem", "position": 2, "name": "Álgebra Relacional — Operadores Unários e de Conjunto" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Álgebra Relacional — Operadores Unários e de Conjunto",
+  "description": "Seleção (σ), projeção (π), união, interseção, diferença e produto cartesiano como base formal do SQL.",
+  "educationalLevel": "Ensino Superior",
+  "learningResourceType": "Aula",
+  "inLanguage": "pt-BR",
+  "about": ["Álgebra Relacional", "Banco de Dados", "SQL"]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo-principal">Pular para o conteúdo principal</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark" aria-hidden="true">BD</span>
+      <span class="brand-text">
+        <span class="brand-name">Banco de Dados</span>
+        <span class="brand-sub">Engenharia da Computação · 2026/2</span>
+      </span>
+    </a>
+    <nav class="site-nav" aria-label="Navegação principal">
+      <ul>
+        <li><a href="../index.html">Início</a></li>
+        <li><a href="../index.html#topicos">Tópicos</a></li>
+        <li><a href="modelo-relacional-chaves.html">Tópico anterior</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <nav class="breadcrumb" aria-label="Trilha de navegação">
+    <ol>
+      <li><a href="../index.html">Início</a></li>
+      <li aria-current="page">Álgebra Relacional — Operadores Unários e de Conjunto</li>
+    </ol>
+  </nav>
+</div>
+
+<main id="conteudo-principal">
+<article class="topic-article container">
+
+  <header class="topic-header">
+    <div class="topic-meta">
+      <span class="duration-badge">⏱ 50 min de leitura</span>
+      <span class="duration-badge">Modelagem de Dados</span>
+    </div>
+    <h1>Álgebra Relacional — Operadores Unários e de Conjunto</h1>
+    <p class="topic-lead">
+      Seleção (σ), projeção (π), união, interseção, diferença e produto cartesiano como base formal do SQL.
+      Ao final desta página você será capaz de escrever expressões de álgebra relacional e reconhecer o
+      comando SQL equivalente a cada operador.
+    </p>
+  </header>
+
+  <section class="objectives">
+    <h2>O que você vai aprender</h2>
+    <ul class="check-list">
+      <li>Por que a álgebra relacional existe e qual problema ela resolve dentro de um <span class="tooltip-term" title="Sistema Gerenciador de Banco de Dados: o software responsável por armazenar, organizar e recuperar dados de forma eficiente e segura.">SGBD</span>.</li>
+      <li>Como filtrar tuplas com o operador de <strong>seleção (σ)</strong>.</li>
+      <li>Como escolher colunas com o operador de <strong>projeção (π)</strong>.</li>
+      <li>A regra de <span class="tooltip-term" title="Duas relações são união-compatíveis quando têm o mesmo grau (número de atributos) e os atributos correspondentes compartilham o mesmo domínio.">compatibilidade de união</span> exigida pelos operadores de conjunto.</li>
+      <li>Como combinar duas relações com <strong>união (∪)</strong>, <strong>interseção (∩)</strong> e <strong>diferença (−)</strong>.</li>
+      <li>Como gerar todas as combinações possíveis entre duas relações com o <strong>produto cartesiano (×)</strong>.</li>
+      <li>A relação direta entre cada operador e uma cláusula do SQL.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>O que é Álgebra Relacional?</h2>
+    <p>
+      A álgebra relacional é uma linguagem formal e procedural: cada operador recebe uma ou duas
+      <span class="tooltip-term" title="Uma relação é o nome formal para o que chamamos de tabela: um conjunto de tuplas com o mesmo esquema de atributos.">relações</span>
+      como entrada e produz <strong>sempre</strong> uma nova relação como saída. Essa propriedade é chamada de
+      <em>fechamento</em> e é o que permite encadear operadores, formando expressões cada vez mais complexas —
+      exatamente como o SQL faz por trás dos panos quando você combina <code>WHERE</code>, <code>SELECT</code>,
+      <code>UNION</code> e <code>JOIN</code> em uma única consulta.
+    </p>
+    <div class="analogy">
+      <p style="margin:0;">
+        <strong>Analogia:</strong> pense na álgebra relacional como uma receita culinária. Cada operador é um
+        utensílio (uma peneira, uma faca, uma batedeira) que transforma um ingrediente (uma tabela) em outro
+        ingrediente. Como a saída de um utensílio pode virar a entrada do próximo, você consegue montar pratos
+        (consultas) cada vez mais elaborados a partir de passos simples.
+      </p>
+    </div>
+    <p>
+      Os operadores estudados nesta página se dividem em dois grupos:
+    </p>
+    <ul>
+      <li><strong>Unários</strong> — atuam sobre <em>uma única</em> relação: seleção (σ) e projeção (π).</li>
+      <li><strong>De conjunto (binários)</strong> — atuam sobre <em>duas</em> relações: união (∪), interseção (∩), diferença (−) e produto cartesiano (×).</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Seleção (σ) — filtrando tuplas</h2>
+    <p>
+      A seleção escolhe um <strong>subconjunto de linhas (tuplas)</strong> de uma relação, mantendo todas as
+      colunas. A condição de filtro é escrita como um subscrito do símbolo σ:
+    </p>
+    <p style="text-align:center; font-size:1.15rem;"><code>σ<sub>condição</sub>(Relação)</code></p>
+    <p>
+      Vamos usar a tabela de gatos da Suzana. Ela cuida de cinco gatos e mantém um pequeno cadastro de cada um:
+    </p>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption>Relação <strong>GatosDaSuzana</strong>(Nome, Cor, Idade, Genero, Peso_kg)</caption>
+        <thead>
+          <tr><th>Nome</th><th>Cor</th><th>Idade</th><th>Genero</th><th>Peso_kg</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Theorodo</td><td>Preto</td><td>3</td><td>M</td><td>4.2</td></tr>
+          <tr><td>Fofinha</td><td>Branco</td><td>1</td><td>F</td><td>3.5</td></tr>
+          <tr><td>Tofu</td><td>Cinza</td><td>5</td><td>M</td><td>5.1</td></tr>
+          <tr><td>Filó</td><td>Branco</td><td>2</td><td>F</td><td>3.8</td></tr>
+          <tr><td>DaVinci</td><td>Caramelo</td><td>4</td><td>M</td><td>4.7</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Se a Suzana quiser saber quais gatas têm menos de 3 anos, a expressão é:
+    </p>
+    <p style="text-align:center;"><code>σ<sub>Genero='F' ∧ Idade&lt;3</sub>(GatosDaSuzana)</code></p>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption>Resultado da seleção</caption>
+        <thead><tr><th>Nome</th><th>Cor</th><th>Idade</th><th>Genero</th><th>Peso_kg</th></tr></thead>
+        <tbody>
+          <tr><td>Fofinha</td><td>Branco</td><td>1</td><td>F</td><td>3.5</td></tr>
+          <tr><td>Filó</td><td>Branco</td><td>2</td><td>F</td><td>3.8</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Repare que o <span class="tooltip-term" title="Grau de uma relação é o número de atributos (colunas) que ela possui.">grau</span>
+      da relação não muda (continuam 5 colunas) — apenas o número de tuplas diminui. Condições podem ser
+      combinadas com os conectivos lógicos <code>∧</code> (E), <code>∨</code> (OU) e <code>¬</code> (NÃO),
+      exatamente como as pistas do jogo <em>Detetive (Para quem faz Lógica para computação nesse semestre)</em>: cada pista elimina suspeitos que não
+      satisfazem uma condição, até sobrar um conjunto reduzido de candidatos — isso <strong>é</strong> uma seleção.
+    </p>
+    <p>
+      <span class="tooltip-tag" title="No SQL, σ corresponde à cláusula WHERE de um SELECT.">σ ↔ SQL</span>
+      Em SQL, a seleção é equivalente à cláusula <code>WHERE</code>:
+      <code>SELECT * FROM GatosDaSuzana WHERE Genero = 'F' AND Idade &lt; 3;</code>
+    </p>
+  </section>
+
+  <section>
+    <h2>Projeção (π) — escolhendo colunas</h2>
+    <p>
+      A projeção faz o caminho inverso da seleção: mantém <strong>todas as linhas</strong> (que satisfaçam a
+      condição, se houver seleção antes) e recorta apenas as <strong>colunas</strong> de interesse.
+    </p>
+    <p style="text-align:center; font-size:1.15rem;"><code>π<sub>atributo1, atributo2, ...</sub>(Relação)</code></p>
+    <p>
+      Uma fazenda automatizada mantém o cadastro dos robôs agrícolas em operação:
+    </p>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption>Relação <strong>RobosAgricolas</strong>(Codigo, Modelo, Tarefa, Setor, Autonomia_h)</caption>
+        <thead><tr><th>Codigo</th><th>Modelo</th><th>Tarefa</th><th>Setor</th><th>Autonomia_h</th></tr></thead>
+        <tbody>
+          <tr><td>R01</td><td>AgroBot-X</td><td>Colheita</td><td>Milho</td><td>8</td></tr>
+          <tr><td>R02</td><td>AgroBot-X</td><td>Pulverização</td><td>Soja</td><td>6</td></tr>
+          <tr><td>R03</td><td>SoloScan</td><td>Monitoramento</td><td>Milho</td><td>10</td></tr>
+          <tr><td>R04</td><td>AgroBot-X</td><td>Colheita</td><td>Soja</td><td>8</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Para saber apenas quais combinações de modelo e tarefa existem na frota:</p>
+    <p style="text-align:center;"><code>π<sub>Modelo, Tarefa</sub>(RobosAgricolas)</code></p>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption>Resultado da projeção — note que há apenas 3 linhas, não 4</caption>
+        <thead><tr><th>Modelo</th><th>Tarefa</th></tr></thead>
+        <tbody>
+          <tr><td>AgroBot-X</td><td>Colheita</td></tr>
+          <tr><td>AgroBot-X</td><td>Pulverização</td></tr>
+          <tr><td>SoloScan</td><td>Monitoramento</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Isso acontece porque uma relação é, por definição, um <strong>conjunto</strong> de tuplas: não pode haver
+      linhas duplicadas. R01 e R04 geram o mesmo par (AgroBot-X, Colheita) depois da projeção, então a duplicata
+      é automaticamente eliminada.
+    </p>
+    <p>
+      <span class="tooltip-tag" title="No SQL, π corresponde à lista de colunas do SELECT, e a eliminação de duplicatas exige DISTINCT.">π ↔ SQL</span>
+      Em SQL: <code>SELECT DISTINCT Modelo, Tarefa FROM RobosAgricolas;</code>
+      (o <code>DISTINCT</code> é necessário porque, diferente da álgebra relacional pura, o SQL não elimina
+      duplicatas por padrão).
+    </p>
+  </section>
+
+  <section>
+    <h2>Combinando σ e π</h2>
+    <p>
+      Como todo operador de álgebra relacional devolve uma relação, é possível encaixar um dentro do outro.
+      Para saber o <em>código</em> e o <em>setor</em> apenas dos robôs que fazem colheita:
+    </p>
+    <p style="text-align:center;"><code>π<sub>Codigo, Setor</sub>( σ<sub>Tarefa='Colheita'</sub>(RobosAgricolas) )</code></p>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <thead><tr><th>Codigo</th><th>Setor</th></tr></thead>
+        <tbody>
+          <tr><td>R01</td><td>Milho</td></tr>
+          <tr><td>R04</td><td>Soja</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Repare na ordem de leitura: <strong>de dentro para fora</strong>. Primeiro a seleção filtra as linhas de
+      colheita, depois a projeção recorta as colunas desejadas do resultado — não da tabela original.
+    </p>
+  </section>
+
+  <section>
+    <h2>Compatibilidade de união: a regra antes dos operadores de conjunto</h2>
+    <p>
+      União, interseção e diferença tratam relações como conjuntos matemáticos de tuplas — e por isso só fazem
+      sentido entre duas relações <strong><span class="tooltip-term" title="União-compatíveis: mesmo grau (número de atributos) e domínios correspondentes iguais, atributo a atributo.">união-compatíveis</span></strong>. Duas relações R e S são união-compatíveis quando:
+    </p>
+    <ul class="check-list">
+      <li>R e S têm o mesmo <span class="tooltip-term" title="Número de atributos (colunas) da relação.">grau</span> (o mesmo número de colunas); e</li>
+      <li>o <span class="tooltip-term" title="Domínio é o conjunto de valores válidos que um atributo pode assumir.">domínio</span> do i-ésimo atributo de R é o mesmo do i-ésimo atributo de S, para todo i.</li>
+    </ul>
+    <div class="analogy">
+      <p style="margin:0;">
+        <strong>Analogia:</strong> é como comparar duas listas de compras. Só faz sentido "somar" ou "cruzar"
+        duas listas se ambas anotam o mesmo tipo de informação na mesma ordem (por exemplo, sempre
+        "item, quantidade"). Comparar uma lista de compras com uma lista de tarefas não gera nada útil.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>União (∪), Interseção (∩) e Diferença (−)</h2>
+    <p>
+      Duas equipes de exploração relatam quais espécies alienígenas avistaram durante suas expedições.
+      As duas relações têm o mesmo único atributo, <code>Especie</code> — logo, são união-compatíveis.
+    </p>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption>Relação <strong>ExpedicaoNorte</strong>(Especie)</caption>
+        <thead><tr><th>Especie</th></tr></thead>
+        <tbody>
+          <tr><td>Zorbix</td></tr>
+          <tr><td>Fulgor</td></tr>
+          <tr><td>Trilax</td></tr>
+          <tr><td>Nébula</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption>Relação <strong>ExpedicaoSul</strong>(Especie)</caption>
+        <thead><tr><th>Especie</th></tr></thead>
+        <tbody>
+          <tr><td>Trilax</td></tr>
+          <tr><td>Nébula</td></tr>
+          <tr><td>Ondrak</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>União (∪) — tudo o que foi visto por pelo menos uma equipe</h3>
+    <p style="text-align:center;"><code>ExpedicaoNorte ∪ ExpedicaoSul</code></p>
+    <p>Resultado: <strong>{Zorbix, Fulgor, Trilax, Nébula, Ondrak}</strong> — 5 espécies, sem repetição.</p>
+    <p><span class="tooltip-tag" title="∪ corresponde ao operador UNION do SQL.">∪ ↔ SQL</span> <code>SELECT Especie FROM ExpedicaoNorte UNION SELECT Especie FROM ExpedicaoSul;</code></p>
+
+    <h3>Interseção (∩) — o que foi visto pelas duas equipes</h3>
+    <p style="text-align:center;"><code>ExpedicaoNorte ∩ ExpedicaoSul</code></p>
+    <p>Resultado: <strong>{Trilax, Nébula}</strong> — apenas as espécies presentes nas duas relações.</p>
+    <p><span class="tooltip-tag" title="∩ corresponde ao operador INTERSECT do SQL.">∩ ↔ SQL</span> <code>SELECT Especie FROM ExpedicaoNorte INTERSECT SELECT Especie FROM ExpedicaoSul;</code></p>
+
+    <h3>Diferença (−) — o que uma equipe viu e a outra não</h3>
+    <p style="text-align:center;"><code>ExpedicaoNorte − ExpedicaoSul</code></p>
+    <p>Resultado: <strong>{Zorbix, Fulgor}</strong> — espécies exclusivas da expedição ao Norte.</p>
+    <p>
+      Diferente da união e da interseção, a diferença <strong>não é comutativa</strong>: trocar a ordem muda o
+      resultado.
+    </p>
+    <p style="text-align:center;"><code>ExpedicaoSul − ExpedicaoNorte</code> = <strong>{Ondrak}</strong></p>
+    <p><span class="tooltip-tag" title="− corresponde ao operador EXCEPT (ou MINUS, no Oracle) do SQL.">− ↔ SQL</span> <code>SELECT Especie FROM ExpedicaoNorte EXCEPT SELECT Especie FROM ExpedicaoSul;</code></p>
+
+    <figure class="diagram-figure">
+      <svg viewBox="0 0 720 240" role="img" aria-labelledby="venn-title venn-desc">
+        <title id="venn-title">Diagramas de Venn para União, Interseção e Diferença</title>
+        <desc id="venn-desc">Três diagramas de Venn lado a lado representando a expedição Norte (N) e a expedição Sul (S), destacando em cada um a região correspondente à união, à interseção e à diferença N menos S.</desc>
+
+        <!-- União -->
+        <g>
+          <circle cx="95" cy="120" r="62" class="diagram-box--external" fill-opacity="0.85"/>
+          <circle cx="145" cy="120" r="62" class="diagram-box--internal" fill-opacity="0.85"/>
+          <text x="120" y="34" text-anchor="middle" class="diagram-title">União (∪)</text>
+          <text x="65" y="90" class="diagram-label">N</text>
+          <text x="175" y="90" class="diagram-label">S</text>
+          <text x="120" y="220" text-anchor="middle" class="diagram-caption">Tudo o que está em N ou em S</text>
+        </g>
+
+        <!-- Interseção -->
+        <g>
+          <circle cx="335" cy="120" r="62" fill="none" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <circle cx="385" cy="120" r="62" fill="none" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <clipPath id="clipS"><circle cx="385" cy="120" r="62"/></clipPath>
+          <circle cx="335" cy="120" r="62" class="diagram-box" clip-path="url(#clipS)"/>
+          <text x="360" y="34" text-anchor="middle" class="diagram-title">Interseção (∩)</text>
+          <text x="305" y="90" class="diagram-label">N</text>
+          <text x="415" y="90" class="diagram-label">S</text>
+          <text x="360" y="220" text-anchor="middle" class="diagram-caption">Apenas o que está em N e em S</text>
+        </g>
+
+        <!-- Diferença -->
+        <g>
+          <circle cx="575" cy="120" r="62" class="diagram-box--external"/>
+          <circle cx="625" cy="120" r="62" fill="var(--surface)" stroke="var(--ink-soft)" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <circle cx="575" cy="120" r="62" fill="none" stroke="var(--cat-modelagem-de-dados)" stroke-width="2"/>
+          <text x="600" y="34" text-anchor="middle" class="diagram-title">Diferença (N − S)</text>
+          <text x="545" y="90" class="diagram-label">N</text>
+          <text x="655" y="90" class="diagram-label">S</text>
+          <text x="600" y="220" text-anchor="middle" class="diagram-caption">O que está em N, mas não em S</text>
+        </g>
+      </svg>
+      <figcaption>
+        Figura 1 — Representação visual da união, interseção e diferença entre as relações ExpedicaoNorte (N) e ExpedicaoSul (S).
+      </figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>Produto Cartesiano (×)</h2>
+    <p>
+      O produto cartesiano combina <strong>cada tupla</strong> da primeira relação com <strong>cada tupla</strong>
+      da segunda, gerando todas as combinações possíveis. Diferente dos operadores anteriores, as relações
+      <strong>não</strong> precisam ser união-compatíveis — na verdade, geralmente têm esquemas totalmente
+      diferentes.
+    </p>
+    <p style="text-align:center; font-size:1.15rem;"><code>R × S</code></p>
+    <p>
+      Se R tem <em>m</em> tuplas e grau <em>p</em>, e S tem <em>n</em> tuplas e grau <em>q</em>, então
+      <code>R × S</code> terá <strong>m × n</strong> tuplas e grau <strong>p + q</strong>.
+    </p>
+    <p>Uma fazenda quer avaliar todas as combinações possíveis entre talhões e robôs disponíveis antes de decidir quem vai para onde:</p>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption>Relação <strong>Talhoes</strong>(Talhao) — grau 1, 2 tuplas</caption>
+        <thead><tr><th>Talhao</th></tr></thead>
+        <tbody><tr><td>A1</td></tr><tr><td>A2</td></tr></tbody>
+      </table>
+    </div>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption>Relação <strong>Robos</strong>(Codigo) — grau 1, 3 tuplas</caption>
+        <thead><tr><th>Codigo</th></tr></thead>
+        <tbody><tr><td>R01</td></tr><tr><td>R02</td></tr><tr><td>R03</td></tr></tbody>
+      </table>
+    </div>
+    <p style="text-align:center;"><code>Talhoes × Robos</code> → 2 × 3 = 6 tuplas, grau 1 + 1 = 2</p>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption>Resultado do produto cartesiano — todas as combinações, sem nenhum critério de filtro ainda</caption>
+        <thead><tr><th>Talhao</th><th>Codigo</th></tr></thead>
+        <tbody>
+          <tr><td>A1</td><td>R01</td></tr>
+          <tr><td>A1</td><td>R02</td></tr>
+          <tr><td>A1</td><td>R03</td></tr>
+          <tr><td>A2</td><td>R01</td></tr>
+          <tr><td>A2</td><td>R02</td></tr>
+          <tr><td>A2</td><td>R03</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="analogy">
+      <p style="margin:0;">
+        <strong>Por que isso importa?</strong> O produto cartesiano, sozinho, quase nunca é o resultado final
+        desejado — ele costuma vir <em>antes</em> de uma seleção que filtra apenas as combinações válidas
+        (por exemplo, "robô compatível com o tipo de solo do talhão"). Essa combinação
+        <code>σ(...)(R × S)</code> é exatamente a base formal do <code>JOIN</code>, que você verá no próximo tópico.
+      </p>
+    </div>
+    <p>
+      <span class="tooltip-tag" title="× corresponde ao CROSS JOIN do SQL.">× ↔ SQL</span>
+      <code>SELECT * FROM Talhoes CROSS JOIN Robos;</code>
+    </p>
+  </section>
+
+  <section>
+    <h2>Resumo comparativo dos operadores</h2>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption>Os seis operadores estudados nesta página</caption>
+        <thead>
+          <tr><th>Símbolo</th><th>Nome</th><th>Aridade</th><th>Requisito</th><th>Grau do resultado</th><th>Equivalente em SQL</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>σ</td><td>Seleção</td><td>Unário</td><td>—</td><td>Igual ao da entrada</td><td><code>WHERE</code></td></tr>
+          <tr><td>π</td><td>Projeção</td><td>Unário</td><td>—</td><td>Número de atributos escolhidos</td><td><code>SELECT DISTINCT</code></td></tr>
+          <tr><td>∪</td><td>União</td><td>Binário</td><td>União-compatibilidade</td><td>Igual ao das entradas</td><td><code>UNION</code></td></tr>
+          <tr><td>∩</td><td>Interseção</td><td>Binário</td><td>União-compatibilidade</td><td>Igual ao das entradas</td><td><code>INTERSECT</code></td></tr>
+          <tr><td>−</td><td>Diferença</td><td>Binário</td><td>União-compatibilidade</td><td>Igual ao das entradas</td><td><code>EXCEPT</code> / <code>MINUS</code></td></tr>
+          <tr><td>×</td><td>Produto cartesiano</td><td>Binário</td><td>Nenhum</td><td>Soma dos graus das entradas</td><td><code>CROSS JOIN</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="thinking-box">
+    <h2>Pense como um detetive</h2>
+    <p>
+      No jogo <em>Detetive</em>, cada pista elimina suspeitos que não satisfazem uma condição —
+      exatamente o que a seleção faz. Use as pistas abaixo para treinar σ, π e os operadores de conjunto.
+      Tente resolver antes de abrir a dica.
+    </p>
+
+    <div class="thinking-exercise">
+      <div class="thinking-header">
+        <h3>Caso 1 — A nave avistada</h3>
+      </div>
+      <p>
+        A relação <code>Suspeitos(Nome, Sala, Arma, Hora)</code> tem 6 tuplas. As testemunhas afirmam:
+        "o culpado estava na <strong>Sala de Navegação</strong> OU carregava o <strong>Feixe de Plasma</strong>,
+        e definitivamente não era depois das <strong>23h</strong>". Escreva a expressão de álgebra relacional
+        que representa esse filtro.
+      </p>
+      <div class="thinking-toggle-wrap">
+        <button type="button" class="thinking-toggle" aria-expanded="false">Ver dica e resposta</button>
+      </div>
+      <div class="thinking-hints thinking-hints--hidden">
+        <h4>Dica</h4>
+        <ul>
+          <li>"OU" entre duas condições vira o conectivo ∨.</li>
+          <li>"E" com a condição de horário vira ∧, aplicada ao resultado do OU.</li>
+        </ul>
+        <h4>Resposta</h4>
+        <p style="margin:0;"><code>σ<sub>(Sala='Navegação' ∨ Arma='Feixe de Plasma') ∧ Hora&lt;23</sub>(Suspeitos)</code></p>
+      </div>
+    </div>
+
+    <div class="thinking-exercise">
+      <div class="thinking-header">
+        <h3>Caso 2 — Cruzando depoimentos</h3>
+      </div>
+      <p>
+        Duas testemunhas fizeram listas separadas de quem viram perto da cena: <code>ListaTestemunha1(Nome)</code>
+        e <code>ListaTestemunha2(Nome)</code>. O detetive quer saber quem <strong>as duas</strong> testemunhas
+        viram, pois esses são os suspeitos mais fortes. Que operador ele deve usar?
+      </p>
+      <div class="thinking-toggle-wrap">
+        <button type="button" class="thinking-toggle" aria-expanded="false">Ver dica e resposta</button>
+      </div>
+      <div class="thinking-hints thinking-hints--hidden">
+        <h4>Dica</h4>
+        <ul><li>"As duas testemunhas viram" significa que o nome precisa aparecer nas duas listas ao mesmo tempo.</li></ul>
+        <h4>Resposta</h4>
+        <p style="margin:0;"><code>ListaTestemunha1 ∩ ListaTestemunha2</code> — a interseção, pois as duas relações são união-compatíveis (mesmo atributo <code>Nome</code>).</p>
+      </div>
+    </div>
+  </section>
+
+<section class="activity-box" id="atividade-pratica">
+      <h2>Atividade prática — simulador de álgebra relacional</h2>
+
+      <p>
+        Nesta atividade você vai executar os operadores diretamente no navegador,
+        sem precisar instalar nada. Interaja com os três simuladores abaixo e
+        confira o resultado em tempo real.
+      </p>
+
+      <div class="thinking-exercise">
+        <h3>1. União (∪), Interseção (∩) e Diferença (−)</h3>
+
+        <p>
+          Marque os estudantes matriculados em cada disciplina e clique em um
+          operador para visualizar o resultado.
+        </p>
+
+        <div class="ar-relations">
+          <fieldset>
+            <legend>BancoDeDados</legend>
+
+            <label><input type="checkbox" class="ar-banco" value="Alessandro" checked> Alessandro</label>
+            <label><input type="checkbox" class="ar-banco" value="Ana" checked> Ana</label>
+            <label><input type="checkbox" class="ar-banco" value="André" checked> André</label>
+            <label><input type="checkbox" class="ar-banco" value="Felipe" checked> Felipe</label>
+            <label><input type="checkbox" class="ar-banco" value="Gabriel" checked> Gabriel</label>
+            <label><input type="checkbox" class="ar-banco" value="Gabriele" checked> Gabriele</label>
+            <label><input type="checkbox" class="ar-banco" value="Isabel" checked> Isabel</label>
+            <label><input type="checkbox" class="ar-banco" value="João" checked> João</label>
+            <label><input type="checkbox" class="ar-banco" value="Larissa" checked> Larissa</label>
+            <label><input type="checkbox" class="ar-banco" value="Matheus" checked> Matheus</label>
+            <label><input type="checkbox" class="ar-banco" value="Rômulo" checked> Rômulo</label>
+            <label><input type="checkbox" class="ar-banco" value="Suzana" checked> Suzana</label>
+            <label><input type="checkbox" class="ar-banco" value="Vinicius" checked> Vinicius</label>
+            <label><input type="checkbox" class="ar-banco" value="William" checked> William</label>
+            <label><input type="checkbox" class="ar-banco" value="Yan" checked> Yan</label>
+            <label><input type="checkbox" class="ar-banco" value="Yuri" checked> Yuri</label>
+          </fieldset>
+
+          <fieldset>
+            <legend>LogicaComputacao</legend>
+
+            <label><input type="checkbox" class="ar-logica" value="Alessandro" checked> Alessandro</label>
+            <label><input type="checkbox" class="ar-logica" value="Elmar" checked> Elmar</label>
+            <label><input type="checkbox" class="ar-logica" value="Felipe" checked> Felipe</label>
+            <label><input type="checkbox" class="ar-logica" value="Isabel" checked> Isabel</label>
+            <label><input type="checkbox" class="ar-logica" value="João" checked> João</label>
+            <label><input type="checkbox" class="ar-logica" value="Larissa" checked> Larissa</label>
+            <label><input type="checkbox" class="ar-logica" value="Matheus" checked> Matheus</label>
+            <label><input type="checkbox" class="ar-logica" value="Victor" checked> Victor</label>
+            <label><input type="checkbox" class="ar-logica" value="Vinicius" checked> Vinicius</label>
+            <label><input type="checkbox" class="ar-logica" value="Yan" checked> Yan</label>
+            <label><input type="checkbox" class="ar-logica" value="Yuri" checked> Yuri</label>
+          </fieldset>
+        </div>
+
+        <div class="thinking-toggle-group" role="group" aria-label="Operadores de conjuntos">
+          <button type="button" class="thinking-toggle" data-op="uniao">Banco de Dados ∪ Lógica</button>
+          <button type="button" class="thinking-toggle" data-op="intersecao">Banco de Dados ∩ Lógica</button>
+          <button type="button" class="thinking-toggle" data-op="diferenca-banco-logica">Banco de Dados − Lógica</button>
+          <button type="button" class="thinking-toggle" data-op="diferenca-logica-banco">Lógica − Banco de Dados</button>
+        </div>
+
+        <div class="thinking-hints" id="ar-conjuntos-resultado" aria-live="polite">
+          <h4>Resultado</h4>
+          <p>Clique em um dos botões acima para calcular.</p>
+        </div>
+      </div>
+
+      <div class="thinking-exercise">
+        <h3>2. Seleção (σ) e Projeção (π) ao vivo</h3>
+
+        <p>
+          Filtre a relação <code>Estudantes</code> por disciplina e escolha quais
+          colunas devem aparecer no resultado.
+        </p>
+
+        <div class="ar-filters">
+          <div>
+            <label for="ar-filtro-disciplina">σ — Filtrar por disciplina</label>
+            <select id="ar-filtro-disciplina">
+              <option value="">(todas as disciplinas)</option>
+              <option value="Banco de Dados">Banco de Dados</option>
+              <option value="Lógica para Computação">Lógica para Computação</option>
+            </select>
+          </div>
+
+          <fieldset>
+            <legend>π — Colunas exibidas</legend>
+            <label><input type="checkbox" class="ar-coluna" value="Codigo" checked> Código</label>
+            <label><input type="checkbox" class="ar-coluna" value="Estudante" checked> Estudante</label>
+            <label><input type="checkbox" class="ar-coluna" value="Disciplina" checked> Disciplina</label>
+            <label><input type="checkbox" class="ar-coluna" value="Periodo" checked> Período</label>
+            <label><input type="checkbox" class="ar-coluna" value="Situacao" checked> Situação</label>
+          </fieldset>
+        </div>
+
+        <div class="table-scroll">
+          <table class="compare-table" id="ar-tabela-estudantes">
+            <thead><tr></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <p id="ar-expressao-atual" class="expression" aria-live="polite"></p>
+      </div>
+
+      <div class="thinking-exercise">
+        <h3>3. Produto cartesiano (×)</h3>
+
+        <p>
+          Digite um estudante por linha em cada caixa e gere todas as combinações
+          possíveis entre estudantes das duas disciplinas.
+        </p>
+
+        <div class="ar-cartesian-inputs">
+          <div>
+            <label for="ar-lista-a">BancoDeDados(Estudante)</label>
+            <textarea id="ar-lista-a" rows="5">Alessandro
+Ana
+Felipe</textarea>
+          </div>
+
+          <div>
+            <label for="ar-lista-b">LogicaComputacao(Estudante)</label>
+            <textarea id="ar-lista-b" rows="5">Elmar
+Isabel
+Victor</textarea>
+          </div>
+        </div>
+
+        <button type="button" class="thinking-toggle" id="ar-gerar-produto">
+          Gerar Banco de Dados × Lógica
+        </button>
+
+        <div class="table-scroll">
+          <table class="compare-table" id="ar-tabela-produto">
+            <thead>
+              <tr>
+                <th>Banco de Dados</th>
+                <th>Lógica para Computação</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <p id="ar-produto-info" class="expression" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/algebra-relacional-unarios.js" defer></script>
+
+<script>
+(function () {
+  // ---------- 1. União / Interseção / Diferença ----------
+  var resultadoConjuntos = document.getElementById(
+    'ar-conjuntos-resultado'
+  );
+
+  function marcados(selector) {
+    return Array.from(document.querySelectorAll(selector))
+      .filter(function (el) {
+        return el.checked;
+      })
+      .map(function (el) {
+        return el.value;
+      });
+  }
+
+  function mostrarConjunto(titulo, expressao, itens) {
+    resultadoConjuntos.innerHTML =
+      '<h4>' + titulo + '</h4>' +
+      '<p style="margin:0 0 .4rem; font-family:var(--font-display); font-size:.85rem; color:var(--ink-soft);">' +
+      expressao +
+      '</p>' +
+      '<p style="margin:0;"><strong>{' +
+      (itens.length ? itens.join(', ') : '∅ (conjunto vazio)') +
+      '}</strong> — ' +
+      itens.length +
+      ' elemento(s)</p>';
+  }
+
+  document.querySelectorAll('[data-op]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var banco = marcados('.ar-banco');
+      var logica = marcados('.ar-logica');
+      var op = btn.getAttribute('data-op');
+
+      if (op === 'uniao') {
+        var uniao = Array.from(new Set(banco.concat(logica)));
+
+        mostrarConjunto(
+          'União',
+          'BancoDeDados ∪ LogicaComputacao',
+          uniao
+        );
+      } else if (op === 'intersecao') {
+        var intersecao = banco.filter(function (nome) {
+          return logica.indexOf(nome) !== -1;
+        });
+
+        mostrarConjunto(
+          'Interseção',
+          'BancoDeDados ∩ LogicaComputacao',
+          intersecao
+        );
+      } else if (op === 'diferenca-banco-logica') {
+        var diferencaBanco = banco.filter(function (nome) {
+          return logica.indexOf(nome) === -1;
+        });
+
+        mostrarConjunto(
+          'Diferença',
+          'BancoDeDados − LogicaComputacao',
+          diferencaBanco
+        );
+      } else if (op === 'diferenca-logica-banco') {
+        var diferencaLogica = logica.filter(function (nome) {
+          return banco.indexOf(nome) === -1;
+        });
+
+        mostrarConjunto(
+          'Diferença',
+          'LogicaComputacao − BancoDeDados',
+          diferencaLogica
+        );
+      }
+    });
+  });
+
+  // ---------- 2. Seleção e Projeção ----------
+  var estudantes = [
+    {
+      Codigo: 'BD01',
+      Estudante: 'Alessandro',
+      Disciplina: 'Banco de Dados',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'BD02',
+      Estudante: 'Ana',
+      Disciplina: 'Banco de Dados',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'BD03',
+      Estudante: 'André',
+      Disciplina: 'Banco de Dados',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'BD04',
+      Estudante: 'Felipe',
+      Disciplina: 'Banco de Dados',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'BD05',
+      Estudante: 'Gabriel',
+      Disciplina: 'Banco de Dados',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'BD06',
+      Estudante: 'Gabriele',
+      Disciplina: 'Banco de Dados',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'BD07',
+      Estudante: 'Isabel',
+      Disciplina: 'Banco de Dados',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'BD08',
+      Estudante: 'João',
+      Disciplina: 'Banco de Dados',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'BD09',
+      Estudante: 'Larissa',
+      Disciplina: 'Banco de Dados',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'BD10',
+      Estudante: 'Matheus',
+      Disciplina: 'Banco de Dados',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'BD11',
+      Estudante: 'Rômulo',
+      Disciplina: 'Banco de Dados',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'BD12',
+      Estudante: 'Suzana',
+      Disciplina: 'Banco de Dados',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'BD13',
+      Estudante: 'Vinicius',
+      Disciplina: 'Banco de Dados',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'BD14',
+      Estudante: 'William',
+      Disciplina: 'Banco de Dados',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'BD15',
+      Estudante: 'Yan',
+      Disciplina: 'Banco de Dados',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'BD16',
+      Estudante: 'Yuri',
+      Disciplina: 'Banco de Dados',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'LC01',
+      Estudante: 'Alessandro',
+      Disciplina: 'Lógica para Computação',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'LC02',
+      Estudante: 'Elmar',
+      Disciplina: 'Lógica para Computação',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'LC03',
+      Estudante: 'Felipe',
+      Disciplina: 'Lógica para Computação',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'LC04',
+      Estudante: 'Isabel',
+      Disciplina: 'Lógica para Computação',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'LC05',
+      Estudante: 'João',
+      Disciplina: 'Lógica para Computação',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'LC06',
+      Estudante: 'Larissa',
+      Disciplina: 'Lógica para Computação',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'LC07',
+      Estudante: 'Matheus',
+      Disciplina: 'Lógica para Computação',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'LC08',
+      Estudante: 'Victor',
+      Disciplina: 'Lógica para Computação',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'LC09',
+      Estudante: 'Vinicius',
+      Disciplina: 'Lógica para Computação',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'LC10',
+      Estudante: 'Yan',
+      Disciplina: 'Lógica para Computação',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    },
+    {
+      Codigo: 'LC11',
+      Estudante: 'Yuri',
+      Disciplina: 'Lógica para Computação',
+      Periodo: '2026/2',
+      Situacao: 'Matriculado'
+    }
+  ];
+
+  var tabelaEstudantes = document.getElementById(
+    'ar-tabela-estudantes'
+  );
+
+  var thead = tabelaEstudantes.querySelector('thead tr');
+  var tbody = tabelaEstudantes.querySelector('tbody');
+  var filtroDisciplina = document.getElementById(
+    'ar-filtro-disciplina'
+  );
+  var expressaoAtual = document.getElementById(
+    'ar-expressao-atual'
+  );
+
+  function colunasSelecionadas() {
+    return Array.from(document.querySelectorAll('.ar-coluna'))
+      .filter(function (el) {
+        return el.checked;
+      })
+      .map(function (el) {
+        return el.value;
+      });
+  }
+
+  function nomeColuna(coluna) {
+    var nomes = {
+      Codigo: 'Código',
+      Estudante: 'Estudante',
+      Disciplina: 'Disciplina',
+      Periodo: 'Período',
+      Situacao: 'Situação'
+    };
+
+    return nomes[coluna] || coluna;
+  }
+
+  function renderEstudantes() {
+    var disciplina = filtroDisciplina.value;
+    var colunas = colunasSelecionadas();
+
+    var filtrados = estudantes.filter(function (estudante) {
+      return disciplina === '' ||
+        estudante.Disciplina === disciplina;
+    });
+
+    thead.innerHTML = colunas.map(function (coluna) {
+      return '<th>' + nomeColuna(coluna) + '</th>';
+    }).join('');
+
+    if (colunas.length === 0) {
+      tbody.innerHTML =
+        '<tr><td>Selecione ao menos uma coluna</td></tr>';
+    } else if (filtrados.length === 0) {
+      tbody.innerHTML =
+        '<tr><td colspan="' + colunas.length +
+        '">Nenhum estudante encontrado</td></tr>';
+    } else {
+      tbody.innerHTML = filtrados.map(function (estudante) {
+        return '<tr>' +
+          colunas.map(function (coluna) {
+            return '<td>' + estudante[coluna] + '</td>';
+          }).join('') +
+          '</tr>';
+      }).join('');
+    }
+
+    var condicao = disciplina === ''
+      ? ''
+      : 'σ<sub>Disciplina=\'' + disciplina + '\'</sub>(Estudantes)';
+
+    var base = condicao || 'Estudantes';
+
+    expressaoAtual.innerHTML =
+      'Expressão atual: <code>π<sub>' +
+      (colunas.join(', ') || '—') +
+      '</sub>(' +
+      base +
+      ')</code>';
+  }
+
+  filtroDisciplina.addEventListener(
+    'change',
+    renderEstudantes
+  );
+
+  document.querySelectorAll('.ar-coluna').forEach(function (cb) {
+    cb.addEventListener('change', renderEstudantes);
+  });
+
+  renderEstudantes();
+
+  // ---------- 3. Produto cartesiano ----------
+  var listaA = document.getElementById('ar-lista-a');
+  var listaB = document.getElementById('ar-lista-b');
+
+  var tabelaProduto = document
+    .getElementById('ar-tabela-produto')
+    .querySelector('tbody');
+
+  var produtoInfo = document.getElementById('ar-produto-info');
+
+  document
+    .getElementById('ar-gerar-produto')
+    .addEventListener('click', function () {
+      var banco = listaA.value
+        .split('\n')
+        .map(function (valor) {
+          return valor.trim();
+        })
+        .filter(Boolean);
+
+      var logica = listaB.value
+        .split('\n')
+        .map(function (valor) {
+          return valor.trim();
+        })
+        .filter(Boolean);
+
+      var linhas = [];
+
+      banco.forEach(function (estudanteBanco) {
+        logica.forEach(function (estudanteLogica) {
+          linhas.push(
+            '<tr><td>' +
+            estudanteBanco +
+            '</td><td>' +
+            estudanteLogica +
+            '</td></tr>'
+          );
+        });
+      });
+
+      tabelaProduto.innerHTML = linhas.join('') ||
+        '<tr><td colspan="2">Preencha as duas listas</td></tr>';
+
+      produtoInfo.textContent =
+        banco.length +
+        ' × ' +
+        logica.length +
+        ' = ' +
+        (banco.length * logica.length) +
+        ' tuplas geradas, grau 2 (1 + 1).';
+    });
+})();
+</script>
+
+  <section>
+    <h2>Lista de exercícios</h2>
+    <p>Resolva os exercícios abaixo e depois confira sua resposta clicando em "Ver resposta".</p>
+
+    <ol>
+      <li>
+        <p>Considerando a relação <code>GatosDaSuzana(Nome, Cor, Idade, Genero, Peso_kg)</code> apresentada nesta página, escreva a expressão de álgebra relacional que retorna o <strong>nome e a cor</strong> de todos os gatos machos com peso acima de 4,5&nbsp;kg.</p>
+        <details>
+          <summary>Ver resposta</summary>
+          <p><code>π<sub>Nome, Cor</sub>( σ<sub>Genero='M' ∧ Peso_kg&gt;4.5</sub>(GatosDaSuzana) )</code> → resultado: Tofu (Cinza) e DaVinci (Caramelo).</p>
+        </details>
+      </li>
+
+      <li>
+        <p>No jogo Detetive, a relação <code>Suspeitos(Nome, Sala, Arma, Hora)</code> guarda os avistamentos. Escreva a expressão que retorna <strong>apenas os nomes</strong> das pessoas que estavam na "Sala de Máquinas" às 22h.</p>
+        <details>
+          <summary>Ver resposta</summary>
+          <p><code>π<sub>Nome</sub>( σ<sub>Sala='Sala de Máquinas' ∧ Hora=22</sub>(Suspeitos) )</code></p>
+        </details>
+      </li>
+
+      <li>
+        <p>Uma nave-mãe alienígena mantém a relação <code>Tripulantes(Nome, Especie, Funcao)</code>. Um cientista humano quer saber quais funções existem a bordo, sem repetições. Que operador ele deve usar e por quê?</p>
+        <details>
+          <summary>Ver resposta</summary>
+          <p>Projeção: <code>π<sub>Funcao</sub>(Tripulantes)</code>. A projeção seleciona colunas e, como uma relação é um conjunto, elimina automaticamente duplicatas — por isso funções repetidas aparecem apenas uma vez no resultado.</p>
+        </details>
+      </li>
+
+      <li>
+        <p>Duas equipes de robôs agrícolas relataram, cada uma em sua relação <code>PragaDetectada(Talhao)</code>, em quais talhões encontraram pragas nesta semana: EquipeA viu pragas em {A1, A3, A5} e EquipeB viu pragas em {A3, A5, A7}. Calcule <code>EquipeA − EquipeB</code> e explique o que esse resultado significa na prática.</p>
+        <details>
+          <summary>Ver resposta</summary>
+          <p>Resultado: <strong>{A1}</strong>. Esse é o talhão em que apenas a EquipeA detectou praga — pode indicar um problema que a EquipeB ainda não percorreu, ou uma divergência de sensores que vale a pena investigar.</p>
+        </details>
+      </li>
+
+      <li>
+        <p>Ainda com os dados do exercício anterior, calcule <code>EquipeA ∪ EquipeB</code> e <code>EquipeA ∩ EquipeB</code>.</p>
+        <details>
+          <summary>Ver resposta</summary>
+          <p>União: <strong>{A1, A3, A5, A7}</strong> (todos os talhões com praga relatada por pelo menos uma equipe). Interseção: <strong>{A3, A5}</strong> (talhões confirmados pelas duas equipes, com maior confiabilidade).</p>
+        </details>
+      </li>
+
+      <li>
+        <p>Explique, em uma frase, por que <code>Tripulantes(Nome, Especie, Funcao) ∪ RobosAgricolas(Codigo, Modelo, Tarefa, Setor, Autonomia_h)</code> <strong>não</strong> é uma operação válida.</p>
+        <details>
+          <summary>Ver resposta</summary>
+          <p>As duas relações não são união-compatíveis: têm graus diferentes (3 contra 5 atributos) e domínios diferentes atributo a atributo, então não satisfazem a regra exigida pelos operadores de conjunto.</p>
+        </details>
+      </li>
+
+      <li>
+        <p>Uma fazenda tem a relação <code>Talhoes(Talhao)</code> com 4 tuplas e a relação <code>Culturas(Cultura)</code> com 3 tuplas. Quantas tuplas e qual grau terá o resultado de <code>Talhoes × Culturas</code>?</p>
+        <details>
+          <summary>Ver resposta</summary>
+          <p>4 × 3 = <strong>12 tuplas</strong>, com grau <strong>2</strong> (1 + 1 atributo de cada relação de origem).</p>
+        </details>
+      </li>
+
+      <li>
+        <p><strong>Desafio:</strong> escreva, em álgebra relacional, uma expressão que combine produto cartesiano e seleção para descobrir quais pares (Talhao, Codigo do robô) são válidos, sabendo que a relação <code>Compatibilidade(Talhao, Codigo)</code> não existe — você só tem <code>Talhoes(Talhao, TipoSolo)</code> e <code>Robos(Codigo, TipoSoloIdeal)</code>, e um par só é válido quando <code>TipoSolo = TipoSoloIdeal</code>.</p>
+        <details>
+          <summary>Ver resposta</summary>
+          <p><code>σ<sub>TipoSolo=TipoSoloIdeal</sub>(Talhoes × Robos)</code>. Esta expressão — produto cartesiano seguido de uma seleção sobre atributos das duas relações de origem — é exatamente a definição formal de um <strong>JOIN</strong>, tema do próximo tópico.</p>
+        </details>
+      </li>
+    </ol>
+  </section>
+
+  <nav class="topic-pager" aria-label="Navegação entre tópicos">
+    <div class="topic-pager-inner">
+      <a class="pager-link pager-link--prev" href="modelo-relacional-chaves.html">
+        <span class="pager-label">← Tópico anterior</span>
+        <span class="pager-title">Modelo Relacional e Chaves</span>
+      </a>
+      <div class="pager-link pager-link--next" aria-disabled="true">
+        <span class="pager-label">Próximo tópico</span>
+        <span class="pager-title">Em breve</span>
+      </div>
+    </div>
+  </nav>
+
+</article>
+</main>
+
+<footer class="container" style="padding-block:2rem; color:var(--ink-soft); font-size:.85rem;">
+  <p>Material didático da disciplina de Banco de Dados — Engenharia da Computação — 2026/2.</p>
+</footer>
+
+<script>
+  document.querySelectorAll('.thinking-toggle').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var panel = button.closest('.thinking-exercise').querySelector('.thinking-hints');
+      var isHidden = panel.classList.toggle('thinking-hints--hidden');
+      button.setAttribute('aria-expanded', String(!isHidden));
+      button.textContent = isHidden ? 'Ver dica e resposta' : 'Ocultar dica e resposta';
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Álgebra Relacional — Banco de Dados</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!--
+    Mantenha aqui o conteúdo didático original do arquivo enviado.
+    A seção da atividade prática deve usar a estrutura indicada abaixo.
+  -->
+
+  <main class="topic-article">
+    <section class="activity-box" id="atividade-pratica">
+      <h2>Atividade prática — simulador de álgebra relacional</h2>
+
+      <p>
+        Nesta atividade você vai executar os operadores diretamente no navegador,
+        sem precisar instalar nada. Interaja com os três simuladores abaixo e
+        confira o resultado em tempo real.
+      </p>
+
+      <div class="thinking-exercise">
+        <h3>1. União (∪), Interseção (∩) e Diferença (−)</h3>
+
+        <p>
+          Marque os estudantes matriculados em cada disciplina e clique em um
+          operador para visualizar o resultado.
+        </p>
+
+        <div class="ar-relations">
+          <fieldset>
+            <legend>BancoDeDados</legend>
+
+            <label><input type="checkbox" class="ar-banco" value="Alessandro" checked> Alessandro</label>
+            <label><input type="checkbox" class="ar-banco" value="Ana" checked> Ana</label>
+            <label><input type="checkbox" class="ar-banco" value="André" checked> André</label>
+            <label><input type="checkbox" class="ar-banco" value="Felipe" checked> Felipe</label>
+            <label><input type="checkbox" class="ar-banco" value="Gabriel" checked> Gabriel</label>
+            <label><input type="checkbox" class="ar-banco" value="Gabriele" checked> Gabriele</label>
+            <label><input type="checkbox" class="ar-banco" value="Isabel" checked> Isabel</label>
+            <label><input type="checkbox" class="ar-banco" value="João" checked> João</label>
+            <label><input type="checkbox" class="ar-banco" value="Larissa" checked> Larissa</label>
+            <label><input type="checkbox" class="ar-banco" value="Matheus" checked> Matheus</label>
+            <label><input type="checkbox" class="ar-banco" value="Rômulo" checked> Rômulo</label>
+            <label><input type="checkbox" class="ar-banco" value="Suzana" checked> Suzana</label>
+            <label><input type="checkbox" class="ar-banco" value="Vinicius" checked> Vinicius</label>
+            <label><input type="checkbox" class="ar-banco" value="William" checked> William</label>
+            <label><input type="checkbox" class="ar-banco" value="Yan" checked> Yan</label>
+            <label><input type="checkbox" class="ar-banco" value="Yuri" checked> Yuri</label>
+          </fieldset>
+
+          <fieldset>
+            <legend>LogicaComputacao</legend>
+
+            <label><input type="checkbox" class="ar-logica" value="Alessandro" checked> Alessandro</label>
+            <label><input type="checkbox" class="ar-logica" value="Elmar" checked> Elmar</label>
+            <label><input type="checkbox" class="ar-logica" value="Felipe" checked> Felipe</label>
+            <label><input type="checkbox" class="ar-logica" value="Isabel" checked> Isabel</label>
+            <label><input type="checkbox" class="ar-logica" value="João" checked> João</label>
+            <label><input type="checkbox" class="ar-logica" value="Larissa" checked> Larissa</label>
+            <label><input type="checkbox" class="ar-logica" value="Matheus" checked> Matheus</label>
+            <label><input type="checkbox" class="ar-logica" value="Victor" checked> Victor</label>
+            <label><input type="checkbox" class="ar-logica" value="Vinicius" checked> Vinicius</label>
+            <label><input type="checkbox" class="ar-logica" value="Yan" checked> Yan</label>
+            <label><input type="checkbox" class="ar-logica" value="Yuri" checked> Yuri</label>
+          </fieldset>
+        </div>
+
+        <div class="thinking-toggle-group" role="group" aria-label="Operadores de conjuntos">
+          <button type="button" class="thinking-toggle" data-op="uniao">Banco de Dados ∪ Lógica</button>
+          <button type="button" class="thinking-toggle" data-op="intersecao">Banco de Dados ∩ Lógica</button>
+          <button type="button" class="thinking-toggle" data-op="diferenca-banco-logica">Banco de Dados − Lógica</button>
+          <button type="button" class="thinking-toggle" data-op="diferenca-logica-banco">Lógica − Banco de Dados</button>
+        </div>
+
+        <div class="thinking-hints" id="ar-conjuntos-resultado" aria-live="polite">
+          <h4>Resultado</h4>
+          <p>Clique em um dos botões acima para calcular.</p>
+        </div>
+      </div>
+
+      <div class="thinking-exercise">
+        <h3>2. Seleção (σ) e Projeção (π) ao vivo</h3>
+
+        <p>
+          Filtre a relação <code>Estudantes</code> por disciplina e escolha quais
+          colunas devem aparecer no resultado.
+        </p>
+
+        <div class="ar-filters">
+          <div>
+            <label for="ar-filtro-disciplina">σ — Filtrar por disciplina</label>
+            <select id="ar-filtro-disciplina">
+              <option value="">(todas as disciplinas)</option>
+              <option value="Banco de Dados">Banco de Dados</option>
+              <option value="Lógica para Computação">Lógica para Computação</option>
+            </select>
+          </div>
+
+          <fieldset>
+            <legend>π — Colunas exibidas</legend>
+            <label><input type="checkbox" class="ar-coluna" value="Codigo" checked> Código</label>
+            <label><input type="checkbox" class="ar-coluna" value="Estudante" checked> Estudante</label>
+            <label><input type="checkbox" class="ar-coluna" value="Disciplina" checked> Disciplina</label>
+            <label><input type="checkbox" class="ar-coluna" value="Periodo" checked> Período</label>
+            <label><input type="checkbox" class="ar-coluna" value="Situacao" checked> Situação</label>
+          </fieldset>
+        </div>
+
+        <div class="table-scroll">
+          <table class="compare-table" id="ar-tabela-estudantes">
+            <thead><tr></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <p id="ar-expressao-atual" class="expression" aria-live="polite"></p>
+      </div>
+
+      <div class="thinking-exercise">
+        <h3>3. Produto cartesiano (×)</h3>
+
+        <p>
+          Digite um estudante por linha em cada caixa e gere todas as combinações
+          possíveis entre estudantes das duas disciplinas.
+        </p>
+
+        <div class="ar-cartesian-inputs">
+          <div>
+            <label for="ar-lista-a">BancoDeDados(Estudante)</label>
+            <textarea id="ar-lista-a" rows="5">Alessandro
+Ana
+Felipe</textarea>
+          </div>
+
+          <div>
+            <label for="ar-lista-b">LogicaComputacao(Estudante)</label>
+            <textarea id="ar-lista-b" rows="5">Elmar
+Isabel
+Victor</textarea>
+          </div>
+        </div>
+
+        <button type="button" class="thinking-toggle" id="ar-gerar-produto">
+          Gerar Banco de Dados × Lógica
+        </button>
+
+        <div class="table-scroll">
+          <table class="compare-table" id="ar-tabela-produto">
+            <thead>
+              <tr>
+                <th>Banco de Dados</th>
+                <th>Lógica para Computação</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <p id="ar-produto-info" class="expression" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/algebra-relacional-unarios.js" defer></script>
+</body>
+</html>
