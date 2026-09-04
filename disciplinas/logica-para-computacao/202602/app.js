@@ -86,6 +86,10 @@
     { id:"revisao-01", review:true, title:"Operação Floricultura", tags:["revisao","logica-proposicional","linguagem","semantica"],
       desc:"Atividades de revisão sobre proposições, linguagem formal, fórmulas bem formadas, conectivos lógicos e tabelas-verdade.",
       href:"revisao-01-logica-proposicional.html" }
+
+    { id:"revisao-02", review:true, title:"Operação Cansada demais para ser dinâmica", tags:["revisao","logica-proposicional","linguagem","semantica"],
+      desc:"Atividades de revisão sobre proposições, linguagem formal, fórmulas bem formadas, conectivos lógicos, tabelas-verdade,  tautologia, contradição, contingência, Equivalência lógica e leis da lógica.",
+      href:"revisao-02-logica-computacao.html" }
   ];
 
   var STORAGE_KEY = "logica-computacao:progresso";
