@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Material didático sobre métodos de desenvolvimento de software tradicionais e ágeis.">
+  <title>Métodos de desenvolvimento</title>
+
+  <!-- Ajuste o caminho caso o CSS da disciplina esteja em outro diretório. -->
+  <link rel="stylesheet" href="assets\css\topicos.css">
+
+  <!--
+    Estilos de apoio para os componentes NOVOS deste tópico (resumos, diagramas,
+    linha do tempo, glossário, caixas de exemplo). Eles usam nomes de classe no
+    mesmo padrão do restante do arquivo (kebab-case em português) para poderem
+    ser movidos para o style.css da disciplina depois. Se o style.css já definir
+    regras equivalentes, essas apenas preenchem o que faltar.
+  -->
+  <style>
+    .resumo-rapido {
+      border-left: 4px solid currentColor;
+      padding: 0.75rem 1.25rem;
+      margin: 1.25rem 0;
+      background: rgba(127,127,127,0.08);
+    }
+    .resumo-rapido h4 { margin-top: 0; }
+    .exemplo-pratico {
+      border: 1px solid rgba(127,127,127,0.35);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+    .exemplo-pratico h4 { margin-top: 0; }
+    .diagrama-svg {
+      width: 100%;
+      max-width: 720px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .imagem-conteudo.diagrama { text-align: center; }
+    .glossario dt { font-weight: bold; margin-top: 0.75rem; }
+    .glossario dd { margin-left: 0; margin-bottom: 0.5rem; }
+    .grade-cards.duas-colunas { grid-template-columns: repeat(2, 1fr); }
+  </style>
+</head>
+<body>
+  <main class="conteudo-disciplina">
+    <header class="cabecalho-conteudo">
+      <p class="numero-topico">07</p>
+      <h1>Métodos de desenvolvimento</h1>
+      <p class="introducao">Abordagens tradicionais e ágeis, colaboração, iteração e entrega de valor no desenvolvimento de software.</p>
+    </header>
+
+    <section class="secao-conteudo" aria-labelledby="objetivos">
+      <h2 id="objetivos">Objetivos de aprendizagem</h2>
+      <ul>
+        <li>Diferenciar métodos prescritivos, iterativos, incrementais e ágeis.</li>
+        <li>Reconhecer vantagens, limitações e contextos de uso de diferentes métodos.</li>
+        <li>Compreender os valores e princípios do Manifesto Ágil.</li>
+        <li>Identificar os elementos fundamentais de Scrum, Kanban e XP.</li>
+        <li>Justificar a escolha de uma abordagem conforme as características de um projeto.</li>
+      </ul>
+    </section>
+
+    <section class="secao-conteudo" aria-labelledby="conceito-metodos">
+      <h2 id="conceito-metodos">1. Métodos de desenvolvimento de software</h2>
+      <p>Um método de desenvolvimento é uma forma organizada de conduzir a criação e a evolução de sistemas. Ele define, em maior ou menor grau, como as pessoas colaboram, quais atividades realizam, quais documentos ou artefatos produzem, como acompanham o progresso e como avaliam a qualidade do software.</p>
+      <p>Não existe um método que seja ideal para todos os projetos. A escolha deve considerar aspectos como estabilidade dos requisitos, criticidade do sistema, exigências legais, tamanho e experiência da equipe, necessidade de documentação, riscos técnicos e velocidade esperada de entrega.</p>
+
+      <div class="grade-cards">
+        <article class="card-conteudo">
+          <h3>Prescritivos</h3>
+          <p>Definem fases, produtos de trabalho, aprovações e controles de modo mais estruturado. São úteis quando há necessidade de previsibilidade, rastreabilidade e documentação formal.</p>
+        </article>
+        <article class="card-conteudo">
+          <h3>Iterativos e incrementais</h3>
+          <p>Permitem construir o produto em partes e aprender ao longo da execução. O resultado evolui a cada ciclo ou incremento entregue.</p>
+        </article>
+        <article class="card-conteudo">
+          <h3>Ágeis</h3>
+          <p>Valorizam entregas frequentes, colaboração com pessoas interessadas no produto, adaptação a mudanças e melhoria contínua.</p>
+        </article>
+      </div>
+
+      <div class="resumo-rapido">
+        <h4>Resumo rápido</h4>
+        <p>Pense nos três grupos como um espectro, não como caixas fechadas: de um lado, mais planejamento antecipado e documentação (prescritivo); do outro, mais ciclos curtos e aprendizado contínuo (ágil). A maioria dos projetos reais combina elementos dos dois lados.</p>
+      </div>
+    </section>
+
+    <section class="secao-conteudo" aria-labelledby="metodos-prescritivos">
+      <h2 id="metodos-prescritivos">2. Métodos prescritivos</h2>
+      <p>Métodos prescritivos descrevem antecipadamente uma sequência de atividades, responsabilidades, documentos e pontos de controle. Em geral, dão maior ênfase ao planejamento, à especificação e à aprovação formal de cada etapa.</p>
+
+      <article class="bloco-metodo">
+        <h3>2.1 Modelo Cascata</h3>
+        <p>O modelo Cascata, ou <em>Waterfall</em>, organiza o desenvolvimento em fases sequenciais. Normalmente, uma fase é concluída e revisada antes do início da próxima. As etapas podem variar conforme a organização, mas costumam incluir requisitos, análise, projeto, implementação, testes, implantação e manutenção.</p>
+
+        <figure class="imagem-conteudo diagrama">
+          <svg class="diagrama-svg" viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama do fluxo em cascata com seis fases sequenciais, cada uma descendo em degrau para a seguinte">
+            <defs>
+              <marker id="seta-cascata" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                <path d="M0,0 L8,4 L0,8 Z" fill="#2c3e50"/>
+              </marker>
+            </defs>
+            <g font-family="sans-serif" font-size="15" fill="#ffffff">
+              <!-- 6 caixas em degrau -->
+              <g>
+                <rect x="10" y="10" width="115" height="46" rx="4" fill="#2c3e50"/>
+                <text x="67" y="38" text-anchor="middle">Requisitos</text>
+              </g>
+              <g>
+                <rect x="130" y="46" width="115" height="46" rx="4" fill="#34495e"/>
+                <text x="187" y="74" text-anchor="middle">Análise</text>
+              </g>
+              <g>
+                <rect x="250" y="82" width="115" height="46" rx="4" fill="#3d566e"/>
+                <text x="307" y="110" text-anchor="middle">Projeto</text>
+              </g>
+              <g>
+                <rect x="370" y="118" width="130" height="46" rx="4" fill="#46687f"/>
+                <text x="435" y="146" text-anchor="middle">Implementação</text>
+              </g>
+              <g>
+                <rect x="505" y="154" width="105" height="46" rx="4" fill="#4f7a90"/>
+                <text x="557" y="182" text-anchor="middle">Testes</text>
+              </g>
+              <g>
+                <rect x="615" y="190" width="100" height="46" rx="4" fill="#588ba1"/>
+                <text x="665" y="211" text-anchor="middle" font-size="13">Implantação</text>
+                <text x="665" y="227" text-anchor="middle" font-size="13">e manutenção</text>
+              </g>
+            </g>
+            <g stroke="#2c3e50" stroke-width="2" marker-end="url(#seta-cascata)" fill="none">
+              <path d="M125,33 L128,55"/>
+              <path d="M245,69 L248,91"/>
+              <path d="M365,105 L368,127"/>
+              <path d="M500,141 L503,163"/>
+              <path d="M610,177 L613,199"/>
+            </g>
+          </svg>
+          <figcaption>Cada fase é concluída e revisada antes de a próxima começar; voltar a uma fase anterior costuma ter custo alto.</figcaption>
+        </figure>
+
+        <ol class="fluxo-processo">
+          <li>Levantamento e especificação de requisitos</li>
+          <li>Análise e projeto da solução</li>
+          <li>Implementação</li>
+          <li>Testes e verificação</li>
+          <li>Implantação</li>
+          <li>Manutenção</li>
+        </ol>
+        <h4>Quando pode ser adequado</h4>
+        <ul>
+          <li>Requisitos claros, estáveis e aprovados formalmente.</li>
+          <li>Sistemas sujeitos a regulamentação, auditoria ou certificação.</li>
+          <li>Projetos nos quais alterações tardias têm alto custo.</li>
+          <li>Contratos que exigem entregáveis e marcos bem definidos.</li>
+        </ul>
+
+        <div class="exemplo-pratico">
+          <h4>Exemplo 1 — sistema embarcado de aviação</h4>
+          <p>Em sistemas embarcados de alta criticidade, como componentes de aviação, equipamentos médicos ou automação industrial, requisitos, documentação técnica, evidências de teste e rastreabilidade podem ser exigidos para demonstrar que o produto atende às normas aplicáveis. Uma organização pode adotar fases formais inspiradas no Cascata e, ao mesmo tempo, utilizar protótipos e revisões técnicas para reduzir riscos.</p>
+        </div>
+
+        <div class="exemplo-pratico">
+          <h4>Exemplo 2 — sistema de folha de pagamento governamental</h4>
+          <p>Um órgão público precisa substituir o sistema de folha de pagamento de milhares de servidores. As regras de cálculo (impostos, benefícios, licenças) já estão definidas em legislação e não mudam durante o projeto. O contrato exige homologação formal de cada módulo antes de seguir para o próximo. Nesse cenário, fases bem delimitadas, com aprovação escrita ao final de cada uma, reduzem o risco de retrabalho e facilitam a auditoria.</p>
+        </div>
+
+        <p>Para aprofundar: <a href="https://arxiv.org/abs/2308.03940" target="_blank" rel="noopener noreferrer">Simulating the Software Development Lifecycle</a>, estudo acadêmico que utiliza o modelo Cascata em uma abordagem de simulação.</p>
+      </article>
+
+      <article class="bloco-metodo">
+        <h3>2.2 Modelo V</h3>
+        <p>O Modelo V relaciona as atividades de definição e projeto às atividades de teste. Cada nível de especificação possui uma forma correspondente de verificação: requisitos são validados por testes de aceitação, arquitetura por testes de sistema, projeto detalhado por testes de integração e componentes por testes unitários.</p>
+
+        <figure class="imagem-conteudo diagrama">
+          <svg class="diagrama-svg" viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama em V relacionando fases de especificação, do lado esquerdo, às fases de teste correspondentes, do lado direito, unidas na base pela implementação">
+            <g stroke="#7f8c8d" stroke-width="2" fill="none">
+              <path d="M60,40 L300,260"/>
+              <path d="M580,40 L340,260"/>
+            </g>
+            <g font-family="sans-serif" font-size="14">
+              <!-- lado esquerdo: especificação -->
+              <rect x="10" y="15" width="140" height="46" rx="4" fill="#2c3e50"/>
+              <text x="80" y="43" text-anchor="middle" fill="#fff">Requisitos</text>
+
+              <rect x="70" y="85" width="140" height="46" rx="4" fill="#34495e"/>
+              <text x="140" y="113" text-anchor="middle" fill="#fff">Arquitetura</text>
+
+              <rect x="140" y="155" width="150" height="46" rx="4" fill="#3d566e"/>
+              <text x="215" y="183" text-anchor="middle" fill="#fff" font-size="13">Projeto detalhado</text>
+
+              <!-- base: implementação -->
+              <rect x="255" y="225" width="130" height="46" rx="4" fill="#46687f"/>
+              <text x="320" y="253" text-anchor="middle" fill="#fff">Codificação</text>
+
+              <!-- lado direito: verificação -->
+              <rect x="350" y="155" width="150" height="46" rx="4" fill="#4f7a90"/>
+              <text x="425" y="183" text-anchor="middle" fill="#fff" font-size="13">Testes de integração</text>
+
+              <rect x="420" y="85" width="150" height="46" rx="4" fill="#588ba1"/>
+              <text x="495" y="113" text-anchor="middle" fill="#fff" font-size="13">Testes de sistema</text>
+
+              <rect x="480" y="15" width="150" height="46" rx="4" fill="#61a1b6"/>
+              <text x="555" y="43" text-anchor="middle" fill="#fff" font-size="13">Testes de aceitação</text>
+            </g>
+          </svg>
+          <figcaption>Cada nível de especificação, à esquerda, já define o critério de verificação correspondente, à direita — planejado desde o início do projeto.</figcaption>
+        </figure>
+
+        <p><strong>Uso frequente:</strong> contextos nos quais testes e evidências de verificação devem ser planejados desde o início.</p>
+
+        <div class="exemplo-pratico">
+          <h4>Exemplo — sistema de transações bancárias</h4>
+          <p>Um banco desenvolve um novo módulo de transferências. Cada requisito de negócio (por exemplo, limite diário de transferência) já nasce vinculado a um teste de aceitação que o valida; cada componente de arquitetura já nasce vinculado a um teste de sistema. Isso evita que a verificação seja pensada apenas no fim do projeto, quando já seria tarde para corrigir decisões de arquitetura.</p>
+        </div>
+      </article>
+
+      <div class="grade-cards">
+        <article class="card-conteudo">
+          <h3>2.3 Prototipação</h3>
+          <p>Produz uma representação parcial do sistema para esclarecer requisitos, avaliar fluxos de uso e obter feedback antes da construção completa. Um protótipo pode ser descartável, quando serve somente para aprender, ou evolutivo, quando é refinado até se tornar parte do produto.</p>
+          <p><strong>Uso frequente:</strong> interfaces complexas, sistemas de atendimento e produtos inovadores.</p>
+          <p><strong>Exemplo:</strong> antes de programar um aplicativo de mobilidade urbana, a equipe cria telas clicáveis (sem lógica real por trás) para testar com usuários se o fluxo de solicitar uma corrida é intuitivo. Depois de validado, o protótipo é descartado e o código real é escrito do zero.</p>
+        </article>
+        <article class="card-conteudo">
+          <h3>2.4 Desenvolvimento incremental</h3>
+          <p>Divide o produto em incrementos funcionais planejados. Cada incremento acrescenta capacidades ao software, possibilitando disponibilizar partes úteis antes de o sistema estar integralmente concluído.</p>
+          <p><strong>Uso frequente:</strong> plataformas institucionais cujos módulos podem ser entregues gradualmente.</p>
+          <p><strong>Exemplo:</strong> um sistema de gestão hospitalar é entregue em incrementos — primeiro o módulo de admissão de pacientes, depois o prontuário eletrônico, depois o faturamento — cada um já utilizável em produção antes do próximo ficar pronto.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="secao-conteudo" aria-labelledby="historia-agil">
+      <h2 id="historia-agil">3. História do desenvolvimento ágil</h2>
+      <p>O desenvolvimento ágil surgiu como uma resposta a dificuldades enfrentadas em projetos de software conduzidos com processos muito rígidos ou excessivamente burocráticos. Em muitos contextos, as equipes percebiam que os requisitos mudavam antes da entrega final e que o feedback das pessoas usuárias chegava tarde demais.</p>
+      <p>Em fevereiro de 2001, dezessete profissionais de software reuniram-se em Snowbird, no estado de Utah, Estados Unidos. Eles discutiram abordagens que já valorizavam ciclos curtos, colaboração, qualidade técnica e aprendizado contínuo. Desse encontro surgiu o Manifesto para o Desenvolvimento Ágil de Software.</p>
+
+      <figure class="imagem-conteudo diagrama">
+        <svg class="diagrama-svg" viewBox="0 0 720 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Linha do tempo com quatro marcos: décadas de 1990, fevereiro de 2001 em Snowbird, publicação do manifesto e disseminação posterior de Scrum, Kanban e XP">
+          <line x1="40" y1="90" x2="680" y2="90" stroke="#95a5a6" stroke-width="3"/>
+          <g font-family="sans-serif" font-size="13" fill="#2c3e50">
+            <circle cx="90" cy="90" r="8" fill="#2c3e50"/>
+            <text x="90" y="70" text-anchor="middle">Década de 1990</text>
+            <text x="90" y="115" text-anchor="middle" font-size="12">Insatisfação com</text>
+            <text x="90" y="130" text-anchor="middle" font-size="12">processos rígidos</text>
+
+            <circle cx="280" cy="90" r="8" fill="#2c3e50"/>
+            <text x="280" y="70" text-anchor="middle">Fev. 2001 — Snowbird</text>
+            <text x="280" y="115" text-anchor="middle" font-size="12">17 profissionais</text>
+            <text x="280" y="130" text-anchor="middle" font-size="12">se reúnem</text>
+
+            <circle cx="470" cy="90" r="8" fill="#2c3e50"/>
+            <text x="470" y="70" text-anchor="middle">Manifesto Ágil</text>
+            <text x="470" y="115" text-anchor="middle" font-size="12">4 valores e 12</text>
+            <text x="470" y="130" text-anchor="middle" font-size="12">princípios publicados</text>
+
+            <circle cx="640" cy="90" r="8" fill="#2c3e50"/>
+            <text x="640" y="70" text-anchor="middle">Anos seguintes</text>
+            <text x="640" y="115" text-anchor="middle" font-size="12">Scrum, Kanban e XP</text>
+            <text x="640" y="130" text-anchor="middle" font-size="12">se difundem</text>
+          </g>
+        </svg>
+        <figcaption>Linha do tempo simplificada do surgimento do Manifesto Ágil.</figcaption>
+      </figure>
+
+      <p>O histórico oficial do movimento está disponível em <a href="https://agilemanifesto.org/history.html" target="_blank" rel="noopener noreferrer">History: The Agile Manifesto</a>.</p>
+    </section>
+
+    <section class="secao-conteudo" aria-labelledby="manifesto-agil">
+      <h2 id="manifesto-agil">4. Manifesto Ágil</h2>
+      <p>O <a href="https://agilemanifesto.org/iso/ptbr/manifesto.html" target="_blank" rel="noopener noreferrer">Manifesto para Desenvolvimento Ágil de Software</a> apresenta quatro valores. Os itens à esquerda são mais valorizados, mas os itens à direita continuam tendo importância.</p>
+
+      <div class="valores-manifesto">
+        <blockquote>
+          <p><strong>Indivíduos e interações</strong> mais que processos e ferramentas.</p>
+        </blockquote>
+        <blockquote>
+          <p><strong>Software em funcionamento</strong> mais que documentação abrangente.</p>
+        </blockquote>
+        <blockquote>
+          <p><strong>Colaboração com o cliente</strong> mais que negociação de contratos.</p>
+        </blockquote>
+        <blockquote>
+          <p><strong>Responder a mudanças</strong> mais que seguir um plano.</p>
+        </blockquote>
+      </div>
+
+      <h3>Princípios do Manifesto Ágil</h3>
+      <ol>
+        <li>Satisfazer o cliente por meio da entrega contínua e adiantada de software com valor.</li>
+        <li>Aceitar mudanças de requisitos, mesmo tardiamente.</li>
+        <li>Entregar software funcionando com frequência.</li>
+        <li>Manter colaboração diária entre pessoas de negócio e desenvolvedoras.</li>
+        <li>Construir projetos em torno de pessoas motivadas e oferecer o ambiente necessário para seu trabalho.</li>
+        <li>Priorizar comunicação direta e efetiva.</li>
+        <li>Utilizar software funcionando como principal medida de progresso.</li>
+        <li>Manter um ritmo de desenvolvimento sustentável.</li>
+        <li>Buscar excelência técnica e bom design continuamente.</li>
+        <li>Valorizar a simplicidade e evitar trabalho desnecessário.</li>
+        <li>Permitir que boas arquiteturas, requisitos e designs emerjam de equipes auto-organizadas.</li>
+        <li>Refletir regularmente sobre como se tornar mais efetivo e ajustar o comportamento da equipe.</li>
+      </ol>
+      <p>Ser ágil não significa dispensar planejamento, documentação, processos ou testes. Significa escolher e ajustar esses elementos para que favoreçam a entrega de valor, a comunicação e a capacidade de responder ao contexto do projeto.</p>
+
+      <div class="exemplo-pratico">
+        <h4>Exemplo — um valor em prática no dia a dia</h4>
+        <p>O valor "responder a mudanças mais que seguir um plano" aparece, na prática, quando uma equipe de e-commerce reprioriza o backlog no meio do trimestre porque um concorrente lançou uma funcionalidade que mudou o comportamento dos clientes — em vez de insistir no roteiro definido três meses antes só porque "estava no plano".</p>
+      </div>
+    </section>
+
+    <section class="secao-conteudo" aria-labelledby="metodos-ageis">
+      <h2 id="metodos-ageis">5. Métodos e frameworks ágeis</h2>
+
+      <article class="bloco-metodo">
+        <h3>5.1 Scrum</h3>
+        <p>Scrum é um framework leve utilizado para enfrentar problemas complexos e desenvolver produtos por meio de ciclos curtos denominados <em>Sprints</em>. Em cada Sprint, a equipe trabalha para gerar um Incremento que atenda à Definição de Pronto e contribua para o objetivo do produto.</p>
+
+        <figure class="imagem-conteudo diagrama">
+          <svg class="diagrama-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama circular do ciclo de um Sprint no Scrum, mostrando Product Backlog alimentando Sprint Planning, Daily Scrum, Sprint Review e Sprint Retrospective em sequência">
+            <circle cx="250" cy="250" r="150" fill="none" stroke="#bdc3c7" stroke-width="2" stroke-dasharray="6 6"/>
+            <g font-family="sans-serif" font-size="14" fill="#ffffff">
+              <circle cx="250" cy="90" r="60" fill="#2c3e50"/>
+              <text x="250" y="85" text-anchor="middle">Sprint</text>
+              <text x="250" y="102" text-anchor="middle">Planning</text>
+
+              <circle cx="400" cy="250" r="60" fill="#34495e"/>
+              <text x="400" y="245" text-anchor="middle">Daily</text>
+              <text x="400" y="262" text-anchor="middle">Scrum</text>
+
+              <circle cx="250" cy="410" r="60" fill="#46687f"/>
+              <text x="250" y="405" text-anchor="middle">Sprint</text>
+              <text x="250" y="422" text-anchor="middle">Review</text>
+
+              <circle cx="100" cy="250" r="60" fill="#588ba1"/>
+              <text x="100" y="245" text-anchor="middle" font-size="12">Sprint</text>
+              <text x="100" y="262" text-anchor="middle" font-size="12">Retrospective</text>
+            </g>
+            <g font-family="sans-serif" font-size="13" fill="#2c3e50">
+              <rect x="200" y="0" width="100" height="34" rx="4" fill="#ecf0f1" stroke="#95a5a6"/>
+              <text x="250" y="22" text-anchor="middle" font-size="12">Product Backlog</text>
+            </g>
+            <g stroke="#7f8c8d" stroke-width="2" fill="none" marker-end="url(#seta-scrum)">
+              <path d="M250,34 L250,55"/>
+            </g>
+            <defs>
+              <marker id="seta-scrum" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                <path d="M0,0 L8,4 L0,8 Z" fill="#7f8c8d"/>
+              </marker>
+            </defs>
+          </svg>
+          <figcaption>O Product Backlog alimenta cada Sprint; dentro do Sprint, os eventos se repetem em ciclo até o Incremento ser entregue.</figcaption>
+        </figure>
+
+        <h4>Responsabilidades no Scrum</h4>
+        <ul>
+          <li><strong>Product Owner:</strong> maximiza o valor do produto e gerencia eficazmente o Product Backlog.</li>
+          <li><strong>Scrum Master:</strong> estabelece o Scrum, apoia a equipe e a organização na compreensão de sua teoria e prática.</li>
+          <li><strong>Developers:</strong> profissionais comprometidos em criar qualquer aspecto de um Incremento utilizável a cada Sprint.</li>
+        </ul>
+        <h4>Eventos</h4>
+        <ul>
+          <li><strong>Sprint:</strong> período de duração fixa que contém os demais eventos e produz um Incremento.</li>
+          <li><strong>Sprint Planning:</strong> planejamento do trabalho da Sprint.</li>
+          <li><strong>Daily Scrum:</strong> inspeção diária do progresso em direção ao Sprint Goal.</li>
+          <li><strong>Sprint Review:</strong> inspeção do resultado e discussão de adaptações futuras.</li>
+          <li><strong>Sprint Retrospective:</strong> reflexão sobre formas de elevar qualidade e efetividade.</li>
+        </ul>
+        <h4>Artefatos e compromissos</h4>
+        <ul>
+          <li><strong>Product Backlog</strong> e seu compromisso: <strong>Product Goal</strong>.</li>
+          <li><strong>Sprint Backlog</strong> e seu compromisso: <strong>Sprint Goal</strong>.</li>
+          <li><strong>Increment</strong> e seu compromisso: <strong>Definition of Done</strong>.</li>
+        </ul>
+
+        <div class="exemplo-pratico">
+          <h4>Exemplo 1 — redução de abandono de carrinho</h4>
+          <p>Uma equipe responsável por um comércio eletrônico pode priorizar, em uma Sprint, a redução do abandono de carrinho. Ao final, entrega uma melhoria utilizável, observa indicadores e coleta feedback de clientes. Na Sprint Review, decide se aperfeiçoa a solução, corrige um problema ou prioriza outra hipótese de maior valor.</p>
+        </div>
+        <div class="exemplo-pratico">
+          <h4>Exemplo 2 — aplicativo de banco digital</h4>
+          <p>Um banco digital organiza o trabalho em Sprints de duas semanas. Em uma delas, o Sprint Goal é "permitir que a pessoa cliente bloqueie o cartão pelo app sem precisar ligar para o suporte". Ao fim da Sprint, essa funcionalidade específica já está em produção, mesmo que outras partes do app ainda estejam em desenvolvimento.</p>
+        </div>
+
+        <p>Consulte o <a href="https://scrumguides.org/scrum-guide.html" target="_blank" rel="noopener noreferrer">Scrum Guide oficial</a> para a definição atualizada do framework.</p>
+      </article>
+
+      <article class="bloco-metodo">
+        <h3>5.2 Kanban</h3>
+        <p>Kanban é uma abordagem de gestão de fluxo. O trabalho é visualizado em um quadro, geralmente com colunas como "A fazer", "Em andamento", "Em revisão" e "Concluído". A equipe estabelece políticas explícitas e limites de trabalho em andamento, conhecidos como limites de WIP.</p>
+
+        <figure class="imagem-conteudo diagrama">
+          <svg class="diagrama-svg" viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Exemplo de quadro Kanban com quatro colunas: A fazer, Em andamento com limite de três, Em revisão com limite de dois, e Concluído, cada uma com cartões representando tarefas">
+            <g font-family="sans-serif" font-size="13">
+              <!-- Coluna 1 -->
+              <rect x="10" y="10" width="150" height="240" rx="4" fill="#ecf0f1" stroke="#bdc3c7"/>
+              <text x="85" y="30" text-anchor="middle" font-weight="bold" fill="#2c3e50">A fazer</text>
+              <rect x="25" y="45" width="120" height="34" rx="3" fill="#ffffff" stroke="#95a5a6"/>
+              <text x="85" y="66" text-anchor="middle" fill="#2c3e50" font-size="11">Chamado #128</text>
+              <rect x="25" y="88" width="120" height="34" rx="3" fill="#ffffff" stroke="#95a5a6"/>
+              <text x="85" y="109" text-anchor="middle" fill="#2c3e50" font-size="11">Chamado #131</text>
+
+              <!-- Coluna 2 -->
+              <rect x="180" y="10" width="150" height="240" rx="4" fill="#ecf0f1" stroke="#bdc3c7"/>
+              <text x="255" y="30" text-anchor="middle" font-weight="bold" fill="#2c3e50">Em andamento</text>
+              <text x="255" y="46" text-anchor="middle" font-size="11" fill="#7f8c8d">limite WIP: 3</text>
+              <rect x="195" y="55" width="120" height="34" rx="3" fill="#fff8e1" stroke="#e67e22"/>
+              <text x="255" y="76" text-anchor="middle" fill="#2c3e50" font-size="11">Chamado #119</text>
+              <rect x="195" y="98" width="120" height="34" rx="3" fill="#fff8e1" stroke="#e67e22"/>
+              <text x="255" y="119" text-anchor="middle" fill="#2c3e50" font-size="11">Chamado #124</text>
+
+              <!-- Coluna 3 -->
+              <rect x="350" y="10" width="150" height="240" rx="4" fill="#ecf0f1" stroke="#bdc3c7"/>
+              <text x="425" y="30" text-anchor="middle" font-weight="bold" fill="#2c3e50">Em revisão</text>
+              <text x="425" y="46" text-anchor="middle" font-size="11" fill="#7f8c8d">limite WIP: 2</text>
+              <rect x="365" y="55" width="120" height="34" rx="3" fill="#eafaf1" stroke="#27ae60"/>
+              <text x="425" y="76" text-anchor="middle" fill="#2c3e50" font-size="11">Chamado #109</text>
+
+              <!-- Coluna 4 -->
+              <rect x="520" y="10" width="150" height="240" rx="4" fill="#ecf0f1" stroke="#bdc3c7"/>
+              <text x="595" y="30" text-anchor="middle" font-weight="bold" fill="#2c3e50">Concluído</text>
+              <rect x="535" y="45" width="120" height="34" rx="3" fill="#e8f6ff" stroke="#3498db"/>
+              <text x="595" y="66" text-anchor="middle" fill="#2c3e50" font-size="11">Chamado #101</text>
+              <rect x="535" y="88" width="120" height="34" rx="3" fill="#e8f6ff" stroke="#3498db"/>
+              <text x="595" y="109" text-anchor="middle" fill="#2c3e50" font-size="11">Chamado #104</text>
+              <rect x="535" y="131" width="120" height="34" rx="3" fill="#e8f6ff" stroke="#3498db"/>
+              <text x="595" y="152" text-anchor="middle" fill="#2c3e50" font-size="11">Chamado #108</text>
+            </g>
+          </svg>
+          <figcaption>Quando "Em andamento" atinge o limite de WIP, ninguém puxa um novo chamado até que um saia dessa coluna — isso evita sobrecarga e expõe gargalos.</figcaption>
+        </figure>
+
+        <p><strong>Exemplo 1:</strong> manutenção de sistemas, atendimento de chamados, suporte técnico e evolução contínua de APIs.</p>
+        <div class="exemplo-pratico">
+          <h4>Exemplo 2 — central de suporte de uma operadora de telecom</h4>
+          <p>A equipe de suporte de nível 2 de uma operadora usa um quadro Kanban com limite de três chamados "em andamento" por pessoa. Quando um técnico atinge o limite, ele ajuda a resolver um chamado já em andamento em vez de iniciar um novo — isso reduz o tempo médio de resolução, mesmo sem "sprints" ou reuniões de planejamento formais.</p>
+        </div>
+        <p><a href="https://www.agilealliance.org/glossary/kanban/" target="_blank" rel="noopener noreferrer">Leia uma referência introdutória sobre Kanban</a>.</p>
+      </article>
+
+      <div class="grade-cards">
+        <article class="card-conteudo">
+          <h3>5.3 Extreme Programming (XP)</h3>
+          <p>XP é uma abordagem ágil com forte ênfase em práticas de engenharia de software. Entre suas práticas mais conhecidas estão programação em pares, desenvolvimento orientado a testes, integração contínua, refatoração, propriedade coletiva do código e pequenas entregas.</p>
+          <p><strong>Exemplo:</strong> uma fintech adota TDD (escrever o teste antes do código) e integração contínua para o módulo de cálculo de juros, já que um erro nessa área tem impacto financeiro direto. Pares de desenvolvedores revezam-se no código, reduzindo a dependência de uma única pessoa.</p>
+          <p><a href="https://www.agilealliance.org/glossary/extreme-programming/" target="_blank" rel="noopener noreferrer">Leia uma referência introdutória sobre XP</a>.</p>
+        </article>
+        <article class="card-conteudo">
+          <h3>5.4 Lean Software Development</h3>
+          <p>Lean busca reduzir desperdícios e melhorar o fluxo de valor. Entre suas ideias estão eliminar atividades sem valor para o usuário, ampliar o aprendizado, entregar rapidamente, fortalecer as pessoas e otimizar o sistema como um todo.</p>
+          <p><strong>Exemplo:</strong> uma equipe percebe que cada deploy passa por três aprovações manuais que raramente encontram problemas. Ao automatizar essas verificações em um pipeline de integração contínua, elimina uma espera que não agregava valor e acelera as entregas.</p>
+        </article>
+        <article class="card-conteudo">
+          <h3>5.5 Crystal</h3>
+          <p>Crystal é uma família de métodos que adapta práticas de acordo com o tamanho da equipe e a criticidade do sistema. Valoriza comunicação, interação entre pessoas e ajustes ao contexto.</p>
+          <p><strong>Exemplo:</strong> uma startup de quatro pessoas construindo um aplicativo de baixo risco (não envolve dados sensíveis nem dinheiro) opta por reuniões informais diárias e quase nenhuma documentação formal, já que o time inteiro compartilha a mesma sala e o mesmo contexto.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="secao-conteudo" aria-labelledby="comparacao">
+      <h2 id="comparacao">6. Comparando abordagens</h2>
+      <div class="tabela-responsiva">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Contexto</th>
+              <th scope="col">Abordagem possível</th>
+              <th scope="col">Razão principal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Requisitos estáveis, contrato formal e auditoria.</td>
+              <td>Cascata ou Modelo V.</td>
+              <td>Rastreabilidade, documentação e pontos de aprovação.</td>
+            </tr>
+            <tr>
+              <td>Produto digital com incerteza sobre necessidades de usuários.</td>
+              <td>Scrum ou uma abordagem iterativa.</td>
+              <td>Feedback frequente e adaptação de prioridades.</td>
+            </tr>
+            <tr>
+              <td>Atendimento contínuo, correções e pequenas melhorias.</td>
+              <td>Kanban.</td>
+              <td>Visualização do fluxo e controle do trabalho em andamento.</td>
+            </tr>
+            <tr>
+              <td>Alto risco técnico e necessidade de manter o código sustentável.</td>
+              <td>XP combinada com práticas ágeis de planejamento.</td>
+              <td>Testes automatizados, integração contínua e refatoração.</td>
+            </tr>
+            <tr>
+              <td>Sistema com requisitos regulados e interface ainda incerta.</td>
+              <td>Abordagem híbrida.</td>
+              <td>Governança formal combinada a protótipos e ciclos de feedback.</td>
+            </tr>
+            <tr>
+              <td>Equipe muito pequena, produto de baixo risco.</td>
+              <td>Crystal.</td>
+              <td>Processo leve, ajustado ao tamanho e à criticidade real do projeto.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="resumo-rapido">
+        <h4>Resumo rápido</h4>
+        <p>Ao escolher uma abordagem, pergunte primeiro: "o que acontece se um requisito mudar depois que essa etapa terminar?" Se a resposta for "seria muito caro corrigir", isso puxa o projeto para o lado prescritivo da tabela. Se a resposta for "ajustamos no próximo ciclo sem grande custo", isso favorece uma abordagem ágil ou iterativa.</p>
+      </div>
+    </section>
+
+    <section class="secao-conteudo" aria-labelledby="estudo-caso">
+      <h2 id="estudo-caso">7. Estudo de caso: portal de matrícula</h2>
+      <p>Uma instituição de ensino precisa desenvolver um portal de matrícula. O sistema deve integrar informações acadêmicas, pagamentos e regras institucionais. Como envolve dados pessoais e processos administrativos importantes, os requisitos de segurança, privacidade, auditoria e integração precisam ser definidos e verificados cuidadosamente.</p>
+      <p>Ao mesmo tempo, estudantes e equipes administrativas precisam validar a facilidade de uso da interface. Nesse cenário, uma abordagem híbrida pode ser adequada: requisitos legais e integrações críticas podem utilizar documentação, rastreabilidade e testes planejados; protótipos podem apoiar a avaliação da experiência de uso; e Sprints podem entregar funcionalidades como consulta de oferta, seleção de disciplinas, confirmação e acompanhamento da solicitação.</p>
+
+      <figure class="imagem-conteudo diagrama">
+        <svg class="diagrama-svg" viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama mostrando a abordagem híbrida do portal de matrícula: uma trilha formal para regras legais e integrações, e uma trilha ágil com protótipos e sprints para a experiência do usuário, convergindo no portal entregue">
+          <g font-family="sans-serif" font-size="13">
+            <rect x="10" y="20" width="220" height="50" rx="4" fill="#2c3e50"/>
+            <text x="120" y="41" text-anchor="middle" fill="#fff" font-size="12">Regras legais, pagamentos</text>
+            <text x="120" y="57" text-anchor="middle" fill="#fff" font-size="12">e integrações acadêmicas</text>
+            <text x="120" y="12" text-anchor="middle" fill="#2c3e50" font-size="12">Trilha formal (documentada e testada)</text>
+
+            <rect x="10" y="150" width="220" height="50" rx="4" fill="#588ba1"/>
+            <text x="120" y="171" text-anchor="middle" fill="#fff" font-size="12">Protótipos de tela e</text>
+            <text x="120" y="187" text-anchor="middle" fill="#fff" font-size="12">Sprints de funcionalidades</text>
+            <text x="120" y="215" text-anchor="middle" fill="#2c3e50" font-size="12">Trilha ágil (iterativa, com feedback)</text>
+
+            <rect x="470" y="85" width="220" height="50" rx="4" fill="#27ae60"/>
+            <text x="580" y="106" text-anchor="middle" fill="#fff" font-size="12">Portal de matrícula</text>
+            <text x="580" y="122" text-anchor="middle" fill="#fff" font-size="12">entregue e evoluindo</text>
+          </g>
+          <g stroke="#7f8c8d" stroke-width="2" fill="none">
+            <path d="M230,45 C 350,45 420,90 470,105"/>
+            <path d="M230,175 C 350,175 420,120 470,115"/>
+          </g>
+        </svg>
+        <figcaption>As duas trilhas — formal e ágil — convergem no mesmo produto entregue, cada uma tratando o tipo de risco em que é mais forte.</figcaption>
+      </figure>
+    </section>
+
+    <section class="secao-conteudo" aria-labelledby="glossario">
+      <h2 id="glossario">8. Glossário rápido</h2>
+      <dl class="glossario">
+        <dt>Incremento</dt>
+        <dd>Parte do produto entregue ao final de uma iteração, já utilizável.</dd>
+        <dt>Backlog</dt>
+        <dd>Lista ordenada de itens de trabalho pendentes, priorizada por valor.</dd>
+        <dt>WIP (Work In Progress)</dt>
+        <dd>Quantidade de itens sendo trabalhados ao mesmo tempo; limitá-la evita sobrecarga da equipe.</dd>
+        <dt>Definição de Pronto (Definition of Done)</dt>
+        <dd>Conjunto de critérios que um incremento precisa atender para ser considerado concluído.</dd>
+        <dt>Rastreabilidade</dt>
+        <dd>Capacidade de ligar um requisito às decisões de projeto e aos testes que o verificam.</dd>
+        <dt>Protótipo evolutivo</dt>
+        <dd>Protótipo que é refinado ao longo do tempo até se tornar parte do produto final, em vez de ser descartado.</dd>
+      </dl>
+    </section>
+
+    <section class="secao-conteudo" aria-labelledby="exercicios">
+      <h2 id="exercicios">9. Exercícios de revisão</h2>
+      <ol class="lista-exercicios">
+        <li>Explique duas diferenças entre o Modelo Cascata e o Scrum.</li>
+        <li>Em quais situações o Modelo V pode ser mais adequado que uma abordagem exclusivamente iterativa?</li>
+        <li>Descreva um exemplo, diferente dos apresentados no material, no qual a prototipação reduziria riscos de requisitos.</li>
+        <li>Compare protótipo descartável e protótipo evolutivo.</li>
+        <li>Explique o contexto histórico que levou à criação do Manifesto Ágil.</li>
+        <li>Escolha um dos valores do Manifesto Ágil e indique uma prática que o torne visível no cotidiano de uma equipe.</li>
+        <li>Por que a expressão "responder a mudanças mais que seguir um plano" não significa abandonar o planejamento?</li>
+        <li>Identifique as responsabilidades de Product Owner, Scrum Master e Developers.</li>
+        <li>Explique a finalidade da Sprint Review e da Sprint Retrospective.</li>
+        <li>Crie um exemplo de Sprint Goal para o portal de matrícula apresentado no estudo de caso.</li>
+        <li>Desenhe um quadro Kanban para uma equipe de suporte e defina limites de WIP para as colunas.</li>
+        <li>Explique, com base no exemplo da central de suporte de telecom, por que um limite de WIP reduz o tempo médio de resolução.</li>
+        <li>Pesquise um caso real de uso de método ágil ou prescritivo e apresente: contexto, método escolhido, benefícios, limitações e lições aprendidas.</li>
+      </ol>
+    </section>
+
+    <section class="secao-conteudo" aria-labelledby="leitura">
+      <h2 id="leitura">Leituras e fontes sugeridas</h2>
+      <ul>
+        <li><a href="https://agilemanifesto.org/iso/ptbr/manifesto.html" target="_blank" rel="noopener noreferrer">Manifesto para Desenvolvimento Ágil de Software</a>.</li>
+        <li><a href="https://agilemanifesto.org/history.html" target="_blank" rel="noopener noreferrer">História do Manifesto Ágil</a>.</li>
+        <li><a href="https://scrumguides.org/scrum-guide.html" target="_blank" rel="noopener noreferrer">Scrum Guide oficial</a>.</li>
+        <li><a href="https://www.agilealliance.org/glossary/kanban/" target="_blank" rel="noopener noreferrer">Agile Alliance: Kanban</a>.</li>
+        <li><a href="https://www.agilealliance.org/glossary/extreme-programming/" target="_blank" rel="noopener noreferrer">Agile Alliance: Extreme Programming</a>.</li>
+        <li><a href="https://arxiv.org/abs/2308.03940" target="_blank" rel="noopener noreferrer">Simulating the Software Development Lifecycle</a>.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

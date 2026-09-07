@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102e46">
+  <title>Atividades de Engenharia de Software — Engenharia de Software</title>
+  <meta name="description" content="Papéis, artefatos e responsabilidades ao longo da produção de software: as quatro atividades fundamentais da Engenharia de Software.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/topicos.css">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo-principal">Pular para o conteúdo</a>
+
+  <header class="topic-header" role="banner">
+    <nav class="topic-breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="../index.html">Início</a></li>
+        <li><span class="sep" aria-hidden="true">/</span></li>
+        <li><a href="../index.html#trilha">Conteúdos</a></li>
+        <li><span class="sep" aria-hidden="true">/</span></li>
+        <li aria-current="page">Atividades de Engenharia de Software</li>
+      </ol>
+    </nav>
+
+    <span class="topic-kicker">Tópico de estudo</span>
+
+    <h1>Atividades de Engenharia de Software</h1>
+    <p class="topic-dek">
+      Papéis, artefatos e responsabilidades ao longo da produção de software.
+    </p>
+  </header>
+
+  <div class="topic-layout">
+    <aside class="topic-toc" data-toc-panel>
+      <details class="topic-toc__summary" data-toc>
+        <summary>
+          <span>Sumário</span>
+          <span class="chevron" aria-hidden="true">▶</span>
+        </summary>
+        <nav aria-label="Sumário">
+          <ol>
+            <li><a href="#sec-01" data-toc>01 O que são atividades de Engenharia de Software?</a></li>
+            <li><a href="#sec-02" data-toc>02 As quatro atividades fundamentais</a></li>
+            <li><a href="#sec-03" data-toc>03 Papéis comuns em uma equipe</a></li>
+            <li><a href="#sec-04" data-toc>04 Artefatos produzidos ao longo do processo</a></li>
+            <li><a href="#sec-05" data-toc>05 Quem produz o quê</a></li>
+            <li><a href="#sec-06" data-toc>06 Responsabilidades compartilhadas</a></li>
+            <li><a href="#sec-07" data-toc>07 Estudo de caso: equipe de apoio a jogos</a></li>
+            <li><a href="#sec-08" data-toc>08 Atividades e fases do ciclo de vida</a></li>
+            <li><a href="#sec-09" data-toc>09 Exercícios de revisão</a></li>
+            <li><a href="#sec-10" data-toc>10 Leituras e fontes sugeridas</a></li>
+          </ol>
+        </nav>
+      </details>
+    </aside>
+
+    <main id="conteudo-principal" class="topic-content" role="main">
+      <article class="topic-article" data-article>
+        <p class="topic-lede">
+          Engenharia de Software não se resume a escrever código. É um conjunto de atividades — especificar, projetar, construir, verificar e evoluir — realizadas por pessoas em papéis diferentes, que produzem e consomem artefatos ao longo de todo o processo.
+        </p>
+
+        <section id="sec-01" class="topic-section">
+          <h2><span class="h2-index">01</span> O que são atividades de Engenharia de Software?</h2>
+          <p>Uma atividade é um conjunto de ações realizadas com um objetivo específico, que parte de alguma informação de entrada e produz um resultado. Diferente de uma <em>fase</em>, que demarca um período do cronograma do projeto, uma atividade descreve um tipo de trabalho que pode se repetir diversas vezes ao longo do desenvolvimento.</p>
+          <p>Em um projeto que segue o modelo Cascata, por exemplo, a especificação de requisitos tende a acontecer uma única vez, no início. Já em uma equipe ágil, a mesma atividade de especificar pode se repetir a cada Sprint, sempre que um novo item do backlog é refinado. A atividade é a mesma; a forma como ela se organiza no tempo é que muda.</p>
+          <p>O <a href="https://www.computer.org/education/bodies-of-knowledge/software-engineering" target="_blank" rel="noopener noreferrer">Guide to the Software Engineering Body of Knowledge (SWEBOK)</a>, mantido pela IEEE Computer Society, organiza o conhecimento da área justamente em torno de áreas de conhecimento e atividades, e não apenas em fases de um cronograma.</p>
+        </section>
+
+        <section id="sec-02" class="topic-section">
+          <h2><span class="h2-index">02</span> As quatro atividades fundamentais</h2>
+          <p>Ainda que cada organização use sua própria nomenclatura, a maioria dos processos de desenvolvimento de software pode ser descrita a partir de quatro atividades fundamentais, que se repetem em ciclos maiores ou menores dependendo do método escolhido.</p>
+
+          <figure class="imagem-conteudo diagrama">
+            <svg class="diagrama-svg" viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama circular com quatro atividades fundamentais: Especificação, Desenvolvimento, Validação e Evolução, conectadas por setas que retornam ao início">
+              <defs>
+                <marker id="seta-atividades" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 Z" fill="#617482"/>
+                </marker>
+              </defs>
+              <g stroke="#617482" stroke-width="2" fill="none" marker-end="url(#seta-atividades)">
+                <path d="M195,55 C 260,30 380,30 445,55"/>
+                <path d="M500,110 C 525,160 525,180 500,225"/>
+                <path d="M445,255 C 380,280 260,280 195,255"/>
+                <path d="M140,225 C 115,180 115,160 140,110"/>
+              </g>
+              <g font-family="'DM Sans', sans-serif">
+                <circle cx="160" cy="80" r="72" fill="#102e46"/>
+                <text x="160" y="72" text-anchor="middle" fill="#fff" font-size="15" font-weight="600">Especificação</text>
+                <text x="160" y="92" text-anchor="middle" fill="#cfe5e7" font-size="11">O que o sistema deve fazer</text>
+
+                <circle cx="480" cy="80" r="72" fill="#216887"/>
+                <text x="480" y="72" text-anchor="middle" fill="#fff" font-size="15" font-weight="600">Desenvolvimento</text>
+                <text x="480" y="92" text-anchor="middle" fill="#cfe5e7" font-size="11">Projeto e implementação</text>
+
+                <circle cx="480" cy="220" r="72" fill="#25a6ad"/>
+                <text x="480" y="212" text-anchor="middle" fill="#fff" font-size="15" font-weight="600">Validação</text>
+                <text x="480" y="232" text-anchor="middle" fill="#e2f0f2" font-size="11">O sistema atende ao esperado?</text>
+
+                <circle cx="160" cy="220" r="72" fill="#3d566e"/>
+                <text x="160" y="212" text-anchor="middle" fill="#fff" font-size="15" font-weight="600">Evolução</text>
+                <text x="160" y="232" text-anchor="middle" fill="#e2f0f2" font-size="11">Adaptar a novas necessidades</text>
+              </g>
+            </svg>
+            <figcaption>As quatro atividades se sucedem e retornam ao início: um sistema em evolução volta a passar por especificação, desenvolvimento e validação.</figcaption>
+          </figure>
+
+          <div class="grade-cards">
+            <article class="card-conteudo">
+              <h3>Especificação</h3>
+              <p>Compreender o problema, levantar necessidades junto às pessoas interessadas e registrar o que o sistema deve fazer e sob quais restrições deve operar.</p>
+            </article>
+            <article class="card-conteudo">
+              <h3>Desenvolvimento</h3>
+              <p>Transformar a especificação em um sistema executável: projetar a arquitetura, tomar decisões técnicas e escrever o código.</p>
+            </article>
+            <article class="card-conteudo">
+              <h3>Validação</h3>
+              <p>Verificar se o sistema construído corresponde ao que foi especificado e se é aceitável para quem vai utilizá-lo.</p>
+            </article>
+            <article class="card-conteudo">
+              <h3>Evolução</h3>
+              <p>Adaptar o sistema a mudanças de necessidades, ambiente ou legislação, corrigindo defeitos e incorporando melhorias.</p>
+            </article>
+          </div>
+
+          <p>Essas quatro atividades não substituem os modelos de ciclo de vida nem os métodos de desenvolvimento — elas descrevem <strong>o que</strong> é feito, enquanto ciclo de vida e método descrevem <strong>quando</strong> e <strong>como</strong> isso é organizado.</p>
+        </section>
+
+        <section id="sec-03" class="topic-section">
+          <h2><span class="h2-index">03</span> Papéis comuns em uma equipe</h2>
+          <p>Um papel descreve um conjunto de responsabilidades que uma pessoa assume no projeto. Em equipes pequenas, a mesma pessoa pode acumular vários papéis; em projetos maiores, cada papel costuma ser ocupado por pessoas ou grupos diferentes.</p>
+
+          <figure class="imagem-conteudo diagrama">
+            <svg class="diagrama-svg" viewBox="0 0 620 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama radial com o sistema de software no centro e seis papéis ao redor: Product Owner, Analista de Requisitos, Arquiteto e Desenvolvedores, Analista de Testes, DevOps e UX Designer">
+              <g stroke="#c7dde5" stroke-width="2">
+                <line x1="310" y1="230" x2="310" y2="70"/>
+                <line x1="310" y1="230" x2="500" y2="140"/>
+                <line x1="310" y1="230" x2="530" y2="330"/>
+                <line x1="310" y1="230" x2="310" y2="400"/>
+                <line x1="310" y1="230" x2="90" y2="330"/>
+                <line x1="310" y1="230" x2="120" y2="140"/>
+              </g>
+              <g font-family="'DM Sans', sans-serif" font-size="12">
+                <circle cx="310" cy="230" r="66" fill="#102e46"/>
+                <text x="310" y="224" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Sistema de</text>
+                <text x="310" y="242" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">software</text>
+
+                <circle cx="310" cy="70" r="56" fill="#216887"/>
+                <text x="310" y="66" text-anchor="middle" fill="#fff" font-weight="600">Product</text>
+                <text x="310" y="80" text-anchor="middle" fill="#fff" font-weight="600">Owner</text>
+
+                <circle cx="500" cy="140" r="56" fill="#25a6ad"/>
+                <text x="500" y="132" text-anchor="middle" fill="#fff" font-weight="600">Analista de</text>
+                <text x="500" y="146" text-anchor="middle" fill="#fff" font-weight="600">requisitos</text>
+
+                <circle cx="530" cy="330" r="56" fill="#3d566e"/>
+                <text x="530" y="322" text-anchor="middle" fill="#fff" font-weight="600">Arquiteto(a) e</text>
+                <text x="530" y="336" text-anchor="middle" fill="#fff" font-weight="600">desenvolvedores</text>
+
+                <circle cx="310" cy="400" r="56" fill="#46687f"/>
+                <text x="310" y="392" text-anchor="middle" fill="#fff" font-weight="600">Analista de</text>
+                <text x="310" y="406" text-anchor="middle" fill="#fff" font-weight="600">testes (QA)</text>
+
+                <circle cx="90" cy="330" r="56" fill="#588ba1"/>
+                <text x="90" y="326" text-anchor="middle" fill="#fff" font-weight="600">DevOps</text>
+
+                <circle cx="120" cy="140" r="56" fill="#f3bb4d"/>
+                <text x="120" y="132" text-anchor="middle" fill="#15232e" font-weight="600">UX/UI</text>
+                <text x="120" y="146" text-anchor="middle" fill="#15232e" font-weight="600">Designer</text>
+              </g>
+            </svg>
+            <figcaption>Papéis diferentes colaboram em torno do mesmo produto; em equipes pequenas, uma única pessoa pode ocupar mais de um papel.</figcaption>
+          </figure>
+
+          <div class="grade-cards">
+            <article class="card-conteudo">
+              <h3>Product Owner / Cliente</h3>
+              <p>Representa quem vai usar ou pagar pelo sistema. Prioriza necessidades e decide o que deve ser entregue primeiro.</p>
+            </article>
+            <article class="card-conteudo">
+              <h3>Analista de requisitos</h3>
+              <p>Conversa com stakeholders, organiza e escreve os requisitos de forma clara, consistente e verificável.</p>
+            </article>
+            <article class="card-conteudo">
+              <h3>Arquiteto(a) de software</h3>
+              <p>Define a estrutura geral da solução: componentes, tecnologias, integrações e decisões que afetam o sistema como um todo.</p>
+            </article>
+            <article class="card-conteudo">
+              <h3>Desenvolvedor(a)</h3>
+              <p>Constrói o software: escreve, revisa e integra código conforme as decisões de projeto.</p>
+            </article>
+            <article class="card-conteudo">
+              <h3>Analista de testes (QA)</h3>
+              <p>Planeja e executa verificações para reduzir a incerteza sobre o comportamento do sistema antes da entrega.</p>
+            </article>
+            <article class="card-conteudo">
+              <h3>DevOps / SRE</h3>
+              <p>Cuida da automação de build, implantação, monitoramento e recuperação do sistema em produção.</p>
+            </article>
+            <article class="card-conteudo">
+              <h3>UX/UI Designer</h3>
+              <p>Investiga necessidades de uso e propõe fluxos e interfaces compreensíveis para quem vai operar o sistema.</p>
+            </article>
+            <article class="card-conteudo">
+              <h3>Scrum Master / Gerente de projeto</h3>
+              <p>Remove impedimentos, organiza o fluxo de trabalho da equipe e acompanha prazos, riscos e comunicação.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="sec-04" class="topic-section">
+          <h2><span class="h2-index">04</span> Artefatos produzidos ao longo do processo</h2>
+          <p>Um artefato é qualquer produto de trabalho registrado durante o desenvolvimento: um documento, um diagrama, um trecho de código ou um relatório. Os artefatos comunicam decisões e permitem verificar o andamento do projeto.</p>
+
+          <div class="table-scroll">
+            <table class="topic-table">
+              <caption>Exemplos de artefatos por atividade</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Atividade</th>
+                  <th scope="col">Exemplos de artefatos</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Especificação</td>
+                  <td>Documento de requisitos, histórias de usuário, backlog, casos de uso, critérios de aceitação.</td>
+                </tr>
+                <tr>
+                  <td>Desenvolvimento</td>
+                  <td>Diagramas de arquitetura, protótipos de interface, modelo de dados, código-fonte, scripts de configuração.</td>
+                </tr>
+                <tr>
+                  <td>Validação</td>
+                  <td>Plano de testes, casos de teste, relatórios de defeito, resultados de testes automatizados.</td>
+                </tr>
+                <tr>
+                  <td>Evolução</td>
+                  <td>Registros de incidentes, solicitações de mudança, changelog, documentação atualizada.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="resumo-rapido">
+            <h4>Resumo rápido</h4>
+            <p>Nem todo artefato precisa ser um documento extenso. Um cartão de backlog, um comentário em uma revisão de código ou um relatório automático de testes também são artefatos — o que importa é que a decisão ou o resultado fique registrado e possa ser consultado depois.</p>
+          </div>
+        </section>
+
+        <section id="sec-05" class="topic-section">
+          <h2><span class="h2-index">05</span> Quem produz o quê</h2>
+          <p>A tabela a seguir relaciona papéis e atividades de forma simplificada: <strong>R</strong> indica responsabilidade principal pelo artefato produzido na atividade; <strong>C</strong> indica colaboração frequente, sem ser o principal responsável.</p>
+
+          <div class="table-scroll">
+            <table class="topic-table">
+              <caption>Relação simplificada entre papéis e atividades</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Papel</th>
+                  <th scope="col">Especificação</th>
+                  <th scope="col">Desenvolvimento</th>
+                  <th scope="col">Validação</th>
+                  <th scope="col">Evolução</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Product Owner</td><td>R</td><td>C</td><td>C</td><td>R</td></tr>
+                <tr><td>Analista de requisitos</td><td>R</td><td>C</td><td>C</td><td>C</td></tr>
+                <tr><td>Arquiteto(a) / Desenvolvedores</td><td>C</td><td>R</td><td>C</td><td>R</td></tr>
+                <tr><td>Analista de testes (QA)</td><td>C</td><td>C</td><td>R</td><td>C</td></tr>
+                <tr><td>DevOps / SRE</td><td>—</td><td>C</td><td>C</td><td>R</td></tr>
+                <tr><td>UX/UI Designer</td><td>C</td><td>C</td><td>C</td><td>C</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="sec-06" class="topic-section">
+          <h2><span class="h2-index">06</span> Responsabilidades compartilhadas</h2>
+          <p>Nenhuma atividade pertence a um único papel de forma isolada. Requisitos mal compreendidos pela equipe de desenvolvimento, testes escritos sem contato com quem levantou os requisitos ou decisões de arquitetura tomadas sem consultar quem vai operar o sistema são sinais de que a colaboração entre papéis não está acontecendo.</p>
+
+          <div class="example-pair">
+            <div class="example-card example-card--good">
+              <span class="example-card__label">Responsabilidade clara</span>
+              <p>A equipe define que cada história do backlog só é considerada pronta quando o Product Owner confirma o comportamento esperado e a analista de testes registra os casos de teste correspondentes.</p>
+            </div>
+            <div class="example-card example-card--bad">
+              <span class="example-card__label">Responsabilidade difusa</span>
+              <p>Ninguém sabe quem deveria ter validado uma regra de negócio antes da entrega; cada pessoa presumiu que outra já havia verificado.</p>
+            </div>
+          </div>
+
+          <div class="callout">
+            <strong>Ponto de atenção</strong>
+            Dividir o trabalho em papéis não deve isolar as pessoas em silos. As atividades fundamentais funcionam melhor quando há comunicação constante entre quem especifica, quem constrói, quem valida e quem opera o sistema.
+          </div>
+        </section>
+
+        <section id="sec-07" class="topic-section">
+          <h2><span class="h2-index">07</span> Estudo de caso: equipe de apoio a jogos de tabuleiro</h2>
+          <p>Uma equipe de quatro pessoas decide construir um sistema de apoio digital para partidas de jogos de tabuleiro, como Banco Imobiliário, Geomundo e War. Como o time é pequeno, cada pessoa acumula mais de um papel.</p>
+          <p>Uma pessoa atua como Product Owner e analista de requisitos: conversa com jogadores para entender regras e dúvidas comuns e escreve as histórias de usuário. Duas pessoas dividem arquitetura e desenvolvimento, definindo como cada jogo será representado no sistema e implementando as funcionalidades. A quarta pessoa acumula testes e operação: escreve casos de teste, verifica o comportamento do sistema durante partidas simuladas e cuida da publicação de novas versões.</p>
+          <p>Mesmo com papéis acumulados, a equipe mantém uma prática simples de especificação, desenvolvimento e validação: nenhuma funcionalidade é considerada concluída sem que alguém, além de quem a implementou, confirme que ela atende à regra do jogo correspondente.</p>
+        </section>
+
+        <section id="sec-08" class="topic-section">
+          <h2><span class="h2-index">08</span> Atividades e fases do ciclo de vida</h2>
+          <p>É comum confundir atividades com fases. Uma fase organiza o tempo do projeto — planejamento, requisitos, projeto, implementação, testes, implantação, manutenção — enquanto uma atividade descreve o tipo de trabalho realizado, e pode aparecer em mais de uma fase.</p>
+          <p>Na fase de manutenção de um sistema, por exemplo, a equipe volta a especificar (o que precisa mudar), desenvolver (como a mudança será implementada), validar (se a mudança funciona sem quebrar o restante do sistema) e evoluir o próprio processo de manutenção. As quatro atividades fundamentais continuam presentes, mesmo fora das fases iniciais do projeto.</p>
+          <p>O próximo tópico detalha como essas atividades se organizam ao longo de fases e modelos de <a href="ciclo-de-vida-do-software.html">ciclo de vida do software</a>.</p>
+        </section>
+
+        <section id="sec-09" class="topic-section">
+          <h2><span class="h2-index">09</span> Exercícios de revisão</h2>
+          <ol class="lista-exercicios">
+            <li>Explique, com suas próprias palavras, a diferença entre atividade e fase.</li>
+            <li>Descreva as quatro atividades fundamentais e dê um exemplo de artefato para cada uma.</li>
+            <li>Escolha dois papéis apresentados neste tópico e explique como eles colaboram entre si.</li>
+            <li>Em uma equipe de duas pessoas, como os papéis apresentados poderiam ser distribuídos?</li>
+            <li>Cite um artefato que você já produziu (em disciplina ou projeto pessoal) e associe-o a uma das quatro atividades.</li>
+            <li>Explique por que a atividade de validação não deveria ficar restrita apenas ao final do projeto.</li>
+            <li>Descreva uma situação em que a ausência de comunicação entre papéis gerou um problema no sistema.</li>
+            <li>Para o estudo de caso da equipe de apoio a jogos de tabuleiro, proponha um artefato adicional que a equipe poderia registrar.</li>
+            <li>Explique por que as quatro atividades fundamentais continuam presentes mesmo na fase de manutenção de um sistema.</li>
+            <li>Monte uma matriz simples de papéis x atividades para um projeto que você conheça, indicando responsabilidade principal e colaboração.</li>
+          </ol>
+        </section>
+
+        <section id="sec-10" class="topic-section">
+          <h2><span class="h2-index">10</span> Leituras e fontes sugeridas</h2>
+          <ul>
+            <li><a href="https://www.computer.org/education/bodies-of-knowledge/software-engineering" target="_blank" rel="noopener noreferrer">IEEE Computer Society — Guide to the Software Engineering Body of Knowledge (SWEBOK)</a>.</li>
+            <li><a href="https://www.ibm.com/think/topics/sdlc" target="_blank" rel="noopener noreferrer">IBM — What is the Software Development Lifecycle?</a>.</li>
+            <li><a href="https://www.scrumguides.org/scrum-guide.html" target="_blank" rel="noopener noreferrer">Scrum Guide oficial</a> — para os papéis de Product Owner, Scrum Master e Developers.</li>
+          </ul>
+        </section>
+
+        <nav class="topic-pager" aria-label="Navegação entre tópicos">
+          <a class="topic-pager__link topic-pager__link--prev" href="../index.html#trilha">
+            <span class="topic-pager__eyebrow">Anterior</span>
+            <span class="topic-pager__title">Voltar aos conteúdos</span>
+          </a>
+          <a class="topic-pager__link topic-pager__link--next" href="ciclo-de-vida-do-software.html">
+            <span class="topic-pager__eyebrow">Próximo</span>
+            <span class="topic-pager__title">Ciclo de vida do software</span>
+          </a>
+        </nav>
+      </article>
+    </main>
+  </div>
+
+  <footer class="topic-footer" role="contentinfo">
+    <p>
+      Disciplina de Engenharia de Software — IFC São Bento do Sul
+    </p>
+  </footer>
+
+  <script src="assets/js/topico.js" defer></script>
+</body>
+</html>

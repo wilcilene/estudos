@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Material didático sobre o ciclo de vida do software, seus modelos, fases, entregas, riscos e decisões.">
+  <title>Ciclo de vida do software</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Utilize o mesmo arquivo CSS da página da disciplina. -->
+  <link rel="stylesheet" href="assets/css/topicos.css">
+</head>
+<body>
+  <main class="conteudo-disciplina">
+    <header class="cabecalho-conteudo">
+      <p class="numero-topico">02</p>
+      <h1>Ciclo de vida do software</h1>
+      <p class="introducao">Modelos, fases, entregas, riscos e decisões que organizam o desenvolvimento de software.</p>
+    </header>
+
+    <section class="secao-conteudo" aria-labelledby="objetivos">
+      <h2 id="objetivos">Objetivos de aprendizagem</h2>
+      <ul>
+        <li>Compreender o conceito de ciclo de vida do software.</li>
+        <li>Identificar as principais fases de um projeto de software.</li>
+        <li>Relacionar atividades, entregas, participantes e decisões em cada fase.</li>
+        <li>Reconhecer riscos técnicos, organizacionais, legais e de negócio.</li>
+        <li>Comparar modelos de ciclo de vida e selecionar uma abordagem coerente com o contexto.</li>
+        <li>Compreender a importância da manutenção, da evolução e da retirada de sistemas.</li>
+      </ul>
+    </section>
+
+    <section class="secao-conteudo" aria-labelledby="conceito-ciclo">
+      <h2 id="conceito-ciclo">1. O que é o ciclo de vida do software?</h2>
+      <p>O ciclo de vida do software representa o conjunto de etapas pelas quais um sistema passa desde a identificação de uma necessidade até sua retirada de operação. Ele inclui atividades técnicas, administrativas e de comunicação necessárias para transformar uma ideia em um produto utilizável e sustentável.</p>
+      <p>Embora seja comum apresentar o ciclo como uma sequência de fases, na prática essas fases podem se repetir, sobrepor-se ou ocorrer em ciclos curtos. Um projeto ágil, por exemplo, revisita requisitos, projeto, implementação e testes em várias iterações. Um projeto regulado pode organizar essas mesmas atividades em marcos formais e documentos aprovados.</p>
+      <p>Uma descrição do ciclo de vida ajuda a equipe a responder perguntas importantes: o que precisa ser feito, quem participa, quais resultados devem ser produzidos, quais riscos precisam ser controlados e que evidências demonstram que uma decisão foi tomada corretamente?</p>
+
+      <figure class="imagem-conteudo">
+        <img src="assets/medias/ciclo-de-vida-software.jpg" alt="Diagrama circular representando o ciclo de vida de um software" loading="lazy">
+        <figcaption>Ciclo de vida do software. Imagem gerada pelo Chatgpt.</figcaption>
+      </figure>
+    </section>
+
+    <section class="secao-conteudo" aria-labelledby="fases">
+      <h2 id="fases">2. Fases mais comuns</h2>
+      <p>As nomenclaturas variam entre organizações e modelos, mas uma visão geral costuma incluir planejamento, análise de requisitos, projeto, implementação, testes, implantação e manutenção. A IBM apresenta essas sete fases como uma referência comum para o SDLC, destacando que cada fase possui objetivos e entregas próprios. <a href="https://www.ibm.com/think/topics/sdlc" target="_blank" rel="noopener noreferrer">Consulte a referência sobre SDLC</a>.</p>
+
+      <article class="bloco-fase">
+        <h3>2.1 Planejamento e viabilidade</h3>
+        <p>Nesta fase, a organização compreende o problema, define o propósito do produto e avalia se a iniciativa é viável. A análise não deve se limitar ao custo financeiro: também precisa considerar viabilidade técnica, operacional, legal, de segurança e de prazo.</p>
+        <h4>Perguntas importantes</h4>
+        <ul>
+          <li>Qual problema será resolvido e para quem?</li>
+          <li>Quais resultados indicarão que o produto foi bem-sucedido?</li>
+          <li>Existem tecnologias, conhecimentos e recursos disponíveis?</li>
+          <li>Há restrições legais, contratuais, éticas ou de privacidade?</li>
+          <li>Quais riscos podem impedir ou comprometer o projeto?</li>
+        </ul>
+        <p><strong>Possíveis entregas:</strong> visão do produto, análise de viabilidade, definição inicial de escopo, registro de riscos e decisão de continuar, ajustar ou interromper a iniciativa.</p>
+      </article>
+
+      <article class="bloco-fase">
+        <h3>2.2 Levantamento e análise de requisitos</h3>
+        <p>Requisitos descrevem capacidades, restrições e qualidades esperadas do sistema. A equipe deve conversar com as partes interessadas, observar processos, analisar documentos e transformar necessidades em especificações compreensíveis e verificáveis.</p>
+        <div class="grade-cards">
+          <article class="card-conteudo">
+            <h4>Requisitos funcionais</h4>
+            <p>Descrevem o que o sistema deve fazer, como cadastrar estudantes, emitir relatórios ou enviar notificações.</p>
+          </article>
+          <article class="card-conteudo">
+            <h4>Requisitos não funcionais</h4>
+            <p>Descrevem qualidades e restrições, como desempenho, disponibilidade, segurança, acessibilidade e compatibilidade.</p>
+          </article>
+          <article class="card-conteudo">
+            <h4>Critérios de aceitação</h4>
+            <p>Indicam condições observáveis que permitem verificar se uma funcionalidade atende ao esperado.</p>
+          </article>
+        </div>
+        <p><strong>Risco frequente:</strong> requisitos vagos, contraditórios ou não validados podem gerar retrabalho, conflitos e um sistema tecnicamente correto, mas inadequado para as pessoas usuárias.</p>
+      </article>
+
+      <article class="bloco-fase">
+        <h3>2.3 Projeto e arquitetura</h3>
+        <p>O projeto transforma requisitos em uma solução técnica. São definidas a arquitetura, a divisão em componentes, as interfaces, o modelo de dados, a experiência de uso, as tecnologias e as estratégias de segurança e implantação.</p>
+        <p>Decisões de arquitetura devem registrar alternativas consideradas, consequências, riscos e motivos da escolha. Uma boa solução não é apenas aquela que funciona no primeiro lançamento; ela também precisa ser compreensível, testável, segura, observável e capaz de evoluir.</p>
+        <p><strong>Possíveis entregas:</strong> diagramas, contratos de API, modelo de dados, protótipos de interface, decisões arquiteturais, modelo de ameaças e plano de integração.</p>
+      </article>
+
+      <article class="bloco-fase">
+        <h3>2.4 Implementação</h3>
+        <p>Na implementação, a equipe constrói o software conforme as decisões de projeto. A atividade envolve programação, configuração de ambientes, gerenciamento de dependências, revisão de código, testes automatizados e integração das partes do sistema.</p>
+        <p>O código produzido deve ser acompanhado de práticas que reduzam defeitos e facilitem a manutenção, como controle de versão, revisão por pares, integração contínua, análise estática e documentação suficiente para o uso e a evolução do sistema.</p>
+      </article>
+
+      <article class="bloco-fase">
+        <h3>2.5 Testes e avaliação</h3>
+        <p>Testar é obter informações sobre o produto e reduzir a incerteza sobre seu comportamento. Os testes podem verificar componentes isolados, integrações, fluxos completos, requisitos de segurança, desempenho, acessibilidade e aceitação pelas pessoas interessadas.</p>
+        <div class="grade-cards">
+          <article class="card-conteudo"><h4>Teste unitário</h4><p>Verifica uma unidade pequena do código, como uma função ou classe.</p></article>
+          <article class="card-conteudo"><h4>Teste de integração</h4><p>Verifica a comunicação e o comportamento conjunto de componentes.</p></article>
+          <article class="card-conteudo"><h4>Teste de sistema</h4><p>Avalia o sistema integrado em um ambiente representativo.</p></article>
+          <article class="card-conteudo"><h4>Teste de aceitação</h4><p>Verifica se o produto atende às necessidades e aos critérios acordados.</p></article>
+        </div>
+        <p>Testes não devem ser entendidos somente como uma etapa final. Quanto mais cedo os riscos são avaliados, menor tende a ser o custo de corrigir problemas de requisitos, arquitetura ou implementação.</p>
+      </article>
+
+      <article class="bloco-fase">
+        <h3>2.6 Implantação e operação</h3>
+        <p>A implantação disponibiliza o software em um ambiente real. Ela pode ocorrer de uma só vez ou gradualmente, utilizando estratégias como implantação em fases, lançamento para um grupo reduzido, canário ou alternância entre ambientes.</p>
+        <p>Além de colocar o código em produção, é necessário preparar configurações, dados, permissões, monitoramento, registros de eventos, procedimentos de recuperação e comunicação com usuários e equipes de suporte.</p>
+        <p><strong>Indicadores úteis:</strong> disponibilidade, tempo de resposta, taxa de erro, volume de incidentes, tempo para recuperação e adoção das funcionalidades.</p>
+      </article>
+
+      <article class="bloco-fase">
+        <h3>2.7 Manutenção e evolução</h3>
+        <p>Depois da implantação, o software continua recebendo correções, adaptações, melhorias e atualizações. A manutenção pode corrigir defeitos, acompanhar mudanças de plataformas ou leis, melhorar desempenho e acrescentar novas capacidades.</p>
+        <p>A manutenção também envolve compreender o comportamento real do sistema. Dados de uso, incidentes, solicitações de suporte e feedback ajudam a definir prioridades para a evolução do produto.</p>
+      </article>
+
+      <article class="bloco-fase">
+        <h3>2.8 Retirada ou substituição</h3>
+        <p>Todo sistema pode chegar ao fim de sua vida útil. A retirada precisa considerar migração de dados, comunicação, preservação de registros, encerramento de integrações, revogação de acessos, descarte seguro e suporte às pessoas afetadas.</p>
+        <p>Ignorar essa etapa pode deixar sistemas obsoletos, vulneráveis ou dependentes de tecnologias sem suporte. A decisão de substituir ou descontinuar deve ser tratada como parte do ciclo de vida.</p>
+      </article>
+    </section>
+
+    <section class="secao-conteudo" aria-labelledby="entregas">
+      <h2 id="entregas">3. Entregas e evidências</h2>
+      <p>Cada fase pode produzir artefatos que ajudam a comunicar decisões e verificar resultados. A quantidade e o formato da documentação devem ser adequados ao contexto: um sistema crítico pode exigir rastreabilidade detalhada, enquanto um pequeno protótipo pode demandar apenas registros essenciais.</p>
+      <div class="tabela-responsiva">
+        <table>
+          <thead>
+            <tr><th scope="col">Fase</th><th scope="col">Exemplos de entregas</th><th scope="col">Pergunta de verificação</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Planejamento</td><td>Visão, escopo inicial, análise de viabilidade e riscos.</td><td>O problema e os resultados esperados estão claros?</td></tr>
+            <tr><td>Requisitos</td><td>Casos de uso, histórias, requisitos e critérios de aceitação.</td><td>As necessidades podem ser compreendidas e verificadas?</td></tr>
+            <tr><td>Projeto</td><td>Arquitetura, modelo de dados, protótipos e decisões técnicas.</td><td>A solução atende aos requisitos e aos atributos de qualidade?</td></tr>
+            <tr><td>Implementação</td><td>Código, componentes, configurações e revisões.</td><td>O software foi construído de modo sustentável?</td></tr>
+            <tr><td>Testes</td><td>Casos, resultados, relatórios e correções.</td><td>Os riscos relevantes foram investigados?</td></tr>
+            <tr><td>Implantação</td><td>Pacote de release, instruções, configuração e plano de recuperação.</td><td>O sistema pode ser disponibilizado com segurança?</td></tr>
+            <tr><td>Manutenção</td><td>Correções, versões, indicadores e registros de incidentes.</td><td>O produto continua útil, seguro e operável?</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="secao-conteudo" aria-labelledby="modelos">
+      <h2 id="modelos">4. Modelos de ciclo de vida</h2>
+      <p>O modelo de ciclo de vida define como as fases são organizadas e como o trabalho flui entre elas. O mesmo conjunto de atividades pode ser executado de maneiras diferentes conforme a estabilidade dos requisitos, os riscos e a necessidade de feedback.</p>
+
+      <div class="grade-cards">
+        <article class="card-conteudo">
+          <h3>Cascata</h3>
+          <p>Organiza as fases de maneira predominantemente sequencial. Pode favorecer previsibilidade e rastreabilidade quando os requisitos são estáveis, mas mudanças tardias podem ser caras.</p>
+        </article>
+        <article class="card-conteudo">
+          <h3>Incremental</h3>
+          <p>Entrega o sistema em partes. Cada incremento amplia a solução e permite disponibilizar valor antes da conclusão total.</p>
+        </article>
+        <article class="card-conteudo">
+          <h3>Iterativo</h3>
+          <p>Repete ciclos de análise, projeto, construção e avaliação para aperfeiçoar gradualmente a solução.</p>
+        </article>
+        <article class="card-conteudo">
+          <h3>Espiral</h3>
+          <p>Organiza ciclos orientados à análise de riscos. É indicado para projetos complexos nos quais protótipos e avaliações de risco são importantes.</p>
+        </article>
+        <article class="card-conteudo">
+          <h3>Ágil</h3>
+          <p>Trabalha com ciclos curtos, priorização contínua, colaboração e entregas frequentes. Scrum, Kanban e XP são referências relacionadas a práticas ágeis.</p>
+        </article>
+        <article class="card-conteudo">
+          <h3>DevOps e entrega contínua</h3>
+          <p>Aproxima desenvolvimento e operação, automatizando integração, testes, implantação, observabilidade e resposta a incidentes.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="secao-conteudo" aria-labelledby="riscos">
+      <h2 id="riscos">5. Riscos ao longo do ciclo</h2>
+      <p>Risco é uma condição ou evento incerto que pode afetar objetivos do projeto ou do produto. O gerenciamento de riscos deve ocorrer continuamente, pois novos riscos podem surgir à medida que o conhecimento aumenta.</p>
+      <div class="grade-cards">
+        <article class="card-conteudo"><h3>Risco de requisitos</h3><p>Necessidades incompletas, contraditórias ou alteradas sem avaliação de impacto.</p></article>
+        <article class="card-conteudo"><h3>Risco técnico</h3><p>Tecnologia imatura, integração difícil, dívida técnica ou desempenho insuficiente.</p></article>
+        <article class="card-conteudo"><h3>Risco de segurança</h3><p>Vulnerabilidades, credenciais expostas, falhas de autorização e proteção inadequada de dados.</p></article>
+        <article class="card-conteudo"><h3>Risco operacional</h3><p>Ausência de monitoramento, recuperação, suporte, capacitação ou capacidade de infraestrutura.</p></article>
+        <article class="card-conteudo"><h3>Risco de projeto</h3><p>Estimativas inadequadas, dependências externas, rotatividade e comunicação insuficiente.</p></article>
+        <article class="card-conteudo"><h3>Risco de conformidade</h3><p>Descumprimento de leis, contratos, normas técnicas ou políticas institucionais.</p></article>
+      </div>
+    </section>
+
+    <section class="secao-conteudo" aria-labelledby="seguranca">
+      <h2 id="seguranca">6. Segurança integrada ao ciclo de vida</h2>
+      <p>Segurança não deve ser deixada somente para os testes finais. Ela precisa ser considerada desde o entendimento do problema, passando pelos requisitos, arquitetura, implementação, implantação e manutenção.</p>
+      <p>O <a href="https://csrc.nist.gov/pubs/sp/800/218/final" target="_blank" rel="noopener noreferrer">NIST Secure Software Development Framework (SSDF)</a> organiza práticas de desenvolvimento seguro em quatro grupos: preparar a organização, proteger o software, produzir software bem protegido e responder a vulnerabilidades. O framework recomenda práticas de alto nível para reduzir vulnerabilidades e tratar riscos durante todo o ciclo. [web:18]</p>
+      <ul>
+        <li><strong>Preparar:</strong> definir papéis, responsabilidades, processos e requisitos de segurança.</li>
+        <li><strong>Proteger:</strong> controlar acesso e proteger código, componentes, dados e mecanismos de distribuição.</li>
+        <li><strong>Produzir:</strong> projetar, programar, revisar e testar considerando segurança.</li>
+        <li><strong>Responder:</strong> identificar vulnerabilidades, corrigi-las, comunicar impactos e aprender com as causas.</li>
+      </ul>
+    </section>
+
+    <section class="secao-conteudo" aria-labelledby="estudo-caso">
+      <h2 id="estudo-caso">7. Estudo de caso: sistema de matrícula</h2>
+      <p>Uma universidade pretende substituir o processo manual de matrícula por um sistema web. O produto deverá consultar a oferta de disciplinas, verificar pré-requisitos, registrar escolhas, controlar vagas, integrar pagamentos e disponibilizar comprovantes.</p>
+      <p>Na fase de planejamento, a equipe deve compreender o problema e os grupos envolvidos. Na análise, deve levantar regras acadêmicas e requisitos de acessibilidade, privacidade e segurança. O projeto deve definir arquitetura, dados, integrações e experiência de uso. A implementação precisa ser acompanhada por testes unitários e de integração. Antes da implantação, devem ser realizados testes de aceitação, carga e segurança.</p>
+      <p>Depois do lançamento, indicadores como erros de matrícula, tempo de resposta, chamados de suporte e taxa de conclusão podem orientar a manutenção. Se o sistema for substituído no futuro, será necessário planejar a migração dos registros e o encerramento seguro das integrações.</p>
+
+      <figure class="imagem-conteudo">
+        <img src="assets/medias/estudo-caso-ciclo-vida.jpg" alt="Imagem ilustrativa do ciclo de vida de um sistema de matrícula universitária" loading="lazy">
+        <figcaption>Sistema universitário acompanhando diferentes fases do ciclo de vida. Falta a imagem, em breve gerarei com chatgpt.</figcaption>
+      </figure>
+    </section>
+
+    <section class="secao-conteudo" aria-labelledby="decisoes">
+      <h2 id="decisoes">8. Decisões importantes</h2>
+      <ol>
+        <li>Qual problema será resolvido e qual valor será entregue?</li>
+        <li>Quais requisitos são essenciais e quais podem ser adiados?</li>
+        <li>Quais atributos de qualidade são críticos para o sistema?</li>
+        <li>Que riscos precisam ser investigados antes da implementação?</li>
+        <li>Como as decisões arquiteturais serão registradas e revisadas?</li>
+        <li>Como o produto será testado em diferentes níveis?</li>
+        <li>Como ocorrerão implantação, monitoramento e recuperação?</li>
+        <li>Como as vulnerabilidades serão identificadas e tratadas?</li>
+        <li>Como será medida a satisfação das pessoas usuárias e a efetividade do produto?</li>
+        <li>Quais critérios indicarão que o sistema deve ser modernizado, substituído ou retirado?</li>
+      </ol>
+    </section>
+
+    <section class="secao-conteudo" aria-labelledby="exercicios">
+      <h2 id="exercicios">9. Exercícios de revisão</h2>
+      <ol class="lista-exercicios">
+        <li>Defina ciclo de vida do software com suas próprias palavras.</li>
+        <li>Explique por que as fases do ciclo de vida não precisam ser sempre executadas de maneira estritamente linear.</li>
+        <li>Associe cada fase a uma entrega: requisitos, arquitetura, código, testes, implantação e manutenção.</li>
+        <li>Diferencie requisito funcional, requisito não funcional e critério de aceitação.</li>
+        <li>Apresente três riscos que podem ocorrer durante o desenvolvimento de um sistema.</li>
+        <li>Compare os modelos Cascata, Incremental e Iterativo.</li>
+        <li>Em qual situação o modelo Espiral pode ser interessante? Justifique.</li>
+        <li>Explique por que manutenção é parte do ciclo de vida, e não uma atividade opcional após o desenvolvimento.</li>
+        <li>Proponha quatro testes para o sistema de matrícula do estudo de caso.</li>
+        <li>Descreva duas práticas de segurança que podem ser adotadas durante o levantamento de requisitos.</li>
+        <li>Elabore uma decisão arquitetural para o sistema de matrícula, incluindo alternativas e justificativa.</li>
+        <li>Defina indicadores que poderiam ser acompanhados após a implantação do sistema.</li>
+        <li>Crie um fluxo com as fases do ciclo de vida e indique os principais pontos de decisão.</li>
+        <li>Pesquise um sistema real que tenha sido modernizado ou substituído. Descreva os motivos, os riscos e os resultados.</li>
+      </ol>
+    </section>
+
+    <section class="secao-conteudo" aria-labelledby="leituras">
+      <h2 id="leituras">10. Leituras e fontes sugeridas</h2>
+      <ul>
+        <li><a href="https://www.ibm.com/think/topics/sdlc" target="_blank" rel="noopener noreferrer">IBM — What is the Software Development Lifecycle?</a>.</li>
+        <li><a href="https://www.atlassian.com/agile/software-development/sdlc" target="_blank" rel="noopener noreferrer">Atlassian — Software Development Life Cycle</a>.</li>
+        <li><a href="https://csrc.nist.gov/pubs/sp/800/218/final" target="_blank" rel="noopener noreferrer">NIST SP 800-218 — Secure Software Development Framework</a>.</li>
+        <li><a href="https://csrc.nist.gov/projects/ssdf" target="_blank" rel="noopener noreferrer">NIST — Secure Software Development Framework</a>.</li>
+        <li><a href="https://arxiv.org/abs/2308.03940" target="_blank" rel="noopener noreferrer">Simulating the Software Development Lifecycle</a>.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
