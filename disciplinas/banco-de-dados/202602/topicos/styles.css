@@ -269,6 +269,166 @@ table.compare-table tbody tr:nth-child(even) {
   background: var(--surface-dim);
 }
 
+/* =========================================================
+Selo "Página criada pelo claude.ai"
+========================================================= */
+
+.ai-badge {
+  display: inline-block;
+  margin: 0 0 1rem;
+  padding: .35rem .8rem;
+  background: var(--surface-dim);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+  font-size: .78rem;
+  font-weight: 700;
+}
+
+/* =========================================================
+Glossário de conceitos (seção 0 e caixas de definição)
+========================================================= */
+
+.glossary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: .9rem;
+  margin: 0 0 1.4rem;
+}
+
+.glossary-item {
+  padding: 1rem 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.glossary-item dt {
+  margin-bottom: .35rem;
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-size: .95rem;
+  font-weight: 700;
+}
+
+.glossary-item dd {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: .92rem;
+}
+
+/* =========================================================
+Caixas didáticas: conceito novo e analogia para quem programa
+========================================================= */
+
+.concept-note,
+.dev-note {
+  margin: 0 0 1.1rem;
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  border-left-width: 4px;
+  border-left-style: solid;
+}
+
+.concept-note {
+  background: var(--primary-soft);
+  border-left-color: var(--primary);
+}
+
+.concept-note h4 {
+  margin: 0 0 .5rem;
+  color: var(--primary-dark);
+}
+
+.dev-note {
+  background: var(--cat-sgbd-soft);
+  border-left-color: var(--cat-sgbd);
+}
+
+.dev-note h4 {
+  margin: 0 0 .5rem;
+  color: var(--cat-sgbd);
+}
+
+.concept-note h4,
+.dev-note h4 {
+  font-family: var(--font-display);
+  font-size: .95rem;
+}
+
+.concept-note p,
+.dev-note p {
+  margin: 0 0 .6rem;
+}
+
+.concept-note p:last-child,
+.dev-note p:last-child,
+.concept-note ol:last-child {
+  margin-bottom: 0;
+}
+
+.concept-note ol {
+  margin: 0 0 .6rem;
+  padding-left: 1.2rem;
+}
+
+.concept-note ol li {
+  margin-bottom: .3rem;
+}
+
+/* =========================================================
+Tabelas de explicação linha a linha do código SQL
+========================================================= */
+
+table.compare-table.code-breakdown td:first-child {
+  width: 38%;
+  background: var(--surface-dim);
+  color: var(--primary-dark);
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: .82rem;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+table.compare-table.code-breakdown td:first-child code {
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* =========================================================
+Blocos de código SQL
+========================================================= */
+
+.code-block {
+  margin: 0 0 1rem;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  background: #1f2140;
+  color: #f8f8ff;
+  border: 1px solid #34375f;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+}
+
+.code-block code {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  border-radius: 0;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: .88rem;
+  line-height: 1.65;
+  white-space: pre;
+}
+
 code {
   padding: .1rem .35rem;
   border-radius: 4px;
@@ -288,5 +448,14 @@ code {
 
   .thinking-toggle {
     width: 100%;
+  }
+
+  .glossary {
+    grid-template-columns: 1fr;
+  }
+
+  table.compare-table.code-breakdown td:first-child {
+    width: auto;
+    white-space: pre-wrap;
   }
 }
