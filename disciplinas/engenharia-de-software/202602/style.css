@@ -1,0 +1,539 @@
+/* ==========================================================================
+   indice.css
+   Estilo compartilhado das páginas de ÍNDICE/NAVEGAÇÃO da disciplina de
+   Engenharia de Software: o menu principal da disciplina (index.html) e os
+   índices de cada tópico que se divide em várias partes (ex.: topicos/
+   analise-e-projeto.html). Extraído do <style> que originalmente vivia
+   embutido no index.html, para permitir reaproveitamento entre páginas.
+
+   Para páginas de CONTEÚDO (a leitura de um assunto em si), use
+   /assets/css/topicos.css — este arquivo aqui é só para telas de "escolha
+   por onde ir", com um cabeçalho em destaque e uma grade de cartões.
+   ========================================================================== */
+
+:root {
+  --ink: #15232e;
+  --navy: #102e46;
+  --blue: #216887;
+  --teal: #25a6ad;
+  --gold: #f3bb4d;
+  --paper: #f5f8fa;
+  --muted: #617482;
+  --line: #dbe6ec;
+  --white: #fff;
+  --shadow: 0 16px 40px #102e4618;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.65 'DM Sans', sans-serif;
+}
+
+a { color: inherit; }
+
+.wrap {
+  width: min(1160px, calc(100% - 2.4rem));
+  margin: auto;
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+}
+
+.skip:focus {
+  left: 1rem;
+  top: 1rem;
+  background: #fff;
+  padding: .5rem;
+  z-index: 5;
+}
+
+/* ---------- barra superior + cabeçalho ---------- */
+
+.top {
+  background: #0b2234;
+  color: #c9dfe5;
+  font-size: .82rem;
+}
+
+.top .wrap {
+  display: flex;
+  justify-content: space-between;
+  padding: .5rem 0;
+}
+
+header {
+  color: #fff;
+  background: linear-gradient(130deg, #102e46, #1b607b 70%, #20a0a7);
+  overflow: hidden;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 0;
+}
+
+.brand {
+  font: 700 1.05rem 'Space Grotesk', sans-serif;
+  text-decoration: none;
+}
+
+.brand i {
+  color: var(--gold);
+  font-style: normal;
+}
+
+nav ul {
+  display: flex;
+  gap: 1.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: .9rem;
+}
+
+nav a { text-decoration: none; }
+
+/* Trilha de navegação (Estudos / Disciplina / Tópico atual), para páginas
+   que ficam mais de um nível abaixo do menu principal. */
+.crumbs {
+  font-size: .82rem;
+  color: #bcdfe2;
+  margin-bottom: 1.1rem;
+}
+
+.crumbs a {
+  color: #bcdfe2;
+  text-decoration: none;
+}
+
+.crumbs a:hover { text-decoration: underline; }
+
+.crumbs .sep {
+  margin: 0 .5rem;
+  color: #6fa2ac;
+}
+
+.crumbs [aria-current] {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ---------- hero ----------
+   Base: cabeçalho compacto, uma coluna — usado pelos índices de tópico.
+   Modificadores:
+   .hero--xl    → título maior, mais respiro (usado pelo menu principal)
+   .hero--media → grade de duas colunas com uma imagem/figura ao lado
+*/
+
+.hero {
+  padding: 4rem 0 4.5rem;
+}
+
+.hero--xl { padding: 5rem 0 5.5rem; }
+
+.hero--media {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  align-items: center;
+  gap: 3rem;
+}
+
+.hero__intro { max-width: 760px; }
+
+.hero--media .hero__intro { max-width: none; }
+
+.eyebrow {
+  color: #a9e5e7;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: .75rem;
+  font-weight: 700;
+}
+
+.hero h1 {
+  font: 700 clamp(2.1rem, 5vw, 3.1rem)/1.08 'Space Grotesk', sans-serif;
+  margin: .7rem 0 1.2rem;
+}
+
+.hero--xl h1 { font-size: clamp(2.6rem, 6vw, 5rem); }
+
+.hero p {
+  font-size: 1.1rem;
+  color: #e2f0f2;
+  max-width: 680px;
+}
+
+.buttons {
+  display: flex;
+  gap: .8rem;
+  flex-wrap: wrap;
+  margin-top: 1.6rem;
+}
+
+.btn {
+  border-radius: 99px;
+  padding: .68rem 1.1rem;
+  text-decoration: none;
+  font-weight: 700;
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.btn.alt {
+  background: #ffffff18;
+  color: #fff;
+  border: 1px solid #ffffff66;
+}
+
+.tower { margin: 0; }
+
+.tower img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 22px;
+  border: 1px solid #ffffff44;
+  box-shadow: 0 20px 40px #061a2c55;
+}
+
+.tower figcaption {
+  font-size: .75rem;
+  color: #cfe5e7;
+  margin-top: .5rem;
+}
+
+/* ---------- conteúdo principal ---------- */
+
+main { padding: 4.2rem 0; }
+
+/* Espaçamento entre seções que não usam um componente com margem própria
+   (como .bridge ou .reflection) — útil em páginas de índice mais curtas. */
+.section-gap { margin-top: 3.5rem; }
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.heading h2 {
+  font: 700 2rem/1.1 'Space Grotesk', sans-serif;
+  margin: .4rem 0;
+  color: var(--navy);
+}
+
+.heading p {
+  color: var(--muted);
+  max-width: 560px;
+  margin: 0;
+}
+
+.progress {
+  height: 9px;
+  background: #dfe9ee;
+  border-radius: 20px;
+  margin: 0 0 2rem;
+  overflow: hidden;
+}
+
+.progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--teal), var(--gold));
+  transition: .3s;
+}
+
+/* ---------- cartões (tópicos, subtópicos, etc.) ---------- */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  padding: 1.25rem;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 15px #102e4608;
+  transition: .2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+.num {
+  color: var(--teal);
+  font: 700 1.2rem 'Space Grotesk', sans-serif;
+}
+
+.card h3 {
+  font: 600 1.08rem/1.25 'Space Grotesk', sans-serif;
+  color: var(--navy);
+  margin: .45rem 0;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: .9rem;
+  margin: .2rem 0 1rem;
+}
+
+.card a {
+  color: var(--blue);
+  font-weight: 700;
+  text-decoration: none;
+  margin-top: auto;
+}
+
+.check {
+  color: var(--muted);
+  font-size: .83rem;
+  margin-top: .8rem;
+}
+
+.check input { accent-color: var(--teal); }
+
+/* Etiquetas pequenas dentro de um cartão (ex.: ferramentas usadas) */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin: 0 0 .9rem;
+}
+
+.chip-row span {
+  font: 700 .72rem 'DM Sans', sans-serif;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  color: var(--blue);
+  border-radius: 99px;
+  padding: .18rem .6rem;
+}
+
+/* Par de blocos explicativos lado a lado (ex.: "dois sentidos" de uma ideia) */
+.duo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 1.2rem 0;
+}
+
+.duo > div {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.1rem 1.3rem;
+}
+
+.duo h4 {
+  margin-top: 0;
+  font: 600 1rem 'Space Grotesk', sans-serif;
+  color: var(--blue);
+}
+
+.duo p:last-child { margin-bottom: 0; }
+
+/* ---------- desafio / ponte reflexiva ---------- */
+
+.bridge {
+  margin: 4.5rem 0;
+  background: #e7f5f5;
+  border: 1px solid #c7e8e9;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.bridge-grid {
+  display: grid;
+  grid-template-columns: .95fr 1.05fr;
+}
+
+.bridge-copy { padding: 2.2rem; }
+
+.bridge h2 {
+  font: 700 clamp(1.8rem, 3vw, 2.6rem)/1.1 'Space Grotesk', sans-serif;
+  margin: .5rem 0 1rem;
+}
+
+.bridge-copy p { color: #385767; }
+
+.challenge {
+  border-left: 4px solid var(--gold);
+  padding-left: 1rem;
+  font-size: 1.12rem;
+  color: var(--ink) !important;
+}
+
+.question {
+  background: #fff;
+  padding: 1.25rem;
+  border-radius: 15px;
+  margin-top: 1.2rem;
+  border: 1px solid #d6e8e9;
+}
+
+.question strong { color: var(--blue); }
+
+.video {
+  background: #102e46;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+}
+
+.video h3 {
+  font: 600 1.35rem 'Space Grotesk', sans-serif;
+  margin-top: 0;
+}
+
+.video-frame {
+  position: relative;
+  padding-top: 56.25%;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #071b2a;
+}
+
+.video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video a {
+  color: #bfecee;
+  font-size: .86rem;
+  margin-top: .8rem;
+}
+
+.reflection {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 1.6rem;
+  margin-bottom: 3rem;
+}
+
+.reflection h2 {
+  font: 700 1.6rem 'Space Grotesk', sans-serif;
+  margin: .2rem 0 .5rem;
+}
+
+.reflection ol {
+  padding-left: 1.3rem;
+  margin-bottom: .3rem;
+}
+
+.reflection li { margin: .45rem 0; }
+
+.forum {
+  display: inline-flex;
+  background: var(--navy);
+  color: #fff;
+  border-radius: 99px;
+  text-decoration: none;
+  padding: .7rem 1.05rem;
+  font-weight: 700;
+}
+
+/* ---------- blocos de link em destaque (materiais, paginação entre tópicos) ---------- */
+
+.materials {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.material {
+  background: var(--navy);
+  color: #fff;
+  padding: 1.2rem;
+  border-radius: 15px;
+  text-decoration: none;
+}
+
+.material small {
+  display: block;
+  color: #a9e5e7;
+  margin-bottom: .3rem;
+}
+
+/* Usado para o link "próximo tópico" numa paginação, alinhando à direita */
+.material--next { text-align: right; }
+
+footer {
+  background: #0b2234;
+  color: #bfd3da;
+  padding: 2rem 0;
+  font-size: .9rem;
+}
+
+footer a { color: #fff; }
+
+/* strong herda var(--ink) do body — escuro demais sobre o fundo escuro do rodapé */
+footer strong { color: #fff; }
+
+/* ==========================================================================
+   Responsivo
+   ========================================================================== */
+
+@media (max-width: 800px) {
+
+  .hero--media,
+  .bridge-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero { padding: 4rem 0; }
+
+  .cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .wrap { width: calc(100% - 1.4rem); }
+
+  nav ul { display: none; }
+
+  .top .wrap span:last-child { display: none; }
+
+  .cards,
+  .materials,
+  .duo {
+    grid-template-columns: 1fr;
+  }
+
+  .heading { display: block; }
+
+  .heading p { margin-top: .5rem; }
+
+  .bridge-copy,
+  .video {
+    padding: 1.3rem;
+  }
+
+  .material--next { text-align: left; }
+}

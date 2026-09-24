@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orientação a Objetos — Revisão da Aula</title>
+<meta name="description" content="Revisão didática de Orientação a Objetos em Java: classes, objetos, atributos, métodos, encapsulamento e construtores, com exemplos comentados e diagramas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F8F6;
+    --paper-panel:#FFFFFF;
+    --ink:#16233A;
+    --ink-soft:#4B5872;
+    --ink-faint:#8792A3;
+    --blue:#1F5C8B;
+    --blue-deep:#0F3A57;
+    --blue-pale:#E7EFF6;
+    --blue-line:#BFD3E3;
+    --amber:#B5701C;
+    --amber-pale:#F7ECDA;
+    --green:#2C7A5B;
+    --green-pale:#E5F1EB;
+    --red:#AD3B34;
+    --red-pale:#F8E8E6;
+    --line:#DBE1E8;
+    --code-bg:#0D2436;
+    --code-text:#DCE8F0;
+    --code-line:#1B3B54;
+    --radius:10px;
+    --maxw:740px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    color:var(--blue-deep);
+    line-height:1.2;
+    margin:0 0 .5em;
+    font-weight:600;
+  }
+  p{margin:0 0 1.1em;}
+  a{color:var(--blue);}
+  ul,ol{padding-left:1.3em;}
+  li{margin-bottom:.4em;}
+  code{
+    font-family:'IBM Plex Mono', monospace;
+    background:var(--blue-pale);
+    color:var(--blue-deep);
+    padding:.12em .38em;
+    border-radius:5px;
+    font-size:.9em;
+  }
+  strong{color:var(--ink);}
+  img,svg{max-width:100%;}
+
+  /* ---------- progress bar ---------- */
+  #progress{
+    position:fixed; top:0; left:0; height:3px; width:0%;
+    background:var(--amber); z-index:200; transition:width .1s linear;
+  }
+
+  /* ---------- top bar (mobile) ---------- */
+  .topbar{
+    display:none;
+    position:sticky; top:0; z-index:150;
+    background:var(--blue-deep); color:#fff;
+    padding:.85rem 1.1rem;
+    align-items:center; justify-content:space-between;
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem;
+  }
+  .topbar button{
+    background:none; border:1px solid rgba(255,255,255,.4);
+    color:#fff; border-radius:8px; padding:.4rem .7rem;
+    font-family:inherit; font-size:.95rem; cursor:pointer;
+  }
+
+  /* ---------- layout ---------- */
+  .layout{
+    display:grid;
+    grid-template-columns:250px minmax(0,1fr);
+    max-width:1180px;
+    margin:0 auto;
+  }
+  nav.toc{
+    position:sticky; top:0; align-self:start; height:100vh;
+    overflow-y:auto;
+    background:var(--blue-deep);
+    color:#DCE6EF;
+    padding:2.1rem 1.4rem 2rem;
+  }
+  nav.toc .brand{
+    font-family:'Fraunces', serif; font-weight:600; color:#fff;
+    font-size:1.15rem; margin-bottom:1.6rem; display:block;
+  }
+  nav.toc .brand span{display:block; font-size:.75rem; font-weight:400; color:#9FB4C8; margin-top:.25rem; font-family:'IBM Plex Sans',sans-serif;}
+  nav.toc ol{list-style:none; padding:0; margin:0; counter-reset:sec;}
+  nav.toc li{margin-bottom:0;}
+  nav.toc a{
+    counter-increment:sec;
+    display:block;
+    color:#B9CADA;
+    text-decoration:none;
+    font-size:.88rem;
+    padding:.5rem .5rem .5rem 1.6rem;
+    border-left:2px solid transparent;
+    position:relative;
+    line-height:1.35;
+  }
+  nav.toc a::before{
+    content: counter(sec, decimal-leading-zero);
+    position:absolute; left:0; top:.5rem;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.72rem; color:#5E7A93;
+  }
+  nav.toc a:hover{color:#fff;}
+  nav.toc a.active{
+    color:#fff; border-left-color:var(--amber);
+    background:rgba(255,255,255,.05);
+  }
+
+  main{
+    padding:0 2.6rem 5rem;
+    min-width:0;
+  }
+  .content-inner{max-width:var(--maxw); margin:0 auto;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    max-width:960px; margin:0 auto;
+    padding:4.4rem 2.6rem 1rem;
+  }
+  .hero h1{font-size:clamp(2.2rem, 5vw, 3.1rem); max-width:14ch;}
+  .hero .lede{
+    font-size:1.18rem; color:var(--ink-soft); max-width:56ch;
+    margin-bottom:1.8rem;
+  }
+  .hero .tags{
+    display:flex; flex-wrap:wrap; gap:.5rem;
+    margin-bottom:2.6rem;
+  }
+  .hero .tags span{
+    font-size:.78rem; color:var(--blue-deep);
+    background:var(--blue-pale); border:1px solid var(--blue-line);
+    padding:.32rem .7rem; border-radius:999px;
+  }
+  .hero-diagram{
+    background:var(--paper-panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:1.4rem 1.2rem .6rem;
+  }
+  .hero-diagram figcaption{
+    font-size:.86rem; color:var(--ink-soft); text-align:center;
+    padding:.7rem 0 .3rem; font-style:italic;
+  }
+
+  /* ---------- sections ---------- */
+  section{
+    padding:3.2rem 0;
+    border-top:1px solid var(--line);
+  }
+  section:first-of-type{border-top:none;}
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.78rem; color:var(--blue);
+    letter-spacing:.02em;
+    margin-bottom:.6rem;
+  }
+  h2{font-size:1.65rem;}
+  h3{font-size:1.22rem; margin-top:1.6rem;}
+
+  /* ---------- callouts ---------- */
+  .box{
+    border-radius:var(--radius);
+    padding:1.1rem 1.3rem;
+    margin:1.5rem 0;
+    border-left:3px solid var(--blue);
+    background:var(--blue-pale);
+  }
+  .box p:last-child{margin-bottom:0;}
+  .box .label{
+    font-weight:600; color:var(--blue-deep);
+    display:block; margin-bottom:.35rem; font-size:.92rem;
+  }
+  .box.dica{border-left-color:var(--green); background:var(--green-pale);}
+  .box.dica .label{color:var(--green);}
+  .box.atencao{border-left-color:var(--red); background:var(--red-pale);}
+  .box.atencao .label{color:var(--red);}
+  .box.contexto{border-left-color:var(--amber); background:var(--amber-pale);}
+  .box.contexto .label{color:var(--amber);}
+
+  /* ---------- code ---------- */
+  .codeblock{
+    margin:1.4rem 0; border-radius:12px; overflow:hidden;
+    border:1px solid var(--code-line);
+  }
+  .codeblock .tab{
+    background:#0A1D2C; color:#8FAFC6;
+    font-family:'IBM Plex Mono', monospace; font-size:.78rem;
+    padding:.55rem 1rem;
+    border-bottom:1px solid var(--code-line);
+    display:flex; justify-content:space-between;
+  }
+  .codeblock pre{
+    margin:0; padding:1.15rem 1.3rem;
+    background:var(--code-bg); color:var(--code-text);
+    overflow-x:auto;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.87rem; line-height:1.6;
+  }
+  .codeblock code{background:none; color:inherit; padding:0; font-size:1em;}
+  .tk-kw{color:#7FB4E8;}
+  .tk-tp{color:#9BD6C4;}
+  .tk-str{color:#E3B978;}
+  .tk-cm{color:#6E86A0; font-style:italic;}
+  .tk-mt{color:#D8A6D8;}
+
+  .output{
+    margin:1rem 0 1.4rem; border-radius:10px;
+    border:1px dashed var(--ink-faint);
+    background:#FCFCFA;
+    padding:1rem 1.3rem;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.86rem; color:var(--ink-soft);
+  }
+  .output .tab{
+    font-family:'IBM Plex Sans', sans-serif; font-size:.75rem;
+    color:var(--ink-faint); margin-bottom:.5rem; font-style:italic;
+  }
+
+  /* ---------- table ---------- */
+  table{
+    width:100%; border-collapse:collapse; margin:1.4rem 0;
+    font-size:.92rem;
+  }
+  th,td{
+    text-align:left; padding:.6rem .8rem;
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+  }
+  th{color:var(--blue-deep); font-family:'IBM Plex Sans',sans-serif; font-weight:600; font-size:.82rem;}
+  td code{white-space:nowrap;}
+
+  /* ---------- details / accordions ---------- */
+  details{
+    border:1px solid var(--line); border-radius:10px;
+    padding:.85rem 1.1rem; margin:.9rem 0;
+    background:var(--paper-panel);
+  }
+  details summary{
+    cursor:pointer; font-weight:600; color:var(--blue-deep);
+    list-style:none; display:flex; align-items:center; gap:.5rem;
+  }
+  details summary::-webkit-details-marker{display:none;}
+  details summary::before{
+    content:"+"; display:inline-block; width:1.1em; text-align:center;
+    color:var(--blue); font-weight:700;
+  }
+  details[open] summary::before{content:"–";}
+  details > *:not(summary){margin-top:.9rem;}
+
+  /* ---------- checklist ---------- */
+  .checklist{list-style:none; padding:0;}
+  .checklist li{
+    padding-left:1.7rem; position:relative; margin-bottom:.6rem;
+  }
+  .checklist li::before{
+    content:""; position:absolute; left:0; top:.32em;
+    width:.85em; height:.85em; border:1.5px solid var(--blue);
+    border-radius:3px;
+  }
+
+  /* ---------- glossary ---------- */
+  .glossary{display:grid; grid-template-columns:1fr; gap:.9rem; margin:1.4rem 0;}
+  .glossary dt{
+    font-family:'IBM Plex Mono', monospace; color:var(--blue-deep);
+    font-weight:600; font-size:.95rem;
+  }
+  .glossary dd{margin:.2rem 0 0; color:var(--ink-soft);}
+
+  /* ---------- footer ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:2.4rem 0 1rem;
+    font-size:.86rem; color:var(--ink-faint);
+  }
+
+  figure{margin:1.6rem 0;}
+  figcaption{font-size:.85rem; color:var(--ink-soft); text-align:center; margin-top:.7rem; font-style:italic;}
+
+  @media (max-width:900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{
+      position:fixed; inset:0 20% 0 0; height:100vh; z-index:140;
+      transform:translateX(-100%); transition:transform .25s ease;
+      box-shadow:8px 0 24px rgba(0,0,0,.25);
+    }
+    nav.toc.open{transform:translateX(0);}
+    .topbar{display:flex;}
+    main{padding:0 1.2rem 4rem;}
+    .hero{padding:2.4rem 1.2rem 1rem;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    nav.toc{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<div class="topbar">
+  <span>Orientação a Objetos</span>
+  <button id="navBtn" aria-expanded="false" aria-controls="tocNav">Sumário</button>
+</div>
+
+<div class="layout">
+
+  <nav class="toc" id="tocNav" aria-label="Sumário da aula">
+    <a class="brand" href="#inicio">Orientação a Objetos<span>revisão de aula · Java</span></a>
+    <ol>
+      <li><a href="#motivacao">Por que Orientação a Objetos</a></li>
+      <li><a href="#classes-objetos">Classes e objetos</a></li>
+      <li><a href="#anatomia-classe">Anatomia de uma classe</a></li>
+      <li><a href="#atributos">Atributos: o estado</a></li>
+      <li><a href="#metodos">Métodos: o comportamento</a></li>
+      <li><a href="#instanciar">Instanciando com <code style="background:none;color:inherit;padding:0">new</code></a></li>
+      <li><a href="#encapsulamento">Encapsulamento</a></li>
+      <li><a href="#construtores">Construtores</a></li>
+      <li><a href="#main">O método main</a></li>
+      <li><a href="#exemplo-completo">Exemplo completo</a></li>
+      <li><a href="#desafio">Desafio: classe Estudante</a></li>
+      <li><a href="#erros-comuns">Erros comuns</a></li>
+      <li><a href="#resumo">Resumo e autoteste</a></li>
+      <li><a href="#proximos-passos">Próximos passos</a></li>
+      <li><a href="#referencias">Referências</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <div class="hero" id="inicio">
+      <h1>Orientação a Objetos</h1>
+      <p class="lede">Você já sabe pensar em lógica: variáveis, condições, laços, funções. Esta revisão mostra como reorganizar esse raciocínio em <strong>classes e objetos</strong> — a base de tudo o que vem depois em Java.</p>
+      <div class="tags">
+        <span>Classes e objetos</span>
+        <span>Atributos e métodos</span>
+        <span>Encapsulamento</span>
+        <span>Construtores</span>
+        <span>Java</span>
+      </div>
+
+      <figure class="hero-diagram">
+        <svg viewBox="0 0 920 440" role="img" aria-labelledby="diagA-title diagA-desc">
+          <title id="diagA-title">Da planta baixa às casas construídas</title>
+          <desc id="diagA-desc">Uma classe Casa funciona como uma planta baixa: a partir dela, o comando new cria vários objetos-casa independentes, cada um com seus próprios valores de cor e número de quartos.</desc>
+          <defs>
+            <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M1 1L8 5L1 9" fill="none" stroke="#1F5C8B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+          </defs>
+
+          <rect x="30" y="30" width="340" height="380" rx="12" fill="#EAF1F8" stroke="#1F5C8B" stroke-width="1.5" stroke-dasharray="7 5"/>
+          <text x="200" y="65" text-anchor="middle" font-family="Fraunces, serif" font-weight="600" font-size="21" fill="#0F3A57">Classe Casa</text>
+          <line x1="55" y1="80" x2="345" y2="80" stroke="#BFD3E3" stroke-width="1"/>
+
+          <text x="55" y="103" font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="#4B5872" font-weight="600">Atributos</text>
+          <text x="55" y="123" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#16233A">- cor</text>
+          <text x="55" y="141" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#16233A">- nQuartos</text>
+          <text x="55" y="159" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#16233A">- luzAcesa</text>
+
+          <text x="215" y="103" font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="#4B5872" font-weight="600">Métodos</text>
+          <text x="215" y="123" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#16233A">+ abrirPorta()</text>
+          <text x="215" y="141" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#16233A">+ acenderLuz()</text>
+
+          <polygon points="130,290 200,235 270,290" fill="none" stroke="#1F5C8B" stroke-width="1.6"/>
+          <rect x="140" y="290" width="120" height="80" fill="none" stroke="#1F5C8B" stroke-width="1.6"/>
+          <rect x="185" y="325" width="30" height="45" fill="none" stroke="#1F5C8B" stroke-width="1.3"/>
+          <rect x="155" y="305" width="16" height="16" fill="none" stroke="#1F5C8B" stroke-width="1.3"/>
+          <rect x="229" y="305" width="16" height="16" fill="none" stroke="#1F5C8B" stroke-width="1.3"/>
+          <text x="200" y="397" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-style="italic" font-size="12" fill="#1F5C8B">molde — nunca é habitada</text>
+
+          <text x="415" y="72" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#0F3A57">new Casa(...)</text>
+          <line x1="372" y1="95" x2="458" y2="95" stroke="#1F5C8B" stroke-width="1.4" marker-end="url(#arrowBlue)"/>
+          <line x1="372" y1="225" x2="458" y2="225" stroke="#1F5C8B" stroke-width="1.4" marker-end="url(#arrowBlue)"/>
+          <line x1="372" y1="355" x2="458" y2="355" stroke="#1F5C8B" stroke-width="1.4" marker-end="url(#arrowBlue)"/>
+
+          <g>
+            <rect x="460" y="40" width="430" height="110" rx="10" fill="#FFFFFF" stroke="#DBE1E8"/>
+            <polygon points="500,86 535,58 570,86" fill="#E8B84A" stroke="#16233A" stroke-width="1.2"/>
+            <rect x="500" y="86" width="70" height="45" fill="#E8B84A" stroke="#16233A" stroke-width="1.2"/>
+            <rect x="522" y="106" width="16" height="25" fill="#FAFAF7" stroke="#16233A" stroke-width="1"/>
+            <text x="590" y="80" font-family="IBM Plex Sans, sans-serif" font-weight="700" font-size="15" fill="#16233A">objCasa1</text>
+            <text x="590" y="102" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#4B5872">cor = "amarela"</text>
+            <text x="590" y="120" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#4B5872">nQuartos = 3</text>
+          </g>
+
+          <g>
+            <rect x="460" y="170" width="430" height="110" rx="10" fill="#FFFFFF" stroke="#DBE1E8"/>
+            <polygon points="500,216 535,188 570,216" fill="#4C86B0" stroke="#16233A" stroke-width="1.2"/>
+            <rect x="500" y="216" width="70" height="45" fill="#4C86B0" stroke="#16233A" stroke-width="1.2"/>
+            <rect x="522" y="236" width="16" height="25" fill="#FAFAF7" stroke="#16233A" stroke-width="1"/>
+            <text x="590" y="210" font-family="IBM Plex Sans, sans-serif" font-weight="700" font-size="15" fill="#16233A">objCasa2</text>
+            <text x="590" y="232" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#4B5872">cor = "azul"</text>
+            <text x="590" y="250" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#4B5872">nQuartos = 2</text>
+          </g>
+
+          <g>
+            <rect x="460" y="300" width="430" height="110" rx="10" fill="#FFFFFF" stroke="#DBE1E8"/>
+            <polygon points="500,346 535,318 570,346" fill="#C1571F" stroke="#16233A" stroke-width="1.2"/>
+            <rect x="500" y="346" width="70" height="45" fill="#C1571F" stroke="#16233A" stroke-width="1.2"/>
+            <rect x="522" y="366" width="16" height="25" fill="#FAFAF7" stroke="#16233A" stroke-width="1"/>
+            <text x="590" y="340" font-family="IBM Plex Sans, sans-serif" font-weight="700" font-size="15" fill="#16233A">objCasa3</text>
+            <text x="590" y="362" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#4B5872">cor = "vermelha"</text>
+            <text x="590" y="380" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#4B5872">nQuartos = 4</text>
+          </g>
+        </svg>
+        <figcaption>“As classes estão para os objetos assim como as plantas arquitetônicas estão para as casas.” A mesma planta gera várias casas — cada uma com sua própria cor e número de quartos.</figcaption>
+      </figure>
+    </div>
+
+    <div class="content-inner">
+
+      <section id="motivacao">
+        <p class="kicker">01</p>
+        <h2>Por que Orientação a Objetos?</h2>
+        <p>Até aqui, você resolveu problemas pensando em <strong>sequência, condição e repetição</strong>: um programa é uma lista de instruções que lê dados, decide o que fazer e repete tarefas. Isso é lógica de programação — e ela continua sendo usada dentro de cada método em Orientação a Objetos (OO). O que muda é a <strong>organização</strong>.</p>
+        <p>Em um programa puramente procedural, dados e funções ficam soltos: uma função lê uma lista de valores, outra função recebe essa mesma lista para calcular algo, outra a modifica. Conforme o sistema cresce, fica difícil lembrar quem pode mexer em quê — e um erro em uma função pode quebrar outras dez sem aviso.</p>
+        <p>A Orientação a Objetos propõe outra organização: em vez de espalhar dado e comportamento, você agrupa os dois na mesma unidade, chamada <strong>objeto</strong>. Um objeto <code>Carro</code> carrega seus próprios dados (cor, modelo) <em>e</em> as ações que fazem sentido para ele (ligar, desligar). Quem quiser usar um carro não precisa saber como ele funciona por dentro — só precisa saber chamar <code>ligar()</code>.</p>
+        <div class="box contexto">
+          <span class="label">Por que isso importa na prática</span>
+          <p>Um material citado nesta disciplina resume bem o motivo histórico da OO ganhar força: os três fatores que mais afetam o futuro do desenvolvimento de software seriam reutilização, reutilização e reutilização. Classes bem projetadas podem ser reaproveitadas em vários programas — assim como uma planta de casa pode ser usada para construir um bairro inteiro, não só uma casa.</p>
+        </div>
+        <p>Você não está abandonando o que aprendeu — está aprendendo <em>onde guardar</em> a lógica que já sabe escrever.</p>
+      </section>
+
+      <section id="classes-objetos">
+        <p class="kicker">02</p>
+        <h2>Classes e objetos</h2>
+        <p>Pense em gatos e cães: ambos são animais, mas um mia e o outro late — semelhanças e diferenças que nos fazem naturalmente agrupar as coisas em categorias. É exatamente isso que uma <strong>classe</strong> faz em programação: descreve uma categoria de coisas que compartilham os mesmos tipos de dado e as mesmas ações possíveis.</p>
+        <div class="glossary">
+          <div>
+            <dt>Classe</dt>
+            <dd>O molde. Define <em>quais</em> atributos e métodos todo objeto desse tipo vai ter — mas não é, ela própria, um objeto usável.</dd>
+          </div>
+          <div>
+            <dt>Objeto</dt>
+            <dd>Uma instância concreta criada a partir de uma classe, com valores próprios para cada atributo. Também chamado de <em>instância</em>.</dd>
+          </div>
+        </div>
+        <p>Repare no diagrama no topo da página: a classe <code>Casa</code> é a planta — ela existe uma única vez e nunca é "habitada". Cada <code>new Casa(...)</code> constrói uma casa de verdade, com sua própria cor e seu próprio número de quartos. Mudar a cor de <code>objCasa1</code> não afeta <code>objCasa2</code> nem a planta original.</p>
+        <table>
+          <thead><tr><th>Classe</th><th>Exemplos de objetos</th></tr></thead>
+          <tbody>
+            <tr><td><code>Cachorro</code></td><td><code>rex</code>, <code>bidu</code>, <code>totó</code></td></tr>
+            <tr><td><code>ContaBancaria</code></td><td><code>conta123</code>, <code>conta456</code></td></tr>
+            <tr><td><code>Estudante</code></td><td><code>ana</code>, <code>julio</code></td></tr>
+            <tr><td><code>Carro</code></td><td><code>fusca</code>, <code>civic</code></td></tr>
+          </tbody>
+        </table>
+        <div class="box dica">
+          <span class="label">Regra prática</span>
+          <p>Se a palavra é genérica e representa um "tipo de coisa" (carro, estudante, pedido, produto), ela tende a virar uma <strong>classe</strong>. Se é uma ocorrência específica desse tipo (o Fusca do seu tio, o estudante Julio), ela vira um <strong>objeto</strong>.</p>
+        </div>
+      </section>
+
+      <section id="anatomia-classe">
+        <p class="kicker">03</p>
+        <h2>Anatomia de uma classe em Java</h2>
+        <p>Toda classe em Java é declarada com a palavra-chave <code>class</code>, seguida do nome da classe e de um corpo delimitado por chaves <code>{ }</code>. O modificador <code>public</code> aparece antes, indicando que a classe pode ser usada por qualquer outra classe do projeto.</p>
+        <div class="codeblock">
+          <div class="tab"><span>Carro.java</span><span>estrutura mínima</span></div>
+<pre><code><span class="tk-kw">public class</span> <span class="tk-tp">Carro</span> {
+    <span class="tk-cm">// atributos e métodos entram aqui dentro</span>
+}</code></pre>
+        </div>
+        <p>Nomes de classe seguem a convenção <strong>PascalCase</strong> (cada palavra começa com maiúscula, sem espaços ou hífens: <code>ContaBancaria</code>, <code>ItemPedido</code>) e podem conter letras, dígitos, <code>_</code> e <code>$</code> — mas nunca começar com um dígito.</p>
+        <p>Uma classe descreve três coisas ao mesmo tempo: um <strong>nome</strong>, um conjunto de <strong>atributos</strong> (o estado) e um conjunto de <strong>métodos</strong> (o comportamento). É assim que a UML costuma desenhar uma classe — em três compartimentos:</p>
+        <figure>
+          <svg viewBox="0 0 480 370" role="img" aria-labelledby="diagB-title diagB-desc">
+            <title id="diagB-title">Diagrama de classe da classe Carro</title>
+            <desc id="diagB-desc">Retângulo dividido em três partes: nome da classe Carro, lista de atributos modelo, cor e ligado, e lista de métodos ligar, desligar, getCor e setCor.</desc>
+            <rect x="40" y="20" width="400" height="330" fill="#FFFFFF" stroke="#16233A" stroke-width="1.4"/>
+            <line x1="40" y1="70" x2="440" y2="70" stroke="#16233A" stroke-width="1.4"/>
+            <line x1="40" y1="210" x2="440" y2="210" stroke="#16233A" stroke-width="1.4"/>
+            <text x="240" y="52" text-anchor="middle" font-family="Fraunces, serif" font-weight="600" font-size="19" fill="#0F3A57">Carro</text>
+            <text x="60" y="100" font-family="IBM Plex Mono, monospace" font-size="14" fill="#16233A">- modelo: String</text>
+            <text x="60" y="140" font-family="IBM Plex Mono, monospace" font-size="14" fill="#16233A">- cor: String</text>
+            <text x="60" y="180" font-family="IBM Plex Mono, monospace" font-size="14" fill="#16233A">- ligado: boolean</text>
+            <text x="60" y="240" font-family="IBM Plex Mono, monospace" font-size="14" fill="#16233A">+ ligar(): void</text>
+            <text x="60" y="270" font-family="IBM Plex Mono, monospace" font-size="14" fill="#16233A">+ desligar(): void</text>
+            <text x="60" y="300" font-family="IBM Plex Mono, monospace" font-size="14" fill="#16233A">+ getCor(): String</text>
+            <text x="60" y="330" font-family="IBM Plex Mono, monospace" font-size="14" fill="#16233A">+ setCor(cor): void</text>
+          </svg>
+          <figcaption><code>-</code> indica visibilidade <code>private</code> (só a própria classe acessa); <code>+</code> indica <code>public</code> (qualquer classe pode chamar).</figcaption>
+        </figure>
+      </section>
+
+      <section id="atributos">
+        <p class="kicker">04</p>
+        <h2>Atributos: o estado de um objeto</h2>
+        <p><strong>Atributos</strong> são variáveis declaradas dentro da classe, fora de qualquer método. Também são chamados de <em>variáveis de instância</em>, porque cada objeto criado a partir da classe guarda a sua própria cópia delas.</p>
+        <div class="codeblock">
+          <div class="tab"><span>Carro.java</span><span>declarando atributos</span></div>
+<pre><code><span class="tk-kw">public class</span> <span class="tk-tp">Carro</span> {
+    <span class="tk-kw">private</span> <span class="tk-tp">String</span> modelo;
+    <span class="tk-kw">private</span> <span class="tk-tp">String</span> cor;
+    <span class="tk-kw">private</span> <span class="tk-tp">boolean</span> ligado;
+}</code></pre>
+        </div>
+        <p>Por convenção — e você vai entender o motivo na seção de <a href="#encapsulamento">encapsulamento</a> — atributos quase sempre são declarados <code>private</code>. Isso significa que só código de dentro da própria classe pode enxergá-los diretamente.</p>
+        <div class="box atencao">
+          <span class="label">Atributo ≠ variável local</span>
+          <p>Uma variável declarada <em>dentro</em> de um método (por exemplo, dentro de <code>main</code>) só existe enquanto aquele método está executando, e só aquele método a enxerga. Um atributo pertence ao objeto inteiro e existe durante toda a vida dele — qualquer método da classe pode usá-lo.</p>
+        </div>
+      </section>
+
+      <section id="metodos">
+        <p class="kicker">05</p>
+        <h2>Métodos: o comportamento de um objeto</h2>
+        <p>Métodos realizam tarefas e, quando fazem sentido, retornam um resultado. Toda declaração de método segue o mesmo esqueleto:</p>
+        <div class="output"><div class="tab">esqueleto de um método</div>modificador tipoDeRetorno nomeDoMetodo(parâmetros) {
+    instruções;
+}</div>
+        <ul>
+          <li><strong>modificador</strong> — normalmente <code>public</code> ou <code>private</code>, define quem pode chamar o método;</li>
+          <li><strong>tipo de retorno</strong> — o tipo do valor devolvido, ou <code>void</code> se o método não devolve nada;</li>
+          <li><strong>nome</strong> — por convenção em <em>camelCase</em>, começando com minúscula (<code>ligar</code>, <code>calcularMedia</code>);</li>
+          <li><strong>parâmetros</strong> — dados que o método precisa receber para trabalhar, entre parênteses e separados por vírgula; use <code>()</code> quando não precisar de nenhum.</li>
+        </ul>
+        <div class="codeblock">
+          <div class="tab"><span>Carro.java</span><span>dois métodos de comportamento</span></div>
+<pre><code><span class="tk-kw">public void</span> ligar() {
+    <span class="tk-kw">this</span>.ligado = <span class="tk-kw">true</span>;
+    <span class="tk-tp">System</span>.out.println(modelo + <span class="tk-str">" ligado. Vrum!"</span>);
+}
+
+<span class="tk-kw">public void</span> desligar() {
+    <span class="tk-kw">this</span>.ligado = <span class="tk-kw">false</span>;
+    <span class="tk-tp">System</span>.out.println(modelo + <span class="tk-str">" desligado."</span>);
+}</code></pre>
+        </div>
+        <p>Para <strong>chamar</strong> um método a partir de outra classe, você usa a variável que guarda o objeto, um ponto, e o nome do método: <code>fusca.ligar();</code>. Isso é bem diferente de chamar um método <code>static</code> (sem precisar de um objeto), que veremos na seção sobre <a href="#main">main</a>.</p>
+        <div class="box dica">
+          <span class="label">Parâmetro × argumento</span>
+          <p><em>Parâmetro</em> é o nome usado na declaração do método (<code>void setCor(String novaCor)</code>). <em>Argumento</em> é o valor real passado na chamada (<code>fusca.setCor("preto")</code>). O mesmo método pode receber argumentos diferentes a cada chamada.</p>
+        </div>
+      </section>
+
+      <section id="instanciar">
+        <p class="kicker">06</p>
+        <h2>Instanciando objetos com <code>new</code></h2>
+        <p>A classe só ganha vida quando você cria um objeto a partir dela. Isso é feito com a expressão de criação de instância: a palavra-chave <code>new</code> seguida do nome da classe e parênteses — que, na verdade, chamam o <a href="#construtores">construtor</a>.</p>
+        <div class="codeblock">
+          <div class="tab"><span>GaragemApp.java</span><span>criando dois objetos independentes</span></div>
+<pre><code><span class="tk-tp">Carro</span> fusca = <span class="tk-kw">new</span> <span class="tk-tp">Carro</span>(<span class="tk-str">"Fusca 1972"</span>, <span class="tk-str">"azul"</span>);
+<span class="tk-tp">Carro</span> civic = <span class="tk-kw">new</span> <span class="tk-tp">Carro</span>(<span class="tk-str">"Civic 2024"</span>, <span class="tk-str">"prata"</span>);</code></pre>
+        </div>
+        <p>Cada chamada a <code>new</code> cria um objeto novo, guardado em memória, com sua própria cópia dos atributos. As variáveis <code>fusca</code> e <code>civic</code> são apenas <em>rótulos</em> que apontam para esses objetos — por isso, ligar o <code>fusca</code> não liga o <code>civic</code>, mesmo sendo os dois da mesma classe <code>Carro</code>.</p>
+        <div class="box">
+          <span class="label">Se o construtor não for declarado</span>
+          <p>Java fornece automaticamente um <strong>construtor padrão</strong>, sem parâmetros, que inicializa os atributos com valores neutros: <code>0</code> para números, <code>false</code> para <code>boolean</code> e <code>null</code> para objetos como <code>String</code>. Assim que você declarar qualquer construtor próprio, esse padrão deixa de existir automaticamente.</p>
+        </div>
+      </section>
+
+      <section id="encapsulamento">
+        <p class="kicker">07</p>
+        <h2>Encapsulamento: protegendo os dados</h2>
+        <p>Em Orientação a Objetos, encapsular significa separar o programa em partes o mais isoladas possível, escondendo os detalhes internos de um objeto e expondo apenas o que é necessário para usá-lo. Na prática, em Java isso se traduz em uma regra simples: <strong>atributos privados, acesso controlado por métodos públicos</strong>.</p>
+        <figure>
+          <svg viewBox="0 0 640 320" role="img" aria-labelledby="diagC-title diagC-desc">
+            <title id="diagC-title">Encapsulamento do objeto Carro</title>
+            <desc id="diagC-desc">Os atributos privados do objeto Carro ficam protegidos dentro de uma cápsula. O acesso direto de fora é bloqueado; a entrada de dados acontece pelo método set e a saída pelo método get.</desc>
+            <rect x="180" y="20" width="280" height="240" rx="40" fill="#E7EFF6" stroke="#1F5C8B" stroke-width="1.6"/>
+            <text x="320" y="52" text-anchor="middle" font-family="Fraunces, serif" font-weight="600" font-size="17" fill="#0F3A57">Objeto Carro</text>
+
+            <rect x="298" y="75" width="26" height="20" rx="3" fill="none" stroke="#16233A" stroke-width="1.6"/>
+            <path d="M303 75 v-8 a8,8 0 0 1 16,0 v8" fill="none" stroke="#16233A" stroke-width="1.6"/>
+            <text x="320" y="135" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#16233A">modelo, cor, ligado</text>
+            <text x="320" y="153" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-style="italic" font-size="11.5" fill="#4B5872">(atributos private)</text>
+
+            <text x="120" y="75" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#0F3A57">setCor("preto")</text>
+            <line x1="60" y1="90" x2="178" y2="90" stroke="#1F5C8B" stroke-width="1.6" marker-end="url(#arrowBlue)"/>
+
+            <text x="510" y="180" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#0F3A57">getCor()</text>
+            <line x1="462" y1="195" x2="580" y2="195" stroke="#1F5C8B" stroke-width="1.6" marker-end="url(#arrowBlue)"/>
+
+            <line x1="30" y1="235" x2="145" y2="235" stroke="#AD3B34" stroke-width="1.4" stroke-dasharray="4 4"/>
+            <text x="87" y="227" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-weight="700" font-size="15" fill="#AD3B34">×</text>
+            <text x="30" y="290" font-family="IBM Plex Mono, monospace" font-size="11.5" fill="#AD3B34">carro.cor = "verde";</text>
+            <text x="30" y="308" font-family="IBM Plex Sans, sans-serif" font-style="italic" font-size="11.5" fill="#AD3B34">acesso direto — bloqueado</text>
+          </svg>
+          <figcaption>Ninguém acessa <code>cor</code> diretamente de fora — o acesso só acontece por uma "porta" pública: <code>setCor()</code> para entrar, <code>getCor()</code> para sair.</figcaption>
+        </figure>
+        <div class="codeblock">
+          <div class="tab"><span>Carro.java</span><span>getters e setters</span></div>
+<pre><code><span class="tk-kw">public</span> <span class="tk-tp">String</span> getCor() {
+    <span class="tk-kw">return</span> cor;
+}
+
+<span class="tk-kw">public void</span> setCor(<span class="tk-tp">String</span> novaCor) {
+    <span class="tk-kw">this</span>.cor = novaCor;
+}</code></pre>
+        </div>
+        <p>Note a convenção de nomes: um método <strong>get</strong> devolve o valor de um atributo (<code>getCor</code>), um método <strong>set</strong> altera esse valor (<code>setCor</code>). Para atributos <code>boolean</code>, o padrão costuma ser <code>isAlgumaCoisa()</code> em vez de <code>getAlgumaCoisa()</code> — por exemplo, <code>isLigado()</code>.</p>
+        <h3>Por que não deixar tudo <code>public</code> e economizar código?</h3>
+        <ul>
+          <li><strong>Validação:</strong> um <code>setNota(double nota)</code> pode recusar valores negativos antes de gravar — um atributo público não tem como impedir isso.</li>
+          <li><strong>Liberdade para mudar por dentro:</strong> se amanhã você decidir guardar a cor como um código numérico em vez de texto, só o método <code>getCor</code>/<code>setCor</code> muda — quem usa a classe nem percebe.</li>
+          <li><strong>Contrato claro:</strong> os métodos públicos dizem exatamente o que a classe promete fazer; o resto é detalhe de implementação.</li>
+        </ul>
+        <h3>Níveis de visibilidade em Java</h3>
+        <table>
+          <thead><tr><th>Modificador</th><th>Quem enxerga</th></tr></thead>
+          <tbody>
+            <tr><td><code>public</code></td><td>Qualquer classe, de qualquer pacote do projeto.</td></tr>
+            <tr><td><code>protected</code></td><td>Classes do mesmo pacote, mais subclasses (mesmo em outros pacotes).</td></tr>
+            <tr><td><em>(nenhum modificador)</em></td><td>Chamado de <em>package-private</em>: apenas classes do mesmo pacote.</td></tr>
+            <tr><td><code>private</code></td><td>Somente a própria classe onde foi declarado.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="construtores">
+        <p class="kicker">08</p>
+        <h2>Construtores: preparando o objeto para nascer</h2>
+        <p>O <strong>construtor</strong> é um método especial: tem o mesmo nome da classe, não declara nenhum tipo de retorno — nem <code>void</code> — e é executado automaticamente sempre que você usa <code>new</code>. Sua função é deixar o objeto pronto para uso já na criação.</p>
+        <div class="codeblock">
+          <div class="tab"><span>Carro.java</span><span>construtor com parâmetros</span></div>
+<pre><code><span class="tk-kw">public class</span> <span class="tk-tp">Carro</span> {
+    <span class="tk-kw">private</span> <span class="tk-tp">String</span> modelo;
+    <span class="tk-kw">private</span> <span class="tk-tp">String</span> cor;
+    <span class="tk-kw">private</span> <span class="tk-tp">boolean</span> ligado;
+
+    <span class="tk-cm">// construtor: recebe os valores iniciais do objeto</span>
+    <span class="tk-kw">public</span> <span class="tk-mt">Carro</span>(<span class="tk-tp">String</span> modelo, <span class="tk-tp">String</span> cor) {
+        <span class="tk-kw">this</span>.modelo = modelo;
+        <span class="tk-kw">this</span>.cor = cor;
+        <span class="tk-kw">this</span>.ligado = <span class="tk-kw">false</span>; <span class="tk-cm">// todo carro nasce desligado</span>
+    }
+}</code></pre>
+        </div>
+        <p>Repare no <code>this</code>: dentro do construtor, o parâmetro e o atributo têm o mesmo nome (<code>cor</code>). <code>this.cor</code> se refere ao atributo do objeto; <code>cor</code> sozinho se refere ao parâmetro recebido. Sem o <code>this</code>, o Java não saberia distinguir os dois — e o atributo nunca seria realmente preenchido.</p>
+        <div class="box atencao">
+          <span class="label">Pegadinha clássica</span>
+          <p>Escrever <code>cor = cor;</code> dentro do construtor não faz nada de útil: é o parâmetro recebendo a si mesmo. O correto é sempre <code>this.cor = cor;</code> quando os nomes coincidem.</p>
+        </div>
+        <h3>Um construtor pode ter mais de uma versão</h3>
+        <p>Assim como métodos, construtores podem ser <strong>sobrecarregados</strong> (mesma classe, assinaturas diferentes). Por exemplo, você poderia adicionar um segundo construtor que já recebe se o carro nasce ligado:</p>
+        <div class="codeblock">
+          <div class="tab"><span>Carro.java</span><span>construtor sobrecarregado (opcional)</span></div>
+<pre><code><span class="tk-kw">public</span> <span class="tk-mt">Carro</span>(<span class="tk-tp">String</span> modelo, <span class="tk-tp">String</span> cor, <span class="tk-tp">boolean</span> ligado) {
+    <span class="tk-kw">this</span>.modelo = modelo;
+    <span class="tk-kw">this</span>.cor = cor;
+    <span class="tk-kw">this</span>.ligado = ligado;
+}</code></pre>
+        </div>
+        <p>Java escolhe automaticamente qual construtor chamar de acordo com a quantidade e o tipo dos argumentos passados em <code>new Carro(...)</code>.</p>
+      </section>
+
+      <section id="main">
+        <p class="kicker">09</p>
+        <h2>O método <code>main</code>: onde tudo começa</h2>
+        <p>Todo programa Java precisa de um ponto de partida — o método pelo qual a JVM (a máquina virtual que executa Java) começa a rodar o código. Esse ponto é sempre:</p>
+        <div class="output"><div class="tab">assinatura fixa do método main</div><span></span>public static void main(String[] args) { ... }</div>
+        <p>Cada palavra dessa assinatura importa:</p>
+        <ul>
+          <li><code>public</code> — a JVM, que é externa ao seu programa, precisa conseguir chamá-lo;</li>
+          <li><code>static</code> — o método pertence à <em>classe</em>, não a um objeto específico; por isso pode rodar sem que nada tenha sido instanciado ainda;</li>
+          <li><code>void</code> — não devolve valor algum para quem o chamou (a JVM);</li>
+          <li><code>String[] args</code> — argumentos que podem ser passados na linha de comando ao executar o programa.</li>
+        </ul>
+        <div class="box dica">
+          <span class="label">static × de instância</span>
+          <p>Um método de instância (como <code>ligar()</code>) só existe "dentro" de um objeto — por isso você escreve <code>fusca.ligar()</code>. Um método <code>static</code> pertence à classe inteira e é chamado direto pelo nome dela, como <code>NomeDaClasse.metodoEstatico()</code>. É justamente por ser <code>static</code> que o <code>main</code> pode rodar antes de qualquer <code>new</code> acontecer — ele é o ponto de partida que vai criar os primeiros objetos.</p>
+        </div>
+      </section>
+
+      <section id="exemplo-completo">
+        <p class="kicker">10</p>
+        <h2>Exemplo completo, do zero ao console</h2>
+        <p>Juntando tudo que vimos até aqui: uma classe <code>Carro</code> completa e uma classe com <code>main</code> que cria dois carros, liga um deles e troca a cor do outro.</p>
+        <div class="codeblock">
+          <div class="tab"><span>Carro.java</span><span>classe completa</span></div>
+<pre><code><span class="tk-kw">public class</span> <span class="tk-tp">Carro</span> {
+
+    <span class="tk-cm">// atributos: o estado de cada carro</span>
+    <span class="tk-kw">private</span> <span class="tk-tp">String</span> modelo;
+    <span class="tk-kw">private</span> <span class="tk-tp">String</span> cor;
+    <span class="tk-kw">private</span> <span class="tk-tp">boolean</span> ligado;
+
+    <span class="tk-cm">// construtor: prepara o carro assim que ele "nasce"</span>
+    <span class="tk-kw">public</span> <span class="tk-mt">Carro</span>(<span class="tk-tp">String</span> modelo, <span class="tk-tp">String</span> cor) {
+        <span class="tk-kw">this</span>.modelo = modelo;
+        <span class="tk-kw">this</span>.cor = cor;
+        <span class="tk-kw">this</span>.ligado = <span class="tk-kw">false</span>;
+    }
+
+    <span class="tk-cm">// métodos: o comportamento de cada carro</span>
+    <span class="tk-kw">public void</span> ligar() {
+        <span class="tk-kw">this</span>.ligado = <span class="tk-kw">true</span>;
+        <span class="tk-tp">System</span>.out.println(modelo + <span class="tk-str">" ligado. Vrum!"</span>);
+    }
+
+    <span class="tk-kw">public void</span> desligar() {
+        <span class="tk-kw">this</span>.ligado = <span class="tk-kw">false</span>;
+        <span class="tk-tp">System</span>.out.println(modelo + <span class="tk-str">" desligado."</span>);
+    }
+
+    <span class="tk-cm">// get/set: acesso controlado ao estado privado</span>
+    <span class="tk-kw">public</span> <span class="tk-tp">boolean</span> isLigado() {
+        <span class="tk-kw">return</span> ligado;
+    }
+
+    <span class="tk-kw">public</span> <span class="tk-tp">String</span> getModelo() {
+        <span class="tk-kw">return</span> modelo;
+    }
+
+    <span class="tk-kw">public</span> <span class="tk-tp">String</span> getCor() {
+        <span class="tk-kw">return</span> cor;
+    }
+
+    <span class="tk-kw">public void</span> setCor(<span class="tk-tp">String</span> novaCor) {
+        <span class="tk-kw">this</span>.cor = novaCor;
+    }
+}</code></pre>
+        </div>
+        <div class="codeblock">
+          <div class="tab"><span>GaragemApp.java</span><span>classe com o método main</span></div>
+<pre><code><span class="tk-kw">public class</span> <span class="tk-tp">GaragemApp</span> {
+
+    <span class="tk-kw">public static void</span> main(<span class="tk-tp">String</span>[] args) {
+        <span class="tk-cm">// cada "new" cria um objeto independente, a partir da mesma classe</span>
+        <span class="tk-tp">Carro</span> fusca = <span class="tk-kw">new</span> <span class="tk-tp">Carro</span>(<span class="tk-str">"Fusca 1972"</span>, <span class="tk-str">"azul"</span>);
+        <span class="tk-tp">Carro</span> civic = <span class="tk-kw">new</span> <span class="tk-tp">Carro</span>(<span class="tk-str">"Civic 2024"</span>, <span class="tk-str">"prata"</span>);
+
+        fusca.ligar();
+        civic.setCor(<span class="tk-str">"preto"</span>);
+
+        <span class="tk-tp">System</span>.out.println(fusca.getModelo() + <span class="tk-str">" está ligado: "</span> + fusca.isLigado());
+        <span class="tk-tp">System</span>.out.println(civic.getModelo() + <span class="tk-str">" agora é "</span> + civic.getCor());
+    }
+}</code></pre>
+        </div>
+        <div class="output">
+          <div class="tab">saída no console</div>
+Fusca 1972 ligado. Vrum!
+Fusca 1972 está ligado: true
+Civic 2024 agora é preto
+        </div>
+        <p>Repare que <code>GaragemApp</code> nunca acessa <code>fusca.ligado</code> ou <code>civic.cor</code> diretamente — tudo passa pelos métodos públicos que a classe <code>Carro</code> decidiu expor. Esse é o encapsulamento funcionando na prática, não apenas na teoria.</p>
+      </section>
+
+      <section id="desafio">
+        <p class="kicker">11</p>
+        <h2>Desafio prático: classe <code>Estudante</code></h2>
+        <p>Hora de aplicar sozinho. O objetivo é o mesmo de uma atividade clássica desta disciplina — mas agora você já tem todo o vocabulário para resolver com confiança.</p>
+        <div class="box">
+          <span class="label">Enunciado</span>
+          <p>Crie uma classe <code>Estudante</code> cujos objetos guardem:</p>
+          <ul class="checklist">
+            <li><code>ra</code> (matrícula, <code>int</code>)</li>
+            <li><code>nome</code> (<code>String</code>)</li>
+            <li><code>nota1</code>, <code>nota2</code>, <code>nota3</code> (<code>double</code>)</li>
+          </ul>
+          <p>Todos os atributos devem ser <code>private</code>, inicializados por um construtor. Crie também um método <code>calcularMedia()</code> que devolva a média das três notas.</p>
+          <p>Em uma classe separada com <code>main</code>, instancie três estudantes e exiba, para cada um, uma linha no formato <code>"O estudante Ana possui média 8.17"</code>.</p>
+        </div>
+        <h3>Roteiro sugerido</h3>
+        <ol>
+          <li>Declare os cinco atributos <code>private</code> em <code>Estudante</code>.</li>
+          <li>Escreva o construtor recebendo os cinco valores e usando <code>this</code> para atribuí-los.</li>
+          <li>Escreva <code>calcularMedia()</code>, retornando <code>(nota1 + nota2 + nota3) / 3</code>.</li>
+          <li>Escreva <code>getNome()</code> e <code>getRa()</code> para poder exibir esses dados fora da classe.</li>
+          <li>Na classe com <code>main</code>, crie os três objetos com <code>new</code> e use <code>System.out.printf</code> para formatar a saída com duas casas decimais (<code>%.2f</code>).</li>
+        </ol>
+        <div class="box dica">
+          <span class="label">Desafio bônus</span>
+          <p>Depois de terminar, tente adicionar um método <code>foiAprovado()</code> que devolva <code>true</code> quando a média for maior ou igual a 6.0. Pense: esse método precisa de algum parâmetro, ou ele já tem tudo que precisa dentro do próprio objeto?</p>
+        </div>
+        <details>
+          <summary>Ver solução comentada</summary>
+          <div class="codeblock">
+            <div class="tab"><span>Estudante.java</span><span>solução sugerida</span></div>
+<pre><code><span class="tk-kw">public class</span> <span class="tk-tp">Estudante</span> {
+    <span class="tk-kw">private</span> <span class="tk-tp">int</span> ra;
+    <span class="tk-kw">private</span> <span class="tk-tp">String</span> nome;
+    <span class="tk-kw">private</span> <span class="tk-tp">double</span> nota1, nota2, nota3;
+
+    <span class="tk-kw">public</span> <span class="tk-mt">Estudante</span>(<span class="tk-tp">int</span> ra, <span class="tk-tp">String</span> nome,
+                     <span class="tk-tp">double</span> nota1, <span class="tk-tp">double</span> nota2, <span class="tk-tp">double</span> nota3) {
+        <span class="tk-kw">this</span>.ra = ra;
+        <span class="tk-kw">this</span>.nome = nome;
+        <span class="tk-kw">this</span>.nota1 = nota1;
+        <span class="tk-kw">this</span>.nota2 = nota2;
+        <span class="tk-kw">this</span>.nota3 = nota3;
+    }
+
+    <span class="tk-kw">public</span> <span class="tk-tp">double</span> calcularMedia() {
+        <span class="tk-kw">return</span> (nota1 + nota2 + nota3) / 3;
+    }
+
+    <span class="tk-kw">public</span> <span class="tk-tp">boolean</span> foiAprovado() {
+        <span class="tk-kw">return</span> calcularMedia() &gt;= 6.0;
+    }
+
+    <span class="tk-kw">public</span> <span class="tk-tp">String</span> getNome() { <span class="tk-kw">return</span> nome; }
+    <span class="tk-kw">public</span> <span class="tk-tp">int</span> getRa() { <span class="tk-kw">return</span> ra; }
+}</code></pre>
+          </div>
+          <div class="codeblock">
+            <div class="tab"><span>EscolaApp.java</span><span>testando a classe</span></div>
+<pre><code><span class="tk-kw">public class</span> <span class="tk-tp">EscolaApp</span> {
+    <span class="tk-kw">public static void</span> main(<span class="tk-tp">String</span>[] args) {
+        <span class="tk-tp">Estudante</span> e1 = <span class="tk-kw">new</span> <span class="tk-tp">Estudante</span>(1, <span class="tk-str">"Ana"</span>, 8.5, 9.0, 7.0);
+        <span class="tk-tp">Estudante</span> e2 = <span class="tk-kw">new</span> <span class="tk-tp">Estudante</span>(2, <span class="tk-str">"Julio"</span>, 5.0, 6.5, 8.0);
+
+        <span class="tk-tp">System</span>.out.printf(<span class="tk-str">"O estudante %s possui média %.2f%n"</span>,
+            e1.getNome(), e1.calcularMedia());
+        <span class="tk-tp">System</span>.out.printf(<span class="tk-str">"O estudante %s possui média %.2f%n"</span>,
+            e2.getNome(), e2.calcularMedia());
+    }
+}</code></pre>
+          </div>
+          <div class="output">
+            <div class="tab">saída no console</div>
+O estudante Ana possui média 8.17
+O estudante Julio possui média 6.50
+          </div>
+        </details>
+      </section>
+
+      <section id="erros-comuns">
+        <p class="kicker">12</p>
+        <h2>Erros comuns de quem está começando</h2>
+        <table>
+          <thead><tr><th>Sintoma</th><th>Causa provável</th></tr></thead>
+          <tbody>
+            <tr><td>O atributo fica <code>null</code> ou com valor errado depois do construtor</td><td>Esqueceu o <code>this.</code> quando o parâmetro tem o mesmo nome do atributo — <code>cor = cor;</code> não atribui nada útil.</td></tr>
+            <tr><td>Qualquer classe consegue alterar os dados do objeto sem restrição</td><td>Atributo declarado <code>public</code> em vez de <code>private</code>, perdendo o encapsulamento.</td></tr>
+            <tr><td><code>NullPointerException</code> ao chamar um método</td><td>Tentou chamar <code>objeto.metodo()</code> sem antes ter feito <code>new</code> para criar o objeto.</td></tr>
+            <tr><td>"Não sei em qual método uma variável está disponível"</td><td>Confusão entre atributo (pertence ao objeto todo) e variável local (só existe dentro de um método).</td></tr>
+            <tr><td>O programa inteiro está dentro do <code>main</code></td><td>Nenhuma divisão em classes — perde exatamente a organização que a OO oferece.</td></tr>
+            <tr><td>Erro de compilação em nomes de classe ou método</td><td>Quebra de convenção: classe começando com minúscula, ou método em PascalCase em vez de camelCase.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="resumo">
+        <p class="kicker">13</p>
+        <h2>Resumo e autoteste</h2>
+        <p>Glossário rápido para revisar antes de uma prova ou antes de continuar os estudos:</p>
+        <div class="glossary">
+          <div><dt>Classe</dt><dd>Molde que define atributos e métodos de um tipo de objeto.</dd></div>
+          <div><dt>Objeto</dt><dd>Instância concreta de uma classe, criada com <code>new</code>, com estado próprio.</dd></div>
+          <div><dt>Atributo</dt><dd>Variável declarada na classe; guarda o estado de cada objeto.</dd></div>
+          <div><dt>Método</dt><dd>Bloco de código que define um comportamento do objeto (ou da classe, se <code>static</code>).</dd></div>
+          <div><dt>Construtor</dt><dd>Método especial, sem retorno e com o nome da classe, executado ao criar um objeto com <code>new</code>.</dd></div>
+          <div><dt>Encapsulamento</dt><dd>Esconder o estado interno (<code>private</code>) e expor acesso controlado por métodos públicos (get/set).</dd></div>
+          <div><dt><code>this</code></dt><dd>Referência ao próprio objeto; usada para diferenciar atributo de parâmetro com o mesmo nome.</dd></div>
+          <div><dt><code>static</code></dt><dd>Pertence à classe, não a um objeto específico — como o método <code>main</code>.</dd></div>
+        </div>
+        <h3>Teste rápido</h3>
+        <details>
+          <summary>1. Qual a diferença entre classe e objeto?</summary>
+          <p>Classe é o molde/planta; objeto é uma instância concreta criada a partir da classe, com valores próprios para seus atributos.</p>
+        </details>
+        <details>
+          <summary>2. Por que usar <code>this.cor = cor;</code> em vez de só <code>cor = cor;</code> no construtor?</summary>
+          <p>Porque parâmetro e atributo têm o mesmo nome. <code>this.cor</code> aponta para o atributo do objeto; sem o <code>this</code>, Java entenderia as duas referências como o próprio parâmetro, e o atributo nunca seria preenchido.</p>
+        </details>
+        <details>
+          <summary>3. Por que atributos costumam ser <code>private</code>?</summary>
+          <p>Para permitir validação de dados, liberdade de mudar a implementação interna sem afetar quem usa a classe, e deixar claro qual é o "contrato público" da classe.</p>
+        </details>
+        <details>
+          <summary>4. O método <code>main</code> é <code>static</code>. Por quê isso é necessário?</summary>
+          <p>Porque a JVM precisa executar esse método antes que qualquer objeto tenha sido criado. Métodos <code>static</code> pertencem à classe, não a uma instância, então podem rodar sem <code>new</code>.</p>
+        </details>
+        <details>
+          <summary>5. Dois carros foram criados a partir da mesma classe <code>Carro</code>. Ligar um deles liga o outro também?</summary>
+          <p>Não. Cada objeto tem sua própria cópia dos atributos (variáveis de instância) — alterar o estado de um objeto nunca afeta outro objeto, mesmo que sejam da mesma classe.</p>
+        </details>
+      </section>
+
+      <section id="proximos-passos">
+        <p class="kicker">14</p>
+        <h2>Próximos passos</h2>
+        <p>Com classes, objetos, atributos, métodos, construtores e encapsulamento consolidados, você já tem a base necessária para os próximos temas da disciplina: <strong>herança</strong> (uma classe reaproveitando características de outra), <strong>polimorfismo</strong> (um mesmo método se comportando de formas diferentes conforme a classe), <strong>interfaces</strong> e o cuidado com <strong>dependências</strong> entre classes. Todos esses conceitos são construídos em cima do que você revisou aqui — vale a pena garantir que classe, objeto, atributo, método, construtor e encapsulamento estejam bem firmes antes de avançar.</p>
+      </section>
+
+      <section id="referencias">
+        <p class="kicker">15</p>
+        <h2>Referências</h2>
+        <ul>
+          <li>DEITEL, H. M.; DEITEL, P. J. <em>Java: How to Program</em>. Pearson Prentice Hall, 2010 (também em português, <em>Java: Como Programar</em>).</li>
+          <li>BEZERRA, E. <em>Princípios de Análise e Projeto de Sistemas com UML</em>. Rio de Janeiro: Campus, 2007.</li>
+          <li>OMG. <em>OMG Unified Modeling Language (OMG UML)</em>, versão 2.5, 2015.</li>
+          <li>Material de aula original desta disciplina (slides de Orientação a Objetos).</li>
+          <li><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/index.html" target="_blank" rel="noopener">Oracle — The Java Tutorials: Classes and Objects</a> (documentação oficial, em inglês).</li>
+        </ul>
+      </section>
+
+      <footer>
+        Material de revisão preparado para acompanhar a aula de Orientação a Objetos. Se algo faltou na explicação, releia a seção correspondente com calma — os exemplos foram pensados para serem reproduzidos linha a linha em sua própria IDE.
+      </footer>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  (function(){
+    var navBtn = document.getElementById('navBtn');
+    var tocNav = document.getElementById('tocNav');
+    navBtn.addEventListener('click', function(){
+      var open = tocNav.classList.toggle('open');
+      navBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    tocNav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        tocNav.classList.remove('open');
+        navBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    var progress = document.getElementById('progress');
+    function updateProgress(){
+      var h = document.documentElement;
+      var scrolled = h.scrollTop;
+      var height = h.scrollHeight - h.clientHeight;
+      progress.style.width = (height > 0 ? (scrolled / height) * 100 : 0) + '%';
+    }
+    document.addEventListener('scroll', updateProgress, {passive:true});
+    updateProgress();
+
+    var links = Array.prototype.slice.call(tocNav.querySelectorAll('a[href^="#"]'));
+    var targets = links.map(function(a){ return document.getElementById(a.getAttribute('href').slice(1)); })
+                        .filter(Boolean);
+    if('IntersectionObserver' in window){
+      var observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          var link = links.find(function(a){ return a.getAttribute('href') === '#' + entry.target.id; });
+          if(!link) return;
+          if(entry.isIntersecting){
+            links.forEach(function(a){ a.classList.remove('active'); });
+            link.classList.add('active');
+          }
+        });
+      }, {rootMargin:'-15% 0px -70% 0px', threshold:0});
+      targets.forEach(function(t){ observer.observe(t); });
+    }
+  })();
+</script>
+</body>
+</html>
