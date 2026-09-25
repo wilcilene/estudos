@@ -3,9 +3,11 @@
    Estilo compartilhado das páginas de tópico da disciplina de Engenharia de
    Software. Segue o mesmo sistema visual do index (paleta, tipografia e
    linguagem de cartões), adaptado para páginas de leitura mais longas.
-   Este arquivo cobre dois padrões de marcação encontrados nos tópicos:
+   Este arquivo cobre três grupos de regras:
      A) .conteudo-disciplina (ciclo-de-vida-do-software.html, metodos-desenvolvimento.html)
-     B) .topic-header / .topic-layout (requisitos.html)
+     B) .topic-header / .topic-layout (requisitos.html e Análise e Projeto)
+     C) Componentes didáticos compartilhados: código, console, caixas de
+        destaque, notação UML, passo a passo, autoteste e acessibilidade.
    ========================================================================== */
 
 :root {
@@ -432,6 +434,13 @@ table.topic-table tbody tr:nth-child(even) td {
   color: #6fa2ac;
 }
 
+/* Separador gerado por CSS: o "/" deixa de ser lido como item da lista */
+.topic-breadcrumb--auto li + li::before {
+  content: "/";
+  margin: 0 .5rem;
+  color: #6fa2ac;
+}
+
 .topic-kicker {
   display: inline-block;
   color: #a9e5e7;
@@ -757,4 +766,687 @@ table.topic-table caption {
     flex-direction: column;
     align-items: flex-start;
   }
+}
+
+/* ==========================================================================
+   Base comum que faltava: contêiner, foco visível e leitura acessível
+   ========================================================================== */
+
+.wrap {
+  width: min(1160px, 100%);
+  margin: 0 auto;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+img, svg { max-width: 100%; }
+
+mark {
+  background: #fdeebd;
+  color: var(--ink);
+  padding: 0 .15em;
+  border-radius: 3px;
+}
+
+/* Metadados do cabeçalho (tempo de leitura, pré-requisito) */
+.topic-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  list-style: none;
+  margin: 1.3rem 0 0;
+  padding: 0;
+}
+
+.topic-meta li {
+  font-size: .82rem;
+  color: #e2f0f2;
+  background: #ffffff14;
+  border: 1px solid #ffffff2e;
+  border-radius: 99px;
+  padding: .25rem .8rem;
+}
+
+.topic-toc__back {
+  margin: 1.1rem 0 0;
+  font-size: .85rem;
+}
+
+.topic-toc nav a.is-active {
+  background: #e7f5f5;
+  color: var(--navy);
+  font-weight: 600;
+}
+
+/* Barra de progresso de leitura (inserida pelo topicos.js) */
+.reading-progress {
+  position: fixed;
+  inset: 0 auto auto 0;
+  height: 4px;
+  width: 0;
+  background: var(--gold);
+  z-index: 50;
+}
+
+/* ==========================================================================
+   C) Componentes didáticos compartilhados
+   ========================================================================== */
+
+/* ---------- Blocos de código ---------- */
+.codeblock {
+  margin: 1.3rem 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #1b3b54;
+  background: #0f2436;
+}
+
+.codeblock__bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  background: #0a1b29;
+  color: #9fbad0;
+  font-size: .78rem;
+  padding: .45rem .6rem .45rem 1rem;
+  border-bottom: 1px solid #1b3b54;
+}
+
+.codeblock__bar .arquivo { font-weight: 600; color: #dce8f0; }
+
+.codeblock__copy {
+  font: 600 .75rem 'DM Sans', sans-serif;
+  color: #dce8f0;
+  background: #ffffff12;
+  border: 1px solid #ffffff2e;
+  border-radius: 8px;
+  padding: .25rem .65rem;
+  cursor: pointer;
+}
+
+.codeblock__copy:hover { background: #ffffff24; }
+
+.codeblock pre {
+  margin: 0;
+  padding: 1.1rem 1.2rem;
+  overflow-x: auto;
+  color: #dce8f0;
+  font: .86rem/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+  tab-size: 4;
+}
+
+.codeblock code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  font-size: 1em;
+}
+
+.tk-kw { color: #7fb4e8; }
+.tk-tp { color: #9bd6c4; }
+.tk-str { color: #e3b978; }
+.tk-cm { color: #7f98b0; font-style: italic; }
+.tk-mt { color: #e0b0e0; }
+.tk-num { color: #f2a37a; }
+
+code, kbd, .mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+}
+
+/* Saída de console / esqueletos de sintaxe */
+.console {
+  margin: 1rem 0 1.4rem;
+  border: 1px dashed #9fb2bd;
+  border-radius: 12px;
+  background: #fbfcfc;
+  padding: .9rem 1.2rem;
+  font: .86rem/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+  color: #354856;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
+.console__label {
+  display: block;
+  font: italic .75rem 'DM Sans', sans-serif;
+  color: var(--muted);
+  margin-bottom: .35rem;
+}
+
+/* Menus de ferramenta: Tools › Java › Export Java */
+kbd {
+  display: inline-block;
+  font-size: .8em;
+  background: #fff;
+  border: 1px solid #c5d4dc;
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  padding: .05rem .4rem;
+  color: var(--navy);
+  white-space: nowrap;
+}
+
+/* ---------- Caixas de destaque (padrão da revisão de OO) ---------- */
+.box {
+  border-radius: 0 14px 14px 0;
+  padding: 1rem 1.3rem;
+  margin: 1.3rem 0;
+  border-left: 4px solid var(--blue);
+  background: #eaf2f6;
+}
+
+.box p:last-child, .box ul:last-child, .box ol:last-child { margin-bottom: 0; }
+
+.box .label {
+  display: block;
+  font: 700 .92rem 'Space Grotesk', sans-serif;
+  color: var(--navy);
+  margin-bottom: .3rem;
+}
+
+.box.dica { border-left-color: #2c8a63; background: #e8f5ee; }
+.box.dica .label { color: #1f6b4b; }
+.box.atencao { border-left-color: #c0493f; background: #fbecea; }
+.box.atencao .label { color: #9c342c; }
+.box.contexto { border-left-color: var(--gold); background: #fff7e8; }
+.box.contexto .label { color: #8a6414; }
+
+/* ---------- Figuras e diagramas ---------- */
+.figura {
+  margin: 1.6rem 0;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 1.2rem 1.2rem .9rem;
+}
+
+.figura__scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.figura--estreita svg { max-width: 460px; margin-inline: auto; }
+.figura svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* No celular os diagramas grandes rolam na horizontal para manter o texto legível */
+@media (max-width: 760px) {
+  .figura--larga svg { min-width: 720px; }
+  .figura--media svg { min-width: 560px; }
+}
+
+/* Botão "Ampliar" e janela de zoom (criados pelo topicos.js) */
+.figura__ampliar {
+  display: block;
+  margin: .6rem auto 0;
+  font: 600 .8rem 'DM Sans', sans-serif;
+  color: var(--blue);
+  background: #fff;
+  border: 1px solid #c5d4dc;
+  border-radius: 99px;
+  padding: .3rem .9rem;
+  cursor: pointer;
+}
+
+.figura__ampliar:hover { border-color: var(--blue); }
+
+dialog.zoom {
+  width: min(1400px, 96vw);
+  max-height: 94vh;
+  border: none;
+  border-radius: 18px;
+  padding: 1rem 1rem 1.2rem;
+  box-shadow: 0 30px 80px #0008;
+}
+
+dialog.zoom::backdrop { background: #0b2234cc; }
+
+dialog.zoom svg { display: block; width: 100%; min-width: 900px; height: auto; }
+
+.zoom__area { overflow: auto; max-height: calc(94vh - 5rem); }
+
+.zoom__topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: .6rem;
+  font: 600 .95rem 'Space Grotesk', sans-serif;
+  color: var(--navy);
+}
+
+.zoom__fechar {
+  font: 700 .85rem 'DM Sans', sans-serif;
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  border-radius: 99px;
+  padding: .4rem 1rem;
+  cursor: pointer;
+}
+
+.figura figcaption {
+  color: var(--muted);
+  font-size: .86rem;
+  text-align: center;
+  margin-top: .8rem;
+}
+
+.figura figcaption strong { color: var(--navy); }
+
+.figura__dica-rolagem {
+  display: none;
+  font-size: .78rem;
+  color: var(--muted);
+  text-align: right;
+  margin: 0 0 .4rem;
+}
+
+/* ---------- Grade de notação: "as peças do diagrama" ---------- */
+.notacao {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1rem;
+  margin: 1.3rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.notacao > li {
+  margin: 0;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1rem 1.1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.notacao__simbolo {
+  background: var(--paper);
+  border-radius: 10px;
+  padding: .5rem;
+  margin-bottom: .8rem;
+  min-height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notacao__simbolo svg { width: 100%; max-width: 220px; height: auto; }
+
+.notacao h4 {
+  margin: 0 0 .35rem;
+  font-size: 1rem;
+  color: var(--navy);
+}
+
+.notacao p {
+  font-size: .9rem;
+  margin: 0 0 .5rem;
+}
+
+.notacao .em-java {
+  margin-top: auto;
+  font-size: .8rem;
+  color: var(--muted);
+  border-top: 1px dashed var(--line);
+  padding-top: .5rem;
+}
+
+/* Anatomia com chamadas numeradas ao lado da figura */
+.anatomia {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 1.4rem;
+  align-items: center;
+  margin: 1.4rem 0;
+}
+
+.anatomia ol {
+  margin: 0;
+  padding-left: 1.3rem;
+}
+
+.anatomia .figura { margin: 0; }
+
+/* ---------- Passo a passo ---------- */
+.passos {
+  list-style: none;
+  counter-reset: passo;
+  margin: 1.4rem 0;
+  padding: 0;
+}
+
+.passos > li {
+  counter-increment: passo;
+  position: relative;
+  margin: 0;
+  padding: 0 0 1.8rem 3.4rem;
+}
+
+.passos > li::before {
+  content: counter(passo);
+  position: absolute;
+  left: 0;
+  top: -.1rem;
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  font: 700 1rem/2.3rem 'Space Grotesk', sans-serif;
+  text-align: center;
+}
+
+.passos > li::after {
+  content: "";
+  position: absolute;
+  left: 1.1rem;
+  top: 2.4rem;
+  bottom: .3rem;
+  width: 2px;
+  background: var(--line);
+}
+
+.passos > li:last-child::after { display: none; }
+
+.passos h3, .passos h4 {
+  margin: 0 0 .5rem;
+  font-size: 1.1rem;
+  color: var(--navy);
+}
+
+.passos .figura { margin: 1rem 0 .4rem; }
+
+/* Tabela de decisão/checklist compacta */
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.checklist li {
+  position: relative;
+  padding-left: 1.8rem;
+  margin: .5rem 0;
+}
+
+.checklist li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .3em;
+  width: .95em;
+  height: .95em;
+  border: 2px solid var(--teal);
+  border-radius: 4px;
+}
+
+/* Lado a lado: diagrama × código */
+.lado-a-lado {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+.lado-a-lado > * { min-width: 0; }
+
+/* ---------- Glossário em lista de definições ---------- */
+.glossary {
+  display: grid;
+  gap: .9rem;
+  margin: 1.3rem 0;
+}
+
+.glossary dt {
+  font: 600 .98rem 'Space Grotesk', sans-serif;
+  color: var(--navy);
+}
+
+.glossary dd {
+  margin: .15rem 0 0;
+  color: var(--muted);
+}
+
+/* Etiquetas pequenas (tags da revisão de OO) */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.4rem;
+}
+
+.chips li {
+  margin: 0;
+  font-size: .8rem;
+  color: var(--navy);
+  background: #e7f5f5;
+  border: 1px solid #c6e6e8;
+  border-radius: 99px;
+  padding: .25rem .75rem;
+}
+
+/* ---------- Autoteste e soluções (details) ---------- */
+.topic-section details,
+.qa {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  padding: .8rem 1.1rem;
+  margin: .8rem 0;
+}
+
+.topic-section details > summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--navy);
+  list-style: none;
+  display: flex;
+  gap: .6rem;
+  align-items: baseline;
+}
+
+.topic-section details > summary::-webkit-details-marker { display: none; }
+
+.topic-section details > summary::before {
+  content: "+";
+  flex: 0 0 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background: #e7f5f5;
+  color: var(--blue);
+  font: 700 .9rem/1.2rem 'Space Grotesk', sans-serif;
+  text-align: center;
+}
+
+.topic-section details[open] > summary::before { content: "–"; }
+
+.topic-section details[open] > summary { margin-bottom: .7rem; }
+
+.topic-section details > :last-child { margin-bottom: 0; }
+
+/* ---------- Marcar como estudado ---------- */
+.estudado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 1.1rem 1.4rem;
+  margin: 2rem 0 0;
+}
+
+.estudado p { margin: 0; color: var(--muted); font-size: .92rem; }
+
+.estudado label {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+}
+
+.estudado input {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: var(--teal);
+}
+
+/* Referências com a cláusula da especificação */
+.refs li { margin: .55rem 0; }
+.refs small { color: var(--muted); }
+
+/* ---------- Responsivo dos componentes ---------- */
+@media (max-width: 900px) {
+  .anatomia, .lado-a-lado { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+  .figura--larga .figura__dica-rolagem,
+  .figura--media .figura__dica-rolagem { display: block; }
+}
+
+@media (max-width: 640px) {
+  .passos > li { padding-left: 2.8rem; }
+  .passos > li::before { width: 2rem; height: 2rem; line-height: 2rem; font-size: .9rem; }
+  .passos > li::after { left: .95rem; top: 2.1rem; }
+  .figura { padding: .9rem .7rem .7rem; }
+  .topic-header .wrap { width: 100%; }
+}
+
+/* ---------- Movimento reduzido e impressão ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+@media print {
+  .topic-toc, .reading-progress, .skip-link, .estudado, .topic-pager, .codeblock__copy, .figura__ampliar, .figura__dica-rolagem { display: none !important; }
+  .topic-layout { display: block; width: 100%; padding: 0; }
+  .topic-header { background: none; color: var(--ink); padding: 0 0 1rem; }
+  .topic-header h1, .topic-dek, .topic-kicker, .topic-meta li { color: var(--ink); }
+  .topic-section { break-inside: avoid-page; border: none; padding: 1rem 0; }
+  .figura { break-inside: avoid; }
+  .figura--larga svg, .figura--media svg { min-width: 0; }
+  details { display: block; }
+  details > * { display: block !important; }
+  a { color: var(--ink); }
+}
+
+/* Listas-componente não herdam o recuo das listas de texto */
+.topic-section .notacao,
+.topic-section .passos,
+.topic-section .checklist,
+.topic-section .chips { padding-left: 0; }
+.topic-section .notacao > li,
+.topic-section .passos > li { margin: 0; }
+
+/* Nos passos, a figura aproveita também a coluna do número */
+@media (min-width: 641px) {
+  .passos .figura { margin-left: -3.4rem; }
+}
+
+/* ==========================================================================
+   D. Documentação de casos de uso (ficha)
+   ========================================================================== */
+.uc-doc {
+  margin: 1.5rem 0;
+  border: 1px solid #c7dde5;
+  border-radius: 16px;
+  background: #fff;
+  overflow: hidden;
+}
+.uc-doc__cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .25rem .75rem;
+  padding: .9rem 1.25rem;
+  background: var(--navy, #102e46);
+  color: #fff;
+}
+.uc-doc__id {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--gold, #f3bb4d);
+}
+.uc-doc__nome { margin: 0; font-size: 1.15rem; color: #fff; }
+.uc-doc__corpo { padding: .5rem 1.25rem 1.25rem; }
+.uc-doc__corpo h4 {
+  margin: 1.4rem 0 .5rem;
+  font-size: .8rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--blue, #216887);
+}
+.uc-doc .topic-table th[scope="row"] { width: 28%; white-space: normal; }
+.uc-fluxo { margin: 0; padding-left: 1.6rem; }
+.uc-fluxo > li { margin: .3rem 0; padding-left: .25rem; }
+.uc-fluxo > li::marker { font-weight: 700; color: var(--blue, #216887); }
+.uc-doc .ator { font-weight: 700; color: #1f6b4b; }
+.uc-doc .sistema { font-weight: 700; color: var(--navy, #102e46); }
+.topic-section .uc-doc .uc-doc__nome { margin: 0; color: #fff; font-size: 1.15rem; }
+.uc-alt { margin: 0; }
+.uc-alt > div {
+  margin: .6rem 0;
+  padding: .7rem .9rem;
+  border-left: 4px solid var(--teal, #25a6ad);
+  background: #f3f9fa;
+  border-radius: 0 10px 10px 0;
+}
+.uc-alt > div.excecao { border-left-color: #c0493f; background: #fbf1f0; }
+.uc-alt dt { font-weight: 700; color: var(--navy, #102e46); }
+.uc-alt dt code { font-weight: 700; }
+.uc-alt dd { margin: .3rem 0 0; }
+.uc-alt dd ol { margin: .2rem 0 0; padding-left: 1.3rem; }
+.uc-ref {
+  display: inline-block;
+  padding: 0 .4rem;
+  border-radius: 6px;
+  background: #fff4d4;
+  color: #8a6414;
+  font-size: .85em;
+  font-weight: 700;
+  white-space: nowrap;
+}
+@media print { .uc-doc { break-inside: auto; } .uc-doc__cabecalho { background: #fff; color: #000; } .uc-doc__nome { color: #000; } }
+.lado-a-lado { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: .75rem; margin: 1rem 0; }
+.lado-a-lado .box { margin: 0; }
+.uc-doc__nome small { font-weight: 500; opacity: .8; font-size: .8em; }
+@media (max-width: 560px) {
+  .uc-doc__corpo { padding: .25rem .75rem 1rem; }
+  .uc-doc .topic-table, .uc-doc .topic-table tbody, .uc-doc .topic-table tr,
+  .uc-doc .topic-table th, .uc-doc .topic-table td { display: block; width: 100%; }
+  .uc-doc .topic-table th[scope="row"] { width: 100%; padding-bottom: .15rem; border-bottom: 0; }
+  .uc-doc .topic-table td { padding-top: .15rem; }
 }

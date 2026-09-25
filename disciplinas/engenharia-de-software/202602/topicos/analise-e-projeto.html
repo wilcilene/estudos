@@ -4,26 +4,47 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Análise e Projeto | Engenharia de Software</title>
-  <meta name="description"
-    content="Índice do tópico Análise e Projeto: revisão de Orientação a Objetos, introdução a UML e os diagramas de classes, sequência, atividades e estados.">
+  <title>Análise e Projeto: UML e Orientação a Objetos | Engenharia de Software</title>
+  <meta name="description" content="Índice do tópico Análise e Projeto: revisão de Orientação a Objetos, introdução a UML e os diagramas de classes, sequência, atividades e estados, com exemplos passo a passo.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#102e46">
-  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/analise-e-projeto.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Estudos · Engenharia de Software">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/analise-e-projeto.html">
   <meta property="og:title" content="Análise e Projeto | Engenharia de Software">
-  <meta property="og:description"
-    content="Modele o sistema em UML antes de construir: orientação a objetos, diagramas de classes, sequência, atividades e estados.">
-  <link rel="canonical"
-    href="https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/analise-e-projeto.html">
+  <meta property="og:description" content="Modele o sistema em UML antes de construir: orientação a objetos, diagramas de classes, sequência, atividades e estados.">
+  <meta property="og:image" content="https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/assets/img/og-analise-e-projeto.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Análise e Projeto: sete assuntos de UML e Orientação a Objetos">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Análise e Projeto | Engenharia de Software">
+  <meta name="twitter:description" content="Orientação a objetos e UML em sete partes, com exemplos passo a passo.">
+  <meta name="twitter:image" content="https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/assets/img/og-analise-e-projeto.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Estudos","item":"https://wilcilene.github.io/estudos/"},{"@type":"ListItem","position":2,"name":"Engenharia de Software","item":"https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/"},{"@type":"ListItem","position":3,"name":"Análise e Projeto"}]}</script>
+  <style>
+    .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .card__link{color:inherit;text-decoration:none}
+    .card__link:hover,.card__link:focus-visible{text-decoration:underline}
+    .progresso-texto{margin:.5rem 0 1.25rem;font-weight:600;color:#216887}
+    .vistas{margin:0;background:#fff;border:1px solid #dbe6ec;border-radius:18px;padding:1rem}
+    .vistas__scroll{overflow-x:auto}
+    .vistas svg{display:block;width:100%;min-width:620px;height:auto}
+    .vistas a:focus-visible rect:first-child{stroke:#f3bb4d;stroke-width:3}
+    .vistas figcaption{margin-top:.75rem;font-size:.92rem;color:#617482}
+    :focus-visible{outline:3px solid #f3bb4d;outline-offset:2px}
+    @media (prefers-reduced-motion:reduce){#bar{transition:none!important}}
+  </style>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Estudos", "item": "https://wilcilene.github.io/estudos/"}, {"@type": "ListItem", "position": 2, "name": "Engenharia de Software", "item": "https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/"}, {"@type": "ListItem", "position": 3, "name": "Análise e Projeto", "item": "https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/analise-e-projeto.html"}]}, {"@type": "Course", "@id": "https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/analise-e-projeto.html#curso", "name": "Análise e Projeto — Engenharia de Software", "url": "https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/analise-e-projeto.html", "description": "Orientação a objetos, introdução a UML e os diagramas de classes, sequência, atividades e estados, com exemplos passo a passo.", "inLanguage": "pt-BR", "educationalLevel": "Ensino superior", "provider": {"@type": "Person", "name": "Wilcilene", "url": "https://wilcilene.github.io/estudos/"}, "hasCourseInstance": {"@type": "CourseInstance", "courseMode": "online", "courseWorkload": "PT4H10M"}}, {"@type": "ItemList", "name": "Os 7 assuntos do tópico", "itemListOrder": "https://schema.org/ItemListOrderAscending", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Revisão de Orientação a Objetos", "url": "https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/analise-e-projeto/orientacao-a-objetos.html"}, {"@type": "ListItem", "position": 2, "name": "Introdução a UML", "url": "https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/analise-e-projeto/introducao-uml.html"}, {"@type": "ListItem", "position": 3, "name": "Diagrama de casos de uso", "url": "https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/analise-e-projeto/diagrama-casos-de-uso.html"}, {"@type": "ListItem", "position": 4, "name": "Diagrama de classes", "url": "https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/analise-e-projeto/diagrama-classes.html"}, {"@type": "ListItem", "position": 5, "name": "Diagrama de sequência", "url": "https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/analise-e-projeto/diagrama-sequencia.html"}, {"@type": "ListItem", "position": 6, "name": "Diagrama de atividades", "url": "https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/analise-e-projeto/diagrama-atividades.html"}, {"@type": "ListItem", "position": 7, "name": "Diagrama de estados", "url": "https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/analise-e-projeto/diagrama-estados.html"}]}]}</script>
 </head>
 
 <body><a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <svg class="sr-only" width="0" height="0" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><defs><marker id="m-aberta" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L13 6 L1 11" fill="none" stroke="#102e46" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-cheia" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L13 6 L1 11 Z" fill="#102e46" stroke="#102e46" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-triangulo" viewBox="0 0 17 17" refX="15" refY="8" markerWidth="17" markerHeight="17" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L15 8 L1 15 Z" fill="#fff" stroke="#102e46" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-losango-vazio" viewBox="0 0 21 15" refX="1" refY="7" markerWidth="21" markerHeight="15" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 7 L10 1 L19 7 L10 13 Z" fill="#fff" stroke="#102e46" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-losango-cheio" viewBox="0 0 21 15" refX="1" refY="7" markerWidth="21" markerHeight="15" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 7 L10 1 L19 7 L10 13 Z" fill="#102e46" stroke="#102e46" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-aberta-hl" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L13 6 L1 11" fill="none" stroke="#c98a12" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-cheia-hl" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L13 6 L1 11 Z" fill="#c98a12" stroke="#c98a12" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-triangulo-hl" viewBox="0 0 17 17" refX="15" refY="8" markerWidth="17" markerHeight="17" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L15 8 L1 15 Z" fill="#fff" stroke="#c98a12" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-losango-vazio-hl" viewBox="0 0 21 15" refX="1" refY="7" markerWidth="21" markerHeight="15" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 7 L10 1 L19 7 L10 13 Z" fill="#fff" stroke="#c98a12" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-losango-cheio-hl" viewBox="0 0 21 15" refX="1" refY="7" markerWidth="21" markerHeight="15" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 7 L10 1 L19 7 L10 13 Z" fill="#c98a12" stroke="#c98a12" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-aberta-teal" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L13 6 L1 11" fill="none" stroke="#216887" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-cheia-teal" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L13 6 L1 11 Z" fill="#216887" stroke="#216887" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-triangulo-teal" viewBox="0 0 17 17" refX="15" refY="8" markerWidth="17" markerHeight="17" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L15 8 L1 15 Z" fill="#fff" stroke="#216887" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-losango-vazio-teal" viewBox="0 0 21 15" refX="1" refY="7" markerWidth="21" markerHeight="15" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 7 L10 1 L19 7 L10 13 Z" fill="#fff" stroke="#216887" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-losango-cheio-teal" viewBox="0 0 21 15" refX="1" refY="7" markerWidth="21" markerHeight="15" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 7 L10 1 L19 7 L10 13 Z" fill="#216887" stroke="#216887" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-aberta-red" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L13 6 L1 11" fill="none" stroke="#b23b31" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-cheia-red" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L13 6 L1 11 Z" fill="#b23b31" stroke="#b23b31" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-triangulo-red" viewBox="0 0 17 17" refX="15" refY="8" markerWidth="17" markerHeight="17" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L15 8 L1 15 Z" fill="#fff" stroke="#b23b31" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-losango-vazio-red" viewBox="0 0 21 15" refX="1" refY="7" markerWidth="21" markerHeight="15" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 7 L10 1 L19 7 L10 13 Z" fill="#fff" stroke="#b23b31" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-losango-cheio-red" viewBox="0 0 21 15" refX="1" refY="7" markerWidth="21" markerHeight="15" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 7 L10 1 L19 7 L10 13 Z" fill="#b23b31" stroke="#b23b31" stroke-width="1.4" stroke-linejoin="round"/></marker></defs></svg>
   <div class="top">
     <div class="wrap"><span>Engenharia da Computação</span><span>Tópico 04 · Análise e Projeto</span></div>
   </div>
@@ -32,23 +53,22 @@
       <nav aria-label="Navegação principal"><a class="brand" href="../">estudos<i>.</i></a>
         <ul>
           <li><a href="../">Menu da disciplina</a></li>
-          <li><a href="#trilha">Os 6 assuntos</a></li>
+          <li><a href="#trilha">Os 7 assuntos</a></li>
+          <li><a href="#vistas">Como se encaixam</a></li>
           <li><a href="#ferramenta">Astah</a></li>
         </ul>
       </nav>
       <div class="hero">
         <div class="hero__intro">
           <nav class="crumbs" aria-label="Trilha de navegação">
-            <a href="../../../../">Estudos</a><span class="sep">/</span><a href="../">Engenharia de Software</a><span
-              class="sep">/</span><span aria-current="page">Análise e Projeto</span>
+            <a href="../../../../">Estudos</a><span class="sep" aria-hidden="true">/</span><a href="../">Engenharia de Software</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Análise e Projeto</span>
           </nav>
-          <div class="eyebrow">Tópico 04 · Engenharia de Software</div>
+          <p class="eyebrow">Tópico 04 · Engenharia de Software</p>
           <h1>Análise e Projeto</h1>
           <p>Da compreensão do problema ao desenho da solução: este tópico ensina a representar um sistema em UML
             antes de escrever a primeira linha de código — e a manter o diagrama e o código conversando entre si,
-            em seis partes.</p>
-          <div class="buttons"><a class="btn" href="#trilha">Ver os 6 assuntos ↓</a><a class="btn alt"
-              href="../">Voltar ao menu da disciplina</a></div>
+            em sete partes.</p>
+          <div class="buttons"><a class="btn" href="#trilha">Ver os 7 assuntos ↓</a><a class="btn alt" href="../">Voltar ao menu da disciplina</a></div>
         </div>
       </div>
     </div>
@@ -58,88 +78,117 @@
       <section id="trilha" aria-labelledby="trilha-title">
         <div class="heading">
           <div>
-            <div class="eyebrow" style="color:var(--blue)">Escolha por onde começar</div>
-            <h2 id="trilha-title">Seis assuntos, uma trilha só</h2>
+            <p class="eyebrow" style="color:var(--blue)">Escolha por onde começar</p>
+            <h2 id="trilha-title">Sete assuntos, uma trilha só</h2>
           </div>
-          <p>Comece pela revisão de Orientação a Objetos e siga a ordem sugerida até os diagramas comportamentais.
-          </p>
+          <p>Comece pela revisão de Orientação a Objetos e siga a ordem sugerida até os diagramas comportamentais. Todos os diagramas usam o mesmo exemplo — a <strong>Cantina Online</strong>, um app de pedidos da cantina da faculdade.</p>
         </div>
-        <div class="progress" aria-label="Progresso do tópico"><span id="bar"></span></div>
+        <div class="progress" role="progressbar" aria-label="Progresso do tópico" aria-valuemin="0" aria-valuemax="7" aria-valuenow="0"><span id="bar"></span></div>
+        <p class="progresso-texto" id="progresso-texto" aria-live="polite">0 de 7 assuntos estudados</p>
         <div class="cards">
-          <article class="card"><span class="num">01</span>
-            <h3>Revisão de Orientação a Objetos</h3>
-            <p>Classes, objetos, atributos, métodos, encapsulamento e construtores — o vocabulário que sustenta
-              qualquer diagrama de UML.</p><a href="analise-e-projeto/orientacao-a-objetos.html">Abrir conteúdo
-              →</a><label class="check"><input type="checkbox"> Estudado</label>
+          <article class="card" aria-labelledby="card-1">
+            <span class="num" aria-hidden="true">01</span>
+            <h3 id="card-1"><a class="card__link" href="analise-e-projeto/orientacao-a-objetos.html">Revisão de Orientação a Objetos</a></h3>
+            <p>Classes, objetos, atributos, métodos, encapsulamento e construtores — o vocabulário que sustenta qualquer diagrama de UML.</p>
+            <div class="chip-row"><span>⏱ 40 min</span><span>Java</span><span>Encapsulamento</span><span>Desafio com solução</span></div>
+            <a href="analise-e-projeto/orientacao-a-objetos.html" aria-hidden="true" tabindex="-1">Abrir conteúdo →</a>
+            <label class="check"><input type="checkbox" data-indice="0"> Estudado<span class="sr-only">: Revisão de Orientação a Objetos</span></label>
           </article>
-          <article class="card"><span class="num">02</span>
-            <h3>Introdução a UML</h3>
-            <p>O que é a UML, por que ela virou uma linguagem comum entre equipes e quais tipos de diagrama ela
-              reúne.</p><a href="analise-e-projeto/introducao-uml.html">Abrir conteúdo →</a><label
-              class="check"><input type="checkbox"> Estudado</label>
+          <article class="card" aria-labelledby="card-2">
+            <span class="num" aria-hidden="true">02</span>
+            <h3 id="card-2"><a class="card__link" href="analise-e-projeto/introducao-uml.html">Introdução a UML</a></h3>
+            <p>O que é a UML, por que ela virou uma linguagem comum entre equipes e quais tipos de diagrama ela reúne.</p>
+            <div class="chip-row"><span>⏱ 20 min</span><span>História</span><span>13 tipos de diagrama</span><span>Notas e estereótipos</span></div>
+            <a href="analise-e-projeto/introducao-uml.html" aria-hidden="true" tabindex="-1">Abrir conteúdo →</a>
+            <label class="check"><input type="checkbox" data-indice="1"> Estudado<span class="sr-only">: Introdução a UML</span></label>
           </article>
-          <article class="card"><span class="num">03</span>
-            <h3>Diagrama de classes</h3>
-            <p>Atributos, métodos, relacionamentos e multiplicidade — do diagrama ao código gerado, e do código de
-              volta ao diagrama.</p>
-            <div class="chip-row"><span>Astah</span><span>Exportação de código</span><span>Engenharia
-                reversa</span></div><a href="analise-e-projeto/diagrama-classes.html">Abrir conteúdo →</a><label
-              class="check"><input type="checkbox"> Estudado</label>
+          <article class="card" aria-labelledby="card-3">
+            <span class="num" aria-hidden="true">03</span>
+            <h3 id="card-3"><a class="card__link" href="analise-e-projeto/diagrama-casos-de-uso.html">Diagrama de casos de uso</a></h3>
+            <p>Atores, casos de uso, include e extend — e a documentação de cada caso de uso: pré e pós-condições, fluxo principal, alternativos e regras de negócio.</p>
+            <div class="chip-row"><span>⏱ 45 min</span><span>Atores</span><span>Include e extend</span><span>Documentação de casos de uso</span></div>
+            <a href="analise-e-projeto/diagrama-casos-de-uso.html" aria-hidden="true" tabindex="-1">Abrir conteúdo →</a>
+            <label class="check"><input type="checkbox" data-indice="2"> Estudado<span class="sr-only">: Diagrama de casos de uso</span></label>
           </article>
-          <article class="card"><span class="num">04</span>
-            <h3>Diagrama de sequência</h3>
-            <p>A ordem das mensagens trocadas entre objetos ao longo do tempo, para representar um cenário de uso.
-            </p><a href="analise-e-projeto/diagrama-sequencia.html">Abrir conteúdo →</a><label class="check"><input
-                type="checkbox"> Estudado</label>
+          <article class="card" aria-labelledby="card-4">
+            <span class="num" aria-hidden="true">04</span>
+            <h3 id="card-4"><a class="card__link" href="analise-e-projeto/diagrama-classes.html">Diagrama de classes</a></h3>
+            <p>Atributos, métodos, relacionamentos e multiplicidade — do diagrama ao código gerado, e do código de volta ao diagrama.</p>
+            <div class="chip-row"><span>⏱ 45 min</span><span>Astah</span><span>Exportação de código</span><span>Engenharia reversa</span></div>
+            <a href="analise-e-projeto/diagrama-classes.html" aria-hidden="true" tabindex="-1">Abrir conteúdo →</a>
+            <label class="check"><input type="checkbox" data-indice="3"> Estudado<span class="sr-only">: Diagrama de classes</span></label>
           </article>
-          <article class="card"><span class="num">05</span>
-            <h3>Diagrama de atividades</h3>
-            <p>O fluxo de um processo ou algoritmo, com decisões, paralelismos e caminhos alternativos.</p><a
-              href="analise-e-projeto/diagrama-atividades.html">Abrir conteúdo →</a><label class="check"><input
-                type="checkbox"> Estudado</label>
+          <article class="card" aria-labelledby="card-5">
+            <span class="num" aria-hidden="true">05</span>
+            <h3 id="card-5"><a class="card__link" href="analise-e-projeto/diagrama-sequencia.html">Diagrama de sequência</a></h3>
+            <p>A ordem das mensagens trocadas entre objetos ao longo do tempo, para representar um cenário de uso.</p>
+            <div class="chip-row"><span>⏱ 35 min</span><span>Linhas de vida</span><span>Fragmentos alt/loop</span><span>Mensagens</span></div>
+            <a href="analise-e-projeto/diagrama-sequencia.html" aria-hidden="true" tabindex="-1">Abrir conteúdo →</a>
+            <label class="check"><input type="checkbox" data-indice="4"> Estudado<span class="sr-only">: Diagrama de sequência</span></label>
           </article>
-          <article class="card"><span class="num">06</span>
-            <h3>Diagrama de estados</h3>
+          <article class="card" aria-labelledby="card-6">
+            <span class="num" aria-hidden="true">06</span>
+            <h3 id="card-6"><a class="card__link" href="analise-e-projeto/diagrama-atividades.html">Diagrama de atividades</a></h3>
+            <p>O fluxo de um processo ou algoritmo, com decisões, paralelismos e caminhos alternativos.</p>
+            <div class="chip-row"><span>⏱ 30 min</span><span>Decisão e fork</span><span>Raias</span><span>Exercício</span></div>
+            <a href="analise-e-projeto/diagrama-atividades.html" aria-hidden="true" tabindex="-1">Abrir conteúdo →</a>
+            <label class="check"><input type="checkbox" data-indice="5"> Estudado<span class="sr-only">: Diagrama de atividades</span></label>
+          </article>
+          <article class="card" aria-labelledby="card-7">
+            <span class="num" aria-hidden="true">07</span>
+            <h3 id="card-7"><a class="card__link" href="analise-e-projeto/diagrama-estados.html">Diagrama de estados</a></h3>
             <p>Os estados possíveis de um objeto e os eventos que disparam a transição de um estado para outro.</p>
-            <a href="analise-e-projeto/diagrama-estados.html">Abrir conteúdo →</a><label class="check"><input
-                type="checkbox"> Estudado</label>
+            <div class="chip-row"><span>⏱ 35 min</span><span>Eventos e guardas</span><span>entry/exit</span><span>Estado composto</span></div>
+            <a href="analise-e-projeto/diagrama-estados.html" aria-hidden="true" tabindex="-1">Abrir conteúdo →</a>
+            <label class="check"><input type="checkbox" data-indice="6"> Estudado<span class="sr-only">: Diagrama de estados</span></label>
           </article>
         </div>
+      </section>
+
+      <section id="vistas" class="section-gap" aria-labelledby="vistas-title">
+        <div class="heading">
+          <div>
+            <p class="eyebrow" style="color:var(--blue)">Visão geral</p>
+            <h2 id="vistas-title">Um sistema, cinco vistas</h2>
+          </div>
+          <p>Cada diagrama responde a uma pergunta diferente sobre o mesmo sistema. Juntos, eles descrevem a estrutura e o comportamento da Cantina Online.</p>
+        </div>
+        <figure class="vistas">
+          <div class="vistas__scroll"><svg viewBox="0 0 900 430" role="img" aria-labelledby="vistas-t vistas-d" xmlns="http://www.w3.org/2000/svg"><title id="vistas-t">Um sistema, cinco vistas</title><desc id="vistas-d">O sistema Cantina Online no centro, cercado por cinco diagramas: casos de uso (quem usa o sistema e para quê), classes (do que o sistema é feito), sequência (quem chama quem), atividades (quais passos o processo segue) e estados (como um objeto muda). Cada painel é um link para a parte correspondente.</desc><rect x="360" y="150" width="180" height="60" rx="30" fill="#102e46" stroke="#102e46" stroke-width="1"/><text x="450" y="177" font-size="15" fill="#fff" text-anchor="middle" font-family="Space Grotesk, DM Sans, Arial, sans-serif" font-weight="700">Cantina Online</text><text x="450" y="196" font-size="11.5" fill="#cfe6ec" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="500">um sistema</text><path d="M360 170 L290 110" fill="none" stroke="#9fb8c4" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="5 4"/><path d="M540 170 L610 110" fill="none" stroke="#9fb8c4" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="5 4"/><path d="M360 190 L290 250" fill="none" stroke="#9fb8c4" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="5 4"/><path d="M540 190 L610 250" fill="none" stroke="#9fb8c4" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="5 4"/><a href="analise-e-projeto/diagrama-classes.html"><rect x="40" y="10" width="250" height="170" rx="14" fill="#fff" stroke="#c7dde5" stroke-width="1.5"/><rect x="40" y="10" width="250" height="34" rx="14" fill="#216887" stroke="#216887" stroke-width="1"/><rect x="40" y="30" width="250" height="14" rx="0" fill="#216887" stroke="#216887" stroke-width="0"/><text x="165" y="33" font-size="14" fill="#fff" text-anchor="middle" font-family="Space Grotesk, DM Sans, Arial, sans-serif" font-weight="700">Classes</text><rect x="60" y="56" width="70" height="50" rx="2" fill="#fff" stroke="#102e46" stroke-width="1.3"/><path d="M60 72 L130 72" fill="none" stroke="#102e46" stroke-width="1.1" stroke-linejoin="round"/><text x="95" y="68" font-size="10.5" fill="#102e46" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="700">Pedido</text><rect x="190" y="56" width="70" height="50" rx="2" fill="#fff" stroke="#102e46" stroke-width="1.3"/><path d="M190 72 L260 72" fill="none" stroke="#102e46" stroke-width="1.1" stroke-linejoin="round"/><text x="225" y="68" font-size="10.5" fill="#102e46" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="700">Item</text><path d="M130 81 L190 81" fill="none" stroke="#102e46" stroke-width="1.3" stroke-linejoin="round" marker-start="url(#m-losango-cheio)"/><text x="180" y="96" font-size="9.5" fill="#216887" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="600">1..*</text><text x="165" y="168" font-size="11.5" fill="#617482" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="600">do que o sistema é feito?</text></a><a href="analise-e-projeto/diagrama-sequencia.html"><rect x="610" y="10" width="250" height="170" rx="14" fill="#fff" stroke="#c7dde5" stroke-width="1.5"/><rect x="610" y="10" width="250" height="34" rx="14" fill="#25a6ad" stroke="#25a6ad" stroke-width="1"/><rect x="610" y="30" width="250" height="14" rx="0" fill="#25a6ad" stroke="#25a6ad" stroke-width="0"/><text x="735" y="33" font-size="14" fill="#fff" text-anchor="middle" font-family="Space Grotesk, DM Sans, Arial, sans-serif" font-weight="700">Sequência</text><rect x="645" y="50" width="60" height="22" rx="3" fill="#e3f1f4" stroke="#102e46" stroke-width="1.2"/><text x="675" y="65" font-size="10" fill="#102e46" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="600">:Tela</text><rect x="795" y="50" width="70" height="22" rx="3" fill="#e3f1f4" stroke="#102e46" stroke-width="1.2"/><text x="830" y="65" font-size="10" fill="#102e46" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="600">:Pedido</text><path d="M675 72 L675 140" fill="none" stroke="#7d8f9b" stroke-width="1.3" stroke-linejoin="round" stroke-dasharray="6 5"/><path d="M830 72 L830 140" fill="none" stroke="#7d8f9b" stroke-width="1.3" stroke-linejoin="round" stroke-dasharray="6 5"/><path d="M675 95 L830 95" fill="none" stroke="#102e46" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#m-cheia)"/><text x="752" y="89" font-size="10" fill="#15232e" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace">pagar()</text><path d="M830 120 L675 120" fill="none" stroke="#102e46" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="5 4" marker-end="url(#m-aberta)"/><text x="735" y="168" font-size="11.5" fill="#617482" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="600">quem chama quem, e quando?</text></a><a href="analise-e-projeto/diagrama-atividades.html"><rect x="40" y="250" width="250" height="170" rx="14" fill="#fff" stroke="#c7dde5" stroke-width="1.5"/><rect x="40" y="250" width="250" height="34" rx="14" fill="#2c8a63" stroke="#2c8a63" stroke-width="1"/><rect x="40" y="270" width="250" height="14" rx="0" fill="#2c8a63" stroke="#2c8a63" stroke-width="0"/><text x="165" y="273" font-size="14" fill="#fff" text-anchor="middle" font-family="Space Grotesk, DM Sans, Arial, sans-serif" font-weight="700">Atividades</text><circle cx="80" cy="333" r="5" fill="#102e46"/><path d="M88 333 L104 333" fill="none" stroke="#102e46" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#m-aberta)"/><rect x="104" y="320" width="70" height="26" rx="10" fill="#fff" stroke="#102e46" stroke-width="1.3"/><text x="139" y="337" font-size="10.5" fill="#15232e" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="500">Pagar</text><path d="M174 333 L196 333" fill="none" stroke="#102e46" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#m-aberta)"/><path d="M208 321 L220 333 L208 345 L196 333 Z" fill="#fff" stroke="#102e46" stroke-width="1.6"/><path d="M220 333 L244 333" fill="none" stroke="#102e46" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#m-aberta)"/><circle cx="256" cy="333" r="9" fill="#fff" stroke="#102e46" stroke-width="1.8"/><circle cx="256" cy="333" r="5" fill="#102e46"/><text x="165" y="408" font-size="11.5" fill="#617482" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="600">quais passos o processo segue?</text></a><a href="analise-e-projeto/diagrama-estados.html"><rect x="610" y="250" width="250" height="170" rx="14" fill="#fff" stroke="#c7dde5" stroke-width="1.5"/><rect x="610" y="250" width="250" height="34" rx="14" fill="#c98a12" stroke="#c98a12" stroke-width="1"/><rect x="610" y="270" width="250" height="14" rx="0" fill="#c98a12" stroke="#c98a12" stroke-width="0"/><text x="735" y="273" font-size="14" fill="#fff" text-anchor="middle" font-family="Space Grotesk, DM Sans, Arial, sans-serif" font-weight="700">Estados</text><rect x="640" y="320" width="80" height="30" rx="12" fill="#fff" stroke="#102e46" stroke-width="1.3"/><text x="680" y="339" font-size="10.5" fill="#102e46" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="700">Aberto</text><path d="M720 335 L768 335" fill="none" stroke="#102e46" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#m-aberta)"/><text x="744" y="328" font-size="9.5" fill="#216887" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-weight="600">pagar</text><rect x="768" y="320" width="80" height="30" rx="12" fill="#fff" stroke="#102e46" stroke-width="1.3"/><text x="808" y="339" font-size="10.5" fill="#102e46" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="700">Pago</text><text x="735" y="408" font-size="11.5" fill="#617482" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="600">como um objeto muda?</text></a><path d="M450 210 L450 250" fill="none" stroke="#9fb8c4" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="5 4"/><a href="analise-e-projeto/diagrama-casos-de-uso.html"><rect x="325" y="250" width="250" height="170" rx="14" fill="#fff" stroke="#c7dde5" stroke-width="1.5"/><rect x="325" y="250" width="250" height="34" rx="14" fill="#5b5ea6" stroke="#5b5ea6" stroke-width="1"/><rect x="325" y="270" width="250" height="14" rx="0" fill="#5b5ea6" stroke="#5b5ea6" stroke-width="0"/><text x="450" y="273" font-size="14" fill="#fff" text-anchor="middle" font-family="Space Grotesk, DM Sans, Arial, sans-serif" font-weight="700">Casos de uso</text><circle cx="385" cy="314" r="9" fill="#fff" stroke="#102e46" stroke-width="1.6"/><path d="M385 323 L385 345" fill="none" stroke="#102e46" stroke-width="1.6" stroke-linejoin="round"/><path d="M371 331 L399 331" fill="none" stroke="#102e46" stroke-width="1.6" stroke-linejoin="round"/><path d="M373 361 L385 345 L397 361" fill="none" stroke="#102e46" stroke-width="1.6" stroke-linejoin="round"/><text x="385" y="379" font-size="12.5" fill="#102e46" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="600"></text><path d="M402 330 L440 330" fill="none" stroke="#102e46" stroke-width="1.3" stroke-linejoin="round"/><ellipse cx="500" cy="330" rx="62" ry="20" fill="#fff" stroke="#102e46" stroke-width="1.3"/><text x="500" y="334" font-size="10.5" fill="#15232e" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="600">Fazer pedido</text><text x="450" y="408" font-size="11.5" fill="#617482" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="600">quem usa, e para quê?</text></a></svg></div>
+          <figcaption>Clique em um painel para abrir a parte correspondente. Os casos de uso dão origem aos outros quatro diagramas; os eventos do diagrama de estados são operações do diagrama de classes, que aparecem como mensagens no diagrama de sequência.</figcaption>
+        </figure>
       </section>
 
       <section id="ferramenta" class="section-gap" aria-labelledby="ferramenta-title">
         <div class="heading">
           <div>
-            <div class="eyebrow" style="color:var(--blue)">Modelagem na prática</div>
+            <p class="eyebrow" style="color:var(--blue)">Modelagem na prática</p>
             <h2 id="ferramenta-title">Uma ferramenta, dois sentidos</h2>
           </div>
           <p>A partir do diagrama de classes, a disciplina explora a Astah como apoio à modelagem.</p>
         </div>
         <div class="duo">
           <div>
-            <h4>Do diagrama para o código</h4>
+            <h3>Do diagrama para o código</h3>
             <p>Depois de modelar classes, atributos, métodos e relacionamentos, a Astah gera automaticamente a
-              estrutura de projeto e as classes correspondentes — economizando a digitação do "esqueleto" do
-              código.</p>
+              estrutura de projeto e as classes correspondentes — economizando a digitação do “esqueleto” do
+              código. <a href="analise-e-projeto/diagrama-classes.html#astah">Veja o passo a passo</a>.</p>
           </div>
           <div>
-            <h4>Do código para o diagrama (engenharia reversa)</h4>
+            <h3>Do código para o diagrama (engenharia reversa)</h3>
             <p>O caminho inverso também é possível: a partir de um código-fonte já existente, a ferramenta
-              reconstrói o diagrama de classes correspondente — útil para entender ou documentar um sistema legado.
-            </p>
+              reconstrói o diagrama de classes correspondente — útil para entender ou documentar um sistema legado.</p>
           </div>
         </div>
       </section>
 
-      <section class="section-gap" aria-labelledby="pager-title">
-        <h2 id="pager-title" style="position:absolute;left:-999px">Navegação entre tópicos</h2>
+      <nav class="section-gap" aria-labelledby="pager-title">
+        <h2 id="pager-title" class="sr-only">Navegação entre tópicos</h2>
         <div class="materials">
-          <a class="material" href="../requisitos.html"><small>← TÓPICO ANTERIOR</small>Especificação de
-            requisitos</a>
-          <a class="material material--next" href="../fundamentos.md#testes"><small>PRÓXIMO TÓPICO →</small>Implementação,
-            depuração e testes</a>
+          <a class="material" href="../requisitos.html" rel="prev"><small>← TÓPICO ANTERIOR</small>Especificação de requisitos</a>
+          <a class="material material--next" href="../fundamentos.md#testes" rel="next"><small>PRÓXIMO TÓPICO →</small>Implementação, depuração e testes</a>
         </div>
-      </section>
+      </nav>
     </div>
   </main>
   <footer>
@@ -148,7 +197,38 @@
       <p>Material de acompanhamento do semestre · <a href="../">Voltar ao menu da disciplina</a></p>
     </div>
   </footer>
-  <script>const checks = [...document.querySelectorAll('.check input')], key = 'es-analise-projeto-progresso'; const saved = JSON.parse(localStorage.getItem(key) || '[]'); checks.forEach((c, i) => { c.checked = !!saved[i]; c.addEventListener('change', () => { localStorage.setItem(key, JSON.stringify(checks.map(x => x.checked))); update() }) }); function update() { document.querySelector('#bar').style.width = (checks.filter(x => x.checked).length / checks.length * 100) + '%' } update();</script>
+  <script>
+    (function () {
+      var chave = 'es-analise-projeto-progresso-v2';
+      var caixas = Array.prototype.slice.call(document.querySelectorAll('.check input'));
+      var barra = document.getElementById('bar');
+      var progresso = document.querySelector('.progress');
+      var texto = document.getElementById('progresso-texto');
+      function ler() {
+        try {
+          var v2 = localStorage.getItem(chave);
+          if (v2) { return JSON.parse(v2); }
+          /* migra o progresso da versão com 6 assuntos: casos de uso entrou na posição 3 */
+          var antigo = JSON.parse(localStorage.getItem('es-analise-projeto-progresso') || '[]');
+          if (antigo.length) { antigo.splice(2, 0, false); }
+          return antigo;
+        } catch (e) { return []; }
+      }
+      function gravar() { try { localStorage.setItem(chave, JSON.stringify(caixas.map(function (c) { return c.checked; }))); } catch (e) { } }
+      function atualizar() {
+        var feitos = caixas.filter(function (c) { return c.checked; }).length;
+        barra.style.width = (feitos / caixas.length * 100) + '%';
+        progresso.setAttribute('aria-valuenow', feitos);
+        texto.textContent = feitos === caixas.length ? 'Todos os ' + caixas.length + ' assuntos estudados. Parabéns!' : feitos + ' de ' + caixas.length + ' assuntos estudados';
+      }
+      var salvo = ler();
+      caixas.forEach(function (c, i) {
+        c.checked = !!salvo[i];
+        c.addEventListener('change', function () { gravar(); atualizar(); });
+      });
+      atualizar();
+    })();
+  </script>
 </body>
 
 </html>

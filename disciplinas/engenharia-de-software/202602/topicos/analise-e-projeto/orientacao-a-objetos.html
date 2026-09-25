@@ -1,443 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Orientação a Objetos — Revisão da Aula</title>
-<meta name="description" content="Revisão didática de Orientação a Objetos em Java: classes, objetos, atributos, métodos, encapsulamento e construtores, com exemplos comentados e diagramas.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --paper:#F7F8F6;
-    --paper-panel:#FFFFFF;
-    --ink:#16233A;
-    --ink-soft:#4B5872;
-    --ink-faint:#8792A3;
-    --blue:#1F5C8B;
-    --blue-deep:#0F3A57;
-    --blue-pale:#E7EFF6;
-    --blue-line:#BFD3E3;
-    --amber:#B5701C;
-    --amber-pale:#F7ECDA;
-    --green:#2C7A5B;
-    --green-pale:#E5F1EB;
-    --red:#AD3B34;
-    --red-pale:#F8E8E6;
-    --line:#DBE1E8;
-    --code-bg:#0D2436;
-    --code-text:#DCE8F0;
-    --code-line:#1B3B54;
-    --radius:10px;
-    --maxw:740px;
-  }
-
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'IBM Plex Sans', sans-serif;
-    font-size:17px;
-    line-height:1.65;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3,h4{
-    font-family:'Fraunces', serif;
-    color:var(--blue-deep);
-    line-height:1.2;
-    margin:0 0 .5em;
-    font-weight:600;
-  }
-  p{margin:0 0 1.1em;}
-  a{color:var(--blue);}
-  ul,ol{padding-left:1.3em;}
-  li{margin-bottom:.4em;}
-  code{
-    font-family:'IBM Plex Mono', monospace;
-    background:var(--blue-pale);
-    color:var(--blue-deep);
-    padding:.12em .38em;
-    border-radius:5px;
-    font-size:.9em;
-  }
-  strong{color:var(--ink);}
-  img,svg{max-width:100%;}
-
-  /* ---------- progress bar ---------- */
-  #progress{
-    position:fixed; top:0; left:0; height:3px; width:0%;
-    background:var(--amber); z-index:200; transition:width .1s linear;
-  }
-
-  /* ---------- top bar (mobile) ---------- */
-  .topbar{
-    display:none;
-    position:sticky; top:0; z-index:150;
-    background:var(--blue-deep); color:#fff;
-    padding:.85rem 1.1rem;
-    align-items:center; justify-content:space-between;
-    font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem;
-  }
-  .topbar button{
-    background:none; border:1px solid rgba(255,255,255,.4);
-    color:#fff; border-radius:8px; padding:.4rem .7rem;
-    font-family:inherit; font-size:.95rem; cursor:pointer;
-  }
-
-  /* ---------- layout ---------- */
-  .layout{
-    display:grid;
-    grid-template-columns:250px minmax(0,1fr);
-    max-width:1180px;
-    margin:0 auto;
-  }
-  nav.toc{
-    position:sticky; top:0; align-self:start; height:100vh;
-    overflow-y:auto;
-    background:var(--blue-deep);
-    color:#DCE6EF;
-    padding:2.1rem 1.4rem 2rem;
-  }
-  nav.toc .brand{
-    font-family:'Fraunces', serif; font-weight:600; color:#fff;
-    font-size:1.15rem; margin-bottom:1.6rem; display:block;
-  }
-  nav.toc .brand span{display:block; font-size:.75rem; font-weight:400; color:#9FB4C8; margin-top:.25rem; font-family:'IBM Plex Sans',sans-serif;}
-  nav.toc ol{list-style:none; padding:0; margin:0; counter-reset:sec;}
-  nav.toc li{margin-bottom:0;}
-  nav.toc a{
-    counter-increment:sec;
-    display:block;
-    color:#B9CADA;
-    text-decoration:none;
-    font-size:.88rem;
-    padding:.5rem .5rem .5rem 1.6rem;
-    border-left:2px solid transparent;
-    position:relative;
-    line-height:1.35;
-  }
-  nav.toc a::before{
-    content: counter(sec, decimal-leading-zero);
-    position:absolute; left:0; top:.5rem;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:.72rem; color:#5E7A93;
-  }
-  nav.toc a:hover{color:#fff;}
-  nav.toc a.active{
-    color:#fff; border-left-color:var(--amber);
-    background:rgba(255,255,255,.05);
-  }
-
-  main{
-    padding:0 2.6rem 5rem;
-    min-width:0;
-  }
-  .content-inner{max-width:var(--maxw); margin:0 auto;}
-
-  /* ---------- hero ---------- */
-  .hero{
-    max-width:960px; margin:0 auto;
-    padding:4.4rem 2.6rem 1rem;
-  }
-  .hero h1{font-size:clamp(2.2rem, 5vw, 3.1rem); max-width:14ch;}
-  .hero .lede{
-    font-size:1.18rem; color:var(--ink-soft); max-width:56ch;
-    margin-bottom:1.8rem;
-  }
-  .hero .tags{
-    display:flex; flex-wrap:wrap; gap:.5rem;
-    margin-bottom:2.6rem;
-  }
-  .hero .tags span{
-    font-size:.78rem; color:var(--blue-deep);
-    background:var(--blue-pale); border:1px solid var(--blue-line);
-    padding:.32rem .7rem; border-radius:999px;
-  }
-  .hero-diagram{
-    background:var(--paper-panel);
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:1.4rem 1.2rem .6rem;
-  }
-  .hero-diagram figcaption{
-    font-size:.86rem; color:var(--ink-soft); text-align:center;
-    padding:.7rem 0 .3rem; font-style:italic;
-  }
-
-  /* ---------- sections ---------- */
-  section{
-    padding:3.2rem 0;
-    border-top:1px solid var(--line);
-  }
-  section:first-of-type{border-top:none;}
-  .kicker{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:.78rem; color:var(--blue);
-    letter-spacing:.02em;
-    margin-bottom:.6rem;
-  }
-  h2{font-size:1.65rem;}
-  h3{font-size:1.22rem; margin-top:1.6rem;}
-
-  /* ---------- callouts ---------- */
-  .box{
-    border-radius:var(--radius);
-    padding:1.1rem 1.3rem;
-    margin:1.5rem 0;
-    border-left:3px solid var(--blue);
-    background:var(--blue-pale);
-  }
-  .box p:last-child{margin-bottom:0;}
-  .box .label{
-    font-weight:600; color:var(--blue-deep);
-    display:block; margin-bottom:.35rem; font-size:.92rem;
-  }
-  .box.dica{border-left-color:var(--green); background:var(--green-pale);}
-  .box.dica .label{color:var(--green);}
-  .box.atencao{border-left-color:var(--red); background:var(--red-pale);}
-  .box.atencao .label{color:var(--red);}
-  .box.contexto{border-left-color:var(--amber); background:var(--amber-pale);}
-  .box.contexto .label{color:var(--amber);}
-
-  /* ---------- code ---------- */
-  .codeblock{
-    margin:1.4rem 0; border-radius:12px; overflow:hidden;
-    border:1px solid var(--code-line);
-  }
-  .codeblock .tab{
-    background:#0A1D2C; color:#8FAFC6;
-    font-family:'IBM Plex Mono', monospace; font-size:.78rem;
-    padding:.55rem 1rem;
-    border-bottom:1px solid var(--code-line);
-    display:flex; justify-content:space-between;
-  }
-  .codeblock pre{
-    margin:0; padding:1.15rem 1.3rem;
-    background:var(--code-bg); color:var(--code-text);
-    overflow-x:auto;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:.87rem; line-height:1.6;
-  }
-  .codeblock code{background:none; color:inherit; padding:0; font-size:1em;}
-  .tk-kw{color:#7FB4E8;}
-  .tk-tp{color:#9BD6C4;}
-  .tk-str{color:#E3B978;}
-  .tk-cm{color:#6E86A0; font-style:italic;}
-  .tk-mt{color:#D8A6D8;}
-
-  .output{
-    margin:1rem 0 1.4rem; border-radius:10px;
-    border:1px dashed var(--ink-faint);
-    background:#FCFCFA;
-    padding:1rem 1.3rem;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:.86rem; color:var(--ink-soft);
-  }
-  .output .tab{
-    font-family:'IBM Plex Sans', sans-serif; font-size:.75rem;
-    color:var(--ink-faint); margin-bottom:.5rem; font-style:italic;
-  }
-
-  /* ---------- table ---------- */
-  table{
-    width:100%; border-collapse:collapse; margin:1.4rem 0;
-    font-size:.92rem;
-  }
-  th,td{
-    text-align:left; padding:.6rem .8rem;
-    border-bottom:1px solid var(--line);
-    vertical-align:top;
-  }
-  th{color:var(--blue-deep); font-family:'IBM Plex Sans',sans-serif; font-weight:600; font-size:.82rem;}
-  td code{white-space:nowrap;}
-
-  /* ---------- details / accordions ---------- */
-  details{
-    border:1px solid var(--line); border-radius:10px;
-    padding:.85rem 1.1rem; margin:.9rem 0;
-    background:var(--paper-panel);
-  }
-  details summary{
-    cursor:pointer; font-weight:600; color:var(--blue-deep);
-    list-style:none; display:flex; align-items:center; gap:.5rem;
-  }
-  details summary::-webkit-details-marker{display:none;}
-  details summary::before{
-    content:"+"; display:inline-block; width:1.1em; text-align:center;
-    color:var(--blue); font-weight:700;
-  }
-  details[open] summary::before{content:"–";}
-  details > *:not(summary){margin-top:.9rem;}
-
-  /* ---------- checklist ---------- */
-  .checklist{list-style:none; padding:0;}
-  .checklist li{
-    padding-left:1.7rem; position:relative; margin-bottom:.6rem;
-  }
-  .checklist li::before{
-    content:""; position:absolute; left:0; top:.32em;
-    width:.85em; height:.85em; border:1.5px solid var(--blue);
-    border-radius:3px;
-  }
-
-  /* ---------- glossary ---------- */
-  .glossary{display:grid; grid-template-columns:1fr; gap:.9rem; margin:1.4rem 0;}
-  .glossary dt{
-    font-family:'IBM Plex Mono', monospace; color:var(--blue-deep);
-    font-weight:600; font-size:.95rem;
-  }
-  .glossary dd{margin:.2rem 0 0; color:var(--ink-soft);}
-
-  /* ---------- footer ---------- */
-  footer{
-    border-top:1px solid var(--line);
-    padding:2.4rem 0 1rem;
-    font-size:.86rem; color:var(--ink-faint);
-  }
-
-  figure{margin:1.6rem 0;}
-  figcaption{font-size:.85rem; color:var(--ink-soft); text-align:center; margin-top:.7rem; font-style:italic;}
-
-  @media (max-width:900px){
-    .layout{grid-template-columns:1fr;}
-    nav.toc{
-      position:fixed; inset:0 20% 0 0; height:100vh; z-index:140;
-      transform:translateX(-100%); transition:transform .25s ease;
-      box-shadow:8px 0 24px rgba(0,0,0,.25);
-    }
-    nav.toc.open{transform:translateX(0);}
-    .topbar{display:flex;}
-    main{padding:0 1.2rem 4rem;}
-    .hero{padding:2.4rem 1.2rem 1rem;}
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    nav.toc{transition:none;}
-  }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Revisão de Orientação a Objetos em Java: classes, objetos e encapsulamento | Análise e Projeto | Engenharia de Software</title>
+  <meta name="description" content="Revisão didática de Orientação a Objetos em Java: classes, objetos, atributos, métodos, encapsulamento e construtores, com exemplos comentados, diagramas e um desafio com solução.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#102e46">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/analise-e-projeto/orientacao-a-objetos.html">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Estudos · Engenharia da Computação">
+  <meta property="og:title" content="Revisão de Orientação a Objetos em Java: classes, objetos e encapsulamento | Engenharia de Software">
+  <meta property="og:description" content="Revisão didática de Orientação a Objetos em Java: classes, objetos, atributos, métodos, encapsulamento e construtores, com exemplos comentados, diagramas e um desafio com solução.">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/analise-e-projeto/orientacao-a-objetos.html">
+  <meta property="og:image" content="https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/assets/img/og-analise-e-projeto.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Análise e Projeto com UML — Engenharia de Software">
+  <meta property="article:modified_time" content="2026-09-25">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/topicos.css">
+  <script src="../assets/js/topicos.js" defer></script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Estudos", "item": "https://wilcilene.github.io/estudos/"}, {"@type": "ListItem", "position": 2, "name": "Engenharia de Software", "item": "https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/"}, {"@type": "ListItem", "position": 3, "name": "Análise e Projeto", "item": "https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/analise-e-projeto.html"}, {"@type": "ListItem", "position": 4, "name": "Revisão de Orientação a Objetos", "item": "https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/analise-e-projeto/orientacao-a-objetos.html"}]}, {"@type": "LearningResource", "@id": "https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/analise-e-projeto/orientacao-a-objetos.html#aula", "name": "Revisão de Orientação a Objetos", "headline": "Revisão de Orientação a Objetos em Java: classes, objetos e encapsulamento", "description": "Revisão didática de Orientação a Objetos em Java: classes, objetos, atributos, métodos, encapsulamento e construtores, com exemplos comentados, diagramas e um desafio com solução.", "url": "https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/analise-e-projeto/orientacao-a-objetos.html", "inLanguage": "pt-BR", "learningResourceType": "Aula", "educationalLevel": "Ensino superior", "teaches": ["Orientação a objetos", "Classes e objetos em Java", "Encapsulamento", "Construtores", "Getters e setters"], "dateModified": "2026-09-25", "image": "https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/topicos/assets/img/og-analise-e-projeto.png", "isPartOf": {"@type": "Course", "name": "Engenharia de Software", "url": "https://wilcilene.github.io/estudos/disciplinas/engenharia-de-software/202602/", "description": "Disciplina de Engenharia de Software do curso de Engenharia da Computação."}, "citation": [{"@type": "WebPage", "name": "The Java Tutorials: Classes and Objects", "url": "https://docs.oracle.com/javase/tutorial/java/javaOO/index.html"}, {"@type": "CreativeWork", "name": "OMG Unified Modeling Language, versão 2.5.1", "url": "https://www.omg.org/spec/UML/2.5.1/"}]}]}</script>
 </head>
+
 <body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <svg class="sr-only" width="0" height="0" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><defs><marker id="m-aberta" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L13 6 L1 11" fill="none" stroke="#102e46" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-cheia" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L13 6 L1 11 Z" fill="#102e46" stroke="#102e46" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-triangulo" viewBox="0 0 17 17" refX="15" refY="8" markerWidth="17" markerHeight="17" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L15 8 L1 15 Z" fill="#fff" stroke="#102e46" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-losango-vazio" viewBox="0 0 21 15" refX="1" refY="7" markerWidth="21" markerHeight="15" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 7 L10 1 L19 7 L10 13 Z" fill="#fff" stroke="#102e46" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-losango-cheio" viewBox="0 0 21 15" refX="1" refY="7" markerWidth="21" markerHeight="15" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 7 L10 1 L19 7 L10 13 Z" fill="#102e46" stroke="#102e46" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-aberta-hl" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L13 6 L1 11" fill="none" stroke="#c98a12" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-cheia-hl" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L13 6 L1 11 Z" fill="#c98a12" stroke="#c98a12" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-triangulo-hl" viewBox="0 0 17 17" refX="15" refY="8" markerWidth="17" markerHeight="17" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L15 8 L1 15 Z" fill="#fff" stroke="#c98a12" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-losango-vazio-hl" viewBox="0 0 21 15" refX="1" refY="7" markerWidth="21" markerHeight="15" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 7 L10 1 L19 7 L10 13 Z" fill="#fff" stroke="#c98a12" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-losango-cheio-hl" viewBox="0 0 21 15" refX="1" refY="7" markerWidth="21" markerHeight="15" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 7 L10 1 L19 7 L10 13 Z" fill="#c98a12" stroke="#c98a12" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-aberta-teal" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L13 6 L1 11" fill="none" stroke="#216887" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-cheia-teal" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L13 6 L1 11 Z" fill="#216887" stroke="#216887" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-triangulo-teal" viewBox="0 0 17 17" refX="15" refY="8" markerWidth="17" markerHeight="17" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L15 8 L1 15 Z" fill="#fff" stroke="#216887" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-losango-vazio-teal" viewBox="0 0 21 15" refX="1" refY="7" markerWidth="21" markerHeight="15" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 7 L10 1 L19 7 L10 13 Z" fill="#fff" stroke="#216887" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-losango-cheio-teal" viewBox="0 0 21 15" refX="1" refY="7" markerWidth="21" markerHeight="15" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 7 L10 1 L19 7 L10 13 Z" fill="#216887" stroke="#216887" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-aberta-red" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L13 6 L1 11" fill="none" stroke="#b23b31" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-cheia-red" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L13 6 L1 11 Z" fill="#b23b31" stroke="#b23b31" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-triangulo-red" viewBox="0 0 17 17" refX="15" refY="8" markerWidth="17" markerHeight="17" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L15 8 L1 15 Z" fill="#fff" stroke="#b23b31" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-losango-vazio-red" viewBox="0 0 21 15" refX="1" refY="7" markerWidth="21" markerHeight="15" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 7 L10 1 L19 7 L10 13 Z" fill="#fff" stroke="#b23b31" stroke-width="1.4" stroke-linejoin="round"/></marker><marker id="m-losango-cheio-red" viewBox="0 0 21 15" refX="1" refY="7" markerWidth="21" markerHeight="15" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 7 L10 1 L19 7 L10 13 Z" fill="#b23b31" stroke="#b23b31" stroke-width="1.4" stroke-linejoin="round"/></marker></defs></svg>
 
-<div id="progress"></div>
-
-<div class="topbar">
-  <span>Orientação a Objetos</span>
-  <button id="navBtn" aria-expanded="false" aria-controls="tocNav">Sumário</button>
-</div>
-
-<div class="layout">
-
-  <nav class="toc" id="tocNav" aria-label="Sumário da aula">
-    <a class="brand" href="#inicio">Orientação a Objetos<span>revisão de aula · Java</span></a>
-    <ol>
-      <li><a href="#motivacao">Por que Orientação a Objetos</a></li>
-      <li><a href="#classes-objetos">Classes e objetos</a></li>
-      <li><a href="#anatomia-classe">Anatomia de uma classe</a></li>
-      <li><a href="#atributos">Atributos: o estado</a></li>
-      <li><a href="#metodos">Métodos: o comportamento</a></li>
-      <li><a href="#instanciar">Instanciando com <code style="background:none;color:inherit;padding:0">new</code></a></li>
-      <li><a href="#encapsulamento">Encapsulamento</a></li>
-      <li><a href="#construtores">Construtores</a></li>
-      <li><a href="#main">O método main</a></li>
-      <li><a href="#exemplo-completo">Exemplo completo</a></li>
-      <li><a href="#desafio">Desafio: classe Estudante</a></li>
-      <li><a href="#erros-comuns">Erros comuns</a></li>
-      <li><a href="#resumo">Resumo e autoteste</a></li>
-      <li><a href="#proximos-passos">Próximos passos</a></li>
-      <li><a href="#referencias">Referências</a></li>
-    </ol>
-  </nav>
-
-  <main>
-    <div class="hero" id="inicio">
-      <h1>Orientação a Objetos</h1>
-      <p class="lede">Você já sabe pensar em lógica: variáveis, condições, laços, funções. Esta revisão mostra como reorganizar esse raciocínio em <strong>classes e objetos</strong> — a base de tudo o que vem depois em Java.</p>
-      <div class="tags">
-        <span>Classes e objetos</span>
-        <span>Atributos e métodos</span>
-        <span>Encapsulamento</span>
-        <span>Construtores</span>
-        <span>Java</span>
-      </div>
-
-      <figure class="hero-diagram">
-        <svg viewBox="0 0 920 440" role="img" aria-labelledby="diagA-title diagA-desc">
-          <title id="diagA-title">Da planta baixa às casas construídas</title>
-          <desc id="diagA-desc">Uma classe Casa funciona como uma planta baixa: a partir dela, o comando new cria vários objetos-casa independentes, cada um com seus próprios valores de cor e número de quartos.</desc>
-          <defs>
-            <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M1 1L8 5L1 9" fill="none" stroke="#1F5C8B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </marker>
-          </defs>
-
-          <rect x="30" y="30" width="340" height="380" rx="12" fill="#EAF1F8" stroke="#1F5C8B" stroke-width="1.5" stroke-dasharray="7 5"/>
-          <text x="200" y="65" text-anchor="middle" font-family="Fraunces, serif" font-weight="600" font-size="21" fill="#0F3A57">Classe Casa</text>
-          <line x1="55" y1="80" x2="345" y2="80" stroke="#BFD3E3" stroke-width="1"/>
-
-          <text x="55" y="103" font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="#4B5872" font-weight="600">Atributos</text>
-          <text x="55" y="123" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#16233A">- cor</text>
-          <text x="55" y="141" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#16233A">- nQuartos</text>
-          <text x="55" y="159" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#16233A">- luzAcesa</text>
-
-          <text x="215" y="103" font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="#4B5872" font-weight="600">Métodos</text>
-          <text x="215" y="123" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#16233A">+ abrirPorta()</text>
-          <text x="215" y="141" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#16233A">+ acenderLuz()</text>
-
-          <polygon points="130,290 200,235 270,290" fill="none" stroke="#1F5C8B" stroke-width="1.6"/>
-          <rect x="140" y="290" width="120" height="80" fill="none" stroke="#1F5C8B" stroke-width="1.6"/>
-          <rect x="185" y="325" width="30" height="45" fill="none" stroke="#1F5C8B" stroke-width="1.3"/>
-          <rect x="155" y="305" width="16" height="16" fill="none" stroke="#1F5C8B" stroke-width="1.3"/>
-          <rect x="229" y="305" width="16" height="16" fill="none" stroke="#1F5C8B" stroke-width="1.3"/>
-          <text x="200" y="397" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-style="italic" font-size="12" fill="#1F5C8B">molde — nunca é habitada</text>
-
-          <text x="415" y="72" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#0F3A57">new Casa(...)</text>
-          <line x1="372" y1="95" x2="458" y2="95" stroke="#1F5C8B" stroke-width="1.4" marker-end="url(#arrowBlue)"/>
-          <line x1="372" y1="225" x2="458" y2="225" stroke="#1F5C8B" stroke-width="1.4" marker-end="url(#arrowBlue)"/>
-          <line x1="372" y1="355" x2="458" y2="355" stroke="#1F5C8B" stroke-width="1.4" marker-end="url(#arrowBlue)"/>
-
-          <g>
-            <rect x="460" y="40" width="430" height="110" rx="10" fill="#FFFFFF" stroke="#DBE1E8"/>
-            <polygon points="500,86 535,58 570,86" fill="#E8B84A" stroke="#16233A" stroke-width="1.2"/>
-            <rect x="500" y="86" width="70" height="45" fill="#E8B84A" stroke="#16233A" stroke-width="1.2"/>
-            <rect x="522" y="106" width="16" height="25" fill="#FAFAF7" stroke="#16233A" stroke-width="1"/>
-            <text x="590" y="80" font-family="IBM Plex Sans, sans-serif" font-weight="700" font-size="15" fill="#16233A">objCasa1</text>
-            <text x="590" y="102" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#4B5872">cor = "amarela"</text>
-            <text x="590" y="120" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#4B5872">nQuartos = 3</text>
-          </g>
-
-          <g>
-            <rect x="460" y="170" width="430" height="110" rx="10" fill="#FFFFFF" stroke="#DBE1E8"/>
-            <polygon points="500,216 535,188 570,216" fill="#4C86B0" stroke="#16233A" stroke-width="1.2"/>
-            <rect x="500" y="216" width="70" height="45" fill="#4C86B0" stroke="#16233A" stroke-width="1.2"/>
-            <rect x="522" y="236" width="16" height="25" fill="#FAFAF7" stroke="#16233A" stroke-width="1"/>
-            <text x="590" y="210" font-family="IBM Plex Sans, sans-serif" font-weight="700" font-size="15" fill="#16233A">objCasa2</text>
-            <text x="590" y="232" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#4B5872">cor = "azul"</text>
-            <text x="590" y="250" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#4B5872">nQuartos = 2</text>
-          </g>
-
-          <g>
-            <rect x="460" y="300" width="430" height="110" rx="10" fill="#FFFFFF" stroke="#DBE1E8"/>
-            <polygon points="500,346 535,318 570,346" fill="#C1571F" stroke="#16233A" stroke-width="1.2"/>
-            <rect x="500" y="346" width="70" height="45" fill="#C1571F" stroke="#16233A" stroke-width="1.2"/>
-            <rect x="522" y="366" width="16" height="25" fill="#FAFAF7" stroke="#16233A" stroke-width="1"/>
-            <text x="590" y="340" font-family="IBM Plex Sans, sans-serif" font-weight="700" font-size="15" fill="#16233A">objCasa3</text>
-            <text x="590" y="362" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#4B5872">cor = "vermelha"</text>
-            <text x="590" y="380" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#4B5872">nQuartos = 4</text>
-          </g>
-        </svg>
-        <figcaption>“As classes estão para os objetos assim como as plantas arquitetônicas estão para as casas.” A mesma planta gera várias casas — cada uma com sua própria cor e número de quartos.</figcaption>
-      </figure>
+  <header class="topic-header">
+    <div class="wrap">
+      <nav class="topic-breadcrumb topic-breadcrumb--auto" aria-label="Trilha de navegação">
+        <ol>
+          <li><a href="../../../../../">Estudos</a></li>
+          <li><a href="../../">Engenharia de Software</a></li>
+          <li><a href="../analise-e-projeto.html">Análise e Projeto</a></li>
+          <li aria-current="page">Revisão de Orientação a Objetos</li>
+        </ol>
+      </nav>
+      <p class="topic-kicker">Análise e Projeto · Parte 1 de 7</p>
+      <h1>Revisão de Orientação a Objetos</h1>
+      <p class="topic-dek">Você já sabe pensar em lógica: variáveis, condições, laços, funções. Esta revisão mostra como reorganizar esse raciocínio em classes e objetos — a base de tudo o que vem depois em Java e em UML.</p>
+      <ul class="topic-meta" aria-label="Sobre esta parte"><li>⏱ cerca de 40 min</li><li>Linguagem: Java</li><li>Inclui desafio com solução</li></ul>
     </div>
+  </header>
 
-    <div class="content-inner">
+  <div class="topic-layout">
+    <aside class="topic-toc">
+      <details class="topic-toc__summary" open>
+        <summary>Nesta página <span class="chevron" aria-hidden="true">▸</span></summary>
+        <nav aria-label="Sumário do conteúdo">
+          <ol><li><a href="#motivacao">Por que OO?</a></li><li><a href="#classes-objetos">Classes e objetos</a></li><li><a href="#anatomia-classe">Anatomia de uma classe</a></li><li><a href="#atributos">Atributos</a></li><li><a href="#metodos">Métodos</a></li><li><a href="#instanciar">Instanciando com new</a></li><li><a href="#encapsulamento">Encapsulamento</a></li><li><a href="#construtores">Construtores</a></li><li><a href="#main">O método main</a></li><li><a href="#exemplo-completo">Exemplo completo</a></li><li><a href="#desafio">Desafio prático</a></li><li><a href="#erros-comuns">Erros comuns</a></li><li><a href="#do-codigo-ao-diagrama">Do código à UML</a></li><li><a href="#resumo">Resumo e autoteste</a></li><li><a href="#referencias">Referências</a></li></ol>
+        </nav>
+      </details>
+      <p class="topic-toc__back"><a href="../analise-e-projeto.html">← Voltar aos 7 assuntos do tópico</a></p>
+    </aside>
 
-      <section id="motivacao">
-        <p class="kicker">01</p>
-        <h2>Por que Orientação a Objetos?</h2>
+    <main class="topic-content" id="conteudo" tabindex="-1">
+      <article class="topic-article">
+        <p class="topic-lede">“As classes estão para os objetos assim como as plantas arquitetônicas estão para as casas.” Uma única planta permite construir muitas casas — cada uma com sua cor e seus moradores. Guarde essa imagem: ela resume esta página inteira.</p>
+
+        <section class="topic-section" id="motivacao" aria-labelledby="motivacao-t">
+          <h2 id="motivacao-t"><span class="h2-index">01</span> Por que Orientação a Objetos?</h2>
+
         <p>Até aqui, você resolveu problemas pensando em <strong>sequência, condição e repetição</strong>: um programa é uma lista de instruções que lê dados, decide o que fazer e repete tarefas. Isso é lógica de programação — e ela continua sendo usada dentro de cada método em Orientação a Objetos (OO). O que muda é a <strong>organização</strong>.</p>
         <p>Em um programa puramente procedural, dados e funções ficam soltos: uma função lê uma lista de valores, outra função recebe essa mesma lista para calcular algo, outra a modifica. Conforme o sistema cresce, fica difícil lembrar quem pode mexer em quê — e um erro em uma função pode quebrar outras dez sem aviso.</p>
         <p>A Orientação a Objetos propõe outra organização: em vez de espalhar dado e comportamento, você agrupa os dois na mesma unidade, chamada <strong>objeto</strong>. Um objeto <code>Carro</code> carrega seus próprios dados (cor, modelo) <em>e</em> as ações que fazem sentido para ele (ligar, desligar). Quem quiser usar um carro não precisa saber como ele funciona por dentro — só precisa saber chamar <code>ligar()</code>.</p>
@@ -446,76 +76,131 @@
           <p>Um material citado nesta disciplina resume bem o motivo histórico da OO ganhar força: os três fatores que mais afetam o futuro do desenvolvimento de software seriam reutilização, reutilização e reutilização. Classes bem projetadas podem ser reaproveitadas em vários programas — assim como uma planta de casa pode ser usada para construir um bairro inteiro, não só uma casa.</p>
         </div>
         <p>Você não está abandonando o que aprendeu — está aprendendo <em>onde guardar</em> a lógica que já sabe escrever.</p>
-      </section>
+      
+        </section>
+        <section class="topic-section" id="classes-objetos" aria-labelledby="classes-objetos-t">
+          <h2 id="classes-objetos-t"><span class="h2-index">02</span> Classes e objetos</h2>
 
-      <section id="classes-objetos">
-        <p class="kicker">02</p>
-        <h2>Classes e objetos</h2>
         <p>Pense em gatos e cães: ambos são animais, mas um mia e o outro late — semelhanças e diferenças que nos fazem naturalmente agrupar as coisas em categorias. É exatamente isso que uma <strong>classe</strong> faz em programação: descreve uma categoria de coisas que compartilham os mesmos tipos de dado e as mesmas ações possíveis.</p>
-        <div class="glossary">
-          <div>
+        <dl class="glossary">
+          
             <dt>Classe</dt>
             <dd>O molde. Define <em>quais</em> atributos e métodos todo objeto desse tipo vai ter — mas não é, ela própria, um objeto usável.</dd>
-          </div>
-          <div>
+          
+          
             <dt>Objeto</dt>
             <dd>Uma instância concreta criada a partir de uma classe, com valores próprios para cada atributo. Também chamado de <em>instância</em>.</dd>
-          </div>
-        </div>
-        <p>Repare no diagrama no topo da página: a classe <code>Casa</code> é a planta — ela existe uma única vez e nunca é "habitada". Cada <code>new Casa(...)</code> constrói uma casa de verdade, com sua própria cor e seu próprio número de quartos. Mudar a cor de <code>objCasa1</code> não afeta <code>objCasa2</code> nem a planta original.</p>
-        <table>
-          <thead><tr><th>Classe</th><th>Exemplos de objetos</th></tr></thead>
+          
+        </dl><figure class="figura figura--larga"><p class="figura__dica-rolagem" aria-hidden="true">Deslize para ver o diagrama inteiro →</p><div class="figura__scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 440" role="img" aria-labelledby="diagA-title diagA-desc">
+          <title id="diagA-title">Da planta baixa às casas construídas</title>
+          <desc id="diagA-desc">Uma classe Casa funciona como uma planta baixa: a partir dela, o comando new cria vários objetos-casa independentes, cada um com seus próprios valores de cor e número de quartos.</desc>
+          
+
+          <rect x="30" y="30" width="340" height="380" rx="12" fill="#eaf4f7" stroke="#216887" stroke-width="1.5" stroke-dasharray="7 5"/>
+          <text x="200" y="65" text-anchor="middle" font-family="Space Grotesk, DM Sans, Arial, sans-serif" font-weight="600" font-size="21" fill="#102e46">Classe Casa</text>
+          <line x1="55" y1="80" x2="345" y2="80" stroke="#c7dde5" stroke-width="1"/>
+
+          <text x="55" y="103" font-family="DM Sans, Arial, sans-serif" font-size="12.5" fill="#617482" font-weight="600">Atributos</text>
+          <text x="55" y="123" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" fill="#15232e">- cor</text>
+          <text x="55" y="141" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" fill="#15232e">- nQuartos</text>
+          <text x="55" y="159" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" fill="#15232e">- luzAcesa</text>
+
+          <text x="215" y="103" font-family="DM Sans, Arial, sans-serif" font-size="12.5" fill="#617482" font-weight="600">Métodos</text>
+          <text x="215" y="123" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" fill="#15232e">+ abrirPorta()</text>
+          <text x="215" y="141" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" fill="#15232e">+ acenderLuz()</text>
+
+          <polygon points="130,290 200,235 270,290" fill="none" stroke="#216887" stroke-width="1.6"/>
+          <rect x="140" y="290" width="120" height="80" fill="none" stroke="#216887" stroke-width="1.6"/>
+          <rect x="185" y="325" width="30" height="45" fill="none" stroke="#216887" stroke-width="1.3"/>
+          <rect x="155" y="305" width="16" height="16" fill="none" stroke="#216887" stroke-width="1.3"/>
+          <rect x="229" y="305" width="16" height="16" fill="none" stroke="#216887" stroke-width="1.3"/>
+          <text x="200" y="397" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-style="italic" font-size="12" fill="#216887">molde — nunca é habitada</text>
+
+          <text x="415" y="72" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12" fill="#102e46">new Casa(...)</text>
+          <line x1="372" y1="95" x2="458" y2="95" stroke="#216887" stroke-width="1.4" marker-end="url(#m-aberta-teal)"/>
+          <line x1="372" y1="225" x2="458" y2="225" stroke="#216887" stroke-width="1.4" marker-end="url(#m-aberta-teal)"/>
+          <line x1="372" y1="355" x2="458" y2="355" stroke="#216887" stroke-width="1.4" marker-end="url(#m-aberta-teal)"/>
+
+          <g>
+            <rect x="460" y="40" width="430" height="110" rx="10" fill="#FFFFFF" stroke="#dbe6ec"/>
+            <polygon points="500,86 535,58 570,86" fill="#f3bb4d" stroke="#15232e" stroke-width="1.2"/>
+            <rect x="500" y="86" width="70" height="45" fill="#f3bb4d" stroke="#15232e" stroke-width="1.2"/>
+            <rect x="522" y="106" width="16" height="25" fill="#ffffff" stroke="#15232e" stroke-width="1"/>
+            <text x="590" y="80" font-family="DM Sans, Arial, sans-serif" font-weight="700" font-size="15" fill="#15232e">objCasa1</text>
+            <text x="590" y="102" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" fill="#617482">cor = "amarela"</text>
+            <text x="590" y="120" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" fill="#617482">nQuartos = 3</text>
+          </g>
+
+          <g>
+            <rect x="460" y="170" width="430" height="110" rx="10" fill="#FFFFFF" stroke="#dbe6ec"/>
+            <polygon points="500,216 535,188 570,216" fill="#25a6ad" stroke="#15232e" stroke-width="1.2"/>
+            <rect x="500" y="216" width="70" height="45" fill="#25a6ad" stroke="#15232e" stroke-width="1.2"/>
+            <rect x="522" y="236" width="16" height="25" fill="#ffffff" stroke="#15232e" stroke-width="1"/>
+            <text x="590" y="210" font-family="DM Sans, Arial, sans-serif" font-weight="700" font-size="15" fill="#15232e">objCasa2</text>
+            <text x="590" y="232" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" fill="#617482">cor = "azul"</text>
+            <text x="590" y="250" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" fill="#617482">nQuartos = 2</text>
+          </g>
+
+          <g>
+            <rect x="460" y="300" width="430" height="110" rx="10" fill="#FFFFFF" stroke="#dbe6ec"/>
+            <polygon points="500,346 535,318 570,346" fill="#C1571F" stroke="#15232e" stroke-width="1.2"/>
+            <rect x="500" y="346" width="70" height="45" fill="#C1571F" stroke="#15232e" stroke-width="1.2"/>
+            <rect x="522" y="366" width="16" height="25" fill="#ffffff" stroke="#15232e" stroke-width="1"/>
+            <text x="590" y="340" font-family="DM Sans, Arial, sans-serif" font-weight="700" font-size="15" fill="#15232e">objCasa3</text>
+            <text x="590" y="362" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" fill="#617482">cor = "vermelha"</text>
+            <text x="590" y="380" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" fill="#617482">nQuartos = 4</text>
+          </g>
+        </svg></div><figcaption>“As classes estão para os objetos assim como as plantas arquitetônicas estão para as casas.” A mesma planta gera várias casas — cada uma com sua própria cor e número de quartos.</figcaption></figure><p>Repare no diagrama acima: a classe <code>Casa</code> é a planta — ela existe uma única vez e nunca é "habitada". Cada <code>new Casa(...)</code> constrói uma casa de verdade, com sua própria cor e seu próprio número de quartos. Mudar a cor de <code>objCasa1</code> não afeta <code>objCasa2</code> nem a planta original.</p>
+        <div class="table-scroll"><table class="topic-table">
+          <thead><tr><th scope="col">Classe</th><th scope="col">Exemplos de objetos</th></tr></thead>
           <tbody>
             <tr><td><code>Cachorro</code></td><td><code>rex</code>, <code>bidu</code>, <code>totó</code></td></tr>
             <tr><td><code>ContaBancaria</code></td><td><code>conta123</code>, <code>conta456</code></td></tr>
             <tr><td><code>Estudante</code></td><td><code>ana</code>, <code>julio</code></td></tr>
             <tr><td><code>Carro</code></td><td><code>fusca</code>, <code>civic</code></td></tr>
           </tbody>
-        </table>
+        </table></div>
         <div class="box dica">
           <span class="label">Regra prática</span>
           <p>Se a palavra é genérica e representa um "tipo de coisa" (carro, estudante, pedido, produto), ela tende a virar uma <strong>classe</strong>. Se é uma ocorrência específica desse tipo (o Fusca do seu tio, o estudante Julio), ela vira um <strong>objeto</strong>.</p>
         </div>
-      </section>
+      
+        </section>
+        <section class="topic-section" id="anatomia-classe" aria-labelledby="anatomia-classe-t">
+          <h2 id="anatomia-classe-t"><span class="h2-index">03</span> Anatomia de uma classe em Java</h2>
 
-      <section id="anatomia-classe">
-        <p class="kicker">03</p>
-        <h2>Anatomia de uma classe em Java</h2>
         <p>Toda classe em Java é declarada com a palavra-chave <code>class</code>, seguida do nome da classe e de um corpo delimitado por chaves <code>{ }</code>. O modificador <code>public</code> aparece antes, indicando que a classe pode ser usada por qualquer outra classe do projeto.</p>
         <div class="codeblock">
-          <div class="tab"><span>Carro.java</span><span>estrutura mínima</span></div>
+          <div class="codeblock__bar"><span><span class="arquivo">Carro.java</span> · estrutura mínima</span></div>
 <pre><code><span class="tk-kw">public class</span> <span class="tk-tp">Carro</span> {
     <span class="tk-cm">// atributos e métodos entram aqui dentro</span>
 }</code></pre>
         </div>
         <p>Nomes de classe seguem a convenção <strong>PascalCase</strong> (cada palavra começa com maiúscula, sem espaços ou hífens: <code>ContaBancaria</code>, <code>ItemPedido</code>) e podem conter letras, dígitos, <code>_</code> e <code>$</code> — mas nunca começar com um dígito.</p>
         <p>Uma classe descreve três coisas ao mesmo tempo: um <strong>nome</strong>, um conjunto de <strong>atributos</strong> (o estado) e um conjunto de <strong>métodos</strong> (o comportamento). É assim que a UML costuma desenhar uma classe — em três compartimentos:</p>
-        <figure>
-          <svg viewBox="0 0 480 370" role="img" aria-labelledby="diagB-title diagB-desc">
+        <figure class="figura figura--estreita"><div class="figura__scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 370" role="img" aria-labelledby="diagB-title diagB-desc">
             <title id="diagB-title">Diagrama de classe da classe Carro</title>
             <desc id="diagB-desc">Retângulo dividido em três partes: nome da classe Carro, lista de atributos modelo, cor e ligado, e lista de métodos ligar, desligar, getCor e setCor.</desc>
-            <rect x="40" y="20" width="400" height="330" fill="#FFFFFF" stroke="#16233A" stroke-width="1.4"/>
-            <line x1="40" y1="70" x2="440" y2="70" stroke="#16233A" stroke-width="1.4"/>
-            <line x1="40" y1="210" x2="440" y2="210" stroke="#16233A" stroke-width="1.4"/>
-            <text x="240" y="52" text-anchor="middle" font-family="Fraunces, serif" font-weight="600" font-size="19" fill="#0F3A57">Carro</text>
-            <text x="60" y="100" font-family="IBM Plex Mono, monospace" font-size="14" fill="#16233A">- modelo: String</text>
-            <text x="60" y="140" font-family="IBM Plex Mono, monospace" font-size="14" fill="#16233A">- cor: String</text>
-            <text x="60" y="180" font-family="IBM Plex Mono, monospace" font-size="14" fill="#16233A">- ligado: boolean</text>
-            <text x="60" y="240" font-family="IBM Plex Mono, monospace" font-size="14" fill="#16233A">+ ligar(): void</text>
-            <text x="60" y="270" font-family="IBM Plex Mono, monospace" font-size="14" fill="#16233A">+ desligar(): void</text>
-            <text x="60" y="300" font-family="IBM Plex Mono, monospace" font-size="14" fill="#16233A">+ getCor(): String</text>
-            <text x="60" y="330" font-family="IBM Plex Mono, monospace" font-size="14" fill="#16233A">+ setCor(cor): void</text>
-          </svg>
-          <figcaption><code>-</code> indica visibilidade <code>private</code> (só a própria classe acessa); <code>+</code> indica <code>public</code> (qualquer classe pode chamar).</figcaption>
-        </figure>
-      </section>
+            <rect x="40" y="20" width="400" height="330" fill="#FFFFFF" stroke="#15232e" stroke-width="1.4"/>
+            <line x1="40" y1="70" x2="440" y2="70" stroke="#15232e" stroke-width="1.4"/>
+            <line x1="40" y1="210" x2="440" y2="210" stroke="#15232e" stroke-width="1.4"/>
+            <text x="240" y="52" text-anchor="middle" font-family="Space Grotesk, DM Sans, Arial, sans-serif" font-weight="600" font-size="19" fill="#102e46">Carro</text>
+            <text x="60" y="100" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14" fill="#15232e">- modelo: String</text>
+            <text x="60" y="140" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14" fill="#15232e">- cor: String</text>
+            <text x="60" y="180" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14" fill="#15232e">- ligado: boolean</text>
+            <text x="60" y="240" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14" fill="#15232e">+ ligar(): void</text>
+            <text x="60" y="270" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14" fill="#15232e">+ desligar(): void</text>
+            <text x="60" y="300" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14" fill="#15232e">+ getCor(): String</text>
+            <text x="60" y="330" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14" fill="#15232e">+ setCor(cor): void</text>
+          </svg></div><figcaption><code>-</code> indica visibilidade <code>private</code> (só a própria classe acessa); <code>+</code> indica <code>public</code> (qualquer classe pode chamar).</figcaption></figure>
+      
+        </section>
+        <section class="topic-section" id="atributos" aria-labelledby="atributos-t">
+          <h2 id="atributos-t"><span class="h2-index">04</span> Atributos: o estado de um objeto</h2>
 
-      <section id="atributos">
-        <p class="kicker">04</p>
-        <h2>Atributos: o estado de um objeto</h2>
         <p><strong>Atributos</strong> são variáveis declaradas dentro da classe, fora de qualquer método. Também são chamados de <em>variáveis de instância</em>, porque cada objeto criado a partir da classe guarda a sua própria cópia delas.</p>
         <div class="codeblock">
-          <div class="tab"><span>Carro.java</span><span>declarando atributos</span></div>
+          <div class="codeblock__bar"><span><span class="arquivo">Carro.java</span> · declarando atributos</span></div>
 <pre><code><span class="tk-kw">public class</span> <span class="tk-tp">Carro</span> {
     <span class="tk-kw">private</span> <span class="tk-tp">String</span> modelo;
     <span class="tk-kw">private</span> <span class="tk-tp">String</span> cor;
@@ -527,15 +212,15 @@
           <span class="label">Atributo ≠ variável local</span>
           <p>Uma variável declarada <em>dentro</em> de um método (por exemplo, dentro de <code>main</code>) só existe enquanto aquele método está executando, e só aquele método a enxerga. Um atributo pertence ao objeto inteiro e existe durante toda a vida dele — qualquer método da classe pode usá-lo.</p>
         </div>
-      </section>
+      
+        </section>
+        <section class="topic-section" id="metodos" aria-labelledby="metodos-t">
+          <h2 id="metodos-t"><span class="h2-index">05</span> Métodos: o comportamento de um objeto</h2>
 
-      <section id="metodos">
-        <p class="kicker">05</p>
-        <h2>Métodos: o comportamento de um objeto</h2>
         <p>Métodos realizam tarefas e, quando fazem sentido, retornam um resultado. Toda declaração de método segue o mesmo esqueleto:</p>
-        <div class="output"><div class="tab">esqueleto de um método</div>modificador tipoDeRetorno nomeDoMetodo(parâmetros) {
+        <pre class="console"><span class="console__label">esqueleto de um método</span>modificador tipoDeRetorno nomeDoMetodo(parâmetros) {
     instruções;
-}</div>
+}</pre>
         <ul>
           <li><strong>modificador</strong> — normalmente <code>public</code> ou <code>private</code>, define quem pode chamar o método;</li>
           <li><strong>tipo de retorno</strong> — o tipo do valor devolvido, ou <code>void</code> se o método não devolve nada;</li>
@@ -543,7 +228,7 @@
           <li><strong>parâmetros</strong> — dados que o método precisa receber para trabalhar, entre parênteses e separados por vírgula; use <code>()</code> quando não precisar de nenhum.</li>
         </ul>
         <div class="codeblock">
-          <div class="tab"><span>Carro.java</span><span>dois métodos de comportamento</span></div>
+          <div class="codeblock__bar"><span><span class="arquivo">Carro.java</span> · dois métodos de comportamento</span></div>
 <pre><code><span class="tk-kw">public void</span> ligar() {
     <span class="tk-kw">this</span>.ligado = <span class="tk-kw">true</span>;
     <span class="tk-tp">System</span>.out.println(modelo + <span class="tk-str">" ligado. Vrum!"</span>);
@@ -559,55 +244,53 @@
           <span class="label">Parâmetro × argumento</span>
           <p><em>Parâmetro</em> é o nome usado na declaração do método (<code>void setCor(String novaCor)</code>). <em>Argumento</em> é o valor real passado na chamada (<code>fusca.setCor("preto")</code>). O mesmo método pode receber argumentos diferentes a cada chamada.</p>
         </div>
-      </section>
+      
+        </section>
+        <section class="topic-section" id="instanciar" aria-labelledby="instanciar-t">
+          <h2 id="instanciar-t"><span class="h2-index">06</span> Instanciando objetos com <code>new</code></h2>
 
-      <section id="instanciar">
-        <p class="kicker">06</p>
-        <h2>Instanciando objetos com <code>new</code></h2>
         <p>A classe só ganha vida quando você cria um objeto a partir dela. Isso é feito com a expressão de criação de instância: a palavra-chave <code>new</code> seguida do nome da classe e parênteses — que, na verdade, chamam o <a href="#construtores">construtor</a>.</p>
         <div class="codeblock">
-          <div class="tab"><span>GaragemApp.java</span><span>criando dois objetos independentes</span></div>
+          <div class="codeblock__bar"><span><span class="arquivo">GaragemApp.java</span> · criando dois objetos independentes</span></div>
 <pre><code><span class="tk-tp">Carro</span> fusca = <span class="tk-kw">new</span> <span class="tk-tp">Carro</span>(<span class="tk-str">"Fusca 1972"</span>, <span class="tk-str">"azul"</span>);
 <span class="tk-tp">Carro</span> civic = <span class="tk-kw">new</span> <span class="tk-tp">Carro</span>(<span class="tk-str">"Civic 2024"</span>, <span class="tk-str">"prata"</span>);</code></pre>
         </div>
         <p>Cada chamada a <code>new</code> cria um objeto novo, guardado em memória, com sua própria cópia dos atributos. As variáveis <code>fusca</code> e <code>civic</code> são apenas <em>rótulos</em> que apontam para esses objetos — por isso, ligar o <code>fusca</code> não liga o <code>civic</code>, mesmo sendo os dois da mesma classe <code>Carro</code>.</p>
+        <figure class="figura figura--media"><p class="figura__dica-rolagem" aria-hidden="true">Deslize para ver o diagrama inteiro →</p><div class="figura__scroll"><svg viewBox="0 0 740 290" role="img" aria-labelledby="fig1-t fig1-d" xmlns="http://www.w3.org/2000/svg"><title id="fig1-t">Variáveis apontando para objetos independentes</title><desc id="fig1-d">À esquerda, as variáveis fusca e civic, do tipo Carro. Cada uma tem uma seta apontando para um objeto diferente à direita: um objeto Carro com modelo Fusca 1972, cor azul e ligado false; outro com modelo Civic 2024, cor prata e ligado false.</desc><text x="120" y="24" font-size="13.5" fill="#102e46" text-anchor="middle" font-family="Space Grotesk, DM Sans, Arial, sans-serif" font-weight="700">Variáveis (referências)</text><text x="560" y="24" font-size="13.5" fill="#102e46" text-anchor="middle" font-family="Space Grotesk, DM Sans, Arial, sans-serif" font-weight="700">Objetos criados com new</text><rect x="40" y="70" width="160" height="44" rx="6" fill="#e3f1f4" stroke="#102e46" stroke-width="1.4"/><text x="52" y="97" font-size="13" fill="#15232e" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-weight="600">Carro fusca</text><circle cx="185" cy="92" r="5" fill="#216887"/><path d="M185 92 L420 92" fill="none" stroke="#216887" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#m-cheia)"/><rect x="420" y="50" width="280" height="90" rx="10" fill="#fff" stroke="#102e46" stroke-width="1.5"/><text x="436" y="72" font-size="13" fill="#102e46" text-anchor="start" font-family="DM Sans, Arial, sans-serif" font-weight="700" text-decoration="underline">:Carro</text><text x="436" y="94" font-size="12.5" fill="#15232e" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace">modelo = "Fusca 1972"</text><text x="436" y="112" font-size="12.5" fill="#15232e" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace">cor    = "azul"</text><text x="436" y="130" font-size="12.5" fill="#15232e" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace">ligado = false</text><rect x="40" y="190" width="160" height="44" rx="6" fill="#e3f1f4" stroke="#102e46" stroke-width="1.4"/><text x="52" y="217" font-size="13" fill="#15232e" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-weight="600">Carro civic</text><circle cx="185" cy="212" r="5" fill="#216887"/><path d="M185 212 L420 212" fill="none" stroke="#216887" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#m-cheia)"/><rect x="420" y="170" width="280" height="90" rx="10" fill="#fff" stroke="#102e46" stroke-width="1.5"/><text x="436" y="192" font-size="13" fill="#102e46" text-anchor="start" font-family="DM Sans, Arial, sans-serif" font-weight="700" text-decoration="underline">:Carro</text><text x="436" y="214" font-size="12.5" fill="#15232e" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace">modelo = "Civic 2024"</text><text x="436" y="232" font-size="12.5" fill="#15232e" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace">cor    = "prata"</text><text x="436" y="250" font-size="12.5" fill="#15232e" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace">ligado = false</text></svg></div><figcaption>Cada <code>new</code> cria um objeto separado na memória; as variáveis só guardam o “endereço” (a referência) de cada um.</figcaption></figure>
         <div class="box">
           <span class="label">Se o construtor não for declarado</span>
           <p>Java fornece automaticamente um <strong>construtor padrão</strong>, sem parâmetros, que inicializa os atributos com valores neutros: <code>0</code> para números, <code>false</code> para <code>boolean</code> e <code>null</code> para objetos como <code>String</code>. Assim que você declarar qualquer construtor próprio, esse padrão deixa de existir automaticamente.</p>
         </div>
-      </section>
+      
+        </section>
+        <section class="topic-section" id="encapsulamento" aria-labelledby="encapsulamento-t">
+          <h2 id="encapsulamento-t"><span class="h2-index">07</span> Encapsulamento: protegendo os dados</h2>
 
-      <section id="encapsulamento">
-        <p class="kicker">07</p>
-        <h2>Encapsulamento: protegendo os dados</h2>
         <p>Em Orientação a Objetos, encapsular significa separar o programa em partes o mais isoladas possível, escondendo os detalhes internos de um objeto e expondo apenas o que é necessário para usá-lo. Na prática, em Java isso se traduz em uma regra simples: <strong>atributos privados, acesso controlado por métodos públicos</strong>.</p>
-        <figure>
-          <svg viewBox="0 0 640 320" role="img" aria-labelledby="diagC-title diagC-desc">
+        <figure class="figura figura--media"><p class="figura__dica-rolagem" aria-hidden="true">Deslize para ver o diagrama inteiro →</p><div class="figura__scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" role="img" aria-labelledby="diagC-title diagC-desc">
             <title id="diagC-title">Encapsulamento do objeto Carro</title>
             <desc id="diagC-desc">Os atributos privados do objeto Carro ficam protegidos dentro de uma cápsula. O acesso direto de fora é bloqueado; a entrada de dados acontece pelo método set e a saída pelo método get.</desc>
-            <rect x="180" y="20" width="280" height="240" rx="40" fill="#E7EFF6" stroke="#1F5C8B" stroke-width="1.6"/>
-            <text x="320" y="52" text-anchor="middle" font-family="Fraunces, serif" font-weight="600" font-size="17" fill="#0F3A57">Objeto Carro</text>
+            <rect x="180" y="20" width="280" height="240" rx="40" fill="#e3f1f4" stroke="#216887" stroke-width="1.6"/>
+            <text x="320" y="52" text-anchor="middle" font-family="Space Grotesk, DM Sans, Arial, sans-serif" font-weight="600" font-size="17" fill="#102e46">Objeto Carro</text>
 
-            <rect x="298" y="75" width="26" height="20" rx="3" fill="none" stroke="#16233A" stroke-width="1.6"/>
-            <path d="M303 75 v-8 a8,8 0 0 1 16,0 v8" fill="none" stroke="#16233A" stroke-width="1.6"/>
-            <text x="320" y="135" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#16233A">modelo, cor, ligado</text>
-            <text x="320" y="153" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-style="italic" font-size="11.5" fill="#4B5872">(atributos private)</text>
+            <rect x="298" y="75" width="26" height="20" rx="3" fill="none" stroke="#15232e" stroke-width="1.6"/>
+            <path d="M303 75 v-8 a8,8 0 0 1 16,0 v8" fill="none" stroke="#15232e" stroke-width="1.6"/>
+            <text x="320" y="135" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" fill="#15232e">modelo, cor, ligado</text>
+            <text x="320" y="153" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-style="italic" font-size="11.5" fill="#617482">(atributos private)</text>
 
-            <text x="120" y="75" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#0F3A57">setCor("preto")</text>
-            <line x1="60" y1="90" x2="178" y2="90" stroke="#1F5C8B" stroke-width="1.6" marker-end="url(#arrowBlue)"/>
+            <text x="120" y="75" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" fill="#102e46">setCor("preto")</text>
+            <line x1="60" y1="90" x2="178" y2="90" stroke="#216887" stroke-width="1.6" marker-end="url(#m-aberta-teal)"/>
 
-            <text x="510" y="180" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#0F3A57">getCor()</text>
-            <line x1="462" y1="195" x2="580" y2="195" stroke="#1F5C8B" stroke-width="1.6" marker-end="url(#arrowBlue)"/>
+            <text x="510" y="180" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" fill="#102e46">getCor()</text>
+            <line x1="462" y1="195" x2="580" y2="195" stroke="#216887" stroke-width="1.6" marker-end="url(#m-aberta-teal)"/>
 
-            <line x1="30" y1="235" x2="145" y2="235" stroke="#AD3B34" stroke-width="1.4" stroke-dasharray="4 4"/>
-            <text x="87" y="227" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-weight="700" font-size="15" fill="#AD3B34">×</text>
-            <text x="30" y="290" font-family="IBM Plex Mono, monospace" font-size="11.5" fill="#AD3B34">carro.cor = "verde";</text>
-            <text x="30" y="308" font-family="IBM Plex Sans, sans-serif" font-style="italic" font-size="11.5" fill="#AD3B34">acesso direto — bloqueado</text>
-          </svg>
-          <figcaption>Ninguém acessa <code>cor</code> diretamente de fora — o acesso só acontece por uma "porta" pública: <code>setCor()</code> para entrar, <code>getCor()</code> para sair.</figcaption>
-        </figure>
+            <line x1="30" y1="235" x2="145" y2="235" stroke="#b23b31" stroke-width="1.4" stroke-dasharray="4 4"/>
+            <text x="87" y="227" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="700" font-size="15" fill="#b23b31">×</text>
+            <text x="30" y="290" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="11.5" fill="#b23b31">carro.cor = "verde";</text>
+            <text x="30" y="308" font-family="DM Sans, Arial, sans-serif" font-style="italic" font-size="11.5" fill="#b23b31">acesso direto — bloqueado</text>
+          </svg></div><figcaption>Ninguém acessa <code>cor</code> diretamente de fora — o acesso só acontece por uma "porta" pública: <code>setCor()</code> para entrar, <code>getCor()</code> para sair.</figcaption></figure>
         <div class="codeblock">
-          <div class="tab"><span>Carro.java</span><span>getters e setters</span></div>
+          <div class="codeblock__bar"><span><span class="arquivo">Carro.java</span> · getters e setters</span></div>
 <pre><code><span class="tk-kw">public</span> <span class="tk-tp">String</span> getCor() {
     <span class="tk-kw">return</span> cor;
 }
@@ -624,23 +307,23 @@
           <li><strong>Contrato claro:</strong> os métodos públicos dizem exatamente o que a classe promete fazer; o resto é detalhe de implementação.</li>
         </ul>
         <h3>Níveis de visibilidade em Java</h3>
-        <table>
-          <thead><tr><th>Modificador</th><th>Quem enxerga</th></tr></thead>
+        <div class="table-scroll"><table class="topic-table">
+          <thead><tr><th scope="col">Modificador</th><th scope="col">Quem enxerga</th></tr></thead>
           <tbody>
             <tr><td><code>public</code></td><td>Qualquer classe, de qualquer pacote do projeto.</td></tr>
             <tr><td><code>protected</code></td><td>Classes do mesmo pacote, mais subclasses (mesmo em outros pacotes).</td></tr>
             <tr><td><em>(nenhum modificador)</em></td><td>Chamado de <em>package-private</em>: apenas classes do mesmo pacote.</td></tr>
             <tr><td><code>private</code></td><td>Somente a própria classe onde foi declarado.</td></tr>
           </tbody>
-        </table>
-      </section>
+        </table></div>
+      
+        </section>
+        <section class="topic-section" id="construtores" aria-labelledby="construtores-t">
+          <h2 id="construtores-t"><span class="h2-index">08</span> Construtores: preparando o objeto para nascer</h2>
 
-      <section id="construtores">
-        <p class="kicker">08</p>
-        <h2>Construtores: preparando o objeto para nascer</h2>
         <p>O <strong>construtor</strong> é um método especial: tem o mesmo nome da classe, não declara nenhum tipo de retorno — nem <code>void</code> — e é executado automaticamente sempre que você usa <code>new</code>. Sua função é deixar o objeto pronto para uso já na criação.</p>
         <div class="codeblock">
-          <div class="tab"><span>Carro.java</span><span>construtor com parâmetros</span></div>
+          <div class="codeblock__bar"><span><span class="arquivo">Carro.java</span> · construtor com parâmetros</span></div>
 <pre><code><span class="tk-kw">public class</span> <span class="tk-tp">Carro</span> {
     <span class="tk-kw">private</span> <span class="tk-tp">String</span> modelo;
     <span class="tk-kw">private</span> <span class="tk-tp">String</span> cor;
@@ -662,7 +345,7 @@
         <h3>Um construtor pode ter mais de uma versão</h3>
         <p>Assim como métodos, construtores podem ser <strong>sobrecarregados</strong> (mesma classe, assinaturas diferentes). Por exemplo, você poderia adicionar um segundo construtor que já recebe se o carro nasce ligado:</p>
         <div class="codeblock">
-          <div class="tab"><span>Carro.java</span><span>construtor sobrecarregado (opcional)</span></div>
+          <div class="codeblock__bar"><span><span class="arquivo">Carro.java</span> · construtor sobrecarregado (opcional)</span></div>
 <pre><code><span class="tk-kw">public</span> <span class="tk-mt">Carro</span>(<span class="tk-tp">String</span> modelo, <span class="tk-tp">String</span> cor, <span class="tk-tp">boolean</span> ligado) {
     <span class="tk-kw">this</span>.modelo = modelo;
     <span class="tk-kw">this</span>.cor = cor;
@@ -670,13 +353,13 @@
 }</code></pre>
         </div>
         <p>Java escolhe automaticamente qual construtor chamar de acordo com a quantidade e o tipo dos argumentos passados em <code>new Carro(...)</code>.</p>
-      </section>
+      
+        </section>
+        <section class="topic-section" id="main" aria-labelledby="main-t">
+          <h2 id="main-t"><span class="h2-index">09</span> O método <code>main</code>: onde tudo começa</h2>
 
-      <section id="main">
-        <p class="kicker">09</p>
-        <h2>O método <code>main</code>: onde tudo começa</h2>
         <p>Todo programa Java precisa de um ponto de partida — o método pelo qual a JVM (a máquina virtual que executa Java) começa a rodar o código. Esse ponto é sempre:</p>
-        <div class="output"><div class="tab">assinatura fixa do método main</div><span></span>public static void main(String[] args) { ... }</div>
+        <pre class="console"><span class="console__label">assinatura fixa do método main</span>public static void main(String[] args) { ... }</pre>
         <p>Cada palavra dessa assinatura importa:</p>
         <ul>
           <li><code>public</code> — a JVM, que é externa ao seu programa, precisa conseguir chamá-lo;</li>
@@ -688,14 +371,14 @@
           <span class="label">static × de instância</span>
           <p>Um método de instância (como <code>ligar()</code>) só existe "dentro" de um objeto — por isso você escreve <code>fusca.ligar()</code>. Um método <code>static</code> pertence à classe inteira e é chamado direto pelo nome dela, como <code>NomeDaClasse.metodoEstatico()</code>. É justamente por ser <code>static</code> que o <code>main</code> pode rodar antes de qualquer <code>new</code> acontecer — ele é o ponto de partida que vai criar os primeiros objetos.</p>
         </div>
-      </section>
+      
+        </section>
+        <section class="topic-section" id="exemplo-completo" aria-labelledby="exemplo-completo-t">
+          <h2 id="exemplo-completo-t"><span class="h2-index">10</span> Exemplo completo, do zero ao console</h2>
 
-      <section id="exemplo-completo">
-        <p class="kicker">10</p>
-        <h2>Exemplo completo, do zero ao console</h2>
         <p>Juntando tudo que vimos até aqui: uma classe <code>Carro</code> completa e uma classe com <code>main</code> que cria dois carros, liga um deles e troca a cor do outro.</p>
         <div class="codeblock">
-          <div class="tab"><span>Carro.java</span><span>classe completa</span></div>
+          <div class="codeblock__bar"><span><span class="arquivo">Carro.java</span> · classe completa</span></div>
 <pre><code><span class="tk-kw">public class</span> <span class="tk-tp">Carro</span> {
 
     <span class="tk-cm">// atributos: o estado de cada carro</span>
@@ -740,7 +423,7 @@
 }</code></pre>
         </div>
         <div class="codeblock">
-          <div class="tab"><span>GaragemApp.java</span><span>classe com o método main</span></div>
+          <div class="codeblock__bar"><span><span class="arquivo">GaragemApp.java</span> · classe com o método main</span></div>
 <pre><code><span class="tk-kw">public class</span> <span class="tk-tp">GaragemApp</span> {
 
     <span class="tk-kw">public static void</span> main(<span class="tk-tp">String</span>[] args) {
@@ -756,18 +439,15 @@
     }
 }</code></pre>
         </div>
-        <div class="output">
-          <div class="tab">saída no console</div>
-Fusca 1972 ligado. Vrum!
+        <pre class="console"><span class="console__label">saída no console</span>Fusca 1972 ligado. Vrum!
 Fusca 1972 está ligado: true
-Civic 2024 agora é preto
-        </div>
+Civic 2024 agora é preto</pre>
         <p>Repare que <code>GaragemApp</code> nunca acessa <code>fusca.ligado</code> ou <code>civic.cor</code> diretamente — tudo passa pelos métodos públicos que a classe <code>Carro</code> decidiu expor. Esse é o encapsulamento funcionando na prática, não apenas na teoria.</p>
-      </section>
+      
+        </section>
+        <section class="topic-section" id="desafio" aria-labelledby="desafio-t">
+          <h2 id="desafio-t"><span class="h2-index">11</span> Desafio prático: classe <code>Estudante</code></h2>
 
-      <section id="desafio">
-        <p class="kicker">11</p>
-        <h2>Desafio prático: classe <code>Estudante</code></h2>
         <p>Hora de aplicar sozinho. O objetivo é o mesmo de uma atividade clássica desta disciplina — mas agora você já tem todo o vocabulário para resolver com confiança.</p>
         <div class="box">
           <span class="label">Enunciado</span>
@@ -792,10 +472,9 @@ Civic 2024 agora é preto
           <span class="label">Desafio bônus</span>
           <p>Depois de terminar, tente adicionar um método <code>foiAprovado()</code> que devolva <code>true</code> quando a média for maior ou igual a 6.0. Pense: esse método precisa de algum parâmetro, ou ele já tem tudo que precisa dentro do próprio objeto?</p>
         </div>
-        <details>
-          <summary>Ver solução comentada</summary>
+        <details><summary>Ver solução comentada</summary>
           <div class="codeblock">
-            <div class="tab"><span>Estudante.java</span><span>solução sugerida</span></div>
+            <div class="codeblock__bar"><span><span class="arquivo">Estudante.java</span> · solução sugerida</span></div>
 <pre><code><span class="tk-kw">public class</span> <span class="tk-tp">Estudante</span> {
     <span class="tk-kw">private</span> <span class="tk-tp">int</span> ra;
     <span class="tk-kw">private</span> <span class="tk-tp">String</span> nome;
@@ -822,33 +501,32 @@ Civic 2024 agora é preto
     <span class="tk-kw">public</span> <span class="tk-tp">int</span> getRa() { <span class="tk-kw">return</span> ra; }
 }</code></pre>
           </div>
-          <div class="codeblock">
-            <div class="tab"><span>EscolaApp.java</span><span>testando a classe</span></div>
-<pre><code><span class="tk-kw">public class</span> <span class="tk-tp">EscolaApp</span> {
-    <span class="tk-kw">public static void</span> main(<span class="tk-tp">String</span>[] args) {
-        <span class="tk-tp">Estudante</span> e1 = <span class="tk-kw">new</span> <span class="tk-tp">Estudante</span>(1, <span class="tk-str">"Ana"</span>, 8.5, 9.0, 7.0);
-        <span class="tk-tp">Estudante</span> e2 = <span class="tk-kw">new</span> <span class="tk-tp">Estudante</span>(2, <span class="tk-str">"Julio"</span>, 5.0, 6.5, 8.0);
+          <div class="codeblock"><div class="codeblock__bar"><span><span class="arquivo">EscolaApp.java</span> · testando a classe com três estudantes</span></div><pre><code class="language-java"><span class="tk-kw">public</span> <span class="tk-kw">class</span> <span class="tk-tp">EscolaApp</span> {
+    <span class="tk-kw">public</span> <span class="tk-kw">static</span> <span class="tk-kw">void</span> <span class="tk-mt">main</span>(<span class="tk-tp">String</span>[] args) {
+        <span class="tk-tp">Estudante</span>[] turma = {
+            <span class="tk-kw">new</span> <span class="tk-tp">Estudante</span>(<span class="tk-num">1</span>, <span class="tk-str">"Ana"</span>, <span class="tk-num">8.5</span>, <span class="tk-num">9.0</span>, <span class="tk-num">7.0</span>),
+            <span class="tk-kw">new</span> <span class="tk-tp">Estudante</span>(<span class="tk-num">2</span>, <span class="tk-str">"Julio"</span>, <span class="tk-num">5.0</span>, <span class="tk-num">6.5</span>, <span class="tk-num">8.0</span>),
+            <span class="tk-kw">new</span> <span class="tk-tp">Estudante</span>(<span class="tk-num">3</span>, <span class="tk-str">"Bia"</span>, <span class="tk-num">4.0</span>, <span class="tk-num">6.0</span>, <span class="tk-num">5.5</span>)
+        };
 
-        <span class="tk-tp">System</span>.out.printf(<span class="tk-str">"O estudante %s possui média %.2f%n"</span>,
-            e1.getNome(), e1.calcularMedia());
-        <span class="tk-tp">System</span>.out.printf(<span class="tk-str">"O estudante %s possui média %.2f%n"</span>,
-            e2.getNome(), e2.calcularMedia());
+        <span class="tk-kw">for</span> (<span class="tk-tp">Estudante</span> e : turma) {
+            <span class="tk-tp">System</span>.out.<span class="tk-mt">printf</span>(<span class="tk-str">"O estudante %s possui média %.2f%n"</span>,
+                e.<span class="tk-mt">getNome</span>(), e.<span class="tk-mt">calcularMedia</span>());
+        }
     }
-}</code></pre>
-          </div>
-          <div class="output">
-            <div class="tab">saída no console</div>
-O estudante Ana possui média 8.17
+}</code></pre></div><pre class="console"><span class="console__label">saída no console</span>O estudante Ana possui média 8.17
 O estudante Julio possui média 6.50
-          </div>
+O estudante Bia possui média 5.17</pre>
+          <div class="box dica"><span class="label">Vírgula ou ponto?</span>
+            <p>O <code>printf</code> usa o idioma do sistema. Num computador configurado em português, a saída pode aparecer como <code>8,17</code>. Para forçar o ponto, use <code>System.out.printf(Locale.US, …)</code>.</p></div>
         </details>
-      </section>
+      
+        </section>
+        <section class="topic-section" id="erros-comuns" aria-labelledby="erros-comuns-t">
+          <h2 id="erros-comuns-t"><span class="h2-index">12</span> Erros comuns de quem está começando</h2>
 
-      <section id="erros-comuns">
-        <p class="kicker">12</p>
-        <h2>Erros comuns de quem está começando</h2>
-        <table>
-          <thead><tr><th>Sintoma</th><th>Causa provável</th></tr></thead>
+        <div class="table-scroll"><table class="topic-table">
+          <thead><tr><th scope="col">Sintoma</th><th scope="col">Causa provável</th></tr></thead>
           <tbody>
             <tr><td>O atributo fica <code>null</code> ou com valor errado depois do construtor</td><td>Esqueceu o <code>this.</code> quando o parâmetro tem o mesmo nome do atributo — <code>cor = cor;</code> não atribui nada útil.</td></tr>
             <tr><td>Qualquer classe consegue alterar os dados do objeto sem restrição</td><td>Atributo declarado <code>public</code> em vez de <code>private</code>, perdendo o encapsulamento.</td></tr>
@@ -857,24 +535,45 @@ O estudante Julio possui média 6.50
             <tr><td>O programa inteiro está dentro do <code>main</code></td><td>Nenhuma divisão em classes — perde exatamente a organização que a OO oferece.</td></tr>
             <tr><td>Erro de compilação em nomes de classe ou método</td><td>Quebra de convenção: classe começando com minúscula, ou método em PascalCase em vez de camelCase.</td></tr>
           </tbody>
-        </table>
-      </section>
+        </table></div>
+      
+        </section>
+        <section class="topic-section" id="do-codigo-ao-diagrama" aria-labelledby="do-codigo-ao-diagrama-t">
+          <h2 id="do-codigo-ao-diagrama-t"><span class="h2-index">13</span> Do código Java ao diagrama UML</h2>
 
-      <section id="resumo">
-        <p class="kicker">13</p>
-        <h2>Resumo e autoteste</h2>
+          <p>Tudo o que você escreveu em Java tem uma representação em UML — é essa ponte que as próximas partes do tópico usam o tempo todo. Compare a mesma classe nas duas linguagens:</p>
+          <figure class="figura figura--media"><p class="figura__dica-rolagem" aria-hidden="true">Deslize para ver o diagrama inteiro →</p><div class="figura__scroll"><svg viewBox="0 0 760 240" role="img" aria-labelledby="fig2-t fig2-d" xmlns="http://www.w3.org/2000/svg"><title id="fig2-t">A mesma classe em Java e em UML</title><desc id="fig2-d">À esquerda, a classe Carro em Java com atributos privados modelo e ligado e métodos públicos. À direita, a mesma classe em UML: nome no topo, atributos com sinal de menos e tipo depois dos dois-pontos, operações com sinal de mais e tipo de retorno no fim.</desc><rect x="20" y="20" width="330" height="200" rx="10" fill="#0d2436" stroke="#0d2436" stroke-width="1"/><text x="36" y="48" font-size="12.5" fill="#dce8f0" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" xml:space="preserve" style="white-space:pre">public class Carro {</text><text x="36" y="70" font-size="12.5" fill="#dce8f0" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" xml:space="preserve" style="white-space:pre">  private String modelo;</text><text x="36" y="92" font-size="12.5" fill="#dce8f0" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" xml:space="preserve" style="white-space:pre">  private boolean ligado;</text><text x="36" y="114" font-size="12.5" fill="#dce8f0" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" xml:space="preserve" style="white-space:pre"></text><text x="36" y="136" font-size="12.5" fill="#dce8f0" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" xml:space="preserve" style="white-space:pre">  public Carro(String modelo) {…}</text><text x="36" y="158" font-size="12.5" fill="#dce8f0" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" xml:space="preserve" style="white-space:pre">  public void ligar() {…}</text><text x="36" y="180" font-size="12.5" fill="#dce8f0" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" xml:space="preserve" style="white-space:pre">  public boolean isLigado() {…}</text><text x="36" y="202" font-size="12.5" fill="#dce8f0" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" xml:space="preserve" style="white-space:pre">}</text><path d="M365 120 L445 120" fill="none" stroke="#216887" stroke-width="2" stroke-linejoin="round" marker-end="url(#m-cheia)"/><text x="405" y="108" font-size="12" fill="#216887" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="700">UML</text><rect x="460" y="30" width="280" height="140" rx="3" fill="#fff" stroke="#102e46" stroke-width="1.5"/><rect x="460" y="30" width="280" height="30" rx="3" fill="#e3f1f4" stroke="#102e46" stroke-width="1.5"/><text x="600.0" y="50" font-size="14.5" fill="#102e46" text-anchor="middle" font-family="Space Grotesk, DM Sans, Arial, sans-serif" font-weight="700">Carro</text><path d="M460 60 L740 60" fill="none" stroke="#102e46" stroke-width="1.5" stroke-linejoin="round"/><path d="M460 106 L740 106" fill="none" stroke="#102e46" stroke-width="1.5" stroke-linejoin="round"/><text x="470" y="78" font-size="12" fill="#15232e" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace">- modelo : String</text><text x="470" y="96" font-size="12" fill="#15232e" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace">- ligado : boolean</text><text x="470" y="124" font-size="12" fill="#15232e" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace">+ Carro(modelo : String)</text><text x="470" y="142" font-size="12" fill="#15232e" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace">+ ligar() : void</text><text x="470" y="160" font-size="12" fill="#15232e" text-anchor="start" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace">+ isLigado() : boolean</text></svg></div><figcaption>Em UML o tipo vem <strong>depois</strong> do nome (<code>modelo : String</code>), <code>private</code> vira <code>-</code> e <code>public</code> vira <code>+</code>.</figcaption></figure>
+          <div class="table-scroll"><table class="topic-table">
+            <caption>Correspondência entre Java e a notação de classes da UML</caption>
+            <thead><tr><th scope="col">Em Java</th><th scope="col">Em UML</th></tr></thead>
+            <tbody>
+              <tr><td><code>private String modelo;</code></td><td><code>- modelo : String</code></td></tr>
+              <tr><td><code>public void ligar()</code></td><td><code>+ ligar() : void</code></td></tr>
+              <tr><td><code>protected</code> / sem modificador</td><td><code>#</code> / <code>~</code></td></tr>
+              <tr><td><code>static</code></td><td>membro <u>sublinhado</u></td></tr>
+              <tr><td><code>new Carro(…)</code> guardado em <code>fusca</code></td><td>objeto <code><u>fusca : Carro</u></code> (nome sublinhado)</td></tr>
+            </tbody></table></div>
+          <p>Você verá essa notação em detalhes no <a href="diagrama-classes.html">diagrama de classes</a>; antes, a <a href="introducao-uml.html">introdução a UML</a> explica o que é a linguagem e por que ela é usada.</p>
+          <h3>E depois?</h3>
+
+        <p>Com classes, objetos, atributos, métodos, construtores e encapsulamento consolidados, você já tem a base necessária para os próximos temas da disciplina: <strong>herança</strong> (uma classe reaproveitando características de outra), <strong>polimorfismo</strong> (um mesmo método se comportando de formas diferentes conforme a classe), <strong>interfaces</strong> e o cuidado com <strong>dependências</strong> entre classes. Todos esses conceitos são construídos em cima do que você revisou aqui — vale a pena garantir que classe, objeto, atributo, método, construtor e encapsulamento estejam bem firmes antes de avançar.</p>
+      
+
+        </section>
+        <section class="topic-section" id="resumo" aria-labelledby="resumo-t">
+          <h2 id="resumo-t"><span class="h2-index">14</span> Resumo e autoteste</h2>
+
         <p>Glossário rápido para revisar antes de uma prova ou antes de continuar os estudos:</p>
-        <div class="glossary">
-          <div><dt>Classe</dt><dd>Molde que define atributos e métodos de um tipo de objeto.</dd></div>
-          <div><dt>Objeto</dt><dd>Instância concreta de uma classe, criada com <code>new</code>, com estado próprio.</dd></div>
-          <div><dt>Atributo</dt><dd>Variável declarada na classe; guarda o estado de cada objeto.</dd></div>
-          <div><dt>Método</dt><dd>Bloco de código que define um comportamento do objeto (ou da classe, se <code>static</code>).</dd></div>
-          <div><dt>Construtor</dt><dd>Método especial, sem retorno e com o nome da classe, executado ao criar um objeto com <code>new</code>.</dd></div>
-          <div><dt>Encapsulamento</dt><dd>Esconder o estado interno (<code>private</code>) e expor acesso controlado por métodos públicos (get/set).</dd></div>
-          <div><dt><code>this</code></dt><dd>Referência ao próprio objeto; usada para diferenciar atributo de parâmetro com o mesmo nome.</dd></div>
-          <div><dt><code>static</code></dt><dd>Pertence à classe, não a um objeto específico — como o método <code>main</code>.</dd></div>
-        </div>
-        <h3>Teste rápido</h3>
+        <dl class="glossary">
+          <dt>Classe</dt><dd>Molde que define atributos e métodos de um tipo de objeto.</dd>
+          <dt>Objeto</dt><dd>Instância concreta de uma classe, criada com <code>new</code>, com estado próprio.</dd>
+          <dt>Atributo</dt><dd>Variável declarada na classe; guarda o estado de cada objeto.</dd>
+          <dt>Método</dt><dd>Bloco de código que define um comportamento do objeto (ou da classe, se <code>static</code>).</dd>
+          <dt>Construtor</dt><dd>Método especial, sem retorno e com o nome da classe, executado ao criar um objeto com <code>new</code>.</dd>
+          <dt>Encapsulamento</dt><dd>Esconder o estado interno (<code>private</code>) e expor acesso controlado por métodos públicos (get/set).</dd>
+          <dt><code>this</code></dt><dd>Referência ao próprio objeto; usada para diferenciar atributo de parâmetro com o mesmo nome.</dd>
+          <dt><code>static</code></dt><dd>Pertence à classe, não a um objeto específico — como o método <code>main</code>.</dd>
+        </dl><h3>Teste rápido</h3>
         <details>
           <summary>1. Qual a diferença entre classe e objeto?</summary>
           <p>Classe é o molde/planta; objeto é uma instância concreta criada a partir da classe, com valores próprios para seus atributos.</p>
@@ -888,83 +587,43 @@ O estudante Julio possui média 6.50
           <p>Para permitir validação de dados, liberdade de mudar a implementação interna sem afetar quem usa a classe, e deixar claro qual é o "contrato público" da classe.</p>
         </details>
         <details>
-          <summary>4. O método <code>main</code> é <code>static</code>. Por quê isso é necessário?</summary>
+          <summary>4. O método <code>main</code> é <code>static</code>. Por que isso é necessário?</summary>
           <p>Porque a JVM precisa executar esse método antes que qualquer objeto tenha sido criado. Métodos <code>static</code> pertencem à classe, não a uma instância, então podem rodar sem <code>new</code>.</p>
         </details>
         <details>
           <summary>5. Dois carros foram criados a partir da mesma classe <code>Carro</code>. Ligar um deles liga o outro também?</summary>
           <p>Não. Cada objeto tem sua própria cópia dos atributos (variáveis de instância) — alterar o estado de um objeto nunca afeta outro objeto, mesmo que sejam da mesma classe.</p>
         </details>
-      </section>
+      
+        </section>
+        <section class="topic-section" id="referencias" aria-labelledby="referencias-t">
+          <h2 id="referencias-t"><span class="h2-index">15</span> Referências</h2>
 
-      <section id="proximos-passos">
-        <p class="kicker">14</p>
-        <h2>Próximos passos</h2>
-        <p>Com classes, objetos, atributos, métodos, construtores e encapsulamento consolidados, você já tem a base necessária para os próximos temas da disciplina: <strong>herança</strong> (uma classe reaproveitando características de outra), <strong>polimorfismo</strong> (um mesmo método se comportando de formas diferentes conforme a classe), <strong>interfaces</strong> e o cuidado com <strong>dependências</strong> entre classes. Todos esses conceitos são construídos em cima do que você revisou aqui — vale a pena garantir que classe, objeto, atributo, método, construtor e encapsulamento estejam bem firmes antes de avançar.</p>
-      </section>
+          <ul class="refs">
+            <li>DEITEL, P.; DEITEL, H. <em>Java: como programar</em>. 10. ed. São Paulo: Pearson, 2017.</li>
+            <li>BEZERRA, E. <em>Princípios de análise e projeto de sistemas com UML</em>. 3. ed. Rio de Janeiro: Elsevier, 2015.</li>
+            <li>OMG. <em>Unified Modeling Language (UML), versão 2.5.1</em>, formal/17-12-05, dez. 2017. <a href="https://www.omg.org/spec/UML/2.5.1/PDF" target="_blank" rel="noopener">PDF da especificação</a>. <small>Seção 11.4 Classes (notação de classe, atributos e operações).</small></li>
+            <li><a href="https://www.omg.org/uml/" target="_blank" rel="noopener">OMG — página oficial da UML</a>.</li>
+            <li><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/index.html" target="_blank" rel="noopener">Oracle — The Java Tutorials: Classes and Objects</a> (documentação oficial, em inglês).</li>
+            <li>Material de aula da disciplina (slides de Orientação a Objetos).</li>
+          </ul>
 
-      <section id="referencias">
-        <p class="kicker">15</p>
-        <h2>Referências</h2>
-        <ul>
-          <li>DEITEL, H. M.; DEITEL, P. J. <em>Java: How to Program</em>. Pearson Prentice Hall, 2010 (também em português, <em>Java: Como Programar</em>).</li>
-          <li>BEZERRA, E. <em>Princípios de Análise e Projeto de Sistemas com UML</em>. Rio de Janeiro: Campus, 2007.</li>
-          <li>OMG. <em>OMG Unified Modeling Language (OMG UML)</em>, versão 2.5, 2015.</li>
-          <li>Material de aula original desta disciplina (slides de Orientação a Objetos).</li>
-          <li><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/index.html" target="_blank" rel="noopener">Oracle — The Java Tutorials: Classes and Objects</a> (documentação oficial, em inglês).</li>
-        </ul>
-      </section>
+        </section>
+        <div class="estudado">
+          <p>Terminou esta parte? Marque para acompanhar seu progresso no índice do tópico.</p>
+          <label><input type="checkbox" data-progresso-indice="0"> Marcar como estudado</label>
+        </div>
+        <nav class="topic-pager" aria-label="Navegação entre partes do tópico"><a class="topic-pager__link" href="../analise-e-projeto.html"><span class="topic-pager__eyebrow">← Índice</span><span class="topic-pager__title">Os 7 assuntos do tópico</span></a><a class="topic-pager__link topic-pager__link--next" href="introducao-uml.html" rel="next"><span class="topic-pager__eyebrow">Próxima parte →</span><span class="topic-pager__title">Introdução a UML</span></a></nav>
+      </article>
+    </main>
+  </div>
 
-      <footer>
-        Material de revisão preparado para acompanhar a aula de Orientação a Objetos. Se algo faltou na explicação, releia a seção correspondente com calma — os exemplos foram pensados para serem reproduzidos linha a linha em sua própria IDE.
-      </footer>
-
+  <footer class="topic-footer">
+    <div class="wrap">
+      <p><strong>Revisão de Orientação a Objetos</strong> · Análise e Projeto · Engenharia de Software</p>
+      <p><a href="../analise-e-projeto.html">Voltar ao índice do tópico</a></p>
     </div>
-  </main>
-</div>
-
-<script>
-  (function(){
-    var navBtn = document.getElementById('navBtn');
-    var tocNav = document.getElementById('tocNav');
-    navBtn.addEventListener('click', function(){
-      var open = tocNav.classList.toggle('open');
-      navBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-    tocNav.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){
-        tocNav.classList.remove('open');
-        navBtn.setAttribute('aria-expanded', 'false');
-      });
-    });
-
-    var progress = document.getElementById('progress');
-    function updateProgress(){
-      var h = document.documentElement;
-      var scrolled = h.scrollTop;
-      var height = h.scrollHeight - h.clientHeight;
-      progress.style.width = (height > 0 ? (scrolled / height) * 100 : 0) + '%';
-    }
-    document.addEventListener('scroll', updateProgress, {passive:true});
-    updateProgress();
-
-    var links = Array.prototype.slice.call(tocNav.querySelectorAll('a[href^="#"]'));
-    var targets = links.map(function(a){ return document.getElementById(a.getAttribute('href').slice(1)); })
-                        .filter(Boolean);
-    if('IntersectionObserver' in window){
-      var observer = new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){
-          var link = links.find(function(a){ return a.getAttribute('href') === '#' + entry.target.id; });
-          if(!link) return;
-          if(entry.isIntersecting){
-            links.forEach(function(a){ a.classList.remove('active'); });
-            link.classList.add('active');
-          }
-        });
-      }, {rootMargin:'-15% 0px -70% 0px', threshold:0});
-      targets.forEach(function(t){ observer.observe(t); });
-    }
-  })();
-</script>
+  </footer>
 </body>
+
 </html>
