@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aspectos Computacionais da Lógica</title>
+<meta name="description" content="Atividade de pesquisa, programação e apresentação — Lógica para Computação, 5ª fase de Engenharia da Computação.">
+<style>
+:root{
+  --bg:#f6f4ef; --fg:#1c232c; --muted:#5b6571; --card:#ffffff; --line:#e0dbd0;
+  --accent:#1f5fbf; --accent-soft:#e3ecfa; --gold:#e9a23b; --gold-soft:#fbf0dc;
+  --ok:#23855a; --ok-soft:#e1f3ea; --bad:#b83a2e; --bad-soft:#f8e3e0;
+  --code:#f1eee7;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#14181e; --fg:#e7e9ec; --muted:#9aa4b0; --card:#1c222a; --line:#2d3540;
+    --accent:#6ea3ff; --accent-soft:#1d2a40; --gold:#f0b85a; --gold-soft:#3a2f1b;
+    --ok:#4cc38a; --ok-soft:#173327; --bad:#ff7b6b; --bad-soft:#3a1f1c; --code:#232a33;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px}
+header.hero{background:linear-gradient(135deg,#123a7a,#1f5fbf 55%,#e9a23b);color:#fff;padding:48px 0 40px}
+.hero .kicker{text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;opacity:.9}
+.hero h1{font-size:clamp(1.8rem,4.5vw,2.8rem);line-height:1.15;margin:.3em 0 .25em}
+.hero p{max-width:720px;opacity:.95;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 12px;font-size:.85rem}
+nav.toc{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line)}
+nav.toc .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:8px;padding-bottom:8px}
+nav.toc a{white-space:nowrap;text-decoration:none;color:var(--muted);font-size:.88rem;padding:4px 10px;border-radius:6px}
+nav.toc a:hover{background:var(--accent-soft);color:var(--accent)}
+section{padding:36px 0 8px}
+h2{font-size:1.55rem;margin:0 0 .4em;display:flex;gap:.5em;align-items:baseline}
+h2 .n{color:var(--gold);font-variant-numeric:tabular-nums}
+h3{font-size:1.12rem;margin:1.2em 0 .3em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.topic{border-top:4px solid var(--accent)}
+.topic:nth-child(2){border-top-color:var(--gold)}
+.topic:nth-child(3){border-top-color:var(--ok)}
+.topic h3{margin-top:0}
+.muted{color:var(--muted)}
+.tag{display:inline-block;font-size:.75rem;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.tag.gold{background:var(--gold-soft);color:#9a6412}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag.gold{color:var(--gold)}}
+.steps{list-style:none;padding:0;margin:0;counter-reset:s}
+.steps>li{position:relative;padding:0 0 18px 52px;counter-increment:s}
+.steps>li::before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:700}
+.steps>li::after{content:"";position:absolute;left:17px;top:38px;bottom:2px;width:2px;background:var(--line)}
+.steps>li:last-child::after{display:none}
+.steps h3{margin:.25em 0 .2em}
+.steps ul{margin:.3em 0}
+details{margin:.4em 0}
+summary{cursor:pointer;font-weight:600;color:var(--accent)}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em}
+code{background:var(--code);padding:1px 5px;border-radius:4px}
+pre{background:var(--code);padding:14px;border-radius:8px;overflow-x:auto;line-height:1.45}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+th{background:var(--accent-soft);color:var(--fg);font-weight:700}
+tr:last-child td{border-bottom:none}
+td.peso{font-weight:700;text-align:center;white-space:nowrap}
+.rubric td:nth-child(3){background:var(--ok-soft)}
+.rubric td:nth-child(6){background:var(--bad-soft)}
+.req{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;align-items:start}
+.req b{color:var(--accent);font-variant-numeric:tabular-nums}
+.callout{border-left:4px solid var(--gold);background:var(--gold-soft);padding:12px 16px;border-radius:0 10px 10px 0;margin:14px 0}
+.cta{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;background:linear-gradient(135deg,var(--accent-soft),var(--gold-soft));border:1px solid var(--line);border-radius:14px;padding:22px}
+.btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;padding:10px 18px;border-radius:10px}
+.btn:hover{filter:brightness(1.08)}
+.checklist{list-style:none;padding:0}
+.checklist li{padding:4px 0 4px 30px;position:relative}
+.checklist li::before{content:"☐";position:absolute;left:4px;color:var(--accent);font-size:1.1em}
+.bar{display:flex;height:34px;border-radius:8px;overflow:hidden;font-size:.78rem;color:#fff;font-weight:600;margin:10px 0 4px}
+.bar span{display:grid;place-items:center;white-space:nowrap;overflow:hidden}
+.refs li{margin:.35em 0}
+footer{padding:30px 0 50px;color:var(--muted);font-size:.9rem}
+@media print{nav.toc{display:none} header.hero{color:#000;background:none} .chip{border-color:#999}}
+
+/* ---------- Glossário ---------- */
+.termo{border-bottom:1.5px dotted var(--accent);cursor:help;border-radius:2px}
+.termo:hover,.termo:focus{background:var(--accent-soft);outline:none}
+.termo:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+#glossario-tip{position:fixed;z-index:100;max-width:360px;background:var(--card);color:var(--fg);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:10px 14px;font-size:.9rem;line-height:1.5;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+#glossario-tip strong{display:block;color:var(--accent);margin-bottom:2px}
+#glossario-tip[hidden]{display:none}
+.leitura{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 10px 10px 0;margin:22px 0 0}
+dl.glossario{display:grid;grid-template-columns:minmax(160px,260px) 1fr;gap:0;margin:10px 0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card)}
+dl.glossario dt,dl.glossario dd{margin:0;padding:10px 14px;border-bottom:1px solid var(--line)}
+dl.glossario dt{font-weight:700;background:var(--accent-soft)}
+dl.glossario dt:target,dl.glossario dt:target+dd{background:var(--gold-soft)}
+@media (max-width:640px){dl.glossario{grid-template-columns:1fr}dl.glossario dt{border-bottom:none;padding-bottom:2px}}
+.passos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin:12px 0}
+.passo{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.passo .cod{display:inline-block;font-weight:800;color:#fff;background:var(--accent);border-radius:6px;padding:0 8px;margin-right:6px}
+.passo h4{margin:0 0 6px;font-size:1rem}
+.passo p{margin:0}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Lógica para Computação · Engenharia da Computação · 5ª fase</div>
+    <h1>Aspectos computacionais da lógica proposicional</h1>
+    <p>Atividade de pesquisa, programação e apresentação em grupo. Vocês vão investigar como o computador <em>representa</em> fórmulas lógicas, como ele <em>procura modelos</em> que as satisfaçam e por que quase todo resolvedor trabalha com a <em>forma normal conjuntiva</em>. No fim, vão programar isso e aplicar a um problema real.</p>
+    <div class="chips">
+      <span class="chip">👥 Grupos de 3 a 4 pessoas</span>
+      <span class="chip">🎤 30 min de apresentação + arguição</span>
+      <span class="chip">📈 Nível intermediário</span>
+      <span class="chip">💻 Exige programação</span>
+      <span class="chip">📦 Entrega em repositório GitHub</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Seções">
+  <div class="wrap">
+    <a href="#objetivos">Objetivos</a>
+    <a href="#topicos">Tópicos</a>
+    <a href="#roteiro">Roteiro de pesquisa</a>
+    <a href="#programacao">Desafio de programação</a>
+    <a href="#apresentacao">Apresentação</a>
+    <a href="#entregaveis">Entregáveis</a>
+    <a href="#avaliacao">Critérios de avaliação</a>
+    <a href="#exemplo">Exemplo de entrega</a>
+    <a href="#referencias">Materiais para estudo</a>
+    <a href="#glossario">Glossário</a>
+  </div>
+</nav>
+
+<main class="wrap">
+<div class="leitura">📖 <strong>Como ler esta página:</strong> cada termo técnico, símbolo ou sigla (como <em>DPLL</em>, <em>DIMACS</em>, <em>φ</em> ou <em>FNC</em>) aparece <strong>sublinhado com pontilhado</strong> na primeira vez em que é usado em cada seção. Passe o mouse ou toque nele para ver o que significa. Todos estão reunidos no <a href="#glossario">Glossário</a>, no fim da página.</div>
+
+<section id="objetivos">
+  <h2><span class="n">1</span> Objetivos de aprendizagem</h2>
+  <p>Ao final da atividade, cada integrante do grupo deve ser capaz de:</p>
+  <ul>
+    <li><strong>Representar</strong> fórmulas da lógica proposicional em uma estrutura de dados (árvore sintática) e explicar como a precedência dos conectivos determina essa árvore.</li>
+    <li><strong>Avaliar</strong> uma fórmula dada uma valoração e explicar o custo dessa avaliação.</li>
+    <li><strong>Distinguir</strong> fórmulas satisfatíveis, insatisfatíveis e válidas, e usar a relação <em>φ é válida ⇔ ¬φ é insatisfatível</em>.</li>
+    <li><strong>Implementar</strong> uma busca de modelos (pelo menos a força bruta pela tabela-verdade) e discutir por que o problema SAT é difícil (NP-completo).</li>
+    <li><strong>Converter</strong> fórmulas para a forma normal conjuntiva (FNC), reconhecer quando a conversão explode de tamanho e justificar o uso da FNC pelos resolvedores SAT.</li>
+    <li><strong>Modelar</strong> um problema do mundo real como fórmula proposicional e interpretar o modelo encontrado pelo programa.</li>
+  </ul>
+</section>
+
+<section id="topicos">
+  <h2><span class="n">2</span> Os três tópicos</h2>
+  <p class="muted">A apresentação deve cobrir os três tópicos de forma <strong>integrada</strong>: o mesmo problema-contexto atravessa as três partes.</p>
+  <div class="grid3">
+    <div class="card topic">
+      <span class="tag">Tópico 1</span>
+      <h3>Representação computacional de fórmulas lógicas</h3>
+      <p class="muted">O que vocês devem conseguir explicar:</p>
+      <ul>
+        <li>Gramática (BNF) das fórmulas e precedência dos conectivos.</li>
+        <li>Árvore sintática abstrata (AST) e a sua construção por um <em>parser</em>.</li>
+        <li>Outras representações: texto, notação prefixa (polonesa), DAG com compartilhamento de subfórmulas.</li>
+        <li>Avaliação recursiva e o seu custo em relação ao tamanho da fórmula.</li>
+      </ul>
+    </div>
+    <div class="card topic">
+      <span class="tag gold">Tópico 2</span>
+      <h3>Satisfatibilidade e busca de modelos</h3>
+      <p class="muted">O que vocês devem conseguir explicar:</p>
+      <ul>
+        <li>Valoração, modelo, fórmula satisfatível, insatisfatível e válida.</li>
+        <li>Busca exaustiva pela tabela-verdade e o custo 2<sup>n</sup>.</li>
+        <li>O problema SAT e o teorema de Cook–Levin (NP-completude).</li>
+        <li>Melhorias da busca: retrocesso (<em>backtracking</em>), propagação unitária, literal puro, algoritmo DPLL.</li>
+      </ul>
+    </div>
+    <div class="card topic">
+      <span class="tag" style="background:var(--ok-soft);color:var(--ok)">Tópico 3</span>
+      <h3>Forma normal conjuntiva</h3>
+      <p class="muted">O que vocês devem conseguir explicar:</p>
+      <ul>
+        <li>Literal, cláusula e FNC; relação com a forma normal disjuntiva.</li>
+        <li>Algoritmo de conversão: eliminar → e ↔, empurrar a negação (FNN), distribuir ∨ sobre ∧.</li>
+        <li>A explosão exponencial da distribuição e a transformação de Tseitin (fórmula <em>equisatisfatível</em>).</li>
+        <li>O formato DIMACS e por que os resolvedores SAT exigem FNC.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="roteiro">
+  <h2><span class="n">3</span> Roteiro de pesquisa sugerido</h2>
+  <p>Este roteiro é uma sugestão de caminho. Cada etapa traz perguntas-guia: se o grupo consegue responder a todas com as próprias palavras, está pronto para a próxima.</p>
+
+  <ol class="steps">
+    <li>
+      <h3>Revisar a base: sintaxe e semântica</h3>
+      <ul>
+        <li>Quais são os símbolos da linguagem proposicional? Qual é a diferença entre <em>sintaxe</em> e <em>semântica</em>?</li>
+        <li>O que é uma valoração? Quantas valorações existem para uma fórmula com <em>n</em> variáveis?</li>
+        <li>Monte à mão a tabela-verdade de <code>(p → q) ↔ (¬q → ¬p)</code>. O que ela mostra?</li>
+      </ul>
+    </li>
+    <li>
+      <h3>Representação computacional</h3>
+      <ul>
+        <li>Escreva a gramática das fórmulas em BNF. Por que a gramática “ingênua” é ambígua e como a precedência resolve isso?</li>
+        <li>Desenhe a árvore sintática de <code>p ∧ q → r ∨ ¬s</code>. Onde ficam os parênteses “invisíveis”?</li>
+        <li>Como uma árvore pode ser guardada na memória (classes, registros, listas aninhadas)? E como um DAG economiza espaço quando a mesma subfórmula aparece várias vezes?</li>
+        <li>Qual é a complexidade de avaliar uma fórmula de tamanho <em>n</em> dada uma valoração?</li>
+      </ul>
+      <details><summary>Para ir além</summary>
+        <p>Pesquisem como linguagens funcionais representam fórmulas com tipos algébricos (por exemplo, <code>data Formula = Var String | Not Formula | And Formula Formula ...</code> em Haskell) e comparem com uma hierarquia de classes em Java/C++ ou com dicionários em Python.</p>
+      </details>
+    </li>
+    <li>
+      <h3>Satisfatibilidade e busca de modelos</h3>
+      <ul>
+        <li>Definam modelo, fórmula satisfatível, insatisfatível e válida. Deem um exemplo de cada.</li>
+        <li>Por que <em>testar validade</em> pode ser reduzido a <em>testar insatisfatibilidade</em>?</li>
+        <li>Quantas linhas a força bruta examina com 10, 30 e 60 variáveis? Estimem o tempo supondo 10<sup>9</sup> avaliações por segundo.</li>
+        <li>O que significa dizer que SAT é NP-completo? Por que <em>verificar</em> um modelo é fácil, mas <em>encontrar</em> um pode ser difícil?</li>
+        <li>Como o retrocesso, a propagação unitária e o literal puro podam a busca? Executem o DPLL à mão em um exemplo pequeno.</li>
+      </ul>
+      <details><summary>Para ir além</summary>
+        <p>Leiam sobre CDCL (<em>conflict-driven clause learning</em>), a técnica dos resolvedores modernos como MiniSat, Glucose e CaDiCaL, e sobre aplicações industriais: verificação de circuitos, planejamento, escalonamento, criptoanálise.</p>
+      </details>
+    </li>
+    <li>
+      <h3>Forma normal conjuntiva</h3>
+      <ul>
+        <li>O que são literal e cláusula? Por que uma cláusula vazia representa ⊥?</li>
+        <li>Quais equivalências justificam cada passo da conversão (eliminação de implicação, De Morgan, dupla negação, distributividade)?</li>
+        <li>Convertam <code>(x₁ ∧ y₁) ∨ (x₂ ∧ y₂) ∨ (x₃ ∧ y₃)</code>. Quantas cláusulas surgem? E com <em>n</em> termos?</li>
+        <li>O que é a transformação de Tseitin? Por que o resultado é <em>equisatisfatível</em>, mas não equivalente?</li>
+        <li>Como é o formato DIMACS usado pelos resolvedores?</li>
+      </ul>
+    </li>
+    <li>
+      <h3>Escolher e modelar um problema-contexto</h3>
+      <ul>
+        <li>Escolham um problema (veja as sugestões na seção 4) e definam as variáveis proposicionais: o que significa cada uma ser verdadeira?</li>
+        <li>Escrevam as restrições em português e depois como fórmulas. Revisem com outro integrante: a tradução está fiel?</li>
+        <li>Criem uma variante do problema que seja <strong>insatisfatível</strong> e expliquem por quê.</li>
+      </ul>
+    </li>
+    <li>
+      <h3>Programar</h3>
+      <ul>
+        <li>Implementem os requisitos da seção 4, testando cada parte antes de juntar tudo.</li>
+        <li>Comparem a saída do programa com o que vocês calcularam à mão nas etapas anteriores.</li>
+      </ul>
+    </li>
+    <li>
+      <h3>Preparar a apresentação</h3>
+      <ul>
+        <li>Montem os slides seguindo a estrutura da seção 5 e ensaiem com cronômetro.</li>
+        <li>Preparem a demonstração ao vivo e um plano B (vídeo curto ou capturas de tela).</li>
+        <li>Todos devem conseguir explicar qualquer parte: a arguição pode ser dirigida a qualquer integrante.</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3>Sugestão de cronograma</h3>
+  <div class="bar" role="img" aria-label="Três aulas: pesquisa, programação, apresentação">
+    <span style="flex:1;background:#1f5fbf">Aula 1 · Etapas 1–4</span>
+    <span style="flex:1;background:#b87a1e">Aula 2 · Etapas 5–6</span>
+    <span style="flex:1;background:#23855a">Aula 3 · Etapa 7</span>
+  </div>
+  <p class="muted" style="font-size:.9rem">Na aula 1, vocês pesquisam e resolvem exemplos à mão; na aula 2, modelam o problema e programam; na aula 3, testam, preparam a apresentação e ensaiam.</p>
+</section>
+
+<section id="programacao">
+  <h2><span class="n">4</span> Desafio de programação</h2>
+  <p>O grupo deve programar um pequeno “kit de lógica” e usá-lo para resolver o problema-contexto escolhido. A linguagem é livre (Python, JavaScript, Java, C/C++, Haskell…). <strong>Não é permitido usar bibliotecas de lógica prontas para os requisitos obrigatórios</strong>; elas podem ser usadas apenas para comparar resultados.</p>
+
+  <div class="card">
+    <h3 style="margin-top:0">Requisitos obrigatórios</h3>
+    <div class="req">
+      <b>R1</b><span><strong>Estrutura de dados</strong> para fórmulas (árvore sintática) com os conectivos ¬, ∧, ∨, → e ↔. As fórmulas podem ser construídas por código.</span>
+      <b>R2</b><span><strong>Impressão e avaliação</strong>: imprimir a fórmula em notação infixa com parênteses corretos e avaliá-la dada uma valoração.</span>
+      <b>R3</b><span><strong>Busca de modelos por força bruta</strong>: dizer se a fórmula é satisfatível, mostrar um modelo, contar os modelos e classificar a fórmula como válida, contingente ou insatisfatível.</span>
+      <b>R4</b><span><strong>Conversão para FNC</strong> pelos passos clássicos (eliminar → e ↔, forma normal da negação, distribuição), com saída em forma de lista de cláusulas.</span>
+      <b>R5</b><span><strong>Aplicação a um problema-contexto</strong> com pelo menos 5 variáveis e 5 restrições, incluindo uma variante insatisfatível. O programa deve mostrar a solução encontrada em linguagem do problema (não só V/F).</span>
+      <b>R6</b><span><strong>Testes</strong>: pelo menos 5 casos, cobrindo uma tautologia, uma contradição e uma fórmula contingente, além de verificar que a FNC gerada é equivalente à fórmula original (comparando tabelas-verdade).</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Extras (bônus de até +1,25 ponto)</h3>
+    <ul>
+      <li><strong>Parser</strong> que lê fórmulas em texto, como <code>(p -&gt; q) &amp; ~r</code> (+0,25).</li>
+      <li><strong>DPLL</strong> com propagação unitária, mostrando o rastro da busca (+0,25).</li>
+      <li><strong>Tseitin e DIMACS</strong>, conferindo o resultado com um resolvedor real (MiniSat, PySAT etc.) (+0,25).</li>
+      <li><strong>Visualização ou jogo interativo</strong> que ajude a turma a entender o conteúdo (+0,5).</li>
+    </ul>
+  </div>
+
+  <h3>Exemplo de saída esperada (formato livre)</h3>
+<pre>Fórmula:   (p ∨ q) ∧ (p → r) ∧ ¬r
+Variáveis: p, q, r        Nós na árvore: 10
+Tabela-verdade: 8 valorações testadas, 1 modelo
+Classificação: satisfatível (contingente)
+Modelo:    p = F, q = V, r = F
+FNC:       (p ∨ q) ∧ (¬p ∨ r) ∧ (¬r)
+FNC equivalente à original? sim (8/8 linhas iguais)</pre>
+
+  <h3>Sugestões de problema-contexto</h3>
+  <p>Cada grupo vai trabalhar com um problema diferente. Assim que escolherem o de vocês, me contem, para que eu possa evitar repetições entre os grupos. Quero ver criatividade: a tabela abaixo traz apenas pontos de partida. Procurem outros problemas, de preferência ligados ao dia a dia de vocês, ao curso, a um esporte, a um jogo ou a um hobby. Quanto mais original e bem justificado for o problema, melhor.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Contexto</th><th>Ideia de variáveis</th><th>Dificuldade</th></tr></thead>
+      <tbody>
+        <tr><td>Coloração de mapa (mesorregiões de um estado com 3 cores)</td><td><code>r_c</code>: “a região r recebe a cor c”</td><td>★★☆</td></tr>
+        <tr><td>Sudoku 4×4</td><td><code>x_l_c_v</code>: “a célula (l, c) contém v”</td><td>★★★</td></tr>
+        <tr><td>Escala de monitores do laboratório</td><td><code>p_t</code>: “a pessoa p trabalha no turno t”</td><td>★★☆</td></tr>
+        <tr><td>Calendário de provas sem conflito</td><td><code>d_s</code>: “a disciplina d tem prova no slot s”</td><td>★★☆</td></tr>
+        <tr><td>Problema das 4 rainhas</td><td><code>q_l_c</code>: “há rainha na posição (l, c)”</td><td>★★★</td></tr>
+        <tr><td>Configuração de um computador (peças compatíveis)</td><td><code>peça</code>: “a peça foi escolhida”</td><td>★☆☆</td></tr>
+        <tr><td>Semáforo de um cruzamento</td><td><code>via_cor</code>: “a via está com a cor”</td><td>★☆☆</td></tr>
+        <tr><td>Enigma de lógica (estilo “quem mora em qual casa”)</td><td><code>pessoa_casa</code></td><td>★★★</td></tr>
+        <tr><td><em>Escalação de um time de vôlei</em></td><td><em>Reservado: é o tema do exemplo de entrega</em></td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="apresentacao">
+  <h2><span class="n">5</span> Estrutura sugerida da apresentação</h2>
+  <p>Vocês terão <strong>30 minutos</strong> para apresentar, seguidos da arguição. Todos os integrantes devem falar. A tabela abaixo mostra o que precisa aparecer na apresentação; quanto tempo dedicar a cada parte e onde dar mais ênfase é decisão de vocês.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Bloco</th><th>Conteúdo</th></tr></thead>
+      <tbody>
+        <tr><td>Contexto</td><td>O problema escolhido, as variáveis e as restrições em português.</td></tr>
+        <tr><td>Representação</td><td>Gramática, árvore sintática de uma restrição do problema, estrutura de dados no código, avaliação.</td></tr>
+        <tr><td>SAT e busca de modelos</td><td>Definições, força bruta e o seu custo, NP-completude, melhorias (DPLL, se feito). Mostrar um modelo e o caso insatisfatível.</td></tr>
+        <tr><td>FNC</td><td>Conversão passo a passo de uma restrição, exemplo de explosão, por que os resolvedores usam FNC.</td></tr>
+        <tr><td>Demonstração ao vivo</td><td>Rodar o programa no problema e na variante insatisfatível.</td></tr>
+        <tr><td>Conclusão</td><td>O que aprenderam, limitações, o que fariam a seguir.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="entregaveis">
+  <h2><span class="n">6</span> Entregáveis</h2>
+  <div class="card">
+    <ul class="checklist">
+      <li>Repositório no GitHub com o código-fonte, organizado e comentado.</li>
+      <li><code>README.md</code> com: integrantes, contexto escolhido, como executar, exemplos de uso e divisão de tarefas.</li>
+      <li>Testes automatizados (requisito R6) e instruções para executá-los.</li>
+      <li>Slides (PDF ou link) ou uma página HTML publicada no GitHub Pages.</li>
+      <li>Lista dos materiais que vocês estudaram.</li>
+      <li>Autoavaliação curta do grupo usando a rubrica da seção 7.</li>
+    </ul>
+  </div>
+  <div class="callout">
+    <strong>Sobre o uso de ferramentas de IA.</strong> Vocês podem usar ferramentas de IA para tirar dúvidas e revisar código, desde que declarem esse uso no README. Na arguição, posso pedir a qualquer integrante que explique qualquer trecho do código: código que vocês não souberem explicar não conta como implementado.
+  </div>
+</section>
+
+<section id="avaliacao">
+  <h2><span class="n">7</span> Critérios de avaliação</h2>
+  <p>A nota vai de 0 a 10. Cada critério é avaliado em quatro níveis. Os pesos indicam o valor máximo de cada critério; os níveis correspondem aproximadamente a 100%, 75%, 50% e 0–25% do peso.</p>
+  <div class="table-wrap">
+    <table class="rubric">
+      <thead>
+        <tr><th>Critério</th><th>Peso</th><th>Excelente</th><th>Bom</th><th>Regular</th><th>Insuficiente</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>C1. Representação computacional</strong></td><td class="peso">1,5</td>
+          <td>Explica gramática, precedência e árvore sintática; justifica a estrutura escolhida e compara com outras representações (texto, prefixa, DAG); explica o custo da avaliação.</td>
+          <td>Explica e usa a árvore corretamente, com comparação superficial entre representações.</td>
+          <td>Usa uma representação sem justificá-la ou com erros de precedência.</td>
+          <td>Não aborda o tópico ou apresenta conceitos incorretos.</td>
+        </tr>
+        <tr>
+          <td><strong>C2. Satisfatibilidade e busca de modelos</strong></td><td class="peso">2,0</td>
+          <td>Define com precisão modelo, SAT, INSAT e validade; usa a relação validade ⇔ insatisfatibilidade da negação; explica a força bruta, o custo 2<sup>n</sup>, a NP-completude e pelo menos uma técnica de poda (ex.: DPLL).</td>
+          <td>Define corretamente e explica a força bruta e o seu custo; menciona NP-completude.</td>
+          <td>Confunde conceitos (ex.: satisfatível com válida) ou não discute custo.</td>
+          <td>Não aborda o tópico ou tem erros graves.</td>
+        </tr>
+        <tr>
+          <td><strong>C3. Forma normal conjuntiva</strong></td><td class="peso">1,5</td>
+          <td>Apresenta o algoritmo passo a passo com as equivalências usadas, mostra um exemplo de explosão exponencial, explica Tseitin (equisatisfatibilidade) e por que os resolvedores usam FNC.</td>
+          <td>Converte corretamente e explica os passos; menciona o problema de tamanho.</td>
+          <td>Converte com erros ou só mostra o resultado, sem os passos.</td>
+          <td>Não aborda o tópico.</td>
+        </tr>
+        <tr>
+          <td><strong>C4. Implementação</strong></td><td class="peso">2,5</td>
+          <td>Atende R1–R6; código organizado e legível; testes passam; README permite executar sem ajuda; demonstração ao vivo funciona.</td>
+          <td>Atende os requisitos com pequenas falhas ou poucos testes.</td>
+          <td>Atende parte dos requisitos ou só roda com intervenção.</td>
+          <td>Não entrega código funcional ou o grupo não sabe explicá-lo.</td>
+        </tr>
+        <tr>
+          <td><strong>C5. Modelagem do problema-contexto</strong></td><td class="peso">1,0</td>
+          <td>Variáveis com significado claro; restrições traduzidas fielmente; variante insatisfatível bem justificada; modelo interpretado na linguagem do problema.</td>
+          <td>Modelagem correta, com pequenas imprecisões na tradução ou na interpretação.</td>
+          <td>Modelagem incompleta ou com restrições erradas.</td>
+          <td>Sem contexto ou contexto trivial.</td>
+        </tr>
+        <tr>
+          <td><strong>C6. Comunicação</strong></td><td class="peso">1,0</td>
+          <td>Respeita o tempo; fala clara; slides limpos, com exemplos e figuras; todos participam de forma equilibrada.</td>
+          <td>Boa clareza, com pequenos problemas de tempo ou de slides.</td>
+          <td>Leitura de slides, excesso de texto ou participação desigual.</td>
+          <td>Apresentação desorganizada ou muito fora do tempo.</td>
+        </tr>
+        <tr>
+          <td><strong>C7. Arguição</strong></td><td class="peso">0,5</td>
+          <td>Qualquer integrante responde com segurança e precisão.</td>
+          <td>Respostas corretas, com alguma hesitação.</td>
+          <td>Respostas parciais ou concentradas em uma pessoa.</td>
+          <td>Não consegue responder.</td>
+        </tr>
+        <tr>
+          <td><strong>Total</strong></td><td class="peso">10,0</td>
+          <td colspan="4">Bônus da seção 4 até +1,25 (nota final limitada a 10). Desconto de 0,5 ponto se a apresentação passar de 30 minutos ou se a demonstração falhar sem plano B.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Um passo para atender cada critério</h3>
+  <p>Para cada critério, uma ação concreta que leva o grupo ao nível “Excelente”:</p>
+  <div class="passos">
+    <div class="passo"><h4><span class="cod">C1</span>Representação computacional</h4><p><strong>Passo:</strong> Escolham uma regra do seu problema, desenhem à mão a árvore sintática dela e mostrem, no código, a estrutura de dados que guarda essa mesma árvore. Expliquem por que a precedência dos conectivos deu aquela forma e escrevam a mesma regra em notação prefixa.</p></div>
+    <div class="passo"><h4><span class="cod">C2</span>Satisfatibilidade e busca de modelos</h4><p><strong>Passo:</strong> Rodem a força bruta no problema e na variante insatisfatível e mostrem numa tabela quantas valorações foram testadas (2ⁿ). Depois, executem o DPLL à mão num caso pequeno, indicando cada propagação unitária e cada decisão.</p></div>
+    <div class="passo"><h4><span class="cod">C3</span>Forma normal conjuntiva</h4><p><strong>Passo:</strong> Convertam uma regra do problema para FNC na frente da turma, dizendo em cada passo qual equivalência foi usada (eliminar → e ↔, De Morgan, dupla negação, distributividade). Mostrem também um exemplo em que a distribuição explode e como a transformação de Tseitin evita isso.</p></div>
+    <div class="passo"><h4><span class="cod">C4</span>Implementação</h4><p><strong>Passo:</strong> Antes de entregar, peçam a alguém de outro grupo que baixe o repositório e rode o programa e os testes automatizados seguindo só o README. Corrijam tudo o que a pessoa não conseguir fazer sozinha.</p></div>
+    <div class="passo"><h4><span class="cod">C5</span>Modelagem do problema-contexto</h4><p><strong>Passo:</strong> Montem uma tabela com a variável e o que ela significa, a regra em português e a regra como fórmula. Confiram cada linha com uma valoração concreta: a fórmula dá V quando a situação é permitida e F quando não é?</p></div>
+    <div class="passo"><h4><span class="cod">C6</span>Comunicação</h4><p><strong>Passo:</strong> Façam um ensaio completo cronometrado, com cada integrante apresentando a própria parte, e ajustem o conteúdo para caber nos 30 minutos.</p></div>
+    <div class="passo"><h4><span class="cod">C7</span>Arguição</h4><p><strong>Passo:</strong> Cada integrante escolhe três perguntas sobre partes que não apresentou (por exemplo: “o que é um modelo?” ou “por que o resolvedor exige FNC?”) e responde em voz alta para o grupo.</p></div>
+    <div class="passo"><h4><span class="cod">+</span>Bônus</h4><p><strong>Passo:</strong> Escolham um dos extras da seção 4 e usem-no na demonstração ao vivo, explicando o que ele acrescenta.</p></div>
+  </div>
+</section>
+
+<section id="exemplo">
+  <h2><span class="n">8</span> Exemplo de entrega</h2>
+  <div class="cta">
+    <div>
+      <strong>Técnico Lógico: escalando o time de vôlei com SAT</strong><br>
+      <span class="muted">Uma entrega-modelo completa, que atende a todos os critérios acima. Inclui laboratório interativo, testes automáticos e um jogo de vôlei em que você escala o time resolvendo fórmulas.</span>
+    </div>
+    <a class="btn" href="apresentacao1-exemplo-entrega.html">Abrir o exemplo 🏐</a>
+  </div>
+  <p class="muted" style="font-size:.9rem">O exemplo mostra o <em>nível esperado</em>, não um modelo a ser copiado: o tema vôlei está reservado e cada grupo deve construir o próprio contexto.</p>
+</section>
+
+<section id="referencias">
+  <h2><span class="n">9</span> Materiais para estudo</h2>
+  <p>Livros, artigos e ferramentas para vocês consultarem durante a pesquisa.</p>
+  <ul class="refs">
+    <li>SILVA, F. S. C.; FINGER, M.; MELO, A. C. V. <em>Lógica para Computação</em>. São Paulo: Thomson Learning, 2006. Capítulos sobre aspectos computacionais da lógica proposicional.</li>
+    <li>HUTH, M.; RYAN, M. <em>Lógica em Ciência da Computação: modelagem e argumentação sobre sistemas</em>. 2. ed. Rio de Janeiro: LTC, 2008.</li>
+    <li>BEN-ARI, M. <em>Mathematical Logic for Computer Science</em>. 3. ed. London: Springer, 2012.</li>
+    <li>BIERE, A.; HEULE, M.; VAN MAAREN, H.; WALSH, T. (ed.). <em>Handbook of Satisfiability</em>. 2. ed. Amsterdam: IOS Press, 2021.</li>
+    <li>DAVIS, M.; LOGEMANN, G.; LOVELAND, D. A machine program for theorem-proving. <em>Communications of the ACM</em>, v. 5, n. 7, p. 394–397, 1962.</li>
+    <li>COOK, S. A. The complexity of theorem-proving procedures. In: <em>Proceedings of the 3rd ACM Symposium on Theory of Computing</em>, 1971.</li>
+    <li>TSEITIN, G. S. On the complexity of derivation in propositional calculus. In: <em>Automation of Reasoning 2</em>. Springer, 1983 (original de 1968).</li>
+    <li>PySAT — biblioteca Python de interface para resolvedores SAT: <a href="https://pysathq.github.io">pysathq.github.io</a>. MiniSat: <a href="http://minisat.se">minisat.se</a>.</li>
+  </ul>
+</section>
+
+<section id="glossario">
+  <h2><span class="n">10</span> Glossário</h2>
+  <p>Significado de todos os termos, símbolos e siglas usados na página, em ordem alfabética. No texto, os termos aparecem <span class="termo" style="cursor:default">sublinhados com pontilhado</span>: passe o mouse ou toque neles para ver a explicação sem sair do lugar.</p>
+  <dl class="glossario">
+    <dt id="g-altura">Altura da árvore</dt><dd>Número de níveis entre a raiz da árvore e a folha mais distante.</dd>
+    <dt id="g-arguicao">Arguição</dt><dd>Perguntas feitas ao grupo depois da apresentação, para verificar se todos entenderam o que apresentaram.</dd>
+    <dt id="g-aridade">Aridade</dt><dd>Quantidade de argumentos de um conectivo: ¬ tem aridade 1; ∧, ∨, → e ↔ têm aridade 2.</dd>
+    <dt id="g-ast">Árvore sintática (AST)</dt><dd>Representação da fórmula como uma árvore: cada nó interno é um conectivo e cada folha é uma variável. A forma da árvore já guarda os parênteses. AST vem do inglês abstract syntax tree.</dd>
+    <dt id="g-assoc">Associatividade</dt><dd>Regra que decide como agrupar conectivos iguais em sequência. A → B → C é lido como A → (B → C): dizemos que → associa à direita.</dd>
+    <dt id="g-iff">↔ (bicondicional, “se e somente se”)</dt><dd>p ↔ q é verdadeira quando p e q têm o mesmo valor. Ex.: E ↔ ¬S, “Elmar joga exatamente quando Saulo não joga”. No teclado, escrevemos &lt;-&gt;.</dd>
+    <dt id="g-bnf">BNF (forma de Backus–Naur)</dt><dd>Notação para escrever gramáticas com regras do tipo nome ::= alternativas. O símbolo | separa alternativas, * significa “repetir zero ou mais vezes” e ? significa “opcional”.</dd>
+    <dt id="g-cdcl">CDCL</dt><dd>Conflict-Driven Clause Learning (aprendizado de cláusulas guiado por conflitos): evolução do DPLL em que cada conflito gera uma cláusula nova, “aprendida”, que impede repetir o mesmo erro.</dd>
+    <dt id="g-clausula">Cláusula</dt><dd>Disjunção (∨) de literais, como (¬A ∨ J). É verdadeira quando pelo menos um de seus literais é verdadeiro.</dd>
+    <dt id="g-unitaria">Cláusula unitária</dt><dd>Cláusula com um único literal, como (¬J). Ela força o valor da variável.</dd>
+    <dt id="g-vazia">Cláusula vazia (□)</dt><dd>Cláusula sem nenhum literal. Nunca pode ser verdadeira; quando aparece, as escolhas feitas levam a conflito.</dd>
+    <dt id="g-complex">Complexidade e notação O( )</dt><dd>Medida de como o tempo de um algoritmo cresce com o tamanho da entrada. O(n) cresce na mesma proporção de n; 2ⁿ dobra a cada variável nova.</dd>
+    <dt id="g-conectivo">Conectivo</dt><dd>Símbolo que junta fórmulas para formar uma fórmula maior: ¬ (não), ∧ (e), ∨ (ou), → (se… então) e ↔ (se e somente se).</dd>
+    <dt id="g-conflito">Conflito</dt><dd>Situação em que alguma cláusula ficou com todos os literais falsos, virando a cláusula vazia. Indica que as escolhas feitas até ali não levam a um modelo.</dd>
+    <dt id="g-and">∧ (conjunção, “e”)</dt><dd>p ∧ q é verdadeira somente quando p e q são verdadeiras. No teclado, escrevemos &amp;.</dd>
+    <dt id="g-contingente">Contingente</dt><dd>Fórmula verdadeira em algumas valorações e falsa em outras.</dd>
+    <dt id="g-contradicao">Contradição</dt><dd>Fórmula falsa em todas as valorações, ou seja, insatisfatível. Ex.: A ∧ ¬A.</dd>
+    <dt id="g-contrapositiva">Contrapositiva</dt><dd>p → q é equivalente a ¬q → ¬p. Ex.: “se Ana joga, João joga” equivale a “se João não joga, Ana não joga”.</dd>
+    <dt id="g-dag">DAG (grafo acíclico dirigido)</dt><dd>Estrutura parecida com a árvore, mas em que subfórmulas iguais são guardadas uma única vez e compartilhadas. Economiza memória. DAG vem do inglês directed acyclic graph.</dd>
+    <dt id="g-decisao">Decisão (chute)</dt><dd>No DPLL, escolher um valor para uma variável quando nenhuma regra força esse valor. Se a escolha levar a conflito, o algoritmo volta e tenta o outro valor.</dd>
+    <dt id="g-descida">Descida recursiva</dt><dd>Técnica de parser em que cada regra da gramática vira uma função, e as funções chamam umas às outras.</dd>
+    <dt id="g-dimacs">DIMACS (formato CNF)</dt><dd>Formato de texto padrão para entregar uma FNC a um resolvedor SAT. Cada variável vira um número, a negação é o sinal de menos e cada linha é uma cláusula terminada em 0. A linha “p cnf 7 8” diz que há 7 variáveis e 8 cláusulas; linhas começando com c são comentários.</dd>
+    <dt id="g-or">∨ (disjunção, “ou”)</dt><dd>p ∨ q é verdadeira quando pelo menos uma das duas é verdadeira (podem ser as duas). No teclado, escrevemos |.</dd>
+    <dt id="g-distrib">Distributividade</dt><dd>α ∨ (β ∧ γ) ≡ (α ∨ β) ∧ (α ∨ γ). É o passo da conversão para FNC que pode multiplicar o tamanho da fórmula.</dd>
+    <dt id="g-dpll">DPLL</dt><dd>Algoritmo de busca de modelos criado por Davis, Putnam, Logemann e Loveland (1962). Trabalha com cláusulas e combina propagação unitária, literal puro e decisões com retrocesso. É a base dos resolvedores SAT modernos.</dd>
+    <dt id="g-dupla">Dupla negação</dt><dd>¬¬α ≡ α: negar duas vezes volta ao original.</dd>
+    <dt id="g-const">⊤ e ⊥ (constantes)</dt><dd>⊤ é uma fórmula sempre verdadeira; ⊥ é uma fórmula sempre falsa.</dd>
+    <dt id="g-equisat">Equisatisfatível</dt><dd>Duas fórmulas são equisatisfatíveis quando uma tem modelo se e somente se a outra tem. É mais fraco que equivalente, porque elas podem ter variáveis diferentes.</dd>
+    <dt id="g-equiv">≡ (equivalência lógica)</dt><dd>α ≡ β significa que as duas fórmulas têm o mesmo valor em todas as valorações; uma pode substituir a outra sem mudar o significado.</dd>
+    <dt id="g-estrutura">Estrutura de dados</dt><dd>Forma de organizar informações na memória do computador, como listas, árvores e grafos.</dd>
+    <dt id="g-explosao">Explosão da FNC</dt><dd>Quando a conversão para FNC por distribuição gera uma quantidade exponencial de cláusulas. A transformação de Tseitin evita isso.</dd>
+    <dt id="g-exponencial">Exponencial</dt><dd>Que se multiplica a cada unidade a mais na entrada, como 2ⁿ. Fica impraticável muito rápido: 60 variáveis já dão mais de 10¹⁸ valorações.</dd>
+    <dt id="g-fnc">FNC (forma normal conjuntiva)</dt><dd>Fórmula escrita como uma conjunção (∧) de cláusulas. Ex.: (A ∨ Y) ∧ (¬A ∨ ¬Y). Em inglês, CNF.</dd>
+    <dt id="g-fnd">FND (forma normal disjuntiva)</dt><dd>O “espelho” da FNC: uma disjunção (∨) de conjunções de literais. Ex.: (A ∧ ¬Y) ∨ (¬A ∧ Y).</dd>
+    <dt id="g-fnn">FNN (forma normal da negação)</dt><dd>Fórmula em que ¬ aparece só diretamente na frente de variáveis e que usa apenas ∧ e ∨. É o passo intermediário da conversão para FNC.</dd>
+    <dt id="g-forca">Força bruta</dt><dd>Estratégia de testar todas as possibilidades, uma por uma. Aqui, significa testar todas as linhas da tabela-verdade.</dd>
+    <dt id="g-formula">Fórmula</dt><dd>Expressão lógica bem escrita, montada com variáveis e conectivos seguindo a gramática. Ex.: (A ∨ Y) ∧ ¬(A ∧ Y).</dd>
+    <dt id="g-github">GitHub e repositório</dt><dd>GitHub é um site para guardar e compartilhar código. Um repositório é a pasta do projeto no GitHub, com o histórico de todas as versões.</dd>
+    <dt id="g-pages">GitHub Pages</dt><dd>Serviço do GitHub que publica os arquivos HTML de um repositório como um site acessível pelo navegador.</dd>
+    <dt id="g-gramatica">Gramática</dt><dd>Conjunto de regras que define como as fórmulas podem ser escritas.</dd>
+    <dt id="g-ambigua">Gramática ambígua</dt><dd>Gramática em que o mesmo texto pode ser lido de dois jeitos, gerando duas árvores. Ex.: A ∧ B ∨ C pode ser (A ∧ B) ∨ C ou A ∧ (B ∨ C).</dd>
+    <dt id="g-heuristica">Heurística</dt><dd>Regra prática que costuma dar boas escolhas, mas sem garantia. Ex.: decidir primeiro uma variável da menor cláusula.</dd>
+    <dt id="g-imp">→ (implicação, “se… então”)</dt><dd>p → q só é falsa quando p é verdadeira e q é falsa. Ex.: A → J, “se Ana joga, então João joga”. Se Ana não joga, a regra não exige nada. No teclado, escrevemos -&gt;.</dd>
+    <dt id="g-insat">Insatisfatível (INSAT)</dt><dd>Fórmula que não tem nenhum modelo: é falsa em todas as valorações. No jogo, é quando não existe escalação possível.</dd>
+    <dt id="g-instancia">Instância</dt><dd>Um caso concreto de um problema. Uma fórmula específica é uma instância do problema SAT.</dd>
+    <dt id="g-demorgan">Leis de De Morgan</dt><dd>¬(α ∧ β) ≡ ¬α ∨ ¬β e ¬(α ∨ β) ≡ ¬α ∧ ¬β: ao negar, ∧ vira ∨ e ∨ vira ∧.</dd>
+    <dt id="g-linear">Linear</dt><dd>Que cresce na mesma proporção da entrada: dobrar a fórmula dobra o resultado.</dd>
+    <dt id="g-vigiados">Literais vigiados</dt><dd>Técnica dos resolvedores em que cada cláusula “vigia” só dois literais. Isso torna a propagação unitária muito rápida.</dd>
+    <dt id="g-literal">Literal</dt><dd>Uma variável (A) ou a negação de uma variável (¬A).</dd>
+    <dt id="g-puro">Literal puro</dt><dd>Variável que aparece sempre com o mesmo sinal em todas as cláusulas (sempre positiva ou sempre negada). Pode receber o valor que satisfaz todas essas cláusulas.</dd>
+    <dt id="g-logica">Lógica proposicional</dt><dd>Parte da lógica que estuda afirmações que podem ser verdadeiras ou falsas (proposições), combinadas por conectivos como “não”, “e”, “ou” e “se… então”.</dd>
+    <dt id="g-minisat">MiniSat, Glucose, CaDiCaL e PySAT</dt><dd>MiniSat, Glucose e CaDiCaL são resolvedores SAT usados na prática. PySAT é uma biblioteca Python que dá acesso a eles.</dd>
+    <dt id="g-modelagem">Modelagem</dt><dd>Traduzir um problema real para a linguagem da lógica: escolher as variáveis e escrever as regras como fórmulas.</dd>
+    <dt id="g-modelo">Modelo</dt><dd>Valoração que torna a fórmula verdadeira. No exemplo, um modelo de Φ é uma escalação que respeita todas as regras.</dd>
+    <dt id="g-neg">¬ (negação, “não”)</dt><dd>¬p é verdadeira quando p é falsa, e vice-versa. Ex.: ¬J significa “João não está em quadra”. No teclado, escrevemos ~.</dd>
+    <dt id="g-no">Nó</dt><dd>Cada ponto de uma árvore ou grafo. Na árvore sintática, um nó é um conectivo, uma variável ou uma constante.</dd>
+    <dt id="g-node">Node.js</dt><dd>Ambiente que executa JavaScript fora do navegador, por exemplo para rodar os testes no terminal.</dd>
+    <dt id="g-infixa">Notação infixa</dt><dd>Forma usual de escrever, com o conectivo entre os operandos: A ∧ B. Precisa de parênteses e de regras de precedência.</dd>
+    <dt id="g-prefixa">Notação prefixa (polonesa)</dt><dd>O conectivo vem antes dos operandos: ∧ A B. Não precisa de parênteses, porque a aridade de cada conectivo diz onde termina cada argumento.</dd>
+    <dt id="g-np">P, NP e NP-completo</dt><dd>P: problemas que se resolvem em tempo polinomial. NP: problemas cuja resposta pode ser verificada em tempo polinomial. NP-completo: os mais difíceis de NP; se um deles tiver algoritmo rápido, todos terão. Se P = NP é uma pergunta em aberto.</dd>
+    <dt id="g-parser">Parser (analisador sintático)</dt><dd>Programa que lê o texto de uma fórmula, confere se ele segue a gramática e constrói a árvore sintática.</dd>
+    <dt id="g-posordem">Percurso em pós-ordem</dt><dd>Forma de visitar uma árvore em que os filhos são visitados antes do pai. Serve para avaliar: primeiro os valores das subfórmulas, depois o do conectivo.</dd>
+    <dt id="g-piorcaso">Pior caso</dt><dd>A entrada mais difícil possível para um algoritmo. A NP-completude fala do pior caso; muitas instâncias reais são fáceis.</dd>
+    <dt id="g-precedencia">Precedência</dt><dd>Ordem de força dos conectivos, que decide qual é aplicado primeiro quando não há parênteses: ¬, depois ∧, ∨, → e por último ↔. É como a multiplicação vir antes da soma.</dd>
+    <dt id="g-pombos">Princípio da casa dos pombos</dt><dd>Não dá para colocar n + 1 pombos em n casas com no máximo um pombo por casa. Escrito como fórmula, é um exemplo clássico de fórmula pequena que é difícil para os resolvedores.</dd>
+    <dt id="g-contexto">Problema-contexto</dt><dd>Situação real escolhida pelo grupo para aplicar a lógica. No exemplo, é a escalação do time de vôlei.</dd>
+    <dt id="g-propagacao">Propagação unitária</dt><dd>Se uma cláusula ficou com um único literal ainda sem valor e todos os outros são falsos, esse literal é obrigatório. Ex.: com J = F, a cláusula (¬A ∨ J) obriga A = F.</dd>
+    <dt id="g-proposicao">Proposição</dt><dd>Afirmação que é verdadeira ou falsa, nunca as duas coisas. Ex.: “Ana está em quadra”.</dd>
+    <dt id="g-rastro">Rastro</dt><dd>Registro, passo a passo, do que o algoritmo fez.</dd>
+    <dt id="g-readme">README.md</dt><dd>Arquivo de apresentação do repositório, escrito em Markdown. Explica o que é o projeto e como executá-lo.</dd>
+    <dt id="g-resolvedor">Resolvedor SAT (SAT solver)</dt><dd>Programa especializado em decidir se uma fórmula em FNC é satisfatível e, se for, encontrar um modelo.</dd>
+    <dt id="g-restricao">Restrição</dt><dd>Regra que a solução precisa respeitar. No exemplo, cada regra de escalação é uma restrição.</dd>
+    <dt id="g-cardinalidade">Restrição de cardinalidade</dt><dd>Regra que limita quantas variáveis podem ser verdadeiras, como “exatamente 6 em quadra”. Escrita só com ∧, ∨ e ¬, exige muitas cláusulas.</dd>
+    <dt id="g-backtracking">Retrocesso (backtracking)</dt><dd>Quando uma escolha leva a conflito, voltar atrás e tentar a outra opção.</dd>
+    <dt id="g-rubrica">Rubrica</dt><dd>Tabela que descreve, para cada critério de avaliação, o que caracteriza cada nível de desempenho.</dd>
+    <dt id="g-sat">SAT (problema da satisfatibilidade)</dt><dd>A pergunta “esta fórmula tem algum modelo?”. É o problema que os resolvedores SAT resolvem.</dd>
+    <dt id="g-satisfativel">Satisfatível</dt><dd>Fórmula que tem pelo menos um modelo, ou seja, que é verdadeira em pelo menos uma valoração.</dd>
+    <dt id="g-semantica">Semântica</dt><dd>O significado das fórmulas: em quais situações cada uma é verdadeira ou falsa.</dd>
+    <dt id="g-sintaxe">Sintaxe</dt><dd>Regras de escrita: quais sequências de símbolos são fórmulas bem formadas. A sintaxe não diz nada sobre verdadeiro ou falso.</dd>
+    <dt id="g-subformula">Subfórmula</dt><dd>Pedaço de uma fórmula que também é uma fórmula. Em (A ∨ Y) ∧ ¬A, são subfórmulas A ∨ Y, ¬A, A e Y.</dd>
+    <dt id="g-tabela">Tabela-verdade</dt><dd>Tabela com uma linha para cada valoração possível e o valor da fórmula em cada uma. Com n variáveis, há 2ⁿ linhas.</dd>
+    <dt id="g-polinomial">Tempo polinomial</dt><dd>Tempo que cresce como uma potência do tamanho da entrada (n, n², n³…). É considerado eficiente.</dd>
+    <dt id="g-cook">Teorema de Cook–Levin</dt><dd>Resultado de Stephen Cook (1971) e Leonid Levin (1973) que provou que SAT é NP-completo. Foi o primeiro problema com essa prova.</dd>
+    <dt id="g-testes">Teste automatizado</dt><dd>Código que executa o programa com entradas conhecidas e confere, sem intervenção humana, se a saída é a esperada.</dd>
+    <dt id="g-tipoalg">Tipo algébrico</dt><dd>Em linguagens como Haskell, tipo definido por casos. Ex.: uma fórmula é uma variável, ou uma negação, ou uma conjunção, e assim por diante.</dd>
+    <dt id="g-token">Token e tokenização</dt><dd>Tokenização é quebrar o texto em pedaços com significado (tokens): variáveis, conectivos e parênteses. É o primeiro passo do parser.</dd>
+    <dt id="g-tseitin">Transformação de Tseitin</dt><dd>Conversão para FNC que cria uma variável nova (τ) para cada subfórmula. Gera uma fórmula equisatisfatível de tamanho linear, evitando a explosão.</dd>
+    <dt id="g-unicode">Unicode e ASCII</dt><dd>Padrões de codificação de caracteres. O ASCII tem só os símbolos do teclado (~ &amp; | -&gt;); o Unicode inclui os símbolos lógicos (¬ ∧ ∨ →).</dd>
+    <dt id="g-valida">Válida (tautologia)</dt><dd>Fórmula verdadeira em todas as valorações. Ex.: A ∨ ¬A. Uma fórmula φ é válida exatamente quando ¬φ é insatisfatível.</dd>
+    <dt id="g-valoracao">Valoração</dt><dd>Atribuição de V (verdadeiro) ou F (falso) a cada variável. No jogo, uma escalação é uma valoração: quem está em quadra vale V e quem está no banco vale F.</dd>
+    <dt id="g-variavel">Variável proposicional</dt><dd>Letra que representa uma proposição e recebe V (verdadeiro) ou F (falso). No exemplo do vôlei, cada letra é a inicial de um atleta: A significa “Ana está em quadra”.</dd>
+    <dt id="g-grego">α, β, γ (alfa, beta, gama)</dt><dd>Letras gregas usadas como nomes de subfórmulas quaisquer quando se escreve uma regra geral. Ex.: α → β ≡ ¬α ∨ β vale para quaisquer fórmulas α e β.</dd>
+    <dt id="g-tau">τ (letra grega “tau”)</dt><dd>Nome das variáveis auxiliares criadas pela transformação de Tseitin: τ1, τ2, … Cada uma representa uma subfórmula.</dd>
+    <dt id="g-phi">φ (letra grega “fi”)</dt><dd>Nome genérico para “uma fórmula qualquer”, como o x da álgebra. “φ é válida” vale para qualquer fórmula que se coloque no lugar de φ.</dd>
+    <dt id="g-Phi">Φ (“fi” maiúsculo)</dt><dd>Nome que demos, no exemplo, à fórmula completa do time: a conjunção (∧) das sete regras de escalação.</dd>
+  </dl>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">Lógica para Computação · Engenharia da Computação · 5ª fase. Página da atividade.</div>
+</footer>
+
+<script id="glossario-js">
+/* Glossário: marca cada termo técnico na primeira vez que aparece em cada seção
+   e mostra o significado ao passar o mouse, tocar ou focar com o teclado. */
+(() => {
+  const DADOS = [{"id": "logica", "t": "Lógica proposicional", "p": ["lógica proposicional"], "d": "Parte da lógica que estuda afirmações que podem ser verdadeiras ou falsas (proposições), combinadas por conectivos como “não”, “e”, “ou” e “se… então”."}, {"id": "proposicao", "t": "Proposição", "p": ["proposição", "proposições"], "d": "Afirmação que é verdadeira ou falsa, nunca as duas coisas. Ex.: “Ana está em quadra”."}, {"id": "variavel", "t": "Variável proposicional", "p": ["variável proposicional", "variáveis proposicionais", "variável", "variáveis"], "d": "Letra que representa uma proposição e recebe V (verdadeiro) ou F (falso). No exemplo do vôlei, cada letra é a inicial de um atleta: A significa “Ana está em quadra”."}, {"id": "conectivo", "t": "Conectivo", "p": ["conectivo", "conectivos"], "d": "Símbolo que junta fórmulas para formar uma fórmula maior: ¬ (não), ∧ (e), ∨ (ou), → (se… então) e ↔ (se e somente se)."}, {"id": "neg", "t": "¬ (negação, “não”)", "p": ["¬", "negação"], "d": "¬p é verdadeira quando p é falsa, e vice-versa. Ex.: ¬J significa “João não está em quadra”. No teclado, escrevemos ~."}, {"id": "and", "t": "∧ (conjunção, “e”)", "p": ["∧", "conjunção", "conjunções"], "d": "p ∧ q é verdadeira somente quando p e q são verdadeiras. No teclado, escrevemos &."}, {"id": "or", "t": "∨ (disjunção, “ou”)", "p": ["∨", "disjunção", "disjunções"], "d": "p ∨ q é verdadeira quando pelo menos uma das duas é verdadeira (podem ser as duas). No teclado, escrevemos |."}, {"id": "imp", "t": "→ (implicação, “se… então”)", "p": ["→", "implicação", "implicações"], "d": "p → q só é falsa quando p é verdadeira e q é falsa. Ex.: A → J, “se Ana joga, então João joga”. Se Ana não joga, a regra não exige nada. No teclado, escrevemos ->."}, {"id": "iff", "t": "↔ (bicondicional, “se e somente se”)", "p": ["↔", "bicondicional"], "d": "p ↔ q é verdadeira quando p e q têm o mesmo valor. Ex.: E ↔ ¬S, “Elmar joga exatamente quando Saulo não joga”. No teclado, escrevemos <->."}, {"id": "const", "t": "⊤ e ⊥ (constantes)", "p": ["⊤", "⊥"], "d": "⊤ é uma fórmula sempre verdadeira; ⊥ é uma fórmula sempre falsa."}, {"id": "equiv", "t": "≡ (equivalência lógica)", "p": ["≡", "equivalência", "equivalências", "equivalente", "equivalentes"], "d": "α ≡ β significa que as duas fórmulas têm o mesmo valor em todas as valorações; uma pode substituir a outra sem mudar o significado."}, {"id": "formula", "t": "Fórmula", "p": ["fórmula", "fórmulas"], "d": "Expressão lógica bem escrita, montada com variáveis e conectivos seguindo a gramática. Ex.: (A ∨ Y) ∧ ¬(A ∧ Y)."}, {"id": "subformula", "t": "Subfórmula", "p": ["subfórmula", "subfórmulas"], "d": "Pedaço de uma fórmula que também é uma fórmula. Em (A ∨ Y) ∧ ¬A, são subfórmulas A ∨ Y, ¬A, A e Y."}, {"id": "phi", "t": "φ (letra grega “fi”)", "p": ["φ"], "d": "Nome genérico para “uma fórmula qualquer”, como o x da álgebra. “φ é válida” vale para qualquer fórmula que se coloque no lugar de φ."}, {"id": "Phi", "t": "Φ (“fi” maiúsculo)", "p": ["Φ"], "d": "Nome que demos, no exemplo, à fórmula completa do time: a conjunção (∧) das sete regras de escalação."}, {"id": "grego", "t": "α, β, γ (alfa, beta, gama)", "p": ["α", "β", "γ"], "d": "Letras gregas usadas como nomes de subfórmulas quaisquer quando se escreve uma regra geral. Ex.: α → β ≡ ¬α ∨ β vale para quaisquer fórmulas α e β."}, {"id": "tau", "t": "τ (letra grega “tau”)", "p": ["τ"], "d": "Nome das variáveis auxiliares criadas pela transformação de Tseitin: τ1, τ2, … Cada uma representa uma subfórmula."}, {"id": "sintaxe", "t": "Sintaxe", "p": ["sintaxe"], "d": "Regras de escrita: quais sequências de símbolos são fórmulas bem formadas. A sintaxe não diz nada sobre verdadeiro ou falso."}, {"id": "semantica", "t": "Semântica", "p": ["semântica"], "d": "O significado das fórmulas: em quais situações cada uma é verdadeira ou falsa."}, {"id": "gramatica", "t": "Gramática", "p": ["gramática", "gramáticas"], "d": "Conjunto de regras que define como as fórmulas podem ser escritas."}, {"id": "bnf", "t": "BNF (forma de Backus–Naur)", "p": ["BNF"], "d": "Notação para escrever gramáticas com regras do tipo nome ::= alternativas. O símbolo | separa alternativas, * significa “repetir zero ou mais vezes” e ? significa “opcional”."}, {"id": "ambigua", "t": "Gramática ambígua", "p": ["ambígua"], "d": "Gramática em que o mesmo texto pode ser lido de dois jeitos, gerando duas árvores. Ex.: A ∧ B ∨ C pode ser (A ∧ B) ∨ C ou A ∧ (B ∨ C)."}, {"id": "precedencia", "t": "Precedência", "p": ["precedência"], "d": "Ordem de força dos conectivos, que decide qual é aplicado primeiro quando não há parênteses: ¬, depois ∧, ∨, → e por último ↔. É como a multiplicação vir antes da soma."}, {"id": "assoc", "t": "Associatividade", "p": ["associa à direita", "associa à esquerda", "associativo", "associatividade"], "d": "Regra que decide como agrupar conectivos iguais em sequência. A → B → C é lido como A → (B → C): dizemos que → associa à direita."}, {"id": "aridade", "t": "Aridade", "p": ["aridade"], "d": "Quantidade de argumentos de um conectivo: ¬ tem aridade 1; ∧, ∨, → e ↔ têm aridade 2."}, {"id": "token", "t": "Token e tokenização", "p": ["tokenização", "tokens", "token"], "d": "Tokenização é quebrar o texto em pedaços com significado (tokens): variáveis, conectivos e parênteses. É o primeiro passo do parser."}, {"id": "parser", "t": "Parser (analisador sintático)", "p": ["parser", "analisador sintático"], "d": "Programa que lê o texto de uma fórmula, confere se ele segue a gramática e constrói a árvore sintática."}, {"id": "descida", "t": "Descida recursiva", "p": ["descida recursiva"], "d": "Técnica de parser em que cada regra da gramática vira uma função, e as funções chamam umas às outras."}, {"id": "ast", "t": "Árvore sintática (AST)", "p": ["árvore sintática abstrata", "árvore sintática", "árvores sintáticas", "AST"], "d": "Representação da fórmula como uma árvore: cada nó interno é um conectivo e cada folha é uma variável. A forma da árvore já guarda os parênteses. AST vem do inglês abstract syntax tree."}, {"id": "no", "t": "Nó", "p": ["nó", "nós"], "d": "Cada ponto de uma árvore ou grafo. Na árvore sintática, um nó é um conectivo, uma variável ou uma constante."}, {"id": "altura", "t": "Altura da árvore", "p": ["altura"], "d": "Número de níveis entre a raiz da árvore e a folha mais distante."}, {"id": "dag", "t": "DAG (grafo acíclico dirigido)", "p": ["grafo acíclico dirigido", "DAG"], "d": "Estrutura parecida com a árvore, mas em que subfórmulas iguais são guardadas uma única vez e compartilhadas. Economiza memória. DAG vem do inglês directed acyclic graph."}, {"id": "estrutura", "t": "Estrutura de dados", "p": ["estrutura de dados", "estruturas de dados"], "d": "Forma de organizar informações na memória do computador, como listas, árvores e grafos."}, {"id": "tipoalg", "t": "Tipo algébrico", "p": ["tipos algébricos", "tipo algébrico"], "d": "Em linguagens como Haskell, tipo definido por casos. Ex.: uma fórmula é uma variável, ou uma negação, ou uma conjunção, e assim por diante."}, {"id": "infixa", "t": "Notação infixa", "p": ["infixa", "infixo"], "d": "Forma usual de escrever, com o conectivo entre os operandos: A ∧ B. Precisa de parênteses e de regras de precedência."}, {"id": "prefixa", "t": "Notação prefixa (polonesa)", "p": ["notação polonesa", "prefixa", "polonesa"], "d": "O conectivo vem antes dos operandos: ∧ A B. Não precisa de parênteses, porque a aridade de cada conectivo diz onde termina cada argumento."}, {"id": "posordem", "t": "Percurso em pós-ordem", "p": ["pós-ordem"], "d": "Forma de visitar uma árvore em que os filhos são visitados antes do pai. Serve para avaliar: primeiro os valores das subfórmulas, depois o do conectivo."}, {"id": "unicode", "t": "Unicode e ASCII", "p": ["Unicode", "ASCII"], "d": "Padrões de codificação de caracteres. O ASCII tem só os símbolos do teclado (~ & | ->); o Unicode inclui os símbolos lógicos (¬ ∧ ∨ →)."}, {"id": "valoracao", "t": "Valoração", "p": ["valoração", "valorações"], "d": "Atribuição de V (verdadeiro) ou F (falso) a cada variável. No jogo, uma escalação é uma valoração: quem está em quadra vale V e quem está no banco vale F."}, {"id": "tabela", "t": "Tabela-verdade", "p": ["tabela-verdade", "tabelas-verdade"], "d": "Tabela com uma linha para cada valoração possível e o valor da fórmula em cada uma. Com n variáveis, há 2ⁿ linhas."}, {"id": "modelo", "t": "Modelo", "p": ["modelo", "modelos"], "d": "Valoração que torna a fórmula verdadeira. No exemplo, um modelo de Φ é uma escalação que respeita todas as regras."}, {"id": "satisfativel", "t": "Satisfatível", "p": ["satisfatível", "satisfatíveis"], "d": "Fórmula que tem pelo menos um modelo, ou seja, que é verdadeira em pelo menos uma valoração."}, {"id": "insat", "t": "Insatisfatível (INSAT)", "p": ["insatisfatível", "insatisfatíveis", "insatisfatibilidade", "INSAT"], "d": "Fórmula que não tem nenhum modelo: é falsa em todas as valorações. No jogo, é quando não existe escalação possível."}, {"id": "valida", "t": "Válida (tautologia)", "p": ["tautologia", "tautologias", "validade", "é válida", "fórmulas válidas"], "d": "Fórmula verdadeira em todas as valorações. Ex.: A ∨ ¬A. Uma fórmula φ é válida exatamente quando ¬φ é insatisfatível."}, {"id": "contradicao", "t": "Contradição", "p": ["contradição", "contradições"], "d": "Fórmula falsa em todas as valorações, ou seja, insatisfatível. Ex.: A ∧ ¬A."}, {"id": "contingente", "t": "Contingente", "p": ["contingente", "contingentes"], "d": "Fórmula verdadeira em algumas valorações e falsa em outras."}, {"id": "sat", "t": "SAT (problema da satisfatibilidade)", "p": ["problema SAT", "satisfatibilidade", "SAT"], "d": "A pergunta “esta fórmula tem algum modelo?”. É o problema que os resolvedores SAT resolvem."}, {"id": "forca", "t": "Força bruta", "p": ["força bruta"], "d": "Estratégia de testar todas as possibilidades, uma por uma. Aqui, significa testar todas as linhas da tabela-verdade."}, {"id": "complex", "t": "Complexidade e notação O( )", "p": ["complexidade", "O(n)"], "d": "Medida de como o tempo de um algoritmo cresce com o tamanho da entrada. O(n) cresce na mesma proporção de n; 2ⁿ dobra a cada variável nova."}, {"id": "linear", "t": "Linear", "p": ["linear"], "d": "Que cresce na mesma proporção da entrada: dobrar a fórmula dobra o resultado."}, {"id": "exponencial", "t": "Exponencial", "p": ["exponencial"], "d": "Que se multiplica a cada unidade a mais na entrada, como 2ⁿ. Fica impraticável muito rápido: 60 variáveis já dão mais de 10¹⁸ valorações."}, {"id": "explosao", "t": "Explosão da FNC", "p": ["explosão exponencial", "explosão da FNC", "explosão"], "d": "Quando a conversão para FNC por distribuição gera uma quantidade exponencial de cláusulas. A transformação de Tseitin evita isso."}, {"id": "polinomial", "t": "Tempo polinomial", "p": ["polinomial"], "d": "Tempo que cresce como uma potência do tamanho da entrada (n, n², n³…). É considerado eficiente."}, {"id": "np", "t": "P, NP e NP-completo", "p": ["NP-completude", "NP-completo", "P × NP", "P = NP", "NP"], "d": "P: problemas que se resolvem em tempo polinomial. NP: problemas cuja resposta pode ser verificada em tempo polinomial. NP-completo: os mais difíceis de NP; se um deles tiver algoritmo rápido, todos terão. Se P = NP é uma pergunta em aberto."}, {"id": "piorcaso", "t": "Pior caso", "p": ["pior caso"], "d": "A entrada mais difícil possível para um algoritmo. A NP-completude fala do pior caso; muitas instâncias reais são fáceis."}, {"id": "instancia", "t": "Instância", "p": ["instância", "instâncias"], "d": "Um caso concreto de um problema. Uma fórmula específica é uma instância do problema SAT."}, {"id": "cook", "t": "Teorema de Cook–Levin", "p": ["Cook–Levin"], "d": "Resultado de Stephen Cook (1971) e Leonid Levin (1973) que provou que SAT é NP-completo. Foi o primeiro problema com essa prova."}, {"id": "resolvedor", "t": "Resolvedor SAT (SAT solver)", "p": ["resolvedores SAT", "resolvedor SAT", "resolvedores", "resolvedor"], "d": "Programa especializado em decidir se uma fórmula em FNC é satisfatível e, se for, encontrar um modelo."}, {"id": "minisat", "t": "MiniSat, Glucose, CaDiCaL e PySAT", "p": ["MiniSat", "Glucose", "CaDiCaL", "PySAT"], "d": "MiniSat, Glucose e CaDiCaL são resolvedores SAT usados na prática. PySAT é uma biblioteca Python que dá acesso a eles."}, {"id": "dpll", "t": "DPLL", "p": ["DPLL"], "d": "Algoritmo de busca de modelos criado por Davis, Putnam, Logemann e Loveland (1962). Trabalha com cláusulas e combina propagação unitária, literal puro e decisões com retrocesso. É a base dos resolvedores SAT modernos."}, {"id": "decisao", "t": "Decisão (chute)", "p": ["decisões", "decisão", "chute"], "d": "No DPLL, escolher um valor para uma variável quando nenhuma regra força esse valor. Se a escolha levar a conflito, o algoritmo volta e tenta o outro valor."}, {"id": "backtracking", "t": "Retrocesso (backtracking)", "p": ["retrocesso", "backtracking"], "d": "Quando uma escolha leva a conflito, voltar atrás e tentar a outra opção."}, {"id": "propagacao", "t": "Propagação unitária", "p": ["propagação unitária", "propagações unitárias", "propagações", "propagação"], "d": "Se uma cláusula ficou com um único literal ainda sem valor e todos os outros são falsos, esse literal é obrigatório. Ex.: com J = F, a cláusula (¬A ∨ J) obriga A = F."}, {"id": "unitaria", "t": "Cláusula unitária", "p": ["cláusula unitária", "cláusulas unitárias"], "d": "Cláusula com um único literal, como (¬J). Ela força o valor da variável."}, {"id": "puro", "t": "Literal puro", "p": ["literal puro"], "d": "Variável que aparece sempre com o mesmo sinal em todas as cláusulas (sempre positiva ou sempre negada). Pode receber o valor que satisfaz todas essas cláusulas."}, {"id": "conflito", "t": "Conflito", "p": ["conflitos", "conflito"], "d": "Situação em que alguma cláusula ficou com todos os literais falsos, virando a cláusula vazia. Indica que as escolhas feitas até ali não levam a um modelo."}, {"id": "cdcl", "t": "CDCL", "p": ["CDCL"], "d": "Conflict-Driven Clause Learning (aprendizado de cláusulas guiado por conflitos): evolução do DPLL em que cada conflito gera uma cláusula nova, “aprendida”, que impede repetir o mesmo erro."}, {"id": "vigiados", "t": "Literais vigiados", "p": ["literais vigiados"], "d": "Técnica dos resolvedores em que cada cláusula “vigia” só dois literais. Isso torna a propagação unitária muito rápida."}, {"id": "heuristica", "t": "Heurística", "p": ["heurística", "heurísticas"], "d": "Regra prática que costuma dar boas escolhas, mas sem garantia. Ex.: decidir primeiro uma variável da menor cláusula."}, {"id": "rastro", "t": "Rastro", "p": ["rastro"], "d": "Registro, passo a passo, do que o algoritmo fez."}, {"id": "literal", "t": "Literal", "p": ["literais", "literal"], "d": "Uma variável (A) ou a negação de uma variável (¬A)."}, {"id": "clausula", "t": "Cláusula", "p": ["cláusulas", "cláusula"], "d": "Disjunção (∨) de literais, como (¬A ∨ J). É verdadeira quando pelo menos um de seus literais é verdadeiro."}, {"id": "vazia", "t": "Cláusula vazia (□)", "p": ["cláusula vazia", "□"], "d": "Cláusula sem nenhum literal. Nunca pode ser verdadeira; quando aparece, as escolhas feitas levam a conflito."}, {"id": "fnc", "t": "FNC (forma normal conjuntiva)", "p": ["forma normal conjuntiva", "FNC", "CNF"], "d": "Fórmula escrita como uma conjunção (∧) de cláusulas. Ex.: (A ∨ Y) ∧ (¬A ∨ ¬Y). Em inglês, CNF."}, {"id": "fnd", "t": "FND (forma normal disjuntiva)", "p": ["forma normal disjuntiva", "FND"], "d": "O “espelho” da FNC: uma disjunção (∨) de conjunções de literais. Ex.: (A ∧ ¬Y) ∨ (¬A ∧ Y)."}, {"id": "fnn", "t": "FNN (forma normal da negação)", "p": ["forma normal da negação", "FNN"], "d": "Fórmula em que ¬ aparece só diretamente na frente de variáveis e que usa apenas ∧ e ∨. É o passo intermediário da conversão para FNC."}, {"id": "demorgan", "t": "Leis de De Morgan", "p": ["De Morgan"], "d": "¬(α ∧ β) ≡ ¬α ∨ ¬β e ¬(α ∨ β) ≡ ¬α ∧ ¬β: ao negar, ∧ vira ∨ e ∨ vira ∧."}, {"id": "dupla", "t": "Dupla negação", "p": ["dupla negação"], "d": "¬¬α ≡ α: negar duas vezes volta ao original."}, {"id": "distrib", "t": "Distributividade", "p": ["distributividade", "distribuição", "distribuir", "distribui"], "d": "α ∨ (β ∧ γ) ≡ (α ∨ β) ∧ (α ∨ γ). É o passo da conversão para FNC que pode multiplicar o tamanho da fórmula."}, {"id": "equisat", "t": "Equisatisfatível", "p": ["equisatisfatibilidade", "equisatisfatível", "equisatisfatíveis"], "d": "Duas fórmulas são equisatisfatíveis quando uma tem modelo se e somente se a outra tem. É mais fraco que equivalente, porque elas podem ter variáveis diferentes."}, {"id": "tseitin", "t": "Transformação de Tseitin", "p": ["Tseitin"], "d": "Conversão para FNC que cria uma variável nova (τ) para cada subfórmula. Gera uma fórmula equisatisfatível de tamanho linear, evitando a explosão."}, {"id": "dimacs", "t": "DIMACS (formato CNF)", "p": ["DIMACS"], "d": "Formato de texto padrão para entregar uma FNC a um resolvedor SAT. Cada variável vira um número, a negação é o sinal de menos e cada linha é uma cláusula terminada em 0. A linha “p cnf 7 8” diz que há 7 variáveis e 8 cláusulas; linhas começando com c são comentários."}, {"id": "contrapositiva", "t": "Contrapositiva", "p": ["contrapositiva"], "d": "p → q é equivalente a ¬q → ¬p. Ex.: “se Ana joga, João joga” equivale a “se João não joga, Ana não joga”."}, {"id": "pombos", "t": "Princípio da casa dos pombos", "p": ["casa dos pombos"], "d": "Não dá para colocar n + 1 pombos em n casas com no máximo um pombo por casa. Escrito como fórmula, é um exemplo clássico de fórmula pequena que é difícil para os resolvedores."}, {"id": "cardinalidade", "t": "Restrição de cardinalidade", "p": ["restrições de cardinalidade", "restrição de cardinalidade"], "d": "Regra que limita quantas variáveis podem ser verdadeiras, como “exatamente 6 em quadra”. Escrita só com ∧, ∨ e ¬, exige muitas cláusulas."}, {"id": "restricao", "t": "Restrição", "p": ["restrições", "restrição"], "d": "Regra que a solução precisa respeitar. No exemplo, cada regra de escalação é uma restrição."}, {"id": "modelagem", "t": "Modelagem", "p": ["modelagem", "modelar"], "d": "Traduzir um problema real para a linguagem da lógica: escolher as variáveis e escrever as regras como fórmulas."}, {"id": "contexto", "t": "Problema-contexto", "p": ["problema-contexto"], "d": "Situação real escolhida pelo grupo para aplicar a lógica. No exemplo, é a escalação do time de vôlei."}, {"id": "testes", "t": "Teste automatizado", "p": ["testes automatizados", "testes automáticos", "teste automatizado"], "d": "Código que executa o programa com entradas conhecidas e confere, sem intervenção humana, se a saída é a esperada."}, {"id": "pages", "t": "GitHub Pages", "p": ["GitHub Pages"], "d": "Serviço do GitHub que publica os arquivos HTML de um repositório como um site acessível pelo navegador."}, {"id": "github", "t": "GitHub e repositório", "p": ["GitHub", "repositório"], "d": "GitHub é um site para guardar e compartilhar código. Um repositório é a pasta do projeto no GitHub, com o histórico de todas as versões."}, {"id": "readme", "t": "README.md", "p": ["README.md", "README"], "d": "Arquivo de apresentação do repositório, escrito em Markdown. Explica o que é o projeto e como executá-lo."}, {"id": "node", "t": "Node.js", "p": ["Node.js"], "d": "Ambiente que executa JavaScript fora do navegador, por exemplo para rodar os testes no terminal."}, {"id": "rubrica", "t": "Rubrica", "p": ["rubrica"], "d": "Tabela que descreve, para cada critério de avaliação, o que caracteriza cada nível de desempenho."}, {"id": "arguicao", "t": "Arguição", "p": ["arguição"], "d": "Perguntas feitas ao grupo depois da apresentação, para verificar se todos entenderam o que apresentaram."}];
+  const porTexto = new Map();
+  const padroes = [];
+  const ehPalavra = c => /[\p{L}\p{N}_]/u.test(c);
+  const escRe = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  for (const e of DADOS) {
+    for (const p of e.p) {
+      const variantes = new Set(p.length > 1 ? [p, p[0].toUpperCase() + p.slice(1)] : [p]);
+      for (const v of variantes) { if (!porTexto.has(v)) { porTexto.set(v, e); padroes.push(v); } }
+    }
+  }
+  padroes.sort((a, b) => b.length - a.length);
+  const RE = new RegExp(padroes.map(p =>
+    (ehPalavra(p[0]) ? '(?<![\\p{L}\\p{N}_])' : '') + escRe(p) + (ehPalavra(p[p.length - 1]) ? '(?![\\p{L}\\p{N}_])' : '')
+  ).join('|'), 'gu');
+  const EXCLUI = 'script,style,pre,textarea,input,button,select,svg,nav,h1,h2,h3,h4,summary,a,.termo,#glossario,#glossario-tip,.leitura,.placar,.atleta,.valoracao,.banco,table.tt,.no-gloss';
+  const ehSimbolo = e => e.p.every(p => !ehPalavra(p[0]));
+
+  function glossariar(raiz, opcoes = {}) {
+    if (!raiz) return;
+    const usados = new Map();
+    const escopo = n => {
+      if (opcoes.escopoUnico) return raiz;
+      return (n.parentElement && n.parentElement.closest('section, header, footer')) || raiz;
+    };
+    const w = document.createTreeWalker(raiz, NodeFilter.SHOW_TEXT, {
+      acceptNode: n => (!n.nodeValue.trim() || (n.parentElement && n.parentElement.closest(EXCLUI)) ||
+        (opcoes.pular && n.parentElement && n.parentElement.closest(opcoes.pular))) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
+    });
+    const nos = [];
+    while (w.nextNode()) nos.push(w.currentNode);
+    for (const n of nos) {
+      const texto = n.nodeValue, esc = escopo(n);
+      if (!usados.has(esc)) usados.set(esc, new Set());
+      const set = usados.get(esc);
+      let ultimo = 0, frag = null, m;
+      RE.lastIndex = 0;
+      while ((m = RE.exec(texto))) {
+        const e = porTexto.get(m[0]);
+        if (!e || set.has(e.id) || (opcoes.semSimbolos && ehSimbolo(e))) continue;
+        set.add(e.id);
+        frag = frag || document.createDocumentFragment();
+        frag.append(texto.slice(ultimo, m.index));
+        const s = document.createElement('span');
+        s.className = 'termo'; s.tabIndex = 0; s.dataset.g = e.id; s.textContent = m[0];
+        s.setAttribute('role', 'button');
+        s.setAttribute('aria-label', m[0] + ': ' + e.t + '. ' + e.d);
+        frag.append(s);
+        ultimo = m.index + m[0].length;
+      }
+      if (frag) { frag.append(texto.slice(ultimo)); n.replaceWith(frag); }
+    }
+  }
+  window.glossariar = glossariar;
+
+  // ---- Balão com o significado ----
+  const porId = new Map(DADOS.map(e => [e.id, e]));
+  const tip = document.createElement('div');
+  tip.id = 'glossario-tip'; tip.hidden = true; tip.setAttribute('role', 'tooltip');
+  document.body.append(tip);
+  let atual = null;
+  function mostra(el) {
+    const e = porId.get(el.dataset.g); if (!e) return;
+    atual = el;
+    tip.innerHTML = '';
+    const t = document.createElement('strong'); t.textContent = e.t;
+    tip.append(t, document.createTextNode(e.d));
+    tip.hidden = false;
+    const r = el.getBoundingClientRect(), W = Math.min(360, innerWidth - 24);
+    tip.style.width = W + 'px';
+    tip.style.left = Math.min(Math.max(12, r.left + r.width / 2 - W / 2), innerWidth - W - 12) + 'px';
+    let top = r.bottom + 8;
+    tip.style.top = top + 'px';
+    if (top + tip.offsetHeight > innerHeight - 8) tip.style.top = Math.max(8, r.top - tip.offsetHeight - 8) + 'px';
+  }
+  function esconde() { tip.hidden = true; atual = null; }
+  const alvo = ev => ev.target.closest && ev.target.closest('.termo');
+  const temHover = !!(window.matchMedia && matchMedia('(hover: hover)').matches);
+  document.addEventListener('mouseover', ev => { const t = alvo(ev); if (t && temHover) mostra(t); });
+  document.addEventListener('mouseout', ev => { const t = alvo(ev); if (t && temHover && t !== document.activeElement) esconde(); });
+  document.addEventListener('focusin', ev => { const t = alvo(ev); if (t) mostra(t); });
+  document.addEventListener('focusout', ev => { if (alvo(ev)) esconde(); });
+  document.addEventListener('click', ev => { const t = alvo(ev); if (t) { ev.preventDefault(); atual === t && !temHover ? esconde() : mostra(t); } else if (atual) esconde(); });
+  document.addEventListener('keydown', ev => { if (ev.key === 'Escape') esconde(); });
+  addEventListener('scroll', () => { if (atual) mostra(atual); }, { passive: true });
+  addEventListener('resize', esconde);
+
+  // ---- Marca a página ----
+  glossariar(document.body, { pular: '#lab-saida, #jogo, #testes-tabela, #codigo' });
+  // Conteúdo gerado pelo laboratório e pelo jogo (só termos em palavras, sem símbolos soltos)
+  for (const sel of ['#lab-saida', '#feedback', '#rali-intro']) {
+    const el = document.querySelector(sel);
+    if (el) glossariar(el, { escopoUnico: true, semSimbolos: true });
+  }
+})();
+</script>
+</body>
+</html>

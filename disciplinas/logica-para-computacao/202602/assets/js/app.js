@@ -11,7 +11,8 @@
     { slug: "resolucao", label: "Princípio da Resolução", color: "crime" },
     { slug: "predicados", label: "Lógica de Predicados", color: "indigo" },
     { slug: "substituicao", label: "Substituição", color: "brass" },
-    { slug: "revisao", label: "Revisão", color: "teal" }
+    { slug: "revisao", label: "Revisão", color: "teal" },
+    { slug: "apresentacoes", label: "Apresentações", color: "crime" }
   ];
 
   var CAT_MAP = {};
@@ -21,6 +22,7 @@
     Os 20 itens da ementa não possuem `review: true`.
     Atividades extras de revisão usam `review: true`: aparecem na grade,
     na busca e nos filtros, mas não entram no contador dos 20 tópicos.
+    O campo opcional `label` troca o rótulo do card (ex.: "Apresentação 1").
   */
   var TOPICS = [
     { id:1, title:"Introdução à lógica e à investigação formal", tags:["visao-geral"],
@@ -86,7 +88,11 @@
 
     { id:"revisao-01", review:true, title:"Operação Floricultura", tags:["revisao","logica-proposicional","linguagem","semantica"],
       desc:"Atividades de revisão sobre proposições, linguagem formal, fórmulas bem formadas, conectivos lógicos e tabelas-verdade.",
-      href:"revisao-01-logica-proposicional.html" }
+      href:"revisao-01-logica-proposicional.html" },
+
+    { id:"apresentacao-01", review:true, label:"Apresentação 1", title:"Aspectos computacionais da lógica: pesquisa, programação e apresentação", tags:["apresentacoes","aspectos-computacionais"],
+      desc:"Atividade em grupo sobre representação computacional de fórmulas, satisfatibilidade e busca de modelos e forma normal conjuntiva. Traz roteiro de pesquisa em 3 aulas, desafio de programação, critérios de avaliação, glossário e um exemplo de entrega com jogo de vôlei.",
+      href:"apresentacao1-index.html" }
   ];
 
   var STORAGE_KEY = "logica-computacao:progresso";
@@ -180,8 +186,10 @@
 
   function cardHtml(topic){
     var isDone = !!done[topic.id];
-    var label = topic.review ? "Atividade de revisão" : "Caso Nº " + String(topic.id).padStart(2, "0");
-    var ariaLabel = topic.review
+    var label = topic.label || (topic.review ? "Atividade de revisão" : "Caso Nº " + String(topic.id).padStart(2, "0"));
+    var ariaLabel = topic.label
+      ? "Marcar " + topic.label + " como concluída"
+      : topic.review
       ? "Marcar atividade de revisão como concluída"
       : "Marcar tópico " + String(topic.id).padStart(2, "0") + " como concluído";
 
@@ -219,7 +227,7 @@
     var isShowingAll = activeFilter === "todos" && !hasSearch;
 
     if(isShowingAll){
-      statusEl.textContent = "Exibindo todos os 20 tópicos e atividades de revisão.";
+      statusEl.textContent = "Exibindo todos os 20 tópicos, atividades de revisão e apresentações.";
       return;
     }
 
