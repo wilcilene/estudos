@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Construção do protótipo do projeto: telas e fluxos | IHC – IFC</title>
+<meta name="description" content="Construção incremental do protótipo do projeto semestral de IHC: tarefas principais, fluxos, inventário e estados de tela, protótipo navegável e iteração.">
+<meta name="keywords" content="Protótipo navegável, Fluxos, Inventário de telas, Estados de tela, Componentes, Iteração, Decisões de design, IHC, Interface Homem-Computador, CPA1469">
+<meta name="author" content="Wilcilene">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0284c7">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/construcao-prototipo-projeto.html">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="IHC – Instituto Federal Catarinense">
+<meta property="og:title" content="Construção do protótipo do projeto: telas e fluxos — IHC">
+<meta property="og:description" content="Construção incremental do protótipo do projeto semestral de IHC: tarefas principais, fluxos, inventário e estados de tela, protótipo navegável e iteração.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/construcao-prototipo-projeto.html">
+<meta property="og:image" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/media/og-image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Construção do protótipo do projeto: telas e fluxos — IHC">
+<meta name="twitter:description" content="Construção incremental do protótipo do projeto semestral de IHC: tarefas principais, fluxos, inventário e estados de tela, protótipo navegável e iteração.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="topicos.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/construcao-prototipo-projeto.html#recurso",
+      "name": "Construção do protótipo do projeto: telas e fluxos",
+      "headline": "Construção do protótipo do projeto: telas e fluxos",
+      "description": "Construção incremental do protótipo do projeto semestral de IHC: tarefas principais, fluxos, inventário e estados de tela, protótipo navegável e iteração.",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/construcao-prototipo-projeto.html",
+      "inLanguage": "pt-BR",
+      "learningResourceType": "Atividade avaliativa",
+      "educationalLevel": "Ensino superior",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student"
+      },
+      "keywords": "Protótipo navegável, Fluxos, Inventário de telas, Estados de tela, Componentes, Iteração, Decisões de design",
+      "dateModified": "2026-09-30",
+      "author": {
+        "@type": "Person",
+        "name": "Wilcilene"
+      },
+      "publisher": {
+        "@type": "CollegeOrUniversity",
+        "name": "Instituto Federal Catarinense",
+        "url": "https://www.ifc.edu.br/"
+      },
+      "isPartOf": {
+        "@type": "Course",
+        "name": "Interface Homem-Computador",
+        "courseCode": "CPA1469",
+        "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "IHC – CPA1469",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Construção do protótipo do projeto: telas e fluxos",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/construcao-prototipo-projeto.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<div class="page">
+
+  <nav aria-label="Trilha de navegação">
+    <a class="breadcrumb" href="../index.html">
+      <span class="breadcrumb-arrow" aria-hidden="true">←</span>
+      IHC · 2026.2 · voltar ao índice da disciplina
+    </a>
+  </nav>
+
+  <header class="lesson-header">
+    <span class="badge">
+      <span class="badge-dot" aria-hidden="true"></span>
+      Atividade · 23, 24/09 e 12/11
+    </span>
+
+    <h1>Construção do protótipo do projeto: telas e fluxos</h1>
+
+    <p class="lesson-intro">
+      Com o problema definido e uma alternativa de design escolhida, chegou a hora de construir o protótipo do projeto. Esta etapa acontece em três encontros: primeiro os fluxos e as telas essenciais, depois o protótipo navegável e, em novembro, uma iteração que incorpora o que estudamos sobre diálogos e modelagem de interação.
+    </p>
+
+    <div class="lesson-meta">
+      <span class="pill">Atividade</span>
+      <span class="pill">Atividade do projeto</span>
+      <span class="pill">Encontros: 23, 24/09 e 12/11</span>
+    </div>
+  </header>
+
+  <section class="summary-card" aria-labelledby="pontos-principais">
+    <h2 id="pontos-principais">O que você vai entregar</h2>
+    <ul class="summary-list">
+      <li>Três tarefas principais com fluxo feliz, alternativo e de erro.</li>
+      <li>Inventário de telas e estados (vazio, carregando, erro, sucesso).</li>
+      <li>Protótipo navegável em média fidelidade, com link compartilhável.</li>
+      <li>Registro das decisões de design e suas justificativas.</li>
+      <li>Versão revisada em 12/11, com mudanças rastreáveis.</li>
+    </ul>
+  </section>
+
+  <div class="page-grid">
+
+    <main id="conteudo" class="content" tabindex="-1">
+
+      <section class="content-section" id="cronograma" aria-labelledby="cronograma-titulo">
+        <h2 id="cronograma-titulo"><span class="section-number">01</span> Os três encontros</h2>
+
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Etapas da construção do protótipo</caption>
+            <thead><tr><th scope="col">Data</th><th scope="col">Foco</th><th scope="col">Resultado esperado ao fim do encontro</th></tr></thead>
+            <tbody>
+              <tr><td><strong>23/09</strong></td><td>Tarefas e fluxos</td><td>Três tarefas principais com fluxos desenhados e inventário de telas.</td></tr>
+              <tr><td><strong>24/09</strong></td><td>Telas e navegação</td><td>Wireframes das telas do inventário ligados em um protótipo navegável.</td></tr>
+              <tr><td><strong>12/11</strong></td><td>Iteração</td><td>Versão revisada com diálogos, feedback, casos de uso e notação de tarefas aplicados.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="fluxos" aria-labelledby="fluxos-titulo">
+        <h2 id="fluxos-titulo"><span class="section-number">02</span> Primeiro os fluxos, depois as telas</h2>
+
+        <p>
+          Desenhar telas soltas leva a interfaces bonitas que não se conectam. Comece pelas <strong>tarefas</strong>:
+          escolha as três mais importantes para as personas do projeto e, para cada uma, desenhe o fluxo.
+        </p>
+        <ul>
+          <li><strong>Caminho feliz</strong>: a sequência mais curta quando tudo dá certo.</li>
+          <li><strong>Caminhos alternativos</strong>: outras formas legítimas de chegar ao objetivo.</li>
+          <li><strong>Caminhos de erro</strong>: dado inválido, falta de conexão, item indisponível, desistência no meio.</li>
+        </ul>
+        <div class="callout callout-example">
+          <span class="callout-label">Exemplo</span>
+          <p>
+            Tarefa “reservar um horário no laboratório”: início → escolher data → escolher horário → confirmar →
+            comprovante. Alternativo: entrar por uma notificação de vaga liberada. Erro: o horário foi reservado por outra
+            pessoa enquanto a reserva estava sendo confirmada. O que a tela mostra nesse momento?
+          </p>
+        </div>
+        <p>A notação completa para fluxos será vista em <a href="fluxos-interacao-notacao-tarefas.html">Fluxos de interação e notação de tarefas</a>; por enquanto, caixas e setas bastam.</p>
+
+      </section>
+
+      <section class="content-section" id="telas" aria-labelledby="telas-titulo">
+        <h2 id="telas-titulo"><span class="section-number">03</span> Inventário e estados de tela</h2>
+
+        <p>
+          A partir dos fluxos, liste todas as telas necessárias (<strong>inventário de telas</strong>) e dê a cada uma um
+          nome único, que será usado no protótipo e no documento. Depois, para cada tela que exibe dados, desenhe seus
+          <strong>estados</strong>, frequentemente esquecidos:
+        </p>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Estados de tela a considerar</caption>
+            <thead><tr><th scope="col">Estado</th><th scope="col">Pergunta de projeto</th></tr></thead>
+            <tbody>
+              <tr><td>Ideal</td><td>Como a tela fica com conteúdo típico?</td></tr>
+              <tr><td>Vazio</td><td>O que a pessoa vê no primeiro uso, antes de ter qualquer dado? Há um convite à primeira ação?</td></tr>
+              <tr><td>Carregando</td><td>Existe indicação de progresso? O layout “pula” quando os dados chegam?</td></tr>
+              <tr><td>Erro</td><td>A mensagem explica o que houve e como resolver?</td></tr>
+              <tr><td>Parcial</td><td>Como fica com um único item? E com trezentos?</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="navegavel" aria-labelledby="navegavel-titulo">
+        <h2 id="navegavel-titulo"><span class="section-number">04</span> Montando o protótipo navegável</h2>
+
+        <ol>
+          <li>Crie os frames com os nomes do inventário (por exemplo, <code>03-reserva-confirmar</code>).</li>
+          <li>Transforme elementos repetidos (cabeçalho, botão, card) em <strong>componentes</strong>: uma alteração se propaga para todas as telas.</li>
+          <li>Ligue as telas seguindo os fluxos e defina um ponto de partida para cada tarefa.</li>
+          <li>Use conteúdo realista e consistente entre as telas (o mesmo horário reservado aparece na confirmação e no comprovante).</li>
+          <li>Percorra cada fluxo como se fosse um usuário e anote os “becos sem saída”.</li>
+          <li>Gere um link de visualização e confirme que ele abre sem login para quem vai avaliar.</li>
+        </ol>
+
+      </section>
+
+      <section class="content-section" id="iteracao" aria-labelledby="iteracao-titulo">
+        <h2 id="iteracao-titulo"><span class="section-number">05</span> A iteração de 12/11</h2>
+
+        <p>Nesta revisão, use o que foi estudado desde a primeira versão:</p>
+        <ul class="checklist">
+          <li>A estrutura de menus e navegação segue as diretrizes de <a href="estrutura-dialogos-navegacao.html">diálogos e navegação</a>?</li>
+          <li>Cada ação relevante tem feedback adequado e mensagens de erro úteis (<a href="tipos-dialogo-feedback.html">tipos de diálogo e feedback</a>)?</li>
+          <li>As telas cobrem os casos de uso e histórias escritos para o projeto (<a href="casos-de-uso-historias.html">casos de uso e histórias</a>)?</li>
+          <li>Os fluxos foram revisados com a notação de tarefas e o mapa de navegação está atualizado?</li>
+        </ul>
+        <p>Registre cada mudança em uma tabela simples: o que mudou, por que mudou e qual evidência ou conceito motivou a mudança.</p>
+
+      </section>
+
+      <section class="content-section" id="entregaveis" aria-labelledby="entregaveis-titulo">
+        <h2 id="entregaveis-titulo"><span class="section-number">06</span> O que entregar</h2>
+
+        <div class="callout callout-activity">
+          <span class="callout-label">Entregáveis</span>
+          <ol>
+            <li>Diagrama dos três fluxos principais (com caminhos alternativos e de erro).</li>
+            <li>Inventário de telas com os estados previstos.</li>
+            <li>Link do protótipo navegável em média fidelidade.</li>
+            <li>Registro de decisões de design: para cada decisão importante, a alternativa descartada e a justificativa.</li>
+            <li>Em 12/11: versão revisada e tabela de mudanças.</li>
+          </ol>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="criterios" aria-labelledby="criterios-titulo">
+        <h2 id="criterios-titulo"><span class="section-number">07</span> Critérios de avaliação</h2>
+
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>O que será observado (os pesos serão informados em sala)</caption>
+            <thead><tr><th scope="col">Critério</th><th scope="col">O que se espera</th></tr></thead>
+            <tbody>
+              <tr><td>Coerência com o problema</td><td>As tarefas escolhidas resolvem o problema e atendem às personas definidas.</td></tr>
+              <tr><td>Completude dos fluxos</td><td>Caminhos de erro e alternativos previstos, sem becos sem saída.</td></tr>
+              <tr><td>Qualidade das telas</td><td>Hierarquia, consistência, estados e aplicação das diretrizes de design.</td></tr>
+              <tr><td>Navegabilidade</td><td>O protótipo pode ser percorrido por alguém de fora da equipe.</td></tr>
+              <tr><td>Rastreabilidade</td><td>Decisões e mudanças justificadas com conceitos ou evidências.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="relevancia" aria-labelledby="relevancia-titulo">
+        <h2 id="relevancia-titulo"><span class="section-number">08</span> Relevância para a Engenharia de Computação</h2>
+        <div class="callout callout-connection">
+          <span class="callout-label">🔗 Conexão com a sua formação</span>
+          <p>
+            O ciclo de construir, revisar e registrar decisões é o mesmo de um desenvolvimento iterativo com sprints e
+            controle de versão. O registro de decisões de design equivale aos <em>Architecture Decision Records</em> (ADRs)
+            usados em engenharia de software, e pensar em estados de tela é pensar como uma máquina de estados, algo que
+            você já faz em sistemas digitais.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section" id="aprofundar" aria-labelledby="aprofundar-titulo">
+        <h2 id="aprofundar-titulo"><span class="section-number">09</span> Para aprofundar</h2>
+        <div class="callout callout-reading">
+          <span class="callout-label">Referências e leituras recomendadas</span>
+          <ul class="reading-list">
+            <li>PREECE, J.; ROGERS, Y.; SHARP, H. <em>Design de Interação</em>. Bookman (capítulos de design, prototipagem e construção).</li>
+            <li>BARBOSA, S. D. J.; SILVA, B. S. <em>Interação Humano-Computador</em>. Elsevier, 2010 (cap. 8, projeto da interação).</li>
+            <li>Tópico relacionado: <a href="prototipagem-ferramentas-wireframes.html">Prototipagem: ferramentas e wireframes</a>.</li>
+            <li>Tópico relacionado: <a href="projeto-problema-escopo.html">Projeto: problema e escopo</a>.</li>
+          </ul>
+        </div>
+
+        <h3>Palavras-chave deste tópico</h3>
+        <div class="keyword-tags" aria-label="Palavras-chave do tópico">
+          <span class="keyword-tag">Protótipo navegável</span>
+          <span class="keyword-tag">Fluxos</span>
+          <span class="keyword-tag">Inventário de telas</span>
+          <span class="keyword-tag">Estados de tela</span>
+          <span class="keyword-tag">Componentes</span>
+          <span class="keyword-tag">Iteração</span>
+          <span class="keyword-tag">Decisões de design</span>
+        </div>
+      </section>
+
+      <nav class="lesson-nav" aria-label="Navegação entre tópicos">
+        <a class="lesson-nav-link prev" href="diretrizes-regras-design.html" rel="prev">
+          <span class="lesson-nav-label">← Tópico anterior</span>
+          <span class="lesson-nav-title">Diretrizes e regras de design</span>
+        </a>
+        <a class="lesson-nav-link next" href="fatores-humanos-processamento-informacao.html" rel="next">
+          <span class="lesson-nav-label">Próximo tópico →</span>
+          <span class="lesson-nav-title">Fatores humanos e processamento de informação</span>
+        </a>
+      </nav>
+
+    </main>
+
+    <aside class="toc" aria-labelledby="toc-titulo">
+      <h2 id="toc-titulo">Neste tópico</h2>
+      <ol>
+        <li><a href="#cronograma">Os três encontros</a></li>
+        <li><a href="#fluxos">Primeiro os fluxos, depois as telas</a></li>
+        <li><a href="#telas">Inventário e estados de tela</a></li>
+        <li><a href="#navegavel">Montando o protótipo navegável</a></li>
+        <li><a href="#iteracao">A iteração de 12/11</a></li>
+        <li><a href="#entregaveis">O que entregar</a></li>
+        <li><a href="#criterios">Critérios de avaliação</a></li>
+        <li><a href="#relevancia">Relevância para a computação</a></li>
+        <li><a href="#aprofundar">Para aprofundar</a></li>
+      </ol>
+      <p class="toc-progress">Tópico 10 de 24 · Atividade</p>
+    </aside>
+
+  </div>
+</div>
+
+<footer>
+  <p>Interface Homem-Computador (CPA1469) · Instituto Federal Catarinense · Semestre 2026.2</p>
+  <p>Material de estudo atualizado no decorrer do semestre. Salve o link e retorne sempre que quiser revisar.</p>
+</footer>
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Voltar ao topo da página">↑</button>
+
+<script>
+  (function () {
+    var backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function () {
+      backToTop.classList.toggle('is-visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>

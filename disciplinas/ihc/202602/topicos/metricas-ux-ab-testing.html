@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Métricas de UX, SUS e A/B testing | IHC – IFC</title>
+<meta name="description" content="Métricas quantitativas de UX: taxa de conclusão, tempo na tarefa, System Usability Scale (SUS) com cálculo, NPS, framework HEART e como planejar e analisar testes A/B.">
+<meta name="keywords" content="Métricas de UX, SUS, System Usability Scale, NPS, HEART, Teste A/B, Taxa de conclusão, Significância estatística, IHC, Interface Homem-Computador, CPA1469">
+<meta name="author" content="Wilcilene">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0284c7">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/metricas-ux-ab-testing.html">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="IHC – Instituto Federal Catarinense">
+<meta property="og:title" content="Métricas de UX, SUS e A/B testing — IHC">
+<meta property="og:description" content="Métricas quantitativas de UX: taxa de conclusão, tempo na tarefa, System Usability Scale (SUS) com cálculo, NPS, framework HEART e como planejar e analisar testes A/B.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/metricas-ux-ab-testing.html">
+<meta property="og:image" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/media/og-image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Métricas de UX, SUS e A/B testing — IHC">
+<meta name="twitter:description" content="Métricas quantitativas de UX: taxa de conclusão, tempo na tarefa, System Usability Scale (SUS) com cálculo, NPS, framework HEART e como planejar e analisar testes A/B.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="topicos.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/metricas-ux-ab-testing.html#recurso",
+      "name": "Métricas de UX, SUS e A/B testing",
+      "headline": "Métricas de UX, SUS e A/B testing",
+      "description": "Métricas quantitativas de UX: taxa de conclusão, tempo na tarefa, System Usability Scale (SUS) com cálculo, NPS, framework HEART e como planejar e analisar testes A/B.",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/metricas-ux-ab-testing.html",
+      "inLanguage": "pt-BR",
+      "learningResourceType": "Material de aula",
+      "educationalLevel": "Ensino superior",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student"
+      },
+      "keywords": "Métricas de UX, SUS, System Usability Scale, NPS, HEART, Teste A/B, Taxa de conclusão, Significância estatística",
+      "dateModified": "2026-09-30",
+      "author": {
+        "@type": "Person",
+        "name": "Wilcilene"
+      },
+      "publisher": {
+        "@type": "CollegeOrUniversity",
+        "name": "Instituto Federal Catarinense",
+        "url": "https://www.ifc.edu.br/"
+      },
+      "isPartOf": {
+        "@type": "Course",
+        "name": "Interface Homem-Computador",
+        "courseCode": "CPA1469",
+        "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "IHC – CPA1469",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Métricas de UX, SUS e A/B testing",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/metricas-ux-ab-testing.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<div class="page">
+
+  <nav aria-label="Trilha de navegação">
+    <a class="breadcrumb" href="../index.html">
+      <span class="breadcrumb-arrow" aria-hidden="true">←</span>
+      IHC · 2026.2 · voltar ao índice da disciplina
+    </a>
+  </nav>
+
+  <header class="lesson-header">
+    <span class="badge">
+      <span class="badge-dot" aria-hidden="true"></span>
+      Métodos de avaliação · 26/11
+    </span>
+
+    <h1>Métricas de UX, SUS e A/B testing</h1>
+
+    <p class="lesson-intro">
+      Medir a experiência permite comparar versões, acompanhar a evolução do produto e argumentar com dados. Nesta aula vamos conhecer as principais métricas de UX, calcular e interpretar o SUS, discutir o NPS e aprender a planejar testes A/B sem cair nas armadilhas estatísticas mais comuns.
+    </p>
+
+    <div class="lesson-meta">
+      <span class="pill">Métodos de avaliação</span>
+      <span class="pill">Nível intermediário</span>
+      <span class="pill">Aula: 26/11</span>
+    </div>
+  </header>
+
+  <section class="summary-card" aria-labelledby="pontos-principais">
+    <h2 id="pontos-principais">Principais pontos</h2>
+    <ul class="summary-list">
+      <li>Escolher métricas de desempenho, autodeclaradas e comportamentais.</li>
+      <li>Organizar métricas com o framework HEART.</li>
+      <li>Calcular e interpretar a pontuação do SUS.</li>
+      <li>Entender o NPS e suas limitações.</li>
+      <li>Planejar testes A/B com hipótese, amostra e critérios de decisão.</li>
+    </ul>
+  </section>
+
+  <div class="page-grid">
+
+    <main id="conteudo" class="content" tabindex="-1">
+
+      <section class="content-section" id="metricas" aria-labelledby="metricas-titulo">
+        <h2 id="metricas-titulo"><span class="section-number">01</span> Tipos de métricas de UX</h2>
+
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Categorias de métricas</caption>
+            <thead><tr><th scope="col">Categoria</th><th scope="col">Exemplos</th><th scope="col">Como coletar</th></tr></thead>
+            <tbody>
+              <tr><td>Desempenho</td><td>Taxa de conclusão, tempo na tarefa, erros, cliques</td><td>Testes de usabilidade</td></tr>
+              <tr><td>Autodeclaradas</td><td>SUS, SEQ, NPS, satisfação</td><td>Questionários</td></tr>
+              <tr><td>Comportamentais</td><td>Retenção, abandono de funil, uso de funcionalidades</td><td>Analytics e registros (logs)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>O framework HEART</h3>
+        <p>
+          Proposto por pesquisadores do Google, organiza métricas em cinco dimensões: <strong>Happiness</strong> (satisfação),
+          <strong>Engagement</strong> (engajamento), <strong>Adoption</strong> (adoção), <strong>Retention</strong> (retenção) e
+          <strong>Task success</strong> (sucesso na tarefa). Para cada dimensão escolhida, define-se um <strong>objetivo</strong>,
+          os <strong>sinais</strong> que indicam progresso e as <strong>métricas</strong> que medem esses sinais.
+        </p>
+        <div class="callout callout-example">
+          <span class="callout-label">Exemplo: sistema de reservas</span>
+          <p><strong>Task success</strong> → objetivo: reservar sem ajuda → sinal: reserva concluída após iniciar → métrica: % de reservas iniciadas que terminam em comprovante.</p>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="desempenho" aria-labelledby="desempenho-titulo">
+        <h2 id="desempenho-titulo"><span class="section-number">02</span> Métricas de desempenho</h2>
+
+        <ul>
+          <li><strong>Taxa de conclusão</strong>: proporção de participantes que concluem a tarefa. Com amostras pequenas, informe também o intervalo de confiança: 4 de 5 é 80%, mas a incerteza é grande.</li>
+          <li><strong>Tempo na tarefa</strong>: tempos têm distribuição assimétrica (alguns participantes demoram muito). Para amostras pequenas, a média geométrica representa melhor o valor típico que a média aritmética.</li>
+          <li><strong>Erros</strong>: defina antes o que conta como erro (caminho errado, dado inválido, pedido de ajuda).</li>
+          <li><strong>SEQ</strong>: após cada tarefa, a pessoa avalia de 1 a 7 quão fácil foi.</li>
+        </ul>
+
+      </section>
+
+      <section class="content-section" id="sus" aria-labelledby="sus-titulo">
+        <h2 id="sus-titulo"><span class="section-number">03</span> System Usability Scale (SUS)</h2>
+
+        <p>
+          Criado por John Brooke em 1986, o SUS tem dez afirmações respondidas em escala de 1 (discordo totalmente) a 5
+          (concordo totalmente). Os itens ímpares são positivos e os pares, negativos, alternando para evitar respostas automáticas.
+        </p>
+        <h3>Cálculo</h3>
+        <ol>
+          <li>Itens ímpares: subtraia 1 da resposta.</li>
+          <li>Itens pares: subtraia a resposta de 5.</li>
+          <li>Some os dez valores (0 a 40) e multiplique por 2,5 (0 a 100).</li>
+        </ol>
+        <pre><code>function pontuacaoSUS(respostas) {
+  // respostas: array com 10 valores de 1 a 5, na ordem dos itens
+  if (respostas.length !== 10) throw new Error('O SUS tem 10 itens');
+  const soma = respostas.reduce((total, r, i) =&gt;
+    total + (i % 2 === 0 ? r - 1 : 5 - r), 0); // i=0 é o item 1 (ímpar)
+  return soma * 2.5;
+}
+
+pontuacaoSUS([4, 2, 5, 1, 4, 2, 5, 2, 4, 1]); // 85</code></pre>
+        <div class="callout callout-reflection">
+          <span class="callout-label">Interpretando</span>
+          <p>
+            A pontuação vai de 0 a 100, mas <strong>não é um percentual</strong>. Estudos de Jeff Sauro com centenas de sistemas
+            indicam média em torno de 68: valores acima disso estão acima da média. Use o SUS para comparar versões ou sistemas
+            com o mesmo método, não como nota absoluta, e lembre que ele indica <em>se</em> há problema, não <em>qual</em> é.
+          </p>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="nps" aria-labelledby="nps-titulo">
+        <h2 id="nps-titulo"><span class="section-number">04</span> NPS e outras métricas de atitude</h2>
+
+        <p>
+          O <strong>Net Promoter Score</strong> pergunta, de 0 a 10, a probabilidade de a pessoa recomendar o produto.
+          Respostas 9–10 são promotores; 7–8, neutros; 0–6, detratores. O NPS é o percentual de promotores menos o de detratores,
+          variando de −100 a +100.
+        </p>
+        <p class="muted">
+          É popular em empresas, mas criticado em pesquisa: mede intenção declarada, não comportamento; descarta informação ao
+          agrupar respostas; e diz pouco sobre o que melhorar. Use-o, se necessário, acompanhado de uma pergunta aberta
+          (“Por que você deu essa nota?”) e de métricas de uso reais.
+        </p>
+
+      </section>
+
+      <section class="content-section" id="ab" aria-labelledby="ab-titulo">
+        <h2 id="ab-titulo"><span class="section-number">05</span> Testes A/B</h2>
+
+        <p>
+          Em um <strong>teste A/B</strong>, usuários reais são divididos aleatoriamente entre duas versões (A, a atual, e B, a
+          variação) e uma métrica é comparada. É o método mais confiável para saber se uma mudança <em>causa</em> uma melhora, porque
+          a aleatorização equilibra os demais fatores.
+        </p>
+        <h3>Planejamento</h3>
+        <ol>
+          <li><strong>Hipótese</strong>: “Mostrar a lotação do laboratório na lista aumenta a taxa de reservas concluídas.”</li>
+          <li><strong>Métrica primária</strong> definida antes, e métricas de proteção (que não podem piorar, como cancelamentos).</li>
+          <li><strong>Tamanho da amostra</strong> calculado antes, a partir do efeito mínimo que vale a pena detectar, do nível de significância (geralmente 5%) e do poder estatístico (geralmente 80%).</li>
+          <li><strong>Duração</strong> suficiente para cobrir ciclos de uso completos (dias da semana, por exemplo).</li>
+          <li><strong>Decisão</strong>: critérios para adotar, descartar ou investigar mais, também definidos antes.</li>
+        </ol>
+        <h3>Armadilhas comuns</h3>
+        <ul>
+          <li><strong>Espiar os resultados</strong> e parar o teste assim que a diferença parece significativa aumenta muito a chance de falso positivo.</li>
+          <li><strong>Muitas variações ou métricas</strong> ao mesmo tempo multiplicam os falsos positivos.</li>
+          <li><strong>Efeito novidade</strong>: uma mudança chama atenção nos primeiros dias e depois o efeito desaparece.</li>
+          <li><strong>Divisão desbalanceada</strong> entre os grupos indica erro de implementação e invalida o teste.</li>
+          <li><strong>Pouco tráfego</strong>: com poucos usuários, um teste A/B não tem poder para detectar diferenças; prefira testes de usabilidade.</li>
+        </ul>
+        <div class="callout callout-reflection">
+          <span class="callout-label">Ética</span>
+          <p>
+            Experimentos com usuários reais também têm limites éticos. Em 2014, um estudo que manipulou o conteúdo exibido a
+            centenas de milhares de usuários de uma rede social para observar efeitos emocionais gerou forte controvérsia sobre
+            consentimento. Testar cores de botão é diferente de testar o bem-estar das pessoas.
+          </p>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="atividade" aria-labelledby="atividade-titulo">
+        <h2 id="atividade-titulo"><span class="section-number">06</span> Atividade prática</h2>
+
+        <div class="callout callout-activity">
+          <span class="callout-label">Atividade</span>
+          <ol>
+            <li>Aplique o SUS ao protótipo do projeto com pelo menos cinco pessoas e calcule a média, usando a função desta página ou uma planilha.</li>
+            <li>Defina uma métrica HEART para o projeto com objetivo, sinal e métrica.</li>
+            <li>Escreva o plano de um teste A/B para uma mudança do projeto: hipótese, métrica primária, métrica de proteção, duração e critério de decisão.</li>
+          </ol>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="relevancia" aria-labelledby="relevancia-titulo">
+        <h2 id="relevancia-titulo"><span class="section-number">07</span> Relevância para a Engenharia de Computação</h2>
+        <div class="callout callout-connection">
+          <span class="callout-label">🔗 Conexão com a sua formação</span>
+          <p>
+            Testes A/B dependem de infraestrutura de engenharia: <em>feature flags</em>, aleatorização estável por usuário,
+            coleta de eventos e pipelines de dados. Também exigem estatística aplicada, que você já estudou, para evitar
+            conclusões erradas. Engenheiros que entendem métricas de UX conseguem instrumentar o sistema corretamente desde o início.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section" id="aprofundar" aria-labelledby="aprofundar-titulo">
+        <h2 id="aprofundar-titulo"><span class="section-number">08</span> Para aprofundar</h2>
+        <div class="callout callout-reading">
+          <span class="callout-label">Referências e leituras recomendadas</span>
+          <ul class="reading-list">
+            <li>BROOKE, J. SUS: a “quick and dirty” usability scale. In: <em>Usability Evaluation in Industry</em>. Taylor &amp; Francis, 1996.</li>
+            <li>SAURO, J.; LEWIS, J. R. <em>Quantifying the User Experience</em>. Morgan Kaufmann, 2. ed., 2016.</li>
+            <li>RODDEN, K.; HUTCHINSON, H.; FU, X. Measuring the user experience on a large scale: user-centered metrics for web applications. <em>CHI</em>, 2010 (HEART).</li>
+            <li>KOHAVI, R.; TANG, D.; XU, Y. <em>Trustworthy Online Controlled Experiments</em>. Cambridge University Press, 2020.</li>
+            <li>TULLIS, T.; ALBERT, B. <em>Measuring the User Experience</em>. Morgan Kaufmann, 3. ed.</li>
+          </ul>
+        </div>
+
+        <h3>Palavras-chave deste tópico</h3>
+        <div class="keyword-tags" aria-label="Palavras-chave do tópico">
+          <span class="keyword-tag">Métricas de UX</span>
+          <span class="keyword-tag">SUS</span>
+          <span class="keyword-tag">System Usability Scale</span>
+          <span class="keyword-tag">NPS</span>
+          <span class="keyword-tag">HEART</span>
+          <span class="keyword-tag">Teste A/B</span>
+          <span class="keyword-tag">Taxa de conclusão</span>
+          <span class="keyword-tag">Significância estatística</span>
+        </div>
+      </section>
+
+      <nav class="lesson-nav" aria-label="Navegação entre tópicos">
+        <a class="lesson-nav-link prev" href="metodos-avaliacao-usuarios.html" rel="prev">
+          <span class="lesson-nav-label">← Tópico anterior</span>
+          <span class="lesson-nav-title">Métodos de avaliação com usuários</span>
+        </a>
+        <a class="lesson-nav-link next" href="estudos-caso-usabilidade.html" rel="next">
+          <span class="lesson-nav-label">Próximo tópico →</span>
+          <span class="lesson-nav-title">Estudos de caso em usabilidade</span>
+        </a>
+      </nav>
+
+    </main>
+
+    <aside class="toc" aria-labelledby="toc-titulo">
+      <h2 id="toc-titulo">Neste tópico</h2>
+      <ol>
+        <li><a href="#metricas">Tipos de métricas de UX</a></li>
+        <li><a href="#desempenho">Métricas de desempenho</a></li>
+        <li><a href="#sus">System Usability Scale (SUS)</a></li>
+        <li><a href="#nps">NPS e métricas de atitude</a></li>
+        <li><a href="#ab">Testes A/B</a></li>
+        <li><a href="#atividade">Atividade prática</a></li>
+        <li><a href="#relevancia">Relevância para a computação</a></li>
+        <li><a href="#aprofundar">Para aprofundar</a></li>
+      </ol>
+      <p class="toc-progress">Tópico 21 de 24 · Métodos de avaliação</p>
+    </aside>
+
+  </div>
+</div>
+
+<footer>
+  <p>Interface Homem-Computador (CPA1469) · Instituto Federal Catarinense · Semestre 2026.2</p>
+  <p>Material de estudo atualizado no decorrer do semestre. Salve o link e retorne sempre que quiser revisar.</p>
+</footer>
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Voltar ao topo da página">↑</button>
+
+<script>
+  (function () {
+    var backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function () {
+      backToTop.classList.toggle('is-visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>

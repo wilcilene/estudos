@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diretrizes e regras de design | IHC – IFC</title>
+<meta name="description" content="Diretrizes e regras de design em IHC: as oito regras de ouro de Shneiderman, princípios de Norman e boas práticas para telas, formulários e navegação.">
+<meta name="keywords" content="Regras de ouro, Shneiderman, Norman, Affordance, Significantes, Mapeamento, Formulários, Navegação, Diretrizes, IHC, Interface Homem-Computador, CPA1469">
+<meta name="author" content="Wilcilene">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0284c7">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/diretrizes-regras-design.html">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="IHC – Instituto Federal Catarinense">
+<meta property="og:title" content="Diretrizes e regras de design — IHC">
+<meta property="og:description" content="Diretrizes e regras de design em IHC: as oito regras de ouro de Shneiderman, princípios de Norman e boas práticas para telas, formulários e navegação.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/diretrizes-regras-design.html">
+<meta property="og:image" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/media/og-image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Diretrizes e regras de design — IHC">
+<meta name="twitter:description" content="Diretrizes e regras de design em IHC: as oito regras de ouro de Shneiderman, princípios de Norman e boas práticas para telas, formulários e navegação.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="topicos.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/diretrizes-regras-design.html#recurso",
+      "name": "Diretrizes e regras de design",
+      "headline": "Diretrizes e regras de design",
+      "description": "Diretrizes e regras de design em IHC: as oito regras de ouro de Shneiderman, princípios de Norman e boas práticas para telas, formulários e navegação.",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/diretrizes-regras-design.html",
+      "inLanguage": "pt-BR",
+      "learningResourceType": "Material de aula",
+      "educationalLevel": "Ensino superior",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student"
+      },
+      "keywords": "Regras de ouro, Shneiderman, Norman, Affordance, Significantes, Mapeamento, Formulários, Navegação, Diretrizes",
+      "dateModified": "2026-09-30",
+      "author": {
+        "@type": "Person",
+        "name": "Wilcilene"
+      },
+      "publisher": {
+        "@type": "CollegeOrUniversity",
+        "name": "Instituto Federal Catarinense",
+        "url": "https://www.ifc.edu.br/"
+      },
+      "isPartOf": {
+        "@type": "Course",
+        "name": "Interface Homem-Computador",
+        "courseCode": "CPA1469",
+        "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "IHC – CPA1469",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Diretrizes e regras de design",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/diretrizes-regras-design.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<div class="page">
+
+  <nav aria-label="Trilha de navegação">
+    <a class="breadcrumb" href="../index.html">
+      <span class="breadcrumb-arrow" aria-hidden="true">←</span>
+      IHC · 2026.2 · voltar ao índice da disciplina
+    </a>
+  </nav>
+
+  <header class="lesson-header">
+    <span class="badge">
+      <span class="badge-dot" aria-hidden="true"></span>
+      Usabilidade e acessibilidade · 16/09
+    </span>
+
+    <h1>Diretrizes e regras de design</h1>
+
+    <p class="lesson-intro">
+      Diretrizes condensam décadas de pesquisa e prática em recomendações aplicáveis. Nesta aula vamos estudar as oito regras de ouro de Shneiderman, os princípios de design de Don Norman e diretrizes concretas para telas, formulários e navegação, sempre com exemplos que você pode verificar no seu próprio projeto.
+    </p>
+
+    <div class="lesson-meta">
+      <span class="pill">Usabilidade e acessibilidade</span>
+      <span class="pill">Nível intermediário</span>
+      <span class="pill">Aula: 16/09</span>
+    </div>
+  </header>
+
+  <section class="summary-card" aria-labelledby="pontos-principais">
+    <h2 id="pontos-principais">Principais pontos</h2>
+    <ul class="summary-list">
+      <li>Diferenciar princípios, diretrizes e padrões de design.</li>
+      <li>Aplicar as oito regras de ouro de Shneiderman.</li>
+      <li>Usar affordances, significantes, mapeamento, restrições e feedback (Norman).</li>
+      <li>Projetar telas com hierarquia, alinhamento e legibilidade.</li>
+      <li>Construir formulários e navegação que previnem erros.</li>
+    </ul>
+  </section>
+
+  <div class="page-grid">
+
+    <main id="conteudo" class="content" tabindex="-1">
+
+      <section class="content-section" id="niveis" aria-labelledby="niveis-titulo">
+        <h2 id="niveis-titulo"><span class="section-number">01</span> Princípios, diretrizes e padrões</h2>
+
+        <p>As recomendações de design existem em diferentes níveis de abstração:</p>
+        <ul>
+          <li><strong>Princípios</strong>: ideias gerais e duradouras (“ofereça feedback”).</li>
+          <li><strong>Diretrizes (guidelines)</strong>: recomendações mais concretas para um contexto (“exiba a mensagem de erro ao lado do campo, em até um segundo após a saída do foco”).</li>
+          <li><strong>Padrões e guias de estilo</strong>: soluções específicas de uma plataforma ou organização (Material Design, Human Interface Guidelines, Padrão Digital de Governo).</li>
+        </ul>
+        <p>
+          Quanto mais concreta a recomendação, mais fácil de aplicar e mais dependente do contexto. Diretrizes não
+          substituem testes com usuários: elas ajudam a evitar erros conhecidos, não a descobrir os novos.
+        </p>
+
+      </section>
+
+      <section class="content-section" id="regras-ouro" aria-labelledby="regras-ouro-titulo">
+        <h2 id="regras-ouro-titulo"><span class="section-number">02</span> As oito regras de ouro de Shneiderman</h2>
+
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Regras de ouro do design de interfaces e exemplos</caption>
+            <thead><tr><th scope="col">Regra</th><th scope="col">Exemplo de aplicação</th></tr></thead>
+            <tbody>
+              <tr><td>1. Busque consistência</td><td>O botão principal tem a mesma cor, posição e verbo em todas as telas.</td></tr>
+              <tr><td>2. Busque usabilidade universal</td><td>Atalhos para experientes, explicações para iniciantes, suporte a leitores de tela.</td></tr>
+              <tr><td>3. Ofereça feedback informativo</td><td>“Arquivo enviado (2,3 MB)” em vez de nenhuma resposta.</td></tr>
+              <tr><td>4. Projete diálogos que indiquem término</td><td>Tela de confirmação com número do pedido ao fim da compra.</td></tr>
+              <tr><td>5. Previna erros</td><td>Desabilitar datas passadas no calendário de agendamento.</td></tr>
+              <tr><td>6. Permita reverter ações facilmente</td><td>“Desfazer” após arquivar um e-mail.</td></tr>
+              <tr><td>7. Mantenha o controle com o usuário</td><td>Nada acontece sem ação da pessoa; carrosséis não giram sozinhos sem controle de pausa.</td></tr>
+              <tr><td>8. Reduza a carga da memória de curto prazo</td><td>Mostrar o resumo do pedido na tela de pagamento em vez de exigir que a pessoa lembre.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="norman" aria-labelledby="norman-titulo">
+        <h2 id="norman-titulo"><span class="section-number">03</span> Os princípios de Don Norman</h2>
+
+        <p>Em <em>O Design do Dia a Dia</em>, Norman propõe conceitos que valem para portas, fogões e interfaces digitais:</p>
+        <ul>
+          <li><strong>Affordance</strong>: a relação entre as propriedades de um objeto e as capacidades de quem o usa, que determina quais ações são possíveis.</li>
+          <li><strong>Significantes</strong>: sinais perceptíveis que indicam onde e como agir (sombra de um botão, sublinhado de um link, ícone de arraste).</li>
+          <li><strong>Mapeamento</strong>: a relação entre controles e efeitos. Um controle de volume que sobe para aumentar tem bom mapeamento.</li>
+          <li><strong>Restrições</strong>: limites que impedem ações erradas (campo que só aceita números, botão desabilitado).</li>
+          <li><strong>Feedback</strong>: resposta imediata e informativa a cada ação.</li>
+          <li><strong>Modelo conceitual</strong>: a explicação que a pessoa constrói sobre como o sistema funciona.</li>
+        </ul>
+        <div class="callout callout-example">
+          <span class="callout-label">A “porta de Norman”</span>
+          <p>
+            Uma porta com puxador que precisa ser empurrada tem um significante enganoso. Na tela, o equivalente é um texto
+            azul e sublinhado que não é link, ou um card inteiro que parece clicável mas só o título funciona.
+          </p>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="telas" aria-labelledby="telas-titulo">
+        <h2 id="telas-titulo"><span class="section-number">04</span> Diretrizes para telas</h2>
+
+        <ul>
+          <li><strong>Hierarquia visual</strong>: uma única ação principal por tela, destacada por tamanho, cor e posição.</li>
+          <li><strong>Alinhamento e grade</strong>: elementos alinhados a uma grade comum parecem relacionados e reduzem o “ruído”.</li>
+          <li><strong>Espaço em branco</strong>: agrupa (proximidade, da Gestalt) e dá respiro à leitura.</li>
+          <li><strong>Legibilidade</strong>: linhas de texto entre 50 e 75 caracteres, tamanho de fonte confortável e contraste mínimo de 4,5:1 para texto comum (WCAG).</li>
+          <li><strong>Cor com significado, nunca sozinha</strong>: erro em vermelho <em>e</em> com ícone e texto.</li>
+        </ul>
+        <p>Esses pontos se apoiam em <a href="decisao-modelos-mentais-carga-cognitiva.html">percepção visual e carga cognitiva</a>, vistos anteriormente.</p>
+
+      </section>
+
+      <section class="content-section" id="formularios" aria-labelledby="formularios-titulo">
+        <h2 id="formularios-titulo"><span class="section-number">05</span> Diretrizes para formulários</h2>
+
+        <ul>
+          <li>Peça só o necessário; cada campo a mais reduz a taxa de conclusão.</li>
+          <li>Use rótulos visíveis acima do campo. <em>Placeholder</em> não é rótulo: desaparece ao digitar e costuma ter pouco contraste.</li>
+          <li>Agrupe campos relacionados e siga a ordem natural da tarefa.</li>
+          <li>Mostre formato e regras antes do erro (“mínimo de 8 caracteres”).</li>
+          <li>Use o tipo de campo adequado para abrir o teclado certo no celular.</li>
+          <li>Valide perto do campo, com mensagem que diga como corrigir, e preserve o que já foi digitado.</li>
+          <li>O botão de envio descreve a ação (“Criar conta”), não apenas “OK”.</li>
+        </ul>
+        <p>Veja como essas diretrizes aparecem no código:</p>
+        <pre><code>&lt;label for="email"&gt;E-mail institucional&lt;/label&gt;
+&lt;p id="email-dica"&gt;Use o e-mail que termina em @estudantes.ifc.edu.br&lt;/p&gt;
+&lt;input id="email" type="email" autocomplete="email"
+       aria-describedby="email-dica email-erro" required&gt;
+&lt;p id="email-erro" role="alert"&gt;&lt;/p&gt;
+
+&lt;button type="submit"&gt;Criar conta&lt;/button&gt;</code></pre>
+
+      </section>
+
+      <section class="content-section" id="navegacao" aria-labelledby="navegacao-titulo">
+        <h2 id="navegacao-titulo"><span class="section-number">06</span> Diretrizes para navegação</h2>
+
+        <p>Em qualquer tela, a pessoa deveria conseguir responder a três perguntas:</p>
+        <ol>
+          <li><strong>Onde estou?</strong> Título da página, item de menu destacado, breadcrumb.</li>
+          <li><strong>Para onde posso ir?</strong> Links e menus com rótulos claros e previsíveis.</li>
+          <li><strong>Como volto?</strong> Botão voltar funcionando, caminho de retorno ao início, estado preservado.</li>
+        </ol>
+        <p>
+          Links devem descrever o destino (“Baixe o edital em PDF”) em vez de “clique aqui”, o que ajuda tanto quem usa
+          leitor de tela quanto os buscadores.
+        </p>
+
+      </section>
+
+      <section class="content-section" id="atividade" aria-labelledby="atividade-titulo">
+        <h2 id="atividade-titulo"><span class="section-number">07</span> Atividade prática</h2>
+
+        <div class="callout callout-activity">
+          <span class="callout-label">Atividade</span>
+          <ol>
+            <li>Escolha um formulário real (matrícula, cadastro em loja, inscrição em evento).</li>
+            <li>Avalie-o com as diretrizes de formulários desta página, registrando cada violação com uma captura de tela.</li>
+            <li>Relacione cada violação com uma das oito regras de ouro ou com um princípio de Norman.</li>
+            <li>Proponha um redesenho em baixa fidelidade das duas violações mais graves.</li>
+            <li>Aplique a mesma verificação aos wireframes do seu projeto.</li>
+          </ol>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="relevancia" aria-labelledby="relevancia-titulo">
+        <h2 id="relevancia-titulo"><span class="section-number">08</span> Relevância para a Engenharia de Computação</h2>
+        <div class="callout callout-connection">
+          <span class="callout-label">🔗 Conexão com a sua formação</span>
+          <p>
+            Diretrizes de design podem ser transformadas em código e automação: componentes reutilizáveis que já nascem
+            acessíveis, regras de <em>lint</em> para HTML e testes automatizados que verificam contraste e rótulos. Em
+            IHMs industriais, normas como a ISO 9241 e guias do setor cumprem o mesmo papel das regras de ouro, com
+            impacto direto em segurança operacional.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section" id="aprofundar" aria-labelledby="aprofundar-titulo">
+        <h2 id="aprofundar-titulo"><span class="section-number">09</span> Para aprofundar</h2>
+        <div class="callout callout-reading">
+          <span class="callout-label">Referências e leituras recomendadas</span>
+          <ul class="reading-list">
+            <li>SHNEIDERMAN, B. et al. <em>Designing the User Interface</em>. Pearson (as oito regras de ouro).</li>
+            <li>NORMAN, D. A. <em>O Design do Dia a Dia</em>. Rocco.</li>
+            <li>WROBLEWSKI, L. <em>Web Form Design: Filling in the Blanks</em>. Rosenfeld Media, 2008.</li>
+            <li>W3C. <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener">Web Content Accessibility Guidelines (WCAG) 2.2</a>.</li>
+          </ul>
+        </div>
+
+        <h3>Palavras-chave deste tópico</h3>
+        <div class="keyword-tags" aria-label="Palavras-chave do tópico">
+          <span class="keyword-tag">Regras de ouro</span>
+          <span class="keyword-tag">Shneiderman</span>
+          <span class="keyword-tag">Norman</span>
+          <span class="keyword-tag">Affordance</span>
+          <span class="keyword-tag">Significantes</span>
+          <span class="keyword-tag">Mapeamento</span>
+          <span class="keyword-tag">Formulários</span>
+          <span class="keyword-tag">Navegação</span>
+          <span class="keyword-tag">Diretrizes</span>
+        </div>
+      </section>
+
+      <nav class="lesson-nav" aria-label="Navegação entre tópicos">
+        <a class="lesson-nav-link prev" href="prototipagem-ferramentas-wireframes.html" rel="prev">
+          <span class="lesson-nav-label">← Tópico anterior</span>
+          <span class="lesson-nav-title">Prototipagem: ferramentas e wireframes em baixa fidelidade</span>
+        </a>
+        <a class="lesson-nav-link next" href="construcao-prototipo-projeto.html" rel="next">
+          <span class="lesson-nav-label">Próximo tópico →</span>
+          <span class="lesson-nav-title">Construção do protótipo do projeto: telas e fluxos</span>
+        </a>
+      </nav>
+
+    </main>
+
+    <aside class="toc" aria-labelledby="toc-titulo">
+      <h2 id="toc-titulo">Neste tópico</h2>
+      <ol>
+        <li><a href="#niveis">Princípios, diretrizes, padrões</a></li>
+        <li><a href="#regras-ouro">As oito regras de ouro de Shneiderman</a></li>
+        <li><a href="#norman">Os princípios de Don Norman</a></li>
+        <li><a href="#telas">Diretrizes para telas</a></li>
+        <li><a href="#formularios">Diretrizes para formulários</a></li>
+        <li><a href="#navegacao">Diretrizes para navegação</a></li>
+        <li><a href="#atividade">Atividade prática</a></li>
+        <li><a href="#relevancia">Relevância para a computação</a></li>
+        <li><a href="#aprofundar">Para aprofundar</a></li>
+      </ol>
+      <p class="toc-progress">Tópico 9 de 24 · Usabilidade e acessibilidade</p>
+    </aside>
+
+  </div>
+</div>
+
+<footer>
+  <p>Interface Homem-Computador (CPA1469) · Instituto Federal Catarinense · Semestre 2026.2</p>
+  <p>Material de estudo atualizado no decorrer do semestre. Salve o link e retorne sempre que quiser revisar.</p>
+</footer>
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Voltar ao topo da página">↑</button>
+
+<script>
+  (function () {
+    var backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function () {
+      backToTop.classList.toggle('is-visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>

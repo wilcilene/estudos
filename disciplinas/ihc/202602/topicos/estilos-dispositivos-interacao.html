@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estilos de interação e dispositivos de entrada/saída | IHC – IFC</title>
+<meta name="description" content="Estilos de interação (manipulação direta, menus, formulários, comandos e linguagem natural), dispositivos de entrada e saída e Lei de Fitts aplicada ao design.">
+<meta name="keywords" content="Estilos de interação, Manipulação direta, Menus, Formulários, Linguagem de comando, Dispositivos de entrada, Lei de Fitts, Háptico, IHC, Interface Homem-Computador, CPA1469">
+<meta name="author" content="Wilcilene">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0284c7">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/estilos-dispositivos-interacao.html">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="IHC – Instituto Federal Catarinense">
+<meta property="og:title" content="Estilos de interação e dispositivos de entrada/saída — IHC">
+<meta property="og:description" content="Estilos de interação (manipulação direta, menus, formulários, comandos e linguagem natural), dispositivos de entrada e saída e Lei de Fitts aplicada ao design.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/estilos-dispositivos-interacao.html">
+<meta property="og:image" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/media/og-image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Estilos de interação e dispositivos de entrada/saída — IHC">
+<meta name="twitter:description" content="Estilos de interação (manipulação direta, menus, formulários, comandos e linguagem natural), dispositivos de entrada e saída e Lei de Fitts aplicada ao design.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="topicos.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/estilos-dispositivos-interacao.html#recurso",
+      "name": "Estilos de interação e dispositivos de entrada/saída",
+      "headline": "Estilos de interação e dispositivos de entrada/saída",
+      "description": "Estilos de interação (manipulação direta, menus, formulários, comandos e linguagem natural), dispositivos de entrada e saída e Lei de Fitts aplicada ao design.",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/estilos-dispositivos-interacao.html",
+      "inLanguage": "pt-BR",
+      "learningResourceType": "Material de aula",
+      "educationalLevel": "Ensino superior",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student"
+      },
+      "keywords": "Estilos de interação, Manipulação direta, Menus, Formulários, Linguagem de comando, Dispositivos de entrada, Lei de Fitts, Háptico",
+      "dateModified": "2026-09-30",
+      "author": {
+        "@type": "Person",
+        "name": "Wilcilene"
+      },
+      "publisher": {
+        "@type": "CollegeOrUniversity",
+        "name": "Instituto Federal Catarinense",
+        "url": "https://www.ifc.edu.br/"
+      },
+      "isPartOf": {
+        "@type": "Course",
+        "name": "Interface Homem-Computador",
+        "courseCode": "CPA1469",
+        "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "IHC – CPA1469",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Estilos de interação e dispositivos de entrada/saída",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/estilos-dispositivos-interacao.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<div class="page">
+
+  <nav aria-label="Trilha de navegação">
+    <a class="breadcrumb" href="../index.html">
+      <span class="breadcrumb-arrow" aria-hidden="true">←</span>
+      IHC · 2026.2 · voltar ao índice da disciplina
+    </a>
+  </nav>
+
+  <header class="lesson-header">
+    <span class="badge">
+      <span class="badge-dot" aria-hidden="true"></span>
+      Técnicas de interação · 20/08
+    </span>
+
+    <h1>Estilos de interação e dispositivos de entrada/saída</h1>
+
+    <p class="lesson-intro">
+      Toda interação acontece por meio de um estilo (a forma de dialogar com o sistema) e de dispositivos (o meio físico de entrada e saída). Nesta aula vamos comparar os estilos clássicos, entender como teclado, mouse, toque e voz moldam a experiência e usar a Lei de Fitts para justificar decisões de layout com números.
+    </p>
+
+    <div class="lesson-meta">
+      <span class="pill">Técnicas de interação</span>
+      <span class="pill">Nível intermediário</span>
+      <span class="pill">Aula: 20/08</span>
+    </div>
+  </header>
+
+  <section class="summary-card" aria-labelledby="pontos-principais">
+    <h2 id="pontos-principais">Principais pontos</h2>
+    <ul class="summary-list">
+      <li>Reconhecer os cinco estilos de interação clássicos e suas vantagens e limitações.</li>
+      <li>Aplicar os princípios da manipulação direta a interfaces modernas.</li>
+      <li>Comparar dispositivos de entrada quanto à precisão, velocidade, esforço e acessibilidade.</li>
+      <li>Usar a Lei de Fitts para dimensionar e posicionar alvos clicáveis e tocáveis.</li>
+      <li>Escolher combinações de estilo e dispositivo adequadas ao contexto de uso.</li>
+    </ul>
+  </section>
+
+  <div class="page-grid">
+
+    <main id="conteudo" class="content" tabindex="-1">
+
+      <section class="content-section" id="estilos" aria-labelledby="estilos-titulo">
+        <h2 id="estilos-titulo"><span class="section-number">01</span> O que é um estilo de interação?</h2>
+
+        <p>
+          Um <strong>estilo de interação</strong> é o conjunto de convenções que define <em>como</em> a pessoa
+          comunica suas intenções ao sistema e como o sistema responde. Ben Shneiderman organizou os estilos
+          clássicos em cinco grandes famílias, que ainda hoje aparecem, muitas vezes combinadas, em qualquer
+          aplicação que você usa.
+        </p>
+
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Os cinco estilos clássicos de interação (Shneiderman)</caption>
+            <thead>
+              <tr><th scope="col">Estilo</th><th scope="col" class="col-good">Pontos fortes</th><th scope="col" class="col-bad">Pontos fracos</th><th scope="col">Quando usar</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Manipulação direta</strong></td><td>Visível, aprendizado rápido, erros fáceis de desfazer.</td><td>Difícil automatizar; exige boa representação visual; pode excluir quem não usa ponteiro.</td><td>Edição visual, mapas, arrastar arquivos, jogos.</td></tr>
+              <tr><td><strong>Seleção por menu</strong></td><td>Favorece reconhecimento; reduz erros de digitação.</td><td>Muitas opções tornam a navegação lenta; hierarquias profundas confundem.</td><td>Usuários iniciantes ou ocasionais; conjuntos de opções conhecidos.</td></tr>
+              <tr><td><strong>Preenchimento de formulário</strong></td><td>Estrutura clara para entrada de dados; fácil de validar.</td><td>Formulários longos cansam; exige boas mensagens de erro.</td><td>Cadastros, pedidos, configurações.</td></tr>
+              <tr><td><strong>Linguagem de comando</strong></td><td>Poderosa, rápida, automatizável e combinável.</td><td>Exige recordação de sintaxe; erros pouco perdoáveis.</td><td>Usuários experientes, administração de sistemas, desenvolvimento.</td></tr>
+              <tr><td><strong>Linguagem natural</strong></td><td>Sem sintaxe para aprender; útil com mãos ocupadas (voz).</td><td>Ambiguidade; expectativas altas; difícil saber o que o sistema “entende”.</td><td>Assistentes, busca, atendimento, consultas pontuais.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="muted">
+          Na prática, interfaces são híbridas. A <em>command palette</em> de editores como o VS Code
+          (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>) mistura linguagem de comando com seleção por menu:
+          você digita, mas escolhe entre sugestões visíveis, combinando velocidade com reconhecimento.
+        </p>
+
+      </section>
+
+      <section class="content-section" id="manipulacao-direta" aria-labelledby="manipulacao-direta-titulo">
+        <h2 id="manipulacao-direta-titulo"><span class="section-number">02</span> Manipulação direta</h2>
+
+        <p>
+          O termo foi proposto por Shneiderman em 1983 para descrever interfaces em que a pessoa age
+          sobre representações visíveis dos objetos, em vez de descrevê-los por comandos. Três princípios a definem:
+        </p>
+        <ol>
+          <li><strong>Representação contínua</strong> dos objetos e ações de interesse.</li>
+          <li><strong>Ações físicas</strong> (arrastar, clicar, tocar, pinçar) no lugar de sintaxe complexa.</li>
+          <li><strong>Operações rápidas, incrementais e reversíveis</strong>, com efeito imediatamente visível.</li>
+        </ol>
+
+        <div class="callout callout-example">
+          <span class="callout-label">Exemplo aplicado</span>
+          <p>
+            Um filtro de preço com controle deslizante que atualiza a lista de produtos enquanto a pessoa arrasta
+            é manipulação direta: o resultado aparece a cada movimento e basta voltar o controle para desfazer.
+            O mesmo filtro com dois campos de texto e um botão “Aplicar” quebra o terceiro princípio, porque o efeito
+            só aparece depois de uma ação separada.
+          </p>
+        </div>
+
+        <p>
+          O ponto fraco é a acessibilidade: tudo o que depende de arrastar precisa ter uma alternativa por teclado
+          ou por um único toque. A WCAG 2.2 tornou isso explícito no critério <em>2.5.7 Movimentos de arrastar</em>.
+        </p>
+
+      </section>
+
+      <section class="content-section" id="menus-formularios-comandos" aria-labelledby="menus-formularios-comandos-titulo">
+        <h2 id="menus-formularios-comandos-titulo"><span class="section-number">03</span> Menus, formulários e comandos</h2>
+
+        <h3>Menus</h3>
+        <p>
+          Menus suspensos, contextuais (botão direito ou toque longo), em abas e radiais organizam opções para que
+          a pessoa <strong>reconheça</strong> em vez de <strong>lembrar</strong>. As decisões críticas são a ordem
+          (por frequência, por categoria ou alfabética), os rótulos e o equilíbrio entre largura e profundidade,
+          tema que retomaremos em <a href="estrutura-dialogos-navegacao.html">Estrutura de diálogos e navegação</a>.
+        </p>
+
+        <h3>Formulários</h3>
+        <p>
+          Formulários funcionam bem quando seguem a ordem mental da tarefa, usam rótulos sempre visíveis,
+          indicam formato esperado antes do erro e validam cada campo perto de onde ele está. O tipo de campo também
+          é uma escolha de interação: um <code>&lt;input type="date"&gt;</code> no celular abre um seletor nativo,
+          enquanto <code>inputmode="numeric"</code> exibe o teclado numérico para um CPF.
+        </p>
+
+        <h3>Linguagem de comando</h3>
+        <p>
+          Terminais, atalhos de teclado e consultas SQL são linguagens de comando. Para reduzir o custo de
+          recordação, boas CLIs oferecem autocompletar, <code>--help</code> consistente, mensagens de erro com
+          sugestão (“você quis dizer <code>git status</code>?”) e confirmação para operações destrutivas.
+        </p>
+
+      </section>
+
+      <section class="content-section" id="dispositivos-entrada" aria-labelledby="dispositivos-entrada-titulo">
+        <h2 id="dispositivos-entrada-titulo"><span class="section-number">04</span> Dispositivos de entrada</h2>
+
+        <p>
+          Cada dispositivo impõe um tipo de precisão, velocidade e esforço. Duas distinções ajudam a analisá-los:
+        </p>
+        <ul>
+          <li><strong>Direto x indireto</strong>: no toque e na caneta, a pessoa age no próprio local da tela; no mouse e no touchpad, o movimento acontece em outro plano e é mapeado para o cursor.</li>
+          <li><strong>Absoluto x relativo</strong>: uma mesa digitalizadora mapeia cada ponto físico para um ponto da tela (absoluto); o mouse move o cursor em relação à posição atual (relativo).</li>
+        </ul>
+
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Comparação resumida de dispositivos de entrada</caption>
+            <thead>
+              <tr><th scope="col">Dispositivo</th><th scope="col">Precisão</th><th scope="col">Pontos de atenção</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Teclado</td><td>Alta para texto e atalhos</td><td>Base da acessibilidade: tudo deve ser operável por ele.</td></tr>
+              <tr><td>Mouse / touchpad</td><td>Alta para apontar</td><td>Exige coordenação mão-olho; pouco adequado em mobilidade.</td></tr>
+              <tr><td>Toque</td><td>Média (o dedo cobre o alvo)</td><td>Alvos maiores; ausência de estado <em>hover</em>; gestos pouco descobríveis.</td></tr>
+              <tr><td>Caneta (stylus)</td><td>Alta</td><td>Ótima para desenho e anotação; pode se perder.</td></tr>
+              <tr><td>Voz</td><td>Variável</td><td>Ruído, sotaque, privacidade, confirmação de ações críticas.</td></tr>
+              <tr><td>Câmera e sensores</td><td>Variável</td><td>Iluminação, calibração, fadiga em gestos no ar.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="lei-de-fitts" aria-labelledby="lei-de-fitts-titulo">
+        <h2 id="lei-de-fitts-titulo"><span class="section-number">05</span> Lei de Fitts: dimensionando alvos</h2>
+
+        <p>
+          Paul Fitts mostrou, em 1954, que o tempo para atingir um alvo cresce com a distância até ele e diminui com o
+          seu tamanho. Na formulação mais usada em IHC:
+        </p>
+        <pre><code>MT = a + b · log₂(D / W + 1)
+
+MT = tempo de movimento
+D  = distância até o centro do alvo
+W  = largura do alvo na direção do movimento
+a, b = constantes obtidas experimentalmente para cada dispositivo</code></pre>
+        <p>
+          O termo <code>log₂(D/W + 1)</code> é o <strong>índice de dificuldade</strong> (ID), medido em bits.
+        </p>
+
+        <div class="callout callout-example">
+          <span class="callout-label">Calculando</span>
+          <p>
+            Um botão de 32 px a 256 px do cursor tem ID = log₂(256/32 + 1) = log₂(9) ≈ 3,17 bits. Dobrando a largura
+            para 64 px, o ID cai para log₂(5) ≈ 2,32 bits. A tarefa ficou cerca de 27% “mais fácil” sem mudar a distância.
+          </p>
+        </div>
+
+        <h3>Consequências de projeto</h3>
+        <ul>
+          <li>Ações frequentes devem ter alvos grandes e ficar perto de onde o cursor ou o polegar já estão.</li>
+          <li>Bordas e cantos da tela funcionam como alvos de largura “infinita” com mouse, porque o cursor para neles.</li>
+          <li>Menus contextuais e radiais reduzem a distância, pois abrem onde a pessoa já está.</li>
+          <li>Em telas de toque, as diretrizes da Apple indicam alvos de pelo menos 44 × 44 pt e o Material Design, 48 × 48 dp; a WCAG 2.2 define 24 × 24 px CSS como mínimo (critério 2.5.8).</li>
+          <li>Ações destrutivas não devem ficar grudadas nas frequentes: a mesma lei que acelera o acerto facilita o erro.</li>
+        </ul>
+
+      </section>
+
+      <section class="content-section" id="dispositivos-saida" aria-labelledby="dispositivos-saida-titulo">
+        <h2 id="dispositivos-saida-titulo"><span class="section-number">06</span> Dispositivos e canais de saída</h2>
+
+        <p>
+          A saída comunica o estado do sistema. Além da tela, existem os canais <strong>sonoro</strong>
+          (alertas, fala sintetizada, leitores de tela) e <strong>háptico</strong> (vibração, resistência em
+          controles). Usar mais de um canal para a mesma informação crítica (redundância) aumenta a chance de ela ser
+          percebida e torna a interface mais acessível: um alerta que é só vermelho falha para quem tem daltonismo;
+          um alerta que é só sonoro falha em um laboratório barulhento.
+        </p>
+        <div class="callout callout-reflection">
+          <span class="callout-label">Para refletir</span>
+          <p>
+            Pense no painel de um carro moderno em que o ar-condicionado só é ajustável pela tela sensível ao toque.
+            Que dispositivo de entrada foi trocado, e o que se perdeu em precisão, feedback tátil e atenção do motorista?
+          </p>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="atividade" aria-labelledby="atividade-titulo">
+        <h2 id="atividade-titulo"><span class="section-number">07</span> Atividade prática</h2>
+
+        <div class="callout callout-activity">
+          <span class="callout-label">Atividade</span>
+          <ol>
+            <li>Escolha uma tarefa (por exemplo, renomear 30 arquivos de fotos) e execute-a de duas formas: pela interface gráfica e por linha de comando ou script. Registre tempo, número de erros e esforço percebido.</li>
+            <li>Identifique qual estilo de interação predomina em cada forma e por quê uma delas foi melhor para você.</li>
+            <li>Em um aplicativo de celular que você usa, escolha os três botões mais usados. Eles estão ao alcance do polegar e têm tamanho adequado? Use a Lei de Fitts para justificar uma melhoria.</li>
+          </ol>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="relevancia" aria-labelledby="relevancia-titulo">
+        <h2 id="relevancia-titulo"><span class="section-number">08</span> Relevância para a Engenharia de Computação</h2>
+        <div class="callout callout-connection">
+          <span class="callout-label">🔗 Conexão com a sua formação</span>
+          <p>
+            Quem projeta sistemas embarcados e IHMs industriais escolhe o próprio dispositivo de entrada: botões físicos,
+            encoders rotativos, telas resistivas ou capacitivas. Taxa de amostragem, <em>debounce</em> de teclas e latência
+            do toque são decisões de engenharia que viram, diretamente, qualidade de interação. A Lei de Fitts também é
+            usada para avaliar novos dispositivos apontadores com base na norma ISO 9241-411.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section" id="aprofundar" aria-labelledby="aprofundar-titulo">
+        <h2 id="aprofundar-titulo"><span class="section-number">09</span> Para aprofundar</h2>
+        <div class="callout callout-reading">
+          <span class="callout-label">Referências e leituras recomendadas</span>
+          <ul class="reading-list">
+            <li>SHNEIDERMAN, B. et al. <em>Designing the User Interface</em>. Pearson, 6. ed. (capítulos sobre manipulação direta, menus e formulários).</li>
+            <li>BARBOSA, S. D. J.; SILVA, B. S. <em>Interação Humano-Computador</em>. Elsevier, 2010 (cap. 3, estilos de interação).</li>
+            <li>FITTS, P. M. The information capacity of the human motor system in controlling the amplitude of movement. <em>Journal of Experimental Psychology</em>, 1954.</li>
+            <li>MACKENZIE, I. S. Fitts' law as a research and design tool in human-computer interaction. <em>Human-Computer Interaction</em>, 1992.</li>
+            <li>W3C. <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener">Web Content Accessibility Guidelines (WCAG) 2.2</a> (critérios 2.5.7 e 2.5.8).</li>
+          </ul>
+        </div>
+
+        <h3>Palavras-chave deste tópico</h3>
+        <div class="keyword-tags" aria-label="Palavras-chave do tópico">
+          <span class="keyword-tag">Estilos de interação</span>
+          <span class="keyword-tag">Manipulação direta</span>
+          <span class="keyword-tag">Menus</span>
+          <span class="keyword-tag">Formulários</span>
+          <span class="keyword-tag">Linguagem de comando</span>
+          <span class="keyword-tag">Dispositivos de entrada</span>
+          <span class="keyword-tag">Lei de Fitts</span>
+          <span class="keyword-tag">Háptico</span>
+        </div>
+      </section>
+
+      <nav class="lesson-nav" aria-label="Navegação entre tópicos">
+        <a class="lesson-nav-link prev" href="decisao-modelos-mentais-carga-cognitiva.html" rel="prev">
+          <span class="lesson-nav-label">← Tópico anterior</span>
+          <span class="lesson-nav-title">Decisão, modelos mentais e carga cognitiva</span>
+        </a>
+        <a class="lesson-nav-link next" href="interacao-multimodal.html" rel="next">
+          <span class="lesson-nav-label">Próximo tópico →</span>
+          <span class="lesson-nav-title">Interação multimodal: voz, gestos e realidade aumentada</span>
+        </a>
+      </nav>
+
+    </main>
+
+    <aside class="toc" aria-labelledby="toc-titulo">
+      <h2 id="toc-titulo">Neste tópico</h2>
+      <ol>
+        <li><a href="#estilos">O que é um estilo de interação?</a></li>
+        <li><a href="#manipulacao-direta">Manipulação direta</a></li>
+        <li><a href="#menus-formularios-comandos">Menus, formulários e comandos</a></li>
+        <li><a href="#dispositivos-entrada">Dispositivos de entrada</a></li>
+        <li><a href="#lei-de-fitts">Lei de Fitts: dimensionando alvos</a></li>
+        <li><a href="#dispositivos-saida">Dispositivos e canais de saída</a></li>
+        <li><a href="#atividade">Atividade prática</a></li>
+        <li><a href="#relevancia">Relevância para a computação</a></li>
+        <li><a href="#aprofundar">Para aprofundar</a></li>
+      </ol>
+      <p class="toc-progress">Tópico 5 de 24 · Técnicas de interação</p>
+    </aside>
+
+  </div>
+</div>
+
+<footer>
+  <p>Interface Homem-Computador (CPA1469) · Instituto Federal Catarinense · Semestre 2026.2</p>
+  <p>Material de estudo atualizado no decorrer do semestre. Salve o link e retorne sempre que quiser revisar.</p>
+</footer>
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Voltar ao topo da página">↑</button>
+
+<script>
+  (function () {
+    var backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function () {
+      backToTop.classList.toggle('is-visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Padrões de design e design systems | IHC – IFC</title>
+<meta name="description" content="Padrões de interação e design systems: catálogo de padrões, design tokens, atomic design, componentes reutilizáveis e interfaces responsivas.">
+<meta name="keywords" content="Padrões de design, Design system, Design tokens, Atomic design, Componentes, Design responsivo, Material Design, gov.br, IHC, Interface Homem-Computador, CPA1469">
+<meta name="author" content="Wilcilene">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0284c7">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/padroes-design-systems.html">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="IHC – Instituto Federal Catarinense">
+<meta property="og:title" content="Padrões de design e design systems — IHC">
+<meta property="og:description" content="Padrões de interação e design systems: catálogo de padrões, design tokens, atomic design, componentes reutilizáveis e interfaces responsivas.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/padroes-design-systems.html">
+<meta property="og:image" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/media/og-image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Padrões de design e design systems — IHC">
+<meta name="twitter:description" content="Padrões de interação e design systems: catálogo de padrões, design tokens, atomic design, componentes reutilizáveis e interfaces responsivas.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="topicos.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/padroes-design-systems.html#recurso",
+      "name": "Padrões de design e design systems",
+      "headline": "Padrões de design e design systems",
+      "description": "Padrões de interação e design systems: catálogo de padrões, design tokens, atomic design, componentes reutilizáveis e interfaces responsivas.",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/padroes-design-systems.html",
+      "inLanguage": "pt-BR",
+      "learningResourceType": "Material de aula",
+      "educationalLevel": "Ensino superior",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student"
+      },
+      "keywords": "Padrões de design, Design system, Design tokens, Atomic design, Componentes, Design responsivo, Material Design, gov.br",
+      "dateModified": "2026-09-30",
+      "author": {
+        "@type": "Person",
+        "name": "Wilcilene"
+      },
+      "publisher": {
+        "@type": "CollegeOrUniversity",
+        "name": "Instituto Federal Catarinense",
+        "url": "https://www.ifc.edu.br/"
+      },
+      "isPartOf": {
+        "@type": "Course",
+        "name": "Interface Homem-Computador",
+        "courseCode": "CPA1469",
+        "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "IHC – CPA1469",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Padrões de design e design systems",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/padroes-design-systems.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<div class="page">
+
+  <nav aria-label="Trilha de navegação">
+    <a class="breadcrumb" href="../index.html">
+      <span class="breadcrumb-arrow" aria-hidden="true">←</span>
+      IHC · 2026.2 · voltar ao índice da disciplina
+    </a>
+  </nav>
+
+  <header class="lesson-header">
+    <span class="badge">
+      <span class="badge-dot" aria-hidden="true"></span>
+      Paradigmas e métodos de projeto · 10/12
+    </span>
+
+    <h1>Padrões de design e design systems</h1>
+
+    <p class="lesson-intro">
+      Muitos problemas de interface já foram resolvidos, e bem. Padrões de design registram essas soluções, e design systems as transformam em componentes, tokens e regras que times inteiros compartilham. Nesta última aula vamos estudar como padrões são descritos, como um design system é organizado e como ele se conecta ao código de interfaces responsivas.
+    </p>
+
+    <div class="lesson-meta">
+      <span class="pill">Paradigmas e métodos de projeto</span>
+      <span class="pill">Nível intermediário</span>
+      <span class="pill">Aula: 10/12</span>
+    </div>
+  </header>
+
+  <section class="summary-card" aria-labelledby="pontos-principais">
+    <h2 id="pontos-principais">Principais pontos</h2>
+    <ul class="summary-list">
+      <li>Descrever um padrão de interação com problema, contexto e solução.</li>
+      <li>Escolher padrões comuns de forma consciente, conhecendo suas limitações.</li>
+      <li>Explicar os elementos de um design system e exemplos reais.</li>
+      <li>Organizar componentes com atomic design e design tokens.</li>
+      <li>Aplicar princípios de design responsivo para web e mobile.</li>
+    </ul>
+  </section>
+
+  <div class="page-grid">
+
+    <main id="conteudo" class="content" tabindex="-1">
+
+      <section class="content-section" id="padroes" aria-labelledby="padroes-titulo">
+        <h2 id="padroes-titulo"><span class="section-number">01</span> O que é um padrão de design</h2>
+
+        <p>
+          A ideia vem da arquitetura: Christopher Alexander descreveu, nos anos 1970, soluções recorrentes para problemas
+          recorrentes de construção. Em software, os padrões de projeto popularizaram o conceito; em IHC, autores como
+          Tidwell catalogaram padrões de interface. Um padrão costuma ter:
+        </p>
+        <ul>
+          <li><strong>Nome</strong>: vocabulário comum para a equipe.</li>
+          <li><strong>Problema</strong>: a necessidade do usuário que ele resolve.</li>
+          <li><strong>Contexto</strong>: quando se aplica e quando não se aplica.</li>
+          <li><strong>Solução</strong>: a estrutura da interação, sem prender a um visual específico.</li>
+          <li><strong>Exemplos e consequências</strong>: onde é usado e o que se ganha ou perde.</li>
+        </ul>
+
+      </section>
+
+      <section class="content-section" id="catalogo" aria-labelledby="catalogo-titulo">
+        <h2 id="catalogo-titulo"><span class="section-number">02</span> Padrões comuns e seus limites</h2>
+
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Catálogo resumido de padrões de interação</caption>
+            <thead><tr><th scope="col">Padrão</th><th scope="col">Resolve</th><th scope="col">Cuidado</th></tr></thead>
+            <tbody>
+              <tr><td>Breadcrumb</td><td>Orientação em hierarquias profundas</td><td>Não substitui a navegação principal.</td></tr>
+              <tr><td>Paginação</td><td>Listas longas com necessidade de voltar a um ponto</td><td>Mais cliques para explorar.</td></tr>
+              <tr><td>Rolagem infinita</td><td>Exploração contínua de conteúdo</td><td>Rodapé inalcançável, perda de posição, dificuldade com teclado.</td></tr>
+              <tr><td>Cards</td><td>Itens heterogêneos com ação própria</td><td>Área clicável ambígua quando há vários links no card.</td></tr>
+              <tr><td>Modal</td><td>Decisão que exige atenção imediata</td><td>Uso excessivo interrompe; exige gestão de foco.</td></tr>
+              <tr><td>Toast / snackbar</td><td>Feedback breve e não bloqueante, com “Desfazer”</td><td>Pode sumir antes de ser lido; anuncie a leitores de tela.</td></tr>
+              <tr><td>Stepper</td><td>Processos longos em etapas</td><td>Mostrar etapa atual, permitir voltar sem perder dados.</td></tr>
+              <tr><td>Busca com sugestões</td><td>Encontrar itens sem navegar</td><td>Resultados vazios precisam de alternativas.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted">Os padrões enganosos, discutidos em <a href="usabilidade-e-ux.html">Usabilidade e UX</a>, são o lado oposto: soluções recorrentes para enganar. Reconhecê-los faz parte do repertório profissional.</p>
+
+      </section>
+
+      <section class="content-section" id="design-systems" aria-labelledby="design-systems-titulo">
+        <h2 id="design-systems-titulo"><span class="section-number">03</span> Design systems</h2>
+
+        <p>
+          Um <strong>design system</strong> é um conjunto coerente de princípios, padrões, componentes reutilizáveis, tokens e
+          documentação, mantido como um produto, para que várias equipes construam interfaces consistentes. Ele vai além de um
+          guia de estilo visual: inclui código, comportamento, acessibilidade e governança (quem decide, como se propõe um
+          novo componente, como se versiona).
+        </p>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Exemplos de design systems públicos</caption>
+            <thead><tr><th scope="col">Design system</th><th scope="col">Organização</th><th scope="col">Destaque</th></tr></thead>
+            <tbody>
+              <tr><td>Material Design</td><td>Google</td><td>Base do Android; tokens e componentes para várias plataformas.</td></tr>
+              <tr><td>Human Interface Guidelines</td><td>Apple</td><td>Diretrizes para iOS, macOS e demais plataformas da empresa.</td></tr>
+              <tr><td>Carbon</td><td>IBM</td><td>Aplicações corporativas, forte documentação de acessibilidade.</td></tr>
+              <tr><td>Fluent</td><td>Microsoft</td><td>Windows e aplicações Microsoft 365.</td></tr>
+              <tr><td>Padrão Digital de Governo</td><td>Governo federal do Brasil</td><td>Componentes para serviços do gov.br, alinhados ao eMAG.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="atomic" aria-labelledby="atomic-titulo">
+        <h2 id="atomic-titulo"><span class="section-number">04</span> Atomic design</h2>
+
+        <p>Brad Frost propôs organizar componentes em cinco níveis, inspirados na química:</p>
+        <div class="roadmap-grid">
+          <div class="roadmap-card"><span class="roadmap-index">1</span><h3>Átomos</h3><p>Botão, campo, rótulo, ícone.</p></div>
+          <div class="roadmap-card"><span class="roadmap-index">2</span><h3>Moléculas</h3><p>Campo de busca = rótulo + campo + botão.</p></div>
+          <div class="roadmap-card"><span class="roadmap-index">3</span><h3>Organismos</h3><p>Cabeçalho com logo, navegação e busca.</p></div>
+          <div class="roadmap-card"><span class="roadmap-index">4</span><h3>Templates</h3><p>Estrutura da página, sem conteúdo real.</p></div>
+          <div class="roadmap-card"><span class="roadmap-index">5</span><h3>Páginas</h3><p>Template preenchido com conteúdo real.</p></div>
+        </div>
+        <p>O modelo ajuda a decidir o nível de reutilização de cada peça e a nomear componentes de forma consistente entre design e código.</p>
+
+      </section>
+
+      <section class="content-section" id="tokens" aria-labelledby="tokens-titulo">
+        <h2 id="tokens-titulo"><span class="section-number">05</span> Design tokens: do design ao código</h2>
+
+        <p>
+          <strong>Design tokens</strong> são as decisões visuais elementares (cores, espaçamentos, tipografia, raios, sombras)
+          guardadas como variáveis nomeadas. As próprias páginas desta disciplina usam tokens em CSS:
+        </p>
+        <pre><code>:root {
+  /* tokens primitivos */
+  --blue-600: #0284c7;
+  --slate-800: #1e293b;
+
+  /* tokens semânticos: dizem PARA QUE a cor serve */
+  --accent: var(--blue-600);
+  --text: var(--slate-800);
+  --radius-md: 10px;
+}
+
+.botao-primario {
+  background: var(--accent);
+  border-radius: var(--radius-md);
+}</code></pre>
+        <p>
+          Tokens semânticos permitem mudar o tema (por exemplo, um modo escuro ou de alto contraste) alterando só as variáveis, sem
+          tocar nos componentes. Em times maiores, os tokens ficam em arquivos JSON e são convertidos automaticamente para CSS,
+          Android e iOS.
+        </p>
+
+      </section>
+
+      <section class="content-section" id="responsivo" aria-labelledby="responsivo-titulo">
+        <h2 id="responsivo-titulo"><span class="section-number">06</span> Interfaces responsivas</h2>
+
+        <ul>
+          <li><strong>Mobile first</strong>: comece pelo menor espaço e acrescente complexidade com <code>@media (min-width: …)</code>.</li>
+          <li><strong>Pontos de quebra pelo conteúdo</strong>: quebre o layout onde o conteúdo deixa de funcionar, não em larguras de aparelhos específicos.</li>
+          <li><strong>Layouts fluidos</strong>: Grid e Flexbox com <code>minmax()</code> e <code>auto-fit</code>, como na grade de tópicos do índice desta disciplina.</li>
+          <li><strong>Tipografia fluida</strong>: <code>font-size: clamp(1.9rem, 3.4vw, 2.6rem)</code> cresce com a tela dentro de limites.</li>
+          <li><strong>Container queries</strong>: o componente se adapta ao espaço do seu contêiner, não da janela, o que facilita a reutilização.</li>
+          <li><strong>Preferências do usuário</strong>: respeite <code>prefers-reduced-motion</code> e <code>prefers-color-scheme</code>.</li>
+        </ul>
+
+      </section>
+
+      <section class="content-section" id="atividade" aria-labelledby="atividade-titulo">
+        <h2 id="atividade-titulo"><span class="section-number">07</span> Atividade prática</h2>
+
+        <div class="callout callout-activity">
+          <span class="callout-label">Atividade</span>
+          <ol>
+            <li>Identifique no protótipo do projeto cinco padrões de interação e descreva cada um com problema, contexto e solução.</li>
+            <li>Extraia um mini design system do protótipo: tokens de cor, tipografia e espaçamento, e cinco componentes organizados pelos níveis do atomic design.</li>
+            <li>Verifique se os componentes atendem aos critérios de acessibilidade estudados (contraste, foco, tamanho de alvo).</li>
+            <li>Compare seu mini design system com um componente equivalente do Padrão Digital de Governo ou do Material Design.</li>
+          </ol>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="relevancia" aria-labelledby="relevancia-titulo">
+        <h2 id="relevancia-titulo"><span class="section-number">08</span> Relevância para a Engenharia de Computação</h2>
+        <div class="callout callout-connection">
+          <span class="callout-label">🔗 Conexão com a sua formação</span>
+          <p>
+            Design systems são software: bibliotecas de componentes versionadas, testadas, documentadas e distribuídas como
+            pacotes. Tokens, componentes e testes visuais automatizados aplicam à interface os mesmos princípios de modularidade
+            e reuso que você usa em qualquer projeto de engenharia, e IHMs de equipamentos embarcados também se beneficiam de
+            bibliotecas de componentes consistentes.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section" id="aprofundar" aria-labelledby="aprofundar-titulo">
+        <h2 id="aprofundar-titulo"><span class="section-number">09</span> Para aprofundar</h2>
+        <div class="callout callout-reading">
+          <span class="callout-label">Referências e leituras recomendadas</span>
+          <ul class="reading-list">
+            <li>TIDWELL, J.; BREWER, C.; VALENCIA, A. <em>Designing Interfaces</em>. O'Reilly, 3. ed., 2020.</li>
+            <li>FROST, B. <em>Atomic Design</em>. 2016.</li>
+            <li>KHOLMATOVA, A. <em>Design Systems</em>. Smashing Magazine, 2017.</li>
+            <li>ALEXANDER, C. et al. <em>Uma Linguagem de Padrões</em>. Bookman.</li>
+            <li>BRASIL. <a href="https://www.gov.br/ds/" target="_blank" rel="noopener">Padrão Digital de Governo – Design System gov.br</a>.</li>
+          </ul>
+        </div>
+
+        <h3>Palavras-chave deste tópico</h3>
+        <div class="keyword-tags" aria-label="Palavras-chave do tópico">
+          <span class="keyword-tag">Padrões de design</span>
+          <span class="keyword-tag">Design system</span>
+          <span class="keyword-tag">Design tokens</span>
+          <span class="keyword-tag">Atomic design</span>
+          <span class="keyword-tag">Componentes</span>
+          <span class="keyword-tag">Design responsivo</span>
+          <span class="keyword-tag">Material Design</span>
+          <span class="keyword-tag">gov.br</span>
+        </div>
+      </section>
+
+      <nav class="lesson-nav" aria-label="Navegação entre tópicos">
+        <a class="lesson-nav-link prev" href="acessibilidade-digital.html" rel="prev">
+          <span class="lesson-nav-label">← Tópico anterior</span>
+          <span class="lesson-nav-title">Acessibilidade digital e padrões</span>
+        </a>
+        <a class="lesson-nav-link next" href="../index.html">
+          <span class="lesson-nav-label">Fim do semestre →</span>
+          <span class="lesson-nav-title">Voltar ao índice da disciplina</span>
+        </a>
+      </nav>
+
+    </main>
+
+    <aside class="toc" aria-labelledby="toc-titulo">
+      <h2 id="toc-titulo">Neste tópico</h2>
+      <ol>
+        <li><a href="#padroes">O que é um padrão de design</a></li>
+        <li><a href="#catalogo">Padrões comuns e seus limites</a></li>
+        <li><a href="#design-systems">Design systems</a></li>
+        <li><a href="#atomic">Atomic design</a></li>
+        <li><a href="#tokens">Design tokens</a></li>
+        <li><a href="#responsivo">Interfaces responsivas</a></li>
+        <li><a href="#atividade">Atividade prática</a></li>
+        <li><a href="#relevancia">Relevância para a computação</a></li>
+        <li><a href="#aprofundar">Para aprofundar</a></li>
+      </ol>
+      <p class="toc-progress">Tópico 24 de 24 · Paradigmas e métodos de projeto</p>
+    </aside>
+
+  </div>
+</div>
+
+<footer>
+  <p>Interface Homem-Computador (CPA1469) · Instituto Federal Catarinense · Semestre 2026.2</p>
+  <p>Material de estudo atualizado no decorrer do semestre. Salve o link e retorne sempre que quiser revisar.</p>
+</footer>
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Voltar ao topo da página">↑</button>
+
+<script>
+  (function () {
+    var backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function () {
+      backToTop.classList.toggle('is-visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>

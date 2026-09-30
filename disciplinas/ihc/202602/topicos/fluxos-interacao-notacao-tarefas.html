@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fluxos de interação, mapas de navegação e notação de tarefas | IHC – IFC</title>
+<meta name="description" content="Fluxos de interação, mapas de navegação e notações de tarefas em IHC: user flows, wireflows, Análise Hierárquica de Tarefas (HTA), ConcurTaskTrees (CTT) e GOMS/KLM.">
+<meta name="keywords" content="Fluxo de interação, Wireflow, Mapa de navegação, Análise de tarefas, HTA, CTT, GOMS, KLM, IHC, Interface Homem-Computador, CPA1469">
+<meta name="author" content="Wilcilene">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0284c7">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/fluxos-interacao-notacao-tarefas.html">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="IHC – Instituto Federal Catarinense">
+<meta property="og:title" content="Fluxos de interação, mapas de navegação e notação de tarefas — IHC">
+<meta property="og:description" content="Fluxos de interação, mapas de navegação e notações de tarefas em IHC: user flows, wireflows, Análise Hierárquica de Tarefas (HTA), ConcurTaskTrees (CTT) e GOMS/KLM.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/fluxos-interacao-notacao-tarefas.html">
+<meta property="og:image" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/media/og-image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fluxos de interação, mapas de navegação e notação de tarefas — IHC">
+<meta name="twitter:description" content="Fluxos de interação, mapas de navegação e notações de tarefas em IHC: user flows, wireflows, Análise Hierárquica de Tarefas (HTA), ConcurTaskTrees (CTT) e GOMS/KLM.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="topicos.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/fluxos-interacao-notacao-tarefas.html#recurso",
+      "name": "Fluxos de interação, mapas de navegação e notação de tarefas",
+      "headline": "Fluxos de interação, mapas de navegação e notação de tarefas",
+      "description": "Fluxos de interação, mapas de navegação e notações de tarefas em IHC: user flows, wireflows, Análise Hierárquica de Tarefas (HTA), ConcurTaskTrees (CTT) e GOMS/KLM.",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/fluxos-interacao-notacao-tarefas.html",
+      "inLanguage": "pt-BR",
+      "learningResourceType": "Material de aula",
+      "educationalLevel": "Ensino superior",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student"
+      },
+      "keywords": "Fluxo de interação, Wireflow, Mapa de navegação, Análise de tarefas, HTA, CTT, GOMS, KLM",
+      "dateModified": "2026-09-30",
+      "author": {
+        "@type": "Person",
+        "name": "Wilcilene"
+      },
+      "publisher": {
+        "@type": "CollegeOrUniversity",
+        "name": "Instituto Federal Catarinense",
+        "url": "https://www.ifc.edu.br/"
+      },
+      "isPartOf": {
+        "@type": "Course",
+        "name": "Interface Homem-Computador",
+        "courseCode": "CPA1469",
+        "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "IHC – CPA1469",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Fluxos de interação, mapas de navegação e notação de tarefas",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/fluxos-interacao-notacao-tarefas.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<div class="page">
+
+  <nav aria-label="Trilha de navegação">
+    <a class="breadcrumb" href="../index.html">
+      <span class="breadcrumb-arrow" aria-hidden="true">←</span>
+      IHC · 2026.2 · voltar ao índice da disciplina
+    </a>
+  </nav>
+
+  <header class="lesson-header">
+    <span class="badge">
+      <span class="badge-dot" aria-hidden="true"></span>
+      Modelagem de interação · 11/11
+    </span>
+
+    <h1>Fluxos de interação, mapas de navegação e notação de tarefas</h1>
+
+    <p class="lesson-intro">
+      Antes de desenhar telas, precisamos representar o caminho que a pessoa percorre e a estrutura das tarefas que ela realiza. Nesta aula veremos fluxos de interação e mapas de navegação, usados no dia a dia de design, e notações formais de tarefas (HTA, CTT e GOMS/KLM), que permitem analisar e até prever o desempenho de uma interface.
+    </p>
+
+    <div class="lesson-meta">
+      <span class="pill">Modelagem de interação</span>
+      <span class="pill">Nível intermediário</span>
+      <span class="pill">Aula: 11/11</span>
+    </div>
+  </header>
+
+  <section class="summary-card" aria-labelledby="pontos-principais">
+    <h2 id="pontos-principais">Principais pontos</h2>
+    <ul class="summary-list">
+      <li>Desenhar fluxos de usuário, de tarefa e wireflows com notação consistente.</li>
+      <li>Diferenciar mapa de navegação e fluxo de interação.</li>
+      <li>Decompor tarefas com Análise Hierárquica de Tarefas (HTA).</li>
+      <li>Representar relações temporais entre tarefas com CTT.</li>
+      <li>Estimar tempos de execução com o modelo KLM.</li>
+    </ul>
+  </section>
+
+  <div class="page-grid">
+
+    <main id="conteudo" class="content" tabindex="-1">
+
+      <section class="content-section" id="fluxos" aria-labelledby="fluxos-titulo">
+        <h2 id="fluxos-titulo"><span class="section-number">01</span> Fluxos de interação</h2>
+
+        <p>Existem três variações comuns:</p>
+        <ul>
+          <li><strong>Fluxo de tarefa</strong>: sequência linear de passos para uma tarefa, sem desvios.</li>
+          <li><strong>Fluxo de usuário</strong>: inclui pontos de entrada, decisões, caminhos alternativos e de erro.</li>
+          <li><strong>Wireflow</strong>: fluxo em que cada nó é uma miniatura da tela, útil para aplicativos com poucas telas e muitas interações.</li>
+        </ul>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Notação básica de fluxos</caption>
+            <thead><tr><th scope="col">Símbolo</th><th scope="col">Significado</th></tr></thead>
+            <tbody>
+              <tr><td>Oval / círculo</td><td>Início ou fim do fluxo</td></tr>
+              <tr><td>Retângulo</td><td>Tela ou página</td></tr>
+              <tr><td>Losango</td><td>Decisão (do usuário ou do sistema)</td></tr>
+              <tr><td>Retângulo arredondado</td><td>Ação ou processamento do sistema</td></tr>
+              <tr><td>Seta rotulada</td><td>Transição e o que a dispara</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Mantenha uma legenda, use nomes iguais aos do inventário de telas e desenhe um fluxo por tarefa.</p>
+
+      </section>
+
+      <section class="content-section" id="mapa-navegacao" aria-labelledby="mapa-navegacao-titulo">
+        <h2 id="mapa-navegacao-titulo"><span class="section-number">02</span> Mapas de navegação</h2>
+
+        <p>
+          O <strong>mapa de navegação</strong> (ou mapa do site) mostra a estrutura de páginas e telas e todas as ligações
+          possíveis entre elas, sem ordem temporal. Ele responde “o que existe e como está organizado?”; o fluxo responde
+          “que caminho a pessoa faz para cumprir esta tarefa?”.
+        </p>
+        <ul>
+          <li>Use o mapa para avaliar <strong>profundidade</strong> (quantos níveis até o conteúdo mais importante?) e páginas órfãs.</li>
+          <li>Use o fluxo para avaliar <strong>eficiência</strong> (quantos passos?) e cobertura de erros.</li>
+        </ul>
+        <p>A jornada do usuário, vista em <a href="metodologias-ihc.html">Metodologias de IHC</a>, amplia o fluxo para além do sistema, incluindo emoções e outros canais.</p>
+
+      </section>
+
+      <section class="content-section" id="hta" aria-labelledby="hta-titulo">
+        <h2 id="hta-titulo"><span class="section-number">03</span> Análise Hierárquica de Tarefas (HTA)</h2>
+
+        <p>
+          A HTA, proposta por Annett e Duncan em 1967, decompõe um objetivo em subtarefas, até o nível de detalhe
+          necessário, e descreve <strong>planos</strong> que dizem a ordem e as condições de execução.
+        </p>
+        <pre><code>0. Sacar dinheiro no caixa eletrônico
+   1. Inserir o cartão
+   2. Digitar a senha
+   3. Escolher “Saque”
+   4. Informar o valor
+   5. Retirar o cartão
+   6. Retirar o dinheiro
+
+   Plano 0: fazer 1-2-3-4; se o saldo for suficiente, fazer 5-6;
+            se não, exibir aviso e voltar a 4.</code></pre>
+        <div class="callout callout-example">
+          <span class="callout-label">Uma decisão de projeto revelada pela análise</span>
+          <p>
+            Quando o dinheiro era entregue antes do cartão, muitas pessoas esqueciam o cartão: ao receber o dinheiro, o
+            objetivo estava cumprido e o passo restante era “esquecido” (um erro de pós-conclusão). Ordenar a tarefa para
+            devolver o cartão antes do dinheiro, como no plano acima, praticamente elimina o problema.
+          </p>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="ctt" aria-labelledby="ctt-titulo">
+        <h2 id="ctt-titulo"><span class="section-number">04</span> ConcurTaskTrees (CTT)</h2>
+
+        <p>
+          A notação CTT, desenvolvida por Fabio Paternò, também organiza tarefas em árvore, mas acrescenta
+          <strong>tipos de tarefa</strong> e <strong>operadores temporais</strong> entre tarefas irmãs.
+        </p>
+        <p><strong>Tipos:</strong> tarefa do usuário (cognitiva, sem interação), da aplicação (realizada pelo sistema), de interação (a pessoa age sobre o sistema) e abstrata (composta por outras).</p>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Principais operadores temporais da CTT</caption>
+            <thead><tr><th scope="col">Operador</th><th scope="col">Nome</th><th scope="col">Significado</th></tr></thead>
+            <tbody>
+              <tr><td><code>T1 &gt;&gt; T2</code></td><td>Habilitação</td><td>T2 só começa quando T1 termina.</td></tr>
+              <tr><td><code>T1 []&gt;&gt; T2</code></td><td>Habilitação com passagem de informação</td><td>T1 termina e passa dados para T2.</td></tr>
+              <tr><td><code>T1 [] T2</code></td><td>Escolha</td><td>Apenas uma das duas é executada.</td></tr>
+              <tr><td><code>T1 ||| T2</code></td><td>Entrelaçamento</td><td>Podem ocorrer em qualquer ordem ou intercaladas.</td></tr>
+              <tr><td><code>T1 [&gt; T2</code></td><td>Desativação</td><td>T2 interrompe e encerra T1 (ex.: “Cancelar”).</td></tr>
+              <tr><td><code>T1 |&gt; T2</code></td><td>Suspensão e retomada</td><td>T2 interrompe T1, que depois continua de onde parou.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Exemplo: <code>PreencherFormulário [&gt; Cancelar</code> deixa explícito que cancelar é possível a qualquer momento do preenchimento, um requisito de interface.</p>
+
+      </section>
+
+      <section class="content-section" id="goms-klm" aria-labelledby="goms-klm-titulo">
+        <h2 id="goms-klm-titulo"><span class="section-number">05</span> GOMS e o modelo KLM</h2>
+
+        <p>
+          O GOMS (<em>Goals, Operators, Methods, Selection rules</em>), de Card, Moran e Newell, descreve tarefas por objetivos,
+          operadores, métodos e regras de seleção entre métodos. Sua versão mais simples, o <strong>KLM</strong>
+          (<em>Keystroke-Level Model</em>), estima o tempo de execução de uma pessoa experiente somando operadores com tempos médios:
+        </p>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Operadores do KLM (valores médios de referência)</caption>
+            <thead><tr><th scope="col">Operador</th><th scope="col">Descrição</th><th scope="col">Tempo</th></tr></thead>
+            <tbody>
+              <tr><td>K</td><td>Pressionar uma tecla</td><td>≈ 0,2 s (varia com a habilidade de digitação)</td></tr>
+              <tr><td>P</td><td>Apontar com o mouse para um alvo</td><td>≈ 1,1 s</td></tr>
+              <tr><td>B</td><td>Pressionar ou soltar o botão do mouse</td><td>≈ 0,1 s</td></tr>
+              <tr><td>H</td><td>Mover a mão entre teclado e mouse</td><td>≈ 0,4 s</td></tr>
+              <tr><td>M</td><td>Preparação mental</td><td>≈ 1,35 s</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-example">
+          <span class="callout-label">Calculando: salvar um arquivo</span>
+          <p>Com as mãos no teclado:</p>
+          <ul>
+            <li><strong>Atalho</strong> <kbd>Ctrl</kbd>+<kbd>S</kbd>: M + K + K = 1,35 + 0,2 + 0,2 = <strong>1,75 s</strong>.</li>
+            <li><strong>Menu</strong>: H + M + P + BB (clicar em “Arquivo”) + M + P + BB (clicar em “Salvar”) = 0,4 + 1,35 + 1,1 + 0,2 + 1,35 + 1,1 + 0,2 = <strong>5,7 s</strong>.</li>
+          </ul>
+          <p>A diferença justifica atalhos para ações frequentes, mas lembre: o KLM modela especialistas e não mede aprendizado nem erros.</p>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="atividade" aria-labelledby="atividade-titulo">
+        <h2 id="atividade-titulo"><span class="section-number">06</span> Atividade prática</h2>
+
+        <div class="callout callout-activity">
+          <span class="callout-label">Atividade</span>
+          <ol>
+            <li>Atualize o mapa de navegação do seu projeto e identifique a profundidade máxima.</li>
+            <li>Faça a HTA da tarefa principal do projeto, com planos.</li>
+            <li>Represente a mesma tarefa em CTT, destacando onde há escolha, entrelaçamento e desativação.</li>
+            <li>Use o KLM para comparar duas alternativas de interface para uma tarefa frequente e indique qual adotar.</li>
+          </ol>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="relevancia" aria-labelledby="relevancia-titulo">
+        <h2 id="relevancia-titulo"><span class="section-number">07</span> Relevância para a Engenharia de Computação</h2>
+        <div class="callout callout-connection">
+          <span class="callout-label">🔗 Conexão com a sua formação</span>
+          <p>
+            Notações como a CTT têm semântica formal e podem ser verificadas por ferramentas, aproximando IHC de métodos
+            formais, máquinas de estados e verificação de modelos, que você conhece de sistemas digitais e teoria da
+            computação. O KLM, por sua vez, é um exemplo de modelo preditivo de desempenho, útil para comparar alternativas
+            antes de implementar, do mesmo modo que estimativas de complexidade orientam escolhas de algoritmos.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section" id="aprofundar" aria-labelledby="aprofundar-titulo">
+        <h2 id="aprofundar-titulo"><span class="section-number">08</span> Para aprofundar</h2>
+        <div class="callout callout-reading">
+          <span class="callout-label">Referências e leituras recomendadas</span>
+          <ul class="reading-list">
+            <li>CARD, S. K.; MORAN, T. P.; NEWELL, A. The keystroke-level model for user performance time with interactive systems. <em>Communications of the ACM</em>, 1980.</li>
+            <li>ANNETT, J.; DUNCAN, K. D. Task analysis and training design. <em>Occupational Psychology</em>, 1967.</li>
+            <li>PATERNÒ, F. <em>Model-Based Design and Evaluation of Interactive Applications</em>. Springer, 2000.</li>
+            <li>BARBOSA, S. D. J.; SILVA, B. S. <em>Interação Humano-Computador</em>. Elsevier, 2010 (análise de tarefas).</li>
+            <li>KIERAS, D. Using the keystroke-level model to estimate execution times. University of Michigan, 2001.</li>
+          </ul>
+        </div>
+
+        <h3>Palavras-chave deste tópico</h3>
+        <div class="keyword-tags" aria-label="Palavras-chave do tópico">
+          <span class="keyword-tag">Fluxo de interação</span>
+          <span class="keyword-tag">Wireflow</span>
+          <span class="keyword-tag">Mapa de navegação</span>
+          <span class="keyword-tag">Análise de tarefas</span>
+          <span class="keyword-tag">HTA</span>
+          <span class="keyword-tag">CTT</span>
+          <span class="keyword-tag">GOMS</span>
+          <span class="keyword-tag">KLM</span>
+        </div>
+      </section>
+
+      <nav class="lesson-nav" aria-label="Navegação entre tópicos">
+        <a class="lesson-nav-link prev" href="casos-de-uso-historias.html" rel="prev">
+          <span class="lesson-nav-label">← Tópico anterior</span>
+          <span class="lesson-nav-title">Casos de uso e histórias de usuário</span>
+        </a>
+        <a class="lesson-nav-link next" href="usabilidade-e-ux.html" rel="next">
+          <span class="lesson-nav-label">Próximo tópico →</span>
+          <span class="lesson-nav-title">Usabilidade e experiência do usuário</span>
+        </a>
+      </nav>
+
+    </main>
+
+    <aside class="toc" aria-labelledby="toc-titulo">
+      <h2 id="toc-titulo">Neste tópico</h2>
+      <ol>
+        <li><a href="#fluxos">Fluxos de interação</a></li>
+        <li><a href="#mapa-navegacao">Mapas de navegação</a></li>
+        <li><a href="#hta">Análise Hierárquica (HTA)</a></li>
+        <li><a href="#ctt">ConcurTaskTrees (CTT)</a></li>
+        <li><a href="#goms-klm">GOMS e o modelo KLM</a></li>
+        <li><a href="#atividade">Atividade prática</a></li>
+        <li><a href="#relevancia">Relevância para a computação</a></li>
+        <li><a href="#aprofundar">Para aprofundar</a></li>
+      </ol>
+      <p class="toc-progress">Tópico 17 de 24 · Modelagem de interação</p>
+    </aside>
+
+  </div>
+</div>
+
+<footer>
+  <p>Interface Homem-Computador (CPA1469) · Instituto Federal Catarinense · Semestre 2026.2</p>
+  <p>Material de estudo atualizado no decorrer do semestre. Salve o link e retorne sempre que quiser revisar.</p>
+</footer>
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Voltar ao topo da página">↑</button>
+
+<script>
+  (function () {
+    var backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function () {
+      backToTop.classList.toggle('is-visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>

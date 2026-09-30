@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estudos de caso em IHC: falhas clássicas | IHC – IFC</title>
+<meta name="description" content="Estudos de caso de falhas clássicas de IHC: Therac-25, voo Air Inter 148, falso alerta de míssil no Havaí, cédula borboleta e o pagamento indevido do Citibank.">
+<meta name="keywords" content="Falhas de IHC, Therac-25, Erro de modo, Air Inter 148, Alerta falso, Cédula borboleta, Queijo suíço, Sistemas críticos, IHC, Interface Homem-Computador, CPA1469">
+<meta name="author" content="Wilcilene">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0284c7">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/estudos-caso-falhas-ihc.html">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="IHC – Instituto Federal Catarinense">
+<meta property="og:title" content="Estudos de caso em IHC: falhas clássicas — IHC">
+<meta property="og:description" content="Estudos de caso de falhas clássicas de IHC: Therac-25, voo Air Inter 148, falso alerta de míssil no Havaí, cédula borboleta e o pagamento indevido do Citibank.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/estudos-caso-falhas-ihc.html">
+<meta property="og:image" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/media/og-image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Estudos de caso em IHC: falhas clássicas — IHC">
+<meta name="twitter:description" content="Estudos de caso de falhas clássicas de IHC: Therac-25, voo Air Inter 148, falso alerta de míssil no Havaí, cédula borboleta e o pagamento indevido do Citibank.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="topicos.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/estudos-caso-falhas-ihc.html#recurso",
+      "name": "Estudos de caso em IHC: falhas clássicas",
+      "headline": "Estudos de caso em IHC: falhas clássicas",
+      "description": "Estudos de caso de falhas clássicas de IHC: Therac-25, voo Air Inter 148, falso alerta de míssil no Havaí, cédula borboleta e o pagamento indevido do Citibank.",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/estudos-caso-falhas-ihc.html",
+      "inLanguage": "pt-BR",
+      "learningResourceType": "Atividade avaliativa",
+      "educationalLevel": "Ensino superior",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student"
+      },
+      "keywords": "Falhas de IHC, Therac-25, Erro de modo, Air Inter 148, Alerta falso, Cédula borboleta, Queijo suíço, Sistemas críticos",
+      "dateModified": "2026-09-30",
+      "author": {
+        "@type": "Person",
+        "name": "Wilcilene"
+      },
+      "publisher": {
+        "@type": "CollegeOrUniversity",
+        "name": "Instituto Federal Catarinense",
+        "url": "https://www.ifc.edu.br/"
+      },
+      "isPartOf": {
+        "@type": "Course",
+        "name": "Interface Homem-Computador",
+        "courseCode": "CPA1469",
+        "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "IHC – CPA1469",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Estudos de caso em IHC: falhas clássicas",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/estudos-caso-falhas-ihc.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<div class="page">
+
+  <nav aria-label="Trilha de navegação">
+    <a class="breadcrumb" href="../index.html">
+      <span class="breadcrumb-arrow" aria-hidden="true">←</span>
+      IHC · 2026.2 · voltar ao índice da disciplina
+    </a>
+  </nav>
+
+  <header class="lesson-header">
+    <span class="badge">
+      <span class="badge-dot" aria-hidden="true"></span>
+      Atividade · 22 e 28/10
+    </span>
+
+    <h1>Estudos de caso em IHC: falhas clássicas</h1>
+
+    <p class="lesson-intro">
+      Algumas das lições mais importantes de IHC foram aprendidas com acidentes e prejuízos reais. Nestes encontros vamos analisar casos clássicos em que a interface contribuiu para o problema, identificar os princípios violados e propor redesenhos, sempre olhando para o sistema como um todo e não apenas para “quem apertou o botão”.
+    </p>
+
+    <div class="lesson-meta">
+      <span class="pill">Atividade</span>
+      <span class="pill">Atividade do projeto</span>
+      <span class="pill">Encontros: 22 e 28/10</span>
+    </div>
+  </header>
+
+  <section class="summary-card" aria-labelledby="pontos-principais">
+    <h2 id="pontos-principais">O que você vai entregar</h2>
+    <ul class="summary-list">
+      <li>Análise de um caso atribuído à equipe usando o roteiro desta página.</li>
+      <li>Identificação dos tipos de erro e dos princípios de IHC violados.</li>
+      <li>Proposta de redesenho da interface envolvida.</li>
+      <li>Discussão dos fatores organizacionais além da interface.</li>
+      <li>Apresentação para a turma em 28/10.</li>
+    </ul>
+  </section>
+
+  <div class="page-grid">
+
+    <main id="conteudo" class="content" tabindex="-1">
+
+      <section class="content-section" id="por-que" aria-labelledby="por-que-titulo">
+        <h2 id="por-que-titulo"><span class="section-number">01</span> Por que estudar falhas?</h2>
+
+        <p>
+          Relatórios de acidentes costumam citar “erro humano”. A pergunta de IHC é outra: <em>por que</em> uma pessoa
+          treinada e bem-intencionada cometeu aquele erro, naquela interface, naquele momento? O modelo do
+          <strong>queijo suíço</strong>, de James Reason, ajuda: cada camada de proteção (treinamento, procedimento,
+          interface, supervisão) tem furos, e o acidente acontece quando os furos se alinham. A interface é uma das camadas,
+          muitas vezes a mais barata de corrigir.
+        </p>
+        <div class="callout callout-reading">
+          <span class="callout-label">Nota sobre as fontes</span>
+          <p>
+            Os resumos a seguir simplificam investigações longas. Para a análise da equipe, consulte os relatórios e artigos
+            indicados nas referências e diferencie o que é fato apurado do que é interpretação.
+          </p>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="therac-25" aria-labelledby="therac-25-titulo">
+        <h2 id="therac-25-titulo"><span class="section-number">02</span> Therac-25 (1985–1987)</h2>
+
+        <p>
+          O Therac-25 era um acelerador linear para radioterapia controlado por software. Entre 1985 e 1987, ocorreram
+          seis acidentes conhecidos com doses massivas de radiação, alguns fatais. A investigação de Leveson e Turner
+          mostrou uma combinação de fatores:
+        </p>
+        <ul>
+          <li>Uma condição de corrida no software era disparada quando operadores experientes editavam os dados de tratamento rapidamente.</li>
+          <li>Mensagens de erro enigmáticas, como “MALFUNCTION 54”, não explicavam o problema nem sua gravidade.</li>
+          <li>Erros frequentes e aparentemente inofensivos acostumaram os operadores a simplesmente continuar o tratamento.</li>
+          <li>Travas físicas de segurança de modelos anteriores foram substituídas por verificações apenas em software.</li>
+        </ul>
+        <p><strong>Lições de IHC:</strong> mensagens de erro devem comunicar gravidade e ação; alertas frequentes e irrelevantes ensinam a ignorar alertas; a rapidez de usuários experientes precisa ser prevista no projeto.</p>
+
+      </section>
+
+      <section class="content-section" id="air-inter-148" aria-labelledby="air-inter-148-titulo">
+        <h2 id="air-inter-148-titulo"><span class="section-number">03</span> Voo Air Inter 148 (1992)</h2>
+
+        <p>
+          Em janeiro de 1992, um Airbus A320 colidiu com uma montanha durante a aproximação a Estrasburgo, na França. Uma
+          das hipóteses centrais da investigação envolveu um <strong>erro de modo</strong>: o mesmo seletor definia a razão de
+          descida em dois modos diferentes. A tripulação provavelmente pretendia um ângulo de descida de 3,3° e, com o
+          sistema no modo de velocidade vertical, comandou uma descida de 3.300 pés por minuto. O display mostrava valores
+          muito parecidos nos dois modos, e o modo ativo era pouco saliente.
+        </p>
+        <p>
+          <strong>Lições de IHC:</strong> modos devem ser evidentes; entradas iguais não devem produzir efeitos muito diferentes
+          conforme um estado pouco visível. Após o acidente, a forma de exibir o valor de velocidade vertical foi alterada para
+          diferenciar os modos.
+        </p>
+
+      </section>
+
+      <section class="content-section" id="havai-2018" aria-labelledby="havai-2018-titulo">
+        <h2 id="havai-2018-titulo"><span class="section-number">04</span> Falso alerta de míssil no Havaí (2018)</h2>
+
+        <p>
+          Em 13 de janeiro de 2018, a agência de emergências do Havaí enviou a celulares um alerta real de ataque de
+          míssil balístico durante o que deveria ser um exercício. A correção oficial só chegou cerca de 38 minutos depois.
+        </p>
+        <ul>
+          <li>A opção de envio real e a de teste ficavam em uma mesma lista, com rótulos parecidos e pouco descritivos.</li>
+          <li>A confirmação era idêntica para teste e para alerta real, tornando-se um passo automático.</li>
+          <li>Não havia um procedimento rápido e pré-aprovado para cancelar ou corrigir um alerta falso.</li>
+          <li>As investigações também apontaram falhas de comunicação no exercício e questões de treinamento, mostrando que a interface não foi o único fator.</li>
+        </ul>
+        <p><strong>Lições de IHC:</strong> ações críticas e de teste devem ser visual e procedimentalmente distintas; confirmações devem explicitar a consequência; todo sistema de envio precisa de um “desfazer” ou de correção rápida.</p>
+
+      </section>
+
+      <section class="content-section" id="cedula-borboleta" aria-labelledby="cedula-borboleta-titulo">
+        <h2 id="cedula-borboleta-titulo"><span class="section-number">05</span> A cédula “borboleta” (Flórida, 2000)</h2>
+
+        <p>
+          Na eleição presidencial dos EUA em 2000, o condado de Palm Beach usou uma cédula de papel perfurada com nomes
+          dispostos em duas páginas, à esquerda e à direita, e os orifícios de marcação alinhados ao centro. O alinhamento
+          entre nome e orifício não era óbvio, e análises posteriores associaram o layout a um número incomum de votos em
+          um candidato que dificilmente seria a escolha desses eleitores, além de muitas cédulas anuladas por dupla marcação.
+        </p>
+        <p><strong>Lições de IHC:</strong> mapeamento entre rótulo e controle (Norman) e proximidade (Gestalt) não são detalhes estéticos; interfaces de uso único e sem treinamento, como cédulas, exigem testes com pessoas reais.</p>
+
+      </section>
+
+      <section class="content-section" id="citibank-2020" aria-labelledby="citibank-2020-titulo">
+        <h2 id="citibank-2020-titulo"><span class="section-number">06</span> O pagamento indevido do Citibank (2020)</h2>
+
+        <p>
+          Em agosto de 2020, o Citibank pretendia pagar apenas juros a credores de um empréstimo e acabou transferindo
+          cerca de US$ 900 milhões, o valor do principal. No sistema utilizado, para evitar o pagamento do principal era
+          preciso marcar campos adicionais além do que o operador havia marcado; a tela não deixava claro o efeito resultante.
+          A operação passou por mais de uma aprovação sem que o erro fosse percebido, e o caso chegou aos tribunais.
+        </p>
+        <p><strong>Lições de IHC:</strong> o resultado de uma operação crítica deve ser pré-visualizado em termos de negócio (“Serão transferidos US$ 900 milhões”); aprovações em série não protegem quando todos veem a mesma tela ambígua.</p>
+
+      </section>
+
+      <section class="content-section" id="roteiro" aria-labelledby="roteiro-titulo">
+        <h2 id="roteiro-titulo"><span class="section-number">07</span> Roteiro de análise</h2>
+
+        <ol>
+          <li><strong>Contexto</strong>: sistema, organização, época e tecnologia.</li>
+          <li><strong>Usuários e tarefa</strong>: quem operava, com qual treinamento, sob quais condições (tempo, estresse, rotina).</li>
+          <li><strong>Sequência de eventos</strong>: o que aconteceu, em ordem, separando fatos de hipóteses.</li>
+          <li><strong>Falhas de interface</strong>: onde estavam os golfos de execução e avaliação.</li>
+          <li><strong>Tipo de erro</strong>: deslize, lapso, engano, erro de modo.</li>
+          <li><strong>Princípios violados</strong>: regras de ouro, princípios de Norman, heurísticas.</li>
+          <li><strong>Outras camadas</strong>: procedimentos, treinamento, organização, pressão de prazo.</li>
+          <li><strong>Redesenho</strong>: esboço de uma interface alternativa e como ela quebraria a cadeia de eventos.</li>
+        </ol>
+
+      </section>
+
+      <section class="content-section" id="atividade" aria-labelledby="atividade-titulo">
+        <h2 id="atividade-titulo"><span class="section-number">08</span> Dinâmica dos encontros</h2>
+
+        <div class="callout callout-activity">
+          <span class="callout-label">Atividade (22 e 28/10)</span>
+          <ol>
+            <li><strong>22/10</strong>: cada equipe recebe um caso, pesquisa fontes primárias e aplica o roteiro de análise.</li>
+            <li>Produza um redesenho, em baixa fidelidade, da tela ou do controle envolvido.</li>
+            <li><strong>28/10</strong>: apresentação de 10 minutos por equipe, seguida de discussão com a turma.</li>
+            <li>Entregue um resumo escrito de 2 páginas com o roteiro preenchido e as referências consultadas.</li>
+          </ol>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="relevancia" aria-labelledby="relevancia-titulo">
+        <h2 id="relevancia-titulo"><span class="section-number">09</span> Relevância para a Engenharia de Computação</h2>
+        <div class="callout callout-connection">
+          <span class="callout-label">🔗 Conexão com a sua formação</span>
+          <p>
+            Vários desses casos envolvem software escrito por engenheiros. Normas como a IEC 62304 (software de dispositivos
+            médicos) e a IEC 62366 (engenharia de usabilidade de produtos para a saúde) existem, em parte, por causa de
+            acidentes como o do Therac-25. Entender a relação entre código, interface e erro de uso é uma competência
+            esperada em quem desenvolve sistemas críticos.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section" id="aprofundar" aria-labelledby="aprofundar-titulo">
+        <h2 id="aprofundar-titulo"><span class="section-number">10</span> Para aprofundar</h2>
+        <div class="callout callout-reading">
+          <span class="callout-label">Referências e leituras recomendadas</span>
+          <ul class="reading-list">
+            <li>LEVESON, N. G.; TURNER, C. S. An investigation of the Therac-25 accidents. <em>IEEE Computer</em>, 1993.</li>
+            <li>REASON, J. <em>Human Error</em>. Cambridge University Press, 1990 (modelo do queijo suíço).</li>
+            <li>CASEY, S. <em>Set Phasers on Stun: And Other True Tales of Design, Technology, and Human Error</em>. Aegean, 1998.</li>
+            <li>FEDERAL COMMUNICATIONS COMMISSION. Relatório sobre o falso alerta de míssil balístico no Havaí, 2018.</li>
+            <li>NORMAN, D. A. <em>O Design do Dia a Dia</em>. Rocco (erros de modo e mapeamento).</li>
+          </ul>
+        </div>
+
+        <h3>Palavras-chave deste tópico</h3>
+        <div class="keyword-tags" aria-label="Palavras-chave do tópico">
+          <span class="keyword-tag">Falhas de IHC</span>
+          <span class="keyword-tag">Therac-25</span>
+          <span class="keyword-tag">Erro de modo</span>
+          <span class="keyword-tag">Air Inter 148</span>
+          <span class="keyword-tag">Alerta falso</span>
+          <span class="keyword-tag">Cédula borboleta</span>
+          <span class="keyword-tag">Queijo suíço</span>
+          <span class="keyword-tag">Sistemas críticos</span>
+        </div>
+      </section>
+
+      <nav class="lesson-nav" aria-label="Navegação entre tópicos">
+        <a class="lesson-nav-link prev" href="metodologias-ihc.html" rel="prev">
+          <span class="lesson-nav-label">← Tópico anterior</span>
+          <span class="lesson-nav-title">Metodologias de IHC</span>
+        </a>
+        <a class="lesson-nav-link next" href="estrutura-dialogos-navegacao.html" rel="next">
+          <span class="lesson-nav-label">Próximo tópico →</span>
+          <span class="lesson-nav-title">Estrutura de diálogos e navegação</span>
+        </a>
+      </nav>
+
+    </main>
+
+    <aside class="toc" aria-labelledby="toc-titulo">
+      <h2 id="toc-titulo">Neste tópico</h2>
+      <ol>
+        <li><a href="#por-que">Por que estudar falhas?</a></li>
+        <li><a href="#therac-25">Therac-25 (1985–1987)</a></li>
+        <li><a href="#air-inter-148">Voo Air Inter 148 (1992)</a></li>
+        <li><a href="#havai-2018">Falso alerta de míssil no Havaí (2018)</a></li>
+        <li><a href="#cedula-borboleta">A cédula “borboleta” (Flórida, 2000)</a></li>
+        <li><a href="#citibank-2020">O pagamento indevido do Citibank (2020)</a></li>
+        <li><a href="#roteiro">Roteiro de análise</a></li>
+        <li><a href="#atividade">Dinâmica dos encontros</a></li>
+        <li><a href="#relevancia">Relevância para a computação</a></li>
+        <li><a href="#aprofundar">Para aprofundar</a></li>
+      </ol>
+      <p class="toc-progress">Tópico 13 de 24 · Atividade</p>
+    </aside>
+
+  </div>
+</div>
+
+<footer>
+  <p>Interface Homem-Computador (CPA1469) · Instituto Federal Catarinense · Semestre 2026.2</p>
+  <p>Material de estudo atualizado no decorrer do semestre. Salve o link e retorne sempre que quiser revisar.</p>
+</footer>
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Voltar ao topo da página">↑</button>
+
+<script>
+  (function () {
+    var backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function () {
+      backToTop.classList.toggle('is-visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>

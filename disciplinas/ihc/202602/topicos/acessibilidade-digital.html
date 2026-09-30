@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acessibilidade digital e padrões | IHC – IFC</title>
+<meta name="description" content="Acessibilidade digital em IHC: desenho universal, WCAG 2.2, eMAG e LBI, tecnologias assistivas, barreiras comuns em código e como testar.">
+<meta name="keywords" content="Acessibilidade digital, WCAG 2.2, POUR, eMAG, Lei Brasileira de Inclusão, Desenho universal, Tecnologias assistivas, Leitor de tela, ARIA, IHC, Interface Homem-Computador, CPA1469">
+<meta name="author" content="Wilcilene">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0284c7">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/acessibilidade-digital.html">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="IHC – Instituto Federal Catarinense">
+<meta property="og:title" content="Acessibilidade digital e padrões — IHC">
+<meta property="og:description" content="Acessibilidade digital em IHC: desenho universal, WCAG 2.2, eMAG e LBI, tecnologias assistivas, barreiras comuns em código e como testar.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/acessibilidade-digital.html">
+<meta property="og:image" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/media/og-image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Acessibilidade digital e padrões — IHC">
+<meta name="twitter:description" content="Acessibilidade digital em IHC: desenho universal, WCAG 2.2, eMAG e LBI, tecnologias assistivas, barreiras comuns em código e como testar.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="topicos.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/acessibilidade-digital.html#recurso",
+      "name": "Acessibilidade digital e padrões",
+      "headline": "Acessibilidade digital e padrões",
+      "description": "Acessibilidade digital em IHC: desenho universal, WCAG 2.2, eMAG e LBI, tecnologias assistivas, barreiras comuns em código e como testar.",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/acessibilidade-digital.html",
+      "inLanguage": "pt-BR",
+      "learningResourceType": "Material de aula",
+      "educationalLevel": "Ensino superior",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student"
+      },
+      "keywords": "Acessibilidade digital, WCAG 2.2, POUR, eMAG, Lei Brasileira de Inclusão, Desenho universal, Tecnologias assistivas, Leitor de tela, ARIA",
+      "dateModified": "2026-09-30",
+      "author": {
+        "@type": "Person",
+        "name": "Wilcilene"
+      },
+      "publisher": {
+        "@type": "CollegeOrUniversity",
+        "name": "Instituto Federal Catarinense",
+        "url": "https://www.ifc.edu.br/"
+      },
+      "isPartOf": {
+        "@type": "Course",
+        "name": "Interface Homem-Computador",
+        "courseCode": "CPA1469",
+        "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "IHC – CPA1469",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Acessibilidade digital e padrões",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/acessibilidade-digital.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<div class="page">
+
+  <nav aria-label="Trilha de navegação">
+    <a class="breadcrumb" href="../index.html">
+      <span class="breadcrumb-arrow" aria-hidden="true">←</span>
+      IHC · 2026.2 · voltar ao índice da disciplina
+    </a>
+  </nav>
+
+  <header class="lesson-header">
+    <span class="badge">
+      <span class="badge-dot" aria-hidden="true"></span>
+      Usabilidade e acessibilidade · 03/12
+    </span>
+
+    <h1>Acessibilidade digital e padrões</h1>
+
+    <p class="lesson-intro">
+      Acessibilidade é garantir que pessoas com deficiência, e na prática todas as pessoas em diferentes situações, consigam perceber, entender, navegar e interagir com sistemas digitais. Nesta aula veremos os conceitos, as normas que orientam o trabalho no Brasil e no mundo, as barreiras mais comuns no código e como testar acessibilidade de verdade.
+    </p>
+
+    <div class="lesson-meta">
+      <span class="pill">Usabilidade e acessibilidade</span>
+      <span class="pill">Nível intermediário</span>
+      <span class="pill">Aula: 03/12</span>
+    </div>
+  </header>
+
+  <section class="summary-card" aria-labelledby="pontos-principais">
+    <h2 id="pontos-principais">Principais pontos</h2>
+    <ul class="summary-list">
+      <li>Entender deficiência como resultado da interação entre pessoa e ambiente.</li>
+      <li>Aplicar os sete princípios do desenho universal.</li>
+      <li>Usar os princípios POUR e os critérios essenciais da WCAG 2.2.</li>
+      <li>Conhecer o eMAG e a Lei Brasileira de Inclusão.</li>
+      <li>Corrigir barreiras comuns em HTML e testar com ferramentas e pessoas.</li>
+    </ul>
+  </section>
+
+  <div class="page-grid">
+
+    <main id="conteudo" class="content" tabindex="-1">
+
+      <section class="content-section" id="conceitos" aria-labelledby="conceitos-titulo">
+        <h2 id="conceitos-titulo"><span class="section-number">01</span> Deficiência, contexto e inclusão</h2>
+
+        <p>
+          No <strong>modelo social</strong> da deficiência, adotado pela Convenção da ONU e pela legislação brasileira, a
+          deficiência resulta da interação entre um impedimento e as barreiras do ambiente. Uma pessoa cega não é “incapaz de
+          usar um site”: o site é que foi construído sem permitir leitura por leitor de tela.
+        </p>
+        <p>As limitações podem ser:</p>
+        <ul>
+          <li><strong>Permanentes</strong>: cegueira, surdez, ausência de um membro.</li>
+          <li><strong>Temporárias</strong>: braço engessado, recuperação de cirurgia ocular.</li>
+          <li><strong>Situacionais</strong>: sol forte na tela, ambiente barulhento, segurar uma criança no colo.</li>
+        </ul>
+        <p>
+          Segundo o IBGE (PNAD Contínua 2022), cerca de 18,6 milhões de pessoas com 2 anos ou mais tinham alguma deficiência
+          no Brasil, aproximadamente 8,9% dessa população, sem contar pessoas idosas com perdas funcionais leves nem limitações
+          temporárias e situacionais.
+        </p>
+
+      </section>
+
+      <section class="content-section" id="desenho-universal" aria-labelledby="desenho-universal-titulo">
+        <h2 id="desenho-universal-titulo"><span class="section-number">02</span> Desenho universal</h2>
+
+        <p>Os sete princípios do desenho universal, formulados no Center for Universal Design (NC State University), em 1997:</p>
+        <ol>
+          <li><strong>Uso equitativo</strong>: útil para pessoas com diferentes capacidades.</li>
+          <li><strong>Flexibilidade no uso</strong>: acomoda preferências e habilidades diversas.</li>
+          <li><strong>Uso simples e intuitivo</strong>: fácil de entender, independentemente de experiência ou idioma.</li>
+          <li><strong>Informação perceptível</strong>: comunica bem, qualquer que seja a condição sensorial.</li>
+          <li><strong>Tolerância ao erro</strong>: minimiza riscos e consequências de ações acidentais.</li>
+          <li><strong>Baixo esforço físico</strong>: uso eficiente e confortável.</li>
+          <li><strong>Tamanho e espaço para aproximação e uso</strong>: adequados a diferentes corpos e posturas.</li>
+        </ol>
+
+      </section>
+
+      <section class="content-section" id="wcag" aria-labelledby="wcag-titulo">
+        <h2 id="wcag-titulo"><span class="section-number">03</span> WCAG 2.2: princípios e critérios</h2>
+
+        <p>
+          As <strong>Web Content Accessibility Guidelines</strong>, do W3C, são a referência internacional. A versão 2.2 foi publicada
+          em 2023 e organiza os critérios em quatro princípios, conhecidos pela sigla <strong>POUR</strong>:
+        </p>
+        <ul>
+          <li><strong>Perceptível</strong>: a informação pode ser percebida (alternativas em texto, legendas, contraste).</li>
+          <li><strong>Operável</strong>: a interface pode ser operada (teclado, tempo suficiente, sem convulsões).</li>
+          <li><strong>Compreensível</strong>: informação e operação são compreensíveis (idioma, previsibilidade, ajuda com erros).</li>
+          <li><strong>Robusto</strong>: funciona com diferentes navegadores e tecnologias assistivas.</li>
+        </ul>
+        <p>Cada critério tem um nível de conformidade: <strong>A</strong> (mínimo), <strong>AA</strong> (meta usual em legislações) e <strong>AAA</strong> (mais exigente).</p>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Critérios da WCAG 2.2 que aparecem com mais frequência</caption>
+            <thead><tr><th scope="col">Critério</th><th scope="col">Nível</th><th scope="col">Em resumo</th></tr></thead>
+            <tbody>
+              <tr><td>1.1.1 Conteúdo não textual</td><td>A</td><td>Imagens informativas têm texto alternativo; decorativas são ignoradas.</td></tr>
+              <tr><td>1.3.1 Informações e relações</td><td>A</td><td>Títulos, listas, tabelas e rótulos marcados semanticamente.</td></tr>
+              <tr><td>1.4.3 Contraste mínimo</td><td>AA</td><td>4,5:1 para texto comum; 3:1 para texto grande.</td></tr>
+              <tr><td>2.1.1 Teclado</td><td>A</td><td>Toda funcionalidade operável por teclado.</td></tr>
+              <tr><td>2.4.7 Foco visível</td><td>AA</td><td>O elemento com foco é claramente indicado.</td></tr>
+              <tr><td>2.5.8 Tamanho do alvo (mínimo)</td><td>AA</td><td>Alvos de pelo menos 24 × 24 px CSS, com exceções.</td></tr>
+              <tr><td>3.1.1 Idioma da página</td><td>A</td><td>O idioma é declarado (<code>lang="pt-BR"</code>).</td></tr>
+              <tr><td>3.3.2 Rótulos ou instruções</td><td>A</td><td>Campos de formulário têm rótulos e instruções.</td></tr>
+              <tr><td>4.1.2 Nome, função, valor</td><td>A</td><td>Componentes expõem nome, papel e estado às tecnologias assistivas.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="brasil" aria-labelledby="brasil-titulo">
+        <h2 id="brasil-titulo"><span class="section-number">04</span> eMAG e legislação brasileira</h2>
+
+        <ul>
+          <li><strong>eMAG</strong> (Modelo de Acessibilidade em Governo Eletrônico): recomendações alinhadas à WCAG, de uso obrigatório em sites e portais do governo federal. Instituições públicas, como os institutos federais, devem segui-lo.</li>
+          <li><strong>Lei Brasileira de Inclusão</strong> (Lei nº 13.146/2015): o art. 63 torna obrigatória a acessibilidade nos sítios da internet mantidos por empresas com sede ou representação comercial no país ou por órgãos de governo.</li>
+          <li><strong>Libras</strong>: reconhecida como meio legal de comunicação (Lei nº 10.436/2002). Ferramentas como o VLibras, mantido pelo governo federal, traduzem conteúdo digital para Libras, mas não substituem conteúdo produzido por intérpretes quando a informação é essencial.</li>
+        </ul>
+
+      </section>
+
+      <section class="content-section" id="tecnologias-assistivas" aria-labelledby="tecnologias-assistivas-titulo">
+        <h2 id="tecnologias-assistivas-titulo"><span class="section-number">05</span> Tecnologias assistivas</h2>
+
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Tecnologias assistivas e o que elas exigem da interface</caption>
+            <thead><tr><th scope="col">Tecnologia</th><th scope="col">Quem usa</th><th scope="col">O que a interface precisa oferecer</th></tr></thead>
+            <tbody>
+              <tr><td>Leitores de tela (NVDA, JAWS, VoiceOver, TalkBack)</td><td>Pessoas cegas ou com baixa visão</td><td>HTML semântico, textos alternativos, rótulos, ordem lógica.</td></tr>
+              <tr><td>Ampliadores de tela e zoom</td><td>Pessoas com baixa visão</td><td>Layout que funciona com 200% a 400% de zoom sem rolagem horizontal.</td></tr>
+              <tr><td>Teclado e acionadores (switches)</td><td>Pessoas com deficiência motora</td><td>Operação completa por teclado, foco visível, alvos grandes.</td></tr>
+              <tr><td>Reconhecimento de voz</td><td>Pessoas com deficiência motora</td><td>Rótulos visíveis iguais ao nome acessível dos controles.</td></tr>
+              <tr><td>Legendas e transcrições</td><td>Pessoas surdas ou com deficiência auditiva</td><td>Legendas sincronizadas em vídeos; transcrição de áudios.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="barreiras-codigo" aria-labelledby="barreiras-codigo-titulo">
+        <h2 id="barreiras-codigo-titulo"><span class="section-number">06</span> Barreiras comuns no código</h2>
+
+        <p>Muitas barreiras nascem de escolhas simples de implementação. Compare:</p>
+        <pre><code>&lt;!-- Barreira: div clicável não recebe foco nem é anunciada como botão --&gt;
+&lt;div class="btn" onclick="salvar()"&gt;Salvar&lt;/div&gt;
+
+&lt;!-- Acessível: o elemento nativo já tem foco, teclado e papel de botão --&gt;
+&lt;button type="button" onclick="salvar()"&gt;Salvar&lt;/button&gt;
+
+
+&lt;!-- Barreira: imagem sem alternativa e ícone sem nome --&gt;
+&lt;img src="grafico-matriculas.png"&gt;
+&lt;button&gt;&lt;svg&gt;...&lt;/svg&gt;&lt;/button&gt;
+
+&lt;!-- Acessível --&gt;
+&lt;img src="grafico-matriculas.png"
+     alt="Matrículas cresceram de 120 em 2023 para 180 em 2025"&gt;
+&lt;button aria-label="Fechar"&gt;&lt;svg aria-hidden="true"&gt;...&lt;/svg&gt;&lt;/button&gt;
+
+
+&lt;!-- Mensagem dinâmica anunciada ao leitor de tela --&gt;
+&lt;p role="status" aria-live="polite"&gt;Reserva confirmada.&lt;/p&gt;</code></pre>
+        <div class="callout callout-reflection">
+          <span class="callout-label">Primeira regra do ARIA</span>
+          <p>Se existe um elemento HTML nativo com o comportamento necessário, use-o em vez de recriá-lo com ARIA. ARIA mal aplicado costuma piorar a acessibilidade.</p>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="testar" aria-labelledby="testar-titulo">
+        <h2 id="testar-titulo"><span class="section-number">07</span> Como testar a acessibilidade</h2>
+
+        <ol>
+          <li><strong>Ferramentas automáticas</strong> (Lighthouse, axe, WAVE): rápidas, mas detectam apenas uma parte dos problemas, como contraste e atributos ausentes. Não avaliam se um texto alternativo faz sentido.</li>
+          <li><strong>Teste com teclado</strong>: desconecte o mouse e percorra a página com <kbd>Tab</kbd>, <kbd>Shift</kbd>+<kbd>Tab</kbd>, <kbd>Enter</kbd>, <kbd>Espaço</kbd> e <kbd>Esc</kbd>. O foco é sempre visível? A ordem faz sentido? Há armadilhas de foco?</li>
+          <li><strong>Teste com leitor de tela</strong>: NVDA (gratuito, Windows), VoiceOver (macOS e iOS) ou TalkBack (Android). Navegue pelos títulos e formulários.</li>
+          <li><strong>Zoom e reflow</strong>: amplie para 200% e 400% e verifique se o conteúdo continua utilizável.</li>
+          <li><strong>Pessoas com deficiência</strong>: nenhuma ferramenta substitui testar com quem usa tecnologias assistivas no dia a dia.</li>
+        </ol>
+
+      </section>
+
+      <section class="content-section" id="atividade" aria-labelledby="atividade-titulo">
+        <h2 id="atividade-titulo"><span class="section-number">08</span> Atividade prática</h2>
+
+        <div class="callout callout-activity">
+          <span class="callout-label">Atividade</span>
+          <ol>
+            <li>Audite esta própria página de estudos (ou o índice da disciplina) com uma ferramenta automática, com teclado e com um leitor de tela. Registre os problemas encontrados com o critério WCAG correspondente.</li>
+            <li>Faça a mesma auditoria em um site de serviço público de sua escolha.</li>
+            <li>Revise o protótipo do projeto: contraste, tamanho dos alvos, rótulos, ordem de foco prevista e alternativas para gestos.</li>
+          </ol>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="relevancia" aria-labelledby="relevancia-titulo">
+        <h2 id="relevancia-titulo"><span class="section-number">09</span> Relevância para a Engenharia de Computação</h2>
+        <div class="callout callout-connection">
+          <span class="callout-label">🔗 Conexão com a sua formação</span>
+          <p>
+            Acessibilidade é, em grande parte, responsabilidade de quem implementa: semântica do HTML, gerenciamento de foco,
+            APIs de acessibilidade dos sistemas operacionais e testes automatizados no pipeline de integração contínua.
+            Engenheiros de computação também desenvolvem as próprias tecnologias assistivas, de acionadores físicos a sistemas
+            de rastreamento ocular e reconhecimento de fala.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section" id="aprofundar" aria-labelledby="aprofundar-titulo">
+        <h2 id="aprofundar-titulo"><span class="section-number">10</span> Para aprofundar</h2>
+        <div class="callout callout-reading">
+          <span class="callout-label">Referências e leituras recomendadas</span>
+          <ul class="reading-list">
+            <li>W3C. <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener">Web Content Accessibility Guidelines (WCAG) 2.2</a>, 2023.</li>
+            <li>W3C WAI. <a href="https://www.w3.org/WAI/ARIA/apg/" target="_blank" rel="noopener">ARIA Authoring Practices Guide</a>.</li>
+            <li>BRASIL. <a href="https://emag.governoeletronico.gov.br/" target="_blank" rel="noopener">eMAG – Modelo de Acessibilidade em Governo Eletrônico</a>.</li>
+            <li>BRASIL. Lei nº 13.146, de 6 de julho de 2015 (Lei Brasileira de Inclusão da Pessoa com Deficiência).</li>
+            <li>IBGE. PNAD Contínua: Pessoas com deficiência 2022. Rio de Janeiro: IBGE, 2023.</li>
+            <li>HORTON, S.; QUESENBERY, W. <em>A Web for Everyone</em>. Rosenfeld Media, 2014.</li>
+          </ul>
+        </div>
+
+        <h3>Palavras-chave deste tópico</h3>
+        <div class="keyword-tags" aria-label="Palavras-chave do tópico">
+          <span class="keyword-tag">Acessibilidade digital</span>
+          <span class="keyword-tag">WCAG 2.2</span>
+          <span class="keyword-tag">POUR</span>
+          <span class="keyword-tag">eMAG</span>
+          <span class="keyword-tag">Lei Brasileira de Inclusão</span>
+          <span class="keyword-tag">Desenho universal</span>
+          <span class="keyword-tag">Tecnologias assistivas</span>
+          <span class="keyword-tag">Leitor de tela</span>
+          <span class="keyword-tag">ARIA</span>
+        </div>
+      </section>
+
+      <nav class="lesson-nav" aria-label="Navegação entre tópicos">
+        <a class="lesson-nav-link prev" href="estudos-caso-usabilidade.html" rel="prev">
+          <span class="lesson-nav-label">← Tópico anterior</span>
+          <span class="lesson-nav-title">Estudos de caso em usabilidade</span>
+        </a>
+        <a class="lesson-nav-link next" href="padroes-design-systems.html" rel="next">
+          <span class="lesson-nav-label">Próximo tópico →</span>
+          <span class="lesson-nav-title">Padrões de design e design systems</span>
+        </a>
+      </nav>
+
+    </main>
+
+    <aside class="toc" aria-labelledby="toc-titulo">
+      <h2 id="toc-titulo">Neste tópico</h2>
+      <ol>
+        <li><a href="#conceitos">Deficiência, contexto e inclusão</a></li>
+        <li><a href="#desenho-universal">Desenho universal</a></li>
+        <li><a href="#wcag">WCAG 2.2: princípios e critérios</a></li>
+        <li><a href="#brasil">eMAG e legislação</a></li>
+        <li><a href="#tecnologias-assistivas">Tecnologias assistivas</a></li>
+        <li><a href="#barreiras-codigo">Barreiras no código</a></li>
+        <li><a href="#testar">Como testar a acessibilidade</a></li>
+        <li><a href="#atividade">Atividade prática</a></li>
+        <li><a href="#relevancia">Relevância para a computação</a></li>
+        <li><a href="#aprofundar">Para aprofundar</a></li>
+      </ol>
+      <p class="toc-progress">Tópico 23 de 24 · Usabilidade e acessibilidade</p>
+    </aside>
+
+  </div>
+</div>
+
+<footer>
+  <p>Interface Homem-Computador (CPA1469) · Instituto Federal Catarinense · Semestre 2026.2</p>
+  <p>Material de estudo atualizado no decorrer do semestre. Salve o link e retorne sempre que quiser revisar.</p>
+</footer>
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Voltar ao topo da página">↑</button>
+
+<script>
+  (function () {
+    var backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function () {
+      backToTop.classList.toggle('is-visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>

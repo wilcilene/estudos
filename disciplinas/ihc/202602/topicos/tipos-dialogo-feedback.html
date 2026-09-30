@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tipos de diálogo e feedback ao usuário | IHC – IFC</title>
+<meta name="description" content="Tipos de diálogo em IHC e como projetar feedback: tempos de resposta, indicadores de progresso, mensagens de erro, confirmação e desfazer.">
+<meta name="keywords" content="Tipos de diálogo, Feedback, Tempo de resposta, Mensagens de erro, Desfazer, Confirmação, Microtexto, Assistentes de IA, IHC, Interface Homem-Computador, CPA1469">
+<meta name="author" content="Wilcilene">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0284c7">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/tipos-dialogo-feedback.html">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="IHC – Instituto Federal Catarinense">
+<meta property="og:title" content="Tipos de diálogo e feedback ao usuário — IHC">
+<meta property="og:description" content="Tipos de diálogo em IHC e como projetar feedback: tempos de resposta, indicadores de progresso, mensagens de erro, confirmação e desfazer.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/tipos-dialogo-feedback.html">
+<meta property="og:image" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/media/og-image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tipos de diálogo e feedback ao usuário — IHC">
+<meta name="twitter:description" content="Tipos de diálogo em IHC e como projetar feedback: tempos de resposta, indicadores de progresso, mensagens de erro, confirmação e desfazer.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="topicos.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/tipos-dialogo-feedback.html#recurso",
+      "name": "Tipos de diálogo e feedback ao usuário",
+      "headline": "Tipos de diálogo e feedback ao usuário",
+      "description": "Tipos de diálogo em IHC e como projetar feedback: tempos de resposta, indicadores de progresso, mensagens de erro, confirmação e desfazer.",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/tipos-dialogo-feedback.html",
+      "inLanguage": "pt-BR",
+      "learningResourceType": "Material de aula",
+      "educationalLevel": "Ensino superior",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student"
+      },
+      "keywords": "Tipos de diálogo, Feedback, Tempo de resposta, Mensagens de erro, Desfazer, Confirmação, Microtexto, Assistentes de IA",
+      "dateModified": "2026-09-30",
+      "author": {
+        "@type": "Person",
+        "name": "Wilcilene"
+      },
+      "publisher": {
+        "@type": "CollegeOrUniversity",
+        "name": "Instituto Federal Catarinense",
+        "url": "https://www.ifc.edu.br/"
+      },
+      "isPartOf": {
+        "@type": "Course",
+        "name": "Interface Homem-Computador",
+        "courseCode": "CPA1469",
+        "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "IHC – CPA1469",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tipos de diálogo e feedback ao usuário",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/tipos-dialogo-feedback.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<div class="page">
+
+  <nav aria-label="Trilha de navegação">
+    <a class="breadcrumb" href="../index.html">
+      <span class="breadcrumb-arrow" aria-hidden="true">←</span>
+      IHC · 2026.2 · voltar ao índice da disciplina
+    </a>
+  </nav>
+
+  <header class="lesson-header">
+    <span class="badge">
+      <span class="badge-dot" aria-hidden="true"></span>
+      Diálogos · 04/11
+    </span>
+
+    <h1>Tipos de diálogo e feedback ao usuário</h1>
+
+    <p class="lesson-intro">
+      Um diálogo só funciona se a pessoa souber, a cada passo, o que o sistema entendeu e o que vai acontecer. Nesta aula comparamos os tipos de diálogo, incluindo conversas com assistentes de IA, e estudamos em detalhe o feedback: tempos de resposta, progresso, mensagens de erro, confirmações e desfazer.
+    </p>
+
+    <div class="lesson-meta">
+      <span class="pill">Diálogos</span>
+      <span class="pill">Nível intermediário</span>
+      <span class="pill">Aula: 04/11</span>
+    </div>
+  </header>
+
+  <section class="summary-card" aria-labelledby="pontos-principais">
+    <h2 id="pontos-principais">Principais pontos</h2>
+    <ul class="summary-list">
+      <li>Comparar diálogos por menu, formulário, comando e linguagem natural.</li>
+      <li>Projetar conversas com assistentes baseados em IA de forma transparente.</li>
+      <li>Usar os limites de tempo de resposta para escolher o tipo de feedback.</li>
+      <li>Escrever mensagens de erro claras, precisas e construtivas.</li>
+      <li>Decidir entre confirmação e desfazer conforme o risco da ação.</li>
+    </ul>
+  </section>
+
+  <div class="page-grid">
+
+    <main id="conteudo" class="content" tabindex="-1">
+
+      <section class="content-section" id="tipos" aria-labelledby="tipos-titulo">
+        <h2 id="tipos-titulo"><span class="section-number">01</span> Tipos de diálogo</h2>
+
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Tipos de diálogo e características</caption>
+            <thead><tr><th scope="col">Tipo</th><th scope="col">Como a pessoa se expressa</th><th scope="col">Ponto forte</th><th scope="col">Risco principal</th></tr></thead>
+            <tbody>
+              <tr><td>Menu</td><td>Escolhe entre opções visíveis.</td><td>Reconhecimento, poucos erros.</td><td>Listas longas e hierarquias profundas.</td></tr>
+              <tr><td>Formulário</td><td>Preenche campos estruturados.</td><td>Entrada de muitos dados de uma vez.</td><td>Validação e mensagens de erro ruins.</td></tr>
+              <tr><td>Linguagem de comando</td><td>Digita comandos com sintaxe definida.</td><td>Velocidade e automação.</td><td>Recordação e erros de sintaxe.</td></tr>
+              <tr><td>Linguagem natural</td><td>Escreve ou fala livremente.</td><td>Nenhuma sintaxe para aprender.</td><td>Ambiguidade e limites invisíveis.</td></tr>
+              <tr><td>Manipulação direta</td><td>Age sobre objetos visíveis.</td><td>Feedback contínuo.</td><td>Difícil de automatizar e de tornar acessível.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="assistentes-ia" aria-labelledby="assistentes-ia-titulo">
+        <h2 id="assistentes-ia-titulo"><span class="section-number">02</span> Diálogos com assistentes baseados em IA</h2>
+
+        <p>
+          Modelos de linguagem tornaram o diálogo em linguagem natural muito mais capaz, mas criaram novos desafios de IHC:
+        </p>
+        <ul>
+          <li><strong>Limites invisíveis</strong>: a pessoa não sabe o que o assistente consegue fazer. Ofereça exemplos de pedidos e explique limitações.</li>
+          <li><strong>Respostas plausíveis, mas incorretas</strong>: indique fontes, níveis de confiança ou pontos que precisam de verificação, especialmente em temas críticos.</li>
+          <li><strong>Ações com efeito no mundo</strong>: antes de enviar, pagar ou apagar algo em nome da pessoa, mostre exatamente o que será feito e peça confirmação.</li>
+          <li><strong>Recuperação</strong>: permita editar o pedido, regenerar respostas e voltar a um estado anterior da conversa.</li>
+          <li><strong>Transparência</strong>: deixe claro quando a pessoa conversa com um sistema automatizado e quando pode falar com um humano.</li>
+        </ul>
+
+      </section>
+
+      <section class="content-section" id="feedback" aria-labelledby="feedback-titulo">
+        <h2 id="feedback-titulo"><span class="section-number">03</span> Feedback e tempo de resposta</h2>
+
+        <p>
+          Feedback é a resposta do sistema a uma ação. Ele deve ser <strong>imediato</strong>, <strong>perceptível</strong> e
+          <strong>proporcional</strong>: pequenas ações pedem sinais discretos; ações importantes pedem confirmação clara.
+          Os limites de tempo de resposta, descritos por Robert Miller (1968) e popularizados por Jakob Nielsen, orientam
+          a escolha:
+        </p>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Limites de tempo de resposta e feedback adequado</caption>
+            <thead><tr><th scope="col">Tempo</th><th scope="col">Percepção</th><th scope="col">Feedback recomendado</th></tr></thead>
+            <tbody>
+              <tr><td>até ≈ 0,1 s</td><td>Instantâneo; a pessoa sente que manipula diretamente.</td><td>Apenas a mudança de estado (botão pressionado, caractere na tela).</td></tr>
+              <tr><td>até ≈ 1 s</td><td>O fluxo de pensamento não é interrompido, mas o atraso é notado.</td><td>Nenhum indicador especial; evite telas em branco.</td></tr>
+              <tr><td>até ≈ 10 s</td><td>Limite para manter a atenção na tarefa.</td><td>Indicador de atividade (spinner) ou esqueleto da página.</td></tr>
+              <tr><td>acima de 10 s</td><td>A pessoa passa a fazer outra coisa.</td><td>Barra de progresso determinada, tempo estimado, opção de cancelar e aviso ao terminar.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li><strong>Telas-esqueleto</strong> (skeleton screens) mostram o layout antes dos dados, reduzindo a sensação de espera e evitando que a página “pule”.</li>
+          <li><strong>Interface otimista</strong>: mostra o resultado (uma curtida, uma mensagem enviada) antes da confirmação do servidor e trata o erro caso ele ocorra. Use apenas quando a falha é rara e reversível.</li>
+          <li><strong>Canais</strong>: combine visual, sonoro e háptico para informações críticas; anuncie mudanças dinâmicas a leitores de tela com <code>aria-live</code>.</li>
+        </ul>
+
+      </section>
+
+      <section class="content-section" id="mensagens-erro" aria-labelledby="mensagens-erro-titulo">
+        <h2 id="mensagens-erro-titulo"><span class="section-number">04</span> Mensagens de erro</h2>
+
+        <p>Uma boa mensagem de erro é <strong>visível</strong> (perto de onde o problema está), <strong>precisa</strong> (diz o que houve), <strong>construtiva</strong> (diz como resolver) e <strong>respeitosa</strong> (não culpa a pessoa).</p>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Reescrevendo mensagens de erro</caption>
+            <thead><tr><th scope="col" class="col-bad">Evite</th><th scope="col" class="col-good">Prefira</th></tr></thead>
+            <tbody>
+              <tr><td>“Erro 422.”</td><td>“Não conseguimos salvar: a data de término é anterior à data de início.”</td></tr>
+              <tr><td>“Entrada inválida.”</td><td>“O CPF deve ter 11 números. Faltam 2.”</td></tr>
+              <tr><td>“Você digitou a senha errada!”</td><td>“E-mail ou senha não conferem. Verifique se o Caps Lock está ativado ou redefina a senha.”</td></tr>
+              <tr><td>“Falha inesperada. Tente mais tarde.”</td><td>“Estamos sem conexão com o servidor. Seu rascunho foi salvo neste dispositivo e será enviado quando a conexão voltar.”</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted">Melhor que uma boa mensagem de erro é uma interface que evita o erro: máscaras de campo, valores padrão sensatos e opções inválidas desabilitadas.</p>
+
+      </section>
+
+      <section class="content-section" id="confirmar-desfazer" aria-labelledby="confirmar-desfazer-titulo">
+        <h2 id="confirmar-desfazer-titulo"><span class="section-number">05</span> Confirmar ou desfazer?</h2>
+
+        <p>
+          Confirmações frequentes viram rotina e são aprovadas sem leitura. Por isso, a regra geral é: <strong>se a ação é
+          reversível, ofereça desfazer; se é irreversível e grave, peça confirmação específica</strong>.
+        </p>
+        <ul>
+          <li>Arquivar um e-mail: execute e mostre “E-mail arquivado · Desfazer”.</li>
+          <li>Excluir definitivamente um projeto: peça confirmação que descreva a consequência (“Excluir o projeto e os 42 arquivos? Esta ação não pode ser desfeita.”), com botões nomeados pela ação (“Excluir projeto” / “Cancelar”), não “OK”.</li>
+          <li>Ações extremamente críticas: exija uma ação deliberada, como digitar o nome do item a ser excluído.</li>
+        </ul>
+
+      </section>
+
+      <section class="content-section" id="microtexto" aria-labelledby="microtexto-titulo">
+        <h2 id="microtexto-titulo"><span class="section-number">06</span> Microtexto e estados vazios</h2>
+
+        <p>
+          <strong>Microtexto</strong> (microcopy) são os pequenos textos da interface: rótulos, botões, dicas, mensagens. Eles
+          fazem parte do diálogo tanto quanto o layout. Use o vocabulário do usuário, verbos de ação nos botões e tom
+          consistente. Em <strong>estados vazios</strong>, explique o que aparecerá ali e ofereça a primeira ação (“Você ainda
+          não tem reservas. Reserve seu primeiro horário.”).
+        </p>
+
+      </section>
+
+      <section class="content-section" id="atividade" aria-labelledby="atividade-titulo">
+        <h2 id="atividade-titulo"><span class="section-number">07</span> Atividade prática</h2>
+
+        <div class="callout callout-activity">
+          <span class="callout-label">Atividade</span>
+          <ol>
+            <li>Colete cinco mensagens de erro reais de sistemas que você usa e reescreva cada uma seguindo as orientações desta aula.</li>
+            <li>No protótipo do projeto, liste cada ação relevante e indique o feedback previsto e o tempo de resposta esperado.</li>
+            <li>Identifique no protótipo uma confirmação que poderia ser substituída por desfazer, ou vice-versa.</li>
+          </ol>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="relevancia" aria-labelledby="relevancia-titulo">
+        <h2 id="relevancia-titulo"><span class="section-number">08</span> Relevância para a Engenharia de Computação</h2>
+        <div class="callout callout-connection">
+          <span class="callout-label">🔗 Conexão com a sua formação</span>
+          <p>
+            O back-end decide boa parte da experiência de feedback: códigos de erro de uma API precisam carregar informação
+            suficiente para gerar mensagens úteis, operações longas precisam reportar progresso e endpoints lentos estouram
+            os limites de 1 e 10 segundos. Definir um orçamento de latência (<em>latency budget</em>) para cada interação é
+            uma prática de engenharia com impacto direto na usabilidade.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section" id="aprofundar" aria-labelledby="aprofundar-titulo">
+        <h2 id="aprofundar-titulo"><span class="section-number">09</span> Para aprofundar</h2>
+        <div class="callout callout-reading">
+          <span class="callout-label">Referências e leituras recomendadas</span>
+          <ul class="reading-list">
+            <li>MILLER, R. B. Response time in man-computer conversational transactions. <em>AFIPS Fall Joint Computer Conference</em>, 1968.</li>
+            <li>NIELSEN, J. <em>Usability Engineering</em>. Morgan Kaufmann, 1993 (tempos de resposta).</li>
+            <li>SHNEIDERMAN, B. et al. <em>Designing the User Interface</em>. Pearson (tempo de resposta e mensagens de erro).</li>
+            <li>PODMAJERSKY, T. <em>Strategic Writing for UX</em>. O'Reilly, 2019.</li>
+            <li>Tópico relacionado: <a href="estrutura-dialogos-navegacao.html">Estrutura de diálogos e navegação</a>.</li>
+          </ul>
+        </div>
+
+        <h3>Palavras-chave deste tópico</h3>
+        <div class="keyword-tags" aria-label="Palavras-chave do tópico">
+          <span class="keyword-tag">Tipos de diálogo</span>
+          <span class="keyword-tag">Feedback</span>
+          <span class="keyword-tag">Tempo de resposta</span>
+          <span class="keyword-tag">Mensagens de erro</span>
+          <span class="keyword-tag">Desfazer</span>
+          <span class="keyword-tag">Confirmação</span>
+          <span class="keyword-tag">Microtexto</span>
+          <span class="keyword-tag">Assistentes de IA</span>
+        </div>
+      </section>
+
+      <nav class="lesson-nav" aria-label="Navegação entre tópicos">
+        <a class="lesson-nav-link prev" href="estrutura-dialogos-navegacao.html" rel="prev">
+          <span class="lesson-nav-label">← Tópico anterior</span>
+          <span class="lesson-nav-title">Estrutura de diálogos e navegação</span>
+        </a>
+        <a class="lesson-nav-link next" href="casos-de-uso-historias.html" rel="next">
+          <span class="lesson-nav-label">Próximo tópico →</span>
+          <span class="lesson-nav-title">Casos de uso e histórias de usuário</span>
+        </a>
+      </nav>
+
+    </main>
+
+    <aside class="toc" aria-labelledby="toc-titulo">
+      <h2 id="toc-titulo">Neste tópico</h2>
+      <ol>
+        <li><a href="#tipos">Tipos de diálogo</a></li>
+        <li><a href="#assistentes-ia">Assistentes baseados em IA</a></li>
+        <li><a href="#feedback">Feedback e tempo de resposta</a></li>
+        <li><a href="#mensagens-erro">Mensagens de erro</a></li>
+        <li><a href="#confirmar-desfazer">Confirmar ou desfazer?</a></li>
+        <li><a href="#microtexto">Microtexto e estados vazios</a></li>
+        <li><a href="#atividade">Atividade prática</a></li>
+        <li><a href="#relevancia">Relevância para a computação</a></li>
+        <li><a href="#aprofundar">Para aprofundar</a></li>
+      </ol>
+      <p class="toc-progress">Tópico 15 de 24 · Diálogos</p>
+    </aside>
+
+  </div>
+</div>
+
+<footer>
+  <p>Interface Homem-Computador (CPA1469) · Instituto Federal Catarinense · Semestre 2026.2</p>
+  <p>Material de estudo atualizado no decorrer do semestre. Salve o link e retorne sempre que quiser revisar.</p>
+</footer>
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Voltar ao topo da página">↑</button>
+
+<script>
+  (function () {
+    var backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function () {
+      backToTop.classList.toggle('is-visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>

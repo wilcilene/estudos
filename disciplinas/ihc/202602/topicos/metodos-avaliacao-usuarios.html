@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Métodos de avaliação com usuários | IHC – IFC</title>
+<meta name="description" content="Avaliação com usuários em IHC: planejamento de testes de usabilidade, think-aloud, questionários, entrevistas, ética e análise de resultados.">
+<meta name="keywords" content="Teste de usabilidade, Think-aloud, Avaliação formativa, Avaliação somativa, Questionários, Entrevista, Ética em pesquisa, Diagrama de afinidade, IHC, Interface Homem-Computador, CPA1469">
+<meta name="author" content="Wilcilene">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0284c7">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/metodos-avaliacao-usuarios.html">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="IHC – Instituto Federal Catarinense">
+<meta property="og:title" content="Métodos de avaliação com usuários — IHC">
+<meta property="og:description" content="Avaliação com usuários em IHC: planejamento de testes de usabilidade, think-aloud, questionários, entrevistas, ética e análise de resultados.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/metodos-avaliacao-usuarios.html">
+<meta property="og:image" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/media/og-image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Métodos de avaliação com usuários — IHC">
+<meta name="twitter:description" content="Avaliação com usuários em IHC: planejamento de testes de usabilidade, think-aloud, questionários, entrevistas, ética e análise de resultados.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="topicos.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/metodos-avaliacao-usuarios.html#recurso",
+      "name": "Métodos de avaliação com usuários",
+      "headline": "Métodos de avaliação com usuários",
+      "description": "Avaliação com usuários em IHC: planejamento de testes de usabilidade, think-aloud, questionários, entrevistas, ética e análise de resultados.",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/metodos-avaliacao-usuarios.html",
+      "inLanguage": "pt-BR",
+      "learningResourceType": "Material de aula",
+      "educationalLevel": "Ensino superior",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student"
+      },
+      "keywords": "Teste de usabilidade, Think-aloud, Avaliação formativa, Avaliação somativa, Questionários, Entrevista, Ética em pesquisa, Diagrama de afinidade",
+      "dateModified": "2026-09-30",
+      "author": {
+        "@type": "Person",
+        "name": "Wilcilene"
+      },
+      "publisher": {
+        "@type": "CollegeOrUniversity",
+        "name": "Instituto Federal Catarinense",
+        "url": "https://www.ifc.edu.br/"
+      },
+      "isPartOf": {
+        "@type": "Course",
+        "name": "Interface Homem-Computador",
+        "courseCode": "CPA1469",
+        "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "IHC – CPA1469",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Métodos de avaliação com usuários",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/metodos-avaliacao-usuarios.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<div class="page">
+
+  <nav aria-label="Trilha de navegação">
+    <a class="breadcrumb" href="../index.html">
+      <span class="breadcrumb-arrow" aria-hidden="true">←</span>
+      IHC · 2026.2 · voltar ao índice da disciplina
+    </a>
+  </nav>
+
+  <header class="lesson-header">
+    <span class="badge">
+      <span class="badge-dot" aria-hidden="true"></span>
+      Métodos de avaliação · 25/11
+    </span>
+
+    <h1>Métodos de avaliação com usuários</h1>
+
+    <p class="lesson-intro">
+      Nenhuma inspeção substitui observar pessoas reais usando o sistema. Nesta aula vamos planejar e conduzir testes de usabilidade, usar o protocolo de pensar em voz alta, escolher questionários e entrevistas, cuidar dos aspectos éticos e transformar observações em decisões de projeto.
+    </p>
+
+    <div class="lesson-meta">
+      <span class="pill">Métodos de avaliação</span>
+      <span class="pill">Nível intermediário</span>
+      <span class="pill">Aula: 25/11</span>
+    </div>
+  </header>
+
+  <section class="summary-card" aria-labelledby="pontos-principais">
+    <h2 id="pontos-principais">Principais pontos</h2>
+    <ul class="summary-list">
+      <li>Classificar avaliações: formativa ou somativa, laboratório ou campo, moderada ou não.</li>
+      <li>Planejar um teste de usabilidade com objetivos, tarefas e métricas.</li>
+      <li>Conduzir sessões com o protocolo think-aloud sem induzir o participante.</li>
+      <li>Aplicar princípios éticos e de proteção de dados na pesquisa com pessoas.</li>
+      <li>Analisar resultados e priorizar problemas encontrados.</li>
+    </ul>
+  </section>
+
+  <div class="page-grid">
+
+    <main id="conteudo" class="content" tabindex="-1">
+
+      <section class="content-section" id="panorama" aria-labelledby="panorama-titulo">
+        <h2 id="panorama-titulo"><span class="section-number">01</span> Panorama dos métodos</h2>
+
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Dimensões para classificar uma avaliação</caption>
+            <thead><tr><th scope="col">Dimensão</th><th scope="col">Opções</th><th scope="col">Quando usar</th></tr></thead>
+            <tbody>
+              <tr><td>Objetivo</td><td><strong>Formativa</strong> x <strong>somativa</strong></td><td>Formativa para encontrar problemas durante o projeto; somativa para medir se o sistema atinge metas.</td></tr>
+              <tr><td>Dados</td><td><strong>Qualitativos</strong> x <strong>quantitativos</strong></td><td>Qualitativos explicam o porquê; quantitativos medem quanto.</td></tr>
+              <tr><td>Local</td><td><strong>Laboratório</strong> x <strong>campo</strong></td><td>Laboratório dá controle; campo mostra o contexto real.</td></tr>
+              <tr><td>Condução</td><td><strong>Moderada</strong> x <strong>não moderada</strong></td><td>Moderada permite perguntar e aprofundar; não moderada alcança mais pessoas.</td></tr>
+              <tr><td>Presença</td><td><strong>Presencial</strong> x <strong>remota</strong></td><td>Remota amplia o recrutamento; presencial facilita observar comportamento.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="teste-usabilidade" aria-labelledby="teste-usabilidade-titulo">
+        <h2 id="teste-usabilidade-titulo"><span class="section-number">02</span> Planejando um teste de usabilidade</h2>
+
+        <ol>
+          <li><strong>Objetivos</strong>: o que queremos descobrir? (“A pessoa encontra como reservar um horário sem ajuda?”)</li>
+          <li><strong>Participantes</strong>: perfil alinhado às personas; critérios de inclusão e exclusão.</li>
+          <li><strong>Tarefas</strong>: escritas como cenários realistas, sem revelar o caminho nem usar os rótulos da interface.</li>
+          <li><strong>Métricas</strong>: sucesso, tempo, erros, pedidos de ajuda, satisfação (veja <a href="metricas-ux-ab-testing.html">Métricas de UX</a>).</li>
+          <li><strong>Roteiro</strong>: boas-vindas, consentimento, perguntas iniciais, tarefas, questionário, entrevista final.</li>
+          <li><strong>Sessão piloto</strong>: um ensaio com alguém de fora revela tarefas ambíguas e problemas no protótipo.</li>
+        </ol>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Escrevendo tarefas</caption>
+            <thead><tr><th scope="col" class="col-bad">Tarefa que induz</th><th scope="col" class="col-good">Tarefa em forma de cenário</th></tr></thead>
+            <tbody>
+              <tr><td>“Clique em Reservas e depois em Nova reserva.”</td><td>“Você precisa usar o laboratório de redes na próxima quinta à tarde para terminar um trabalho. Garanta seu horário.”</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Quantos participantes?</h3>
+        <p>
+          Nielsen e Landauer mostraram que, em testes formativos, cerca de cinco participantes de um mesmo perfil encontram
+          a maior parte dos problemas mais frequentes, e que é mais produtivo fazer vários ciclos pequenos, corrigindo entre eles,
+          do que um único teste grande. O número não vale para perfis muito diferentes (teste cada perfil) nem para avaliações
+          somativas com estatística, que exigem amostras maiores.
+        </p>
+
+      </section>
+
+      <section class="content-section" id="think-aloud" aria-labelledby="think-aloud-titulo">
+        <h2 id="think-aloud-titulo"><span class="section-number">03</span> O protocolo de pensar em voz alta</h2>
+
+        <p>
+          No <strong>think-aloud</strong>, o participante verbaliza o que está pensando enquanto realiza a tarefa: o que
+          procura, o que espera, o que o surpreende. Pode ser <strong>concorrente</strong> (durante a tarefa) ou
+          <strong>retrospectivo</strong> (depois, assistindo à gravação), útil quando falar atrapalharia a tarefa ou o tempo é medido.
+        </p>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Postura do facilitador</caption>
+            <thead><tr><th scope="col" class="col-good">Faça</th><th scope="col" class="col-bad">Evite</th></tr></thead>
+            <tbody>
+              <tr><td>“O que você está pensando agora?”</td><td>“Você viu o botão ali em cima?”</td></tr>
+              <tr><td>Devolver a pergunta: “O que você acha que acontece?”</td><td>Explicar como a interface funciona.</td></tr>
+              <tr><td>Aceitar o silêncio e observar.</td><td>Reagir com aprovação ou decepção às ações.</td></tr>
+              <tr><td>Lembrar que estamos testando a interface, não a pessoa.</td><td>Defender o design quando o participante critica.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="questionarios-entrevistas" aria-labelledby="questionarios-entrevistas-titulo">
+        <h2 id="questionarios-entrevistas-titulo"><span class="section-number">04</span> Questionários e entrevistas</h2>
+
+        <ul>
+          <li><strong>SUS</strong> (<em>System Usability Scale</em>): dez itens, rápido e muito usado para satisfação e usabilidade percebida.</li>
+          <li><strong>SEQ</strong> (<em>Single Ease Question</em>): uma pergunta após cada tarefa sobre a facilidade percebida.</li>
+          <li><strong>UEQ</strong> (<em>User Experience Questionnaire</em>): pares de adjetivos que cobrem qualidades pragmáticas e hedônicas.</li>
+          <li><strong>NASA-TLX</strong>: mede carga de trabalho percebida, útil em sistemas críticos.</li>
+        </ul>
+        <p>
+          A <strong>entrevista pós-teste</strong> aprofunda o que foi observado: “Percebi que você voltou duas vezes à tela
+          inicial. O que estava procurando?”. Evite perguntas hipotéticas (“Você usaria isso?”), que produzem respostas pouco
+          confiáveis; prefira perguntar sobre comportamentos passados.
+        </p>
+
+      </section>
+
+      <section class="content-section" id="etica" aria-labelledby="etica-titulo">
+        <h2 id="etica-titulo"><span class="section-number">05</span> Ética na avaliação com pessoas</h2>
+
+        <ul>
+          <li><strong>Consentimento livre e esclarecido</strong>: explique objetivo, duração, gravação e uso dos dados; obtenha concordância por escrito.</li>
+          <li><strong>Direito de desistir</strong> a qualquer momento, sem necessidade de justificativa.</li>
+          <li><strong>Privacidade</strong>: anonimize os dados, peça autorização específica para gravar voz ou rosto e armazene com segurança, conforme a LGPD.</li>
+          <li><strong>Bem-estar</strong>: deixe claro que dificuldades são falhas da interface, não do participante.</li>
+          <li><strong>Pesquisa acadêmica</strong>: estudos que geram publicações podem exigir aprovação de Comitê de Ética em Pesquisa; a Resolução CNS nº 510/2016 trata de pesquisas em Ciências Humanas e Sociais.</li>
+        </ul>
+
+      </section>
+
+      <section class="content-section" id="analise" aria-labelledby="analise-titulo">
+        <h2 id="analise-titulo"><span class="section-number">06</span> Analisando os resultados</h2>
+
+        <ol>
+          <li>Reúna as anotações de todas as sessões logo após cada uma, enquanto a memória está fresca.</li>
+          <li>Registre cada observação em um cartão ou nota: o que aconteceu, em que tarefa, com qual participante.</li>
+          <li>Agrupe observações semelhantes em um <strong>diagrama de afinidade</strong> para identificar problemas.</li>
+          <li>Para cada problema, indique quantos participantes o enfrentaram e a severidade.</li>
+          <li>Transforme os problemas prioritários em recomendações e, no projeto, em mudanças no protótipo.</li>
+        </ol>
+        <div class="callout callout-reflection">
+          <span class="callout-label">Cuidado com o viés de confirmação</span>
+          <p>É tentador ver só o que confirma o design. Registre também os momentos em que o participante teve sucesso por caminhos inesperados; eles revelam o modelo mental real.</p>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="atividade" aria-labelledby="atividade-titulo">
+        <h2 id="atividade-titulo"><span class="section-number">07</span> Atividade prática</h2>
+
+        <div class="callout callout-activity">
+          <span class="callout-label">Atividade</span>
+          <ol>
+            <li>Elabore o plano de teste de usabilidade do protótipo do projeto: objetivos, perfil de participantes, três tarefas em forma de cenário, métricas e roteiro.</li>
+            <li>Redija um termo de consentimento simples para os participantes.</li>
+            <li>Faça uma sessão piloto com alguém de outra equipe e ajuste o roteiro.</li>
+            <li>Conduza pelo menos três sessões com think-aloud e apresente os cinco principais problemas encontrados.</li>
+          </ol>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="relevancia" aria-labelledby="relevancia-titulo">
+        <h2 id="relevancia-titulo"><span class="section-number">08</span> Relevância para a Engenharia de Computação</h2>
+        <div class="callout callout-connection">
+          <span class="callout-label">🔗 Conexão com a sua formação</span>
+          <p>
+            Testar com usuários é o equivalente, na interface, a testar o hardware no ambiente real de operação: é onde surgem
+            os problemas que nenhuma especificação previu. A preocupação com proteção de dados das gravações e registros
+            também envolve decisões técnicas de armazenamento, anonimização e controle de acesso, típicas da área de computação.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section" id="aprofundar" aria-labelledby="aprofundar-titulo">
+        <h2 id="aprofundar-titulo"><span class="section-number">09</span> Para aprofundar</h2>
+        <div class="callout callout-reading">
+          <span class="callout-label">Referências e leituras recomendadas</span>
+          <ul class="reading-list">
+            <li>RUBIN, J.; CHISNELL, D. <em>Handbook of Usability Testing</em>. Wiley, 2. ed., 2008.</li>
+            <li>NIELSEN, J.; LANDAUER, T. K. A mathematical model of the finding of usability problems. <em>INTERCHI</em>, 1993.</li>
+            <li>ERICSSON, K. A.; SIMON, H. A. <em>Protocol Analysis: Verbal Reports as Data</em>. MIT Press, 1993.</li>
+            <li>BRASIL. Conselho Nacional de Saúde. Resolução nº 510, de 7 de abril de 2016.</li>
+            <li>BARBOSA, S. D. J.; SILVA, B. S. <em>Interação Humano-Computador</em>. Elsevier, 2010 (cap. 11, avaliação por observação).</li>
+          </ul>
+        </div>
+
+        <h3>Palavras-chave deste tópico</h3>
+        <div class="keyword-tags" aria-label="Palavras-chave do tópico">
+          <span class="keyword-tag">Teste de usabilidade</span>
+          <span class="keyword-tag">Think-aloud</span>
+          <span class="keyword-tag">Avaliação formativa</span>
+          <span class="keyword-tag">Avaliação somativa</span>
+          <span class="keyword-tag">Questionários</span>
+          <span class="keyword-tag">Entrevista</span>
+          <span class="keyword-tag">Ética em pesquisa</span>
+          <span class="keyword-tag">Diagrama de afinidade</span>
+        </div>
+      </section>
+
+      <nav class="lesson-nav" aria-label="Navegação entre tópicos">
+        <a class="lesson-nav-link prev" href="heuristicas-usabilidade.html" rel="prev">
+          <span class="lesson-nav-label">← Tópico anterior</span>
+          <span class="lesson-nav-title">Heurísticas de usabilidade</span>
+        </a>
+        <a class="lesson-nav-link next" href="metricas-ux-ab-testing.html" rel="next">
+          <span class="lesson-nav-label">Próximo tópico →</span>
+          <span class="lesson-nav-title">Métricas de UX, SUS e A/B testing</span>
+        </a>
+      </nav>
+
+    </main>
+
+    <aside class="toc" aria-labelledby="toc-titulo">
+      <h2 id="toc-titulo">Neste tópico</h2>
+      <ol>
+        <li><a href="#panorama">Panorama dos métodos</a></li>
+        <li><a href="#teste-usabilidade">Planejando o teste</a></li>
+        <li><a href="#think-aloud">O protocolo de pensar em voz alta</a></li>
+        <li><a href="#questionarios-entrevistas">Questionários e entrevistas</a></li>
+        <li><a href="#etica">Ética na avaliação com pessoas</a></li>
+        <li><a href="#analise">Analisando os resultados</a></li>
+        <li><a href="#atividade">Atividade prática</a></li>
+        <li><a href="#relevancia">Relevância para a computação</a></li>
+        <li><a href="#aprofundar">Para aprofundar</a></li>
+      </ol>
+      <p class="toc-progress">Tópico 20 de 24 · Métodos de avaliação</p>
+    </aside>
+
+  </div>
+</div>
+
+<footer>
+  <p>Interface Homem-Computador (CPA1469) · Instituto Federal Catarinense · Semestre 2026.2</p>
+  <p>Material de estudo atualizado no decorrer do semestre. Salve o link e retorne sempre que quiser revisar.</p>
+</footer>
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Voltar ao topo da página">↑</button>
+
+<script>
+  (function () {
+    var backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function () {
+      backToTop.classList.toggle('is-visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>

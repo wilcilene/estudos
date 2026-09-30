@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interação multimodal: voz, gestos e realidade aumentada | IHC – IFC</title>
+<meta name="description" content="Interação multimodal: interfaces de voz, gestos, rastreamento do olhar e realidade virtual e aumentada, com desafios de projeto e critérios de escolha.">
+<meta name="keywords" content="Multimodalidade, Interface de voz, Gestos, Rastreamento ocular, Realidade virtual, Realidade aumentada, CARE, Cybersickness, IHC, Interface Homem-Computador, CPA1469">
+<meta name="author" content="Wilcilene">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0284c7">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/interacao-multimodal.html">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="IHC – Instituto Federal Catarinense">
+<meta property="og:title" content="Interação multimodal: voz, gestos e realidade aumentada — IHC">
+<meta property="og:description" content="Interação multimodal: interfaces de voz, gestos, rastreamento do olhar e realidade virtual e aumentada, com desafios de projeto e critérios de escolha.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/interacao-multimodal.html">
+<meta property="og:image" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/media/og-image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Interação multimodal: voz, gestos e realidade aumentada — IHC">
+<meta name="twitter:description" content="Interação multimodal: interfaces de voz, gestos, rastreamento do olhar e realidade virtual e aumentada, com desafios de projeto e critérios de escolha.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="topicos.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/interacao-multimodal.html#recurso",
+      "name": "Interação multimodal: voz, gestos e realidade aumentada",
+      "headline": "Interação multimodal: voz, gestos e realidade aumentada",
+      "description": "Interação multimodal: interfaces de voz, gestos, rastreamento do olhar e realidade virtual e aumentada, com desafios de projeto e critérios de escolha.",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/interacao-multimodal.html",
+      "inLanguage": "pt-BR",
+      "learningResourceType": "Material de aula",
+      "educationalLevel": "Ensino superior",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student"
+      },
+      "keywords": "Multimodalidade, Interface de voz, Gestos, Rastreamento ocular, Realidade virtual, Realidade aumentada, CARE, Cybersickness",
+      "dateModified": "2026-09-30",
+      "author": {
+        "@type": "Person",
+        "name": "Wilcilene"
+      },
+      "publisher": {
+        "@type": "CollegeOrUniversity",
+        "name": "Instituto Federal Catarinense",
+        "url": "https://www.ifc.edu.br/"
+      },
+      "isPartOf": {
+        "@type": "Course",
+        "name": "Interface Homem-Computador",
+        "courseCode": "CPA1469",
+        "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "IHC – CPA1469",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Interação multimodal: voz, gestos e realidade aumentada",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/interacao-multimodal.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<div class="page">
+
+  <nav aria-label="Trilha de navegação">
+    <a class="breadcrumb" href="../index.html">
+      <span class="breadcrumb-arrow" aria-hidden="true">←</span>
+      IHC · 2026.2 · voltar ao índice da disciplina
+    </a>
+  </nav>
+
+  <header class="lesson-header">
+    <span class="badge">
+      <span class="badge-dot" aria-hidden="true"></span>
+      Técnicas de interação · 21/08
+    </span>
+
+    <h1>Interação multimodal: voz, gestos e realidade aumentada</h1>
+
+    <p class="lesson-intro">
+      Falar, apontar, olhar e se mover são formas naturais de comunicação humana, e cada vez mais sistemas as aceitam como entrada. Nesta aula vamos estudar como combinar modalidades, os desafios específicos de voz, gestos, olhar e realidade virtual e aumentada, e como decidir quando elas realmente ajudam.
+    </p>
+
+    <div class="lesson-meta">
+      <span class="pill">Técnicas de interação</span>
+      <span class="pill">Nível intermediário</span>
+      <span class="pill">Aula: 21/08</span>
+    </div>
+  </header>
+
+  <section class="summary-card" aria-labelledby="pontos-principais">
+    <h2 id="pontos-principais">Principais pontos</h2>
+    <ul class="summary-list">
+      <li>Definir interação multimodal e as formas de combinar modalidades (CARE).</li>
+      <li>Entender o funcionamento e as limitações de interfaces de voz.</li>
+      <li>Projetar gestos considerando descobribilidade, fadiga e ambiguidade.</li>
+      <li>Reconhecer o problema do “toque de Midas” no rastreamento do olhar.</li>
+      <li>Identificar requisitos de conforto e segurança em realidade virtual e aumentada.</li>
+    </ul>
+  </section>
+
+  <div class="page-grid">
+
+    <main id="conteudo" class="content" tabindex="-1">
+
+      <section class="content-section" id="o-que-e" aria-labelledby="o-que-e-titulo">
+        <h2 id="o-que-e-titulo"><span class="section-number">01</span> O que é interação multimodal?</h2>
+
+        <p>
+          Uma interface é <strong>multimodal</strong> quando aceita ou produz informação por mais de um canal
+          sensorial ou motor: fala, toque, gesto, olhar, som, vibração. A ideia não é nova: em 1980, a demonstração
+          <em>“Put-That-There”</em>, de Richard Bolt no MIT, permitia apontar para um objeto na parede e dizer
+          “coloque aquilo ali”, combinando fala e gesto em um único comando.
+        </p>
+        <p>As propriedades CARE (Coutaz e colegas, 1995) descrevem como as modalidades se relacionam:</p>
+        <ul>
+          <li><strong>Complementaridade</strong>: cada modalidade fornece parte da informação (“mover <em>isso</em>” + apontar).</li>
+          <li><strong>Atribuição</strong>: uma única modalidade é a responsável por certa ação.</li>
+          <li><strong>Redundância</strong>: duas modalidades transmitem a mesma informação ao mesmo tempo, o que aumenta a robustez.</li>
+          <li><strong>Equivalência</strong>: a pessoa escolhe qualquer modalidade para a mesma ação (digitar <em>ou</em> falar a busca).</li>
+        </ul>
+        <div class="callout callout-connection">
+          <span class="callout-label">Por que isso importa</span>
+          <p>
+            Equivalência é um dos pilares da acessibilidade: quem não enxerga a tela, não pode falar ou não usa as mãos
+            precisa de caminhos alternativos para a mesma tarefa.
+          </p>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="voz" aria-labelledby="voz-titulo">
+        <h2 id="voz-titulo"><span class="section-number">02</span> Interfaces de voz e linguagem natural</h2>
+
+        <p>Uma interface de voz costuma seguir este encadeamento:</p>
+        <ol>
+          <li><strong>Reconhecimento de fala (ASR)</strong>: transforma áudio em texto.</li>
+          <li><strong>Compreensão de linguagem natural (NLU)</strong>: identifica a intenção e os parâmetros (“agendar lembrete” + “amanhã às 8h”).</li>
+          <li><strong>Gerenciamento de diálogo</strong>: decide a próxima ação e o que perguntar.</li>
+          <li><strong>Geração de resposta e síntese de fala (TTS)</strong>: devolve a resposta em áudio.</li>
+        </ol>
+        <p>Erros podem surgir em qualquer etapa, e a pessoa não vê onde. Por isso, interfaces de voz precisam de cuidados próprios:</p>
+        <ul>
+          <li><strong>Descobribilidade</strong>: não há menu visível; ofereça exemplos do que pode ser dito.</li>
+          <li><strong>Memória</strong>: listas faladas longas sobrecarregam; ofereça poucas opções por vez.</li>
+          <li><strong>Confirmação proporcional ao risco</strong>: confirmação implícita (“Lembrete criado para amanhã às 8h”) para ações simples; explícita (“Confirma a transferência de R$ 500?”) para ações críticas.</li>
+          <li><strong>Recuperação de erros</strong>: evite repetir “não entendi”; reformule a pergunta ou ofereça alternativas.</li>
+          <li><strong>Contexto</strong>: ruído, privacidade (falar a senha em voz alta?) e diversidade de sotaques e de fala.</li>
+        </ul>
+
+      </section>
+
+      <section class="content-section" id="gestos" aria-labelledby="gestos-titulo">
+        <h2 id="gestos-titulo"><span class="section-number">03</span> Gestos</h2>
+
+        <p>
+          Gestos vão do toque (tocar, deslizar, pinçar) aos movimentos no ar captados por câmeras e sensores de
+          profundidade. Eles parecem “naturais”, mas quase sempre são aprendidos: não existe um gesto universal para
+          “desfazer”.
+        </p>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Desafios de projeto em interfaces gestuais</caption>
+            <thead><tr><th scope="col">Desafio</th><th scope="col">Como mitigar</th></tr></thead>
+            <tbody>
+              <tr><td>Gestos invisíveis e pouco descobríveis</td><td>Dicas visuais, tutoriais breves e alternativas por botão.</td></tr>
+              <tr><td>Fadiga nos braços em gestos no ar</td><td>Sessões curtas, gestos com o braço apoiado e gestos pequenos.</td></tr>
+              <tr><td>Ativação acidental</td><td>Gesto de “ativação” claro, zona de interação delimitada e feedback antes da ação.</td></tr>
+              <tr><td>Diferenças culturais e motoras</td><td>Testar com públicos diversos; permitir configuração e modalidades equivalentes.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="olhar" aria-labelledby="olhar-titulo">
+        <h2 id="olhar-titulo"><span class="section-number">04</span> Interação pelo olhar</h2>
+
+        <p>
+          O rastreamento ocular pode ser usado como <strong>entrada</strong>: o sistema sabe para onde a pessoa olha.
+          É uma tecnologia valiosa em comunicação alternativa, por exemplo para pessoas com doenças que limitam os
+          movimentos. Mas o olhar serve, antes de tudo, para <em>perceber</em>. Se tudo o que é olhado for ativado, a
+          pessoa não consegue apenas ler a tela: é o chamado <strong>problema do toque de Midas</strong>, descrito por
+          Robert Jacob em 1990.
+        </p>
+        <p>
+          Soluções comuns combinam o olhar com outra modalidade (olhar para selecionar e piscar, falar ou pressionar um
+          botão para confirmar) ou usam <em>dwell time</em>, um tempo mínimo de fixação para ativar. Em headsets de
+          realidade virtual, o rastreamento ocular também é usado para renderizar em alta resolução apenas a região
+          observada (<em>foveated rendering</em>).
+        </p>
+
+      </section>
+
+      <section class="content-section" id="rv-ra" aria-labelledby="rv-ra-titulo">
+        <h2 id="rv-ra-titulo"><span class="section-number">05</span> Realidade virtual, aumentada e mista</h2>
+
+        <p>
+          O <strong>contínuo realidade-virtualidade</strong> de Milgram e Kishino (1994) organiza essas tecnologias em
+          uma escala: do ambiente totalmente real, passando pela realidade aumentada (o digital sobreposto ao mundo
+          físico) até a realidade virtual (ambiente totalmente sintético). No meio está a realidade mista.
+        </p>
+        <h3>Requisitos de projeto específicos</h3>
+        <ul>
+          <li><strong>Conforto e cybersickness</strong>: conflitos entre o que os olhos veem e o que o sistema vestibular sente causam enjoo. Evite mover a câmera sem que a pessoa se mova; prefira teletransporte a locomoção contínua para iniciantes.</li>
+          <li><strong>Latência</strong>: atrasos entre o movimento da cabeça e a atualização da imagem aumentam o desconforto; a literatura costuma citar cerca de 20 ms como meta.</li>
+          <li><strong>Segurança física</strong>: limites de área, alerta de obstáculos e cuidado com a atenção dividida em RA.</li>
+          <li><strong>Interação espacial</strong>: apontar com raio, pegar objetos com as mãos, menus presos ao pulso ou ao campo de visão.</li>
+          <li><strong>Acessibilidade</strong>: modos sentados, legendas espaciais e alternativas a movimentos amplos.</li>
+        </ul>
+
+      </section>
+
+      <section class="content-section" id="projeto" aria-labelledby="projeto-titulo">
+        <h2 id="projeto-titulo"><span class="section-number">06</span> Como escolher as modalidades</h2>
+
+        <p>A tecnologia disponível não deve ser o ponto de partida. Relacione a modalidade ao contexto:</p>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Contexto de uso e modalidades mais adequadas</caption>
+            <thead><tr><th scope="col">Situação</th><th scope="col">Modalidade favorecida</th><th scope="col">Evitar</th></tr></thead>
+            <tbody>
+              <tr><td>Mãos ocupadas (oficina, cozinha, cirurgia)</td><td>Voz, pedal, olhar</td><td>Toque em tela</td></tr>
+              <tr><td>Ambiente ruidoso (fábrica, rua)</td><td>Toque, botões físicos, háptico</td><td>Voz como único canal</td></tr>
+              <tr><td>Espaço público, informação sensível</td><td>Toque, teclado</td><td>Voz e saída sonora</td></tr>
+              <tr><td>Olhos ocupados (dirigir)</td><td>Voz, controles físicos com feedback tátil</td><td>Telas com muitos níveis de menu</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Qualquer que seja a escolha, cada modalidade precisa de <strong>feedback no seu próprio canal</strong> e de um
+          <strong>caminho alternativo</strong> quando falha.
+        </p>
+
+      </section>
+
+      <section class="content-section" id="atividade" aria-labelledby="atividade-titulo">
+        <h2 id="atividade-titulo"><span class="section-number">07</span> Atividade prática</h2>
+
+        <div class="callout callout-activity">
+          <span class="callout-label">Atividade</span>
+          <p>
+            Um técnico de manutenção precisa consultar o manual de uma máquina enquanto segura ferramentas, em um galpão
+            barulhento. Em grupos:
+          </p>
+          <ol>
+            <li>Proponha uma combinação de modalidades de entrada e saída e classifique-a pelas propriedades CARE.</li>
+            <li>Descreva três situações de erro (reconhecimento falho, gesto acidental etc.) e como o sistema se recupera.</li>
+            <li>Indique qual alternativa existe para um técnico com deficiência auditiva.</li>
+          </ol>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="relevancia" aria-labelledby="relevancia-titulo">
+        <h2 id="relevancia-titulo"><span class="section-number">08</span> Relevância para a Engenharia de Computação</h2>
+        <div class="callout callout-connection">
+          <span class="callout-label">🔗 Conexão com a sua formação</span>
+          <p>
+            Interfaces multimodais são, antes de tudo, problemas de sensores, processamento de sinais e sistemas de tempo
+            real: captura de áudio com microfones em matriz, visão computacional para gestos, fusão de dados de IMUs e
+            orçamento de latência. Com modelos de IA rodando no próprio dispositivo (<em>edge AI</em>), o engenheiro de
+            computação decide o que processar localmente, com impacto em privacidade, consumo de energia e tempo de resposta.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section" id="aprofundar" aria-labelledby="aprofundar-titulo">
+        <h2 id="aprofundar-titulo"><span class="section-number">09</span> Para aprofundar</h2>
+        <div class="callout callout-reading">
+          <span class="callout-label">Referências e leituras recomendadas</span>
+          <ul class="reading-list">
+            <li>PREECE, J.; ROGERS, Y.; SHARP, H. <em>Design de Interação</em>. Bookman (capítulo sobre interfaces: voz, gestos, RV e RA).</li>
+            <li>BOLT, R. A. “Put-that-there”: voice and gesture at the graphics interface. <em>ACM SIGGRAPH</em>, 1980.</li>
+            <li>COUTAZ, J. et al. Four easy pieces for assessing the usability of multimodal interaction: the CARE properties. <em>INTERACT</em>, 1995.</li>
+            <li>JACOB, R. J. K. What you look at is what you get: eye movement-based interaction techniques. <em>CHI</em>, 1990.</li>
+            <li>MILGRAM, P.; KISHINO, F. A taxonomy of mixed reality visual displays. <em>IEICE Transactions on Information and Systems</em>, 1994.</li>
+          </ul>
+        </div>
+
+        <h3>Palavras-chave deste tópico</h3>
+        <div class="keyword-tags" aria-label="Palavras-chave do tópico">
+          <span class="keyword-tag">Multimodalidade</span>
+          <span class="keyword-tag">Interface de voz</span>
+          <span class="keyword-tag">Gestos</span>
+          <span class="keyword-tag">Rastreamento ocular</span>
+          <span class="keyword-tag">Realidade virtual</span>
+          <span class="keyword-tag">Realidade aumentada</span>
+          <span class="keyword-tag">CARE</span>
+          <span class="keyword-tag">Cybersickness</span>
+        </div>
+      </section>
+
+      <nav class="lesson-nav" aria-label="Navegação entre tópicos">
+        <a class="lesson-nav-link prev" href="estilos-dispositivos-interacao.html" rel="prev">
+          <span class="lesson-nav-label">← Tópico anterior</span>
+          <span class="lesson-nav-title">Estilos de interação e dispositivos de entrada/saída</span>
+        </a>
+        <a class="lesson-nav-link next" href="projeto-problema-escopo.html" rel="next">
+          <span class="lesson-nav-label">Próximo tópico →</span>
+          <span class="lesson-nav-title">Projeto: problema e escopo</span>
+        </a>
+      </nav>
+
+    </main>
+
+    <aside class="toc" aria-labelledby="toc-titulo">
+      <h2 id="toc-titulo">Neste tópico</h2>
+      <ol>
+        <li><a href="#o-que-e">O que é interação multimodal?</a></li>
+        <li><a href="#voz">Interfaces de voz e linguagem natural</a></li>
+        <li><a href="#gestos">Gestos</a></li>
+        <li><a href="#olhar">Interação pelo olhar</a></li>
+        <li><a href="#rv-ra">Realidade virtual, aumentada e mista</a></li>
+        <li><a href="#projeto">Como escolher as modalidades</a></li>
+        <li><a href="#atividade">Atividade prática</a></li>
+        <li><a href="#relevancia">Relevância para a computação</a></li>
+        <li><a href="#aprofundar">Para aprofundar</a></li>
+      </ol>
+      <p class="toc-progress">Tópico 6 de 24 · Técnicas de interação</p>
+    </aside>
+
+  </div>
+</div>
+
+<footer>
+  <p>Interface Homem-Computador (CPA1469) · Instituto Federal Catarinense · Semestre 2026.2</p>
+  <p>Material de estudo atualizado no decorrer do semestre. Salve o link e retorne sempre que quiser revisar.</p>
+</footer>
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Voltar ao topo da página">↑</button>
+
+<script>
+  (function () {
+    var backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function () {
+      backToTop.classList.toggle('is-visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Usabilidade e experiência do usuário | IHC – IFC</title>
+<meta name="description" content="Usabilidade (ISO 9241-11) e experiência do usuário: atributos de Nielsen, UX pragmática e hedônica, comunicabilidade e padrões enganosos.">
+<meta name="keywords" content="Usabilidade, ISO 9241-11, Experiência do usuário, Eficácia, Eficiência, Satisfação, Comunicabilidade, Padrões enganosos, Dark patterns, IHC, Interface Homem-Computador, CPA1469">
+<meta name="author" content="Wilcilene">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0284c7">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/usabilidade-e-ux.html">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="IHC – Instituto Federal Catarinense">
+<meta property="og:title" content="Usabilidade e experiência do usuário — IHC">
+<meta property="og:description" content="Usabilidade (ISO 9241-11) e experiência do usuário: atributos de Nielsen, UX pragmática e hedônica, comunicabilidade e padrões enganosos.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/usabilidade-e-ux.html">
+<meta property="og:image" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/media/og-image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Usabilidade e experiência do usuário — IHC">
+<meta name="twitter:description" content="Usabilidade (ISO 9241-11) e experiência do usuário: atributos de Nielsen, UX pragmática e hedônica, comunicabilidade e padrões enganosos.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="topicos.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/usabilidade-e-ux.html#recurso",
+      "name": "Usabilidade e experiência do usuário",
+      "headline": "Usabilidade e experiência do usuário",
+      "description": "Usabilidade (ISO 9241-11) e experiência do usuário: atributos de Nielsen, UX pragmática e hedônica, comunicabilidade e padrões enganosos.",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/usabilidade-e-ux.html",
+      "inLanguage": "pt-BR",
+      "learningResourceType": "Material de aula",
+      "educationalLevel": "Ensino superior",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student"
+      },
+      "keywords": "Usabilidade, ISO 9241-11, Experiência do usuário, Eficácia, Eficiência, Satisfação, Comunicabilidade, Padrões enganosos, Dark patterns",
+      "dateModified": "2026-09-30",
+      "author": {
+        "@type": "Person",
+        "name": "Wilcilene"
+      },
+      "publisher": {
+        "@type": "CollegeOrUniversity",
+        "name": "Instituto Federal Catarinense",
+        "url": "https://www.ifc.edu.br/"
+      },
+      "isPartOf": {
+        "@type": "Course",
+        "name": "Interface Homem-Computador",
+        "courseCode": "CPA1469",
+        "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "IHC – CPA1469",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Usabilidade e experiência do usuário",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/usabilidade-e-ux.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<div class="page">
+
+  <nav aria-label="Trilha de navegação">
+    <a class="breadcrumb" href="../index.html">
+      <span class="breadcrumb-arrow" aria-hidden="true">←</span>
+      IHC · 2026.2 · voltar ao índice da disciplina
+    </a>
+  </nav>
+
+  <header class="lesson-header">
+    <span class="badge">
+      <span class="badge-dot" aria-hidden="true"></span>
+      Usabilidade e acessibilidade · 18/11
+    </span>
+
+    <h1>Usabilidade e experiência do usuário</h1>
+
+    <p class="lesson-intro">
+      Usabilidade e experiência do usuário são termos usados o tempo todo, muitas vezes como sinônimos. Nesta aula vamos defini-los com precisão, conhecer os atributos que permitem avaliá-los, entender outras dimensões da qualidade de uso e discutir o lado ético: interfaces projetadas para enganar.
+    </p>
+
+    <div class="lesson-meta">
+      <span class="pill">Usabilidade e acessibilidade</span>
+      <span class="pill">Nível intermediário</span>
+      <span class="pill">Aula: 18/11</span>
+    </div>
+  </header>
+
+  <section class="summary-card" aria-labelledby="pontos-principais">
+    <h2 id="pontos-principais">Principais pontos</h2>
+    <ul class="summary-list">
+      <li>Definir usabilidade segundo a ISO 9241-11: eficácia, eficiência e satisfação.</li>
+      <li>Aplicar os cinco atributos de usabilidade de Nielsen.</li>
+      <li>Diferenciar qualidades pragmáticas e hedônicas da experiência.</li>
+      <li>Relacionar usabilidade, UX, acessibilidade e comunicabilidade.</li>
+      <li>Reconhecer padrões enganosos e suas implicações éticas e legais.</li>
+    </ul>
+  </section>
+
+  <div class="page-grid">
+
+    <main id="conteudo" class="content" tabindex="-1">
+
+      <section class="content-section" id="usabilidade" aria-labelledby="usabilidade-titulo">
+        <h2 id="usabilidade-titulo"><span class="section-number">01</span> O que é usabilidade</h2>
+
+        <p>
+          A norma ISO 9241-11 define usabilidade como o grau em que um sistema pode ser usado por usuários específicos para
+          alcançar objetivos específicos com <strong>eficácia</strong>, <strong>eficiência</strong> e <strong>satisfação</strong>
+          em um <strong>contexto de uso</strong> específico.
+        </p>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Componentes da usabilidade e como medi-los</caption>
+            <thead><tr><th scope="col">Componente</th><th scope="col">Pergunta</th><th scope="col">Exemplo de medida</th></tr></thead>
+            <tbody>
+              <tr><td>Eficácia</td><td>A pessoa conseguiu?</td><td>Taxa de conclusão da tarefa; completude do resultado.</td></tr>
+              <tr><td>Eficiência</td><td>Com quanto esforço?</td><td>Tempo, número de passos, erros.</td></tr>
+              <tr><td>Satisfação</td><td>Como se sentiu?</td><td>Questionários como o SUS; comentários.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted">A parte final da definição é essencial: um sistema não é “usável” em abstrato, mas para certas pessoas, tarefas e contextos.</p>
+
+      </section>
+
+      <section class="content-section" id="atributos-nielsen" aria-labelledby="atributos-nielsen-titulo">
+        <h2 id="atributos-nielsen-titulo"><span class="section-number">02</span> Os atributos de Nielsen</h2>
+
+        <ul>
+          <li><strong>Facilidade de aprendizado</strong>: quão rápido alguém realiza tarefas básicas no primeiro contato.</li>
+          <li><strong>Eficiência de uso</strong>: produtividade de quem já aprendeu.</li>
+          <li><strong>Facilidade de memorização</strong>: quão fácil é voltar a usar depois de um tempo sem uso.</li>
+          <li><strong>Erros</strong>: quantos acontecem, quão graves são e quão fácil é se recuperar.</li>
+          <li><strong>Satisfação</strong>: quão agradável é o uso.</li>
+        </ul>
+        <p>
+          Os atributos podem entrar em conflito. Um sistema de uso diário por especialistas pode sacrificar um pouco da
+          facilidade de aprendizado em troca de eficiência (atalhos, densidade de informação). Um quiosque de autoatendimento
+          faz a escolha oposta. Por isso, os perfis vistos em <a href="tipos-de-usuarios.html">tipos de usuários</a> definem as prioridades.
+        </p>
+
+      </section>
+
+      <section class="content-section" id="ux" aria-labelledby="ux-titulo">
+        <h2 id="ux-titulo"><span class="section-number">03</span> Experiência do usuário</h2>
+
+        <p>
+          A ISO 9241-210 define UX como as percepções e respostas de uma pessoa resultantes do uso <em>ou do uso antecipado</em>
+          de um produto, sistema ou serviço. A UX começa antes do uso (expectativas, reputação) e continua depois (lembrança,
+          vontade de voltar).
+        </p>
+        <p>Marc Hassenzahl distingue duas qualidades percebidas:</p>
+        <ul>
+          <li><strong>Pragmáticas</strong>: ligadas a realizar tarefas (útil, claro, controlável).</li>
+          <li><strong>Hedônicas</strong>: ligadas a estímulo, identidade e prazer (original, bonito, que expressa quem sou).</li>
+        </ul>
+        <p>
+          O “favo de mel” de Peter Morville resume facetas desejáveis da UX: <strong>útil</strong>, <strong>usável</strong>,
+          <strong>desejável</strong>, <strong>encontrável</strong>, <strong>acessível</strong>, <strong>confiável</strong> e
+          <strong>valioso</strong>.
+        </p>
+
+      </section>
+
+      <section class="content-section" id="comparacao" aria-labelledby="comparacao-titulo">
+        <h2 id="comparacao-titulo"><span class="section-number">04</span> Usabilidade x UX</h2>
+
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Diferenças de foco</caption>
+            <thead><tr><th scope="col">Aspecto</th><th scope="col">Usabilidade</th><th scope="col">UX</th></tr></thead>
+            <tbody>
+              <tr><td>Foco</td><td>Realização de tarefas</td><td>Experiência completa, incluindo emoções e significado</td></tr>
+              <tr><td>Tempo</td><td>Durante o uso</td><td>Antes, durante e depois do uso</td></tr>
+              <tr><td>Medidas típicas</td><td>Sucesso, tempo, erros, satisfação</td><td>Também atratividade, confiança, fidelidade, emoções</td></tr>
+              <tr><td>Relação</td><td colspan="2">A usabilidade é uma condição necessária, mas não suficiente, para uma boa UX.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="qualidade-de-uso" aria-labelledby="qualidade-de-uso-titulo">
+        <h2 id="qualidade-de-uso-titulo"><span class="section-number">05</span> Qualidade de uso e comunicabilidade</h2>
+
+        <p>
+          Barbosa e Silva agrupam sob o termo <strong>qualidade de uso</strong> quatro critérios: usabilidade, experiência do
+          usuário, acessibilidade e comunicabilidade. A <strong>comunicabilidade</strong> vem da Engenharia Semiótica, teoria de
+          IHC desenvolvida no Brasil por Clarisse de Souza, que vê a interface como uma mensagem do designer para o usuário:
+          uma interface com boa comunicabilidade transmite com clareza a lógica de quem a projetou, ou seja, para que ela
+          serve, como funciona e por que foi feita daquele jeito.
+        </p>
+
+      </section>
+
+      <section class="content-section" id="dark-patterns" aria-labelledby="dark-patterns-titulo">
+        <h2 id="dark-patterns-titulo"><span class="section-number">06</span> O lado escuro: padrões enganosos</h2>
+
+        <p>
+          Harry Brignull cunhou em 2010 o termo <em>dark patterns</em>, hoje chamados de <strong>padrões enganosos</strong>
+          (<em>deceptive patterns</em>): interfaces projetadas para levar a pessoa a fazer algo que ela não faria se
+          entendesse o que está acontecendo. Exemplos:
+        </p>
+        <ul>
+          <li><strong>Fácil de entrar, difícil de sair</strong>: assinatura em um clique, cancelamento só por telefone.</li>
+          <li><strong>Itens incluídos às escondidas</strong>: seguro adicionado automaticamente ao carrinho.</li>
+          <li><strong>Constrangimento na recusa</strong>: “Não, prefiro pagar mais caro”.</li>
+          <li><strong>Urgência falsa</strong>: contadores regressivos que reiniciam a cada visita.</li>
+          <li><strong>Consentimento induzido</strong>: “Aceitar tudo” em destaque e opções de privacidade escondidas.</li>
+        </ul>
+        <div class="callout callout-reflection">
+          <span class="callout-label">Ética e legislação</span>
+          <p>
+            Usabilidade a serviço de enganar continua sendo manipulação. No Brasil, a LGPD exige consentimento livre, informado
+            e inequívoco, e o Código de Defesa do Consumidor proíbe práticas enganosas; padrões como os acima podem violar ambos.
+            Quem projeta e implementa essas interfaces também é responsável por elas.
+          </p>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="atividade" aria-labelledby="atividade-titulo">
+        <h2 id="atividade-titulo"><span class="section-number">07</span> Atividade prática</h2>
+
+        <div class="callout callout-activity">
+          <span class="callout-label">Atividade</span>
+          <ol>
+            <li>Escolha um serviço de assinatura e percorra os fluxos de contratação e de cancelamento. Compare número de passos, clareza e padrões enganosos encontrados.</li>
+            <li>Para o seu projeto, ordene os cinco atributos de Nielsen por prioridade e justifique com base nas personas.</li>
+            <li>Defina uma meta mensurável de eficácia, uma de eficiência e uma de satisfação para a avaliação final.</li>
+          </ol>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="relevancia" aria-labelledby="relevancia-titulo">
+        <h2 id="relevancia-titulo"><span class="section-number">08</span> Relevância para a Engenharia de Computação</h2>
+        <div class="callout callout-connection">
+          <span class="callout-label">🔗 Conexão com a sua formação</span>
+          <p>
+            Requisitos de usabilidade podem e devem ser especificados como requisitos não funcionais verificáveis (“80% dos
+            novos usuários concluem a reserva em até 2 minutos sem ajuda”), no mesmo nível de requisitos de desempenho e
+            segurança. A norma ISO/IEC 25010, de qualidade de produto de software, inclui a usabilidade (hoje chamada de
+            capacidade de interação) entre suas características de qualidade.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section" id="aprofundar" aria-labelledby="aprofundar-titulo">
+        <h2 id="aprofundar-titulo"><span class="section-number">09</span> Para aprofundar</h2>
+        <div class="callout callout-reading">
+          <span class="callout-label">Referências e leituras recomendadas</span>
+          <ul class="reading-list">
+            <li>ISO 9241-11:2018. <em>Ergonomics of human-system interaction — Part 11: Usability: Definitions and concepts</em>.</li>
+            <li>NIELSEN, J. <em>Usability Engineering</em>. Morgan Kaufmann, 1993.</li>
+            <li>HASSENZAHL, M. The thing and I: understanding the relationship between user and product. In: <em>Funology</em>. Kluwer, 2003.</li>
+            <li>DE SOUZA, C. S. <em>The Semiotic Engineering of Human-Computer Interaction</em>. MIT Press, 2005.</li>
+            <li>BRIGNULL, H. <em>Deceptive Patterns</em>. Testimonium, 2023.</li>
+            <li>BARBOSA, S. D. J.; SILVA, B. S. <em>Interação Humano-Computador</em>. Elsevier, 2010 (cap. 2, qualidade de uso).</li>
+          </ul>
+        </div>
+
+        <h3>Palavras-chave deste tópico</h3>
+        <div class="keyword-tags" aria-label="Palavras-chave do tópico">
+          <span class="keyword-tag">Usabilidade</span>
+          <span class="keyword-tag">ISO 9241-11</span>
+          <span class="keyword-tag">Experiência do usuário</span>
+          <span class="keyword-tag">Eficácia</span>
+          <span class="keyword-tag">Eficiência</span>
+          <span class="keyword-tag">Satisfação</span>
+          <span class="keyword-tag">Comunicabilidade</span>
+          <span class="keyword-tag">Padrões enganosos</span>
+          <span class="keyword-tag">Dark patterns</span>
+        </div>
+      </section>
+
+      <nav class="lesson-nav" aria-label="Navegação entre tópicos">
+        <a class="lesson-nav-link prev" href="fluxos-interacao-notacao-tarefas.html" rel="prev">
+          <span class="lesson-nav-label">← Tópico anterior</span>
+          <span class="lesson-nav-title">Fluxos de interação, mapas de navegação e notação de tarefas</span>
+        </a>
+        <a class="lesson-nav-link next" href="heuristicas-usabilidade.html" rel="next">
+          <span class="lesson-nav-label">Próximo tópico →</span>
+          <span class="lesson-nav-title">Heurísticas de usabilidade</span>
+        </a>
+      </nav>
+
+    </main>
+
+    <aside class="toc" aria-labelledby="toc-titulo">
+      <h2 id="toc-titulo">Neste tópico</h2>
+      <ol>
+        <li><a href="#usabilidade">O que é usabilidade</a></li>
+        <li><a href="#atributos-nielsen">Os atributos de Nielsen</a></li>
+        <li><a href="#ux">Experiência do usuário</a></li>
+        <li><a href="#comparacao">Usabilidade x UX</a></li>
+        <li><a href="#qualidade-de-uso">Qualidade de uso e comunicabilidade</a></li>
+        <li><a href="#dark-patterns">Padrões enganosos</a></li>
+        <li><a href="#atividade">Atividade prática</a></li>
+        <li><a href="#relevancia">Relevância para a computação</a></li>
+        <li><a href="#aprofundar">Para aprofundar</a></li>
+      </ol>
+      <p class="toc-progress">Tópico 18 de 24 · Usabilidade e acessibilidade</p>
+    </aside>
+
+  </div>
+</div>
+
+<footer>
+  <p>Interface Homem-Computador (CPA1469) · Instituto Federal Catarinense · Semestre 2026.2</p>
+  <p>Material de estudo atualizado no decorrer do semestre. Salve o link e retorne sempre que quiser revisar.</p>
+</footer>
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Voltar ao topo da página">↑</button>
+
+<script>
+  (function () {
+    var backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function () {
+      backToTop.classList.toggle('is-visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>

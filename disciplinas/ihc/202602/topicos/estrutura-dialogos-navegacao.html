@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estrutura de diálogos e navegação | IHC – IFC</title>
+<meta name="description" content="Estrutura de diálogos e navegação: iniciativa do diálogo, arquitetura da informação, card sorting, menus (largura x profundidade), padrões de navegação e diálogos modais.">
+<meta name="keywords" content="Diálogo, Iniciativa, Arquitetura da informação, Card sorting, Tree testing, Menus, Padrões de navegação, Máquina de estados, Modal, IHC, Interface Homem-Computador, CPA1469">
+<meta name="author" content="Wilcilene">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0284c7">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/estrutura-dialogos-navegacao.html">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="IHC – Instituto Federal Catarinense">
+<meta property="og:title" content="Estrutura de diálogos e navegação — IHC">
+<meta property="og:description" content="Estrutura de diálogos e navegação: iniciativa do diálogo, arquitetura da informação, card sorting, menus (largura x profundidade), padrões de navegação e diálogos modais.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/estrutura-dialogos-navegacao.html">
+<meta property="og:image" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/media/og-image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Estrutura de diálogos e navegação — IHC">
+<meta name="twitter:description" content="Estrutura de diálogos e navegação: iniciativa do diálogo, arquitetura da informação, card sorting, menus (largura x profundidade), padrões de navegação e diálogos modais.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="topicos.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/estrutura-dialogos-navegacao.html#recurso",
+      "name": "Estrutura de diálogos e navegação",
+      "headline": "Estrutura de diálogos e navegação",
+      "description": "Estrutura de diálogos e navegação: iniciativa do diálogo, arquitetura da informação, card sorting, menus (largura x profundidade), padrões de navegação e diálogos modais.",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/estrutura-dialogos-navegacao.html",
+      "inLanguage": "pt-BR",
+      "learningResourceType": "Material de aula",
+      "educationalLevel": "Ensino superior",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student"
+      },
+      "keywords": "Diálogo, Iniciativa, Arquitetura da informação, Card sorting, Tree testing, Menus, Padrões de navegação, Máquina de estados, Modal",
+      "dateModified": "2026-09-30",
+      "author": {
+        "@type": "Person",
+        "name": "Wilcilene"
+      },
+      "publisher": {
+        "@type": "CollegeOrUniversity",
+        "name": "Instituto Federal Catarinense",
+        "url": "https://www.ifc.edu.br/"
+      },
+      "isPartOf": {
+        "@type": "Course",
+        "name": "Interface Homem-Computador",
+        "courseCode": "CPA1469",
+        "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "IHC – CPA1469",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Estrutura de diálogos e navegação",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/estrutura-dialogos-navegacao.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<div class="page">
+
+  <nav aria-label="Trilha de navegação">
+    <a class="breadcrumb" href="../index.html">
+      <span class="breadcrumb-arrow" aria-hidden="true">←</span>
+      IHC · 2026.2 · voltar ao índice da disciplina
+    </a>
+  </nav>
+
+  <header class="lesson-header">
+    <span class="badge">
+      <span class="badge-dot" aria-hidden="true"></span>
+      Diálogos · 29/10
+    </span>
+
+    <h1>Estrutura de diálogos e navegação</h1>
+
+    <p class="lesson-intro">
+      Toda interface é uma conversa em turnos: a pessoa age, o sistema responde, e assim por diante. Nesta aula vamos estudar como estruturar essa conversa: quem tem a iniciativa, como organizar a informação e os menus, quais padrões de navegação usar e como representar o diálogo antes de construí-lo.
+    </p>
+
+    <div class="lesson-meta">
+      <span class="pill">Diálogos</span>
+      <span class="pill">Nível intermediário</span>
+      <span class="pill">Aula: 29/10</span>
+    </div>
+  </header>
+
+  <section class="summary-card" aria-labelledby="pontos-principais">
+    <h2 id="pontos-principais">Principais pontos</h2>
+    <ul class="summary-list">
+      <li>Caracterizar diálogos com iniciativa do sistema, do usuário ou mista.</li>
+      <li>Aplicar os componentes da arquitetura da informação e o card sorting.</li>
+      <li>Equilibrar largura e profundidade de menus.</li>
+      <li>Escolher padrões de navegação adequados à plataforma e ao conteúdo.</li>
+      <li>Representar diálogos como estados e transições e usar modais com critério.</li>
+    </ul>
+  </section>
+
+  <div class="page-grid">
+
+    <main id="conteudo" class="content" tabindex="-1">
+
+      <section class="content-section" id="dialogo" aria-labelledby="dialogo-titulo">
+        <h2 id="dialogo-titulo"><span class="section-number">01</span> O diálogo humano-computador</h2>
+
+        <p>
+          Chamamos de <strong>diálogo</strong> a troca estruturada de turnos entre a pessoa e o sistema. Um aspecto central é
+          a <strong>iniciativa</strong>:
+        </p>
+        <ul>
+          <li><strong>Iniciativa do sistema</strong>: o sistema conduz, perguntando uma coisa por vez (assistente de instalação, URA telefônica). Bom para iniciantes e tarefas raras; frustrante para experientes.</li>
+          <li><strong>Iniciativa do usuário</strong>: a pessoa decide o que fazer e em que ordem (planilha, editor de texto). Flexível, mas exige saber o que se quer.</li>
+          <li><strong>Iniciativa mista</strong>: o sistema sugere e a pessoa pode desviar a qualquer momento (busca com sugestões, chatbots bem projetados).</li>
+        </ul>
+
+      </section>
+
+      <section class="content-section" id="arquitetura-informacao" aria-labelledby="arquitetura-informacao-titulo">
+        <h2 id="arquitetura-informacao-titulo"><span class="section-number">02</span> Arquitetura da informação</h2>
+
+        <p>Rosenfeld e Morville descrevem a arquitetura da informação em quatro sistemas:</p>
+        <ul>
+          <li><strong>Organização</strong>: como o conteúdo é agrupado (por tarefa, público, tema, data, ordem alfabética).</li>
+          <li><strong>Rotulagem</strong>: como cada grupo é nomeado.</li>
+          <li><strong>Navegação</strong>: como a pessoa se desloca entre os grupos.</li>
+          <li><strong>Busca</strong>: como encontra algo diretamente.</li>
+        </ul>
+        <h3>Card sorting e tree testing</h3>
+        <p>
+          No <strong>card sorting</strong>, participantes agrupam cartões com os conteúdos do sistema. No formato
+          <em>aberto</em>, criam os grupos e dão nomes a eles, revelando seus modelos mentais; no <em>fechado</em>, distribuem os
+          cartões em categorias já definidas, validando uma proposta. O <strong>tree testing</strong> faz o caminho inverso:
+          apresenta apenas a hierarquia de menus, sem visual, e pede que a pessoa encontre onde está algo.
+        </p>
+
+      </section>
+
+      <section class="content-section" id="menus" aria-labelledby="menus-titulo">
+        <h2 id="menus-titulo"><span class="section-number">03</span> Menus: largura, profundidade e ordem</h2>
+
+        <p>
+          Um mesmo conjunto de opções pode ser organizado de forma <strong>larga e rasa</strong> (muitas opções por nível,
+          poucos níveis) ou <strong>estreita e profunda</strong>. Estudos clássicos de navegação em menus indicam que,
+          em geral, hierarquias mais largas e rasas levam a menos erros de navegação, desde que as opções de cada nível
+          estejam bem agrupadas e rotuladas. Cada nível extra é mais uma decisão e mais uma chance de a pessoa se perder.
+        </p>
+        <p>
+          Isso não contradiz a Lei de Hick: o tempo de decisão cresce com o número de opções, mas de forma logarítmica, e
+          opções bem agrupadas são escaneadas por bloco, não uma a uma.
+        </p>
+        <ul>
+          <li><strong>Ordem por frequência</strong>: para ações muito usadas.</li>
+          <li><strong>Ordem por categoria</strong>: quando há grupos naturais.</li>
+          <li><strong>Ordem alfabética</strong>: para listas longas de nomes conhecidos (países, cursos).</li>
+          <li><strong>Ordem convencional</strong>: quando existe expectativa (dias da semana, tamanhos P, M, G).</li>
+        </ul>
+
+      </section>
+
+      <section class="content-section" id="padroes-navegacao" aria-labelledby="padroes-navegacao-titulo">
+        <h2 id="padroes-navegacao-titulo"><span class="section-number">04</span> Padrões de navegação</h2>
+
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Padrões de navegação e seus usos</caption>
+            <thead><tr><th scope="col">Padrão</th><th scope="col">Quando usar</th><th scope="col">Cuidados</th></tr></thead>
+            <tbody>
+              <tr><td>Barra de navegação superior</td><td>Sites com poucas seções principais.</td><td>Rótulos curtos; não esconder seções importantes em “Mais”.</td></tr>
+              <tr><td>Navegação inferior (mobile)</td><td>Três a cinco destinos principais usados com frequência.</td><td>Sempre visível; ícone acompanhado de texto.</td></tr>
+              <tr><td>Menu “hambúrguer”</td><td>Muitos destinos secundários em telas pequenas.</td><td>Baixa descobribilidade: o que está escondido é menos usado.</td></tr>
+              <tr><td>Abas</td><td>Alternar entre visões do mesmo conteúdo.</td><td>Poucas abas; a aba ativa deve ser evidente.</td></tr>
+              <tr><td>Breadcrumb</td><td>Hierarquias com vários níveis.</td><td>Complementa, não substitui, a navegação principal.</td></tr>
+              <tr><td>Stepper (etapas)</td><td>Processos lineares (checkout, cadastro).</td><td>Indicar etapa atual e total; permitir voltar sem perder dados.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          A navegação pode ser <strong>global</strong> (presente em todo o sistema), <strong>local</strong> (dentro de uma seção)
+          ou <strong>contextual</strong> (links dentro do conteúdo, como “veja também”). As três devem ser consistentes entre si.
+        </p>
+
+      </section>
+
+      <section class="content-section" id="estados-modais" aria-labelledby="estados-modais-titulo">
+        <h2 id="estados-modais-titulo"><span class="section-number">05</span> Diálogos como estados e o uso de modais</h2>
+
+        <p>
+          Um diálogo pode ser representado como uma <strong>máquina de estados</strong>: cada estado é o que o sistema está
+          mostrando ou esperando; cada transição é disparada por uma ação da pessoa ou por um evento do sistema.
+        </p>
+        <pre><code>[Login vazio] --digita dados--> [Preenchido]
+[Preenchido]  --envia-->        [Verificando]
+[Verificando] --sucesso-->      [Painel inicial]
+[Verificando] --credenciais inválidas--> [Erro de login] (dados mantidos)
+[Verificando] --sem conexão-->  [Erro de rede] --tentar de novo--> [Verificando]</code></pre>
+        <p>Representar assim revela estados esquecidos, como a falta de conexão, antes de qualquer tela ser desenhada.</p>
+        <h3>Diálogos modais</h3>
+        <p>
+          Uma janela modal bloqueia o resto da interface até ser respondida. Use-a para decisões que exigem atenção imediata
+          (confirmar exclusão definitiva), não para informações que poderiam aparecer na própria página. Modais precisam
+          prender o foco do teclado dentro deles, fechar com <kbd>Esc</kbd> e devolver o foco ao elemento de origem; o
+          elemento HTML <code>&lt;dialog&gt;</code> com <code>showModal()</code> já oferece boa parte desse comportamento.
+        </p>
+
+      </section>
+
+      <section class="content-section" id="atividade" aria-labelledby="atividade-titulo">
+        <h2 id="atividade-titulo"><span class="section-number">06</span> Atividade prática</h2>
+
+        <div class="callout callout-activity">
+          <span class="callout-label">Atividade</span>
+          <ol>
+            <li>Liste de 20 a 30 conteúdos ou funções do seu projeto em cartões.</li>
+            <li>Realize um card sorting aberto com três pessoas de fora da equipe e compare os agrupamentos.</li>
+            <li>Proponha a estrutura de menus do projeto com base nos resultados e escolha o padrão de navegação.</li>
+            <li>Represente como máquina de estados o diálogo de uma tarefa principal, incluindo estados de erro.</li>
+          </ol>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="relevancia" aria-labelledby="relevancia-titulo">
+        <h2 id="relevancia-titulo"><span class="section-number">07</span> Relevância para a Engenharia de Computação</h2>
+        <div class="callout callout-connection">
+          <span class="callout-label">🔗 Conexão com a sua formação</span>
+          <p>
+            Em aplicações web modernas, a navegação é implementada por rotas, e cada URL representa um estado do diálogo. Uma
+            boa estrutura de navegação se reflete em URLs legíveis, histórico do navegador funcionando, links que podem ser
+            compartilhados e páginas mais bem indexadas pelos buscadores. Máquinas de estados, conteúdo clássico de sistemas
+            digitais, são usadas diretamente para modelar diálogos complexos.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section" id="aprofundar" aria-labelledby="aprofundar-titulo">
+        <h2 id="aprofundar-titulo"><span class="section-number">08</span> Para aprofundar</h2>
+        <div class="callout callout-reading">
+          <span class="callout-label">Referências e leituras recomendadas</span>
+          <ul class="reading-list">
+            <li>ROSENFELD, L.; MORVILLE, P.; ARANGO, J. <em>Information Architecture: For the Web and Beyond</em>. O'Reilly, 4. ed.</li>
+            <li>SPENCER, D. <em>Card Sorting: Designing Usable Categories</em>. Rosenfeld Media, 2009.</li>
+            <li>SHNEIDERMAN, B. et al. <em>Designing the User Interface</em>. Pearson (capítulo sobre menus).</li>
+            <li>BARBOSA, S. D. J.; SILVA, B. S. <em>Interação Humano-Computador</em>. Elsevier, 2010 (modelagem da interação).</li>
+          </ul>
+        </div>
+
+        <h3>Palavras-chave deste tópico</h3>
+        <div class="keyword-tags" aria-label="Palavras-chave do tópico">
+          <span class="keyword-tag">Diálogo</span>
+          <span class="keyword-tag">Iniciativa</span>
+          <span class="keyword-tag">Arquitetura da informação</span>
+          <span class="keyword-tag">Card sorting</span>
+          <span class="keyword-tag">Tree testing</span>
+          <span class="keyword-tag">Menus</span>
+          <span class="keyword-tag">Padrões de navegação</span>
+          <span class="keyword-tag">Máquina de estados</span>
+          <span class="keyword-tag">Modal</span>
+        </div>
+      </section>
+
+      <nav class="lesson-nav" aria-label="Navegação entre tópicos">
+        <a class="lesson-nav-link prev" href="estudos-caso-falhas-ihc.html" rel="prev">
+          <span class="lesson-nav-label">← Tópico anterior</span>
+          <span class="lesson-nav-title">Estudos de caso em IHC: falhas clássicas</span>
+        </a>
+        <a class="lesson-nav-link next" href="tipos-dialogo-feedback.html" rel="next">
+          <span class="lesson-nav-label">Próximo tópico →</span>
+          <span class="lesson-nav-title">Tipos de diálogo e feedback ao usuário</span>
+        </a>
+      </nav>
+
+    </main>
+
+    <aside class="toc" aria-labelledby="toc-titulo">
+      <h2 id="toc-titulo">Neste tópico</h2>
+      <ol>
+        <li><a href="#dialogo">O diálogo humano-computador</a></li>
+        <li><a href="#arquitetura-informacao">Arquitetura da informação</a></li>
+        <li><a href="#menus">Menus: largura, profundidade e ordem</a></li>
+        <li><a href="#padroes-navegacao">Padrões de navegação</a></li>
+        <li><a href="#estados-modais">Estados e modais</a></li>
+        <li><a href="#atividade">Atividade prática</a></li>
+        <li><a href="#relevancia">Relevância para a computação</a></li>
+        <li><a href="#aprofundar">Para aprofundar</a></li>
+      </ol>
+      <p class="toc-progress">Tópico 14 de 24 · Diálogos</p>
+    </aside>
+
+  </div>
+</div>
+
+<footer>
+  <p>Interface Homem-Computador (CPA1469) · Instituto Federal Catarinense · Semestre 2026.2</p>
+  <p>Material de estudo atualizado no decorrer do semestre. Salve o link e retorne sempre que quiser revisar.</p>
+</footer>
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Voltar ao topo da página">↑</button>
+
+<script>
+  (function () {
+    var backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function () {
+      backToTop.classList.toggle('is-visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>

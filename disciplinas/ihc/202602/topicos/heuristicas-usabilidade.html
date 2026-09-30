@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heurísticas de usabilidade | IHC – IFC</title>
+<meta name="description" content="As dez heurísticas de usabilidade de Nielsen com exemplos, como conduzir uma avaliação heurística, escala de severidade e limitações do método.">
+<meta name="keywords" content="Heurísticas de Nielsen, Avaliação heurística, Inspeção, Severidade, Percurso cognitivo, Problemas de usabilidade, IHC, Interface Homem-Computador, CPA1469">
+<meta name="author" content="Wilcilene">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0284c7">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/heuristicas-usabilidade.html">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="IHC – Instituto Federal Catarinense">
+<meta property="og:title" content="Heurísticas de usabilidade — IHC">
+<meta property="og:description" content="As dez heurísticas de usabilidade de Nielsen com exemplos, como conduzir uma avaliação heurística, escala de severidade e limitações do método.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/heuristicas-usabilidade.html">
+<meta property="og:image" content="https://wilcilene.github.io/estudos/disciplinas/ihc/202602/media/og-image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Heurísticas de usabilidade — IHC">
+<meta name="twitter:description" content="As dez heurísticas de usabilidade de Nielsen com exemplos, como conduzir uma avaliação heurística, escala de severidade e limitações do método.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="topicos.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/heuristicas-usabilidade.html#recurso",
+      "name": "Heurísticas de usabilidade",
+      "headline": "Heurísticas de usabilidade",
+      "description": "As dez heurísticas de usabilidade de Nielsen com exemplos, como conduzir uma avaliação heurística, escala de severidade e limitações do método.",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/heuristicas-usabilidade.html",
+      "inLanguage": "pt-BR",
+      "learningResourceType": "Material de aula",
+      "educationalLevel": "Ensino superior",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student"
+      },
+      "keywords": "Heurísticas de Nielsen, Avaliação heurística, Inspeção, Severidade, Percurso cognitivo, Problemas de usabilidade",
+      "dateModified": "2026-09-30",
+      "author": {
+        "@type": "Person",
+        "name": "Wilcilene"
+      },
+      "publisher": {
+        "@type": "CollegeOrUniversity",
+        "name": "Instituto Federal Catarinense",
+        "url": "https://www.ifc.edu.br/"
+      },
+      "isPartOf": {
+        "@type": "Course",
+        "name": "Interface Homem-Computador",
+        "courseCode": "CPA1469",
+        "url": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "IHC – CPA1469",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Heurísticas de usabilidade",
+          "item": "https://wilcilene.github.io/estudos/disciplinas/ihc/202602/topicos/heuristicas-usabilidade.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<div class="page">
+
+  <nav aria-label="Trilha de navegação">
+    <a class="breadcrumb" href="../index.html">
+      <span class="breadcrumb-arrow" aria-hidden="true">←</span>
+      IHC · 2026.2 · voltar ao índice da disciplina
+    </a>
+  </nav>
+
+  <header class="lesson-header">
+    <span class="badge">
+      <span class="badge-dot" aria-hidden="true"></span>
+      Métodos de avaliação · 19/11
+    </span>
+
+    <h1>Heurísticas de usabilidade</h1>
+
+    <p class="lesson-intro">
+      A avaliação heurística é um dos métodos mais usados para encontrar problemas de usabilidade de forma rápida e barata, sem envolver usuários. Nesta aula vamos estudar as dez heurísticas de Nielsen com exemplos, aprender a conduzir uma avaliação completa, classificar a severidade dos problemas e reconhecer os limites do método.
+    </p>
+
+    <div class="lesson-meta">
+      <span class="pill">Métodos de avaliação</span>
+      <span class="pill">Nível intermediário</span>
+      <span class="pill">Aula: 19/11</span>
+    </div>
+  </header>
+
+  <section class="summary-card" aria-labelledby="pontos-principais">
+    <h2 id="pontos-principais">Principais pontos</h2>
+    <ul class="summary-list">
+      <li>Explicar as dez heurísticas de Nielsen com exemplos de violação.</li>
+      <li>Conduzir uma avaliação heurística com vários avaliadores.</li>
+      <li>Classificar problemas pela escala de severidade de 0 a 4.</li>
+      <li>Registrar problemas de forma rastreável e com recomendação.</li>
+      <li>Reconhecer limitações do método e alternativas como o percurso cognitivo.</li>
+    </ul>
+  </section>
+
+  <div class="page-grid">
+
+    <main id="conteudo" class="content" tabindex="-1">
+
+      <section class="content-section" id="o-que-e" aria-labelledby="o-que-e-titulo">
+        <h2 id="o-que-e-titulo"><span class="section-number">01</span> O que é avaliação heurística</h2>
+
+        <p>
+          Proposta por Jakob Nielsen e Rolf Molich em 1990, a <strong>avaliação heurística</strong> é um método de
+          <strong>inspeção</strong>: especialistas examinam a interface e julgam sua conformidade com um conjunto de princípios
+          reconhecidos, as heurísticas. Não envolve usuários e pode ser aplicada a protótipos em papel, wireframes ou
+          sistemas prontos, o que a torna útil desde cedo no projeto.
+        </p>
+
+      </section>
+
+      <section class="content-section" id="dez-heuristicas" aria-labelledby="dez-heuristicas-titulo">
+        <h2 id="dez-heuristicas-titulo"><span class="section-number">02</span> As dez heurísticas de Nielsen</h2>
+
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Heurísticas de usabilidade e exemplos de violação</caption>
+            <thead><tr><th scope="col">Heurística</th><th scope="col">Em resumo</th><th scope="col">Exemplo de violação</th></tr></thead>
+            <tbody>
+              <tr><td>1. Visibilidade do estado do sistema</td><td>Informar o que está acontecendo, em tempo razoável.</td><td>Upload sem nenhum indicador de progresso.</td></tr>
+              <tr><td>2. Correspondência entre o sistema e o mundo real</td><td>Falar a língua do usuário; seguir convenções do mundo real.</td><td>Menu “Gerenciar entidades” para cadastrar alunos.</td></tr>
+              <tr><td>3. Controle e liberdade do usuário</td><td>Oferecer “saídas de emergência”: desfazer, refazer, cancelar.</td><td>Assistente de cadastro sem botão de voltar.</td></tr>
+              <tr><td>4. Consistência e padrões</td><td>Mesmas palavras e ações significam a mesma coisa; seguir convenções da plataforma.</td><td>“Salvar”, “Gravar” e “Confirmar” para a mesma ação em telas diferentes.</td></tr>
+              <tr><td>5. Prevenção de erros</td><td>Eliminar condições propensas a erro ou pedir confirmação.</td><td>Campo de data livre que aceita “31/02”.</td></tr>
+              <tr><td>6. Reconhecimento em vez de recordação</td><td>Tornar visíveis objetos, ações e opções.</td><td>Exigir que a pessoa digite o código da disciplina de memória.</td></tr>
+              <tr><td>7. Flexibilidade e eficiência de uso</td><td>Aceleradores para experientes, sem atrapalhar iniciantes.</td><td>Nenhum atalho ou ação em lote em um sistema de uso diário.</td></tr>
+              <tr><td>8. Estética e design minimalista</td><td>Não incluir informação irrelevante ou raramente necessária.</td><td>Tela inicial com dezenas de avisos antigos acima da função principal.</td></tr>
+              <tr><td>9. Ajudar a reconhecer, diagnosticar e recuperar-se de erros</td><td>Mensagens em linguagem simples, precisas, com solução.</td><td>“Erro 0x80070005”.</td></tr>
+              <tr><td>10. Ajuda e documentação</td><td>Documentação fácil de buscar, focada na tarefa e concisa.</td><td>Manual em PDF de 200 páginas como única ajuda.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="como-aplicar" aria-labelledby="como-aplicar-titulo">
+        <h2 id="como-aplicar-titulo"><span class="section-number">03</span> Como conduzir a avaliação</h2>
+
+        <ol>
+          <li><strong>Preparação</strong>: defina o escopo (telas ou tarefas), o perfil dos usuários e as heurísticas a usar. Entregue aos avaliadores um roteiro das tarefas principais.</li>
+          <li><strong>Avaliação individual</strong>: cada avaliador percorre a interface pelo menos duas vezes: uma para entender o fluxo geral e outra para examinar cada elemento. Os avaliadores não conversam nesta fase, para não se influenciarem.</li>
+          <li><strong>Consolidação</strong>: os problemas são reunidos em uma lista única, eliminando duplicatas.</li>
+          <li><strong>Classificação de severidade</strong>: cada avaliador atribui severidade a todos os problemas da lista; usa-se a média ou a discussão até consenso.</li>
+          <li><strong>Relatório</strong>: problemas priorizados, com recomendação de correção.</li>
+        </ol>
+        <p>
+          Nielsen recomenda de <strong>três a cinco avaliadores</strong>: avaliadores diferentes encontram problemas diferentes, e um
+          único avaliador costuma encontrar apenas uma parte deles.
+        </p>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Escala de severidade de Nielsen</caption>
+            <thead><tr><th scope="col">Nível</th><th scope="col">Significado</th></tr></thead>
+            <tbody>
+              <tr><td>0</td><td>Não é um problema de usabilidade.</td></tr>
+              <tr><td>1</td><td>Problema cosmético: corrigir se houver tempo.</td></tr>
+              <tr><td>2</td><td>Problema menor: baixa prioridade.</td></tr>
+              <tr><td>3</td><td>Problema grave: alta prioridade.</td></tr>
+              <tr><td>4</td><td>Catástrofe: corrigir antes do lançamento.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>A severidade combina <strong>frequência</strong> (quantas pessoas encontram o problema), <strong>impacto</strong> (quão difícil é superá-lo) e <strong>persistência</strong> (se acontece uma vez ou sempre).</p>
+
+      </section>
+
+      <section class="content-section" id="registro" aria-labelledby="registro-titulo">
+        <h2 id="registro-titulo"><span class="section-number">04</span> Registrando os problemas</h2>
+
+        <p>Um registro bem feito permite que outra pessoa entenda e corrija o problema sem ter participado da avaliação:</p>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>Modelo de registro de problemas</caption>
+            <thead><tr><th scope="col">ID</th><th scope="col">Local</th><th scope="col">Heurística</th><th scope="col">Descrição</th><th scope="col">Severidade</th><th scope="col">Recomendação</th></tr></thead>
+            <tbody>
+              <tr><td>P03</td><td>Tela de reserva</td><td>1 · Visibilidade do estado</td><td>Após confirmar, a tela volta ao início sem indicar se a reserva foi feita.</td><td>3</td><td>Exibir comprovante com data, horário e laboratório.</td></tr>
+              <tr><td>P07</td><td>Menu principal</td><td>2 · Correspondência com o mundo real</td><td>Rótulo “Alocação de recursos” não é reconhecido como “Reservar laboratório”.</td><td>2</td><td>Renomear para “Reservar laboratório”.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Inclua capturas de tela e descreva o problema, não a solução, na coluna de descrição.</p>
+
+      </section>
+
+      <section class="content-section" id="limitacoes" aria-labelledby="limitacoes-titulo">
+        <h2 id="limitacoes-titulo"><span class="section-number">05</span> Limitações e métodos complementares</h2>
+
+        <ul>
+          <li>Pode apontar <strong>falsos positivos</strong>: problemas que usuários reais não teriam.</li>
+          <li>Pode deixar passar problemas ligados ao domínio ou ao contexto real de uso.</li>
+          <li>A qualidade depende muito da experiência dos avaliadores.</li>
+          <li>Não substitui testes com usuários; os dois métodos se complementam.</li>
+        </ul>
+        <p>
+          O <strong>percurso cognitivo</strong> (<em>cognitive walkthrough</em>) é outro método de inspeção, focado na facilidade
+          de aprendizado: para cada passo de uma tarefa, o avaliador pergunta se um usuário novato saberia o que fazer, veria a
+          ação disponível, a associaria ao objetivo e entenderia o feedback. Também existem conjuntos de heurísticas
+          específicos, por exemplo para aplicativos móveis, jogos e sistemas de visualização.
+        </p>
+
+      </section>
+
+      <section class="content-section" id="atividade" aria-labelledby="atividade-titulo">
+        <h2 id="atividade-titulo"><span class="section-number">06</span> Atividade prática</h2>
+
+        <div class="callout callout-activity">
+          <span class="callout-label">Atividade</span>
+          <ol>
+            <li>Em trios, escolham um sistema real (o sistema acadêmico, um aplicativo de transporte, um site de serviço público).</li>
+            <li>Cada integrante faz a avaliação individual com as dez heurísticas, focando em duas tarefas definidas pelo trio.</li>
+            <li>Consolidem os problemas, atribuam severidade individualmente e calculem a média.</li>
+            <li>Entreguem o registro no modelo acima, com as cinco recomendações mais prioritárias.</li>
+          </ol>
+          <p>Este exercício prepara a avaliação do protótipo do projeto em <a href="estudos-caso-usabilidade.html">Estudos de caso em usabilidade</a>.</p>
+        </div>
+
+      </section>
+
+      <section class="content-section" id="relevancia" aria-labelledby="relevancia-titulo">
+        <h2 id="relevancia-titulo"><span class="section-number">07</span> Relevância para a Engenharia de Computação</h2>
+        <div class="callout callout-connection">
+          <span class="callout-label">🔗 Conexão com a sua formação</span>
+          <p>
+            A avaliação heurística funciona como uma revisão de código para a interface: barata, feita por pares e capaz de
+            capturar muitos problemas antes que cheguem ao usuário. Integrá-la ao fluxo de desenvolvimento (por exemplo, em
+            revisões de pull requests que alteram telas) é uma prática simples que melhora a qualidade do produto.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section" id="aprofundar" aria-labelledby="aprofundar-titulo">
+        <h2 id="aprofundar-titulo"><span class="section-number">08</span> Para aprofundar</h2>
+        <div class="callout callout-reading">
+          <span class="callout-label">Referências e leituras recomendadas</span>
+          <ul class="reading-list">
+            <li>NIELSEN, J.; MOLICH, R. Heuristic evaluation of user interfaces. <em>CHI</em>, 1990.</li>
+            <li>NIELSEN, J. <a href="https://www.nngroup.com/articles/ten-usability-heuristics/" target="_blank" rel="noopener">10 Usability Heuristics for User Interface Design</a>. Nielsen Norman Group.</li>
+            <li>NIELSEN, J. <a href="https://www.nngroup.com/articles/how-to-rate-the-severity-of-usability-problems/" target="_blank" rel="noopener">Severity Ratings for Usability Problems</a>. Nielsen Norman Group.</li>
+            <li>WHARTON, C. et al. The cognitive walkthrough method: a practitioner's guide. In: <em>Usability Inspection Methods</em>. Wiley, 1994.</li>
+            <li>BARBOSA, S. D. J.; SILVA, B. S. <em>Interação Humano-Computador</em>. Elsevier, 2010 (cap. 10, avaliação por inspeção).</li>
+          </ul>
+        </div>
+
+        <h3>Palavras-chave deste tópico</h3>
+        <div class="keyword-tags" aria-label="Palavras-chave do tópico">
+          <span class="keyword-tag">Heurísticas de Nielsen</span>
+          <span class="keyword-tag">Avaliação heurística</span>
+          <span class="keyword-tag">Inspeção</span>
+          <span class="keyword-tag">Severidade</span>
+          <span class="keyword-tag">Percurso cognitivo</span>
+          <span class="keyword-tag">Problemas de usabilidade</span>
+        </div>
+      </section>
+
+      <nav class="lesson-nav" aria-label="Navegação entre tópicos">
+        <a class="lesson-nav-link prev" href="usabilidade-e-ux.html" rel="prev">
+          <span class="lesson-nav-label">← Tópico anterior</span>
+          <span class="lesson-nav-title">Usabilidade e experiência do usuário</span>
+        </a>
+        <a class="lesson-nav-link next" href="metodos-avaliacao-usuarios.html" rel="next">
+          <span class="lesson-nav-label">Próximo tópico →</span>
+          <span class="lesson-nav-title">Métodos de avaliação com usuários</span>
+        </a>
+      </nav>
+
+    </main>
+
+    <aside class="toc" aria-labelledby="toc-titulo">
+      <h2 id="toc-titulo">Neste tópico</h2>
+      <ol>
+        <li><a href="#o-que-e">O que é avaliação heurística</a></li>
+        <li><a href="#dez-heuristicas">As dez heurísticas</a></li>
+        <li><a href="#como-aplicar">Como conduzir a avaliação</a></li>
+        <li><a href="#registro">Registrando os problemas</a></li>
+        <li><a href="#limitacoes">Limitações e complementos</a></li>
+        <li><a href="#atividade">Atividade prática</a></li>
+        <li><a href="#relevancia">Relevância para a computação</a></li>
+        <li><a href="#aprofundar">Para aprofundar</a></li>
+      </ol>
+      <p class="toc-progress">Tópico 19 de 24 · Métodos de avaliação</p>
+    </aside>
+
+  </div>
+</div>
+
+<footer>
+  <p>Interface Homem-Computador (CPA1469) · Instituto Federal Catarinense · Semestre 2026.2</p>
+  <p>Material de estudo atualizado no decorrer do semestre. Salve o link e retorne sempre que quiser revisar.</p>
+</footer>
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Voltar ao topo da página">↑</button>
+
+<script>
+  (function () {
+    var backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function () {
+      backToTop.classList.toggle('is-visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>
