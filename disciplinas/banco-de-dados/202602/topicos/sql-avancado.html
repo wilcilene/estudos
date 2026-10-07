@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Window Functions, CTEs e Índices | Banco de Dados</title>
+  <meta name="description" content="Window functions (RANK, SUM OVER), Common Table Expressions (WITH) e uma introdução a índices B-tree e hashing, explicados com o painel de telemetria de uma frota de foguetes.">
+  <meta name="keywords" content="window functions, OVER, PARTITION BY, RANK, CTE, WITH, índices, B-tree, hashing, otimização de consultas SQL">
+  <meta name="author" content="Disciplina de Banco de Dados">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/sql-avancado.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Window Functions, CTEs e Índices">
+  <meta property="og:description" content="Window functions, CTEs e introdução a índices com o painel de telemetria de uma frota de foguetes.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/sql-avancado.html">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Window Functions, CTEs e Índices",
+    "description": "Window functions, CTEs e introdução a índices com o painel de telemetria de uma frota de foguetes.",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "artigo de estudo",
+    "educationalLevel": "Graduação",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Banco de Dados",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/index.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">BD</span>
+        <span class="brand-text">
+          <span class="brand-name">Banco de Dados</span>
+          <span class="brand-sub">Eng. de Computação</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="../index.html">Banco de Dados</a></li>
+          <li aria-current="page">Window Functions, CTEs e Otimização de Consultas</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="topic-article">
+      <div class="container">
+        <header class="topic-header">
+          <p class="topic-eyebrow">Linguagens SQL</p>
+          <h1>Window functions, CTEs e uma primeira ideia de índices</h1>
+          <p class="topic-lead">Com JOIN, GROUP BY e subconsultas, vocês já resolvem a maioria dos problemas reais. Agora eu quero mostrar dois recursos que deixam consultas complexas muito mais legíveis — e fechar com uma explicação de por que algumas consultas são rápidas e outras, lentas. O cenário de hoje é o painel de telemetria de uma frota de foguetes.</p>
+        </header>
+
+        <section class="objectives" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">O que vocês vão aprender aqui</h2>
+          <ul class="check-list">
+            <li>Calcular um ranking por grupo com funções de janela (<code>OVER</code>, <code>PARTITION BY</code>).</li>
+            <li>Calcular um total acumulado com <code>SUM() OVER (ORDER BY ...)</code>.</li>
+            <li>Organizar uma consulta em etapas nomeadas com <code>WITH</code> (CTE).</li>
+            <li>Entender, em termos gerais, por que um índice acelera uma consulta.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="s1-title">
+          <h2 id="s1-title">1. O cenário: telemetria de lançamentos</h2>
+          <div class="theme-box">
+            <h3>🚀 Base de lançamentos</h3>
+            <p>Uma agência espacial registra cada lançamento de foguete na tabela <code>lancamento</code>: qual base foi usada, a data, a altitude máxima atingida e o combustível restante ao fim da missão.</p>
+          </div>
+          <pre class="code-block"><code>CREATE TABLE lancamento (
+  id_lancamento INT PRIMARY KEY AUTO_INCREMENT,
+  nome_foguete VARCHAR(60) NOT NULL,
+  base_lancamento VARCHAR(40) NOT NULL,
+  data_lancamento DATE NOT NULL,
+  altitude_km DECIMAL(8,2) NOT NULL,
+  combustivel_restante_pct DECIMAL(5,2) NOT NULL
+);</code></pre>
+        </section>
+
+        <section aria-labelledby="s2-title">
+          <h2 id="s2-title">2. Window functions: calculando sem perder o detalhe</h2>
+          <p>Uma função de agregação comum (como <code>AVG</code> com <code>GROUP BY</code>) resume várias linhas em uma só. Uma <strong>window function</strong> calcula algo sobre um grupo de linhas, mas <strong>sem</strong> colapsar o resultado — cada linha original continua aparecendo.</p>
+
+          <pre class="code-block"><code>SELECT nome_foguete,
+       base_lancamento,
+       altitude_km,
+       RANK() OVER (
+         PARTITION BY base_lancamento
+         ORDER BY altitude_km DESC
+       ) AS posicao_na_base
+FROM lancamento;</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: ranking de altitude por base</caption>
+              <thead><tr><th scope="col">Trecho</th><th scope="col">O que significa</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>RANK()</code></td>
+                  <td>A função de janela em si: atribui uma posição de ranking a cada linha. Em caso de empate, duas linhas recebem a mesma posição e a próxima posição é pulada (ex.: 1, 1, 3).</td>
+                </tr>
+                <tr>
+                  <td><code>OVER (...)</code></td>
+                  <td>Define a "janela": o conjunto de linhas sobre o qual <code>RANK()</code> é calculado para cada linha atual.</td>
+                </tr>
+                <tr>
+                  <td><code>PARTITION BY base_lancamento</code></td>
+                  <td>Reinicia a contagem para cada base — ou seja, o ranking é calculado <em>dentro</em> de cada base separadamente, não no total geral.</td>
+                </tr>
+                <tr>
+                  <td><code>ORDER BY altitude_km DESC</code></td>
+                  <td>Dentro de cada base, ordena da maior altitude para a menor antes de numerar.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="concept-box">
+            <h3>Conceito: RANK() × ROW_NUMBER() × DENSE_RANK()</h3>
+            <p><code>ROW_NUMBER()</code> sempre numera de forma única (1, 2, 3, 4...), mesmo com empates. <code>RANK()</code> repete a posição em empates e pula números depois (1, 1, 3, 4). <code>DENSE_RANK()</code> repete a posição em empates, mas <strong>não</strong> pula números depois (1, 1, 2, 3).</p>
+          </div>
+
+          <p>Outro uso comum é um total acumulado — por exemplo, o combustível total consumido pela frota ao longo do tempo:</p>
+          <pre class="code-block"><code>SELECT data_lancamento,
+       nome_foguete,
+       SUM(100 - combustivel_restante_pct) OVER (
+         ORDER BY data_lancamento
+       ) AS consumo_acumulado
+FROM lancamento;</code></pre>
+          <p>Sem <code>PARTITION BY</code>, a janela é a tabela inteira; com <code>ORDER BY</code> dentro do <code>OVER</code>, cada linha soma o valor das linhas anteriores — é assim que se constrói um total corrido.</p>
+        </section>
+
+        <section aria-labelledby="s3-title">
+          <h2 id="s3-title">3. CTEs: dando nome às etapas de uma consulta</h2>
+          <p>Uma <strong>Common Table Expression</strong> (CTE) é um resultado temporário, nomeado, que existe só durante aquela consulta — ajuda a quebrar uma consulta complexa em passos legíveis:</p>
+          <pre class="code-block"><code>WITH media_por_base AS (
+  SELECT base_lancamento, AVG(altitude_km) AS altitude_media
+  FROM lancamento
+  GROUP BY base_lancamento
+)
+SELECT l.nome_foguete, l.base_lancamento, l.altitude_km, m.altitude_media
+FROM lancamento AS l
+JOIN media_por_base AS m ON m.base_lancamento = l.base_lancamento
+WHERE l.altitude_km &gt; m.altitude_media;</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: foguetes acima da média da própria base</caption>
+              <thead><tr><th scope="col">Trecho</th><th scope="col">O que significa</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>WITH media_por_base AS (...)</code></td>
+                  <td>Define uma tabela temporária chamada <code>media_por_base</code>, calculada pela consulta entre parênteses — a altitude média de cada base.</td>
+                </tr>
+                <tr>
+                  <td><code>JOIN media_por_base AS m ON ...</code></td>
+                  <td>A consulta principal usa <code>media_por_base</code> como se fosse uma tabela normal, juntando cada lançamento com a média da sua própria base.</td>
+                </tr>
+                <tr>
+                  <td><code>WHERE l.altitude_km &gt; m.altitude_media;</code></td>
+                  <td>Mantém só os lançamentos que superaram a média da própria base.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>O mesmo resultado seria possível com uma subconsulta no <code>FROM</code>, mas o <code>WITH</code> deixa a intenção de cada etapa muito mais clara — e pode ser reaproveitado várias vezes na mesma consulta, enquanto uma subconsulta teria que ser repetida.</p>
+        </section>
+
+        <section aria-labelledby="s4-title">
+          <h2 id="s4-title">4. Por que algumas consultas são rápidas — uma primeira ideia de índice</h2>
+          <p>Sem ajuda, o SGBD responde a um <code>WHERE base_lancamento = 'Alcântara'</code> lendo linha por linha, do início ao fim da tabela — uma <strong>varredura completa</strong> (<em>table scan</em>). Um <strong>índice</strong> é uma estrutura auxiliar que organiza os valores de uma coluna de um jeito que permite pular direto para o trecho relevante, sem ler tudo.</p>
+
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Dois tipos de índice, duas situações diferentes</caption>
+              <thead><tr><th scope="col">Estrutura</th><th scope="col">Como funciona</th><th scope="col">Melhor para</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><strong>B-tree</strong></td>
+                  <td>Organiza os valores em uma árvore balanceada, mantendo-os ordenados.</td>
+                  <td>Igualdade (<code>=</code>), faixas (<code>BETWEEN</code>, <code>&gt;</code>, <code>&lt;</code>) e ordenação (<code>ORDER BY</code>) — é o padrão da maioria dos SGBDs, inclusive o MySQL.</td>
+                </tr>
+                <tr>
+                  <td><strong>Hashing</strong></td>
+                  <td>Aplica uma função que transforma o valor em um endereço direto, sem manter ordem.</td>
+                  <td>Buscas por igualdade exata — muito rápido para <code>=</code>, mas inútil para faixas ou ordenação, já que não existe noção de "próximo valor".</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tip-box">
+            <h3>⚠️ Índice não é de graça</h3>
+            <p>Todo índice acelera leitura, mas desacelera um pouco a escrita: a cada <code>INSERT</code>, <code>UPDATE</code> ou <code>DELETE</code>, o SGBD também precisa atualizar os índices daquela tabela. Por isso não criamos índice em toda coluna — priorizamos as colunas mais usadas em <code>WHERE</code>, <code>JOIN</code> e <code>ORDER BY</code>. A boa notícia é que, como vocês já viram, toda <code>PRIMARY KEY</code> e toda coluna <code>UNIQUE</code> já ganham um índice automaticamente.</p>
+          </div>
+        </section>
+
+        <section class="quiz-box" aria-labelledby="quiz-title">
+          <h3 id="quiz-title">🤔 Confira se entendeu</h3>
+          <details>
+            <summary>Qual a diferença entre usar GROUP BY e usar uma window function para calcular a altitude média por base?</summary>
+            <p>GROUP BY colapsa as linhas em uma por base, perdendo o detalhe de cada lançamento individual. Uma window function (com PARTITION BY) calcula o mesmo valor, mas mantém todas as linhas originais, cada uma mostrando a média do seu grupo ao lado dos próprios dados.</p>
+          </details>
+          <details>
+            <summary>Por que um índice hashing não ajudaria em uma consulta com ORDER BY altitude_km?</summary>
+            <p>Porque hashing não preserva nenhuma noção de ordem entre os valores — ele só permite localizar rapidamente um valor exato, não percorrer os dados em sequência crescente ou decrescente.</p>
+          </details>
+        </section>
+
+        <section aria-labelledby="materials-title">
+          <h2 id="materials-title">Materiais para estudo</h2>
+          <ul class="materials-list">
+            <li>Referência oficial: <a href="https://dev.mysql.com/doc/refman/8.0/en/window-functions.html" target="_blank" rel="noopener">window functions</a> e <a href="https://dev.mysql.com/doc/refman/8.0/en/with.html" target="_blank" rel="noopener">CTEs (WITH)</a> no MySQL.</li>
+            <li>Próximo tópico: dependências funcionais e formas normais — a base teórica para decidir como separar os dados em tabelas.</li>
+          </ul>
+          <ul class="video-links">
+            <li>
+              <span class="video-icon" aria-hidden="true">▶</span>
+              <div>
+                <a href="https://www.youtube.com/results?search_query=window+functions+SQL+CTE+explicado" target="_blank" rel="noopener">Buscar vídeo-aulas sobre window functions e CTEs no YouTube</a>
+                <span class="video-note">Abre uma busca no YouTube com aulas sobre funções de janela e CTEs em SQL.</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="topic-pager" aria-label="Navegação entre tópicos">
+          <div class="topic-pager-inner">
+            <a class="pager-link pager-link--prev" href="sql-juncoes-agregacao.html">
+              <span class="pager-label">Anterior</span>
+              <span class="pager-title">Junções, Subconsultas e Agregação em SQL</span>
+            </a>
+            <a class="pager-link pager-link--next" href="normalizacao-formas-normais.html">
+              <span class="pager-label">Próximo</span>
+              <span class="pager-title">Dependências Funcionais e Formas Normais</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Banco de Dados · Engenharia de Computação</p>
+      <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DDL — Banco de Clínica Veterinária com MySQL Workbench | Banco de Dados</title>
+  <meta name="description" content="Guia passo a passo, explicado linha a linha, para criar um banco de dados de agendamentos de uma clínica veterinária usando MySQL Workbench e SQL DDL.">
+  <meta name="keywords" content="DDL, MySQL Workbench, clínica veterinária, agendamento, CREATE DATABASE, CREATE TABLE, chave primária, chave estrangeira, restrições">
+  <meta name="author" content="Disciplina de Banco de Dados">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/topicos/ddl.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="DDL — Banco de Clínica Veterinária com MySQL Workbench">
+  <meta property="og:description" content="Tutorial passo a passo, explicado linha a linha, para criar a estrutura de um banco veterinário no MySQL Workbench.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/topicos/ddl.html">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "DDL — Banco de Clínica Veterinária com MySQL Workbench",
+    "description": "Guia passo a passo, explicado linha a linha, para criar a estrutura de um banco veterinário no MySQL Workbench.",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "aula prática",
+    "educationalLevel": "Graduação",
+    "timeRequired": "PT3H",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Banco de Dados",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/index.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">BD</span>
+        <span class="brand-text">
+          <span class="brand-name">Banco de Dados</span>
+          <span class="brand-sub">Eng. de Computação · 60h</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="../index.html">Banco de Dados</a></li>
+          <li aria-current="page">DDL — Banco de Clínica Veterinária com MySQL Workbench</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="topic-article">
+      <div class="container">
+        <header class="topic-header">
+          <h1>DDL: criando um banco para clínica veterinária</h1>
+          <p class="topic-lead">Nesta aula prática, você utilizará o MySQL Workbench para construir a estrutura de um sistema de agendamentos veterinários. O roteiro apresenta o que executar, em que ordem executar, <strong>por que cada linha de código existe</strong> e como verificar o resultado de cada etapa.</p>
+          <p class="topic-lead">Você já programa e já conhece lógica, tipos de dados e estruturas de repetição — mas talvez esta seja a primeira vez que crie um banco de dados do zero. Por isso, sempre que um comando SQL aparecer, ele virá acompanhado de uma tabela explicando <strong>o que cada trecho faz</strong>, e sempre que um conceito novo surgir, ele será relacionado a algo que você já conhece da programação.</p>
+        </header>
+
+        <section class="objectives" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">Objetivos de aprendizagem</h2>
+          <ul class="check-list">
+            <li>Utilizar o MySQL Workbench para executar scripts SQL.</li>
+            <li>Explicar o papel da DDL na definição da estrutura do banco.</li>
+            <li>Reconhecer o significado de cada palavra-chave usada em um <code>CREATE TABLE</code>.</li>
+            <li>Criar tabelas com tipos de dados, chaves e restrições.</li>
+            <li>Representar relacionamentos 1:N e N:M.</li>
+            <li>Inspecionar tabelas e interpretar mensagens de erro.</li>
+            <li>Organizar um script SQL reprodutível e documentado.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="s0-title">
+          <h2 id="s0-title">0. Vocabulário essencial antes de começar</h2>
+          <p>Estes são os termos que vão aparecer repetidamente no restante da aula. Leia uma vez agora e volte aqui sempre que precisar — não é necessário decorar.</p>
+
+          <dl class="glossary">
+            <div class="glossary-item">
+              <dt>Banco de dados (database)</dt>
+              <dd>Um espaço isolado no servidor MySQL onde ficam guardadas as tabelas de um sistema. Um mesmo servidor MySQL pode hospedar vários bancos, do mesmo jeito que um sistema operacional guarda várias pastas de projetos diferentes.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Tabela</dt>
+              <dd>Uma estrutura que guarda dados de um mesmo tipo de "coisa" (pets, veterinários, consultas). Para quem programa, pense na tabela como a definição de uma classe ou de um <code>struct</code>: ela descreve quais campos existem, mas ainda não é um dado concreto.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Coluna (ou atributo/campo)</dt>
+              <dd>Cada informação que a tabela guarda, com um nome e um tipo fixo — equivalente a um atributo/propriedade de uma classe, como <code>String nome</code> ou <code>int idade</code>.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Linha (ou registro/tupla)</dt>
+              <dd>Um valor concreto guardado na tabela, com um valor para cada coluna — equivalente a uma instância/objeto criado a partir da classe.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Chave primária (PRIMARY KEY / PK)</dt>
+              <dd>A coluna (ou conjunto de colunas) que identifica cada linha de forma única, sem repetição. É parecida com o <code>id</code> que você provavelmente já usou em APIs REST ou com uma chave de mapa/dicionário: não pode haver duas linhas com a mesma chave.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Chave estrangeira (FOREIGN KEY / FK)</dt>
+              <dd>Uma coluna que guarda o valor da chave primária de outra tabela, criando uma ligação entre elas. É o equivalente relacional a guardar uma referência/ponteiro para outro objeto, só que validado pelo próprio banco de dados.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Restrição (constraint)</dt>
+              <dd>Uma regra que o banco passa a impor automaticamente sobre os dados (obrigatoriedade, unicidade, valor padrão, faixa de valores válidos). É como uma validação que, em vez de ficar só no seu código, também é garantida pelo banco — mesmo que outro sistema grave dados diretamente nele.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>AUTO_INCREMENT</dt>
+              <dd>Instrui o MySQL a gerar automaticamente o próximo número inteiro disponível para a coluna sempre que uma nova linha é inserida — parecido com um contador global que o próprio banco mantém.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Charset e collation</dt>
+              <dd><strong>Charset</strong> define quais caracteres podem ser armazenados (o <code>utf8mb4</code> aceita acentos, cedilha e até emojis). <strong>Collation</strong> define como o banco compara e ordena texto (se diferencia maiúsculas de minúsculas, se ignora acentos na ordenação, etc.).</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>DDL, DML e DQL</dt>
+              <dd><strong>DDL</strong> (Data Definition Language) cria e altera estruturas: <code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>. <strong>DML</strong> (Data Manipulation Language) manipula os dados dentro das estruturas: <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>. <strong>DQL</strong> (Data Query Language) consulta dados: <code>SELECT</code>. Nesta aula você trabalha só com DDL. O <code>SELECT</code> é tecnicamente DQL, mas costuma ser estudado <strong>junto com DML</strong> no próximo tópico, porque, na prática, você só consegue confirmar se um <code>INSERT</code>, <code>UPDATE</code> ou <code>DELETE</code> funcionou consultando os dados logo em seguida — as duas coisas andam juntas no dia a dia, mesmo sendo categorias formalmente diferentes.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Índice (INDEX)</dt>
+              <dd>Uma estrutura auxiliar que o MySQL mantém para encontrar linhas mais rápido, sem precisar ler a tabela inteira — o mesmo papel do índice de um livro. Toda <code>PRIMARY KEY</code> e toda coluna <code>UNIQUE</code> já ganham um índice automaticamente; é possível criar índices extras depois, com <code>CREATE INDEX</code>.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt>Integridade referencial</dt>
+              <dd>A garantia de que toda chave estrangeira aponta para um registro que realmente existe — nunca uma "referência quebrada". É exatamente o que as cláusulas <code>FOREIGN KEY</code>, <code>ON UPDATE</code> e <code>ON DELETE</code> desta aula existem para manter, mesmo quando dados são alterados ou apagados.</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section aria-labelledby="s1-title">
+          <h2 id="s1-title">1. DDL e o MySQL Workbench</h2>
+          <p><span class="tooltip-term" title="Data Definition Language — Linguagem de Definição de Dados">DDL</span> é o conjunto de comandos SQL utilizado para criar, modificar e remover estruturas do banco de dados. Neste roteiro, você usará principalmente <code>CREATE DATABASE</code>, <code>CREATE TABLE</code> e restrições de integridade.</p>
+          <p>O <strong>MySQL Workbench</strong> será o ambiente de trabalho. Ele permite abrir uma conexão com o servidor MySQL, escrever comandos no SQL Editor, executar scripts por seleção ou por bloco, visualizar mensagens e consultar a estrutura criada.</p>
+
+          <div class="dev-note">
+            <h4>Para quem já programa</h4>
+            <p>O Workbench funciona como uma mistura de terminal + IDE apenas para banco de dados: o <strong>SQL Editor</strong> é onde você escreve o "código" (SQL), o <strong>Output</strong> é o equivalente ao console/terminal onde aparecem erros e mensagens de sucesso, e o <strong>Navigator</strong> é como o explorador de arquivos do seu editor de código, só que mostrando bancos, tabelas e colunas em vez de pastas e arquivos.</p>
+          </div>
+
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Elementos do MySQL Workbench usados nesta aula</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Elemento</th>
+                  <th scope="col">Função</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>MySQL Connections</td>
+                  <td>Lista e abre conexões com servidores MySQL.</td>
+                </tr>
+                <tr>
+                  <td>SQL Editor</td>
+                  <td>Área em que o script SQL é digitado e executado.</td>
+                </tr>
+                <tr>
+                  <td>Navigator / Schemas</td>
+                  <td>Exibe bancos, tabelas, views e outros objetos da conexão.</td>
+                </tr>
+                <tr>
+                  <td>Action Output</td>
+                  <td>Exibe mensagens de sucesso, avisos e erros da execução.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section aria-labelledby="s2-title">
+          <h2 id="s2-title">2. Preparar o MySQL Workbench</h2>
+          <p>Antes de escrever comandos, confirme que o Workbench está conectado ao servidor MySQL disponibilizado no laboratório. <a href="configurar-ambiente.html">Se você precisa instalar e configurar o ambiente clique aqui.</a></p>
+          <ol>
+            <li>Abra o <strong>MySQL Workbench</strong> no computador.</li>
+            <li>Na tela inicial, localize a conexão indicada pelo professor.</li>
+            <li>Dê duplo clique na conexão para abrir o SQL Editor.</li>
+            <li>Aguarde o carregamento do painel <strong>Navigator</strong> e da área de edição.</li>
+            <li>Crie uma nova aba SQL pelo botão de nova consulta, se necessário.</li>
+            <li>Salve imediatamente o arquivo pelo menu <strong>File → Save Script As...</strong>.</li>
+            <li>Use o nome <code>01_clinica_veterinaria_ddl.sql</code>.</li>
+          </ol>
+          <p class="analogy"><strong>Importante:</strong> o Workbench é o cliente. O banco de dados fica no servidor MySQL. Abrir o Workbench não cria automaticamente um banco; é necessário executar os comandos SQL na conexão correta. É a mesma lógica de um cliente HTTP (como o Postman) versus a API que ele consome: a ferramenta não é o serviço, apenas fala com ele.</p>
+        </section>
+
+        <section aria-labelledby="s3-title">
+          <h2 id="s3-title">3. Cenário da clínica</h2>
+          <p>O banco <code>clinica_veterinaria_db</code> armazenará dados necessários para organizar agendamentos e atendimentos de uma clínica veterinária.</p>
+
+          <div class="concept-note">
+            <h4>Conceito: de entidade a tabela</h4>
+            <p>Cada linha da tabela abaixo é uma <strong>entidade</strong> do sistema — um "tipo de coisa" que precisa ser guardada. No próximo passo, cada entidade vira uma tabela, cada característica dela vira uma coluna, e cada relação entre entidades vira uma chave estrangeira (para relações 1:N) ou uma tabela extra (para relações N:M). É o mesmo raciocínio de modelagem que você já usa ao desenhar classes de domínio antes de escrever código.</p>
+          </div>
+
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Entidades do sistema</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Entidade</th>
+                  <th scope="col">Finalidade</th>
+                  <th scope="col">Relações principais</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Responsável</td>
+                  <td>Registra a pessoa que responde pelo pet.</td>
+                  <td>Um responsável pode ter vários pets.</td>
+                </tr>
+                <tr>
+                  <td>Pet</td>
+                  <td>Registra o animal atendido.</td>
+                  <td>Cada pet possui um responsável principal.</td>
+                </tr>
+                <tr>
+                  <td>Veterinário</td>
+                  <td>Registra profissionais da clínica.</td>
+                  <td>Um veterinário pode atender várias consultas.</td>
+                </tr>
+                <tr>
+                  <td>Especialidade</td>
+                  <td>Classifica áreas de atuação.</td>
+                  <td>Relacionamento N:M com veterinário.</td>
+                </tr>
+                <tr>
+                  <td>Tipo de atendimento</td>
+                  <td>Define serviço, duração e valor base.</td>
+                  <td>Um tipo pode ser usado em muitas consultas.</td>
+                </tr>
+                <tr>
+                  <td>Consulta</td>
+                  <td>Registra o agendamento e o atendimento.</td>
+                  <td>Relaciona pet, veterinário e tipo de atendimento.</td>
+                </tr>
+                <tr>
+                  <td>Procedimento</td>
+                  <td>Registra procedimentos oferecidos.</td>
+                  <td>Relacionamento N:M com consulta.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section aria-labelledby="s4-title">
+          <h2 id="s4-title">4. Criar e selecionar o banco</h2>
+          <p>Digite o script abaixo no SQL Editor. O comando <code>CREATE DATABASE</code> cria o banco; o comando <code>USE</code> seleciona o banco para os próximos comandos.</p>
+
+          <pre class="code-block"><code>CREATE DATABASE IF NOT EXISTS clinica_veterinaria_db
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+USE clinica_veterinaria_db;</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: criação e seleção do banco</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Trecho</th>
+                  <th scope="col">O que significa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>CREATE DATABASE</code></td>
+                  <td>Comando DDL que cria um novo banco de dados (um novo "espaço" isolado) dentro do servidor MySQL.</td>
+                </tr>
+                <tr>
+                  <td><code>IF NOT EXISTS</code></td>
+                  <td>Faz o comando ser <strong>idempotente</strong>: se o banco já existir, o MySQL não tenta criá-lo de novo e não gera erro. Sem essa cláusula, executar o script duas vezes causaria o erro "database exists".</td>
+                </tr>
+                <tr>
+                  <td><code>clinica_veterinaria_db</code></td>
+                  <td>Nome escolhido para o banco. É um identificador, como o nome de um projeto ou de um pacote no seu código.</td>
+                </tr>
+                <tr>
+                  <td><code>CHARACTER SET utf8mb4</code></td>
+                  <td>Define o conjunto de caracteres aceito pelo banco. <code>utf8mb4</code> é a variante completa do UTF-8 no MySQL, necessária para acentuação e emojis (o <code>utf8</code> "antigo" do MySQL não suporta todos os caracteres Unicode).</td>
+                </tr>
+                <tr>
+                  <td><code>COLLATE utf8mb4_unicode_ci</code></td>
+                  <td>Define a regra de comparação/ordenação de texto. O sufixo <code>_ci</code> significa <em>case-insensitive</em>: "Rex" e "rex" são tratados como iguais em comparações e buscas.</td>
+                </tr>
+                <tr>
+                  <td><code>;</code></td>
+                  <td>Ponto e vírgula: encerra a instrução SQL, do mesmo jeito que encerraria uma instrução em Java, C# ou JavaScript com <code>;</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>USE clinica_veterinaria_db;</code></td>
+                  <td>Não cria nada — apenas diz ao MySQL "a partir de agora, todo comando sem nome de banco explícito se aplica a este banco". Equivale a fazer um <code>cd</code> para dentro da pasta do projeto antes de rodar comandos nela.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Como executar no Workbench</h3>
+          <ol>
+            <li>Clique dentro do bloco SQL.</li>
+            <li>Selecione o bloco com o mouse ou use <code>Ctrl+A</code> se a aba contiver apenas esse script.</li>
+            <li>Clique no ícone de raio para executar a seleção ou o comando atual.</li>
+            <li>Observe o painel <strong>Output</strong> na parte inferior.</li>
+            <li>Uma mensagem de sucesso indica que o comando foi aceito pelo servidor.</li>
+          </ol>
+
+          <p>Agora confirme a seleção:</p>
+          <pre class="code-block"><code>SELECT DATABASE();
+SHOW DATABASES;</code></pre>
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: comandos de verificação</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Trecho</th>
+                  <th scope="col">O que significa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>SELECT DATABASE();</code></td>
+                  <td><code>DATABASE()</code> é uma função do MySQL que devolve o nome do banco atualmente selecionado nesta conexão. <code>SELECT</code> aqui é usado só para "imprimir" esse valor, algo como um <code>console.log(DATABASE())</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>SHOW DATABASES;</code></td>
+                  <td>Lista todos os bancos que existem no servidor MySQL ao qual você está conectado (não apenas o que você acabou de criar).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>O resultado de <code>SELECT DATABASE()</code> deve ser <code>clinica_veterinaria_db</code>. Se aparecer <code>NULL</code>, o banco ainda não foi selecionado — normalmente porque o comando <code>USE</code> não foi executado nesta aba/sessão do Workbench.</p>
+        </section>
+
+        <section aria-labelledby="s5-title">
+          <h2 id="s5-title">5. Escolher tipos e restrições</h2>
+          <p>Antes de criar as tabelas, relacione cada informação do cenário a um tipo de dado e a uma regra de armazenamento.</p>
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Tipos utilizados no banco veterinário</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Tipo</th>
+                  <th scope="col">Uso</th>
+                  <th scope="col">Exemplo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>INT</code></td>
+                  <td>Identificadores e números inteiros.</td>
+                  <td><code>id_pet</code>, <code>duracao_minutos</code></td>
+                </tr>
+                <tr>
+                  <td><code>VARCHAR(n)</code></td>
+                  <td>Texto com limite de tamanho.</td>
+                  <td><code>nome</code>, <code>status</code></td>
+                </tr>
+                <tr>
+                  <td><code>CHAR(n)</code></td>
+                  <td>Texto de tamanho fixo.</td>
+                  <td>CPF sem pontuação, com 11 caracteres.</td>
+                </tr>
+                <tr>
+                  <td><code>DATE</code></td>
+                  <td>Data sem horário.</td>
+                  <td><code>data_nascimento</code></td>
+                </tr>
+                <tr>
+                  <td><code>DATETIME</code></td>
+                  <td>Data e hora.</td>
+                  <td><code>data_hora</code> da consulta.</td>
+                </tr>
+                <tr>
+                  <td><code>DECIMAL(p,s)</code></td>
+                  <td>Valores numéricos exatos.</td>
+                  <td><code>peso_kg</code>, <code>valor_base</code></td>
+                </tr>
+                <tr>
+                  <td><code>BOOLEAN</code></td>
+                  <td>Estado verdadeiro/falso.</td>
+                  <td><code>ativo</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="dev-note">
+            <h4>Para quem já programa</h4>
+            <p>Pense nesses tipos como equivalentes aos tipos que você já usa: <code>INT</code> ≈ <code>int</code>; <code>VARCHAR(n)</code> ≈ <code>String</code> com tamanho máximo; <code>BOOLEAN</code> ≈ <code>boolean</code>/<code>bool</code>; <code>DATE</code>/<code>DATETIME</code> ≈ <code>LocalDate</code>/<code>LocalDateTime</code>. A diferença mais importante é o <code>DECIMAL(p,s)</code>: diferente de <code>float</code>/<code>double</code>, ele guarda o número exato (sem erro de arredondamento binário), por isso é o tipo correto para dinheiro e peso — <code>p</code> é o total de dígitos e <code>s</code> quantos ficam depois da vírgula. Em <code>DECIMAL(10,2)</code>, por exemplo, cabem até 8 dígitos antes da vírgula e 2 depois.</p>
+          </div>
+
+          <p>Além do tipo, cada coluna pode receber restrições que o banco passa a validar sozinho:</p>
+
+          <dl class="glossary">
+            <div class="glossary-item">
+              <dt><code>NOT NULL</code></dt>
+              <dd>O valor é obrigatório: o MySQL recusa qualquer <code>INSERT</code> ou <code>UPDATE</code> que deixe essa coluna vazia.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt><code>UNIQUE</code></dt>
+              <dd>Impede que duas linhas tenham o mesmo valor nessa coluna, mesmo que a coluna não seja a chave primária.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt><code>DEFAULT valor</code></dt>
+              <dd>Se nenhum valor for informado ao inserir a linha, o banco usa automaticamente o valor padrão indicado.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt><code>CHECK (condição)</code></dt>
+              <dd>Só aceita a linha se a condição for verdadeira. É uma validação de domínio feita pelo próprio banco, útil mesmo quando vários sistemas diferentes gravam na mesma tabela.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt><code>PRIMARY KEY</code></dt>
+              <dd>Marca a coluna (ou conjunto de colunas) como identificador único e obrigatório da linha.</dd>
+            </div>
+            <div class="glossary-item">
+              <dt><code>FOREIGN KEY</code></dt>
+              <dd>Conecta uma coluna desta tabela à chave primária de outra tabela, garantindo que só existam referências válidas.</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section aria-labelledby="s6-title">
+          <h2 id="s6-title">6. Criar as tabelas independentes</h2>
+          <p>Crie primeiro as tabelas que não dependem de chaves estrangeiras. Essa ordem é importante: as tabelas referenciadas precisam existir antes de serem usadas como destino de uma chave estrangeira — o MySQL não consegue criar uma referência para algo que ainda não existe, do mesmo jeito que você não pode importar uma classe que ainda não foi criada.</p>
+
+          <pre class="code-block"><code>CREATE TABLE responsavel (
+  id_responsavel INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(120) NOT NULL,
+  cpf CHAR(11) NOT NULL UNIQUE,
+  telefone VARCHAR(20) NOT NULL,
+  email VARCHAR(120) UNIQUE
+);
+
+CREATE TABLE veterinario (
+  id_veterinario INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(120) NOT NULL,
+  crmv VARCHAR(20) NOT NULL UNIQUE,
+  telefone VARCHAR(20) NOT NULL,
+  email VARCHAR(120) NOT NULL UNIQUE,
+  ativo BOOLEAN NOT NULL DEFAULT TRUE
+);
+
+CREATE TABLE especialidade (
+  id_especialidade INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(80) NOT NULL UNIQUE,
+  descricao VARCHAR(255)
+);
+
+CREATE TABLE tipo_atendimento (
+  id_tipo_atendimento INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(80) NOT NULL UNIQUE,
+  duracao_minutos INT NOT NULL,
+  valor_base DECIMAL(10,2) NOT NULL,
+  ativo BOOLEAN NOT NULL DEFAULT TRUE,
+
+  CONSTRAINT chk_tipo_atendimento_duracao
+    CHECK (duracao_minutos &gt; 0),
+
+  CONSTRAINT chk_tipo_atendimento_valor
+    CHECK (valor_base &gt;= 0)
+);</code></pre>
+
+          <div class="concept-note">
+            <h4>Conceito: a "forma" geral de um CREATE TABLE</h4>
+            <p>Todo comando segue o mesmo esqueleto: <code>CREATE TABLE nome_da_tabela ( lista_de_colunas_separadas_por_vírgula, restrições_extras );</code>. Cada linha dentro dos parênteses descreve uma coluna com o formato <code>nome_da_coluna TIPO restrições</code>. A vírgula separa itens, igual a uma lista de parâmetros em uma função — e por isso o <strong>último item antes do <code>)</code> nunca tem vírgula</strong>.</p>
+          </div>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: <code>CREATE TABLE responsavel</code></caption>
+              <thead>
+                <tr>
+                  <th scope="col">Trecho</th>
+                  <th scope="col">O que significa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>CREATE TABLE responsavel (</code></td>
+                  <td>Inicia a criação da tabela chamada <code>responsavel</code>. Tudo até o <code>)</code> final faz parte da definição dessa tabela.</td>
+                </tr>
+                <tr>
+                  <td><code>id_responsavel INT PRIMARY KEY AUTO_INCREMENT,</code></td>
+                  <td>Cria a coluna <code>id_responsavel</code>, do tipo inteiro, marcada como chave primária (identifica cada linha de forma única) e com geração automática de valor (você nunca precisa informá-la manualmente ao inserir dados).</td>
+                </tr>
+                <tr>
+                  <td><code>nome VARCHAR(120) NOT NULL,</code></td>
+                  <td>Coluna de texto com até 120 caracteres, obrigatória (não pode ficar em branco).</td>
+                </tr>
+                <tr>
+                  <td><code>cpf CHAR(11) NOT NULL UNIQUE,</code></td>
+                  <td>Texto de tamanho fixo (11 caracteres, sem pontuação), obrigatório e que não pode se repetir entre responsáveis — dois responsáveis não podem ter o mesmo CPF.</td>
+                </tr>
+                <tr>
+                  <td><code>telefone VARCHAR(20) NOT NULL,</code></td>
+                  <td>Texto de até 20 caracteres, obrigatório. Usa <code>VARCHAR</code>, e não <code>INT</code>, porque telefone pode ter parênteses, hífen ou "0" à esquerda, que um número inteiro não preservaria.</td>
+                </tr>
+                <tr>
+                  <td><code>email VARCHAR(120) UNIQUE</code></td>
+                  <td>Texto de até 120 caracteres, sem <code>NOT NULL</code> — ou seja, é opcional — mas, quando informado, não pode se repetir entre responsáveis.</td>
+                </tr>
+                <tr>
+                  <td><code>);</code></td>
+                  <td>Fecha a lista de colunas e encerra o comando.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: <code>CREATE TABLE veterinario</code></caption>
+              <thead>
+                <tr>
+                  <th scope="col">Trecho</th>
+                  <th scope="col">O que significa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>CREATE TABLE veterinario (</code></td>
+                  <td>Inicia a tabela <code>veterinario</code>, seguindo o mesmo padrão da tabela anterior.</td>
+                </tr>
+                <tr>
+                  <td><code>id_veterinario INT PRIMARY KEY AUTO_INCREMENT,</code></td>
+                  <td>Identificador único e autogerado do veterinário.</td>
+                </tr>
+                <tr>
+                  <td><code>nome VARCHAR(120) NOT NULL,</code></td>
+                  <td>Nome completo, obrigatório.</td>
+                </tr>
+                <tr>
+                  <td><code>crmv VARCHAR(20) NOT NULL UNIQUE,</code></td>
+                  <td>Registro profissional (CRMV), obrigatório e único — dois veterinários não podem compartilhar o mesmo registro.</td>
+                </tr>
+                <tr>
+                  <td><code>telefone VARCHAR(20) NOT NULL,</code></td>
+                  <td>Telefone de contato, obrigatório.</td>
+                </tr>
+                <tr>
+                  <td><code>email VARCHAR(120) NOT NULL UNIQUE,</code></td>
+                  <td>E-mail obrigatório e único, diferente do e-mail do responsável (que é opcional). A regra de negócio muda de tabela para tabela porque cada entidade tem exigências diferentes.</td>
+                </tr>
+                <tr>
+                  <td><code>ativo BOOLEAN NOT NULL DEFAULT TRUE</code></td>
+                  <td>Sinalizador verdadeiro/falso, obrigatório, que começa como <code>TRUE</code> quando não informado — assim, todo veterinário cadastrado já entra como ativo por padrão, sem precisar informar isso manualmente em cada inserção.</td>
+                </tr>
+                <tr>
+                  <td><code>);</code></td>
+                  <td>Fecha e encerra o comando.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: <code>CREATE TABLE especialidade</code></caption>
+              <thead>
+                <tr>
+                  <th scope="col">Trecho</th>
+                  <th scope="col">O que significa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>CREATE TABLE especialidade (</code></td>
+                  <td>Inicia a tabela que vai listar as especialidades possíveis (ex.: dermatologia, ortopedia).</td>
+                </tr>
+                <tr>
+                  <td><code>id_especialidade INT PRIMARY KEY AUTO_INCREMENT,</code></td>
+                  <td>Identificador único e autogerado da especialidade.</td>
+                </tr>
+                <tr>
+                  <td><code>nome VARCHAR(80) NOT NULL UNIQUE,</code></td>
+                  <td>Nome da especialidade, obrigatório e único — não faz sentido cadastrar "Dermatologia" duas vezes.</td>
+                </tr>
+                <tr>
+                  <td><code>descricao VARCHAR(255)</code></td>
+                  <td>Texto livre opcional (sem <code>NOT NULL</code>) para detalhar a especialidade.</td>
+                </tr>
+                <tr>
+                  <td><code>);</code></td>
+                  <td>Fecha e encerra o comando.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: <code>CREATE TABLE tipo_atendimento</code></caption>
+              <thead>
+                <tr>
+                  <th scope="col">Trecho</th>
+                  <th scope="col">O que significa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>CREATE TABLE tipo_atendimento (</code></td>
+                  <td>Inicia a tabela que descreve os serviços oferecidos (ex.: consulta de rotina, retorno, vacinação).</td>
+                </tr>
+                <tr>
+                  <td><code>id_tipo_atendimento INT PRIMARY KEY AUTO_INCREMENT,</code></td>
+                  <td>Identificador único e autogerado do tipo de atendimento.</td>
+                </tr>
+                <tr>
+                  <td><code>nome VARCHAR(80) NOT NULL UNIQUE,</code></td>
+                  <td>Nome do serviço, obrigatório e único.</td>
+                </tr>
+                <tr>
+                  <td><code>duracao_minutos INT NOT NULL,</code></td>
+                  <td>Duração prevista em minutos, obrigatória.</td>
+                </tr>
+                <tr>
+                  <td><code>valor_base DECIMAL(10,2) NOT NULL,</code></td>
+                  <td>Valor cobrado por padrão, obrigatório, guardado como número decimal exato (evita erro de arredondamento em dinheiro).</td>
+                </tr>
+                <tr>
+                  <td><code>ativo BOOLEAN NOT NULL DEFAULT TRUE,</code></td>
+                  <td>Indica se o tipo de atendimento ainda está disponível para agendamento; começa como <code>TRUE</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>CONSTRAINT chk_tipo_atendimento_duracao</code></td>
+                  <td>Dá um nome (<code>chk_tipo_atendimento_duracao</code>) a uma restrição que vem a seguir. Nomear a restrição ajuda a identificar exatamente qual regra falhou quando o MySQL retornar um erro, em vez de mostrar apenas um código genérico.</td>
+                </tr>
+                <tr>
+                  <td><code>CHECK (duracao_minutos &gt; 0),</code></td>
+                  <td>Só aceita a linha se a duração for maior que zero — evita atendimentos com duração nula ou negativa.</td>
+                </tr>
+                <tr>
+                  <td><code>CONSTRAINT chk_tipo_atendimento_valor</code></td>
+                  <td>Nomeia a próxima restrição, seguindo o mesmo padrão: <code>chk_</code> (de <em>check</em>) + nome da tabela + o que está sendo validado.</td>
+                </tr>
+                <tr>
+                  <td><code>CHECK (valor_base &gt;= 0)</code></td>
+                  <td>Só aceita a linha se o valor cobrado for zero ou positivo, evitando preços negativos por erro de digitação ou de sistema.</td>
+                </tr>
+                <tr>
+                  <td><code>);</code></td>
+                  <td>Fecha e encerra o comando.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Execute cada comando separado ou execute o bloco inteiro. No painel <strong>Output</strong>, confirme que cada instrução foi finalizada sem erro.</p>
+          <p>Atualize a árvore de schemas no Navigator clicando no ícone de atualização. Expanda <code>clinica_veterinaria_db</code> e depois <code>Tables</code>. As quatro tabelas devem aparecer.</p>
+        </section>
+
+        <section aria-labelledby="s7-title">
+          <h2 id="s7-title">7. Criar PET e sua chave estrangeira</h2>
+          <p>Agora crie a tabela <code>pet</code>. A coluna <code>id_responsavel</code> representa o lado N de uma relação 1:N: um responsável pode estar associado a vários pets.</p>
+
+          <pre class="code-block"><code>CREATE TABLE pet (
+  id_pet INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(80) NOT NULL,
+  especie VARCHAR(40) NOT NULL,
+  raca VARCHAR(80),
+  sexo CHAR(1) NOT NULL,
+  data_nascimento DATE,
+  peso_kg DECIMAL(5,2),
+  observacoes VARCHAR(500),
+  id_responsavel INT NOT NULL,
+
+  CONSTRAINT chk_pet_sexo
+    CHECK (sexo IN ('M', 'F')),
+
+  CONSTRAINT chk_pet_peso
+    CHECK (peso_kg IS NULL OR peso_kg &gt; 0),
+
+  CONSTRAINT fk_pet_responsavel
+    FOREIGN KEY (id_responsavel)
+    REFERENCES responsavel(id_responsavel)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+);</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: <code>CREATE TABLE pet</code></caption>
+              <thead>
+                <tr>
+                  <th scope="col">Trecho</th>
+                  <th scope="col">O que significa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>CREATE TABLE pet (</code></td>
+                  <td>Inicia a tabela <code>pet</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>id_pet INT PRIMARY KEY AUTO_INCREMENT,</code></td>
+                  <td>Identificador único e autogerado do pet.</td>
+                </tr>
+                <tr>
+                  <td><code>nome VARCHAR(80) NOT NULL,</code></td>
+                  <td>Nome do pet, obrigatório.</td>
+                </tr>
+                <tr>
+                  <td><code>especie VARCHAR(40) NOT NULL,</code></td>
+                  <td>Espécie (cão, gato, ave...), obrigatória. Foi usado texto livre, e não uma lista fixa, porque a clínica pode atender espécies variadas.</td>
+                </tr>
+                <tr>
+                  <td><code>raca VARCHAR(80),</code></td>
+                  <td>Raça do pet, opcional (sem <code>NOT NULL</code>) — nem todo pet tem raça definida.</td>
+                </tr>
+                <tr>
+                  <td><code>sexo CHAR(1) NOT NULL,</code></td>
+                  <td>Um único caractere obrigatório para o sexo do animal. Usa <code>CHAR(1)</code>, e não <code>VARCHAR(1)</code>, porque o tamanho é sempre exatamente 1, e <code>CHAR</code> é ligeiramente mais eficiente para tamanho fixo.</td>
+                </tr>
+                <tr>
+                  <td><code>data_nascimento DATE,</code></td>
+                  <td>Data de nascimento, opcional — pode não ser conhecida no cadastro.</td>
+                </tr>
+                <tr>
+                  <td><code>peso_kg DECIMAL(5,2),</code></td>
+                  <td>Peso em quilos, opcional, com até 5 dígitos no total e 2 depois da vírgula (até 999,99 kg).</td>
+                </tr>
+                <tr>
+                  <td><code>observacoes VARCHAR(500),</code></td>
+                  <td>Texto livre opcional e mais longo, para anotações gerais.</td>
+                </tr>
+                <tr>
+                  <td><code>id_responsavel INT NOT NULL,</code></td>
+                  <td>Coluna que vai guardar o <code>id_responsavel</code> de algum registro da tabela <code>responsavel</code>. É obrigatória porque, no cenário desta clínica, todo pet precisa ter um responsável. Sozinha, ainda é só uma coluna <code>INT</code> comum — é a <code>FOREIGN KEY</code> mais abaixo que transforma esse número em uma referência validada.</td>
+                </tr>
+                <tr>
+                  <td><code>CONSTRAINT chk_pet_sexo</code></td>
+                  <td>Nomeia a restrição de validação do sexo.</td>
+                </tr>
+                <tr>
+                  <td><code>CHECK (sexo IN ('M', 'F')),</code></td>
+                  <td>Só aceita a linha se <code>sexo</code> for exatamente <code>'M'</code> ou <code>'F'</code>. É o equivalente, no banco, a restringir os valores possíveis de uma <em>enum</em> no seu código — só que a validação acontece no servidor de dados, não na aplicação.</td>
+                </tr>
+                <tr>
+                  <td><code>CONSTRAINT chk_pet_peso</code></td>
+                  <td>Nomeia a restrição de validação do peso.</td>
+                </tr>
+                <tr>
+                  <td><code>CHECK (peso_kg IS NULL OR peso_kg &gt; 0),</code></td>
+                  <td>Como o peso é opcional, a condição precisa aceitar tanto "não informado" (<code>IS NULL</code>) quanto "informado e maior que zero". Sem o <code>IS NULL</code>, o <code>CHECK</code> rejeitaria também os pets sem peso cadastrado.</td>
+                </tr>
+                <tr>
+                  <td><code>CONSTRAINT fk_pet_responsavel</code></td>
+                  <td>Nomeia a chave estrangeira que vem a seguir, seguindo o padrão <code>fk_</code> (de <em>foreign key</em>) + tabela + tabela referenciada.</td>
+                </tr>
+                <tr>
+                  <td><code>FOREIGN KEY (id_responsavel)</code></td>
+                  <td>Declara que a coluna <code>id_responsavel</code>, definida acima, é uma chave estrangeira.</td>
+                </tr>
+                <tr>
+                  <td><code>REFERENCES responsavel(id_responsavel)</code></td>
+                  <td>Diz a qual tabela e a qual coluna essa chave estrangeira aponta: a coluna <code>id_responsavel</code> da tabela <code>responsavel</code>. A partir de agora, o MySQL rejeita qualquer pet cujo <code>id_responsavel</code> não exista na tabela <code>responsavel</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>ON UPDATE CASCADE</code></td>
+                  <td>Se o <code>id_responsavel</code> de um responsável for alterado na tabela <code>responsavel</code>, o MySQL atualiza automaticamente esse valor em todos os pets relacionados, mantendo a ligação íntegra.</td>
+                </tr>
+                <tr>
+                  <td><code>ON DELETE RESTRICT</code></td>
+                  <td>Impede a exclusão de um responsável enquanto ele ainda tiver pets cadastrados — o comando <code>DELETE</code> falha com erro em vez de apagar (ou deixar órfão) o pet. Isso protege o histórico da clínica contra exclusões acidentais.</td>
+                </tr>
+                <tr>
+                  <td><code>);</code></td>
+                  <td>Fecha e encerra o comando.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="concept-note">
+            <h4>Conceito: por que <code>pet</code> só pode ser criada depois de <code>responsavel</code>?</h4>
+            <p>Ao declarar <code>REFERENCES responsavel(id_responsavel)</code>, o MySQL precisa conferir se a tabela <code>responsavel</code> e a coluna <code>id_responsavel</code> realmente existem <em>no momento em que o <code>CREATE TABLE pet</code> é executado</em>. Se você tentasse criar <code>pet</code> antes de <code>responsavel</code>, o comando falharia, porque não é possível referenciar algo que ainda não existe — é o mesmo motivo pelo qual você não consegue importar uma classe de um arquivo que ainda não foi criado.</p>
+          </div>
+
+          <p>Para conferir a estrutura, execute:</p>
+          <pre class="code-block"><code>DESCRIBE pet;
+SHOW CREATE TABLE pet;</code></pre>
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: comandos de inspeção</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Trecho</th>
+                  <th scope="col">O que significa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>DESCRIBE pet;</code></td>
+                  <td>Lista as colunas da tabela <code>pet</code>, seus tipos, se aceitam <code>NULL</code>, quais são chave e quais têm valor padrão — um resumo rápido da estrutura.</td>
+                </tr>
+                <tr>
+                  <td><code>SHOW CREATE TABLE pet;</code></td>
+                  <td>Mostra o comando <code>CREATE TABLE</code> equivalente exatamente como o MySQL o entendeu e guardou, incluindo nomes de constraints — útil para conferir se tudo foi criado como esperado.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section aria-labelledby="s8-title">
+          <h2 id="s8-title">8. Criar a relação N:M entre veterinário e especialidade</h2>
+          <p>Um veterinário pode possuir várias especialidades, e uma especialidade pode pertencer a vários veterinários. Para essa relação N:M, crie uma tabela associativa.</p>
+
+          <div class="concept-note">
+            <h4>Conceito: por que uma relação N:M precisa de uma tabela extra?</h4>
+            <p>Uma chave estrangeira só consegue guardar <strong>uma</strong> referência por linha, o que resolve relações 1:N (um pet tem um único responsável). Numa relação N:M, cada lado pode se associar a vários registros do outro lado ao mesmo tempo, então nenhuma das duas tabelas originais consegue guardar isso sozinha. A solução é criar uma <strong>tabela associativa</strong> (também chamada de tabela de junção): cada linha dela representa um par válido "este veterinário tem esta especialidade", e ela guarda uma chave estrangeira para cada lado da relação.</p>
+          </div>
+
+          <pre class="code-block"><code>CREATE TABLE veterinario_especialidade (
+  id_veterinario INT NOT NULL,
+  id_especialidade INT NOT NULL,
+
+  PRIMARY KEY (id_veterinario, id_especialidade),
+
+  CONSTRAINT fk_vet_esp_veterinario
+    FOREIGN KEY (id_veterinario)
+    REFERENCES veterinario(id_veterinario)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT,
+
+  CONSTRAINT fk_vet_esp_especialidade
+    FOREIGN KEY (id_especialidade)
+    REFERENCES especialidade(id_especialidade)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+);</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: <code>CREATE TABLE veterinario_especialidade</code></caption>
+              <thead>
+                <tr>
+                  <th scope="col">Trecho</th>
+                  <th scope="col">O que significa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>CREATE TABLE veterinario_especialidade (</code></td>
+                  <td>Inicia a tabela associativa. O nome combina as duas tabelas que ela conecta, por convenção.</td>
+                </tr>
+                <tr>
+                  <td><code>id_veterinario INT NOT NULL,</code></td>
+                  <td>Vai guardar o identificador de um veterinário. Repare que aqui <strong>não</strong> há <code>AUTO_INCREMENT</code> nem <code>PRIMARY KEY</code> na própria linha: esta tabela não tem um identificador próprio, ela só reaproveita os identificadores das outras duas tabelas.</td>
+                </tr>
+                <tr>
+                  <td><code>id_especialidade INT NOT NULL,</code></td>
+                  <td>Vai guardar o identificador de uma especialidade, com o mesmo raciocínio da coluna anterior.</td>
+                </tr>
+                <tr>
+                  <td><code>PRIMARY KEY (id_veterinario, id_especialidade),</code></td>
+                  <td>Cria uma <strong>chave primária composta</strong>: a combinação das duas colunas é que precisa ser única, não cada uma isoladamente. Isso permite que um mesmo veterinário apareça em várias linhas (uma por especialidade) e que uma mesma especialidade apareça em várias linhas (uma por veterinário), mas impede que o <em>mesmo par</em> veterinário+especialidade seja cadastrado duas vezes.</td>
+                </tr>
+                <tr>
+                  <td><code>CONSTRAINT fk_vet_esp_veterinario</code></td>
+                  <td>Nomeia a primeira chave estrangeira desta tabela.</td>
+                </tr>
+                <tr>
+                  <td><code>FOREIGN KEY (id_veterinario)<br>REFERENCES veterinario(id_veterinario)</code></td>
+                  <td>Garante que todo valor de <code>id_veterinario</code> aqui corresponda a um veterinário que realmente existe na tabela <code>veterinario</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>ON UPDATE CASCADE<br>ON DELETE RESTRICT,</code></td>
+                  <td>Mesmo comportamento já visto na tabela <code>pet</code>: atualização em cascata, exclusão bloqueada enquanto houver vínculo.</td>
+                </tr>
+                <tr>
+                  <td><code>CONSTRAINT fk_vet_esp_especialidade</code></td>
+                  <td>Nomeia a segunda chave estrangeira desta tabela.</td>
+                </tr>
+                <tr>
+                  <td><code>FOREIGN KEY (id_especialidade)<br>REFERENCES especialidade(id_especialidade)</code></td>
+                  <td>Garante que todo valor de <code>id_especialidade</code> aqui corresponda a uma especialidade que realmente existe.</td>
+                </tr>
+                <tr>
+                  <td><code>ON UPDATE CASCADE<br>ON DELETE RESTRICT</code></td>
+                  <td>Mesmo comportamento de atualização em cascata e exclusão bloqueada, agora do lado da especialidade.</td>
+                </tr>
+                <tr>
+                  <td><code>);</code></td>
+                  <td>Fecha e encerra o comando. Repare que esta tabela só existe depois de <code>veterinario</code> e <code>especialidade</code>, pelo mesmo motivo de dependência já explicado na seção anterior.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>A chave primária composta impede o registro duplicado da mesma combinação. No Workbench, use <code>DESCRIBE veterinario_especialidade;</code> para observar que os dois campos fazem parte da chave.</p>
+        </section>
+
+        <section aria-labelledby="s9-title">
+          <h2 id="s9-title">9. Criar CONSULTA</h2>
+          <p>A consulta é criada depois de pet, veterinário e tipo de atendimento, pois contém chaves estrangeiras para as três tabelas.</p>
+
+          <pre class="code-block"><code>CREATE TABLE consulta (
+  id_consulta INT PRIMARY KEY AUTO_INCREMENT,
+  data_hora DATETIME NOT NULL,
+  status VARCHAR(20) NOT NULL DEFAULT 'agendada',
+  motivo VARCHAR(255) NOT NULL,
+  observacoes VARCHAR(1000),
+  valor_cobrado DECIMAL(10,2),
+  id_pet INT NOT NULL,
+  id_veterinario INT NOT NULL,
+  id_tipo_atendimento INT NOT NULL,
+
+  CONSTRAINT chk_consulta_status
+    CHECK (status IN (
+      'agendada',
+      'confirmada',
+      'em_atendimento',
+      'concluida',
+      'cancelada',
+      'faltou'
+    )),
+
+  CONSTRAINT chk_consulta_valor
+    CHECK (valor_cobrado IS NULL OR valor_cobrado &gt;= 0),
+
+  CONSTRAINT fk_consulta_pet
+    FOREIGN KEY (id_pet)
+    REFERENCES pet(id_pet)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT,
+
+  CONSTRAINT fk_consulta_veterinario
+    FOREIGN KEY (id_veterinario)
+    REFERENCES veterinario(id_veterinario)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT,
+
+  CONSTRAINT fk_consulta_tipo_atendimento
+    FOREIGN KEY (id_tipo_atendimento)
+    REFERENCES tipo_atendimento(id_tipo_atendimento)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+);</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: <code>CREATE TABLE consulta</code></caption>
+              <thead>
+                <tr>
+                  <th scope="col">Trecho</th>
+                  <th scope="col">O que significa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>CREATE TABLE consulta (</code></td>
+                  <td>Inicia a tabela central do sistema: cada linha é um agendamento/atendimento.</td>
+                </tr>
+                <tr>
+                  <td><code>id_consulta INT PRIMARY KEY AUTO_INCREMENT,</code></td>
+                  <td>Identificador único e autogerado da consulta.</td>
+                </tr>
+                <tr>
+                  <td><code>data_hora DATETIME NOT NULL,</code></td>
+                  <td>Data e horário do agendamento, obrigatórios.</td>
+                </tr>
+                <tr>
+                  <td><code>status VARCHAR(20) NOT NULL DEFAULT 'agendada',</code></td>
+                  <td>Situação atual da consulta, obrigatória, começando como <code>'agendada'</code> quando não informada explicitamente na inserção.</td>
+                </tr>
+                <tr>
+                  <td><code>motivo VARCHAR(255) NOT NULL,</code></td>
+                  <td>Motivo da consulta, obrigatório.</td>
+                </tr>
+                <tr>
+                  <td><code>observacoes VARCHAR(1000),</code></td>
+                  <td>Texto livre e mais longo, opcional, para anotações do atendimento.</td>
+                </tr>
+                <tr>
+                  <td><code>valor_cobrado DECIMAL(10,2),</code></td>
+                  <td>Valor efetivamente cobrado, opcional — pode ainda não ser conhecido enquanto a consulta está apenas agendada.</td>
+                </tr>
+                <tr>
+                  <td><code>id_pet INT NOT NULL,</code></td>
+                  <td>Vai se tornar chave estrangeira para <code>pet</code>; obrigatória porque toda consulta precisa de um pet.</td>
+                </tr>
+                <tr>
+                  <td><code>id_veterinario INT NOT NULL,</code></td>
+                  <td>Vai se tornar chave estrangeira para <code>veterinario</code>; obrigatória.</td>
+                </tr>
+                <tr>
+                  <td><code>id_tipo_atendimento INT NOT NULL,</code></td>
+                  <td>Vai se tornar chave estrangeira para <code>tipo_atendimento</code>; obrigatória.</td>
+                </tr>
+                <tr>
+                  <td><code>CONSTRAINT chk_consulta_status</code></td>
+                  <td>Nomeia a restrição que valida os valores possíveis de <code>status</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>CHECK (status IN ('agendada', 'confirmada', 'em_atendimento', 'concluida', 'cancelada', 'faltou')),</code></td>
+                  <td>Só aceita esses seis valores exatos para <code>status</code>. Funciona como uma <em>enum</em> validada pelo próprio banco: mesmo que outro sistema (ou um <code>UPDATE</code> feito diretamente no banco) tente gravar, por exemplo, <code>'finalizada'</code>, o MySQL recusa, porque esse valor não está na lista.</td>
+                </tr>
+                <tr>
+                  <td><code>CONSTRAINT chk_consulta_valor</code></td>
+                  <td>Nomeia a restrição de validação do valor cobrado.</td>
+                </tr>
+                <tr>
+                  <td><code>CHECK (valor_cobrado IS NULL OR valor_cobrado &gt;= 0),</code></td>
+                  <td>Aceita valor não informado (<code>IS NULL</code>) ou um valor zero/positivo — igual à lógica já usada em <code>peso_kg</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>CONSTRAINT fk_consulta_pet<br>FOREIGN KEY (id_pet)<br>REFERENCES pet(id_pet)<br>ON UPDATE CASCADE<br>ON DELETE RESTRICT,</code></td>
+                  <td>Transforma <code>id_pet</code> em referência validada para a tabela <code>pet</code>: só aceita pets que existem, propaga atualizações de <code>id</code> e bloqueia a exclusão de um pet que ainda tenha consultas.</td>
+                </tr>
+                <tr>
+                  <td><code>CONSTRAINT fk_consulta_veterinario<br>FOREIGN KEY (id_veterinario)<br>REFERENCES veterinario(id_veterinario)<br>ON UPDATE CASCADE<br>ON DELETE RESTRICT,</code></td>
+                  <td>Mesmo raciocínio, agora ligando a consulta a um veterinário existente.</td>
+                </tr>
+                <tr>
+                  <td><code>CONSTRAINT fk_consulta_tipo_atendimento<br>FOREIGN KEY (id_tipo_atendimento)<br>REFERENCES tipo_atendimento(id_tipo_atendimento)<br>ON UPDATE CASCADE<br>ON DELETE RESTRICT</code></td>
+                  <td>Mesmo raciocínio, ligando a consulta a um tipo de atendimento existente. Note que esta é a última cláusula, por isso não termina com vírgula.</td>
+                </tr>
+                <tr>
+                  <td><code>);</code></td>
+                  <td>Fecha e encerra o comando.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Após executar, atualize o schema no Navigator e confirme a existência da tabela. Em seguida, execute:</p>
+          <pre class="code-block"><code>DESCRIBE consulta;
+SHOW CREATE TABLE consulta;</code></pre>
+          <p>Procure as colunas <code>id_pet</code>, <code>id_veterinario</code> e <code>id_tipo_atendimento</code>, além das constraints no comando de criação.</p>
+        </section>
+
+        <section aria-labelledby="s10-title">
+          <h2 id="s10-title">10. Criar procedimentos e a relação N:M com consulta</h2>
+          <p>Uma consulta pode possuir vários procedimentos. Um procedimento, como vacinação ou microchipagem, pode ser realizado em várias consultas. Essa relação N:M exige uma tabela própria.</p>
+
+          <pre class="code-block"><code>CREATE TABLE procedimento (
+  id_procedimento INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(100) NOT NULL UNIQUE,
+  descricao VARCHAR(500),
+  valor_base DECIMAL(10,2) NOT NULL,
+
+  CONSTRAINT chk_procedimento_valor
+    CHECK (valor_base &gt;= 0)
+);
+
+CREATE TABLE consulta_procedimento (
+  id_consulta INT NOT NULL,
+  id_procedimento INT NOT NULL,
+  quantidade INT NOT NULL DEFAULT 1,
+  valor_cobrado DECIMAL(10,2) NOT NULL,
+  observacao VARCHAR(500),
+
+  PRIMARY KEY (id_consulta, id_procedimento),
+
+  CONSTRAINT chk_consulta_procedimento_quantidade
+    CHECK (quantidade &gt; 0),
+
+  CONSTRAINT chk_consulta_procedimento_valor
+    CHECK (valor_cobrado &gt;= 0),
+
+  CONSTRAINT fk_consulta_procedimento_consulta
+    FOREIGN KEY (id_consulta)
+    REFERENCES consulta(id_consulta)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+
+  CONSTRAINT fk_consulta_procedimento_procedimento
+    FOREIGN KEY (id_procedimento)
+    REFERENCES procedimento(id_procedimento)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+);</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: <code>CREATE TABLE procedimento</code></caption>
+              <thead>
+                <tr>
+                  <th scope="col">Trecho</th>
+                  <th scope="col">O que significa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>CREATE TABLE procedimento (</code></td>
+                  <td>Inicia a tabela que lista os procedimentos que a clínica oferece.</td>
+                </tr>
+                <tr>
+                  <td><code>id_procedimento INT PRIMARY KEY AUTO_INCREMENT,</code></td>
+                  <td>Identificador único e autogerado do procedimento.</td>
+                </tr>
+                <tr>
+                  <td><code>nome VARCHAR(100) NOT NULL UNIQUE,</code></td>
+                  <td>Nome do procedimento, obrigatório e único.</td>
+                </tr>
+                <tr>
+                  <td><code>descricao VARCHAR(500),</code></td>
+                  <td>Descrição opcional e mais longa.</td>
+                </tr>
+                <tr>
+                  <td><code>valor_base DECIMAL(10,2) NOT NULL,</code></td>
+                  <td>Valor padrão do procedimento, obrigatório.</td>
+                </tr>
+                <tr>
+                  <td><code>CONSTRAINT chk_procedimento_valor<br>CHECK (valor_base &gt;= 0)</code></td>
+                  <td>Impede valor negativo, seguindo o mesmo padrão já usado em outras tabelas.</td>
+                </tr>
+                <tr>
+                  <td><code>);</code></td>
+                  <td>Fecha e encerra o comando.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="concept-note">
+            <h4>Conceito: atributos que pertencem ao relacionamento, não às entidades</h4>
+            <p>Repare que <code>quantidade</code>, <code>valor_cobrado</code> e <code>observacao</code> não fazem sentido nem em <code>consulta</code> nem em <code>procedimento</code> isoladamente: eles só existem porque <em>este</em> procedimento foi feito <em>nesta</em> consulta. Por isso ficam na tabela associativa, e não em nenhuma das duas tabelas originais. É comum uma tabela N:M carregar dados próprios do vínculo, além das duas chaves estrangeiras.</p>
+          </div>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: <code>CREATE TABLE consulta_procedimento</code></caption>
+              <thead>
+                <tr>
+                  <th scope="col">Trecho</th>
+                  <th scope="col">O que significa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>CREATE TABLE consulta_procedimento (</code></td>
+                  <td>Inicia a tabela associativa entre consulta e procedimento.</td>
+                </tr>
+                <tr>
+                  <td><code>id_consulta INT NOT NULL,</code></td>
+                  <td>Vai referenciar uma consulta; obrigatória.</td>
+                </tr>
+                <tr>
+                  <td><code>id_procedimento INT NOT NULL,</code></td>
+                  <td>Vai referenciar um procedimento; obrigatória.</td>
+                </tr>
+                <tr>
+                  <td><code>quantidade INT NOT NULL DEFAULT 1,</code></td>
+                  <td>Quantas vezes o procedimento foi realizado nesta consulta; obrigatória, começando em 1 quando não informada.</td>
+                </tr>
+                <tr>
+                  <td><code>valor_cobrado DECIMAL(10,2) NOT NULL,</code></td>
+                  <td>Valor efetivamente cobrado por este procedimento nesta consulta específica; obrigatório (diferente da tabela <code>consulta</code>, onde o valor geral podia ficar em aberto).</td>
+                </tr>
+                <tr>
+                  <td><code>observacao VARCHAR(500),</code></td>
+                  <td>Anotação opcional sobre este procedimento nesta consulta.</td>
+                </tr>
+                <tr>
+                  <td><code>PRIMARY KEY (id_consulta, id_procedimento),</code></td>
+                  <td>Chave primária composta: o mesmo procedimento pode aparecer em várias consultas e a mesma consulta pode ter vários procedimentos, mas o par específico não pode se repetir.</td>
+                </tr>
+                <tr>
+                  <td><code>CONSTRAINT chk_consulta_procedimento_quantidade<br>CHECK (quantidade &gt; 0),</code></td>
+                  <td>Impede quantidade zero ou negativa.</td>
+                </tr>
+                <tr>
+                  <td><code>CONSTRAINT chk_consulta_procedimento_valor<br>CHECK (valor_cobrado &gt;= 0),</code></td>
+                  <td>Impede valor cobrado negativo.</td>
+                </tr>
+                <tr>
+                  <td><code>CONSTRAINT fk_consulta_procedimento_consulta<br>FOREIGN KEY (id_consulta)<br>REFERENCES consulta(id_consulta)</code></td>
+                  <td>Garante que todo <code>id_consulta</code> aqui corresponda a uma consulta existente.</td>
+                </tr>
+                <tr>
+                  <td><code>ON UPDATE CASCADE<br>ON DELETE CASCADE,</code></td>
+                  <td>Diferente das outras chaves estrangeiras vistas até aqui, esta usa <code>ON DELETE CASCADE</code>: se a consulta for excluída, os procedimentos vinculados a ela são excluídos automaticamente junto, porque não faz sentido manter "procedimentos de uma consulta que não existe mais".</td>
+                </tr>
+                <tr>
+                  <td><code>CONSTRAINT fk_consulta_procedimento_procedimento<br>FOREIGN KEY (id_procedimento)<br>REFERENCES procedimento(id_procedimento)<br>ON UPDATE CASCADE<br>ON DELETE RESTRICT</code></td>
+                  <td>Garante que todo <code>id_procedimento</code> corresponda a um procedimento existente; aqui volta a usar <code>RESTRICT</code>, porque um procedimento (como "vacinação") deve continuar existindo no catálogo mesmo que já tenha sido usado em consultas — ele não deve ser apagado enquanto houver histórico associado.</td>
+                </tr>
+                <tr>
+                  <td><code>);</code></td>
+                  <td>Fecha e encerra o comando.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="dev-note">
+            <h4>Para quem já programa</h4>
+            <p><code>CASCADE</code> e <code>RESTRICT</code> são escolhas de design, não uma regra fixa do MySQL — parecido com decidir, ao apagar um objeto pai na sua aplicação, se os objetos filhos devem ser apagados junto ou se a operação deve ser bloqueada. Aqui, apagar uma <em>consulta</em> arrasta seus procedimentos vinculados (<code>CASCADE</code>), mas apagar um <em>procedimento</em> do catálogo é bloqueado se ele já foi usado (<code>RESTRICT</code>), porque o catálogo de procedimentos deve ser mais estável que o histórico de uma consulta específica.</p>
+          </div>
+
+          <p>Os atributos <code>quantidade</code>, <code>valor_cobrado</code> e <code>observacao</code> pertencem ao relacionamento, pois descrevem o procedimento dentro de uma consulta específica.</p>
+          <p>Verifique a estrutura:</p>
+          <pre class="code-block"><code>DESCRIBE procedimento;
+DESCRIBE consulta_procedimento;
+SHOW CREATE TABLE consulta_procedimento;</code></pre>
+        </section>
+
+        <section aria-labelledby="s11-title">
+          <h2 id="s11-title">11. Validar toda a estrutura</h2>
+          <p>Ao terminar, execute os comandos abaixo no SQL Editor do Workbench. Eles não alteram a estrutura; apenas permitem inspecionar os objetos criados.</p>
+
+          <pre class="code-block"><code>SHOW TABLES;
+
+DESCRIBE responsavel;
+DESCRIBE pet;
+DESCRIBE veterinario;
+DESCRIBE especialidade;
+DESCRIBE veterinario_especialidade;
+DESCRIBE tipo_atendimento;
+DESCRIBE consulta;
+DESCRIBE procedimento;
+DESCRIBE consulta_procedimento;
+
+SHOW CREATE TABLE consulta;
+SHOW CREATE TABLE consulta_procedimento;</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: comandos de validação final</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Trecho</th>
+                  <th scope="col">O que significa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>SHOW TABLES;</code></td>
+                  <td>Lista todas as tabelas existentes dentro do banco atualmente selecionado (aquele definido pelo último <code>USE</code>).</td>
+                </tr>
+                <tr>
+                  <td><code>DESCRIBE nome_da_tabela;</code> (repetido para cada tabela)</td>
+                  <td>Mostra colunas, tipos, obrigatoriedade e chaves de cada tabela individualmente — uma checagem rápida de que cada uma foi criada como planejado.</td>
+                </tr>
+                <tr>
+                  <td><code>SHOW CREATE TABLE consulta;</code> e <code>SHOW CREATE TABLE consulta_procedimento;</code></td>
+                  <td>Mostra o comando completo de criação dessas duas tabelas específicas, incluindo os nomes das constraints — úteis para conferir com atenção porque são as tabelas com mais chaves estrangeiras deste banco.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Use a lista abaixo para conferir o resultado:</p>
+          <ul class="check-list">
+            <li>Nove tabelas aparecem dentro de <code>clinica_veterinaria_db</code>.</li>
+            <li>Todas as tabelas possuem chave primária.</li>
+            <li>As chaves estrangeiras apontam para tabelas criadas anteriormente.</li>
+            <li>As relações N:M possuem chaves primárias compostas.</li>
+            <li>Os campos obrigatórios foram definidos com <code>NOT NULL</code>.</li>
+            <li>Valores exclusivos utilizam <code>UNIQUE</code>.</li>
+            <li>Valores padrão e limites de domínio aparecem nas constraints.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="s12-title">
+          <h2 id="s12-title">12. Script consolidado</h2>
+          <p>Depois de testar cada etapa, mantenha uma versão completa do script. O bloco abaixo pode ser salvo e executado novamente em um banco vazio, desde que as tabelas ainda não existam.</p>
+          <p>Execute o bloco inteiro somente depois de compreender a ordem de criação. Tabelas pai vêm antes das tabelas filhas porque as chaves estrangeiras dependem delas.</p>
+
+          <div class="concept-note">
+            <h4>Conceito: mapa de dependências entre as tabelas</h4>
+            <p>Antes de rodar o script completo, é útil visualizar por que a ordem abaixo é a única que funciona sem erro:</p>
+            <ol>
+              <li><code>responsavel</code>, <code>veterinario</code>, <code>especialidade</code>, <code>tipo_atendimento</code> — não têm chave estrangeira, podem ser criadas em qualquer ordem entre si.</li>
+              <li><code>pet</code> — depende de <code>responsavel</code> já existir.</li>
+              <li><code>veterinario_especialidade</code> — depende de <code>veterinario</code> e <code>especialidade</code>.</li>
+              <li><code>consulta</code> — depende de <code>pet</code>, <code>veterinario</code> e <code>tipo_atendimento</code>.</li>
+              <li><code>procedimento</code> — não tem chave estrangeira, mas precisa existir antes do próximo item.</li>
+              <li><code>consulta_procedimento</code> — depende de <code>consulta</code> e <code>procedimento</code>.</li>
+            </ol>
+            <p>Essa lista é, na prática, uma ordenação topológica das dependências — o mesmo tipo de problema que aparece ao resolver a ordem de inicialização de módulos com dependências entre si no código.</p>
+          </div>
+
+          <pre class="code-block"><code>CREATE DATABASE IF NOT EXISTS clinica_veterinaria_db
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+USE clinica_veterinaria_db;
+
+CREATE TABLE responsavel (
+  id_responsavel INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(120) NOT NULL,
+  cpf CHAR(11) NOT NULL UNIQUE,
+  telefone VARCHAR(20) NOT NULL,
+  email VARCHAR(120) UNIQUE
+);
+
+CREATE TABLE veterinario (
+  id_veterinario INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(120) NOT NULL,
+  crmv VARCHAR(20) NOT NULL UNIQUE,
+  telefone VARCHAR(20) NOT NULL,
+  email VARCHAR(120) NOT NULL UNIQUE,
+  ativo BOOLEAN NOT NULL DEFAULT TRUE
+);
+
+CREATE TABLE especialidade (
+  id_especialidade INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(80) NOT NULL UNIQUE,
+  descricao VARCHAR(255)
+);
+
+CREATE TABLE tipo_atendimento (
+  id_tipo_atendimento INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(80) NOT NULL UNIQUE,
+  duracao_minutos INT NOT NULL,
+  valor_base DECIMAL(10,2) NOT NULL,
+  ativo BOOLEAN NOT NULL DEFAULT TRUE,
+  CONSTRAINT chk_tipo_atendimento_duracao CHECK (duracao_minutos &gt; 0),
+  CONSTRAINT chk_tipo_atendimento_valor CHECK (valor_base &gt;= 0)
+);
+
+CREATE TABLE pet (
+  id_pet INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(80) NOT NULL,
+  especie VARCHAR(40) NOT NULL,
+  raca VARCHAR(80),
+  sexo CHAR(1) NOT NULL,
+  data_nascimento DATE,
+  peso_kg DECIMAL(5,2),
+  observacoes VARCHAR(500),
+  id_responsavel INT NOT NULL,
+  CONSTRAINT chk_pet_sexo CHECK (sexo IN ('M', 'F')),
+  CONSTRAINT chk_pet_peso CHECK (peso_kg IS NULL OR peso_kg &gt; 0),
+  CONSTRAINT fk_pet_responsavel
+    FOREIGN KEY (id_responsavel) REFERENCES responsavel(id_responsavel)
+    ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE veterinario_especialidade (
+  id_veterinario INT NOT NULL,
+  id_especialidade INT NOT NULL,
+  PRIMARY KEY (id_veterinario, id_especialidade),
+  CONSTRAINT fk_vet_esp_veterinario
+    FOREIGN KEY (id_veterinario) REFERENCES veterinario(id_veterinario)
+    ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT fk_vet_esp_especialidade
+    FOREIGN KEY (id_especialidade) REFERENCES especialidade(id_especialidade)
+    ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE procedimento (
+  id_procedimento INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(100) NOT NULL UNIQUE,
+  descricao VARCHAR(500),
+  valor_base DECIMAL(10,2) NOT NULL,
+  CONSTRAINT chk_procedimento_valor CHECK (valor_base &gt;= 0)
+);
+
+CREATE TABLE consulta (
+  id_consulta INT PRIMARY KEY AUTO_INCREMENT,
+  data_hora DATETIME NOT NULL,
+  status VARCHAR(20) NOT NULL DEFAULT 'agendada',
+  motivo VARCHAR(255) NOT NULL,
+  observacoes VARCHAR(1000),
+  valor_cobrado DECIMAL(10,2),
+  id_pet INT NOT NULL,
+  id_veterinario INT NOT NULL,
+  id_tipo_atendimento INT NOT NULL,
+  CONSTRAINT chk_consulta_status CHECK (status IN (
+    'agendada', 'confirmada', 'em_atendimento',
+    'concluida', 'cancelada', 'faltou'
+  )),
+  CONSTRAINT chk_consulta_valor CHECK (valor_cobrado IS NULL OR valor_cobrado &gt;= 0),
+  CONSTRAINT fk_consulta_pet
+    FOREIGN KEY (id_pet) REFERENCES pet(id_pet)
+    ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT fk_consulta_veterinario
+    FOREIGN KEY (id_veterinario) REFERENCES veterinario(id_veterinario)
+    ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT fk_consulta_tipo_atendimento
+    FOREIGN KEY (id_tipo_atendimento) REFERENCES tipo_atendimento(id_tipo_atendimento)
+    ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE consulta_procedimento (
+  id_consulta INT NOT NULL,
+  id_procedimento INT NOT NULL,
+  quantidade INT NOT NULL DEFAULT 1,
+  valor_cobrado DECIMAL(10,2) NOT NULL,
+  observacao VARCHAR(500),
+  PRIMARY KEY (id_consulta, id_procedimento),
+  CONSTRAINT chk_consulta_procedimento_quantidade CHECK (quantidade &gt; 0),
+  CONSTRAINT chk_consulta_procedimento_valor CHECK (valor_cobrado &gt;= 0),
+  CONSTRAINT fk_consulta_procedimento_consulta
+    FOREIGN KEY (id_consulta) REFERENCES consulta(id_consulta)
+    ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT fk_consulta_procedimento_procedimento
+    FOREIGN KEY (id_procedimento) REFERENCES procedimento(id_procedimento)
+    ON UPDATE CASCADE ON DELETE RESTRICT
+);</code></pre>
+          <p>Se cada seção anterior já foi executada com sucesso, este bloco não traz nenhuma linha nova — ele apenas reúne, na ordem correta, tudo o que já foi explicado linha a linha nas seções 4 a 10.</p>
+        </section>
+
+        <section aria-labelledby="s13-title">
+          <h2 id="s13-title">13. Problemas frequentes no Workbench</h2>
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Como investigar problemas comuns</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Situação</th>
+                  <th scope="col">Causa provável</th>
+                  <th scope="col">Como investigar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>A instrução é executada, mas a tabela não aparece.</td>
+                  <td>O schema não foi atualizado no Navigator ou a tabela foi criada em outro banco.</td>
+                  <td>Execute <code>SELECT DATABASE();</code> e atualize <strong>Schemas</strong>.</td>
+                </tr>
+                <tr>
+                  <td>Erro ao criar uma chave estrangeira.</td>
+                  <td>A tabela pai não existe, os tipos não coincidem ou a coluna referenciada não é chave.</td>
+                  <td>Verifique a ordem dos comandos, tipos e resultado de <code>SHOW CREATE TABLE</code>.</td>
+                </tr>
+                <tr>
+                  <td>Erro de sintaxe.</td>
+                  <td>Vírgula, parêntese ou palavra-chave incorreta.</td>
+                  <td>Leia a linha destacada no Output e execute o bloco em partes menores.</td>
+                </tr>
+                <tr>
+                  <td>Erro ao remover registro relacionado.</td>
+                  <td><code>ON DELETE RESTRICT</code> protege a integridade referencial.</td>
+                  <td>Verifique quais registros dependentes ainda existem antes de excluir.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="dev-note">
+            <h4>Para quem já programa</h4>
+            <p>Esses erros de banco cumprem o mesmo papel que exceções em tempo de execução no seu código: eles não são "coisas que deram errado com o programa", são a própria camada de dados recusando ativamente uma operação que quebraria uma regra de negócio (como excluir um responsável que ainda tem pets). Ler a mensagem completa no Output — e não só o código do erro — costuma indicar exatamente qual constraint foi violada.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="materials-title">
+          <h2 id="materials-title">Materiais complementares</h2>
+          <ul class="materials-list">
+            <li>MySQL Workbench instalado e conectado ao servidor do laboratório.</li>
+            <li>Script salvo como <code>01_clinica_veterinaria_ddl.sql</code>.</li>
+            <li>Documentação do MySQL sobre <em>CREATE DATABASE</em>, <em>CREATE TABLE</em> e constraints.</li>
+            <li>Próximo tópico: manipulação de dados com DML — <code>INSERT</code>, <code>SELECT</code>, <code>UPDATE</code> e <code>DELETE</code>.</li>
+          </ul>
+        </section>
+
+        <section class="topic-pager" aria-label="Navegação entre tópicos">
+          <div class="topic-pager-inner">
+            <a class="pager-link pager-link--prev" href="mapeamento-mer-relacional.html">
+              <span class="pager-label">Anterior</span>
+              <span class="pager-title">Mapeamento do MER para o Modelo Relacional</span>
+            </a>
+            <a class="pager-link pager-link--next" href="../index.html#topicos">
+              <span class="pager-label">Próximo</span>
+              <span class="pager-title">Voltar ao índice</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Banco de Dados · Engenharia de Computação · 2026/2</p>
+      <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
+    </div>
+  </footer>
+</body>
+</html>

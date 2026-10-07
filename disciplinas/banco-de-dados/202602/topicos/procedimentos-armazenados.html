@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Procedimentos Armazenados e Funções | Banco de Dados</title>
+  <meta name="description" content="Stored procedures e funções definidas pelo usuário em SQL, e a diferença entre lógica no banco e lógica na aplicação, explicadas com uma oficina de montagem de robôs com rotinas automatizadas.">
+  <meta name="keywords" content="procedimento armazenado, stored procedure, função definida pelo usuário, DELIMITER, lógica no banco de dados, SQL">
+  <meta name="author" content="Disciplina de Banco de Dados">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/procedimentos-armazenados.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Procedimentos Armazenados e Funções">
+  <meta property="og:description" content="Stored procedures e funções explicadas com uma oficina de montagem de robôs com rotinas automatizadas.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/procedimentos-armazenados.html">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Procedimentos Armazenados e Funções",
+    "description": "Stored procedures e funções explicadas com uma oficina de montagem de robôs com rotinas automatizadas.",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "aula prática",
+    "educationalLevel": "Graduação",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Banco de Dados",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/index.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">BD</span>
+        <span class="brand-text">
+          <span class="brand-name">Banco de Dados</span>
+          <span class="brand-sub">Eng. de Computação</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="../index.html">Banco de Dados</a></li>
+          <li aria-current="page">Procedimentos Armazenados e Funções</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="topic-article">
+      <div class="container">
+        <header class="topic-header">
+          <p class="topic-eyebrow">Programabilidade</p>
+          <h1>Procedimentos armazenados e funções</h1>
+          <p class="topic-lead">Até agora, cada operação no banco era um comando SQL isolado, disparado pela aplicação. Hoje vamos ver como guardar uma <strong>rotina inteira</strong> dentro do próprio banco, para ser executada sempre do mesmo jeito, por qualquer aplicação que precisar dela. Bem-vindos à oficina de montagem de robôs, onde rotinas automatizadas cuidam de tarefas repetitivas.</p>
+        </header>
+
+        <section class="objectives" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">O que vocês vão aprender aqui</h2>
+          <ul class="check-list">
+            <li>Entender o que é um procedimento armazenado (stored procedure).</li>
+            <li>Criar e chamar procedimentos com parâmetros.</li>
+            <li>Criar uma função definida pelo usuário que retorna um valor.</li>
+            <li>Discutir quando colocar lógica no banco e quando deixá-la na aplicação.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="s1-title">
+          <h2 id="s1-title">1. A oficina de montagem de robôs</h2>
+          <div class="theme-box">
+            <h3>🔧 Oficina RoboForge</h3>
+            <p>Toda vez que um robô é montado, a oficina precisa registrar a peça usada, baixar o estoque dessa peça e marcar o robô como "em montagem". São três passos, sempre na mesma ordem, repetidos para cada robô montado.</p>
+          </div>
+          <pre class="code-block"><code>CREATE TABLE peca (
+  id_peca INT PRIMARY KEY AUTO_INCREMENT,
+  nome_peca VARCHAR(60) NOT NULL,
+  estoque INT NOT NULL DEFAULT 0
+);
+
+CREATE TABLE robo (
+  id_robo INT PRIMARY KEY AUTO_INCREMENT,
+  modelo VARCHAR(60) NOT NULL,
+  status VARCHAR(20) NOT NULL DEFAULT 'planejado'
+);
+
+CREATE TABLE uso_peca (
+  id_robo INT,
+  id_peca INT,
+  quantidade INT NOT NULL,
+  PRIMARY KEY (id_robo, id_peca),
+  FOREIGN KEY (id_robo) REFERENCES robo(id_robo),
+  FOREIGN KEY (id_peca) REFERENCES peca(id_peca)
+);</code></pre>
+        </section>
+
+        <section aria-labelledby="s2-title">
+          <h2 id="s2-title">2. Criando um procedimento armazenado</h2>
+          <p>Em vez de repetir os três comandos toda vez — na aplicação, em scripts diferentes, por pessoas diferentes — eu guardo a rotina inteira no banco, com o nome <code>registrar_uso_peca</code>:</p>
+          <pre class="code-block"><code>DELIMITER //
+
+CREATE PROCEDURE registrar_uso_peca (
+  IN p_id_robo INT,
+  IN p_id_peca INT,
+  IN p_quantidade INT
+)
+BEGIN
+  INSERT INTO uso_peca (id_robo, id_peca, quantidade)
+  VALUES (p_id_robo, p_id_peca, p_quantidade);
+
+  UPDATE peca
+  SET estoque = estoque - p_quantidade
+  WHERE id_peca = p_id_peca;
+
+  UPDATE robo
+  SET status = 'em montagem'
+  WHERE id_robo = p_id_robo;
+END //
+
+DELIMITER ;</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: o procedimento</caption>
+              <thead><tr><th scope="col">Trecho</th><th scope="col">O que significa</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>DELIMITER //</code></td>
+                  <td>Troca temporariamente o caractere que marca "fim de comando" de <code>;</code> para <code>//</code>, porque o corpo do procedimento usa <code>;</code> internamente e não queremos que o cliente SQL corte o comando no meio.</td>
+                </tr>
+                <tr>
+                  <td><code>CREATE PROCEDURE registrar_uso_peca (...)</code></td>
+                  <td>Declara o procedimento e seus parâmetros de entrada: qual robô, qual peça e qual quantidade.</td>
+                </tr>
+                <tr>
+                  <td><code>IN p_id_robo INT</code></td>
+                  <td><code>IN</code> indica que o parâmetro só entra valores — o procedimento não devolve nada através dele. O prefixo <code>p_</code> evita confusão com nomes de colunas.</td>
+                </tr>
+                <tr>
+                  <td><code>BEGIN ... END</code></td>
+                  <td>Delimita o corpo do procedimento: tudo que está entre eles é executado em sequência, como um bloco único, toda vez que o procedimento é chamado.</td>
+                </tr>
+                <tr>
+                  <td><code>INSERT ... UPDATE ... UPDATE ...</code></td>
+                  <td>Os três comandos que antes seriam repetidos manualmente agora vivem dentro da rotina, sempre executados juntos e na mesma ordem.</td>
+                </tr>
+                <tr>
+                  <td><code>DELIMITER ;</code></td>
+                  <td>Devolve o delimitador padrão para <code>;</code>, já que terminamos de declarar o procedimento.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Para usar o procedimento, basta chamá-lo com <code>CALL</code>:</p>
+          <pre class="code-block"><code>CALL registrar_uso_peca(12, 5, 2);</code></pre>
+          <p>Uma única chamada executa os três passos, sempre na mesma ordem, sem que quem está chamando precise saber os detalhes internos da rotina.</p>
+
+          <div class="concept-box">
+            <h3>Conceito: por que não envolver isso em uma transação?</h3>
+            <p>Reparem que os três comandos dentro do procedimento formam, na prática, uma operação que deveria ser tudo-ou-nada — exatamente o problema que vimos com <code>START TRANSACTION</code>/<code>COMMIT</code>/<code>ROLLBACK</code>. Em um cenário real, esse procedimento normalmente envolveria os três comandos em uma transação, para garantir que, se algo falhar no meio, nenhuma das três alterações fique de pé.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="s3-title">
+          <h2 id="s3-title">3. Funções definidas pelo usuário</h2>
+          <p>Uma <strong>função</strong> é parecida com um procedimento, mas tem uma diferença importante: ela sempre <strong>retorna um valor</strong> e pode ser usada dentro de uma expressão, como em um <code>SELECT</code>. Vamos criar uma função que calcula quantos robôs já foram montados usando uma determinada peça:</p>
+          <pre class="code-block"><code>DELIMITER //
+
+CREATE FUNCTION total_robos_com_peca (p_id_peca INT)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+  DECLARE total INT;
+
+  SELECT COUNT(DISTINCT id_robo) INTO total
+  FROM uso_peca
+  WHERE id_peca = p_id_peca;
+
+  RETURN total;
+END //
+
+DELIMITER ;</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: a função</caption>
+              <thead><tr><th scope="col">Trecho</th><th scope="col">O que significa</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>RETURNS INT</code></td>
+                  <td>Declara que essa função sempre devolve um número inteiro.</td>
+                </tr>
+                <tr>
+                  <td><code>DETERMINISTIC</code></td>
+                  <td>Avisa ao SGBD que, para os mesmos parâmetros de entrada, a função sempre devolve o mesmo resultado — isso permite que o SGBD otimize o uso da função.</td>
+                </tr>
+                <tr>
+                  <td><code>DECLARE total INT;</code></td>
+                  <td>Cria uma variável local <code>total</code>, que só existe durante a execução da função.</td>
+                </tr>
+                <tr>
+                  <td><code>SELECT ... INTO total ...</code></td>
+                  <td>Executa a consulta e guarda o resultado dentro da variável <code>total</code>, em vez de devolvê-lo diretamente como resultado de consulta.</td>
+                </tr>
+                <tr>
+                  <td><code>RETURN total;</code></td>
+                  <td>Devolve o valor calculado para quem chamou a função.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Como a função devolve um valor, posso usá-la dentro de um <code>SELECT</code> comum:</p>
+          <pre class="code-block"><code>SELECT nome_peca, total_robos_com_peca(id_peca) AS robos_usando
+FROM peca;</code></pre>
+        </section>
+
+        <section aria-labelledby="s4-title">
+          <h2 id="s4-title">4. Lógica no banco ou lógica na aplicação?</h2>
+          <p>Nem toda regra precisa (ou deve) virar um procedimento armazenado. Vale pensar em dois critérios:</p>
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Quando colocar lógica no banco</caption>
+              <thead><tr><th scope="col">Favorece o banco</th><th scope="col">Favorece a aplicação</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Regra usada por várias aplicações diferentes acessando o mesmo banco.</td>
+                  <td>Regra específica de uma única aplicação, que pode mudar com frequência.</td>
+                </tr>
+                <tr>
+                  <td>Operação que precisa de garantias fortes de atomicidade/consistência perto dos dados.</td>
+                  <td>Lógica de interface, validação de formulário, regras que dependem de serviços externos.</td>
+                </tr>
+                <tr>
+                  <td>Rotina de manutenção/auditoria que deve rodar independente de quem está usando o sistema.</td>
+                  <td>Equipe prefere versionar e testar a lógica de negócio junto com o código da aplicação.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tip-box">
+            <h3>💡 Não existe resposta única</h3>
+            <p>Essa é uma decisão de arquitetura, não uma regra fixa de SQL. Times diferentes fazem escolhas diferentes — o importante é vocês entenderem o que um procedimento armazenado <em>pode</em> fazer, para decidir conscientemente quando usar essa ferramenta.</p>
+          </div>
+        </section>
+
+        <section class="quiz-box" aria-labelledby="quiz-title">
+          <h3 id="quiz-title">🤔 Confira se entendeu</h3>
+          <details>
+            <summary>Qual é a principal diferença entre um procedimento armazenado e uma função definida pelo usuário?</summary>
+            <p>A função sempre retorna um valor e pode ser usada dentro de uma expressão (como em um SELECT); o procedimento não precisa retornar nada e é executado com CALL, de forma isolada.</p>
+          </details>
+          <details>
+            <summary>Por que usamos DELIMITER // antes de criar o procedimento registrar_uso_peca?</summary>
+            <p>Porque o corpo do procedimento contém vários comandos terminados em ponto e vírgula. Trocar o delimitador evita que o cliente SQL interprete o primeiro ponto e vírgula interno como o fim do CREATE PROCEDURE.</p>
+          </details>
+        </section>
+
+        <section aria-labelledby="materials-title">
+          <h2 id="materials-title">Materiais para estudo</h2>
+          <ul class="materials-list">
+            <li>Referência oficial: <a href="https://dev.mysql.com/doc/refman/8.0/en/stored-routines.html" target="_blank" rel="noopener">stored routines no MySQL (procedures e functions)</a>.</li>
+            <li>Próximo tópico: gatilhos (triggers) — rotinas que disparam automaticamente em resposta a eventos na tabela.</li>
+          </ul>
+          <ul class="video-links">
+            <li>
+              <span class="video-icon" aria-hidden="true">▶</span>
+              <div>
+                <a href="https://www.youtube.com/results?search_query=stored+procedure+SQL+MySQL+explicado" target="_blank" rel="noopener">Buscar vídeo-aulas sobre stored procedures em SQL no YouTube</a>
+                <span class="video-note">Abre uma busca no YouTube com aulas sobre procedimentos armazenados.</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="topic-pager" aria-label="Navegação entre tópicos">
+          <div class="topic-pager-inner">
+            <a class="pager-link pager-link--prev" href="visoes.html">
+              <span class="pager-label">Anterior</span>
+              <span class="pager-title">Visões (Views)</span>
+            </a>
+            <a class="pager-link pager-link--next" href="gatilhos.html">
+              <span class="pager-label">Próximo</span>
+              <span class="pager-title">Gatilhos (Triggers)</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Banco de Dados · Engenharia de Computação</p>
+      <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
+    </div>
+  </footer>
+</body>
+</html>

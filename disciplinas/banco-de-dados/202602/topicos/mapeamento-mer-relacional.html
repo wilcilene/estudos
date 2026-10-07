@@ -9,13 +9,13 @@
   <meta name="author" content="Disciplina de Banco de Dados">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#4338ca">
-  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/topicos/mapeamento-mer-relacional.html">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/mapeamento-mer-relacional.html">
 
   <meta property="og:type" content="article">
   <meta property="og:title" content="Mapeamento do MER para o Modelo Relacional">
   <meta property="og:description" content="Regras de conversão de entidades e relacionamentos 1:1, 1:N e N:M, entidades fracas e especialização.">
   <meta property="og:locale" content="pt_BR">
-  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/topicos/mapeamento-mer-relacional.html">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/mapeamento-mer-relacional.html">
   <meta name="twitter:card" content="summary">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,11 +33,10 @@
     "inLanguage": "pt-BR",
     "learningResourceType": "aula",
     "educationalLevel": "Graduação",
-    "timeRequired": "PT2H",
     "isPartOf": {
       "@type": "Course",
       "name": "Banco de Dados",
-      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/index.html"
+      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/index.html"
     }
   }
   </script>
@@ -51,15 +50,9 @@
         <span class="brand-mark" aria-hidden="true">BD</span>
         <span class="brand-text">
           <span class="brand-name">Banco de Dados</span>
-          <span class="brand-sub">Eng. de Computação · 60h</span>
+          <span class="brand-sub">Eng. de Computação</span>
         </span>
       </a>
-      <nav class="site-nav" aria-label="Navegação principal">
-        <ul>
-          <li><a href="../index.html#progresso">Progresso</a></li>
-          <li><a href="../index.html#topicos">Tópicos</a></li>
-        </ul>
-      </nav>
     </div>
   </header>
 
@@ -76,11 +69,9 @@
     <article class="topic-article">
       <div class="container">
         <header class="topic-header">
-          <div class="topic-meta">
-            <span class="category-tag cat-modelo-relacional">Modelo Relacional</span>
-          </div>
+          <p class="topic-eyebrow">Modelo Relacional</p>
           <h1>Mapeamento do MER para o Modelo Relacional</h1>
-          <p class="topic-lead">A transformação do MER em relações é a ponte entre a representação conceitual e a implementação de um banco de dados relacional. Nesta aula, você aprenderá a converter entidades, atributos e relacionamentos em tabelas, chaves e restrições. Boa parte dessa página foi gerada com IA.</p>
+          <p class="topic-lead">A transformação do MER em relações é a ponte entre a representação conceitual e a implementação de um banco de dados relacional. Vamos converter entidades, atributos e relacionamentos em tabelas, chaves e restrições.</p>
         </header>
 
         <section class="objectives" aria-labelledby="objectives-title">
@@ -257,19 +248,36 @@
             <li>Modele um sistema de projetos no qual Fornecedor fornece Componentes para Projetos. Inclua quantidade e data do fornecimento como atributos do relacionamento ternário (três).</li>
             <li>Represente uma entidade Dependente pertencente a Funcionário. Indique chave estrangeira e a chave primária composta.</li>
             <li>Revise seu esquema final e indique onde aparecem as regras de cardinalidade, participação, integridade referencial e identificação das entidades.</li>
-	    <li>Pense em um sistema de Banco de dados para ser desenvolvido no decorrer do semestre e represente o MER desse sistema. Pode fazer esse item em alguma ferramenta digital, pois será utilizado na sua apresentação final do semestre. Mas construa o MER, não pegue uma única imagem pronta. Irei conferir as partes e perguntar sobre.
+	    <li>Pense em um sistema de banco de dados para representar com um MER completo. Pode usar alguma ferramenta digital para desenhá-lo, mas construa o MER você mesmo — não use uma imagem pronta.</li>
           </ol>
+        </section>
+
+        <section aria-labelledby="materials-title">
+          <h2 id="materials-title">Materiais para estudo</h2>
+          <ul class="materials-list">
+            <li>ELMASRI, R.; NAVATHE, S. B. <em>Sistemas de Banco de Dados</em>. 7. ed. Capítulo sobre mapeamento do MER para o modelo relacional.</li>
+            <li>Revise também a página de Modelo Relacional e Chaves, que traz os conceitos de chave usados neste mapeamento.</li>
+          </ul>
+          <ul class="video-links">
+            <li>
+              <span class="video-icon" aria-hidden="true">▶</span>
+              <div>
+                <a href="https://www.youtube.com/results?search_query=mapeamento+MER+para+modelo+relacional+explicado" target="_blank" rel="noopener">Buscar vídeo-aulas sobre mapeamento MER-relacional no YouTube</a>
+                <span class="video-note">Abre uma busca no YouTube com aulas sobre essa conversão.</span>
+              </div>
+            </li>
+          </ul>
         </section>
 
         <section class="topic-pager" aria-label="Navegação entre tópicos">
           <div class="topic-pager-inner">
-            <a class="pager-link pager-link--prev" href="mer.html">
+            <a class="pager-link pager-link--prev" href="modelo-relacional-chaves.html">
               <span class="pager-label">Anterior</span>
-              <span class="pager-title">Modelo Entidade-Relacionamento</span>
+              <span class="pager-title">Modelo Relacional e Chaves</span>
             </a>
-            <a class="pager-link pager-link--next" href="../index.html#topicos">
+            <a class="pager-link pager-link--next" href="algebra-relacional-unarios.html">
               <span class="pager-label">Próximo</span>
-              <span class="pager-title">Voltar ao índice</span>
+              <span class="pager-title">Álgebra Relacional — Unários e Conjunto</span>
             </a>
           </div>
         </section>
@@ -279,7 +287,7 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>Banco de Dados · Engenharia de Computação · 2026/2</p>
+      <p>Banco de Dados · Engenharia de Computação</p>
       <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
     </div>
   </footer>

@@ -3,26 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Aula prática de DDL e DML em MySQL usando uma pizzaria para gatos. Aprenda CREATE, ALTER, DROP, INSERT, UPDATE e DELETE passo a passo.">
+  <title>DDL e DML no MySQL: a Pizzaria Miau | Banco de Dados</title>
+  <meta name="description" content="Aula prática de DDL e DML em MySQL usando uma pizzaria para gatos. CREATE, ALTER, DROP, INSERT, UPDATE e DELETE explicados passo a passo.">
   <meta name="keywords" content="MySQL, SQL, DDL, DML, banco de dados, CREATE TABLE, ALTER TABLE, INSERT, UPDATE, DELETE">
-  <meta name="author" content="Material didático de Banco de Dados">
-  <title>DDL e DML no MySQL — Pizzaria Miau</title>
+  <meta name="author" content="Disciplina de Banco de Dados">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/ddl-dml-pizzaria-gatos.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="DDL e DML no MySQL: a Pizzaria Miau">
+  <meta property="og:description" content="CREATE, ALTER, DROP, INSERT, UPDATE e DELETE explicados passo a passo com a pizzaria para gatos.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/ddl-dml-pizzaria-gatos.html">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "DDL e DML no MySQL: a Pizzaria Miau",
+    "description": "CREATE, ALTER, DROP, INSERT, UPDATE e DELETE explicados passo a passo com a pizzaria para gatos.",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "aula prática",
+    "educationalLevel": "Graduação",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Banco de Dados",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/index.html"
+    }
+  }
+  </script>
 </head>
 <body>
-  <main class="container topic-article">
-    <header>
-      <p class="ai-badge">Banco de Dados • MySQL • Aula prática</p>
-      <h1>DDL e DML no MySQL: a Pizzaria Miau 🍕🐈</h1>
-      <p>
-        Nesta atividade você vai construir, passo a passo, o banco de dados de uma pizzaria criada especialmente para gatos.
-        A ideia é simples: primeiro montamos a <strong>estrutura</strong> que guardará as informações; depois começamos a
-        <strong>cadastrar, alterar e remover os dados</strong> dessa estrutura.
-      </p>
-    </header>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
 
-    <section aria-labelledby="visao-geral">
-      <h2 id="visao-geral">Antes de começar: DDL ou DML?</h2>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">BD</span>
+        <span class="brand-text">
+          <span class="brand-name">Banco de Dados</span>
+          <span class="brand-sub">Eng. de Computação</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="../index.html">Banco de Dados</a></li>
+          <li aria-current="page">DDL e DML no MySQL: a Pizzaria Miau</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="topic-article">
+      <div class="container">
+        <header class="topic-header">
+          <p class="topic-eyebrow">DDL e DML</p>
+          <h1>DDL e DML no MySQL: a Pizzaria Miau 🍕🐈</h1>
+          <p class="topic-lead">
+            Nesta atividade vocês vão construir, passo a passo, o banco de dados de uma pizzaria criada especialmente para gatos.
+            A ideia é simples: primeiro montamos a <strong>estrutura</strong> que guardará as informações; depois começamos a
+            <strong>cadastrar, alterar e remover os dados</strong> dessa estrutura.
+          </p>
+        </header>
+
+        <section class="objectives" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">O que vocês vão aprender aqui</h2>
+          <ul class="check-list">
+            <li>Diferenciar comandos DDL (<code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>) de comandos DML (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>).</li>
+            <li>Criar um banco de dados e uma tabela do zero.</li>
+            <li>Cadastrar, alterar e remover registros com segurança, sempre usando <code>WHERE</code>.</li>
+            <li>Adicionar uma nova coluna a uma tabela já existente com <code>ALTER TABLE</code>.</li>
+            <li>Diferenciar <code>DELETE</code> de <code>DROP</code>.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="visao-geral">
+          <h2 id="visao-geral">Antes de começar: DDL ou DML?</h2>
       <div class="table-scroll">
         <table class="compare-table">
           <thead>
@@ -529,9 +596,50 @@ WHERE nome = 'Brócolis Misterioso';</code></pre>
       </div>
     </section>
 
-    <footer>
-      <p><strong>Fim da atividade.</strong> Agora você já consegue diferenciar DDL de DML observando o efeito real de cada comando no banco de dados.</p>
-    </footer>
+    <section aria-labelledby="materials-title">
+      <h2 id="materials-title">Materiais para estudo</h2>
+      <ul class="materials-list">
+        <li>Referência oficial: <a href="https://dev.mysql.com/doc/refman/8.0/en/sql-data-definition-statements.html" target="_blank" rel="noopener">comandos DDL no MySQL</a>.</li>
+        <li>Referência oficial: <a href="https://dev.mysql.com/doc/refman/8.0/en/sql-data-manipulation-statements.html" target="_blank" rel="noopener">comandos DML no MySQL</a>.</li>
+        <li>Veja também a página de DDL, que trabalha os mesmos comandos em um cenário de clínica veterinária.</li>
+      </ul>
+      <ul class="video-links">
+        <li>
+          <span class="video-icon" aria-hidden="true">▶</span>
+          <div>
+            <a href="https://www.youtube.com/results?search_query=DDL+DML+MySQL+CREATE+INSERT+UPDATE+DELETE+explicado" target="_blank" rel="noopener">Buscar vídeo-aulas sobre DDL e DML no MySQL no YouTube</a>
+            <span class="video-note">Abre uma busca no YouTube com aulas sobre DDL e DML.</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="quiz-box" aria-labelledby="quiz-title">
+      <h3 id="quiz-title">🤔 Confira se entendeu</h3>
+      <p>Fim da atividade. Agora vocês já conseguem diferenciar DDL de DML observando o efeito real de cada comando no banco de dados — se mudou a <strong>estrutura</strong>, foi DDL; se mudou os <strong>dados</strong> dentro dela, foi DML.</p>
+    </section>
+
+    <section class="topic-pager" aria-label="Navegação entre tópicos">
+      <div class="topic-pager-inner">
+        <a class="pager-link pager-link--prev" href="ddl.html">
+          <span class="pager-label">Ver também</span>
+          <span class="pager-title">DDL — Clínica Veterinária</span>
+        </a>
+        <a class="pager-link pager-link--next" href="../index.html#topicos">
+          <span class="pager-label">Próximo</span>
+          <span class="pager-title">Voltar ao índice</span>
+        </a>
+      </div>
+    </section>
+      </div>
+    </article>
   </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Banco de Dados · Engenharia de Computação</p>
+      <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
+    </div>
+  </footer>
 </body>
 </html>

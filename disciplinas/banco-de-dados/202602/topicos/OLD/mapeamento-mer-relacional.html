@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapeamento do MER para o Modelo Relacional | Banco de Dados</title>
+  <meta name="description" content="Regras de transformação do Modelo Entidade-Relacionamento para o Modelo Relacional: entidades, relacionamentos, chaves, entidades fracas, especialização, generalização e restrições.">
+  <meta name="keywords" content="mapeamento MER modelo relacional, transformação MER, entidades fracas, especialização, generalização, chaves, banco de dados">
+  <meta name="author" content="Disciplina de Banco de Dados">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/topicos/mapeamento-mer-relacional.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Mapeamento do MER para o Modelo Relacional">
+  <meta property="og:description" content="Regras de conversão de entidades e relacionamentos 1:1, 1:N e N:M, entidades fracas e especialização.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/topicos/mapeamento-mer-relacional.html">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="js/thinking.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Mapeamento do MER para o Modelo Relacional",
+    "description": "Regras de conversão de entidades e relacionamentos 1:1, 1:N e N:M, entidades fracas e especialização.",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "aula",
+    "educationalLevel": "Graduação",
+    "timeRequired": "PT2H",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Banco de Dados",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/index.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">BD</span>
+        <span class="brand-text">
+          <span class="brand-name">Banco de Dados</span>
+          <span class="brand-sub">Eng. de Computação · 60h</span>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="Navegação principal">
+        <ul>
+          <li><a href="../index.html#progresso">Progresso</a></li>
+          <li><a href="../index.html#topicos">Tópicos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="../index.html">Banco de Dados</a></li>
+          <li aria-current="page">Mapeamento do MER para o Modelo Relacional</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="topic-article">
+      <div class="container">
+        <header class="topic-header">
+          <div class="topic-meta">
+            <span class="category-tag cat-modelo-relacional">Modelo Relacional</span>
+          </div>
+          <h1>Mapeamento do MER para o Modelo Relacional</h1>
+          <p class="topic-lead">A transformação do MER em relações é a ponte entre a representação conceitual e a implementação de um banco de dados relacional. Nesta aula, você aprenderá a converter entidades, atributos e relacionamentos em tabelas, chaves e restrições. Boa parte dessa página foi gerada com IA.</p>
+        </header>
+
+        <section class="objectives" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">Objetivos de aprendizagem</h2>
+          <ul class="check-list">
+            <li>Transformar entidades regulares em relações com atributos e chave primária.</li>
+            <li>Mapear atributos compostos, multivalorados e derivados.</li>
+            <li>Aplicar as regras de conversão para relacionamentos 1:1, 1:N e N:M.</li>
+            <li>Mapear entidades fracas e seus relacionamentos identificadores.</li>
+            <li>Comparar estratégias para especialização e generalização.</li>
+            <li>Validar chaves, restrições e integridade do esquema resultante.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="s1-title">
+          <h2 id="s1-title">1. Da modelagem conceitual ao esquema relacional</h2>
+          <p>O MER descreve o domínio em termos de entidades, atributos e relacionamentos. O modelo relacional, por sua vez, representa esses elementos por meio de <strong>relações</strong>, normalmente implementadas como tabelas.</p>
+          <p>O mapeamento não é uma simples tradução visual. É necessário tomar decisões sobre chaves, redundância, participação, atributos de relacionamentos e representação de estruturas especiais.</p>
+          <div class="analogy">
+            <strong>Ideia central:</strong> uma entidade geralmente origina uma relação; um relacionamento pode ser representado por uma chave estrangeira ou por uma nova relação, dependendo de sua cardinalidade.
+          </div>
+        </section>
+
+        <section aria-labelledby="s2-title">
+          <h2 id="s2-title">2. Entidades regulares</h2>
+          <p>Para cada entidade regular do MER, crie uma relação com:</p>
+          <ul>
+            <li>um nome correspondente à entidade;</li>
+            <li>um atributo para cada atributo simples;</li>
+            <li>uma chave primária que identifique cada ocorrência;</li>
+            <li>atributos componentes no caso de atributos compostos.</li>
+          </ul>
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Exemplo de conversão de entidade</caption>
+              <thead>
+                <tr>
+                  <th scope="col">MER</th>
+                  <th scope="col">Relação resultante</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Aluno(matrícula, nome, data de nascimento, endereço)</td>
+                  <td>ALUNO(<u>matricula</u>, nome, data_nascimento, logradouro, número, cidade, estado)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>O endereço composto foi decomposto em seus componentes. A matrícula foi escolhida como chave primária porque identifica unicamente cada aluno.</p>
+        </section>
+
+        <section aria-labelledby="s3-title">
+          <h2 id="s3-title">3. Atributos especiais</h2>
+          <h3>Atributos compostos</h3>
+          <p>Um atributo composto deve ser substituído por seus atributos simples componentes. Por exemplo, <code>endereço</code> pode originar <code>logradouro</code>, <code>número</code>, <code>bairro</code>, <code>cidade</code> e <code>CEP</code>.</p>
+
+          <h3>Atributos multivalorados</h3>
+          <p>Para um atributo que pode possuir vários valores, crie uma nova relação contendo:</p>
+          <ul>
+            <li>a chave primária da entidade original;</li>
+            <li>o atributo multivalorado;</li>
+            <li>uma chave primária composta por esses elementos, quando apropriado.</li>
+          </ul>
+          <p>Exemplo: <code>ALUNO_TELEFONE(<u>matricula</u>, <u>telefone</u>)</code>.</p>
+
+          <h3>Atributos derivados</h3>
+          <p>Atributos derivados normalmente não precisam ser armazenados, pois podem ser calculados a partir de outros dados. A idade, por exemplo, pode ser obtida a partir da data de nascimento.</p>
+        </section>
+
+        <section aria-labelledby="s4-title">
+          <h2 id="s4-title">4. Relacionamento 1:1</h2>
+          <p>Em um relacionamento 1:1, cada ocorrência de uma entidade se associa a, no máximo, uma ocorrência da outra entidade.</p>
+          <p>A estratégia mais comum é adicionar a chave primária de uma relação como chave estrangeira na outra. A escolha deve considerar a participação total e a possibilidade de valores nulos.</p>
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Exemplo: Pessoa e Passaporte</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Relação</th>
+                  <th scope="col">Chaves e restrições</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>PESSOA(<u>id_pessoa</u>, nome)</td>
+                  <td>Entidade regular.</td>
+                </tr>
+                <tr>
+                  <td>PASSAPORTE(<u>id_passaporte</u>, data_emissão, id_pessoa)</td>
+                  <td><code>id_pessoa</code> é FK e deve ser UNIQUE; pode ser NOT NULL se todo passaporte exigir uma pessoa.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section aria-labelledby="s5-title">
+          <h2 id="s5-title">5. Relacionamento 1:N</h2>
+          <p>No relacionamento 1:N, uma ocorrência do lado 1 pode se associar a várias ocorrências do lado N. A chave primária do lado 1 deve ser adicionada como chave estrangeira na relação do lado N.</p>
+          <p>Exemplo: um <strong>Curso</strong> possui várias <strong>Turmas</strong>. A chave de Curso aparece em TURMA:</p>
+          <p><code>CURSO(<u>id_curso</u>, nome)</code></p>
+          <p><code>TURMA(<u>id_turma</u>, período, id_curso FK)</code></p>
+          <p>Se toda turma obrigatoriamente pertence a um curso, <code>id_curso</code> deve ser <code>NOT NULL</code>.</p>
+        </section>
+
+        <section aria-labelledby="s6-title">
+          <h2 id="s6-title">6. Relacionamento N:M</h2>
+          <p>Um relacionamento N:M não pode ser representado apenas adicionando uma chave estrangeira em uma das tabelas. Cria-se uma nova relação para representar o relacionamento.</p>
+          <p>A nova relação contém as chaves primárias das entidades participantes. Essas chaves geralmente formam uma chave primária composta.</p>
+          <p>Exemplo: um aluno pode cursar várias disciplinas, e uma disciplina pode ser cursada por vários alunos:</p>
+          <p><code>ALUNO(<u>matricula</u>, nome)</code></p>
+          <p><code>DISCIPLINA(<u>codigo_disciplina</u>, nome, carga_horaria)</code></p>
+          <p><code>MATRICULA(<u>matricula</u> FK, <u>codigo_disciplina</u> FK, semestre, nota)</code></p>
+          <p>Os atributos <code>semestre</code> e <code>nota</code> pertencem ao relacionamento, não exclusivamente ao aluno ou à disciplina.</p>
+        </section>
+
+        <section aria-labelledby="s7-title">
+          <h2 id="s7-title">7. Relacionamentos ternários e n-ários</h2>
+          <p>Relacionamentos com três ou mais entidades também são convertidos em uma nova relação contendo as chaves das entidades participantes e os atributos próprios do relacionamento.</p>
+          <p>Por exemplo, se um <strong>Fornecedor</strong> fornece determinado <strong>Componente</strong> para um <strong>Projeto</strong>, a relação pode ser:</p>
+          <p><code>FORNECIMENTO(<u>id_fornecedor</u> FK, <u>id_componente</u> FK, <u>id_projeto</u> FK, quantidade, data_fornecimento)</code></p>
+          <p>A chave primária deve refletir quais combinações identificam unicamente cada ocorrência do relacionamento.</p>
+        </section>
+
+        <section aria-labelledby="s8-title">
+          <h2 id="s8-title">8. Entidades fracas</h2>
+          <p>Uma entidade fraca não possui atributos suficientes para formar uma chave primária independente. Sua identificação depende de uma entidade proprietária e de uma <strong>chave parcial</strong>.</p>
+          <p>Para mapear uma entidade fraca:</p>
+          <ol>
+            <li>Crie uma relação para a entidade fraca.</li>
+            <li>Inclua seus atributos simples.</li>
+            <li>Adicione a chave primária da entidade proprietária como chave estrangeira.</li>
+            <li>Combine a chave estrangeira com a chave parcial para formar a chave primária.</li>
+          </ol>
+          <p>Exemplo: um <strong>Dependente</strong> é identificado pelo nome dentro de um funcionário:</p>
+          <p><code>FUNCIONARIO(<u>id_funcionario</u>, nome)</code></p>
+          <p><code>DEPENDENTE(<u>id_funcionario</u> FK, <u>nome_dependente</u>, data_nascimento, parentesco)</code></p>
+        </section>
+
+        <section aria-labelledby="s9-title">
+          <h2 id="s9-title">9. Especialização e generalização</h2>
+          <p>Especialização e generalização representam hierarquias entre uma superclasse e subclasses. Uma superclasse reúne atributos comuns; as subclasses acrescentam características específicas.</p>
+          <p>Considere a hierarquia <strong>Usuário</strong> com os subtipos <strong>Aluno</strong> e <strong>Professor</strong>. Existem diferentes estratégias de mapeamento:</p>
+          <ul>
+            <li><strong>Uma relação para a superclasse e uma para cada subclasse:</strong> preserva a estrutura e evita repetição dos atributos comuns.</li>
+            <li><strong>Uma relação única para toda a hierarquia:</strong> pode usar um atributo discriminador, como <code>tipo_usuario</code>, mas pode gerar muitos valores nulos.</li>
+            <li><strong>Uma relação para cada subclasse concreta:</strong> elimina a tabela da superclasse, mas repete os atributos comuns.</li>
+          </ul>
+          <p>A escolha depende de fatores como disjunção, completude, frequência de consultas e necessidade de representar instâncias da superclasse.</p>
+        </section>
+
+        <section aria-labelledby="s10-title">
+          <h2 id="s10-title">10. Validação do esquema mapeado</h2>
+          <p>Depois de converter o MER, revise o esquema com uma lista de verificação:</p>
+          <ul>
+            <li>Toda relação possui uma chave primária identificável?</li>
+            <li>As chaves estrangeiras apontam para relações existentes?</li>
+            <li>Os atributos de relacionamentos foram colocados na relação correta?</li>
+            <li>As cardinalidades 1:1, 1:N e N:M foram preservadas?</li>
+            <li>As participações obrigatórias estão refletidas por <code>NOT NULL</code> ou outras restrições?</li>
+            <li>Os atributos multivalorados foram convertidos em relações próprias?</li>
+            <li>As entidades fracas possuem a chave composta adequada?</li>
+            <li>A estratégia de especialização evita inconsistências e redundância excessiva?</li>
+          </ul>
+        </section>
+
+        <section class="activity-box" aria-labelledby="activity-title">
+          <h2 id="activity-title">Atividade de revisão</h2>
+          <p><strong>Instrução:</strong> represente as soluções em papel, utilizando lápis, caneta ou outro material que evidencie a realização manual. Identifique as relações, as chaves primárias, as chaves estrangeiras e as principais restrições. Após finalizar, confira se todos os itens do tópico 10. foram atendidos.</p>
+          <ol>
+            <li>Modele um sistema acadêmico contendo Estudante, Curso, Disciplina, Professor e Matrícula. Inclua pelo menos um relacionamento 1:N e um relacionamento N:M com atributos próprios.</li>
+            <li>Converta para o modelo relacional um cenário de Carro e Motorista, justificando em qual relação a chave estrangeira deve ser colocada e quais restrições devem ser aplicadas.</li>
+            <li>Modele um sistema de projetos no qual Fornecedor fornece Componentes para Projetos. Inclua quantidade e data do fornecimento como atributos do relacionamento ternário (três).</li>
+            <li>Represente uma entidade Dependente pertencente a Funcionário. Indique chave estrangeira e a chave primária composta.</li>
+            <li>Revise seu esquema final e indique onde aparecem as regras de cardinalidade, participação, integridade referencial e identificação das entidades.</li>
+	    <li>Pense em um sistema de Banco de dados para ser desenvolvido no decorrer do semestre e represente o MER desse sistema. Pode fazer esse item em alguma ferramenta digital, pois será utilizado na sua apresentação final do semestre. Mas construa o MER, não pegue uma única imagem pronta. Irei conferir as partes e perguntar sobre.
+          </ol>
+        </section>
+
+        <section class="topic-pager" aria-label="Navegação entre tópicos">
+          <div class="topic-pager-inner">
+            <a class="pager-link pager-link--prev" href="mer.html">
+              <span class="pager-label">Anterior</span>
+              <span class="pager-title">Modelo Entidade-Relacionamento</span>
+            </a>
+            <a class="pager-link pager-link--next" href="../index.html#topicos">
+              <span class="pager-label">Próximo</span>
+              <span class="pager-title">Voltar ao índice</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Banco de Dados · Engenharia de Computação · 2026/2</p>
+      <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
+    </div>
+  </footer>
+</body>
+</html>

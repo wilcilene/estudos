@@ -7,7 +7,7 @@
 <meta name="description" content="Aprenda os operadores unários e de conjunto da álgebra relacional — seleção (σ), projeção (π), união, interseção, diferença e produto cartesiano — com exemplos práticos e exercícios.">
 <meta name="author" content="Disciplina de Banco de Dados — Engenharia da Computação">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/topicos/algebra-relacional-unarios.html">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/algebra-relacional-unarios.html">
 
 <!-- Open Graph -->
 <meta property="og:type" content="article">
@@ -36,10 +36,15 @@
   "@type": "LearningResource",
   "name": "Álgebra Relacional — Operadores Unários e de Conjunto",
   "description": "Seleção (σ), projeção (π), união, interseção, diferença e produto cartesiano como base formal do SQL.",
-  "educationalLevel": "Ensino Superior",
-  "learningResourceType": "Aula",
+  "educationalLevel": "Graduação",
+  "learningResourceType": "aula",
   "inLanguage": "pt-BR",
-  "about": ["Álgebra Relacional", "Banco de Dados", "SQL"]
+  "about": ["Álgebra Relacional", "Banco de Dados", "SQL"],
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Banco de Dados",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/index.html"
+  }
 }
 </script>
 </head>
@@ -53,35 +58,26 @@
       <span class="brand-mark" aria-hidden="true">BD</span>
       <span class="brand-text">
         <span class="brand-name">Banco de Dados</span>
-        <span class="brand-sub">Engenharia da Computação · 2026/2</span>
+        <span class="brand-sub">Engenharia da Computação</span>
       </span>
     </a>
-    <nav class="site-nav" aria-label="Navegação principal">
-      <ul>
-        <li><a href="../index.html">Início</a></li>
-        <li><a href="../index.html#topicos">Tópicos</a></li>
-        <li><a href="modelo-relacional-chaves.html">Tópico anterior</a></li>
-      </ul>
-    </nav>
   </div>
 </header>
 
-<div class="container">
-  <nav class="breadcrumb" aria-label="Trilha de navegação">
+<nav class="breadcrumb" aria-label="Trilha de navegação">
+  <div class="container">
     <ol>
-      <li><a href="../index.html">Início</a></li>
+      <li><a href="../index.html">Banco de Dados</a></li>
       <li aria-current="page">Álgebra Relacional — Operadores Unários e de Conjunto</li>
     </ol>
-  </nav>
-</div>
+  </div>
+</nav>
 
 <main id="conteudo-principal">
 <article class="topic-article container">
 
   <header class="topic-header">
-    <div class="topic-meta">
-      <span class="duration-badge">Modelagem de Dados</span>
-    </div>
+    <p class="topic-eyebrow">Modelagem de Dados</p>
     <h1>Álgebra Relacional — Operadores Unários e de Conjunto</h1>
     <p class="topic-lead">
       Seleção (σ), projeção (π), união, interseção, diferença e produto cartesiano como base formal do SQL.
@@ -646,7 +642,6 @@ Victor</textarea>
         <p id="ar-produto-info" class="expression" aria-live="polite"></p>
       </div>
     </section>
-  </main>
 
   <script src="js/algebra-relacional-unarios.js" defer></script>
 
@@ -721,24 +716,44 @@ Victor</textarea>
     </ol>
   </section>
 
+  <section aria-labelledby="materials-title">
+    <h2 id="materials-title">Materiais para estudo</h2>
+    <ul class="materials-list">
+      <li>ELMASRI, R.; NAVATHE, S. B. <em>Sistemas de Banco de Dados</em>. 7. ed. Capítulo sobre álgebra relacional.</li>
+      <li>DATE, C. J. <em>Introdução a Sistemas de Bancos de Dados</em> — leitura de aprofundamento sobre a álgebra relacional de Codd.</li>
+    </ul>
+    <ul class="video-links">
+      <li>
+        <span class="video-icon" aria-hidden="true">▶</span>
+        <div>
+          <a href="https://www.youtube.com/results?search_query=%C3%A1lgebra+relacional+sele%C3%A7%C3%A3o+proje%C3%A7%C3%A3o+uni%C3%A3o+interse%C3%A7%C3%A3o+diferen%C3%A7a+explicado" target="_blank" rel="noopener">Buscar vídeo-aulas sobre álgebra relacional no YouTube</a>
+          <span class="video-note">Abre uma busca no YouTube com aulas sobre seleção, projeção e operadores de conjunto.</span>
+        </div>
+      </li>
+    </ul>
+  </section>
+
   <nav class="topic-pager" aria-label="Navegação entre tópicos">
     <div class="topic-pager-inner">
-      <a class="pager-link pager-link--prev" href="modelo-relacional-chaves.html">
-        <span class="pager-label">← Tópico anterior</span>
-        <span class="pager-title">Modelo Relacional e Chaves</span>
+      <a class="pager-link pager-link--prev" href="mapeamento-mer-relacional.html">
+        <span class="pager-label">Anterior</span>
+        <span class="pager-title">Mapeamento do MER para o Modelo Relacional</span>
       </a>
-      <div class="pager-link pager-link--next" aria-disabled="true">
-        <span class="pager-label">Próximo tópico</span>
-        <span class="pager-title">Em breve</span>
-      </div>
+      <a class="pager-link pager-link--next" href="algebra-relacional-juncoes.html">
+        <span class="pager-label">Próximo</span>
+        <span class="pager-title">Álgebra Relacional — Junções e Divisão</span>
+      </a>
     </div>
   </nav>
 
 </article>
 </main>
 
-<footer class="container" style="padding-block:2rem; color:var(--ink-soft); font-size:.85rem;">
-  <p>Material didático da disciplina de Banco de Dados — Engenharia da Computação — 2026/2.</p>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>Banco de Dados · Engenharia de Computação</p>
+    <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
+  </div>
 </footer>
 
 <script>

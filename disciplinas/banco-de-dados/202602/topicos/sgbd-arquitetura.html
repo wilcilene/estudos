@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arquitetura e Funcionamento de um SGBD | Banco de Dados</title>
+  <meta name="description" content="Entenda o que é um SGBD, suas funções e componentes internos — processador de consultas, otimizador, gerenciador de transações e de armazenamento — com a analogia da torre de controle de uma estação espacial. Panorama de PostgreSQL, MySQL, Oracle e SQLite.">
+  <meta name="keywords" content="SGBD, sistema gerenciador de banco de dados, arquitetura de banco de dados, processador de consultas, otimizador, gerenciador de transações, PostgreSQL, MySQL, Oracle, SQLite">
+  <meta name="author" content="Disciplina de Banco de Dados">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/sgbd-arquitetura.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Arquitetura e Funcionamento de um SGBD">
+  <meta property="og:description" content="Funções e componentes internos de um SGBD, com panorama de PostgreSQL, MySQL, Oracle e SQLite.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/sgbd-arquitetura.html">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Arquitetura e Funcionamento de um SGBD",
+    "description": "Funções e componentes internos de um SGBD, com panorama de mercado.",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "artigo de estudo",
+    "educationalLevel": "Graduação",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Banco de Dados",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/index.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">BD</span>
+        <span class="brand-text">
+          <span class="brand-name">Banco de Dados</span>
+          <span class="brand-sub">Eng. de Computação</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="../index.html">Banco de Dados</a></li>
+          <li aria-current="page">Arquitetura e Funcionamento de um SGBD</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="topic-article">
+      <div class="container">
+        <header class="topic-header">
+          <p class="topic-eyebrow">SGBD</p>
+          <h1>Arquitetura e funcionamento de um SGBD</h1>
+          <p class="topic-lead">Até aqui, vocês modelaram dados no papel. A partir de agora, esses dados vão morar em um banco de verdade — e quem cuida deles é o SGBD. Para entender por que ele é tão mais do que "um lugar para guardar tabelas", eu gosto de comparar um SGBD com a torre de controle de uma estação espacial.</p>
+        </header>
+
+        <section class="objectives" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">O que vocês vão aprender aqui</h2>
+          <ul class="check-list">
+            <li>Definir o que é um SGBD e por que ele fica entre a aplicação e os dados.</li>
+            <li>Listar as principais funções de um SGBD.</li>
+            <li>Reconhecer os componentes internos de um SGBD e o papel de cada um.</li>
+            <li>Comparar PostgreSQL, MySQL, Oracle e SQLite e saber quando cada um faz sentido.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="s1-title">
+          <h2 id="s1-title">1. A torre de controle da estação</h2>
+          <div class="theme-box">
+            <h3>🛰️ A analogia</h3>
+            <p>Imaginem uma estação espacial onde dezenas de módulos — laboratórios, docas, naves de carga — precisam ler e gravar informações no mesmo arquivo central de registros, ao mesmo tempo, sem que um módulo apague por acidente o que outro acabou de escrever, e sem que a estação perca tudo se a energia cair por um segundo. Ninguém deixaria cada módulo escrever diretamente no arquivo por conta própria — existe uma <strong>torre de controle</strong> no meio, que recebe cada pedido, decide a ordem, aplica as regras e só então grava ou devolve a resposta. O SGBD é essa torre de controle para os seus dados.</p>
+          </div>
+          <p>Formalmente: um <strong>Sistema Gerenciador de Banco de Dados (SGBD)</strong> é o software que fica entre as aplicações e os arquivos físicos de dados, oferecendo uma forma controlada, consistente e segura de criar, ler, alterar e remover informações — sem que cada aplicação precise reinventar como os dados são armazenados em disco.</p>
+        </section>
+
+        <section aria-labelledby="s2-title">
+          <h2 id="s2-title">2. As funções que a torre de controle precisa cumprir</h2>
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Funções essenciais de um SGBD</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Função</th>
+                  <th scope="col">O que ela garante</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Definição de dados</td>
+                  <td>Permite descrever a estrutura (tabelas, colunas, tipos, chaves) através da DDL, que vocês vão estudar no próximo bloco de tópicos.</td>
+                </tr>
+                <tr>
+                  <td>Manipulação de dados</td>
+                  <td>Permite inserir, consultar, atualizar e remover registros através da DML e da DQL.</td>
+                </tr>
+                <tr>
+                  <td>Controle de concorrência</td>
+                  <td>Coordena vários módulos (usuários) acessando os mesmos dados ao mesmo tempo, sem que um pedido corrompa o resultado do outro.</td>
+                </tr>
+                <tr>
+                  <td>Controle de integridade</td>
+                  <td>Aplica as regras definidas na modelagem (chaves primárias, estrangeiras, restrições) automaticamente, mesmo que a aplicação esqueça de validar algo.</td>
+                </tr>
+                <tr>
+                  <td>Segurança e controle de acesso</td>
+                  <td>Decide quem pode ver ou alterar cada parte dos dados, por meio de usuários, perfis e permissões.</td>
+                </tr>
+                <tr>
+                  <td>Recuperação de falhas</td>
+                  <td>Garante que, mesmo se a energia cair no meio de uma operação, os dados voltem a um estado consistente quando o sistema religar.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section aria-labelledby="s3-title">
+          <h2 id="s3-title">3. Por dentro da torre: os componentes</h2>
+          <p>Quando um módulo da estação envia um pedido — por exemplo, um <code>SELECT</code> — ele passa por várias "salas" dentro da torre de controle antes de uma resposta voltar:</p>
+
+          <figure class="figure-frame">
+            <svg viewBox="0 0 640 300" role="img" aria-labelledby="svg2-title svg2-desc" xmlns="http://www.w3.org/2000/svg">
+              <title id="svg2-title">Fluxo de uma consulta dentro de um SGBD</title>
+              <desc id="svg2-desc">Uma consulta da aplicação passa pelo processador de consultas, pelo otimizador, pelo gerenciador de transações e pelo gerenciador de armazenamento antes de chegar ao disco.</desc>
+
+              <rect x="10" y="16" width="130" height="54" rx="10" style="fill:var(--surface-dim);stroke:var(--ink-soft);stroke-width:2"></rect>
+              <text x="75" y="48" text-anchor="middle" font-family="Lexend, sans-serif" font-size="12" font-weight="700" fill="#14162b">Aplicação</text>
+
+              <rect x="10" y="110" width="620" height="170" rx="12" style="fill:var(--primary-soft);stroke:var(--primary);stroke-width:2"></rect>
+              <text x="30" y="132" font-family="Lexend, sans-serif" font-size="12" font-weight="700" fill="#312a92">SGBD (torre de controle)</text>
+
+              <rect x="30" y="150" width="140" height="56" rx="8" style="fill:var(--surface);stroke:var(--primary);stroke-width:1.5"></rect>
+              <text x="100" y="174" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#312a92">Processador de</text>
+              <text x="100" y="188" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#312a92">consultas</text>
+
+              <rect x="195" y="150" width="140" height="56" rx="8" style="fill:var(--surface);stroke:var(--primary);stroke-width:1.5"></rect>
+              <text x="265" y="182" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#312a92">Otimizador</text>
+
+              <rect x="360" y="150" width="140" height="56" rx="8" style="fill:var(--surface);stroke:var(--primary);stroke-width:1.5"></rect>
+              <text x="430" y="174" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#312a92">Gerenciador de</text>
+              <text x="430" y="188" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#312a92">transações</text>
+
+              <rect x="30" y="226" width="300" height="40" rx="8" style="fill:var(--surface);stroke:var(--primary);stroke-width:1.5"></rect>
+              <text x="180" y="250" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#312a92">Gerenciador de armazenamento e buffer</text>
+
+              <rect x="360" y="226" width="140" height="40" rx="8" style="fill:var(--surface);stroke:var(--primary);stroke-width:1.5"></rect>
+              <text x="430" y="250" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#312a92">Catálogo de dados</text>
+
+              <rect x="530" y="150" width="80" height="116" rx="8" style="fill:var(--ink);stroke:var(--ink);stroke-width:1.5"></rect>
+              <text x="570" y="212" text-anchor="middle" font-family="Lexend, sans-serif" font-size="12" font-weight="700" fill="#fff">Disco</text>
+
+              <line x1="75" y1="70" x2="100" y2="150" stroke="#5b5f7a" stroke-width="2" marker-end="url(#arrow)"></line>
+              <line x1="170" y1="178" x2="195" y2="178" stroke="#5b5f7a" stroke-width="2" marker-end="url(#arrow)"></line>
+              <line x1="335" y1="178" x2="360" y2="178" stroke="#5b5f7a" stroke-width="2" marker-end="url(#arrow)"></line>
+              <line x1="500" y1="178" x2="530" y2="190" stroke="#5b5f7a" stroke-width="2" marker-end="url(#arrow)"></line>
+
+              <defs>
+                <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#5b5f7a"></path>
+                </marker>
+              </defs>
+            </svg>
+            <figcaption>Uma consulta percorre o processador de consultas, o otimizador e o gerenciador de transações antes de tocar o disco.</figcaption>
+          </figure>
+
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>O que cada componente faz</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Componente</th>
+                  <th scope="col">Função</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Processador de consultas</td>
+                  <td>Recebe o SQL enviado pela aplicação, verifica a sintaxe e traduz o comando para uma representação interna.</td>
+                </tr>
+                <tr>
+                  <td>Otimizador</td>
+                  <td>Decide o caminho de execução mais eficiente para aquela consulta (qual índice usar, em que ordem juntar as tabelas).</td>
+                </tr>
+                <tr>
+                  <td>Gerenciador de transações</td>
+                  <td>Garante que operações agrupadas em uma transação sejam tratadas como um bloco único — é o tema da próxima parte da disciplina.</td>
+                </tr>
+                <tr>
+                  <td>Gerenciador de armazenamento e buffer</td>
+                  <td>Controla como os dados são lidos e escritos em disco, mantendo cópias recentes em memória para acelerar o acesso.</td>
+                </tr>
+                <tr>
+                  <td>Catálogo de dados (dicionário de dados)</td>
+                  <td>Guarda os "metadados": quais tabelas existem, quais colunas cada uma tem, quais são as chaves — é nele que comandos como <code>DESCRIBE</code> vão buscar a resposta.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section aria-labelledby="s4-title">
+          <h2 id="s4-title">4. Panorama de mercado</h2>
+          <p>Existem dezenas de SGBDs no mercado; vocês vão usar o MySQL nas próximas aulas práticas, mas vale a pena conhecer o cenário mais amplo:</p>
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Quatro SGBDs relacionais populares</caption>
+              <thead>
+                <tr>
+                  <th scope="col">SGBD</th>
+                  <th scope="col">Licença</th>
+                  <th scope="col">Perfil típico de uso</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>PostgreSQL</strong></td>
+                  <td>Código aberto</td>
+                  <td>Sistemas que exigem recursos avançados de SQL, tipos de dados customizados e forte aderência a padrões.</td>
+                </tr>
+                <tr>
+                  <td><strong>MySQL</strong></td>
+                  <td>Código aberto (com versão comercial)</td>
+                  <td>Aplicações web de médio e grande porte; muito usado junto com PHP, Node e frameworks web em geral.</td>
+                </tr>
+                <tr>
+                  <td><strong>Oracle Database</strong></td>
+                  <td>Proprietária</td>
+                  <td>Grandes sistemas corporativos com exigências pesadas de desempenho, auditoria e suporte contratado.</td>
+                </tr>
+                <tr>
+                  <td><strong>SQLite</strong></td>
+                  <td>Código aberto</td>
+                  <td>Banco embarcado: roda dentro do próprio aplicativo (apps mobile, ferramentas desktop), sem um servidor separado.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="concept-box">
+            <h3>Conceito: embarcado × cliente-servidor</h3>
+            <p>PostgreSQL, MySQL e Oracle seguem o modelo <strong>cliente-servidor</strong>: o SGBD roda como um processo separado (às vezes em outra máquina), e as aplicações se conectam a ele pela rede — foi esse modelo que vocês já usaram no MySQL Workbench. O SQLite é <strong>embarcado</strong>: o banco inteiro é um único arquivo, lido e escrito diretamente pelo próprio aplicativo, sem processo de servidor nem rede envolvida.</p>
+          </div>
+        </section>
+
+        <section class="quiz-box" aria-labelledby="quiz-title">
+          <h3 id="quiz-title">🤔 Confira se entendeu</h3>
+          <details>
+            <summary>Dois usuários tentam atualizar a mesma linha de uma tabela ao mesmo tempo. Qual função do SGBD entra em ação?</summary>
+            <p>O controle de concorrência, que coordena os acessos simultâneos para que uma atualização não sobrescreva a outra de forma inconsistente.</p>
+          </details>
+          <details>
+            <summary>Por que um app mobile offline-first costuma preferir SQLite a um SGBD cliente-servidor como o PostgreSQL?</summary>
+            <p>Porque o SQLite é embarcado: não exige um servidor de banco rodando separadamente nem conexão de rede, já que o banco é um arquivo local lido diretamente pelo aplicativo.</p>
+          </details>
+        </section>
+
+        <section aria-labelledby="materials-title">
+          <h2 id="materials-title">Materiais para estudo</h2>
+          <ul class="materials-list">
+            <li>Documentação oficial: <a href="https://www.postgresql.org/docs/" target="_blank" rel="noopener">PostgreSQL</a>, <a href="https://dev.mysql.com/doc/" target="_blank" rel="noopener">MySQL</a> e <a href="https://www.sqlite.org/docs.html" target="_blank" rel="noopener">SQLite</a>.</li>
+            <li>Próximo tópico: as primeiras consultas em SQL, usando o MySQL que vocês já conhecem do Workbench.</li>
+          </ul>
+          <ul class="video-links">
+            <li>
+              <span class="video-icon" aria-hidden="true">▶</span>
+              <div>
+                <a href="https://www.youtube.com/results?search_query=arquitetura+interna+de+um+SGBD+explicada" target="_blank" rel="noopener">Buscar vídeo-aulas sobre arquitetura de SGBDs no YouTube</a>
+                <span class="video-note">Abre uma busca no YouTube com vídeos sobre o funcionamento interno de um banco de dados.</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="topic-pager" aria-label="Navegação entre tópicos">
+          <div class="topic-pager-inner">
+            <a class="pager-link pager-link--prev" href="algebra-relacional-juncoes.html">
+              <span class="pager-label">Anterior</span>
+              <span class="pager-title">Álgebra Relacional — Junções e Divisão</span>
+            </a>
+            <a class="pager-link pager-link--next" href="sql-introducao.html">
+              <span class="pager-label">Próximo</span>
+              <span class="pager-title">Introdução ao SQL e Consultas Básicas</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Banco de Dados · Engenharia de Computação</p>
+      <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
+    </div>
+  </footer>
+</body>
+</html>

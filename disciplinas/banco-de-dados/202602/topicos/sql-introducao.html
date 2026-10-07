@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introdução ao SQL: SELECT, WHERE e ORDER BY | Banco de Dados</title>
+  <meta name="description" content="Primeiros passos em SQL com o exemplo de uma frota de robôs de entrega: padrão SQL ISO/ANSI, estrutura do SELECT, filtros com WHERE, operadores de comparação e ordenação com ORDER BY, explicados linha a linha.">
+  <meta name="keywords" content="SQL, SELECT, WHERE, ORDER BY, consultas SQL, padrão SQL ANSI, operadores de comparação, LIKE, LIMIT, introdução a SQL">
+  <meta name="author" content="Disciplina de Banco de Dados">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/sql-introducao.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Introdução ao SQL: SELECT, WHERE e ORDER BY">
+  <meta property="og:description" content="Primeiros passos em SQL com o exemplo de uma frota de robôs de entrega, explicados linha a linha.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/sql-introducao.html">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Introdução ao SQL: SELECT, WHERE e ORDER BY",
+    "description": "Primeiros passos em SQL: estrutura do SELECT, filtros com WHERE e ordenação com ORDER BY.",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "artigo de estudo",
+    "educationalLevel": "Graduação",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Banco de Dados",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/index.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">BD</span>
+        <span class="brand-text">
+          <span class="brand-name">Banco de Dados</span>
+          <span class="brand-sub">Eng. de Computação</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="../index.html">Banco de Dados</a></li>
+          <li aria-current="page">Introdução ao SQL e Consultas Básicas</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="topic-article">
+      <div class="container">
+        <header class="topic-header">
+          <p class="topic-eyebrow">Linguagens SQL</p>
+          <h1>Introdução ao SQL: SELECT, WHERE e ORDER BY</h1>
+          <p class="topic-lead">A partir de agora a gente conversa com o banco na língua dele: o SQL. Antes de criar qualquer tabela (isso fica para o próximo tópico, de DDL), eu quero que vocês aprendam a <em>perguntar</em> coisas a um banco que já existe. Vamos usar como cenário a central de monitoramento de uma frota de robôs de entrega.</p>
+        </header>
+
+        <section class="objectives" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">O que vocês vão aprender aqui</h2>
+          <ul class="check-list">
+            <li>Entender o que é o padrão SQL (ISO/ANSI) e por que ele existe.</li>
+            <li>Ler e escrever a estrutura básica de um <code>SELECT</code>.</li>
+            <li>Filtrar linhas com <code>WHERE</code> e os principais operadores de comparação.</li>
+            <li>Ordenar resultados com <code>ORDER BY</code> e limitar quantidade com <code>LIMIT</code>.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="s1-title">
+          <h2 id="s1-title">1. O cenário: a frota de robôs</h2>
+          <div class="theme-box">
+            <h3>🤖 A central de monitoramento</h3>
+            <p>Imaginem uma empresa de entregas que usa robôs autônomos. Toda a frota é monitorada por uma única tabela, <code>robo_entrega</code>, que guarda o estado de cada robô em tempo real. É nessa tabela que vamos praticar nossas primeiras consultas.</p>
+          </div>
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Tabela robo_entrega (dados de exemplo)</caption>
+              <thead>
+                <tr>
+                  <th scope="col">id_robo</th>
+                  <th scope="col">codigo</th>
+                  <th scope="col">cidade</th>
+                  <th scope="col">bateria_pct</th>
+                  <th scope="col">status</th>
+                  <th scope="col">velocidade_kmh</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>RX-01</td><td>Blumenau</td><td>82</td><td>em_rota</td><td>14.5</td></tr>
+                <tr><td>2</td><td>RX-02</td><td>Joinville</td><td>19</td><td>carregando</td><td>0.0</td></tr>
+                <tr><td>3</td><td>RX-03</td><td>Blumenau</td><td>67</td><td>em_rota</td><td>11.2</td></tr>
+                <tr><td>4</td><td>RX-04</td><td>Itajaí</td><td>95</td><td>disponivel</td><td>0.0</td></tr>
+                <tr><td>5</td><td>RX-05</td><td>Joinville</td><td>8</td><td>manutencao</td><td>0.0</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section aria-labelledby="s2-title">
+          <h2 id="s2-title">2. O padrão SQL</h2>
+          <p><strong>SQL</strong> (Structured Query Language) é um padrão definido pela ISO e pela ANSI, o que significa que a sintaxe básica — <code>SELECT</code>, <code>WHERE</code>, <code>ORDER BY</code> — funciona de forma muito parecida em qualquer SGBD relacional: MySQL, PostgreSQL, Oracle ou SQL Server. Cada SGBD acrescenta pequenas particularidades por cima do padrão (por exemplo, a forma de fazer <code>AUTO_INCREMENT</code> varia entre eles), mas o núcleo que vocês vão aprender aqui é transferível.</p>
+        </section>
+
+        <section aria-labelledby="s3-title">
+          <h2 id="s3-title">3. A estrutura do SELECT</h2>
+          <p>Toda consulta começa pedindo "quais colunas eu quero ver" e "de qual tabela":</p>
+
+          <pre class="code-block"><code>SELECT codigo, cidade, bateria_pct
+FROM robo_entrega;</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: primeiro SELECT</caption>
+              <thead>
+                <tr><th scope="col">Trecho</th><th scope="col">O que significa</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>SELECT codigo, cidade, bateria_pct</code></td>
+                  <td>Diz quais colunas devem aparecer no resultado, na ordem escolhida — aqui, só três das seis colunas da tabela.</td>
+                </tr>
+                <tr>
+                  <td><code>FROM robo_entrega;</code></td>
+                  <td>Diz de qual tabela os dados vêm. O ponto e vírgula encerra o comando.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Para trazer todas as colunas sem digitar o nome de cada uma, usamos o asterisco:</p>
+          <pre class="code-block"><code>SELECT * FROM robo_entrega;</code></pre>
+          <div class="tip-box">
+            <h3>⚠️ Cuidado com o *</h3>
+            <p><code>SELECT *</code> é ótimo para explorar uma tabela pequena durante o estudo, mas em código de produção eu peço que vocês sempre listem as colunas que realmente precisam — isso deixa a consulta mais rápida e evita que ela quebre se alguém adicionar uma coluna nova na tabela depois.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="s4-title">
+          <h2 id="s4-title">4. Filtrando linhas com WHERE</h2>
+          <p>O <code>SELECT</code> sozinho traz todas as linhas. Para trazer só os robôs que interessam, usamos <code>WHERE</code>:</p>
+
+          <pre class="code-block"><code>SELECT codigo, cidade, bateria_pct
+FROM robo_entrega
+WHERE bateria_pct &lt; 20;</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: filtrando por bateria baixa</caption>
+              <thead>
+                <tr><th scope="col">Trecho</th><th scope="col">O que significa</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>WHERE bateria_pct &lt; 20</code></td>
+                  <td>Só inclui no resultado as linhas em que o valor de <code>bateria_pct</code> é menor que 20 — ou seja, os robôs RX-02 (19%) e RX-05 (8%).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Operadores mais usados no WHERE</caption>
+              <thead>
+                <tr><th scope="col">Operador</th><th scope="col">Significado</th><th scope="col">Exemplo</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>=</code></td><td>Igual a</td><td><code>status = 'em_rota'</code></td></tr>
+                <tr><td><code>&lt;&gt;</code> ou <code>!=</code></td><td>Diferente de</td><td><code>status &lt;&gt; 'manutencao'</code></td></tr>
+                <tr><td><code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code></td><td>Maior, menor, maior ou igual, menor ou igual</td><td><code>velocidade_kmh &gt; 10</code></td></tr>
+                <tr><td><code>AND</code> / <code>OR</code></td><td>Combina duas condições</td><td><code>cidade = 'Blumenau' AND status = 'em_rota'</code></td></tr>
+                <tr><td><code>BETWEEN a AND b</code></td><td>Está dentro de um intervalo (inclusive)</td><td><code>bateria_pct BETWEEN 60 AND 90</code></td></tr>
+                <tr><td><code>IN (lista)</code></td><td>Está dentro de uma lista de valores</td><td><code>cidade IN ('Blumenau', 'Itajaí')</code></td></tr>
+                <tr><td><code>LIKE</code></td><td>Compara texto com um padrão (<code>%</code> = qualquer sequência de caracteres)</td><td><code>codigo LIKE 'RX-0%'</code></td></tr>
+                <tr><td><code>IS NULL</code></td><td>O valor não foi informado</td><td><code>observacao IS NULL</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="concept-box">
+            <h3>Conceito: por que não se usa = para comparar com NULL</h3>
+            <p><code>NULL</code> representa "valor desconhecido", então <code>coluna = NULL</code> nunca é considerado verdadeiro pelo SQL — nem quando a coluna realmente está vazia. Por isso existe o operador específico <code>IS NULL</code> (e <code>IS NOT NULL</code> para o caso contrário).</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="s5-title">
+          <h2 id="s5-title">5. Ordenando com ORDER BY e limitando com LIMIT</h2>
+          <pre class="code-block"><code>SELECT codigo, cidade, bateria_pct
+FROM robo_entrega
+ORDER BY bateria_pct ASC
+LIMIT 3;</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: os três robôs com menos bateria</caption>
+              <thead>
+                <tr><th scope="col">Trecho</th><th scope="col">O que significa</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>ORDER BY bateria_pct ASC</code></td>
+                  <td>Ordena o resultado pela coluna <code>bateria_pct</code>, do menor para o maior (<code>ASC</code> = ascendente; <code>DESC</code> faria o caminho contrário).</td>
+                </tr>
+                <tr>
+                  <td><code>LIMIT 3;</code></td>
+                  <td>Depois de ordenar, mantém só as três primeiras linhas do resultado — útil para perguntas como "quais são os robôs mais críticos agora?".</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Dá para combinar tudo o que vimos em uma única consulta:</p>
+          <pre class="code-block"><code>SELECT codigo, cidade, bateria_pct, status
+FROM robo_entrega
+WHERE status &lt;&gt; 'manutencao'
+ORDER BY bateria_pct ASC
+LIMIT 2;</code></pre>
+          <p>Essa consulta lê assim, de trás para frente no raciocínio: "me dê os 2 robôs com menos bateria, entre os que não estão em manutenção, mostrando código, cidade, bateria e status."</p>
+        </section>
+
+        <section class="quiz-box" aria-labelledby="quiz-title">
+          <h3 id="quiz-title">🤔 Confira se entendeu</h3>
+          <details>
+            <summary>Como eu escreveria uma consulta para listar os robôs de Joinville que estão com status 'em_rota', ordenados pelo código?</summary>
+            <p><code>SELECT * FROM robo_entrega WHERE cidade = 'Joinville' AND status = 'em_rota' ORDER BY codigo;</code></p>
+          </details>
+          <details>
+            <summary>Por que SELECT * FROM robo_entrega WHERE bateria_pct = NULL; nunca retorna nenhuma linha, mesmo que existam robôs sem bateria registrada?</summary>
+            <p>Porque NULL significa "desconhecido", e o operador = nunca é verdadeiro ao comparar algo com NULL. O correto seria usar WHERE bateria_pct IS NULL.</p>
+          </details>
+        </section>
+
+        <section aria-labelledby="materials-title">
+          <h2 id="materials-title">Materiais para estudo</h2>
+          <ul class="materials-list">
+            <li>Referência de sintaxe SQL: <a href="https://dev.mysql.com/doc/refman/8.0/en/select.html" target="_blank" rel="noopener">documentação do comando SELECT no MySQL</a>.</li>
+            <li>Próximo tópico: DDL — como criar as tabelas que estamos apenas consultando aqui.</li>
+          </ul>
+          <ul class="video-links">
+            <li>
+              <span class="video-icon" aria-hidden="true">▶</span>
+              <div>
+                <a href="https://www.youtube.com/results?search_query=SQL+SELECT+WHERE+ORDER+BY+para+iniciantes" target="_blank" rel="noopener">Buscar vídeo-aulas sobre SELECT, WHERE e ORDER BY no YouTube</a>
+                <span class="video-note">Abre uma busca no YouTube com aulas introdutórias de SQL.</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="topic-pager" aria-label="Navegação entre tópicos">
+          <div class="topic-pager-inner">
+            <a class="pager-link pager-link--prev" href="sgbd-arquitetura.html">
+              <span class="pager-label">Anterior</span>
+              <span class="pager-title">Arquitetura e Funcionamento de um SGBD</span>
+            </a>
+            <a class="pager-link pager-link--next" href="ddl.html">
+              <span class="pager-label">Próximo</span>
+              <span class="pager-title">DDL — Definição de Estruturas</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Banco de Dados · Engenharia de Computação</p>
+      <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
+    </div>
+  </footer>
+</body>
+</html>

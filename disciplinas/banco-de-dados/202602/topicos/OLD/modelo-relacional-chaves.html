@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modelo Relacional e Chaves | Banco de Dados</title>
+<meta name="description" content="Relações, tuplas, domínio, grau, superchave, chave candidata, chave primária, chave estrangeira e integridade referencial — Engenharia da Computação.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a href="#conteudo-principal" class="skip-link">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="../index.html" class="brand">
+      <span class="brand-mark" aria-hidden="true">BD</span>
+      <span class="brand-text">
+        <span class="brand-name">Banco de Dados</span>
+        <span class="brand-sub">Engenharia da Computação · 2026/2</span>
+      </span>
+    </a>
+    <nav class="site-nav" aria-label="Navegação principal">
+      <ul>
+        <li><a href="../index.html">Início</a></li>
+        <li><a href="../topicos/index.html">Tópicos</a></li>
+        <li><a href="../cronograma.html">Cronograma</a></li>
+        <li><a href="../avaliacoes.html">Avaliações</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <nav class="breadcrumb" aria-label="Trilha de navegação">
+    <ol>
+      <li><a href="../index.html">Banco de Dados</a></li>
+      <li><a href="../topicos/index.html">Tópicos</a></li>
+      <li aria-current="page">Modelo Relacional e Chaves</li>
+    </ol>
+  </nav>
+</div>
+
+<main id="conteudo-principal" class="container topic-article">
+
+  <header class="topic-header">
+    <div class="topic-meta">
+      <span class="duration-badge">Modelagem de Dados</span>
+    </div>
+    <h1>Modelo Relacional e Chaves</h1>
+    <p class="topic-lead">
+      Depois de representar o mundo real com o Modelo Entidade-Relacionamento (MER),
+      precisamos traduzir esse desenho para uma estrutura que o Sistema Gerenciador de
+      Banco de Dados (SGBD) entenda: <strong>tabelas</strong>. Este tópico apresenta os
+      fundamentos formais do modelo relacional — <span class="tooltip-tag" title="Proposto por Edgar F. Codd em 1970, na IBM">quem criou?</span> —
+      e como as <em>chaves</em> garantem que os dados sejam únicos, consistentes e
+      corretamente conectados entre tabelas. Página de hoje gerada por IA. 
+    </p>
+  </header>
+
+  <section class="objectives">
+    <h2>Objetivos de aprendizagem</h2>
+    <ul class="check-list">
+      <li>Definir formalmente relação, tupla, atributo, domínio e grau de uma relação.</li>
+      <li>Diferenciar superchave, chave candidata, chave primária e chave estrangeira.</li>
+      <li>Aplicar as regras de integridade de entidade e integridade referencial.</li>
+      <li>Identificar chaves candidatas e primárias em um esquema relacional dado.</li>
+      <li>Explicar as consequências de violar a integridade referencial em operações de INSERT, UPDATE e DELETE.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>1. O que é uma relação?</h2>
+    <p>
+      No modelo relacional, uma <strong>relação</strong> é, formalmente, uma tabela
+      bidimensional composta por linhas e colunas — mas com regras matemáticas precisas
+      derivadas da teoria de conjuntos. Cada relação tem:
+    </p>
+    <ul>
+      <li>um <strong>nome</strong> único dentro do banco de dados (ex.: <code>Aluno</code>, <code>Disciplina</code>, <code>Matricula</code>);</li>
+      <li>um conjunto de <strong>atributos</strong> (as colunas);</li>
+      <li>um conjunto de <strong>tuplas</strong> (as linhas), que representam as instâncias de dados.</li>
+    </ul>
+
+    <div class="analogy">
+      <strong>Analogia:</strong> pense em uma relação como uma planilha bem-comportada.
+      Cada coluna tem um tipo de dado fixo (nomes, números, datas) e cada linha
+      descreve <em>um único</em> objeto do mundo real — um aluno, um pedido, um produto.
+      Diferente de uma planilha comum, porém, uma relação <strong>não tem ordem</strong>
+      definida entre linhas nem entre colunas, e <strong>não permite tuplas duplicadas</strong>.
+    </div>
+
+    <figure class="diagram-figure">
+      <svg viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fig1-title fig1-desc">
+        <title id="fig1-title">Anatomia de uma relação</title>
+        <desc id="fig1-desc">Tabela Aluno com colunas matrícula, nome e curso, destacando atributos, tupla, domínio e grau.</desc>
+
+        <text x="20" y="28" class="diagram-title">Relação: Aluno</text>
+
+        <!-- header row -->
+        <rect x="20" y="45" width="180" height="34" class="diagram-box" style="fill:var(--primary); stroke:var(--primary-dark);"/>
+        <rect x="200" y="45" width="280" height="34" class="diagram-box" style="fill:var(--primary); stroke:var(--primary-dark);"/>
+        <rect x="480" y="45" width="220" height="34" class="diagram-box" style="fill:var(--primary); stroke:var(--primary-dark);"/>
+        <text x="30" y="67" font-size="12" fill="#fff" font-family="Lexend">matricula</text>
+        <text x="210" y="67" font-size="12" fill="#fff" font-family="Lexend">nome</text>
+        <text x="490" y="67" font-size="12" fill="#fff" font-family="Lexend">curso</text>
+
+        <!-- rows -->
+        <g>
+          <rect x="20" y="79" width="180" height="34" class="diagram-box"/>
+          <rect x="200" y="79" width="280" height="34" class="diagram-box"/>
+          <rect x="480" y="79" width="220" height="34" class="diagram-box"/>
+          <text x="30" y="101" font-size="12" fill="var(--ink)">2026001</text>
+          <text x="210" y="101" font-size="12" fill="var(--ink)">Marina Souza</text>
+          <text x="490" y="101" font-size="12" fill="var(--ink)">Eng. Computação</text>
+        </g>
+        <g>
+          <rect x="20" y="113" width="180" height="34" class="diagram-box"/>
+          <rect x="200" y="113" width="280" height="34" class="diagram-box"/>
+          <rect x="480" y="113" width="220" height="34" class="diagram-box"/>
+          <text x="30" y="135" font-size="12" fill="var(--ink)">2026002</text>
+          <text x="210" y="135" font-size="12" fill="var(--ink)">Rafael Lima</text>
+          <text x="490" y="135" font-size="12" fill="var(--ink)">Eng. Computação</text>
+        </g>
+        <g>
+          <rect x="20" y="147" width="180" height="34" class="diagram-box"/>
+          <rect x="200" y="147" width="280" height="34" class="diagram-box"/>
+          <rect x="480" y="147" width="220" height="34" class="diagram-box"/>
+          <text x="30" y="169" font-size="12" fill="var(--ink)">2026003</text>
+          <text x="210" y="169" font-size="12" fill="var(--ink)">Júlia Prado</text>
+          <text x="490" y="169" font-size="12" fill="var(--ink)">Sistemas de Info.</text>
+        </g>
+
+        <!-- annotations -->
+        <line x1="290" y1="45" x2="290" y2="20" class="diagram-arrow"/>
+        <text x="230" y="15" class="diagram-caption">atributo (coluna)</text>
+
+        <line x1="600" y1="130" x2="740" y2="130" class="diagram-arrow"/>
+        <text x="745" y="134" class="diagram-caption">tupla (linha)</text>
+
+        <text x="20" y="210" class="diagram-caption">Grau da relação = número de atributos = 3 (matricula, nome, curso)</text>
+        <text x="20" y="228" class="diagram-caption">Cardinalidade = número de tuplas neste instante = 3</text>
+        <text x="20" y="246" class="diagram-caption">Domínio(matricula) = números inteiros de 7 dígitos, no formato AAAANNN</text>
+      </svg>
+      <figcaption>Figura 1 — Anatomia de uma relação: atributos (colunas), tuplas (linhas), grau e domínio.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>2. Tuplas e atributos</h2>
+    <p>
+      Uma <strong>tupla</strong> é uma linha da relação: um conjunto ordenado de valores,
+      um para cada atributo, que descreve uma ocorrência específica da entidade
+      representada pela tabela. Na Figura 1, <code>(2026001, "Marina Souza", "Eng. Computação")</code>
+      é uma tupla.
+    </p>
+    <p>
+      Um <strong>atributo</strong> é uma coluna da relação — uma propriedade nomeada que
+      todas as tuplas compartilham. Cada atributo está associado a um <strong>domínio</strong>:
+      o conjunto de valores atômicos e válidos que ele pode assumir.
+    </p>
+  </section>
+
+  <section>
+    <h2>3. Domínio e grau</h2>
+    <p>
+      O <strong>domínio</strong> de um atributo define o tipo de dado, o formato e as
+      restrições de valor aceitáveis. Por exemplo, o domínio do atributo
+      <code>curso</code> pode ser uma lista fechada de strings
+      (<code>{"Eng. Computação", "Sistemas de Informação", "Eng. de Software"}</code>),
+      enquanto o domínio de <code>matricula</code> pode ser todo inteiro positivo de 7 dígitos.
+    </p>
+    <p>
+      O <strong>grau</strong> de uma relação é simplesmente o número de atributos que ela
+      possui. Uma relação de grau 1 é <em>unária</em>; de grau 2, <em>binária</em>; de
+      grau <var>n</var>, <em>n-ária</em>. Não confunda grau com <strong>cardinalidade</strong>,
+      que é o número de tuplas presentes na relação em um dado momento — a cardinalidade
+      muda a cada INSERT ou DELETE, mas o grau só muda se o esquema da tabela for alterado.
+    </p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption>Comparando grau e cardinalidade na relação <code>Aluno</code> da Figura 1</caption>
+        <thead>
+          <tr><th scope="col">Conceito</th><th scope="col">Definição</th><th scope="col">Valor no exemplo</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Grau</td>
+            <td>Número de atributos (colunas) da relação</td>
+            <td>3 (matricula, nome, curso)</td>
+          </tr>
+          <tr>
+            <td>Cardinalidade</td>
+            <td>Número de tuplas (linhas) em um instante</td>
+            <td>3 alunos cadastrados</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>4. Chaves: identificando tuplas de forma única</h2>
+    <p>
+      Como uma relação não permite tuplas duplicadas, é preciso garantir que exista pelo
+      menos um atributo (ou conjunto de atributos) capaz de identificar cada tupla de
+      forma única. É esse o papel das <strong>chaves</strong>.
+    </p>
+
+    <h3 class="visually-hidden">Superchave</h3>
+    <p>
+      <strong>Superchave</strong> é qualquer subconjunto de atributos que, tomado em
+      conjunto, identifica uma tupla de forma única dentro da relação. Toda relação tem
+      pelo menos uma superchave trivial: o conjunto de <em>todos</em> os seus atributos.
+    </p>
+
+    <p>
+      <strong>Chave candidata</strong> é uma superchave <em>mínima</em> — ou seja, se você
+      remover qualquer atributo dela, ela deixa de identificar as tuplas de forma única.
+      Uma relação pode ter mais de uma chave candidata.
+    </p>
+
+    <p>
+      <strong>Chave primária (Primary Key — PK)</strong> é a chave candidata escolhida
+      pelo projetista para ser o identificador oficial da relação. As demais chaves
+      candidatas passam a ser chamadas de <strong>chaves alternativas</strong>.
+    </p>
+
+    <p>
+      <strong>Chave estrangeira (Foreign Key — FK)</strong> é um atributo (ou conjunto de
+      atributos) em uma relação que referencia a chave primária de outra relação
+      (ou, em casos de autorrelacionamento, da própria relação), estabelecendo o
+      vínculo entre as duas tabelas.
+    </p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption>Tabela <code>Aluno(matricula, cpf, email, nome, curso)</code></caption>
+        <thead>
+          <tr><th scope="col">Conjunto de atributos</th><th scope="col">É superchave?</th><th scope="col">É chave candidata?</th><th scope="col">Por quê</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>{matricula, cpf, email, nome, curso}</code></td>
+            <td>Sim</td>
+            <td>Não</td>
+            <td>Identifica a tupla, mas não é mínima — tem atributos redundantes</td>
+          </tr>
+          <tr>
+            <td><code>{matricula}</code></td>
+            <td>Sim</td>
+            <td>Sim</td>
+            <td>Único, mínimo e nunca se repete entre alunos</td>
+          </tr>
+          <tr>
+            <td><code>{cpf}</code></td>
+            <td>Sim</td>
+            <td>Sim</td>
+            <td>Também único e mínimo — chave candidata alternativa</td>
+          </tr>
+          <tr>
+            <td><code>{email}</code></td>
+            <td>Sim</td>
+            <td>Sim</td>
+            <td>Assumindo e-mails institucionais únicos por aluno</td>
+          </tr>
+          <tr>
+            <td><code>{nome}</code></td>
+            <td>Não</td>
+            <td>Não</td>
+            <td>Dois alunos podem ter o mesmo nome</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Neste exemplo, <code>matricula</code>, <code>cpf</code> e <code>email</code> são
+      todas <em>chaves candidatas</em>. O projetista escolhe <code>matricula</code> como
+      <strong>chave primária</strong> (por ser mais curta e específica do contexto
+      acadêmico); <code>cpf</code> e <code>email</code> tornam-se
+      <em>chaves alternativas</em>, geralmente protegidas por restrições
+      <code>UNIQUE</code> no SGBD.
+    </p>
+  </section>
+
+  <section>
+    <h2>5. Integridade referencial</h2>
+    <p>
+      A <strong>integridade referencial</strong> é a regra que garante consistência entre
+      relações ligadas por chave estrangeira: <em>todo valor de chave estrangeira deve
+      ser nulo ou corresponder a um valor existente da chave primária referenciada</em>.
+      Ela impede "referências fantasmas" — por exemplo, uma matrícula que aponte para um
+      aluno que não existe.
+    </p>
+    <p>
+      Há também a <strong>regra de integridade de entidade</strong>, complementar: nenhum
+      atributo que faça parte da chave primária pode ser nulo, pois um valor nulo não
+      identificaria a tupla de forma única.
+    </p>
+
+    <figure class="diagram-figure">
+      <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fig2-title fig2-desc">
+        <title id="fig2-title">Integridade referencial entre Aluno e Matricula</title>
+        <desc id="fig2-desc">A chave estrangeira aluno_matricula na tabela Matricula referencia a chave primária matricula na tabela Aluno.</desc>
+
+        <!-- Aluno table -->
+        <rect x="40" y="40" width="240" height="34" class="diagram-box" style="fill:var(--primary); stroke:var(--primary-dark);"/>
+        <text x="55" y="62" font-size="13" fill="#fff" font-family="Lexend">Aluno</text>
+        <rect x="40" y="74" width="240" height="30" class="diagram-box"/>
+        <text x="55" y="94" font-size="12" fill="var(--ink)">PK  matricula</text>
+        <rect x="40" y="104" width="240" height="30" class="diagram-box"/>
+        <text x="55" y="124" font-size="12" fill="var(--ink)">nome</text>
+        <rect x="40" y="134" width="240" height="30" class="diagram-box"/>
+        <text x="55" y="154" font-size="12" fill="var(--ink)">curso</text>
+
+        <!-- Matricula table -->
+        <rect x="560" y="40" width="260" height="34" class="diagram-box" style="fill:var(--current); stroke:#c2410c;"/>
+        <text x="575" y="62" font-size="13" fill="#fff" font-family="Lexend">Matricula</text>
+        <rect x="560" y="74" width="260" height="30" class="diagram-box"/>
+        <text x="575" y="94" font-size="12" fill="var(--ink)">PK  id_matricula</text>
+        <rect x="560" y="104" width="260" height="30" class="diagram-box"/>
+        <text x="575" y="124" font-size="12" fill="var(--ink)">FK  aluno_matricula</text>
+        <rect x="560" y="134" width="260" height="30" class="diagram-box"/>
+        <text x="575" y="154" font-size="12" fill="var(--ink)">disciplina</text>
+
+        <!-- relation arrow -->
+        <line x1="280" y1="89" x2="560" y2="119" class="diagram-arrow" stroke-dasharray="4 3"/>
+        <text x="330" y="200" class="diagram-caption">A FK "aluno_matricula" só aceita valores que já existam</text>
+        <text x="330" y="216" class="diagram-caption">como PK "matricula" na tabela Aluno (ou o valor nulo, se permitido).</text>
+      </svg>
+      <figcaption>Figura 2 — A chave estrangeira <code>aluno_matricula</code> referencia a chave primária <code>matricula</code>.</figcaption>
+    </figure>
+
+    <p>Isso tem consequências práticas nas operações do SGBD:</p>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <caption>Efeito da integridade referencial em operações comuns</caption>
+        <thead>
+          <tr><th scope="col">Operação</th><th scope="col">Situação verificada</th><th scope="col">Resultado se violar a regra</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>INSERT em <code>Matricula</code></td>
+            <td>O valor de <code>aluno_matricula</code> existe em <code>Aluno.matricula</code>?</td>
+            <td>Rejeitado — erro de chave estrangeira</td>
+          </tr>
+          <tr>
+            <td>DELETE em <code>Aluno</code></td>
+            <td>Existem matrículas apontando para esse aluno?</td>
+            <td>Rejeitado, ou aplica-se <code>ON DELETE CASCADE</code>/<code>SET NULL</code>, conforme definido no esquema</td>
+          </tr>
+          <tr>
+            <td>UPDATE de <code>matricula</code> em <code>Aluno</code></td>
+            <td>Existem FKs apontando para o valor antigo?</td>
+            <td>Rejeitado, ou propagado com <code>ON UPDATE CASCADE</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="thinking-box">
+    <h2>Para pensar!</h2>
+    <p>
+      Analise os esquemas relacionais abaixo (nome da tabela e atributos entre
+      parênteses) e responda aos exercícios propostos. Tente resolver antes de abrir as dicas.
+    </p>
+
+    <article class="thinking-exercise">
+      <div class="thinking-header">
+        <h3>Exercício 1 — Identificando chaves</h3>
+        <span class="tooltip-tag" title="Aplica os conceitos de superchave e chave candidata">superchave · chave candidata</span>
+      </div>
+      <p>
+        Considere: <code>Livro(isbn, titulo, editora, ano, codigo_interno)</code>, em que
+        <code>isbn</code> e <code>codigo_interno</code> são, cada um isoladamente, únicos
+        para cada livro do acervo.
+      </p>
+      <h4>Regras</h4>
+      <ul>
+        <li>Liste pelo menos três superchaves diferentes de <code>Livro</code>.</li>
+        <li>Indique quais são chaves candidatas.</li>
+        <li>Justifique qual delas você escolheria como chave primária e por quê.</li>
+      </ul>
+      <div class="thinking-toggle-wrap">
+        <button type="button" class="thinking-toggle" aria-expanded="false" aria-controls="dicas-ex1">Mostrar dicas</button>
+      </div>
+      <div class="thinking-hints thinking-hints--hidden" id="dicas-ex1">
+        <h4>Dicas</h4>
+        <ul>
+          <li>Toda superchave contém pelo menos uma chave candidata dentro de si.</li>
+          <li><code>{isbn, titulo}</code> é superchave, mas não é mínima — por quê?</li>
+          <li>Compare o tamanho e a estabilidade de <code>isbn</code> e <code>codigo_interno</code> antes de decidir a PK.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="thinking-exercise">
+      <div class="thinking-header">
+        <h3>Exercício 2 — Integridade referencial na prática</h3>
+        <span class="tooltip-tag" title="Aplica os conceitos de chave estrangeira e integridade referencial">chave estrangeira · integridade referencial</span>
+      </div>
+      <p>
+        Dado o esquema <code>Pedido(id_pedido, id_cliente, data)</code> e
+        <code>Cliente(id_cliente, nome, email)</code>, em que <code>id_cliente</code> em
+        <code>Pedido</code> é FK para <code>Cliente.id_cliente</code>:
+      </p>
+      <h4>Regras</h4>
+      <ul>
+        <li>O que acontece se você tentar inserir um pedido com <code>id_cliente = 999</code>, sendo que esse cliente não existe?</li>
+        <li>Um cliente sem nenhum pedido pode ser excluído sem restrição? Em que condição isso deixaria de ser verdade?</li>
+        <li>Proponha uma política de <code>ON DELETE</code> adequada para quando um cliente com pedidos é removido, justificando a escolha entre <code>CASCADE</code>, <code>SET NULL</code> e <code>RESTRICT</code>.</li>
+      </ul>
+      <div class="thinking-toggle-wrap">
+        <button type="button" class="thinking-toggle" aria-expanded="false" aria-controls="dicas-ex2">Mostrar dicas</button>
+      </div>
+      <div class="thinking-hints thinking-hints--hidden" id="dicas-ex2">
+        <h4>Dicas</h4>
+        <ul>
+          <li>Pense no impacto de cada política sobre o histórico de pedidos — apagar um cliente deveria apagar o histórico?</li>
+          <li><code>RESTRICT</code> impede a exclusão enquanto houver dependentes; <code>SET NULL</code> exige que a FK aceite nulo.</li>
+          <li>Relacione sua escolha a uma necessidade real de negócio (ex.: auditoria fiscal de pedidos).</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="activity-box">
+    <h2>Atividade prática</h2>
+    <p>
+      Escolha um domínio de sua preferência (ex.: sistema de biblioteca, e-commerce ou
+      matrícula acadêmica) e, em uma folha ou editor de texto:
+    </p>
+    <ol>
+      <li>Defina de 2 a 3 relações com seus atributos e domínios.</li>
+      <li>Identifique todas as superchaves e as chaves candidatas de cada relação.</li>
+      <li>Escolha a chave primária de cada uma e justifique a escolha.</li>
+      <li>Adicione pelo menos uma chave estrangeira conectando duas relações e descreva a regra de integridade referencial associada.</li>
+    </ol>
+    <p>Envie o resultado no formato indicado pelo(a) professor(a) até a próxima aula.</p>
+  </section>
+
+  <section>
+    <h2>Materiais complementares</h2>
+    <ul class="materials-list">
+      <li>ELMASRI, R.; NAVATHE, S. B. <em>Sistemas de Banco de Dados</em>. 7. ed. Capítulo sobre o Modelo Relacional.</li>
+      <li>SILBERSCHATZ, A.; KORTH, H.; SUDARSHAN, S. <em>Sistema de Banco de Dados</em>. Capítulo sobre Modelo de Dados Relacional.</li>
+      <li>DATE, C. J. <em>Introdução a Sistemas de Bancos de Dados</em> — leitura de aprofundamento sobre a álgebra relacional de Codd.</li>
+    </ul>
+  </section>
+
+</main>
+
+<nav class="topic-pager container" aria-label="Navegação entre tópicos">
+  <div class="topic-pager-inner">
+    <a class="pager-link pager-link--prev" href="modelo-entidade-relacionamento.html">
+      <span class="pager-label">← Anterior</span>
+      <span class="pager-title">Modelo Entidade-Relacionamento (MER)</span>
+    </a>
+    <a class="pager-link pager-link--next" href="algebra-relacional.html">
+      <span class="pager-label">Próximo →</span>
+      <span class="pager-title">Álgebra Relacional</span>
+    </a>
+  </div>
+</nav>
+
+<script>
+  document.querySelectorAll('.thinking-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var panel = document.getElementById(btn.getAttribute('aria-controls'));
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      panel.classList.toggle('thinking-hints--hidden');
+      btn.textContent = expanded ? 'Mostrar dicas' : 'Ocultar dicas';
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula prática de DDL e DML em MySQL usando uma pizzaria para gatos. Aprenda CREATE, ALTER, DROP, INSERT, UPDATE e DELETE passo a passo.">
+  <meta name="keywords" content="MySQL, SQL, DDL, DML, banco de dados, CREATE TABLE, ALTER TABLE, INSERT, UPDATE, DELETE">
+  <meta name="author" content="Material didático de Banco de Dados">
+  <title>DDL e DML no MySQL — Pizzaria Miau</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container topic-article">
+    <header>
+      <p class="ai-badge">Banco de Dados • MySQL • Aula prática</p>
+      <h1>DDL e DML no MySQL: a Pizzaria Miau 🍕🐈</h1>
+      <p>
+        Nesta atividade você vai construir, passo a passo, o banco de dados de uma pizzaria criada especialmente para gatos.
+        A ideia é simples: primeiro montamos a <strong>estrutura</strong> que guardará as informações; depois começamos a
+        <strong>cadastrar, alterar e remover os dados</strong> dessa estrutura.
+      </p>
+    </header>
+
+    <section aria-labelledby="visao-geral">
+      <h2 id="visao-geral">Antes de começar: DDL ou DML?</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Comando</th>
+              <th>Grupo</th>
+              <th>O que faz?</th>
+              <th>Exemplo na Pizzaria Miau</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>CREATE</code></td>
+              <td><strong>DDL</strong></td>
+              <td>Cria estruturas no banco de dados.</td>
+              <td>Criar o banco e a tabela de pizzas.</td>
+            </tr>
+            <tr>
+              <td><code>ALTER</code></td>
+              <td><strong>DDL</strong></td>
+              <td>Altera a estrutura de uma tabela existente.</td>
+              <td>Adicionar a coluna <code>nivel_catnip</code>.</td>
+            </tr>
+            <tr>
+              <td><code>DROP</code></td>
+              <td><strong>DDL</strong></td>
+              <td>Remove uma estrutura inteira.</td>
+              <td>Excluir completamente a tabela de pizzas.</td>
+            </tr>
+            <tr>
+              <td><code>INSERT</code></td>
+              <td><strong>DML</strong></td>
+              <td>Adiciona registros.</td>
+              <td>Cadastrar sabores no cardápio.</td>
+            </tr>
+            <tr>
+              <td><code>UPDATE</code></td>
+              <td><strong>DML</strong></td>
+              <td>Altera registros existentes.</td>
+              <td>Aumentar o preço da pizza de atum.</td>
+            </tr>
+            <tr>
+              <td><code>DELETE</code></td>
+              <td><strong>DML</strong></td>
+              <td>Remove registros, mantendo a tabela.</td>
+              <td>Tirar do cardápio um sabor rejeitado pelos gatos.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="concept-note">
+        <h4>Regra para lembrar</h4>
+        <p><strong>DDL</strong> muda a estrutura onde os dados serão armazenados.</p>
+        <p><strong>DML</strong> trabalha com os dados que já estão dentro dessa estrutura.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="preparacao">
+      <h2 id="preparacao">0. Prepare seu ambiente</h2>
+      <p>
+        Você pode executar os comandos desta aula no MySQL Workbench, no terminal do MySQL, no phpMyAdmin ou em outro
+        cliente compatível com MySQL. Execute os blocos <strong>na ordem apresentada</strong>.
+      </p>
+
+      <div class="activity-box">
+        <h2>Como acompanhar a atividade</h2>
+        <p>A cada etapa:</p>
+        <ol>
+          <li>Leia o objetivo.</li>
+          <li>Copie o comando SQL.</li>
+          <li>Execute no MySQL.</li>
+          <li>Observe o resultado.</li>
+          <li>Leia a explicação do que mudou.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section aria-labelledby="passo-1">
+      <h2 id="passo-1">1. Criando o banco da Pizzaria Miau</h2>
+      <p>
+        Nossa pizzaria é voltada para gatos extremamente exigentes: atum é sucesso, frango costuma ser aceito,
+        peixe ganha pontos extras e qualquer receita muito extravagante corre o risco de receber aquele olhar felino de desaprovação.
+      </p>
+
+      <div class="concept-note">
+        <h4>Objetivo</h4>
+        <p>Criar um banco chamado <code>pizzaria_miau</code> e informar ao MySQL que trabalharemos nele.</p>
+      </div>
+
+      <pre class="code-block"><code>CREATE DATABASE pizzaria_miau;
+
+USE pizzaria_miau;</code></pre>
+
+      <div class="table-scroll">
+        <table class="compare-table code-breakdown">
+          <thead>
+            <tr>
+              <th>Trecho</th>
+              <th>O que está acontecendo?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>CREATE DATABASE pizzaria_miau;</code></td>
+              <td>Cria o banco de dados. Estamos definindo uma nova estrutura, portanto é <strong>DDL</strong>.</td>
+            </tr>
+            <tr>
+              <td><code>USE pizzaria_miau;</code></td>
+              <td>Seleciona o banco que receberá os próximos comandos.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="passo-2">
+      <h2 id="passo-2">2. Criando a estrutura para cadastrar as pizzas</h2>
+      <p>
+        Agora vamos criar a tabela que armazenará o cardápio. Neste momento <strong>não existe nenhuma pizza cadastrada</strong>.
+        Estamos somente definindo quais informações cada pizza poderá ter.
+      </p>
+
+      <pre class="code-block"><code>CREATE TABLE pizzas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    proteina_principal VARCHAR(50) NOT NULL,
+    preco DECIMAL(6,2) NOT NULL,
+    favorita_dos_gatos BOOLEAN DEFAULT FALSE
+);</code></pre>
+
+      <div class="table-scroll">
+        <table class="compare-table code-breakdown">
+          <thead>
+            <tr>
+              <th>Trecho</th>
+              <th>O que significa?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>id INT AUTO_INCREMENT PRIMARY KEY</code></td>
+              <td>Cada pizza recebe um número único automaticamente.</td>
+            </tr>
+            <tr>
+              <td><code>nome VARCHAR(100) NOT NULL</code></td>
+              <td>Guarda o nome da pizza. <code>NOT NULL</code> impede o cadastro sem nome.</td>
+            </tr>
+            <tr>
+              <td><code>proteina_principal VARCHAR(50)</code></td>
+              <td>Informa o ingrediente principal: atum, sardinha, frango etc.</td>
+            </tr>
+            <tr>
+              <td><code>preco DECIMAL(6,2)</code></td>
+              <td>Guarda valores monetários com duas casas decimais.</td>
+            </tr>
+            <tr>
+              <td><code>favorita_dos_gatos BOOLEAN</code></td>
+              <td>Marca se o sabor foi aprovado pelo comitê felino.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="concept-note">
+        <h4>O que mudou?</h4>
+        <p>
+          Antes não existia tabela. Agora existe uma estrutura chamada <code>pizzas</code> com cinco colunas.
+          Como criamos a <strong>estrutura</strong>, usamos DDL.
+        </p>
+      </div>
+
+      <h3>Confira a estrutura criada</h3>
+      <pre class="code-block"><code>DESCRIBE pizzas;</code></pre>
+      <p>Observe os nomes das colunas, os tipos de dados e quais campos aceitam ou não valores nulos.</p>
+    </section>
+
+    <section aria-labelledby="passo-3">
+      <h2 id="passo-3">3. Cadastrando o primeiro cardápio felino</h2>
+      <p>
+        A estrutura está pronta. Agora começamos a trabalhar com os <strong>dados</strong>. Para isso usamos <code>INSERT</code>.
+      </p>
+
+      <pre class="code-block"><code>INSERT INTO pizzas (nome, proteina_principal, preco, favorita_dos_gatos)
+VALUES
+    ('Atum Supremo', 'Atum', 29.90, TRUE),
+    ('Sardinha Crocante', 'Sardinha', 27.50, TRUE),
+    ('Frango Ronronante', 'Frango', 25.90, TRUE),
+    ('Salmão do Sofá', 'Salmão', 34.90, TRUE),
+    ('Brócolis Misterioso', 'Brócolis', 22.00, FALSE);</code></pre>
+
+      <div class="dev-note">
+        <h4>Por que existe uma pizza de brócolis?</h4>
+        <p>
+          Porque alguém da administração decidiu que “os gatos precisam experimentar coisas novas”. O banco de dados registra a decisão.
+          O olhar de julgamento dos gatos fica por conta deles.
+        </p>
+      </div>
+
+      <h3>Veja o que foi cadastrado</h3>
+      <pre class="code-block"><code>SELECT * FROM pizzas;</code></pre>
+
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>nome</th>
+              <th>proteina_principal</th>
+              <th>preco</th>
+              <th>favorita_dos_gatos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Atum Supremo</td><td>Atum</td><td>29.90</td><td>1</td></tr>
+            <tr><td>2</td><td>Sardinha Crocante</td><td>Sardinha</td><td>27.50</td><td>1</td></tr>
+            <tr><td>3</td><td>Frango Ronronante</td><td>Frango</td><td>25.90</td><td>1</td></tr>
+            <tr><td>4</td><td>Salmão do Sofá</td><td>Salmão</td><td>34.90</td><td>1</td></tr>
+            <tr><td>5</td><td>Brócolis Misterioso</td><td>Brócolis</td><td>22.00</td><td>0</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="concept-note">
+        <h4>DDL ou DML?</h4>
+        <p>
+          <code>INSERT</code> não criou nem alterou colunas. Ele apenas colocou registros dentro da estrutura existente.
+          Portanto é <strong>DML</strong>.
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="passo-4">
+      <h2 id="passo-4">4. Aumentando o preço da pizza de atum</h2>
+      <p>
+        A Atum Supremo virou a campeã de pedidos. Naturalmente, a administração da Pizzaria Miau percebeu a oportunidade.
+      </p>
+
+      <pre class="code-block"><code>UPDATE pizzas
+SET preco = 32.90
+WHERE id = 1;</code></pre>
+
+      <h3>Confira apenas a pizza alterada</h3>
+      <pre class="code-block"><code>SELECT *
+FROM pizzas
+WHERE id = 1;</code></pre>
+
+      <div class="concept-note">
+        <h4>O que mudou?</h4>
+        <p>
+          A tabela continua com as mesmas colunas. Apenas o valor de um registro foi alterado.
+          Isso é <strong>DML</strong>.
+        </p>
+      </div>
+
+      <div class="activity-box">
+        <h2>Atenção ao WHERE ⚠️</h2>
+        <p>Veja este comando:</p>
+        <pre class="code-block"><code>UPDATE pizzas
+SET preco = 32.90;</code></pre>
+        <p>
+          Sem <code>WHERE</code>, <strong>todas as pizzas</strong> receberiam o mesmo preço. Não execute esse comando agora.
+          Ele está aqui para mostrar por que o filtro é tão importante.
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="passo-5">
+      <h2 id="passo-5">5. A estrutura precisa de uma informação nova</h2>
+      <p>
+        A pizzaria descobriu que alguns sabores ficam mais populares quando recebem catnip. Precisamos armazenar essa informação,
+        mas a tabela ainda não possui uma coluna para isso.
+      </p>
+
+      <div class="concept-note">
+        <h4>Pense antes de executar</h4>
+        <p>
+          Para guardar uma informação que ainda <strong>não cabe na estrutura</strong>, precisamos mudar a tabela. Portanto voltamos à DDL.
+        </p>
+      </div>
+
+      <pre class="code-block"><code>ALTER TABLE pizzas
+ADD nivel_catnip VARCHAR(20) DEFAULT 'Sem catnip';</code></pre>
+
+      <h3>Confira novamente a estrutura</h3>
+      <pre class="code-block"><code>DESCRIBE pizzas;</code></pre>
+
+      <p>Agora a tabela possui uma nova coluna chamada <code>nivel_catnip</code>.</p>
+
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Antes do ALTER</th>
+              <th>Depois do ALTER</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>id</code></td>
+              <td><code>id</code></td>
+            </tr>
+            <tr>
+              <td><code>nome</code></td>
+              <td><code>nome</code></td>
+            </tr>
+            <tr>
+              <td><code>proteina_principal</code></td>
+              <td><code>proteina_principal</code></td>
+            </tr>
+            <tr>
+              <td><code>preco</code></td>
+              <td><code>preco</code></td>
+            </tr>
+            <tr>
+              <td><code>favorita_dos_gatos</code></td>
+              <td><code>favorita_dos_gatos</code></td>
+            </tr>
+            <tr>
+              <td>—</td>
+              <td><code>nivel_catnip</code> ← nova coluna</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="passo-6">
+      <h2 id="passo-6">6. Preenchendo a nova coluna</h2>
+      <p>
+        A coluna já existe. Agora vamos colocar dados nela. Observe a mudança de raciocínio:
+        <strong>ALTER criou a coluna; UPDATE preenche os registros.</strong>
+      </p>
+
+      <pre class="code-block"><code>UPDATE pizzas
+SET nivel_catnip = 'Extra'
+WHERE nome = 'Atum Supremo';
+
+UPDATE pizzas
+SET nivel_catnip = 'Moderado'
+WHERE nome = 'Salmão do Sofá';</code></pre>
+
+      <pre class="code-block"><code>SELECT nome, nivel_catnip
+FROM pizzas;</code></pre>
+
+      <div class="concept-note">
+        <h4>Compare</h4>
+        <p><code>ALTER TABLE</code> mudou a <strong>estrutura</strong> → DDL.</p>
+        <p><code>UPDATE</code> mudou os <strong>dados</strong> dentro dela → DML.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="passo-7">
+      <h2 id="passo-7">7. O fracasso do Brócolis Misterioso</h2>
+      <p>
+        Após uma semana no cardápio, nenhum gato pediu a pizza Brócolis Misterioso. Um deles cheirou, encarou o atendente e foi embora.
+        A pizzaria decidiu remover esse sabor.
+      </p>
+
+      <pre class="code-block"><code>DELETE FROM pizzas
+WHERE nome = 'Brócolis Misterioso';</code></pre>
+
+      <h3>Confira o cardápio</h3>
+      <pre class="code-block"><code>SELECT * FROM pizzas;</code></pre>
+
+      <div class="concept-note">
+        <h4>DELETE não apaga a tabela</h4>
+        <p>
+          O registro foi removido, mas a tabela <code>pizzas</code> continua existindo, com suas colunas e os demais sabores.
+          Portanto <code>DELETE</code> é DML.
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="passo-8">
+      <h2 id="passo-8">8. DELETE x DROP: a diferença que você precisa enxergar</h2>
+
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Comando</th>
+              <th>Resultado</th>
+              <th>A tabela ainda existe?</th>
+              <th>Grupo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>DELETE FROM pizzas;</code></td>
+              <td>Remove todos os registros.</td>
+              <td>Sim.</td>
+              <td>DML</td>
+            </tr>
+            <tr>
+              <td><code>DROP TABLE pizzas;</code></td>
+              <td>Remove a própria tabela.</td>
+              <td>Não.</td>
+              <td>DDL</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="activity-box">
+        <h2>Não execute ainda 🐾</h2>
+        <p>
+          O comando abaixo apagaria completamente a tabela que acabamos de construir. Vamos deixá-lo apenas como exemplo por enquanto:
+        </p>
+        <pre class="code-block"><code>DROP TABLE pizzas;</code></pre>
+      </div>
+    </section>
+
+    <section aria-labelledby="desafio">
+      <h2 id="desafio">9. Sua vez: desafio do gerente felino</h2>
+      <p>Execute os desafios abaixo sem copiar uma solução pronta. Depois compare seu raciocínio com as dicas.</p>
+
+      <article class="thinking-exercise">
+        <h3>Desafio 1 — novo sabor</h3>
+        <p>Cadastre a pizza <strong>Patê Imperial</strong>, com proteína principal <strong>Patê</strong>, preço <strong>31.50</strong> e marque-a como favorita.</p>
+        <details>
+          <summary>Mostrar dica</summary>
+          <div class="thinking-hints">
+            <p>Você não precisa mudar a estrutura. O comando começa com <code>INSERT INTO</code>.</p>
+          </div>
+        </details>
+      </article>
+
+      <article class="thinking-exercise">
+        <h3>Desafio 2 — promoção relâmpago</h3>
+        <p>Altere o preço da <strong>Sardinha Crocante</strong> para <strong>24.90</strong>.</p>
+        <details>
+          <summary>Mostrar dica</summary>
+          <div class="thinking-hints">
+            <p>Você está alterando um dado existente. Use <code>UPDATE</code> com <code>WHERE</code>.</p>
+          </div>
+        </details>
+      </article>
+
+      <article class="thinking-exercise">
+        <h3>Desafio 3 — nova informação</h3>
+        <p>A pizzaria quer informar se a pizza pode ser servida gelada. Crie uma coluna chamada <code>pode_servir_gelada</code> do tipo <code>BOOLEAN</code>.</p>
+        <details>
+          <summary>Mostrar dica</summary>
+          <div class="thinking-hints">
+            <p>Agora a estrutura precisa mudar. Use <code>ALTER TABLE ... ADD ...</code>.</p>
+          </div>
+        </details>
+      </article>
+
+      <article class="thinking-exercise">
+        <h3>Desafio 4 — veto do conselho dos gatos</h3>
+        <p>Remova do cardápio a pizza <strong>Frango Ronronante</strong>, mas mantenha a tabela.</p>
+        <details>
+          <summary>Mostrar dica</summary>
+          <div class="thinking-hints">
+            <p>Você quer remover um registro, não a estrutura. Use <code>DELETE</code> com <code>WHERE</code>.</p>
+          </div>
+        </details>
+      </article>
+    </section>
+
+    <section aria-labelledby="resumo">
+      <h2 id="resumo">10. Resumo final</h2>
+
+      <dl class="glossary">
+        <div class="glossary-item">
+          <dt>DDL — Data Definition Language</dt>
+          <dd>Comandos que definem ou alteram estruturas do banco. Nesta aula: <code>CREATE</code>, <code>ALTER</code> e <code>DROP</code>.</dd>
+        </div>
+        <div class="glossary-item">
+          <dt>DML — Data Manipulation Language</dt>
+          <dd>Comandos que inserem, alteram ou removem dados. Nesta aula: <code>INSERT</code>, <code>UPDATE</code> e <code>DELETE</code>.</dd>
+        </div>
+        <div class="glossary-item">
+          <dt>Estrutura</dt>
+          <dd>Banco, tabelas, colunas, tipos de dados e demais definições que determinam como os dados serão organizados.</dd>
+        </div>
+        <div class="glossary-item">
+          <dt>Registro</dt>
+          <dd>Uma linha armazenada em uma tabela. Na Pizzaria Miau, cada registro representa uma pizza do cardápio.</dd>
+        </div>
+      </dl>
+
+      <div class="activity-box">
+        <h2>Teste rápido</h2>
+        <p>Se você lembrar apenas de uma coisa, lembre desta pergunta:</p>
+        <p><strong>“Estou mudando a estrutura ou os dados que estão dentro dela?”</strong></p>
+        <p>Estrutura → <strong>DDL</strong>. Dados → <strong>DML</strong>.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="reiniciar">
+      <h2 id="reiniciar">11. Quer repetir a atividade do zero?</h2>
+      <p>Depois de terminar os exercícios, você pode apagar todo o banco da atividade e começar novamente:</p>
+
+      <pre class="code-block"><code>DROP DATABASE pizzaria_miau;</code></pre>
+
+      <div class="concept-note">
+        <h4>Por que isso é DDL?</h4>
+        <p>
+          Porque o comando remove uma estrutura inteira do banco de dados. Use somente quando quiser realmente apagar toda a atividade.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <p><strong>Fim da atividade.</strong> Agora você já consegue diferenciar DDL de DML observando o efeito real de cada comando no banco de dados.</p>
+    </footer>
+  </main>
+</body>
+</html>

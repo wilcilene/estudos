@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visões (Views) | Banco de Dados</title>
+  <meta name="description" content="CREATE VIEW, views atualizáveis e o uso de views para segurança e abstração de dados, explicados com a biblioteca intergaláctica e seus níveis de acesso a acervos restritos.">
+  <meta name="keywords" content="view, visão, CREATE VIEW, view atualizável, segurança de dados, abstração, SQL">
+  <meta name="author" content="Disciplina de Banco de Dados">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/visoes.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Visões (Views)">
+  <meta property="og:description" content="Views explicadas com a biblioteca intergaláctica e seus acervos restritos por nível de acesso.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/visoes.html">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Visões (Views)",
+    "description": "Views explicadas com a biblioteca intergaláctica e seus acervos restritos por nível de acesso.",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "aula prática",
+    "educationalLevel": "Graduação",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Banco de Dados",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/index.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">BD</span>
+        <span class="brand-text">
+          <span class="brand-name">Banco de Dados</span>
+          <span class="brand-sub">Eng. de Computação</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="../index.html">Banco de Dados</a></li>
+          <li aria-current="page">Visões (Views)</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="topic-article">
+      <div class="container">
+        <header class="topic-header">
+          <p class="topic-eyebrow">Visões</p>
+          <h1>Visões (Views)</h1>
+          <p class="topic-lead">Até aqui, vocês sempre consultaram as tabelas diretamente. Mas e se eu quiser mostrar só uma parte dos dados para alguém, sem dar acesso à tabela inteira — e sem copiar os dados para outro lugar? É para isso que existem as <strong>views</strong>. Vamos explorar a Biblioteca Intergaláctica e seus acervos restritos por nível de acesso.</p>
+        </header>
+
+        <section class="objectives" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">O que vocês vão aprender aqui</h2>
+          <ul class="check-list">
+            <li>Entender o que é uma view e por que ela não guarda dados próprios.</li>
+            <li>Criar views com <code>CREATE VIEW</code>.</li>
+            <li>Diferenciar views comuns de views atualizáveis.</li>
+            <li>Usar views para segurança (restringir colunas/linhas) e para abstração (simplificar consultas repetidas).</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="s1-title">
+          <h2 id="s1-title">1. A Biblioteca Intergaláctica</h2>
+          <div class="theme-box">
+            <h3>📚 Biblioteca Intergaláctica</h3>
+            <p>A biblioteca guarda registros de todas as espécies catalogadas da galáxia. Mas nem todo visitante pode ver tudo: há dados confidenciais (coordenadas de planetas-sede, por exemplo) que só a diretoria pode consultar.</p>
+          </div>
+          <pre class="code-block"><code>CREATE TABLE especie (
+  id_especie INT PRIMARY KEY AUTO_INCREMENT,
+  nome_especie VARCHAR(80) NOT NULL,
+  classificacao VARCHAR(40),
+  planeta_sede VARCHAR(80),
+  coordenadas_sede VARCHAR(60),
+  nivel_ameaca VARCHAR(20)
+);</code></pre>
+          <p>Visitantes comuns podem consultar nome, classificação e nível de ameaça. Mas <code>planeta_sede</code> e <code>coordenadas_sede</code> são informações sigilosas — só a diretoria da biblioteca pode vê-las.</p>
+        </section>
+
+        <section aria-labelledby="s2-title">
+          <h2 id="s2-title">2. Criando uma view pública</h2>
+          <p>Em vez de dar acesso à tabela <code>especie</code> inteira para os visitantes, eu crio uma <strong>view</strong> que já esconde as colunas sigilosas:</p>
+          <pre class="code-block"><code>CREATE VIEW vw_especie_publica AS
+SELECT id_especie, nome_especie, classificacao, nivel_ameaca
+FROM especie;</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: a view pública</caption>
+              <thead><tr><th scope="col">Trecho</th><th scope="col">O que significa</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>CREATE VIEW vw_especie_publica AS</code></td>
+                  <td>Cria uma view chamada <code>vw_especie_publica</code>. A partir daqui, o que vem é a consulta que define essa view.</td>
+                </tr>
+                <tr>
+                  <td><code>SELECT id_especie, nome_especie, ...</code></td>
+                  <td>A view só mostra essas quatro colunas — <code>planeta_sede</code> e <code>coordenadas_sede</code> nunca aparecem para quem consulta a view.</td>
+                </tr>
+                <tr>
+                  <td><code>FROM especie;</code></td>
+                  <td>A view busca os dados na tabela real <code>especie</code>, mas ninguém que usa a view precisa saber disso.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Agora, qualquer visitante pode consultar a view como se fosse uma tabela comum:</p>
+          <pre class="code-block"><code>SELECT * FROM vw_especie_publica WHERE nivel_ameaca = 'baixo';</code></pre>
+
+          <div class="concept-box">
+            <h3>Conceito: a view não guarda dados</h3>
+            <p>Uma view <strong>não duplica</strong> os dados da tabela. Ela é, na prática, uma consulta <code>SELECT</code> salva com um nome. Toda vez que alguém consulta a view, o SGBD executa essa consulta de novo contra a tabela real. Se a tabela <code>especie</code> mudar, a view reflete a mudança imediatamente — porque ela não tem dados próprios para ficar desatualizados.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="s3-title">
+          <h2 id="s3-title">3. Views para segurança: restringindo linhas também</h2>
+          <p>Views não restringem só colunas — também podem restringir <strong>linhas</strong>. Imagine que visitantes comuns não devem ver nenhuma espécie classificada como alto risco, nem o próprio nível de ameaça dela:</p>
+          <pre class="code-block"><code>CREATE VIEW vw_especie_segura AS
+SELECT id_especie, nome_especie, classificacao
+FROM especie
+WHERE nivel_ameaca &lt;&gt; 'alto';</code></pre>
+          <p>Quem consulta <code>vw_especie_segura</code> nunca vê as espécies de alto risco — elas simplesmente não existem do ponto de vista dessa view. É uma forma de aplicar regras de negócio de acesso diretamente no banco, sem depender só da aplicação para filtrar.</p>
+        </section>
+
+        <section aria-labelledby="s4-title">
+          <h2 id="s4-title">4. Views atualizáveis</h2>
+          <p>Algumas views aceitam <code>INSERT</code>, <code>UPDATE</code> e <code>DELETE</code> como se fossem tabelas — são as <strong>views atualizáveis</strong>. Isso só funciona quando a view vem de uma única tabela, sem agregações, <code>GROUP BY</code>, <code>DISTINCT</code> ou junções complexas, de forma que o SGBD consiga traduzir a alteração de volta para a tabela original sem ambiguidade.</p>
+          <pre class="code-block"><code>UPDATE vw_especie_publica
+SET classificacao = 'reclassificada'
+WHERE id_especie = 7;</code></pre>
+          <p>Como <code>vw_especie_publica</code> vem de uma tabela só e não tem agregação, essa alteração é traduzida pelo SGBD para um <code>UPDATE</code> real na tabela <code>especie</code>.</p>
+
+          <div class="tip-box">
+            <h3>🚫 Quando a view deixa de ser atualizável</h3>
+            <p>Se a view tiver <code>GROUP BY</code>, funções agregadas (<code>COUNT</code>, <code>SUM</code>...), <code>DISTINCT</code>, uniões de várias tabelas sem chave clara ou subconsultas, o SGBD não consegue decidir de forma única qual linha da tabela original cada linha da view representa — e a view passa a ser somente para leitura.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="s5-title">
+          <h2 id="s5-title">5. Views para abstração: simplificando o que se repete</h2>
+          <p>Suponha que, toda semana, a diretoria precisa da contagem de espécies catalogadas por classificação. Em vez de repetir essa consulta com <code>GROUP BY</code> todas as vezes, eu salvo a lógica em uma view:</p>
+          <pre class="code-block"><code>CREATE VIEW vw_resumo_classificacao AS
+SELECT classificacao, COUNT(*) AS total_especies
+FROM especie
+GROUP BY classificacao;</code></pre>
+          <p>A partir daqui, basta consultar <code>SELECT * FROM vw_resumo_classificacao;</code> sempre que precisar do resumo — a lógica de agrupamento fica escondida dentro da view, e quem consulta nem precisa saber que existe um <code>GROUP BY</code> por trás. Essa view, por ter agregação, é somente para leitura.</p>
+        </section>
+
+        <section class="quiz-box" aria-labelledby="quiz-title">
+          <h3 id="quiz-title">🤔 Confira se entendeu</h3>
+          <details>
+            <summary>Por que uma view não fica "desatualizada" quando a tabela original muda?</summary>
+            <p>Porque a view não guarda dados próprios — ela é uma consulta salva, executada de novo contra a tabela real a cada vez que é consultada.</p>
+          </details>
+          <details>
+            <summary>A view vw_resumo_classificacao aceita UPDATE? Por quê?</summary>
+            <p>Não. Ela usa GROUP BY e uma função agregada (COUNT), então o SGBD não conseguiria traduzir uma alteração na view de volta para uma linha específica da tabela especie.</p>
+          </details>
+        </section>
+
+        <section aria-labelledby="materials-title">
+          <h2 id="materials-title">Materiais para estudo</h2>
+          <ul class="materials-list">
+            <li>Referência oficial: <a href="https://dev.mysql.com/doc/refman/8.0/en/views.html" target="_blank" rel="noopener">CREATE VIEW no MySQL</a>.</li>
+            <li>Próximo tópico: procedimentos armazenados e funções — colocando lógica dentro do próprio banco.</li>
+          </ul>
+          <ul class="video-links">
+            <li>
+              <span class="video-icon" aria-hidden="true">▶</span>
+              <div>
+                <a href="https://www.youtube.com/results?search_query=view+SQL+CREATE+VIEW+explicado" target="_blank" rel="noopener">Buscar vídeo-aulas sobre views em SQL no YouTube</a>
+                <span class="video-note">Abre uma busca no YouTube com aulas sobre criação e uso de views.</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="topic-pager" aria-label="Navegação entre tópicos">
+          <div class="topic-pager-inner">
+            <a class="pager-link pager-link--prev" href="restricoes-transacoes.html">
+              <span class="pager-label">Anterior</span>
+              <span class="pager-title">Restrições de Integridade e Transações (ACID)</span>
+            </a>
+            <a class="pager-link pager-link--next" href="procedimentos-armazenados.html">
+              <span class="pager-label">Próximo</span>
+              <span class="pager-title">Procedimentos Armazenados e Funções</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Banco de Dados · Engenharia de Computação</p>
+      <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
+    </div>
+  </footer>
+</body>
+</html>

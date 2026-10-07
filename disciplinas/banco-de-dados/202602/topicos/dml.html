@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DML: INSERT, UPDATE e DELETE | Banco de Dados</title>
+  <meta name="description" content="Aprenda INSERT, UPDATE e DELETE explicados linha a linha com o exemplo de um abrigo intergaláctico de alienígenas resgatados. Boas práticas de manipulação segura de dados e como validar cada comando com SELECT antes de executá-lo.">
+  <meta name="keywords" content="DML, INSERT, UPDATE, DELETE, manipulação de dados, SQL, boas práticas, WHERE, transação, povoamento de tabelas">
+  <meta name="author" content="Disciplina de Banco de Dados">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/dml.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="DML: INSERT, UPDATE e DELETE">
+  <meta property="og:description" content="INSERT, UPDATE e DELETE explicados linha a linha com o exemplo de um abrigo intergaláctico de alienígenas resgatados.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/dml.html">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "DML: INSERT, UPDATE e DELETE",
+    "description": "INSERT, UPDATE e DELETE explicados linha a linha com o exemplo de um abrigo intergaláctico de alienígenas resgatados.",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "aula prática",
+    "educationalLevel": "Graduação",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Banco de Dados",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/index.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">BD</span>
+        <span class="brand-text">
+          <span class="brand-name">Banco de Dados</span>
+          <span class="brand-sub">Eng. de Computação</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="../index.html">Banco de Dados</a></li>
+          <li aria-current="page">DML — Manipulação de Dados</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="topic-article">
+      <div class="container">
+        <header class="topic-header">
+          <p class="topic-eyebrow">DDL e DML</p>
+          <h1>DML: povoando e mantendo os dados com INSERT, UPDATE e DELETE</h1>
+          <p class="topic-lead">Vocês já sabem criar a estrutura (DDL) e já sabem perguntar coisas a uma tabela (<code>SELECT</code>). Agora falta a parte que efetivamente põe dados dentro dela, corrige o que está errado e remove o que não deve mais existir: a <strong>DML</strong>. Vamos praticar com o cadastro de um abrigo intergaláctico que recebe alienígenas resgatados de naves acidentadas.</p>
+        </header>
+
+        <section class="objectives" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">O que vocês vão aprender aqui</h2>
+          <ul class="check-list">
+            <li>Inserir uma ou várias linhas de uma vez com <code>INSERT INTO ... VALUES</code>.</li>
+            <li>Atualizar registros existentes com <code>UPDATE ... SET ... WHERE</code>.</li>
+            <li>Remover registros com <code>DELETE FROM ... WHERE</code>.</li>
+            <li>Adotar o hábito de validar um <code>UPDATE</code>/<code>DELETE</code> com um <code>SELECT</code> antes de executá-lo de verdade.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="s1-title">
+          <h2 id="s1-title">1. O cenário: o abrigo</h2>
+          <div class="theme-box">
+            <h3>👽 O abrigo intergaláctico</h3>
+            <p>Depois que uma nave tem um problema, os sobreviventes são trazidos para um abrigo temporário até serem reencaminhados aos seus planetas. A tabela <code>alienigena_resgatado</code> já existe (ela foi criada com DDL, exatamente como vocês praticaram no tópico anterior) — agora é nossa vez de povoá-la e mantê-la atualizada.</p>
+          </div>
+          <pre class="code-block"><code>CREATE TABLE alienigena_resgatado (
+  id_registro INT PRIMARY KEY AUTO_INCREMENT,
+  nome_registro VARCHAR(80) NOT NULL,
+  especie VARCHAR(60) NOT NULL,
+  planeta_origem VARCHAR(60) NOT NULL,
+  estado_saude VARCHAR(20) NOT NULL DEFAULT 'em_observacao',
+  data_resgate DATE NOT NULL,
+  setor_abrigo CHAR(1) NOT NULL
+);</code></pre>
+          <p>Essa tabela é só o ponto de partida para os exemplos a seguir — já criada, já existe no banco, pronta para receber linhas.</p>
+        </section>
+
+        <section aria-labelledby="s2-title">
+          <h2 id="s2-title">2. Inserindo registros com INSERT</h2>
+          <pre class="code-block"><code>INSERT INTO alienigena_resgatado
+  (nome_registro, especie, planeta_origem, estado_saude, data_resgate, setor_abrigo)
+VALUES
+  ('Zyx-7', 'Crystalloide', 'Vexor IV', 'estavel', '2026-09-14', 'A');</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: primeiro INSERT</caption>
+              <thead><tr><th scope="col">Trecho</th><th scope="col">O que significa</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>INSERT INTO alienigena_resgatado</code></td>
+                  <td>Diz em qual tabela a nova linha vai entrar.</td>
+                </tr>
+                <tr>
+                  <td><code>(nome_registro, especie, planeta_origem, estado_saude, data_resgate, setor_abrigo)</code></td>
+                  <td>Lista explicitamente as colunas que vamos preencher, na ordem escolhida por nós. Note que <code>id_registro</code> não aparece: ele é <code>AUTO_INCREMENT</code>, então o próprio MySQL gera o valor.</td>
+                </tr>
+                <tr>
+                  <td><code>VALUES ('Zyx-7', 'Crystalloide', 'Vexor IV', 'estavel', '2026-09-14', 'A');</code></td>
+                  <td>Traz um valor para cada coluna listada acima, <strong>na mesma ordem</strong>. Textos e datas vão entre aspas simples; números, não.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tip-box">
+            <h3>⚠️ Sempre liste as colunas</h3>
+            <p>É possível escrever <code>INSERT INTO alienigena_resgatado VALUES (...)</code> sem listar as colunas — mas aí o MySQL espera um valor para <strong>cada</strong> coluna da tabela, na ordem exata em que ela foi criada. Se alguém alterar a tabela no futuro e adicionar uma coluna no meio, esse INSERT "silencioso" passa a inserir os dados nas colunas erradas sem avisar ninguém. Por isso eu sempre peço para vocês listarem as colunas explicitamente, mesmo preenchendo todas.</p>
+          </div>
+
+          <p>Para inserir vários resgatados de uma vez, listamos vários grupos de valores separados por vírgula:</p>
+          <pre class="code-block"><code>INSERT INTO alienigena_resgatado
+  (nome_registro, especie, planeta_origem, estado_saude, data_resgate, setor_abrigo)
+VALUES
+  ('Mor-3', 'Fluidigena', 'Oceano de Thess', 'critico', '2026-09-15', 'B'),
+  ('Kael-9', 'Crystalloide', 'Vexor IV', 'estavel', '2026-09-15', 'A'),
+  ('Ix-1', 'Lumeno', 'Prisma Binário', 'em_observacao', '2026-09-16', 'C');</code></pre>
+          <p>Cada grupo entre parênteses é uma linha nova; o SGBD insere as três de uma só vez, o que é bem mais rápido do que rodar três comandos <code>INSERT</code> separados.</p>
+        </section>
+
+        <section aria-labelledby="s3-title">
+          <h2 id="s3-title">3. Atualizando registros com UPDATE</h2>
+          <p>Dias depois, o estado de saúde de Mor-3 melhora. Vamos atualizar só essa linha:</p>
+          <pre class="code-block"><code>UPDATE alienigena_resgatado
+SET estado_saude = 'estavel'
+WHERE nome_registro = 'Mor-3';</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: atualizando o estado de saúde</caption>
+              <thead><tr><th scope="col">Trecho</th><th scope="col">O que significa</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>UPDATE alienigena_resgatado</code></td>
+                  <td>Diz em qual tabela vamos alterar linhas existentes.</td>
+                </tr>
+                <tr>
+                  <td><code>SET estado_saude = 'estavel'</code></td>
+                  <td>Diz qual coluna muda e para qual novo valor. Dá para atualizar várias colunas na mesma linha, separando com vírgula: <code>SET estado_saude = 'estavel', setor_abrigo = 'A'</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>WHERE nome_registro = 'Mor-3';</code></td>
+                  <td>Escolhe <strong>quais linhas</strong> recebem a alteração. Sem essa cláusula, a alteração vale para <em>todas</em> as linhas da tabela.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tip-box">
+            <h3>🚨 O erro mais perigoso da DML</h3>
+            <p>Um <code>UPDATE</code> sem <code>WHERE</code> altera <strong>a tabela inteira</strong>. Se vocês rodarem <code>UPDATE alienigena_resgatado SET estado_saude = 'estavel';</code> sem a cláusula <code>WHERE</code>, todos os alienígenas do abrigo — inclusive os que estão em estado crítico — passam a constar como estáveis. Antes de apertar o raio de execução, confiram sempre se a linha do <code>WHERE</code> está mesmo lá.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="s4-title">
+          <h2 id="s4-title">4. Removendo registros com DELETE</h2>
+          <p>Quando um alienígena é reencaminhado ao seu planeta de origem, o registro sai do abrigo:</p>
+          <pre class="code-block"><code>DELETE FROM alienigena_resgatado
+WHERE nome_registro = 'Kael-9';</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: removendo um registro</caption>
+              <thead><tr><th scope="col">Trecho</th><th scope="col">O que significa</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>DELETE FROM alienigena_resgatado</code></td>
+                  <td>Diz de qual tabela as linhas serão removidas.</td>
+                </tr>
+                <tr>
+                  <td><code>WHERE nome_registro = 'Kael-9';</code></td>
+                  <td>Escolhe qual linha será removida. Assim como no <code>UPDATE</code>, sem <code>WHERE</code> a instrução remove <strong>todas</strong> as linhas da tabela — a estrutura continua existindo, mas fica vazia.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section aria-labelledby="s5-title">
+          <h2 id="s5-title">5. O hábito que evita desastres</h2>
+          <p>A técnica que eu mais insisto com vocês: antes de rodar um <code>UPDATE</code> ou <code>DELETE</code>, rodem um <code>SELECT</code> com a <strong>mesma cláusula WHERE</strong>, só para ver quais linhas seriam afetadas.</p>
+          <ol class="step-list">
+            <li><strong>Escrevam a condição primeiro.</strong><p>Pensem em "quais linhas eu quero afetar" antes de pensar no comando.</p></li>
+            <li><strong>Testem com SELECT.</strong><p><code>SELECT * FROM alienigena_resgatado WHERE nome_registro = 'Mor-3';</code> — confiram se é exatamente a linha (ou as linhas) que vocês esperavam.</p></li>
+            <li><strong>Troquem o SELECT * FROM pelo comando real.</strong><p>Se o resultado do passo anterior estava certo, substituam <code>SELECT * FROM tabela</code> por <code>UPDATE tabela SET ...</code> ou <code>DELETE FROM tabela</code>, mantendo o mesmo <code>WHERE</code>.</p></li>
+            <li><strong>Confiram depois de executar.</strong><p>Rodem o <code>SELECT</code> de novo para confirmar que o resultado final é o esperado.</p></li>
+          </ol>
+          <p>É por esse motivo, aliás, que SELECT entra junto com DML neste bloco de estudos: embora tecnicamente pertença à DQL (a linguagem de consulta), na prática ele é o instrumento que usamos o tempo todo para verificar o efeito de um INSERT, UPDATE ou DELETE antes e depois de executá-lo.</p>
+        </section>
+
+        <section class="quiz-box" aria-labelledby="quiz-title">
+          <h3 id="quiz-title">🤔 Confira se entendeu</h3>
+          <details>
+            <summary>Por que o INSERT não precisa (e não deve) informar um valor para id_registro?</summary>
+            <p>Porque id_registro foi criado como AUTO_INCREMENT: o próprio MySQL gera o próximo valor automaticamente a cada nova linha.</p>
+          </details>
+          <details>
+            <summary>Qual comando movería o registro de Ix-1 para o setor 'A' do abrigo?</summary>
+            <p><code>UPDATE alienigena_resgatado SET setor_abrigo = 'A' WHERE nome_registro = 'Ix-1';</code></p>
+          </details>
+        </section>
+
+        <section aria-labelledby="materials-title">
+          <h2 id="materials-title">Materiais para estudo</h2>
+          <ul class="materials-list">
+            <li>Referência oficial: <a href="https://dev.mysql.com/doc/refman/8.0/en/insert.html" target="_blank" rel="noopener">INSERT</a>, <a href="https://dev.mysql.com/doc/refman/8.0/en/update.html" target="_blank" rel="noopener">UPDATE</a> e <a href="https://dev.mysql.com/doc/refman/8.0/en/delete.html" target="_blank" rel="noopener">DELETE</a> no MySQL.</li>
+            <li>Próximo tópico: junções, subconsultas e funções de agregação — como combinar dados de várias tabelas em uma única consulta.</li>
+          </ul>
+          <ul class="video-links">
+            <li>
+              <span class="video-icon" aria-hidden="true">▶</span>
+              <div>
+                <a href="https://www.youtube.com/results?search_query=SQL+INSERT+UPDATE+DELETE+explicado" target="_blank" rel="noopener">Buscar vídeo-aulas sobre INSERT, UPDATE e DELETE no YouTube</a>
+                <span class="video-note">Abre uma busca no YouTube com aulas sobre manipulação de dados em SQL.</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="topic-pager" aria-label="Navegação entre tópicos">
+          <div class="topic-pager-inner">
+            <a class="pager-link pager-link--prev" href="ddl.html">
+              <span class="pager-label">Anterior</span>
+              <span class="pager-title">DDL — Definição de Estruturas</span>
+            </a>
+            <a class="pager-link pager-link--next" href="sql-juncoes-agregacao.html">
+              <span class="pager-label">Próximo</span>
+              <span class="pager-title">Junções, Subconsultas e Agregação em SQL</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Banco de Dados · Engenharia de Computação</p>
+      <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
+    </div>
+  </footer>
+</body>
+</html>

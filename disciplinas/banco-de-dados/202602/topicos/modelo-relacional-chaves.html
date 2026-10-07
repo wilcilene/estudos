@@ -4,10 +4,41 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Modelo Relacional e Chaves | Banco de Dados</title>
-<meta name="description" content="Relações, tuplas, domínio, grau, superchave, chave candidata, chave primária, chave estrangeira e integridade referencial — Engenharia da Computação.">
+<meta name="description" content="Relações, tuplas, domínio, grau, superchave, chave candidata, chave primária, chave estrangeira e integridade referencial, explicados a partir do MER.">
+<meta name="keywords" content="modelo relacional, relação, tupla, domínio, grau, superchave, chave candidata, chave primária, chave estrangeira, integridade referencial">
+<meta name="author" content="Disciplina de Banco de Dados">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#4338ca">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/modelo-relacional-chaves.html">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Modelo Relacional e Chaves">
+<meta property="og:description" content="Relação, tupla, domínio, grau, superchave, chave candidata, chave primária, chave estrangeira e integridade referencial.">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/modelo-relacional-chaves.html">
+<meta name="twitter:card" content="summary">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Modelo Relacional e Chaves",
+  "description": "Relação, tupla, domínio, grau, superchave, chave candidata, chave primária, chave estrangeira e integridade referencial.",
+  "inLanguage": "pt-BR",
+  "learningResourceType": "aula",
+  "educationalLevel": "Graduação",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Banco de Dados",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/index.html"
+  }
+}
+</script>
 </head>
 <body>
 
@@ -19,44 +50,33 @@
       <span class="brand-mark" aria-hidden="true">BD</span>
       <span class="brand-text">
         <span class="brand-name">Banco de Dados</span>
-        <span class="brand-sub">Engenharia da Computação · 2026/2</span>
+        <span class="brand-sub">Engenharia da Computação</span>
       </span>
     </a>
-    <nav class="site-nav" aria-label="Navegação principal">
-      <ul>
-        <li><a href="../index.html">Início</a></li>
-        <li><a href="../topicos/index.html">Tópicos</a></li>
-        <li><a href="../cronograma.html">Cronograma</a></li>
-        <li><a href="../avaliacoes.html">Avaliações</a></li>
-      </ul>
-    </nav>
   </div>
 </header>
 
-<div class="container">
-  <nav class="breadcrumb" aria-label="Trilha de navegação">
+<nav class="breadcrumb" aria-label="Trilha de navegação">
+  <div class="container">
     <ol>
       <li><a href="../index.html">Banco de Dados</a></li>
-      <li><a href="../topicos/index.html">Tópicos</a></li>
       <li aria-current="page">Modelo Relacional e Chaves</li>
     </ol>
-  </nav>
-</div>
+  </div>
+</nav>
 
 <main id="conteudo-principal" class="container topic-article">
 
   <header class="topic-header">
-    <div class="topic-meta">
-      <span class="duration-badge">Modelagem de Dados</span>
-    </div>
+    <p class="topic-eyebrow">Modelagem de Dados</p>
     <h1>Modelo Relacional e Chaves</h1>
     <p class="topic-lead">
       Depois de representar o mundo real com o Modelo Entidade-Relacionamento (MER),
       precisamos traduzir esse desenho para uma estrutura que o Sistema Gerenciador de
-      Banco de Dados (SGBD) entenda: <strong>tabelas</strong>. Este tópico apresenta os
+      Banco de Dados (SGBD) entenda: <strong>tabelas</strong>. Vamos ver os
       fundamentos formais do modelo relacional — <span class="tooltip-tag" title="Proposto por Edgar F. Codd em 1970, na IBM">quem criou?</span> —
       e como as <em>chaves</em> garantem que os dados sejam únicos, consistentes e
-      corretamente conectados entre tabelas. Página de hoje gerada por IA. 
+      corretamente conectados entre tabelas.
     </p>
   </header>
 
@@ -445,7 +465,7 @@
   </section>
 
   <section>
-    <h2>Materiais complementares</h2>
+    <h2>Materiais para estudo</h2>
     <ul class="materials-list">
       <li>ELMASRI, R.; NAVATHE, S. B. <em>Sistemas de Banco de Dados</em>. 7. ed. Capítulo sobre o Modelo Relacional.</li>
       <li>SILBERSCHATZ, A.; KORTH, H.; SUDARSHAN, S. <em>Sistema de Banco de Dados</em>. Capítulo sobre Modelo de Dados Relacional.</li>
@@ -453,20 +473,27 @@
     </ul>
   </section>
 
+  <section class="topic-pager" aria-label="Navegação entre tópicos">
+    <div class="topic-pager-inner">
+      <a class="pager-link pager-link--prev" href="modelagem-avancada.html">
+        <span class="pager-label">Anterior</span>
+        <span class="pager-title">Modelagem Conceitual Avançada</span>
+      </a>
+      <a class="pager-link pager-link--next" href="mapeamento-mer-relacional.html">
+        <span class="pager-label">Próximo</span>
+        <span class="pager-title">Mapeamento do MER para o Modelo Relacional</span>
+      </a>
+    </div>
+  </section>
+
 </main>
 
-<nav class="topic-pager container" aria-label="Navegação entre tópicos">
-  <div class="topic-pager-inner">
-    <a class="pager-link pager-link--prev" href="modelo-entidade-relacionamento.html">
-      <span class="pager-label">← Anterior</span>
-      <span class="pager-title">Modelo Entidade-Relacionamento (MER)</span>
-    </a>
-    <a class="pager-link pager-link--next" href="algebra-relacional.html">
-      <span class="pager-label">Próximo →</span>
-      <span class="pager-title">Álgebra Relacional</span>
-    </a>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>Banco de Dados · Engenharia de Computação</p>
+    <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
   </div>
-</nav>
+</footer>
 
 <script>
   document.querySelectorAll('.thinking-toggle').forEach(function (btn) {

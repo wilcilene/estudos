@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JOINs, Subconsultas e Agregação em SQL | Banco de Dados</title>
+  <meta name="description" content="INNER JOIN, LEFT JOIN, subconsultas, GROUP BY e HAVING explicados linha a linha com o exemplo de um torneio de e-sports entre equipes de robôs.">
+  <meta name="keywords" content="INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL JOIN, subconsulta, GROUP BY, HAVING, funções de agregação, SQL">
+  <meta name="author" content="Disciplina de Banco de Dados">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/sql-juncoes-agregacao.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="JOINs, Subconsultas e Agregação em SQL">
+  <meta property="og:description" content="INNER JOIN, LEFT JOIN, subconsultas, GROUP BY e HAVING com o exemplo de um torneio de e-sports entre equipes de robôs.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/sql-juncoes-agregacao.html">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "JOINs, Subconsultas e Agregação em SQL",
+    "description": "INNER JOIN, LEFT JOIN, subconsultas, GROUP BY e HAVING com o exemplo de um torneio de e-sports entre equipes de robôs.",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "aula prática",
+    "educationalLevel": "Graduação",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Banco de Dados",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/index.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">BD</span>
+        <span class="brand-text">
+          <span class="brand-name">Banco de Dados</span>
+          <span class="brand-sub">Eng. de Computação</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="../index.html">Banco de Dados</a></li>
+          <li aria-current="page">Junções, Subconsultas e Agregação em SQL</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="topic-article">
+      <div class="container">
+        <header class="topic-header">
+          <p class="topic-eyebrow">Linguagens SQL</p>
+          <h1>JOINs, subconsultas e agregação</h1>
+          <p class="topic-lead">Até agora cada consulta mexia em uma tabela por vez. Mas a graça de ter várias tabelas relacionadas é justamente combiná-las. Vamos praticar com um torneio de e-sports disputado inteiramente por equipes de robôs.</p>
+        </header>
+
+        <section class="objectives" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">O que vocês vão aprender aqui</h2>
+          <ul class="check-list">
+            <li>Combinar tabelas com <code>INNER JOIN</code> e <code>LEFT JOIN</code>.</li>
+            <li>Entender por que o MySQL não tem <code>FULL JOIN</code> nativo e como contornar isso.</li>
+            <li>Resumir dados com funções de agregação, <code>GROUP BY</code> e <code>HAVING</code>.</li>
+            <li>Escrever uma subconsulta dentro do <code>WHERE</code>.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="s1-title">
+          <h2 id="s1-title">1. O cenário: o torneio</h2>
+          <div class="theme-box">
+            <h3>🎮 Liga Robótica de E-sports</h3>
+            <p>Três tabelas organizam o torneio: <code>equipe</code> (as equipes inscritas), <code>robo_jogador</code> (cada robô pertence a uma equipe) e <code>partida</code> (os confrontos, com o placar de cada lado).</p>
+          </div>
+          <pre class="code-block"><code>CREATE TABLE equipe (
+  id_equipe INT PRIMARY KEY AUTO_INCREMENT,
+  nome_equipe VARCHAR(60) NOT NULL UNIQUE
+);
+
+CREATE TABLE robo_jogador (
+  id_robo INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(60) NOT NULL,
+  id_equipe INT NOT NULL,
+  pontuacao_media DECIMAL(5,2) NOT NULL DEFAULT 0,
+  FOREIGN KEY (id_equipe) REFERENCES equipe(id_equipe)
+);
+
+CREATE TABLE partida (
+  id_partida INT PRIMARY KEY AUTO_INCREMENT,
+  id_equipe_casa INT NOT NULL,
+  id_equipe_visitante INT NOT NULL,
+  placar_casa INT NOT NULL,
+  placar_visitante INT NOT NULL,
+  data_partida DATE NOT NULL,
+  FOREIGN KEY (id_equipe_casa) REFERENCES equipe(id_equipe),
+  FOREIGN KEY (id_equipe_visitante) REFERENCES equipe(id_equipe)
+);</code></pre>
+        </section>
+
+        <section aria-labelledby="s2-title">
+          <h2 id="s2-title">2. INNER JOIN: só o que casa dos dois lados</h2>
+          <p>Queremos o nome de cada robô junto com o nome da equipe dele — uma informação que, sozinha, nenhuma das duas tabelas tem completa.</p>
+          <pre class="code-block"><code>SELECT r.nome AS robo, e.nome_equipe AS equipe
+FROM robo_jogador AS r
+INNER JOIN equipe AS e ON r.id_equipe = e.id_equipe
+ORDER BY e.nome_equipe;</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: robôs e suas equipes</caption>
+              <thead><tr><th scope="col">Trecho</th><th scope="col">O que significa</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>SELECT r.nome AS robo, e.nome_equipe AS equipe</code></td>
+                  <td>Escolhe colunas de duas tabelas diferentes, usando apelidos (<code>r</code> e <code>e</code>) para indicar de qual tabela cada coluna vem, e <code>AS</code> para renomear o resultado.</td>
+                </tr>
+                <tr>
+                  <td><code>FROM robo_jogador AS r</code></td>
+                  <td>Define <code>robo_jogador</code> como ponto de partida da consulta, apelidada de <code>r</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>INNER JOIN equipe AS e</code></td>
+                  <td>Diz que vamos combinar com a tabela <code>equipe</code>, apelidada de <code>e</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>ON r.id_equipe = e.id_equipe</code></td>
+                  <td>A regra de combinação: só junta uma linha de <code>robo_jogador</code> com a linha de <code>equipe</code> em que o <code>id_equipe</code> é igual. Esse é exatamente o papel da chave estrangeira.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="concept-box">
+            <h3>Conceito: por que "inner"?</h3>
+            <p><code>INNER JOIN</code> só mantém no resultado as linhas em que a condição do <code>ON</code> encontra correspondência nos dois lados. Se um robô, por engano, tivesse um <code>id_equipe</code> que não existe em <code>equipe</code> — o que a própria <code>FOREIGN KEY</code> impede, a propósito — ele simplesmente não apareceria no resultado.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="s3-title">
+          <h2 id="s3-title">3. LEFT JOIN: mantendo quem não tem correspondência</h2>
+          <p>Uma equipe acabou de se inscrever e ainda não cadastrou nenhum robô. Com <code>INNER JOIN</code>, ela nem apareceria na consulta anterior. Para listar <strong>todas</strong> as equipes, com ou sem robôs, usamos <code>LEFT JOIN</code>:</p>
+          <pre class="code-block"><code>SELECT e.nome_equipe, r.nome AS robo
+FROM equipe AS e
+LEFT JOIN robo_jogador AS r ON r.id_equipe = e.id_equipe;</code></pre>
+          <p>Aqui a tabela à esquerda do <code>LEFT JOIN</code> é <code>equipe</code>: todas as suas linhas aparecem no resultado, mesmo quando não há robô correspondente — nesse caso, a coluna <code>robo</code> simplesmente vem como <code>NULL</code>.</p>
+
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>INNER × LEFT × RIGHT × FULL JOIN</caption>
+              <thead><tr><th scope="col">Tipo</th><th scope="col">O que mantém no resultado</th></tr></thead>
+              <tbody>
+                <tr><td><code>INNER JOIN</code></td><td>Só as linhas que têm correspondência nos dois lados.</td></tr>
+                <tr><td><code>LEFT JOIN</code></td><td>Todas as linhas da tabela à esquerda, com ou sem correspondência à direita.</td></tr>
+                <tr><td><code>RIGHT JOIN</code></td><td>Todas as linhas da tabela à direita, com ou sem correspondência à esquerda.</td></tr>
+                <tr><td><code>FULL JOIN</code></td><td>Todas as linhas dos dois lados, correspondendo ou não.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tip-box">
+            <h3>⚠️ O MySQL não tem FULL JOIN</h3>
+            <p>Diferente do PostgreSQL e do SQL Server, o MySQL não implementa <code>FULL JOIN</code> diretamente. Quando vocês precisarem desse comportamento no MySQL, o caminho é combinar um <code>LEFT JOIN</code> com um <code>RIGHT JOIN</code> usando <code>UNION</code>. Na prática, costuma ser mais simples reescrever a pergunta usando dois <code>LEFT JOIN</code>s separados.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="s4-title">
+          <h2 id="s4-title">4. Resumindo dados com funções de agregação</h2>
+          <p>Quantos robôs cada equipe tem, e qual a pontuação média deles?</p>
+          <pre class="code-block"><code>SELECT e.nome_equipe,
+       COUNT(r.id_robo) AS total_robos,
+       AVG(r.pontuacao_media) AS media_equipe
+FROM equipe AS e
+LEFT JOIN robo_jogador AS r ON r.id_equipe = e.id_equipe
+GROUP BY e.id_equipe, e.nome_equipe
+HAVING COUNT(r.id_robo) &gt;= 2
+ORDER BY media_equipe DESC;</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: ranking de equipes com 2+ robôs</caption>
+              <thead><tr><th scope="col">Trecho</th><th scope="col">O que significa</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>COUNT(r.id_robo) AS total_robos</code></td>
+                  <td>Conta quantas linhas de <code>robo_jogador</code> casaram com cada equipe no <code>JOIN</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>AVG(r.pontuacao_media) AS media_equipe</code></td>
+                  <td>Calcula a média da pontuação dos robôs daquela equipe.</td>
+                </tr>
+                <tr>
+                  <td><code>GROUP BY e.id_equipe, e.nome_equipe</code></td>
+                  <td>Agrupa as linhas por equipe antes de aplicar <code>COUNT</code> e <code>AVG</code> — sem isso, o resultado seria uma única média para o torneio inteiro.</td>
+                </tr>
+                <tr>
+                  <td><code>HAVING COUNT(r.id_robo) &gt;= 2</code></td>
+                  <td>Filtra os <strong>grupos</strong> já calculados, mantendo só equipes com 2 ou mais robôs. Não dá para usar <code>WHERE</code> aqui, porque <code>WHERE</code> filtra linhas antes do agrupamento, e <code>COUNT(...)</code> só existe depois dele.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="concept-box">
+            <h3>Conceito: WHERE × HAVING</h3>
+            <p><code>WHERE</code> filtra linhas individuais, antes de qualquer agrupamento. <code>HAVING</code> filtra grupos inteiros, depois que <code>GROUP BY</code> e as funções de agregação já foram calculados. Uma regra prática: se a condição usa <code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MIN</code> ou <code>MAX</code>, ela vai no <code>HAVING</code>; qualquer outra condição vai no <code>WHERE</code>.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="s5-title">
+          <h2 id="s5-title">5. Subconsultas: uma consulta dentro da outra</h2>
+          <p>Quais robôs têm pontuação acima da média geral do torneio?</p>
+          <pre class="code-block"><code>SELECT nome, pontuacao_media
+FROM robo_jogador
+WHERE pontuacao_media &gt; (
+  SELECT AVG(pontuacao_media) FROM robo_jogador
+);</code></pre>
+          <p>A consulta entre parênteses roda primeiro e devolve um único número (a média geral); depois, a consulta externa usa esse número para filtrar os robôs. Isso é uma <strong>subconsulta escalar</strong> — ela devolve exatamente um valor, por isso pode ser comparada diretamente com <code>&gt;</code>.</p>
+        </section>
+
+        <section class="quiz-box" aria-labelledby="quiz-title">
+          <h3 id="quiz-title">🤔 Confira se entendeu</h3>
+          <details>
+            <summary>Por que a consulta de equipes com LEFT JOIN mostra uma linha com robô = NULL para a equipe recém-inscrita?</summary>
+            <p>Porque o LEFT JOIN mantém todas as linhas da tabela à esquerda (equipe) mesmo quando não existe robô correspondente em robo_jogador; nesses casos, as colunas vindas da tabela à direita aparecem como NULL.</p>
+          </details>
+          <details>
+            <summary>Por que não podemos escrever WHERE COUNT(r.id_robo) >= 2 em vez de usar HAVING?</summary>
+            <p>Porque WHERE é avaliado antes do agrupamento (GROUP BY), e COUNT() só existe depois que os grupos foram formados. Por isso essa condição precisa ir no HAVING.</p>
+          </details>
+        </section>
+
+        <section aria-labelledby="materials-title">
+          <h2 id="materials-title">Materiais para estudo</h2>
+          <ul class="materials-list">
+            <li>Referência oficial: <a href="https://dev.mysql.com/doc/refman/8.0/en/join.html" target="_blank" rel="noopener">JOIN</a> e <a href="https://dev.mysql.com/doc/refman/8.0/en/group-by-functions-and-modifiers.html" target="_blank" rel="noopener">funções de agregação</a> no MySQL.</li>
+            <li>Próximo tópico: window functions, CTEs e uma primeira noção de índices para otimizar essas consultas.</li>
+          </ul>
+          <ul class="video-links">
+            <li>
+              <span class="video-icon" aria-hidden="true">▶</span>
+              <div>
+                <a href="https://www.youtube.com/results?search_query=SQL+JOIN+GROUP+BY+HAVING+explicado" target="_blank" rel="noopener">Buscar vídeo-aulas sobre JOIN, GROUP BY e HAVING no YouTube</a>
+                <span class="video-note">Abre uma busca no YouTube com aulas sobre junções e agregação em SQL.</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="topic-pager" aria-label="Navegação entre tópicos">
+          <div class="topic-pager-inner">
+            <a class="pager-link pager-link--prev" href="dml.html">
+              <span class="pager-label">Anterior</span>
+              <span class="pager-title">DML — Manipulação de Dados</span>
+            </a>
+            <a class="pager-link pager-link--next" href="sql-avancado.html">
+              <span class="pager-label">Próximo</span>
+              <span class="pager-title">Window Functions, CTEs e Otimização de Consultas</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Banco de Dados · Engenharia de Computação</p>
+      <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
+    </div>
+  </footer>
+</body>
+</html>

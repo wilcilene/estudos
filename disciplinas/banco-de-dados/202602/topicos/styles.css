@@ -24,6 +24,13 @@
   --cat-sgbd: #0891b2;
   --cat-sgbd-soft: #e1f5f9;
 
+  --teal: #0d9488;
+  --teal-soft: #e3f6f3;
+  --amber: #d97706;
+  --amber-soft: #fef3e0;
+  --pink: #db2777;
+  --pink-soft: #fce7f3;
+
   --font-display: 'Lexend', 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
@@ -458,4 +465,720 @@ code {
     width: auto;
     white-space: pre-wrap;
   }
+}
+
+/* =========================================================
+   Acessibilidade: skip-link, foco visível, texto só para leitor de tela
+   ========================================================= */
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  z-index: 100;
+  padding: .6rem 1rem;
+  background: var(--primary);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  border-radius: 0 0 var(--radius-sm) 0;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* =========================================================
+   Cabeçalho do site e marca
+   ========================================================= */
+
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  padding-block: .9rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.brand:hover {
+  color: var(--ink);
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: .95rem;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.brand-sub {
+  color: var(--ink-soft);
+  font-size: .8rem;
+}
+
+/* =========================================================
+   Trilha de navegação (breadcrumb)
+   ========================================================= */
+
+.breadcrumb {
+  padding-block: .9rem;
+  background: var(--surface-dim);
+  border-bottom: 1px solid var(--border);
+}
+
+.breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink-soft);
+  font-size: .85rem;
+}
+
+.breadcrumb li + li::before {
+  content: "›";
+  margin-right: .4rem;
+  color: var(--ink-soft);
+}
+
+.breadcrumb a {
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.breadcrumb li[aria-current="page"] {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* =========================================================
+   Cabeçalho do tópico
+   ========================================================= */
+
+.topic-header {
+  padding-block: 1.6rem 1.2rem;
+}
+
+.topic-eyebrow {
+  margin: 0 0 .4rem;
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.topic-header h1 {
+  margin: 0 0 .7rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  line-height: 1.25;
+}
+
+.topic-lead {
+  max-width: 760px;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+
+.topic-article section {
+  margin-bottom: 1.8rem;
+}
+
+.topic-article section h2 {
+  margin: 0 0 .9rem;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+}
+
+.topic-article section h3 {
+  margin: 0 0 .6rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.topic-article section p {
+  margin: 0 0 .9rem;
+}
+
+/* =========================================================
+   Objetivos e lista de verificação
+   ========================================================= */
+
+.objectives {
+  padding: 1.2rem 1.3rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.check-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: .55rem;
+}
+
+.check-list li {
+  position: relative;
+  padding-left: 1.7rem;
+}
+
+.check-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: .05rem;
+  display: grid;
+  place-items: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  background: var(--done-soft);
+  color: var(--done);
+  border-radius: 50%;
+  font-size: .72rem;
+  font-weight: 700;
+}
+
+/* =========================================================
+   Materiais para estudo, analogias e termos com dica
+   ========================================================= */
+
+.materials-list {
+  margin: 0 0 .9rem;
+  padding-left: 1.2rem;
+}
+
+.materials-list li {
+  margin-bottom: .5rem;
+}
+
+.analogy {
+  padding: 1rem 1.15rem;
+  margin-bottom: 1.1rem;
+  background: var(--cat-modelagem-de-dados-soft);
+  border-left: 4px solid var(--cat-modelagem-de-dados);
+  border-radius: var(--radius);
+}
+
+.tooltip-term {
+  text-decoration: underline dotted;
+  text-decoration-color: var(--ink-soft);
+  cursor: help;
+}
+
+/* =========================================================
+   Caixas didáticas novas: cenário criativo, conceito e dica
+   ========================================================= */
+
+.theme-box {
+  padding: 1.2rem 1.3rem;
+  margin-bottom: 1.1rem;
+  background: linear-gradient(135deg, var(--primary-soft), var(--pink-soft));
+  border: 1px solid var(--primary-soft);
+  border-radius: var(--radius);
+}
+
+.theme-box h3 {
+  margin: 0 0 .5rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.theme-box p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.concept-box {
+  padding: 1rem 1.15rem;
+  margin-bottom: 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.concept-box h3 {
+  margin: 0 0 .5rem;
+  color: var(--primary-dark);
+  font-family: var(--font-display);
+  font-size: .95rem;
+}
+
+.concept-box p {
+  margin: 0;
+}
+
+.tip-box {
+  padding: 1rem 1.15rem;
+  margin-bottom: 1.1rem;
+  background: var(--amber-soft);
+  border-left: 4px solid var(--amber);
+  border-radius: var(--radius);
+}
+
+.tip-box h3 {
+  margin: 0 0 .5rem;
+  color: var(--amber);
+  font-family: var(--font-display);
+  font-size: .95rem;
+}
+
+.tip-box p {
+  margin: 0;
+}
+
+/* =========================================================
+   Lista de passos numerados
+   ========================================================= */
+
+.step-list {
+  display: grid;
+  gap: .7rem;
+  margin: 0 0 1.1rem;
+  padding: 0;
+  counter-reset: step-counter;
+}
+
+.step-list > div {
+  position: relative;
+  padding: .7rem 1rem .7rem 2.8rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  counter-increment: step-counter;
+}
+
+.step-list > div::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: .8rem;
+  top: .65rem;
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-size: .8rem;
+  font-weight: 700;
+}
+
+/* =========================================================
+   Molduras de ilustração (diagramas SVG)
+   ========================================================= */
+
+.figure-frame {
+  margin: 0 0 1.1rem;
+  padding: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.figure-frame svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.figure-frame figcaption {
+  margin-top: .6rem;
+  color: var(--ink-soft);
+  font-size: .85rem;
+}
+
+/* =========================================================
+   Autoverificação (quiz-box)
+   ========================================================= */
+
+.quiz-box {
+  padding: 1.2rem 1.3rem;
+  margin-bottom: 1.1rem;
+  background: var(--teal-soft);
+  border: 1px solid var(--teal);
+  border-radius: var(--radius);
+}
+
+.quiz-box h3 {
+  margin: 0 0 .8rem;
+  color: var(--teal);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.quiz-box details {
+  margin-bottom: .6rem;
+  padding: .7rem .9rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.quiz-box details:last-child {
+  margin-bottom: 0;
+}
+
+.quiz-box summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.quiz-box details p {
+  margin: .6rem 0 0;
+  color: var(--ink-soft);
+}
+
+/* =========================================================
+   Links de vídeo (busca no YouTube)
+   ========================================================= */
+
+.video-links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: .6rem;
+}
+
+.video-links li {
+  display: flex;
+  align-items: flex-start;
+  gap: .7rem;
+}
+
+.video-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 1.8rem;
+  height: 1.8rem;
+  background: var(--primary-soft);
+  color: var(--primary);
+  border-radius: 50%;
+  font-size: .75rem;
+}
+
+.video-links a {
+  font-weight: 600;
+}
+
+.video-note {
+  display: block;
+  margin-top: .15rem;
+  color: var(--ink-soft);
+  font-size: .85rem;
+}
+
+/* =========================================================
+   Rodapé do site
+   ========================================================= */
+
+.site-footer {
+  margin-top: 2rem;
+  padding-block: 1.6rem;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .5rem;
+  color: var(--ink-soft);
+  font-size: .9rem;
+}
+
+.footer-inner p {
+  margin: 0;
+}
+
+.footer-inner a {
+  color: var(--ink-soft);
+}
+
+.footer-inner a:hover {
+  color: var(--primary);
+}
+
+/* =========================================================
+   Navegação entre tópicos (pager)
+   ========================================================= */
+
+.topic-pager {
+  margin-top: 2rem;
+}
+
+.topic-pager-inner {
+  display: flex;
+  gap: 1rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
+}
+
+.pager-link {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  padding: .9rem 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  transition: border-color .15s ease, transform .15s ease;
+}
+
+.pager-link:hover {
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.pager-link--next {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.pager-label {
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.pager-title {
+  font-weight: 600;
+}
+
+/* =========================================================
+   Responsivo adicional (cabeçalho, pager, caixas novas)
+   ========================================================= */
+
+@media (max-width: 720px) {
+  .topic-pager-inner {
+    flex-direction: column;
+  }
+
+  .pager-link--next {
+    text-align: left;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .theme-box,
+  .concept-box,
+  .tip-box,
+  .quiz-box,
+  .objectives {
+    padding: 1rem;
+  }
+
+  .step-list > div {
+    padding-left: 2.5rem;
+  }
+}
+
+@media print {
+  .site-header,
+  .breadcrumb,
+  .topic-pager,
+  .site-footer,
+  .skip-link,
+  .video-links {
+    display: none;
+  }
+}
+
+/* =========================================================
+   Caixa de exercícios "Pense como um detetive" e variantes
+   ========================================================= */
+
+.thinking-box {
+  margin-bottom: 1.8rem;
+}
+
+.thinking-header {
+  margin-bottom: .6rem;
+}
+
+.thinking-header h3 {
+  margin: 0;
+}
+
+.thinking-toggle-wrap {
+  margin-bottom: .2rem;
+}
+
+.thinking-hints--hidden {
+  display: none;
+}
+
+/* =========================================================
+   Termo com dica (tooltip-tag) — rótulo curto, estilo de selo
+   ========================================================= */
+
+.tooltip-tag {
+  display: inline-block;
+  padding: .15rem .55rem;
+  margin-right: .3rem;
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: .72rem;
+  font-weight: 700;
+  cursor: help;
+  text-decoration: underline dotted;
+  text-decoration-color: var(--primary);
+}
+
+/* =========================================================
+   Figuras com diagramas SVG (diagram-figure) e anatomia do SVG
+   ========================================================= */
+
+.diagram-figure {
+  margin: 0 0 1.1rem;
+  padding: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+  overflow-x: auto;
+}
+
+.diagram-figure svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.diagram-figure figcaption {
+  margin-top: .6rem;
+  color: var(--ink-soft);
+  font-size: .85rem;
+  text-align: left;
+}
+
+.activity-figure {
+  margin-top: 1rem;
+}
+
+.activity-figure img,
+.diagram-figure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+}
+
+.diagram-box {
+  fill: var(--surface);
+  stroke: var(--border);
+  stroke-width: 1.5;
+}
+
+.diagram-box--external {
+  fill: var(--cat-modelagem-de-dados-soft);
+  stroke: var(--cat-modelagem-de-dados);
+}
+
+.diagram-box--internal {
+  fill: var(--cat-sgbd-soft);
+  stroke: var(--cat-sgbd);
+}
+
+.diagram-box--conceptual {
+  fill: var(--primary-soft);
+  stroke: var(--primary);
+}
+
+.diagram-title {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--ink);
+}
+
+.diagram-label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--ink-soft);
+}
+
+.diagram-caption {
+  font-family: var(--font-body);
+  font-size: 11px;
+  fill: var(--ink-soft);
+}
+
+.diagram-arrow {
+  stroke: var(--ink-soft);
+  stroke-width: 1.5;
+  fill: none;
 }

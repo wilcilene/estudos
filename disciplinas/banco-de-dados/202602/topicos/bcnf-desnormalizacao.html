@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forma Normal de Boyce-Codd e Desnormalização | Banco de Dados</title>
+  <meta name="description" content="BCNF explicada com a escala de operadores de uma usina de energia alienígena: por que uma tabela pode estar na 3FN e ainda ter anomalias, e quando desnormalizar de propósito para ganhar desempenho.">
+  <meta name="keywords" content="BCNF, Boyce-Codd, forma normal, desnormalização, superchave, chave candidata, dependência funcional, desempenho de banco de dados">
+  <meta name="author" content="Disciplina de Banco de Dados">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/bcnf-desnormalizacao.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Forma Normal de Boyce-Codd e Desnormalização">
+  <meta property="og:description" content="BCNF e desnormalização explicadas com a escala de operadores de uma usina de energia alienígena.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/bcnf-desnormalizacao.html">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Forma Normal de Boyce-Codd e Desnormalização",
+    "description": "BCNF e desnormalização explicadas com a escala de operadores de uma usina de energia alienígena.",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "artigo de estudo",
+    "educationalLevel": "Graduação",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Banco de Dados",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/index.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">BD</span>
+        <span class="brand-text">
+          <span class="brand-name">Banco de Dados</span>
+          <span class="brand-sub">Eng. de Computação</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="../index.html">Banco de Dados</a></li>
+          <li aria-current="page">Forma Normal de Boyce-Codd e Desnormalização</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="topic-article">
+      <div class="container">
+        <header class="topic-header">
+          <p class="topic-eyebrow">Normalização</p>
+          <h1>BCNF: quando a 3FN ainda não é suficiente</h1>
+          <p class="topic-lead">A 3FN resolve a maioria dos problemas, mas existe um caso específico — chaves candidatas que se sobrepõem — em que uma tabela passa na 3FN e ainda assim guarda redundância. Vamos ver esse caso com a escala de operadores de uma usina de energia alienígena, e depois falar sobre o oposto: desnormalizar de propósito.</p>
+        </header>
+
+        <section class="objectives" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">O que vocês vão aprender aqui</h2>
+          <ul class="check-list">
+            <li>Entender a definição formal da BCNF.</li>
+            <li>Identificar uma tabela que está na 3FN mas viola a BCNF.</li>
+            <li>Decompor essa tabela para eliminar a anomalia.</li>
+            <li>Reconhecer quando desnormalizar de propósito é uma decisão válida.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="s1-title">
+          <h2 id="s1-title">1. O cenário: a escala da usina</h2>
+          <div class="theme-box">
+            <h3>⚡ Usina de energia alienígena</h3>
+            <p>A usina tem vários setores (reatores de fusão, de antimatéria, de energia solar concentrada). Cada operador é certificado para trabalhar em <strong>um único</strong> setor — essa é uma regra rígida de segurança. A escala registra quem trabalha em qual turno.</p>
+          </div>
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>escala_operacao</caption>
+              <thead><tr><th scope="col">operador</th><th scope="col">turno</th><th scope="col">setor</th></tr></thead>
+              <tbody>
+                <tr><td>Vex Orlan</td><td>manhã</td><td>Fusão</td></tr>
+                <tr><td>Vex Orlan</td><td>noite</td><td>Fusão</td></tr>
+                <tr><td>Nia Draft</td><td>manhã</td><td>Antimatéria</td></tr>
+                <tr><td>Rho Kesh</td><td>tarde</td><td>Solar Concentrada</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Reparem que "Vex Orlan" aparece duas vezes, e "Fusão" é repetido nas duas linhas. Isso já é um cheiro de redundância — mas, como vamos ver, essa tabela passa tranquilamente pela 3FN.</p>
+        </section>
+
+        <section aria-labelledby="s2-title">
+          <h2 id="s2-title">2. Duas chaves candidatas que se sobrepõem</h2>
+          <p>Essa tabela tem duas dependências funcionais importantes:</p>
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Dependências funcionais de escala_operacao</caption>
+              <thead><tr><th scope="col">Dependência</th><th scope="col">Em palavras</th></tr></thead>
+              <tbody>
+                <tr><td><code>(setor, turno) → operador</code></td><td>Para cada setor e turno, existe só um operador escalado.</td></tr>
+                <tr><td><code>operador → setor</code></td><td>Cada operador é certificado para um único setor — essa é a regra de negócio da usina.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Como <code>operador → setor</code> e <code>(setor, turno) → operador</code>, temos <strong>duas chaves candidatas</strong>: <code>(operador, turno)</code> e <code>(setor, turno)</code> — qualquer uma das duas identifica uma linha sozinha.</p>
+        </section>
+
+        <section aria-labelledby="s3-title">
+          <h2 id="s3-title">3. Por que ela passa na 3FN (e ainda assim incomoda)</h2>
+          <p>A 3FN proíbe dependência transitiva de um atributo <strong>não-chave</strong> para outro atributo não-chave. Mas <code>setor</code> não é não-chave aqui — ele é um <strong>atributo primo</strong>, porque participa da chave candidata <code>(setor, turno)</code>. Então a dependência <code>operador → setor</code> não quebra a regra da 3FN, mesmo sendo exatamente o tipo de redundância que a normalização existe para evitar.</p>
+
+          <div class="concept-box">
+            <h3>Conceito: a definição da BCNF</h3>
+            <p>Uma tabela está na <strong>Forma Normal de Boyce-Codd</strong> quando, para toda dependência funcional não trivial <code>X → Y</code>, <code>X</code> é uma <strong>superchave</strong> (ou seja, <code>X</code> sozinho já determina a linha inteira). A diferença para a 3FN é sutil, mas decisiva: a 3FN abre uma exceção quando <code>Y</code> é um atributo primo; a BCNF não abre exceção nenhuma.</p>
+          </div>
+
+          <p>Testando <code>operador → setor</code> contra essa régua: <code>operador</code> sozinho <strong>não</strong> é superchave (ele não determina <code>turno</code>). Logo, essa dependência viola a BCNF — mesmo a tabela estando na 3FN.</p>
+        </section>
+
+        <section aria-labelledby="s4-title">
+          <h2 id="s4-title">4. Decompondo para BCNF</h2>
+          <pre class="code-block"><code>CREATE TABLE operador_setor (
+  operador VARCHAR(60) PRIMARY KEY,
+  setor VARCHAR(40) NOT NULL
+);
+
+CREATE TABLE escala (
+  operador VARCHAR(60) NOT NULL,
+  turno VARCHAR(20) NOT NULL,
+  PRIMARY KEY (operador, turno),
+  FOREIGN KEY (operador) REFERENCES operador_setor(operador)
+);</code></pre>
+          <p>Agora o setor de cada operador é guardado uma única vez, em <code>operador_setor</code>; <code>escala</code> só registra quem trabalha em qual turno. Atualizar a certificação de um operador vira um <code>UPDATE</code> em uma única linha, não importa em quantos turnos ele trabalhe.</p>
+
+          <div class="tip-box">
+            <h3>⚠️ O preço da decomposição em BCNF</h3>
+            <p>Depois dessa decomposição, a regra "para cada setor e turno, só um operador" não é mais garantida automaticamente por uma <code>PRIMARY KEY</code> simples — ela passa a depender de uma consulta ou de uma lógica extra para ser verificada. Esse é um trade-off conhecido da BCNF: ela sempre elimina a redundância, mas nem sempre preserva, de forma direta, todas as dependências funcionais originais da tabela.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="s5-title">
+          <h2 id="s5-title">5. O caminho contrário: desnormalizar de propósito</h2>
+          <p>Tudo o que vimos até aqui — nesta aula e na anterior — empurra na direção de <em>mais</em> tabelas, cada uma mais enxuta. Só que normalizar demais tem um custo: cada consulta que junta informações espalhadas em várias tabelas pequenas precisa de mais <code>JOIN</code>s, e <code>JOIN</code> custa processamento.</p>
+          <p>Em sistemas com volume alto de leitura — um painel de monitoramento da usina que atualiza a cada segundo, por exemplo — às vezes vale a pena aceitar um pouco de redundância de propósito, para evitar juntar várias tabelas a toda hora:</p>
+          <pre class="code-block"><code>CREATE TABLE leitura_painel (
+  id_leitura INT PRIMARY KEY AUTO_INCREMENT,
+  operador VARCHAR(60) NOT NULL,
+  setor VARCHAR(40) NOT NULL,   -- redundante: já existe em operador_setor
+  temperatura_c DECIMAL(6,2) NOT NULL,
+  registrado_em DATETIME NOT NULL
+);</code></pre>
+          <p>Aqui, <code>setor</code> está duplicado de propósito dentro de <code>leitura_painel</code> para que o painel não precise fazer <code>JOIN</code> com <code>operador_setor</code> a cada atualização — uma escolha consciente de performance, não um erro de modelagem.</p>
+
+          <div class="concept-box">
+            <h3>Conceito: desnormalização é uma decisão, não um acidente</h3>
+            <p>Desnormalizar sem perceber — simplesmente nunca separar as tabelas direito — é um problema. Desnormalizar <strong>de propósito</strong>, depois de já ter um modelo normalizado e identificar um gargalo real de desempenho, é uma técnica legítima. A diferença é que, no segundo caso, alguém precisa assumir a responsabilidade de manter os dados duplicados sincronizados (por exemplo, atualizando <code>leitura_painel</code> sempre que <code>operador_setor</code> mudar).</p>
+          </div>
+        </section>
+
+        <section class="quiz-box" aria-labelledby="quiz-title">
+          <h3 id="quiz-title">🤔 Confira se entendeu</h3>
+          <details>
+            <summary>Por que operador → setor não viola a 3FN, mas viola a BCNF?</summary>
+            <p>Porque setor é um atributo primo (participa da chave candidata (setor, turno)), e a 3FN só proíbe dependências transitivas entre atributos não-primos. A BCNF não abre essa exceção: basta operador não ser superchave para a dependência violar a regra.</p>
+          </details>
+          <details>
+            <summary>Em que situação faz sentido desnormalizar de propósito?</summary>
+            <p>Quando um sistema já normalizado apresenta um gargalo real de desempenho em consultas de leitura muito frequentes, e a equipe está disposta a manter a sincronização dos dados duplicados.</p>
+          </details>
+        </section>
+
+        <section aria-labelledby="materials-title">
+          <h2 id="materials-title">Materiais para estudo</h2>
+          <ul class="materials-list">
+            <li>Próximo tópico: restrições de integridade e transações — como o banco garante que um conjunto de operações aconteça por inteiro ou não aconteça de jeito nenhum.</li>
+          </ul>
+          <ul class="video-links">
+            <li>
+              <span class="video-icon" aria-hidden="true">▶</span>
+              <div>
+                <a href="https://www.youtube.com/results?search_query=forma+normal+de+Boyce-Codd+BCNF+explicada" target="_blank" rel="noopener">Buscar vídeo-aulas sobre BCNF no YouTube</a>
+                <span class="video-note">Abre uma busca no YouTube com aulas sobre a Forma Normal de Boyce-Codd.</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="topic-pager" aria-label="Navegação entre tópicos">
+          <div class="topic-pager-inner">
+            <a class="pager-link pager-link--prev" href="normalizacao-formas-normais.html">
+              <span class="pager-label">Anterior</span>
+              <span class="pager-title">Dependências Funcionais e Formas Normais</span>
+            </a>
+            <a class="pager-link pager-link--next" href="restricoes-transacoes.html">
+              <span class="pager-label">Próximo</span>
+              <span class="pager-title">Restrições de Integridade e Transações (ACID)</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Banco de Dados · Engenharia de Computação</p>
+      <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restrições de Integridade e Transações (ACID) | Banco de Dados</title>
+  <meta name="description" content="CHECK, UNIQUE e NOT NULL revisados, e o conceito de transação com as propriedades ACID explicados com uma transferência de créditos entre contas no cofre central de um banco de robôs.">
+  <meta name="keywords" content="transação, ACID, atomicidade, consistência, isolamento, durabilidade, COMMIT, ROLLBACK, START TRANSACTION, CHECK, UNIQUE, NOT NULL">
+  <meta name="author" content="Disciplina de Banco de Dados">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/restricoes-transacoes.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Restrições de Integridade e Transações (ACID)">
+  <meta property="og:description" content="Transações e ACID explicados com uma transferência entre contas no cofre central de um banco de robôs.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/restricoes-transacoes.html">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Restrições de Integridade e Transações (ACID)",
+    "description": "Transações e ACID explicados com uma transferência entre contas no cofre central de um banco de robôs.",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "aula prática",
+    "educationalLevel": "Graduação",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Banco de Dados",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/index.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">BD</span>
+        <span class="brand-text">
+          <span class="brand-name">Banco de Dados</span>
+          <span class="brand-sub">Eng. de Computação</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="../index.html">Banco de Dados</a></li>
+          <li aria-current="page">Restrições de Integridade e Transações (ACID)</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="topic-article">
+      <div class="container">
+        <header class="topic-header">
+          <p class="topic-eyebrow">Restrições</p>
+          <h1>Restrições de integridade e transações (ACID)</h1>
+          <p class="topic-lead">Vocês já usam <code>CHECK</code>, <code>UNIQUE</code> e <code>NOT NULL</code> desde a DDL — hoje vamos revisá-los rapidamente e depois resolver um problema novo: o que acontece quando uma operação de negócio precisa de <em>mais de um</em> comando SQL para ser concluída? Vamos abrir o cofre central do RoboBank, o banco que atende contas de robôs.</p>
+        </header>
+
+        <section class="objectives" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">O que vocês vão aprender aqui</h2>
+          <ul class="check-list">
+            <li>Revisar <code>CHECK</code>, <code>UNIQUE</code> e <code>NOT NULL</code> como restrições de integridade.</li>
+            <li>Entender por que algumas operações precisam de mais de um comando SQL.</li>
+            <li>Usar <code>START TRANSACTION</code>, <code>COMMIT</code> e <code>ROLLBACK</code>.</li>
+            <li>Explicar cada letra da sigla ACID com um exemplo concreto.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="s1-title">
+          <h2 id="s1-title">1. O cofre do RoboBank</h2>
+          <div class="theme-box">
+            <h3>🏦 RoboBank</h3>
+            <p>Cada robô tem uma conta de créditos. O saldo nunca pode ficar negativo — essa é uma regra inegociável do banco.</p>
+          </div>
+          <pre class="code-block"><code>CREATE TABLE conta_robo (
+  id_conta INT PRIMARY KEY AUTO_INCREMENT,
+  titular_robo VARCHAR(60) NOT NULL UNIQUE,
+  saldo DECIMAL(12,2) NOT NULL DEFAULT 0,
+  CONSTRAINT chk_saldo_positivo CHECK (saldo &gt;= 0)
+);</code></pre>
+          <p>Rapidinho, para quem já viu isso na DDL: <code>NOT NULL</code> torna o titular obrigatório, <code>UNIQUE</code> impede dois robôs com a mesma conta, e <code>CHECK (saldo &gt;= 0)</code> bloqueia qualquer <code>UPDATE</code> que deixaria o saldo negativo — o banco nunca aceita a linha, não importa o que a aplicação tente fazer.</p>
+        </section>
+
+        <section aria-labelledby="s2-title">
+          <h2 id="s2-title">2. O problema: uma transferência não é um comando só</h2>
+          <p>Transferir 100 créditos do robô A para o robô B exige <strong>dois</strong> comandos:</p>
+          <pre class="code-block"><code>UPDATE conta_robo SET saldo = saldo - 100 WHERE titular_robo = 'Unidade-A';
+UPDATE conta_robo SET saldo = saldo + 100 WHERE titular_robo = 'Unidade-B';</code></pre>
+          <div class="tip-box">
+            <h3>🚨 E se a energia cair entre os dois comandos?</h3>
+            <p>Se o primeiro <code>UPDATE</code> rodar e, antes do segundo, a conexão cair ou o servidor reiniciar, o robô A perde 100 créditos e o robô B nunca recebe nada. Créditos somem do sistema. É exatamente esse risco que uma <strong>transação</strong> elimina.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="s3-title">
+          <h2 id="s3-title">3. Agrupando comandos em uma transação</h2>
+          <pre class="code-block"><code>START TRANSACTION;
+
+UPDATE conta_robo SET saldo = saldo - 100 WHERE titular_robo = 'Unidade-A';
+UPDATE conta_robo SET saldo = saldo + 100 WHERE titular_robo = 'Unidade-B';
+
+COMMIT;</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: uma transferência segura</caption>
+              <thead><tr><th scope="col">Trecho</th><th scope="col">O que significa</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>START TRANSACTION;</code></td>
+                  <td>Abre um bloco: a partir daqui, nenhuma alteração é gravada em definitivo até que a transação seja confirmada.</td>
+                </tr>
+                <tr>
+                  <td><code>UPDATE ... SET saldo = saldo - 100 ...</code></td>
+                  <td>Debita o robô A. A mudança já existe <em>dentro</em> da transação, mas ainda não é definitiva nem visível para outras conexões.</td>
+                </tr>
+                <tr>
+                  <td><code>UPDATE ... SET saldo = saldo + 100 ...</code></td>
+                  <td>Credita o robô B, ainda dentro do mesmo bloco.</td>
+                </tr>
+                <tr>
+                  <td><code>COMMIT;</code></td>
+                  <td>Confirma o bloco inteiro de uma vez: as duas alterações se tornam permanentes juntas, ou nenhuma delas se torna.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Se algo der errado no meio do caminho — por exemplo, o segundo <code>UPDATE</code> violar o <code>CHECK (saldo &gt;= 0)</code> porque o robô B não existe — nós desfazemos tudo com <code>ROLLBACK</code> em vez de <code>COMMIT</code>:</p>
+          <pre class="code-block"><code>START TRANSACTION;
+
+UPDATE conta_robo SET saldo = saldo - 100 WHERE titular_robo = 'Unidade-A';
+-- algo deu errado aqui
+ROLLBACK;</code></pre>
+          <p><code>ROLLBACK</code> desfaz tudo o que aconteceu desde o <code>START TRANSACTION</code>, como se a transação nunca tivesse existido — o robô A recupera os 100 créditos que havia "perdido" dentro do bloco.</p>
+        </section>
+
+        <section aria-labelledby="s4-title">
+          <h2 id="s4-title">4. ACID: as quatro garantias por trás do COMMIT</h2>
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>ACID na transferência do RoboBank</caption>
+              <thead><tr><th scope="col">Propriedade</th><th scope="col">O que garante</th><th scope="col">No nosso exemplo</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><strong>Atomicidade</strong></td>
+                  <td>A transação acontece por inteiro, ou não acontece nada.</td>
+                  <td>É impossível o robô A perder créditos sem o robô B recebê-los.</td>
+                </tr>
+                <tr>
+                  <td><strong>Consistência</strong></td>
+                  <td>A transação leva o banco de um estado válido para outro estado válido, respeitando todas as restrições.</td>
+                  <td>O <code>CHECK (saldo &gt;= 0)</code> nunca é violado, nem durante, nem depois da transação.</td>
+                </tr>
+                <tr>
+                  <td><strong>Isolamento</strong></td>
+                  <td>Transações acontecendo ao mesmo tempo não enxergam os resultados parciais umas das outras.</td>
+                  <td>Se duas transferências envolvendo o robô A acontecerem ao mesmo tempo, uma não vê o saldo "no meio do caminho" da outra.</td>
+                </tr>
+                <tr>
+                  <td><strong>Durabilidade</strong></td>
+                  <td>Depois do <code>COMMIT</code>, o resultado sobrevive mesmo a uma queda de energia imediatamente em seguida.</td>
+                  <td>Uma vez confirmada, a transferência não "some" se o servidor reiniciar um segundo depois.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="concept-box">
+            <h3>Conceito: isolamento tem níveis</h3>
+            <p>Na prática, "isolamento total" entre transações simultâneas tem um custo de desempenho, então os SGBDs oferecem <strong>níveis de isolamento</strong> configuráveis, trocando um pouco de rigor por velocidade. Esse ajuste fino é um tópico avançado — por enquanto, o que importa é saber que o problema existe e que o SGBD dá ferramentas para controlá-lo.</p>
+          </div>
+        </section>
+
+        <section class="quiz-box" aria-labelledby="quiz-title">
+          <h3 id="quiz-title">🤔 Confira se entendeu</h3>
+          <details>
+            <summary>Por que não bastava rodar os dois UPDATEs um atrás do outro, sem START TRANSACTION?</summary>
+            <p>Porque, sem a transação, cada UPDATE é confirmado isoladamente. Se o processo for interrompido entre os dois comandos, o débito do robô A já estaria confirmado e o crédito do robô B, não — os créditos simplesmente desapareceriam.</p>
+          </details>
+          <details>
+            <summary>Qual propriedade do ACID é violada se, depois de um COMMIT confirmado, uma queda de energia faz o banco "esquecer" a transferência?</summary>
+            <p>A durabilidade, que garante que o resultado de uma transação confirmada sobrevive a falhas do sistema.</p>
+          </details>
+        </section>
+
+        <section aria-labelledby="materials-title">
+          <h2 id="materials-title">Materiais para estudo</h2>
+          <ul class="materials-list">
+            <li>Referência oficial: <a href="https://dev.mysql.com/doc/refman/8.0/en/commit.html" target="_blank" rel="noopener">transações no MySQL (START TRANSACTION, COMMIT, ROLLBACK)</a>.</li>
+            <li>Próximo tópico: visões (views) — como expor apenas parte dos dados de forma segura e reutilizável.</li>
+          </ul>
+          <ul class="video-links">
+            <li>
+              <span class="video-icon" aria-hidden="true">▶</span>
+              <div>
+                <a href="https://www.youtube.com/results?search_query=transa%C3%A7%C3%B5es+SQL+ACID+COMMIT+ROLLBACK+explicado" target="_blank" rel="noopener">Buscar vídeo-aulas sobre transações e ACID no YouTube</a>
+                <span class="video-note">Abre uma busca no YouTube com aulas sobre transações em banco de dados.</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="topic-pager" aria-label="Navegação entre tópicos">
+          <div class="topic-pager-inner">
+            <a class="pager-link pager-link--prev" href="bcnf-desnormalizacao.html">
+              <span class="pager-label">Anterior</span>
+              <span class="pager-title">Forma Normal de Boyce-Codd e Desnormalização</span>
+            </a>
+            <a class="pager-link pager-link--next" href="visoes.html">
+              <span class="pager-label">Próximo</span>
+              <span class="pager-title">Visões (Views)</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Banco de Dados · Engenharia de Computação</p>
+      <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
+    </div>
+  </footer>
+</body>
+</html>

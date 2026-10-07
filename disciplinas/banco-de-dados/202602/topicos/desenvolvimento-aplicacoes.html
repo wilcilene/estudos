@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desenvolvimento de Aplicações com Banco de Dados | Banco de Dados</title>
+  <meta name="description" content="Drivers ODBC/JDBC, ORMs, pool de conexões e prevenção de SQL injection, explicados com o desenvolvimento do app da Central de Resgate Estelar, que precisa falar com o banco de dados de forma segura.">
+  <meta name="keywords" content="JDBC, ODBC, ORM, pool de conexões, SQL injection, prepared statement, desenvolvimento de aplicações, banco de dados">
+  <meta name="author" content="Disciplina de Banco de Dados">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/desenvolvimento-aplicacoes.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Desenvolvimento de Aplicações com Banco de Dados">
+  <meta property="og:description" content="Drivers, ORMs, pool de conexões e SQL injection explicados com o app da Central de Resgate Estelar.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/desenvolvimento-aplicacoes.html">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Desenvolvimento de Aplicações com Banco de Dados",
+    "description": "Drivers, ORMs, pool de conexões e SQL injection explicados com o app da Central de Resgate Estelar.",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "aula prática",
+    "educationalLevel": "Graduação",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Banco de Dados",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/index.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">BD</span>
+        <span class="brand-text">
+          <span class="brand-name">Banco de Dados</span>
+          <span class="brand-sub">Eng. de Computação</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="../index.html">Banco de Dados</a></li>
+          <li aria-current="page">Desenvolvimento de Aplicações com Banco de Dados</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="topic-article">
+      <div class="container">
+        <header class="topic-header">
+          <p class="topic-eyebrow">Integração</p>
+          <h1>Desenvolvimento de aplicações com banco de dados</h1>
+          <p class="topic-lead">Em todos os tópicos anteriores, rodamos SQL diretamente em um cliente de banco. Mas, na prática, é uma aplicação — escrita em Java, Python, JavaScript, etc. — quem precisa falar com o banco. Hoje vamos fechar o ciclo: como uma aplicação real se conecta, envia comandos e se protege de erros e ataques. Vamos acompanhar a equipe que desenvolve o sistema da Central de Resgate Estelar.</p>
+        </header>
+
+        <section class="objectives" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">O que vocês vão aprender aqui</h2>
+          <ul class="check-list">
+            <li>Entender o papel dos drivers ODBC/JDBC na comunicação aplicação ↔ banco.</li>
+            <li>Entender o que um ORM resolve e o que ele esconde.</li>
+            <li>Entender por que uma aplicação usa um pool de conexões, em vez de abrir uma conexão nova a cada operação.</li>
+            <li>Reconhecer e prevenir SQL injection com prepared statements.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="s1-title">
+          <h2 id="s1-title">1. A Central de Resgate Estelar</h2>
+          <div class="theme-box">
+            <h3>🚀 Central de Resgate Estelar</h3>
+            <p>A equipe está construindo o sistema que recebe pedidos de socorro de naves em apuros, registra cada chamado no banco de dados e aciona a nave de resgate mais próxima. O sistema roda em um servidor e precisa conversar com um banco de dados relacional continuamente, atendendo vários operadores ao mesmo tempo.</p>
+          </div>
+          <p>A primeira pergunta da equipe: como o código da aplicação, escrito em uma linguagem de programação, consegue enviar comandos SQL para o banco e receber os resultados de volta?</p>
+        </section>
+
+        <section aria-labelledby="s2-title">
+          <h2 id="s2-title">2. Drivers ODBC e JDBC: a ponte com o banco</h2>
+          <p>A aplicação não "fala" diretamente o protocolo interno do SGBD. Ela usa um <strong>driver</strong> — uma biblioteca que traduz comandos da linguagem de programação para o protocolo que o banco entende, e traduz as respostas do banco de volta para estruturas que a aplicação consegue usar.</p>
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>ODBC e JDBC</caption>
+              <thead><tr><th scope="col">Driver</th><th scope="col">Contexto de uso</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><strong>ODBC</strong> (Open Database Connectivity)</td>
+                  <td>Padrão independente de linguagem, amplamente usado para conectar aplicações a diferentes SGBDs através de uma interface comum em C.</td>
+                </tr>
+                <tr>
+                  <td><strong>JDBC</strong> (Java Database Connectivity)</td>
+                  <td>Padrão específico para aplicações Java, com uma API orientada a objetos para abrir conexões, executar comandos e percorrer resultados.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pre class="code-block"><code>// Exemplo ilustrativo em Java com JDBC
+Connection conexao = DriverManager.getConnection(
+    "jdbc:mysql://localhost:3306/resgate_estelar", "usuario", "senha");
+
+Statement comando = conexao.createStatement();
+ResultSet resultado = comando.executeQuery(
+    "SELECT * FROM chamado_socorro WHERE status = 'pendente'");</code></pre>
+          <p>Note que, por trás dessas poucas linhas, o driver está abrindo uma conexão de rede com o SGBD, autenticando o usuário, enviando o comando SQL e convertendo as linhas da resposta em objetos que o código Java consegue percorrer.</p>
+        </section>
+
+        <section aria-labelledby="s3-title">
+          <h2 id="s3-title">3. ORMs: mapeando tabelas para objetos</h2>
+          <p>Escrever SQL manualmente para cada operação funciona, mas em um sistema grande isso significa muito código repetitivo. Um <strong>ORM</strong> (Object-Relational Mapper) mapeia cada tabela para uma classe e cada linha para um objeto, permitindo trabalhar com o banco usando a linguagem de programação em vez de escrever SQL diretamente:</p>
+          <pre class="code-block"><code># Exemplo ilustrativo em Python com um ORM
+chamados_pendentes = ChamadoSocorro.objects.filter(status='pendente')
+
+for chamado in chamados_pendentes:
+    print(chamado.nave_solicitante, chamado.coordenadas)</code></pre>
+          <p>Por trás dessas duas linhas, o ORM gera e executa algo equivalente a <code>SELECT * FROM chamado_socorro WHERE status = 'pendente'</code>, e converte cada linha do resultado em um objeto <code>ChamadoSocorro</code>.</p>
+
+          <div class="concept-box">
+            <h3>Conceito: o que o ORM ganha e o que ele esconde</h3>
+            <p>Um ORM acelera o desenvolvimento e reduz SQL repetitivo, mas também esconde o comando real que está sendo executado. Em consultas simples isso não é problema; em consultas complexas ou que precisam de alto desempenho, a equipe de desenvolvimento ainda precisa entender o SQL gerado por baixo — tudo o que vocês estudaram até aqui continua relevante mesmo usando um ORM.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="s4-title">
+          <h2 id="s4-title">4. Pool de conexões</h2>
+          <p>Abrir uma conexão com o banco não é instantâneo: envolve autenticação, estabelecimento de rede e alocação de recursos no SGBD. Se a Central de Resgate abrisse e fechasse uma conexão nova para <em>cada</em> chamado de socorro recebido, o sistema ficaria lento e sobrecarregaria o banco com conexões.</p>
+          <p>A solução é um <strong>pool de conexões</strong>: a aplicação abre um conjunto de conexões quando inicia e as mantém abertas, reaproveitando-as entre as operações.</p>
+          <div class="step-list">
+            <div><strong>Aplicação inicia</strong> — um pool com, por exemplo, 10 conexões já abertas é criado.</div>
+            <div><strong>Operador registra um chamado</strong> — a aplicação pede uma conexão livre do pool, em vez de abrir uma nova.</div>
+            <div><strong>Comando é executado</strong> — o INSERT do novo chamado roda usando essa conexão emprestada.</div>
+            <div><strong>Conexão é devolvida</strong> — em vez de ser fechada, a conexão volta para o pool, pronta para a próxima operação.</div>
+          </div>
+          <div class="tip-box">
+            <h3>💡 Por que isso importa para quem projeta o banco</h3>
+            <p>O tamanho do pool de conexões afeta diretamente quantas operações simultâneas o banco aguenta. Um pool pequeno pode gerar filas de espera; um pool grande demais pode sobrecarregar o SGBD com mais conexões do que ele consegue administrar com eficiência.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="s5-title">
+          <h2 id="s5-title">5. SQL injection: o ataque que explora SQL montado na mão</h2>
+          <p>Suponha que a equipe monte a consulta de busca de chamados concatenando o texto digitado pelo operador diretamente no SQL:</p>
+          <pre class="code-block"><code>// NUNCA faça isso
+String idDigitado = campoTexto.getText();
+String sql = "SELECT * FROM chamado_socorro WHERE id_chamado = " + idDigitado;
+comando.executeQuery(sql);</code></pre>
+          <p>Se um operador mal-intencionado digitar, no lugar de um número, o texto <code>0 OR 1=1</code>, o comando final se torna:</p>
+          <pre class="code-block"><code>SELECT * FROM chamado_socorro WHERE id_chamado = 0 OR 1=1</code></pre>
+          <p><code>1=1</code> é sempre verdadeiro, então essa condição retorna <strong>todos</strong> os chamados da tabela, não apenas um. Com entradas mais elaboradas, esse tipo de ataque pode ler, alterar ou apagar dados que o operador nunca deveria acessar. Isso é <strong>SQL injection</strong>: o texto digitado pelo usuário é interpretado como parte do comando SQL, em vez de apenas como um valor.</p>
+
+          <div class="tip-box">
+            <h3>🚨 A causa raiz: misturar dado com comando</h3>
+            <p>O problema não é "o que o operador digitou" — é que o código tratou a entrada do operador como parte do <em>código SQL</em>, em vez de tratá-la como um <em>valor</em> dentro de um comando fixo.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="s6-title">
+          <h2 id="s6-title">6. Prevenindo com prepared statements</h2>
+          <p>A correção é usar um <strong>prepared statement</strong>: o comando SQL é enviado ao banco com um espaço reservado (<code>?</code>) no lugar do valor, e o valor digitado é enviado <em>separadamente</em>, nunca como texto a ser interpretado como SQL:</p>
+          <pre class="code-block"><code>String sql = "SELECT * FROM chamado_socorro WHERE id_chamado = ?";
+PreparedStatement comando = conexao.prepareStatement(sql);
+comando.setInt(1, Integer.parseInt(idDigitado));
+ResultSet resultado = comando.executeQuery();</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: a defesa com prepared statement</caption>
+              <thead><tr><th scope="col">Trecho</th><th scope="col">O que significa</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>WHERE id_chamado = ?</code></td>
+                  <td>O <code>?</code> é um espaço reservado. O driver já sabe, pelo comando, que ali vai existir exatamente um valor — nunca um trecho de SQL.</td>
+                </tr>
+                <tr>
+                  <td><code>comando.setInt(1, ...)</code></td>
+                  <td>Define o valor do primeiro espaço reservado como um número inteiro. Se o operador tentasse digitar <code>0 OR 1=1</code>, essa conversão para inteiro simplesmente falharia — o texto nunca chega a ser interpretado como SQL.</td>
+                </tr>
+                <tr>
+                  <td><code>comando.executeQuery();</code></td>
+                  <td>Executa o comando já com o valor embutido de forma segura pelo próprio driver, não por concatenação de texto.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Com o prepared statement, mesmo que o operador digite algo malicioso, esse texto é tratado estritamente como o <em>valor</em> de um parâmetro — nunca como parte da estrutura do comando SQL. É por isso que prepared statements (ou o equivalente fornecido por um ORM) são a defesa padrão contra SQL injection.</p>
+        </section>
+
+        <section class="quiz-box" aria-labelledby="quiz-title">
+          <h3 id="quiz-title">🤔 Confira se entendeu</h3>
+          <details>
+            <summary>Por que a Central de Resgate Estelar usa um pool de conexões em vez de abrir uma conexão nova para cada chamado?</summary>
+            <p>Porque abrir uma conexão é custoso (autenticação, rede, alocação de recursos). Reaproveitar conexões já abertas através de um pool evita esse custo repetido e evita sobrecarregar o banco com um número excessivo de conexões simultâneas.</p>
+          </details>
+          <details>
+            <summary>Por que "SELECT * FROM chamado_socorro WHERE id_chamado = " + idDigitado é perigoso, mesmo que pareça funcionar na maioria dos testes?</summary>
+            <p>Porque concatena a entrada do usuário diretamente no comando SQL. Uma entrada como "0 OR 1=1" deixa de ser apenas um valor e passa a alterar a lógica do comando, retornando dados que não deveriam ser acessados — isso é SQL injection.</p>
+          </details>
+        </section>
+
+        <section aria-labelledby="materials-title">
+          <h2 id="materials-title">Materiais para estudo</h2>
+          <ul class="materials-list">
+            <li>Referência oficial: <a href="https://dev.mysql.com/doc/connector-j/en/connector-j-reference-implementation-notes.html" target="_blank" rel="noopener">MySQL Connector/J (JDBC)</a>.</li>
+            <li>Referência: <a href="https://owasp.org/www-community/attacks/SQL_Injection" target="_blank" rel="noopener">OWASP — SQL Injection</a>.</li>
+          </ul>
+          <ul class="video-links">
+            <li>
+              <span class="video-icon" aria-hidden="true">▶</span>
+              <div>
+                <a href="https://www.youtube.com/results?search_query=JDBC+ORM+pool+de+conex%C3%B5es+SQL+injection+explicado" target="_blank" rel="noopener">Buscar vídeo-aulas sobre JDBC, ORM e SQL injection no YouTube</a>
+                <span class="video-note">Abre uma busca no YouTube com aulas sobre integração de aplicações com bancos de dados.</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="topic-pager" aria-label="Navegação entre tópicos">
+          <div class="topic-pager-inner">
+            <a class="pager-link pager-link--prev" href="gatilhos.html">
+              <span class="pager-label">Anterior</span>
+              <span class="pager-title">Gatilhos (Triggers)</span>
+            </a>
+            <a class="pager-link pager-link--next" href="../index.html#topicos">
+              <span class="pager-label">Fim da trilha</span>
+              <span class="pager-title">Voltar ao índice de tópicos</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Banco de Dados · Engenharia de Computação</p>
+      <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
+    </div>
+  </footer>
+</body>
+</html>

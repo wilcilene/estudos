@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurar o Ambiente — MySQL Server e MySQL Workbench | Banco de Dados</title>
+  <meta name="description" content="Guia passo a passo para baixar e configurar o MySQL Server e o MySQL Workbench no Windows, macOS e Linux, antes das aulas práticas de Banco de Dados.">
+  <meta name="keywords" content="MySQL, MySQL Workbench, instalação, Windows, macOS, Linux, configurar ambiente, banco de dados">
+  <meta name="author" content="Disciplina de Banco de Dados">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/topicos/configurar-ambiente.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Configurar o Ambiente — MySQL Server e MySQL Workbench">
+  <meta property="og:description" content="Passo a passo para instalar o MySQL Server e o MySQL Workbench no Windows, macOS e Linux.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/topicos/configurar-ambiente.html">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Configurar o Ambiente — MySQL Server e MySQL Workbench",
+    "description": "Guia passo a passo para instalar o MySQL Server e o MySQL Workbench no Windows, macOS e Linux.",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "guia de instalação",
+    "educationalLevel": "Graduação",
+    "timeRequired": "PT1H",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Banco de Dados",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/index.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">BD</span>
+        <span class="brand-text">
+          <span class="brand-name">Banco de Dados</span>
+          <span class="brand-sub">Eng. de Computação · 60h</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="../index.html">Banco de Dados</a></li>
+          <li aria-current="page">Configurar o ambiente — MySQL Server e MySQL Workbench</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="topic-article">
+      <div class="container">
+        <header class="topic-header">
+          <p class="ai-badge">Página criada pelo claude.ai com base no css e padrão já adotados na disciplina</p>
+          <h1>Configurando o ambiente: MySQL Server e MySQL Workbench</h1>
+          <p class="topic-lead">Antes de executar os scripts DDL da disciplina, você precisa de duas coisas instaladas na sua máquina: o <strong>MySQL Server</strong> (o banco de dados propriamente dito) e o <strong>MySQL Workbench</strong> (o cliente gráfico usado para escrever e executar SQL). Este guia mostra o passo a passo para Windows, macOS e Linux.</p>
+        </header>
+
+        <section class="objectives" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">O que você vai conseguir fazer ao final</h2>
+          <ul class="check-list">
+            <li>Ter o MySQL Server instalado e em execução na sua máquina.</li>
+            <li>Ter o MySQL Workbench instalado e aberto.</li>
+            <li>Criar uma conexão local no Workbench e testar essa conexão.</li>
+            <li>Executar <code>SELECT 1;</code> com sucesso, confirmando que o ambiente está pronto.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="s1-title">
+          <h2 id="s1-title">1. Entendendo as duas peças do ambiente</h2>
+          <p>É comum confundir as duas instalações, porque no dia a dia você vai abrir só o Workbench. Mas são dois programas com funções bem diferentes:</p>
+
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>MySQL Server × MySQL Workbench</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Programa</th>
+                  <th scope="col">O que é</th>
+                  <th scope="col">Fica rodando o tempo todo?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>MySQL Server</td>
+                  <td>O banco de dados de verdade: um processo (serviço) que guarda os dados em disco e responde a comandos SQL enviados por uma conexão de rede.</td>
+                  <td>Sim, roda em segundo plano como um serviço do sistema operacional, mesmo sem nenhuma janela aberta.</td>
+                </tr>
+                <tr>
+                  <td>MySQL Workbench</td>
+                  <td>Um programa com interface gráfica que se conecta ao MySQL Server, permite escrever SQL no editor e visualizar tabelas, colunas e resultados.</td>
+                  <td>Não, só roda enquanto você o mantém aberto — é só uma "janela" para o servidor.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="dev-note">
+            <h4>Para quem já programa</h4>
+            <p>A relação entre os dois é a mesma que existe entre um servidor de API e o Postman/Insomnia: o servidor guarda o estado e responde a requisições; o cliente gráfico só existe para facilitar o envio dessas requisições e a leitura das respostas. Fechar o Workbench não desliga o banco, do mesmo jeito que fechar o Postman não desliga sua API.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="s2-title">
+          <h2 id="s2-title">2. Antes de começar</h2>
+          <ul class="check-list">
+            <li>Conexão de internet estável (os instaladores têm entre 300 MB e 600 MB).</li>
+            <li>Cerca de 1,5 GB de espaço livre em disco.</li>
+            <li>Permissão de administrador no computador (a instalação do servidor exige privilégios elevados nos três sistemas).</li>
+            <li>Anote, em algum lugar seguro, a senha que você vai definir para o usuário <code>root</code> do MySQL — ela será pedida sempre que o Workbench conectar ao servidor.</li>
+          </ul>
+          <p>Escolha a seção correspondente ao seu sistema operacional abaixo. Os três caminhos terminam no mesmo lugar: seção 6, testando a primeira conexão.</p>
+        </section>
+
+        <section aria-labelledby="s-win-title">
+          <h2 id="s-win-title">3. Windows</h2>
+          <p>No Windows, o caminho mais simples é o <strong>MySQL Installer</strong>, um único instalador que já oferece o Server e o Workbench juntos.</p>
+
+          <ol>
+            <li>Acesse <code>dev.mysql.com/downloads/installer</code> no navegador.</li>
+            <li>Baixe a versão <strong>mysql-installer-community</strong> (o arquivo "web" é menor, mas baixa os componentes durante a instalação; o arquivo "full" já vem com tudo, recomendado se a internet do laboratório for instável).</li>
+            <li>Execute o instalador baixado (arquivo <code>.msi</code>).</li>
+            <li>Na tela <strong>Choosing a Setup Type</strong>, selecione <strong>Developer Default</strong>. Essa opção já marca o MySQL Server, o MySQL Workbench e as bibliotecas de conexão necessárias.</li>
+            <li>Clique em <strong>Execute</strong> na tela seguinte para baixar e instalar cada componente marcado.</li>
+            <li>Na etapa <strong>Type and Networking</strong>, mantenha a porta padrão <code>3306</code> e a opção <strong>Config Type: Development Computer</strong>.</li>
+            <li>Na etapa <strong>Authentication Method</strong>, mantenha a opção recomendada (<em>Use Strong Password Encryption</em>).</li>
+            <li>Na etapa <strong>Accounts and Roles</strong>, defina uma senha para o usuário <code>root</code> e anote-a.</li>
+            <li>Na etapa <strong>Windows Service</strong>, mantenha a opção de configurar o MySQL como serviço do Windows, iniciando automaticamente com o sistema.</li>
+            <li>Clique em <strong>Execute</strong> na tela final de configuração e aguarde a confirmação de que cada item foi concluído com sucesso.</li>
+            <li>Finalize o instalador. O MySQL Workbench já estará disponível no menu Iniciar.</li>
+          </ol>
+
+          <div class="concept-note">
+            <h4>Conceito: o MySQL como serviço do Windows</h4>
+            <p>Ao marcar a opção de serviço, o Windows passa a iniciar o MySQL Server automaticamente toda vez que o computador liga, sem precisar abrir nenhum programa manualmente. Para verificar se ele está ativo, abra o app <strong>Serviços</strong> (pesquise "Serviços" no menu Iniciar) e procure por <code>MySQL80</code> (ou nome parecido) na lista — o status deve estar como <strong>Em execução</strong>.</p>
+          </div>
+
+          <p>Se preferir instalar cada parte separadamente (por exemplo, se o computador já tiver um MySQL Server e você só precisa do Workbench), baixe o instalador do Workbench isoladamente em <code>dev.mysql.com/downloads/workbench</code>, escolhendo a versão para Windows.</p>
+        </section>
+
+        <section aria-labelledby="s-mac-title">
+          <h2 id="s-mac-title">4. macOS</h2>
+          <p>No macOS existem dois caminhos igualmente válidos. Escolha o que fizer mais sentido para você.</p>
+
+          <h3>Opção A — Homebrew (recomendado para quem já usa terminal)</h3>
+          <p>Se você já tem o <a href="https://brew.sh" target="_blank" rel="noopener">Homebrew</a> instalado, este caminho é o mais rápido.</p>
+
+          <pre class="code-block"><code>brew update
+brew install mysql
+brew services start mysql
+mysql_secure_installation</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: instalação via Homebrew</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Trecho</th>
+                  <th scope="col">O que significa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>brew update</code></td>
+                  <td>Atualiza a lista de pacotes que o Homebrew conhece, garantindo que você instale a versão mais recente disponível do MySQL.</td>
+                </tr>
+                <tr>
+                  <td><code>brew install mysql</code></td>
+                  <td>Baixa e instala o MySQL Server (o pacote de linha de comando, sem interface gráfica).</td>
+                </tr>
+                <tr>
+                  <td><code>brew services start mysql</code></td>
+                  <td>Inicia o MySQL Server como um serviço em segundo plano e o configura para iniciar automaticamente sempre que você ligar o computador — o equivalente ao serviço do Windows visto na seção anterior.</td>
+                </tr>
+                <tr>
+                  <td><code>mysql_secure_installation</code></td>
+                  <td>Executa um assistente interativo no terminal que define a senha do usuário <code>root</code>, remove usuários anônimos e aplica configurações de segurança recomendadas para um primeiro uso.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Em seguida, instale o Workbench (ele não vem junto com o pacote <code>mysql</code> do Homebrew):</p>
+          <pre class="code-block"><code>brew install --cask mysqlworkbench</code></pre>
+          <p><code>--cask</code> indica ao Homebrew que este é um aplicativo com interface gráfica (não uma ferramenta de linha de comando), instalado como um app normal na pasta Aplicativos.</p>
+
+          <h3>Opção B — Instaladores oficiais (sem usar terminal)</h3>
+          <ol>
+            <li>Acesse <code>dev.mysql.com/downloads/mysql</code> e baixe o pacote <strong>DMG Archive</strong> para macOS.</li>
+            <li>Abra o arquivo <code>.dmg</code> baixado e execute o instalador <code>.pkg</code> dentro dele.</li>
+            <li>Siga o assistente; na tela de configuração, defina e anote a senha do usuário <code>root</code>.</li>
+            <li>Ao final, abra <strong>Preferências do Sistema → MySQL</strong> para conferir se o servidor está em execução e para iniciá-lo automaticamente no login.</li>
+            <li>Acesse <code>dev.mysql.com/downloads/workbench</code>, baixe o instalador para macOS e arraste o aplicativo para a pasta Aplicativos.</li>
+          </ol>
+
+          <div class="dev-note">
+            <h4>Para quem já programa</h4>
+            <p>Se seu Mac usa chip Apple Silicon (M1/M2/M3/M4), tanto o Homebrew quanto os instaladores oficiais já distribuem binários nativos — não é preciso se preocupar com Rosetta para o MySQL Server ou para o Workbench nas versões atuais.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="s-linux-title">
+          <h2 id="s-linux-title">5. Linux (Ubuntu/Debian e derivados)</h2>
+          <p>Os comandos abaixo usam <code>apt</code>, o gerenciador de pacotes do Ubuntu e de distribuições baseadas em Debian. Se você usa Fedora, openSUSE ou Arch, o processo é equivalente, trocando <code>apt</code> por <code>dnf</code>, <code>zypper</code> ou <code>pacman</code>.</p>
+
+          <pre class="code-block"><code>sudo apt update
+sudo apt install mysql-server
+sudo systemctl status mysql
+sudo mysql_secure_installation</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: instalação do MySQL Server no Linux</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Trecho</th>
+                  <th scope="col">O que significa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>sudo apt update</code></td>
+                  <td>Atualiza a lista local de pacotes disponíveis nos repositórios configurados, para que o passo seguinte encontre a versão mais recente do MySQL.</td>
+                </tr>
+                <tr>
+                  <td><code>sudo apt install mysql-server</code></td>
+                  <td>Instala o pacote do MySQL Server e todas as suas dependências. Ao final da instalação, o serviço já é iniciado automaticamente.</td>
+                </tr>
+                <tr>
+                  <td><code>sudo systemctl status mysql</code></td>
+                  <td>Consulta o <code>systemd</code> (o gerenciador de serviços do Linux) para confirmar se o serviço <code>mysql</code> está com status <strong>active (running)</strong>.</td>
+                </tr>
+                <tr>
+                  <td><code>sudo mysql_secure_installation</code></td>
+                  <td>Assistente interativo que define a senha do usuário <code>root</code>, remove usuários e bancos de teste padrão e reforça as configurações de segurança — igual ao comando equivalente no macOS.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Para instalar o Workbench, você tem duas opções:</p>
+          <ol>
+            <li><strong>Via apt</strong> (mais simples, se disponível na sua distribuição): <code>sudo apt install mysql-workbench-community</code>.</li>
+            <li><strong>Via Snap</strong> (se o pacote acima não existir no seu repositório): <code>sudo snap install mysql-workbench-community</code>.</li>
+          </ol>
+          <p>Se nenhum dos dois estiver disponível, baixe o pacote <code>.deb</code> diretamente em <code>dev.mysql.com/downloads/workbench</code>, escolhendo a opção para Ubuntu, e instale com:</p>
+          <pre class="code-block"><code>sudo apt install ./mysql-workbench-community_*.deb</code></pre>
+          <p>O prefixo <code>./</code> indica ao <code>apt</code> que o pacote está em um arquivo local (na pasta atual), e não em um repositório remoto.</p>
+        </section>
+
+        <section aria-labelledby="s6-title">
+          <h2 id="s6-title">6. Criando a primeira conexão no Workbench</h2>
+          <p>Este passo é igual nos três sistemas operacionais, depois que o MySQL Server e o Workbench estiverem instalados.</p>
+          <ol>
+            <li>Abra o MySQL Workbench.</li>
+            <li>Na tela inicial, clique no ícone <strong>+</strong> ao lado de "MySQL Connections".</li>
+            <li>Em <strong>Connection Name</strong>, dê um nome como <code>Local</code> ou <code>Laboratório</code>.</li>
+            <li>Mantenha <strong>Hostname</strong> como <code>127.0.0.1</code> e <strong>Port</strong> como <code>3306</code> (valores padrão de uma instalação local).</li>
+            <li>Em <strong>Username</strong>, digite <code>root</code>.</li>
+            <li>Clique em <strong>Test Connection</strong>, informe a senha definida durante a instalação e confirme.</li>
+            <li>Uma mensagem de sucesso confirma que o Workbench conseguiu falar com o servidor. Clique em <strong>OK</strong> e depois em <strong>OK</strong> novamente para salvar a conexão.</li>
+            <li>Dê duplo clique na conexão salva para abrir o SQL Editor.</li>
+          </ol>
+
+          <p>Para confirmar que tudo está funcionando, execute:</p>
+          <pre class="code-block"><code>SELECT 1;
+SELECT VERSION();</code></pre>
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: teste final do ambiente</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Trecho</th>
+                  <th scope="col">O que significa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>SELECT 1;</code></td>
+                  <td>Não consulta nenhuma tabela — apenas pede ao servidor para devolver o número <code>1</code>. Se o resultado aparecer sem erro, significa que a conexão entre Workbench e MySQL Server está funcionando de ponta a ponta.</td>
+                </tr>
+                <tr>
+                  <td><code>SELECT VERSION();</code></td>
+                  <td>Retorna a versão do MySQL Server instalada, útil para conferir se está de acordo com a versão recomendada pela disciplina.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section aria-labelledby="s7-title">
+          <h2 id="s7-title">7. Problemas comuns na instalação</h2>
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Como investigar problemas comuns</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Situação</th>
+                  <th scope="col">Causa provável</th>
+                  <th scope="col">Como investigar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Workbench mostra "Can't connect to MySQL server".</td>
+                  <td>O serviço do MySQL Server não está em execução.</td>
+                  <td>Windows: verifique em <strong>Serviços</strong>. macOS: <code>brew services list</code> ou Preferências do Sistema. Linux: <code>sudo systemctl status mysql</code>.</td>
+                </tr>
+                <tr>
+                  <td>Erro "Access denied for user 'root'".</td>
+                  <td>Senha digitada não confere com a definida na instalação.</td>
+                  <td>Refaça a etapa de definição de senha (<code>mysql_secure_installation</code> no macOS/Linux, ou o assistente do MySQL Installer no Windows).</td>
+                </tr>
+                <tr>
+                  <td>Porta <code>3306</code> já está em uso.</td>
+                  <td>Outra instalação do MySQL (ou outro serviço) já está usando essa porta.</td>
+                  <td>Verifique se não há uma instalação anterior do MySQL ainda ativa antes de instalar uma nova.</td>
+                </tr>
+                <tr>
+                  <td>Comando <code>brew</code> ou <code>apt</code> não encontrado.</td>
+                  <td>Gerenciador de pacotes não instalado ou terminal errado.</td>
+                  <td>No macOS, instale o Homebrew em <code>brew.sh</code> antes de repetir os comandos. No Linux, confirme que está usando um terminal Bash/Zsh de uma distribuição baseada em Debian.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Banco de Dados · Engenharia de Computação · 2026/2</p>
+      <p><a href="index.html">Voltar ao índice da disciplina</a></p>
+    </div>
+  </footer>
+</body>
+</html>

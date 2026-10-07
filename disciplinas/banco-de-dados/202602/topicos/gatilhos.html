@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gatilhos (Triggers) | Banco de Dados</title>
+  <meta name="description" content="Triggers em SQL — BEFORE/AFTER INSERT, UPDATE e DELETE — explicados com o sistema de vigilância automática de uma nave-mãe alienígena, incluindo auditoria e integridade referencial complexa.">
+  <meta name="keywords" content="trigger, gatilho, BEFORE INSERT, AFTER UPDATE, auditoria, integridade referencial, SQL">
+  <meta name="author" content="Disciplina de Banco de Dados">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/gatilhos.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Gatilhos (Triggers)">
+  <meta property="og:description" content="Triggers explicados com o sistema de vigilância automática de uma nave-mãe alienígena.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/topicos/gatilhos.html">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Gatilhos (Triggers)",
+    "description": "Triggers explicados com o sistema de vigilância automática de uma nave-mãe alienígena.",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "aula prática",
+    "educationalLevel": "Graduação",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Banco de Dados",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/index.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">BD</span>
+        <span class="brand-text">
+          <span class="brand-name">Banco de Dados</span>
+          <span class="brand-sub">Eng. de Computação</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="../index.html">Banco de Dados</a></li>
+          <li aria-current="page">Gatilhos (Triggers)</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="topic-article">
+      <div class="container">
+        <header class="topic-header">
+          <p class="topic-eyebrow">Programabilidade</p>
+          <h1>Gatilhos (Triggers)</h1>
+          <p class="topic-lead">Procedimentos armazenados são executados quando alguém os chama explicitamente com <code>CALL</code>. Mas e se eu quiser que algo aconteça <strong>automaticamente</strong>, sempre que uma linha for inserida, alterada ou apagada — sem que ninguém precise lembrar de chamar nada? É para isso que existem os <strong>gatilhos</strong>. Vamos entrar no sistema de vigilância automática de uma nave-mãe alienígena.</p>
+        </header>
+
+        <section class="objectives" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">O que vocês vão aprender aqui</h2>
+          <ul class="check-list">
+            <li>Entender o que é um trigger e quando ele dispara.</li>
+            <li>Diferenciar <code>BEFORE</code> e <code>AFTER</code>, e <code>INSERT</code>/<code>UPDATE</code>/<code>DELETE</code>.</li>
+            <li>Usar <code>OLD</code> e <code>NEW</code> para acessar os valores da linha afetada.</li>
+            <li>Criar um trigger de auditoria e um trigger de validação complexa.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="s1-title">
+          <h2 id="s1-title">1. A nave-mãe e seu registro de tripulantes</h2>
+          <div class="theme-box">
+            <h3>🛸 Nave-mãe Zorvex</h3>
+            <p>A nave-mãe mantém um registro de todos os tripulantes alienígenas e seus níveis de autorização. Toda alteração nesse registro precisa ser automaticamente auditada — a central de comando exige saber quem mudou o quê e quando, sem depender de a aplicação lembrar de registrar isso.</p>
+          </div>
+          <pre class="code-block"><code>CREATE TABLE tripulante (
+  id_tripulante INT PRIMARY KEY AUTO_INCREMENT,
+  nome_tripulante VARCHAR(80) NOT NULL,
+  nivel_autorizacao INT NOT NULL DEFAULT 1
+);
+
+CREATE TABLE auditoria_tripulante (
+  id_auditoria INT PRIMARY KEY AUTO_INCREMENT,
+  id_tripulante INT NOT NULL,
+  nivel_anterior INT,
+  nivel_novo INT,
+  data_alteracao DATETIME
+);</code></pre>
+        </section>
+
+        <section aria-labelledby="s2-title">
+          <h2 id="s2-title">2. Criando um trigger de auditoria (AFTER UPDATE)</h2>
+          <p>Eu quero que, toda vez que o nível de autorização de um tripulante mudar, uma linha seja automaticamente registrada em <code>auditoria_tripulante</code> — sem que a aplicação precise fazer isso manualmente:</p>
+          <pre class="code-block"><code>DELIMITER //
+
+CREATE TRIGGER trg_auditoria_autorizacao
+AFTER UPDATE ON tripulante
+FOR EACH ROW
+BEGIN
+  IF OLD.nivel_autorizacao &lt;&gt; NEW.nivel_autorizacao THEN
+    INSERT INTO auditoria_tripulante (id_tripulante, nivel_anterior, nivel_novo, data_alteracao)
+    VALUES (OLD.id_tripulante, OLD.nivel_autorizacao, NEW.nivel_autorizacao, NOW());
+  END IF;
+END //
+
+DELIMITER ;</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: o trigger de auditoria</caption>
+              <thead><tr><th scope="col">Trecho</th><th scope="col">O que significa</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>CREATE TRIGGER trg_auditoria_autorizacao</code></td>
+                  <td>Declara um gatilho com esse nome — ele não é chamado manualmente, apenas disparado pelo SGBD quando o evento ocorrer.</td>
+                </tr>
+                <tr>
+                  <td><code>AFTER UPDATE ON tripulante</code></td>
+                  <td>Define o evento que dispara o trigger: depois que um <code>UPDATE</code> na tabela <code>tripulante</code> for concluído.</td>
+                </tr>
+                <tr>
+                  <td><code>FOR EACH ROW</code></td>
+                  <td>O gatilho executa uma vez para cada linha afetada pelo UPDATE, não uma vez só para o comando inteiro.</td>
+                </tr>
+                <tr>
+                  <td><code>OLD.nivel_autorizacao</code></td>
+                  <td><code>OLD</code> representa a linha como ela estava <em>antes</em> da alteração — só existe em UPDATE e DELETE.</td>
+                </tr>
+                <tr>
+                  <td><code>NEW.nivel_autorizacao</code></td>
+                  <td><code>NEW</code> representa a linha como ela fica <em>depois</em> da alteração — só existe em INSERT e UPDATE.</td>
+                </tr>
+                <tr>
+                  <td><code>IF OLD... &lt;&gt; NEW... THEN</code></td>
+                  <td>Só registra auditoria se o nível realmente mudou — evita gravar linhas de auditoria para updates que não alteraram esse campo.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Depois de criado, o trigger age sozinho. Se alguém rodar:</p>
+          <pre class="code-block"><code>UPDATE tripulante SET nivel_autorizacao = 5 WHERE id_tripulante = 3;</code></pre>
+          <p>...uma linha é automaticamente inserida em <code>auditoria_tripulante</code>, sem que ninguém tenha escrito esse <code>INSERT</code> explicitamente. A auditoria passa a ser garantida pelo banco, não pela boa vontade de quem programa a aplicação.</p>
+
+          <div class="concept-box">
+            <h3>Conceito: por que AFTER e não BEFORE, aqui?</h3>
+            <p>Usamos <code>AFTER UPDATE</code> porque só queremos registrar a auditoria depois que temos certeza de que a alteração foi aceita pelo banco. Um trigger <code>BEFORE</code> dispara antes da alteração ser efetivada — é o momento certo para <em>validar ou ajustar</em> os dados, não para registrar um fato que ainda pode não se confirmar.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="s3-title">
+          <h2 id="s3-title">3. Trigger de validação complexa (BEFORE INSERT)</h2>
+          <p>Agora um caso diferente: a central de comando exige que nenhum tripulante novo entre com nível de autorização acima de 3, a não ser que seja da espécie "Comandante". Essa é uma regra que um simples <code>CHECK</code> de coluna não resolve, porque depende de <em>outra coluna</em> da mesma linha:</p>
+          <pre class="code-block"><code>DELIMITER //
+
+CREATE TRIGGER trg_valida_autorizacao
+BEFORE INSERT ON tripulante
+FOR EACH ROW
+BEGIN
+  IF NEW.nivel_autorizacao &gt; 3 AND NEW.nome_tripulante NOT LIKE 'Comandante%' THEN
+    SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'Apenas Comandantes podem ter nível de autorização acima de 3.';
+  END IF;
+END //
+
+DELIMITER ;</code></pre>
+
+          <div class="table-scroll">
+            <table class="compare-table code-breakdown">
+              <caption>Linha a linha: o trigger de validação</caption>
+              <thead><tr><th scope="col">Trecho</th><th scope="col">O que significa</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>BEFORE INSERT ON tripulante</code></td>
+                  <td>Dispara antes da linha ser efetivamente inserida — é a hora certa para bloquear a inserção, se necessário.</td>
+                </tr>
+                <tr>
+                  <td><code>IF NEW.nivel_autorizacao &gt; 3 AND ...</code></td>
+                  <td>Verifica a condição combinando duas colunas da mesma linha nova — algo que uma restrição <code>CHECK</code> simples em uma coluna isolada não conseguiria expressar com a mesma clareza.</td>
+                </tr>
+                <tr>
+                  <td><code>SIGNAL SQLSTATE '45000' ...</code></td>
+                  <td>Lança um erro customizado, cancelando o INSERT inteiro e devolvendo a mensagem definida para quem tentou inserir a linha.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Se alguém tentar inserir um tripulante comum com nível 5, o banco recusa a operação antes mesmo de gravar a linha:</p>
+          <pre class="code-block"><code>INSERT INTO tripulante (nome_tripulante, nivel_autorizacao) VALUES ('Zyx', 5);
+-- Erro: Apenas Comandantes podem ter nível de autorização acima de 3.</code></pre>
+        </section>
+
+        <section aria-labelledby="s4-title">
+          <h2 id="s4-title">4. Os seis momentos possíveis de um trigger</h2>
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Combinações de BEFORE/AFTER com INSERT/UPDATE/DELETE</caption>
+              <thead><tr><th scope="col">Momento</th><th scope="col">Evento</th><th scope="col">Uso típico</th></tr></thead>
+              <tbody>
+                <tr><td>BEFORE</td><td>INSERT</td><td>Validar ou ajustar valores antes de gravar uma linha nova.</td></tr>
+                <tr><td>AFTER</td><td>INSERT</td><td>Disparar efeitos colaterais depois que a linha já foi gravada (ex: notificar, auditar).</td></tr>
+                <tr><td>BEFORE</td><td>UPDATE</td><td>Validar a alteração antes que ela seja aplicada.</td></tr>
+                <tr><td>AFTER</td><td>UPDATE</td><td>Registrar auditoria da alteração já confirmada.</td></tr>
+                <tr><td>BEFORE</td><td>DELETE</td><td>Impedir ou registrar o estado de uma linha antes que ela seja removida.</td></tr>
+                <tr><td>AFTER</td><td>DELETE</td><td>Atualizar dados relacionados depois que a linha já foi removida.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tip-box">
+            <h3>⚠️ Cuidado com triggers em cadeia</h3>
+            <p>Um trigger pode disparar um <code>UPDATE</code> em outra tabela, que por sua vez tem seu próprio trigger, que altera outra tabela... Isso pode criar cadeias difíceis de acompanhar e depurar. Usem triggers para regras claras e bem delimitadas — não para esconder fluxos de negócio inteiros que a equipe precisará entender depois.</p>
+          </div>
+        </section>
+
+        <section class="quiz-box" aria-labelledby="quiz-title">
+          <h3 id="quiz-title">🤔 Confira se entendeu</h3>
+          <details>
+            <summary>Por que o trigger de validação usa BEFORE INSERT, e não AFTER INSERT?</summary>
+            <p>Porque BEFORE dispara antes da linha ser gravada, permitindo cancelar a inserção com SIGNAL se a regra for violada. Se fosse AFTER, a linha inválida já teria sido gravada antes do trigger rodar.</p>
+          </details>
+          <details>
+            <summary>No trigger de auditoria, por que só OLD está disponível em um DELETE, e não NEW?</summary>
+            <p>Porque NEW representa a linha depois da alteração — em um DELETE não existe "depois", a linha deixa de existir. Por isso DELETE só tem acesso a OLD, o estado da linha antes de ser removida.</p>
+          </details>
+        </section>
+
+        <section aria-labelledby="materials-title">
+          <h2 id="materials-title">Materiais para estudo</h2>
+          <ul class="materials-list">
+            <li>Referência oficial: <a href="https://dev.mysql.com/doc/refman/8.0/en/triggers.html" target="_blank" rel="noopener">triggers no MySQL</a>.</li>
+            <li>Próximo tópico: desenvolvimento de aplicações com banco de dados — conectando tudo o que vimos a um sistema real.</li>
+          </ul>
+          <ul class="video-links">
+            <li>
+              <span class="video-icon" aria-hidden="true">▶</span>
+              <div>
+                <a href="https://www.youtube.com/results?search_query=trigger+SQL+BEFORE+AFTER+INSERT+UPDATE+explicado" target="_blank" rel="noopener">Buscar vídeo-aulas sobre triggers em SQL no YouTube</a>
+                <span class="video-note">Abre uma busca no YouTube com aulas sobre gatilhos (triggers).</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="topic-pager" aria-label="Navegação entre tópicos">
+          <div class="topic-pager-inner">
+            <a class="pager-link pager-link--prev" href="procedimentos-armazenados.html">
+              <span class="pager-label">Anterior</span>
+              <span class="pager-title">Procedimentos Armazenados e Funções</span>
+            </a>
+            <a class="pager-link pager-link--next" href="desenvolvimento-aplicacoes.html">
+              <span class="pager-label">Próximo</span>
+              <span class="pager-title">Desenvolvimento de Aplicações com Banco de Dados</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Banco de Dados · Engenharia de Computação</p>
+      <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
+    </div>
+  </footer>
+</body>
+</html>

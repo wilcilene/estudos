@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modelo Entidade-Relacionamento (MER) | Banco de Dados</title>
+  <meta name="description" content="Aula completa sobre Modelo Entidade-Relacionamento (MER): entidades, atributos, relacionamentos, cardinalidade, participação, restrições e modelagem conceitual.">
+  <meta name="keywords" content="MER, modelo entidade-relacionamento, entidades, atributos, relacionamentos, cardinalidade, participação, banco de dados">
+  <meta name="author" content="Disciplina de Banco de Dados">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/topicos/mer.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Modelo Entidade-Relacionamento (MER)">
+  <meta property="og:description" content="Entidades, atributos, relacionamentos, cardinalidade e participação no projeto conceitual.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/topicos/mer.html">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cellipse cx='12' cy='5' rx='9' ry='3.2' fill='%234338ca'/%3E%3Cpath d='M3 5v14c0 1.8 4 3.2 9 3.2s9-1.4 9-3.2V5' fill='none' stroke='%234338ca' stroke-width='2'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS das páginas de tópicos -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Dados estruturados -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Modelo Entidade-Relacionamento (MER)",
+    "description": "Entidades, atributos, relacionamentos, cardinalidade e participação no projeto conceitual.",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "aula",
+    "educationalLevel": "Graduação",
+    "timeRequired": "PT2H",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Banco de Dados",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/banco-de-dados/202602/index.html"
+    }
+  }
+  </script>
+
+  <!-- JS reutilizável para botões de pistas -->
+  <script src="../js/thinking.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">BD</span>
+        <span class="brand-text">
+          <span class="brand-name">Banco de Dados</span>
+          <span class="brand-sub">Eng. de Computação · 60h</span>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="Navegação principal">
+        <ul>
+          <li><a href="../index.html#progresso">Progresso</a></li>
+          <li><a href="../index.html#topicos">Tópicos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="../index.html">Banco de Dados</a></li>
+          <li aria-current="page">Modelo Entidade-Relacionamento (MER)</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="topic-article">
+      <div class="container">
+        <header class="topic-header">
+          <div class="topic-meta">
+            <span class="category-tag cat-modelagem-de-dados">Modelagem de Dados</span>
+          </div>
+          <h1>Modelo Entidade-Relacionamento (MER)</h1>
+          <p class="topic-lead">O MER é a etapa de modelagem conceitual que permite representar, de forma clara e independente de implementação, os elementos principais de um domínio: entidades, atributos, relacionamentos, cardinalidade e participação.</p>
+        </header>
+
+        <section class="objectives" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">Objetivos de aprendizagem</h2>
+          <ul class="check-list">
+            <li>Identificar entidades, atributos e relacionamentos em um problema real.</li>
+            <li>Classificar atributos simples, compostos, multivalorados e derivados.</li>
+            <li>Determinar cardinalidade e participação em diferentes cenários.</li>
+            <li>Aplicar o MER na modelagem de um domínio acadêmico ou de engenharia.</li>
+            <li>Interpretar um MER como documentação conceitual do sistema.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="s1-title">
+          <h2 id="s1-title">1. O que é o MER</h2>
+          <p>O Modelo Entidade-Relacionamento é uma técnica de <strong>modelagem conceitual</strong> proposta para representar os principais elementos de um domínio antes da implementação física do banco de dados. Ele descreve o que existe no mundo real que será armazenado, sem entrar ainda em detalhes de tabelas, índices ou SQL.</p>
+          <p>Em Engenharia de Computação, isso é especialmente útil porque ajuda a separar <strong>o problema</strong> da <strong>solução tecnológica</strong>. Primeiro entendemos a estrutura da informação; depois decidimos como implementá-la no SGBD.</p>
+        </section>
+
+        <section aria-labelledby="s2-title">
+          <h2 id="s2-title">2. Entidades, atributos e relacionamentos</h2>
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Elementos fundamentais do MER</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Elemento</th>
+                  <th scope="col">Descrição</th>
+                  <th scope="col">Exemplo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Entidade</strong></td>
+                  <td>Objeto ou conceito que precisa ser armazenado e identificado.</td>
+                  <td>Aluno, Disciplina, Professor</td>
+                </tr>
+                <tr>
+                  <td><strong>Atributo</strong></td>
+                  <td>Característica que descreve uma entidade ou relacionamento.</td>
+                  <td>nome, matrícula, carga horária</td>
+                </tr>
+                <tr>
+                  <td><strong>Relacionamento</strong></td>
+                  <td>Associação entre entidades.</td>
+                  <td>Aluno <em>matricula-se em</em> Disciplina</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Uma forma prática de identificar entidades é perguntar: <em>“isso precisa ter seus próprios dados e ser identificado de maneira independente?”</em> Se a resposta for sim, provavelmente estamos diante de uma entidade.</p>
+        </section>
+
+        <section aria-labelledby="s3-title">
+          <h2 id="s3-title">3. Tipos de atributos</h2>
+          <ul>
+            <li><strong>Simples</strong> — não podem ser decompostos: CPF, matrícula, código.</li>
+            <li><strong>Composto</strong> — podem ser divididos em partes: endereço, nome completo, coordenadas.</li>
+            <li><strong>Multivalorado</strong> — podem ter mais de um valor para a mesma entidade: telefones, e-mails alternativos.</li>
+            <li><strong>Derivado</strong> — calculado a partir de outros dados: idade, tempo de serviço, média final.</li>
+          </ul>
+          <p>Na prática de projeto, atributos multivalorados e derivados exigem atenção porque afetam a transição do modelo conceitual para o relacional.</p>
+        </section>
+
+        <section aria-labelledby="s4-title">
+          <h2 id="s4-title">4. Cardinalidade e participação</h2>
+          <p>A cardinalidade indica quantas ocorrências de uma entidade podem se associar a outra. Já a participação informa se essa associação é obrigatória ou opcional.</p>
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Cardinalidade e participação</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Conceito</th>
+                  <th scope="col">O que significa</th>
+                  <th scope="col">Exemplo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1:1</strong></td>
+                  <td>Uma ocorrência de A se relaciona com uma de B.</td>
+                  <td>Pessoa ↔ CPF</td>
+                </tr>
+                <tr>
+                  <td><strong>1:N</strong></td>
+                  <td>Uma ocorrência de A se relaciona com várias de B.</td>
+                  <td>Professor → Turmas</td>
+                </tr>
+                <tr>
+                  <td><strong>N:M</strong></td>
+                  <td>Várias ocorrências de A se relacionam com várias de B.</td>
+                  <td>Aluno ↔ Disciplina</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="analogy">A participação pode ser pensada como uma regra de obrigatoriedade: alguns relacionamentos são <strong>obrigatórios</strong>, outros são <strong>opcionais</strong>. Isso define se um registro pode existir sem estar vinculado a outro.</p>
+        </section>
+
+        <section aria-labelledby="s5-title">
+          <h2 id="s5-title">5. Exemplo de modelagem</h2>
+          <p>Considere um sistema acadêmico. Alguns elementos principais do domínio são:</p>
+          <ul>
+            <li><strong>Entidades</strong>: Aluno, Curso, Disciplina, Professor.</li>
+            <li><strong>Relacionamentos</strong>: Aluno cursa Disciplina, Professor ministra Disciplina, Curso possui Disciplina.</li>
+            <li><strong>Atributos</strong>: nome do aluno, código da disciplina, carga horária, semestre.</li>
+          </ul>
+          <p>Esse tipo de análise ajuda a reduzir ambiguidades e evitar que a implementação seja feita “direto no SQL” sem reflexão sobre o domínio.</p>
+        </section>
+
+        <section aria-labelledby="s6-title">
+          <h2 id="s6-title">6. Modelo Entidade Relacionamento</h2>
+          <p>O MER é a representação gráfica do modelo. Ele ajuda a comunicar a estrutura do sistema para desenvolvedores, analistas e stakeholders.</p>
+          <figure class="diagram-figure">
+            <img src="medias/mer-exemplo.png" alt="Modelo Entidade-Relacionamento de um sistema acadêmico com entidades Aluno, Curso, Disciplina e Professor.">
+            <figcaption>MER ilustrativo de um sistema acadêmico. Imagem gerada no ChatGPT.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="s7-title">
+          <h2 id="s7-title">7. Erros comuns</h2>
+          <ul>
+            <li>Confundir entidade com atributo.</li>
+            <li>Modelar tudo como tabela sem refletir o domínio.</li>
+            <li>Ignorar cardinalidade e participação.</li>
+            <li>Usar nomes vagos, como “coisa” ou “dados”, em vez de termos do domínio.</li>
+          </ul>
+        </section>
+
+        <section class="activity-box" aria-labelledby="activity-title">
+          <h2 id="activity-title">Atividade em aula</h2>
+          <p><strong>Cenário:</strong> uma secretaria acadêmica precisa organizar informações de alunos, cursos e disciplinas em um modelo conceitual.</p>
+          <ol>
+            <li>Identifique as quatro entidades do cenário.</li>
+            <li>Liste os principais atributos de cada entidade.</li>
+            <li>Proponha relacionamentos com cardinalidade.</li>
+            <li>Desenhe o MER e explique suas escolhas em até 5 minutos.</li>
+          </ol>
+
+          <figure class="diagram-figure activity-figure">
+            <img src="medias/atividade-mer.png" alt="Estudantes em atividade de sala de aula modelando um MER em um cenário acadêmico.">
+            <figcaption>Imagem gerada pelo ChatGPT.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="s8-title">
+          <h2 id="s8-title">8. Materiais complementares</h2>
+          <ul class="materials-list">
+            <li>Revisar o capítulo introdutório sobre modelagem conceitual no livro-base da disciplina.</li>
+            <li>Resolver exercícios de identificação de entidades, atributos e relacionamentos.</li>
+          </ul>
+        </section>
+
+        <!-- Seção de exercícios "Para pensar!" -->
+        <section class="thinking-box" aria-labelledby="thinking-title">
+          <h2 id="thinking-title">Para pensar!</h2>
+          <p>Para cada contexto represente o MER em papel com caneta, lápis ou outro material que evidencie a representação manual das soluções. Lembre de incluir pelo menos todas as entidades com seus atributos, relacionamentos e identificação da chave primária.</p>
+
+          <!-- Exercício 1 -->
+          <article class="thinking-exercise" id="ex1-gatos-ciborgues">
+            <header class="thinking-header">
+              <h3>Exercício 1 — Colônia de Gatos</h3>
+            </header>
+
+            <p><strong>Contexto:</strong> Uma organização de pesquisa mantém uma colônia de gatos cibernético em uma estação espacial. Cada gato é monitorado por sensores e participa de missões de reconhecimento.</p>
+
+            <h4>Regras do domínio</h4>
+            <ul>
+              <li>Cada gato cibernético possui um identificador único (id_gato), nome de registro, data de ativação, nível de energia atual e status (em missão, em manutenção, em repouso).</li>
+              <li>Um gato pode ter vários módulos instalados, cada módulo tem código, tipo (visão noturna, reforço muscular, interface de rede, etc.), nível de versão e data de instalação.</li>
+              <li>Um mesmo tipo de módulo pode ser instalado em vários gatos.</li>
+              <li>A estação possui várias Missões de Reconhecimento com código, descrição, setor explorado, nível de risco e janela de tempo.</li>
+              <li>Uma missão envolve um ou mais gatos; um gato pode participar de várias missões.</li>
+              <li>Para cada missão são registradas leituras de sensores associadas ao gato e à missão, com tipo de sensor, valor e timestamp.</li>
+              <li>Alguns gatos são designados como líderes de missão; cada missão deve ter exatamente um líder, que é um dos gatos participantes.</li>
+              <li>Há Técnicos de manutenção responsáveis pelos módulos, com ID, nome e especialidade, e registros de manutenção (data, tipo, técnico responsável).</li>
+            </ul>
+
+            <div class="thinking-toggle-wrap">
+              <button type="button"
+                      class="thinking-toggle"
+                      data-target="hints-ex1"
+                      aria-expanded="false"
+                      aria-controls="hints-ex1">
+                Mostrar pistas para o MER
+              </button>
+            </div>
+
+            <div id="hints-ex1"
+                 class="thinking-hints thinking-hints--hidden"
+                 aria-hidden="true">
+              <h4>Pistas para o MER</h4>
+              <ul>
+                <li>Entidades principais: Gato cibernético, Módulo, Missão, Leitura de Sensor, Técnico, Manutenção de Módulo.</li>
+                <li>Relacionamentos: gatos participam de missões (N:M); módulos são instalados em gatos; leituras vinculam gato + missão; técnicos instalam/manutêm módulos.</li>
+                <li>Cardinalidade e participação: missões devem ter pelo menos um gato; gatos podem existir sem missão ativa; líder de missão pode ser visto como relacionamento especial ou atributo.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Exercício 2 -->
+          <article class="thinking-exercise" id="ex2-robos-gladiadores">
+            <header class="thinking-header">
+              <h3>Exercício 2 — Arena de Robôs Gladiadores</h3>
+            </header>
+
+            <p><strong>Contexto:</strong> Uma grande arena interplanetária organiza torneios de robôs controlados por humanos, alienígenas e IAs autônomas.</p>
+
+            <h4>Regras do domínio</h4>
+            <ul>
+              <li>Cada Robô possui ID único, nome, modelo, fabricante, ano de construção e classe (leve, média, pesada).</li>
+              <li>Um robô é cadastrado por um Proprietário (humano, alienígena ou IA corporativa) com ID, nome, espécie/tipo e planeta ou estação de origem.</li>
+              <li>A arena organiza Torneios com nome, edição, tipo (1x1, equipe, sobrevivência) e prêmio principal; cada torneio possui diversas Partidas.</li>
+              <li>Cada Partida tem código, data/hora, arena física e modalidade, envolvendo pelo menos dois robôs e registrando qual robô ou equipe venceu.</li>
+              <li>Robôs podem se organizar em Equipes de Combate com nome, planeta de origem e ranking; um robô pode pertencer a uma equipe ou lutar de forma independente.</li>
+              <li>Há Módulos de Armas e Módulos de Defesa com ID, tipo (laser, plasma, escudo, armadura) e nível de potência; robôs podem equipar vários módulos, e um módulo pode estar em vários robôs.</li>
+              <li>Após cada partida é gerado um Relatório de Desempenho associado a um robô e a uma partida, registrando danos recebidos, danos causados, tempo em combate e status final.</li>
+            </ul>
+
+            <div class="thinking-toggle-wrap">
+              <button type="button"
+                      class="thinking-toggle"
+                      data-target="hints-ex2"
+                      aria-expanded="false"
+                      aria-controls="hints-ex2">
+                Mostrar pistas para o MER
+              </button>
+            </div>
+
+            <div id="hints-ex2"
+                 class="thinking-hints thinking-hints--hidden"
+                 aria-hidden="true">
+              <h4>Pistas para o MER</h4>
+              <ul>
+                <li>Entidades principais: Robô, Proprietário, Torneio, Partida, Equipe, Módulo (arma/defesa), Relatório de Desempenho.</li>
+                <li>Relacionamentos: robôs são cadastrados por proprietários (1:N); robôs participam de partidas (N:M); partidas pertencem a torneios (1:N); robôs podem integrar equipes; robôs equipam módulos; relatórios descrevem desempenho em partidas.</li>
+                <li>Cardinalidade e participação: partidas devem ter pelo menos dois robôs; robôs podem existir sem partidas disputadas; torneios podem existir antes de terem partidas cadastradas.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Exercício 3 -->
+          <article class="thinking-exercise" id="ex3-estacoes-pesquisa">
+            <header class="thinking-header">
+              <h3>Exercício 3 — Rede de Estações de Pesquisa</h3>
+            </header>
+
+            <p><strong>Contexto:</strong> Uma aliança entre humanos e a espécie alienígena Thar’Kuun opera uma rede de estações de pesquisa em diferentes planetas. Soldados humanos protegem as estações; cientistas alienígenas conduzem experimentos.</p>
+
+            <h4>Regras do domínio</h4>
+            <ul>
+              <li>Cada Estação de Pesquisa possui ID, nome, planeta ou satélite, tipo de ambiente (deserto, gelo, atmosfera tóxica, órbita) e nível de segurança.</li>
+              <li>Em cada estação atuam Equipes de Pesquisa com ID, área de estudo (biologia, materiais, energia escura) e data de início.</li>
+              <li>Os Cientistas Thar’Kuun possuem ID, nome, especialidade e ciclo de vida, podendo participar de múltiplas equipes.</li>
+              <li>Soldados Humanos possuem ID, nome, patente e unidade militar; são alocados a estações e podem ser transferidos ao longo do tempo.</li>
+              <li>As estações podem armazenar Artefatos Alienígenas com ID, classificação (seguro, restrito, perigoso), origem e descrição; cada artefato é associado a uma estação e a uma equipe responsável.</li>
+              <li>As equipes registram Experimentos com ID, título, objetivo, data de início e status; cada experimento pode envolver um ou mais artefatos e gera Relatórios de Experimento.</li>
+              <li>O comando define Protocolos de Segurança com ID, nível (verde, amarelo, vermelho) e tipo (biológico, energético, psíquico), aplicados a estações e/ou artefatos; infrações geram Relatórios de Incidente.</li>
+            </ul>
+
+            <div class="thinking-toggle-wrap">
+              <button type="button"
+                      class="thinking-toggle"
+                      data-target="hints-ex3"
+                      aria-expanded="false"
+                      aria-controls="hints-ex3">
+                Mostrar pistas para o MER
+              </button>
+            </div>
+
+            <div id="hints-ex3"
+                 class="thinking-hints thinking-hints--hidden"
+                 aria-hidden="true">
+              <h4>Pistas para o MER</h4>
+              <ul>
+                <li>Entidades principais: Estação, Equipe de Pesquisa, Cientista, Soldado, Artefato, Experimento, Relatório de Experimento, Protocolo de Segurança, Incidente.</li>
+                <li>Relacionamentos: estações têm equipes (1:N); cientistas participam de equipes (N:M); soldados são alocados a estações (N:M, com histórico); artefatos são armazenados em estações e estudados por equipes; experimentos envolvem artefatos e são conduzidos por equipes; protocolos se aplicam a estações e artefatos; incidentes vinculam pessoas, estação e protocolo.</li>
+                <li>Cardinalidade e participação: estações podem existir antes de terem equipes; experimentos devem estar associados a uma equipe; artefatos podem existir sem experimentos ainda; protocolos podem existir mesmo sem incidentes.</li>
+              </ul>
+            </div>
+          </article>
+        </section>
+
+        <section class="topic-pager" aria-label="Navegação entre tópicos">
+          <div class="topic-pager-inner">
+            <a class="pager-link pager-link--prev" href="conceitos-basicos.html">
+              <span class="pager-label">Anterior</span>
+              <span class="pager-title">Conceitos Básicos</span>
+            </a>
+            <a class="pager-link pager-link--next" href="../index.html#topicos">
+              <span class="pager-label">Próximo</span>
+              <span class="pager-title">Voltar ao índice</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Banco de Dados · Engenharia de Computação · 2026/2</p>
+      <p><a href="../index.html">Voltar ao índice da disciplina</a></p>
+    </div>
+  </footer>
+</body>
+</html>
