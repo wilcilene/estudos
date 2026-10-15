@@ -12,7 +12,8 @@
     { slug: "predicados", label: "Lógica de Predicados", color: "indigo" },
     { slug: "substituicao", label: "Substituição", color: "brass" },
     { slug: "revisao", label: "Revisão", color: "teal" },
-    { slug: "apresentacoes", label: "Apresentações", color: "crime" }
+    { slug: "apresentacoes", label: "Apresentações", color: "crime" },
+    { slug: "atividades", label: "Atividades em dupla", color: "indigo" }
   ];
 
   var CAT_MAP = {};
@@ -93,6 +94,10 @@
     { id:"revisao-02", review:true, title:"Operação Biblioteca: Revisão Integrada I", tags:["revisao","logica-proposicional","semantica","sistemas-dedutivos"],
       desc:"Lista dissertativa dos Casos 01 a 07: formalização, FBFs, árvores sintáticas, tabelas-verdade, classificação de fórmulas, equivalências, regras de inferência e uma prova completa. Entrega em PDF pelo SIGA.",
       href:"revisao-02-logica-computacao.html" },
+
+    { id:"atividade-clausula-vazia", review:true, label:"Atividade em duplas", title:"Detetive: O Caso da Cláusula Vazia", tags:["atividades","resolucao"],
+      desc:"Investigação em duplas sobre o sumiço da gata Estrela: transformar pistas em cláusulas, aplicar a regra de resolução e encontrar a cláusula vazia. Traz exemplo resolvido, dossiês, rubrica, modelo de registro e um simulador de resolução.",
+      href:"atividade-clausula-vazia.html" },
 
     { id:"apresentacao-01", review:true, label:"Apresentação 1", title:"Aspectos computacionais da lógica: pesquisa, programação e apresentação", tags:["apresentacoes","aspectos-computacionais"],
       desc:"Atividade em grupo sobre representação computacional de fórmulas, satisfatibilidade e busca de modelos e forma normal conjuntiva. Traz roteiro de pesquisa em 3 aulas, desafio de programação, critérios de avaliação, glossário e um exemplo de entrega com jogo de vôlei.",
@@ -231,7 +236,7 @@
     var isShowingAll = activeFilter === "todos" && !hasSearch;
 
     if(isShowingAll){
-      statusEl.textContent = "Exibindo os " + COURSE_TOPICS.length + " casos e mais " + (TOPICS.length - COURSE_TOPICS.length) + " atividades extras (revisões e apresentações).";
+      statusEl.textContent = "Exibindo os " + COURSE_TOPICS.length + " casos e mais " + (TOPICS.length - COURSE_TOPICS.length) + " atividades extras (revisões, apresentações e atividades em dupla).";
       return;
     }
 
@@ -288,7 +293,7 @@
   });
 
   resetProgressButton.addEventListener("click", function(){
-    if(confirm("Reiniciar todo o progresso salvo neste navegador (casos, revisões e apresentações)?")){
+    if(confirm("Reiniciar todo o progresso salvo neste navegador (casos, revisões, apresentações e atividades)?")){
       done = {};
       saveDone(done);
       render();

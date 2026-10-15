@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detetive: O Caso da Cláusula Vazia | Atividade de Resolução Proposicional</title>
+<meta name="description" content="Atividade em duplas de Lógica para Computação: transformar pistas em cláusulas, aplicar a regra de resolução proposicional e encontrar a cláusula vazia no sumiço da gata Estrela. Com exemplo resolvido, dossiês, rubrica e simulador.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/atividade-clausula-vazia.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Detetive: O Caso da Cláusula Vazia">
+<meta property="og:description" content="Investiguem pistas, formem cláusulas e encontrem a contradição: atividade em duplas sobre resolução proposicional.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/atividade-clausula-vazia.html">
+<meta property="og:image" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/assets/img/estrela-retrato.jpg">
+<meta property="og:image:alt" content="Estrela, a gata branca de rosto creme que adotou o museu como lar">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Detetive: O Caso da Cláusula Vazia",
+    "description": "Atividade em duplas sobre cláusulas, representação por conjuntos, princípio da resolução proposicional e algoritmo de resolução, com casos temáticos de investigação.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/atividade-clausula-vazia.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Atividade em grupo",
+    "educationalLevel": "Ensino Superior",
+    "image": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/assets/img/estrela-retrato.jpg",
+    "teaches": ["Cláusulas e representação por conjuntos", "Princípio da resolução proposicional", "Algoritmo de resolução proposicional", "Prova por refutação"],
+    "author": { "@type": "Person", "name": "Wilcilene Kowal" },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": { "@type": "EducationalOrganization", "name": "Instituto Federal Catarinense — Campus São Bento do Sul" }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Lógica para Computação", "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/" },
+      { "@type": "ListItem", "position": 2, "name": "Detetive: O Caso da Cláusula Vazia", "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/atividade-clausula-vazia.html" }
+    ]
+  }
+]
+</script>
+
+<style>
+/* ===== Estilos próprios desta atividade (o restante vem de assets/css/style.css) ===== */
+.atv{ max-width: 1040px; margin: 0 auto; padding: 0 1.5rem; }
+.atv article.topic{ padding-top: 1rem; }
+.atv article.topic h2{ display:flex; align-items:baseline; gap:0.6rem; scroll-margin-top: 4.5rem; }
+.atv article.topic h2 .num{ font-family:"Special Elite", monospace; color: var(--brass-dark); font-size: 1rem; }
+
+/* Cabeçalho */
+.hero-atv{ display:grid; grid-template-columns: 1fr auto; gap: 2rem; align-items:center; }
+.hero-atv .hero-title{ margin-bottom: 0.5rem; }
+.hero-sub{ font-family:"IBM Plex Mono", monospace; font-size: 0.95rem; color: var(--crime-dark); margin: 0 0 1rem; }
+.emblema{ width: 170px; height: 170px; color: var(--ink); }
+.emblema .estrela{ fill: var(--brass); stroke: var(--brass-dark); }
+.pill-duplas{ display:inline-flex; align-items:center; gap:0.5rem; font-family:"IBM Plex Mono", monospace; font-size:0.8rem; border:1px solid var(--line-strong); background: var(--paper-card); padding: 0.35rem 0.8rem; border-radius: 999px; }
+
+/* Sumário fixo */
+.toc{ position: sticky; top: 0; z-index: 20; background: rgba(239,230,210,0.96); border-bottom: 1px solid var(--line-strong); backdrop-filter: blur(4px); }
+.toc ol{ list-style:none; margin:0 auto; padding: 0.55rem 1.5rem; max-width: 1040px; display:flex; gap: 0.35rem; overflow-x:auto; }
+.toc a{ display:block; white-space:nowrap; text-decoration:none; font-family:"IBM Plex Mono", monospace; font-size:0.75rem; padding: 0.25rem 0.6rem; border-radius: 999px; border:1px solid transparent; color: var(--ink-soft); }
+.toc a:hover{ border-color: var(--line-strong); color: var(--ink); background: var(--paper-card); }
+
+/* Grades de cartões */
+.grade{ display:grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; margin: 1rem 0 1.5rem; }
+.ficha{ position:relative; background: var(--paper-card); border:1px solid var(--line-strong); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.25rem 1.1rem 1rem; }
+.ficha::before{ content:""; position:absolute; top:0; left:1rem; width:34px; height:9px; background: rgba(217,203,163,0.9); border:1px solid var(--line-strong); border-top:none; border-radius: 0 0 3px 3px; }
+.ficha h3{ margin: 0.2rem 0 0.4rem !important; font-size: 1.02rem !important; }
+.ficha p{ margin: 0 0 0.5rem !important; font-size: 0.94rem; }
+.ficha p:last-child{ margin-bottom:0 !important; }
+.ficha .ex{ font-family:"IBM Plex Mono", monospace; font-size:0.82rem; color: var(--teal-dark); }
+.ficha .papel{ font-family:"Special Elite", monospace; font-size:0.78rem; color: var(--crime-dark); letter-spacing:0.04em; }
+
+/* Regra de resolução em destaque */
+.regra{ background: var(--paper-card); border: 2px solid var(--ink); border-radius: var(--radius); padding: 1.25rem; margin: 1.25rem 0; box-shadow: var(--shadow); }
+.regra .label{ font-family:"IBM Plex Mono", monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color: var(--crime-dark); display:block; margin-bottom: 0.75rem; }
+.fracao{ display:grid; justify-content:center; text-align:center; font-family:"IBM Plex Mono", monospace; font-size: clamp(1rem, 2.6vw, 1.3rem); gap: 0.35rem; }
+.fracao .premissas{ display:flex; gap: 2.5rem; justify-content:center; flex-wrap:wrap; }
+.fracao .barra{ border-top: 2px solid var(--ink); }
+.fracao .resultado{ font-weight:600; color: var(--teal-dark); }
+.regra p.nota{ margin: 0.9rem 0 0 !important; font-size: 0.93rem; text-align:center; color: var(--ink-soft); }
+
+/* Roteiro */
+.passos{ list-style:none; counter-reset: passo; padding:0 !important; margin: 1rem 0; }
+.passos > li{ counter-increment: passo; position:relative; padding: 0 0 1rem 3.1rem; margin:0 !important; }
+.passos > li::before{ content: counter(passo); position:absolute; left:0; top:0; width:2.1rem; height:2.1rem; border-radius:50%; background: var(--ink); color: var(--paper-card); display:grid; place-items:center; font-family:"IBM Plex Mono", monospace; font-size:0.85rem; font-weight:600; }
+.passos > li::after{ content:""; position:absolute; left:1.02rem; top:2.2rem; bottom:0.15rem; width:2px; background: var(--line-strong); }
+.passos > li:last-child::after{ display:none; }
+.passos > li > strong:first-child, .desfecho > strong:first-child{ display:block; }
+.desfechos{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 0.75rem; margin-top: 0.6rem; }
+.desfecho{ border-radius: 8px; padding: 0.7rem 0.85rem; font-size: 0.93rem; }
+.desfecho.insat{ background: rgba(166,56,59,0.09); border:1px solid rgba(166,56,59,0.3); }
+.desfecho.sat{ background: rgba(63,103,100,0.09); border:1px solid rgba(63,103,100,0.3); }
+
+/* Selo "caso resolvido" */
+.selo{ display:inline-block; font-family:"Special Elite", monospace; letter-spacing:0.08em; font-size: 0.85rem; color: var(--crime-dark); border: 2px solid var(--crime-dark); border-radius: 6px; padding: 0.15rem 0.6rem; transform: rotate(-5deg); background: rgba(247,241,227,0.7); }
+.selo.verde{ color: var(--teal-dark); border-color: var(--teal-dark); }
+
+/* Árvore de resolução */
+.arvore{ display:block; width:100%; max-width: 560px; height:auto; margin: 0.5rem auto 1rem; color: var(--ink); }
+.arvore rect{ fill: var(--paper-card); stroke: var(--line-strong); }
+.arvore rect.vazia{ stroke: var(--crime-dark); stroke-width: 2; }
+.arvore text{ font-family:"IBM Plex Mono", monospace; font-size: 15px; fill: currentColor; }
+.arvore line{ stroke: var(--ink-soft); stroke-width: 1.5; }
+.arvore text.lit{ font-size: 12px; fill: var(--crime-dark); }
+
+/* Dossiês dos casos */
+.dossie{ background: var(--paper-card); border:1px solid var(--line-strong); border-left: 6px solid var(--brass); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.25rem 1.3rem; margin: 1.5rem 0; }
+.dossie-topo{ display:flex; justify-content:space-between; align-items:flex-start; gap: 1rem; flex-wrap:wrap; }
+.dossie-topo h3{ margin: 0.15rem 0 0.25rem !important; font-size: 1.2rem !important; }
+.dossie .meta{ font-family:"IBM Plex Mono", monospace; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.07em; color: var(--brass-dark); }
+.dossie .tipo{ font-family:"IBM Plex Mono", monospace; font-size:0.72rem; padding: 0.2rem 0.55rem; border-radius:999px; border:1px solid var(--line-strong); background: var(--paper); white-space:nowrap; }
+.dossie h4{ font-family:"IBM Plex Mono", monospace; font-size: 0.78rem; text-transform:uppercase; letter-spacing:0.07em; color: var(--ink-soft); margin: 1rem 0 0.4rem; }
+.dossie .pistas li{ margin-bottom: 0.3rem; }
+.registro{ display:grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 0.85rem; margin-top: 0.4rem; }
+.registro label{ display:block; font-family:"IBM Plex Mono", monospace; font-size:0.75rem; color: var(--ink-soft); margin-bottom: 0.3rem; }
+textarea, .sim input, .sim select{ width:100%; font: 0.92rem/1.5 "IBM Plex Mono", ui-monospace, monospace; color: var(--ink); background: #FFFCF5; border:1px solid var(--line-strong); border-radius: 8px; padding: 0.55rem 0.65rem; }
+textarea{ min-height: 7rem; resize: vertical; }
+
+/* Botões */
+.btn{ font-family:"IBM Plex Mono", monospace; font-size: 0.8rem; cursor:pointer; border-radius: 8px; border: 1px solid var(--ink); background: var(--ink); color: var(--paper-card); padding: 0.5rem 0.9rem; }
+.btn:hover{ background: var(--crime-dark); border-color: var(--crime-dark); }
+.btn.sec{ background: var(--paper-card); color: var(--ink); border-color: var(--line-strong); }
+.btn.sec:hover{ border-color: var(--ink); color: var(--crime-dark); background: var(--paper-card); }
+.acoes{ display:flex; flex-wrap:wrap; gap: 0.5rem; align-items:center; margin-top: 0.85rem; }
+.msg{ font-family:"IBM Plex Mono", monospace; font-size: 0.78rem; color: var(--teal-dark); min-height: 1.2em; }
+
+/* Tabelas desta página */
+.tbl td.pts{ font-family:"IBM Plex Mono", monospace; text-align:center; white-space:nowrap; font-weight:600; }
+.tbl tfoot td{ font-weight:700; background: rgba(195,179,135,0.25); }
+.tbl td code{ white-space: nowrap; }
+
+/* Glossário */
+.glossario{ display:grid; grid-template-columns: minmax(150px, 220px) 1fr; gap: 0.1rem 1rem; margin: 0.5rem 0 1.5rem; }
+.glossario dt{ font-weight:700; padding: 0.5rem 0; border-top: 1px dashed var(--line-strong); }
+.glossario dd{ margin:0; padding: 0.5rem 0; border-top: 1px dashed var(--line-strong); }
+
+/* Simulador */
+.sim{ background: var(--paper-card); border: 1px solid var(--line-strong); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.25rem; }
+.sim label{ display:block; font-family:"IBM Plex Mono", monospace; font-size: 0.78rem; color: var(--ink-soft); margin: 0.75rem 0 0.3rem; }
+.sim .dupla-sel{ display:grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.lista-clausulas{ list-style:none; padding:0 !important; margin: 0.5rem 0 0 !important; display:flex; flex-wrap:wrap; gap: 0.45rem; }
+.lista-clausulas li{ margin:0 !important; font-family:"IBM Plex Mono", monospace; font-size:0.85rem; background: var(--paper); border:1px solid var(--line-strong); border-radius: 6px; padding: 0.2rem 0.55rem; }
+.lista-clausulas li b{ color: var(--brass-dark); margin-right: 0.3rem; }
+.saida{ margin-top: 1rem; border-radius: 8px; padding: 0.85rem 1rem; border: 1px dashed var(--line-strong); background: rgba(255,255,255,0.4); }
+.saida.ok{ border: 1px solid rgba(63,103,100,0.45); background: rgba(63,103,100,0.08); }
+.saida.vazia{ border: 2px solid var(--crime-dark); background: rgba(166,56,59,0.08); }
+.saida.aviso{ border: 1px solid rgba(169,130,47,0.5); background: rgba(169,130,47,0.1); }
+.saida p{ margin: 0 0 0.4rem !important; }
+.saida p:last-child{ margin-bottom: 0 !important; }
+.historico{ font-family:"IBM Plex Mono", monospace; font-size: 0.82rem; }
+
+/* Ficha da desaparecida e câmera */
+.ficha-desaparecida{ display:grid; grid-template-columns: minmax(160px, 240px) 1fr; gap: 1.25rem; align-items:center; background: var(--paper-card); border:1px solid var(--line-strong); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1rem; margin: 1.25rem 0; }
+.ficha-desaparecida img{ width:100%; height:auto; border-radius: 6px; border: 6px solid #fff; box-shadow: 0 2px 8px rgba(35,38,43,0.18); transform: rotate(-2deg); }
+.ficha-desaparecida dl{ display:grid; grid-template-columns: auto 1fr; gap: 0.25rem 0.85rem; margin: 0.75rem 0 0; font-size: 0.94rem; }
+.ficha-desaparecida dt{ font-family:"IBM Plex Mono", monospace; font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); padding-top: 0.15rem; }
+.ficha-desaparecida dd{ margin:0; }
+.camera{ margin: 1.25rem auto; max-width: 620px; }
+.camera-quadro{ position:relative; border-radius: 6px; overflow:hidden; border: 3px solid var(--ink); }
+.camera-quadro img{ display:block; width:100%; height:auto; filter: grayscale(0.85) contrast(1.1) brightness(0.95); }
+.camera-rec{ position:absolute; left: 0.6rem; top: 0.5rem; font-family:"IBM Plex Mono", monospace; font-size: 0.72rem; color: #fff; background: rgba(0,0,0,0.6); padding: 0.15rem 0.45rem; border-radius: 4px; }
+.camera figcaption{ font-size: 0.88rem; color: var(--ink-soft); margin-top: 0.4rem; text-align:center; }
+
+/* Gabarito */
+.gabarito{ border: 2px dashed var(--crime-dark); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-top: 1rem; background: rgba(166,56,59,0.04); }
+.gabarito h3:first-child{ margin-top: 0 !important; }
+
+@media (max-width: 720px){
+  .atv{ padding: 0 1rem; }
+  .hero-atv{ grid-template-columns: 1fr; }
+  .emblema{ width: 110px; height: 110px; order: -1; }
+  .glossario{ grid-template-columns: 1fr; }
+  .ficha-desaparecida{ grid-template-columns: 1fr; }
+  .ficha-desaparecida img{ max-width: 240px; margin: 0 auto; }
+  .glossario dd{ border-top: none; padding-top: 0; }
+  .sim .dupla-sel{ grid-template-columns: 1fr; }
+  .toc ol{ padding: 0.5rem 1rem; }
+}
+
+@media print{
+  .toc, .sim, .acoes, #btn-gabarito, .registro{ display:none !important; }
+  .gabarito[hidden]{ display:none !important; }
+  .dossie, .ficha, .regra{ box-shadow:none; break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="wrap masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Atividade em duplas</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-atv">
+      <div>
+        <p class="hero-eyebrow">Agência de Detetives · Princípio da resolução</p>
+        <h1 class="hero-title">Detetive: <span class="accent">O Caso da Cláusula Vazia</span></h1>
+        <p class="hero-sub">Investiguem pistas, formem cláusulas e encontrem a contradição.</p>
+        <p class="hero-lede">
+          Nesta atividade, vocês receberão dossiês com pistas de testemunhas, câmeras e anotações. A missão é
+          transformar essas pistas em cláusulas, cruzá-las com a regra de resolução e descobrir se elas podem ser
+          verdadeiras ao mesmo tempo. Quando aparece a <strong>cláusula vazia</strong>, eu considero a prova definitiva:
+          as pistas são incompatíveis.
+        </p>
+        <p><span class="pill-duplas">Atividade em duplas · um dossiê por dupla</span></p>
+      </div>
+      <svg class="emblema" viewBox="0 0 120 120" role="img" aria-label="Emblema da atividade: uma estrela dentro de uma lupa">
+        <circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="6"/>
+        <circle cx="50" cy="50" r="31" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.5"/>
+        <line x1="78" y1="78" x2="110" y2="110" stroke="currentColor" stroke-width="11" stroke-linecap="round"/>
+        <polygon class="estrela" stroke-width="2" stroke-linejoin="round" points="50,24 57.1,40.3 74.7,42 61.4,53.7 65.3,71 50,62 34.7,71 38.6,53.7 25.3,42 42.9,40.3"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Seções da atividade">
+  <ol>
+    <li><a href="#contexto">Contexto</a></li>
+    <li><a href="#conceitos">Conceitos</a></li>
+    <li><a href="#roteiro">Passo a passo</a></li>
+    <li><a href="#exemplo">Exemplo</a></li>
+    <li><a href="#duplas">Duplas</a></li>
+    <li><a href="#desafios">Desafios</a></li>
+    <li><a href="#apresentacao">Apresentação</a></li>
+    <li><a href="#avaliacao">Avaliação</a></li>
+    <li><a href="#apoio">Apoio</a></li>
+    <li><a href="#simulador">Simulador</a></li>
+  </ol>
+</nav>
+
+<nav class="atv breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<main id="conteudo" class="atv">
+<article class="topic">
+
+  <!-- 2. CONTEXTO -->
+  <section aria-labelledby="contexto">
+    <h2 id="contexto"><span class="num" aria-hidden="true">01</span> A Agência de Detetives</h2>
+    <p>
+      A Agência de Detetives recebe casos misteriosos toda semana. Cada caso chega como um dossiê: depoimentos de
+      testemunhas, registros de câmeras, anotações da perícia e declarações dos suspeitos. Algumas pistas convivem em paz;
+      outras se contradizem, e alguém mente ou se engana.
+    </p>
+    <figure class="ficha-desaparecida">
+      <img src="assets/img/estrela-retrato.jpg" width="640" height="640" alt="Estrela: gata branca de rosto, orelhas e patas cor de creme, olhos semicerrados, tomando sol junto a um muro." decoding="async">
+      <figcaption>
+        <span class="selo">DESAPARECIDA</span>
+        <dl>
+          <dt>Nome</dt><dd>Estrela</dd>
+          <dt>Espécie</dt><dd>Gata</dd>
+          <dt>Pelagem</dt><dd>Branca, com rosto, orelhas, patas e cauda cor de creme</dd>
+          <dt>Endereço</dt><dd>O museu inteiro, que ela reivindicou como lar</dd>
+          <dt>Vista por último</dt><dd>Corredor das galerias, durante a noite</dd>
+        </dl>
+      </figcaption>
+    </figure>
+    <p>
+      O caso mais famoso da agência é o da <strong>Estrela</strong>, uma gata charmosa que um dia entrou no museu da
+      cidade e decidiu que ele era a casa dela: dorme na bilheteria, patrulha as galerias e ganhou até um lugar
+      reservado no banco da entrada. Certa manhã, a Estrela sumiu. Desde então, a agência coleciona pistas sobre a
+      noite do desaparecimento, e cada dossiê desta atividade é uma parte dessa investigação.
+    </p>
+    <p>
+      O trabalho de vocês é o de uma equipe de detetives lógicos: em vez de confiar na intuição, vocês usarão a
+      <strong>resolução proposicional</strong> para verificar, com rigor, se o conjunto de pistas leva a uma contradição.
+    </p>
+
+    <div class="table-wrap">
+      <table class="tbl">
+        <caption>A metáfora da investigação</caption>
+        <thead><tr><th scope="col">Na agência</th><th scope="col">Na lógica</th><th scope="col">Exemplo</th></tr></thead>
+        <tbody>
+          <tr><td>Pista</td><td>Premissa (fórmula lógica)</td><td><code>J → D</code>: “se entrou pela janela, a janela quebrou”</td></tr>
+          <tr><td>Ficha de evidência</td><td>Cláusula</td><td><code>{¬J, D}</code></td></tr>
+          <tr><td>Pistas que se opõem diretamente</td><td>Literais complementares</td><td><code>S</code> “o suspeito estava no local” e <code>¬S</code> “não estava”</td></tr>
+          <tr><td>Cruzar duas fichas</td><td>Aplicar a resolução</td><td><code>{¬J, D}</code> com <code>{J}</code> gera <code>{D}</code></td></tr>
+          <tr><td>Contradição encontrada</td><td>Cláusula vazia <code>□</code></td><td>Caso <strong>resolvido como insatisfatível</strong> <span class="selo">CASO RESOLVIDO</span></td></tr>
+          <tr><td>Nenhuma contradição</td><td>Sem <code>□</code> ao final da busca</td><td>Caso <strong>satisfatível</strong>: as pistas podem coexistir <span class="selo verde">SEM CONTRADIÇÃO</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 3. CONCEITOS -->
+  <section aria-labelledby="conceitos">
+    <h2 id="conceitos"><span class="num" aria-hidden="true">02</span> Os conceitos da investigação</h2>
+    <p>Antes de abrir os dossiês, revisem as ferramentas. Cada ficha traz a ideia e um exemplo no contexto do caso.</p>
+
+    <div class="grade">
+      <div class="ficha"><h3>Proposição</h3><p>Afirmação que é verdadeira ou falsa.</p><p class="ex">S: “o suspeito estava no local”</p></div>
+      <div class="ficha"><h3>Literal</h3><p>Uma proposição ou a sua negação.</p><p class="ex">S, ¬S, A, ¬A</p></div>
+      <div class="ficha"><h3>Cláusula</h3><p>Disjunção (“ou”) de literais. Basta um literal verdadeiro para ela ser verdadeira.</p><p class="ex">¬S ∨ A</p></div>
+      <div class="ficha"><h3>Forma normal conjuntiva (FNC/CNF)</h3><p>Conjunção (“e”) de cláusulas: uma lista de exigências, todas obrigatórias.</p><p class="ex">(¬S ∨ A) ∧ S ∧ ¬A</p></div>
+      <div class="ficha"><h3>Representação por conjuntos</h3><p>Cada cláusula vira um conjunto de literais; a fórmula vira um conjunto de cláusulas.</p><p class="ex">{ {¬S, A}, {S}, {¬A} }</p></div>
+      <div class="ficha"><h3>Regra de resolução</h3><p>Duas cláusulas com literais complementares geram uma nova cláusula sem esse par.</p><p class="ex">{¬S, A} + {S} ⟶ {A}</p></div>
+      <div class="ficha"><h3>Resolvente</h3><p>A cláusula nova produzida pela resolução. É uma consequência lógica das duas fichas cruzadas.</p><p class="ex">{A}</p></div>
+      <div class="ficha"><h3>Cláusula vazia</h3><p>Cláusula sem nenhum literal, sempre falsa. Surge ao cruzar <code>{A}</code> com <code>{¬A}</code>.</p><p class="ex">□  (ou { })</p></div>
+      <div class="ficha"><h3>Insatisfatibilidade</h3><p>Nenhuma valoração torna todas as cláusulas verdadeiras ao mesmo tempo.</p><p class="ex">{A} e {¬A} juntas</p></div>
+      <div class="ficha"><h3>Prova por refutação</h3><p>Para provar uma conclusão, eu a nego e mostro que isso gera contradição.</p><p class="ex">Premissas + ¬C ⟶ □</p></div>
+    </div>
+
+    <div class="regra" role="group" aria-labelledby="regra-titulo">
+      <span class="label" id="regra-titulo">A regra de resolução</span>
+      <div class="fracao" aria-describedby="regra-leitura">
+        <div class="premissas"><span>C₁ = A ∨ L</span><span>C₂ = B ∨ ¬L</span></div>
+        <div class="barra" aria-hidden="true"></div>
+        <div class="resultado">Resolvente: A ∨ B</div>
+      </div>
+      <p class="nota" id="regra-leitura">
+        Em conjuntos: o resolvente é <code>(C₁ − {L}) ∪ (C₂ − {¬L})</code>. Juntamos as duas fichas e retiramos
+        <strong>apenas o par</strong> <code>L</code> / <code>¬L</code>. Se não sobrar nada, temos a cláusula vazia <code>□</code>.
+      </p>
+    </div>
+
+    <div class="evidence-box">
+      <span class="label">Prova por refutação</span>
+      <p>
+        Para mostrar que uma conclusão <code>C</code> segue das premissas, vocês acrescentam a sua negação <code>¬C</code>
+        ao conjunto de cláusulas. Se a resolução produzir a cláusula vazia, as premissas e <code>¬C</code> não podem ser
+        verdadeiras juntas. Portanto, sempre que as premissas forem verdadeiras, <code>C</code> também será:
+        <code>C</code> é <strong>consequência lógica</strong> das premissas.
+      </p>
+    </div>
+  </section>
+
+  <!-- 4. ROTEIRO -->
+  <section aria-labelledby="roteiro">
+    <h2 id="roteiro"><span class="num" aria-hidden="true">03</span> Passo a passo da investigação</h2>
+    <ol class="passos">
+      <li><strong>Leiam o caso e identifiquem as proposições.</strong> Procurem afirmações que admitem os valores verdadeiro ou falso.</li>
+      <li><strong>Definam os símbolos proposicionais.</strong> Por exemplo: <code>S</code> “o suspeito estava no local”; <code>A</code> “o alarme foi desativado”; <code>C</code> “há câmera registrando a entrada”.</li>
+      <li><strong>Traduzam cada pista para lógica proposicional.</strong> Cuidado com “se… então”, “ou” e “não”.</li>
+      <li><strong>Convertam todas as fórmulas para FNC.</strong> Usem <code>P → Q ≡ ¬P ∨ Q</code> e as leis de De Morgan.</li>
+      <li><strong>Escrevam o conjunto de cláusulas.</strong> Cada cláusula como conjunto de literais, numerada: <code>(1) {¬S, A}</code>.</li>
+      <li><strong>Acrescentem a negação da conclusão.</strong> Só quando o caso pedir para provar uma afirmação.</li>
+      <li><strong>Procurem pares de cláusulas com literais complementares.</strong> Comecem pelas cláusulas unitárias: elas encurtam o caminho.</li>
+      <li><strong>Apliquem a regra de resolução e registrem o resolvente.</strong> Indiquem as cláusulas usadas e o literal cancelado.</li>
+      <li><strong>Repitam o processo.</strong> Continuem até encontrar a cláusula vazia ou até não surgirem resolventes novos e úteis.</li>
+      <li>
+        <strong>Concluam.</strong>
+        <div class="desfechos">
+          <div class="desfecho insat"><strong>Surgiu □</strong> Há contradição: o caso é <strong>insatisfatível</strong>. Se vocês negaram a conclusão, ela está provada.</div>
+          <div class="desfecho sat"><strong>Não surgiu □</strong> Nenhuma contradição encontrada: o caso é <strong>satisfatível</strong> (ou inconclusivo, se a busca não foi completa).</div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 5. EXEMPLO -->
+  <section aria-labelledby="exemplo">
+    <h2 id="exemplo"><span class="num" aria-hidden="true">04</span> Exemplo resolvido: “O desaparecimento da Estrela”</h2>
+    <p>Na manhã seguinte, a Estrela não apareceu para o café na bilheteria. A câmera do corredor registrou a gata pela última vez durante a noite, e o dossiê traz três pistas:</p>
+    <figure class="camera">
+      <div class="camera-quadro">
+        <img src="assets/img/estrela-camera.jpg" width="800" height="530" alt="Imagem de câmera de segurança: a gata Estrela, branca com cauda cor de creme, caminha pelo piso do corredor." loading="lazy" decoding="async">
+        <span class="camera-rec" aria-hidden="true">● REC · CAM 03 · CORREDOR · 23:47</span>
+      </div>
+      <figcaption>Último registro da câmera do corredor: a Estrela atravessa as galerias, como em toda ronda noturna.</figcaption>
+    </figure>
+
+    <div class="grade">
+      <div class="ficha">
+        <h3>Pistas</h3>
+        <p>1. Se o sequestrador da Estrela entrou pela janela, então a janela estava destruída.</p>
+        <p>2. O sequestrador entrou pela janela.</p>
+        <p>3. A janela não estava destruída.</p>
+      </div>
+      <div class="ficha">
+        <h3>Símbolos</h3>
+        <p><code>J</code>: o sequestrador entrou pela janela.</p>
+        <p><code>D</code>: a janela estava destruída.</p>
+      </div>
+      <div class="ficha">
+        <h3>Fórmulas e cláusulas</h3>
+        <p><code>J → D ≡ ¬J ∨ D</code> ⟶ <code>(1) {¬J, D}</code></p>
+        <p><code>J</code> ⟶ <code>(2) {J}</code></p>
+        <p><code>¬D</code> ⟶ <code>(3) {¬D}</code></p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="tbl">
+        <caption>Linha do tempo da investigação</caption>
+        <thead><tr><th scope="col">Passo</th><th scope="col">Cláusulas cruzadas</th><th scope="col">Par complementar</th><th scope="col">Resolvente</th><th scope="col">Em linguagem natural</th></tr></thead>
+        <tbody>
+          <tr><td class="pts">1</td><td><code>(1) {¬J, D}</code> e <code>(2) {J}</code></td><td><code>J</code> / <code>¬J</code></td><td><code>(4) {D}</code></td><td>Se entrou pela janela, ela quebrou; e ele entrou. Logo, a janela estava destruída.</td></tr>
+          <tr class="destaque"><td class="pts">2</td><td><code>(4) {D}</code> e <code>(3) {¬D}</code></td><td><code>D</code> / <code>¬D</code></td><td><code>□</code></td><td>A janela estaria destruída e não destruída ao mesmo tempo: impossível.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <svg class="arvore" viewBox="0 0 520 220" role="img" aria-labelledby="arvore-desc">
+      <title id="arvore-desc">Árvore de resolução: {¬J, D} com {J} gera {D}; {D} com {¬D} gera a cláusula vazia.</title>
+      <line x1="110" y1="45" x2="200" y2="110"/><line x1="290" y1="45" x2="200" y2="110"/>
+      <line x1="200" y1="135" x2="300" y2="185"/><line x1="410" y1="125" x2="300" y2="185"/>
+      <rect x="55" y="15" width="110" height="34" rx="6"/><text x="110" y="37" text-anchor="middle">{¬J, D}</text>
+      <rect x="250" y="15" width="80" height="34" rx="6"/><text x="290" y="37" text-anchor="middle">{J}</text>
+      <rect x="165" y="100" width="70" height="34" rx="6"/><text x="200" y="122" text-anchor="middle">{D}</text>
+      <rect x="370" y="92" width="80" height="34" rx="6"/><text x="410" y="114" text-anchor="middle">{¬D}</text>
+      <rect class="vazia" x="270" y="175" width="60" height="38" rx="6"/><text x="300" y="200" text-anchor="middle">□</text>
+      <text class="lit" x="200" y="86" text-anchor="middle">J</text>
+      <text class="lit" x="262" y="168" text-anchor="middle">D</text>
+    </svg>
+
+    <div class="summary">
+      <span class="label">Conclusão do exemplo <span class="selo">CASO RESOLVIDO</span></span>
+      <p>
+        Como derivamos a cláusula vazia, o conjunto de pistas é <strong>insatisfatível</strong>. Na história, as evidências se
+        contradizem: não é possível que o sequestrador tenha entrado pela janela, que isso a destrua e, ao mesmo tempo, que a
+        janela esteja intacta. Pelo menos uma pista é falsa, e a próxima pergunta do detetive é: <em>qual?</em> Talvez a Estrela nem tenha sido levada.
+      </p>
+    </div>
+  </section>
+
+  <!-- 6. DUPLAS -->
+  <section aria-labelledby="duplas">
+    <h2 id="duplas"><span class="num" aria-hidden="true">05</span> Organização em duplas</h2>
+    <p>
+      A turma trabalha em <strong>duplas</strong>, e cada dupla recebe um dossiê (Seção 06). Há quatro
+      papéis; como a dupla tem duas pessoas, cada uma assume dois papéis e vocês <strong>trocam os papéis</strong> durante a
+      atividade, por exemplo depois da conversão para cláusulas. Se houver mais duplas do que dossiês, um mesmo caso
+      pode ir para duas duplas, e a comparação das resoluções entra na apresentação.
+    </p>
+    <div class="grade">
+      <div class="ficha"><p class="papel">PAPEL 1</p><h3>Detetive principal</h3><p>Lê o caso, organiza as pistas e conduz a conversão para cláusulas.</p></div>
+      <div class="ficha"><p class="papel">PAPEL 2</p><h3>Perito lógico</h3><p>Verifica as equivalências, a FNC e cada aplicação da regra de resolução.</p></div>
+      <div class="ficha"><p class="papel">PAPEL 3</p><h3>Registrador do caso</h3><p>Anota cada passo, os resolventes e a conclusão no modelo de registro.</p></div>
+      <div class="ficha"><p class="papel">PAPEL 4</p><h3>Advogado do diabo</h3><p>Questiona a escolha das cláusulas e se a conclusão está bem justificada.</p></div>
+    </div>
+    <div class="table-wrap">
+      <table class="tbl">
+        <caption>Os dossiês disponíveis</caption>
+        <thead><tr><th scope="col">Dossiê</th><th scope="col">Característica</th></tr></thead>
+        <tbody>
+          <tr><td><a href="#caso-1">1 · O Álibi do Relógio</a></td><td>Encadeamento de implicações</td></tr>
+          <tr><td><a href="#caso-2">2 · A Pegada no Jardim</a></td><td>Prova por refutação de uma conclusão</td></tr>
+          <tr><td><a href="#caso-3">3 · O Cofre do Museu</a></td><td>Investigação sem contradição</td></tr>
+          <tr><td><a href="#caso-4">4 · O Testemunho Contraditório</a></td><td>Depoimentos incompatíveis</td></tr>
+          <tr><td><a href="#caso-5">5 · O Suspeito Invisível</a></td><td>Caso curto; também serve de extra para quem terminar antes</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 7. DESAFIOS -->
+  <section aria-labelledby="desafios">
+    <h2 id="desafios"><span class="num" aria-hidden="true">06</span> Os dossiês das duplas</h2>
+    <p>
+      Em todos os casos, a tarefa é a mesma: <strong>definir os símbolos (quando não forem dados), traduzir as pistas,
+      converter em cláusulas, aplicar resolução e concluir se há contradição</strong>, explicando o que isso significa na
+      história. Os campos de registro servem para rascunho na tela; a entrega oficial é o modelo de registro da Seção 09.
+    </p>
+
+    <!-- Caso 1 -->
+    <div class="dossie" id="caso-1">
+      <div class="dossie-topo">
+        <div><span class="meta">Dossiê 1</span><h3>O Álibi do Relógio</h3></div>
+        <span class="tipo">Encadeamento de implicações</span>
+      </div>
+      <div class="enunciado">
+        <p>Na noite do sumiço da Estrela, um vaso do museu foi quebrado durante uma luta na sala de música. O principal suspeito afirma que passou a noite no baile, no salão ao lado.</p>
+        <h4>Pistas</h4>
+        <ol class="pistas">
+          <li>Se o relógio da sala parou às 22h, então a luta aconteceu às 22h.</li>
+          <li>O relógio da sala parou às 22h.</li>
+          <li>Se a luta aconteceu às 22h, então o suspeito estava na sala às 22h.</li>
+          <li>Três convidados juram que o suspeito estava no baile às 22h.</li>
+          <li>Ninguém pode estar no baile e na sala ao mesmo tempo.</li>
+        </ol>
+        <h4>Símbolos sugeridos</h4>
+        <p><code>R</code>: o relógio parou às 22h · <code>L</code>: a luta foi às 22h · <code>S</code>: o suspeito estava na sala às 22h · <code>B</code>: o suspeito estava no baile às 22h</p>
+        <h4>Tarefa</h4>
+        <p>O álibi do suspeito é compatível com as outras pistas? Convertam tudo em cláusulas (atenção à pista 5) e apliquem resolução.</p>
+      </div>
+      <div class="registro">
+        <div><label for="c1-clausulas">Conjunto de cláusulas</label><textarea id="c1-clausulas" placeholder="(1) {¬R, L}&#10;(2) ..."></textarea></div>
+        <div><label for="c1-passos">Passos de resolução e conclusão</label><textarea id="c1-passos" placeholder="Passo 1: (1) + (2), literal R ⟶ ..."></textarea></div>
+      </div>
+      <div class="acoes"><button class="btn sec js-copiar" type="button" data-alvo="caso-1">Copiar enunciado</button><span class="msg" role="status" aria-live="polite"></span></div>
+    </div>
+
+    <!-- Caso 2 -->
+    <div class="dossie" id="caso-2">
+      <div class="dossie-topo">
+        <div><span class="meta">Dossiê 2</span><h3>A Pegada no Jardim</h3></div>
+        <span class="tipo">Prova por refutação</span>
+      </div>
+      <div class="enunciado">
+        <p>Na manhã seguinte ao sumiço da Estrela, a perícia encontrou uma pegada de bota no canteiro do jardim. A delegada quer saber se as pistas permitem acusar o jardineiro.</p>
+        <h4>Pistas</h4>
+        <ol class="pistas">
+          <li>Se choveu à noite, então a terra do jardim estava molhada.</li>
+          <li>Choveu à noite.</li>
+          <li>Se há pegada de bota e a terra estava molhada, então o jardineiro passou pelo jardim depois da chuva.</li>
+          <li>Há uma pegada de bota no jardim.</li>
+        </ol>
+        <h4>Conclusão a investigar</h4>
+        <p>“O jardineiro passou pelo jardim depois da chuva.”</p>
+        <h4>Tarefa</h4>
+        <p>Definam os símbolos. Provem a conclusão por refutação: acrescentem a sua negação e busquem a cláusula vazia. Atenção à conversão da pista 3.</p>
+      </div>
+      <div class="registro">
+        <div><label for="c2-clausulas">Símbolos e conjunto de cláusulas</label><textarea id="c2-clausulas"></textarea></div>
+        <div><label for="c2-passos">Passos de resolução e conclusão</label><textarea id="c2-passos"></textarea></div>
+      </div>
+      <div class="acoes"><button class="btn sec js-copiar" type="button" data-alvo="caso-2">Copiar enunciado</button><span class="msg" role="status" aria-live="polite"></span></div>
+    </div>
+
+    <!-- Caso 3 -->
+    <div class="dossie" id="caso-3">
+      <div class="dossie-topo">
+        <div><span class="meta">Dossiê 3</span><h3>O Cofre do Museu</h3></div>
+        <span class="tipo">Será que há contradição?</span>
+      </div>
+      <div class="enunciado">
+        <p>O cofre onde o museu guardava a coleira de ouro da Estrela foi encontrado aberto. O chefe da segurança garante que foi arrombamento, mas a perícia tem dúvidas.</p>
+        <h4>Pistas</h4>
+        <ol class="pistas">
+          <li>O cofre foi aberto com a chave ou foi arrombado.</li>
+          <li>Se o cofre foi arrombado, então o alarme foi desativado.</li>
+          <li>O segurança estava de plantão.</li>
+          <li>O alarme não foi desativado ou o segurança não estava de plantão (o alarme só é desligado na troca de turno).</li>
+        </ol>
+        <h4>Símbolos sugeridos</h4>
+        <p><code>K</code>: o cofre foi aberto com a chave · <code>F</code>: o cofre foi arrombado · <code>A</code>: o alarme foi desativado · <code>S</code>: o segurança estava de plantão</p>
+        <h4>Tarefa</h4>
+        <p>As pistas provam que o cofre foi arrombado? Acrescentem a negação dessa conclusão e apliquem resolução até não surgirem resolventes novos. Se não aparecer <code>□</code>, encontrem uma valoração que satisfaça todas as cláusulas e expliquem o que ela conta sobre o caso.</p>
+      </div>
+      <div class="registro">
+        <div><label for="c3-clausulas">Conjunto de cláusulas</label><textarea id="c3-clausulas"></textarea></div>
+        <div><label for="c3-passos">Passos de resolução, valoração e conclusão</label><textarea id="c3-passos"></textarea></div>
+      </div>
+      <div class="acoes"><button class="btn sec js-copiar" type="button" data-alvo="caso-3">Copiar enunciado</button><span class="msg" role="status" aria-live="polite"></span></div>
+    </div>
+
+    <!-- Caso 4 -->
+    <div class="dossie" id="caso-4">
+      <div class="dossie-topo">
+        <div><span class="meta">Dossiê 4</span><h3>O Testemunho Contraditório</h3></div>
+        <span class="tipo">Depoimentos incompatíveis</span>
+      </div>
+      <div class="enunciado">
+        <p>Quatro fontes descrevem a fuga de um suspeito visto perto da caminha da Estrela. A delegada desconfia que alguma delas não diz a verdade.</p>
+        <h4>Pistas</h4>
+        <ol class="pistas">
+          <li>Testemunha da rua: “Ele saiu pela porta dos fundos ou pela janela.”</li>
+          <li>Vizinha do andar de cima: “Ele não saiu pela janela.”</li>
+          <li>Técnico de segurança: “Se ele saiu pelos fundos, a câmera dos fundos o registrou.”</li>
+          <li>Perícia: “A câmera dos fundos não registrou ninguém.”</li>
+        </ol>
+        <h4>Tarefa</h4>
+        <p>Definam os símbolos e verifiquem, por resolução, se os quatro depoimentos podem ser verdadeiros ao mesmo tempo. O que a resposta diz sobre as testemunhas?</p>
+      </div>
+      <div class="registro">
+        <div><label for="c4-clausulas">Símbolos e conjunto de cláusulas</label><textarea id="c4-clausulas"></textarea></div>
+        <div><label for="c4-passos">Passos de resolução e conclusão</label><textarea id="c4-passos"></textarea></div>
+      </div>
+      <div class="acoes"><button class="btn sec js-copiar" type="button" data-alvo="caso-4">Copiar enunciado</button><span class="msg" role="status" aria-live="polite"></span></div>
+    </div>
+
+    <!-- Caso 5 -->
+    <div class="dossie" id="caso-5">
+      <div class="dossie-topo">
+        <div><span class="meta">Dossiê 5 · caso extra</span><h3>O Suspeito Invisível</h3></div>
+        <span class="tipo">Caso curto</span>
+      </div>
+      <div class="enunciado">
+        <p>Nenhuma câmera registrou o suspeito, e ele afirma que nunca esteve no museu. Será que ele é mesmo “invisível”?</p>
+        <h4>Pistas</h4>
+        <ol class="pistas">
+          <li>O suspeito estava no local ou usou um disfarce.</li>
+          <li>Se usou um disfarce, então deixou fios de peruca.</li>
+          <li>Não foram encontrados fios de peruca.</li>
+        </ol>
+        <h4>Conclusão a investigar</h4>
+        <p>“O suspeito estava no local.”</p>
+        <h4>Tarefa</h4>
+        <p>Definam os símbolos, neguem a conclusão e cheguem à cláusula vazia no menor número de passos que conseguirem.</p>
+      </div>
+      <div class="registro">
+        <div><label for="c5-clausulas">Símbolos e conjunto de cláusulas</label><textarea id="c5-clausulas"></textarea></div>
+        <div><label for="c5-passos">Passos de resolução e conclusão</label><textarea id="c5-passos"></textarea></div>
+      </div>
+      <div class="acoes"><button class="btn sec js-copiar" type="button" data-alvo="caso-5">Copiar enunciado</button><span class="msg" role="status" aria-live="polite"></span></div>
+    </div>
+
+    <!-- Gabarito -->
+    <div class="acoes">
+      <button class="btn" id="btn-gabarito" type="button" aria-expanded="false" aria-controls="gabarito">Ver gabarito do professor</button>
+    </div>
+    <div class="gabarito" id="gabarito" hidden>
+      <h3>Gabarito do professor</h3>
+      <p>Há outras ordens de resolução corretas; o que importa é que cada passo use exatamente um par complementar.</p>
+
+      <h4>Dossiê 1 · O Álibi do Relógio <span class="selo">INSATISFATÍVEL</span></h4>
+      <pre><code>Fórmulas:  R → L,  R,  L → S,  B,  ¬(B ∧ S) ≡ ¬B ∨ ¬S
+(1) {¬R, L}   (2) {R}   (3) {¬L, S}   (4) {B}   (5) {¬B, ¬S}
+
+Passo 1: (1) + (2), literal R  ⟶  (6) {L}
+Passo 2: (6) + (3), literal L  ⟶  (7) {S}
+Passo 3: (7) + (5), literal S  ⟶  (8) {¬B}
+Passo 4: (8) + (4), literal B  ⟶  □</code></pre>
+      <p>O álibi é incompatível com as pistas físicas: se o relógio e a perícia estão certos, os três convidados se enganaram (ou mentiram).</p>
+
+      <h4>Dossiê 2 · A Pegada no Jardim <span class="selo">CONCLUSÃO PROVADA</span></h4>
+      <pre><code>C: choveu à noite   T: terra molhada   P: há pegada de bota   J: o jardineiro passou depois da chuva
+Fórmulas:  C → T,  C,  (P ∧ T) → J,  P;   negação da conclusão: ¬J
+(P ∧ T) → J  ≡  ¬(P ∧ T) ∨ J  ≡  ¬P ∨ ¬T ∨ J
+(1) {¬C, T}   (2) {C}   (3) {¬P, ¬T, J}   (4) {P}   (5) {¬J}
+
+Passo 1: (1) + (2), literal C  ⟶  (6) {T}
+Passo 2: (6) + (3), literal T  ⟶  (7) {¬P, J}
+Passo 3: (7) + (4), literal P  ⟶  (8) {J}
+Passo 4: (8) + (5), literal J  ⟶  □</code></pre>
+      <p>Com <code>¬J</code> surge contradição; logo, “o jardineiro passou pelo jardim depois da chuva” é consequência lógica das pistas. Ele passou por lá, o que ainda não prova que ele levou a Estrela.</p>
+
+      <h4>Dossiê 3 · O Cofre do Museu <span class="selo verde">SATISFATÍVEL</span></h4>
+      <pre><code>Fórmulas:  K ∨ F,  F → A,  S,  ¬A ∨ ¬S;   negação da conclusão “foi arrombado”: ¬F
+(1) {K, F}   (2) {¬F, A}   (3) {S}   (4) {¬A, ¬S}   (5) {¬F}
+
+(3) + (4), literal S  ⟶  (6) {¬A}
+(1) + (5), literal F  ⟶  (7) {K}
+(1) + (2), literal F  ⟶  (8) {K, A}
+(2) + (4), literal A  ⟶  (9) {¬F, ¬S}
+(8) + (4), literal A  ⟶  (10) {K, ¬S}
+Demais pares só repetem cláusulas já obtidas: {¬F}, {K}, {K, ¬S}.
+Nenhum literal ¬K aparece, então K nunca é cancelado: a busca satura sem □.</code></pre>
+      <p>Valoração que satisfaz tudo: <code>K = V, F = F, A = F, S = V</code>. As pistas <strong>não</strong> provam o arrombamento. Pelo contrário: elas forçam <code>¬A</code> e, com isso, <code>¬F</code>, então o cofre foi aberto com a chave. A investigação deveria olhar para quem tinha a chave.</p>
+
+      <h4>Dossiê 4 · O Testemunho Contraditório <span class="selo">INSATISFATÍVEL</span></h4>
+      <pre><code>F: saiu pelos fundos   J: saiu pela janela   C: a câmera dos fundos o registrou
+(1) {F, J}   (2) {¬J}   (3) {¬F, C}   (4) {¬C}
+
+Passo 1: (1) + (2), literal J  ⟶  (5) {F}
+Passo 2: (5) + (3), literal F  ⟶  (6) {C}
+Passo 3: (6) + (4), literal C  ⟶  □</code></pre>
+      <p>Os quatro depoimentos não podem ser todos verdadeiros. Alguém mentiu, se enganou, ou a câmera falhou. A resolução não diz <em>quem</em>; ela garante que pelo menos uma fonte está errada.</p>
+
+      <h4>Dossiê 5 · O Suspeito Invisível <span class="selo">CONCLUSÃO PROVADA</span></h4>
+      <pre><code>S: o suspeito estava no local   D: usou disfarce   P: deixou fios de peruca
+(1) {S, D}   (2) {¬D, P}   (3) {¬P}   (4) {¬S}   (negação da conclusão)
+
+Passo 1: (2) + (3), literal P  ⟶  (5) {¬D}
+Passo 2: (1) + (5), literal D  ⟶  (6) {S}
+Passo 3: (6) + (4), literal S  ⟶  □</code></pre>
+      <p>O suspeito estava no local. Ele não é invisível: só não passou na frente das câmeras.</p>
+    </div>
+  </section>
+
+  <!-- 8. APRESENTAÇÃO -->
+  <section aria-labelledby="apresentacao">
+    <h2 id="apresentacao"><span class="num" aria-hidden="true">07</span> Apresentação dos resultados</h2>
+    <p>Cada dupla apresenta o seu caso em <strong>3 a 4 minutos</strong>, no quadro ou no projetor, respondendo a estas perguntas:</p>
+    <div class="grade">
+      <div class="ficha"><p class="papel">1</p><p>Quais foram as proposições identificadas?</p></div>
+      <div class="ficha"><p class="papel">2</p><p>Como as pistas foram convertidas em cláusulas?</p></div>
+      <div class="ficha"><p class="papel">3</p><p>Quais cláusulas foram escolhidas para a resolução?</p></div>
+      <div class="ficha"><p class="papel">4</p><p>Quais literais complementares foram usados?</p></div>
+      <div class="ficha"><p class="papel">5</p><p>Qual resolvente foi obtido em cada passo?</p></div>
+      <div class="ficha"><p class="papel">6</p><p>Foi encontrada a cláusula vazia?</p></div>
+      <div class="ficha"><p class="papel">7</p><p>O caso é satisfatível ou insatisfatível?</p></div>
+      <div class="ficha"><p class="papel">8</p><p>O que a conclusão significa dentro da história do detetive?</p></div>
+    </div>
+  </section>
+
+  <!-- 9. AVALIAÇÃO -->
+  <section aria-labelledby="avaliacao">
+    <h2 id="avaliacao"><span class="num" aria-hidden="true">08</span> Critérios de avaliação</h2>
+    <div class="table-wrap">
+      <table class="tbl">
+        <caption>Rubrica · total de 10 pontos</caption>
+        <thead><tr><th scope="col">Critério</th><th scope="col">Pontos</th><th scope="col">Resolução excelente</th><th scope="col">Resolução incompleta</th></tr></thead>
+        <tbody>
+          <tr><td>Identificação das proposições</td><td class="pts">1,5</td><td>Símbolos para todas as afirmações relevantes, cada um com uma frase declarativa clara.</td><td>Símbolos faltando, ambíguos ou que já incluem uma negação ou um conectivo.</td></tr>
+          <tr><td>Tradução das pistas para lógica proposicional</td><td class="pts">2,0</td><td>Conectivos corretos, inclusive o sentido do “se… então” e da negação de conjunções.</td><td>Condicional invertido, “ou” lido como “e”, pista esquecida.</td></tr>
+          <tr><td>Conversão para FNC e representação por conjuntos</td><td class="pts">2,0</td><td>Cada passo justificado por uma equivalência; cláusulas numeradas e escritas como conjuntos.</td><td>Conversão sem justificativa ou com erro de De Morgan; cláusulas misturadas com fórmulas.</td></tr>
+          <tr><td>Aplicação da regra de resolução</td><td class="pts">2,0</td><td>Cada passo cancela exatamente um par complementar; o resolvente está correto.</td><td>Dois pares cancelados de uma vez, resolução sem par complementar, literais perdidos.</td></tr>
+          <tr><td>Registro dos passos</td><td class="pts">1,0</td><td>Para cada passo: cláusulas usadas, literal cancelado e resolvente numerado.</td><td>Só o resultado final, sem o caminho percorrido.</td></tr>
+          <tr><td>Conclusão sobre satisfatibilidade</td><td class="pts">1,0</td><td>Classificação correta e interpretação dentro da história.</td><td>Classificação sem interpretação ou confundida (□ lido como “sem contradição”).</td></tr>
+          <tr><td>Clareza da apresentação</td><td class="pts">0,5</td><td>Responde às oito perguntas no tempo, com fala dividida na dupla.</td><td>Leitura do registro sem explicação ou fora do tempo.</td></tr>
+        </tbody>
+        <tfoot><tr><td>Total</td><td class="pts">10,0</td><td colspan="2"></td></tr></tfoot>
+      </table>
+    </div>
+  </section>
+
+  <!-- 10. APOIO -->
+  <section aria-labelledby="apoio">
+    <h2 id="apoio"><span class="num" aria-hidden="true">09</span> Materiais de apoio</h2>
+
+    <h3>Mini glossário</h3>
+    <dl class="glossario">
+      <dt>Literais complementares</dt><dd>Um literal e a sua negação, como <code>S</code> e <code>¬S</code>.</dd>
+      <dt>Cláusula unitária</dt><dd>Cláusula com um só literal, como <code>{¬D}</code>. É a pista mais valiosa: força o valor da variável.</dd>
+      <dt>Cláusula vazia (□)</dt><dd>Cláusula sem literais; é sempre falsa. Encontrá-la prova que o conjunto é insatisfatível.</dd>
+      <dt>Conjunto vazio de cláusulas (∅)</dt><dd>Nenhuma exigência; é sempre verdadeiro. Não confundam com <code>□</code>.</dd>
+      <dt>Satisfatível</dt><dd>Existe pelo menos uma valoração que torna todas as cláusulas verdadeiras.</dd>
+      <dt>Saturação</dt><dd>Situação em que nenhum par de cláusulas gera um resolvente novo.</dd>
+      <dt>Refutação</dt><dd>Provar <code>C</code> mostrando que premissas + <code>¬C</code> levam a <code>□</code>.</dd>
+    </dl>
+
+    <h3>Lembrete visual da regra</h3>
+    <div class="regra">
+      <div class="fracao">
+        <div class="premissas"><span>{ …, L }</span><span>{ …, ¬L }</span></div>
+        <div class="barra" aria-hidden="true"></div>
+        <div class="resultado">{ o que sobrou das duas }</div>
+      </div>
+      <p class="nota">Um par por vez · sobrou nada? É <code>□</code>.</p>
+    </div>
+
+    <h3>Modelo de registro</h3>
+    <pre id="modelo-registro"><code>DOSSIÊ: __________________________   DUPLA: __________________
+
+1. Símbolos
+   ___ : ____________________________________
+   ___ : ____________________________________
+
+2. Pistas em lógica proposicional
+   (P1) ______________   (P2) ______________   (P3) ______________
+
+3. Conversão para FNC (com a equivalência usada)
+   ______________________________________________________________
+
+4. Conjunto de cláusulas (numeradas)
+   (1) {    }   (2) {    }   (3) {    }   (4) {    }
+   Negação da conclusão, se houver: (  ) {    }
+
+5. Passos de resolução
+   Passo | Cláusulas | Literal cancelado | Resolvente
+   ------+-----------+-------------------+-----------
+     1   |           |                   |
+     2   |           |                   |
+
+6. Conclusão
+   [ ] Cláusula vazia encontrada: INSATISFATÍVEL
+   [ ] Sem cláusula vazia: SATISFATÍVEL (valoração: ______________)
+   O que isso significa no caso: __________________________________</code></pre>
+    <div class="acoes"><button class="btn sec js-copiar" type="button" data-alvo="modelo-registro">Copiar modelo de registro</button><span class="msg" role="status" aria-live="polite"></span></div>
+
+    <h3>Erros comuns</h3>
+    <div class="callout"><span class="label">Erro comum · esquecer de negar a conclusão</span><p>Na prova por refutação, a conclusão entra <strong>negada</strong>. Se vocês acrescentarem <code>{J}</code> em vez de <code>{¬J}</code>, nunca encontrarão a contradição certa.</p></div>
+    <div class="callout"><span class="label">Erro comum · resolver sem par complementar</span><p><code>{A, B}</code> e <code>{A, C}</code> não têm literal complementar: não existe resolvente entre elas. Juntar as duas fichas não é resolução.</p></div>
+    <div class="callout"><span class="label">Erro comum · cancelar dois pares de uma vez</span><p>De <code>{A, B}</code> e <code>{¬A, ¬B}</code> não sai <code>□</code>. Resolvendo um par por vez, sai <code>{B, ¬B}</code>, uma cláusula sempre verdadeira e inútil.</p></div>
+    <div class="callout"><span class="label">Erro comum · confundir □ com ∅</span><p><code>□</code> é <strong>uma cláusula</strong> sem literais (falsa). <code>∅</code> é um <strong>conjunto sem cláusulas</strong> (verdadeiro). Achar <code>□</code> encerra o caso como insatisfatível.</p></div>
+    <div class="callout"><span class="label">Erro comum · converter o “se… então” ao contrário</span><p><code>P → Q</code> vira <code>{¬P, Q}</code>, e não <code>{P, ¬Q}</code>. Quem é negado é o antecedente.</p></div>
+  </section>
+
+  <!-- 11. SIMULADOR -->
+  <section aria-labelledby="simulador">
+    <h2 id="simulador"><span class="num" aria-hidden="true">10</span> Simulador de resolução</h2>
+    <p>
+      O simulador serve para <strong>conferir</strong> um passo que vocês já fizeram no papel, não para substituir o
+      raciocínio. Digitem as cláusulas, escolham duas e vejam o que a regra produz. Para a negação, usem
+      <code>¬</code>, <code>~</code>, <code>!</code> ou <code>-</code>.
+    </p>
+
+    <div class="sim" id="sim">
+      <label for="sim-entrada">Cláusulas (formato <code>{A, B}, {¬A, C}</code>)</label>
+      <textarea id="sim-entrada" spellcheck="false" aria-describedby="sim-ajuda">{¬J, D}, {J}, {¬D}</textarea>
+      <p class="msg" id="sim-ajuda">Cada cláusula entre chaves; literais separados por vírgula. A cláusula vazia é <code>{}</code>.</p>
+      <div class="acoes">
+        <button class="btn" type="button" id="sim-ler">Ler cláusulas</button>
+        <button class="btn sec" type="button" id="sim-exemplo">Carregar exemplo</button>
+        <button class="btn sec" type="button" id="sim-limpar">Limpar</button>
+      </div>
+
+      <p class="msg" style="margin-top:0.9rem">Conjunto atual:</p>
+      <ul class="lista-clausulas" id="sim-lista" aria-live="polite"></ul>
+
+      <div class="dupla-sel">
+        <div><label for="sim-c1">Primeira cláusula</label><select id="sim-c1"></select></div>
+        <div><label for="sim-c2">Segunda cláusula</label><select id="sim-c2"></select></div>
+      </div>
+      <div class="acoes">
+        <button class="btn" type="button" id="sim-resolver">Aplicar resolução</button>
+        <button class="btn sec" type="button" id="sim-adicionar" disabled>Adicionar resolvente ao conjunto</button>
+      </div>
+
+      <div class="saida" id="sim-saida" role="status" aria-live="polite"><p>Leiam as cláusulas e escolham duas para começar.</p></div>
+
+      <h3>Registro dos passos</h3>
+      <ol class="historico" id="sim-historico"></ol>
+    </div>
+  </section>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="atividade-clausula-vazia">
+    <label><input type="checkbox" aria-label="Marcar atividade como concluída"> concluída</label>
+    <span class="stamp">CASO RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre páginas">
+    <a href="topico-16-algoritmo-de-resolucao.html"><span class="dir">← Caso 16</span>Algoritmo de resolução proposicional</a>
+    <a class="next" href="index.html"><span class="dir">Voltar ao índice →</span>Guia de estudos</a>
+  </nav>
+</article>
+</main>
+
+<footer class="site"><div class="wrap">Profa. Wilcilene Kowal · Lógica para Computação · IFC São Bento do Sul</div></footer>
+
+<script src="assets/js/topic.js" defer></script>
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Copiar enunciados e modelo ---------- */
+  function copiarTexto(texto) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(texto);
+    }
+    return new Promise(function (resolve, reject) {
+      var area = document.createElement("textarea");
+      area.value = texto;
+      area.setAttribute("readonly", "");
+      area.style.position = "fixed";
+      area.style.opacity = "0";
+      document.body.appendChild(area);
+      area.select();
+      try { document.execCommand("copy") ? resolve() : reject(); } catch (e) { reject(e); }
+      document.body.removeChild(area);
+    });
+  }
+
+  document.querySelectorAll(".js-copiar").forEach(function (botao) {
+    botao.addEventListener("click", function () {
+      var alvo = document.getElementById(botao.dataset.alvo);
+      var origem = alvo && (alvo.querySelector(".enunciado") || alvo);
+      var msg = botao.parentElement.querySelector(".msg");
+      if (!origem) return;
+      var titulo = alvo.querySelector("h3");
+      var texto = (titulo ? titulo.innerText + "\n\n" : "") + origem.innerText.trim();
+      if (alvo.id === "modelo-registro") texto = origem.innerText;
+      copiarTexto(texto).then(
+        function () { msg.textContent = "Copiado."; },
+        function () { msg.textContent = "Não foi possível copiar; selecionem o texto manualmente."; }
+      );
+    });
+  });
+
+  /* ---------- Gabarito do professor ---------- */
+  var btnGabarito = document.getElementById("btn-gabarito");
+  var gabarito = document.getElementById("gabarito");
+  btnGabarito.addEventListener("click", function () {
+    var abrir = gabarito.hidden;
+    gabarito.hidden = !abrir;
+    btnGabarito.setAttribute("aria-expanded", String(abrir));
+    btnGabarito.textContent = abrir ? "Ocultar gabarito do professor" : "Ver gabarito do professor";
+  });
+
+  /* ---------- Simulador de resolução ---------- */
+  var NEG = /^(?:¬|~|!|-)\s*/;
+  var NOME = /^[A-Za-z][A-Za-z0-9_]*$/;
+  var EXEMPLO = "{A, B}, {¬A, C}, {¬B}, {¬C}";
+
+  var entrada = document.getElementById("sim-entrada");
+  var lista = document.getElementById("sim-lista");
+  var sel1 = document.getElementById("sim-c1");
+  var sel2 = document.getElementById("sim-c2");
+  var saida = document.getElementById("sim-saida");
+  var historico = document.getElementById("sim-historico");
+  var btnAdicionar = document.getElementById("sim-adicionar");
+
+  var clausulas = [];       /* cada cláusula: array de literais em texto, ex.: ["¬J", "D"] */
+  var ultimoResolvente = null;
+
+  function complemento(lit) { return lit.charAt(0) === "¬" ? lit.slice(1) : "¬" + lit; }
+  /* A ordem digitada é preservada na tela; a chave ordenada serve só para comparar cláusulas. */
+  function chave(c) { return c.slice().sort().join(","); }
+  function mostrar(c) { return c.length ? "{" + c.join(", ") + "}" : "□"; }
+  function escapar(t) {
+    return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function lerClausulas(texto) {
+    var resultado = [];
+    var resto = texto.replace(/\{([^{}]*)\}/g, function (_, miolo) {
+      var literais = [];
+      var partes = miolo.split(",").map(function (p) { return p.trim(); }).filter(Boolean);
+      partes.forEach(function (p) {
+        var negado = NEG.test(p);
+        var nome = p.replace(NEG, "").trim();
+        if (!NOME.test(nome)) throw new Error("Literal inválido: “" + p + "”. Usem letras, números ou _, começando por letra.");
+        var lit = (negado ? "¬" : "") + nome;
+        if (literais.indexOf(lit) === -1) literais.push(lit);
+      });
+      resultado.push(literais);
+      return " ";
+    });
+    if (/[^\s,;]/.test(resto)) throw new Error("Há texto fora das chaves. Escrevam cada cláusula entre { e }.");
+    if (!resultado.length) throw new Error("Nenhuma cláusula encontrada. Exemplo de formato: {A, ¬B}, {B}.");
+    var unicas = [], vistas = {};
+    resultado.forEach(function (c) { var k = chave(c); if (!vistas[k]) { vistas[k] = true; unicas.push(c); } });
+    return unicas;
+  }
+
+  function preencherSelect(sel, indicePadrao) {
+    var anterior = sel.value;
+    sel.innerHTML = clausulas.map(function (c, i) {
+      return '<option value="' + i + '">(' + (i + 1) + ") " + escapar(mostrar(c)) + "</option>";
+    }).join("");
+    if (anterior !== "" && Number(anterior) < clausulas.length) sel.value = anterior;
+    else sel.value = String(Math.min(indicePadrao, clausulas.length - 1));
+  }
+
+  function renderizar() {
+    lista.innerHTML = clausulas.map(function (c, i) {
+      return "<li><b>(" + (i + 1) + ")</b>" + escapar(mostrar(c)) + "</li>";
+    }).join("");
+    preencherSelect(sel1, 0);
+    preencherSelect(sel2, 1);
+  }
+
+  function mensagem(classe, html) {
+    saida.className = "saida" + (classe ? " " + classe : "");
+    saida.innerHTML = html;
+  }
+
+  function ler() {
+    historico.innerHTML = "";
+    try {
+      clausulas = lerClausulas(entrada.value);
+      ultimoResolvente = null;
+      btnAdicionar.disabled = true;
+      renderizar();
+      var temVazia = clausulas.some(function (c) { return c.length === 0; });
+      mensagem(temVazia ? "vazia" : "", temVazia
+        ? "<p><strong>O conjunto já contém a cláusula vazia</strong>, então ele é insatisfatível.</p>"
+        : "<p>" + clausulas.length + " cláusula(s) lida(s). Escolham duas e apliquem a resolução.</p>");
+    } catch (erro) {
+      clausulas = [];
+      renderizar();
+      mensagem("aviso", "<p><strong>Não consegui ler as cláusulas.</strong> " + escapar(erro.message) + "</p>");
+    }
+  }
+
+  function resolver() {
+    ultimoResolvente = null;
+    btnAdicionar.disabled = true;
+    if (clausulas.length < 2) { mensagem("aviso", "<p>Leiam pelo menos duas cláusulas antes de resolver.</p>"); return; }
+    var i = Number(sel1.value), j = Number(sel2.value);
+    if (i === j) { mensagem("aviso", "<p>Escolham <strong>duas cláusulas diferentes</strong>.</p>"); return; }
+    var c1 = clausulas[i], c2 = clausulas[j];
+    var pares = c1.filter(function (l) { return c2.indexOf(complemento(l)) !== -1; });
+    var rotulo = "(" + (i + 1) + ") " + mostrar(c1) + " e (" + (j + 1) + ") " + mostrar(c2);
+
+    if (!pares.length) {
+      mensagem("aviso", "<p><strong>A resolução não pode ser aplicada diretamente.</strong> " + escapar(rotulo) +
+        " não têm nenhum literal complementar (um literal em uma e a sua negação na outra).</p>");
+      return;
+    }
+
+    var resolventes = pares.map(function (lit) {
+      var r = c1.filter(function (l) { return l !== lit; })
+        .concat(c2.filter(function (l) { return l !== complemento(lit); }));
+      var unico = [];
+      r.forEach(function (l) { if (unico.indexOf(l) === -1) unico.push(l); });
+      var tautologica = unico.some(function (l) { return unico.indexOf(complemento(l)) !== -1; });
+      return { lit: lit.replace("¬", ""), clausula: unico, tautologica: tautologica };
+    });
+
+    if (pares.length > 1) {
+      mensagem("aviso", "<p><strong>Há " + pares.length + " pares complementares</strong> entre " + escapar(rotulo) +
+        ". A regra cancela um par por vez, e cada escolha gera uma cláusula tautológica (sempre verdadeira):</p><ul>" +
+        resolventes.map(function (r) { return "<li>sobre " + escapar(r.lit) + ": " + escapar(mostrar(r.clausula)) + "</li>"; }).join("") +
+        "</ul><p>Esses resolventes não ajudam a encontrar a contradição. Não cancelem os dois pares ao mesmo tempo!</p>");
+      return;
+    }
+
+    var r = resolventes[0];
+    ultimoResolvente = r.clausula;
+    var jaExiste = clausulas.some(function (c) { return chave(c) === chave(r.clausula); });
+    btnAdicionar.disabled = jaExiste;
+    registrar(i, j, r);
+
+    if (!r.clausula.length) {
+      mensagem("vazia", '<p><span class="selo">CASO RESOLVIDO</span></p><p><strong>Caso resolvido: cláusula vazia encontrada!</strong> ' +
+        "Cruzando " + escapar(rotulo) + " sobre <code>" + escapar(r.lit) + "</code>, não sobrou nenhum literal. O conjunto é insatisfatível.</p>");
+    } else if (r.tautologica) {
+      mensagem("aviso", "<p>Resolvente sobre <code>" + escapar(r.lit) + "</code>: <strong>" + escapar(mostrar(r.clausula)) +
+        "</strong>. Ele contém um literal e a sua negação, então é sempre verdadeiro e não ajuda na busca.</p>");
+    } else {
+      mensagem("ok", "<p>Resolvente de " + escapar(rotulo) + " sobre <code>" + escapar(r.lit) + "</code>: <strong>" +
+        escapar(mostrar(r.clausula)) + "</strong>.</p>" +
+        (jaExiste ? "<p>Essa cláusula já está no conjunto; tentem outro par.</p>" : "<p>Se quiserem continuar a investigação, adicionem o resolvente ao conjunto.</p>"));
+    }
+  }
+
+  function registrar(i, j, r) {
+    var li = document.createElement("li");
+    li.textContent = "(" + (i + 1) + ") + (" + (j + 1) + "), literal " + r.lit + " ⟶ " + mostrar(r.clausula);
+    historico.appendChild(li);
+  }
+
+  function adicionar() {
+    if (!ultimoResolvente) return;
+    var existe = clausulas.some(function (c) { return chave(c) === chave(ultimoResolvente); });
+    if (existe) { btnAdicionar.disabled = true; return; }
+    clausulas.push(ultimoResolvente);
+    entrada.value = clausulas.map(function (c) { return "{" + c.join(", ") + "}"; }).join(", ");
+    renderizar();
+    sel1.value = String(clausulas.length - 1);
+    mensagem("ok", "<p>Resolvente adicionado como cláusula (" + clausulas.length + ").</p>");
+    ultimoResolvente = null;
+    btnAdicionar.disabled = true;
+  }
+
+  document.getElementById("sim-ler").addEventListener("click", ler);
+  document.getElementById("sim-resolver").addEventListener("click", resolver);
+  btnAdicionar.addEventListener("click", adicionar);
+  document.getElementById("sim-exemplo").addEventListener("click", function () {
+    entrada.value = EXEMPLO;
+    historico.innerHTML = "";
+    ler();
+  });
+  document.getElementById("sim-limpar").addEventListener("click", function () {
+    entrada.value = "";
+    clausulas = [];
+    historico.innerHTML = "";
+    ultimoResolvente = null;
+    btnAdicionar.disabled = true;
+    renderizar();
+    mensagem("", "<p>Digitem as cláusulas e cliquem em “Ler cláusulas”.</p>");
+    entrada.focus();
+  });
+
+  ler();
+})();
+</script>
+</body>
+</html>

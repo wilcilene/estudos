@@ -13,7 +13,7 @@ Cada disciplina tem seu próprio layout e organização, por isso apenas algumas
 - [Banco de Dados](disciplinas/banco-de-dados/202602/index.html)
 - [Engenharia de Software](disciplinas/engenharia-de-software/202602/index.html)
 - [IHC](disciplinas/ihc/202602/index.html)
-- [Lógica para Computação](disciplinas/logica-para-computacao/202602/index.html)
+- [Lógica para Computação](disciplinas/logica-para-computacao/2027/index.html)
   
 ### Anteriores
 - [Economia](disciplinas/economia/index.md/)
@@ -21,7 +21,8 @@ Cada disciplina tem seu próprio layout e organização, por isso apenas algumas
 - [Engenharia de Software](disciplinas/engenharia-de-software/index.md)
 - [Estrutura de Dados](disciplinas/estrutura-de-dados/index.md)
 - [IHC](disciplinas/ihc/202601/index.html)
-- [Lógica para Computação](disciplinas/logica-para-computacao/index.md)
+- [Lógica para Computação v1](disciplinas/logica-para-computacao/index.md)
+- [Lógica para Computação v2](disciplinas/logica-para-computacao/202602/index.html)
 - [Matemática Discreta](disciplinas/matematica-discreta/index.html)
 - [Programação I - Bacharelado ECO](disciplinas/programacaoi-eco/index.html)
 - [Programação I - Técnico integrado](disciplinas/programacaoi/index.md)
