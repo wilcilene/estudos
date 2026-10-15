@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 04 — Conectivos Lógicos | Lógica para Computação</title>
+<meta name="description" content="Negação, conjunção, disjunção, condicional e bicondicional: significado, tabelas, traduções do português, ou exclusivo e conectivos em programação.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-04-conectivos-logicos.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Caso Nº 04 — Conectivos Lógicos | Lógica para Computação">
+<meta property="og:description" content="Negação, conjunção, disjunção, condicional e bicondicional: significado, tabelas, traduções do português, ou exclusivo e conectivos em programação.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-04-conectivos-logicos.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Conectivos Lógicos",
+    "description": "Negação, conjunção, disjunção, condicional e bicondicional: significado, tabelas, traduções do português, ou exclusivo e conectivos em programação.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-04-conectivos-logicos.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Material de estudo",
+    "educationalLevel": "Ensino Superior",
+    "position": 4,
+    "author": {
+      "@type": "Person",
+      "name": "Wilcilene Kowal"
+    },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Instituto Federal Catarinense — Campus São Bento do Sul"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Lógica para Computação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Caso 04: Conectivos lógicos",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-04-conectivos-logicos.html"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 04 de 20</span>
+  </div>
+</header>
+
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag crime mono">Caso Nº 04 · Lógica Proposicional</span>
+  <h1>Conectivos Lógicos</h1>
+  <p class="lede">Cinco conectivos bastam para descrever qualquer relação entre pistas. Vocês vão ver o significado exato de cada um e as armadilhas de tradução do português.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+<div class="goals">
+    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <ul>
+      <li>dar o significado exato de <code>¬</code>, <code>∧</code>, <code>∨</code>, <code>→</code> e <code>↔</code>;</li>
+      <li>entender por que o condicional é verdadeiro quando o antecedente é falso;</li>
+      <li>traduzir expressões como “só se”, “a menos que”, “nem... nem” e “condição necessária”;</li>
+      <li>diferenciar o “ou” inclusivo do exclusivo e relacionar os conectivos com operadores de programação.</li>
+    </ul>
+  </div>
+
+  <h2>Os cinco conectivos de uma vez</h2>
+  <p>Esta é a tabela que vocês precisam saber de cor. Leiam cada coluna como uma regra do jogo:</p>
+  <div class="table-wrap">
+    <table class="tbl tv">
+      <caption>Tabela dos conectivos</caption>
+      <thead><tr><th>p</th><th>q</th><th>¬p</th><th>p ∧ q</th><th>p ∨ q</th><th>p → q</th><th>p ↔ q</th></tr></thead>
+      <tbody>
+        <tr><td>V</td><td>V</td><td>F</td><td>V</td><td>V</td><td>V</td><td>V</td></tr>
+        <tr><td>V</td><td>F</td><td>F</td><td>F</td><td>V</td><td class="f">F</td><td>F</td></tr>
+        <tr><td>F</td><td>V</td><td>V</td><td>F</td><td>V</td><td>V</td><td>F</td></tr>
+        <tr><td>F</td><td>F</td><td>V</td><td>F</td><td>F</td><td>V</td><td>V</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Negação, conjunção e disjunção</h2>
+  <p>
+    A <strong>negação</strong> <code>¬p</code> inverte o valor de <code>p</code>. A <strong>conjunção</strong>
+    <code>p ∧ q</code> só é verdadeira quando as duas partes são: é a linguagem de “todas as pistas precisam bater”.
+    A <strong>disjunção</strong> <code>p ∨ q</code> é verdadeira quando pelo menos uma das partes é: é a linguagem de
+    “uma das hipóteses se confirma”. Na lógica, o “ou” é sempre <strong>inclusivo</strong>: as duas podem ser verdadeiras ao mesmo tempo.
+  </p>
+  <p>
+    Quando vocês quiserem dizer “um ou outro, mas não os dois”, precisam do <strong>ou exclusivo</strong>
+    (<code>p ⊕ q</code>), que não é primitivo: ele se escreve como <code>(p ∨ q) ∧ ¬(p ∧ q)</code> ou como <code>¬(p ↔ q)</code>.
+  </p>
+
+  <h2>O condicional: o conectivo que mais confunde</h2>
+  <p>
+    Em <code>p → q</code>, <code>p</code> é o <strong>antecedente</strong> e <code>q</code> é o <strong>consequente</strong>.
+    O condicional é uma <strong>promessa</strong>: “se <code>p</code> acontecer, eu garanto <code>q</code>”. A promessa só é
+    quebrada quando <code>p</code> acontece e <code>q</code> não acontece. Se <code>p</code> não acontece, a promessa não foi
+    testada, e a lógica clássica a considera cumprida.
+  </p>
+  <div class="evidence-box">
+    <span class="label">A promessa do Mordomo</span>
+    <p>O Mordomo diz: “Se eu estive na Biblioteca, então vi o Candelabro.” Em quais situações ele mentiu?</p>
+    <ul>
+      <li>Esteve e viu: falou a verdade.</li>
+      <li>Esteve e não viu: <strong>mentiu</strong>. É a única linha falsa.</li>
+      <li>Não esteve (tenha visto ou não o Candelabro em outro lugar): a frase dele não foi posta à prova, então não podemos acusá-lo de mentir.</li>
+    </ul>
+  </div>
+  <p>
+    Isso também mostra que <code>p → q</code> <strong>não</strong> afirma causa nem relação de assunto. “Se 2 + 2 = 5,
+    então a Faca está no envelope” é verdadeira, porque o antecedente é falso. A lógica só olha para os valores.
+  </p>
+
+  <h3>Condição suficiente e condição necessária</h3>
+  <p>Em <code>p → q</code>, dizemos que <code>p</code> é <strong>suficiente</strong> para <code>q</code>, e <code>q</code> é <strong>necessário</strong> para <code>p</code>. As traduções abaixo são todas <code>p → q</code>:</p>
+  <ul>
+    <li>“Se p, então q”; “q, se p”; “p implica q”.</li>
+    <li>“p <strong>só se</strong> q” (atenção: o “só se” marca o consequente!).</li>
+    <li>“p é condição suficiente para q”; “q é condição necessária para p”.</li>
+    <li>“Sempre que p, q”; “q sempre que p”.</li>
+  </ul>
+  <div class="callout">
+    <span class="label">Erro comum</span>
+    <p>“O Jardineiro é culpado só se esteve no Jardim” é <code>J → G</code>, e não <code>G → J</code>. Estar no Jardim é necessário para ele ser culpado, mas não basta.</p>
+    <p>“A menos que” costuma ser traduzido como <code>∨</code>: “o crime foi na Cozinha, a menos que tenha sido com o Veneno” é <code>C ∨ V</code> (equivalente a <code>¬V → C</code>).</p>
+  </div>
+
+  <h3>Recíproca, inversa e contrapositiva</h3>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Nome</th><th>Forma</th><th>Equivale a <code>p → q</code>?</th></tr></thead>
+      <tbody>
+        <tr><td>Original</td><td><code>p → q</code></td><td>—</td></tr>
+        <tr><td>Contrapositiva</td><td><code>¬q → ¬p</code></td><td class="v">Sim, sempre</td></tr>
+        <tr><td>Recíproca</td><td><code>q → p</code></td><td class="f">Não</td></tr>
+        <tr><td>Inversa</td><td><code>¬p → ¬q</code></td><td class="f">Não (equivale à recíproca)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>O bicondicional</h2>
+  <p>
+    <code>p ↔ q</code> (“p se e somente se q”) é verdadeiro quando as duas partes têm o mesmo valor. Ele equivale a
+    <code>(p → q) ∧ (q → p)</code>: cada lado é necessário e suficiente para o outro. Em definições matemáticas, o “se”
+    muitas vezes significa “se e somente se”; em lógica, precisamos ser explícitos.
+  </p>
+
+  <h2>Tradução do português: um guia rápido</h2>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Em português</th><th>Fórmula</th></tr></thead>
+      <tbody>
+        <tr><td>p e q; p, mas q; p, embora q; tanto p quanto q</td><td><code>p ∧ q</code></td></tr>
+        <tr><td>p ou q (ou ambos)</td><td><code>p ∨ q</code></td></tr>
+        <tr><td>ou p ou q, mas não ambos</td><td><code>(p ∨ q) ∧ ¬(p ∧ q)</code></td></tr>
+        <tr><td>nem p nem q</td><td><code>¬p ∧ ¬q</code></td></tr>
+        <tr><td>não é verdade que p e q</td><td><code>¬(p ∧ q)</code></td></tr>
+        <tr><td>p só se q; q é necessário para p</td><td><code>p → q</code></td></tr>
+        <tr><td>p se q; q é suficiente para p</td><td><code>q → p</code></td></tr>
+        <tr><td>p se e somente se q</td><td><code>p ↔ q</code></td></tr>
+        <tr><td>p, a menos que q</td><td><code>p ∨ q</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Conectivos em programação</h2>
+  <p>
+    Em C, Java, JavaScript e Python, <code>!</code>/<code>not</code>, <code>&amp;&amp;</code>/<code>and</code> e
+    <code>||</code>/<code>or</code> correspondem a <code>¬</code>, <code>∧</code> e <code>∨</code>. Duas diferenças importam:
+  </p>
+  <ul>
+    <li><strong>Avaliação em curto-circuito:</strong> em <code>a &amp;&amp; b</code>, se <code>a</code> é falso, <code>b</code> nem é calculado. O valor lógico é o mesmo, mas efeitos colaterais de <code>b</code> não acontecem.</li>
+    <li><strong>Não existe operador de implicação:</strong> para escrever <code>p → q</code>, usem <code>!p || q</code>. O ou exclusivo aparece como <code>^</code> (bit a bit) ou <code>!=</code> entre booleanos; e o bicondicional, como <code>==</code> entre booleanos.</li>
+  </ul>
+
+  <div class="detetive">
+    <span class="label">No Detetive</span>
+    <ul>
+      <li>Quando uma jogadora mostra uma carta depois do seu palpite “Mordomo, Faca, Biblioteca”, e vocês não veem qual foi, a única coisa que sabem é uma <strong>disjunção</strong>: ela tem o Mordomo <em>ou</em> a Faca <em>ou</em> a Biblioteca.</li>
+      <li>A regra do envelope, “exatamente um suspeito”, é um <strong>ou exclusivo</strong> generalizado: pelo menos um (uma grande disjunção) e não dois ao mesmo tempo (várias negações de conjunções).</li>
+      <li>“Se a Pá está na minha mão, então não está no envelope” é um <strong>condicional</strong> que vocês aplicam o tempo todo, sem perceber.</li>
+    </ul>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 1 · Tradução</span>
+    <p>Sejam <code>c</code>: “o suspeito estava na cena” e <code>a</code>: “o suspeito tem álibi”. Traduzam:</p>
+    <ol>
+      <li>“O suspeito estava na cena e não tinha álibi.”</li>
+      <li>“Se o suspeito tinha álibi, então não estava na cena.”</li>
+      <li>“O suspeito estava na cena só se não tinha álibi.”</li>
+      <li>“Nem estava na cena nem tinha álibi.”</li>
+      <li>“Ter álibi é condição suficiente para não estar na cena.”</li>
+    </ol>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>1. <code>c ∧ ¬a</code>. 2. <code>a → ¬c</code>. 3. <code>c → ¬a</code>. 4. <code>¬c ∧ ¬a</code>. 5. <code>a → ¬c</code> (igual ao item 2). Reparem que os itens 2 e 3 são contrapositivas um do outro, logo são equivalentes.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 2 · Quem mentiu?</span>
+    <p>A Governanta diz: “A Faca está no envelope se e somente se o crime foi na Cozinha.” Depois se descobre que o crime foi na Sala de Jantar e a Faca não está no envelope. Ela mentiu?</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Não. Os dois lados são falsos, então têm o mesmo valor, e o bicondicional é verdadeiro.</p>
+    </details>
+  </div>
+
+  <div class="summary">
+    <span class="label">Para guardar</span>
+    <ul>
+      <li><code>p → q</code> só é falso na linha <code>p = V</code>, <code>q = F</code>.</li>
+      <li>“p só se q” é <code>p → q</code>; “p se q” é <code>q → p</code>.</li>
+      <li>A contrapositiva equivale ao original; a recíproca e a inversa não.</li>
+      <li>O “ou” lógico é inclusivo; o exclusivo se escreve com <code>(p ∨ q) ∧ ¬(p ∧ q)</code>.</li>
+      <li>Em código: <code>p → q</code> vira <code>!p || q</code>.</li>
+    </ul>
+  </div>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="4">
+    <label><input type="checkbox" aria-label="Marcar o caso 04 como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre casos">
+    <a href="topico-03-linguagem-formal.html"><span class="dir">← Caso anterior</span>Linguagem formal e símbolos lógicos</a>
+    <a class="next" href="topico-05-tabelas-verdade.html"><span class="dir">Próximo caso →</span>Tabelas-verdade</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow"><span>Guia de estudos · Lógica para Computação</span><span class="mono">Profa. Wilcilene Kowal · IFC São Bento do Sul</span></div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

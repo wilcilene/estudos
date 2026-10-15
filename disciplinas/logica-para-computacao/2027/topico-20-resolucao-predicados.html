@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 20 — Resolução em Lógica de Predicados e Investigação Completa | Lógica para Computação</title>
+<meta name="description" content="Resolução em lógica de primeira ordem: forma clausal, skolemização, resolução com unificação, fatoração, completude e a ligação com Prolog.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-20-resolucao-predicados.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Caso Nº 20 — Resolução em Lógica de Predicados e Investigação Completa | Lógica para Computação">
+<meta property="og:description" content="Resolução em lógica de primeira ordem: forma clausal, skolemização, resolução com unificação, fatoração, completude e a ligação com Prolog.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-20-resolucao-predicados.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Resolução em Lógica de Predicados e Investigação Completa",
+    "description": "Resolução em lógica de primeira ordem: forma clausal, skolemização, resolução com unificação, fatoração, completude e a ligação com Prolog.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-20-resolucao-predicados.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Material de estudo",
+    "educationalLevel": "Ensino Superior",
+    "position": 20,
+    "author": {
+      "@type": "Person",
+      "name": "Wilcilene Kowal"
+    },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Instituto Federal Catarinense — Campus São Bento do Sul"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Lógica para Computação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Caso 20: Resolução em lógica de predicados",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-20-resolucao-predicados.html"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 20 de 20</span>
+  </div>
+</header>
+
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag brass mono">Caso Nº 20 · Substituição · Resolução</span>
+  <h1>Resolução em Lógica de Predicados e Investigação Completa</h1>
+  <p class="lede">O caso final: combinamos forma clausal, unificação e resolução para provar, com o rigor da lógica de primeira ordem, quem está no envelope.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+<div class="goals">
+    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <ul>
+      <li>converter fórmulas de primeira ordem para forma clausal, incluindo a skolemização;</li>
+      <li>aplicar a resolução binária com unificação e a fatoração;</li>
+      <li>fechar um caso do Detetive inteiro por refutação;</li>
+      <li>explicar a completude da resolução e por que a busca pode não terminar;</li>
+      <li>reconhecer na linguagem Prolog a resolução trabalhando sobre cláusulas de Horn.</li>
+    </ul>
+  </div>
+
+  <h2>Forma clausal em primeira ordem</h2>
+  <p>
+    A resolução trabalha sobre cláusulas, então o primeiro passo é levar as pistas a esse formato. Os passos do Caso 13
+    continuam valendo; o que muda é o tratamento dos quantificadores:
+  </p>
+  <ol>
+    <li><strong>Eliminar ↔ e →.</strong></li>
+    <li><strong>Empurrar ¬ para dentro</strong>, usando também <code>¬∀ ≡ ∃¬</code> e <code>¬∃ ≡ ∀¬</code> (Caso 18).</li>
+    <li><strong>Separar variáveis:</strong> cada quantificador ganha uma variável com nome próprio.</li>
+    <li><strong>Skolemizar:</strong> eliminar cada <code>∃</code> (explicado abaixo).</li>
+    <li><strong>Retirar os ∀:</strong> toda variável que sobra é implicitamente universal.</li>
+    <li><strong>Distribuir ∨ sobre ∧</strong> e separar as cláusulas, renomeando as variáveis de cada uma.</li>
+  </ol>
+
+  <h2>Skolemização</h2>
+  <p>
+    Um <code>∃</code> afirma que algo existe sem dizer quem é. A skolemização dá um nome novo a esse “algo”:
+  </p>
+  <ul>
+    <li>Se o <code>∃</code> não está dentro de nenhum <code>∀</code>, o objeto vira uma <strong>constante nova</strong>: <code>∃x (Suspeito(x) ∧ NoEnvelope(x))</code> vira <code>Suspeito(s₀) ∧ NoEnvelope(s₀)</code>. Leiam <code>s₀</code> como “o culpado, seja quem for”.</li>
+    <li>Se está dentro de <code>∀</code>s, o objeto pode depender deles, e vira uma <strong>função nova</strong>: <code>∀j ∃c Tem(j, c)</code> vira <code>∀j Tem(j, cartaDe(j))</code>, em que <code>cartaDe(j)</code> é “alguma carta da jogadora <code>j</code>”.</li>
+  </ul>
+  <p>
+    O resultado <strong>não é equivalente</strong> à fórmula original, mas é <strong>equisatisfatível</strong>, exatamente
+    como na transformação de Tseitin (Caso 13). Como a refutação só pergunta “é insatisfatível?”, isso basta.
+  </p>
+  <div class="callout">
+    <span class="label">Erro comum</span>
+    <p>Skolemizar antes de empurrar as negações. Em <code>¬∀x P(x)</code>, o quantificador é, na verdade, um <code>∃</code> disfarçado (<code>∃x ¬P(x)</code>). Outro erro é usar uma constante quando o <code>∃</code> está dentro de um <code>∀</code>: em <code>∀j ∃c Tem(j, c)</code>, trocar <code>c</code> por uma constante diria que todas as jogadoras têm a <em>mesma</em> carta.</p>
+  </div>
+
+  <h2>Resolução com unificação</h2>
+  <p>
+    Na lógica proposicional, o par complementar precisava ser idêntico: <code>p</code> e <code>¬p</code>. Agora basta que
+    os dois literais <strong>se tornem</strong> complementares depois de uma substituição. Com as variáveis das duas
+    cláusulas renomeadas para não colidirem:
+  </p>
+  <pre><code>  {L₁} ∪ A        {¬L₂} ∪ B        σ = MGU(L₁, L₂)
+  ──────────────────────────────────────────────
+                   (A ∪ B)σ</code></pre>
+  <p>
+    Falta um detalhe para a regra ficar completa: a <strong>fatoração</strong>. Se dois literais de uma mesma cláusula
+    unificam, podemos fundi-los: de <code>{P(x), P(y)}</code> obtemos o fator <code>{P(x)}</code> com <code>{y/x}</code>.
+    Sem isso, o conjunto insatisfatível <code>{P(x), P(y)}</code>, <code>{¬P(u), ¬P(v)}</code> nunca chegaria a
+    <code>□</code>: toda resolvente binária ainda teria dois literais.
+  </p>
+
+  <h2>Fechando o caso</h2>
+  <div class="evidence-box">
+    <span class="label">Dossiê final</span>
+    <p>Mini-partida com três suspeitos. Eu sou a Jogadora 1 (<code>j1</code>).</p>
+    <pre><code>Regras e pistas                                         Cláusulas
+∀j ∀k ∀c (Mostrou(j, k, c) → Tem(j, c))                 1. {¬Mostrou(j, k, c), Tem(j, c)}
+∀j ∀c (Tem(j, c) → ¬NoEnvelope(c))                      2. {¬Tem(i, d), ¬NoEnvelope(d)}
+o culpado é Mordomo, Jardineiro ou Cozinheira           3. {NoEnvelope(Mordomo), NoEnvelope(Jardineiro),
+                                                            NoEnvelope(Cozinheira)}
+eu tenho a Cozinheira                                   4. {Tem(j1, Cozinheira)}
+a Jogadora 2 me mostrou o Mordomo                       5. {Mostrou(j2, j1, Mordomo)}
+negação da acusação “foi o Jardineiro”                  6. {¬NoEnvelope(Jardineiro)}</code></pre>
+    <pre><code> 7. {Tem(j2, Mordomo)}                       1 + 5,  σ = {j/j2, k/j1, c/Mordomo}
+ 8. {¬NoEnvelope(Mordomo)}                   2 + 7,  σ = {i/j2, d/Mordomo}
+ 9. {¬NoEnvelope(Cozinheira)}                2 + 4,  σ = {i/j1, d/Cozinheira}
+10. {NoEnvelope(Jardineiro),
+     NoEnvelope(Cozinheira)}                 3 + 8
+11. {NoEnvelope(Jardineiro)}                 10 + 9
+12. □                                        11 + 6</code></pre>
+    <p>
+      A cláusula vazia prova que <code>NoEnvelope(Jardineiro)</code> é consequência lógica das regras e das pistas. Vejam
+      que a cláusula 2 foi usada duas vezes, com unificadores diferentes: uma regra geral, várias instâncias. Isso é o que
+      a lógica proposicional não conseguia fazer com uma única fórmula.
+    </p>
+  </div>
+
+  <h2>Completude e o limite da busca</h2>
+  <p>
+    Robinson provou em 1965 que a resolução com unificação e fatoração é <strong>refutacionalmente completa</strong>: se
+    um conjunto de cláusulas é insatisfatível, existe uma derivação de <code>□</code>. A base teórica é o teorema de
+    Herbrand, que reduz a insatisfatibilidade em primeira ordem a um conjunto finito de instâncias sem variáveis.
+  </p>
+  <p>
+    Mas lembrem do Caso 18: a validade é só <strong>semidecidível</strong>. Quando o conjunto é satisfatível, a busca pode
+    gerar cláusulas novas para sempre. Com <code>{P(a)}</code> e <code>{¬P(x), P(f(x))}</code>, a resolução produz
+    <code>P(f(a))</code>, <code>P(f(f(a)))</code>, <code>P(f(f(f(a))))</code>... sem nunca saturar. Na lógica
+    proposicional havia no máximo <code>3ⁿ</code> cláusulas (Caso 16); aqui, as funções criam termos sem fim. Por isso
+    provadores reais combinam as estratégias do Caso 16 com limites de tempo.
+  </p>
+
+  <h2>Prolog: resolução como linguagem de programação</h2>
+  <p>
+    Se todas as cláusulas são de Horn (Caso 14), a busca fica muito mais simples: a <strong>resolução SLD</strong> parte da
+    pergunta negada e resolve sempre o primeiro literal do objetivo com uma regra ou fato. É exatamente isso que o Prolog
+    executa, e as respostas que ele devolve são os unificadores encontrados no caminho.
+  </p>
+  <pre><code>% fatos da partida
+mostrou(j2, j1, mordomo).
+suspeito(mordomo).  suspeito(jardineiro).  suspeito(cozinheira).
+
+% regras
+tem(j1, cozinheira).
+tem(J, C)  :- mostrou(J, _, C).
+fora(C)    :- tem(_, C).
+culpado(X) :- suspeito(X), \+ fora(X).
+
+?- culpado(X).
+X = jardineiro.</code></pre>
+  <p>
+    Uma ressalva importante: o <code>\+</code> do Prolog é <strong>negação por falha</strong>. Ele lê “não consegui provar
+    que está fora” como “não está fora”, o que só é correto se o programa contém <em>todas</em> as informações
+    relevantes (hipótese do mundo fechado). Na refutação clássica do dossiê, nós não precisamos dessa hipótese, porque a
+    cláusula 3 dizia explicitamente quais eram os suspeitos.
+  </p>
+
+  <h2>Olhando para trás: o percurso completo</h2>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Casos</th><th>O que vocês construíram</th><th>No Detetive</th></tr></thead>
+      <tbody>
+        <tr><td>01–04</td><td>proposições, linguagem formal, conectivos</td><td>escrever as pistas sem ambiguidade</td></tr>
+        <tr><td>05–08</td><td>tabelas-verdade, classificação, equivalência, consequência</td><td>saber quando uma acusação é garantida</td></tr>
+        <tr><td>09–10</td><td>regras de inferência e demonstrações</td><td>justificar cada passo do raciocínio</td></tr>
+        <tr><td>11–14</td><td>representação, SAT, FNC, cláusulas</td><td>transformar o bloco de anotações em dados</td></tr>
+        <tr><td>15–16</td><td>resolução e seu algoritmo</td><td>deixar a máquina eliminar as hipóteses</td></tr>
+        <tr><td>17–20</td><td>predicados, semântica, unificação, resolução em primeira ordem</td><td>escrever as regras do jogo uma vez só e aplicá-las a qualquer jogadora e carta</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Esse é o percurso da lógica para a computação: da intuição de quem investiga até um procedimento que uma máquina
+    executa sem se cansar e sem errar. Eu espero que, na próxima partida, vocês olhem para o bloco de anotações e vejam
+    cláusulas.
+  </p>
+
+  <div class="detetive">
+    <span class="label">No Detetive</span>
+    <p>
+      Repararam que o dossiê final é o jogo de verdade, só que escrito com cuidado? Regra geral do jogo (cláusulas 1 a 3),
+      o que vocês viram (4 e 5) e a acusação que pretendem fazer, negada (6). Quando a resolução chega a <code>□</code>,
+      podem abrir o envelope sem medo.
+    </p>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 1 · Skolemização</span>
+    <p>Skolemizem: (a) <code>∃x ∀y Mostrou(x, y, Faca)</code>; (b) <code>∀y ∃x Mostrou(x, y, Faca)</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>(a) <code>Mostrou(m, y, Faca)</code>, com <code>m</code> constante nova: uma única jogadora mostrou a Faca a todas. (b) <code>Mostrou(g(y), y, Faca)</code>, com <code>g</code> função nova: para cada jogadora <code>y</code>, alguém (que depende de <code>y</code>) mostrou a Faca a ela.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 2 · Um passo de resolução</span>
+    <p>Resolvam <code>{¬Tem(i, d), ¬NoEnvelope(d)}</code> com <code>{Tem(j3, Corda)}</code>. Qual é o MGU e a resolvente?</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>MGU <code>{i/j3, d/Corda}</code>; resolvente <code>{¬NoEnvelope(Corda)}</code>: a Corda não está no envelope.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Desafio final · Montem o seu caso</span>
+    <p>
+      Escrevam duas premissas em lógica de predicados (pelo menos uma regra com <code>∀</code> e um fato concreto) e uma
+      conclusão. Convertam tudo em cláusulas, neguem a conclusão e cheguem a <code>□</code>, indicando o unificador de
+      cada passo, como no dossiê final. Depois, retirem uma premissa e mostrem que <code>□</code> deixa de aparecer.
+    </p>
+    <details>
+      <summary>Ver uma dica</summary>
+      <p>Usem uma regra como <code>∀x (EsteveEm(x, Biblioteca) → Suspeito(x))</code> e o fato <code>EsteveEm(Mordomo, Biblioteca)</code>. Cláusulas: <code>{¬EsteveEm(x, Biblioteca), Suspeito(x)}</code>, <code>{EsteveEm(Mordomo, Biblioteca)}</code> e a negação <code>{¬Suspeito(Mordomo)}</code>. Dois passos levam a <code>□</code>.</p>
+    </details>
+  </div>
+
+  <div class="summary">
+    <span class="label">Para guardar</span>
+    <ul>
+      <li>Forma clausal: eliminar →, empurrar ¬, separar variáveis, skolemizar, retirar ∀, distribuir.</li>
+      <li>Skolemizar preserva a satisfatibilidade, não a equivalência.</li>
+      <li>Resolução binária com MGU + fatoração é refutacionalmente completa (Robinson, 1965).</li>
+      <li>Em primeira ordem, a busca pode não terminar quando a conclusão não decorre: semidecidibilidade.</li>
+      <li>Prolog = resolução SLD sobre cláusulas de Horn, com negação por falha.</li>
+    </ul>
+  </div>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="20">
+    <label><input type="checkbox" aria-label="Marcar o caso 20 como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre casos">
+    <a href="topico-19-substituicao-unificacao.html"><span class="dir">← Caso anterior</span>Substituição e unificação</a>
+    <a class="next" href="index.html"><span class="dir">Fim da investigação</span>Voltar ao guia de estudos</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow"><span>Guia de estudos · Lógica para Computação</span><span class="mono">Profa. Wilcilene Kowal · IFC São Bento do Sul</span></div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

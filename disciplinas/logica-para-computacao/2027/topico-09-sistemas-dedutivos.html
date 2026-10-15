@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 09 — Sistemas Dedutivos e Regras de Inferência | Lógica para Computação</title>
+<meta name="description" content="Sistemas dedutivos e regras de inferência: modus ponens, modus tollens, silogismos, dilema construtivo, correção e completude.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-09-sistemas-dedutivos.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Caso Nº 09 — Sistemas Dedutivos e Regras de Inferência | Lógica para Computação">
+<meta property="og:description" content="Sistemas dedutivos e regras de inferência: modus ponens, modus tollens, silogismos, dilema construtivo, correção e completude.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-09-sistemas-dedutivos.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Sistemas Dedutivos e Regras de Inferência",
+    "description": "Sistemas dedutivos e regras de inferência: modus ponens, modus tollens, silogismos, dilema construtivo, correção e completude.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-09-sistemas-dedutivos.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Material de estudo",
+    "educationalLevel": "Ensino Superior",
+    "position": 9,
+    "author": {
+      "@type": "Person",
+      "name": "Wilcilene Kowal"
+    },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Instituto Federal Catarinense — Campus São Bento do Sul"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Lógica para Computação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Caso 09: Sistemas dedutivos e regras de inferência",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-09-sistemas-dedutivos.html"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 09 de 20</span>
+  </div>
+</header>
+
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag brass mono">Caso Nº 09 · Sistemas Dedutivos</span>
+  <h1>Sistemas Dedutivos e Regras de Inferência</h1>
+  <p class="lede">Em vez de testar todos os cenários, um sistema dedutivo vai de premissa em premissa aplicando regras. É o procedimento do investigador, não o palpite.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+<div class="goals">
+    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <ul>
+      <li>explicar o que é um sistema dedutivo e a diferença entre <code>⊢</code> e <code>⊨</code>;</li>
+      <li>enunciar e aplicar as principais regras de inferência;</li>
+      <li>usar equivalências como regras de substituição dentro de uma derivação;</li>
+      <li>explicar o que significam correção e completude de um sistema.</li>
+    </ul>
+  </div>
+
+  <h2>Por que precisamos de regras</h2>
+  <p>
+    No Caso 08, verificamos argumentos olhando para todas as valorações. Isso é o lado <strong>semântico</strong> da
+    lógica, e o custo é <code>2ⁿ</code>. Um <strong>sistema dedutivo</strong> segue o caminho <strong>sintático</strong>:
+    em vez de olhar valores, ele manipula símbolos com um conjunto pequeno de regras, cada uma comprovadamente segura.
+    Vocês vão de premissa em premissa, sem nunca montar uma tabela.
+  </p>
+  <p>
+    Escrevo <code>Γ ⊢ C</code> para dizer “<code>C</code> é <strong>derivável</strong> de <code>Γ</code>”, isto é, existe uma
+    sequência de passos, partindo de <code>Γ</code> e aplicando regras, que termina em <code>C</code>. Comparem:
+  </p>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th></th><th><code>Γ ⊨ C</code></th><th><code>Γ ⊢ C</code></th></tr></thead>
+      <tbody>
+        <tr><td>Nome</td><td>consequência lógica</td><td>derivabilidade</td></tr>
+        <tr><td>Natureza</td><td>semântica (valores-verdade)</td><td>sintática (regras sobre símbolos)</td></tr>
+        <tr><td>Como se verifica</td><td>todas as valorações</td><td>exibindo uma derivação</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Correção e completude</h2>
+  <p>Um sistema dedutivo só presta se as duas setas coincidirem:</p>
+  <ul>
+    <li><strong>Correção</strong> (<em>soundness</em>): se <code>Γ ⊢ C</code>, então <code>Γ ⊨ C</code>. Tudo o que o sistema deriva é realmente consequência. As regras nunca levam do verdadeiro ao falso.</li>
+    <li><strong>Completude</strong> (<em>completeness</em>): se <code>Γ ⊨ C</code>, então <code>Γ ⊢ C</code>. Toda consequência pode ser derivada. Nada fica de fora.</li>
+  </ul>
+  <p>Os sistemas que estudamos para a lógica proposicional são corretos e completos. Por isso, provar por regras e provar por tabela dão sempre a mesma resposta.</p>
+
+  <h2>As regras de inferência</h2>
+  <p>Cada regra corresponde a uma tautologia do Caso 06. Leiam “de ... deriva-se ...”.</p>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Regra</th><th>Premissas</th><th>Conclusão</th><th>Leitura de detetive</th></tr></thead>
+      <tbody>
+        <tr><td>Modus ponens (MP)</td><td><code>p → q</code>, <code>p</code></td><td><code>q</code></td><td>A regra vale e a condição aconteceu.</td></tr>
+        <tr><td>Modus tollens (MT)</td><td><code>p → q</code>, <code>¬q</code></td><td><code>¬p</code></td><td>A consequência não aconteceu, então a causa também não.</td></tr>
+        <tr><td>Silogismo hipotético (SH)</td><td><code>p → q</code>, <code>q → r</code></td><td><code>p → r</code></td><td>Encadear pistas.</td></tr>
+        <tr><td>Silogismo disjuntivo (SD)</td><td><code>p ∨ q</code>, <code>¬p</code></td><td><code>q</code></td><td>Eliminar um suspeito.</td></tr>
+        <tr><td>Conjunção (Cj)</td><td><code>p</code>, <code>q</code></td><td><code>p ∧ q</code></td><td>Juntar pistas.</td></tr>
+        <tr><td>Simplificação (Simp)</td><td><code>p ∧ q</code></td><td><code>p</code></td><td>Separar uma pista.</td></tr>
+        <tr><td>Adição (Ad)</td><td><code>p</code></td><td><code>p ∨ q</code></td><td>Enfraquecer uma pista.</td></tr>
+        <tr><td>Dilema construtivo (DC)</td><td><code>p → r</code>, <code>q → r</code>, <code>p ∨ q</code></td><td><code>r</code></td><td>Seja qual for a hipótese, o resultado é o mesmo.</td></tr>
+        <tr><td>Resolução (Res)</td><td><code>p ∨ q</code>, <code>¬p ∨ r</code></td><td><code>q ∨ r</code></td><td>Cruzar duas pistas (Caso 15).</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Além delas, toda equivalência do Caso 07 pode ser usada como <strong>regra de substituição</strong>: vocês podem
+    trocar uma subfórmula por outra equivalente, em qualquer lugar da linha, citando a lei (DM para De Morgan, DN para
+    dupla negação, Cond para o condicional, e assim por diante).
+  </p>
+  <div class="callout">
+    <span class="label">Regra de inferência × regra de substituição</span>
+    <p>Regras de inferência (MP, MT, SD...) só se aplicam à <strong>linha inteira</strong>. De <code>(p ∧ q) → r</code> vocês não podem “simplificar” e obter <code>p → r</code>: isso nem é válido! Já as equivalências podem ser aplicadas a qualquer parte da fórmula.</p>
+  </div>
+
+  <h2>Encadeando regras para fechar um caso</h2>
+  <div class="evidence-box">
+    <span class="label">Derivação comentada</span>
+    <p>Premissas: (1) <code>E → M</code> “se havia pegadas na entrada, o Mordomo esteve lá”; (2) <code>M → (C ∨ J)</code> “se o Mordomo esteve lá, o culpado é a Cozinheira ou o Jardineiro”; (3) <code>E</code>; (4) <code>¬J</code>. Objetivo: <code>C</code>.</p>
+    <pre><code>1. E → M            premissa
+2. M → (C ∨ J)      premissa
+3. E                premissa
+4. ¬J               premissa
+5. M                MP 1, 3
+6. C ∨ J            MP 2, 5
+7. J ∨ C            comutatividade 6
+8. C                SD 7, 4</code></pre>
+  </div>
+
+  <div class="detetive">
+    <span class="label">No Detetive</span>
+    <p>
+      O silogismo disjuntivo é o coração do jogo. Vocês sabem que o culpado é um dos seis suspeitos
+      (<code>S₁ ∨ S₂ ∨ ... ∨ S₆</code>). Cada carta de suspeito que aparece numa mão dá um <code>¬Sᵢ</code>, e cada
+      aplicação do SD tira um suspeito da disjunção. Quando sobra um só, a conclusão é derivada, e não adivinhada.
+    </p>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 1 · Qual regra?</span>
+    <p>Das premissas <code>¬T</code> (“a testemunha não viu o carro”) e <code>T ∨ P</code> (“viu o carro ou a placa”), que regra permite concluir <code>P</code>?</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Silogismo disjuntivo: de <code>T ∨ P</code> e <code>¬T</code>, deriva-se <code>P</code>.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 2 · Derive</span>
+    <p>Premissas: <code>V → ¬C</code>, <code>C ∨ B</code>, <code>V</code>. Derivem <code>B</code> justificando cada linha.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <pre><code>1. V → ¬C    premissa
+2. C ∨ B     premissa
+3. V         premissa
+4. ¬C        MP 1, 3
+5. B         SD 2, 4</code></pre>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 3 · Dilema</span>
+    <p>“Se a arma foi a Faca, o crime foi na Cozinha. Se a arma foi o Veneno, o crime foi na Cozinha. A arma foi a Faca ou o Veneno.” O que se conclui, e por qual regra?</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>O crime foi na Cozinha, por dilema construtivo: <code>f → c</code>, <code>v → c</code>, <code>f ∨ v</code> ⊢ <code>c</code>.</p>
+    </details>
+  </div>
+
+  <div class="summary">
+    <span class="label">Para guardar</span>
+    <ul>
+      <li><code>⊨</code> é semântico; <code>⊢</code> é sintático.</li>
+      <li>Correção: tudo que é derivável é consequência. Completude: toda consequência é derivável.</li>
+      <li>MP, MT, SH, SD, Cj, Simp, Ad e DC são as regras básicas; equivalências entram como substituições.</li>
+      <li>Regras de inferência se aplicam à linha inteira; equivalências, a qualquer subfórmula.</li>
+    </ul>
+  </div>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="9">
+    <label><input type="checkbox" aria-label="Marcar o caso 09 como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre casos">
+    <a href="topico-08-consequencia-logica.html"><span class="dir">← Caso anterior</span>Consequência lógica e argumentação</a>
+    <a class="next" href="topico-10-demonstracoes.html"><span class="dir">Próximo caso →</span>Demonstrações em lógica proposicional</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow"><span>Guia de estudos · Lógica para Computação</span><span class="mono">Profa. Wilcilene Kowal · IFC São Bento do Sul</span></div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

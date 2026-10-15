@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lógica para Computação | Guia de Estudos com o Jogo Detetive</title>
+<meta name="description" content="Guia de estudos de Lógica para Computação (Engenharia da Computação, IFC São Bento do Sul): 20 casos, da lógica proposicional à resolução em lógica de predicados, explicados com o jogo Detetive.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Lógica para Computação | Guia de Estudos com o Jogo Detetive">
+<meta property="og:description" content="20 casos de Lógica para Computação organizados como uma investigação: da lógica proposicional à resolução em lógica de predicados.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lógica para Computação | Guia de Estudos">
+<meta name="twitter:description" content="Guia de estudos de Lógica para Computação organizado como uma investigação do jogo Detetive.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Lógica para Computação",
+  "description": "Disciplina do 5º período de Engenharia da Computação: lógica proposicional, semântica, sistemas dedutivos, aspectos computacionais (SAT, FNC), princípio da resolução, lógica de predicados, substituição e unificação.",
+  "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+  "inLanguage": "pt-BR",
+  "educationalLevel": "Ensino Superior",
+  "author": {
+    "@type": "Person",
+    "name": "Wilcilene Kowal"
+  },
+  "provider": {
+    "@type": "EducationalOrganization",
+    "name": "Instituto Federal Catarinense — Campus São Bento do Sul",
+    "sameAs": "https://saobentodosul.ifc.edu.br/"
+  },
+  "hasCourseInstance": {
+    "@type": "CourseInstance",
+    "courseMode": "blended",
+    "instructor": {
+      "@type": "Person",
+      "name": "Wilcilene Kowal"
+    }
+  }
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="wrap masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Ementa completa</span>
+  </div>
+
+  <div class="wrap hero">
+    <p class="hero-eyebrow">Departamento de investigações lógicas</p>
+    <h1 class="hero-title">Todo argumento é uma <span class="accent">cena de crime</span>.</h1>
+    <p class="hero-lede">
+      Eu organizei a disciplina como uma partida de Detetive. Vocês vão partir de pistas soltas, aprender uma linguagem
+      sem ambiguidade, cruzar informações em tabelas-verdade, demonstrar conclusões passo a passo e, no fim, ensinar uma
+      máquina a fechar o caso sozinha, em lógica proposicional e em lógica de predicados.
+    </p>
+    <div class="hero-facts mono">
+      <span><b>20</b> casos de estudo</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span><b>9</b> frentes de investigação</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>Da lógica proposicional à lógica de predicados</span>
+    </div>
+  </div>
+</header>
+
+<main id="conteudo">
+  <section class="wrap" aria-labelledby="como-estudar">
+    <h2 id="como-estudar" class="visually-hidden">Como estudar com este guia</h2>
+    <div class="intro-grid">
+      <div class="evidence-box">
+        <span class="label">O jogo</span>
+        <h2>Por que Detetive?</h2>
+        <p>No Detetive, um suspeito, uma arma e um local estão escondidos no envelope. Cada rodada traz pistas, e só acusa quem consegue <em>provar</em> a resposta. É exatamente o que a lógica faz: tirar conclusões garantidas a partir de informações parciais.</p>
+      </div>
+      <div class="evidence-box">
+        <span class="label">Cada caso</span>
+        <h2>Como os casos são montados</h2>
+        <p>Todo caso começa com os objetivos, explica o conteúdo com exemplos do jogo, aponta um erro comum, propõe exercícios com resposta e fecha com um resumo “Para guardar”.</p>
+      </div>
+      <div class="evidence-box">
+        <span class="label">Método</span>
+        <h2>Como eu sugiro estudar</h2>
+        <p>Sigam a ordem dos casos, tentem os exercícios antes de abrir a resposta e marquem “concluído” ao terminar. O progresso fica salvo neste navegador.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap meter-section">
+    <section class="meter" aria-labelledby="meter-heading">
+      <div class="meter-top">
+        <div>
+          <p class="meter-label" id="meter-heading">Progresso da investigação</p>
+          <p class="meter-count">Casos resolvidos: <b id="meter-count">0</b> de <span id="meter-total">20</span></p>
+        </div>
+        <button class="reset-btn mono" id="reset-progress" type="button">Reiniciar progresso</button>
+      </div>
+      <div class="meter-track" role="progressbar" aria-labelledby="meter-heading" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0" id="meter-progressbar">
+        <div class="meter-fill" id="meter-fill"></div>
+      </div>
+      <div class="meter-ticks" aria-hidden="true">
+        <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
+      </div>
+      <p class="meter-hint">Marquem “concluído” em cada caso para acompanhar o andamento. Revisões e apresentações não entram na contagem dos 20 casos.</p>
+    </section>
+  </div>
+
+  <div class="wrap toolbar">
+    <div class="search-row">
+      <label class="search-box" for="search-input">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="search" id="search-input" placeholder="Buscar por palavra-chave (ex.: tabela-verdade, SAT, unificação)" aria-label="Buscar caso por palavra-chave">
+      </label>
+    </div>
+    <p class="filter-label">Filtrar por frente de investigação</p>
+    <div class="filters" id="filters" role="group" aria-label="Filtro por frente de investigação"></div>
+    <p class="results-status" id="results-status" role="status" aria-live="polite"></p>
+  </div>
+
+  <div class="wrap">
+    <div class="grid" id="grid"></div>
+    <div class="empty-state" id="empty-state">
+      <span class="display">Nenhuma pista encontrada.</span>
+      Tentem outra palavra-chave ou voltem para “Todos”.
+    </div>
+  </div>
+
+  <noscript>
+    <div class="wrap">
+      <p>O índice interativo precisa de JavaScript. Os casos podem ser abertos diretamente, começando pelo <a href="topico-01-introducao-a-logica.html">Caso 01: Introdução à lógica</a>.</p>
+    </div>
+  </noscript>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>Profa. Wilcilene Kowal · Lógica para Computação · IFC São Bento do Sul</span>
+    <span class="mono">Material atualizado ao longo do semestre. Salvem este link!</span>
+  </div>
+</footer>
+
+<script src="assets/js/app.js" defer></script>
+</body>
+</html>

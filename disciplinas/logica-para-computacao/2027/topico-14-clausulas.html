@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 14 — Cláusulas e Representação por Conjuntos | Lógica para Computação</title>
+<meta name="description" content="Cláusulas como conjuntos de literais: cláusula vazia, cláusula unitária, cláusulas de Horn, tautologias, subsunção e o formato DIMACS.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-14-clausulas.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Caso Nº 14 — Cláusulas e Representação por Conjuntos | Lógica para Computação">
+<meta property="og:description" content="Cláusulas como conjuntos de literais: cláusula vazia, cláusula unitária, cláusulas de Horn, tautologias, subsunção e o formato DIMACS.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-14-clausulas.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Cláusulas e Representação por Conjuntos",
+    "description": "Cláusulas como conjuntos de literais: cláusula vazia, cláusula unitária, cláusulas de Horn, tautologias, subsunção e o formato DIMACS.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-14-clausulas.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Material de estudo",
+    "educationalLevel": "Ensino Superior",
+    "position": 14,
+    "author": {
+      "@type": "Person",
+      "name": "Wilcilene Kowal"
+    },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Instituto Federal Catarinense — Campus São Bento do Sul"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Lógica para Computação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Caso 14: Cláusulas e representação por conjuntos",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-14-clausulas.html"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 14 de 20</span>
+  </div>
+</header>
+
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag crime mono">Caso Nº 14 · Princípio da Resolução</span>
+  <h1>Cláusulas e Representação por Conjuntos</h1>
+  <p class="lede">Em forma normal conjuntiva, cada pista vira uma cláusula e o caso inteiro vira um conjunto de cláusulas, pronto para ser cruzado.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+<div class="goals">
+    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <ul>
+      <li>escrever cláusulas e fórmulas em FNC na notação de conjuntos;</li>
+      <li>explicar o significado da cláusula vazia e do conjunto vazio de cláusulas;</li>
+      <li>reconhecer cláusulas unitárias, tautológicas, de Horn e cláusulas subsumidas;</li>
+      <li>representar um conjunto de cláusulas em código e no formato DIMACS.</li>
+    </ul>
+  </div>
+
+  <h2>Por que usar conjuntos</h2>
+  <p>
+    Numa cláusula, a ordem dos literais não importa (comutatividade) e repetir um literal não muda nada
+    (idempotência). Por isso, podemos escrever a cláusula como um <strong>conjunto de literais</strong>:
+    <code>p ∨ ¬q ∨ r</code> vira <code>{p, ¬q, r}</code>. Do mesmo jeito, uma FNC é uma conjunção de cláusulas, em que
+    ordem e repetição também não importam, então ela vira um <strong>conjunto de cláusulas</strong>:
+  </p>
+  <pre><code>(p ∨ r) ∧ (q ∨ r) ∧ (¬p ∨ ¬q)     ⟶     { {p, r}, {q, r}, {¬p, ¬q} }</code></pre>
+  <p>
+    Leiam assim: a vírgula <strong>dentro</strong> de uma cláusula é um “ou”; a vírgula <strong>entre</strong> cláusulas é um
+    “e”. Uma valoração satisfaz o conjunto quando satisfaz <em>todas</em> as cláusulas; ela satisfaz uma cláusula quando
+    torna verdadeiro <em>pelo menos um</em> de seus literais.
+  </p>
+
+  <h2>Casos especiais que caem em prova</h2>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Objeto</th><th>Notação</th><th>Valor</th><th>Por quê</th></tr></thead>
+      <tbody>
+        <tr><td>Cláusula vazia</td><td><code>{ }</code> ou <code>□</code></td><td class="f">sempre F</td><td>Uma disjunção sem literais não tem nenhum literal que possa ser verdadeiro.</td></tr>
+        <tr><td>Conjunto vazio de cláusulas</td><td><code>∅</code></td><td class="v">sempre V</td><td>Uma conjunção sem exigências não tem nenhuma exigência que possa falhar.</td></tr>
+        <tr><td>Conjunto que contém a cláusula vazia</td><td><code>{ ..., □, ... }</code></td><td class="f">insatisfatível</td><td>Uma das exigências nunca pode ser cumprida.</td></tr>
+        <tr><td>Cláusula unitária</td><td><code>{p}</code></td><td>depende</td><td>Força <code>p = V</code> em qualquer modelo.</td></tr>
+        <tr><td>Cláusula tautológica</td><td><code>{p, ¬p, q}</code></td><td class="v">sempre V</td><td>Contém um literal e o seu complementar; pode ser descartada.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout">
+    <span class="label">Erro comum</span>
+    <p>Confundir <code>{ }</code> (a cláusula vazia, falsa) com <code>∅</code> (nenhuma cláusula, verdadeiro). Encontrar <code>□</code> durante a resolução é o sinal de que o conjunto é insatisfatível; ficar sem cláusulas para satisfazer é sinal de sucesso na busca de modelos.</p>
+  </div>
+
+  <h2>Subsunção: cláusulas que sobram</h2>
+  <p>
+    Se <code>C ⊆ D</code>, dizemos que <code>C</code> <strong>subsume</strong> <code>D</code>. Nesse caso, <code>D</code> é
+    redundante: toda valoração que satisfaz <code>C</code> também satisfaz <code>D</code>. Por exemplo, <code>{p}</code> subsume
+    <code>{p, q}</code>. Remover cláusulas subsumidas e tautológicas deixa o conjunto menor sem mudar o seu significado, e
+    os algoritmos agradecem.
+  </p>
+
+  <h2>Cláusulas de Horn</h2>
+  <p>
+    Uma <strong>cláusula de Horn</strong> tem <strong>no máximo um literal positivo</strong>. Elas são especiais porque podem
+    ser lidas como regras:
+  </p>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Tipo</th><th>Cláusula</th><th>Leitura como regra</th></tr></thead>
+      <tbody>
+        <tr><td>Regra</td><td><code>{¬p, ¬q, r}</code></td><td><code>p ∧ q → r</code></td></tr>
+        <tr><td>Fato</td><td><code>{r}</code></td><td><code>r</code> é verdade</td></tr>
+        <tr><td>Objetivo (restrição)</td><td><code>{¬p, ¬q}</code></td><td><code>p ∧ q</code> não pode acontecer</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Para conjuntos de cláusulas de Horn, a satisfatibilidade é resolvida em <strong>tempo linear</strong>, sem o risco
+    exponencial do SAT geral. É esse o formato da linguagem Prolog, que vamos encontrar no Caso 20.
+  </p>
+
+  <h2>Cláusulas no computador</h2>
+  <p>
+    Numa implementação, uma cláusula é um conjunto (ou um vetor ordenado) de literais, e o literal é um inteiro com sinal:
+    a variável <code>k</code> vira <code>k</code> e <code>¬k</code> vira <code>-k</code>. Esse é o formato
+    <strong>DIMACS</strong>, lido por praticamente todos os resolvedores SAT:
+  </p>
+  <pre><code>c Pistas do exemplo: 1 = p, 2 = q, 3 = r
+p cnf 3 3
+1 3 0
+2 3 0
+-1 -2 0</code></pre>
+  <p>A linha <code>p cnf 3 3</code> diz que há 3 variáveis e 3 cláusulas; cada cláusula termina em <code>0</code>; linhas com <code>c</code> são comentários.</p>
+
+  <div class="detetive">
+    <span class="label">No Detetive</span>
+    <p>
+      Vejam como o bloco de anotações vira um conjunto de cláusulas (cada variável quer dizer “a carta está no envelope”):
+    </p>
+    <ul>
+      <li>“Eu tenho a Faca”: <code>{¬F}</code>, uma cláusula unitária.</li>
+      <li>“O jogador à direita mostrou uma carta entre Mordomo, Veneno e Cozinha”: <code>{¬M, ¬V, ¬C}</code>, uma cláusula de Horn do tipo objetivo.</li>
+      <li>“O suspeito é Mordomo, Governanta ou Jardineiro”: <code>{M, G, J}</code>, que não é de Horn.</li>
+    </ul>
+    <p>Se mais tarde vocês descobrem <code>{¬M}</code>, a pista <code>{¬M, ¬V, ¬C}</code> passa a ser subsumida e pode ser riscada do bloco: ela não acrescenta mais nada.</p>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 1 · Notação de conjuntos</span>
+    <p>Escrevam como conjunto de cláusulas: <code>(¬p ∨ q) ∧ (¬q ∨ p) ∧ p</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><code>{ {¬p, q}, {¬q, p}, {p} }</code>. A última é unitária.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 2 · Limpando o conjunto</span>
+    <p>Simplifiquem <code>{ {p, q}, {p}, {q, ¬q, r}, {¬r, s}, {¬r, s, p} }</code> removendo cláusulas tautológicas e subsumidas.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><code>{q, ¬q, r}</code> é tautológica. <code>{p}</code> subsume <code>{p, q}</code> e <code>{¬r, s, p}</code>. Resultado: <code>{ {p}, {¬r, s} }</code>.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 3 · Horn ou não?</span>
+    <p>Quais são de Horn: <code>{¬a, b}</code>, <code>{a, b}</code>, <code>{¬a, ¬b, ¬c}</code>, <code>{c}</code>?</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Todas, exceto <code>{a, b}</code>, que tem dois literais positivos.</p>
+    </details>
+  </div>
+
+  <div class="summary">
+    <span class="label">Para guardar</span>
+    <ul>
+      <li>Cláusula = conjunto de literais (“ou”); FNC = conjunto de cláusulas (“e”).</li>
+      <li><code>□</code> é falsa; <code>∅</code> é verdadeiro.</li>
+      <li>Cláusulas tautológicas e subsumidas podem ser removidas.</li>
+      <li>Cláusulas de Horn (no máximo um literal positivo) são regras, fatos e restrições; o SAT delas é fácil.</li>
+      <li>DIMACS: variáveis como inteiros, negação como sinal de menos, <code>0</code> no fim.</li>
+    </ul>
+  </div>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="14">
+    <label><input type="checkbox" aria-label="Marcar o caso 14 como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre casos">
+    <a href="topico-13-forma-normal-conjuntiva.html"><span class="dir">← Caso anterior</span>Forma normal conjuntiva</a>
+    <a class="next" href="topico-15-principio-da-resolucao.html"><span class="dir">Próximo caso →</span>Princípio da resolução proposicional</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow"><span>Guia de estudos · Lógica para Computação</span><span class="mono">Profa. Wilcilene Kowal · IFC São Bento do Sul</span></div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

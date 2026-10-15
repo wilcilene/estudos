@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 12 — Satisfatibilidade e Busca de Modelos | Lógica para Computação</title>
+<meta name="description" content="O problema SAT: modelos, força bruta, NP-completude, o algoritmo DPLL e a modelagem do jogo Detetive como fórmula satisfatível.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-12-satisfatibilidade.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Caso Nº 12 — Satisfatibilidade e Busca de Modelos | Lógica para Computação">
+<meta property="og:description" content="O problema SAT: modelos, força bruta, NP-completude, o algoritmo DPLL e a modelagem do jogo Detetive como fórmula satisfatível.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-12-satisfatibilidade.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Satisfatibilidade e Busca de Modelos",
+    "description": "O problema SAT: modelos, força bruta, NP-completude, o algoritmo DPLL e a modelagem do jogo Detetive como fórmula satisfatível.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-12-satisfatibilidade.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Material de estudo",
+    "educationalLevel": "Ensino Superior",
+    "position": 12,
+    "author": {
+      "@type": "Person",
+      "name": "Wilcilene Kowal"
+    },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Instituto Federal Catarinense — Campus São Bento do Sul"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Lógica para Computação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Caso 12: Satisfatibilidade e busca de modelos",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-12-satisfatibilidade.html"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 12 de 20</span>
+  </div>
+</header>
+
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag teal mono">Caso Nº 12 · Aspectos Computacionais</span>
+  <h1>Satisfatibilidade e Busca de Modelos</h1>
+  <p class="lede">Existe algum envelope compatível com todas as anotações? Essa é exatamente a pergunta do problema SAT, um dos mais importantes da computação.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+<div class="goals">
+    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <ul>
+      <li>definir modelo, fórmula satisfatível e o problema SAT;</li>
+      <li>reduzir validade e consequência lógica a perguntas de satisfatibilidade;</li>
+      <li>explicar por que SAT é NP-completo e o que isso significa na prática;</li>
+      <li>executar à mão as ideias do algoritmo DPLL;</li>
+      <li>modelar o envelope do Detetive como uma fórmula e resolvê-lo por propagação.</li>
+    </ul>
+  </div>
+
+  <h2>O problema SAT</h2>
+  <p>
+    Uma valoração que torna uma fórmula verdadeira é um <strong>modelo</strong> dela. Uma fórmula é
+    <strong>satisfatível</strong> quando tem pelo menos um modelo, e <strong>insatisfatível</strong> quando não tem nenhum.
+    O <strong>problema SAT</strong> é a pergunta: “dada uma fórmula, ela é satisfatível?”. Na versão de busca, queremos
+    também um modelo, quando ele existir.
+  </p>
+  <p>Vocês já conhecem a ligação com o Caso 06: contradições são insatisfatíveis; tautologias e contingências são satisfatíveis.</p>
+
+  <h2>Um único problema, muitas perguntas</h2>
+  <p>A força do SAT está em que outras perguntas se transformam nele:</p>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Pergunta</th><th>Pergunta equivalente ao resolvedor SAT</th></tr></thead>
+      <tbody>
+        <tr><td><code>A</code> é tautologia?</td><td><code>¬A</code> é insatisfatível?</td></tr>
+        <tr><td><code>A ≡ B</code>?</td><td><code>¬(A ↔ B)</code> é insatisfatível?</td></tr>
+        <tr><td><code>Γ ⊨ C</code>?</td><td><code>Γ ∪ {¬C}</code> é insatisfatível?</td></tr>
+        <tr><td>As pistas são consistentes?</td><td><code>Γ</code> é satisfatível?</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Força bruta e o seu custo</h2>
+  <p>O algoritmo mais simples testa as valorações uma a uma, como uma tabela-verdade que para no primeiro modelo:</p>
+  <pre><code>para i de 0 até 2ⁿ − 1:
+    val ← valoração do número i         (Caso 11)
+    se avaliar(fórmula, val): retorne "SAT", val
+retorne "INSAT"</code></pre>
+  <p>
+    Verificar uma valoração custa O(n), mas há <code>2ⁿ</code> delas. Para fórmulas satisfatíveis, às vezes o modelo
+    aparece cedo. Para provar que uma fórmula é <strong>insatisfatível</strong>, porém, a força bruta precisa testar
+    todas as linhas.
+  </p>
+
+  <h2>Por que SAT é difícil: NP-completude</h2>
+  <p>
+    SAT foi o primeiro problema provado <strong>NP-completo</strong>, pelo teorema de Cook–Levin (1971). Em palavras simples:
+  </p>
+  <ul>
+    <li>SAT está em <strong>NP</strong>: se alguém entrega um modelo, vocês o verificam em tempo polinomial (basta avaliar).</li>
+    <li>SAT é <strong>NP-difícil</strong>: qualquer problema de NP (escalonamento, coloração de grafos, Sudoku, roteamento...) pode ser traduzido para SAT em tempo polinomial.</li>
+  </ul>
+  <p>
+    Ninguém conhece um algoritmo polinomial para SAT; encontrar um responderia à pergunta <code>P = NP</code>, um dos
+    maiores problemas em aberto da matemática. Ainda assim, os resolvedores modernos (os <em>SAT solvers</em>, como
+    MiniSat, Glucose e CaDiCaL) resolvem instâncias industriais com milhões de variáveis, porque a NP-completude fala do
+    <strong>pior caso</strong>, e problemas reais costumam ter estrutura que permite podar a busca.
+  </p>
+
+  <h2>Podando a busca: as ideias do DPLL</h2>
+  <p>
+    O algoritmo DPLL (Davis, Putnam, Logemann e Loveland, 1962) trabalha com fórmulas em forma de cláusulas (Caso 13) e
+    combina três ideias:
+  </p>
+  <ol>
+    <li><strong>Propagação unitária:</strong> se uma cláusula ficou com um só literal livre e os outros são falsos, esse literal é obrigatório.</li>
+    <li><strong>Literal puro:</strong> se uma variável só aparece com um sinal, podemos escolher o valor que satisfaz todas as suas ocorrências.</li>
+    <li><strong>Decisão com retrocesso:</strong> se nada é forçado, escolhemos um valor (um “chute”); se surgir uma cláusula falsa, voltamos e tentamos o outro valor.</li>
+  </ol>
+  <pre><code>DPLL(cláusulas, valoração):
+    aplique propagação unitária e literais puros
+    se alguma cláusula ficou falsa: retorne INSAT
+    se todas estão satisfeitas:     retorne SAT
+    escolha uma variável x livre
+    retorne DPLL(..., x = V)  ou  DPLL(..., x = F)</code></pre>
+
+  <h2>O envelope do Detetive como fórmula</h2>
+  <p>
+    Vou usar uma versão pequena do jogo, com três suspeitos (Mordomo <code>M</code>, Cozinheira <code>Z</code>, Jardineiro
+    <code>J</code>) e três armas (Faca <code>F</code>, Veneno <code>V</code>, Pá <code>P</code>). Cada variável significa
+    “esta carta está no envelope”.
+  </p>
+  <div class="evidence-box">
+    <span class="label">Regras do jogo em cláusulas</span>
+    <pre><code>Pelo menos um suspeito:   M ∨ Z ∨ J
+No máximo um suspeito:    ¬M ∨ ¬Z    ¬M ∨ ¬J    ¬Z ∨ ¬J
+Pelo menos uma arma:      F ∨ V ∨ P
+No máximo uma arma:       ¬F ∨ ¬V    ¬F ∨ ¬P    ¬V ∨ ¬P</code></pre>
+    <span class="label">Pistas da partida</span>
+    <pre><code>Eu tenho a Faca e o Mordomo:              ¬F      ¬M
+Palpitei "Cozinheira, Veneno" e alguém
+me mostrou uma das duas cartas:           ¬Z ∨ ¬V
+Outra jogadora me mostrou a Pá:           ¬P</code></pre>
+    <span class="label">DPLL por propagação, sem nenhum chute</span>
+    <pre><code>¬F, ¬M, ¬P             cláusulas unitárias
+F ∨ V ∨ P   →  V       (F e P são falsos)
+¬Z ∨ ¬V     →  ¬Z      (V é verdadeiro)
+M ∨ Z ∨ J   →  J       (M e Z são falsos)</code></pre>
+    <p>Modelo único: Jardineiro com Veneno. Se não houvesse a pista da Pá, a fórmula teria três modelos e a acusação ainda seria um palpite.</p>
+  </div>
+  <p>
+    No jogo completo, com 6 suspeitos, 6 armas e 9 locais, as regras do envelope geram 3 cláusulas de “pelo menos um” e
+    15 + 15 + 36 = 66 cláusulas de “no máximo um” (uma para cada par de cartas do mesmo tipo). Para um resolvedor SAT,
+    isso é minúsculo.
+  </p>
+
+  <div class="callout">
+    <span class="label">Erro comum</span>
+    <p>Achar que “no máximo um” se escreve com uma única cláusula. Não se escreve: são necessárias todas as cláusulas <code>¬a ∨ ¬b</code>, uma para cada par. Esse tipo de restrição é chamado de <strong>restrição de cardinalidade</strong>.</p>
+  </div>
+
+  <div class="detetive">
+    <span class="label">No Detetive</span>
+    <p>
+      Vocês podem acusar quando a fórmula das anotações tem <strong>exatamente um modelo</strong>. Um truque para conferir
+      com um resolvedor: encontrem um modelo, acrescentem a cláusula que o proíbe (por exemplo, <code>¬J ∨ ¬V</code>) e
+      perguntem de novo. Se a resposta for INSAT, o envelope está determinado e a acusação é consequência lógica.
+    </p>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 1 · Satisfatível?</span>
+    <p>A fórmula <code>(p ∨ q) ∧ ¬p ∧ ¬q</code> é satisfatível?</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Não. As unitárias forçam <code>p = F</code> e <code>q = F</code>, e então <code>p ∨ q</code> fica falsa. É insatisfatível.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 2 · Contando modelos</span>
+    <p>No exemplo do envelope, retire a pista da Pá (<code>¬P</code>). Quais são os modelos?</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Com <code>¬F</code> e <code>¬M</code>, sobram as armas V e P e os suspeitos Z e J, com a restrição <code>¬Z ∨ ¬V</code>. Os modelos são (J, V), (J, P) e (Z, P). Três envelopes possíveis: ainda não dá para acusar.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 3 · Reduzindo a SAT</span>
+    <p>Que pergunta vocês fariam a um resolvedor SAT para saber se <code>p → q, q → r ⊨ p → r</code>?</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Se <code>(p → q) ∧ (q → r) ∧ ¬(p → r)</code> é satisfatível. A resposta é INSAT, logo a consequência vale.</p>
+    </details>
+  </div>
+
+  <div class="summary">
+    <span class="label">Para guardar</span>
+    <ul>
+      <li>SAT: existe valoração que torna a fórmula verdadeira?</li>
+      <li>Validade, equivalência e consequência se reduzem a SAT pela negação.</li>
+      <li>SAT é NP-completo: verificar é fácil, encontrar pode ser difícil no pior caso.</li>
+      <li>DPLL = propagação unitária + literal puro + decisão com retrocesso.</li>
+      <li>“Exatamente um” = uma cláusula de “pelo menos um” + uma cláusula por par para “no máximo um”.</li>
+    </ul>
+  </div>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="12">
+    <label><input type="checkbox" aria-label="Marcar o caso 12 como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre casos">
+    <a href="topico-11-representacao-computacional.html"><span class="dir">← Caso anterior</span>Representação computacional de fórmulas lógicas</a>
+    <a class="next" href="topico-13-forma-normal-conjuntiva.html"><span class="dir">Próximo caso →</span>Forma normal conjuntiva</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow"><span>Guia de estudos · Lógica para Computação</span><span class="mono">Profa. Wilcilene Kowal · IFC São Bento do Sul</span></div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

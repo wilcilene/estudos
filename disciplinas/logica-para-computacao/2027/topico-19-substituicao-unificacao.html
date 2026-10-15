@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 19 — Substituição e Unificação | Lógica para Computação</title>
+<meta name="description" content="Substituição de variáveis por termos, composição, unificador mais geral e o algoritmo de unificação de Robinson com verificação de ocorrência.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-19-substituicao-unificacao.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Caso Nº 19 — Substituição e Unificação | Lógica para Computação">
+<meta property="og:description" content="Substituição de variáveis por termos, composição, unificador mais geral e o algoritmo de unificação de Robinson com verificação de ocorrência.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-19-substituicao-unificacao.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Substituição e Unificação",
+    "description": "Substituição de variáveis por termos, composição, unificador mais geral e o algoritmo de unificação de Robinson com verificação de ocorrência.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-19-substituicao-unificacao.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Material de estudo",
+    "educationalLevel": "Ensino Superior",
+    "position": 19,
+    "author": {
+      "@type": "Person",
+      "name": "Wilcilene Kowal"
+    },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Instituto Federal Catarinense — Campus São Bento do Sul"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Lógica para Computação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Caso 19: Substituição e unificação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-19-substituicao-unificacao.html"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 19 de 20</span>
+  </div>
+</header>
+
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag brass mono">Caso Nº 19 · Substituição</span>
+  <h1>Substituição e Unificação</h1>
+  <p class="lede">Uma regra geral e uma pista concreta só se encontram quando conseguimos fazer as duas coincidirem. Esse encaixe se chama unificação.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+<div class="goals">
+    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <ul>
+      <li>aplicar e compor substituições, respeitando a aplicação simultânea;</li>
+      <li>definir unificador e unificador mais geral (MGU);</li>
+      <li>executar o algoritmo de unificação passo a passo, incluindo a verificação de ocorrência;</li>
+      <li>reconhecer os dois motivos de falha: conflito de símbolos e ciclo;</li>
+      <li>ler e adaptar uma implementação da unificação em Python.</li>
+    </ul>
+  </div>
+
+  <h2>Substituição</h2>
+  <p>
+    Uma <strong>substituição</strong> <code>σ = {x₁/t₁, ..., xₙ/tₙ}</code> troca cada variável <code>xᵢ</code> pelo termo
+    <code>tᵢ</code>. Escrevemos <code>φσ</code> para o resultado de aplicar <code>σ</code> em <code>φ</code>. Com
+    <code>σ = {j/j1, c/Faca}</code>:
+  </p>
+  <pre><code>Tem(j, c)σ  =  Tem(j1, Faca)</code></pre>
+  <p>
+    O resultado se chama <strong>instância</strong> da fórmula original. É assim que uma regra geral (“quem mostra uma
+    carta tem a carta”) é aplicada a um caso concreto. Dois cuidados:
+  </p>
+  <ul>
+    <li>A aplicação é <strong>simultânea</strong>. <code>P(x, y){x/y, y/a}</code> dá <code>P(y, a)</code>, e não <code>P(a, a)</code>: o <code>y</code> que entrou no lugar de <code>x</code> não é substituído de novo.</li>
+    <li>Só se substituem variáveis, nunca constantes. <code>{Faca/x}</code> não é uma substituição.</li>
+  </ul>
+
+  <h2>Composição</h2>
+  <p>
+    A composição <code>σθ</code> significa “aplicar <code>σ</code> e depois <code>θ</code>”: <code>φ(σθ) = (φσ)θ</code>.
+    Para calcular, apliquem <code>θ</code> nos termos de <code>σ</code> e acrescentem os pares de <code>θ</code> cujas
+    variáveis <code>σ</code> não mencionava.
+  </p>
+  <div class="evidence-box">
+    <span class="label">Compondo</span>
+    <pre><code>σ = {x/f(y)}      θ = {y/a}
+σθ = {x/f(a), y/a}
+
+Conferindo em P(x, y):   P(x, y)σ = P(f(y), y)   e depois   θ  →  P(f(a), a)  ✓</code></pre>
+  </div>
+
+  <h2>Unificação e unificador mais geral</h2>
+  <p>
+    Um <strong>unificador</strong> de duas expressões é uma substituição que as torna <strong>idênticas</strong>. Para
+    <code>P(x, y)</code> e <code>P(a, z)</code>, estes são unificadores:
+  </p>
+  <pre><code>σ₁ = {x/a, y/z}            resultado: P(a, z)
+σ₂ = {x/a, y/b, z/b}       resultado: P(a, b)</code></pre>
+  <p>
+    O <code>σ₂</code> fixa mais do que o necessário: ele é <code>σ₁</code> seguido de <code>{z/b}</code>. Dizemos que
+    <code>σ₁</code> é <strong>mais geral</strong>. O <strong>unificador mais geral</strong> (MGU, de <em>most general
+    unifier</em>) é aquele do qual todos os outros se obtêm por composição. O teorema de Robinson (1965) garante: se duas
+    expressões são unificáveis, existe um MGU, único a menos de renomear variáveis. Na resolução, sempre usamos o MGU,
+    para não perder generalidade cedo demais.
+  </p>
+
+  <h2>O algoritmo de unificação</h2>
+  <p>Escrevam o problema como uma lista de equações <code>s = t</code> e apliquem as regras até não sobrar nada a fazer:</p>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Situação</th><th>Ação</th></tr></thead>
+      <tbody>
+        <tr><td><code>f(s₁, ..., sₙ) = f(t₁, ..., tₙ)</code></td><td><strong>Decompor</strong> em <code>s₁ = t₁, ..., sₙ = tₙ</code>.</td></tr>
+        <tr><td><code>f(...) = g(...)</code> com <code>f ≠ g</code> (ou aridades diferentes)</td><td><strong>Falha</strong> por conflito. Duas constantes diferentes também conflitam.</td></tr>
+        <tr><td><code>x = x</code></td><td><strong>Apagar</strong> a equação.</td></tr>
+        <tr><td><code>t = x</code> com <code>t</code> que não é variável</td><td><strong>Inverter</strong> para <code>x = t</code>.</td></tr>
+        <tr><td><code>x = t</code> com <code>x</code> aparecendo dentro de <code>t</code></td><td><strong>Falha</strong> pela verificação de ocorrência (<em>occurs check</em>).</td></tr>
+        <tr><td><code>x = t</code> com <code>x</code> fora de <code>t</code></td><td><strong>Eliminar:</strong> registrar <code>x/t</code> e trocar <code>x</code> por <code>t</code> em todas as outras equações.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="evidence-box">
+    <span class="label">Exemplo clássico</span>
+    <pre><code>P(x, f(y))  =  P(a, f(g(z)))
+→ x = a,  f(y) = f(g(z))        decompor
+→ x = a,  y = g(z)              decompor
+MGU: {x/a, y/g(z)}              resultado: P(a, f(g(z)))</code></pre>
+  </div>
+  <div class="evidence-box">
+    <span class="label">Exemplo do Detetive</span>
+    <p>A regra fala de <code>Mostrou(j, aDireita(j), c)</code>; o fato é <code>Mostrou(j1, k, Faca)</code>.</p>
+    <pre><code>j = j1,   aDireita(j) = k,   c = Faca        decompor
+j/j1  →   aDireita(j1) = k,  c = Faca          eliminar j
+          k = aDireita(j1)                     inverter
+MGU: {j/j1, k/aDireita(j1), c/Faca}</code></pre>
+    <p>Lendo: a jogadora <code>k</code> do fato só pode ser a que está à direita de <code>j1</code>, e a carta é a Faca.</p>
+  </div>
+
+  <h2>Quando a unificação falha</h2>
+  <ul>
+    <li><strong>Conflito:</strong> <code>EsteveEm(Mordomo, Biblioteca)</code> e <code>EsteveEm(Jardineiro, y)</code>. A primeira equação é <code>Mordomo = Jardineiro</code>, duas constantes diferentes. Nenhuma substituição resolve.</li>
+    <li><strong>Ciclo:</strong> <code>P(x, x)</code> e <code>P(y, aDireita(y))</code>. Depois de <code>x/y</code>, sobra <code>y = aDireita(y)</code>: <code>y</code> teria de ser a jogadora à direita de si mesma, um termo infinito <code>aDireita(aDireita(...))</code>. A verificação de ocorrência barra isso.</li>
+  </ul>
+  <div class="callout">
+    <span class="label">Erro comum</span>
+    <p>Esquecer a verificação de ocorrência. Sem ela, o algoritmo “unifica” <code>x</code> com <code>f(x)</code> e a resolução pode “provar” coisas falsas. Curiosidade de engenharia: o Prolog, por desempenho, pula essa verificação por padrão; quando ela importa, usa-se o predicado <code>unify_with_occurs_check/2</code>.</p>
+  </div>
+
+  <h2>Uma implementação em Python</h2>
+  <p>Termos compostos são tuplas <code>(símbolo, arg1, ...)</code>; variáveis são textos em minúsculas; constantes começam com maiúscula (por isso <code>J1</code>).</p>
+  <pre><code>def eh_var(t):
+    return isinstance(t, str) and t[0].islower()
+
+def aplicar(t, s):
+    if eh_var(t):
+        return aplicar(s[t], s) if t in s else t
+    if isinstance(t, tuple):
+        return (t[0],) + tuple(aplicar(a, s) for a in t[1:])
+    return t
+
+def ocorre(x, t):
+    if t == x:
+        return True
+    return isinstance(t, tuple) and any(ocorre(x, a) for a in t[1:])
+
+def unificar(a, b, s=None):
+    s = {} if s is None else s
+    a, b = aplicar(a, s), aplicar(b, s)
+    if a == b:
+        return s
+    if eh_var(a):
+        return None if ocorre(a, b) else {**s, a: b}
+    if eh_var(b):
+        return unificar(b, a, s)
+    if isinstance(a, tuple) and isinstance(b, tuple) \
+            and a[0] == b[0] and len(a) == len(b):
+        for x, y in zip(a[1:], b[1:]):
+            s = unificar(x, y, s)
+            if s is None:
+                return None
+        return s
+    return None                                    # conflito de símbolos
+
+regra = ("Mostrou", "j", ("aDireita", "j"), "c")
+fato  = ("Mostrou", "J1", "k", "Faca")
+print(unificar(regra, fato))
+# {'j': 'J1', 'k': ('aDireita', 'J1'), 'c': 'Faca'}</code></pre>
+  <p>A função devolve <code>None</code> quando não há unificador. O dicionário pode ter variáveis que apontam para termos com outras variáveis; <code>aplicar</code> segue essas ligações até o fim.</p>
+
+  <div class="detetive">
+    <span class="label">No Detetive</span>
+    <p>
+      Unificar é o que vocês fazem ao ouvir um palpite e consultar as regras do bloco: “quem mostra uma carta tem a carta”
+      casa com “a jogadora à direita da Jogadora 1 mostrou a Faca” quando <code>j</code> vira <code>j1</code> e
+      <code>c</code> vira <code>Faca</code>. Se o palpite falasse de uma carta diferente da que a regra exige, haveria
+      conflito, e a regra simplesmente não se aplicaria.
+    </p>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 1 · Unificador</span>
+    <p>Encontrem o MGU de <code>UsouArma(x, Faca)</code> e <code>UsouArma(Mordomo, y)</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><code>{x/Mordomo, y/Faca}</code>. As duas viram <code>UsouArma(Mordomo, Faca)</code>.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 2 · Com funções</span>
+    <p>Encontrem o MGU de <code>Q(x, f(x))</code> e <code>Q(f(y), z)</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Equações <code>x = f(y)</code> e <code>f(x) = z</code>. Eliminando <code>x</code>: <code>z = f(f(y))</code>. MGU: <code>{x/f(y), z/f(f(y))}</code>. Resultado: <code>Q(f(y), f(f(y)))</code>.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 3 · Unifica ou falha?</span>
+    <p>Para cada par, dê o MGU ou o motivo da falha: (a) <code>P(x, x)</code> e <code>P(Mordomo, Faca)</code>; (b) <code>P(x, g(x))</code> e <code>P(g(y), y)</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>(a) Falha por conflito: depois de <code>x/Mordomo</code>, sobra <code>Mordomo = Faca</code>. (b) Falha por ocorrência: de <code>x = g(y)</code>, a segunda equação vira <code>g(g(y)) = y</code>, e <code>y</code> aparece dentro de <code>g(g(y))</code>.</p>
+    </details>
+  </div>
+
+  <div class="summary">
+    <span class="label">Para guardar</span>
+    <ul>
+      <li>Substituição troca variáveis por termos, todas ao mesmo tempo.</li>
+      <li>Unificador torna duas expressões idênticas; o MGU fixa só o necessário.</li>
+      <li>Algoritmo: decompor, apagar, inverter, eliminar; falhar por conflito ou por ocorrência.</li>
+      <li>Sem verificação de ocorrência, a unificação aceita termos infinitos e a lógica fica incorreta.</li>
+    </ul>
+  </div>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="19">
+    <label><input type="checkbox" aria-label="Marcar o caso 19 como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre casos">
+    <a href="topico-18-semantica-predicados.html"><span class="dir">← Caso anterior</span>Semântica da lógica de predicados</a>
+    <a class="next" href="topico-20-resolucao-predicados.html"><span class="dir">Próximo caso →</span>Resolução em lógica de predicados</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow"><span>Guia de estudos · Lógica para Computação</span><span class="mono">Profa. Wilcilene Kowal · IFC São Bento do Sul</span></div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

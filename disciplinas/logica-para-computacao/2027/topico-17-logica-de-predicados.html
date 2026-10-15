@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 17 — Lógica de Predicados: Termos, Predicados e Quantificadores | Lógica para Computação</title>
+<meta name="description" content="Lógica de primeira ordem: constantes, variáveis, funções, predicados, quantificadores, escopo, variáveis livres e ligadas e tradução do português.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-17-logica-de-predicados.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Caso Nº 17 — Lógica de Predicados: Termos, Predicados e Quantificadores | Lógica para Computação">
+<meta property="og:description" content="Lógica de primeira ordem: constantes, variáveis, funções, predicados, quantificadores, escopo, variáveis livres e ligadas e tradução do português.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-17-logica-de-predicados.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Lógica de Predicados: Termos, Predicados e Quantificadores",
+    "description": "Lógica de primeira ordem: constantes, variáveis, funções, predicados, quantificadores, escopo, variáveis livres e ligadas e tradução do português.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-17-logica-de-predicados.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Material de estudo",
+    "educationalLevel": "Ensino Superior",
+    "position": 17,
+    "author": {
+      "@type": "Person",
+      "name": "Wilcilene Kowal"
+    },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Instituto Federal Catarinense — Campus São Bento do Sul"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Lógica para Computação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Caso 17: Lógica de predicados: termos, predicados e quantificadores",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-17-logica-de-predicados.html"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 17 de 20</span>
+  </div>
+</header>
+
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag indigo mono">Caso Nº 17 · Lógica de Predicados</span>
+  <h1>Lógica de Predicados: Termos, Predicados e Quantificadores</h1>
+  <p class="lede">A lógica proposicional trata cada frase como um bloco fechado. Para falar de todos os suspeitos, de alguma arma ou de quem tem qual carta, precisamos de um vocabulário mais rico.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+<div class="goals">
+    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <ul>
+      <li>explicar o que a lógica proposicional não consegue dizer e por que precisamos de predicados;</li>
+      <li>distinguir constantes, variáveis, funções e predicados, com suas aridades;</li>
+      <li>usar os quantificadores ∀ e ∃, identificando escopo, variáveis livres e ligadas;</li>
+      <li>traduzir frases para lógica de predicados sem cair nas armadilhas clássicas;</li>
+      <li>escrever as regras do Detetive com um vocabulário de primeira ordem.</li>
+    </ul>
+  </div>
+
+  <h2>O limite da lógica proposicional</h2>
+  <p>
+    Até aqui, “o Mordomo está no envelope” era um bloco fechado, a variável <code>M</code>. Isso funciona, mas cobra caro.
+    Para dizer “quem tem uma carta na mão sabe que ela não está no envelope”, eu precisaria de uma fórmula para cada
+    combinação de jogadora e carta. Com 4 jogadoras e 21 cartas, são 84 fórmulas quase idênticas. E uma frase como
+    “toda carta está no envelope ou na mão de alguém” não tem tradução direta.
+  </p>
+  <p>
+    A <strong>lógica de predicados</strong> (ou <strong>lógica de primeira ordem</strong>) abre a proposição e mostra a
+    estrutura dela: <strong>objetos</strong>, <strong>propriedades</strong> e <strong>relações</strong>, além de palavras
+    como “todo” e “algum”.
+  </p>
+
+  <h2>Os ingredientes da linguagem</h2>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Símbolo</th><th>O que nomeia</th><th>Exemplos no Detetive</th></tr></thead>
+      <tbody>
+        <tr><td>Constante</td><td>um objeto específico</td><td><code>Mordomo</code>, <code>Faca</code>, <code>Biblioteca</code>, <code>j1</code> (a Jogadora 1)</td></tr>
+        <tr><td>Variável</td><td>um objeto qualquer, ainda não fixado</td><td><code>x</code>, <code>c</code>, <code>j</code></td></tr>
+        <tr><td>Função (aridade n)</td><td>leva n objetos a <strong>um objeto</strong></td><td><code>aDireita(j)</code>: a jogadora sentada à direita de <code>j</code></td></tr>
+        <tr><td>Predicado (aridade n)</td><td>leva n objetos a <strong>V ou F</strong></td><td><code>Suspeito(x)</code>, <code>Tem(j, c)</code>, <code>NoEnvelope(c)</code>, <code>Mostrou(j, k, c)</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Constantes, variáveis e aplicações de funções formam os <strong>termos</strong>: são os “substantivos” da linguagem.
+    <code>aDireita(aDireita(j1))</code> é um termo (a jogadora duas cadeiras à direita da Jogadora 1). Um predicado aplicado
+    a termos forma uma <strong>fórmula atômica</strong>, que já pode ser verdadeira ou falsa:
+    <code>Tem(aDireita(j1), Faca)</code>. A partir daí, os conectivos que vocês já conhecem funcionam como antes.
+  </p>
+  <div class="callout">
+    <span class="label">Erro comum</span>
+    <p>Confundir função com predicado. <code>aDireita(j1)</code> <strong>é uma jogadora</strong>, não uma afirmação; escrever <code>aDireita(j1) ∧ Tem(j1, Faca)</code> não faz sentido. Já <code>Tem(j1, Faca)</code> é uma afirmação e não pode ser argumento de outro predicado: <code>Suspeito(Tem(j1, Faca))</code> está mal formada.</p>
+  </div>
+
+  <h2>Quantificadores</h2>
+  <ul>
+    <li><strong>Universal:</strong> <code>∀x φ</code> diz que <code>φ</code> vale para <strong>todo</strong> objeto <code>x</code> do domínio.</li>
+    <li><strong>Existencial:</strong> <code>∃x φ</code> diz que <code>φ</code> vale para <strong>pelo menos um</strong> objeto <code>x</code>.</li>
+  </ul>
+  <p>
+    O <strong>escopo</strong> de um quantificador é a fórmula logo à sua frente. Uma ocorrência de variável dentro do escopo
+    de um quantificador sobre ela é <strong>ligada</strong>; fora de qualquer escopo, é <strong>livre</strong>. Em
+  </p>
+  <pre><code>∀c (Tem(j, c) → ¬NoEnvelope(c))</code></pre>
+  <p>
+    a variável <code>c</code> é ligada e <code>j</code> é livre. Uma fórmula com variável livre funciona como uma função
+    booleana à espera de um valor (“<em>ela</em> tem uma carta...”, mas quem é ela?). Uma fórmula sem variáveis livres é
+    uma <strong>sentença</strong>: ela tem valor-verdade assim que fixamos o cenário (Caso 18).
+  </p>
+
+  <h2>Padrões de tradução</h2>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Frase</th><th>Tradução correta</th><th>Armadilha</th></tr></thead>
+      <tbody>
+        <tr><td>Todo suspeito tem motivo.</td><td><code>∀x (Suspeito(x) → Motivo(x))</code></td><td><code>∀x (Suspeito(x) ∧ Motivo(x))</code> diz que <em>tudo</em> é suspeito, inclusive a Faca.</td></tr>
+        <tr><td>Algum suspeito tem motivo.</td><td><code>∃x (Suspeito(x) ∧ Motivo(x))</code></td><td><code>∃x (Suspeito(x) → Motivo(x))</code> fica verdadeira só porque existe a Faca, que não é suspeito.</td></tr>
+        <tr><td>Nenhum suspeito tem álibi.</td><td><code>∀x (Suspeito(x) → ¬Alibi(x))</code></td><td>equivale a <code>¬∃x (Suspeito(x) ∧ Alibi(x))</code></td></tr>
+        <tr><td>Só suspeitos têm motivo.</td><td><code>∀x (Motivo(x) → Suspeito(x))</code></td><td>o “só” inverte o condicional, como o “só se” do Caso 04.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Regra prática que eu repito todo semestre: <strong>∀ combina com →</strong> e <strong>∃ combina com ∧</strong>.</p>
+
+  <h2>A ordem dos quantificadores importa</h2>
+  <div class="evidence-box">
+    <span class="label">Mesmas palavras, sentidos diferentes</span>
+    <pre><code>∀j ∃c Tem(j, c)     toda jogadora tem alguma carta              (verdade no jogo)
+∃c ∀j Tem(j, c)     existe uma carta que todas as jogadoras têm (impossível: cada carta está em uma mão só)</code></pre>
+    <p>
+      Na primeira, a carta pode ser diferente para cada jogadora: <code>c</code> depende de <code>j</code>. Na segunda,
+      uma única carta precisa servir para todas. Quantificadores do mesmo tipo podem trocar de lugar
+      (<code>∀x ∀y ≡ ∀y ∀x</code>); de tipos diferentes, não.
+    </p>
+  </div>
+
+  <h2>As regras do Detetive em primeira ordem</h2>
+  <div class="evidence-box">
+    <span class="label">Vocabulário e regras</span>
+    <pre><code>∀c (Carta(c) → NoEnvelope(c) ∨ ∃j Tem(j, c))      toda carta está no envelope ou com alguém
+∀j ∀c (Tem(j, c) → ¬NoEnvelope(c))                 carta na mão não está no envelope
+∃x (Suspeito(x) ∧ NoEnvelope(x))                   há um suspeito no envelope
+∀j ∀k ∀c (Mostrou(j, k, c) → Tem(j, c))            quem mostra uma carta, tem a carta
+Tem(j1, Faca)                                      um fato concreto, sem variáveis</code></pre>
+    <p>
+      Cinco linhas no lugar de dezenas de fórmulas proposicionais. Para dizer “<strong>exatamente</strong> um suspeito”,
+      precisamos ainda do símbolo de igualdade:
+      <code>∃x (Suspeito(x) ∧ NoEnvelope(x) ∧ ∀y (Suspeito(y) ∧ NoEnvelope(y) → y = x))</code>.
+    </p>
+  </div>
+
+  <div class="detetive">
+    <span class="label">No Detetive</span>
+    <p>
+      Quando o domínio é finito, como as 21 cartas e as jogadoras da mesa, dá para “desdobrar” cada quantificador em uma
+      conjunção ou disjunção e voltar à lógica proposicional: <code>Tem(j1, Faca)</code> vira uma variável, e assim por
+      diante. É assim que muitos programas mandam problemas de primeira ordem para um resolvedor SAT (Caso 12). A lógica de
+      predicados é a linguagem em que vocês <strong>pensam e escrevem</strong> as regras; o desdobramento é o que a
+      máquina executa.
+    </p>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 1 · Tradução</span>
+    <p>Traduzam: “toda jogadora mostrou alguma carta para a jogadora à sua direita”. Usem <code>Mostrou(j, k, c)</code> e a função <code>aDireita</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><code>∀j ∃c Mostrou(j, aDireita(j), c)</code>. Reparem que a função evita um quantificador a mais para a segunda jogadora.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 2 · Livre ou ligada?</span>
+    <p>Em <code>∃c (Tem(j, c) ∧ Arma(c)) ∨ NoEnvelope(c)</code>, quais ocorrências são livres?</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><code>j</code> é livre. O escopo do <code>∃c</code> termina no parêntese, então o <code>c</code> de <code>NoEnvelope(c)</code> também é livre, mesmo tendo o mesmo nome. Bom estilo: renomear, por exemplo <code>∃d (Tem(j, d) ∧ Arma(d)) ∨ NoEnvelope(c)</code>.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 3 · Ordem</span>
+    <p>Expliquem a diferença entre <code>∃x ∀c (Tem(x, c) → Arma(c))</code> e <code>∀c ∃x (Tem(x, c) → Arma(c))</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>A primeira diz que existe uma jogadora cujas cartas são todas armas. Na segunda, para cada carta basta achar algum <code>x</code> que torne o condicional verdadeiro, e qualquer <code>x</code> que não tenha a carta já serve (antecedente falso). Ela é quase vazia de conteúdo, um bom exemplo de por que ∃ com → costuma ser engano.</p>
+    </details>
+  </div>
+
+  <div class="summary">
+    <span class="label">Para guardar</span>
+    <ul>
+      <li>Termos (constantes, variáveis, funções) nomeiam objetos; predicados produzem V ou F.</li>
+      <li>∀: para todo; ∃: existe pelo menos um. Escopo decide se a variável é livre ou ligada.</li>
+      <li>Sentença = fórmula sem variáveis livres.</li>
+      <li>∀ com →, ∃ com ∧.</li>
+      <li>Quantificadores de tipos diferentes não comutam.</li>
+    </ul>
+  </div>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="17">
+    <label><input type="checkbox" aria-label="Marcar o caso 17 como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre casos">
+    <a href="topico-16-algoritmo-de-resolucao.html"><span class="dir">← Caso anterior</span>Algoritmo de resolução proposicional</a>
+    <a class="next" href="topico-18-semantica-predicados.html"><span class="dir">Próximo caso →</span>Semântica da lógica de predicados</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow"><span>Guia de estudos · Lógica para Computação</span><span class="mono">Profa. Wilcilene Kowal · IFC São Bento do Sul</span></div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

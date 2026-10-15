@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 08 — Consequência Lógica e Argumentação | Lógica para Computação</title>
+<meta name="description" content="Consequência lógica e validade de argumentos: definição semântica, teste por tabela-verdade, relação com insatisfatibilidade e falácias formais.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-08-consequencia-logica.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Caso Nº 08 — Consequência Lógica e Argumentação | Lógica para Computação">
+<meta property="og:description" content="Consequência lógica e validade de argumentos: definição semântica, teste por tabela-verdade, relação com insatisfatibilidade e falácias formais.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-08-consequencia-logica.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Consequência Lógica e Argumentação",
+    "description": "Consequência lógica e validade de argumentos: definição semântica, teste por tabela-verdade, relação com insatisfatibilidade e falácias formais.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-08-consequencia-logica.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Material de estudo",
+    "educationalLevel": "Ensino Superior",
+    "position": 8,
+    "author": {
+      "@type": "Person",
+      "name": "Wilcilene Kowal"
+    },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Instituto Federal Catarinense — Campus São Bento do Sul"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Lógica para Computação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Caso 08: Consequência lógica e argumentação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-08-consequencia-logica.html"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 08 de 20</span>
+  </div>
+</header>
+
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag indigo mono">Caso Nº 08 · Semântica · Sistemas Dedutivos</span>
+  <h1>Consequência Lógica e Argumentação</h1>
+  <p class="lede">No Detetive, uma acusação errada elimina vocês do jogo. Por isso a acusação precisa ser consequência lógica das anotações, e nunca um palpite.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+<div class="goals">
+    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <ul>
+      <li>definir consequência lógica e usar a notação <code>Γ ⊨ C</code>;</li>
+      <li>testar a validade de um argumento pelo método das linhas críticas;</li>
+      <li>relacionar consequência com tautologia e com insatisfatibilidade;</li>
+      <li>reconhecer as falácias formais mais comuns e construir contraexemplos.</li>
+    </ul>
+  </div>
+
+  <h2>O que é consequência lógica</h2>
+  <p>
+    Seja <code>Γ = {P₁, P₂, ..., Pₙ}</code> um conjunto de premissas e <code>C</code> uma conclusão. Dizemos que
+    <code>C</code> é <strong>consequência lógica</strong> de <code>Γ</code>, e escrevemos <code>Γ ⊨ C</code>, quando
+    <strong>toda valoração que torna todas as premissas verdadeiras também torna <code>C</code> verdadeira</strong>.
+    Dito de outro jeito: não existe cenário em que as premissas sejam verdadeiras e a conclusão falsa.
+  </p>
+  <p>Um argumento é <strong>válido</strong> exatamente quando sua conclusão é consequência lógica das premissas.</p>
+
+  <h2>Três formas de dizer a mesma coisa</h2>
+  <p>Estas três afirmações são equivalentes, e cada uma leva a um método diferente de verificação:</p>
+  <ol>
+    <li><code>P₁, ..., Pₙ ⊨ C</code>.</li>
+    <li>A fórmula <code>(P₁ ∧ ... ∧ Pₙ) → C</code> é <strong>tautologia</strong> (Caso 06).</li>
+    <li>O conjunto <code>{P₁, ..., Pₙ, ¬C}</code> é <strong>insatisfatível</strong>: não existe valoração que torne tudo verdadeiro.</li>
+  </ol>
+  <p>
+    A terceira forma é a mais importante para a computação. Ela diz que, para provar uma conclusão, basta mostrar que
+    as premissas e a <em>negação</em> da conclusão não podem conviver. Essa é a ideia da <strong>refutação</strong>,
+    que vai sustentar a resolução nos Casos 15 a 20.
+  </p>
+
+  <h2>O método das linhas críticas</h2>
+  <p>Para testar um argumento pela tabela-verdade:</p>
+  <ol>
+    <li>Montem a tabela com uma coluna para cada premissa e uma para a conclusão.</li>
+    <li>Marquem as <strong>linhas críticas</strong>: aquelas em que todas as premissas são V.</li>
+    <li>Se a conclusão for V em todas as linhas críticas, o argumento é válido. Se houver uma linha crítica com conclusão F, essa linha é um <strong>contraexemplo</strong>.</li>
+  </ol>
+  <div class="evidence-box">
+    <span class="label">Testando uma acusação</span>
+    <p>Premissas: <code>m → b</code> (“se foi o Mordomo, foi na Biblioteca”) e <code>¬b</code> (“não foi na Biblioteca”). Conclusão: <code>¬m</code>.</p>
+    <div class="table-wrap">
+      <table class="tbl tv">
+        <thead><tr><th>m</th><th>b</th><th>m → b</th><th>¬b</th><th class="res">¬m</th></tr></thead>
+        <tbody>
+          <tr><td>V</td><td>V</td><td>V</td><td>F</td><td class="res">F</td></tr>
+          <tr><td>V</td><td>F</td><td>F</td><td>V</td><td class="res">F</td></tr>
+          <tr><td>F</td><td>V</td><td>V</td><td>F</td><td class="res">V</td></tr>
+          <tr class="destaque"><td>F</td><td>F</td><td>V</td><td>V</td><td class="res">V</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Só a última linha é crítica, e nela a conclusão é V. O argumento é válido: é o <em>modus tollens</em>.</p>
+  </div>
+
+  <h2>Falácias formais: argumentos que parecem válidos</h2>
+  <p>Estas duas formas aparecem o tempo todo em discussões, relatórios e até em depurações de código. Ambas são inválidas.</p>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Falácia</th><th>Forma</th><th>Exemplo</th><th>Contraexemplo</th></tr></thead>
+      <tbody>
+        <tr><td>Afirmação do consequente</td><td><code>p → q, q ⊭ p</code></td><td>“Se foi o Jardineiro, há lama no tapete. Há lama. Logo, foi o Jardineiro.”</td><td><code>p = F, q = V</code>: a lama veio de outra pessoa.</td></tr>
+        <tr><td>Negação do antecedente</td><td><code>p → q, ¬p ⊭ ¬q</code></td><td>“Se foi o Jardineiro, há lama. Não foi o Jardineiro. Logo, não há lama.”</td><td><code>p = F, q = V</code>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Um jeito prático de desmascarar uma falácia é <strong>trocar o conteúdo</strong> mantendo a forma: “se chove, a rua
+    fica molhada; a rua está molhada; logo, choveu”. Basta lembrar do caminhão-pipa para ver que a forma não garante nada.
+  </p>
+  <div class="callout">
+    <span class="label">Erro comum em depuração</span>
+    <p>“Se o bug está no módulo X, o teste falha. O teste falhou. Então o bug está no módulo X.” É afirmação do consequente. O teste pode falhar por muitos outros motivos.</p>
+  </div>
+
+  <h2>Duas propriedades úteis</h2>
+  <ul>
+    <li><strong>Monotonicidade:</strong> se <code>Γ ⊨ C</code>, então acrescentar premissas não estraga a conclusão: <code>Γ ∪ {D} ⊨ C</code>. Uma acusação certa continua certa quando vocês descobrem mais pistas.</li>
+    <li><strong>Premissas inconsistentes provam qualquer coisa:</strong> se <code>Γ</code> é insatisfatível, não há linha crítica, e então <code>Γ ⊨ C</code> para qualquer <code>C</code>. Por isso uma contradição nas anotações é desastrosa: ela “autoriza” qualquer acusação.</li>
+  </ul>
+
+  <div class="detetive">
+    <span class="label">No Detetive</span>
+    <p>
+      A acusação é o momento da consequência lógica. Vocês só podem acusar “Mordomo, Faca, Biblioteca” quando essa
+      conclusão for verdadeira em <strong>todos</strong> os envelopes compatíveis com suas anotações. Se ainda existir
+      um único envelope compatível em que o culpado é outro, esse envelope é um contraexemplo, e a acusação é um palpite
+      arriscado. No jogo, o preço de um argumento inválido é sair da partida.
+    </p>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 1 · Silogismo disjuntivo</span>
+    <p>As premissas <code>p ∨ q</code> e <code>¬p</code> garantem <code>q</code>? Justifiquem pelas linhas críticas.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Para <code>¬p</code> ser V, <code>p = F</code>; para <code>p ∨ q</code> ser V com <code>p = F</code>, <code>q = V</code>. A única linha crítica é <code>p = F, q = V</code>, e nela a conclusão é V. Logo, <code>p ∨ q, ¬p ⊨ q</code>.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 2 · Válido ou não?</span>
+    <p>“Se o crime foi na Cozinha, a arma foi a Faca ou o Veneno. A arma não foi o Veneno. O crime foi na Cozinha. Logo, a arma foi a Faca.”</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Formalizando: <code>c → (f ∨ v)</code>, <code>¬v</code>, <code>c</code>, conclusão <code>f</code>. Nas linhas críticas, <code>c = V</code> e <code>v = F</code>, e a primeira premissa exige <code>f ∨ v = V</code>, logo <code>f = V</code>. Válido.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 3 · Encontre o contraexemplo</span>
+    <p>Mostrem que <code>p → q, q → r ⊭ r → p</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Tome <code>p = F</code>, <code>q = F</code>, <code>r = V</code>: <code>p → q = V</code>, <code>q → r = V</code>, mas <code>r → p = V → F = F</code>. Premissas verdadeiras e conclusão falsa: inválido.</p>
+    </details>
+  </div>
+
+  <div class="summary">
+    <span class="label">Para guardar</span>
+    <ul>
+      <li><code>Γ ⊨ C</code>: em toda valoração em que <code>Γ</code> é verdadeiro, <code>C</code> também é.</li>
+      <li><code>Γ ⊨ C</code> ⇔ <code>(∧Γ) → C</code> é tautologia ⇔ <code>Γ ∪ {¬C}</code> é insatisfatível.</li>
+      <li>Um único contraexemplo derruba um argumento.</li>
+      <li>Afirmação do consequente e negação do antecedente são falácias.</li>
+    </ul>
+  </div>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="8">
+    <label><input type="checkbox" aria-label="Marcar o caso 08 como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre casos">
+    <a href="topico-07-equivalencia-logica.html"><span class="dir">← Caso anterior</span>Equivalência lógica e leis da lógica</a>
+    <a class="next" href="topico-09-sistemas-dedutivos.html"><span class="dir">Próximo caso →</span>Sistemas dedutivos e regras de inferência</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow"><span>Guia de estudos · Lógica para Computação</span><span class="mono">Profa. Wilcilene Kowal · IFC São Bento do Sul</span></div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

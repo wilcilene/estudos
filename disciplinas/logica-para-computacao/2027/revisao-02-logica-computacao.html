@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revisão 02 — Operação Biblioteca: Revisão Integrada I | Lógica para Computação</title>
+<meta name="description" content="Revisão Integrada I de Lógica para Computação (Casos 01 a 07): formalização, FBFs, árvores sintáticas, tabelas-verdade, tautologias, equivalências, regras de inferência e demonstração, com gabarito comentado.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/revisao-02-logica-computacao.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Revisão 02 — Operação Biblioteca: Revisão Integrada I">
+<meta property="og:description" content="Lista dissertativa dos Casos 01 a 07 com gabarito comentado, no tema do jogo Detetive.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/revisao-02-logica-computacao.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Revisão 02 — Operação Biblioteca: Revisão Integrada I",
+  "description": "Revisão Integrada I de Lógica para Computação (Casos 01 a 07) com gabarito comentado.",
+  "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/revisao-02-logica-computacao.html",
+  "inLanguage": "pt-BR",
+  "learningResourceType": "Lista de exercícios",
+  "educationalLevel": "Ensino Superior",
+  "author": { "@type": "Person", "name": "Wilcilene Kowal" },
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Lógica para Computação",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/"
+  }
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+<header class="site">
+  <div class="wrap masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Revisão 02</span>
+  </div>
+</header>
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+<div class="wrap-narrow case-header">
+  <span class="case-tag teal mono">Revisão Integrada I · Casos 01 a 07</span>
+  <h1>Operação Biblioteca</h1>
+  <p class="lede">O corpo foi encontrado na Biblioteca, e o dossiê precisa ser fechado com rigor. Nesta revisão, eu junto tudo o que vocês estudaram até o Caso 07 em vinte questões e um bônus. Resolvam primeiro no papel; o gabarito comentado fica escondido em cada questão.</p>
+</div>
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+  <div class="goals">
+    <span class="label">Orientações</span>
+    <ul>
+      <li>Apresentem o desenvolvimento e justifiquem cada resposta: resposta sem justificativa não fecha o caso.</li>
+      <li>Usem a notação da disciplina: <code>¬ ∧ ∨ → ↔</code>, com V e F nas tabelas-verdade.</li>
+      <li>Abram o gabarito só depois de tentar. Ele serve para corrigir o raciocínio, não para substituí-lo.</li>
+      <li><strong>Entrega:</strong> enviem a resolução em PDF pelo SIGA.</li>
+    </ul>
+  </div>
+
+  <div class="evidence-box">
+    <span class="label">Legenda do caso</span>
+    <p>Sempre que eu não disser outra coisa, as letras significam:</p>
+    <div class="table-wrap">
+      <table class="tbl">
+        <tbody>
+          <tr><td><code>b</code></td><td>o crime foi na Biblioteca</td><td><code>m</code></td><td>o Mordomo é o culpado</td></tr>
+          <tr><td><code>k</code></td><td>a arma é o Candelabro</td><td><code>j</code></td><td>o Jardineiro é o culpado</td></tr>
+          <tr><td><code>r</code></td><td>a arma é a Corda</td><td><code>c</code></td><td>o crime foi na Cozinha</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2>Parte A — Fundamentos e formalização</h2>
+
+  <div class="exercise">
+    <span class="label">Questão 1 · Validade e verdade</span>
+    <p>Digam se cada afirmação é verdadeira ou falsa e justifiquem.</p>
+    <ol type="I">
+      <li>Todo argumento válido tem conclusão verdadeira.</li>
+      <li>Se a conclusão de um argumento é uma tautologia, o argumento é válido, quaisquer que sejam as premissas.</li>
+      <li>Um argumento cujas premissas são contraditórias entre si é válido.</li>
+      <li>Se as premissas e a conclusão de um argumento são verdadeiras, então o argumento é válido.</li>
+    </ol>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><strong>I. Falsa.</strong> A validade garante a conclusão apenas <em>se</em> as premissas forem verdadeiras. Com uma premissa falsa, um argumento válido pode ter conclusão falsa (Caso 01: válido não é o mesmo que correto).</p>
+      <p><strong>II. Verdadeira.</strong> Não existe linha em que a conclusão seja falsa, então não existe linha com premissas verdadeiras e conclusão falsa.</p>
+      <p><strong>III. Verdadeira.</strong> Não existe linha em que todas as premissas sejam verdadeiras, então não há contraexemplo possível. É uma validade “vazia”, que não ajuda ninguém a investigar.</p>
+      <p><strong>IV. Falsa.</strong> Validade é questão de forma. “Se o crime foi na Biblioteca, a arma é o Candelabro; a arma é o Candelabro; logo, o crime foi na Biblioteca” pode ter tudo verdadeiro num jogo e, mesmo assim, é a falácia da afirmação do consequente.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Questão 2 · O argumento do servidor principal</span>
+    <p>“Se o servidor principal caiu, então o monitor disparou um alerta e o sistema de backup assumiu. O sistema de backup não assumiu. Logo, o servidor principal não caiu.” Identifiquem as proposições atômicas, as premissas e a conclusão, formalizem e digam se o argumento é válido.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Atômicas: <code>s</code> = o servidor principal caiu; <code>a</code> = o monitor disparou um alerta; <code>u</code> = o sistema de backup assumiu.</p>
+      <p>Premissas: <code>s → (a ∧ u)</code> e <code>¬u</code>. Conclusão: <code>¬s</code>.</p>
+      <p>É válido. Se <code>s</code> fosse verdadeiro, a primeira premissa exigiria <code>u</code> verdadeiro, contrariando <code>¬u</code>. Pela tabela: a única linha com as duas premissas verdadeiras e <code>s = V</code> não existe. É um modus tollens com uma simplificação no meio.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Questão 3 · Proposição simples, composta ou não proposição</span>
+    <ol type="a">
+      <li>O Mordomo estava na Biblioteca.</li>
+      <li>Quem estava com o Candelabro?</li>
+      <li>Se a arma é a Corda, então o crime não foi na Cozinha.</li>
+      <li>Mostre a sua carta!</li>
+      <li>O Jardineiro não é o culpado.</li>
+      <li>x está no envelope.</li>
+    </ol>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>(a) simples; (b) não é proposição (pergunta); (c) composta (condicional, com uma negação no consequente); (d) não é proposição (ordem); (e) composta: é a negação da proposição simples “o Jardineiro é o culpado”; (f) não é proposição enquanto <code>x</code> não for fixado (é uma sentença aberta, que vai virar predicado no Caso 17).</p>
+    </details>
+  </div>
+
+  <h2>Parte B — Linguagem formal e FBFs</h2>
+
+  <div class="exercise">
+    <span class="label">Questão 4 · É FBF?</span>
+    <p>Digam quais expressões são fórmulas bem formadas e justifiquem as que não são.</p>
+    <pre><code>(a) ((p ∧ q) → r)
+(b) (p ∨ ∧ q)
+(c) ((p ↔ q) → (¬r ∨ s))
+(d) → p q
+(e) ¬((p ∨ q) ∧ r)</code></pre>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>São FBFs: (a), (c) e (e). Em (b), o <code>∧</code> não tem fórmula à esquerda: depois de <code>∨</code> deveria vir uma fórmula, e não um conectivo. Em (d), o conectivo binário aparece antes dos operandos; isso seria válido na notação prefixa (Caso 11), mas não na linguagem infixa que definimos no Caso 03.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Questão 5 · Árvores sintáticas</span>
+    <p>Construam a árvore sintática, indiquem o conectivo principal e listem as subfórmulas de: (a) <code>¬(b ∧ m) → k</code>; (b) <code>(b ∨ ¬c) ↔ (k ∧ r)</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <pre><code>(a)        →                 (b)          ↔
+         /   \                             /     \
+        ¬     k                           ∨       ∧
+        |                                / \     / \
+        ∧                               b   ¬   k   r
+       / \                                  |
+      b   m                                 c</code></pre>
+      <p>(a) Conectivo principal <code>→</code> (pela precedência, o <code>¬</code> se aplica só ao parêntese). Subfórmulas: <code>b, m, k, b ∧ m, ¬(b ∧ m)</code> e a própria fórmula.</p>
+      <p>(b) Conectivo principal <code>↔</code>. Subfórmulas: <code>b, c, k, r, ¬c, b ∨ ¬c, k ∧ r</code> e a própria fórmula.</p>
+    </details>
+  </div>
+
+  <h2>Parte C — Tabelas-verdade</h2>
+
+  <div class="exercise">
+    <span class="label">Questão 6 · Primeira tabela</span>
+    <p>Construam a tabela-verdade de <code>((p ∧ q) → r)</code>, com coluna intermediária.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <div class="table-wrap">
+        <table class="tbl tv">
+          <thead><tr><th>p</th><th>q</th><th>r</th><th>p ∧ q</th><th class="res">(p ∧ q) → r</th></tr></thead>
+          <tbody>
+            <tr><td class="v">V</td><td class="v">V</td><td class="v">V</td><td class="v">V</td><td class="res v">V</td></tr>
+            <tr class="destaque"><td class="v">V</td><td class="v">V</td><td class="f">F</td><td class="v">V</td><td class="res f">F</td></tr>
+            <tr><td class="v">V</td><td class="f">F</td><td class="v">V</td><td class="f">F</td><td class="res v">V</td></tr>
+            <tr><td class="v">V</td><td class="f">F</td><td class="f">F</td><td class="f">F</td><td class="res v">V</td></tr>
+            <tr><td class="f">F</td><td class="v">V</td><td class="v">V</td><td class="f">F</td><td class="res v">V</td></tr>
+            <tr><td class="f">F</td><td class="v">V</td><td class="f">F</td><td class="f">F</td><td class="res v">V</td></tr>
+            <tr><td class="f">F</td><td class="f">F</td><td class="v">V</td><td class="f">F</td><td class="res v">V</td></tr>
+            <tr><td class="f">F</td><td class="f">F</td><td class="f">F</td><td class="f">F</td><td class="res v">V</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Só a linha destacada é falsa: antecedente verdadeiro e consequente falso.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Questão 7 · Encadeando condicionais</span>
+    <p>Construam a tabela-verdade de <code>((p → q) ∧ (q → r))</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <div class="table-wrap">
+        <table class="tbl tv">
+          <thead><tr><th>p</th><th>q</th><th>r</th><th>p → q</th><th>q → r</th><th class="res">(p → q) ∧ (q → r)</th></tr></thead>
+          <tbody>
+            <tr><td class="v">V</td><td class="v">V</td><td class="v">V</td><td class="v">V</td><td class="v">V</td><td class="res v">V</td></tr>
+            <tr><td class="v">V</td><td class="v">V</td><td class="f">F</td><td class="v">V</td><td class="f">F</td><td class="res f">F</td></tr>
+            <tr><td class="v">V</td><td class="f">F</td><td class="v">V</td><td class="f">F</td><td class="v">V</td><td class="res f">F</td></tr>
+            <tr><td class="v">V</td><td class="f">F</td><td class="f">F</td><td class="f">F</td><td class="v">V</td><td class="res f">F</td></tr>
+            <tr><td class="f">F</td><td class="v">V</td><td class="v">V</td><td class="v">V</td><td class="v">V</td><td class="res v">V</td></tr>
+            <tr><td class="f">F</td><td class="v">V</td><td class="f">F</td><td class="v">V</td><td class="f">F</td><td class="res f">F</td></tr>
+            <tr><td class="f">F</td><td class="f">F</td><td class="v">V</td><td class="v">V</td><td class="v">V</td><td class="res v">V</td></tr>
+            <tr><td class="f">F</td><td class="f">F</td><td class="f">F</td><td class="v">V</td><td class="v">V</td><td class="res v">V</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>É uma contingência: quatro linhas verdadeiras e quatro falsas.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Questão 8 · Quantas linhas?</span>
+    <p>Quantas linhas tem a tabela-verdade de cada fórmula? Expliquem o método e como vocês organizam as linhas para não esquecer nenhuma.</p>
+    <ol type="a">
+      <li><code>(b ∧ k) → ¬m</code></li>
+      <li><code>(p ∨ q) ∧ (r → s) ∧ ¬p</code></li>
+      <li>Uma fórmula sobre os 6 suspeitos do jogo, uma variável para cada um.</li>
+    </ol>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>O número de linhas é <code>2ⁿ</code>, com <code>n</code> o número de variáveis <strong>distintas</strong> (repetições não contam). (a) 3 variáveis: 8 linhas. (b) <code>p, q, r, s</code>: 16 linhas. (c) 6 variáveis: 64 linhas.</p>
+      <p>Método: na primeira coluna, metade V e metade F; na seguinte, os blocos se dividem ao meio; na última, V e F se alternam. É contar em binário (Caso 05).</p>
+    </details>
+  </div>
+
+  <h2>Parte D — Tautologias, contradições e contingências</h2>
+
+  <div class="exercise">
+    <span class="label">Questão 9 · Classifiquem</span>
+    <ol type="a">
+      <li><code>m ∨ ¬m</code></li>
+      <li><code>(b → k) ∧ b ∧ ¬k</code></li>
+      <li><code>(b → k) → (k → b)</code></li>
+      <li><code>((b → k) ∧ ¬k) → ¬b</code></li>
+    </ol>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>(a) Tautologia (terceiro excluído). (b) Contradição: <code>b</code> e <code>b → k</code> forçam <code>k</code>, que contradiz <code>¬k</code>. (c) Contingência: falsa quando <code>b = F</code> e <code>k = V</code>, verdadeira, por exemplo, com tudo V. Confundir uma condicional com a sua recíproca é um erro clássico. (d) Tautologia: é o modus tollens escrito como fórmula; a tentativa de falsificação (consequente <code>¬b</code> falso, então <code>b = V</code>; antecedente verdadeiro exige <code>¬k</code> e <code>b → k</code>, então <code>k = V</code>) chega a contradição.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Questão 10 · Construam vocês</span>
+    <p>Usando exatamente cinco variáveis (<code>p, q, r, s, t</code>), escrevam uma tautologia, uma contradição e uma contingência. Justifiquem cada classificação sem montar a tabela de 32 linhas.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Há muitas respostas certas. Exemplos:</p>
+      <ul>
+        <li>Tautologia: <code>(p ∧ q ∧ r ∧ s ∧ t) → p</code>. Para ser falsa, precisaria de antecedente V (logo <code>p = V</code>) e consequente <code>p = F</code>: impossível.</li>
+        <li>Contradição: <code>(p ∧ q ∧ r ∧ s ∧ t) ∧ ¬p</code>. Exige <code>p</code> e <code>¬p</code> ao mesmo tempo.</li>
+        <li>Contingência: <code>p ∧ q ∧ r ∧ s ∧ t</code>. Verdadeira na linha com tudo V e falsa em qualquer outra.</li>
+      </ul>
+    </details>
+  </div>
+
+  <h2>Parte E — Equivalências lógicas</h2>
+  <p>Em todas as questões desta parte, cada passo deve citar a lei usada.</p>
+
+  <div class="exercise">
+    <span class="label">Questão 11 · Dupla negação</span>
+    <p>Simplifiquem <code>¬¬(b ∧ ¬¬k)</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <pre><code>¬¬(b ∧ ¬¬k)
+≡ b ∧ ¬¬k        dupla negação
+≡ b ∧ k          dupla negação</code></pre>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Questão 12 · De Morgan</span>
+    <p>(a) Neguem “o Mordomo e o Jardineiro são culpados” e escrevam o resultado em português. (b) Simplifiquem <code>¬(b ∨ ¬c)</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>(a) <code>¬(m ∧ j) ≡ ¬m ∨ ¬j</code>: “o Mordomo não é culpado ou o Jardineiro não é culpado”. Atenção: não é “nenhum dos dois é culpado”.</p>
+      <p>(b) <code>¬(b ∨ ¬c) ≡ ¬b ∧ ¬¬c ≡ ¬b ∧ c</code> (De Morgan, depois dupla negação): “não foi na Biblioteca, foi na Cozinha”.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Questão 13 · Absorção</span>
+    <p>Simplifiquem: (a) <code>m ∨ (m ∧ k)</code>; (b) <code>m ∧ (m ∨ k)</code>; (c) <code>(b ∧ k) ∨ ((b ∧ k) ∧ m)</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>(a) <code>m</code>; (b) <code>m</code>; (c) <code>b ∧ k</code>, aplicando a absorção com <code>A = b ∧ k</code>. Leitura de (a): se o Mordomo é culpado, a informação extra “e com o Candelabro” não muda a disjunção.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Questão 14 · Equivalência do condicional</span>
+    <p>Para a pista <code>b → k</code>: (a) reescrevam usando só <code>¬</code> e <code>∨</code>; (b) escrevam a contrapositiva e a leiam em português; (c) escrevam a negação da pista sem usar <code>→</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>(a) <code>¬b ∨ k</code>. (b) <code>¬k → ¬b</code>: “se a arma não é o Candelabro, o crime não foi na Biblioteca”. (c) <code>¬(¬b ∨ k) ≡ b ∧ ¬k</code>: “foi na Biblioteca e a arma não é o Candelabro”. A negação de um condicional é uma conjunção, não outro condicional.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Questão 15 · Bicondicional</span>
+    <p>Mostrem, por equivalências, que <code>b ↔ k ≡ (b ∧ k) ∨ (¬b ∧ ¬k)</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <pre><code>b ↔ k
+≡ (b → k) ∧ (k → b)                               definição do bicondicional
+≡ (¬b ∨ k) ∧ (¬k ∨ b)                             equivalência do condicional
+≡ (¬b ∧ ¬k) ∨ (¬b ∧ b) ∨ (k ∧ ¬k) ∨ (k ∧ b)       distributividade
+≡ (¬b ∧ ¬k) ∨ (k ∧ b)                             contradições somem (A ∨ F ≡ A)
+≡ (b ∧ k) ∨ (¬b ∧ ¬k)                             comutatividade</code></pre>
+      <p>Leitura: as duas pistas andam juntas, ou ambas verdadeiras ou ambas falsas.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Questão 16 · Comutatividade e seus limites</span>
+    <p>(a) Mostrem que <code>(k ∧ b) ∨ m ≡ m ∨ (b ∧ k)</code>, citando as leis. (b) O conectivo <code>→</code> é comutativo? Justifiquem com uma valoração.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>(a) <code>(k ∧ b) ∨ m ≡ (b ∧ k) ∨ m</code> (comutatividade de ∧) <code>≡ m ∨ (b ∧ k)</code> (comutatividade de ∨).</p>
+      <p>(b) Não. Com <code>b = F</code> e <code>k = V</code>: <code>b → k</code> é V e <code>k → b</code> é F. Os dois lados têm valores diferentes numa valoração, então não são equivalentes.</p>
+    </details>
+  </div>
+
+  <h2>Parte F — Argumentos e regras de inferência</h2>
+
+  <div class="exercise">
+    <span class="label">Questão 17 · Que regra é essa?</span>
+    <ol type="a">
+      <li>Se foi na Biblioteca, a arma é o Candelabro. Foi na Biblioteca. Logo, a arma é o Candelabro.</li>
+      <li>Se o Mordomo é culpado, ele esteve na Cozinha. Ele não esteve na Cozinha. Logo, o Mordomo não é culpado.</li>
+      <li>Se foi na Biblioteca, a arma é o Candelabro. Se a arma é o Candelabro, o Jardineiro é culpado. Logo, se foi na Biblioteca, o Jardineiro é culpado.</li>
+      <li>O culpado é o Mordomo ou o Jardineiro. Não é o Mordomo. Logo, é o Jardineiro.</li>
+    </ol>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>(a) Modus ponens: <code>b → k, b ⊢ k</code>. (b) Modus tollens: <code>m → c, ¬c ⊢ ¬m</code>. (c) Silogismo hipotético: <code>b → k, k → j ⊢ b → j</code>. (d) Silogismo disjuntivo: <code>m ∨ j, ¬m ⊢ j</code>.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Questão 18 · Onde está o erro?</span>
+    <p>Os dois argumentos abaixo são inválidos. Deem o nome da falácia e uma valoração que sirva de contraexemplo.</p>
+    <ol type="a">
+      <li>Se o Mordomo é culpado, ele esteve na Cozinha. Ele esteve na Cozinha. Logo, o Mordomo é culpado.</li>
+      <li>Se foi na Biblioteca, a arma é o Candelabro. Não foi na Biblioteca. Logo, a arma não é o Candelabro.</li>
+    </ol>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>(a) Afirmação do consequente. Contraexemplo: <code>m = F, c = V</code> (as premissas são verdadeiras e a conclusão é falsa: ele esteve na Cozinha por outro motivo).</p>
+      <p>(b) Negação do antecedente. Contraexemplo: <code>b = F, k = V</code> (o crime foi em outro local, mas com o Candelabro).</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Questão 19 · Válido ou não?</span>
+    <p>“Se a arma é a Corda, o crime foi na Cozinha. O crime foi na Cozinha ou na Biblioteca. Não foi na Biblioteca. Logo, a arma é a Corda.” Formalizem e decidam.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Premissas: <code>r → c</code>, <code>c ∨ b</code>, <code>¬b</code>. Conclusão: <code>r</code>.</p>
+      <p>Por silogismo disjuntivo, <code>c</code> é garantido. Mas de <code>r → c</code> e <code>c</code> não se conclui <code>r</code> (afirmação do consequente). <strong>Inválido.</strong> Contraexemplo: <code>r = F, c = V, b = F</code>, com as três premissas verdadeiras e a conclusão falsa.</p>
+    </details>
+  </div>
+
+  <h2>Parte G — Desafio integrador</h2>
+
+  <div class="exercise">
+    <span class="label">Questão 20 · Demonstração</span>
+    <p>Construam uma demonstração com linhas numeradas e justificadas.</p>
+    <p>Premissas: (1) <code>b → (k ∨ r)</code>; (2) <code>¬k</code>; (3) <code>¬r</code>; (4) <code>b ∨ c</code>. Conclusão: <code>c</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <pre><code>1. b → (k ∨ r)     premissa
+2. ¬k              premissa
+3. ¬r              premissa
+4. b ∨ c           premissa
+5. ¬k ∧ ¬r         conjunção 2, 3
+6. ¬(k ∨ r)        De Morgan 5
+7. ¬b              modus tollens 1, 6
+8. c               silogismo disjuntivo 4, 7</code></pre>
+      <p>Leitura de detetive: a arma não é o Candelabro nem a Corda, então não foi na Biblioteca; como só sobravam Biblioteca e Cozinha, foi na Cozinha.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Bônus · Tautologia</span>
+    <p>Demonstrem que <code>[((p → q) ∧ (q → r)) ∧ p] → r</code> é uma tautologia por tentativa de falsificação e confirmem pela tabela-verdade.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><strong>Falsificação.</strong> Para a fórmula ser falsa, precisaríamos de <code>r = F</code> e do antecedente verdadeiro. Então <code>p = V</code>; de <code>p → q</code> verdadeiro, <code>q = V</code>; de <code>q → r</code> verdadeiro, <code>r = V</code>. Contradição com <code>r = F</code>. Nenhuma valoração falsifica a fórmula: é tautologia.</p>
+      <div class="table-wrap">
+        <table class="tbl tv">
+          <thead><tr><th>p</th><th>q</th><th>r</th><th>(p → q) ∧ (q → r)</th><th>antecedente (… ∧ p)</th><th class="res">fórmula</th></tr></thead>
+          <tbody>
+            <tr><td class="v">V</td><td class="v">V</td><td class="v">V</td><td class="v">V</td><td class="v">V</td><td class="res v">V</td></tr>
+            <tr><td class="v">V</td><td class="v">V</td><td class="f">F</td><td class="f">F</td><td class="f">F</td><td class="res v">V</td></tr>
+            <tr><td class="v">V</td><td class="f">F</td><td class="v">V</td><td class="f">F</td><td class="f">F</td><td class="res v">V</td></tr>
+            <tr><td class="v">V</td><td class="f">F</td><td class="f">F</td><td class="f">F</td><td class="f">F</td><td class="res v">V</td></tr>
+            <tr><td class="f">F</td><td class="v">V</td><td class="v">V</td><td class="v">V</td><td class="f">F</td><td class="res v">V</td></tr>
+            <tr><td class="f">F</td><td class="v">V</td><td class="f">F</td><td class="f">F</td><td class="f">F</td><td class="res v">V</td></tr>
+            <tr><td class="f">F</td><td class="f">F</td><td class="v">V</td><td class="v">V</td><td class="f">F</td><td class="res v">V</td></tr>
+            <tr><td class="f">F</td><td class="f">F</td><td class="f">F</td><td class="v">V</td><td class="f">F</td><td class="res v">V</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>A coluna final só tem V. Essa mesma fórmula é demonstrada por prova condicional no <a href="topico-10-demonstracoes.html">Caso 10</a>.</p>
+    </details>
+  </div>
+
+  <div class="summary">
+    <span class="label">Entrega</span>
+    <p>Resolvam as questões no papel ou em um editor, com todo o desenvolvimento, gerem um único PDF e enviem pelo SIGA.</p>
+  </div>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="revisao-02">
+    <label><input type="checkbox" aria-label="Marcar revisão como concluída"> concluída</label>
+    <span class="stamp">ARQUIVO REVISADO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre atividades">
+    <a href="revisao-01-logica-proposicional.html"><span class="dir">← Revisão 01</span>Operação Floricultura</a>
+    <a class="next" href="index.html"><span class="dir">Voltar ao índice →</span>Guia de estudos</a>
+  </nav>
+</article></main>
+
+<footer class="site"><div class="wrap-narrow">Profa. Wilcilene Kowal · Lógica para Computação · IFC São Bento do Sul</div></footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

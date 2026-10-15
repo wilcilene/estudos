@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lista de Exercícios — SQL na Prática</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f7fb; --card:#fff; --ink:#1b1f2a; --muted:#5d6475; --line:#e6e8ef;
+    --accent:#5b4bdb; --accent-soft:#eeebff;
+    --ddl:#c2410c; --ddl-soft:#fff1e6;
+    --dml:#be185d; --dml-soft:#fde7f1;
+    --sel:#1d4ed8; --sel-soft:#e6eeff;
+    --join:#0f766e; --join-soft:#ddf5f1;
+    --agg:#7c3aed; --agg-soft:#f1e9ff;
+    --sub:#a16207; --sub-soft:#fdf3d8;
+    --des:#334155; --des-soft:#e9edf3;
+    --ok:#15803d; --ok-soft:#e3f6e8;
+    --code-bg:#1e2130; --code-ink:#e5e7f0;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.6;font-size:16px}
+  a{color:var(--accent)}
+  code,pre{font-family:"JetBrains Mono",ui-monospace,Consolas,monospace}
+  kbd{font-family:inherit;font-size:.78em;font-weight:600;background:#fff;border:1px solid #cfd3de;border-bottom-width:2px;border-radius:5px;padding:0 .4em}
+  :not(pre)>code{background:#f0f1f6;border:1px solid var(--line);border-radius:5px;padding:.05em .35em;font-size:.88em}
+
+  header.hero{background:linear-gradient(135deg,#2b2370 0%,#5b4bdb 60%,#7f6cf0 100%);color:#fff;padding:48px 16px 56px}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 16px}
+  .hero .eyebrow{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+  .hero h1{font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.2;margin:.3em 0 .4em;font-weight:800}
+  .hero p{max-width:720px;opacity:.95;margin:0}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:4px 12px;font-size:.82rem;font-weight:500}
+
+  nav.toc{position:sticky;top:0;z-index:10;background:rgba(246,247,251,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  nav.toc .wrap{display:flex;gap:6px;overflow-x:auto;padding:10px 16px;scrollbar-width:thin}
+  nav.toc a{white-space:nowrap;text-decoration:none;color:var(--muted);font-size:.85rem;font-weight:600;padding:6px 12px;border-radius:999px}
+  nav.toc a:hover{background:var(--accent-soft);color:var(--accent)}
+  .progress{height:4px;background:var(--line)}
+  .progress span{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+
+  main{padding:28px 0 64px}
+  section{margin-top:40px;scroll-margin-top:70px}
+  h2{font-size:1.5rem;margin:0 0 6px;font-weight:800;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  h2 .tag{font-size:.72rem}
+  .lead{color:var(--muted);margin:0 0 18px}
+  h3{font-size:1.05rem;margin:22px 0 8px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:0 1px 2px rgba(20,20,50,.04)}
+  .grid{display:grid;gap:14px}
+  @media(min-width:720px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}}
+
+  .tag{display:inline-block;font-size:.72rem;font-weight:700;border-radius:999px;padding:3px 10px;letter-spacing:.01em;white-space:nowrap}
+  .t-ddl{background:var(--ddl-soft);color:var(--ddl)}
+  .t-dml{background:var(--dml-soft);color:var(--dml)}
+  .t-sel{background:var(--sel-soft);color:var(--sel)}
+  .t-join{background:var(--join-soft);color:var(--join)}
+  .t-agg{background:var(--agg-soft);color:var(--agg)}
+  .t-sub{background:var(--sub-soft);color:var(--sub)}
+  .t-des{background:var(--des-soft);color:var(--des)}
+  .t-ok{background:var(--ok-soft);color:var(--ok)}
+
+  ul.steps{margin:8px 0 0;padding-left:20px}
+  ul.steps li{margin:4px 0}
+
+  /* esquema */
+  .tbl h4{margin:0 0 8px;font-size:.95rem;display:flex;align-items:center;gap:8px}
+  .tbl h4 code{background:none;border:0;padding:0;font-size:1rem;font-weight:600}
+  .tbl ul{list-style:none;margin:0;padding:0;font-family:"JetBrains Mono",monospace;font-size:.8rem}
+  .tbl li{padding:3px 0;border-top:1px dashed var(--line);display:flex;justify-content:space-between;gap:8px}
+  .tbl li:first-child{border-top:0}
+  .tbl .k{font-weight:700;font-size:.68rem;border-radius:4px;padding:0 5px;align-self:center}
+  .pk{background:#fde68a;color:#78350f}
+  .fk{background:#c7d2fe;color:#312e81}
+  .rels{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .rels span{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:.82rem}
+
+  /* código */
+  .codebox{position:relative;margin-top:12px}
+  .codebar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+  button.btn{font:inherit;font-size:.85rem;font-weight:600;border:0;border-radius:9px;padding:9px 14px;cursor:pointer;background:var(--accent);color:#fff}
+  button.btn.ghost{background:var(--card);color:var(--accent);border:1px solid #d9d4ff}
+  button.btn:hover{filter:brightness(1.07)}
+  pre.sql{background:var(--code-bg);color:var(--code-ink);border-radius:12px;padding:18px;overflow:auto;font-size:.8rem;line-height:1.55;margin:0;max-height:440px}
+  pre.sql.open{max-height:none}
+  pre.sql .kw{color:#a5b4fc;font-weight:500}
+  pre.sql .str{color:#86efac}
+  pre.sql .com{color:#7c8199;font-style:italic}
+  pre.sql .num{color:#fca5a5}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#1b1f2a;color:#fff;padding:10px 18px;border-radius:10px;font-size:.9rem;opacity:0;transition:.25s;pointer-events:none;z-index:50}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  /* avisos */
+  .note{border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:10px;padding:14px 16px;margin:16px 0}
+  .note.warn{border-color:#d97706;background:#fff6e5}
+  .note strong:first-child{display:block;margin-bottom:2px}
+
+  /* exercícios */
+  .ex{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:12px;transition:border-color .2s,opacity .2s}
+  .ex.done{border-color:#b7e4c4;background:#fbfefc}
+  .ex .num{font-weight:800;font-size:.85rem;color:var(--accent);background:var(--accent-soft);border-radius:9px;min-width:44px;text-align:center;padding:6px 4px}
+  .ex.done .num{background:var(--ok-soft);color:var(--ok)}
+  .ex .body p{margin:0 0 6px}
+  .ex .body p:last-child{margin-bottom:0}
+  .ex .body ol,.ex .body ul{margin:6px 0;padding-left:20px}
+  .ex .meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px}
+  .ex label.chk{margin-left:auto;font-size:.8rem;color:var(--muted);display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none}
+  .ex label.chk input{accent-color:var(--ok);width:16px;height:16px}
+  details.dica{margin-top:8px;font-size:.9rem}
+  details.dica summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:.85rem}
+  details.dica div{margin-top:6px;color:var(--muted)}
+  .ex.challenge{border-style:dashed;border-color:#c9c2ff}
+
+  footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-size:.85rem;text-align:center}
+  @media print{nav.toc,.codebar,label.chk,.progress{display:none}pre.sql{max-height:none;white-space:pre-wrap}header.hero{color:#000;background:none;padding:0}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Banco de Dados · Lista de Exercícios</div>
+    <h1>SQL na Prática: DDL, DML e Consultas</h1>
+    <p>Nesta lista vocês vão administrar o banco de dados da <strong>Semana Acadêmica 2026</strong> do campus: criar e alterar estruturas, cadastrar e corrigir dados e, principalmente, extrair informações úteis para a organização do evento.</p>
+    <div class="chips">
+      <span class="chip">MySQL Workbench</span>
+      <span class="chip">DDL — CREATE · ALTER · DROP</span>
+      <span class="chip">DML — INSERT · UPDATE · DELETE</span>
+      <span class="chip">Junções</span>
+      <span class="chip">Agrupamento e HAVING</span>
+      <span class="chip">ORDER BY</span>
+      <span class="chip">Subconsultas</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap">
+    <a href="#inicio">Como trabalhar</a>
+    <a href="#base">A base</a>
+    <a href="#script">Script inicial</a>
+    <a href="#p1">1 · DDL</a>
+    <a href="#p2">2 · DML</a>
+    <a href="#p3">3 · Consultas</a>
+    <a href="#p4">4 · Junções</a>
+    <a href="#p5">5 · Agrupamento</a>
+    <a href="#p6">6 · Subconsultas</a>
+    <a href="#p7">7 · Desafios</a>
+  </div>
+  <div class="progress"><span id="bar"></span></div>
+</nav>
+
+<main class="wrap">
+
+<!-- ================= COMO TRABALHAR ================= -->
+<section id="inicio" style="margin-top:0">
+  <h2>Como vamos trabalhar</h2>
+  <p class="lead">Leiam com atenção antes de começar — isso evita muita dor de cabeça lá na Parte 3.</p>
+  <div class="grid g2">
+    <div class="card">
+      <h3 style="margin-top:0">🛠️ Ambiente</h3>
+      <ul class="steps">
+        <li>Usaremos o <strong>MySQL Workbench</strong> com MySQL 8. O script foi testado no MySQL 8.0.</li>
+        <li>O próprio script cria o banco <code>semana_academica</code> e já faz o <code>USE</code>.</li>
+        <li><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Enter</kbd> (raio ⚡) executa tudo ou o trecho selecionado; <kbd>Ctrl</kbd>+<kbd>Enter</kbd> executa só o comando onde está o cursor.</li>
+        <li>Erros e "linhas afetadas" aparecem no painel <em>Output</em>, na parte de baixo da tela.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">📝 Entrega</h3>
+      <ul class="steps">
+        <li>Guardem todas as respostas em um arquivo <code>respostas_SEUNOME.sql</code>.</li>
+        <li>Antes de cada comando, um comentário com o número do exercício: <code>-- 3.4</code>.</li>
+        <li>Perguntas teóricas e mensagens de erro também vão como comentário.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">
+    <strong>✓ Confiram vocês mesmos</strong>
+    Nas consultas, o selo verde indica quantas linhas o resultado deve ter <em>na base original</em>. Se o número de vocês for diferente, revisem filtros, junções e o tratamento de <code>NULL</code> antes de seguir.
+  </div>
+  <div class="note">
+    <strong>🔒 Safe Updates do Workbench</strong>
+    Por padrão, o Workbench bloqueia <code>UPDATE</code> e <code>DELETE</code> cujo <code>WHERE</code> não usa uma coluna chave (erro <code>1175</code>). O script inicial já executa <code>SET SQL_SAFE_UPDATES = 0;</code>, mas isso vale só para a conexão aberta: se vocês fecharem o Workbench e voltarem, rodem esse comando de novo antes da Parte 2.
+  </div>
+  <div class="note warn">
+    <strong>⚠️ Ordem importa</strong>
+    As Partes 1 e 2 alteram a base. Quando chegarem na Parte 3, <strong>executem o script inicial de novo</strong>: ele apaga tudo (inclusive as tabelas que vocês criaram) e recria a base limpa. Assim, todos os resultados conferem com os selos.
+  </div>
+</section>
+
+<!-- ================= A BASE ================= -->
+<section id="base">
+  <h2>A base: Semana Acadêmica 2026</h2>
+  <p class="lead">Participantes (alunos dos cursos do campus ou externos) se inscrevem em eventos — palestras, minicursos e oficinas — que acontecem em salas e são conduzidos por palestrantes. Depois do evento, registra-se a presença e o participante pode avaliar com uma nota de 1 a 5.</p>
+
+  <div class="grid g3">
+    <div class="card tbl"><h4>📚 <code>curso</code></h4><ul>
+      <li>id_curso <span class="k pk">PK</span></li><li>nome</li><li>sigla <span class="k" style="background:#e5e7eb">UNIQUE</span></li></ul></div>
+    <div class="card tbl"><h4>🙋 <code>participante</code></h4><ul>
+      <li>id_participante <span class="k pk">PK</span></li><li>nome</li><li>email <span class="k" style="background:#e5e7eb">UNIQUE</span></li>
+      <li>id_curso <span class="k fk">FK → curso</span></li><li>cidade</li><li>data_nascimento</li></ul></div>
+    <div class="card tbl"><h4>🎤 <code>palestrante</code></h4><ul>
+      <li>id_palestrante <span class="k pk">PK</span></li><li>nome</li><li>instituicao</li><li>area</li></ul></div>
+    <div class="card tbl"><h4>🚪 <code>sala</code></h4><ul>
+      <li>id_sala <span class="k pk">PK</span></li><li>nome</li><li>bloco</li><li>capacidade</li></ul></div>
+    <div class="card tbl"><h4>📅 <code>evento</code></h4><ul>
+      <li>id_evento <span class="k pk">PK</span></li><li>titulo</li><li>tipo</li><li>data_evento · hora_inicio</li><li>carga_horaria · vagas · valor</li>
+      <li>id_sala <span class="k fk">FK → sala</span></li><li>id_palestrante <span class="k fk">FK → palestrante</span></li></ul></div>
+    <div class="card tbl"><h4>🎟️ <code>inscricao</code></h4><ul>
+      <li>id_participante <span class="k pk">PK</span><span class="k fk">FK</span></li><li>id_evento <span class="k pk">PK</span><span class="k fk">FK</span></li>
+      <li>data_inscricao</li><li>presente</li><li>nota_avaliacao</li></ul></div>
+  </div>
+  <div class="rels">
+    <span>curso <b>1 : N</b> participante</span>
+    <span>participante <b>N : M</b> evento (via inscricao)</span>
+    <span>sala <b>1 : N</b> evento</span>
+    <span>palestrante <b>1 : N</b> evento</span>
+  </div>
+  <div class="note" style="margin-top:18px">
+    <strong>Detalhes que vão aparecer nas consultas</strong>
+    <code>id_curso</code> nulo = participante externo · <code>nota_avaliacao</code> nula = não avaliou · <code>valor</code> zero = evento gratuito · <code>presente</code> começa como <code>FALSE</code>. No MySQL, <code>BOOLEAN</code> é um <code>TINYINT(1)</code>: o Workbench mostra <code>1</code> para verdadeiro e <code>0</code> para falso.
+  </div>
+</section>
+
+<!-- ================= SCRIPT ================= -->
+<section id="script">
+  <h2>Script inicial <span class="tag t-ok">copiar e executar</span></h2>
+  <p class="lead">Copiem o script completo, colem em uma aba de consulta do Workbench e executem de uma vez (⚡). Ele cria o banco <code>semana_academica</code>, as seis tabelas e insere 5 cursos, 16 participantes, 6 palestrantes, 5 salas, 12 eventos e 46 inscrições.</p>
+  <div class="codebox">
+    <div class="codebar">
+      <button class="btn" id="copy">📋 Copiar script</button>
+      <button class="btn ghost" id="download">⬇️ Baixar .sql</button>
+      <button class="btn ghost" id="expand">↕️ Expandir</button>
+    </div>
+    <pre class="sql" id="sql">-- =========================================================
+-- SEMANA ACADÊMICA 2026 — script da base inicial (MySQL 8)
+-- Pode ser executado quantas vezes quiserem: ele apaga e recria tudo.
+-- No Workbench: colem tudo e executem com o raio (Ctrl+Shift+Enter).
+-- =========================================================
+
+CREATE DATABASE IF NOT EXISTS semana_academica;
+USE semana_academica;
+
+-- Desliga o "Safe Updates" do Workbench nesta conexão, para que
+-- UPDATE e DELETE com WHERE em colunas que não são chave funcionem.
+SET SQL_SAFE_UPDATES = 0;
+
+-- Limpeza (tabelas filhas primeiro, inclusive as criadas nos exercícios)
+DROP TABLE IF EXISTS certificado;
+DROP TABLE IF EXISTS evento_patrocinador;
+DROP TABLE IF EXISTS patrocinador;
+DROP TABLE IF EXISTS inscricao;
+DROP TABLE IF EXISTS evento;
+DROP TABLE IF EXISTS participante;
+DROP TABLE IF EXISTS palestrante;
+DROP TABLE IF EXISTS sala;
+DROP TABLE IF EXISTS curso;
+
+-- ---------------------------------------------------------
+-- Estrutura (DDL)
+-- ---------------------------------------------------------
+CREATE TABLE curso (
+  id_curso   INT          PRIMARY KEY,
+  nome       VARCHAR(80)  NOT NULL,
+  sigla      VARCHAR(10)  NOT NULL UNIQUE
+);
+
+CREATE TABLE participante (
+  id_participante  INT          PRIMARY KEY,
+  nome             VARCHAR(80)  NOT NULL,
+  email            VARCHAR(100) NOT NULL UNIQUE,
+  id_curso         INT,                         -- NULL = participante externo
+  cidade           VARCHAR(50)  NOT NULL,
+  data_nascimento  DATE,
+  FOREIGN KEY (id_curso) REFERENCES curso (id_curso)
+);
+
+CREATE TABLE palestrante (
+  id_palestrante  INT          PRIMARY KEY,
+  nome            VARCHAR(80)  NOT NULL,
+  instituicao     VARCHAR(80)  NOT NULL,
+  area            VARCHAR(60)
+);
+
+CREATE TABLE sala (
+  id_sala     INT          PRIMARY KEY,
+  nome        VARCHAR(60)  NOT NULL,
+  bloco       CHAR(1)      NOT NULL,
+  capacidade  INT          NOT NULL CHECK (capacidade &gt; 0)
+);
+
+CREATE TABLE evento (
+  id_evento       INT           PRIMARY KEY,
+  titulo          VARCHAR(100)  NOT NULL,
+  tipo            VARCHAR(20)   NOT NULL CHECK (tipo IN ('Palestra', 'Minicurso', 'Oficina')),
+  data_evento     DATE          NOT NULL,
+  hora_inicio     TIME          NOT NULL,
+  carga_horaria   INT           NOT NULL,
+  vagas           INT           NOT NULL,
+  valor           DECIMAL(6,2)  NOT NULL DEFAULT 0,
+  id_sala         INT           NOT NULL,
+  id_palestrante  INT           NOT NULL,
+  FOREIGN KEY (id_sala)        REFERENCES sala (id_sala),
+  FOREIGN KEY (id_palestrante) REFERENCES palestrante (id_palestrante)
+);
+
+CREATE TABLE inscricao (
+  id_participante  INT      NOT NULL,
+  id_evento        INT      NOT NULL,
+  data_inscricao   DATE     NOT NULL,
+  presente         BOOLEAN  NOT NULL DEFAULT FALSE,  -- no MySQL vira TINYINT(1): 1 = TRUE, 0 = FALSE
+  nota_avaliacao   INT      CHECK (nota_avaliacao BETWEEN 1 AND 5),  -- NULL = não avaliou
+  PRIMARY KEY (id_participante, id_evento),
+  FOREIGN KEY (id_participante) REFERENCES participante (id_participante),
+  FOREIGN KEY (id_evento)       REFERENCES evento (id_evento)
+);
+
+-- ---------------------------------------------------------
+-- Dados (DML)
+-- ---------------------------------------------------------
+INSERT INTO curso (id_curso, nome, sigla) VALUES
+  (1, 'Engenharia da Computação', 'ECO'),
+  (2, 'Engenharia de Controle e Automação', 'ECA'),
+  (3, 'Tecnologia em Análise e Desenvolvimento de Sistemas', 'TADS'),
+  (4, 'Técnico em Informática', 'TINF'),
+  (5, 'Bacharelado em Design', 'DSG');
+
+INSERT INTO participante (id_participante, nome, email, id_curso, cidade, data_nascimento) VALUES
+  (1,  'Ana Beatriz Souza',  'ana.souza@email.com',      1,    'São Bento do Sul', '2004-03-12'),
+  (2,  'Bruno Hoffmann',     'bruno.hoffmann@email.com', 1,    'Rio Negrinho',     '2003-07-25'),
+  (3,  'Camila Schulz',      'camila.schulz@email.com',  2,    'São Bento do Sul', '2005-01-30'),
+  (4,  'Diego Ramos',        'diego.ramos@email.com',    3,    'Joinville',        '2002-11-08'),
+  (5,  'Eduarda Klein',      'eduarda.klein@email.com',  1,    'Campo Alegre',     '2004-09-17'),
+  (6,  'Felipe Weber',       'felipe.weber@email.com',   4,    'São Bento do Sul', '2007-05-03'),
+  (7,  'Gabriela Lima',      'gabriela.lima@email.com',  NULL, 'Joinville',        '1998-02-21'),
+  (8,  'Henrique Bauer',     'henrique.bauer@email.com', 2,    'Rio Negrinho',     '2003-12-14'),
+  (9,  'Isabela Martins',    'isabela.martins@email.com',3,    'São Bento do Sul', '2001-06-09'),
+  (10, 'João Pedro Fischer', 'joao.fischer@email.com',   1,    'São Bento do Sul', '2004-10-02'),
+  (11, 'Larissa Costa',      'larissa.costa@email.com',  NULL, 'Curitiba',         '1995-08-27'),
+  (12, 'Mateus Krüger',      'mateus.kruger@email.com',  4,    'Campo Alegre',     '2008-01-19'),
+  (13, 'Natália Rocha',      'natalia.rocha@email.com',  2,    'Joinville',        '2004-04-04'),
+  (14, 'Otávio Pereira',     'otavio.pereira@email.com', 3,    'Rio Negrinho',     '2000-12-31'),
+  (15, 'Paula Mendes',       'paula.mendes@email.com',   1,    'São Bento do Sul', '2005-02-15'),
+  (16, 'Rafael Nunes',       'rafael.nunes@email.com',   NULL, 'Mafra',            '1999-07-07');
+
+INSERT INTO palestrante (id_palestrante, nome, instituicao, area) VALUES
+  (1, 'Helena Vieira',   'UDESC',              'Banco de Dados'),
+  (2, 'Ricardo Alves',   'UFSC',               'Inteligência Artificial'),
+  (3, 'Fernanda Lopes',  'TechNorte Sistemas', 'Engenharia de Software'),
+  (4, 'Tiago Moreira',   'IFC',                'Automação Industrial'),
+  (5, 'Sofia Andrade',   'PUCPR',              'Interação Humano-Computador'),
+  (6, 'Lucas Barros',    'UTFPR',              'Redes de Computadores');
+
+INSERT INTO sala (id_sala, nome, bloco, capacidade) VALUES
+  (1, 'Auditório',                    'A', 120),
+  (2, 'Laboratório de Informática 1', 'B', 30),
+  (3, 'Laboratório de Informática 2', 'B', 25),
+  (4, 'Sala 105',                     'A', 40),
+  (5, 'Laboratório de Automação',     'C', 20);
+
+INSERT INTO evento (id_evento, titulo, tipo, data_evento, hora_inicio, carga_horaria, vagas, valor, id_sala, id_palestrante) VALUES
+  (1,  'Abertura: O futuro dos dados',            'Palestra',  '2026-11-09', '19:00', 2, 120,  0.00, 1, 1),
+  (2,  'Modelagem de Bancos de Dados na Prática', 'Minicurso', '2026-11-10', '13:30', 4,  30, 25.00, 2, 1),
+  (3,  'IA Generativa na Engenharia',             'Palestra',  '2026-11-10', '19:00', 2, 120,  0.00, 1, 2),
+  (4,  'Python para Análise de Dados',            'Minicurso', '2026-11-11', '13:30', 4,  25, 30.00, 3, 2),
+  (5,  'Métodos Ágeis no Mercado',                'Palestra',  '2026-11-11', '19:00', 2,  40, 10.00, 4, 3),
+  (6,  'Git e GitHub do Zero',                    'Oficina',   '2026-11-12', '08:00', 3,  30, 15.00, 2, 3),
+  (7,  'CLPs e Automação Industrial',             'Oficina',   '2026-11-12', '13:30', 3,  20, 20.00, 5, 4),
+  (8,  'Prototipação de Interfaces',              'Oficina',   '2026-11-12', '19:00', 3,  25, 15.00, 3, 5),
+  (9,  'Usabilidade e Acessibilidade',            'Palestra',  '2026-11-13', '10:00', 2,  50,  0.00, 4, 5),
+  (10, 'SQL Avançado',                            'Minicurso', '2026-11-13', '13:30', 4,  30, 35.00, 2, 1),
+  (11, 'Internet das Coisas com Arduino',         'Oficina',   '2026-11-13', '13:30', 3,  20, 25.00, 5, 4),
+  (12, 'Encerramento: Carreira em Tecnologia',    'Palestra',  '2026-11-13', '19:00', 1, 120,  0.00, 1, 3);
+
+INSERT INTO inscricao (id_participante, id_evento, data_inscricao, presente, nota_avaliacao) VALUES
+  (1,  1,  '2026-10-01', TRUE,  5),
+  (1,  2,  '2026-10-01', TRUE,  5),
+  (1,  6,  '2026-10-05', TRUE,  4),
+  (1,  10, '2026-10-05', TRUE,  4),
+  (2,  1,  '2026-10-02', TRUE,  4),
+  (2,  3,  '2026-10-02', TRUE,  5),
+  (2,  4,  '2026-10-08', FALSE, NULL),
+  (2,  6,  '2026-10-08', TRUE,  3),
+  (3,  1,  '2026-10-03', TRUE,  4),
+  (3,  7,  '2026-10-03', TRUE,  5),
+  (3,  12, '2026-10-20', TRUE,  NULL),
+  (4,  3,  '2026-10-04', TRUE,  4),
+  (4,  4,  '2026-10-04', TRUE,  5),
+  (4,  5,  '2026-10-10', TRUE,  4),
+  (4,  10, '2026-10-10', FALSE, NULL),
+  (5,  1,  '2026-10-06', TRUE,  5),
+  (5,  2,  '2026-10-06', TRUE,  4),
+  (5,  8,  '2026-10-12', TRUE,  5),
+  (5,  9,  '2026-10-12', TRUE,  5),
+  (5,  12, '2026-10-25', FALSE, NULL),
+  (6,  6,  '2026-10-07', TRUE,  5),
+  (6,  7,  '2026-10-07', FALSE, NULL),
+  (7,  3,  '2026-10-09', TRUE,  3),
+  (7,  5,  '2026-10-09', TRUE,  4),
+  (7,  9,  '2026-10-15', TRUE,  4),
+  (8,  1,  '2026-10-11', FALSE, NULL),
+  (8,  7,  '2026-10-11', TRUE,  4),
+  (8,  12, '2026-10-22', TRUE,  4),
+  (9,  4,  '2026-10-13', TRUE,  4),
+  (9,  5,  '2026-10-13', TRUE,  3),
+  (9,  8,  '2026-10-16', TRUE,  4),
+  (9,  10, '2026-10-16', TRUE,  5),
+  (10, 2,  '2026-10-14', TRUE,  3),
+  (10, 3,  '2026-10-14', TRUE,  5),
+  (10, 6,  '2026-10-18', TRUE,  4),
+  (10, 10, '2026-10-18', TRUE,  4),
+  (10, 12, '2026-10-28', TRUE,  5),
+  (11, 5,  '2026-10-17', TRUE,  5),
+  (11, 9,  '2026-10-17', TRUE,  4),
+  (12, 6,  '2026-10-19', FALSE, NULL),
+  (12, 7,  '2026-10-19', TRUE,  4),
+  (14, 3,  '2026-10-21', FALSE, NULL),
+  (14, 4,  '2026-10-21', TRUE,  3),
+  (15, 1,  '2026-10-23', TRUE,  5),
+  (15, 2,  '2026-10-23', TRUE,  4),
+  (15, 8,  '2026-10-24', TRUE,  4);
+</pre>
+  </div>
+</section>
+
+<!-- ================= PARTE 1 ================= -->
+<section id="p1">
+  <h2>Parte 1 — Definindo estruturas <span class="tag t-ddl">DDL</span></h2>
+  <p class="lead">A organização pediu novas funcionalidades no sistema. Antes de mexer nos dados, vocês precisam ajustar o esquema.</p>
+
+  <div class="ex" data-id="1.1"><div class="num">1.1</div><div class="body">
+    <p>Criem a tabela <code>certificado</code> com:</p>
+    <ul>
+      <li><code>id_certificado</code> inteiro, chave primária;</li>
+      <li><code>id_participante</code> e <code>id_evento</code>, obrigatórios, formando uma <strong>chave estrangeira composta</strong> que referencia <code>inscricao</code>;</li>
+      <li><code>codigo_validacao</code> texto de até 20 caracteres, obrigatório e único;</li>
+      <li><code>data_emissao</code> data obrigatória, com valor padrão igual à data atual.</li>
+    </ul>
+    <details class="dica"><summary>Dica</summary><div>A FK composta é declarada de uma vez: <code>FOREIGN KEY (col1, col2) REFERENCES tabela (col1, col2)</code>. Para o padrão de data, o MySQL 8 exige parênteses em volta da expressão: <code>DEFAULT (CURRENT_DATE)</code>.</div></details>
+    <div class="meta"><span class="tag t-ddl">CREATE TABLE</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="1.2"><div class="num">1.2</div><div class="body">
+    <p>A organização quer mandar avisos por WhatsApp. Adicionem à tabela <code>participante</code> a coluna <code>telefone</code> (texto, até 20 caracteres, opcional). Depois, consultem a tabela: que valor aparece nessa coluna para os participantes já cadastrados? Por quê?</p>
+    <div class="meta"><span class="tag t-ddl">ALTER TABLE … ADD</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="1.3"><div class="num">1.3</div><div class="body">
+    <p>Adicionem à tabela <code>sala</code> a coluna <code>possui_projetor</code>, booleana, obrigatória e com padrão <code>TRUE</code>. Comparem com o exercício anterior: o que aconteceu com as salas já existentes?</p>
+    <div class="meta"><span class="tag t-ddl">ALTER TABLE … ADD</span><span class="tag t-ddl">DEFAULT</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="1.4"><div class="num">1.4</div><div class="body">
+    <p>Acrescentem duas restrições <strong>nomeadas</strong> à tabela <code>evento</code>:</p>
+    <ul>
+      <li><code>ck_evento_vagas</code>: o número de vagas deve ser maior que zero;</li>
+      <li><code>ck_evento_carga</code>: a carga horária deve estar entre 1 e 8 horas.</li>
+    </ul>
+    <p>Por que é uma boa prática dar nome às restrições?</p>
+    <details class="dica"><summary>Dica</summary><div><code>ALTER TABLE evento ADD CONSTRAINT nome CHECK (condição);</code> — comparem com o nome que o MySQL inventou para a restrição de <code>tipo</code>, criada sem nome no script (vocês vão encontrá-lo na mensagem de erro do exercício 2.4).</div></details>
+    <div class="meta"><span class="tag t-ddl">ADD CONSTRAINT</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="1.5"><div class="num">1.5</div><div class="body">
+    <p>A Semana Acadêmica passará a ter patrocinadores. Um patrocinador pode apoiar vários eventos e um evento pode ter vários patrocinadores, cada apoio com um <em>valor de aporte</em>. Criem:</p>
+    <ul>
+      <li><code>patrocinador</code> (<code>id_patrocinador</code>, <code>nome</code> obrigatório, <code>cnpj</code> com 14 caracteres e único);</li>
+      <li>a tabela que resolve o relacionamento N:M, <code>evento_patrocinador</code>, com <code>valor_aporte</code> obrigatório e positivo.</li>
+    </ul>
+    <p>Qual deve ser a chave primária da tabela associativa? Relacionem com as regras de mapeamento MER → relacional.</p>
+    <div class="meta"><span class="tag t-ddl">CREATE TABLE</span><span class="tag t-ddl">N:M</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="1.6"><div class="num">1.6</div><div class="body">
+    <p>Criem uma tabela qualquer chamada <code>rascunho</code>, insiram duas linhas nela e depois removam-na com <code>DROP TABLE</code>.</p>
+    <p>Em comentário, expliquem a diferença entre <code>DELETE FROM rascunho</code>, <code>TRUNCATE TABLE rascunho</code> e <code>DROP TABLE rascunho</code>. Quais são DDL e quais são DML?</p>
+    <div class="meta"><span class="tag t-ddl">DROP</span><span class="tag t-ddl">TRUNCATE</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="1.7"><div class="num">1.7</div><div class="body">
+    <p>Executem <code>DROP TABLE curso;</code>. Copiem a mensagem de erro para o arquivo e expliquem por que o MySQL recusou o comando.</p>
+    <p>Depois, tentem <code>DROP TABLE curso CASCADE;</code> e observem: o MySQL aceita a palavra <code>CASCADE</code>, mas a ignora. Em comentário, respondam <strong>sem executar</strong> 😉: (a) se a FK de <code>participante</code> tivesse sido criada com <code>ON DELETE CASCADE</code>, o que aconteceria ao excluir um curso? (b) por que desligar <code>FOREIGN_KEY_CHECKS</code> para "resolver" o erro é uma péssima ideia?</p>
+    <div class="meta"><span class="tag t-ddl">Integridade referencial</span><span class="tag t-ddl">ON DELETE CASCADE</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+</section>
+
+<!-- ================= PARTE 2 ================= -->
+<section id="p2">
+  <h2>Parte 2 — Manipulando dados <span class="tag t-dml">DML</span></h2>
+  <p class="lead">Façam os exercícios na ordem — alguns dependem das estruturas criadas na Parte 1.</p>
+
+  <div class="ex" data-id="2.1"><div class="num">2.1</div><div class="body">
+    <p>Cadastrem <strong>vocês mesmos</strong> como participante: <code>id_participante = 17</code>, curso de Engenharia da Computação, sua cidade, data de nascimento e telefone.</p>
+    <div class="meta"><span class="tag t-dml">INSERT</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="2.2"><div class="num">2.2</div><div class="body">
+    <p>Inscrevam-se nos eventos <em>SQL Avançado</em> e <em>Internet das Coisas com Arduino</em> usando <strong>um único</strong> <code>INSERT</code>. Informem apenas participante, evento e data de inscrição. Que valor ficou em <code>presente</code> e em <code>nota_avaliacao</code>? De onde vieram? Por que o Workbench mostra <code>0</code> em vez de <code>FALSE</code>?</p>
+    <div class="meta"><span class="tag t-dml">INSERT múltiplo</span><span class="tag t-ddl">DEFAULT</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="2.3"><div class="num">2.3</div><div class="body">
+    <p>Cadastrem o evento 13: minicurso <em>Banco de Dados NoSQL</em>, com Helena Vieira, no Laboratório de Informática 1, em 11/11/2026 às 08:00, 4 horas, 30 vagas, R$ 30,00.</p>
+    <div class="meta"><span class="tag t-dml">INSERT</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="2.4"><div class="num">2.4</div><div class="body">
+    <p>Cada comando abaixo <strong>deve falhar</strong>. Escrevam e executem cada um, copiem do painel <em>Output</em> o código e a mensagem de erro e indiquem qual restrição foi violada (PK, FK, UNIQUE, NOT NULL ou CHECK):</p>
+    <ol>
+      <li>um evento do tipo <code>'Workshop'</code>;</li>
+      <li>uma inscrição no evento 99;</li>
+      <li>uma avaliação com nota 6;</li>
+      <li>um participante com o e-mail <code>ana.souza@email.com</code>;</li>
+      <li>a inscrição do participante 1 no evento 1 de novo.</li>
+    </ol>
+    <div class="meta"><span class="tag t-dml">INSERT</span><span class="tag t-ddl">Restrições</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="2.5"><div class="num">2.5</div><div class="body">
+    <p>O custo dos materiais subiu: reajustem em <strong>10%</strong> o valor de todas as oficinas. Antes, façam um <code>SELECT</code> para ver os valores atuais; depois, outro para conferir os novos.</p>
+    <p>Se aparecer o erro <code>1175</code>, executem <code>SET SQL_SAFE_UPDATES = 0;</code> e tentem de novo. Em comentário, expliquem que tipo de acidente essa proteção do Workbench quer evitar.</p>
+    <div class="meta"><span class="tag t-dml">UPDATE</span><span class="tag t-ok">4 linhas afetadas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="2.6"><div class="num">2.6</div><div class="body">
+    <p>O Diego Ramos chegou atrasado ao <em>SQL Avançado</em>, mas assistiu e deu nota 5. Registrem a presença e a nota dele com <strong>um único</strong> <code>UPDATE</code>.</p>
+    <details class="dica"><summary>Dica</summary><div>A chave de <code>inscricao</code> é composta. O <code>WHERE</code> precisa identificar exatamente uma linha.</div></details>
+    <div class="meta"><span class="tag t-dml">UPDATE</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="2.7"><div class="num">2.7</div><div class="body">
+    <p>As salas do bloco C não têm projetor. Atualizem a coluna criada no exercício 1.3. Quantas linhas foram afetadas?</p>
+    <div class="meta"><span class="tag t-dml">UPDATE</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="2.8"><div class="num">2.8</div><div class="body">
+    <p>Removam as inscrições <strong>sem presença</strong> do evento <em>Encerramento: Carreira em Tecnologia</em> (id 12). Boa prática: rodem primeiro um <code>SELECT</code> com o mesmo <code>WHERE</code> para ver o que será apagado.</p>
+    <div class="meta"><span class="tag t-dml">DELETE</span><span class="tag t-ok">1 linha removida</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="2.9"><div class="num">2.9</div><div class="body">
+    <p>Tentem excluir o curso de Engenharia da Computação e, em seguida, o seu próprio cadastro (participante 17). Expliquem os erros e escrevam a sequência de comandos que permitiria excluir o participante 17 corretamente — <strong>e executem</strong>.</p>
+    <div class="meta"><span class="tag t-dml">DELETE</span><span class="tag t-ddl">FK</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex challenge" data-id="2.10"><div class="num">2.10</div><div class="body">
+    <p><strong>Desafio.</strong> Cadastrem dois patrocinadores e três aportes em eventos diferentes. Depois, usando <code>INSERT INTO … SELECT</code>, gerem automaticamente um certificado para <strong>cada inscrição com presença</strong>, com o código no formato <code>SA26-&lt;participante&gt;-&lt;evento&gt;</code> (ex.: <code>SA26-5-8</code>).</p>
+    <details class="dica"><summary>Dica</summary><div>No MySQL, textos se juntam com <code>CONCAT('SA26-', id_participante, '-', id_evento)</code> e <code>ROW_NUMBER() OVER ()</code> numera as linhas do resultado (servindo de id). Atenção: no MySQL <code>||</code> significa OU lógico, não concatenação. Se fizeram tudo na ordem, devem surgir 40 certificados.</div></details>
+    <div class="meta"><span class="tag t-dml">INSERT … SELECT</span><span class="tag t-des">Desafio</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="note warn" style="margin-top:22px">
+    <strong>🔄 Hora de recomeçar</strong>
+    Antes da Parte 3, <a href="#script">executem o script inicial novamente</a>. A partir daqui todos os selos verdes consideram a base original.
+  </div>
+</section>
+
+<!-- ================= PARTE 3 ================= -->
+<section id="p3">
+  <h2>Parte 3 — Consultas, filtros e ordenação <span class="tag t-sel">SELECT</span></h2>
+  <p class="lead">Lembrem da álgebra relacional: o <code>WHERE</code> faz o papel da seleção (σ) e a lista do <code>SELECT</code>, o da projeção (π).</p>
+
+  <div class="ex" data-id="3.1"><div class="num">3.1</div><div class="body">
+    <p>Montem a programação da semana: título, tipo, data e hora de todos os eventos, em ordem cronológica (data e, no mesmo dia, hora).</p>
+    <div class="meta"><span class="tag t-sel">ORDER BY múltiplo</span><span class="tag t-ok">✓ 12 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="3.2"><div class="num">3.2</div><div class="body">
+    <p>Listem nome e cidade dos participantes <strong>externos</strong>, em ordem alfabética. Por que <code>WHERE id_curso = NULL</code> não funciona?</p>
+    <div class="meta"><span class="tag t-sel">IS NULL</span><span class="tag t-ok">✓ 3 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="3.3"><div class="num">3.3</div><div class="body">
+    <p>Mostrem título e valor dos eventos que custam entre R$ 15,00 e R$ 30,00 (inclusive), do mais caro para o mais barato; em caso de empate, por título.</p>
+    <div class="meta"><span class="tag t-sel">BETWEEN</span><span class="tag t-sel">ORDER BY … DESC</span><span class="tag t-ok">✓ 6 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="3.4"><div class="num">3.4</div><div class="body">
+    <p>Encontrem os eventos cujo título contém a palavra <em>dados</em>. Testem com <code>LIKE '%Dados%'</code> e com <code>LIKE '%dados%'</code>: o resultado muda? Testem também <code>LIKE '%analise%'</code>, sem acento.</p>
+    <p>Agora façam a busca <strong>diferenciar maiúsculas</strong>, trazendo só os títulos com "Dados" maiúsculo. Expliquem em comentário o que aconteceu.</p>
+    <details class="dica"><summary>Dica</summary><div>O MySQL 8 compara textos pela <em>collation</em> <code>utf8mb4_0900_ai_ci</code>: <strong>ai</strong> = <em>accent insensitive</em> e <strong>ci</strong> = <em>case insensitive</em>. Para comparar byte a byte, usem <code>LIKE BINARY '%Dados%'</code> ou <code>titulo COLLATE utf8mb4_bin LIKE '%Dados%'</code>.</div></details>
+    <div class="meta"><span class="tag t-sel">LIKE</span><span class="tag t-sel">Collation</span><span class="tag t-ok">✓ 3 linhas · 2 com BINARY</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="3.5"><div class="num">3.5</div><div class="body">
+    <p>De quais cidades vêm os participantes? Mostrem cada cidade <strong>uma única vez</strong>, em ordem alfabética.</p>
+    <div class="meta"><span class="tag t-sel">DISTINCT</span><span class="tag t-ok">✓ 6 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="3.6"><div class="num">3.6</div><div class="body">
+    <p>Quais são os <strong>3 eventos mais caros</strong>? Em caso de empate no valor, desempatem pelo título. O que mudaria no resultado se vocês não colocassem o critério de desempate?</p>
+    <details class="dica"><summary>Dica</summary><div><code>LIMIT 3</code>, sempre depois do <code>ORDER BY</code>. Vale saber que o padrão SQL usa <code>FETCH FIRST 3 ROWS ONLY</code>, que o MySQL não aceita.</div></details>
+    <div class="meta"><span class="tag t-sel">LIMIT</span><span class="tag t-ok">✓ 3 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="3.7"><div class="num">3.7</div><div class="body">
+    <p>Listem nome e data de nascimento dos participantes nascidos de 2004 em diante, do mais novo para o mais velho.</p>
+    <div class="meta"><span class="tag t-sel">Datas</span><span class="tag t-ok">✓ 8 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="3.8"><div class="num">3.8</div><div class="body">
+    <p>A organização quer divulgar os eventos <strong>gratuitos</strong> que começam a partir das 18h. Mostrem título, data e hora.</p>
+    <div class="meta"><span class="tag t-sel">AND</span><span class="tag t-ok">✓ 3 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+</section>
+
+<!-- ================= PARTE 4 ================= -->
+<section id="p4">
+  <h2>Parte 4 — Junções <span class="tag t-join">JOIN</span></h2>
+  <p class="lead">Na álgebra, vocês usaram ⋈ e a junção externa. Agora é a vez do <code>INNER JOIN</code> e do <code>LEFT JOIN</code>.</p>
+
+  <div class="ex" data-id="4.1"><div class="num">4.1</div><div class="body">
+    <p>Para o folder do evento: título, data, nome da sala, bloco e nome do palestrante de cada evento, em ordem cronológica.</p>
+    <div class="meta"><span class="tag t-join">JOIN com 3 tabelas</span><span class="tag t-ok">✓ 12 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="4.2"><div class="num">4.2</div><div class="body">
+    <p>Listem <strong>todos</strong> os participantes com a sigla do seu curso. Para os externos, deve aparecer o texto <code>Externo</code> no lugar da sigla. Testem antes com <code>INNER JOIN</code> e expliquem por que as linhas diminuem.</p>
+    <details class="dica"><summary>Dica</summary><div><code>COALESCE(c.sigla, 'Externo')</code> devolve o primeiro valor não nulo.</div></details>
+    <div class="meta"><span class="tag t-join">LEFT JOIN</span><span class="tag t-sel">COALESCE</span><span class="tag t-ok">✓ 16 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="4.3"><div class="num">4.3</div><div class="body">
+    <p>Qual palestrante foi convidado mas ainda <strong>não tem nenhum evento</strong>? Resolvam com <code>LEFT JOIN</code> (sem subconsulta).</p>
+    <div class="meta"><span class="tag t-join">LEFT JOIN … IS NULL</span><span class="tag t-ok">✓ 1 linha</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="4.4"><div class="num">4.4</div><div class="body">
+    <p>Mostrem a "agenda" da Eduarda Klein: título, data e hora de cada evento em que ela se inscreveu e se esteve presente, em ordem cronológica.</p>
+    <div class="meta"><span class="tag t-join">JOIN</span><span class="tag t-ok">✓ 5 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="4.5"><div class="num">4.5</div><div class="body">
+    <p>Quais eventos acontecem no <strong>bloco B</strong>? Mostrem título, sala e palestrante, ordenados por sala e depois por data.</p>
+    <div class="meta"><span class="tag t-join">JOIN + WHERE</span><span class="tag t-ok">✓ 5 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="4.6"><div class="num">4.6</div><div class="body">
+    <p>Quem mora em <strong>Rio Negrinho</strong> e está inscrito em alguma <strong>oficina</strong>? Mostrem o nome do participante e o título da oficina.</p>
+    <div class="meta"><span class="tag t-join">JOIN</span><span class="tag t-ok">✓ 2 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+</section>
+
+<!-- ================= PARTE 5 ================= -->
+<section id="p5">
+  <h2>Parte 5 — Funções de agrupamento <span class="tag t-agg">GROUP BY · HAVING</span></h2>
+  <p class="lead"><code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MIN</code> e <code>MAX</code>. Lembrem: toda coluna do <code>SELECT</code> que não está dentro de uma função de agregação precisa estar no <code>GROUP BY</code>.</p>
+
+  <div class="ex" data-id="5.1"><div class="num">5.1</div><div class="body">
+    <p>Em uma única consulta, mostrem o total de participantes e quantos deles têm curso informado. Por que <code>COUNT(*)</code> e <code>COUNT(id_curso)</code> dão números diferentes?</p>
+    <div class="meta"><span class="tag t-agg">COUNT</span><span class="tag t-ok">✓ 1 linha</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="5.2"><div class="num">5.2</div><div class="body">
+    <p>Para cada tipo de evento, mostrem a quantidade de eventos e o valor médio, mínimo e máximo, ordenando pelo valor médio (do maior para o menor). Arredondem a média para 2 casas.</p>
+    <div class="meta"><span class="tag t-agg">AVG · MIN · MAX</span><span class="tag t-agg">ROUND</span><span class="tag t-ok">✓ 3 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="5.3"><div class="num">5.3</div><div class="body">
+    <p>Quantos inscritos tem <strong>cada</strong> evento? O resultado precisa mostrar também o evento sem nenhum inscrito, com zero. Ordenem do mais procurado para o menos procurado.</p>
+    <details class="dica"><summary>Dica</summary><div>Com <code>LEFT JOIN</code>, comparem <code>COUNT(*)</code> com <code>COUNT(i.id_participante)</code> para o evento sem inscritos. Qual dá o número certo?</div></details>
+    <div class="meta"><span class="tag t-agg">COUNT + LEFT JOIN</span><span class="tag t-ok">✓ 12 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="5.4"><div class="num">5.4</div><div class="body">
+    <p>Quais eventos têm <strong>5 ou mais</strong> inscritos? Expliquem por que essa condição não pode ficar no <code>WHERE</code>.</p>
+    <div class="meta"><span class="tag t-agg">HAVING</span><span class="tag t-ok">✓ 3 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="5.5"><div class="num">5.5</div><div class="body">
+    <p>Considerando que todo inscrito paga o valor do evento, calculem a <strong>arrecadação de cada evento pago</strong>, da maior para a menor. Em outra consulta, mostrem a arrecadação total da Semana.</p>
+    <div class="meta"><span class="tag t-agg">SUM</span><span class="tag t-ok">✓ 7 linhas · total R$ 600,00</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="5.6"><div class="num">5.6</div><div class="body">
+    <p>O certificado final soma a carga horária dos eventos em que o participante <strong>esteve presente</strong>. Mostrem nome e total de horas de cada participante, do maior para o menor (empates em ordem alfabética).</p>
+    <div class="meta"><span class="tag t-agg">SUM + WHERE</span><span class="tag t-ok">✓ 14 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="5.7"><div class="num">5.7</div><div class="body">
+    <p>Calculem a nota média de cada palestrante (2 casas) e a quantidade de avaliações recebidas, da melhor para a pior média. O <code>AVG</code> considerou as inscrições sem nota? Como vocês comprovam isso?</p>
+    <div class="meta"><span class="tag t-agg">AVG e NULL</span><span class="tag t-ok">✓ 5 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="5.8"><div class="num">5.8</div><div class="body">
+    <p>Calculem a <strong>taxa de presença (%)</strong> de cada evento com inscritos: presentes ÷ inscritos × 100, com 1 casa decimal. Ordenem da menor para a maior taxa.</p>
+    <details class="dica"><summary>Dica</summary><div><code>SUM(CASE WHEN presente THEN 1 ELSE 0 END)</code> conta os presentes. Como no MySQL <code>presente</code> vale 1 ou 0, <code>SUM(presente)</code> dá o mesmo resultado; expliquem por quê. Usem <code>ROUND(…, 1)</code> no final.</div></details>
+    <div class="meta"><span class="tag t-agg">CASE dentro de SUM</span><span class="tag t-ok">✓ 11 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="5.9"><div class="num">5.9</div><div class="body">
+    <p>Quais cidades têm <strong>3 ou mais</strong> participantes cadastrados? Mostrem cidade e quantidade, da maior para a menor.</p>
+    <div class="meta"><span class="tag t-agg">HAVING</span><span class="tag t-ok">✓ 3 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+</section>
+
+<!-- ================= PARTE 6 ================= -->
+<section id="p6">
+  <h2>Parte 6 — Consultas aninhadas <span class="tag t-sub">Subconsultas</span></h2>
+  <p class="lead">Subconsultas no <code>WHERE</code>, no <code>HAVING</code> e no <code>FROM</code>, com <code>IN</code>, <code>NOT IN</code>, <code>EXISTS</code> e <code>NOT EXISTS</code>.</p>
+
+  <div class="ex" data-id="6.1"><div class="num">6.1</div><div class="body">
+    <p>Quais eventos custam <strong>mais que a média</strong> de valor de todos os eventos? Mostrem título e valor, do mais caro para o mais barato.</p>
+    <div class="meta"><span class="tag t-sub">Subconsulta escalar</span><span class="tag t-ok">✓ 7 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="6.2"><div class="num">6.2</div><div class="body">
+    <p>Quem se cadastrou mas <strong>nunca se inscreveu</strong> em nenhum evento? Resolvam de duas formas: com <code>NOT IN</code> e com <code>NOT EXISTS</code>.</p>
+    <div class="meta"><span class="tag t-sub">NOT IN · NOT EXISTS</span><span class="tag t-ok">✓ 2 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="6.3"><div class="num">6.3</div><div class="body">
+    <p>Qual evento não tem nenhum inscrito? Agora resolvam com subconsulta (no 5.3 vocês usaram junção).</p>
+    <div class="meta"><span class="tag t-sub">NOT IN</span><span class="tag t-ok">✓ 1 linha</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="6.4"><div class="num">6.4</div><div class="body">
+    <p>Quem é o participante <strong>mais engajado</strong>, ou seja, com o maior número de inscrições? Atenção: pode haver empate, e a consulta precisa mostrar todos os empatados — por isso <code>LIMIT 1</code> não serve.</p>
+    <details class="dica"><summary>Dica</summary><div>No <code>HAVING</code>, comparem o <code>COUNT(*)</code> com o <code>MAX</code> de uma subconsulta que conta as inscrições por participante.</div></details>
+    <div class="meta"><span class="tag t-sub">Subconsulta no HAVING</span><span class="tag t-ok">✓ 2 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="6.5"><div class="num">6.5</div><div class="body">
+    <p>Existe algum evento com mais vagas do que a capacidade da sala? Resolvam com uma <strong>subconsulta correlacionada</strong> (sem <code>JOIN</code>). Expliquem em comentário o que torna a subconsulta "correlacionada".</p>
+    <div class="meta"><span class="tag t-sub">Correlacionada</span><span class="tag t-ok">✓ 1 linha</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="6.6"><div class="num">6.6</div><div class="body">
+    <p>Listem, em ordem alfabética, os participantes inscritos em algum evento da palestrante <strong>Helena Vieira</strong>, usando apenas subconsultas encadeadas com <code>IN</code> (nada de <code>JOIN</code>). Quantos níveis de aninhamento foram necessários?</p>
+    <div class="meta"><span class="tag t-sub">IN encadeado</span><span class="tag t-ok">✓ 9 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="6.7"><div class="num">6.7</div><div class="body">
+    <p>Usando uma <strong>subconsulta no <code>FROM</code></strong> (tabela derivada) que conta os inscritos de cada evento, calculem a <em>média de inscritos por evento</em> para cada tipo. O evento sem inscritos deve entrar na média com zero.</p>
+    <div class="meta"><span class="tag t-sub">Tabela derivada</span><span class="tag t-agg">AVG de COUNT</span><span class="tag t-ok">✓ 3 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="6.8"><div class="num">6.8</div><div class="body">
+    <p>Quais participantes dão notas, em média, <strong>acima da média geral</strong> das avaliações? Mostrem nome e média (2 casas), da maior para a menor.</p>
+    <div class="meta"><span class="tag t-sub">Subconsulta no HAVING</span><span class="tag t-ok">✓ 7 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="6.9"><div class="num">6.9</div><div class="body">
+    <p>Qual curso <strong>não tem nenhum aluno inscrito</strong> em evento? Usem <code>NOT EXISTS</code>. Cuidado: um curso pode ter alunos cadastrados que não se inscreveram em nada.</p>
+    <div class="meta"><span class="tag t-sub">NOT EXISTS</span><span class="tag t-ok">✓ 1 linha</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex" data-id="6.10"><div class="num">6.10</div><div class="body">
+    <p>Subconsultas também servem para DML. Escrevam e executem:</p>
+    <ol>
+      <li>um <code>UPDATE</code> que dá <strong>50% de desconto</strong> nos eventos com menos de 4 inscritos;</li>
+      <li>um <code>DELETE</code> que remove as inscrições <strong>sem presença</strong> em eventos do tipo <em>Palestra</em>.</li>
+    </ol>
+    <p>No <code>UPDATE</code>, o MySQL provavelmente vai responder com o erro <code>1093</code>. Leiam a mensagem, entendam a limitação e contornem-na. Quando funcionar, o <em>Output</em> mostrará <code>Rows matched: 3  Changed: 2</code>: expliquem por que só 2 linhas mudaram. O <code>DELETE</code> deve remover 3 linhas.</p>
+    <details class="dica"><summary>Dica</summary><div>O MySQL não deixa a subconsulta ler a mesma tabela que está sendo alterada. O truque é "embrulhar" a subconsulta em uma tabela derivada: <code>WHERE id_evento IN (SELECT id_evento FROM ( …subconsulta… ) AS t)</code>. E olhem bem o valor dos eventos escolhidos 😉</div></details>
+    <div class="meta"><span class="tag t-sub">UPDATE/DELETE com subconsulta</span><span class="tag t-dml">Erro 1093</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+</section>
+
+<!-- ================= PARTE 7 ================= -->
+<section id="p7">
+  <h2>Parte 7 — Desafios integradores <span class="tag t-des">Para fechar</span></h2>
+  <p class="lead">Rodem o script inicial de novo antes de começar. Aqui vale combinar tudo o que vocês usaram até agora.</p>
+
+  <div class="ex challenge" data-id="7.1"><div class="num">7.1</div><div class="body">
+    <p><strong>Relatório por curso.</strong> Para cada curso (inclusive os que não têm ninguém), mostrem: sigla, quantidade de participantes, quantidade de inscrições e média das notas (2 casas). Ordenem pela quantidade de inscrições, da maior para a menor.</p>
+    <details class="dica"><summary>Dica</summary><div>Dois <code>LEFT JOIN</code> em sequência multiplicam as linhas: para contar participantes sem repetição, usem <code>COUNT(DISTINCT …)</code>.</div></details>
+    <div class="meta"><span class="tag t-join">LEFT JOIN</span><span class="tag t-agg">COUNT DISTINCT</span><span class="tag t-ok">✓ 5 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex challenge" data-id="7.2"><div class="num">7.2</div><div class="body">
+    <p><strong>Ocupação das salas.</strong> Para cada sala, mostrem o total de inscritos em todos os eventos dela, o total de vagas oferecidas e a taxa de ocupação (%), da sala mais ocupada para a menos ocupada.</p>
+    <div class="meta"><span class="tag t-sub">Tabela derivada</span><span class="tag t-agg">SUM</span><span class="tag t-ok">✓ 5 linhas</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+
+  <div class="ex challenge" data-id="7.3"><div class="num">7.3</div><div class="body">
+    <p><strong>De volta à álgebra relacional.</strong> Escrevam, em comentário, a expressão em álgebra relacional equivalente às consultas <strong>4.5</strong> e <strong>6.2</strong>. Qual operador da álgebra corresponde ao <code>NOT EXISTS</code> do 6.2? E qual parte do SQL vocês <em>não</em> conseguem representar com os operadores básicos vistos em aula (pensem em <code>ORDER BY</code> e <code>COUNT</code>)?</p>
+    <div class="meta"><span class="tag t-des">Álgebra ↔ SQL</span><label class="chk"><input type="checkbox">feito</label></div>
+  </div></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">IFC — Campus São Bento do Sul · Banco de Dados · Lista de Exercícios: SQL na Prática (MySQL)</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  var pre = document.getElementById('sql');
+  var raw = pre.textContent;
+
+  // realce simples de sintaxe
+  var KW = ['CREATE','TABLE','DROP','IF','EXISTS','INSERT','INTO','VALUES','PRIMARY','KEY','FOREIGN','REFERENCES','NOT','NULL','UNIQUE','CHECK','DEFAULT','IN','BETWEEN','AND','INT','VARCHAR','CHAR','DATE','TIME','DECIMAL','BOOLEAN','TRUE','FALSE','USE','DATABASE','SET'];
+  var re = new RegExp("(--[^\\n]*)|('(?:[^']|'')*')|\\b(" + KW.join('|') + ")\\b|\\b(\\d+(?:\\.\\d+)?)\\b", 'g');
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  var out = '', last = 0, m;
+  while ((m = re.exec(raw)) !== null){
+    out += esc(raw.slice(last, m.index));
+    var cls = m[1] ? 'com' : m[2] ? 'str' : m[3] ? 'kw' : 'num';
+    out += '<span class="' + cls + '">' + esc(m[0]) + '</span>';
+    last = re.lastIndex;
+  }
+  out += esc(raw.slice(last));
+  pre.innerHTML = out;
+
+  var toast = document.getElementById('toast');
+  function say(msg){ toast.textContent = msg; toast.classList.add('show'); setTimeout(function(){toast.classList.remove('show');}, 1800); }
+
+  document.getElementById('copy').addEventListener('click', function(){
+    function fallback(){
+      var ta = document.createElement('textarea'); ta.value = raw; document.body.appendChild(ta);
+      ta.select(); try{ document.execCommand('copy'); say('Script copiado!'); }catch(e){ say('Não consegui copiar — selecionem o texto manualmente.'); }
+      document.body.removeChild(ta);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(raw).then(function(){ say('Script copiado!'); }, fallback);
+    } else { fallback(); }
+  });
+
+  document.getElementById('download').addEventListener('click', function(){
+    var blob = new Blob([raw], {type:'text/plain;charset=utf-8'});
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'semana_academica_mysql.sql';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  });
+
+  var exp = document.getElementById('expand');
+  exp.addEventListener('click', function(){
+    pre.classList.toggle('open');
+    exp.textContent = pre.classList.contains('open') ? '↕️ Recolher' : '↕️ Expandir';
+  });
+
+  // progresso (salvo só no navegador de cada estudante)
+  var KEY = 'sql-na-pratica-feitos';
+  var done = {};
+  try { done = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){ done = {}; }
+  var exs = document.querySelectorAll('.ex');
+  var bar = document.getElementById('bar');
+  function update(){
+    var n = 0;
+    exs.forEach(function(ex){ if (ex.classList.contains('done')) n++; });
+    bar.style.width = (100 * n / exs.length) + '%';
+  }
+  exs.forEach(function(ex){
+    var id = ex.getAttribute('data-id');
+    var cb = ex.querySelector('input[type=checkbox]');
+    if (done[id]) { cb.checked = true; ex.classList.add('done'); }
+    cb.addEventListener('change', function(){
+      ex.classList.toggle('done', cb.checked);
+      if (cb.checked) done[id] = 1; else delete done[id];
+      try { localStorage.setItem(KEY, JSON.stringify(done)); } catch(e){}
+      update();
+    });
+  });
+  update();
+})();
+</script>
+</body>
+</html>

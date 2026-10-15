@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 05 — Tabelas-Verdade | Lógica para Computação</title>
+<meta name="description" content="Construção sistemática de tabelas-verdade: número de linhas, ordem das valorações, colunas intermediárias, crescimento exponencial e atalhos.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-05-tabelas-verdade.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Caso Nº 05 — Tabelas-Verdade | Lógica para Computação">
+<meta property="og:description" content="Construção sistemática de tabelas-verdade: número de linhas, ordem das valorações, colunas intermediárias, crescimento exponencial e atalhos.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-05-tabelas-verdade.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Tabelas-Verdade",
+    "description": "Construção sistemática de tabelas-verdade: número de linhas, ordem das valorações, colunas intermediárias, crescimento exponencial e atalhos.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-05-tabelas-verdade.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Material de estudo",
+    "educationalLevel": "Ensino Superior",
+    "position": 5,
+    "author": {
+      "@type": "Person",
+      "name": "Wilcilene Kowal"
+    },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Instituto Federal Catarinense — Campus São Bento do Sul"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Lógica para Computação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Caso 05: Tabelas-verdade",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-05-tabelas-verdade.html"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 05 de 20</span>
+  </div>
+</header>
+
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag indigo mono">Caso Nº 05 · Semântica</span>
+  <h1>Tabelas-Verdade</h1>
+  <p class="lede">A tabela-verdade é o bloco de anotações completo do investigador: ela examina a fórmula em todos os cenários possíveis, sem deixar nenhum de fora.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+<div class="goals">
+    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <ul>
+      <li>definir valoração e calcular quantas linhas uma tabela-verdade tem;</li>
+      <li>montar a tabela de forma sistemática, sem esquecer nem repetir linhas;</li>
+      <li>usar colunas intermediárias para avaliar fórmulas complexas;</li>
+      <li>usar o atalho da avaliação reversa para encontrar rapidamente uma linha falsa;</li>
+      <li>explicar por que a tabela-verdade fica inviável quando o número de variáveis cresce.</li>
+    </ul>
+  </div>
+
+  <h2>Valoração: um cenário completo</h2>
+  <p>
+    Uma <strong>valoração</strong> (ou interpretação) é uma atribuição de V ou F a cada variável da fórmula. Cada valoração
+    é um “mundo possível”: um jeito de as coisas poderem ser. A semântica da lógica proposicional define, para cada
+    valoração, o valor da fórmula inteira, conectivo por conectivo, de dentro para fora, usando a tabela do Caso 04.
+  </p>
+  <p>
+    A <strong>tabela-verdade</strong> lista todas as valorações possíveis e o valor da fórmula em cada uma. Com
+    <code>n</code> variáveis distintas, cada uma tem 2 valores possíveis, então existem <code>2 · 2 · ... · 2 = 2ⁿ</code> valorações,
+    ou seja, <code>2ⁿ</code> linhas.
+  </p>
+
+  <h2>Montando a tabela sem esquecer nenhuma linha</h2>
+  <p>Eu sigo sempre o mesmo método, e recomendo que vocês façam igual:</p>
+  <ol>
+    <li>Listem as variáveis em ordem (por exemplo, alfabética).</li>
+    <li>Na primeira coluna, alternem blocos de <code>2ⁿ⁻¹</code> V e <code>2ⁿ⁻¹</code> F; na segunda, blocos de <code>2ⁿ⁻²</code>; e assim por diante, até a última coluna, que alterna V e F linha a linha.</li>
+    <li>Criem uma coluna para cada subfórmula, das mais internas para as mais externas.</li>
+    <li>A última coluna é a da fórmula inteira (o conectivo principal).</li>
+  </ol>
+  <p>
+    Esse padrão é o mesmo de contar em binário de trás para frente: se V = 1 e F = 0, as linhas vão de 111 a 000.
+    Vamos usar essa observação no Caso 11 para gerar todas as valorações com um laço de 0 a <code>2ⁿ − 1</code>.
+  </p>
+
+  <h2>Exemplo completo: uma pista com três variáveis</h2>
+  <p>Considerem a pista <code>(p ∧ q) → r</code>, com <code>p</code>: “o crime foi na Biblioteca”, <code>q</code>: “o Mordomo é o culpado” e <code>r</code>: “a arma é o Candelabro”.</p>
+  <div class="table-wrap">
+    <table class="tbl tv">
+      <caption>Tabela-verdade de (p ∧ q) → r</caption>
+      <thead><tr><th>p</th><th>q</th><th>r</th><th>p ∧ q</th><th class="res">(p ∧ q) → r</th></tr></thead>
+      <tbody>
+        <tr><td>V</td><td>V</td><td>V</td><td>V</td><td class="res">V</td></tr>
+        <tr class="destaque"><td>V</td><td>V</td><td>F</td><td>V</td><td class="res">F</td></tr>
+        <tr><td>V</td><td>F</td><td>V</td><td>F</td><td class="res">V</td></tr>
+        <tr><td>V</td><td>F</td><td>F</td><td>F</td><td class="res">V</td></tr>
+        <tr><td>F</td><td>V</td><td>V</td><td>F</td><td class="res">V</td></tr>
+        <tr><td>F</td><td>V</td><td>F</td><td>F</td><td class="res">V</td></tr>
+        <tr><td>F</td><td>F</td><td>V</td><td>F</td><td class="res">V</td></tr>
+        <tr><td>F</td><td>F</td><td>F</td><td>F</td><td class="res">V</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    A única linha falsa é a destacada: crime na Biblioteca, Mordomo culpado e arma diferente do Candelabro. Isso faz
+    sentido: é o único cenário que contradiz a pista. Em todos os outros, a pista não é desmentida.
+  </p>
+
+  <h2>Atalho: a avaliação reversa</h2>
+  <p>
+    Muitas vezes vocês não precisam da tabela inteira, só querem saber se a fórmula <em>pode</em> ser falsa. Nesse caso,
+    comecem pelo fim: suponham a fórmula falsa e vejam o que isso obriga.
+  </p>
+  <div class="evidence-box">
+    <span class="label">Avaliação reversa de (p → q) → (¬q → ¬p)</span>
+    <pre><code>Suponha a fórmula F.
+Um → só é F com antecedente V e consequente F:
+   (p → q) = V   e   (¬q → ¬p) = F
+(¬q → ¬p) = F obriga ¬q = V e ¬p = F, ou seja, q = F e p = V.
+Mas então (p → q) = (V → F) = F, contradizendo (p → q) = V.</code></pre>
+    <p>Não existe valoração que torne a fórmula falsa. Ela é sempre verdadeira, e provamos isso sem montar 4 linhas. No Caso 06 vamos dar nome a essas fórmulas.</p>
+  </div>
+
+  <h2>O problema do crescimento exponencial</h2>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Variáveis (n)</th><th>Linhas (2ⁿ)</th><th>Comentário</th></tr></thead>
+      <tbody>
+        <tr><td>3</td><td>8</td><td>cabe numa folha</td></tr>
+        <tr><td>10</td><td>1.024</td><td>já pede uma planilha</td></tr>
+        <tr><td>21</td><td>2.097.152</td><td>uma variável para cada carta do Detetive</td></tr>
+        <tr><td>64</td><td>≈ 1,8 × 10¹⁹</td><td>a 10⁹ linhas por segundo, quase 600 anos</td></tr>
+        <tr><td>300</td><td>≈ 2 × 10⁹⁰</td><td>mais que o número estimado de átomos do universo</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    A tabela-verdade é um <strong>procedimento de decisão</strong>: ela sempre termina e sempre dá a resposta certa. O
+    problema é o custo. Grande parte da disciplina, dos sistemas dedutivos à resolução, é a busca por caminhos que
+    evitem montar todas as linhas.
+  </p>
+
+  <div class="detetive">
+    <span class="label">No Detetive</span>
+    <p>
+      Uma linha da tabela-verdade é um bloco de anotações completamente preenchido: para cada carta, “está no envelope”
+      (V) ou “não está” (F). Das mais de 2 milhões de linhas com 21 cartas, só 324 respeitam a regra “exatamente um
+      suspeito, uma arma e um local” (6 × 6 × 9). Jogar bem é eliminar linhas: cada carta que vocês veem derruba todas as
+      linhas em que ela estaria no envelope.
+    </p>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 1 · Tabela com duas variáveis</span>
+    <p>Construam a tabela-verdade de <code>¬p ∨ q</code> e compare com a coluna de <code>p → q</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <div class="table-wrap">
+        <table class="tbl tv">
+          <thead><tr><th>p</th><th>q</th><th>¬p</th><th class="res">¬p ∨ q</th><th>p → q</th></tr></thead>
+          <tbody>
+            <tr><td>V</td><td>V</td><td>F</td><td class="res">V</td><td>V</td></tr>
+            <tr><td>V</td><td>F</td><td>F</td><td class="res">F</td><td>F</td></tr>
+            <tr><td>F</td><td>V</td><td>V</td><td class="res">V</td><td>V</td></tr>
+            <tr><td>F</td><td>F</td><td>V</td><td class="res">V</td><td>V</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>As colunas são idênticas: <code>¬p ∨ q</code> e <code>p → q</code> são equivalentes. É essa a equivalência que vocês usam ao escrever <code>!p || q</code> em código (Caso 07).</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 2 · Três variáveis</span>
+    <p>Construam a tabela de <code>(p → q) ∧ (q → r)</code>. Em quantas linhas ela é verdadeira?</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>
+        Na ordem VVV, VVF, VFV, VFF, FVV, FVF, FFV, FFF: <code>p → q</code> = V, V, F, F, V, V, V, V; <code>q → r</code> = V, F, V, V, V, F, V, V.
+        A conjunção é V, F, F, F, V, F, V, V. Verdadeira em <strong>4</strong> linhas: VVV, FVV, FFV e FFF.
+      </p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 3 · Avaliação reversa</span>
+    <p>Usem a avaliação reversa para encontrar uma valoração que torna <code>(p ∨ q) → (p ∧ q)</code> falsa.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Para ser F, o antecedente <code>p ∨ q</code> deve ser V e o consequente <code>p ∧ q</code> deve ser F. Basta que exatamente uma das variáveis seja V: por exemplo, <code>p = V</code>, <code>q = F</code>.</p>
+    </details>
+  </div>
+
+  <div class="summary">
+    <span class="label">Para guardar</span>
+    <ul>
+      <li>Valoração = atribuição de V/F às variáveis; com <code>n</code> variáveis, há <code>2ⁿ</code> valorações.</li>
+      <li>Avaliem de dentro para fora, com uma coluna por subfórmula.</li>
+      <li>Para saber se uma fórmula pode ser falsa, suponham-na falsa e propaguem as consequências.</li>
+      <li>A tabela-verdade sempre funciona, mas cresce exponencialmente.</li>
+    </ul>
+  </div>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="5">
+    <label><input type="checkbox" aria-label="Marcar o caso 05 como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre casos">
+    <a href="topico-04-conectivos-logicos.html"><span class="dir">← Caso anterior</span>Conectivos lógicos</a>
+    <a class="next" href="topico-06-tautologia-contradicao.html"><span class="dir">Próximo caso →</span>Tautologia, contradição e contingência</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow"><span>Guia de estudos · Lógica para Computação</span><span class="mono">Profa. Wilcilene Kowal · IFC São Bento do Sul</span></div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

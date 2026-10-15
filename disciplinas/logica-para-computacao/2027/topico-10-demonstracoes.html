@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 10 — Demonstrações em Lógica Proposicional | Lógica para Computação</title>
+<meta name="description" content="Como escrever demonstrações formais: prova direta, prova condicional, redução ao absurdo, prova por casos e dedução natural.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-10-demonstracoes.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Caso Nº 10 — Demonstrações em Lógica Proposicional | Lógica para Computação">
+<meta property="og:description" content="Como escrever demonstrações formais: prova direta, prova condicional, redução ao absurdo, prova por casos e dedução natural.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-10-demonstracoes.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Demonstrações em Lógica Proposicional",
+    "description": "Como escrever demonstrações formais: prova direta, prova condicional, redução ao absurdo, prova por casos e dedução natural.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-10-demonstracoes.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Material de estudo",
+    "educationalLevel": "Ensino Superior",
+    "position": 10,
+    "author": {
+      "@type": "Person",
+      "name": "Wilcilene Kowal"
+    },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Instituto Federal Catarinense — Campus São Bento do Sul"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Lógica para Computação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Caso 10: Demonstrações em lógica proposicional",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-10-demonstracoes.html"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 10 de 20</span>
+  </div>
+</header>
+
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag brass mono">Caso Nº 10 · Sistemas Dedutivos</span>
+  <h1>Demonstrações em Lógica Proposicional</h1>
+  <p class="lede">Uma demonstração formal é o relatório final do investigador: cada linha justificada por uma regra, até a conclusão que fecha o caso.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+<div class="goals">
+    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <ul>
+      <li>escrever uma demonstração formal no formato de linhas numeradas e justificadas;</li>
+      <li>usar quatro estratégias: prova direta, prova condicional, redução ao absurdo e prova por casos;</li>
+      <li>trabalhar com hipóteses temporárias e saber quando elas são descartadas;</li>
+      <li>escolher a estratégia certa olhando para o formato da conclusão.</li>
+    </ul>
+  </div>
+
+  <h2>O formato de uma demonstração</h2>
+  <p>Uma <strong>demonstração</strong> (ou prova) formal de <code>C</code> a partir de <code>Γ</code> é uma lista numerada em que cada linha é:</p>
+  <ul>
+    <li>uma premissa de <code>Γ</code>; ou</li>
+    <li>uma hipótese temporária, aberta por uma estratégia (veremos abaixo); ou</li>
+    <li>o resultado de aplicar uma regra (Caso 09) a linhas anteriores, citando quais.</li>
+  </ul>
+  <p>
+    A última linha é <code>C</code>, fora de qualquer hipótese ainda aberta. Eu insisto na justificativa de cada linha
+    porque é ela que torna a prova <strong>verificável</strong>: qualquer colega, ou qualquer programa, pode conferir linha
+    por linha sem precisar confiar em quem escreveu.
+  </p>
+
+  <h2>Estratégia 1: prova direta</h2>
+  <p>Aplicar regras às premissas até chegar à conclusão. É o que fizemos no Caso 09.</p>
+  <div class="evidence-box">
+    <span class="label">Prova direta</span>
+    <p>Premissas: <code>P → M</code>, <code>M → C</code>, <code>P</code>. Objetivo: <code>C</code>.</p>
+    <pre><code>1. P → M         premissa
+2. M → C         premissa
+3. P             premissa
+4. P → C         SH 1, 2
+5. C             MP 4, 3</code></pre>
+  </div>
+
+  <h2>Estratégia 2: prova condicional (PC)</h2>
+  <p>
+    Quando a conclusão é um condicional <code>A → B</code>, vocês podem <strong>supor <code>A</code></strong> como hipótese
+    temporária e tentar derivar <code>B</code>. Conseguindo, fecham a hipótese e concluem <code>A → B</code>. O que foi
+    derivado dentro da hipótese só pode ser usado lá dentro; eu marco essas linhas com uma barra vertical.
+  </p>
+  <div class="evidence-box">
+    <span class="label">O bônus da Revisão Integrada</span>
+    <p>Provar, sem premissas, que <code>((p → q) ∧ (q → r) ∧ p) → r</code> é teorema.</p>
+    <pre><code>1. | (p → q) ∧ (q → r) ∧ p     hipótese (PC)
+2. | p → q                     Simp 1
+3. | q → r                     Simp 1
+4. | p                         Simp 1
+5. | q                         MP 2, 4
+6. | r                         MP 3, 5
+7. ((p → q) ∧ (q → r) ∧ p) → r   PC 1–6</code></pre>
+    <p>Uma fórmula derivada sem nenhuma premissa se chama <strong>teorema</strong>. Pela correção do sistema, todo teorema é tautologia.</p>
+  </div>
+
+  <h2>Estratégia 3: redução ao absurdo (RAA)</h2>
+  <p>
+    Para provar <code>A</code>, supõe-se <code>¬A</code> e deriva-se uma contradição (<code>B</code> e <code>¬B</code>).
+    Como as premissas não podem conviver com <code>¬A</code>, conclui-se <code>A</code>. Essa é a estratégia mais poderosa,
+    e é exatamente a ideia da refutação por resolução (Caso 15).
+  </p>
+  <div class="evidence-box">
+    <span class="label">Redução ao absurdo</span>
+    <p>Premissas: <code>p → q</code>, <code>p → ¬q</code>. Objetivo: <code>¬p</code>.</p>
+    <pre><code>1. p → q         premissa
+2. p → ¬q        premissa
+3. | p           hipótese (RAA)
+4. | q           MP 1, 3
+5. | ¬q          MP 2, 3
+6. | q ∧ ¬q      Cj 4, 5   (contradição)
+7. ¬p            RAA 3–6</code></pre>
+    <p>Lendo como detetive: “se o suspeito estivesse na sala, ele teria e não teria visto a vítima; logo, ele não estava na sala”.</p>
+  </div>
+
+  <h2>Estratégia 4: prova por casos</h2>
+  <p>
+    Quando vocês têm uma disjunção <code>A ∨ B</code>, provem a conclusão supondo <code>A</code> e, separadamente, supondo
+    <code>B</code>. Se ela sai nos dois casos, sai sempre. É o dilema construtivo transformado em estratégia.
+  </p>
+  <div class="evidence-box">
+    <span class="label">Prova por casos</span>
+    <p>Premissas: <code>f ∨ v</code>, <code>f → c</code>, <code>v → (c ∧ n)</code>. Objetivo: <code>c</code>.</p>
+    <pre><code>1. f ∨ v          premissa
+2. f → c          premissa
+3. v → (c ∧ n)    premissa
+4. | f            hipótese (caso 1)
+5. | c            MP 2, 4
+6. | v            hipótese (caso 2)
+7. | c ∧ n        MP 3, 6
+8. | c            Simp 7
+9. c              casos 1, 4–5, 6–8</code></pre>
+  </div>
+
+  <h2>Como escolher a estratégia</h2>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Se a conclusão (ou o que vocês têm) é...</th><th>Tentem</th></tr></thead>
+      <tbody>
+        <tr><td>um condicional <code>A → B</code></td><td>prova condicional: suponham <code>A</code></td></tr>
+        <tr><td>uma negação <code>¬A</code></td><td>redução ao absurdo: suponham <code>A</code> e busquem contradição</td></tr>
+        <tr><td>uma disjunção entre as premissas</td><td>prova por casos</td></tr>
+        <tr><td>uma variável isolada e nada parece funcionar</td><td>redução ao absurdo com <code>¬A</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout">
+    <span class="label">Erro comum</span>
+    <p>Usar fora da hipótese uma linha derivada dentro dela. Na prova por casos acima, a linha 5 (<code>c</code>) vale apenas no caso 1. Só a linha 9, depois de fechar os dois casos, vale de verdade.</p>
+  </div>
+
+  <h2>Por que formalizar</h2>
+  <p>
+    Demonstrações formais são a base dos <strong>assistentes de prova</strong> (Coq, Lean, Isabelle), usados para verificar
+    compiladores, sistemas operacionais e algoritmos criptográficos. Nesses sistemas, a prova é um programa, e o
+    computador confere cada linha. É a versão industrial do que vocês estão fazendo à mão.
+  </p>
+
+  <div class="detetive">
+    <span class="label">No Detetive</span>
+    <p>
+      A redução ao absurdo é o raciocínio de quem pensa: “suponha que o crime foi na Biblioteca; então, pela pista 2,
+      a arma seria o Candelabro; mas eu vi o Candelabro na mão do jogador à direita. Absurdo. Logo, não foi na Biblioteca.”
+      Testar uma hipótese, chegar a uma contradição e descartá-la é o que vocês fazem a cada rodada.
+    </p>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 1 · Corrigindo uma prova</span>
+    <p>Premissas: (1) <code>¬C → ¬P</code>, (2) <code>P</code>. Derivem <code>C</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <pre><code>1. ¬C → ¬P     premissa
+2. P           premissa
+3. ¬¬P         DN 2
+4. ¬¬C         MT 1, 3
+5. C           DN 4</code></pre>
+      <p>O modus tollens exige a negação do consequente. O consequente é <code>¬P</code>, então precisamos de <code>¬¬P</code>, que vem de <code>P</code> por dupla negação.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 2 · Prova condicional</span>
+    <p>Provem <code>p → q ⊢ (q → r) → (p → r)</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <pre><code>1. p → q              premissa
+2. | q → r            hipótese (PC)
+3. | | p              hipótese (PC)
+4. | | q              MP 1, 3
+5. | | r              MP 2, 4
+6. | p → r            PC 3–5
+7. (q → r) → (p → r)  PC 2–6</code></pre>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 3 · Redução ao absurdo</span>
+    <p>Provem <code>a ∨ b, ¬a ∨ c, ¬b, ¬c ⊢ ⊥</code> (ou seja, que as premissas são inconsistentes).</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <pre><code>1. a ∨ b      premissa
+2. ¬a ∨ c     premissa
+3. ¬b         premissa
+4. ¬c         premissa
+5. b ∨ a      comutatividade 1
+6. a          SD 5, 3
+7. ¬¬a        DN 6
+8. c          SD 2, 7
+9. c ∧ ¬c     Cj 8, 4</code></pre>
+      <p>Chegamos a uma contradição sem nenhuma hipótese: as premissas, juntas, são insatisfatíveis.</p>
+    </details>
+  </div>
+
+  <div class="summary">
+    <span class="label">Para guardar</span>
+    <ul>
+      <li>Cada linha de uma prova é premissa, hipótese ou resultado de uma regra, sempre justificada.</li>
+      <li>Para <code>A → B</code>: suponham <code>A</code>. Para <code>¬A</code>: suponham <code>A</code> e busquem contradição.</li>
+      <li>Linhas dentro de uma hipótese só valem enquanto ela está aberta.</li>
+      <li>Redução ao absurdo é a mãe da refutação por resolução.</li>
+    </ul>
+  </div>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="10">
+    <label><input type="checkbox" aria-label="Marcar o caso 10 como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre casos">
+    <a href="topico-09-sistemas-dedutivos.html"><span class="dir">← Caso anterior</span>Sistemas dedutivos e regras de inferência</a>
+    <a class="next" href="topico-11-representacao-computacional.html"><span class="dir">Próximo caso →</span>Representação computacional de fórmulas lógicas</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow"><span>Guia de estudos · Lógica para Computação</span><span class="mono">Profa. Wilcilene Kowal · IFC São Bento do Sul</span></div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

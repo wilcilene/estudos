@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 03 — Linguagem Formal e Símbolos Lógicos | Lógica para Computação</title>
+<meta name="description" content="Linguagem formal da lógica proposicional: alfabeto, fórmulas bem formadas, subfórmulas, conectivo principal, precedência e indução estrutural.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-03-linguagem-formal.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Caso Nº 03 — Linguagem Formal e Símbolos Lógicos | Lógica para Computação">
+<meta property="og:description" content="Linguagem formal da lógica proposicional: alfabeto, fórmulas bem formadas, subfórmulas, conectivo principal, precedência e indução estrutural.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-03-linguagem-formal.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Linguagem Formal e Símbolos Lógicos",
+    "description": "Linguagem formal da lógica proposicional: alfabeto, fórmulas bem formadas, subfórmulas, conectivo principal, precedência e indução estrutural.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-03-linguagem-formal.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Material de estudo",
+    "educationalLevel": "Ensino Superior",
+    "position": 3,
+    "author": {
+      "@type": "Person",
+      "name": "Wilcilene Kowal"
+    },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Instituto Federal Catarinense — Campus São Bento do Sul"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Lógica para Computação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Caso 03: Linguagem formal e símbolos lógicos",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-03-linguagem-formal.html"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 03 de 20</span>
+  </div>
+</header>
+
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag teal mono">Caso Nº 03 · Linguagem</span>
+  <h1>Linguagem Formal e Símbolos Lógicos</h1>
+  <p class="lede">Antes de raciocinar sobre as pistas, precisamos escrevê-las sem ambiguidade. Neste caso eu apresento o alfabeto da lógica e as regras que dizem exatamente o que é uma fórmula.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+<div class="goals">
+    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <ul>
+      <li>separar <strong>sintaxe</strong> (como se escreve) de <strong>semântica</strong> (o que significa);</li>
+      <li>aplicar a definição indutiva de fórmula bem formada (FBF) para aceitar ou rejeitar expressões;</li>
+      <li>identificar o conectivo principal e listar as subfórmulas de uma fórmula;</li>
+      <li>usar as convenções de precedência para escrever com menos parênteses sem perder precisão;</li>
+      <li>entender a ideia de prova por indução estrutural.</li>
+    </ul>
+  </div>
+
+  <h2>Sintaxe e semântica</h2>
+  <p>
+    Toda linguagem, natural ou artificial, tem dois lados. A <strong>sintaxe</strong> diz quais sequências de símbolos
+    são bem escritas. A <strong>semântica</strong> diz o que elas significam. Vocês conhecem isso da programação: um
+    compilador primeiro verifica se o código está bem escrito (erro de sintaxe) e só depois se preocupa com o que ele faz.
+    Neste caso eu trato apenas da sintaxe; a semântica começa no Caso 05, com as tabelas-verdade.
+  </p>
+
+  <h2>O alfabeto da lógica proposicional</h2>
+  <p>Uma linguagem formal começa com um conjunto fechado de símbolos. Na lógica proposicional, ele tem três partes:</p>
+  <ul>
+    <li><strong>Variáveis proposicionais:</strong> <code>p, q, r, s, p₁, p₂, ...</code> (um conjunto infinito enumerável).</li>
+    <li><strong>Conectivos:</strong> <code>¬</code> (unário) e <code>∧, ∨, →, ↔</code> (binários). Alguns autores incluem as constantes <code>⊤</code> (sempre verdadeiro) e <code>⊥</code> (sempre falso).</li>
+    <li><strong>Símbolos auxiliares:</strong> os parênteses <code>(</code> e <code>)</code>.</li>
+  </ul>
+
+  <h2>Fórmula bem formada: uma definição indutiva</h2>
+  <p>O conjunto das <strong>fórmulas bem formadas (FBF)</strong> é o menor conjunto que satisfaz estas regras:</p>
+  <ol>
+    <li><strong>Base:</strong> toda variável proposicional é uma FBF.</li>
+    <li><strong>Negação:</strong> se <code>A</code> é FBF, então <code>¬A</code> é FBF.</li>
+    <li><strong>Binários:</strong> se <code>A</code> e <code>B</code> são FBFs, então <code>(A ∧ B)</code>, <code>(A ∨ B)</code>, <code>(A → B)</code> e <code>(A ↔ B)</code> são FBFs.</li>
+    <li><strong>Fechamento:</strong> nada mais é FBF.</li>
+  </ol>
+  <p>
+    Reparem que <code>A</code> e <code>B</code> não são variáveis: são <strong>metavariáveis</strong>, que representam
+    qualquer fórmula. Com essa definição em camadas, construímos fórmulas arbitrariamente grandes a partir de peças
+    simples, e um programa consegue verificar mecanicamente se uma expressão foi construída assim. É a mesma ideia de uma
+    gramática de linguagem de programação, que vamos escrever em BNF no Caso 11.
+  </p>
+  <div class="evidence-box">
+    <span class="label">Construindo uma pista, passo a passo</span>
+    <p>Legenda: <code>B</code>: “o crime ocorreu na Biblioteca”; <code>M</code>: “o Mordomo é culpado”; <code>F</code>: “a Faca foi usada”.</p>
+    <pre><code>1. B                 FBF pela regra base
+2. M                 FBF pela regra base
+3. (B ∧ M)           FBF pela regra dos binários, de 1 e 2
+4. F                 FBF pela regra base
+5. ((B ∧ M) → F)     FBF pela regra dos binários, de 3 e 4</code></pre>
+    <p>Essa sequência é a <strong>certidão de nascimento</strong> da fórmula: prova que ela é bem formada.</p>
+  </div>
+
+  <h2>Conectivo principal e subfórmulas</h2>
+  <p>
+    O <strong>conectivo principal</strong> é o último conectivo aplicado na construção. Em <code>((B ∧ M) → F)</code>,
+    é o <code>→</code>. Ele é o mais importante, porque define o “tipo” da fórmula: essa é uma condicional, e não
+    uma conjunção. As <strong>subfórmulas</strong> são todas as fórmulas que aparecem durante a construção, incluindo a
+    própria fórmula: <code>B</code>, <code>M</code>, <code>F</code>, <code>(B ∧ M)</code> e <code>((B ∧ M) → F)</code>.
+  </p>
+  <p>
+    Desenhando a construção de baixo para cima, obtemos a <strong>árvore sintática</strong>: a raiz é o conectivo principal,
+    as folhas são variáveis e cada nó interno é uma subfórmula.
+  </p>
+  <pre><code>        →
+       / \
+      ∧   F
+     / \
+    B   M</code></pre>
+
+  <h2>Precedência: escrevendo com menos parênteses</h2>
+  <p>A definição oficial exige muitos parênteses. Para simplificar, adotamos convenções, como na aritmética (multiplicação antes de soma):</p>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Força</th><th>Conectivo</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td>1ª (liga mais forte)</td><td><code>¬</code></td><td><code>¬p ∧ q</code> é <code>(¬p) ∧ q</code></td></tr>
+        <tr><td>2ª</td><td><code>∧</code></td><td><code>p ∧ q ∨ r</code> é <code>(p ∧ q) ∨ r</code></td></tr>
+        <tr><td>3ª</td><td><code>∨</code></td><td></td></tr>
+        <tr><td>4ª</td><td><code>→</code></td><td>associa à direita: <code>p → q → r</code> é <code>p → (q → r)</code></td></tr>
+        <tr><td>5ª (liga mais fraco)</td><td><code>↔</code></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Também omitimos os parênteses externos. Na dúvida, coloquem parênteses: eles nunca estão errados. E atenção:
+    alguns livros não diferenciam a força de <code>∧</code> e <code>∨</code>. Em prova e em código, prefiram explicitar.
+  </p>
+  <div class="callout">
+    <span class="label">Erro comum</span>
+    <p>
+      Achar que <code>p → q → r</code> é <code>(p → q) → r</code>. Não é, e as duas leituras não são equivalentes:
+      com <code>p = F</code>, <code>q = F</code> e <code>r = F</code>, a primeira vale V e a segunda vale F.
+    </p>
+  </div>
+
+  <h2>Indução estrutural: provando algo para todas as fórmulas</h2>
+  <p>
+    Como as fórmulas são definidas indutivamente, podemos provar propriedades sobre <em>todas</em> elas com a mesma
+    estrutura: mostramos que a propriedade vale para as variáveis (base) e que, se vale para <code>A</code> e
+    <code>B</code>, também vale para <code>¬A</code> e para <code>(A ∘ B)</code>, onde <code>∘</code> é qualquer binário.
+  </p>
+  <div class="evidence-box">
+    <span class="label">Exemplo de indução estrutural</span>
+    <p><strong>Afirmação:</strong> toda FBF tem o mesmo número de “(” e de “)”.</p>
+    <p><strong>Base:</strong> uma variável tem 0 de cada.</p>
+    <p><strong>Negação:</strong> <code>¬A</code> tem os mesmos parênteses de <code>A</code>, que por hipótese estão equilibrados.</p>
+    <p><strong>Binários:</strong> <code>(A ∘ B)</code> soma os de <code>A</code> e <code>B</code> (equilibrados) e acrescenta um “(” e um “)”.</p>
+    <p>Logo, vale para toda FBF. É exatamente o raciocínio que um <em>parser</em> usa para rejeitar <code>(p ∨ q</code>.</p>
+  </div>
+
+  <div class="detetive">
+    <span class="label">No Detetive</span>
+    <p>
+      Pensem no bloco de anotações. Escrever “Mordomo e ou Faca” não ajuda ninguém: não dá para saber o que foi
+      anotado. A sintaxe é o que garante que cada anotação tenha uma única leitura. Se vocês formalizam a pista
+      “se foi na Cozinha e com o Veneno, então não foi o Jardineiro” como <code>((C ∧ V) → ¬J)</code>, não existe
+      outra interpretação possível.
+    </p>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 1 · É FBF?</span>
+    <ol>
+      <li><code>(p ∧ q)</code></li>
+      <li><code>p ∧ ∧ q</code></li>
+      <li><code>¬(p → q)</code></li>
+      <li><code>(p ∨ )</code></li>
+      <li><code>→ p q</code></li>
+      <li><code>¬¬p</code></li>
+    </ol>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>
+        1. Sim. 2. Não: dois binários seguidos, sem fórmula entre eles. 3. Sim. 4. Não: falta o segundo argumento do <code>∨</code>.
+        5. Não pela nossa definição (que é infixa); seria válida em notação prefixa, vista no Caso 11. 6. Sim: a regra da negação aplicada duas vezes.
+      </p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 2 · Conectivo principal e subfórmulas</span>
+    <p>Para <code>¬(B ∨ C) → (M ∧ ¬F)</code>, indique o conectivo principal e liste todas as subfórmulas.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>
+        Conectivo principal: <code>→</code> (pela precedência, <code>¬</code> e <code>∧</code> se ligam antes).
+        Subfórmulas: <code>B</code>, <code>C</code>, <code>M</code>, <code>F</code>, <code>B ∨ C</code>, <code>¬(B ∨ C)</code>,
+        <code>¬F</code>, <code>M ∧ ¬F</code> e a fórmula inteira. São 9.
+      </p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 3 · Recolocando os parênteses</span>
+    <p>Reescrevam com todos os parênteses: <code>¬p ∨ q ∧ r → s ↔ t</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><code>(((¬p ∨ (q ∧ r)) → s) ↔ t)</code>. Primeiro o <code>¬</code>, depois o <code>∧</code>, o <code>∨</code>, o <code>→</code> e, por último, o <code>↔</code>.</p>
+    </details>
+  </div>
+
+  <div class="summary">
+    <span class="label">Para guardar</span>
+    <ul>
+      <li>Sintaxe trata da escrita; semântica trata do significado.</li>
+      <li>FBFs são definidas indutivamente: variáveis, negações e binários entre parênteses.</li>
+      <li>O conectivo principal é o último aplicado e é a raiz da árvore sintática.</li>
+      <li>Precedência: <code>¬</code>, <code>∧</code>, <code>∨</code>, <code>→</code> (à direita), <code>↔</code>.</li>
+      <li>Definições indutivas permitem provas por indução estrutural.</li>
+    </ul>
+  </div>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="3">
+    <label><input type="checkbox" aria-label="Marcar o caso 03 como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre casos">
+    <a href="topico-02-proposicoes.html"><span class="dir">← Caso anterior</span>Proposições e identificação de sentenças</a>
+    <a class="next" href="topico-04-conectivos-logicos.html"><span class="dir">Próximo caso →</span>Conectivos lógicos</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow"><span>Guia de estudos · Lógica para Computação</span><span class="mono">Profa. Wilcilene Kowal · IFC São Bento do Sul</span></div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

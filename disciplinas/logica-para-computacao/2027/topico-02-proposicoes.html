@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 02 — Proposições e Identificação de Sentenças | Lógica para Computação</title>
+<meta name="description" content="Proposições lógicas: sentenças declarativas, valor-verdade, princípios clássicos, proposições atômicas e compostas e o que não é proposição.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-02-proposicoes.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Caso Nº 02 — Proposições e Identificação de Sentenças | Lógica para Computação">
+<meta property="og:description" content="Proposições lógicas: sentenças declarativas, valor-verdade, princípios clássicos, proposições atômicas e compostas e o que não é proposição.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-02-proposicoes.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Proposições e Identificação de Sentenças",
+    "description": "Proposições lógicas: sentenças declarativas, valor-verdade, princípios clássicos, proposições atômicas e compostas e o que não é proposição.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-02-proposicoes.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Material de estudo",
+    "educationalLevel": "Ensino Superior",
+    "position": 2,
+    "author": {
+      "@type": "Person",
+      "name": "Wilcilene Kowal"
+    },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Instituto Federal Catarinense — Campus São Bento do Sul"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Lógica para Computação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Caso 02: Proposições e identificação de sentenças",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-02-proposicoes.html"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 02 de 20</span>
+  </div>
+</header>
+
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag crime mono">Caso Nº 02 · Lógica Proposicional</span>
+  <h1>Proposições e Identificação de Sentenças</h1>
+  <p class="lede">Nem toda frase dita durante uma investigação serve como pista. Aqui vocês vão aprender a separar as afirmações que podem ser verdadeiras ou falsas de todo o resto.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+<div class="goals">
+    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <ul>
+      <li>definir proposição e reconhecer quando uma frase é ou não é proposição;</li>
+      <li>enunciar os três princípios clássicos que sustentam a lógica proposicional;</li>
+      <li>diferenciar proposições atômicas e compostas e representá-las com variáveis;</li>
+      <li>identificar sentenças abertas, que só ganham valor-verdade na lógica de predicados.</li>
+    </ul>
+  </div>
+
+  <h2>O que é uma proposição</h2>
+  <p>
+    Uma <strong>proposição</strong> é uma sentença declarativa à qual podemos atribuir <strong>exatamente um</strong>
+    valor-verdade: verdadeiro (V) ou falso (F). Não importa se nós <em>sabemos</em> qual é o valor; importa que ele
+    exista. “A Faca está no envelope” é uma proposição mesmo no começo da partida, quando ninguém sabe a resposta:
+    o envelope já está fechado, e a frase já é verdadeira ou falsa.
+  </p>
+  <p>Eu escrevo <code>V(p)</code> para indicar o valor-verdade da proposição <code>p</code>. Assim, <code>V(p) = V</code> lê-se “p é verdadeira”.</p>
+
+  <h2>Os três princípios clássicos</h2>
+  <p>A lógica que estudamos neste semestre, chamada <strong>lógica clássica</strong>, assume três princípios:</p>
+  <ul>
+    <li><strong>Identidade:</strong> uma proposição é igual a si mesma; se <code>p</code> é verdadeira, então <code>p</code> é verdadeira.</li>
+    <li><strong>Não contradição:</strong> nenhuma proposição é verdadeira e falsa ao mesmo tempo.</li>
+    <li><strong>Terceiro excluído:</strong> toda proposição é verdadeira ou falsa; não existe uma terceira opção.</li>
+  </ul>
+  <p>
+    Os dois últimos juntos formam o <strong>princípio da bivalência</strong>. Ele parece óbvio, mas existem lógicas que o
+    abandonam: a lógica fuzzy (valores entre 0 e 1), as lógicas trivalentes (verdadeiro, falso, indefinido, como o
+    <code>NULL</code> do SQL) e a lógica intuicionista. Vale saber que elas existem; nós vamos trabalhar só com a clássica.
+  </p>
+
+  <h2>O que não é proposição</h2>
+  <p>Estas são as armadilhas mais comuns. Nenhuma delas recebe um único valor-verdade:</p>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Tipo de frase</th><th>Exemplo na investigação</th><th>Por que não é proposição</th></tr></thead>
+      <tbody>
+        <tr><td>Pergunta</td><td>“Quem estava na Biblioteca?”</td><td>Pede informação, não afirma nada.</td></tr>
+        <tr><td>Ordem</td><td>“Mostre a carta!”</td><td>Expressa um pedido; não faz sentido dizer que é verdadeira.</td></tr>
+        <tr><td>Exclamação</td><td>“Que noite estranha!”</td><td>Expressa emoção.</td></tr>
+        <tr><td>Sentença aberta</td><td>“x usou a Faca.”</td><td>O valor depende de quem é <code>x</code>. Ela vira proposição quando substituímos <code>x</code> ou a quantificamos (Caso 17).</td></tr>
+        <tr><td>Possibilidade ou opinião</td><td>“Talvez o Jardineiro seja culpado.”</td><td>Não afirma um fato; “talvez” é uma modalidade que a lógica clássica não trata.</td></tr>
+        <tr><td>Paradoxo</td><td>“Esta frase é falsa.”</td><td>Se fosse V, seria F; se fosse F, seria V. Viola a bivalência.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout">
+    <span class="label">Cuidado com frases vagas</span>
+    <p>
+      “O Mordomo é alto” só é proposição se combinarmos um critério (por exemplo, mais de 1,80 m). Em lógica e em
+      computação, precisamos eliminar ambiguidades antes de formalizar. Um requisito de software do tipo
+      “o sistema deve ser rápido” tem o mesmo problema: só vira algo testável quando alguém diz “responde em menos de 200 ms”.
+    </p>
+  </div>
+
+  <h2>Variáveis proposicionais</h2>
+  <p>
+    Para trabalhar com precisão, eu represento cada proposição simples por uma letra, chamada <strong>variável
+    proposicional</strong>: <code>p</code>, <code>q</code>, <code>r</code>... ou letras que lembrem o conteúdo, como
+    <code>M</code> para “o Mordomo é o culpado”. A letra guarda apenas o valor-verdade; o significado fica registrado
+    numa legenda, como num bloco de anotações.
+  </p>
+
+  <h2>Proposições atômicas e compostas</h2>
+  <p>
+    Uma proposição é <strong>atômica</strong> (ou simples) quando não pode ser dividida em proposições menores. Ela é
+    <strong>composta</strong> (ou molecular) quando é formada por proposições atômicas ligadas por conectivos
+    (“não”, “e”, “ou”, “se... então”, “se e somente se”). O valor-verdade de uma composta depende apenas dos valores das
+    atômicas que a formam: isso se chama <strong>princípio da composicionalidade</strong>, e é ele que torna possível
+    a tabela-verdade do Caso 05.
+  </p>
+  <div class="evidence-box">
+    <span class="label">Decompondo um depoimento</span>
+    <p>“O Mordomo mentiu e, se a Cozinheira estava na Cozinha, então a Faca não saiu de lá.”</p>
+    <p>Legenda: <code>m</code>: “o Mordomo mentiu”; <code>c</code>: “a Cozinheira estava na Cozinha”; <code>f</code>: “a Faca saiu da Cozinha”.</p>
+    <p>Fórmula: <code>m ∧ (c → ¬f)</code>. Uma frase longa vira três proposições atômicas e uma estrutura que vamos aprender a avaliar.</p>
+  </div>
+  <div class="callout">
+    <span class="label">Erro comum</span>
+    <p>“O Mordomo não é culpado” <strong>não</strong> é atômica: ela é a negação da atômica “o Mordomo é culpado”. Sempre escolham as atômicas na forma afirmativa e usem <code>¬</code> para negar.</p>
+  </div>
+
+  <div class="detetive">
+    <span class="label">No Detetive</span>
+    <p>
+      Cada carta do jogo gera uma proposição atômica do tipo “a carta <em>c</em> está no envelope”. Com 6 suspeitos,
+      6 armas e 9 locais, são 21 proposições atômicas. Tudo o que vocês anotam no bloco durante a partida é uma
+      combinação delas: “a Pá não está no envelope” é <code>¬E<sub>Pá</sub></code>; “ou é o Mordomo ou é a Governanta” é
+      uma disjunção. A partida inteira cabe em lógica proposicional, e é isso que vamos explorar nos próximos casos.
+    </p>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 1 · Proposição ou não?</span>
+    <p>Classifiquem cada frase. Se for proposição, diga se é atômica ou composta.</p>
+    <ol>
+      <li>“A Faca estava na Cozinha.”</li>
+      <li>“Você viu alguém suspeito?”</li>
+      <li>“O Mordomo mentiu e o Jardineiro sabia disso.”</li>
+      <li>“Saia daqui agora!”</li>
+      <li>“x é o dono do Candelabro.”</li>
+      <li>“Se o crime foi na Biblioteca, então não foi com o Veneno.”</li>
+      <li>“Talvez a Médica esteja escondendo uma carta.”</li>
+    </ol>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>
+        1. Proposição atômica. 2. Não é proposição (pergunta). 3. Proposição composta (conjunção de duas atômicas).
+        4. Não é proposição (ordem). 5. Não é proposição: é uma sentença aberta, pois depende de <code>x</code>.
+        6. Proposição composta (condicional; o consequente contém uma negação). 7. Não é proposição (possibilidade).
+      </p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 2 · Escolhendo as atômicas</span>
+    <p>Escolha variáveis e formalize: “O crime não foi na Biblioteca, mas foi com o Candelabro ou com a Corda.”</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><code>b</code>: “o crime foi na Biblioteca”; <code>k</code>: “foi com o Candelabro”; <code>r</code>: “foi com a Corda”. Fórmula: <code>¬b ∧ (k ∨ r)</code>. O “mas” tem o mesmo valor lógico do “e”.</p>
+    </details>
+  </div>
+
+  <div class="summary">
+    <span class="label">Para guardar</span>
+    <ul>
+      <li>Proposição: sentença declarativa com exatamente um valor-verdade, V ou F.</li>
+      <li>Perguntas, ordens, exclamações, sentenças abertas, frases modais e paradoxos não são proposições.</li>
+      <li>Atômicas não se dividem; compostas são atômicas ligadas por conectivos.</li>
+      <li>O valor de uma composta depende só dos valores das atômicas (composicionalidade).</li>
+    </ul>
+  </div>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="2">
+    <label><input type="checkbox" aria-label="Marcar o caso 02 como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre casos">
+    <a href="topico-01-introducao-a-logica.html"><span class="dir">← Caso anterior</span>Introdução à lógica e à investigação formal</a>
+    <a class="next" href="topico-03-linguagem-formal.html"><span class="dir">Próximo caso →</span>Linguagem formal e símbolos lógicos</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow"><span>Guia de estudos · Lógica para Computação</span><span class="mono">Profa. Wilcilene Kowal · IFC São Bento do Sul</span></div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

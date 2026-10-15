@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 11 — Representação Computacional de Fórmulas Lógicas | Lógica para Computação</title>
+<meta name="description" content="Representação de fórmulas em programas: árvore sintática, gramática, parser, avaliação recursiva, DAG e valorações como bits.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-11-representacao-computacional.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Caso Nº 11 — Representação Computacional de Fórmulas Lógicas | Lógica para Computação">
+<meta property="og:description" content="Representação de fórmulas em programas: árvore sintática, gramática, parser, avaliação recursiva, DAG e valorações como bits.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-11-representacao-computacional.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Representação Computacional de Fórmulas Lógicas",
+    "description": "Representação de fórmulas em programas: árvore sintática, gramática, parser, avaliação recursiva, DAG e valorações como bits.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-11-representacao-computacional.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Material de estudo",
+    "educationalLevel": "Ensino Superior",
+    "position": 11,
+    "author": {
+      "@type": "Person",
+      "name": "Wilcilene Kowal"
+    },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Instituto Federal Catarinense — Campus São Bento do Sul"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Lógica para Computação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Caso 11: Representação computacional de fórmulas lógicas",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-11-representacao-computacional.html"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 11 de 20</span>
+  </div>
+</header>
+
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag teal mono">Caso Nº 11 · Aspectos Computacionais</span>
+  <h1>Representação Computacional de Fórmulas Lógicas</h1>
+  <p class="lede">Para o computador raciocinar sobre uma pista, ela precisa virar dado. Neste caso vocês vão ver como uma fórmula se transforma em estrutura de dados.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+<div class="goals">
+    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <ul>
+      <li>representar fórmulas como árvores sintáticas em uma linguagem de programação;</li>
+      <li>escrever a gramática das fórmulas em BNF e entender como um <em>parser</em> a usa;</li>
+      <li>implementar a avaliação recursiva e analisar o seu custo;</li>
+      <li>gerar todas as valorações com números binários e reconhecer a ideia de DAG.</li>
+    </ul>
+  </div>
+
+  <h2>Da definição indutiva à estrutura de dados</h2>
+  <p>
+    No Caso 03, vimos que toda fórmula é uma variável, uma negação de fórmula ou um binário entre duas fórmulas. Essa
+    definição já é, praticamente, a declaração de um tipo de dados recursivo: uma <strong>árvore</strong> em que cada folha
+    é uma variável e cada nó interno é um conectivo com um filho (<code>¬</code>) ou dois filhos (<code>∧, ∨, →, ↔</code>).
+  </p>
+  <div class="evidence-box">
+    <span class="label">A pista (B ∧ M) → C como objeto</span>
+    <pre><code>// JavaScript: cada nó guarda o tipo e os filhos
+const pista = {
+  t: "imp",
+  a: { t: "and", a: { t: "var", n: "B" }, b: { t: "var", n: "M" } },
+  b: { t: "var", n: "C" }
+};</code></pre>
+    <pre><code># Python: a mesma árvore com dataclasses
+from dataclasses import dataclass
+
+@dataclass
+class Var:  nome: str
+@dataclass
+class Nao:  a: object
+@dataclass
+class Bin:  op: str; a: object; b: object   # op em {"and","or","imp","iff"}
+
+pista = Bin("imp", Bin("and", Var("B"), Var("M")), Var("C"))</code></pre>
+    <p>Reparem que os parênteses desapareceram: o agrupamento está na forma da árvore.</p>
+  </div>
+
+  <h2>A gramática e o parser</h2>
+  <p>
+    Para ler uma fórmula digitada como texto, precisamos de um <strong>parser</strong> (analisador sintático). Ele segue
+    uma gramática escrita em <strong>BNF</strong>, com um nível para cada precedência do Caso 03, do conectivo mais
+    fraco ao mais forte:
+  </p>
+  <pre><code>bicond  ::= implica ( "↔" implica )*
+implica ::= ou ( "→" implica )?        ← recursão à direita: → associa à direita
+ou      ::= e ( "∨" e )*
+e       ::= unario ( "∧" unario )*
+unario  ::= "¬" unario | atomo
+atomo   ::= VARIAVEL | "(" bicond ")"</code></pre>
+  <p>
+    Um parser de <strong>descida recursiva</strong> tem uma função para cada linha dessa gramática, e as funções chamam
+    umas às outras. É exatamente assim que compiladores leem expressões aritméticas. Vocês encontram um parser completo,
+    funcionando, no <a href="apresentacao1-exemplo-entrega.html#representacao">exemplo de entrega da Apresentação 1</a>.
+  </p>
+
+  <h2>Avaliação recursiva</h2>
+  <p>Para avaliar uma fórmula numa valoração, percorremos a árvore em pós-ordem: primeiro os filhos, depois o conectivo.</p>
+  <pre><code>function avaliar(f, val) {          // val: { B: true, M: false, C: true }
+  switch (f.t) {
+    case "var": return val[f.n];
+    case "not": return !avaliar(f.a, val);
+    case "and": return avaliar(f.a, val) &amp;&amp; avaliar(f.b, val);
+    case "or":  return avaliar(f.a, val) || avaliar(f.b, val);
+    case "imp": return !avaliar(f.a, val) || avaliar(f.b, val);
+    case "iff": return avaliar(f.a, val) === avaliar(f.b, val);
+  }
+}</code></pre>
+  <p>
+    Cada nó é visitado uma vez, então o custo é <strong>O(n)</strong>, com <code>n</code> o tamanho da fórmula. Guardem isso:
+    <strong>verificar</strong> se uma valoração satisfaz uma fórmula é rápido. O difícil, como veremos no Caso 12, é
+    <strong>encontrar</strong> uma valoração que satisfaça.
+  </p>
+  <p>
+    Notem também que a função recursiva espelha a definição indutiva: um caso por regra de formação. Provar que ela
+    termina e está correta é uma indução estrutural (Caso 03).
+  </p>
+
+  <h2>Valorações como números binários</h2>
+  <p>
+    Com <code>n</code> variáveis numeradas de 0 a <code>n − 1</code>, cada valoração é um número de <code>n</code> bits:
+    o bit <code>k</code> diz o valor da variável <code>k</code>. Para percorrer a tabela-verdade inteira, basta um laço de
+    0 a <code>2ⁿ − 1</code>.
+  </p>
+  <pre><code>function tabela(f, vars) {
+  const linhas = [];
+  for (let i = 0; i &lt; (1 &lt;&lt; vars.length); i++) {
+    const val = {};
+    vars.forEach((x, k) =&gt; { val[x] = Boolean(i &amp; (1 &lt;&lt; k)); });
+    linhas.push({ val, resultado: avaliar(f, val) });
+  }
+  return linhas;
+}</code></pre>
+  <p>Na prática, essa representação também é usada para guardar conjuntos de cartas com uma única variável inteira: cada bit é uma carta.</p>
+
+  <h2>Outras representações</h2>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Representação</th><th>Exemplo para (B ∧ M) → C</th><th>Vantagem</th><th>Limitação</th></tr></thead>
+      <tbody>
+        <tr><td>Texto infixo</td><td><code>(B ∧ M) → C</code></td><td>legível</td><td>exige parser e precedência</td></tr>
+        <tr><td>Notação prefixa (polonesa)</td><td><code>→ ∧ B M C</code></td><td>dispensa parênteses</td><td>pouco legível</td></tr>
+        <tr><td>Árvore sintática</td><td>objetos aninhados</td><td>fácil de percorrer e transformar</td><td>repete subfórmulas iguais</td></tr>
+        <tr><td>DAG (grafo acíclico dirigido)</td><td>nós compartilhados</td><td>economiza memória e trabalho</td><td>mais difícil de modificar</td></tr>
+        <tr><td>Lista de cláusulas</td><td><code>{¬B, ¬M, C}</code></td><td>formato dos resolvedores</td><td>exige conversão (Caso 13)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    No <strong>DAG</strong>, uma subfórmula que aparece várias vezes vira um único nó, apontado por vários pais. Em
+    <code>(p ∧ q) ∨ ¬(p ∧ q)</code>, o nó <code>p ∧ q</code> é armazenado e avaliado uma só vez. Essa ideia vai reaparecer
+    na transformação de Tseitin (Caso 13).
+  </p>
+
+  <div class="detetive">
+    <span class="label">No Detetive</span>
+    <p>
+      Um “verificador de bloco de anotações” é só isto: uma lista de pistas em forma de árvore e a função
+      <code>avaliar</code>. Dado um envelope candidato (uma valoração), o programa confere, pista por pista, se ele é
+      compatível com tudo o que foi visto. Com 324 envelopes possíveis, testar todos leva milissegundos. É assim que o
+      jogo da Apresentação 1 confere a escalação do time de vôlei.
+    </p>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 1 · Desenhe a árvore</span>
+    <p>Representem <code>¬p ∨ q → r</code> como árvore e como objeto JavaScript.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Pela precedência, é <code>((¬p) ∨ q) → r</code>. Raiz <code>→</code>; filho esquerdo <code>∨</code> (com filhos <code>¬p</code> e <code>q</code>); filho direito <code>r</code>.</p>
+      <pre><code>{ t:"imp",
+  a:{ t:"or", a:{ t:"not", a:{ t:"var", n:"p" } }, b:{ t:"var", n:"q" } },
+  b:{ t:"var", n:"r" } }</code></pre>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 2 · Contando nós</span>
+    <p>Escrevam uma função recursiva que conte quantos nós uma fórmula tem. Quantos nós tem <code>(B ∧ M) → C</code>?</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <pre><code>function nos(f) {
+  if (f.t === "var") return 1;
+  if (f.t === "not") return 1 + nos(f.a);
+  return 1 + nos(f.a) + nos(f.b);
+}</code></pre>
+      <p>Para <code>(B ∧ M) → C</code>: 5 nós (<code>→</code>, <code>∧</code>, <code>B</code>, <code>M</code>, <code>C</code>).</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 3 · Bits</span>
+    <p>Com as variáveis <code>[B, M, C]</code> nos bits 0, 1 e 2, que valoração corresponde ao número 5?</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>5 = 101 em binário: bit 0 = 1, bit 1 = 0, bit 2 = 1. Logo, <code>B = V</code>, <code>M = F</code>, <code>C = V</code>.</p>
+    </details>
+  </div>
+
+  <div class="summary">
+    <span class="label">Para guardar</span>
+    <ul>
+      <li>Fórmula = árvore: folhas são variáveis, nós internos são conectivos.</li>
+      <li>A gramática em BNF com um nível por precedência guia o parser de descida recursiva.</li>
+      <li>Avaliar custa O(n); percorrer todas as valorações custa O(n · 2ⁿ).</li>
+      <li>Valorações podem ser números binários; DAGs compartilham subfórmulas iguais.</li>
+    </ul>
+  </div>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="11">
+    <label><input type="checkbox" aria-label="Marcar o caso 11 como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre casos">
+    <a href="topico-10-demonstracoes.html"><span class="dir">← Caso anterior</span>Demonstrações em lógica proposicional</a>
+    <a class="next" href="topico-12-satisfatibilidade.html"><span class="dir">Próximo caso →</span>Satisfatibilidade e busca de modelos</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow"><span>Guia de estudos · Lógica para Computação</span><span class="mono">Profa. Wilcilene Kowal · IFC São Bento do Sul</span></div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

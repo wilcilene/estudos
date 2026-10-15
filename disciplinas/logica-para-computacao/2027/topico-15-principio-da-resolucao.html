@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 15 — Princípio da Resolução Proposicional | Lógica para Computação</title>
+<meta name="description" content="A regra de resolução: literais complementares, resolvente, correção da regra, refutação e como a resolução generaliza modus ponens e modus tollens.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-15-principio-da-resolucao.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Caso Nº 15 — Princípio da Resolução Proposicional | Lógica para Computação">
+<meta property="og:description" content="A regra de resolução: literais complementares, resolvente, correção da regra, refutação e como a resolução generaliza modus ponens e modus tollens.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-15-principio-da-resolucao.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Princípio da Resolução Proposicional",
+    "description": "A regra de resolução: literais complementares, resolvente, correção da regra, refutação e como a resolução generaliza modus ponens e modus tollens.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-15-principio-da-resolucao.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Material de estudo",
+    "educationalLevel": "Ensino Superior",
+    "position": 15,
+    "author": {
+      "@type": "Person",
+      "name": "Wilcilene Kowal"
+    },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Instituto Federal Catarinense — Campus São Bento do Sul"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Lógica para Computação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Caso 15: Princípio da resolução proposicional",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-15-principio-da-resolucao.html"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 15 de 20</span>
+  </div>
+</header>
+
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag crime mono">Caso Nº 15 · Princípio da Resolução</span>
+  <h1>Princípio da Resolução Proposicional</h1>
+  <p class="lede">Duas pistas incompletas, cruzadas, eliminam uma possibilidade e revelam uma pista nova. Essa operação única é a regra de resolução.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+<div class="goals">
+    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <ul>
+      <li>aplicar a regra de resolução a duas cláusulas e calcular a resolvente;</li>
+      <li>provar que a regra é correta, raciocinando por casos;</li>
+      <li>mostrar que modus ponens, modus tollens, silogismo disjuntivo e hipotético são casos particulares dela;</li>
+      <li>usar a refutação por resolução para provar consequência lógica;</li>
+      <li>evitar o erro clássico de cancelar dois pares de literais ao mesmo tempo.</li>
+    </ul>
+  </div>
+
+  <h2>A regra de resolução</h2>
+  <p>
+    Nos Casos 09 e 10, vocês trabalharam com uma caixa de ferramentas cheia de regras. A resolução faz o caminho oposto:
+    <strong>uma única regra</strong>, que trabalha sobre cláusulas (Caso 14). Se uma cláusula contém um literal
+    <code>p</code> e outra contém o complementar <code>¬p</code>, eu posso juntar as duas e cancelar esse par:
+  </p>
+  <pre><code>  {p} ∪ A        {¬p} ∪ B
+  ─────────────────────────   (resolução sobre p)
+           A ∪ B</code></pre>
+  <p>
+    A cláusula <code>A ∪ B</code> é a <strong>resolvente</strong>. Por exemplo, de <code>{M, J}</code> (“foi o Mordomo ou o
+    Jardineiro”) e <code>{¬M, L}</code> (“se foi o Mordomo, havia lama nas botas”), eu obtenho <code>{J, L}</code>: “foi o
+    Jardineiro ou havia lama nas botas”. Uma pista nova, gerada de forma totalmente mecânica.
+  </p>
+
+  <h2>Por que a regra é correta</h2>
+  <p>
+    Quero mostrar que toda valoração que satisfaz as duas cláusulas também satisfaz <code>A ∪ B</code>. Vejam que é uma
+    prova por casos (Caso 10) sobre o valor de <code>p</code>:
+  </p>
+  <ul>
+    <li>Se <code>p = V</code>, então <code>¬p</code> é falso, e a segunda cláusula só pode estar satisfeita por algum literal de <code>B</code>.</li>
+    <li>Se <code>p = F</code>, então a primeira cláusula só pode estar satisfeita por algum literal de <code>A</code>.</li>
+  </ul>
+  <p>
+    Nos dois casos, algum literal de <code>A ∪ B</code> é verdadeiro. Logo, <code>{p} ∪ A, {¬p} ∪ B ⊨ A ∪ B</code>: a
+    resolução nunca tira uma conclusão falsa de pistas verdadeiras.
+  </p>
+
+  <h2>Uma regra que engole as outras</h2>
+  <p>Escrevam as regras do Caso 09 como cláusulas e tentem calcular a resolvente de cada linha antes de clicar em “Mostrar”:</p>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Regra clássica</th><th>Premissas como cláusulas</th><th>Resolvente</th></tr></thead>
+      <tbody>
+        <tr><td>Modus ponens</td><td><code>{p}</code>, <code>{¬p, q}</code></td><td><details><summary>Mostrar</summary><p><code>{q}</code></p></details></td></tr>
+        <tr><td>Modus tollens</td><td><code>{¬q}</code>, <code>{¬p, q}</code></td><td><details><summary>Mostrar</summary><p><code>{¬p}</code></p></details></td></tr>
+        <tr><td>Silogismo disjuntivo</td><td><code>{p, q}</code>, <code>{¬p}</code></td><td><details><summary>Mostrar</summary><p><code>{q}</code></p></details></td></tr>
+        <tr><td>Silogismo hipotético</td><td><code>{¬p, q}</code>, <code>{¬q, r}</code></td><td><details><summary>Mostrar</summary><p><code>{¬p, r}</code>, ou seja, <code>p → r</code></p></details></td></tr>
+        <tr><td>Contradição</td><td><code>{p}</code>, <code>{¬p}</code></td><td><details><summary>Mostrar</summary><p><code>□</code> (cláusula vazia)</p></details></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    É por isso que a resolução é tão querida na computação: em vez de um programa que escolhe entre dez regras, eu tenho
+    um programa que faz uma única operação, repetidas vezes, sobre conjuntos de literais.
+  </p>
+
+  <h2>Resolvendo cada caso no Detetive</h2>
+  <p>
+    Agora vou dar uma situação de jogo para cada linha da tabela. O roteiro é sempre o mesmo, e é ele que eu quero que
+    vocês treinem: (1) traduzir a pista para fórmula; (2) eliminar o <code>→</code> com <code>A → B ≡ ¬A ∨ B</code> e
+    escrever a cláusula; (3) achar <strong>um</strong> par de literais complementares; (4) juntar o que sobrou das duas
+    cláusulas.
+  </p>
+  <div class="exercise">
+    <span class="label">Exemplo 1 · Modus ponens</span>
+    <p>Pistas: “se o crime foi na Biblioteca, a arma é o Candelabro” e “o crime foi na Biblioteca”. Usem <code>b</code> = foi na Biblioteca e <code>k</code> = a arma é o Candelabro.</p>
+    <p>Tentem primeiro: escrevam as cláusulas, encontrem o par complementar e calculem a resolvente.</p>
+    <details>
+      <summary>Ver resolução</summary>
+      <pre><code>1. b → k  ≡  ¬b ∨ k     →  cláusula {¬b, k}
+2. b                    →  cláusula {b}
+3. Par complementar: b (na cláusula 2) e ¬b (na cláusula 1)
+4. Resolvente: ({b} − {b}) ∪ ({¬b, k} − {¬b})  =  {k}</code></pre>
+      <p>Conclusão <code>{k}</code>: a arma é o Candelabro. É o modus ponens, obtido sem citar a regra pelo nome.</p>
+    </details>
+  </div>
+  <div class="exercise">
+    <span class="label">Exemplo 2 · Modus tollens</span>
+    <p>Pistas: “se o Mordomo é o culpado, ele esteve na Cozinha” e “o Mordomo não esteve na Cozinha”. Usem <code>m</code> = o Mordomo é o culpado e <code>c</code> = ele esteve na Cozinha.</p>
+    <p>Tentem primeiro: escrevam as cláusulas, encontrem o par complementar e calculem a resolvente.</p>
+    <details>
+      <summary>Ver resolução</summary>
+      <pre><code>1. m → c  ≡  ¬m ∨ c     →  cláusula {¬m, c}
+2. ¬c                   →  cláusula {¬c}
+3. Par complementar: c (na cláusula 1) e ¬c (na cláusula 2)
+4. Resolvente: {¬m}</code></pre>
+      <p>Conclusão <code>{¬m}</code>: o Mordomo não é o culpado. Reparem que é a mesma operação do caso anterior; só mudou qual literal foi cancelado.</p>
+    </details>
+  </div>
+  <div class="exercise">
+    <span class="label">Exemplo 3 · Silogismo disjuntivo</span>
+    <p>Pistas: “o culpado é o Mordomo ou o Jardineiro” e “a Jogadora 2 me mostrou a carta do Mordomo”. Usem <code>m</code> e <code>j</code> para “o Mordomo / o Jardineiro está no envelope”.</p>
+    <p>Tentem primeiro: escrevam as cláusulas, encontrem o par complementar e calculem a resolvente.</p>
+    <details>
+      <summary>Ver resolução</summary>
+      <pre><code>1. m ∨ j                 →  cláusula {m, j}
+2. a carta foi mostrada, então não está no envelope: ¬m  →  cláusula {¬m}
+3. Par complementar: m (na cláusula 1) e ¬m (na cláusula 2)
+4. Resolvente: {j}</code></pre>
+      <p>Conclusão <code>{j}</code>: o Jardineiro está no envelope. É a eliminação que vocês fazem no bloco de anotações a cada carta vista.</p>
+    </details>
+  </div>
+  <div class="exercise">
+    <span class="label">Exemplo 4 · Silogismo hipotético</span>
+    <p>Pistas: “se a arma é a Corda, o crime foi no Jardim” e “se o crime foi no Jardim, o culpado é o Jardineiro”. Usem <code>r</code> = a arma é a Corda, <code>g</code> = foi no Jardim e <code>j</code> = o culpado é o Jardineiro.</p>
+    <p>Tentem primeiro: escrevam as cláusulas, encontrem o par complementar e calculem a resolvente.</p>
+    <details>
+      <summary>Ver resolução</summary>
+      <pre><code>1. r → g  ≡  ¬r ∨ g     →  cláusula {¬r, g}
+2. g → j  ≡  ¬g ∨ j     →  cláusula {¬g, j}
+3. Par complementar: g (na cláusula 1) e ¬g (na cláusula 2)
+4. Resolvente: {¬r, j}  ≡  ¬r ∨ j  ≡  r → j</code></pre>
+      <p>Conclusão <code>r → j</code>: se a arma é a Corda, o culpado é o Jardineiro. A resolvente ainda tem dois literais: é uma pista nova, não uma resposta final. Ela fica guardada até aparecer <code>{r}</code> ou <code>{¬j}</code>.</p>
+    </details>
+  </div>
+  <div class="exercise">
+    <span class="label">Exemplo 5 · Contradição</span>
+    <p>Anotações: numa rodada vocês concluíram que “a Faca está no envelope”; mais tarde, “a Jogadora 3 me mostrou a Faca”. Usem <code>f</code> = a Faca está no envelope.</p>
+    <p>Tentem primeiro: escrevam as cláusulas, encontrem o par complementar e calculem a resolvente.</p>
+    <details>
+      <summary>Ver resolução</summary>
+      <pre><code>1. f                     →  cláusula {f}
+2. a Faca foi mostrada: ¬f  →  cláusula {¬f}
+3. Par complementar: f e ¬f
+4. Resolvente: { }  =  □   (não sobrou nenhum literal)</code></pre>
+      <p>A cláusula vazia avisa que as anotações são <strong>inconsistentes</strong>: alguma pista foi registrada errado ou alguma dedução anterior estava furada. Nas refutações, é exatamente esse □ que vocês procuram de propósito, depois de acrescentar a negação da conclusão.</p>
+    </details>
+  </div>
+
+  <h2>Refutação: provando por contradição</h2>
+  <p>
+    A resolução sozinha não deriva qualquer consequência. De <code>{p}</code>, por exemplo, ela nunca produz
+    <code>{p, q}</code>, embora <code>p ⊨ p ∨ q</code>. Ela é usada de outro jeito, que vocês já conhecem desde a redução
+    ao absurdo e o Caso 12:
+  </p>
+  <div class="evidence-box">
+    <span class="label">O método da refutação</span>
+    <pre><code>Para provar Γ ⊨ C:
+1. converta as fórmulas de Γ e a negação ¬C para cláusulas (Caso 13);
+2. aplique resolução repetidamente;
+3. se aparecer □, então Γ ∪ {¬C} é insatisfatível, e portanto Γ ⊨ C.</code></pre>
+  </div>
+  <p>
+    O resultado que garante esse método se chama <strong>completude refutacional</strong>: se um conjunto de cláusulas é
+    insatisfatível, existe uma sequência de resoluções que chega a <code>□</code>. Junto com a correção, isso significa
+    que a resolução responde exatamente às perguntas de consequência lógica.
+  </p>
+
+  <h2>Um caso resolvido por refutação</h2>
+  <div class="evidence-box">
+    <span class="label">Onde foi o crime?</span>
+    <p>Locais possíveis: Biblioteca <code>B</code>, Cozinha <code>C</code>, Sala de Estar <code>S</code>. <code>K</code> = “a arma do envelope é o Candelabro”.</p>
+    <pre><code>1. {B, C, S}      o local é um dos três
+2. {¬C}           eu tenho a carta da Cozinha
+3. {¬B, K}        pista: se foi na Biblioteca, a arma é o Candelabro
+4. {¬K}           outra jogadora me mostrou o Candelabro
+5. {¬S}           negação do que quero provar (“foi na Sala de Estar”)
+─────────────────────────────────────────
+6. {B, S}         resolução de 1 e 2 sobre C
+7. {B}            resolução de 6 e 5 sobre S
+8. {K}            resolução de 7 e 3 sobre B
+9. □              resolução de 8 e 4 sobre K</code></pre>
+    <p>Chegamos à cláusula vazia. Supor que o crime <em>não</em> foi na Sala de Estar é incompatível com as pistas; portanto, foi na Sala de Estar.</p>
+  </div>
+
+  <div class="callout">
+    <span class="label">Erro comum</span>
+    <p>
+      Cancelar dois pares de uma vez. De <code>{p, q}</code> e <code>{¬p, ¬q}</code>, há quem “resolva” tudo e escreva
+      <code>□</code>. Errado: esse conjunto é satisfatível (basta <code>p = V</code>, <code>q = F</code>). Resolvendo
+      corretamente sobre um único par, por exemplo <code>p</code>, obtemos <code>{q, ¬q}</code>, uma cláusula tautológica,
+      que não traz informação nenhuma. <strong>Uma resolução, um par.</strong>
+    </p>
+  </div>
+
+  <div class="detetive">
+    <span class="label">No Detetive</span>
+    <p>
+      Quando vocês cruzam uma pista do tipo “alguém mostrou Mordomo, Faca ou Biblioteca” (<code>{¬M, ¬F, ¬B}</code>) com
+      a descoberta de que a Faca e a Biblioteca estão no envelope (<code>{F}</code> e <code>{B}</code>), duas resoluções
+      levam a <code>{¬M}</code>: o Mordomo não está no envelope. Esse é o raciocínio que eu chamo de “eliminar pelo bloco
+      de anotações”, e ele é resolução pura.
+    </p>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 1 · Calcule a resolvente</span>
+    <p>Resolvam <code>{¬p, ¬q}</code> e <code>{p, r}</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>O par complementar é <code>p</code>/<code>¬p</code>. A resolvente é <code>{¬q, r}</code>, ou seja, <code>q → r</code>.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 2 · Refutação</span>
+    <p>Provem por refutação que <code>p → q, q → r, p ⊨ r</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <pre><code>1. {¬p, q}     2. {¬q, r}     3. {p}     4. {¬r}   (negação da conclusão)
+5. {q}         resolução de 1 e 3
+6. {r}         resolução de 5 e 2
+7. □           resolução de 6 e 4</code></pre>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 3 · Resolventes inúteis</span>
+    <p>Quais são todas as resolventes possíveis entre <code>{p, q, ¬r}</code> e <code>{¬p, r}</code>? Alguma delas ajuda?</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Sobre <code>p</code>: <code>{q, ¬r, r}</code>. Sobre <code>r</code>: <code>{p, q, ¬p}</code>. As duas são tautológicas e podem ser descartadas. Quando duas cláusulas têm dois pares complementares, nenhuma resolução entre elas é útil.</p>
+    </details>
+  </div>
+
+  <div class="summary">
+    <span class="label">Para guardar</span>
+    <ul>
+      <li>De <code>{p} ∪ A</code> e <code>{¬p} ∪ B</code>, deriva-se <code>A ∪ B</code>.</li>
+      <li>A regra é correta (prova por casos sobre <code>p</code>) e generaliza MP, MT, SD e SH.</li>
+      <li>Para provar <code>Γ ⊨ C</code>: acrescentem <code>¬C</code> e busquem <code>□</code>.</li>
+      <li>A resolução é refutacionalmente completa: todo conjunto insatisfatível chega a <code>□</code>.</li>
+      <li>Uma resolução cancela exatamente um par de literais.</li>
+    </ul>
+  </div>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="15">
+    <label><input type="checkbox" aria-label="Marcar o caso 15 como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre casos">
+    <a href="topico-14-clausulas.html"><span class="dir">← Caso anterior</span>Cláusulas e representação por conjuntos</a>
+    <a class="next" href="topico-16-algoritmo-de-resolucao.html"><span class="dir">Próximo caso →</span>Algoritmo de resolução proposicional</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow"><span>Guia de estudos · Lógica para Computação</span><span class="mono">Profa. Wilcilene Kowal · IFC São Bento do Sul</span></div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

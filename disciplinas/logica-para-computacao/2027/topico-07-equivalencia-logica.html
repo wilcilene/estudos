@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 07 — Equivalência Lógica e Leis da Lógica | Lógica para Computação</title>
+<meta name="description" content="Equivalência lógica, leis clássicas (De Morgan, distributividade, absorção, contrapositiva, exportação) e simplificação algébrica de fórmulas.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-07-equivalencia-logica.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Caso Nº 07 — Equivalência Lógica e Leis da Lógica | Lógica para Computação">
+<meta property="og:description" content="Equivalência lógica, leis clássicas (De Morgan, distributividade, absorção, contrapositiva, exportação) e simplificação algébrica de fórmulas.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-07-equivalencia-logica.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Equivalência Lógica e Leis da Lógica",
+    "description": "Equivalência lógica, leis clássicas (De Morgan, distributividade, absorção, contrapositiva, exportação) e simplificação algébrica de fórmulas.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-07-equivalencia-logica.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Material de estudo",
+    "educationalLevel": "Ensino Superior",
+    "position": 7,
+    "author": {
+      "@type": "Person",
+      "name": "Wilcilene Kowal"
+    },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Instituto Federal Catarinense — Campus São Bento do Sul"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Lógica para Computação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Caso 07: Equivalência lógica e leis da lógica",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-07-equivalencia-logica.html"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 07 de 20</span>
+  </div>
+</header>
+
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag indigo mono">Caso Nº 07 · Semântica</span>
+  <h1>Equivalência Lógica e Leis da Lógica</h1>
+  <p class="lede">Duas pistas escritas de formas diferentes podem dizer exatamente a mesma coisa. As leis da lógica são as ferramentas para reconhecer e provar isso.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+<div class="goals">
+    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <ul>
+      <li>definir equivalência lógica e diferenciar o símbolo <code>≡</code> do conectivo <code>↔</code>;</li>
+      <li>usar as principais leis da lógica, com nome;</li>
+      <li>provar equivalências algebricamente, passo a passo;</li>
+      <li>negar corretamente frases com “e”, “ou” e “se... então”, inclusive em código.</li>
+    </ul>
+  </div>
+
+  <h2>O que é equivalência lógica</h2>
+  <p>
+    Duas fórmulas <code>A</code> e <code>B</code> são <strong>logicamente equivalentes</strong>, e eu escrevo
+    <code>A ≡ B</code>, quando têm o mesmo valor em <em>todas</em> as valorações, ou seja, a mesma coluna final na
+    tabela-verdade. Uma forma equivalente de dizer: <code>A ≡ B</code> exatamente quando <code>A ↔ B</code> é tautologia.
+  </p>
+  <div class="callout">
+    <span class="label">Atenção à diferença</span>
+    <p>
+      <code>↔</code> é um conectivo: faz parte da linguagem e forma novas fórmulas. <code>≡</code> é uma afirmação
+      <em>sobre</em> fórmulas, feita na metalinguagem. <code>p ↔ q</code> pode ser verdadeira ou falsa;
+      <code>p ≡ q</code> simplesmente é falsa (as colunas de <code>p</code> e <code>q</code> diferem).
+    </p>
+  </div>
+
+  <h2>As leis da lógica</h2>
+  <p>Estas equivalências aparecem tanto que ganharam nome. Todas podem ser verificadas por tabela-verdade; vocês devem saber usá-las sem consultar.</p>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Lei</th><th>Forma com ∧</th><th>Forma com ∨</th></tr></thead>
+      <tbody>
+        <tr><td>Identidade</td><td><code>p ∧ ⊤ ≡ p</code></td><td><code>p ∨ ⊥ ≡ p</code></td></tr>
+        <tr><td>Dominação</td><td><code>p ∧ ⊥ ≡ ⊥</code></td><td><code>p ∨ ⊤ ≡ ⊤</code></td></tr>
+        <tr><td>Idempotência</td><td><code>p ∧ p ≡ p</code></td><td><code>p ∨ p ≡ p</code></td></tr>
+        <tr><td>Complemento</td><td><code>p ∧ ¬p ≡ ⊥</code></td><td><code>p ∨ ¬p ≡ ⊤</code></td></tr>
+        <tr><td>Comutatividade</td><td><code>p ∧ q ≡ q ∧ p</code></td><td><code>p ∨ q ≡ q ∨ p</code></td></tr>
+        <tr><td>Associatividade</td><td><code>(p ∧ q) ∧ r ≡ p ∧ (q ∧ r)</code></td><td><code>(p ∨ q) ∨ r ≡ p ∨ (q ∨ r)</code></td></tr>
+        <tr><td>Distributividade</td><td><code>p ∧ (q ∨ r) ≡ (p ∧ q) ∨ (p ∧ r)</code></td><td><code>p ∨ (q ∧ r) ≡ (p ∨ q) ∧ (p ∨ r)</code></td></tr>
+        <tr><td>De Morgan</td><td><code>¬(p ∧ q) ≡ ¬p ∨ ¬q</code></td><td><code>¬(p ∨ q) ≡ ¬p ∧ ¬q</code></td></tr>
+        <tr><td>Absorção</td><td><code>p ∧ (p ∨ q) ≡ p</code></td><td><code>p ∨ (p ∧ q) ≡ p</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Lei</th><th>Equivalência</th></tr></thead>
+      <tbody>
+        <tr><td>Dupla negação</td><td><code>¬¬p ≡ p</code></td></tr>
+        <tr><td>Condicional</td><td><code>p → q ≡ ¬p ∨ q</code></td></tr>
+        <tr><td>Contrapositiva</td><td><code>p → q ≡ ¬q → ¬p</code></td></tr>
+        <tr><td>Negação do condicional</td><td><code>¬(p → q) ≡ p ∧ ¬q</code></td></tr>
+        <tr><td>Bicondicional</td><td><code>p ↔ q ≡ (p → q) ∧ (q → p) ≡ (p ∧ q) ∨ (¬p ∧ ¬q)</code></td></tr>
+        <tr><td>Exportação</td><td><code>(p ∧ q) → r ≡ p → (q → r)</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Reparem na simetria da primeira tabela: trocando <code>∧</code> por <code>∨</code> e <code>⊤</code> por <code>⊥</code>,
+    uma coluna vira a outra. Isso se chama <strong>princípio da dualidade</strong>, e ajuda a memorizar.
+  </p>
+
+  <h2>Provas algébricas: reescrevendo passo a passo</h2>
+  <p>
+    Como equivalência é uma relação de substituição, vocês podem trocar qualquer subfórmula por outra equivalente sem
+    mudar o significado do todo. Uma <strong>prova algébrica</strong> é uma cadeia de reescritas, cada uma justificada por uma lei.
+  </p>
+  <div class="evidence-box">
+    <span class="label">Simplificando uma pista confusa</span>
+    <p>Um depoimento: “Não é verdade que, se o crime foi na Cozinha, então não foi com o Veneno; ou então foi na Cozinha.” Formalizando: <code>¬(c → ¬v) ∨ c</code>.</p>
+    <pre><code>¬(c → ¬v) ∨ c
+≡ (c ∧ ¬¬v) ∨ c        negação do condicional
+≡ (c ∧ v) ∨ c          dupla negação
+≡ c ∨ (c ∧ v)          comutatividade
+≡ c                    absorção</code></pre>
+    <p>Todo aquele depoimento diz apenas uma coisa: o crime foi na Cozinha.</p>
+  </div>
+
+  <h2>Negando frases corretamente</h2>
+  <p>Negar é uma das tarefas em que mais se erra, no português e no código. As leis resolvem:</p>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Frase</th><th>Negação correta</th></tr></thead>
+      <tbody>
+        <tr><td>O Mordomo e a Cozinheira estavam na sala.</td><td>O Mordomo não estava na sala <strong>ou</strong> a Cozinheira não estava.</td></tr>
+        <tr><td>A arma é a Faca ou o Veneno.</td><td>A arma não é a Faca <strong>e</strong> não é o Veneno.</td></tr>
+        <tr><td>Se o Jardineiro é culpado, ele usou a Pá.</td><td>O Jardineiro é culpado <strong>e</strong> não usou a Pá.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout">
+    <span class="label">Erro comum</span>
+    <p>Negar “se p, então q” como “se p, então não q”. A negação de um condicional não é um condicional: é <code>p ∧ ¬q</code>, o único cenário em que a promessa é quebrada.</p>
+  </div>
+
+  <h2>Por que isso importa para a computação</h2>
+  <p>
+    Vocês aplicam essas leis ao refatorar código. A condição <code>if (!(logado &amp;&amp; admin))</code> é, por De Morgan,
+    <code>if (!logado || !admin)</code>. Um <code>while (!(fim || erro))</code> vira <code>while (!fim &amp;&amp; !erro)</code>.
+    Em circuitos, simplificar a fórmula significa usar menos portas lógicas. E, no Caso 13, essas mesmas leis vão converter
+    qualquer fórmula para a forma normal conjuntiva.
+  </p>
+
+  <div class="detetive">
+    <span class="label">No Detetive</span>
+    <p>
+      Uma jogadora diz: “não é verdade que eu tenho o Mordomo e a Faca”. Pela lei de De Morgan, isso é “ou eu não tenho o
+      Mordomo, ou não tenho a Faca”. Escrita assim, a informação vira uma disjunção, que é muito mais fácil de cruzar
+      com outras anotações (e que já está no formato de cláusula que a resolução usa).
+    </p>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 1 · De Morgan</span>
+    <p>Reescrevam <code>¬(p ∨ ¬q)</code> de modo que a negação só apareça diretamente sobre variáveis.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><code>¬(p ∨ ¬q) ≡ ¬p ∧ ¬¬q ≡ ¬p ∧ q</code> (De Morgan e dupla negação).</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 2 · Prova algébrica</span>
+    <p>Provem que <code>(p → q) ∧ (p → r) ≡ p → (q ∧ r)</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <pre><code>(p → q) ∧ (p → r)
+≡ (¬p ∨ q) ∧ (¬p ∨ r)     condicional (duas vezes)
+≡ ¬p ∨ (q ∧ r)            distributividade (lida da direita para a esquerda)
+≡ p → (q ∧ r)             condicional</code></pre>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 3 · Negação em código</span>
+    <p>Reescrevam sem o <code>!</code> externo: <code>!(temCarta || (ehSuspeito &amp;&amp; !temAlibi))</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><code>!temCarta &amp;&amp; (!ehSuspeito || temAlibi)</code>. De Morgan no <code>||</code> externo, de novo no <code>&amp;&amp;</code> interno, e dupla negação em <code>temAlibi</code>.</p>
+    </details>
+  </div>
+
+  <div class="summary">
+    <span class="label">Para guardar</span>
+    <ul>
+      <li><code>A ≡ B</code> ⇔ mesma coluna na tabela ⇔ <code>A ↔ B</code> é tautologia.</li>
+      <li>De Morgan, condicional, dupla negação, distributividade e absorção são as leis mais usadas.</li>
+      <li>¬(p → q) ≡ p ∧ ¬q: a negação de um condicional é uma conjunção.</li>
+      <li>Substituir por equivalentes nunca muda o significado: é assim que simplificamos fórmulas, código e circuitos.</li>
+    </ul>
+  </div>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="7">
+    <label><input type="checkbox" aria-label="Marcar o caso 07 como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre casos">
+    <a href="topico-06-tautologia-contradicao.html"><span class="dir">← Caso anterior</span>Tautologia, contradição e contingência</a>
+    <a class="next" href="topico-08-consequencia-logica.html"><span class="dir">Próximo caso →</span>Consequência lógica e argumentação</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow"><span>Guia de estudos · Lógica para Computação</span><span class="mono">Profa. Wilcilene Kowal · IFC São Bento do Sul</span></div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

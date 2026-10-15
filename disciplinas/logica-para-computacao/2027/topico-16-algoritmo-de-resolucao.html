@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 16 — Algoritmo de Resolução Proposicional | Lógica para Computação</title>
+<meta name="description" content="Algoritmo de resolução por saturação: pseudocódigo, implementação, terminação, complexidade e estratégias de refinamento.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-16-algoritmo-de-resolucao.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Caso Nº 16 — Algoritmo de Resolução Proposicional | Lógica para Computação">
+<meta property="og:description" content="Algoritmo de resolução por saturação: pseudocódigo, implementação, terminação, complexidade e estratégias de refinamento.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-16-algoritmo-de-resolucao.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Algoritmo de Resolução Proposicional",
+    "description": "Algoritmo de resolução por saturação: pseudocódigo, implementação, terminação, complexidade e estratégias de refinamento.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-16-algoritmo-de-resolucao.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Material de estudo",
+    "educationalLevel": "Ensino Superior",
+    "position": 16,
+    "author": {
+      "@type": "Person",
+      "name": "Wilcilene Kowal"
+    },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Instituto Federal Catarinense — Campus São Bento do Sul"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Lógica para Computação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Caso 16: Algoritmo de resolução proposicional",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-16-algoritmo-de-resolucao.html"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 16 de 20</span>
+  </div>
+</header>
+
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag crime mono">Caso Nº 16 · Princípio da Resolução · Aspectos Computacionais</span>
+  <h1>Algoritmo de Resolução Proposicional</h1>
+  <p class="lede">Chegou a hora de automatizar o investigador: um algoritmo que recebe as cláusulas e procura, sozinho, a contradição que fecha o caso.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+<div class="goals">
+    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <ul>
+      <li>descrever o algoritmo de resolução por saturação e implementá-lo em poucas linhas;</li>
+      <li>explicar por que ele sempre termina na lógica proposicional e quanto ele pode custar;</li>
+      <li>usar estratégias que reduzem a busca: preferência unitária, conjunto de suporte e subsunção;</li>
+      <li>interpretar uma saturação sem <code>□</code> como prova de que a conclusão <em>não</em> decorre das premissas.</li>
+    </ul>
+  </div>
+
+  <h2>A ideia: saturar</h2>
+  <p>
+    No Caso 15, eu escolhi com cuidado quais cláusulas resolver. Um computador não tem essa intuição, então a estratégia
+    mais simples é a força: resolver <strong>todos os pares</strong> possíveis, acrescentar as resolventes ao conjunto e
+    repetir. O processo para em uma de duas situações:
+  </p>
+  <ul>
+    <li>aparece a cláusula vazia <code>□</code>: o conjunto é <strong>insatisfatível</strong> (a conclusão foi provada);</li>
+    <li>uma rodada inteira não produz nenhuma cláusula nova: o conjunto está <strong>saturado</strong> e é <strong>satisfatível</strong> (a conclusão não decorre das premissas).</li>
+  </ul>
+  <pre><code>função resolucao(S):
+    repita:
+        novas ← ∅
+        para cada par de cláusulas (C1, C2) em S:
+            para cada resolvente R de C1 e C2:
+                se R = □: retorne INSAT
+                novas ← novas ∪ {R}
+        se novas ⊆ S: retorne SAT          (saturou)
+        S ← S ∪ novas</code></pre>
+
+  <h2>Uma implementação em Python</h2>
+  <p>Usando a representação do Caso 14 (literal = inteiro com sinal, cláusula = <code>frozenset</code>), o algoritmo cabe numa tela:</p>
+  <pre><code>def resolventes(c1, c2):
+    saida = []
+    for lit in c1:
+        if -lit in c2:
+            r = (c1 - {lit}) | (c2 - {-lit})
+            if not any(-x in r for x in r):     # descarta cláusulas tautológicas
+                saida.append(frozenset(r))
+    return saida
+
+def resolucao(clausulas):
+    S = {frozenset(c) for c in clausulas}
+    if frozenset() in S:
+        return "INSAT"
+    while True:
+        novas = set()
+        lista = list(S)
+        for i in range(len(lista)):
+            for j in range(i + 1, len(lista)):
+                for r in resolventes(lista[i], lista[j]):
+                    if not r:                     # cláusula vazia
+                        return "INSAT"
+                    novas.add(r)
+        if novas &lt;= S:
+            return "SAT"
+        S |= novas
+
+# p → q, q → r, p ⊨ r ?   (1 = p, 2 = q, 3 = r; a última cláusula é ¬r)
+print(resolucao([{-1, 2}, {-2, 3}, {1}, {-3}]))   # INSAT: a consequência vale</code></pre>
+
+  <h2>Acompanhando as rodadas</h2>
+  <div class="evidence-box">
+    <span class="label">Exemplo que chega a □</span>
+    <p>Conjunto: <code>{p, q}</code>, <code>{¬p, q}</code>, <code>{p, ¬q}</code>, <code>{¬p, ¬q}</code> (as quatro combinações proibidas).</p>
+    <pre><code>Rodada 1:
+  {p, q}  + {¬p, q}   →  {q}
+  {p, q}  + {p, ¬q}   →  {p}
+  {¬p, q} + {¬p, ¬q}  →  {¬p}
+  {p, ¬q} + {¬p, ¬q}  →  {¬q}
+  (os outros pares só geram tautologias, descartadas)
+Rodada 2:
+  {q} + {¬q}          →  □     INSAT</code></pre>
+  </div>
+  <div class="evidence-box">
+    <span class="label">Exemplo que satura sem □</span>
+    <p>Pistas: <code>p ∨ q</code>, <code>¬p ∨ q</code>, <code>q → r</code>. Quero saber se <code>p</code> decorre delas, então acrescento <code>{¬p}</code>.</p>
+    <pre><code>Inicial:   {p, q}  {¬p, q}  {¬q, r}  {¬p}
+Rodada 1:  {q}  {p, r}  {¬p, r}
+Rodada 2:  {r}  {q, r}            (por exemplo, {q} + {¬q, r} → {r})
+Rodada 3:  só aparecem cláusulas que já existem
+Resultado: SAT, saturado sem □</code></pre>
+    <p>A conclusão <code>p</code> <strong>não</strong> decorre das pistas. E vejam: <code>p = F, q = V, r = V</code> satisfaz tudo, inclusive <code>¬p</code>. É o contraexemplo que a saturação garante existir.</p>
+  </div>
+
+  <h2>Terminação e custo</h2>
+  <p>
+    Com <code>n</code> variáveis, cada variável pode aparecer numa cláusula positiva, negativa ou ausente (cláusulas
+    tautológicas são descartadas). Então existem no máximo <strong>3ⁿ</strong> cláusulas diferentes. Como o conjunto só
+    cresce e é limitado, o algoritmo <strong>sempre termina</strong>: na lógica proposicional, a resolução é um
+    <strong>procedimento de decisão</strong>.
+  </p>
+  <p>
+    O lado ruim é o tamanho desse limite. Cada rodada compara todos os pares, e o conjunto pode crescer
+    exponencialmente. Isso não é defeito da implementação: Haken provou em 1985 que existem fórmulas insatisfatíveis (como
+    o <em>princípio da casa dos pombos</em>: <code>n + 1</code> pombos não cabem em <code>n</code> casas sem dividir) cujas
+    refutações por resolução têm tamanho exponencial, qualquer que seja a ordem escolhida. Isso combina com o que vimos no
+    Caso 12: SAT é NP-completo.
+  </p>
+
+  <h2>Estratégias que cortam a busca</h2>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Estratégia</th><th>Ideia</th><th>Por que ajuda</th></tr></thead>
+      <tbody>
+        <tr><td>Preferência unitária</td><td>Resolver primeiro com cláusulas de um literal.</td><td>A resolvente é sempre menor que a outra cláusula: o conjunto encolhe em direção a <code>□</code>. É a propagação unitária do DPLL.</td></tr>
+        <tr><td>Conjunto de suporte</td><td>Toda resolução usa pelo menos uma cláusula que vem de <code>¬C</code> (ou de uma resolvente dela).</td><td>Premissas consistentes entre si não produzem <code>□</code> sozinhas; a busca fica focada na pergunta. Continua completa.</td></tr>
+        <tr><td>Subsunção</td><td>Descartar <code>D</code> quando existe <code>C ⊆ D</code>.</td><td>Remove cláusulas redundantes antes que elas gerem mais redundância.</td></tr>
+        <tr><td>Eliminar tautologias</td><td>Descartar cláusulas com <code>p</code> e <code>¬p</code>.</td><td>Elas são sempre verdadeiras e nunca ajudam a chegar a <code>□</code>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Um detalhe que eu acho bonito: quando o DPLL do Caso 12 responde INSAT, a árvore de busca dele corresponde a uma
+    refutação por resolução. E os resolvedores modernos (CDCL) <em>aprendem</em> cláusulas novas a cada conflito
+    exatamente por resolução. As duas ideias que vocês estudaram separadas trabalham juntas na prática.
+  </p>
+
+  <div class="callout">
+    <span class="label">Erro comum</span>
+    <p>Achar que “não encontrei <code>□</code>” é o mesmo que “a conclusão é falsa”. Saturar sem <code>□</code> mostra só que a conclusão <strong>não é consequência</strong> das premissas: existe um cenário em que as pistas valem e a conclusão falha. Ela pode até ser verdadeira no envelope real; vocês só ainda não têm pistas para garantir.</p>
+  </div>
+
+  <div class="detetive">
+    <span class="label">No Detetive</span>
+    <p>
+      Um assistente de anotações automático faria assim: juntar as regras do envelope (Caso 12), as pistas da partida e a
+      negação da acusação que vocês pretendem fazer, por exemplo <code>{¬J}</code> para “foi o Jardineiro”, e rodar
+      <code>resolucao</code> com conjunto de suporte. Se sair INSAT, a acusação é segura. Se sair SAT, o próprio estado
+      saturado aponta um envelope compatível com tudo em que o culpado é outro, e a acusação seria um chute.
+    </p>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 1 · Trace o algoritmo</span>
+    <p>Tracem as rodadas para <code>{p}</code>, <code>{¬p, q}</code>, <code>{¬q}</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Rodada 1: <code>{p} + {¬p, q} → {q}</code>; <code>{¬p, q} + {¬q} → {¬p}</code>. Rodada 2: <code>{q} + {¬q} → □</code> (ou <code>{p} + {¬p} → □</code>). INSAT.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 2 · Conjunto de suporte</span>
+    <p>Premissas: <code>{¬a, b}</code>, <code>{¬b, c}</code>, <code>{a}</code>, <code>{d, e}</code>, <code>{¬e, d}</code>. Conclusão: <code>c</code>. Usando conjunto de suporte, que resoluções vocês fazem? As cláusulas com <code>d</code> e <code>e</code> chegam a ser usadas?</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Suporte inicial: <code>{¬c}</code>. <code>{¬c} + {¬b, c} → {¬b}</code>; <code>{¬b} + {¬a, b} → {¬a}</code>; <code>{¬a} + {a} → □</code>. Três passos, e as cláusulas sobre <code>d</code> e <code>e</code> nunca entram: sem a estratégia, o algoritmo também resolveria <code>{d, e}</code> com <code>{¬e, d}</code> à toa.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 3 · Limite de cláusulas</span>
+    <p>Com 3 variáveis, quantas cláusulas não tautológicas distintas existem, contando a vazia? E com 20 variáveis, aproximadamente?</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><code>3³ = 27</code>. Com 20 variáveis, <code>3²⁰ ≈ 3,5 bilhões</code>. O algoritmo termina, mas o limite deixa claro por que estratégias são indispensáveis.</p>
+    </details>
+  </div>
+
+  <div class="summary">
+    <span class="label">Para guardar</span>
+    <ul>
+      <li>Saturação: resolver todos os pares até achar <code>□</code> (INSAT) ou não gerar nada novo (SAT).</li>
+      <li>Na lógica proposicional, sempre termina: no máximo <code>3ⁿ</code> cláusulas.</li>
+      <li>O pior caso é exponencial (casa dos pombos), coerente com a NP-completude de SAT.</li>
+      <li>Preferência unitária, conjunto de suporte e subsunção tornam a busca viável.</li>
+      <li>Saturar sem <code>□</code> = a conclusão não é consequência; existe contraexemplo.</li>
+    </ul>
+  </div>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="16">
+    <label><input type="checkbox" aria-label="Marcar o caso 16 como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre casos">
+    <a href="topico-15-principio-da-resolucao.html"><span class="dir">← Caso anterior</span>Princípio da resolução proposicional</a>
+    <a class="next" href="topico-17-logica-de-predicados.html"><span class="dir">Próximo caso →</span>Lógica de predicados: termos, predicados e quantificadores</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow"><span>Guia de estudos · Lógica para Computação</span><span class="mono">Profa. Wilcilene Kowal · IFC São Bento do Sul</span></div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

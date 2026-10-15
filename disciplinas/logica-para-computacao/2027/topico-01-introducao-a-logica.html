@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 01 — Introdução à Lógica e à Investigação Formal | Lógica para Computação</title>
+<meta name="description" content="Introdução à Lógica para Computação: raciocínio dedutivo, validade, o papel da lógica na computação e como o jogo Detetive guia a disciplina.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-01-introducao-a-logica.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Caso Nº 01 — Introdução à Lógica e à Investigação Formal | Lógica para Computação">
+<meta property="og:description" content="Introdução à Lógica para Computação: raciocínio dedutivo, validade, o papel da lógica na computação e como o jogo Detetive guia a disciplina.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-01-introducao-a-logica.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Introdução à Lógica e à Investigação Formal",
+    "description": "Introdução à Lógica para Computação: raciocínio dedutivo, validade, o papel da lógica na computação e como o jogo Detetive guia a disciplina.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-01-introducao-a-logica.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Material de estudo",
+    "educationalLevel": "Ensino Superior",
+    "position": 1,
+    "author": {
+      "@type": "Person",
+      "name": "Wilcilene Kowal"
+    },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Instituto Federal Catarinense — Campus São Bento do Sul"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Lógica para Computação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Caso 01: Introdução à lógica e à investigação formal",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-01-introducao-a-logica.html"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 01 de 20</span>
+  </div>
+</header>
+
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag brass mono">Caso Nº 01 · Visão Geral</span>
+  <h1>Introdução à Lógica e à Investigação Formal</h1>
+  <p class="lede">Antes de abrir o envelope do crime, vocês precisam conhecer as regras da investigação. Neste caso eu apresento o que é raciocínio lógico, por que ele sustenta a computação e como o jogo Detetive vai acompanhar toda a disciplina.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+<div class="goals">
+    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <ul>
+      <li>explicar o que a lógica estuda e por que ela não se preocupa com o “assunto” das frases, e sim com a forma do raciocínio;</li>
+      <li>diferenciar dedução, indução e abdução, e reconhecer qual delas um detetive usa em cada momento;</li>
+      <li>distinguir argumento <strong>válido</strong> de argumento <strong>correto</strong> (ou sólido);</li>
+      <li>relacionar cada etapa do jogo Detetive com um conteúdo da disciplina.</li>
+    </ul>
+  </div>
+
+  <h2>O que é lógica, afinal?</h2>
+  <p>
+    Eu gosto de definir lógica como <strong>o estudo das formas de raciocínio que preservam a verdade</strong>.
+    Reparem na palavra “preservam”: a lógica não diz se uma premissa é verdadeira no mundo real. Ela garante que,
+    <em>se</em> as premissas forem verdadeiras, a conclusão também será. Quem verifica se as premissas são verdadeiras
+    é o detetive, a perícia, o sensor, o banco de dados. Quem garante que o caminho entre as premissas e a conclusão
+    não tem furos é a lógica.
+  </p>
+  <p>
+    Por isso dizemos que a lógica é <strong>formal</strong>: ela olha para a forma do argumento e ignora o conteúdo.
+    Vejam estes dois argumentos:
+  </p>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Argumento sobre o crime</th><th>Argumento sobre um servidor</th><th>Forma comum</th></tr></thead>
+      <tbody>
+        <tr><td>Se o Mordomo é o culpado, ele esteve na Biblioteca.</td><td>Se o servidor caiu, o monitor disparou um alerta.</td><td><code>p → q</code></td></tr>
+        <tr><td>O Mordomo não esteve na Biblioteca.</td><td>O monitor não disparou alerta.</td><td><code>¬q</code></td></tr>
+        <tr><td>Logo, o Mordomo não é o culpado.</td><td>Logo, o servidor não caiu.</td><td><code>¬p</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Os assuntos são completamente diferentes, mas a forma é a mesma. Se vocês provarem que essa forma é válida uma vez,
+    ela vale para qualquer conteúdo que encaixe nela. Essa é a grande economia da lógica, e é exatamente o que permite
+    que um programa raciocine sobre assuntos que ele não “entende”.
+  </p>
+
+  <h2>Por que a computação depende tanto de lógica</h2>
+  <p>Vocês já usam lógica todos os dias, muitas vezes sem dar esse nome:</p>
+  <ul>
+    <li><strong>Programação:</strong> toda condição de <code>if</code>, <code>while</code> e todo filtro com <code>&amp;&amp;</code>, <code>||</code> e <code>!</code> é uma fórmula lógica.</li>
+    <li><strong>Circuitos digitais:</strong> portas AND, OR e NOT são conectivos lógicos feitos de transistores; projetar um circuito é escrever e simplificar fórmulas.</li>
+    <li><strong>Bancos de dados:</strong> a cláusula <code>WHERE</code> de uma consulta SQL é uma fórmula avaliada em cada linha da tabela.</li>
+    <li><strong>Verificação de software e hardware:</strong> empresas usam resolvedores lógicos (os <em>SAT solvers</em>, que veremos no Caso 12) para provar que um processador ou um protocolo não tem certos erros.</li>
+    <li><strong>Inteligência artificial:</strong> sistemas especialistas, planejadores e linguagens como Prolog representam conhecimento com lógica de predicados e deduzem conclusões por resolução (Casos 15 a 20).</li>
+  </ul>
+
+  <h2>Três jeitos de raciocinar: dedução, indução e abdução</h2>
+  <p>Um detetive usa três tipos de raciocínio, e é importante que vocês saibam qual deles a lógica formal garante:</p>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Tipo</th><th>O que faz</th><th>Exemplo na investigação</th><th>Garante a conclusão?</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Dedução</strong></td><td>Tira conclusões que <em>decorrem necessariamente</em> das premissas.</td><td>“A faca está na mão de uma jogadora; logo, a faca não está no envelope.”</td><td class="v">Sim</td></tr>
+        <tr><td><strong>Indução</strong></td><td>Generaliza a partir de casos observados.</td><td>“Nas últimas cinco partidas, quem começou foi quem ganhou; quem começa deve ter vantagem.”</td><td class="f">Não (é provável)</td></tr>
+        <tr><td><strong>Abdução</strong></td><td>Propõe a melhor explicação para um fato.</td><td>“Há lama no tapete; a melhor explicação é que o Jardineiro passou por aqui.”</td><td class="f">Não (é hipótese)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Na prática, o detetive usa a abdução para levantar hipóteses e a dedução para confirmá-las ou derrubá-las.
+    <strong>Nesta disciplina, nós estudamos a dedução</strong>: o único raciocínio em que a conclusão é garantida.
+  </p>
+
+  <h2>Argumento, validade e correção</h2>
+  <p>
+    Um <strong>argumento</strong> é formado por premissas (o que assumimos) e uma conclusão (o que afirmamos a partir delas).
+    Guardem estas duas definições, porque elas vão voltar o semestre inteiro:
+  </p>
+  <ul>
+    <li>Um argumento é <strong>válido</strong> quando é impossível que todas as premissas sejam verdadeiras e a conclusão seja falsa.</li>
+    <li>Um argumento é <strong>correto</strong> (ou <em>sólido</em>) quando é válido <em>e</em> suas premissas são de fato verdadeiras.</li>
+  </ul>
+  <div class="callout">
+    <span class="label">Erro comum</span>
+    <p>
+      “O argumento é válido, então a conclusão é verdadeira.” Não necessariamente! Vejam: “Toda arma de metal é o candelabro;
+      a faca é de metal; logo, a faca é o candelabro.” A forma é válida, mas a primeira premissa é falsa, então a conclusão
+      também pode ser falsa. A validade garante o caminho, não o ponto de partida.
+    </p>
+  </div>
+
+  <h2>Por que o jogo Detetive?</h2>
+  <p>
+    Escolhi o jogo Detetive para acompanhar a disciplina porque ele é, literalmente, um exercício de dedução.
+    Para quem não lembra das regras: no início da partida, uma carta de <strong>suspeito</strong>, uma de <strong>arma</strong>
+    e uma de <strong>local</strong> são colocadas, sem ninguém ver, no <strong>envelope confidencial</strong>. As demais cartas são
+    distribuídas entre os jogadores. Em cada rodada, alguém faz um <strong>palpite</strong> (“foi o Mordomo, com a Faca,
+    na Biblioteca”), e o jogador seguinte que tiver uma dessas cartas mostra uma delas, em segredo, para quem palpitou.
+    Quem tiver certeza faz a <strong>acusação</strong> e confere o envelope. Errou? Está fora da partida.
+  </p>
+  <div class="detetive">
+    <span class="label">O Detetive ao longo da disciplina</span>
+    <div class="table-wrap">
+      <table class="tbl">
+        <thead><tr><th>No jogo</th><th>Na lógica</th><th>Onde aparece</th></tr></thead>
+        <tbody>
+          <tr><td>“A Faca está no envelope”</td><td>proposição atômica</td><td>Casos 02 e 03</td></tr>
+          <tr><td>“Ou o Mordomo ou a Cozinheira, nunca os dois”</td><td>conectivos lógicos</td><td>Caso 04</td></tr>
+          <tr><td>O bloco de anotações completo</td><td>valoração / linha da tabela-verdade</td><td>Caso 05</td></tr>
+          <tr><td>Anotações que se contradizem</td><td>contradição, insatisfatibilidade</td><td>Casos 06 e 12</td></tr>
+          <tr><td>Acusação só com certeza</td><td>consequência lógica</td><td>Caso 08</td></tr>
+          <tr><td>“Não é este, então é aquele”</td><td>regras de inferência</td><td>Casos 09 e 10</td></tr>
+          <tr><td>Algum envelope compatível com tudo?</td><td>problema SAT</td><td>Caso 12</td></tr>
+          <tr><td>Cartas mostradas após um palpite</td><td>cláusulas e resolução</td><td>Casos 13 a 16</td></tr>
+          <tr><td>“Toda carta em uma mão está fora do envelope”</td><td>lógica de predicados</td><td>Casos 17 a 20</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2>Panorama da disciplina: as nove frentes da investigação</h2>
+  <p>No guia de estudos, vocês podem filtrar os casos por estas frentes:</p>
+  <ol>
+    <li><strong>Visão geral:</strong> o que é lógica e como a disciplina está organizada (este caso).</li>
+    <li><strong>Linguagem:</strong> símbolos e regras que definem o que é uma fórmula.</li>
+    <li><strong>Lógica proposicional:</strong> proposições e conectivos.</li>
+    <li><strong>Semântica:</strong> tabelas-verdade, tautologias, equivalências e consequência lógica.</li>
+    <li><strong>Sistemas dedutivos:</strong> regras de inferência e demonstrações.</li>
+    <li><strong>Aspectos computacionais:</strong> fórmulas como dados, satisfatibilidade e formas normais.</li>
+    <li><strong>Princípio da resolução:</strong> provar por refutação, cláusula a cláusula.</li>
+    <li><strong>Lógica de predicados:</strong> quantificadores, domínios e interpretações.</li>
+    <li><strong>Substituição:</strong> unificação e resolução em lógica de primeira ordem.</li>
+  </ol>
+
+  <div class="exercise">
+    <span class="label">Exercício 1 · Que tipo de raciocínio é este?</span>
+    <ol>
+      <li>“Toda carta que eu tenho na mão não está no envelope. Eu tenho a Pá. Logo, a Pá não está no envelope.”</li>
+      <li>“Nas três partidas que joguei, o crime aconteceu na Cozinha. O crime deve acontecer sempre na Cozinha.”</li>
+      <li>“A jogadora ao meu lado hesitou ao ouvir ‘Veneno’; provavelmente ela tem essa carta.”</li>
+    </ol>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>1. Dedução: a conclusão decorre necessariamente das premissas. 2. Indução: generalização a partir de poucos casos (e, no Detetive, completamente errada, já que o envelope é sorteado). 3. Abdução: a hesitação é explicada pela hipótese mais plausível, que pode estar errada.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 2 · Válido, correto ou nenhum dos dois?</span>
+    <p>Considerem o argumento: “Se o Jardineiro é culpado, então usou a Pá. O Jardineiro usou a Pá. Logo, o Jardineiro é culpado.”</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>
+        É <strong>inválido</strong>. A forma é <code>p → q, q ⊢ p</code>, conhecida como falácia da afirmação do consequente.
+        O Jardineiro pode ter usado a Pá para cuidar do jardim sem ser o culpado: as premissas podem ser verdadeiras e a conclusão falsa.
+        Se o argumento não é válido, ele também não pode ser correto. Vamos estudar essa falácia com detalhe no Caso 08.
+      </p>
+    </details>
+  </div>
+
+  <div class="summary">
+    <span class="label">Para guardar</span>
+    <ul>
+      <li>A lógica estuda a <strong>forma</strong> dos argumentos, não o seu conteúdo.</li>
+      <li>Válido: premissas verdadeiras garantem conclusão verdadeira. Correto: válido e com premissas verdadeiras.</li>
+      <li>Só a dedução garante a conclusão; indução e abdução produzem conclusões prováveis.</li>
+      <li>No Detetive, a acusação precisa ser uma dedução. É por isso que ele vai nos acompanhar até o Caso 20.</li>
+    </ul>
+  </div>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="1">
+    <label><input type="checkbox" aria-label="Marcar o caso 01 como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre casos">
+    <a href="index.html"><span class="dir">← Início</span>Guia de estudos</a>
+    <a class="next" href="topico-02-proposicoes.html"><span class="dir">Próximo caso →</span>Proposições e identificação de sentenças</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow"><span>Guia de estudos · Lógica para Computação</span><span class="mono">Profa. Wilcilene Kowal · IFC São Bento do Sul</span></div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

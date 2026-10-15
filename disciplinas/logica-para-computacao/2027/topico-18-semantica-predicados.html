@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 18 — Semântica da Lógica de Predicados | Lógica para Computação</title>
+<meta name="description" content="Semântica da lógica de primeira ordem: estruturas, domínio, interpretação, atribuição de variáveis, avaliação de quantificadores e contramodelos.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-18-semantica-predicados.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Caso Nº 18 — Semântica da Lógica de Predicados | Lógica para Computação">
+<meta property="og:description" content="Semântica da lógica de primeira ordem: estruturas, domínio, interpretação, atribuição de variáveis, avaliação de quantificadores e contramodelos.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-18-semantica-predicados.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Semântica da Lógica de Predicados",
+    "description": "Semântica da lógica de primeira ordem: estruturas, domínio, interpretação, atribuição de variáveis, avaliação de quantificadores e contramodelos.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-18-semantica-predicados.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Material de estudo",
+    "educationalLevel": "Ensino Superior",
+    "position": 18,
+    "author": {
+      "@type": "Person",
+      "name": "Wilcilene Kowal"
+    },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Instituto Federal Catarinense — Campus São Bento do Sul"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Lógica para Computação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Caso 18: Semântica da lógica de predicados",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-18-semantica-predicados.html"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 18 de 20</span>
+  </div>
+</header>
+
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag indigo mono">Caso Nº 18 · Lógica de Predicados</span>
+  <h1>Semântica da Lógica de Predicados</h1>
+  <p class="lede">Uma fórmula com quantificadores só ganha valor-verdade quando dizemos quem são os jogadores, as cartas e quem tem o quê. Isso é uma interpretação.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+<div class="goals">
+    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <ul>
+      <li>definir estrutura (domínio + interpretação) e atribuição de variáveis;</li>
+      <li>avaliar fórmulas quantificadas pela definição recursiva de satisfação;</li>
+      <li>expandir quantificadores em domínios finitos e estimar o custo disso;</li>
+      <li>negar quantificadores e saber quando eles se distribuem sobre ∧ e ∨;</li>
+      <li>construir contramodelos e entender por que a validade em primeira ordem é indecidível.</li>
+    </ul>
+  </div>
+
+  <h2>Do valor-verdade à estrutura</h2>
+  <p>
+    Na lógica proposicional, uma valoração (uma linha da tabela) bastava para dar valor a qualquer fórmula. Em primeira
+    ordem, eu preciso de mais coisa: de quais objetos estou falando e o que cada símbolo significa. Isso se chama uma
+    <strong>estrutura</strong> (ou <strong>modelo</strong>, ou <strong>interpretação</strong>) <code>𝓜 = (D, I)</code>:
+  </p>
+  <ul>
+    <li>o <strong>domínio</strong> <code>D</code>: um conjunto não vazio de objetos;</li>
+    <li>a <strong>interpretação</strong> <code>I</code>: cada constante aponta para um objeto de <code>D</code>; cada função de aridade n vira uma função <code>Dⁿ → D</code>; cada predicado de aridade n vira um <strong>conjunto de n-uplas</strong> de <code>D</code> (as n-uplas em que ele é verdadeiro).</li>
+  </ul>
+  <p>
+    Para fórmulas com variáveis livres, também precisamos de uma <strong>atribuição</strong> <code>s</code>, que diz qual
+    objeto cada variável representa no momento.
+  </p>
+
+  <h2>A definição de satisfação</h2>
+  <p>A notação <code>𝓜, s ⊨ φ</code> lê-se “<code>φ</code> é verdadeira em <code>𝓜</code> com a atribuição <code>s</code>”. A definição segue a estrutura da fórmula, como a função <code>avaliar</code> do Caso 11:</p>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Fórmula</th><th>É verdadeira quando...</th></tr></thead>
+      <tbody>
+        <tr><td><code>P(t₁, ..., tₙ)</code></td><td>a n-upla dos objetos denotados por <code>t₁, ..., tₙ</code> pertence a <code>I(P)</code></td></tr>
+        <tr><td><code>¬φ</code>, <code>φ ∧ ψ</code>, ...</td><td>como nas tabelas-verdade de sempre</td></tr>
+        <tr><td><code>∀x φ</code></td><td>para <strong>todo</strong> <code>d ∈ D</code>, <code>𝓜, s[x ↦ d] ⊨ φ</code></td></tr>
+        <tr><td><code>∃x φ</code></td><td>para <strong>algum</strong> <code>d ∈ D</code>, <code>𝓜, s[x ↦ d] ⊨ φ</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><code>s[x ↦ d]</code> é a atribuição <code>s</code> com <code>x</code> trocado por <code>d</code>. Para sentenças, a atribuição não faz diferença, e escrevemos só <code>𝓜 ⊨ φ</code>.</p>
+
+  <h2>Avaliando num estado de partida</h2>
+  <div class="evidence-box">
+    <span class="label">Uma estrutura do Detetive</span>
+    <pre><code>D = { j1, j2, Mordomo, Jardineiro, Faca, Corda }
+I(Jogadora)   = { j1, j2 }
+I(Suspeito)   = { Mordomo, Jardineiro }
+I(Arma)       = { Faca, Corda }
+I(Tem)        = { (j1, Faca), (j2, Mordomo) }
+I(NoEnvelope) = { Jardineiro, Corda }</code></pre>
+    <div class="table-wrap">
+      <table class="tbl">
+        <thead><tr><th>Sentença</th><th>Valor</th><th>Por quê</th></tr></thead>
+        <tbody>
+          <tr><td><code>∃x (Suspeito(x) ∧ NoEnvelope(x))</code></td><td class="v">V</td><td><code>x = Jardineiro</code> serve.</td></tr>
+          <tr><td><code>∀x (Suspeito(x) → NoEnvelope(x))</code></td><td class="f">F</td><td><code>x = Mordomo</code> é contraexemplo.</td></tr>
+          <tr><td><code>∀j (Jogadora(j) → ∃c Tem(j, c))</code></td><td class="v">V</td><td><code>j1</code> tem a Faca; <code>j2</code> tem o Mordomo.</td></tr>
+          <tr><td><code>∀c (Tem(j1, c) → Arma(c))</code></td><td class="v">V</td><td>a única carta de <code>j1</code> é uma arma.</td></tr>
+          <tr><td><code>∃c (Tem(j1, c) ∧ NoEnvelope(c))</code></td><td class="f">F</td><td>nenhuma carta é ao mesmo tempo da mão de <code>j1</code> e do envelope.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2>Domínios finitos: expansão</h2>
+  <p>Se <code>D = {d₁, ..., dₙ}</code> e cada objeto tem um nome, os quantificadores viram conectivos:</p>
+  <pre><code>∀x P(x)  ≡  P(d₁) ∧ P(d₂) ∧ ... ∧ P(dₙ)
+∃x P(x)  ≡  P(d₁) ∨ P(d₂) ∨ ... ∨ P(dₙ)</code></pre>
+  <p>
+    Avaliar ficou mecânico, mas notem o custo: com <code>k</code> quantificadores aninhados, são <code>nᵏ</code>
+    combinações. Em código, cada quantificador é um laço: <code>∀</code> é um <code>all(...)</code> e <code>∃</code> é um
+    <code>any(...)</code>.
+  </p>
+  <pre><code>D = ["j1", "j2", "Mordomo", "Jardineiro", "Faca", "Corda"]
+tem = {("j1", "Faca"), ("j2", "Mordomo")}
+jogadora = {"j1", "j2"}
+
+# ∀j (Jogadora(j) → ∃c Tem(j, c))
+print(all((j not in jogadora) or any((j, c) in tem for c in D) for j in D))   # True</code></pre>
+
+  <h2>Negação e distribuição de quantificadores</h2>
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Equivalência</th><th>Leitura</th></tr></thead>
+      <tbody>
+        <tr><td><code>¬∀x φ ≡ ∃x ¬φ</code></td><td>“nem todos têm álibi” = “alguém não tem álibi”</td></tr>
+        <tr><td><code>¬∃x φ ≡ ∀x ¬φ</code></td><td>“ninguém viu o crime” = “todos não viram”</td></tr>
+        <tr><td><code>∀x (φ ∧ ψ) ≡ ∀x φ ∧ ∀x ψ</code></td><td>∀ distribui sobre ∧</td></tr>
+        <tr><td><code>∃x (φ ∨ ψ) ≡ ∃x φ ∨ ∃x ψ</code></td><td>∃ distribui sobre ∨</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    São as leis de De Morgan para quantificadores: na expansão finita, <code>∀</code> é um grande <code>∧</code> e
+    <code>∃</code> um grande <code>∨</code>, e as leis do Caso 07 fazem o resto.
+  </p>
+  <div class="callout">
+    <span class="label">Erro comum</span>
+    <p>Distribuir ∀ sobre ∨ (ou ∃ sobre ∧). “Toda carta é arma ou suspeito” <strong>não</strong> implica “toda carta é arma ou toda carta é suspeito”. E “existe uma arma e existe um suspeito” não implica “existe algo que é arma e suspeito”.</p>
+  </div>
+
+  <h2>Validade, contramodelos e indecidibilidade</h2>
+  <p>
+    Os conceitos do Caso 06 voltam com estruturas no lugar de linhas: uma sentença é <strong>válida</strong> se é
+    verdadeira em <strong>toda</strong> estrutura, <strong>satisfatível</strong> se é verdadeira em alguma, e
+    <code>Γ ⊨ C</code> se toda estrutura que satisfaz <code>Γ</code> satisfaz <code>C</code>. Para mostrar que uma
+    consequência <strong>não</strong> vale, vocês constroem um <strong>contramodelo</strong>: uma estrutura em que as
+    premissas são verdadeiras e a conclusão é falsa.
+  </p>
+  <p>
+    Agora vem a grande diferença. Há infinitas estruturas possíveis, inclusive com domínios infinitos, então não existe
+    “tabela-verdade” para percorrer. Church e Turing provaram em 1936 que <strong>não existe algoritmo que decida</strong>,
+    para toda sentença de primeira ordem, se ela é válida. Por outro lado, Gödel mostrou em 1929 (teorema da completude)
+    que toda sentença válida tem uma demonstração. Juntando os dois: se a sentença é válida, uma busca por provas acaba
+    encontrando; se não é, a busca pode não terminar nunca. Isso se chama <strong>semidecidibilidade</strong>, e vai
+    aparecer de novo no Caso 20.
+  </p>
+
+  <div class="detetive">
+    <span class="label">No Detetive</span>
+    <p>
+      O estado real de uma partida é <strong>uma</strong> estrutura: quem tem cada carta e o que está no envelope. Nenhuma
+      jogadora conhece essa estrutura inteira. O que cada uma tem é um conjunto de pistas <code>Γ</code>, e o que ela pode
+      afirmar com segurança é o que vale em <strong>todas</strong> as estruturas compatíveis com <code>Γ</code>, isto é,
+      as consequências lógicas. Cada estrutura compatível em que o culpado é diferente é um contramodelo para a sua
+      acusação. Acusar cedo demais é ignorar um contramodelo.
+    </p>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 1 · Avaliação</span>
+    <p>No domínio <code>{Mordomo, Jardineiro}</code>, com <code>I(Culpado) = {Mordomo}</code>, avalie <code>∀x Culpado(x)</code> e <code>∃x ¬Culpado(x)</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><code>∀x Culpado(x)</code> é falsa (o Jardineiro não satisfaz). <code>∃x ¬Culpado(x)</code> é verdadeira (o Jardineiro satisfaz). Coerente com <code>¬∀x Culpado(x) ≡ ∃x ¬Culpado(x)</code>.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 2 · Contramodelo</span>
+    <p>Mostrem que <code>∀x (A(x) ∨ S(x)) ⊭ ∀x A(x) ∨ ∀x S(x)</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><code>D = {Faca, Mordomo}</code>, <code>I(A) = {Faca}</code>, <code>I(S) = {Mordomo}</code>. A premissa é verdadeira (cada objeto é arma ou suspeito), mas <code>∀x A(x)</code> é falsa (Mordomo) e <code>∀x S(x)</code> também (Faca).</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 3 · Expansão</span>
+    <p>Expandam <code>∀j ∃c Tem(j, c)</code> considerando apenas as jogadoras <code>{j1, j2}</code> e as cartas <code>{Faca, Corda}</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><code>(Tem(j1, Faca) ∨ Tem(j1, Corda)) ∧ (Tem(j2, Faca) ∨ Tem(j2, Corda))</code>. Reparem: já é uma FNC, pronta para um resolvedor SAT.</p>
+    </details>
+  </div>
+
+  <div class="summary">
+    <span class="label">Para guardar</span>
+    <ul>
+      <li>Estrutura = domínio não vazio + significado de cada constante, função e predicado.</li>
+      <li>∀x: vale para todo objeto; ∃x: vale para algum. A avaliação é recursiva.</li>
+      <li>Domínio finito: ∀ vira ∧, ∃ vira ∨, com custo <code>nᵏ</code>.</li>
+      <li>¬∀ ≡ ∃¬ e ¬∃ ≡ ∀¬; ∀ distribui sobre ∧, ∃ sobre ∨, e não o contrário.</li>
+      <li>Validade em primeira ordem é indecidível, mas semidecidível.</li>
+    </ul>
+  </div>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="18">
+    <label><input type="checkbox" aria-label="Marcar o caso 18 como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre casos">
+    <a href="topico-17-logica-de-predicados.html"><span class="dir">← Caso anterior</span>Lógica de predicados: termos, predicados e quantificadores</a>
+    <a class="next" href="topico-19-substituicao-unificacao.html"><span class="dir">Próximo caso →</span>Substituição e unificação</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow"><span>Guia de estudos · Lógica para Computação</span><span class="mono">Profa. Wilcilene Kowal · IFC São Bento do Sul</span></div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>

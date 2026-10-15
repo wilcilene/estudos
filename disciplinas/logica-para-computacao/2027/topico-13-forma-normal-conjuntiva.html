@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Nº 13 — Forma Normal Conjuntiva | Lógica para Computação</title>
+<meta name="description" content="Forma normal conjuntiva (FNC) e disjuntiva (FND): algoritmo de conversão, construção pela tabela-verdade, explosão exponencial e transformação de Tseitin.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-13-forma-normal-conjuntiva.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Caso Nº 13 — Forma Normal Conjuntiva | Lógica para Computação">
+<meta property="og:description" content="Forma normal conjuntiva (FNC) e disjuntiva (FND): algoritmo de conversão, construção pela tabela-verdade, explosão exponencial e transformação de Tseitin.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-13-forma-normal-conjuntiva.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Forma Normal Conjuntiva",
+    "description": "Forma normal conjuntiva (FNC) e disjuntiva (FND): algoritmo de conversão, construção pela tabela-verdade, explosão exponencial e transformação de Tseitin.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-13-forma-normal-conjuntiva.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Material de estudo",
+    "educationalLevel": "Ensino Superior",
+    "position": 13,
+    "author": {
+      "@type": "Person",
+      "name": "Wilcilene Kowal"
+    },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Instituto Federal Catarinense — Campus São Bento do Sul"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Lógica para Computação",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Caso 13: Forma normal conjuntiva",
+        "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/topico-13-forma-normal-conjuntiva.html"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Caso 13 de 20</span>
+  </div>
+</header>
+
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag teal mono">Caso Nº 13 · Aspectos Computacionais · Resolução</span>
+  <h1>Forma Normal Conjuntiva</h1>
+  <p class="lede">Antes de entregar as pistas a um algoritmo, padronizamos todas no mesmo formato: uma conjunção de cláusulas.</p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+<div class="goals">
+    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <ul>
+      <li>definir literal, cláusula, forma normal conjuntiva (FNC) e forma normal disjuntiva (FND);</li>
+      <li>converter qualquer fórmula para FNC pelos passos clássicos, justificando cada um;</li>
+      <li>construir a FNC e a FND diretamente pela tabela-verdade;</li>
+      <li>explicar a explosão exponencial e como a transformação de Tseitin a evita.</li>
+    </ul>
+  </div>
+
+  <h2>Definições</h2>
+  <ul>
+    <li>Um <strong>literal</strong> é uma variável (<code>p</code>) ou a negação de uma variável (<code>¬p</code>).</li>
+    <li>Uma <strong>cláusula</strong> é uma disjunção de literais: <code>(p ∨ ¬q ∨ r)</code>.</li>
+    <li>Uma fórmula está em <strong>forma normal conjuntiva (FNC)</strong> quando é uma conjunção de cláusulas: <code>(p ∨ ¬q) ∧ (¬p ∨ r) ∧ q</code>.</li>
+    <li>Ela está em <strong>forma normal disjuntiva (FND)</strong> quando é uma disjunção de conjunções de literais: <code>(p ∧ ¬q) ∨ (¬p ∧ r)</code>.</li>
+  </ul>
+  <p>
+    <strong>Toda fórmula proposicional tem uma FNC e uma FND equivalentes.</strong> Isso torna a FNC um formato universal:
+    um algoritmo que sabe lidar com cláusulas sabe lidar com qualquer fórmula. Em inglês, FNC é <em>CNF</em> (conjunctive
+    normal form), sigla que vocês vão encontrar nos resolvedores SAT.
+  </p>
+  <p>
+    Uma intuição útil: uma FNC é uma <strong>lista de exigências</strong>, todas obrigatórias, e cada exigência pode ser
+    cumprida de mais de um jeito. Uma FND é uma <strong>lista de cenários</strong>, e basta um deles acontecer.
+  </p>
+
+  <h2>Convertendo para FNC em quatro passos</h2>
+  <ol>
+    <li><strong>Eliminar ↔ e →:</strong> <code>A ↔ B ≡ (¬A ∨ B) ∧ (¬B ∨ A)</code> e <code>A → B ≡ ¬A ∨ B</code>.</li>
+    <li><strong>Empurrar as negações até as variáveis</strong> (forma normal da negação): De Morgan e dupla negação.</li>
+    <li><strong>Distribuir ∨ sobre ∧:</strong> <code>A ∨ (B ∧ C) ≡ (A ∨ B) ∧ (A ∨ C)</code>, até não haver ∧ dentro de ∨.</li>
+    <li><strong>Simplificar:</strong> retirar literais repetidos numa cláusula e cláusulas que contêm <code>p</code> e <code>¬p</code> (são sempre verdadeiras).</li>
+  </ol>
+  <div class="evidence-box">
+    <span class="label">Convertendo uma pista com bicondicional</span>
+    <p>Pista: “o crime foi na Biblioteca se e somente se a arma foi o Candelabro ou a Corda”: <code>b ↔ (k ∨ r)</code>.</p>
+    <pre><code>1. Eliminar ↔:    (¬b ∨ k ∨ r) ∧ (¬(k ∨ r) ∨ b)
+2. De Morgan:     (¬b ∨ k ∨ r) ∧ ((¬k ∧ ¬r) ∨ b)
+3. Distribuir:    (¬b ∨ k ∨ r) ∧ (¬k ∨ b) ∧ (¬r ∨ b)</code></pre>
+    <p>Três cláusulas. Leiam cada uma como exigência: “se foi na Biblioteca, a arma é Candelabro ou Corda”; “se foi o Candelabro, foi na Biblioteca”; “se foi a Corda, foi na Biblioteca”.</p>
+  </div>
+
+  <h2>FNC e FND direto da tabela-verdade</h2>
+  <p>Quando vocês já têm a tabela, existe um caminho mecânico:</p>
+  <ul>
+    <li><strong>FND:</strong> para cada linha <strong>V</strong>, escrevam a conjunção que descreve exatamente aquela linha, e juntem tudo com ∨.</li>
+    <li><strong>FNC:</strong> para cada linha <strong>F</strong>, escrevam a cláusula que <em>proíbe</em> aquela linha (negando cada variável da linha), e juntem tudo com ∧.</li>
+  </ul>
+  <div class="evidence-box">
+    <span class="label">A pista do Caso 05</span>
+    <p><code>(p ∧ q) → r</code> é falsa só na linha <code>p = V, q = V, r = F</code>. A cláusula que proíbe essa linha é <code>¬p ∨ ¬q ∨ r</code>, e essa é a FNC da pista. Uma linha falsa, uma cláusula.</p>
+  </div>
+
+  <h2>O problema: explosão exponencial</h2>
+  <p>
+    A distribuição pode multiplicar o tamanho. A fórmula <code>(x₁ ∧ y₁) ∨ (x₂ ∧ y₂) ∨ ... ∨ (xₙ ∧ yₙ)</code> tem tamanho
+    linear em <code>n</code>, mas sua FNC equivalente tem <code>2ⁿ</code> cláusulas: cada cláusula escolhe <code>xᵢ</code> ou
+    <code>yᵢ</code> de cada termo. Com <code>n = 3</code>:
+  </p>
+  <pre><code>(x₁ ∨ x₂ ∨ x₃) ∧ (x₁ ∨ x₂ ∨ y₃) ∧ (x₁ ∨ y₂ ∨ x₃) ∧ (x₁ ∨ y₂ ∨ y₃) ∧
+(y₁ ∨ x₂ ∨ x₃) ∧ (y₁ ∨ x₂ ∨ y₃) ∧ (y₁ ∨ y₂ ∨ x₃) ∧ (y₁ ∨ y₂ ∨ y₃)</code></pre>
+  <p>Com <code>n = 30</code>, seriam mais de um bilhão de cláusulas.</p>
+
+  <h2>A solução: transformação de Tseitin</h2>
+  <p>
+    Em vez de buscar uma fórmula <strong>equivalente</strong>, buscamos uma <strong>equisatisfatível</strong>: satisfatível
+    se e somente se a original for. Para isso, criamos uma variável nova para cada subfórmula e escrevemos cláusulas que
+    a definem. Para <code>t ↔ (a ∧ b)</code>, por exemplo:
+  </p>
+  <pre><code>(¬t ∨ a) ∧ (¬t ∨ b) ∧ (t ∨ ¬a ∨ ¬b)</code></pre>
+  <p>
+    Fazendo isso para cada nó da árvore e exigindo que a variável da raiz seja verdadeira, obtemos uma FNC de tamanho
+    <strong>linear</strong>. O preço são variáveis extras, mas qualquer modelo do resultado, restrito às variáveis originais,
+    é modelo da fórmula original. É assim que ferramentas reais geram entradas para resolvedores SAT. O exemplo de entrega
+    da <a href="apresentacao1-exemplo-entrega.html#fnc">Apresentação 1</a> implementa e testa essa transformação.
+  </p>
+
+  <div class="callout">
+    <span class="label">Erro comum</span>
+    <p>Distribuir na direção errada. Para FNC, distribui-se <strong>∨ sobre ∧</strong>: <code>A ∨ (B ∧ C)</code> vira <code>(A ∨ B) ∧ (A ∨ C)</code>. Distribuir ∧ sobre ∨ leva à FND.</p>
+  </div>
+
+  <div class="detetive">
+    <span class="label">No Detetive</span>
+    <p>
+      As anotações do Detetive já nascem quase todas em FNC. “Eu tenho a Faca” é a cláusula unitária <code>¬F</code>.
+      “Alguém mostrou Mordomo, Faca ou Biblioteca” é a cláusula <code>¬M ∨ ¬F ∨ ¬B</code> (pelo menos uma não está no
+      envelope). As regras do envelope são cláusulas de “pelo menos um” e de “no máximo um” (Caso 12). O jogo inteiro é
+      uma grande conjunção de cláusulas, pronta para a resolução.
+    </p>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 1 · Bicondicional</span>
+    <p>Convertam <code>p ↔ q</code> para FNC.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><code>(¬p ∨ q) ∧ (¬q ∨ p)</code>. Já está em FNC depois do primeiro passo.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 2 · Todos os passos</span>
+    <p>Convertam <code>¬(p → q) ∨ (r ∧ ¬s)</code> para FNC.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <pre><code>¬(¬p ∨ q) ∨ (r ∧ ¬s)          eliminar →
+(p ∧ ¬q) ∨ (r ∧ ¬s)            De Morgan e dupla negação
+(p ∨ r) ∧ (p ∨ ¬s) ∧ (¬q ∨ r) ∧ (¬q ∨ ¬s)    distribuir</code></pre>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 3 · Pela tabela</span>
+    <p>A fórmula <code>φ</code> de variáveis <code>p, q</code> é falsa apenas nas linhas <code>(V, F)</code> e <code>(F, F)</code>. Escrevam a sua FNC e simplifique.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Linha (V, F) gera <code>¬p ∨ q</code>; linha (F, F) gera <code>p ∨ q</code>. FNC: <code>(¬p ∨ q) ∧ (p ∨ q)</code>, que pela distributividade equivale a <code>q ∨ (¬p ∧ p) ≡ q</code>. Faz sentido: <code>φ</code> é verdadeira exatamente quando <code>q</code> é.</p>
+    </details>
+  </div>
+
+  <div class="summary">
+    <span class="label">Para guardar</span>
+    <ul>
+      <li>FNC = conjunção de cláusulas; FND = disjunção de conjunções de literais.</li>
+      <li>Passos: eliminar ↔ e →, empurrar ¬, distribuir ∨ sobre ∧, simplificar.</li>
+      <li>Pela tabela: cada linha F vira uma cláusula da FNC.</li>
+      <li>A distribuição pode explodir; Tseitin gera uma FNC equisatisfatível de tamanho linear.</li>
+    </ul>
+  </div>
+
+  <div class="topic-done mono" id="topic-done-toggle" data-id="13">
+    <label><input type="checkbox" aria-label="Marcar o caso 13 como concluído"> concluído</label>
+    <span class="stamp">RESOLVIDO</span>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre casos">
+    <a href="topico-12-satisfatibilidade.html"><span class="dir">← Caso anterior</span>Satisfatibilidade e busca de modelos</a>
+    <a class="next" href="topico-14-clausulas.html"><span class="dir">Próximo caso →</span>Cláusulas e representação por conjuntos</a>
+  </nav>
+
+</article></main>
+
+<footer class="site">
+  <div class="wrap-narrow"><span>Guia de estudos · Lógica para Computação</span><span class="mono">Profa. Wilcilene Kowal · IFC São Bento do Sul</span></div>
+</footer>
+
+<script src="assets/js/topic.js" defer></script>
+</body>
+</html>
