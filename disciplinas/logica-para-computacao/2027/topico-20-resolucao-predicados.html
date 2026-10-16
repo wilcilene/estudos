@@ -96,7 +96,7 @@
 <main id="conteudo" class="wrap-narrow"><article class="topic">
 
 <div class="goals">
-    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <span class="label">Ao final deste caso, vocês saberão</span>
     <ul>
       <li>converter fórmulas de primeira ordem para forma clausal, incluindo a skolemização;</li>
       <li>aplicar a resolução binária com unificação e a fatoração;</li>
@@ -107,6 +107,10 @@
   </div>
 
   <h2>Forma clausal em primeira ordem</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>Arrumar a mala para uma viagem com regras rígidas da companhia aérea: tudo precisa caber no mesmo formato. Roupas dobradas, líquidos em potinhos, nada solto. A forma clausal é a “mala” da resolução: as pistas precisam ser dobradas nesse formato antes de embarcar.</p>
+  </div>
   <p>
     A resolução trabalha sobre cláusulas, então o primeiro passo é levar as pistas a esse formato. Os passos do Caso 13
     continuam valendo; o que muda é o tratamento dos quantificadores:
@@ -121,6 +125,10 @@
   </ol>
 
   <h2>Skolemização</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>Alguém deixou a luz da sala acesa, mas ninguém sabe quem. Para conversar sobre isso, a família dá um apelido: “o Esquecido”. Se cada sala da casa ficou com a luz acesa, o apelido depende da sala: “o Esquecido da sala x”. O primeiro apelido é uma constante de Skolem; o segundo, uma função de Skolem.</p>
+  </div>
   <p>
     Um <code>∃</code> afirma que algo existe sem dizer quem é. A skolemização dá um nome novo a esse “algo”:
   </p>
@@ -138,6 +146,10 @@
   </div>
 
   <h2>Resolução com unificação</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>Duas peças de quebra-cabeça que quase encaixam: uma tem a aba “Tem(j, c)” e a outra o buraco “¬Tem(j1, Faca)”. Ajustando a primeira peça (trocando <code>j</code> por <code>j1</code> e <code>c</code> por <code>Faca</code>), elas encaixam e o par some, como na resolução proposicional. A unificação é o ajuste; a resolução é o encaixe.</p>
+  </div>
   <p>
     Na lógica proposicional, o par complementar precisava ser idêntico: <code>p</code> e <code>¬p</code>. Agora basta que
     os dois literais <strong>se tornem</strong> complementares depois de uma substituição. Com as variáveis das duas
@@ -194,6 +206,10 @@ negação da acusação “foi o Jardineiro”                  6. {¬NoEnvelope
   </p>
 
   <h2>Prolog: resolução como linguagem de programação</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>Um bibliotecário que segue fichas do tipo “para achar isto, procure aquilo”. Vocês perguntam “quem é o culpado?”; ele pega a ficha da regra <code>culpado(X)</code>, que manda procurar um suspeito que não esteja fora; vai às fichas de suspeitos, testa cada um, e devolve o primeiro que passa. Cada consulta a uma ficha é um passo de resolução.</p>
+  </div>
   <p>
     Se todas as cláusulas são de Horn (Caso 14), a busca fica muito mais simples: a <strong>resolução SLD</strong> parte da
     pergunta negada e resolve sempre o primeiro literal do objetivo com uma regra ou fato. É exatamente isso que o Prolog

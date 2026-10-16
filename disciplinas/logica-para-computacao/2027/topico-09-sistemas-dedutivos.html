@@ -96,16 +96,25 @@
 <main id="conteudo" class="wrap-narrow"><article class="topic">
 
 <div class="goals">
-    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <span class="label">Ao final deste caso, vocês saberão</span>
     <ul>
       <li>explicar o que é um sistema dedutivo e a diferença entre <code>⊢</code> e <code>⊨</code>;</li>
       <li>enunciar e aplicar as principais regras de inferência;</li>
       <li>usar equivalências como regras de substituição dentro de uma derivação;</li>
-      <li>explicar o que significam correção e completude de um sistema.</li>
+      <li>explicar o que significam correção e completude de um sistema e por que as regras são corretas.</li>
     </ul>
   </div>
 
   <h2>Por que precisamos de regras</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Duas crianças querem saber se um labirinto tem saída. A primeira desenha <strong>todos</strong> os caminhos
+      possíveis, um por um, até achar a saída ou esgotar o papel. A segunda conhece algumas jogadas seguras (“siga a
+      parede da direita”, “não volte por onde veio”) e avança passo a passo. A primeira faz tabela-verdade; a
+      segunda usa um sistema dedutivo.
+    </p>
+  </div>
   <p>
     No Caso 08, verificamos argumentos olhando para todas as valorações. Isso é o lado <strong>semântico</strong> da
     lógica, e o custo é <code>2ⁿ</code>. Um <strong>sistema dedutivo</strong> segue o caminho <strong>sintático</strong>:
@@ -123,20 +132,38 @@
         <tr><td>Nome</td><td>consequência lógica</td><td>derivabilidade</td></tr>
         <tr><td>Natureza</td><td>semântica (valores-verdade)</td><td>sintática (regras sobre símbolos)</td></tr>
         <tr><td>Como se verifica</td><td>todas as valorações</td><td>exibindo uma derivação</td></tr>
+        <tr><td>Analogia</td><td>conferir todos os caminhos do labirinto</td><td>mostrar um caminho que chega à saída</td></tr>
       </tbody>
     </table>
   </div>
 
   <h2>Correção e completude</h2>
-  <p>Um sistema dedutivo só presta se as duas setas coincidirem:</p>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Um detector de metais na praia. Ele é bom se fizer duas coisas: <strong>nunca apitar à toa</strong> (se apitou, tem
+      metal mesmo) e <strong>nunca deixar metal passar</strong> (se tem metal, ele apita). A primeira qualidade se chama
+      correção; a segunda, completude. Um sistema dedutivo precisa das duas.
+    </p>
+  </div>
   <ul>
     <li><strong>Correção</strong> (<em>soundness</em>): se <code>Γ ⊢ C</code>, então <code>Γ ⊨ C</code>. Tudo o que o sistema deriva é realmente consequência. As regras nunca levam do verdadeiro ao falso.</li>
     <li><strong>Completude</strong> (<em>completeness</em>): se <code>Γ ⊨ C</code>, então <code>Γ ⊢ C</code>. Toda consequência pode ser derivada. Nada fica de fora.</li>
   </ul>
-  <p>Os sistemas que estudamos para a lógica proposicional são corretos e completos. Por isso, provar por regras e provar por tabela dão sempre a mesma resposta.</p>
+  <p>
+    Os sistemas que estudamos para a lógica proposicional são corretos e completos (a completude da lógica proposicional
+    foi provada por Emil Post em 1921). Por isso, provar por regras e provar por tabela dão sempre a mesma resposta.
+  </p>
+  <p>
+    <strong>Por que as regras são corretas?</strong> Porque cada regra corresponde a uma tautologia do Caso 06: o modus
+    ponens é correto porque <code>((p → q) ∧ p) → q</code> é tautologia. A prova de que o sistema inteiro é correto é
+    uma indução sobre o tamanho da derivação: as premissas são verdadeiras (base), e cada regra preserva a verdade
+    (passo). Se alguém inventasse a “regra” <code>p → q, q ⊢ p</code>, o sistema deixaria de ser correto, porque essa
+    forma não é tautologia (é a falácia da afirmação do consequente).
+  </p>
 
   <h2>As regras de inferência</h2>
-  <p>Cada regra corresponde a uma tautologia do Caso 06. Leiam “de ... deriva-se ...”.</p>
+  <p>Cada regra corresponde a uma tautologia do Caso 06. Leiam “de ... deriva-se ...”. Pensem nelas como as jogadas permitidas de um jogo de tabuleiro: o cavalo do xadrez anda em L, e ponto.</p>
   <div class="table-wrap">
     <table class="tbl">
       <thead><tr><th>Regra</th><th>Premissas</th><th>Conclusão</th><th>Leitura de detetive</th></tr></thead>
@@ -153,6 +180,14 @@
       </tbody>
     </table>
   </div>
+  <div class="imagine">
+    <span class="label">A regra que parece estranha: adição</span>
+    <p>
+      Se é verdade que “hoje é sábado”, também é verdade que “hoje é sábado ou chove sorvete”. Parece bobo, mas é correto:
+      um “ou” fica verdadeiro com uma parte verdadeira só. A adição deixa a informação mais fraca de propósito, para que
+      ela se encaixe em outra regra, por exemplo um dilema construtivo que exige uma disjunção.
+    </p>
+  </div>
   <p>
     Além delas, toda equivalência do Caso 07 pode ser usada como <strong>regra de substituição</strong>: vocês podem
     trocar uma subfórmula por outra equivalente, em qualquer lugar da linha, citando a lei (DM para De Morgan, DN para
@@ -160,7 +195,7 @@
   </p>
   <div class="callout">
     <span class="label">Regra de inferência × regra de substituição</span>
-    <p>Regras de inferência (MP, MT, SD...) só se aplicam à <strong>linha inteira</strong>. De <code>(p ∧ q) → r</code> vocês não podem “simplificar” e obter <code>p → r</code>: isso nem é válido! Já as equivalências podem ser aplicadas a qualquer parte da fórmula.</p>
+    <p>Regras de inferência (MP, MT, SD...) só se aplicam à <strong>linha inteira</strong>. De <code>(p ∧ q) → r</code> vocês não podem “simplificar” e obter <code>p → r</code>: isso nem é válido! (Com <code>p = V, q = F, r = F</code>, a premissa é V e a “conclusão” é F.) Já as equivalências podem ser aplicadas a qualquer parte da fórmula.</p>
   </div>
 
   <h2>Encadeando regras para fechar um caso</h2>
@@ -175,7 +210,13 @@
 6. C ∨ J            MP 2, 5
 7. J ∨ C            comutatividade 6
 8. C                SD 7, 4</code></pre>
+    <p>Leiam a derivação como uma história: “havia pegadas, então o Mordomo esteve lá; então foi a Cozinheira ou o Jardineiro; não foi o Jardineiro; então foi a Cozinheira”. Cada vírgula dessa frase é uma regra.</p>
   </div>
+  <p>
+    Uma dica de estratégia: olhem para o objetivo e perguntem “que regra termina com esse formato?”. Para chegar a
+    <code>C</code> sozinho, o SD é um bom candidato, então vocês procuram uma disjunção com <code>C</code> e a negação da
+    outra parte. Isso se chama <strong>raciocinar de trás para frente</strong>, e é o que o Prolog faz no Caso 20.
+  </p>
 
   <div class="detetive">
     <span class="label">No Detetive</span>
@@ -196,7 +237,7 @@
   </div>
 
   <div class="exercise">
-    <span class="label">Exercício 2 · Derive</span>
+    <span class="label">Exercício 2 · Derivem</span>
     <p>Premissas: <code>V → ¬C</code>, <code>C ∨ B</code>, <code>V</code>. Derivem <code>B</code> justificando cada linha.</p>
     <details>
       <summary>Ver resposta</summary>
@@ -217,11 +258,21 @@
     </details>
   </div>
 
+  <div class="exercise">
+    <span class="label">Exercício 4 · A regra é correta?</span>
+    <p>Alguém propõe a regra “de <code>p ∨ q</code> e <code>p</code>, derive <code>¬q</code>”. Ela é correta?</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Não. Com <code>p = V</code> e <code>q = V</code>, as duas premissas são verdadeiras e <code>¬q</code> é falsa. O erro é ler o “ou” como exclusivo; na lógica ele é inclusivo.</p>
+    </details>
+  </div>
+
   <div class="summary">
     <span class="label">Para guardar</span>
     <ul>
-      <li><code>⊨</code> é semântico; <code>⊢</code> é sintático.</li>
+      <li><code>⊨</code> é semântico (conferir todos os mundos); <code>⊢</code> é sintático (seguir regras).</li>
       <li>Correção: tudo que é derivável é consequência. Completude: toda consequência é derivável.</li>
+      <li>Cada regra é correta porque corresponde a uma tautologia.</li>
       <li>MP, MT, SH, SD, Cj, Simp, Ad e DC são as regras básicas; equivalências entram como substituições.</li>
       <li>Regras de inferência se aplicam à linha inteira; equivalências, a qualquer subfórmula.</li>
     </ul>

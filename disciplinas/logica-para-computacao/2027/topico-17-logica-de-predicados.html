@@ -96,7 +96,7 @@
 <main id="conteudo" class="wrap-narrow"><article class="topic">
 
 <div class="goals">
-    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <span class="label">Ao final deste caso, vocês saberão</span>
     <ul>
       <li>explicar o que a lógica proposicional não consegue dizer e por que precisamos de predicados;</li>
       <li>distinguir constantes, variáveis, funções e predicados, com suas aridades;</li>
@@ -107,6 +107,10 @@
   </div>
 
   <h2>O limite da lógica proposicional</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>Um caderno em que cada frase precisa ser escrita inteira: “a Jogadora 1 tem a Faca”, “a Jogadora 1 tem a Corda”, “a Jogadora 2 tem a Faca”... Seria muito mais fácil ter um <strong>molde com lacunas</strong>, “____ tem ____”, e preencher as lacunas quando precisar. A lógica de predicados é a lógica dos moldes.</p>
+  </div>
   <p>
     Até aqui, “o Mordomo está no envelope” era um bloco fechado, a variável <code>M</code>. Isso funciona, mas cobra caro.
     Para dizer “quem tem uma carta na mão sabe que ela não está no envelope”, eu precisaria de uma fórmula para cada
@@ -120,6 +124,10 @@
   </p>
 
   <h2>Os ingredientes da linguagem</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>Na gramática da escola: <strong>constantes</strong> são nomes próprios (“o Mordomo”, “a Faca”); <strong>variáveis</strong> são pronomes (“ele”, “aquilo”), que só dizem algo quando sabemos a quem se referem; <strong>funções</strong> são expressões como “o vizinho da direita de ...”, que recebem alguém e devolvem <em>alguém</em>; <strong>predicados</strong> são expressões como “... é suspeito” ou “... tem ...”, que recebem alguém e devolvem <em>sim ou não</em>.</p>
+  </div>
   <div class="table-wrap">
     <table class="tbl">
       <thead><tr><th>Símbolo</th><th>O que nomeia</th><th>Exemplos no Detetive</th></tr></thead>
@@ -143,6 +151,11 @@
   </div>
 
   <h2>Quantificadores</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>Na sala de aula, a professora pergunta: “<strong>todo mundo</strong> trouxe o caderno?”. Para responder “sim”, ela precisa conferir cada aluno: isso é o <code>∀</code>. Depois pergunta: “<strong>alguém</strong> tem uma borracha?”. Basta uma mão levantada: isso é o <code>∃</code>.</p>
+    <p>E o <strong>escopo</strong> é o alcance da voz da professora: a pergunta vale para quem está dentro da sala. Uma variável fora do escopo do quantificador é como um aluno no corredor: a pergunta não chega até ele, e ele fica “livre”.</p>
+  </div>
   <ul>
     <li><strong>Universal:</strong> <code>∀x φ</code> diz que <code>φ</code> vale para <strong>todo</strong> objeto <code>x</code> do domínio.</li>
     <li><strong>Existencial:</strong> <code>∃x φ</code> diz que <code>φ</code> vale para <strong>pelo menos um</strong> objeto <code>x</code>.</li>
@@ -173,6 +186,10 @@
   <p>Regra prática que eu repito todo semestre: <strong>∀ combina com →</strong> e <strong>∃ combina com ∧</strong>.</p>
 
   <h2>A ordem dos quantificadores importa</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>“Toda criança tem uma mãe” é verdade: cada criança tem a sua. “Existe uma mãe de todas as crianças” diria que uma única mulher é mãe de todas as crianças do mundo. As palavras são quase as mesmas; a ordem do “todo” e do “existe” muda tudo.</p>
+  </div>
   <div class="evidence-box">
     <span class="label">Mesmas palavras, sentidos diferentes</span>
     <pre><code>∀j ∃c Tem(j, c)     toda jogadora tem alguma carta              (verdade no jogo)

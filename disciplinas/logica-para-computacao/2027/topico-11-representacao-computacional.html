@@ -90,22 +90,31 @@
 <div class="wrap-narrow case-header">
   <span class="case-tag teal mono">Caso Nº 11 · Aspectos Computacionais</span>
   <h1>Representação Computacional de Fórmulas Lógicas</h1>
-  <p class="lede">Para o computador raciocinar sobre uma pista, ela precisa virar dado. Neste caso vocês vão ver como uma fórmula se transforma em estrutura de dados.</p>
+  <p class="lede">Para o computador raciocinar sobre uma pista, ela precisa virar dado. Neste caso vocês verão como uma fórmula se transforma em estrutura de dados.</p>
 </div>
 
 <main id="conteudo" class="wrap-narrow"><article class="topic">
 
 <div class="goals">
-    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <span class="label">Ao final deste caso, vocês saberão</span>
     <ul>
       <li>representar fórmulas como árvores sintáticas em uma linguagem de programação;</li>
-      <li>escrever a gramática das fórmulas em BNF e entender como um <em>parser</em> a usa;</li>
+      <li>escrever a gramática das fórmulas em BNF e entender as duas etapas da leitura: análise léxica e análise sintática;</li>
+      <li>ler e adaptar um <em>parser</em> de descida recursiva completo;</li>
       <li>implementar a avaliação recursiva e analisar o seu custo;</li>
       <li>gerar todas as valorações com números binários e reconhecer a ideia de DAG.</li>
     </ul>
   </div>
 
   <h2>Da definição indutiva à estrutura de dados</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Uma árvore genealógica desenhada de cabeça para baixo. No topo está a avó; abaixo, os filhos; mais abaixo, os
+      netos, que não têm filhos. Numa fórmula, o topo é o conectivo principal, os “filhos” são as partes que ele liga e
+      os “netos sem filhos” são as variáveis. Guardar uma fórmula no computador é guardar essa árvore.
+    </p>
+  </div>
   <p>
     No Caso 03, vimos que toda fórmula é uma variável, uma negação de fórmula ou um binário entre duas fórmulas. Essa
     definição já é, praticamente, a declaração de um tipo de dados recursivo: uma <strong>árvore</strong> em que cada folha
@@ -133,11 +142,23 @@ pista = Bin("imp", Bin("and", Var("B"), Var("M")), Var("C"))</code></pre>
     <p>Reparem que os parênteses desapareceram: o agrupamento está na forma da árvore.</p>
   </div>
 
-  <h2>A gramática e o parser</h2>
+  <h2>Lendo texto: análise léxica e sintática</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Uma criança aprendendo a ler faz duas coisas. Primeiro, separa as letras em <strong>palavras</strong> (“o”, “gato”,
+      “dorme”). Depois, entende como as palavras se organizam numa <strong>frase</strong> (quem é o sujeito, qual é o
+      verbo). Um programa que lê fórmulas faz o mesmo: primeiro separa os símbolos (análise léxica), depois monta a
+      árvore (análise sintática).
+    </p>
+  </div>
+  <ol>
+    <li><strong>Análise léxica</strong> (o <em>tokenizer</em>): transforma o texto <code>"(B ∧ M) → C"</code> na lista de peças <code>["(", "B", "∧", "M", ")", "→", "C"]</code>, ignorando espaços.</li>
+    <li><strong>Análise sintática</strong> (o <em>parser</em>): lê a lista e monta a árvore, seguindo uma gramática.</li>
+  </ol>
   <p>
-    Para ler uma fórmula digitada como texto, precisamos de um <strong>parser</strong> (analisador sintático). Ele segue
-    uma gramática escrita em <strong>BNF</strong>, com um nível para cada precedência do Caso 03, do conectivo mais
-    fraco ao mais forte:
+    A gramática é escrita em <strong>BNF</strong>, com um nível para cada precedência do Caso 03, do conectivo mais
+    fraco ao mais forte. Cada linha diz “uma coisa deste tipo é feita destas peças”:
   </p>
   <pre><code>bicond  ::= implica ( "↔" implica )*
 implica ::= ou ( "→" implica )?        ← recursão à direita: → associa à direita
@@ -147,11 +168,47 @@ unario  ::= "¬" unario | atomo
 atomo   ::= VARIAVEL | "(" bicond ")"</code></pre>
   <p>
     Um parser de <strong>descida recursiva</strong> tem uma função para cada linha dessa gramática, e as funções chamam
-    umas às outras. É exatamente assim que compiladores leem expressões aritméticas. Vocês encontram um parser completo,
-    funcionando, no <a href="apresentacao1-exemplo-entrega.html#representacao">exemplo de entrega da Apresentação 1</a>.
+    umas às outras. É exatamente assim que compiladores leem expressões aritméticas. Este é um parser completo, em
+    poucas linhas:
+  </p>
+  <pre><code>function parse(texto) {
+  const tokens = texto.match(/[A-Za-z]\w*|[¬∧∨→↔()]/g) || [];   // análise léxica
+  let i = 0;
+  const ver = () =&gt; tokens[i];
+  function bicond()  { let a = implica(); while (ver() === "↔") { i++; a = { t: "iff", a, b: implica() }; } return a; }
+  function implica() { const a = ou(); if (ver() === "→") { i++; return { t: "imp", a, b: implica() }; } return a; }
+  function ou()      { let a = conj(); while (ver() === "∨") { i++; a = { t: "or", a, b: conj() }; } return a; }
+  function conj()    { let a = unario(); while (ver() === "∧") { i++; a = { t: "and", a, b: unario() }; } return a; }
+  function unario()  { if (ver() === "¬") { i++; return { t: "not", a: unario() }; } return atomo(); }
+  function atomo() {
+    const t = ver();
+    if (t === "(") { i++; const f = bicond(); if (ver() !== ")") throw new Error("faltou ')'"); i++; return f; }
+    if (t &amp;&amp; /^[A-Za-z]/.test(t)) { i++; return { t: "var", n: t }; }
+    throw new Error("símbolo inesperado: " + t);
+  }
+  const f = bicond();
+  if (i &lt; tokens.length) throw new Error("sobrou: " + tokens[i]);
+  return f;
+}
+
+parse("(B ∧ M) → C");   // a mesma árvore da pista acima
+parse("p ∧ ∧ q");       // erro: símbolo inesperado: ∧</code></pre>
+  <p>
+    Leiam a função <code>implica</code> com calma: ela chama a si mesma depois da seta, e é isso que faz
+    <code>p → q → r</code> virar <code>p → (q → r)</code>. As outras usam um laço <code>while</code>, que associa à
+    esquerda. Uma versão mais completa, com mais recursos, está no
+    <a href="apresentacao1-exemplo-entrega.html#representacao">exemplo de entrega da Apresentação 1</a>.
   </p>
 
   <h2>Avaliação recursiva</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Uma diretora de escola que quer saber se todas as turmas fizeram a lição. Ela não visita cada aluno: pergunta às
+      coordenadoras, que perguntam às professoras, que olham os alunos. Cada uma responde para quem perguntou, e a
+      resposta sobe até a diretora. A avaliação de uma fórmula funciona assim: cada nó pergunta aos filhos e depois decide.
+    </p>
+  </div>
   <p>Para avaliar uma fórmula numa valoração, percorremos a árvore em pós-ordem: primeiro os filhos, depois o conectivo.</p>
   <pre><code>function avaliar(f, val) {          // val: { B: true, M: false, C: true }
   switch (f.t) {
@@ -174,6 +231,14 @@ atomo   ::= VARIAVEL | "(" bicond ")"</code></pre>
   </p>
 
   <h2>Valorações como números binários</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Uma fileira de lâmpadas na parede, cada uma acesa (1) ou apagada (0). Lida da direita para a esquerda, a fileira é
+      um número em binário. Contar de 0 até o maior número possível é o mesmo que passar por todas as combinações de
+      lâmpadas, sem repetir e sem pular nenhuma.
+    </p>
+  </div>
   <p>
     Com <code>n</code> variáveis numeradas de 0 a <code>n − 1</code>, cada valoração é um número de <code>n</code> bits:
     o bit <code>k</code> diz o valor da variável <code>k</code>. Para percorrer a tabela-verdade inteira, basta um laço de
@@ -204,9 +269,9 @@ atomo   ::= VARIAVEL | "(" bicond ")"</code></pre>
     </table>
   </div>
   <p>
-    No <strong>DAG</strong>, uma subfórmula que aparece várias vezes vira um único nó, apontado por vários pais. Em
-    <code>(p ∧ q) ∨ ¬(p ∧ q)</code>, o nó <code>p ∧ q</code> é armazenado e avaliado uma só vez. Essa ideia vai reaparecer
-    na transformação de Tseitin (Caso 13).
+    No <strong>DAG</strong>, uma subfórmula que aparece várias vezes vira um único nó, apontado por vários pais, como dois
+    irmãos que moram na mesma casa e dão o mesmo endereço. Em <code>(p ∧ q) ∨ ¬(p ∧ q)</code>, o nó <code>p ∧ q</code> é
+    armazenado e avaliado uma só vez. Essa ideia reaparece na transformação de Tseitin (Caso 13).
   </p>
 
   <div class="detetive">
@@ -220,7 +285,7 @@ atomo   ::= VARIAVEL | "(" bicond ")"</code></pre>
   </div>
 
   <div class="exercise">
-    <span class="label">Exercício 1 · Desenhe a árvore</span>
+    <span class="label">Exercício 1 · Desenhem a árvore</span>
     <p>Representem <code>¬p ∨ q → r</code> como árvore e como objeto JavaScript.</p>
     <details>
       <summary>Ver resposta</summary>
@@ -254,11 +319,21 @@ atomo   ::= VARIAVEL | "(" bicond ")"</code></pre>
     </details>
   </div>
 
+  <div class="exercise">
+    <span class="label">Exercício 4 · Estendendo o parser</span>
+    <p>Que mudanças vocês fariam no parser para aceitar também <code>⊕</code> (ou exclusivo) com a mesma força do <code>∨</code>?</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Incluir <code>⊕</code> na expressão regular do tokenizer e, na função <code>ou</code>, aceitar os dois símbolos no laço: <code>while (ver() === "∨" || ver() === "⊕") { const op = ver() === "∨" ? "or" : "xor"; i++; a = { t: op, a, b: conj() }; }</code>. Depois, acrescentar <code>case "xor": return avaliar(f.a, val) !== avaliar(f.b, val);</code> na avaliação.</p>
+    </details>
+  </div>
+
   <div class="summary">
     <span class="label">Para guardar</span>
     <ul>
       <li>Fórmula = árvore: folhas são variáveis, nós internos são conectivos.</li>
-      <li>A gramática em BNF com um nível por precedência guia o parser de descida recursiva.</li>
+      <li>Ler texto tem duas etapas: análise léxica (peças) e sintática (árvore), guiada por uma gramática em BNF.</li>
+      <li>No parser de descida recursiva, cada nível de precedência é uma função.</li>
       <li>Avaliar custa O(n); percorrer todas as valorações custa O(n · 2ⁿ).</li>
       <li>Valorações podem ser números binários; DAGs compartilham subfórmulas iguais.</li>
     </ul>

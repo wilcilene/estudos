@@ -96,17 +96,25 @@
 <main id="conteudo" class="wrap-narrow"><article class="topic">
 
 <div class="goals">
-    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <span class="label">Ao final deste caso, vocês saberão</span>
     <ul>
       <li>definir modelo, fórmula satisfatível e o problema SAT;</li>
       <li>reduzir validade e consequência lógica a perguntas de satisfatibilidade;</li>
       <li>explicar por que SAT é NP-completo e o que isso significa na prática;</li>
-      <li>executar à mão as ideias do algoritmo DPLL;</li>
+      <li>executar à mão as ideias do algoritmo DPLL, inclusive decisões e retrocessos;</li>
       <li>modelar o envelope do Detetive como uma fórmula e resolvê-lo por propagação.</li>
     </ul>
   </div>
 
   <h2>O problema SAT</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Um cadeado de bicicleta com vários discos, cada um com só duas posições: 0 e 1. Existe alguma combinação que abre o
+      cadeado? Essa é a pergunta do SAT. Cada disco é uma variável, cada combinação é uma valoração, e “abrir” é tornar a
+      fórmula verdadeira.
+    </p>
+  </div>
   <p>
     Uma valoração que torna uma fórmula verdadeira é um <strong>modelo</strong> dela. Uma fórmula é
     <strong>satisfatível</strong> quando tem pelo menos um modelo, e <strong>insatisfatível</strong> quando não tem nenhum.
@@ -116,7 +124,7 @@
   <p>Vocês já conhecem a ligação com o Caso 06: contradições são insatisfatíveis; tautologias e contingências são satisfatíveis.</p>
 
   <h2>Um único problema, muitas perguntas</h2>
-  <p>A força do SAT está em que outras perguntas se transformam nele:</p>
+  <p>A força do SAT está em que outras perguntas se transformam nele. Saber abrir cadeados resolve muitos outros problemas:</p>
   <div class="table-wrap">
     <table class="tbl">
       <thead><tr><th>Pergunta</th><th>Pergunta equivalente ao resolvedor SAT</th></tr></thead>
@@ -130,7 +138,7 @@
   </div>
 
   <h2>Força bruta e o seu custo</h2>
-  <p>O algoritmo mais simples testa as valorações uma a uma, como uma tabela-verdade que para no primeiro modelo:</p>
+  <p>O algoritmo mais simples testa as valorações uma a uma, como girar os discos do cadeado em todas as combinações:</p>
   <pre><code>para i de 0 até 2ⁿ − 1:
     val ← valoração do número i         (Caso 11)
     se avaliar(fórmula, val): retorne "SAT", val
@@ -142,9 +150,15 @@ retorne "INSAT"</code></pre>
   </p>
 
   <h2>Por que SAT é difícil: NP-completude</h2>
-  <p>
-    SAT foi o primeiro problema provado <strong>NP-completo</strong>, pelo teorema de Cook–Levin (1971). Em palavras simples:
-  </p>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Se um amigo diz “a combinação é 0110”, vocês testam em um segundo: abriu ou não abriu. Mas descobrir a combinação
+      sozinhos pode exigir testar todas. <strong>Conferir é fácil; descobrir pode ser difícil.</strong> É exatamente
+      essa diferença que a teoria da complexidade estuda.
+    </p>
+  </div>
+  <p>SAT foi o primeiro problema provado <strong>NP-completo</strong>, pelo teorema de Cook–Levin (1971). Em palavras simples:</p>
   <ul>
     <li>SAT está em <strong>NP</strong>: se alguém entrega um modelo, vocês o verificam em tempo polinomial (basta avaliar).</li>
     <li>SAT é <strong>NP-difícil</strong>: qualquer problema de NP (escalonamento, coloração de grafos, Sudoku, roteamento...) pode ser traduzido para SAT em tempo polinomial.</li>
@@ -155,14 +169,28 @@ retorne "INSAT"</code></pre>
     MiniSat, Glucose e CaDiCaL) resolvem instâncias industriais com milhões de variáveis, porque a NP-completude fala do
     <strong>pior caso</strong>, e problemas reais costumam ter estrutura que permite podar a busca.
   </p>
+  <p>
+    Alguns tipos de fórmula são fáceis: se toda cláusula tem no máximo dois literais (<strong>2-SAT</strong>) ou é de Horn
+    (Caso 14), existe algoritmo de tempo linear. A dificuldade começa no <strong>3-SAT</strong>, com cláusulas de três
+    literais. Curiosidade: em fórmulas 3-SAT aleatórias, as instâncias mais difíceis aparecem quando há cerca de 4,26
+    cláusulas por variável; com menos, quase sempre há modelo; com mais, quase sempre não há.
+  </p>
 
   <h2>Podando a busca: as ideias do DPLL</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Quem resolve Sudoku a lápis não tenta todos os números em todas as casas. Primeiro preenche as casas
+      <strong>obrigatórias</strong> (só um número cabe ali). Quando não há mais casas obrigatórias, <strong>chuta</strong>
+      um número a lápis e continua. Se der errado, <strong>apaga</strong> até o chute e tenta outro. O DPLL faz exatamente isso.
+    </p>
+  </div>
   <p>
     O algoritmo DPLL (Davis, Putnam, Logemann e Loveland, 1962) trabalha com fórmulas em forma de cláusulas (Caso 13) e
     combina três ideias:
   </p>
   <ol>
-    <li><strong>Propagação unitária:</strong> se uma cláusula ficou com um só literal livre e os outros são falsos, esse literal é obrigatório.</li>
+    <li><strong>Propagação unitária:</strong> se uma cláusula ficou com um só literal livre e os outros são falsos, esse literal é obrigatório (a casa do Sudoku em que só cabe um número).</li>
     <li><strong>Literal puro:</strong> se uma variável só aparece com um sinal, podemos escolher o valor que satisfaz todas as suas ocorrências.</li>
     <li><strong>Decisão com retrocesso:</strong> se nada é forçado, escolhemos um valor (um “chute”); se surgir uma cláusula falsa, voltamos e tentamos o outro valor.</li>
   </ol>
@@ -172,6 +200,11 @@ retorne "INSAT"</code></pre>
     se todas estão satisfeitas:     retorne SAT
     escolha uma variável x livre
     retorne DPLL(..., x = V)  ou  DPLL(..., x = F)</code></pre>
+  <p>
+    Os resolvedores modernos acrescentam uma quarta ideia, o <strong>aprendizado de cláusulas</strong> (CDCL): quando
+    um chute dá errado, eles anotam uma cláusula nova que explica o erro, para nunca mais cair na mesma armadilha. É
+    como quem resolve Sudoku anotar “nesta linha, o 7 não pode ficar na esquerda”.
+  </p>
 
   <h2>O envelope do Detetive como fórmula</h2>
   <p>
@@ -199,8 +232,8 @@ M ∨ Z ∨ J   →  J       (M e Z são falsos)</code></pre>
   </div>
   <p>
     No jogo completo, com 6 suspeitos, 6 armas e 9 locais, as regras do envelope geram 3 cláusulas de “pelo menos um” e
-    15 + 15 + 36 = 66 cláusulas de “no máximo um” (uma para cada par de cartas do mesmo tipo). Para um resolvedor SAT,
-    isso é minúsculo.
+    15 + 15 + 36 = 66 cláusulas de “no máximo um” (uma para cada par de cartas do mesmo tipo: <code>6·5/2 = 15</code> e
+    <code>9·8/2 = 36</code>). Para um resolvedor SAT, isso é minúsculo.
   </p>
 
   <div class="callout">
@@ -228,7 +261,7 @@ M ∨ Z ∨ J   →  J       (M e Z são falsos)</code></pre>
 
   <div class="exercise">
     <span class="label">Exercício 2 · Contando modelos</span>
-    <p>No exemplo do envelope, retire a pista da Pá (<code>¬P</code>). Quais são os modelos?</p>
+    <p>No exemplo do envelope, retirem a pista da Pá (<code>¬P</code>). Quais são os modelos?</p>
     <details>
       <summary>Ver resposta</summary>
       <p>Com <code>¬F</code> e <code>¬M</code>, sobram as armas V e P e os suspeitos Z e J, com a restrição <code>¬Z ∨ ¬V</code>. Os modelos são (J, V), (J, P) e (Z, P). Três envelopes possíveis: ainda não dá para acusar.</p>
@@ -244,13 +277,26 @@ M ∨ Z ∨ J   →  J       (M e Z são falsos)</code></pre>
     </details>
   </div>
 
+  <div class="exercise">
+    <span class="label">Exercício 4 · DPLL com chute e retrocesso</span>
+    <p>Executem o DPLL em <code>{p, q}</code>, <code>{¬p, q}</code>, <code>{p, ¬q}</code>, <code>{¬p, ¬q}</code>. Não há unitárias nem literais puros no começo.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <pre><code>Decisão p = V:  {p,q} e {p,¬q} satisfeitas; sobram {q} e {¬q}
+   propagação: q = V, e então {¬q} fica falsa  → conflito
+Retrocesso, p = F:  sobram {q} e {¬q}
+   propagação: q = V, e então {¬q} fica falsa  → conflito
+Os dois ramos falharam: INSAT</code></pre>
+    </details>
+  </div>
+
   <div class="summary">
     <span class="label">Para guardar</span>
     <ul>
-      <li>SAT: existe valoração que torna a fórmula verdadeira?</li>
+      <li>SAT: existe valoração que torna a fórmula verdadeira? (Existe combinação que abre o cadeado?)</li>
       <li>Validade, equivalência e consequência se reduzem a SAT pela negação.</li>
-      <li>SAT é NP-completo: verificar é fácil, encontrar pode ser difícil no pior caso.</li>
-      <li>DPLL = propagação unitária + literal puro + decisão com retrocesso.</li>
+      <li>SAT é NP-completo: verificar é fácil, encontrar pode ser difícil no pior caso; 2-SAT e Horn são fáceis.</li>
+      <li>DPLL = propagação unitária + literal puro + decisão com retrocesso; CDCL acrescenta aprendizado.</li>
       <li>“Exatamente um” = uma cláusula de “pelo menos um” + uma cláusula por par para “no máximo um”.</li>
     </ul>
   </div>

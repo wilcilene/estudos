@@ -96,9 +96,10 @@
 <main id="conteudo" class="wrap-narrow"><article class="topic">
 
 <div class="goals">
-    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <span class="label">Ao final deste caso, vocês saberão</span>
     <ul>
       <li>definir consequência lógica e usar a notação <code>Γ ⊨ C</code>;</li>
+      <li>enxergar a consequência como inclusão entre conjuntos de modelos;</li>
       <li>testar a validade de um argumento pelo método das linhas críticas;</li>
       <li>relacionar consequência com tautologia e com insatisfatibilidade;</li>
       <li>reconhecer as falácias formais mais comuns e construir contraexemplos.</li>
@@ -106,13 +107,42 @@
   </div>
 
   <h2>O que é consequência lógica</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Uma peneira. Vocês despejam nela todas as linhas da tabela-verdade, todos os mundos possíveis. As premissas são os
+      furinhos da peneira: só passam os mundos em que todas as premissas são verdadeiras. Agora olhem o que caiu do
+      outro lado. Se a conclusão é verdadeira em <strong>todos</strong> os mundos que passaram, ela é consequência das
+      premissas. Se um único mundo passou com a conclusão falsa, não é.
+    </p>
+  </div>
   <p>
-    Seja <code>Γ = {P₁, P₂, ..., Pₙ}</code> um conjunto de premissas e <code>C</code> uma conclusão. Dizemos que
-    <code>C</code> é <strong>consequência lógica</strong> de <code>Γ</code>, e escrevemos <code>Γ ⊨ C</code>, quando
+    Com palavras de adulto: seja <code>Γ = {P₁, P₂, ..., Pₙ}</code> um conjunto de premissas e <code>C</code> uma conclusão.
+    Dizemos que <code>C</code> é <strong>consequência lógica</strong> de <code>Γ</code>, e escrevemos <code>Γ ⊨ C</code>, quando
     <strong>toda valoração que torna todas as premissas verdadeiras também torna <code>C</code> verdadeira</strong>.
     Dito de outro jeito: não existe cenário em que as premissas sejam verdadeiras e a conclusão falsa.
   </p>
   <p>Um argumento é <strong>válido</strong> exatamente quando sua conclusão é consequência lógica das premissas.</p>
+
+  <h2>Consequência como inclusão de conjuntos</h2>
+  <p>
+    Chamem de <code>Mod(Γ)</code> o conjunto das valorações que satisfazem todas as premissas (os mundos que passam pela
+    peneira) e de <code>Mod(C)</code> o conjunto das valorações em que <code>C</code> é verdadeira. Então:
+  </p>
+  <pre><code>Γ ⊨ C    exatamente quando    Mod(Γ) ⊆ Mod(C)</code></pre>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Dois círculos desenhados no chão do pátio: um chamado “mundos das pistas” e outro chamado “mundos em que o Mordomo é
+      culpado”. A acusação é segura se o primeiro círculo estiver inteirinho dentro do segundo. Se um pedacinho do
+      primeiro ficar de fora, esse pedacinho é um contraexemplo.
+    </p>
+  </div>
+  <p>
+    Essa visão explica de uma vez duas propriedades que veremos adiante: acrescentar premissas só encolhe
+    <code>Mod(Γ)</code> (monotonicidade), e se <code>Mod(Γ)</code> é vazio, ele está contido em qualquer conjunto
+    (premissas inconsistentes provam qualquer coisa).
+  </p>
 
   <h2>Três formas de dizer a mesma coisa</h2>
   <p>Estas três afirmações são equivalentes, e cada uma leva a um método diferente de verificação:</p>
@@ -123,15 +153,21 @@
   </ol>
   <p>
     A terceira forma é a mais importante para a computação. Ela diz que, para provar uma conclusão, basta mostrar que
-    as premissas e a <em>negação</em> da conclusão não podem conviver. Essa é a ideia da <strong>refutação</strong>,
-    que vai sustentar a resolução nos Casos 15 a 20.
+    as premissas e a <em>negação</em> da conclusão não podem conviver. Na peneira: coloquem também o furinho “a conclusão
+    é falsa”; se nada passar, a conclusão estava garantida. Essa é a ideia da <strong>refutação</strong>, que sustenta a
+    resolução nos Casos 15 a 20.
+  </p>
+  <p>
+    Uma quarta forma, muito útil nas provas: <code>Γ ∪ {A} ⊨ B</code> se e somente se <code>Γ ⊨ A → B</code>. Ela se chama
+    <strong>teorema da dedução semântico</strong> e justifica a estratégia de “supor <code>A</code> para provar
+    <code>A → B</code>” que aparece no Caso 10.
   </p>
 
   <h2>O método das linhas críticas</h2>
   <p>Para testar um argumento pela tabela-verdade:</p>
   <ol>
     <li>Montem a tabela com uma coluna para cada premissa e uma para a conclusão.</li>
-    <li>Marquem as <strong>linhas críticas</strong>: aquelas em que todas as premissas são V.</li>
+    <li>Marquem as <strong>linhas críticas</strong>: aquelas em que todas as premissas são V (os mundos que passam pela peneira).</li>
     <li>Se a conclusão for V em todas as linhas críticas, o argumento é válido. Se houver uma linha crítica com conclusão F, essa linha é um <strong>contraexemplo</strong>.</li>
   </ol>
   <div class="evidence-box">
@@ -162,9 +198,16 @@
       </tbody>
     </table>
   </div>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      “Todo cachorro tem quatro patas. Meu gato tem quatro patas. Logo, meu gato é um cachorro.” Qualquer criança ri
+      dessa conclusão. A forma é exatamente a da afirmação do consequente; com o conteúdo trocado, o defeito fica óbvio.
+    </p>
+  </div>
   <p>
-    Um jeito prático de desmascarar uma falácia é <strong>trocar o conteúdo</strong> mantendo a forma: “se chove, a rua
-    fica molhada; a rua está molhada; logo, choveu”. Basta lembrar do caminhão-pipa para ver que a forma não garante nada.
+    Esse é o jeito prático de desmascarar uma falácia: <strong>trocar o conteúdo</strong> mantendo a forma. “Se chove, a
+    rua fica molhada; a rua está molhada; logo, choveu.” Basta lembrar do caminhão-pipa para ver que a forma não garante nada.
   </p>
   <div class="callout">
     <span class="label">Erro comum em depuração</span>
@@ -173,8 +216,8 @@
 
   <h2>Duas propriedades úteis</h2>
   <ul>
-    <li><strong>Monotonicidade:</strong> se <code>Γ ⊨ C</code>, então acrescentar premissas não estraga a conclusão: <code>Γ ∪ {D} ⊨ C</code>. Uma acusação certa continua certa quando vocês descobrem mais pistas.</li>
-    <li><strong>Premissas inconsistentes provam qualquer coisa:</strong> se <code>Γ</code> é insatisfatível, não há linha crítica, e então <code>Γ ⊨ C</code> para qualquer <code>C</code>. Por isso uma contradição nas anotações é desastrosa: ela “autoriza” qualquer acusação.</li>
+    <li><strong>Monotonicidade:</strong> se <code>Γ ⊨ C</code>, então acrescentar premissas não estraga a conclusão: <code>Γ ∪ {D} ⊨ C</code>. Mais furinhos na peneira só deixam passar menos mundos. Uma acusação certa continua certa quando vocês descobrem mais pistas.</li>
+    <li><strong>Premissas inconsistentes provam qualquer coisa:</strong> se <code>Γ</code> é insatisfatível, nenhum mundo passa pela peneira, não há linha crítica, e então <code>Γ ⊨ C</code> para qualquer <code>C</code>. Por isso uma contradição nas anotações é desastrosa: ela “autoriza” qualquer acusação.</li>
   </ul>
 
   <div class="detetive">
@@ -206,19 +249,29 @@
   </div>
 
   <div class="exercise">
-    <span class="label">Exercício 3 · Encontre o contraexemplo</span>
+    <span class="label">Exercício 3 · Encontrem o contraexemplo</span>
     <p>Mostrem que <code>p → q, q → r ⊭ r → p</code>.</p>
     <details>
       <summary>Ver resposta</summary>
-      <p>Tome <code>p = F</code>, <code>q = F</code>, <code>r = V</code>: <code>p → q = V</code>, <code>q → r = V</code>, mas <code>r → p = V → F = F</code>. Premissas verdadeiras e conclusão falsa: inválido.</p>
+      <p>Tomem <code>p = F</code>, <code>q = F</code>, <code>r = V</code>: <code>p → q = V</code>, <code>q → r = V</code>, mas <code>r → p = V → F = F</code>. Premissas verdadeiras e conclusão falsa: inválido.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 4 · Contando modelos</span>
+    <p>Com as variáveis <code>p, q</code>, listem <code>Mod({p ∨ q})</code> e <code>Mod(q)</code>. Vale <code>p ∨ q ⊨ q</code>?</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><code>Mod(p ∨ q) = {VV, VF, FV}</code> e <code>Mod(q) = {VV, FV}</code>. A valoração <code>VF</code> está no primeiro e não no segundo, então a inclusão falha: <code>p ∨ q ⊭ q</code>, e <code>VF</code> é o contraexemplo.</p>
     </details>
   </div>
 
   <div class="summary">
     <span class="label">Para guardar</span>
     <ul>
-      <li><code>Γ ⊨ C</code>: em toda valoração em que <code>Γ</code> é verdadeiro, <code>C</code> também é.</li>
+      <li><code>Γ ⊨ C</code>: em toda valoração em que <code>Γ</code> é verdadeiro, <code>C</code> também é; ou seja, <code>Mod(Γ) ⊆ Mod(C)</code>.</li>
       <li><code>Γ ⊨ C</code> ⇔ <code>(∧Γ) → C</code> é tautologia ⇔ <code>Γ ∪ {¬C}</code> é insatisfatível.</li>
+      <li><code>Γ ∪ {A} ⊨ B</code> ⇔ <code>Γ ⊨ A → B</code>.</li>
       <li>Um único contraexemplo derruba um argumento.</li>
       <li>Afirmação do consequente e negação do antecedente são falácias.</li>
     </ul>

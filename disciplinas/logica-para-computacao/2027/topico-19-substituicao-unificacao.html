@@ -96,7 +96,7 @@
 <main id="conteudo" class="wrap-narrow"><article class="topic">
 
 <div class="goals">
-    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <span class="label">Ao final deste caso, vocês saberão</span>
     <ul>
       <li>aplicar e compor substituições, respeitando a aplicação simultânea;</li>
       <li>definir unificador e unificador mais geral (MGU);</li>
@@ -107,6 +107,10 @@
   </div>
 
   <h2>Substituição</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>Um formulário com lacunas: “A jogadora ____ tem a carta ____.” Substituir é preencher as lacunas. E a aplicação é <strong>simultânea</strong>: vocês leem o formulário original e preenchem todas as lacunas de uma vez; o que acabou de ser escrito numa lacuna não é preenchido de novo.</p>
+  </div>
   <p>
     Uma <strong>substituição</strong> <code>σ = {x₁/t₁, ..., xₙ/tₙ}</code> troca cada variável <code>xᵢ</code> pelo termo
     <code>tᵢ</code>. Escrevemos <code>φσ</code> para o resultado de aplicar <code>σ</code> em <code>φ</code>. Com
@@ -137,6 +141,10 @@ Conferindo em P(x, y):   P(x, y)σ = P(f(y), y)   e depois   θ  →  P(f(a), a)
   </div>
 
   <h2>Unificação e unificador mais geral</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>Dois formulários parcialmente preenchidos precisam ficar idênticos. Vocês podem preencher lacunas, mas não podem apagar o que já está escrito. Unificar é achar um preenchimento que funcione; o <strong>unificador mais geral</strong> é o preenchimento mais “preguiçoso”: só escreve o estritamente necessário e deixa o resto em branco para depois.</p>
+  </div>
   <p>
     Um <strong>unificador</strong> de duas expressões é uma substituição que as torna <strong>idênticas</strong>. Para
     <code>P(x, y)</code> e <code>P(a, z)</code>, estes são unificadores:
@@ -184,6 +192,10 @@ MGU: {j/j1, k/aDireita(j1), c/Faca}</code></pre>
   </div>
 
   <h2>Quando a unificação falha</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>Dois motivos fazem a unificação desistir. O primeiro é um conflito, como exigir que o mesmo campo diga “Mordomo” e “Jardineiro”. O segundo é pedir uma caixa que contenha a si mesma: para guardar a caixa dentro dela, a caixa teria de ser maior do que ela própria. É isso que a verificação de ocorrência detecta.</p>
+  </div>
   <ul>
     <li><strong>Conflito:</strong> <code>EsteveEm(Mordomo, Biblioteca)</code> e <code>EsteveEm(Jardineiro, y)</code>. A primeira equação é <code>Mordomo = Jardineiro</code>, duas constantes diferentes. Nenhuma substituição resolve.</li>
     <li><strong>Ciclo:</strong> <code>P(x, x)</code> e <code>P(y, aDireita(y))</code>. Depois de <code>x/y</code>, sobra <code>y = aDireita(y)</code>: <code>y</code> teria de ser a jogadora à direita de si mesma, um termo infinito <code>aDireita(aDireita(...))</code>. A verificação de ocorrência barra isso.</li>

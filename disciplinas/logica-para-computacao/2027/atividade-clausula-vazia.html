@@ -173,10 +173,9 @@ textarea{ min-height: 7rem; resize: vertical; }
 .ficha-desaparecida dl{ display:grid; grid-template-columns: auto 1fr; gap: 0.25rem 0.85rem; margin: 0.75rem 0 0; font-size: 0.94rem; }
 .ficha-desaparecida dt{ font-family:"IBM Plex Mono", monospace; font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); padding-top: 0.15rem; }
 .ficha-desaparecida dd{ margin:0; }
-.camera{ margin: 1.25rem auto; max-width: 620px; }
+.camera{ margin: 1.25rem auto; max-width: 760px; }
 .camera-quadro{ position:relative; border-radius: 6px; overflow:hidden; border: 3px solid var(--ink); }
-.camera-quadro img{ display:block; width:100%; height:auto; filter: grayscale(0.85) contrast(1.1) brightness(0.95); }
-.camera-rec{ position:absolute; left: 0.6rem; top: 0.5rem; font-family:"IBM Plex Mono", monospace; font-size: 0.72rem; color: #fff; background: rgba(0,0,0,0.6); padding: 0.15rem 0.45rem; border-radius: 4px; }
+.camera-quadro img{ display:block; width:100%; height:auto; }
 .camera figcaption{ font-size: 0.88rem; color: var(--ink-soft); margin-top: 0.4rem; text-align:center; }
 
 /* Gabarito */
@@ -269,15 +268,16 @@ textarea{ min-height: 7rem; resize: vertical; }
       outras se contradizem, e alguém mente ou se engana.
     </p>
     <figure class="ficha-desaparecida">
-      <img src="assets/img/estrela-retrato.jpg" width="640" height="640" alt="Estrela: gata branca de rosto, orelhas e patas cor de creme, olhos semicerrados, tomando sol junto a um muro." decoding="async">
+      <img src="assets/img/estrela-retrato.jpg" width="600" height="800" alt="Estrela: gata branca com rosto, orelhas e cauda cor de creme e olhos azuis, sentada numa galeria do museu, usando uma bandana azul com os dizeres “Ronda do Museu”." decoding="async">
       <figcaption>
         <span class="selo">DESAPARECIDA</span>
         <dl>
           <dt>Nome</dt><dd>Estrela</dd>
           <dt>Espécie</dt><dd>Gata</dd>
-          <dt>Pelagem</dt><dd>Branca, com rosto, orelhas, patas e cauda cor de creme</dd>
+          <dt>Pelagem</dt><dd>Branca, com rosto, orelhas, patas e cauda cor de creme; olhos azuis</dd>
+          <dt>Sinal particular</dt><dd>Bandana azul da “Ronda do Museu”</dd>
           <dt>Endereço</dt><dd>O museu inteiro, que ela reivindicou como lar</dd>
-          <dt>Vista por último</dt><dd>Corredor das galerias, durante a noite</dd>
+          <dt>Vista por último</dt><dd>Hall principal, às 21h14 (câmera 03)</dd>
         </dl>
       </figcaption>
     </figure>
@@ -376,13 +376,12 @@ textarea{ min-height: 7rem; resize: vertical; }
   <!-- 5. EXEMPLO -->
   <section aria-labelledby="exemplo">
     <h2 id="exemplo"><span class="num" aria-hidden="true">04</span> Exemplo resolvido: “O desaparecimento da Estrela”</h2>
-    <p>Na manhã seguinte, a Estrela não apareceu para o café na bilheteria. A câmera do corredor registrou a gata pela última vez durante a noite, e o dossiê traz três pistas:</p>
+    <p>Na manhã seguinte, a Estrela não apareceu para o café na bilheteria. A câmera 03, no hall principal, registrou a gata pela última vez às 21h14, e o dossiê traz três pistas:</p>
     <figure class="camera">
       <div class="camera-quadro">
-        <img src="assets/img/estrela-camera.jpg" width="800" height="530" alt="Imagem de câmera de segurança: a gata Estrela, branca com cauda cor de creme, caminha pelo piso do corredor." loading="lazy" decoding="async">
-        <span class="camera-rec" aria-hidden="true">● REC · CAM 03 · CORREDOR · 23:47</span>
+        <img src="assets/img/estrela-camera.jpg" width="1000" height="750" alt="Imagem em preto e branco da câmera 03 do museu, no hall principal, às 21h14: a gata Estrela caminha pelo piso entre um busto de pedra e uma vitrine de vasos." loading="lazy" decoding="async">
       </div>
-      <figcaption>Último registro da câmera do corredor: a Estrela atravessa as galerias, como em toda ronda noturna.</figcaption>
+      <figcaption>Último registro da câmera 03: a Estrela atravessa o hall principal, como em toda ronda noturna.</figcaption>
     </figure>
 
     <div class="grade">

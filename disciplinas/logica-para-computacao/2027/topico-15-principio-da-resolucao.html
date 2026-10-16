@@ -96,7 +96,7 @@
 <main id="conteudo" class="wrap-narrow"><article class="topic">
 
 <div class="goals">
-    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <span class="label">Ao final deste caso, vocês saberão</span>
     <ul>
       <li>aplicar a regra de resolução a duas cláusulas e calcular a resolvente;</li>
       <li>provar que a regra é correta, raciocinando por casos;</li>
@@ -107,6 +107,11 @@
   </div>
 
   <h2>A regra de resolução</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>Duas fichas de pistas sobre a mesa. Uma diz “Mordomo <em>ou</em> Jardineiro”; a outra diz “<em>não</em> Mordomo <em>ou</em> havia lama”. O Mordomo aparece afirmado numa e negado na outra, como um <code>+1</code> e um <code>−1</code>: somados, viram zero e somem. Tudo o que sobrou nas duas fichas vai para uma ficha nova: “Jardineiro <em>ou</em> havia lama”.</p>
+    <p>A regra é só isso: <strong>juntar e cancelar um par</strong>. Um par por vez, sempre.</p>
+  </div>
   <p>
     Nos Casos 09 e 10, vocês trabalharam com uma caixa de ferramentas cheia de regras. A resolução faz o caminho oposto:
     <strong>uma única regra</strong>, que trabalha sobre cláusulas (Caso 14). Se uma cláusula contém um literal
@@ -122,6 +127,10 @@
   </p>
 
   <h2>Por que a regra é correta</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>Joguem uma moeda para decidir o valor de <code>p</code>. Se der cara (<code>p</code> verdadeiro), a ficha que tem <code>¬p</code> perdeu essa bolinha e precisa de outra verdadeira, que só pode estar em <code>B</code>. Se der coroa (<code>p</code> falso), é a outra ficha que precisa de uma bolinha em <code>A</code>. Qualquer que seja a moeda, sobra uma bolinha verdadeira em <code>A ∪ B</code>.</p>
+  </div>
   <p>
     Quero mostrar que toda valoração que satisfaz as duas cláusulas também satisfaz <code>A ∪ B</code>. Vejam que é uma
     prova por casos (Caso 10) sobre o valor de <code>p</code>:
@@ -156,7 +165,7 @@
 
   <h2>Resolvendo cada caso no Detetive</h2>
   <p>
-    Agora vou dar uma situação de jogo para cada linha da tabela. O roteiro é sempre o mesmo, e é ele que eu quero que
+    Agora eu dou uma situação de jogo para cada linha da tabela. O roteiro é sempre o mesmo, e é ele que eu quero que
     vocês treinem: (1) traduzir a pista para fórmula; (2) eliminar o <code>→</code> com <code>A → B ≡ ¬A ∨ B</code> e
     escrever a cláusula; (3) achar <strong>um</strong> par de literais complementares; (4) juntar o que sobrou das duas
     cláusulas.
@@ -228,6 +237,11 @@
   </div>
 
   <h2>Refutação: provando por contradição</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>Para provar que o irmão comeu o chocolate, vocês contam a história ao contrário: “finjam que ele <em>não</em> comeu”. Juntam essa versão com as pistas (o papel no bolso, a boca suja) e mostram que a história não fecha. Se fingir o contrário leva a um absurdo, a afirmação original estava certa.</p>
+    <p>Na resolução, “a história não fecha” tem uma cara bem concreta: aparece a ficha em branco, <code>□</code>.</p>
+  </div>
   <p>
     A resolução sozinha não deriva qualquer consequência. De <code>{p}</code>, por exemplo, ela nunca produz
     <code>{p, q}</code>, embora <code>p ⊨ p ∨ q</code>. Ela é usada de outro jeito, que vocês já conhecem desde a redução
@@ -262,6 +276,20 @@
 9. □              resolução de 8 e 4 sobre K</code></pre>
     <p>Chegamos à cláusula vazia. Supor que o crime <em>não</em> foi na Sala de Estar é incompatível com as pistas; portanto, foi na Sala de Estar.</p>
   </div>
+
+  <h2>Por que a refutação sempre funciona: a ideia da prova</h2>
+  <p>
+    A completude refutacional parece mágica, mas a ideia da prova cabe numa árvore. Desenhem a árvore de todas as
+    valorações (Caso 05): cada nível decide uma variável. Em cada nó, olhem se alguma cláusula do conjunto já ficou
+    <strong>falsa</strong> só com as decisões tomadas até ali. Se ficou, cortem a árvore nesse nó: é um <strong>nó de falha</strong>.
+  </p>
+  <ol>
+    <li>Se o conjunto é insatisfatível, todo caminho termina num nó de falha (senão, o caminho seria um modelo).</li>
+    <li>Peguem um nó que não é de falha, mas cujos dois filhos são. O filho em que <code>p = V</code> falsifica uma cláusula que precisa conter <code>¬p</code> (senão ela já seria falsa no pai); o filho em que <code>p = F</code> falsifica uma cláusula que contém <code>p</code>.</li>
+    <li>A resolvente dessas duas cláusulas sobre <code>p</code> só tem literais já falsos no pai. Acrescentando-a, o pai vira nó de falha, e a árvore encolhe.</li>
+    <li>Repetindo, a árvore encolhe até a raiz virar nó de falha. Na raiz nada foi decidido, então a única cláusula falsa ali é a vazia: <code>□</code>.</li>
+  </ol>
+  <p>Essa é a prova por <strong>árvores semânticas</strong>, e ela mostra que a resolução faz, de baixo para cima, o mesmo trabalho que a tabela-verdade faz de cima para baixo.</p>
 
   <div class="callout">
     <span class="label">Erro comum</span>

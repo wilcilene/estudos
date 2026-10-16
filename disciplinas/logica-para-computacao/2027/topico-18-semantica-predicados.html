@@ -96,7 +96,7 @@
 <main id="conteudo" class="wrap-narrow"><article class="topic">
 
 <div class="goals">
-    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <span class="label">Ao final deste caso, vocês saberão</span>
     <ul>
       <li>definir estrutura (domínio + interpretação) e atribuição de variáveis;</li>
       <li>avaliar fórmulas quantificadas pela definição recursiva de satisfação;</li>
@@ -107,6 +107,10 @@
   </div>
 
   <h2>Do valor-verdade à estrutura</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>Uma peça de teatro. O roteiro diz: “o vilão entra e pega a espada”. O roteiro é a fórmula. Mas a frase só fica verdadeira ou falsa numa apresentação concreta: quem faz o vilão, quais objetos estão no palco, quem segura o quê. Esse elenco com cenário é a <strong>estrutura</strong>. Com outro elenco, a mesma fala pode virar falsa.</p>
+  </div>
   <p>
     Na lógica proposicional, uma valoração (uma linha da tabela) bastava para dar valor a qualquer fórmula. Em primeira
     ordem, eu preciso de mais coisa: de quais objetos estou falando e o que cada símbolo significa. Isso se chama uma
@@ -122,6 +126,10 @@
   </p>
 
   <h2>A definição de satisfação</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>A atribuição de variáveis funciona como um crachá provisório. Quando a fórmula diz <code>∀x</code>, cada objeto do domínio usa o crachá “x” por um momento, e a fórmula é testada com ele. <code>∀</code> exige que <em>todos</em> passem no teste com o crachá; <code>∃</code> exige que pelo menos <em>um</em> passe.</p>
+  </div>
   <p>A notação <code>𝓜, s ⊨ φ</code> lê-se “<code>φ</code> é verdadeira em <code>𝓜</code> com a atribuição <code>s</code>”. A definição segue a estrutura da fórmula, como a função <code>avaliar</code> do Caso 11:</p>
   <div class="table-wrap">
     <table class="tbl">
@@ -197,6 +205,10 @@ print(all((j not in jogadora) or any((j, c) in tem for c in D) for j in D))   # 
   </div>
 
   <h2>Validade, contramodelos e indecidibilidade</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>Procurar uma agulha num palheiro infinito. Se a agulha existe, um dia vocês a encontram, por mais que demore. Se ela não existe, vocês nunca sabem a hora de parar: talvez esteja no próximo punhado de palha. Provar validade em primeira ordem é assim.</p>
+  </div>
   <p>
     Os conceitos do Caso 06 voltam com estruturas no lugar de linhas: uma sentença é <strong>válida</strong> se é
     verdadeira em <strong>toda</strong> estrutura, <strong>satisfatível</strong> se é verdadeira em alguma, e

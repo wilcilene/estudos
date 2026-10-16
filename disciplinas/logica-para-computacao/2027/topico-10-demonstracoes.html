@@ -96,16 +96,25 @@
 <main id="conteudo" class="wrap-narrow"><article class="topic">
 
 <div class="goals">
-    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <span class="label">Ao final deste caso, vocês saberão</span>
     <ul>
       <li>escrever uma demonstração formal no formato de linhas numeradas e justificadas;</li>
       <li>usar quatro estratégias: prova direta, prova condicional, redução ao absurdo e prova por casos;</li>
       <li>trabalhar com hipóteses temporárias e saber quando elas são descartadas;</li>
-      <li>escolher a estratégia certa olhando para o formato da conclusão.</li>
+      <li>escolher a estratégia certa olhando para o formato da conclusão;</li>
+      <li>reconhecer de onde vem esse estilo de prova (dedução natural) e onde ele é usado hoje.</li>
     </ul>
   </div>
 
   <h2>O formato de uma demonstração</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Uma receita de bolo em que cada passo vem com o motivo: “3. Junte a farinha (porque a receita da vovó manda)”,
+      “4. Leve ao forno (porque a massa já está pronta, passo 3)”. Qualquer pessoa consegue conferir se a receita foi
+      seguida sem precisar provar o bolo. Uma demonstração é isso: cada linha diz <em>o que</em> e <em>por quê</em>.
+    </p>
+  </div>
   <p>Uma <strong>demonstração</strong> (ou prova) formal de <code>C</code> a partir de <code>Γ</code> é uma lista numerada em que cada linha é:</p>
   <ul>
     <li>uma premissa de <code>Γ</code>; ou</li>
@@ -115,11 +124,12 @@
   <p>
     A última linha é <code>C</code>, fora de qualquer hipótese ainda aberta. Eu insisto na justificativa de cada linha
     porque é ela que torna a prova <strong>verificável</strong>: qualquer colega, ou qualquer programa, pode conferir linha
-    por linha sem precisar confiar em quem escreveu.
+    por linha sem precisar confiar em quem escreveu. Esse estilo se chama <strong>dedução natural</strong> e foi proposto
+    por Gerhard Gentzen em 1934, justamente para imitar o jeito como as pessoas raciocinam.
   </p>
 
   <h2>Estratégia 1: prova direta</h2>
-  <p>Aplicar regras às premissas até chegar à conclusão. É o que fizemos no Caso 09.</p>
+  <p>Aplicar regras às premissas até chegar à conclusão, como seguir uma trilha de migalhas. É o que fizemos no Caso 09.</p>
   <div class="evidence-box">
     <span class="label">Prova direta</span>
     <p>Premissas: <code>P → M</code>, <code>M → C</code>, <code>P</code>. Objetivo: <code>C</code>.</p>
@@ -131,10 +141,20 @@
   </div>
 
   <h2>Estratégia 2: prova condicional (PC)</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Uma brincadeira de “faz de conta”. Uma criança diz: “Faz de conta que eu sou um pirata. Então eu tenho um navio.
+      Então eu posso navegar.” Quando a brincadeira acaba, ela não é pirata, mas aprendeu uma coisa verdadeira:
+      “<strong>se</strong> eu fosse pirata, <strong>então</strong> poderia navegar”. O que aconteceu dentro do faz de conta
+      só vale lá dentro; o que sai de lá é o “se... então”.
+    </p>
+  </div>
   <p>
     Quando a conclusão é um condicional <code>A → B</code>, vocês podem <strong>supor <code>A</code></strong> como hipótese
-    temporária e tentar derivar <code>B</code>. Conseguindo, fecham a hipótese e concluem <code>A → B</code>. O que foi
-    derivado dentro da hipótese só pode ser usado lá dentro; eu marco essas linhas com uma barra vertical.
+    temporária e tentar derivar <code>B</code>. Conseguindo, fecham a hipótese (dizemos que ela foi
+    <strong>descartada</strong>) e concluem <code>A → B</code>. O que foi derivado dentro da hipótese só pode ser usado lá
+    dentro; eu marco essas linhas com uma barra vertical. A PC é a versão sintática do teorema da dedução visto no Caso 08.
   </p>
   <div class="evidence-box">
     <span class="label">O bônus da Revisão Integrada</span>
@@ -150,6 +170,13 @@
   </div>
 
   <h2>Estratégia 3: redução ao absurdo (RAA)</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Um irmão mais novo jura que não comeu o chocolate. A irmã pensa: “Se ele não comeu, por que a boca está suja de
+      chocolate e o papel está no bolso dele? Não faz sentido!” Supor que ele não comeu leva a um absurdo; então ele comeu.
+    </p>
+  </div>
   <p>
     Para provar <code>A</code>, supõe-se <code>¬A</code> e deriva-se uma contradição (<code>B</code> e <code>¬B</code>).
     Como as premissas não podem conviver com <code>¬A</code>, conclui-se <code>A</code>. Essa é a estratégia mais poderosa,
@@ -169,6 +196,13 @@
   </div>
 
   <h2>Estratégia 4: prova por casos</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      “Amanhã, ou eu vou de ônibus ou de bicicleta. Se for de ônibus, chego às 8h. Se for de bicicleta, também chego às
+      8h. Então, de um jeito ou de outro, chego às 8h.” Não importa qual caso acontece: a conclusão sai nos dois.
+    </p>
+  </div>
   <p>
     Quando vocês têm uma disjunção <code>A ∨ B</code>, provem a conclusão supondo <code>A</code> e, separadamente, supondo
     <code>B</code>. Se ela sai nos dois casos, sai sempre. É o dilema construtivo transformado em estratégia.
@@ -195,20 +229,23 @@
         <tr><td>um condicional <code>A → B</code></td><td>prova condicional: suponham <code>A</code></td></tr>
         <tr><td>uma negação <code>¬A</code></td><td>redução ao absurdo: suponham <code>A</code> e busquem contradição</td></tr>
         <tr><td>uma disjunção entre as premissas</td><td>prova por casos</td></tr>
+        <tr><td>uma conjunção <code>A ∧ B</code></td><td>provem <code>A</code> e <code>B</code> separadamente e juntem com Cj</td></tr>
         <tr><td>uma variável isolada e nada parece funcionar</td><td>redução ao absurdo com <code>¬A</code></td></tr>
       </tbody>
     </table>
   </div>
   <div class="callout">
     <span class="label">Erro comum</span>
-    <p>Usar fora da hipótese uma linha derivada dentro dela. Na prova por casos acima, a linha 5 (<code>c</code>) vale apenas no caso 1. Só a linha 9, depois de fechar os dois casos, vale de verdade.</p>
+    <p>Usar fora da hipótese uma linha derivada dentro dela. Na prova por casos acima, a linha 5 (<code>c</code>) vale apenas no caso 1. Só a linha 9, depois de fechar os dois casos, vale de verdade. É o “faz de conta” vazando para a vida real.</p>
   </div>
 
   <h2>Por que formalizar</h2>
   <p>
     Demonstrações formais são a base dos <strong>assistentes de prova</strong> (Coq, Lean, Isabelle), usados para verificar
     compiladores, sistemas operacionais e algoritmos criptográficos. Nesses sistemas, a prova é um programa, e o
-    computador confere cada linha. É a versão industrial do que vocês estão fazendo à mão.
+    computador confere cada linha. Existe até uma correspondência precisa entre provas e programas (a
+    <strong>correspondência de Curry–Howard</strong>): a prova condicional corresponde a escrever uma função, e o modus
+    ponens corresponde a chamar essa função. É a versão industrial do que vocês fazem à mão.
   </p>
 
   <div class="detetive">
@@ -246,6 +283,7 @@
 5. | | r              MP 2, 4
 6. | p → r            PC 3–5
 7. (q → r) → (p → r)  PC 2–6</code></pre>
+      <p>Reparem nas duas brincadeiras de faz de conta, uma dentro da outra: elas fecham na ordem inversa em que abriram, como parênteses.</p>
     </details>
   </div>
 
@@ -267,12 +305,26 @@
     </details>
   </div>
 
+  <div class="exercise">
+    <span class="label">Exercício 4 · Escolham a estratégia</span>
+    <p>Para provar <code>¬(p ∧ ¬p)</code> sem premissas, que estratégia vocês usam? Escrevam a prova.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>A conclusão é uma negação, então redução ao absurdo:</p>
+      <pre><code>1. | p ∧ ¬p      hipótese (RAA)
+2. | p           Simp 1
+3. | ¬p          Simp 1
+4. | p ∧ ¬p      Cj 2, 3   (contradição)
+5. ¬(p ∧ ¬p)     RAA 1–4</code></pre>
+    </details>
+  </div>
+
   <div class="summary">
     <span class="label">Para guardar</span>
     <ul>
       <li>Cada linha de uma prova é premissa, hipótese ou resultado de uma regra, sempre justificada.</li>
-      <li>Para <code>A → B</code>: suponham <code>A</code>. Para <code>¬A</code>: suponham <code>A</code> e busquem contradição.</li>
-      <li>Linhas dentro de uma hipótese só valem enquanto ela está aberta.</li>
+      <li>Para <code>A → B</code>: suponham <code>A</code> (faz de conta). Para <code>¬A</code>: suponham <code>A</code> e busquem contradição.</li>
+      <li>Linhas dentro de uma hipótese só valem enquanto ela está aberta; hipóteses fecham na ordem inversa.</li>
       <li>Redução ao absurdo é a mãe da refutação por resolução.</li>
     </ul>
   </div>

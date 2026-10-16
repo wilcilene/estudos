@@ -96,7 +96,7 @@
 <main id="conteudo" class="wrap-narrow"><article class="topic">
 
 <div class="goals">
-    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <span class="label">Ao final deste caso, vocês saberão</span>
     <ul>
       <li>descrever o algoritmo de resolução por saturação e implementá-lo em poucas linhas;</li>
       <li>explicar por que ele sempre termina na lógica proposicional e quanto ele pode custar;</li>
@@ -106,6 +106,10 @@
   </div>
 
   <h2>A ideia: saturar</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>Uma criança com uma pilha de fichas que decide cruzar <em>todas</em> com <em>todas</em>. Cada cruzamento que dá uma ficha nova vai para a pilha. Ela para quando aparece uma ficha em branco (a contradição) ou quando uma rodada inteira só produz fichas que já estavam na pilha. Não é esperto, mas é garantido.</p>
+  </div>
   <p>
     No Caso 15, eu escolhi com cuidado quais cláusulas resolver. Um computador não tem essa intuição, então a estratégia
     mais simples é a força: resolver <strong>todos os pares</strong> possíveis, acrescentar as resolventes ao conjunto e
@@ -181,6 +185,10 @@ Resultado: SAT, saturado sem □</code></pre>
   </div>
 
   <h2>Terminação e custo</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>Um álbum de figurinhas com um número finito de figurinhas diferentes. Mesmo comprando pacotes para sempre, uma hora o álbum completa e só vêm repetidas. Com <code>n</code> variáveis, o “álbum” de cláusulas possíveis tem <code>3ⁿ</code> figurinhas: por isso a saturação sempre termina. O problema é que o álbum pode ser gigantesco.</p>
+  </div>
   <p>
     Com <code>n</code> variáveis, cada variável pode aparecer numa cláusula positiva, negativa ou ausente (cláusulas
     tautológicas são descartadas). Então existem no máximo <strong>3ⁿ</strong> cláusulas diferentes. Como o conjunto só
@@ -196,6 +204,10 @@ Resultado: SAT, saturado sem □</code></pre>
   </p>
 
   <h2>Estratégias que cortam a busca</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>Quando vocês perdem a chave de casa, não reviram a casa inteira em ordem alfabética: começam pelos lugares onde costumam deixá-la e pelas coisas pequenas (bolsos, mesa da entrada). As estratégias de resolução fazem o mesmo: começam pela pergunta (conjunto de suporte) e pelas fichas pequenas (preferência unitária).</p>
+  </div>
   <div class="table-wrap">
     <table class="tbl">
       <thead><tr><th>Estratégia</th><th>Ideia</th><th>Por que ajuda</th></tr></thead>

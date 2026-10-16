@@ -96,45 +96,75 @@
 <main id="conteudo" class="wrap-narrow"><article class="topic">
 
 <div class="goals">
-    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <span class="label">Ao final deste caso, vocês saberão</span>
     <ul>
       <li>separar <strong>sintaxe</strong> (como se escreve) de <strong>semântica</strong> (o que significa);</li>
       <li>aplicar a definição indutiva de fórmula bem formada (FBF) para aceitar ou rejeitar expressões;</li>
       <li>identificar o conectivo principal e listar as subfórmulas de uma fórmula;</li>
       <li>usar as convenções de precedência para escrever com menos parênteses sem perder precisão;</li>
+      <li>explicar por que toda FBF tem uma única leitura;</li>
       <li>entender a ideia de prova por indução estrutural.</li>
     </ul>
   </div>
 
   <h2>Sintaxe e semântica</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>Comparem estas três frases:</p>
+    <ul>
+      <li>“O gato dorme no sofá.” Está bem escrita e faz sentido.</li>
+      <li>“O sofá dorme no gato.” Está bem escrita (sujeito, verbo, complemento), mas o significado é estranho.</li>
+      <li>“Sofá o no dorme gato.” Nem chega a ser uma frase: as palavras estão fora de ordem.</li>
+    </ul>
+    <p>
+      A segunda frase passa no teste da <strong>sintaxe</strong> (a ordem das peças) e tropeça na <strong>semântica</strong>
+      (o significado). A terceira nem passa na sintaxe. Com fórmulas lógicas acontece a mesma coisa.
+    </p>
+  </div>
   <p>
-    Toda linguagem, natural ou artificial, tem dois lados. A <strong>sintaxe</strong> diz quais sequências de símbolos
+    Toda linguagem, natural ou artificial, tem esses dois lados. A <strong>sintaxe</strong> diz quais sequências de símbolos
     são bem escritas. A <strong>semântica</strong> diz o que elas significam. Vocês conhecem isso da programação: um
     compilador primeiro verifica se o código está bem escrito (erro de sintaxe) e só depois se preocupa com o que ele faz.
     Neste caso eu trato apenas da sintaxe; a semântica começa no Caso 05, com as tabelas-verdade.
   </p>
 
   <h2>O alfabeto da lógica proposicional</h2>
-  <p>Uma linguagem formal começa com um conjunto fechado de símbolos. Na lógica proposicional, ele tem três partes:</p>
+  <p>
+    Uma linguagem formal começa com um conjunto fechado de símbolos, como uma caixa de Lego com tipos de peças bem
+    definidos. Nenhuma peça de fora entra na caixa. Na lógica proposicional, as peças são de três tipos:
+  </p>
   <ul>
-    <li><strong>Variáveis proposicionais:</strong> <code>p, q, r, s, p₁, p₂, ...</code> (um conjunto infinito enumerável).</li>
-    <li><strong>Conectivos:</strong> <code>¬</code> (unário) e <code>∧, ∨, →, ↔</code> (binários). Alguns autores incluem as constantes <code>⊤</code> (sempre verdadeiro) e <code>⊥</code> (sempre falso).</li>
-    <li><strong>Símbolos auxiliares:</strong> os parênteses <code>(</code> e <code>)</code>.</li>
+    <li><strong>Variáveis proposicionais:</strong> <code>p, q, r, s, p₁, p₂, ...</code> (um conjunto infinito enumerável). São as peças básicas.</li>
+    <li><strong>Conectivos:</strong> <code>¬</code> (unário, encaixa em uma peça) e <code>∧, ∨, →, ↔</code> (binários, ligam duas peças). Alguns autores incluem as constantes <code>⊤</code> (sempre verdadeiro) e <code>⊥</code> (sempre falso).</li>
+    <li><strong>Símbolos auxiliares:</strong> os parênteses <code>(</code> e <code>)</code>, que funcionam como os encaixes que dizem o que vai junto com o quê.</li>
   </ul>
 
   <h2>Fórmula bem formada: uma definição indutiva</h2>
-  <p>O conjunto das <strong>fórmulas bem formadas (FBF)</strong> é o menor conjunto que satisfaz estas regras:</p>
+  <p>
+    Ter as peças não basta: precisamos das regras de montagem. O conjunto das <strong>fórmulas bem formadas (FBF)</strong>
+    é o menor conjunto que satisfaz estas regras:
+  </p>
   <ol>
     <li><strong>Base:</strong> toda variável proposicional é uma FBF.</li>
     <li><strong>Negação:</strong> se <code>A</code> é FBF, então <code>¬A</code> é FBF.</li>
     <li><strong>Binários:</strong> se <code>A</code> e <code>B</code> são FBFs, então <code>(A ∧ B)</code>, <code>(A ∨ B)</code>, <code>(A → B)</code> e <code>(A ↔ B)</code> são FBFs.</li>
     <li><strong>Fechamento:</strong> nada mais é FBF.</li>
   </ol>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Uma receita de bonecas russas (matrioscas). A regra base diz: “uma boneca pequena e maciça é uma boneca”. As
+      outras regras dizem: “se vocês têm uma boneca, podem colocá-la dentro de outra maior”. A regra de fechamento diz:
+      “só é boneca o que foi montado assim”. Por mais que a boneca final seja enorme, sempre dá para abrir camada por
+      camada até chegar às pequenas do centro. Fórmulas funcionam igual: sempre dá para desmontar até as variáveis.
+    </p>
+  </div>
   <p>
     Reparem que <code>A</code> e <code>B</code> não são variáveis: são <strong>metavariáveis</strong>, que representam
-    qualquer fórmula. Com essa definição em camadas, construímos fórmulas arbitrariamente grandes a partir de peças
-    simples, e um programa consegue verificar mecanicamente se uma expressão foi construída assim. É a mesma ideia de uma
-    gramática de linguagem de programação, que vamos escrever em BNF no Caso 11.
+    <em>qualquer</em> fórmula, do mesmo jeito que “uma boneca” na receita pode ser qualquer boneca já montada. Com essa
+    definição em camadas, construímos fórmulas arbitrariamente grandes a partir de peças simples, e um programa consegue
+    verificar mecanicamente se uma expressão foi construída assim. É a mesma ideia de uma gramática de linguagem de
+    programação, que escreveremos em BNF no Caso 11.
   </p>
   <div class="evidence-box">
     <span class="label">Construindo uma pista, passo a passo</span>
@@ -149,20 +179,37 @@
 
   <h2>Conectivo principal e subfórmulas</h2>
   <p>
-    O <strong>conectivo principal</strong> é o último conectivo aplicado na construção. Em <code>((B ∧ M) → F)</code>,
-    é o <code>→</code>. Ele é o mais importante, porque define o “tipo” da fórmula: essa é uma condicional, e não
-    uma conjunção. As <strong>subfórmulas</strong> são todas as fórmulas que aparecem durante a construção, incluindo a
-    própria fórmula: <code>B</code>, <code>M</code>, <code>F</code>, <code>(B ∧ M)</code> e <code>((B ∧ M) → F)</code>.
+    O <strong>conectivo principal</strong> é o último conectivo aplicado na construção: a última boneca, a de fora.
+    Em <code>((B ∧ M) → F)</code>, é o <code>→</code>. Ele é o mais importante, porque define o “tipo” da fórmula: essa é
+    uma condicional, e não uma conjunção. As <strong>subfórmulas</strong> são todas as fórmulas que aparecem durante a
+    construção, incluindo a própria fórmula: <code>B</code>, <code>M</code>, <code>F</code>, <code>(B ∧ M)</code> e
+    <code>((B ∧ M) → F)</code>.
   </p>
   <p>
     Desenhando a construção de baixo para cima, obtemos a <strong>árvore sintática</strong>: a raiz é o conectivo principal,
-    as folhas são variáveis e cada nó interno é uma subfórmula.
+    as folhas são variáveis e cada nó interno é uma subfórmula. Pensem numa árvore genealógica de cabeça para baixo: a
+    fórmula inteira é a “avó”, e as variáveis são os “netos” lá embaixo.
   </p>
   <pre><code>        →
        / \
       ∧   F
      / \
     B   M</code></pre>
+  <p>
+    Um jeito mecânico de achar o conectivo principal numa fórmula com todos os parênteses: percorram da esquerda para a
+    direita contando <code>+1</code> a cada “(” e <code>−1</code> a cada “)”. O conectivo binário que aparece quando o
+    contador está em <strong>1</strong> (dentro só do parêntese externo) é o principal. Se a fórmula começa com
+    <code>¬</code> fora de qualquer parêntese, o principal é essa negação.
+  </p>
+
+  <h2>Por que cada fórmula tem uma só leitura</h2>
+  <p>
+    Na aritmética, <code>2 + 3 × 4</code> poderia dar 20 ou 14, e só não dá confusão porque combinamos uma regra. Na
+    lógica, a definição com parênteses resolve isso de vez: vale o <strong>teorema da leitura única</strong>, que diz que
+    toda FBF ou é uma variável, ou é <code>¬A</code> para uma única <code>A</code>, ou é <code>(A ∘ B)</code> para um único
+    conectivo <code>∘</code> e um único par <code>A</code>, <code>B</code>. Em outras palavras: toda fórmula tem exatamente
+    uma árvore. Sem isso, a mesma fórmula poderia ter dois valores, e a lógica deixaria de funcionar.
+  </p>
 
   <h2>Precedência: escrevendo com menos parênteses</h2>
   <p>A definição oficial exige muitos parênteses. Para simplificar, adotamos convenções, como na aritmética (multiplicação antes de soma):</p>
@@ -178,9 +225,19 @@
       </tbody>
     </table>
   </div>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Os conectivos como ímãs de forças diferentes. O <code>¬</code> é o ímã mais forte: ele gruda na peça que está
+      imediatamente ao lado antes de qualquer outro agir. Depois vem o <code>∧</code>, depois o <code>∨</code>, e por
+      último os mais fracos, <code>→</code> e <code>↔</code>, que só juntam os blocos que os outros já montaram.
+    </p>
+  </div>
   <p>
     Também omitimos os parênteses externos. Na dúvida, coloquem parênteses: eles nunca estão errados. E atenção:
     alguns livros não diferenciam a força de <code>∧</code> e <code>∨</code>. Em prova e em código, prefiram explicitar.
+    Vejam por que a convenção importa: <code>p ∧ q ∨ r</code> lido como <code>(p ∧ q) ∨ r</code> vale V com
+    <code>p = F, r = V</code>; lido como <code>p ∧ (q ∨ r)</code>, vale F com os mesmos valores.
   </p>
   <div class="callout">
     <span class="label">Erro comum</span>
@@ -191,6 +248,15 @@
   </div>
 
   <h2>Indução estrutural: provando algo para todas as fórmulas</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Uma fila infinita de dominós. Se vocês garantirem duas coisas, (1) o primeiro cai e (2) sempre que um cai, ele
+      derruba o próximo, então todos caem, mesmo sem ninguém olhar cada um. A indução estrutural é esse truque, só que
+      os “dominós” são as fórmulas, e “derrubar o próximo” é passar de <code>A</code> e <code>B</code> para
+      <code>¬A</code> e <code>(A ∘ B)</code>.
+    </p>
+  </div>
   <p>
     Como as fórmulas são definidas indutivamente, podemos provar propriedades sobre <em>todas</em> elas com a mesma
     estrutura: mostramos que a propriedade vale para as variáveis (base) e que, se vale para <code>A</code> e
@@ -203,6 +269,13 @@
     <p><strong>Negação:</strong> <code>¬A</code> tem os mesmos parênteses de <code>A</code>, que por hipótese estão equilibrados.</p>
     <p><strong>Binários:</strong> <code>(A ∘ B)</code> soma os de <code>A</code> e <code>B</code> (equilibrados) e acrescenta um “(” e um “)”.</p>
     <p>Logo, vale para toda FBF. É exatamente o raciocínio que um <em>parser</em> usa para rejeitar <code>(p ∨ q</code>.</p>
+  </div>
+  <div class="evidence-box">
+    <span class="label">Mais um exemplo: contando conectivos</span>
+    <p><strong>Afirmação:</strong> em toda FBF sem <code>¬</code>, o número de variáveis (contando repetições) é o número de conectivos binários mais 1.</p>
+    <p><strong>Base:</strong> uma variável: 1 variável, 0 conectivos. <code>1 = 0 + 1</code>.</p>
+    <p><strong>Binários:</strong> se <code>A</code> tem <code>a + 1</code> variáveis e <code>a</code> conectivos, e <code>B</code> tem <code>b + 1</code> e <code>b</code>, então <code>(A ∘ B)</code> tem <code>a + b + 2</code> variáveis e <code>a + b + 1</code> conectivos. Continua valendo.</p>
+    <p>É a mesma propriedade das árvores binárias completas da disciplina de estruturas de dados: folhas = nós internos + 1.</p>
   </div>
 
   <div class="detetive">
@@ -236,7 +309,7 @@
 
   <div class="exercise">
     <span class="label">Exercício 2 · Conectivo principal e subfórmulas</span>
-    <p>Para <code>¬(B ∨ C) → (M ∧ ¬F)</code>, indique o conectivo principal e liste todas as subfórmulas.</p>
+    <p>Para <code>¬(B ∨ C) → (M ∧ ¬F)</code>, indiquem o conectivo principal e listem todas as subfórmulas.</p>
     <details>
       <summary>Ver resposta</summary>
       <p>
@@ -256,14 +329,23 @@
     </details>
   </div>
 
+  <div class="exercise">
+    <span class="label">Exercício 4 · Indução estrutural</span>
+    <p>Provem por indução estrutural que o número de subfórmulas de uma FBF é no máximo o número de símbolos dela (contando variáveis, conectivos e parênteses).</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>Base: uma variável tem 1 subfórmula e 1 símbolo. Negação: <code>¬A</code> tem as subfórmulas de <code>A</code> mais ela mesma, ou seja, no máximo <code>|A| + 1</code>, e tem <code>|A| + 1</code> símbolos. Binários: <code>(A ∘ B)</code> tem no máximo <code>sub(A) + sub(B) + 1 ≤ |A| + |B| + 1</code> subfórmulas e <code>|A| + |B| + 3</code> símbolos. Vale sempre.</p>
+    </details>
+  </div>
+
   <div class="summary">
     <span class="label">Para guardar</span>
     <ul>
       <li>Sintaxe trata da escrita; semântica trata do significado.</li>
       <li>FBFs são definidas indutivamente: variáveis, negações e binários entre parênteses.</li>
-      <li>O conectivo principal é o último aplicado e é a raiz da árvore sintática.</li>
+      <li>O conectivo principal é o último aplicado e é a raiz da árvore sintática; toda FBF tem uma só árvore.</li>
       <li>Precedência: <code>¬</code>, <code>∧</code>, <code>∨</code>, <code>→</code> (à direita), <code>↔</code>.</li>
-      <li>Definições indutivas permitem provas por indução estrutural.</li>
+      <li>Definições indutivas permitem provas por indução estrutural, como dominós em fila.</li>
     </ul>
   </div>
 

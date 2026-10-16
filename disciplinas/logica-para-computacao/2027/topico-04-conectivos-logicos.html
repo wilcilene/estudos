@@ -90,23 +90,28 @@
 <div class="wrap-narrow case-header">
   <span class="case-tag crime mono">Caso Nº 04 · Lógica Proposicional</span>
   <h1>Conectivos Lógicos</h1>
-  <p class="lede">Cinco conectivos bastam para descrever qualquer relação entre pistas. Vocês vão ver o significado exato de cada um e as armadilhas de tradução do português.</p>
+  <p class="lede">Cinco conectivos bastam para descrever qualquer relação entre pistas. Vocês verão o significado exato de cada um e as armadilhas de tradução do português.</p>
 </div>
 
 <main id="conteudo" class="wrap-narrow"><article class="topic">
 
 <div class="goals">
-    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <span class="label">Ao final deste caso, vocês saberão</span>
     <ul>
       <li>dar o significado exato de <code>¬</code>, <code>∧</code>, <code>∨</code>, <code>→</code> e <code>↔</code>;</li>
       <li>entender por que o condicional é verdadeiro quando o antecedente é falso;</li>
       <li>traduzir expressões como “só se”, “a menos que”, “nem... nem” e “condição necessária”;</li>
-      <li>diferenciar o “ou” inclusivo do exclusivo e relacionar os conectivos com operadores de programação.</li>
+      <li>diferenciar o “ou” inclusivo do exclusivo e relacionar os conectivos com operadores de programação;</li>
+      <li>explicar o que é um conjunto completo de conectivos e por que uma única porta NAND basta para montar um computador.</li>
     </ul>
   </div>
 
   <h2>Os cinco conectivos de uma vez</h2>
-  <p>Esta é a tabela que vocês precisam saber de cor. Leiam cada coluna como uma regra do jogo:</p>
+  <p>
+    Um conectivo é uma “máquina” que recebe valores-verdade e devolve um valor-verdade. O que define cada máquina é
+    a sua tabela: para cada combinação de entradas, qual é a saída. Esta é a tabela que vocês precisam saber de cor.
+    Leiam cada coluna como uma regra do jogo:
+  </p>
   <div class="table-wrap">
     <table class="tbl tv">
       <caption>Tabela dos conectivos</caption>
@@ -121,6 +126,14 @@
   </div>
 
   <h2>Negação, conjunção e disjunção</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <ul>
+      <li><strong>Negação</strong> é o botão “do contra”: se vocês dizem “sim”, ele diz “não”, e vice-versa.</li>
+      <li><strong>Conjunção</strong> é uma porta com duas fechaduras: só abre se as <em>duas</em> chaves forem giradas. Em eletricidade, são dois interruptores em série: a lâmpada só acende com os dois ligados.</li>
+      <li><strong>Disjunção</strong> é uma sala com duas portas: basta abrir <em>uma</em> para entrar, e abrir as duas também funciona. São dois interruptores em paralelo: qualquer um acende a lâmpada.</li>
+    </ul>
+  </div>
   <p>
     A <strong>negação</strong> <code>¬p</code> inverte o valor de <code>p</code>. A <strong>conjunção</strong>
     <code>p ∧ q</code> só é verdadeira quando as duas partes são: é a linguagem de “todas as pistas precisam bater”.
@@ -130,14 +143,28 @@
   <p>
     Quando vocês quiserem dizer “um ou outro, mas não os dois”, precisam do <strong>ou exclusivo</strong>
     (<code>p ⊕ q</code>), que não é primitivo: ele se escreve como <code>(p ∨ q) ∧ ¬(p ∧ q)</code> ou como <code>¬(p ↔ q)</code>.
+    É o “ou” do cardápio: “sobremesa: sorvete ou pudim” costuma significar um dos dois, não os dois.
   </p>
 
   <h2>O condicional: o conectivo que mais confunde</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Uma mãe promete: “<strong>Se</strong> você arrumar o quarto, <strong>então</strong> ganha sorvete.” Em que situação a mãe
+      quebrou a promessa?
+    </p>
+    <ul>
+      <li>O quarto foi arrumado e a criança ganhou sorvete: promessa cumprida.</li>
+      <li>O quarto foi arrumado e a criança <strong>não</strong> ganhou sorvete: promessa quebrada. Esta é a única linha falsa.</li>
+      <li>O quarto não foi arrumado e a criança não ganhou sorvete: ninguém pode reclamar.</li>
+      <li>O quarto não foi arrumado e mesmo assim a criança ganhou sorvete: a mãe foi generosa, mas não quebrou a promessa; ela só disse o que aconteceria <em>se</em> o quarto fosse arrumado.</li>
+    </ul>
+  </div>
   <p>
     Em <code>p → q</code>, <code>p</code> é o <strong>antecedente</strong> e <code>q</code> é o <strong>consequente</strong>.
     O condicional é uma <strong>promessa</strong>: “se <code>p</code> acontecer, eu garanto <code>q</code>”. A promessa só é
     quebrada quando <code>p</code> acontece e <code>q</code> não acontece. Se <code>p</code> não acontece, a promessa não foi
-    testada, e a lógica clássica a considera cumprida.
+    testada, e a lógica clássica a considera cumprida. Esse condicional se chama <strong>material</strong>.
   </p>
   <div class="evidence-box">
     <span class="label">A promessa do Mordomo</span>
@@ -150,10 +177,20 @@
   </div>
   <p>
     Isso também mostra que <code>p → q</code> <strong>não</strong> afirma causa nem relação de assunto. “Se 2 + 2 = 5,
-    então a Faca está no envelope” é verdadeira, porque o antecedente é falso. A lógica só olha para os valores.
+    então a Faca está no envelope” é verdadeira, porque o antecedente é falso. A lógica só olha para os valores. Uma
+    forma de lembrar: <code>p → q</code> equivale a <code>¬p ∨ q</code>, “ou o antecedente falha, ou o consequente acontece”.
   </p>
 
   <h3>Condição suficiente e condição necessária</h3>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Para entrar na piscina do clube, é <strong>necessário</strong> ter a carteirinha: sem ela, ninguém entra. Mas ter a
+      carteirinha não é <strong>suficiente</strong>: também precisa de exame médico. Já cair na piscina é
+      <strong>suficiente</strong> para ficar molhado: basta isso. Em fórmula: “entrou → tem carteirinha” e
+      “caiu na piscina → molhado”. O necessário fica sempre do lado direito da seta; o suficiente, do lado esquerdo.
+    </p>
+  </div>
   <p>Em <code>p → q</code>, dizemos que <code>p</code> é <strong>suficiente</strong> para <code>q</code>, e <code>q</code> é <strong>necessário</strong> para <code>p</code>. As traduções abaixo são todas <code>p → q</code>:</p>
   <ul>
     <li>“Se p, então q”; “q, se p”; “p implica q”.</li>
@@ -168,23 +205,25 @@
   </div>
 
   <h3>Recíproca, inversa e contrapositiva</h3>
+  <p>Partindo de “se choveu, a rua está molhada” (<code>c → m</code>), vejam quais versões dizem a mesma coisa:</p>
   <div class="table-wrap">
     <table class="tbl">
-      <thead><tr><th>Nome</th><th>Forma</th><th>Equivale a <code>p → q</code>?</th></tr></thead>
+      <thead><tr><th>Nome</th><th>Forma</th><th>Exemplo</th><th>Equivale a <code>p → q</code>?</th></tr></thead>
       <tbody>
-        <tr><td>Original</td><td><code>p → q</code></td><td>—</td></tr>
-        <tr><td>Contrapositiva</td><td><code>¬q → ¬p</code></td><td class="v">Sim, sempre</td></tr>
-        <tr><td>Recíproca</td><td><code>q → p</code></td><td class="f">Não</td></tr>
-        <tr><td>Inversa</td><td><code>¬p → ¬q</code></td><td class="f">Não (equivale à recíproca)</td></tr>
+        <tr><td>Original</td><td><code>p → q</code></td><td>Se choveu, a rua está molhada.</td><td>—</td></tr>
+        <tr><td>Contrapositiva</td><td><code>¬q → ¬p</code></td><td>Se a rua não está molhada, não choveu.</td><td class="v">Sim, sempre</td></tr>
+        <tr><td>Recíproca</td><td><code>q → p</code></td><td>Se a rua está molhada, choveu. (E se foi o caminhão-pipa?)</td><td class="f">Não</td></tr>
+        <tr><td>Inversa</td><td><code>¬p → ¬q</code></td><td>Se não choveu, a rua não está molhada.</td><td class="f">Não (equivale à recíproca)</td></tr>
       </tbody>
     </table>
   </div>
 
   <h2>O bicondicional</h2>
   <p>
-    <code>p ↔ q</code> (“p se e somente se q”) é verdadeiro quando as duas partes têm o mesmo valor. Ele equivale a
-    <code>(p → q) ∧ (q → p)</code>: cada lado é necessário e suficiente para o outro. Em definições matemáticas, o “se”
-    muitas vezes significa “se e somente se”; em lógica, precisamos ser explícitos.
+    <code>p ↔ q</code> (“p se e somente se q”) é verdadeiro quando as duas partes têm o mesmo valor: as duas ligadas ou as
+    duas desligadas, como duas lâmpadas no mesmo fio. Ele equivale a <code>(p → q) ∧ (q → p)</code>: cada lado é
+    necessário e suficiente para o outro. Em definições matemáticas, o “se” muitas vezes significa “se e somente se”;
+    em lógica, precisamos ser explícitos.
   </p>
 
   <h2>Tradução do português: um guia rápido</h2>
@@ -205,13 +244,40 @@
     </table>
   </div>
 
+  <h2>Quantos conectivos existem? Conjuntos completos</h2>
+  <p>
+    Um conectivo binário é uma tabela com 4 linhas, e cada linha pode ter V ou F na saída. Logo, existem
+    <code>2⁴ = 16</code> conectivos binários diferentes (e <code>2^(2ⁿ)</code> funções de <code>n</code> variáveis). Nós
+    demos nome só a alguns. Será que precisamos de todos?
+  </p>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Com poucas cores de tinta (vermelho, amarelo, azul, branco e preto) um pintor mistura qualquer cor que quiser. Com
+      os conectivos acontece algo parecido: alguns poucos bastam para “misturar” qualquer outro. Um conjunto assim se
+      chama <strong>funcionalmente completo</strong>.
+    </p>
+  </div>
+  <ul>
+    <li><code>{¬, ∧, ∨}</code> é completo: qualquer tabela vira uma FND (Caso 13).</li>
+    <li><code>{¬, ∧}</code> já basta, porque <code>p ∨ q ≡ ¬(¬p ∧ ¬q)</code>. O mesmo vale para <code>{¬, ∨}</code> e <code>{¬, →}</code>.</li>
+    <li>Um único conectivo basta: o <strong>NAND</strong> (<code>p ↑ q ≡ ¬(p ∧ q)</code>), e também o NOR.</li>
+  </ul>
+  <div class="evidence-box">
+    <span class="label">Tudo a partir do NAND</span>
+    <pre><code>¬p      ≡  p ↑ p
+p ∧ q   ≡  (p ↑ q) ↑ (p ↑ q)
+p ∨ q   ≡  (p ↑ p) ↑ (q ↑ q)</code></pre>
+    <p>É por isso que fábricas de chips conseguem montar processadores inteiros repetindo um só tipo de porta lógica: um transistor arranjado como NAND, bilhões de vezes.</p>
+  </div>
+
   <h2>Conectivos em programação</h2>
   <p>
     Em C, Java, JavaScript e Python, <code>!</code>/<code>not</code>, <code>&amp;&amp;</code>/<code>and</code> e
     <code>||</code>/<code>or</code> correspondem a <code>¬</code>, <code>∧</code> e <code>∨</code>. Duas diferenças importam:
   </p>
   <ul>
-    <li><strong>Avaliação em curto-circuito:</strong> em <code>a &amp;&amp; b</code>, se <code>a</code> é falso, <code>b</code> nem é calculado. O valor lógico é o mesmo, mas efeitos colaterais de <code>b</code> não acontecem.</li>
+    <li><strong>Avaliação em curto-circuito:</strong> em <code>a &amp;&amp; b</code>, se <code>a</code> é falso, <code>b</code> nem é calculado. O valor lógico é o mesmo, mas efeitos colaterais de <code>b</code> não acontecem. É por isso que <code>obj != null &amp;&amp; obj.ativo</code> não quebra quando <code>obj</code> é nulo.</li>
     <li><strong>Não existe operador de implicação:</strong> para escrever <code>p → q</code>, usem <code>!p || q</code>. O ou exclusivo aparece como <code>^</code> (bit a bit) ou <code>!=</code> entre booleanos; e o bicondicional, como <code>==</code> entre booleanos.</li>
   </ul>
 
@@ -249,13 +315,23 @@
     </details>
   </div>
 
+  <div class="exercise">
+    <span class="label">Exercício 3 · Só com NAND</span>
+    <p>Escrevam <code>p → q</code> usando apenas o conectivo <code>↑</code>.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><code>p → q ≡ ¬p ∨ q ≡ ¬(p ∧ ¬q) ≡ p ↑ ¬q ≡ p ↑ (q ↑ q)</code>. Conferindo: só dá F quando <code>p = V</code> e <code>q ↑ q = V</code>, isto é, <code>q = F</code>.</p>
+    </details>
+  </div>
+
   <div class="summary">
     <span class="label">Para guardar</span>
     <ul>
-      <li><code>p → q</code> só é falso na linha <code>p = V</code>, <code>q = F</code>.</li>
-      <li>“p só se q” é <code>p → q</code>; “p se q” é <code>q → p</code>.</li>
+      <li><code>p → q</code> só é falso na linha <code>p = V</code>, <code>q = F</code>: a promessa quebrada.</li>
+      <li>“p só se q” é <code>p → q</code>; “p se q” é <code>q → p</code>; o necessário fica à direita da seta.</li>
       <li>A contrapositiva equivale ao original; a recíproca e a inversa não.</li>
       <li>O “ou” lógico é inclusivo; o exclusivo se escreve com <code>(p ∨ q) ∧ ¬(p ∧ q)</code>.</li>
+      <li>Há 16 conectivos binários; <code>{¬, ∧}</code> e <code>{↑}</code> são conjuntos completos.</li>
       <li>Em código: <code>p → q</code> vira <code>!p || q</code>.</li>
     </ul>
   </div>

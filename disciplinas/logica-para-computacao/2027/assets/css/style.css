@@ -315,6 +315,16 @@ article.topic pre code{ background:none; padding:0; }
 .intro-grid h2{ font-family:"Source Serif 4",serif; font-size:1.05rem; margin: 0 0 0.4rem; }
 .intro-grid p{ margin:0; font-size:0.93rem; color: var(--ink-soft); }
 
+
+/* Caixas didáticas: analogia ("Imaginem…") e vocabulário ("Palavra nova") */
+.imagine{ background: rgba(169,130,47,0.08); border: 2px dashed rgba(169,130,47,0.55); border-radius: var(--radius); padding: 1rem 1.2rem; margin: 1.25rem 0; }
+.imagine .label, .palavra .label{ font-family:"IBM Plex Mono",monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; display:block; margin-bottom:0.45rem; }
+.imagine .label{ color: var(--brass-dark); }
+.palavra{ background: rgba(74,85,112,0.07); border-left: 4px solid var(--indigo); border-radius: 0 var(--radius) var(--radius) 0; padding: 0.85rem 1.1rem; margin: 1.25rem 0; }
+.palavra .label{ color: var(--indigo-dark); }
+.imagine p:last-child, .palavra p:last-child{ margin-bottom:0; }
+.imagine ul:last-child, .imagine ol:last-child, .palavra ul:last-child{ margin-bottom:0; }
+
 @media print{
   .skip-link, .toolbar, .meter-section, .topic-done, .page-nav, .breadcrumb{ display:none !important; }
   body{ background:#fff; }

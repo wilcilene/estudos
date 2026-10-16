@@ -96,16 +96,27 @@
 <main id="conteudo" class="wrap-narrow"><article class="topic">
 
 <div class="goals">
-    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <span class="label">Ao final deste caso, vocês saberão</span>
     <ul>
       <li>classificar uma fórmula como tautologia, contradição ou contingência;</li>
       <li>relacionar essas classes com satisfatibilidade e validade;</li>
       <li>provar que uma fórmula é tautologia sem montar a tabela inteira;</li>
-      <li>reconhecer tautologias famosas que vão virar regras de inferência.</li>
+      <li>usar a substituição uniforme para gerar tautologias novas a partir de antigas;</li>
+      <li>reconhecer tautologias famosas que viram regras de inferência.</li>
     </ul>
   </div>
 
   <h2>Três destinos possíveis para uma fórmula</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>Três moedas num cofrinho de brincadeira:</p>
+    <ul>
+      <li>uma moeda com <strong>cara dos dois lados</strong>: jogue quantas vezes quiser, sempre dá cara;</li>
+      <li>uma moeda com <strong>coroa dos dois lados</strong>: nunca dá cara;</li>
+      <li>uma <strong>moeda normal</strong>: às vezes cara, às vezes coroa.</li>
+    </ul>
+    <p>Trocando “cara” por “verdadeiro” e “jogar a moeda” por “escolher uma linha da tabela”, temos as três classes de fórmulas: tautologia, contradição e contingência.</p>
+  </div>
   <p>Depois de montar a tabela-verdade, olhem para a coluna final. Só existem três possibilidades:</p>
   <div class="table-wrap">
     <table class="tbl">
@@ -117,26 +128,42 @@
       </tbody>
     </table>
   </div>
-  <p>Existe ainda uma quarta palavra que vocês vão usar muito: uma fórmula é <strong>satisfatível</strong> quando tem pelo menos uma linha V. Ou seja, tautologias e contingências são satisfatíveis; contradições não.</p>
+  <div class="palavra">
+    <span class="label">Palavras novas</span>
+    <p><strong>Modelo</strong> de uma fórmula: uma linha (valoração) em que ela é verdadeira. <strong>Satisfatível:</strong> tem pelo menos um modelo, ou seja, pelo menos uma linha V. Tautologias e contingências são satisfatíveis; contradições não.</p>
+  </div>
 
   <h2>As relações que importam</h2>
-  <p>Guardem estas três relações. Elas parecem simples, mas são a base dos algoritmos que veremos a partir do Caso 12:</p>
+  <p>Guardem estas três relações. Elas parecem simples, mas são a base dos algoritmos a partir do Caso 12:</p>
   <ul>
     <li><code>A</code> é tautologia <strong>se e somente se</strong> <code>¬A</code> é contradição.</li>
     <li><code>A</code> é contradição <strong>se e somente se</strong> <code>A</code> não é satisfatível.</li>
     <li>Logo, <code>A</code> é tautologia <strong>se e somente se</strong> <code>¬A</code> não é satisfatível.</li>
   </ul>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Negar uma fórmula é virar a moeda do avesso: cara vira coroa em todas as faces. A moeda “sempre cara” vira a moeda
+      “sempre coroa”. Então, para saber se uma moeda é “sempre cara”, basta perguntar se a moeda do avesso
+      <em>alguma vez</em> dá cara. Se nunca dá, a original era sempre cara.
+    </p>
+  </div>
   <p>
-    Essa última é preciosa: um programa que só sabe responder “esta fórmula tem algum modelo?” também consegue
+    Essa última relação é preciosa: um programa que só sabe responder “esta fórmula tem algum modelo?” também consegue
     verificar tautologias. Basta perguntar sobre a negação. É exatamente isso que fazemos na resolução por refutação.
   </p>
 
   <h2>Por que tautologias importam</h2>
   <p>
     Uma tautologia é verdadeira em qualquer cenário. Por isso ela não traz informação sobre o caso (“o suspeito é culpado
-    ou não é” não ajuda a investigação), mas traz informação sobre o <strong>raciocínio</strong>. Quando a fórmula
-    <code>(premissas) → conclusão</code> é tautologia, o argumento é válido, como veremos no Caso 08.
+    ou não é” não elimina nenhuma linha do bloco de anotações), mas traz informação sobre o <strong>raciocínio</strong>.
+    Quando a fórmula <code>(premissas) → conclusão</code> é tautologia, o argumento é válido, como veremos no Caso 08.
     Uma contradição, por outro lado, revela anotações incompatíveis: alguma pista foi mal registrada ou alguém mentiu.
+  </p>
+  <p>
+    Uma forma útil de pensar: uma pista é tanto mais <strong>informativa</strong> quanto mais linhas ela elimina. Uma
+    tautologia elimina zero linhas (não informa nada). Uma contradição elimina todas (informa “demais”: nenhum cenário
+    sobra). As pistas úteis de uma investigação são contingências, que eliminam algumas linhas e deixam outras.
   </p>
 
   <h2>Provando tautologias sem a tabela inteira</h2>
@@ -146,14 +173,22 @@
   </p>
   <div class="evidence-box">
     <span class="label">Modus ponens como fórmula</span>
-    <p>Vamos provar que <code>((p → q) ∧ p) → q</code> é tautologia.</p>
-    <pre><code>Suponha F. Então ((p → q) ∧ p) = V e q = F.
+    <p>Provemos que <code>((p → q) ∧ p) → q</code> é tautologia.</p>
+    <pre><code>Suponham F. Então ((p → q) ∧ p) = V e q = F.
 Da conjunção verdadeira:  (p → q) = V  e  p = V.
 Com p = V e q = F:  (p → q) = F.     Contradição!</code></pre>
     <p>Não há como falsificar a fórmula. Ela é tautologia, e é por isso que o modus ponens é uma regra segura (Caso 09).</p>
   </div>
+  <div class="evidence-box">
+    <span class="label">Quando a tentativa encontra um contraexemplo</span>
+    <p>Será que <code>(p → q) → (q → p)</code> é tautologia?</p>
+    <pre><code>Suponham F. Então (p → q) = V e (q → p) = F.
+(q → p) = F obriga q = V e p = F.
+Conferindo (p → q) com p = F, q = V:  F → V = V.   Nenhuma contradição!</code></pre>
+    <p>A valoração <code>p = F, q = V</code> torna a fórmula falsa: ela <strong>não</strong> é tautologia. A tentativa de falsificar funcionou e nos entregou o contraexemplo de bandeja.</p>
+  </div>
 
-  <h2>Tautologias que vocês vão reencontrar</h2>
+  <h2>Tautologias que vocês reencontrarão</h2>
   <div class="table-wrap">
     <table class="tbl">
       <thead><tr><th>Nome</th><th>Tautologia</th></tr></thead>
@@ -165,14 +200,31 @@ Com p = V e q = F:  (p → q) = F.     Contradição!</code></pre>
         <tr><td>Silogismo hipotético</td><td><code>((p → q) ∧ (q → r)) → (p → r)</code></td></tr>
         <tr><td>Silogismo disjuntivo</td><td><code>((p ∨ q) ∧ ¬p) → q</code></td></tr>
         <tr><td>Contrapositiva</td><td><code>(p → q) ↔ (¬q → ¬p)</code></td></tr>
+        <tr><td>Explosão</td><td><code>(p ∧ ¬p) → q</code> (de uma contradição, sai qualquer coisa)</td></tr>
       </tbody>
     </table>
   </div>
-  <p>Reparem num detalhe: toda instância de uma tautologia também é tautologia. Se vocês trocarem <code>p</code> por <code>(B ∧ M)</code> em <code>p ∨ ¬p</code>, obtêm <code>(B ∧ M) ∨ ¬(B ∧ M)</code>, que continua sempre verdadeira.</p>
+
+  <h2>Substituição uniforme: uma fábrica de tautologias</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Uma forma de biscoito em formato de estrela. Não importa se a massa é de chocolate, de baunilha ou de cenoura: o
+      biscoito sai em formato de estrela. A forma é a tautologia; a massa é o que vocês colocam no lugar das letras.
+    </p>
+  </div>
+  <p>
+    Toda instância de uma tautologia também é tautologia. Se vocês trocarem <code>p</code> por <code>(B ∧ M)</code> em
+    <code>p ∨ ¬p</code>, obtêm <code>(B ∧ M) ∨ ¬(B ∧ M)</code>, que continua sempre verdadeira. A única regra é trocar a
+    <strong>mesma</strong> variável pela <strong>mesma</strong> fórmula em todos os lugares onde ela aparece (por isso o
+    nome “uniforme”). O motivo: a coluna de <code>(B ∧ M)</code> só tem V e F, exatamente como a coluna de <code>p</code>,
+    e a tautologia já funcionava para qualquer valor de <code>p</code>.
+  </p>
 
   <div class="callout">
     <span class="label">Erro comum</span>
     <p>“Contingência” não quer dizer “fórmula fraca”. A maioria das pistas de um caso real são contingências, porque elas dizem algo sobre o mundo e poderiam ser falsas. O que não pode acontecer é o conjunto das pistas virar uma contradição.</p>
+    <p>Outro erro: substituir de forma não uniforme. Trocar só o primeiro <code>p</code> de <code>p ∨ ¬p</code> por <code>q</code> dá <code>q ∨ ¬p</code>, que não é tautologia.</p>
   </div>
 
   <div class="detetive">
@@ -180,13 +232,14 @@ Com p = V e q = F:  (p → q) = F.     Contradição!</code></pre>
     <p>
       Imaginem que vocês anotaram “o crime foi na Cozinha” (porque nenhum outro local sobrou) e, mais tarde, alguém
       mostrou a carta Cozinha. A conjunção das anotações virou <code>C ∧ ¬C</code>: uma contradição. Isso não quer
-      dizer que o jogo esteja quebrado; quer dizer que alguma anotação anterior está errada. Detectar contradições é
-      tão importante quanto encontrar o culpado.
+      dizer que o jogo esteja quebrado; quer dizer que alguma anotação anterior está errada. E cuidado com a explosão:
+      de anotações contraditórias, a lógica “prova” qualquer acusação. Detectar contradições é tão importante quanto
+      encontrar o culpado.
     </p>
   </div>
 
   <div class="exercise">
-    <span class="label">Exercício 1 · Classifique</span>
+    <span class="label">Exercício 1 · Classifiquem</span>
     <ol>
       <li><code>p → p</code></li>
       <li><code>p ↔ ¬p</code></li>
@@ -206,21 +259,31 @@ Com p = V e q = F:  (p → q) = F.     Contradição!</code></pre>
   </div>
 
   <div class="exercise">
-    <span class="label">Exercício 2 · Prove por avaliação reversa</span>
+    <span class="label">Exercício 2 · Provem por avaliação reversa</span>
     <p>Mostrem que o silogismo disjuntivo <code>((p ∨ q) ∧ ¬p) → q</code> é tautologia.</p>
     <details>
       <summary>Ver resposta</summary>
-      <p>Suponha F: o antecedente é V e <code>q = F</code>. Do antecedente, <code>¬p = V</code>, logo <code>p = F</code>, e <code>p ∨ q = V</code>. Mas com <code>p = F</code> e <code>q = F</code>, <code>p ∨ q = F</code>. Contradição: a fórmula é tautologia.</p>
+      <p>Suponham F: o antecedente é V e <code>q = F</code>. Do antecedente, <code>¬p = V</code>, logo <code>p = F</code>, e <code>p ∨ q = V</code>. Mas com <code>p = F</code> e <code>q = F</code>, <code>p ∨ q = F</code>. Contradição: a fórmula é tautologia.</p>
+    </details>
+  </div>
+
+  <div class="exercise">
+    <span class="label">Exercício 3 · Substituição uniforme</span>
+    <p>A partir do modus tollens <code>((p → q) ∧ ¬q) → ¬p</code>, gerem a tautologia correspondente com <code>p := (b ∧ m)</code> e <code>q := k</code>, e leiam-na no contexto do Detetive.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p><code>(((b ∧ m) → k) ∧ ¬k) → ¬(b ∧ m)</code>: “se crime na Biblioteca com o Mordomo implica Candelabro, e a arma não é o Candelabro, então não é verdade que foi na Biblioteca com o Mordomo”. É tautologia sem precisar de tabela.</p>
     </details>
   </div>
 
   <div class="summary">
     <span class="label">Para guardar</span>
     <ul>
-      <li>Tautologia: sempre V. Contradição: sempre F. Contingência: depende.</li>
+      <li>Tautologia: sempre V. Contradição: sempre F. Contingência: depende (moeda normal).</li>
       <li>Satisfatível = tem pelo menos um modelo (tautologias e contingências).</li>
       <li><code>A</code> é tautologia ⇔ <code>¬A</code> é insatisfatível.</li>
-      <li>Para provar tautologia, tentem falsificá-la; se falharem, está provado.</li>
+      <li>Para provar tautologia, tentem falsificá-la; se falharem, está provado; se conseguirem, ganharam um contraexemplo.</li>
+      <li>Substituição uniforme de uma tautologia gera outra tautologia.</li>
     </ul>
   </div>
 

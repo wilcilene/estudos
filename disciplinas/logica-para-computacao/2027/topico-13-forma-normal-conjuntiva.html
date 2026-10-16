@@ -96,11 +96,11 @@
 <main id="conteudo" class="wrap-narrow"><article class="topic">
 
 <div class="goals">
-    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <span class="label">Ao final deste caso, vocês saberão</span>
     <ul>
-      <li>definir literal, cláusula, forma normal conjuntiva (FNC) e forma normal disjuntiva (FND);</li>
+      <li>definir literal, cláusula, forma normal da negação (FNN), forma normal conjuntiva (FNC) e forma normal disjuntiva (FND);</li>
       <li>converter qualquer fórmula para FNC pelos passos clássicos, justificando cada um;</li>
-      <li>construir a FNC e a FND diretamente pela tabela-verdade;</li>
+      <li>construir a FNC e a FND diretamente pela tabela-verdade, e usar isso para provar que toda fórmula tem as duas formas;</li>
       <li>explicar a explosão exponencial e como a transformação de Tseitin a evita.</li>
     </ul>
   </div>
@@ -111,15 +111,24 @@
     <li>Uma <strong>cláusula</strong> é uma disjunção de literais: <code>(p ∨ ¬q ∨ r)</code>.</li>
     <li>Uma fórmula está em <strong>forma normal conjuntiva (FNC)</strong> quando é uma conjunção de cláusulas: <code>(p ∨ ¬q) ∧ (¬p ∨ r) ∧ q</code>.</li>
     <li>Ela está em <strong>forma normal disjuntiva (FND)</strong> quando é uma disjunção de conjunções de literais: <code>(p ∧ ¬q) ∨ (¬p ∧ r)</code>.</li>
+    <li>Ela está em <strong>forma normal da negação (FNN)</strong> quando usa só <code>¬</code>, <code>∧</code> e <code>∨</code>, e cada <code>¬</code> está grudado numa variável.</li>
   </ul>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Uma FNC é a <strong>lista de regras da casa</strong>, coladas na geladeira: “arrumar a cama ou dobrar o pijama”, “escovar
+      os dentes”, “guardar os brinquedos ou varrer o quarto”. <em>Todas</em> as regras precisam ser cumpridas (é um “e”
+      entre elas), mas cada regra pode ser cumprida de mais de um jeito (é um “ou” dentro dela).
+    </p>
+    <p>
+      Uma FND é um <strong>cardápio de cenários</strong>: “ou pizza com suco, ou macarrão com água”. Basta <em>um</em>
+      cenário acontecer, e cada cenário exige tudo o que está nele.
+    </p>
+  </div>
   <p>
     <strong>Toda fórmula proposicional tem uma FNC e uma FND equivalentes.</strong> Isso torna a FNC um formato universal:
     um algoritmo que sabe lidar com cláusulas sabe lidar com qualquer fórmula. Em inglês, FNC é <em>CNF</em> (conjunctive
-    normal form), sigla que vocês vão encontrar nos resolvedores SAT.
-  </p>
-  <p>
-    Uma intuição útil: uma FNC é uma <strong>lista de exigências</strong>, todas obrigatórias, e cada exigência pode ser
-    cumprida de mais de um jeito. Uma FND é uma <strong>lista de cenários</strong>, e basta um deles acontecer.
+    normal form), sigla que vocês encontrarão nos resolvedores SAT.
   </p>
 
   <h2>Convertendo para FNC em quatro passos</h2>
@@ -129,6 +138,15 @@
     <li><strong>Distribuir ∨ sobre ∧:</strong> <code>A ∨ (B ∧ C) ≡ (A ∨ B) ∧ (A ∨ C)</code>, até não haver ∧ dentro de ∨.</li>
     <li><strong>Simplificar:</strong> retirar literais repetidos numa cláusula e cláusulas que contêm <code>p</code> e <code>¬p</code> (são sempre verdadeiras).</li>
   </ol>
+  <div class="imagine">
+    <span class="label">O passo 3, como na aritmética</span>
+    <p>
+      Na escola, vocês aprenderam que <code>a × (b + c) = a×b + a×c</code>: o número de fora “entra” e multiplica cada um
+      de dentro. A distributividade do passo 3 é igual, com o <code>∨</code> no papel da multiplicação: o <code>A</code> de
+      fora entra e se junta a cada pedaço do <code>∧</code>. E, como <code>(a + b)(c + d)</code> vira quatro termos,
+      <code>(a ∧ b) ∨ (c ∧ d)</code> vira quatro cláusulas: <code>(a ∨ c) ∧ (a ∨ d) ∧ (b ∨ c) ∧ (b ∨ d)</code>.
+    </p>
+  </div>
   <div class="evidence-box">
     <span class="label">Convertendo uma pista com bicondicional</span>
     <p>Pista: “o crime foi na Biblioteca se e somente se a arma foi o Candelabro ou a Corda”: <code>b ↔ (k ∨ r)</code>.</p>
@@ -141,13 +159,19 @@
   <h2>FNC e FND direto da tabela-verdade</h2>
   <p>Quando vocês já têm a tabela, existe um caminho mecânico:</p>
   <ul>
-    <li><strong>FND:</strong> para cada linha <strong>V</strong>, escrevam a conjunção que descreve exatamente aquela linha, e juntem tudo com ∨.</li>
-    <li><strong>FNC:</strong> para cada linha <strong>F</strong>, escrevam a cláusula que <em>proíbe</em> aquela linha (negando cada variável da linha), e juntem tudo com ∧.</li>
+    <li><strong>FND:</strong> para cada linha <strong>V</strong>, escrevam a conjunção que descreve exatamente aquela linha, e juntem tudo com ∨. É uma lista de “cenários em que a fórmula vale”.</li>
+    <li><strong>FNC:</strong> para cada linha <strong>F</strong>, escrevam a cláusula que <em>proíbe</em> aquela linha (negando cada variável da linha), e juntem tudo com ∧. É uma lista de “cenários proibidos”.</li>
   </ul>
   <div class="evidence-box">
     <span class="label">A pista do Caso 05</span>
     <p><code>(p ∧ q) → r</code> é falsa só na linha <code>p = V, q = V, r = F</code>. A cláusula que proíbe essa linha é <code>¬p ∨ ¬q ∨ r</code>, e essa é a FNC da pista. Uma linha falsa, uma cláusula.</p>
   </div>
+  <p>
+    Esse método também é a <strong>prova</strong> de que toda fórmula tem FNC e FND: qualquer tabela, por maior que seja,
+    tem linhas V e linhas F, e o método funciona para todas. (Dois casos de borda: uma contradição tem FND vazia, que
+    vale F; uma tautologia tem FNC vazia, que vale V.) Ele também mostra que <code>{¬, ∧, ∨}</code> é um conjunto
+    completo de conectivos (Caso 04).
+  </p>
 
   <h2>O problema: explosão exponencial</h2>
   <p>
@@ -160,10 +184,18 @@
   <p>Com <code>n = 30</code>, seriam mais de um bilhão de cláusulas.</p>
 
   <h2>A solução: transformação de Tseitin</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Uma professora que precisa repetir “o aluno de camiseta azul que senta perto da janela” várias vezes numa aula.
+      Em vez disso, ela diz: “esse aluno agora se chama Tito” e passa a falar só “Tito”. A frase encolhe, e nada se
+      perde, porque todo mundo sabe quem é o Tito. Tseitin dá apelidos a pedaços da fórmula.
+    </p>
+  </div>
   <p>
     Em vez de buscar uma fórmula <strong>equivalente</strong>, buscamos uma <strong>equisatisfatível</strong>: satisfatível
-    se e somente se a original for. Para isso, criamos uma variável nova para cada subfórmula e escrevemos cláusulas que
-    a definem. Para <code>t ↔ (a ∧ b)</code>, por exemplo:
+    se e somente se a original for. Para isso, criamos uma variável nova (o apelido) para cada subfórmula e escrevemos
+    cláusulas que a definem. Para <code>t ↔ (a ∧ b)</code>, por exemplo:
   </p>
   <pre><code>(¬t ∨ a) ∧ (¬t ∨ b) ∧ (t ∨ ¬a ∨ ¬b)</code></pre>
   <p>
@@ -172,6 +204,10 @@
     é modelo da fórmula original. É assim que ferramentas reais geram entradas para resolvedores SAT. O exemplo de entrega
     da <a href="apresentacao1-exemplo-entrega.html#fnc">Apresentação 1</a> implementa e testa essa transformação.
   </p>
+  <div class="callout">
+    <span class="label">Equivalente × equisatisfatível</span>
+    <p><code>p</code> e <code>p ∧ t</code> não são equivalentes (com <code>p = V, t = F</code> os valores diferem), mas são equisatisfatíveis: as duas têm modelo. Para perguntas de SAT, isso basta; para trocar uma fórmula por outra dentro de um programa, não basta.</p>
+  </div>
 
   <div class="callout">
     <span class="label">Erro comum</span>
@@ -184,7 +220,7 @@
       As anotações do Detetive já nascem quase todas em FNC. “Eu tenho a Faca” é a cláusula unitária <code>¬F</code>.
       “Alguém mostrou Mordomo, Faca ou Biblioteca” é a cláusula <code>¬M ∨ ¬F ∨ ¬B</code> (pelo menos uma não está no
       envelope). As regras do envelope são cláusulas de “pelo menos um” e de “no máximo um” (Caso 12). O jogo inteiro é
-      uma grande conjunção de cláusulas, pronta para a resolução.
+      uma grande lista de regras na geladeira, pronta para a resolução.
     </p>
   </div>
 
@@ -210,20 +246,32 @@
 
   <div class="exercise">
     <span class="label">Exercício 3 · Pela tabela</span>
-    <p>A fórmula <code>φ</code> de variáveis <code>p, q</code> é falsa apenas nas linhas <code>(V, F)</code> e <code>(F, F)</code>. Escrevam a sua FNC e simplifique.</p>
+    <p>A fórmula <code>φ</code> de variáveis <code>p, q</code> é falsa apenas nas linhas <code>(V, F)</code> e <code>(F, F)</code>. Escrevam a sua FNC e simplifiquem.</p>
     <details>
       <summary>Ver resposta</summary>
       <p>Linha (V, F) gera <code>¬p ∨ q</code>; linha (F, F) gera <code>p ∨ q</code>. FNC: <code>(¬p ∨ q) ∧ (p ∨ q)</code>, que pela distributividade equivale a <code>q ∨ (¬p ∧ p) ≡ q</code>. Faz sentido: <code>φ</code> é verdadeira exatamente quando <code>q</code> é.</p>
     </details>
   </div>
 
+  <div class="exercise">
+    <span class="label">Exercício 4 · Tseitin à mão</span>
+    <p>Apliquem a transformação de Tseitin a <code>(a ∧ b) ∨ c</code>, usando <code>t₁</code> para <code>a ∧ b</code> e <code>t₂</code> para a fórmula inteira.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <pre><code>t₁ ↔ (a ∧ b):   (¬t₁ ∨ a) ∧ (¬t₁ ∨ b) ∧ (t₁ ∨ ¬a ∨ ¬b)
+t₂ ↔ (t₁ ∨ c):  (¬t₂ ∨ t₁ ∨ c) ∧ (t₂ ∨ ¬t₁) ∧ (t₂ ∨ ¬c)
+raiz:            (t₂)</code></pre>
+      <p>Sete cláusulas. Aqui a distribuição direta daria só duas (<code>(a ∨ c) ∧ (b ∨ c)</code>); Tseitin compensa nas fórmulas grandes, em que a distribuição explode.</p>
+    </details>
+  </div>
+
   <div class="summary">
     <span class="label">Para guardar</span>
     <ul>
-      <li>FNC = conjunção de cláusulas; FND = disjunção de conjunções de literais.</li>
-      <li>Passos: eliminar ↔ e →, empurrar ¬, distribuir ∨ sobre ∧, simplificar.</li>
-      <li>Pela tabela: cada linha F vira uma cláusula da FNC.</li>
-      <li>A distribuição pode explodir; Tseitin gera uma FNC equisatisfatível de tamanho linear.</li>
+      <li>FNC = conjunção de cláusulas (regras da casa); FND = disjunção de conjunções de literais (cardápio de cenários).</li>
+      <li>Passos: eliminar ↔ e →, empurrar ¬ (FNN), distribuir ∨ sobre ∧, simplificar.</li>
+      <li>Pela tabela: cada linha F vira uma cláusula da FNC; cada linha V, um termo da FND. Isso prova que toda fórmula tem as duas formas.</li>
+      <li>A distribuição pode explodir; Tseitin gera uma FNC equisatisfatível de tamanho linear, com apelidos para as subfórmulas.</li>
     </ul>
   </div>
 

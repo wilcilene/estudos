@@ -96,16 +96,25 @@
 <main id="conteudo" class="wrap-narrow"><article class="topic">
 
 <div class="goals">
-    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <span class="label">Ao final deste caso, vocês saberão</span>
     <ul>
       <li>definir equivalência lógica e diferenciar o símbolo <code>≡</code> do conectivo <code>↔</code>;</li>
       <li>usar as principais leis da lógica, com nome;</li>
+      <li>explicar por que é permitido trocar uma subfórmula por outra equivalente (teorema da substituição);</li>
       <li>provar equivalências algebricamente, passo a passo;</li>
       <li>negar corretamente frases com “e”, “ou” e “se... então”, inclusive em código.</li>
     </ul>
   </div>
 
   <h2>O que é equivalência lógica</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Duas receitas diferentes de bolo: uma manda bater os ovos primeiro e depois juntar o açúcar; a outra, o contrário.
+      Se, toda vez que vocês fazem as duas, sai exatamente o mesmo bolo, as receitas são <strong>equivalentes</strong>:
+      escritas de jeitos diferentes, resultado idêntico. Com fórmulas é igual: o “bolo” é a coluna final da tabela.
+    </p>
+  </div>
   <p>
     Duas fórmulas <code>A</code> e <code>B</code> são <strong>logicamente equivalentes</strong>, e eu escrevo
     <code>A ≡ B</code>, quando têm o mesmo valor em <em>todas</em> as valorações, ou seja, a mesma coluna final na
@@ -114,14 +123,24 @@
   <div class="callout">
     <span class="label">Atenção à diferença</span>
     <p>
-      <code>↔</code> é um conectivo: faz parte da linguagem e forma novas fórmulas. <code>≡</code> é uma afirmação
-      <em>sobre</em> fórmulas, feita na metalinguagem. <code>p ↔ q</code> pode ser verdadeira ou falsa;
-      <code>p ≡ q</code> simplesmente é falsa (as colunas de <code>p</code> e <code>q</code> diferem).
+      <code>↔</code> é um conectivo: faz parte da linguagem e forma novas fórmulas, como uma peça de Lego. <code>≡</code>
+      é uma afirmação <em>sobre</em> fórmulas, feita na metalinguagem, como o carimbo de um inspetor dizendo “estas duas
+      peças são intercambiáveis”. <code>p ↔ q</code> pode ser verdadeira ou falsa conforme a linha; <code>p ≡ q</code>
+      simplesmente é falsa (as colunas de <code>p</code> e <code>q</code> diferem).
     </p>
   </div>
+  <p>
+    A relação <code>≡</code> é uma <strong>relação de equivalência</strong> no sentido matemático: é reflexiva
+    (<code>A ≡ A</code>), simétrica (se <code>A ≡ B</code>, então <code>B ≡ A</code>) e transitiva (se <code>A ≡ B</code> e
+    <code>B ≡ C</code>, então <code>A ≡ C</code>). A transitividade é o que permite encadear passos numa prova algébrica.
+  </p>
 
   <h2>As leis da lógica</h2>
-  <p>Estas equivalências aparecem tanto que ganharam nome. Todas podem ser verificadas por tabela-verdade; vocês devem saber usá-las sem consultar.</p>
+  <p>
+    Estas equivalências aparecem tanto que ganharam nome. Pensem nelas como as regras da aritmética que vocês usam sem
+    pensar (<code>x + 0 = x</code>, <code>x · 1 = x</code>, <code>a · (b + c) = a·b + a·c</code>): todas podem ser verificadas
+    por tabela-verdade, e vocês devem saber usá-las sem consultar.
+  </p>
   <div class="table-wrap">
     <table class="tbl">
       <thead><tr><th>Lei</th><th>Forma com ∧</th><th>Forma com ∨</th></tr></thead>
@@ -151,15 +170,41 @@
       </tbody>
     </table>
   </div>
+  <div class="imagine">
+    <span class="label">De Morgan, explicado para uma criança</span>
+    <p>
+      “Não é verdade que eu comi bolo <strong>e</strong> sorvete” quer dizer que pelo menos um dos dois eu não comi:
+      “não comi bolo <strong>ou</strong> não comi sorvete”. Já “não é verdade que eu comi bolo <strong>ou</strong> sorvete”
+      quer dizer que não comi nenhum: “não comi bolo <strong>e</strong> não comi sorvete”. Quando o “não” entra nos
+      parênteses, o “e” vira “ou” e o “ou” vira “e”.
+    </p>
+  </div>
   <p>
     Reparem na simetria da primeira tabela: trocando <code>∧</code> por <code>∨</code> e <code>⊤</code> por <code>⊥</code>,
-    uma coluna vira a outra. Isso se chama <strong>princípio da dualidade</strong>, e ajuda a memorizar.
+    uma coluna vira a outra. Isso se chama <strong>princípio da dualidade</strong>: se uma equivalência vale (sem
+    <code>→</code> e <code>↔</code>), a sua dual também vale. Ele ajuda a memorizar e corta o trabalho pela metade.
+  </p>
+
+  <h2>Por que podemos trocar pedaços: o teorema da substituição</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Um quebra-cabeça em que duas peças têm exatamente o mesmo encaixe. Vocês podem trocar uma pela outra em qualquer
+      lugar da montagem, e o desenho final continua o mesmo.
+    </p>
+  </div>
+  <p>
+    O <strong>teorema da substituição</strong> diz: se <code>A ≡ B</code> e <code>A</code> aparece como subfórmula de
+    <code>C</code>, então trocar essa ocorrência de <code>A</code> por <code>B</code> dá uma fórmula equivalente a
+    <code>C</code>. A prova é uma indução estrutural (Caso 03): pela composicionalidade, o valor de <code>C</code> só
+    depende do valor da subfórmula, e <code>A</code> e <code>B</code> têm sempre o mesmo valor. É esse teorema que autoriza
+    as provas algébricas a seguir.
   </p>
 
   <h2>Provas algébricas: reescrevendo passo a passo</h2>
   <p>
-    Como equivalência é uma relação de substituição, vocês podem trocar qualquer subfórmula por outra equivalente sem
-    mudar o significado do todo. Uma <strong>prova algébrica</strong> é uma cadeia de reescritas, cada uma justificada por uma lei.
+    Uma <strong>prova algébrica</strong> é uma cadeia de reescritas, cada uma justificada por uma lei, como simplificar
+    uma expressão na matemática do ensino médio. A transitividade garante que o primeiro elo é equivalente ao último.
   </p>
   <div class="evidence-box">
     <span class="label">Simplificando uma pista confusa</span>
@@ -181,6 +226,7 @@
         <tr><td>O Mordomo e a Cozinheira estavam na sala.</td><td>O Mordomo não estava na sala <strong>ou</strong> a Cozinheira não estava.</td></tr>
         <tr><td>A arma é a Faca ou o Veneno.</td><td>A arma não é a Faca <strong>e</strong> não é o Veneno.</td></tr>
         <tr><td>Se o Jardineiro é culpado, ele usou a Pá.</td><td>O Jardineiro é culpado <strong>e</strong> não usou a Pá.</td></tr>
+        <tr><td>O crime foi na Sala se e somente se foi com a Corda.</td><td>Foi na Sala sem a Corda, <strong>ou</strong> foi com a Corda fora da Sala.</td></tr>
       </tbody>
     </table>
   </div>
@@ -193,8 +239,8 @@
   <p>
     Vocês aplicam essas leis ao refatorar código. A condição <code>if (!(logado &amp;&amp; admin))</code> é, por De Morgan,
     <code>if (!logado || !admin)</code>. Um <code>while (!(fim || erro))</code> vira <code>while (!fim &amp;&amp; !erro)</code>.
-    Em circuitos, simplificar a fórmula significa usar menos portas lógicas. E, no Caso 13, essas mesmas leis vão converter
-    qualquer fórmula para a forma normal conjuntiva.
+    Em circuitos, simplificar a fórmula significa usar menos portas lógicas, gastar menos energia e ocupar menos área no
+    chip. E, no Caso 13, essas mesmas leis convertem qualquer fórmula para a forma normal conjuntiva.
   </p>
 
   <div class="detetive">
@@ -236,13 +282,26 @@
     </details>
   </div>
 
+  <div class="exercise">
+    <span class="label">Exercício 4 · Absorção a partir de outras leis</span>
+    <p>Provem a absorção <code>p ∨ (p ∧ q) ≡ p</code> usando identidade, distributividade e dominação.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <pre><code>p ∨ (p ∧ q)
+≡ (p ∧ ⊤) ∨ (p ∧ q)      identidade
+≡ p ∧ (⊤ ∨ q)            distributividade (da direita para a esquerda)
+≡ p ∧ ⊤                  dominação
+≡ p                      identidade</code></pre>
+    </details>
+  </div>
+
   <div class="summary">
     <span class="label">Para guardar</span>
     <ul>
-      <li><code>A ≡ B</code> ⇔ mesma coluna na tabela ⇔ <code>A ↔ B</code> é tautologia.</li>
+      <li><code>A ≡ B</code> ⇔ mesma coluna na tabela ⇔ <code>A ↔ B</code> é tautologia (duas receitas, mesmo bolo).</li>
       <li>De Morgan, condicional, dupla negação, distributividade e absorção são as leis mais usadas.</li>
       <li>¬(p → q) ≡ p ∧ ¬q: a negação de um condicional é uma conjunção.</li>
-      <li>Substituir por equivalentes nunca muda o significado: é assim que simplificamos fórmulas, código e circuitos.</li>
+      <li>O teorema da substituição autoriza trocar subfórmulas por equivalentes; a transitividade encadeia os passos.</li>
     </ul>
   </div>
 

@@ -96,7 +96,7 @@
 <main id="conteudo" class="wrap-narrow"><article class="topic">
 
 <div class="goals">
-    <span class="label">Ao final deste caso, vocês vão saber</span>
+    <span class="label">Ao final deste caso, vocês saberão</span>
     <ul>
       <li>definir valoração e calcular quantas linhas uma tabela-verdade tem;</li>
       <li>montar a tabela de forma sistemática, sem esquecer nem repetir linhas;</li>
@@ -107,16 +107,42 @@
   </div>
 
   <h2>Valoração: um cenário completo</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Um painel com vários interruptores, um para cada variável. Uma <strong>valoração</strong> é uma foto do painel:
+      para cada interruptor, se ele está ligado (V) ou desligado (F). Mudou um interruptor? É outra foto, outra valoração.
+    </p>
+  </div>
   <p>
-    Uma <strong>valoração</strong> (ou interpretação) é uma atribuição de V ou F a cada variável da fórmula. Cada valoração
-    é um “mundo possível”: um jeito de as coisas poderem ser. A semântica da lógica proposicional define, para cada
-    valoração, o valor da fórmula inteira, conectivo por conectivo, de dentro para fora, usando a tabela do Caso 04.
+    Com palavras de adulto: uma <strong>valoração</strong> (ou interpretação) é uma atribuição de V ou F a cada variável
+    da fórmula. Cada valoração é um “mundo possível”: um jeito de as coisas poderem ser. A semântica da lógica
+    proposicional define, para cada valoração, o valor da fórmula inteira, conectivo por conectivo, de dentro para fora,
+    usando a tabela do Caso 04. É como resolver uma conta com parênteses: primeiro o de dentro, depois o de fora.
   </p>
   <p>
-    A <strong>tabela-verdade</strong> lista todas as valorações possíveis e o valor da fórmula em cada uma. Com
-    <code>n</code> variáveis distintas, cada uma tem 2 valores possíveis, então existem <code>2 · 2 · ... · 2 = 2ⁿ</code> valorações,
-    ou seja, <code>2ⁿ</code> linhas.
+    A <strong>tabela-verdade</strong> lista todas as valorações possíveis e o valor da fórmula em cada uma: é o álbum com
+    todas as fotos possíveis do painel.
   </p>
+
+  <h2>Quantas linhas? Contando com uma árvore</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Uma criança tem 2 camisetas e 2 bermudas. Quantas roupas diferentes ela monta? Para cada camiseta, 2 bermudas:
+      <code>2 × 2 = 4</code>. Se ganhar 2 bonés, cada uma das 4 roupas vira 2: <code>4 × 2 = 8</code>. Cada peça nova com 2 opções
+      <strong>dobra</strong> o total.
+    </p>
+  </div>
+  <p>
+    Com variáveis é igual: cada variável nova tem 2 valores e dobra o número de cenários. Com <code>n</code> variáveis
+    distintas, existem <code>2 · 2 · ... · 2 = 2ⁿ</code> valorações, ou seja, <code>2ⁿ</code> linhas. Dá para ver isso
+    numa árvore em que cada nível decide uma variável:
+  </p>
+  <pre><code>                    início
+               p=V /        \ p=F
+              q=V/ \q=F   q=V/ \q=F
+             r: V F  V F  V F  V F     → 8 folhas = 8 linhas</code></pre>
 
   <h2>Montando a tabela sem esquecer nenhuma linha</h2>
   <p>Eu sigo sempre o mesmo método, e recomendo que vocês façam igual:</p>
@@ -126,9 +152,17 @@
     <li>Criem uma coluna para cada subfórmula, das mais internas para as mais externas.</li>
     <li>A última coluna é a da fórmula inteira (o conectivo principal).</li>
   </ol>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      O hodômetro de um carro antigo, aqueles de rodinhas com números. A rodinha da direita gira a cada quilômetro; a do
+      meio só gira quando a da direita completa a volta; a da esquerda, mais devagar ainda. As colunas da tabela fazem a
+      mesma coisa, só que cada rodinha tem apenas dois números: V e F.
+    </p>
+  </div>
   <p>
     Esse padrão é o mesmo de contar em binário de trás para frente: se V = 1 e F = 0, as linhas vão de 111 a 000.
-    Vamos usar essa observação no Caso 11 para gerar todas as valorações com um laço de 0 a <code>2ⁿ − 1</code>.
+    Usaremos essa observação no Caso 11 para gerar todas as valorações com um laço de 0 a <code>2ⁿ − 1</code>.
   </p>
 
   <h2>Exemplo completo: uma pista com três variáveis</h2>
@@ -149,25 +183,43 @@
       </tbody>
     </table>
   </div>
+  <p>Leiam a linha destacada devagar, como se fosse uma conta:</p>
+  <ol>
+    <li><code>p = V</code> e <code>q = V</code>, então <code>p ∧ q = V</code> (as duas fechaduras abertas).</li>
+    <li><code>r = F</code>.</li>
+    <li><code>V → F</code> é a promessa quebrada, então a fórmula vale F.</li>
+  </ol>
   <p>
-    A única linha falsa é a destacada: crime na Biblioteca, Mordomo culpado e arma diferente do Candelabro. Isso faz
-    sentido: é o único cenário que contradiz a pista. Em todos os outros, a pista não é desmentida.
+    A única linha falsa é essa: crime na Biblioteca, Mordomo culpado e arma diferente do Candelabro. Isso faz sentido:
+    é o único cenário que contradiz a pista. Em todos os outros, a pista não é desmentida.
   </p>
 
   <h2>Atalho: a avaliação reversa</h2>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      Em vez de testar todas as chaves de um molho para ver se alguma abre a porta errada, o detetive pensa ao contrário:
+      “para essa porta abrir, o que teria de acontecer?”. Se a resposta levar a um absurdo, nenhuma chave abre.
+    </p>
+  </div>
   <p>
     Muitas vezes vocês não precisam da tabela inteira, só querem saber se a fórmula <em>pode</em> ser falsa. Nesse caso,
     comecem pelo fim: suponham a fórmula falsa e vejam o que isso obriga.
   </p>
   <div class="evidence-box">
     <span class="label">Avaliação reversa de (p → q) → (¬q → ¬p)</span>
-    <pre><code>Suponha a fórmula F.
+    <pre><code>Suponham a fórmula F.
 Um → só é F com antecedente V e consequente F:
    (p → q) = V   e   (¬q → ¬p) = F
 (¬q → ¬p) = F obriga ¬q = V e ¬p = F, ou seja, q = F e p = V.
 Mas então (p → q) = (V → F) = F, contradizendo (p → q) = V.</code></pre>
-    <p>Não existe valoração que torne a fórmula falsa. Ela é sempre verdadeira, e provamos isso sem montar 4 linhas. No Caso 06 vamos dar nome a essas fórmulas.</p>
+    <p>Não existe valoração que torne a fórmula falsa. Ela é sempre verdadeira, e provamos isso sem montar 4 linhas. No Caso 06 essas fórmulas ganham nome.</p>
   </div>
+  <p>
+    Às vezes a avaliação reversa chega a uma <strong>bifurcação</strong>: por exemplo, para <code>p ∨ q</code> ser V, pode
+    ser <code>p</code>, pode ser <code>q</code>. Aí vocês testam um ramo de cada vez. Esse “testar um ramo, voltar e
+    testar o outro” é exatamente a ideia do algoritmo DPLL do Caso 12.
+  </p>
 
   <h2>O problema do crescimento exponencial</h2>
   <div class="table-wrap">
@@ -182,10 +234,19 @@ Mas então (p → q) = (V → F) = F, contradizendo (p → q) = V.</code></pre>
       </tbody>
     </table>
   </div>
+  <div class="imagine">
+    <span class="label">Imaginem…</span>
+    <p>
+      A lenda do tabuleiro de xadrez: um grão de arroz na primeira casa, 2 na segunda, 4 na terceira, sempre dobrando. Na
+      casa 64 não existe arroz suficiente no mundo. A tabela-verdade cresce do mesmo jeito: cada variável dobra o trabalho.
+    </p>
+  </div>
   <p>
     A tabela-verdade é um <strong>procedimento de decisão</strong>: ela sempre termina e sempre dá a resposta certa. O
     problema é o custo. Grande parte da disciplina, dos sistemas dedutivos à resolução, é a busca por caminhos que
-    evitem montar todas as linhas.
+    evitem montar todas as linhas. E um detalhe para quem gosta de contar: com <code>n</code> variáveis, existem
+    <code>2^(2ⁿ)</code> colunas finais diferentes possíveis, ou seja, <code>2^(2ⁿ)</code> fórmulas não equivalentes.
+    Com 3 variáveis, já são 256.
   </p>
 
   <div class="detetive">
@@ -200,7 +261,7 @@ Mas então (p → q) = (V → F) = F, contradizendo (p → q) = V.</code></pre>
 
   <div class="exercise">
     <span class="label">Exercício 1 · Tabela com duas variáveis</span>
-    <p>Construam a tabela-verdade de <code>¬p ∨ q</code> e compare com a coluna de <code>p → q</code>.</p>
+    <p>Construam a tabela-verdade de <code>¬p ∨ q</code> e comparem com a coluna de <code>p → q</code>.</p>
     <details>
       <summary>Ver resposta</summary>
       <div class="table-wrap">
@@ -239,13 +300,22 @@ Mas então (p → q) = (V → F) = F, contradizendo (p → q) = V.</code></pre>
     </details>
   </div>
 
+  <div class="exercise">
+    <span class="label">Exercício 4 · Contando sem montar</span>
+    <p>Sem montar a tabela, digam em quantas das 16 linhas a fórmula <code>p ∧ q ∧ r ∧ s</code> é verdadeira, e em quantas <code>p ∨ q ∨ r ∨ s</code> é falsa.</p>
+    <details>
+      <summary>Ver resposta</summary>
+      <p>A conjunção só é V quando todas são V: 1 linha. A disjunção só é F quando todas são F: também 1 linha. Logo, ela é verdadeira em 15.</p>
+    </details>
+  </div>
+
   <div class="summary">
     <span class="label">Para guardar</span>
     <ul>
-      <li>Valoração = atribuição de V/F às variáveis; com <code>n</code> variáveis, há <code>2ⁿ</code> valorações.</li>
-      <li>Avaliem de dentro para fora, com uma coluna por subfórmula.</li>
+      <li>Valoração = foto do painel de interruptores; com <code>n</code> variáveis, há <code>2ⁿ</code> valorações.</li>
+      <li>Colunas como um hodômetro binário; avaliem de dentro para fora, com uma coluna por subfórmula.</li>
       <li>Para saber se uma fórmula pode ser falsa, suponham-na falsa e propaguem as consequências.</li>
-      <li>A tabela-verdade sempre funciona, mas cresce exponencialmente.</li>
+      <li>A tabela-verdade sempre funciona, mas cresce exponencialmente, como o arroz no tabuleiro.</li>
     </ul>
   </div>
 
