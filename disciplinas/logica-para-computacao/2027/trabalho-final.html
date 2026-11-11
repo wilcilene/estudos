@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trabalho Final: Motores de Inferência | Lógica para Computação</title>
+<meta name="description" content="Trabalho final de Lógica para Computação em duplas: construir um sistema de inferência em Prolog e Python, com unificação, resolução e SAT, para um de cinco contextos complexos que recebem dados de entrada e chegam a conclusões por regras.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/trabalho-final.html">
+<meta name="theme-color" content="#EFE6D2">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lógica para Computação — Guia de Estudos">
+<meta property="og:title" content="Trabalho Final: Motores de Inferência">
+<meta property="og:description" content="Cinco contextos complexos para serem resolvidos com Prolog, unificação, resolução e SAT.">
+<meta property="og:url" content="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/trabalho-final.html">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Trabalho Final: Motores de Inferência",
+    "description": "Trabalho final em duplas de Lógica para Computação: sistemas de inferência em Prolog e Python com unificação, resolução e SAT para cinco contextos complexos.",
+    "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/trabalho-final.html",
+    "inLanguage": "pt-BR",
+    "learningResourceType": "Projeto",
+    "educationalLevel": "Ensino Superior",
+    "teaches": ["Lógica proposicional", "Linguagem e semântica", "Sistemas dedutivos", "Aspectos computacionais", "Princípio da resolução", "Lógica de predicados", "Substituição e resolução"],
+    "author": { "@type": "Person", "name": "Wilcilene Kowal" },
+    "isPartOf": {
+      "@type": "Course",
+      "name": "Lógica para Computação",
+      "url": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/",
+      "provider": { "@type": "EducationalOrganization", "name": "Instituto Federal Catarinense — Campus São Bento do Sul" }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Lógica para Computação", "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/" },
+      { "@type": "ListItem", "position": 2, "name": "Trabalho Final: Motores de Inferência", "item": "https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/2027/trabalho-final.html" }
+    ]
+  }
+]
+</script>
+
+<style>
+/* Estilos próprios do trabalho final (o restante vem de assets/css/style.css) */
+.toc-tf{ list-style:none; padding:0 !important; margin: 1rem 0 2rem !important; display:flex; flex-wrap:wrap; gap:0.4rem; }
+.toc-tf li{ margin:0 !important; }
+.toc-tf a{ display:block; font-family:"IBM Plex Mono", monospace; font-size:0.76rem; text-decoration:none; padding:0.3rem 0.7rem; border:1px solid var(--line-strong); border-radius:999px; background: var(--paper-card); color: var(--ink-soft); }
+.toc-tf a:hover{ color: var(--crime-dark); border-color: var(--ink); }
+.contexto{ background: var(--paper-card); border:1px solid var(--line-strong); border-left: 6px solid var(--brass); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.25rem 1.3rem; margin: 2rem 0; }
+.contexto > h3{ margin-top: 0.2rem !important; font-size: 1.3rem !important; }
+.contexto .meta{ font-family:"IBM Plex Mono", monospace; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.07em; color: var(--brass-dark); }
+.contexto h4{ font-family:"IBM Plex Mono", monospace; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.07em; color: var(--ink-soft); margin: 1.3rem 0 0.45rem; }
+.selos{ display:flex; flex-wrap:wrap; gap:0.4rem; margin: 0.4rem 0 0.8rem; }
+.selos span{ font-family:"IBM Plex Mono", monospace; font-size:0.72rem; padding:0.18rem 0.55rem; border-radius:999px; border:1px solid var(--line-strong); background: var(--paper); }
+.tbl td.pts{ font-family:"IBM Plex Mono", monospace; text-align:center; white-space:nowrap; font-weight:600; }
+.tbl tfoot td{ font-weight:700; background: rgba(195,179,135,0.25); }
+.contexto pre{ max-height: 28rem; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">§</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="case-number mono">Trabalho final</span>
+  </div>
+</header>
+
+<nav class="wrap-narrow breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">← Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap-narrow case-header">
+  <span class="case-tag crime mono">Trabalho final · em duplas · nível difícil</span>
+  <h1>Motores de Inferência: do fato à conclusão</h1>
+  <p class="lede">
+    No estudo de caso do diagnóstico médico, vocês viram uma base pequena de regras chegar a uma conclusão por
+    substituição, unificação e resolução. Agora vocês construirão o sistema de verdade: um programa que recebe dados de
+    entrada, aplica regras lógicas e chega a resultados que ele consegue justificar.
+  </p>
+</div>
+
+<main id="conteudo" class="wrap-narrow"><article class="topic">
+
+  <nav aria-label="Seções do trabalho">
+    <ul class="toc-tf">
+      <li><a href="#visao">Visão geral</a></li>
+      <li><a href="#modulos">O que construir</a></li>
+      <li><a href="#tecnico">Requisitos técnicos</a></li>
+      <li><a href="#contextos">Os cinco contextos</a></li>
+      <li><a href="#entregas">Entregas</a></li>
+      <li><a href="#etapas">Etapas</a></li>
+      <li><a href="#avaliacao">Avaliação</a></li>
+    </ul>
+  </nav>
+
+  <!-- VISÃO GERAL -->
+  <section aria-labelledby="visao">
+    <h2 id="visao">Visão geral</h2>
+    <p>
+      Cada dupla escolhe <strong>um dos cinco contextos</strong> descritos abaixo e constrói um <strong>sistema de
+      inferência</strong> para ele. O sistema recebe valores de entrada (fatos de um caso concreto), aplica as regras do
+      contexto e responde a perguntas, sempre com uma <strong>explicação</strong> de como chegou à resposta.
+    </p>
+    <p>
+      Implementar com as próprias mãos as ideias centrais da disciplina: a linguagem de
+      predicados, a unificação, a resolução e a satisfatibilidade.
+    </p>
+
+    <div class="table-wrap">
+      <table class="tbl">
+        <caption>Como a ementa aparece no trabalho</caption>
+        <thead><tr><th scope="col">Item da ementa</th><th scope="col">Onde ele aparece no sistema</th><th scope="col">Casos de apoio</th></tr></thead>
+        <tbody>
+          <tr><td>Lógica proposicional</td><td>Camada SAT: o domínio finito de cada entrada vira variáveis proposicionais.</td><td><a href="topico-02-proposicoes.html">02</a>–<a href="topico-04-conectivos-logicos.html">04</a></td></tr>
+          <tr><td>Linguagem e semântica</td><td>Vocabulário formal do contexto; avaliação de regras sobre a estrutura definida pela entrada.</td><td><a href="topico-03-linguagem-formal.html">03</a>, <a href="topico-05-tabelas-verdade.html">05</a>–<a href="topico-08-consequencia-logica.html">08</a>, <a href="topico-18-semantica-predicados.html">18</a></td></tr>
+          <tr><td>Sistemas dedutivos</td><td>Árvore de prova que justifica cada resposta.</td><td><a href="topico-09-sistemas-dedutivos.html">09</a>, <a href="topico-10-demonstracoes.html">10</a></td></tr>
+          <tr><td>Aspectos computacionais</td><td>Representação das fórmulas como dados, FNC, Tseitin, DIMACS e DPLL.</td><td><a href="topico-11-representacao-computacional.html">11</a>–<a href="topico-14-clausulas.html">14</a></td></tr>
+          <tr><td>Princípio da resolução</td><td>Consequência por refutação: premissas + negação da conclusão levam a <code>□</code>.</td><td><a href="topico-15-principio-da-resolucao.html">15</a>, <a href="topico-16-algoritmo-de-resolucao.html">16</a></td></tr>
+          <tr><td>Lógica de predicados</td><td>Regras escritas uma vez, com variáveis e quantificadores, valendo para qualquer entrada.</td><td><a href="topico-17-logica-de-predicados.html">17</a>, <a href="topico-18-semantica-predicados.html">18</a></td></tr>
+          <tr><td>Substituição e resolução</td><td>Motor próprio em Python, com unificação (incluindo verificação de ocorrência) e resolução SLD.</td><td><a href="topico-19-substituicao-unificacao.html">19</a>, <a href="topico-20-resolucao-predicados.html">20</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- MÓDULOS -->
+  <section aria-labelledby="modulos">
+    <h2 id="modulos">O que construir: seis módulos</h2>
+    <p>Todos os contextos exigem os mesmos seis módulos. O peso de cada um varia conforme o contexto, como indicado em cada dossiê.</p>
+
+    <div class="goals">
+      <span class="label">M1 · Modelagem formal</span>
+      <ul>
+        <li>Vocabulário de primeira ordem: constantes, predicados (com aridade) e funções, cada um com o seu significado.</li>
+        <li>Todas as regras do contexto escritas em lógica de predicados, com quantificadores explícitos.</li>
+        <li>Conversão das regras para forma clausal (incluindo skolemização, quando houver <code>∃</code>).</li>
+        <li>Pelo menos uma derivação por resolução, com os unificadores de cada passo.</li>
+      </ul>
+    </div>
+
+    <div class="goals">
+      <span class="label">M2 · Base de conhecimento em Prolog ou Python ou outra linguagem de representação de conhecimento (fatos, regras e consultas).</span>
+      <ul>
+        <li>Regras do contexto, separadas dos fatos de entrada.</li>
+        <li>Fatos gerados automaticamente a partir do arquivo de entrada (JSON).</li>
+        <li>Consultas que respondem a todas as perguntas do contexto.</li>
+        <li>Um <strong>meta-interpretador</strong> <code>prova(Objetivo, Arvore)</code> que devolve a árvore de prova usada como explicação.</li>
+      </ul>
+    </div>
+
+    <div class="goals">
+      <span class="label">M3 · Motor de inferência próprio em Python</span>
+      <ul>
+        <li>Representação de termos, átomos e cláusulas (Caso 11).</li>
+        <li>Unificação com verificação de ocorrência e composição de substituições (Caso 19).</li>
+        <li>Resolução SLD (encadeamento para trás) sobre cláusulas de Horn, com renomeação de variáveis, limite de profundidade e detecção de laços.</li>
+        <li>As mesmas respostas do Prolog para as mesmas consultas, conferidas por testes automatizados.</li>
+      </ul>
+    </div>
+
+    <div class="goals">
+      <span class="label">M4 · Camada proposicional e SAT</span>
+      <ul>
+        <li><em>Grounding</em>: instanciar as regras para o domínio finito da entrada, gerando variáveis proposicionais.</li>
+        <li>Conversão para FNC.</li>
+        <li>DPLL implementado, com propagação unitária e retrocesso.</li>
+        <li>Uso do SAT para três perguntas: a entrada é consistente? Esta conclusão é consequência (por refutação)? Quantos modelos existem?</li>
+      </ul>
+    </div>
+
+    <div class="goals">
+      <span class="label">M5 · Interface e explicação</span>
+      <ul>
+        <li>Linha de comando que recebe o arquivo de entrada e a pergunta, por exemplo: <code>python main.py --entrada caso1.json --pergunta envelope</code>.</li>
+        <li>Saída legível: resposta, regras usadas, substituições aplicadas e, quando houver, o motivo de a pergunta não ter resposta única.</li>
+      </ul>
+    </div>
+
+    <div class="goals">
+      <span class="label">M6 · Testes</span>
+      <ul>
+        <li>Todos os casos de aceitação do contexto escolhido (abaixo) passando com <code>pytest</code>.</li>
+        <li>Pelo menos oito casos criados pela dupla, incluindo uma entrada inconsistente e uma entrada em que a resposta não é única.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- REQUISITOS TÉCNICOS -->
+  <section aria-labelledby="tecnico">
+    <h2 id="tecnico">Requisitos técnicos</h2>
+    <div class="table-wrap">
+      <table class="tbl">
+        <thead><tr><th scope="col">Item</th><th scope="col">Exigência</th></tr></thead>
+        <tbody>
+          <tr><td>Linguagens</td><td>sugestão: SWI-Prolog (M2)e Python 3.10 ou superior.</td></tr>
+          <tr><td>Bibliotecas</td><td>Unificação, resolução e DPLL implementados pela dupla. Resolvedores prontos (como <code>pycosat</code>, <code>python-sat</code> ou <code>pyswip</code>) só podem ser usados para <strong>conferir</strong> resultados nos testes.</td></tr>
+          <tr><td>Entrada</td><td>Um arquivo JSON por caso, no formato definido pela dupla a partir do exemplo do contexto.</td></tr>
+          <tr><td>Repositório</td><td>GitHub, com histórico de commits das duas pessoas da dupla, <code>README.md</code> com instruções de execução e pasta <code>casos/</code> com as entradas.</td></tr>
+          <tr><td>Reprodutibilidade</td><td>Um comando para rodar todos os testes (<code>pytest</code>) e um para rodar o sistema com qualquer entrada.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CONTEXTOS -->
+  <section aria-labelledby="contextos">
+    <h2 id="contextos">Os cinco contextos</h2>
+    <p>
+      Cada contexto traz a narrativa, as entradas e as saídas esperadas, um vocabulário sugerido, as regras mínimas, o que o
+      torna difícil, um exemplo de entrada e os <strong>casos de aceitação</strong>, com as respostas que o sistema precisa
+      produzir. As respostas dos casos de aceitação foram conferidas por enumeração exaustiva.
+    </p>
+
+    <!-- CONTEXTO 1 -->
+    <div class="contexto" id="contexto-1">
+      <span class="meta">Contexto 1</span>
+      <h3>O Detetive automático</h3>
+      <div class="selos"><span>disjunções</span><span>restrições de cardinalidade</span><span>contagem de modelos</span><span>peso maior: M4</span></div>
+      <p>
+        Um assistente de anotações para o jogo Detetive. Ele recebe as cartas da sua mão e o histórico de palpites da partida
+        (quem palpitou, quem passou, quem mostrou e, quando foi para vocês, qual carta) e deduz o que for possível sobre o
+        envelope e sobre as mãos dos outros jogadores.
+      </p>
+      <h4>Entradas</h4>
+      <ul>
+        <li>Listas de suspeitos, armas e locais; jogadores na ordem da mesa; quantidade de cartas na mão de cada jogador.</li>
+        <li>As cartas da sua mão.</li>
+        <li>A sequência de eventos: palpite, jogadores que passaram, jogador que mostrou e, se vocês viram, a carta.</li>
+      </ul>
+      <h4>Saídas</h4>
+      <ul>
+        <li>Os envelopes ainda possíveis (e quantos são).</li>
+        <li>As cartas cuja localização é certa (envelope ou mão de um jogador específico).</li>
+        <li>A acusação, quando o envelope estiver determinado, com a prova por refutação.</li>
+        <li>Bônus: o palpite que mais reduz o número de envelopes possíveis.</li>
+      </ul>
+      <h4>Vocabulário sugerido</h4>
+      <pre><code>Suspeito(c)  Arma(c)  Local(c)  Jogador(j)
+Tem(j, c)            a jogadora j tem a carta c
+NoEnvelope(c)        a carta c está no envelope
+Passou(j, e)         j não tinha nenhuma carta do palpite do evento e
+Mostrou(j, e, c)     j mostrou a carta c no evento e (c pode ser desconhecida)</code></pre>
+      <h4>Regras mínimas</h4>
+      <ul>
+        <li>Toda carta está no envelope ou na mão de exatamente um jogador.</li>
+        <li>O envelope tem exatamente um suspeito, uma arma e um local.</li>
+        <li>Cada jogador tem exatamente a quantidade de cartas informada.</li>
+        <li>Quem passou não tem nenhuma das três cartas do palpite.</li>
+        <li>Quem mostrou tem pelo menos uma das três cartas (e, se a carta foi vista, tem aquela carta).</li>
+      </ul>
+      <h4>Onde está a dificuldade</h4>
+      <p>
+        “Mostrou uma das três” é uma disjunção, e “exatamente <em>k</em> cartas” é uma restrição de cardinalidade: nenhuma das
+        duas é de Horn. O Prolog resolve por gerar e testar; o motor SLD do M3 trata as regras de Horn (por exemplo, quem
+        passou não tem a carta); e a camada SAT precisa codificar a cardinalidade em FNC e <strong>enumerar</strong> os
+        modelos, acrescentando a cada modelo encontrado a cláusula que o bloqueia.
+      </p>
+      <h4>Exemplo de entrada</h4>
+      <pre><code>{
+  "suspeitos": ["mordomo", "cozinheira", "jardineiro"],
+  "armas":     ["faca", "veneno", "pa"],
+  "locais":    ["biblioteca", "cozinha", "jardim"],
+  "jogadores": ["j1", "j2", "j3"],
+  "eu": "j1",
+  "cartas_na_mao": {"j1": 2, "j2": 2, "j3": 2},
+  "minha_mao": ["mordomo", "faca"],
+  "eventos": [
+    {"palpite_de": "j1", "palpite": ["cozinheira", "veneno", "biblioteca"],
+     "passaram": ["j2"], "mostrou": "j3", "carta_vista": "biblioteca"},
+    {"palpite_de": "j2", "palpite": ["jardineiro", "pa", "cozinha"],
+     "passaram": ["j3", "j1"], "mostrou": null},
+    {"palpite_de": "j3", "palpite": ["jardineiro", "veneno", "cozinha"],
+     "passaram": ["j1"], "mostrou": "j2", "carta_vista": null},
+    {"palpite_de": "j1", "palpite": ["mordomo", "faca", "jardim"],
+     "passaram": [], "mostrou": "j2", "carta_vista": "jardim"}
+  ]
+}</code></pre>
+      <h4>Casos de aceitação</h4>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th scope="col">Eventos considerados</th><th scope="col">Resposta esperada</th></tr></thead>
+          <tbody>
+            <tr><td>1 e 2</td><td>5 envelopes possíveis: (cozinheira, pá, cozinha), (cozinheira, pá, jardim), (cozinheira, veneno, cozinha), (jardineiro, veneno, cozinha), (jardineiro, veneno, jardim). Localizações certas: mordomo e faca com j1; biblioteca com j3.</td></tr>
+            <tr><td>1 a 3</td><td>4 envelopes: sai (jardineiro, veneno, cozinha).</td></tr>
+            <tr><td>1 a 4</td><td>1 envelope: <strong>cozinheira, pá, cozinha</strong>. Distribuição completa: j2 = {jardineiro, jardim}; j3 = {biblioteca, veneno}.</td></tr>
+            <tr><td>1 a 4, mais a pergunta “o crime foi com a faca?”</td><td>Não, e a resposta vem com prova: <code>NoEnvelope(faca)</code> é refutado porque j1 tem a faca.</td></tr>
+            <tr><td>Entrada em que j3 passa no evento 1 e também mostra a biblioteca</td><td>Entrada inconsistente, com indicação das cláusulas em conflito.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CONTEXTO 2 -->
+    <div class="contexto" id="contexto-2">
+      <span class="meta">Contexto 2</span>
+      <h3>A linha do tempo do museu: quem levou a Estrela?</h3>
+      <div class="selos"><span>recursão</span><span>caminhos em grafos</span><span>aritmética de tempo</span><span>depoimentos contraditórios</span><span>peso maior: M2 e M3</span></div>
+      <p>
+        A gata Estrela sumiu do hall principal do museu. O sistema recebe a planta do museu (salas e tempos de deslocamento),
+        registros confiáveis (câmeras, cartões de acesso) e depoimentos das pessoas que estavam no prédio. Ele decide quem
+        poderia fisicamente estar no hall durante a janela do sumiço, quais depoimentos são contraditos pelos registros e
+        quem continua suspeito.
+      </p>
+      <h4>Entradas</h4>
+      <ul>
+        <li>Salas, corredores entre salas e o tempo de deslocamento de cada corredor (em minutos).</li>
+        <li>O local do crime e a janela de tempo.</li>
+        <li>Registros confiáveis: pessoa, sala, instante e fonte.</li>
+        <li>Depoimentos: pessoa, sala e intervalo em que diz ter permanecido ali.</li>
+      </ul>
+      <h4>Saídas</h4>
+      <ul>
+        <li>Quem poderia fisicamente estar no local do crime durante a janela, com o intervalo possível.</li>
+        <li>Depoimentos refutados, com o registro que os contradiz.</li>
+        <li>Suspeitos finais, aceitando como verdadeiros os depoimentos não refutados.</li>
+        <li>Bônus: registros que se contradizem entre si (deslocamento impossível) e o menor conjunto de depoimentos que, se falsos, mudaria o suspeito final.</li>
+      </ul>
+      <h4>Vocabulário sugerido</h4>
+      <pre><code>Corredor(s1, s2, minutos)        Distancia(s1, s2, d)      (caminho mínimo, recursivo)
+Registro(p, sala, instante)      Depoimento(p, sala, de, ate)
+PodeEstar(p, sala, t1, t2)       Refutado(p, sala, de, ate)      Suspeito(p)</code></pre>
+      <h4>Regras mínimas</h4>
+      <ul>
+        <li>A distância entre salas é o menor caminho pelos corredores (o corredor vale nos dois sentidos).</li>
+        <li>Entre dois registros consecutivos <code>(s₁, t₁)</code> e <code>(s₂, t₂)</code> da mesma pessoa, ela pode estar na sala <code>x</code> no intervalo <code>[t₁ + d(s₁, x), t₂ − d(x, s₂)]</code>, se ele não for vazio.</li>
+        <li>Um depoimento <code>(p, s, de, até)</code> é refutado por um registro de <code>p</code> em outra sala num instante entre <code>de</code> e <code>até</code>.</li>
+        <li>Um depoimento não refutado que cobre toda a janela, numa sala diferente do local do crime, inocenta a pessoa.</li>
+      </ul>
+      <h4>Onde está a dificuldade</h4>
+      <p>
+        O menor caminho exige recursão com controle de ciclos (no Prolog e no motor SLD). A comparação de tempos exige
+        aritmética, que a unificação pura não faz: vocês precisarão de predicados embutidos no Prolog e de uma extensão do
+        motor Python para comparações. A camada SAT entra quando os instantes são discretizados (por exemplo, minuto a
+        minuto) e a pergunta é “existe um trajeto consistente com todos os registros?”.
+      </p>
+      <h4>Exemplo de entrada (instantes em minutos depois das 21h)</h4>
+      <pre><code>{
+  "corredores": [["hall", "galeria", 2], ["hall", "cafe", 3],
+                 ["galeria", "reserva", 4], ["cafe", "reserva", 6]],
+  "local_do_crime": "hall",
+  "janela": [14, 30],
+  "registros": [
+    ["guarda", "cafe", 5], ["guarda", "galeria", 20], ["guarda", "cafe", 40],
+    ["curadora", "galeria", 13], ["curadora", "reserva", 20], ["curadora", "reserva", 31],
+    ["faxineiro", "reserva", 10], ["faxineiro", "reserva", 35],
+    ["visitante", "hall", 0], ["visitante", "cafe", 25], ["visitante", "cafe", 40]
+  ],
+  "depoimentos": [
+    ["guarda", "cafe", 5, 40],
+    ["curadora", "reserva", 20, 31],
+    ["faxineiro", "reserva", 10, 35],
+    ["visitante", "cafe", 8, 40]
+  ]
+}</code></pre>
+      <h4>Casos de aceitação</h4>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th scope="col">Pergunta</th><th scope="col">Resposta esperada</th></tr></thead>
+          <tbody>
+            <tr><td>Distâncias</td><td>hall–reserva = 6 (pela galeria); galeria–café = 5; café–reserva = 6.</td></tr>
+            <tr><td>Quem poderia estar no hall entre 21:14 e 21:30?</td><td>guarda (21:14–21:18 e 21:22–21:30), faxineiro (21:16–21:29), visitante (21:14–21:22 e 21:28–21:30). A curadora não: entre 21:13 e 21:20 ela chegaria ao hall às 21:15, mas precisaria sair às 21:14.</td></tr>
+            <tr><td>Depoimentos refutados</td><td>Só o do guarda: ele diz que ficou no café das 21:05 às 21:40, mas há registro dele na galeria às 21:20.</td></tr>
+            <tr><td>Suspeitos finais</td><td><strong>guarda</strong>. Faxineiro e visitante têm depoimentos não refutados que cobrem a janela.</td></tr>
+            <tr><td>Mesma entrada sem o registro do guarda às 21:20</td><td>Nenhum depoimento refutado; o guarda passa a ser inocentado pelo próprio depoimento, e não sobra suspeito: o sistema precisa dizer isso, e não inventar um culpado.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CONTEXTO 3 -->
+    <div class="contexto" id="contexto-3">
+      <span class="meta">Contexto 3</span>
+      <h3>Perícia em circuitos digitais: qual componente queimou?</h3>
+      <div class="selos"><span>diagnóstico por consistência</span><span>SAT incremental</span><span>conjuntos mínimos</span><span>peso maior: M4</span></div>
+      <p>
+        Um circuito digital está dando resultados errados. O sistema recebe a descrição do circuito (portas e ligações), os
+        valores nas entradas e os valores observados nas saídas, e descobre quais combinações de componentes defeituosos
+        explicam o que foi observado. Os conjuntos mínimos de suspeitos são o “laudo” da perícia.
+      </p>
+      <h4>Entradas</h4>
+      <ul>
+        <li>Componentes, com tipo (AND, OR, XOR, NOT) e ligações de entrada e saída.</li>
+        <li>Valores das entradas do circuito e valores observados em algumas saídas (ou pontos internos).</li>
+      </ul>
+      <h4>Saídas</h4>
+      <ul>
+        <li>Se o comportamento observado é compatível com todos os componentes funcionando.</li>
+        <li>Todos os <strong>diagnósticos mínimos</strong>: conjuntos de componentes que, supostos defeituosos, tornam a observação consistente, sem que nenhum subconjunto deles também torne.</li>
+        <li>Bônus: o próximo ponto do circuito que vale a pena medir para separar os diagnósticos.</li>
+      </ul>
+      <h4>Vocabulário sugerido</h4>
+      <pre><code>Porta(c, tipo)   Entrada(c, i, fio)   Saida(c, fio)
+Valor(fio, v)    Anormal(c)
+∀c (Porta(c, and) ∧ ¬Anormal(c) → (Saida(c) = Entrada(c,1) ∧ Entrada(c,2)))</code></pre>
+      <h4>Regras mínimas</h4>
+      <ul>
+        <li>Cada porta não anormal se comporta conforme o seu tipo; uma porta anormal pode ter qualquer saída.</li>
+        <li>Um fio tem um único valor, propagado de quem o produz para quem o usa.</li>
+        <li>Um conjunto <code>Δ</code> é diagnóstico quando “os componentes de <code>Δ</code> são anormais e os demais não” é consistente com as observações.</li>
+      </ul>
+      <h4>Onde está a dificuldade</h4>
+      <p>
+        Cada pergunta de consistência é uma chamada ao SAT. Testar todos os subconjuntos custa <code>2ⁿ</code>; vocês
+        precisarão usar os <strong>conflitos</strong> (conjuntos de componentes que não podem estar todos bons ao mesmo
+        tempo) e calcular os diagnósticos mínimos como os conjuntos mínimos que intersectam todos os conflitos (algoritmo de
+        Reiter). O Prolog modela o circuito de forma elegante; o motor SLD do M3 propaga valores para a frente.
+      </p>
+      <h4>Exemplo de entrada: somador completo</h4>
+      <pre><code>{
+  "portas": {
+    "X1": ["xor", ["a", "b"], "w1"],
+    "X2": ["xor", ["w1", "cin"], "s"],
+    "A1": ["and", ["a", "b"], "w2"],
+    "A2": ["and", ["cin", "w1"], "w3"],
+    "O1": ["or",  ["w2", "w3"], "cout"]
+  },
+  "entradas":   {"a": 1, "b": 0, "cin": 1},
+  "observados": {"s": 1, "cout": 0}
+}</code></pre>
+      <h4>Casos de aceitação</h4>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th scope="col">Observação (com a = 1, b = 0, cin = 1)</th><th scope="col">Resposta esperada</th></tr></thead>
+          <tbody>
+            <tr><td>s = 0, cout = 1</td><td>Consistente com todos os componentes bons: nenhuma falha.</td></tr>
+            <tr><td>s = 1, cout = 0</td><td>Diagnósticos mínimos: <strong>{X1}</strong>, <strong>{X2, A2}</strong>, <strong>{X2, O1}</strong>.</td></tr>
+            <tr><td>s = 0, cout = 0</td><td>Diagnósticos mínimos: {A2}, {O1}, {X1, X2}.</td></tr>
+            <tr><td>Conflitos mínimos para s = 1, cout = 0</td><td>A dupla deve listar os conflitos encontrados e mostrar que os diagnósticos intersectam todos eles.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CONTEXTO 4 -->
+    <div class="contexto" id="contexto-4">
+      <span class="meta">Contexto 4</span>
+      <h3>Guardiões do acervo: controle de acesso por regras</h3>
+      <div class="selos"><span>herança transitiva</span><span>negação</span><span>delegação com validade</span><span>política em conflito</span><span>peso maior: M2 e M3</span></div>
+      <p>
+        O museu precisa decidir, a cada pedido, se uma pessoa pode executar uma ação sobre um recurso naquele horário. As
+        permissões vêm de papéis que herdam permissões de outros papéis, de delegações temporárias e de proibições que
+        sempre têm prioridade (por exemplo, ninguém aprova o próprio pedido). O sistema responde “permitido” ou “negado” e
+        mostra a cadeia de regras que levou à decisão.
+      </p>
+      <h4>Entradas</h4>
+      <ul>
+        <li>Pessoas e seus papéis; hierarquia de papéis; permissões de cada papel.</li>
+        <li>Delegações: quem delega, para quem, qual permissão e em que horário.</li>
+        <li>Proibições: restrição de horário por recurso, separação de funções.</li>
+        <li>O pedido: pessoa, ação, recurso e horário.</li>
+      </ul>
+      <h4>Saídas</h4>
+      <ul>
+        <li>Permitido ou negado, com a prova (papéis percorridos, delegação usada, proibição aplicada).</li>
+        <li>Bônus: verificação da política inteira com SAT, apontando pares de regras que permitem e negam a mesma coisa ao mesmo tempo, e pessoas que acumulam papéis incompatíveis.</li>
+      </ul>
+      <h4>Vocabulário sugerido</h4>
+      <pre><code>Papel(pessoa, papel)      Herda(papel_superior, papel_inferior)
+Permissao(papel, acao, tipo_recurso)
+Delega(de, para, acao, tipo_recurso, inicio, fim)
+Solicitante(pedido, pessoa)     Horario(recurso, inicio, fim)
+Pode(pessoa, acao, recurso, hora)</code></pre>
+      <h4>Regras mínimas</h4>
+      <ul>
+        <li>Um papel herda, de forma transitiva, as permissões dos papéis abaixo dele.</li>
+        <li>Uma delegação só vale no intervalo informado e só se quem delega tem a permissão.</li>
+        <li>Proibições vencem permissões (“negar prevalece”).</li>
+        <li>Ninguém aprova um pedido que ele mesmo fez.</li>
+        <li>A reserva técnica só pode ser acessada das 8h às 18h, exceto pelo papel de segurança.</li>
+      </ul>
+      <h4>Onde está a dificuldade</h4>
+      <p>
+        A proibição usa negação. No Prolog, ela vira negação por falha (<code>\+</code>), que depende da hipótese do mundo
+        fechado (Caso 20); no motor Python, vocês precisarão implementar a negação por falha com cuidado para não aceitar
+        objetivos com variáveis livres. A herança é recursiva e pode ter ciclos mal configurados, que o sistema precisa detectar.
+      </p>
+      <h4>Exemplo de entrada</h4>
+      <pre><code>{
+  "papeis": {"bia": "coordenador", "davi": "tecnico", "edu": "estagiario", "gil": "seguranca"},
+  "herda": [["coordenador", "tecnico"], ["tecnico", "estagiario"]],
+  "permissoes": [["estagiario", "ler", "catalogo"], ["tecnico", "editar", "catalogo"],
+                 ["tecnico", "ler", "reserva_tecnica"], ["coordenador", "aprovar", "emprestimo"],
+                 ["seguranca", "ler", "reserva_tecnica"]],
+  "delegacoes": [["bia", "davi", "aprovar", "emprestimo", 9, 12]],
+  "pedidos": {"p7": "davi", "p8": "edu"},
+  "horarios": {"reserva_tecnica": [8, 18]},
+  "excecoes_de_horario": ["seguranca"]
+}</code></pre>
+      <h4>Casos de aceitação</h4>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th scope="col">Pedido</th><th scope="col">Resposta esperada</th></tr></thead>
+          <tbody>
+            <tr><td>edu, ler, catálogo, 10h</td><td>Permitido (estagiário).</td></tr>
+            <tr><td>edu, editar, catálogo, 10h</td><td>Negado (nenhuma permissão).</td></tr>
+            <tr><td>bia, editar, catálogo, 10h</td><td>Permitido (coordenador herda de técnico).</td></tr>
+            <tr><td>davi, aprovar, p8, 10h</td><td>Permitido (delegação de bia, válida das 9h às 12h).</td></tr>
+            <tr><td>davi, aprovar, p8, 14h</td><td>Negado (delegação fora do horário).</td></tr>
+            <tr><td>davi, aprovar, p7, 10h</td><td>Negado (separação de funções: p7 foi pedido por davi).</td></tr>
+            <tr><td>bia, aprovar, p7, 10h</td><td>Permitido.</td></tr>
+            <tr><td>bia, ler, reserva técnica, 20h</td><td>Negado (fora do horário).</td></tr>
+            <tr><td>gil, ler, reserva técnica, 20h</td><td>Permitido (exceção da segurança).</td></tr>
+            <tr><td>edu, ler, reserva técnica, 10h</td><td>Negado (estagiário não herda de técnico; a herança só desce).</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CONTEXTO 5 -->
+    <div class="contexto" id="contexto-5">
+      <span class="meta">Contexto 5</span>
+      <h3>A grade horária impossível</h3>
+      <div class="selos"><span>codificação em SAT</span><span>enumeração de modelos</span><span>núcleo insatisfatível</span><span>peso maior: M4</span></div>
+      <p>
+        A coordenação precisa montar a grade de aulas: cada disciplina em um horário e uma sala, sem choques de professor,
+        de turma ou de sala, respeitando laboratórios e indisponibilidades. O sistema encontra uma grade válida, conta
+        quantas existem e, quando não existe nenhuma, <strong>explica por quê</strong> apontando o menor conjunto de
+        restrições incompatíveis.
+      </p>
+      <h4>Entradas</h4>
+      <ul>
+        <li>Horários e salas disponíveis; disciplinas com professor, turma e tipo de sala exigido.</li>
+        <li>Indisponibilidades de professores; restrições extras (por exemplo, duas disciplinas em dias diferentes).</li>
+      </ul>
+      <h4>Saídas</h4>
+      <ul>
+        <li>Uma grade válida e o número total de grades válidas.</li>
+        <li>Se não houver grade, um <strong>núcleo insatisfatível mínimo</strong>, traduzido para linguagem natural.</li>
+        <li>Bônus: a grade que otimiza um critério (por exemplo, menos janelas para os professores), usando chamadas sucessivas ao SAT.</li>
+      </ul>
+      <h4>Vocabulário sugerido</h4>
+      <pre><code>Disciplina(d)  Professor(d, p)  Turma(d, t)  Exige(d, tipo_sala)
+Horario(h)     Sala(s, tipo)    Indisponivel(p, h)
+Aloca(d, h, s)                  (vira a variável proposicional x_{d,h,s})</code></pre>
+      <h4>Regras mínimas</h4>
+      <ul>
+        <li>Cada disciplina tem exatamente uma alocação <code>(h, s)</code>.</li>
+        <li>Uma sala recebe no máximo uma disciplina por horário.</li>
+        <li>Duas disciplinas do mesmo professor ou da mesma turma não ficam no mesmo horário.</li>
+        <li>Disciplinas que exigem laboratório só vão para laboratório.</li>
+        <li>Nenhuma disciplina fica num horário em que o professor está indisponível.</li>
+      </ul>
+      <h4>Onde está a dificuldade</h4>
+      <p>
+        O número de cláusulas cresce rápido, e a codificação precisa ser cuidadosa (Caso 12). Para explicar a
+        impossibilidade, vocês precisarão de um algoritmo de núcleo insatisfatível (por exemplo, retirar um grupo de
+        restrições por vez e perguntar de novo ao SAT) e de um jeito de agrupar cláusulas por regra de origem. O Prolog serve
+        para validar uma grade dada; o motor SLD do M3, para explicar por que uma grade específica é inválida.
+      </p>
+      <h4>Exemplo de entrada</h4>
+      <pre><code>{
+  "horarios": ["h1", "h2", "h3"],
+  "salas": {"s1": "comum", "lab": "laboratorio"},
+  "disciplinas": {
+    "LOG":  {"professor": "profA", "turma": "5a", "exige": null},
+    "BD":   {"professor": "profA", "turma": "5a", "exige": "laboratorio"},
+    "IHC":  {"professor": "profB", "turma": "5a", "exige": "laboratorio"},
+    "CALC": {"professor": "profC", "turma": "1a", "exige": null}
+  },
+  "indisponivel": [["profB", "h1"]]
+}</code></pre>
+      <h4>Casos de aceitação</h4>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th scope="col">Entrada</th><th scope="col">Resposta esperada</th></tr></thead>
+          <tbody>
+            <tr><td>Exemplo acima</td><td>Satisfatível, com <strong>24</strong> grades válidas. Uma delas: LOG (h1, s1), BD (h2, lab), IHC (h3, lab), CALC (h1, lab).</td></tr>
+            <tr><td>Mesma entrada, com CALC passando para a turma 5a</td><td>Insatisfatível. Núcleo: as quatro disciplinas da turma 5a precisam de horários diferentes, e só existem três horários (princípio da casa dos pombos, Caso 16).</td></tr>
+            <tr><td>Exemplo acima com profB indisponível também em h2 e h3</td><td>Insatisfatível. Núcleo: IHC precisa de algum horário, e profB está indisponível em todos.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENTREGAS -->
+  <section aria-labelledby="entregas">
+    <h2 id="entregas">Entregas</h2>
+    <div class="table-wrap">
+      <table class="tbl">
+        <thead><tr><th scope="col">Entrega</th><th scope="col">Conteúdo</th></tr></thead>
+        <tbody>
+          <tr><td>Repositório</td><td>Código, casos de entrada, testes e <code>README.md</code> com instruções de execução.</td></tr>
+          <tr><td>Relatório técnico (PDF)</td><td>Modelagem formal completa; decisões de projeto; resultados dos casos de aceitação e dos casos próprios; limitações conhecidas.</td></tr>
+          <tr><td>Defesa</td><td>Demonstração ao vivo. Eu informarei uma entrada nova na hora, e o sistema precisa responder com explicação. Cada integrante responde perguntas individuais sobre qualquer parte do código.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ETAPAS -->
+  <section aria-labelledby="etapas">
+    <h2 id="etapas">Etapas de acompanhamento</h2>
+    <p>Em cada etapa, a dupla mostra o que construiu, e eu dou retorno antes da etapa seguinte.</p>
+    <ol>
+      <li><strong>Modelagem:</strong> vocabulário, regras em lógica de predicados, forma clausal e uma derivação (M1).</li>
+      <li><strong>Algoritmo:</strong> base de conhecimento, leitura do JSON, consultas e meta-interpretador (M2).</li>
+      <li><strong>Motor próprio:</strong> unificação, resolução SLD e testes comparando com o "prolog" (M3).</li>
+      <li><strong>Camada SAT:</strong> <em>grounding</em>, FNC, DIMACS e DPLL, com as perguntas de consistência, consequência e contagem (M4).</li>
+      <li><strong>Integração e defesa:</strong> interface, explicações, testes finais, relatório e apresentação (M5 e M6).</li>
+    </ol>
+  </section>
+
+  <!-- AVALIAÇÃO -->
+  <section aria-labelledby="avaliacao">
+    <h2 id="avaliacao">Avaliação</h2>
+    <div class="table-wrap">
+      <table class="tbl">
+        <caption>Rubrica · total de 10 pontos</caption>
+        <thead><tr><th scope="col">Critério</th><th scope="col">Pontos</th><th scope="col">O que diferencia um trabalho excelente</th></tr></thead>
+        <tbody>
+          <tr><td>M1 · Modelagem formal</td><td class="pts">2,0</td><td>Vocabulário sem ambiguidade; regras completas e corretas em lógica de predicados; forma clausal e derivação com MGUs corretos.</td></tr>
+          <tr><td>M2 · Base</td><td class="pts">2,0</td><td>Regras gerais, sem casos “colados” para a entrada de exemplo; meta-interpretador que devolve a árvore de prova.</td></tr>
+          <tr><td>M3 · Motor próprio</td><td class="pts">2,0</td><td>Unificação com verificação de ocorrência; resolução SLD correta, com renomeação de variáveis e controle de laços; mesmas respostas do Prolog.</td></tr>
+          <tr><td>M4 · Camada SAT</td><td class="pts">1,5</td><td>Codificação correta em FNC; DPLL próprio; consistência, refutação e contagem de modelos funcionando.</td></tr>
+          <tr><td>M5 · Interface e explicação</td><td class="pts">0,5</td><td>Respostas legíveis, com a cadeia de regras e as substituições usadas.</td></tr>
+          <tr><td>M6 · Testes</td><td class="pts">1,0</td><td>Todos os casos de aceitação passando; casos próprios que exploram limites (inconsistência, resposta não única, entradas grandes).</td></tr>
+          <tr><td>Defesa</td><td class="pts">1,0</td><td>Sistema responde à entrada nova; as duas pessoas explicam qualquer parte do código.</td></tr>
+        </tbody>
+        <tfoot><tr><td>Total</td><td class="pts">10,0</td><td></td></tr></tfoot>
+      </table>
+    </div>
+  </section>
+
+  <div class="summary">
+    <span class="label">Para começar</span>
+    <ul>
+      <li>Escolham o contexto e leiam de novo os casos de apoio indicados na tabela da ementa.</li>
+      <li>Antes de programar, escrevam as regras em lógica de predicados e resolvam à mão um caso de aceitação.</li>
+      <li>Revisitem o <a href="https://wilcilene.github.io/estudos/disciplinas/logica-para-computacao/estudo-de-caso.html">estudo de caso do diagnóstico médico</a>: o trabalho final é a versão completa daquela ideia.</li>
+    </ul>
+  </div>
+
+  <nav class="page-nav" aria-label="Navegação entre páginas">
+    <a href="topico-20-resolucao-predicados.html"><span class="dir">← Caso 20</span>Resolução em lógica de predicados</a>
+    <a class="next" href="index.html"><span class="dir">Voltar ao índice →</span>Guia de estudos</a>
+  </nav>
+</article></main>
+
+<footer class="site"><div class="wrap-narrow">Profa. Wilcilene Kowal · Lógica para Computação · IFC São Bento do Sul</div></footer>
+</body>
+</html>

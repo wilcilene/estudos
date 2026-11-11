@@ -101,7 +101,11 @@
 
     { id:"apresentacao-01", review:true, label:"Apresentação 1", title:"Aspectos computacionais da lógica: pesquisa, programação e apresentação", tags:["apresentacoes","aspectos-computacionais"],
       desc:"Atividade em grupo sobre representação computacional de fórmulas, satisfatibilidade e busca de modelos e forma normal conjuntiva. Traz roteiro de pesquisa em 3 aulas, desafio de programação, critérios de avaliação, glossário e um exemplo de entrega com jogo de vôlei.",
-      href:"apresentacao1-index.html" }
+      href:"apresentacao1-index.html" },
+
+    { id:"trabalho-final", review:true, label:"Trabalho final", title:"Motores de Inferência: do fato à conclusão", tags:["atividades","predicados","substituicao","resolucao","aspectos-computacionais"],
+      desc:"Trabalho final em duplas: construir um sistema de inferência que recebe dados de entrada, aplica regras e justifica as conclusões, com base de conhecimento, unificação, resolução e SAT. Cinco contextos: Detetive automático, linha do tempo do museu, perícia em circuitos, controle de acesso e grade horária.",
+      href:"trabalho-final.html" }
   ];
 
   var STORAGE_KEY = "logica-computacao:progresso";

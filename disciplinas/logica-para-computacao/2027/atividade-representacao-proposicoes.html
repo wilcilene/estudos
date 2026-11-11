@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atividade — O Interrogatório das Frases | Lógica para Computação</title>
+<meta name="description" content="Atividade de 30 minutos: representar frases de uma partida de Detetive em lógica proposicional e com os quantificadores para todo e existe.">
+<meta name="author" content="Wilcilene Kowal">
+<meta name="theme-color" content="#EFE6D2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EFE6D2; --paper-card: #F7F1E3; --panel: #FBF7EB;
+    --ink: #23262B; --ink-soft: #514B3E;
+    --line: #D9CBA3; --line-strong: #C3B387;
+    --crime: #A6383B; --crime-dark: #832C2E;
+    --teal: #3F6764; --teal-dark: #315250;
+    --focus: #1B63C4;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Source Serif 4", Georgia, serif; font-size: 1.05rem; line-height: 1.6; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+  code, .mono { font-family: "IBM Plex Mono", monospace; }
+  code { font-size: 0.92em; background: #EFE6D2; padding: 0.05rem 0.35rem; border-radius: 3px; }
+
+  .skip-link { position: absolute; left: -999px; top: 0; background: var(--ink); color: #fff; padding: 0.75rem 1.25rem; }
+  .skip-link:focus { left: 1rem; top: 1rem; z-index: 10; }
+
+  header.site { border-bottom: 2px solid var(--line-strong); background: var(--paper-card); }
+  .masthead { max-width: 1180px; margin: 0 auto; padding: 1.1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .brand { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; color: var(--ink); }
+  .brand-badge { width: 34px; height: 34px; border: 2px solid var(--ink); border-radius: 50%; display: grid; place-items: center; font-family: "Special Elite", monospace; background: var(--paper-card); }
+  .brand-text { font-family: "IBM Plex Mono", monospace; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+  .brand-text strong { display: block; font-size: 0.95rem; color: var(--ink); letter-spacing: 0.02em; }
+  .chip { font-family: "IBM Plex Mono", monospace; font-size: 0.78rem; color: var(--ink-soft); border: 1px solid var(--line-strong); padding: 0.3rem 0.7rem; border-radius: 999px; background: var(--paper-card); white-space: nowrap; }
+
+  .wrap { max-width: 820px; margin: 0 auto; padding: 0 1.5rem; }
+  .breadcrumb { padding-top: 1rem; font-family: "IBM Plex Mono", monospace; font-size: 0.82rem; }
+  .breadcrumb a { color: var(--ink-soft); text-decoration: none; }
+  .case-header { padding-top: 1.5rem; padding-bottom: 2rem; border-bottom: 1px dashed var(--line-strong); }
+  .tag { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 0.75rem; letter-spacing: 0.04em; padding: 0.25rem 0.7rem; border-radius: 999px; background: #DDE6E2; color: var(--teal-dark); border: 1px solid #b9cbc6; }
+  h1 { font-family: "Special Elite", monospace; font-weight: 400; font-size: clamp(1.8rem, 4vw, 2.4rem); margin: 0.8rem 0 0.6rem; line-height: 1.2; }
+  .lede { color: var(--ink-soft); font-size: 1.12rem; margin: 0; max-width: 40rem; }
+  h2 { font-size: 1.4rem; margin: 2.4rem 0 0.8rem; }
+  h3 { margin: 0 0 0.4rem; font-size: 1.1rem; }
+
+  .intro { margin: 1.8rem 0; padding: 1.4rem; border: 2px solid #496B68; border-radius: 8px; background: #F4F0E5; }
+  .intro h2 { margin-top: 0; }
+  .panel { margin: 1rem 0 1.5rem; padding: 1.3rem; border: 1px solid #CBBF9D; border-radius: 8px; background: var(--panel); }
+  .small-note { font-size: 0.9rem; color: var(--ink-soft); }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.8rem; margin: 1rem 0; }
+  .card-group { border: 1px solid #CBBF9D; border-radius: 6px; background: #FFFDF7; padding: 0.7rem 0.8rem; }
+  .card-group h4 { margin: 0 0 0.4rem; font-family: "IBM Plex Mono", monospace; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--crime-dark); }
+  .card-group ul { list-style: none; margin: 0; padding: 0; font-size: 0.95rem; }
+  .card-group li { margin: 0.3rem 0; }
+  .card-group code { font-weight: 600; }
+
+  .keyboard { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
+  .keyboard span { font-family: "IBM Plex Mono", monospace; font-size: 0.85rem; padding: 0.2rem 0.55rem; border: 1px solid #CBBF9D; border-radius: 4px; background: #FFFDF7; }
+  .keyboard code { background: none; padding: 0; }
+
+  .symbols { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.6rem 0 0.2rem; }
+  .symbols button { min-width: 2.3rem; padding: 0.3rem 0.5rem; border: 1px solid #B9AD8A; border-radius: 4px; background: #FFFDF7; font: 1rem "IBM Plex Mono", monospace; cursor: pointer; }
+  .symbols button:hover, .symbols button:focus-visible { background: #EFE6D2; }
+  .time { display: inline-block; margin-left: 0.4rem; vertical-align: middle; }
+
+  .item { margin: 1.1rem 0 1.3rem; }
+  .item label { display: block; cursor: pointer; }
+  .item-text { display: block; margin-bottom: 0.35rem; }
+  .num { font-family: "IBM Plex Mono", monospace; font-weight: 600; color: var(--crime-dark); margin-right: 0.35rem; }
+  .item input { width: 100%; padding: 0.65rem; border: 1px solid #B9AD8A; border-radius: 4px; background: #FFFDF7; font: 1rem "IBM Plex Mono", monospace; }
+  .item.is-right input { border-color: var(--teal); background: #EEF5F3; }
+  .item.is-wrong input { border-color: var(--crime); background: #FBEEEE; }
+  .status { display: block; min-height: 1.2em; margin-top: 0.25rem; font-size: 0.88rem; }
+  .item.is-right .status { color: var(--teal-dark); }
+  .item.is-wrong .status { color: var(--crime-dark); }
+
+  .btn { margin-top: 0.4rem; padding: 0.65rem 1.1rem; border: 0; border-radius: 4px; background: var(--teal); color: #fff; font: inherit; cursor: pointer; }
+  .btn:hover, .btn:focus-visible { background: var(--teal-dark); }
+  .feedback { display: none; margin-top: 1rem; padding: 0.8rem 1rem; border-left: 4px solid var(--teal); background: #EEF2EE; }
+  .feedback.show { display: block; }
+  .answer { display: none; margin-top: 1rem; padding: 1rem 1.2rem; border: 1px dashed var(--line-strong); border-radius: 6px; background: var(--panel); }
+  .answer.open { display: block; }
+  .answer ol { padding-left: 1.4rem; margin: 0; }
+  .answer li { margin: 0.5rem 0; }
+
+  footer.site { margin-top: 3rem; padding: 1.5rem 0; border-top: 2px solid var(--line-strong); font-family: "IBM Plex Mono", monospace; font-size: 0.8rem; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="site">
+  <div class="masthead">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">&sect;</span>
+      <span class="brand-text"><strong>Lógica para Computação</strong>guia de estudos</span>
+    </a>
+    <span class="chip">Atividade · 30 min</span>
+  </div>
+</header>
+
+<nav class="wrap breadcrumb" aria-label="Trilha de navegação">
+  <a href="index.html">&larr; Voltar ao guia de estudos</a>
+</nav>
+
+<div class="wrap case-header">
+  <span class="tag">Atividade · Representação de proposições e quantificadores</span>
+  <h1>O Interrogatório das Frases</h1>
+  <p class="lede">Estamos no meio de uma partida de Detetive. Os jogadores falam em português, mas a investigação só avança em linguagem formal. Vocês têm 30 minutos para transformar 24 frases da partida em fórmulas: primeiro em lógica proposicional e, no final, com os quantificadores “para todo” e “existe”.</p>
+</div>
+
+<main id="conteudo" class="wrap">
+
+  <section class="intro" aria-labelledby="alfabeto-title">
+    <h2 id="alfabeto-title">O alfabeto da partida (Arquivos 1 a 3)</h2>
+    <p>Lembrem-se de como o Detetive funciona: no começo da partida, uma carta de suspeito, uma de arma e uma de local vão para o <strong>envelope confidencial</strong>. As outras cartas são distribuídas entre os jogadores. A cada rodada, quem faz um palpite pode receber uma carta mostrada por outro jogador. Quem acha que já sabe o conteúdo do envelope faz a <strong>acusação</strong>.</p>
+    <p>Usem <strong>somente</strong> as letras abaixo. Cada letra é uma proposição atômica. Negações, “e”, “ou” e condicionais devem ser montados com os conectivos.</p>
+
+    <div class="cards">
+      <div class="card-group">
+        <h4>Suspeitos no envelope</h4>
+        <ul>
+          <li><code>M</code>: a carta do Mordomo está no envelope</li>
+          <li><code>J</code>: a carta do Jardineiro está no envelope</li>
+          <li><code>C</code>: a carta do Coronel está no envelope</li>
+        </ul>
+      </div>
+      <div class="card-group">
+        <h4>Armas no envelope</h4>
+        <ul>
+          <li><code>F</code>: a carta da Faca está no envelope</li>
+          <li><code>R</code>: a carta da Corda está no envelope</li>
+          <li><code>N</code>: a carta do Veneno está no envelope</li>
+        </ul>
+      </div>
+      <div class="card-group">
+        <h4>Locais no envelope</h4>
+        <ul>
+          <li><code>B</code>: a carta da Biblioteca está no envelope</li>
+          <li><code>K</code>: a carta da Cozinha está no envelope</li>
+          <li><code>E</code>: a carta da Sala de Estar está no envelope</li>
+        </ul>
+      </div>
+      <div class="card-group">
+        <h4>A rodada</h4>
+        <ul>
+          <li><code>T</code>: eu tenho a carta da Faca na mão</li>
+          <li><code>S</code>: alguém me mostrou uma carta no meu palpite</li>
+          <li><code>A</code>: eu faço a acusação nesta rodada</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="small-note">Vocês podem digitar os símbolos ou usar os atalhos do teclado. Espaços não importam. Fórmulas equivalentes à do laudo também são aceitas na conferência.</p>
+    <div class="keyboard" aria-label="Atalhos de teclado para os conectivos">
+      <span>¬ &nbsp;<code>~</code></span>
+      <span>∧ &nbsp;<code>&amp;</code></span>
+      <span>∨ &nbsp;<code>|</code> ou <code>v</code></span>
+      <span>→ &nbsp;<code>-&gt;</code></span>
+      <span>↔ &nbsp;<code>&lt;-&gt;</code></span>
+    </div>
+  </section>
+
+  <!-- ARQUIVO 1 -->
+  <h2>Arquivo 1 — Anotações diretas <span class="chip time">~4 min</span></h2>
+  <section class="panel" data-part="p1">
+    <h3>Um conectivo por frase</h3>
+    <p>Comecem pelas anotações mais simples do bloco de notas do detetive.</p>
+    <div class="symbols" aria-label="Inserir símbolo no último campo usado">
+      <button type="button" data-symbol="¬">¬</button><button type="button" data-symbol="∧">∧</button><button type="button" data-symbol="∨">∨</button><button type="button" data-symbol="→">→</button><button type="button" data-symbol="↔">↔</button>
+    </div>
+
+    <div class="item" data-answer="¬M">
+      <label><span class="item-text"><span class="num">01</span>“O Mordomo não está no envelope.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="item" data-answer="B ∧ R">
+      <label><span class="item-text"><span class="num">02</span>“A Biblioteca e a Corda estão no envelope.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="item" data-answer="F ∨ N">
+      <label><span class="item-text"><span class="num">03</span>“A arma do envelope é a Faca ou o Veneno.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="item" data-answer="K → N">
+      <label><span class="item-text"><span class="num">04</span>“Se a Cozinha está no envelope, então o Veneno está no envelope.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="item" data-answer="C ↔ R">
+      <label><span class="item-text"><span class="num">05</span>“O Coronel está no envelope se e somente se a Corda está no envelope.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <button class="btn js-check-part" type="button" data-part="p1">Conferir arquivo 1</button>
+    <div class="feedback" id="feedback-p1" role="status" aria-live="polite"></div>
+  </section>
+
+  <!-- ARQUIVO 2 -->
+  <h2>Arquivo 2 — Jogadores que enrolam <span class="chip time">~8 min</span></h2>
+  <section class="panel" data-part="p2">
+    <h3>O português esconde o conectivo</h3>
+    <p>Na mesa, ninguém fala “e”, “ou” e “se… então” de forma direta. Leiam com calma: o perigo está na ordem do condicional e no alcance da negação.</p>
+    <div class="symbols" aria-label="Inserir símbolo no último campo usado">
+      <button type="button" data-symbol="¬">¬</button><button type="button" data-symbol="∧">∧</button><button type="button" data-symbol="∨">∨</button><button type="button" data-symbol="→">→</button><button type="button" data-symbol="↔">↔</button>
+    </div>
+
+    <div class="item" data-answer="¬M ∧ ¬J">
+      <label><span class="item-text"><span class="num">06</span>“Nem o Mordomo nem o Jardineiro estão no envelope.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="item" data-answer="C ∧ ¬F">
+      <label><span class="item-text"><span class="num">07</span>“O Coronel está no envelope, mas a Faca não está.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="item" data-answer="A → ¬S">
+      <label><span class="item-text"><span class="num">08</span>“Eu faço a acusação somente se ninguém me mostrou carta no meu palpite.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="item" data-answer="T → ¬F">
+      <label><span class="item-text"><span class="num">09</span>“A Faca não está no envelope sempre que eu tenho a carta da Faca na mão.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="item" data-answer="¬(B ∧ K)">
+      <label><span class="item-text"><span class="num">10</span>“Não é verdade que a Biblioteca e a Cozinha estão ambas no envelope.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="item" data-answer="¬N → R">
+      <label><span class="item-text"><span class="num">11</span>“A Corda está no envelope, a menos que o Veneno esteja.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="item" data-answer="J → K">
+      <label><span class="item-text"><span class="num">12</span>“Para que o Jardineiro esteja no envelope, é necessário que a Cozinha também esteja.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <button class="btn js-check-part" type="button" data-part="p2">Conferir arquivo 2</button>
+    <div class="feedback" id="feedback-p2" role="status" aria-live="polite"></div>
+  </section>
+
+  <!-- ARQUIVO 3 -->
+  <h2>Arquivo 3 — O raciocínio da rodada <span class="chip time">~7 min</span></h2>
+  <section class="panel" data-part="p3">
+    <h3>Mais de um conectivo: atenção aos parênteses</h3>
+    <p>Antes de escrever, identifiquem o conectivo principal de cada frase. Ele é o que fica “por fora” dos parênteses.</p>
+    <div class="symbols" aria-label="Inserir símbolo no último campo usado">
+      <button type="button" data-symbol="¬">¬</button><button type="button" data-symbol="∧">∧</button><button type="button" data-symbol="∨">∨</button><button type="button" data-symbol="→">→</button><button type="button" data-symbol="↔">↔</button>
+    </div>
+
+    <div class="item" data-answer="(¬S ∧ ¬T) → A">
+      <label><span class="item-text"><span class="num">13</span>“Se ninguém me mostrou carta no meu palpite e eu não tenho a carta da Faca na mão, então eu faço a acusação.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="item" data-answer="M → (¬J ∧ ¬C)">
+      <label><span class="item-text"><span class="num">14</span>“Se o Mordomo está no envelope, então nem o Jardineiro nem o Coronel estão.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="item" data-answer="(F ∨ R) ∧ ¬(F ∧ R)">
+      <label><span class="item-text"><span class="num">15</span>“No envelope está a Faca ou a Corda, mas não as duas.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="item" data-answer="S → (¬M ∨ ¬F ∨ ¬B)">
+      <label><span class="item-text"><span class="num">16</span>Meu palpite foi “Mordomo, com a Faca, na Biblioteca”. “Se alguém me mostrou uma carta, então o Mordomo não está no envelope, ou a Faca não está, ou a Biblioteca não está.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="item" data-answer="(E ∧ N) ↔ C">
+      <label><span class="item-text"><span class="num">17</span>“A Sala de Estar e o Veneno estão no envelope se e somente se o Coronel está no envelope.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <button class="btn js-check-part" type="button" data-part="p3">Conferir arquivo 3</button>
+    <div class="feedback" id="feedback-p3" role="status" aria-live="polite"></div>
+  </section>
+
+  <!-- ARQUIVO 4 -->
+  <h2>Arquivo 4 — Para todo e existe <span class="chip time">~11 min</span></h2>
+  <section class="panel" data-part="p4">
+    <h3>Abrindo as proposições</h3>
+    <p>Até aqui, cada letra era uma frase inteira. Agora a frase é aberta em <strong>predicados</strong> (moldes com lacunas) e <strong>constantes</strong> (nomes), e os quantificadores dizem para quantos objetos ela vale. O domínio são as cartas e as jogadoras da mesa.</p>
+    <div class="cards">
+      <div class="card-group">
+        <h4>Predicados</h4>
+        <ul>
+          <li><code>Suspeito(x)</code>: x é um suspeito</li>
+          <li><code>Arma(x)</code>: x é uma arma</li>
+          <li><code>Jogadora(j)</code>: j é uma jogadora</li>
+          <li><code>NoEnvelope(c)</code>: a carta c está no envelope</li>
+          <li><code>Tem(j, c)</code>: a jogadora j tem a carta c na mão</li>
+          <li><code>Alibi(x)</code>: x tem álibi</li>
+        </ul>
+      </div>
+      <div class="card-group">
+        <h4>Constantes</h4>
+        <ul>
+          <li><code>j1</code>: a Jogadora 1</li>
+          <li><code>Faca</code>: a carta da Faca</li>
+        </ul>
+        <h4 style="margin-top:0.8rem">Quantificadores</h4>
+        <ul>
+          <li><code>∀x</code>: para todo x</li>
+          <li><code>∃x</code>: existe (pelo menos) um x</li>
+        </ul>
+      </div>
+    </div>
+    <p class="small-note">Para digitar os quantificadores, usem os botões abaixo ou o teclado: <code>@</code> para ∀ e <code>#</code> para ∃. O alcance de um quantificador vai só até a fórmula logo depois dele; para abranger uma fórmula composta, coloquem-na entre parênteses, como no Caso 17. Lembrem a regra prática: <strong>∀ combina com →</strong> e <strong>∃ combina com ∧</strong>.</p>
+    <div class="symbols" aria-label="Inserir símbolo no último campo usado">
+      <button type="button" data-symbol="¬">¬</button><button type="button" data-symbol="∧">∧</button><button type="button" data-symbol="∨">∨</button><button type="button" data-symbol="→">→</button><button type="button" data-symbol="↔">↔</button><button type="button" data-symbol="∀">∀</button><button type="button" data-symbol="∃">∃</button>
+    </div>
+
+    <div class="item" data-mode="pred" data-answer="∃x (Arma(x) ∧ NoEnvelope(x))">
+      <label><span class="item-text"><span class="num">18</span>“Existe uma arma no envelope.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="item" data-mode="pred" data-answer="∀c (Tem(j1, c) → ¬NoEnvelope(c))">
+      <label><span class="item-text"><span class="num">19</span>“Toda carta que a Jogadora 1 tem está fora do envelope.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="item" data-mode="pred" data-answer="∀x (Suspeito(x) → ¬Alibi(x))">
+      <label><span class="item-text"><span class="num">20</span>“Nenhum suspeito tem álibi.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="item" data-mode="pred" data-answer="∃c (Tem(j1, c) ∧ Arma(c))">
+      <label><span class="item-text"><span class="num">21</span>“A Jogadora 1 tem pelo menos uma arma.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="item" data-mode="pred" data-answer="¬∀x (Suspeito(x) → Alibi(x))">
+      <label><span class="item-text"><span class="num">22</span>“Nem todo suspeito tem álibi.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="item" data-mode="pred" data-answer="∀j (Jogadora(j) → ∃c Tem(j, c))">
+      <label><span class="item-text"><span class="num">23</span>“Toda jogadora tem alguma carta.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="item" data-mode="pred" data-answer="NoEnvelope(Faca) → ¬∃j (Jogadora(j) ∧ Tem(j, Faca))">
+      <label><span class="item-text"><span class="num">24</span>“Se a Faca está no envelope, então nenhuma jogadora tem a Faca.”</span>
+      <input type="text" class="js-formula" placeholder="Digite a fórmula" autocomplete="off" spellcheck="false"></label>
+      <span class="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <button class="btn js-check-part" type="button" data-part="p4">Conferir arquivo 4</button>
+    <div class="feedback" id="feedback-p4" role="status" aria-live="polite"></div>
+  </section>
+
+  <h2>Gabarito</h2>
+  <p>Abram somente depois de tentar todas as frases.</p>
+  <button class="btn js-toggle-answer" type="button" aria-expanded="false" aria-controls="answer-all" data-target="answer-all">Exibir ou ocultar gabarito</button>
+  <div class="answer" id="answer-all">
+    <ol>
+      <li><code>¬M</code></li>
+      <li><code>(B ∧ R)</code></li>
+      <li><code>(F ∨ N)</code>. O “ou” lógico é inclusivo; quem garante que só há uma arma no envelope são as regras do jogo, não a frase.</li>
+      <li><code>(K → N)</code></li>
+      <li><code>(C ↔ R)</code></li>
+      <li><code>(¬M ∧ ¬J)</code>, equivalente a <code>¬(M ∨ J)</code>. “Nem… nem” nega as duas partes.</li>
+      <li><code>(C ∧ ¬F)</code>. O “mas” tem valor lógico de “e”; o contraste é só da linguagem.</li>
+      <li><code>(A → ¬S)</code>. “X somente se Y” vira <code>X → Y</code>. O erro comum é inverter para <code>(¬S → A)</code>.</li>
+      <li><code>(T → ¬F)</code>. “Sempre que” introduz o antecedente, mesmo aparecendo no fim da frase. Se a carta está na minha mão, ela não pode estar no envelope.</li>
+      <li><code>¬(B ∧ K)</code>, equivalente a <code>(¬B ∨ ¬K)</code>. Diferente do item 06: aqui pelo menos uma das duas está fora do envelope, não necessariamente as duas.</li>
+      <li><code>(¬N → R)</code>, equivalente a <code>(N ∨ R)</code>. “X, a menos que Y” significa “se não Y, então X”.</li>
+      <li><code>(J → K)</code>. A condição necessária fica no consequente.</li>
+      <li><code>((¬S ∧ ¬T) → A)</code></li>
+      <li><code>(M → (¬J ∧ ¬C))</code></li>
+      <li><code>((F ∨ R) ∧ ¬(F ∧ R))</code>. É o “ou exclusivo”; também vale <code>¬(F ↔ R)</code>.</li>
+      <li><code>(S → ((¬M ∨ ¬F) ∨ ¬B))</code>. Se alguém mostrou uma carta do palpite, pelo menos uma das três cartas não está no envelope.</li>
+      <li><code>((E ∧ N) ↔ C)</code></li>
+      <li><code>∃x (Arma(x) ∧ NoEnvelope(x))</code>. Com <code>→</code> no lugar do <code>∧</code>, a fórmula ficaria verdadeira só porque existe algo que não é arma.</li>
+      <li><code>∀c (Tem(j1, c) → ¬NoEnvelope(c))</code></li>
+      <li><code>∀x (Suspeito(x) → ¬Alibi(x))</code>, equivalente a <code>¬∃x (Suspeito(x) ∧ Alibi(x))</code>.</li>
+      <li><code>∃c (Tem(j1, c) ∧ Arma(c))</code></li>
+      <li><code>¬∀x (Suspeito(x) → Alibi(x))</code>, equivalente a <code>∃x (Suspeito(x) ∧ ¬Alibi(x))</code>: “nem todos têm” = “algum não tem”. Diferente do item 20.</li>
+      <li><code>∀j (Jogadora(j) → ∃c Tem(j, c))</code>. A ordem importa: <code>∃c ∀j Tem(j, c)</code> diria que existe uma carta que todas as jogadoras têm.</li>
+      <li><code>(NoEnvelope(Faca) → ¬∃j (Jogadora(j) ∧ Tem(j, Faca)))</code>, equivalente a <code>(NoEnvelope(Faca) → ∀j (Jogadora(j) → ¬Tem(j, Faca)))</code>.</li>
+    </ol>
+  </div>
+
+</main>
+
+<footer class="site"><div class="wrap">Profa. Wilcilene Kowal · Lógica para Computação · IFC São Bento do Sul</div></footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const ALPHABET = new Set(["M", "J", "C", "F", "R", "N", "B", "K", "E", "T", "S", "A"]);
+
+  /* Aceita ¬ ~ ! | ∧ & && ^ | ∨ | || v | → -> => | ↔ <-> <=> */
+  const tokenize = text => {
+    const src = String(text || "")
+      .replace(/<->|<=>/g, "↔")
+      .replace(/->|=>/g, "→")
+      .replace(/&&|&|\^/g, "∧")
+      .replace(/\|\||\|/g, "∨")
+      .replace(/[~!]/g, "¬");
+    const tokens = [];
+    for (const ch of src) {
+      if (/\s/.test(ch)) continue;
+      if ("¬∧∨→↔()".includes(ch)) { tokens.push(ch); continue; }
+      if (ch === "v" || ch === "V") { tokens.push("∨"); continue; }
+      if (/[a-zA-Z]/.test(ch)) { tokens.push(ch.toUpperCase()); continue; }
+      throw new Error(`o símbolo “${ch}” não faz parte da linguagem.`);
+    }
+    return tokens;
+  };
+
+  /* Precedência usual: ¬, ∧, ∨, →, ↔ (→ associa à direita). */
+  const parse = text => {
+    const tokens = tokenize(text);
+    if (!tokens.length) throw new Error("campo vazio.");
+    let pos = 0;
+    const peek = () => tokens[pos];
+    const take = () => tokens[pos++];
+
+    const atom = () => {
+      const t = take();
+      if (t === undefined) throw new Error("a fórmula terminou antes da hora.");
+      if (t === "¬") return { op: "¬", a: atom() };
+      if (t === "(") {
+        const inner = bicond();
+        if (take() !== ")") throw new Error("falta fechar um parêntese.");
+        return inner;
+      }
+      if (/^[A-Z]$/.test(t)) {
+        if (!ALPHABET.has(t)) throw new Error(`a letra ${t} não está no alfabeto da partida.`);
+        if (peek() && /^[A-Z]$/.test(peek())) throw new Error("há duas letras seguidas sem conectivo.");
+        return { op: "atom", name: t };
+      }
+      throw new Error(`o conectivo “${t}” está fora de lugar.`);
+    };
+    const binary = (next, symbol) => () => {
+      let left = next();
+      while (peek() === symbol) { take(); left = { op: symbol, a: left, b: next() }; }
+      return left;
+    };
+    const conj = binary(atom, "∧");
+    const disj = binary(conj, "∨");
+    const impl = () => {
+      const left = disj();
+      if (peek() === "→") { take(); return { op: "→", a: left, b: impl() }; }
+      return left;
+    };
+    const bicond = binary(impl, "↔");
+
+    const tree = bicond();
+    if (pos < tokens.length) {
+      throw new Error(tokens[pos] === ")" ? "há um parêntese fechando sem ter sido aberto." : "há símbolos sobrando no fim da fórmula.");
+    }
+    return tree;
+  };
+
+  const evaluate = (node, v) => {
+    switch (node.op) {
+      case "atom": return v[node.name];
+      case "¬": return !evaluate(node.a, v);
+      case "∧": return evaluate(node.a, v) && evaluate(node.b, v);
+      case "∨": return evaluate(node.a, v) || evaluate(node.b, v);
+      case "→": return !evaluate(node.a, v) || evaluate(node.b, v);
+      case "↔": return evaluate(node.a, v) === evaluate(node.b, v);
+      default: return false;
+    }
+  };
+
+  const atomsOf = (node, set = new Set()) => {
+    if (node.op === "atom") set.add(node.name);
+    if (node.a) atomsOf(node.a, set);
+    if (node.b) atomsOf(node.b, set);
+    return set;
+  };
+
+  /* Equivalentes = mesmo valor em todas as linhas da tabela-verdade. */
+  const equivalent = (f, g) => {
+    const names = [...new Set([...atomsOf(f), ...atomsOf(g)])];
+    for (let mask = 0; mask < (1 << names.length); mask += 1) {
+      const v = {};
+      names.forEach((n, i) => { v[n] = Boolean(mask & (1 << i)); });
+      if (evaluate(f, v) !== evaluate(g, v)) return false;
+    }
+    return true;
+  };
+
+  /* ---------- Lógica de predicados (Arquivo 4) ---------- */
+  const PREDICATES = { suspeito: ["Suspeito", 1], arma: ["Arma", 1], jogadora: ["Jogadora", 1], noenvelope: ["NoEnvelope", 1], tem: ["Tem", 2], alibi: ["Alibi", 1] };
+  const CONSTANTS = { j1: "j1", faca: "Faca" };
+  const plain = w => w.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+
+  const tokenizePred = text => {
+    const src = String(text || "")
+      .replace(/<->|<=>/g, "↔").replace(/->|=>/g, "→")
+      .replace(/&&|&|\^/g, "∧").replace(/\|\||\|/g, "∨")
+      .replace(/[~!]/g, "¬").replace(/@/g, "∀").replace(/#/g, "∃");
+    const tokens = [];
+    const re = /\s+|([¬∧∨→↔∀∃(),.:])|([A-Za-zÀ-ÿ0-9_]+)|(.)/g;
+    let m;
+    while ((m = re.exec(src))) {
+      if (m[1]) { if (m[1] !== "." && m[1] !== ":") tokens.push(m[1]); }
+      else if (m[2]) tokens.push(m[2] === "v" || m[2] === "V" ? "∨" : { id: m[2] });
+      else if (m[3]) throw new Error(`o símbolo “${m[3]}” não faz parte da linguagem.`);
+    }
+    return tokens;
+  };
+
+  const parsePred = text => {
+    const tokens = tokenizePred(text);
+    if (!tokens.length) throw new Error("campo vazio.");
+    let pos = 0;
+    const peek = () => tokens[pos];
+    const take = () => tokens[pos++];
+
+    const term = bound => {
+      const t = take();
+      if (!t || !t.id) throw new Error("falta um termo dentro dos parênteses do predicado.");
+      const key = plain(t.id);
+      if (CONSTANTS[key]) return { kind: "const", name: CONSTANTS[key] };
+      if (bound.includes(t.id)) return { kind: "var", name: t.id };
+      if (PREDICATES[key]) throw new Error(`${t.id}(…) é uma afirmação e não pode ser argumento de outro predicado.`);
+      throw new Error(`a variável ${t.id} está livre: falta um quantificador ou os parênteses do alcance.`);
+    };
+
+    const unary = bound => {
+      const t = take();
+      if (t === undefined) throw new Error("a fórmula terminou antes da hora.");
+      if (t === "¬") return { op: "¬", a: unary(bound) };
+      if (t === "∀" || t === "∃") {
+        const v = take();
+        if (!v || !v.id) throw new Error(`depois de ${t} deve vir uma variável.`);
+        if (PREDICATES[plain(v.id)] || CONSTANTS[plain(v.id)]) throw new Error(`${v.id} não pode ser usada como variável.`);
+        return { op: t, v: v.id, a: unary([...bound, v.id]) };
+      }
+      if (t === "(") {
+        const inner = bicond(bound);
+        if (take() !== ")") throw new Error("falta fechar um parêntese.");
+        return inner;
+      }
+      if (t.id) {
+        const info = PREDICATES[plain(t.id)];
+        if (!info) {
+          if (CONSTANTS[plain(t.id)]) throw new Error(`${t.id} é uma constante (um objeto), não uma afirmação.`);
+          throw new Error(`o predicado ${t.id} não está no alfabeto.`);
+        }
+        if (take() !== "(") throw new Error(`o predicado ${info[0]} precisa de parênteses com ${info[1]} termo(s).`);
+        const args = [term(bound)];
+        while (peek() === ",") { take(); args.push(term(bound)); }
+        if (take() !== ")") throw new Error(`falta fechar o parêntese de ${info[0]}.`);
+        if (args.length !== info[1]) throw new Error(`${info[0]} recebe ${info[1]} termo(s), e não ${args.length}.`);
+        return { op: "pred", name: info[0], args };
+      }
+      throw new Error(`o símbolo “${t}” está fora de lugar.`);
+    };
+    const binary = (next, symbol) => bound => {
+      let left = next(bound);
+      while (peek() === symbol) { take(); left = { op: symbol, a: left, b: next(bound) }; }
+      return left;
+    };
+    const conj = binary(unary, "∧");
+    const disj = binary(conj, "∨");
+    const impl = bound => {
+      const left = disj(bound);
+      if (peek() === "→") { take(); return { op: "→", a: left, b: impl(bound) }; }
+      return left;
+    };
+    const bicond = binary(impl, "↔");
+
+    const tree = bicond([]);
+    if (pos < tokens.length) throw new Error(tokens[pos] === ")" ? "há um parêntese fechando sem ter sido aberto." : "há símbolos sobrando no fim da fórmula.");
+    return tree;
+  };
+
+  /* Uma mesa sorteada: jogadoras e cartas (suspeitos, armas e outras), com mãos, envelope e álibis ao acaso. */
+  const randomTable = () => {
+    const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+    const types = ["jogadora", "suspeito", "arma", "local"];
+    const n = 4 + Math.floor(Math.random() * 3);
+    const objs = types.concat(Array.from({ length: n - 4 }, () => pick(types))).map((type, id) => ({ id, type }));
+    const players = objs.filter(o => o.type === "jogadora");
+    const cards = objs.filter(o => o.type !== "jogadora");
+    const coin = () => Math.random() < 0.5;
+    const env = new Set(cards.filter(coin).map(o => o.id));
+    const alibi = new Set(objs.filter(coin).map(o => o.id));
+    const tem = new Set();
+    players.forEach(p => cards.forEach(c => { if (coin()) tem.add(`${p.id},${c.id}`); }));
+    return {
+      domain: objs.map(o => o.id),
+      consts: { j1: players[0].id, Faca: pick(cards.filter(c => c.type === "arma")).id },
+      preds: {
+        Suspeito: ([x]) => objs[x].type === "suspeito",
+        Arma: ([x]) => objs[x].type === "arma",
+        Jogadora: ([x]) => objs[x].type === "jogadora",
+        NoEnvelope: ([x]) => env.has(x),
+        Alibi: ([x]) => alibi.has(x),
+        Tem: ([j, c]) => tem.has(`${j},${c}`)
+      }
+    };
+  };
+
+  const evalPred = (node, M, s) => {
+    const val = t => (t.kind === "const" ? M.consts[t.name] : s[t.name]);
+    switch (node.op) {
+      case "pred": return M.preds[node.name](node.args.map(val));
+      case "¬": return !evalPred(node.a, M, s);
+      case "∧": return evalPred(node.a, M, s) && evalPred(node.b, M, s);
+      case "∨": return evalPred(node.a, M, s) || evalPred(node.b, M, s);
+      case "→": return !evalPred(node.a, M, s) || evalPred(node.b, M, s);
+      case "↔": return evalPred(node.a, M, s) === evalPred(node.b, M, s);
+      case "∀": return M.domain.every(d => evalPred(node.a, M, { ...s, [node.v]: d }));
+      case "∃": return M.domain.some(d => evalPred(node.a, M, { ...s, [node.v]: d }));
+      default: return false;
+    }
+  };
+
+  /* Compara as duas fórmulas em 400 mesas sorteadas. */
+  const equivalentPred = (f, g) => {
+    for (let i = 0; i < 400; i += 1) {
+      const M = randomTable();
+      if (evalPred(f, M, {}) !== evalPred(g, M, {})) return false;
+    }
+    return true;
+  };
+
+  /* Botões de símbolos: inserem no último campo usado. */
+  let lastInput = null;
+  document.querySelectorAll(".js-formula").forEach(input => input.addEventListener("focus", () => { lastInput = input; }));
+  document.querySelectorAll(".symbols button").forEach(button => {
+    button.addEventListener("mousedown", e => e.preventDefault());
+    button.addEventListener("click", () => {
+      const panel = button.closest(".panel");
+      const target = lastInput && panel.contains(lastInput) ? lastInput : panel.querySelector(".js-formula");
+      const start = target.selectionStart ?? target.value.length;
+      const end = target.selectionEnd ?? target.value.length;
+      target.value = target.value.slice(0, start) + button.dataset.symbol + target.value.slice(end);
+      target.focus();
+      target.setSelectionRange(start + 1, start + 1);
+      lastInput = target;
+    });
+  });
+
+  const checkItem = item => {
+    const input = item.querySelector(".js-formula");
+    const status = item.querySelector(".status");
+    item.classList.remove("is-right", "is-wrong");
+
+    if (!input.value.trim()) {
+      status.textContent = "Ainda sem resposta.";
+      return false;
+    }
+    try {
+      const ok = item.dataset.mode === "pred"
+        ? equivalentPred(parsePred(input.value), parsePred(item.dataset.answer))
+        : equivalent(parse(input.value), parse(item.dataset.answer));
+      item.classList.add(ok ? "is-right" : "is-wrong");
+      status.textContent = ok ? "Confere com o laudo." : "Não confere com o laudo. Releiam a frase.";
+      return ok;
+    } catch (error) {
+      item.classList.add("is-wrong");
+      status.textContent = `Fórmula mal formada: ${error.message}`;
+      return false;
+    }
+  };
+
+  document.querySelectorAll(".js-check-part").forEach(button => {
+    button.addEventListener("click", () => {
+      const part = button.dataset.part;
+      const items = [...document.querySelectorAll(`[data-part="${part}"] .item`)];
+      const correct = items.filter(checkItem).length;
+      const feedback = document.getElementById(`feedback-${part}`);
+      const message = correct === items.length ? "Excelente trabalho, detetives!" : "Revisem as pistas marcadas e tentem novamente.";
+      feedback.classList.add("show");
+      feedback.innerHTML = `<strong>Resultado:</strong> ${correct}/${items.length} fórmula(s) correta(s). ${message}`;
+    });
+  });
+
+  document.querySelectorAll(".js-toggle-answer").forEach(button => {
+    button.addEventListener("click", () => {
+      const target = document.getElementById(button.dataset.target);
+      if (!target) return;
+      const isOpen = target.classList.toggle("open");
+      button.setAttribute("aria-expanded", String(isOpen));
+    });
+  });
+})();
+</script>
+</body>
+</html>
